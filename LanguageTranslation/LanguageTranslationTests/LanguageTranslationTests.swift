@@ -33,7 +33,7 @@ class LanguageTranslationTests: XCTestCase {
         //TODO: Add additional test cases for missing inputs, wrong languages, etc.
         let expectation = expectationWithDescription("Translation")
         
-        service.translate("Hello",sourceLanguage:"",targetLanguage:"es",callback:{(textResult:[String]?) in
+        service.translate("Hello",sourceLanguage:"en",targetLanguage:"es",callback:{(textResult:[String]?) in
             if let text = textResult {
                 if (text.isEmpty) {
                     XCTAssertFalse(text.isEmpty,"Expected at least 1 translated string")

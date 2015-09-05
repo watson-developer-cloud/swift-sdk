@@ -13,12 +13,14 @@ import Foundation
 public class LanguageTranslationUtils {
     private var _debug: Bool = true
     private let TAG = "[LanguageTranslationSDK] "
-    private let _httpContentTypeHeader = "Accept"
+    private let _httpContentTypeHeader = "Content-Type"
+    private let _httpAcceptHeader = "Accept"
     private let _httpAuthorizationHeader = "Authorization"
     private let _contentTypeJSON = "application/json"
+    private let _contentTypeText = "text/plain"
     public var apiKey: String!
 
-    public func buildRequest(endpoint:String, method:String, body: NSData?) -> NSURLRequest {
+    public func buildRequest(endpoint:String, method:String, body: NSData?, textContent: Bool = false) -> NSURLRequest {
         
         if let url = NSURL(string: endpoint) {
             
@@ -26,15 +28,22 @@ public class LanguageTranslationUtils {
             
             request.HTTPMethod = method
             request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
-            request.addValue(_contentTypeJSON, forHTTPHeaderField: _httpContentTypeHeader)
+            if (textContent) {
+                request.addValue(_contentTypeText, forHTTPHeaderField: _httpAcceptHeader)
+                request.addValue(_contentTypeText, forHTTPHeaderField: _httpContentTypeHeader)
+            } else {
+                request.addValue(_contentTypeJSON, forHTTPHeaderField: _httpAcceptHeader)
+                request.addValue(_contentTypeJSON, forHTTPHeaderField: _httpContentTypeHeader)
+            }
+            self.printDebug("buildRequest(): Content-Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!)
             
             if let bodyData = body {
                 request.HTTPBody = bodyData
             }
-            
+            self.printDebug("buildRequest(): " + method + " " + endpoint)
             return request
         }
-        
+        self.printDebug("buildRequest(): Invalid endpoint")
         return NSURLRequest()
     }
 
@@ -45,7 +54,8 @@ public class LanguageTranslationUtils {
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
             
             if (error != nil) {
-                print(error)
+                self.printDebug("performRequest(): " + error.localizedDescription)
+                callback(nil)
             } else {
                 if let responseData = data {
                     
@@ -65,10 +75,16 @@ public class LanguageTranslationUtils {
                             let returnVal = NSDictionary(object: json, forKey: "dataArray")
                             callback(returnVal)
                         }
+                    } else {
+                        self.printDebug("performRequest(): Response is neither an array nor dictionary. Returning as string.")
+                        let dataString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
+                        let returnVal = NSDictionary(object: dataString!, forKey: "data")
+                        callback(returnVal)
                     }
                     
                 } else {
-                    self.printDebug("No response data.")
+                    self.printDebug("performRequest(): No response data.")
+                    callback(nil)
                 }
                 
             }

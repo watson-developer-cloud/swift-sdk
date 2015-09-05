@@ -13,7 +13,7 @@ import LanguageTranslation
 //TODO: Add test cases for auth issues
 
 class LanguageTranslationTests: XCTestCase {
-    private let timeout = 15.0
+    private let timeout = 300.0
     //TODO: Move credentials to plist temporarily
     //TODO: Before release, change credentials to use <insert-username-here>
     private var service : LanguageTranslation = LanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
@@ -28,6 +28,20 @@ class LanguageTranslationTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
 
+    func testIdentify() {
+        let expectation = expectationWithDescription("Identify")
+        
+        service.identify("hola", callback:{(language:String?) in
+            if let lang = language {
+                XCTAssertEqual(lang,"es","Expected 'hola' to be identified as 'es' language")
+                expectation.fulfill()
+            } else { XCTAssertNotNil(language, "Expected valid language result") }
+    })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    
     //TODO: Test case currently failing due to error "no text being passed in" - need to investigate
     func testTranslation() {
         //TODO: Add additional test cases for missing inputs, wrong languages, etc.
@@ -40,7 +54,7 @@ class LanguageTranslationTests: XCTestCase {
                 }
                 else {
                     let translatedText = text.first!
-                    XCTAssertEqual(translatedText,"hola","Expected hello to translate to hola")
+                    XCTAssertEqual(translatedText,"Hola","Expected hello to translate to Hola")
                 }
             }
             else {

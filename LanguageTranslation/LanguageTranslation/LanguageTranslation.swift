@@ -71,6 +71,23 @@ public class LanguageTranslation {
             callback(languages)
         })
     }
+
+    public func identify(text:String, callback: (String?)->()) {
+        
+        let endpoint = _baseURL + "/v2/identify"
+        let request = utils.buildRequest(endpoint, method: POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), textContent: true)
+        
+        utils.performRequest(request, callback: {response in
+            if let error_message = response["error_message"] as? String
+            {
+                self.utils.printDebug("identify(): " + error_message)
+                callback(nil)
+            }
+            else {
+                callback(response["data"] as! String?)
+            }
+        })
+    }
     
     public func translate(text:String,sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
 
@@ -85,8 +102,12 @@ public class LanguageTranslation {
                 callback(nil)
             }
             else {
-                var translatedText = [String]()
-                callback(translatedText)
+                if let translations = response["translations"] as? NSArray
+                {
+                    let firstTranslation = translations[0] as! NSDictionary
+                    let translation = firstTranslation["translation"] as! String
+                    callback([translation])
+                }
             }
         })
     }

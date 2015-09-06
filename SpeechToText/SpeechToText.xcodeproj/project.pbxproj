@@ -13,6 +13,16 @@
 		7AA9F9C71B9BD4AA00554EF0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F9C61B9BD4AA00554EF0 /* Images.xcassets */; };
 		7AA9F9CA1B9BD4AA00554EF0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F9C81B9BD4AA00554EF0 /* LaunchScreen.xib */; };
 		7AA9F9D61B9BD4AA00554EF0 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9D51B9BD4AA00554EF0 /* SpeechToTextTests.swift */; };
+		7AA9F9EA1B9BD51900554EF0 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E01B9BD51900554EF0 /* Alamofire.swift */; };
+		7AA9F9EB1B9BD51900554EF0 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E11B9BD51900554EF0 /* Download.swift */; };
+		7AA9F9EC1B9BD51900554EF0 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E21B9BD51900554EF0 /* Manager.swift */; };
+		7AA9F9ED1B9BD51900554EF0 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E31B9BD51900554EF0 /* MultipartFormData.swift */; };
+		7AA9F9EE1B9BD51900554EF0 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E41B9BD51900554EF0 /* ParameterEncoding.swift */; };
+		7AA9F9EF1B9BD51900554EF0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E51B9BD51900554EF0 /* Request.swift */; };
+		7AA9F9F01B9BD51900554EF0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E61B9BD51900554EF0 /* ResponseSerialization.swift */; };
+		7AA9F9F11B9BD51900554EF0 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E71B9BD51900554EF0 /* ServerTrustPolicy.swift */; };
+		7AA9F9F21B9BD51900554EF0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E81B9BD51900554EF0 /* Upload.swift */; };
+		7AA9F9F31B9BD51900554EF0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E91B9BD51900554EF0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +46,17 @@
 		7AA9F9CF1B9BD4AA00554EF0 /* SpeechToTextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechToTextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA9F9D41B9BD4AA00554EF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA9F9D51B9BD4AA00554EF0 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
+		7AA9F9DF1B9BD51900554EF0 /* Alamofire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alamofire.h; sourceTree = "<group>"; };
+		7AA9F9E01B9BD51900554EF0 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		7AA9F9E11B9BD51900554EF0 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		7AA9F9E21B9BD51900554EF0 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		7AA9F9E31B9BD51900554EF0 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		7AA9F9E41B9BD51900554EF0 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		7AA9F9E51B9BD51900554EF0 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		7AA9F9E61B9BD51900554EF0 /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
+		7AA9F9E71B9BD51900554EF0 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		7AA9F9E81B9BD51900554EF0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		7AA9F9E91B9BD51900554EF0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +98,7 @@
 		7AA9F9BC1B9BD4AA00554EF0 /* SpeechToText */ = {
 			isa = PBXGroup;
 			children = (
+				7AA9F9F41B9BD52200554EF0 /* Alamofire */,
 				7AA9F9BF1B9BD4AA00554EF0 /* AppDelegate.swift */,
 				7AA9F9C11B9BD4AA00554EF0 /* ViewController.swift */,
 				7AA9F9C31B9BD4AA00554EF0 /* Main.storyboard */,
@@ -110,6 +132,24 @@
 				7AA9F9D41B9BD4AA00554EF0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7AA9F9F41B9BD52200554EF0 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				7AA9F9DF1B9BD51900554EF0 /* Alamofire.h */,
+				7AA9F9E01B9BD51900554EF0 /* Alamofire.swift */,
+				7AA9F9E11B9BD51900554EF0 /* Download.swift */,
+				7AA9F9E21B9BD51900554EF0 /* Manager.swift */,
+				7AA9F9E31B9BD51900554EF0 /* MultipartFormData.swift */,
+				7AA9F9E41B9BD51900554EF0 /* ParameterEncoding.swift */,
+				7AA9F9E51B9BD51900554EF0 /* Request.swift */,
+				7AA9F9E61B9BD51900554EF0 /* ResponseSerialization.swift */,
+				7AA9F9E71B9BD51900554EF0 /* ServerTrustPolicy.swift */,
+				7AA9F9E81B9BD51900554EF0 /* Upload.swift */,
+				7AA9F9E91B9BD51900554EF0 /* Validation.swift */,
+			);
+			name = Alamofire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +252,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA9F9EE1B9BD51900554EF0 /* ParameterEncoding.swift in Sources */,
+				7AA9F9EF1B9BD51900554EF0 /* Request.swift in Sources */,
+				7AA9F9ED1B9BD51900554EF0 /* MultipartFormData.swift in Sources */,
+				7AA9F9EA1B9BD51900554EF0 /* Alamofire.swift in Sources */,
+				7AA9F9F01B9BD51900554EF0 /* ResponseSerialization.swift in Sources */,
+				7AA9F9F21B9BD51900554EF0 /* Upload.swift in Sources */,
+				7AA9F9EB1B9BD51900554EF0 /* Download.swift in Sources */,
 				7AA9F9C21B9BD4AA00554EF0 /* ViewController.swift in Sources */,
+				7AA9F9F11B9BD51900554EF0 /* ServerTrustPolicy.swift in Sources */,
 				7AA9F9C01B9BD4AA00554EF0 /* AppDelegate.swift in Sources */,
+				7AA9F9F31B9BD51900554EF0 /* Validation.swift in Sources */,
+				7AA9F9EC1B9BD51900554EF0 /* Manager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

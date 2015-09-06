@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SpeechToText/SpeechToText.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:LanguageTranslation/LanguageTranslation.xcodeproj">
    </FileRef>
 </Workspace>

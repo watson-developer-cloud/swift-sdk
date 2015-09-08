@@ -23,6 +23,8 @@
 		7AA9F9F11B9BD51900554EF0 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E71B9BD51900554EF0 /* ServerTrustPolicy.swift */; };
 		7AA9F9F21B9BD51900554EF0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E81B9BD51900554EF0 /* Upload.swift */; };
 		7AA9F9F31B9BD51900554EF0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9E91B9BD51900554EF0 /* Validation.swift */; };
+		7AA9F9F61B9BD9FA00554EF0 /* WatsonSpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9F51B9BD9FA00554EF0 /* WatsonSpeechToText.swift */; };
+		7AA9F9F81B9CFCFE00554EF0 /* test-audio.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F9F71B9CF7C400554EF0 /* test-audio.flac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		7AA9F9E71B9BD51900554EF0 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		7AA9F9E81B9BD51900554EF0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		7AA9F9E91B9BD51900554EF0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		7AA9F9F51B9BD9FA00554EF0 /* WatsonSpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSpeechToText.swift; sourceTree = "<group>"; };
+		7AA9F9F71B9CF7C400554EF0 /* test-audio.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test-audio.flac"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				7AA9F9C61B9BD4AA00554EF0 /* Images.xcassets */,
 				7AA9F9C81B9BD4AA00554EF0 /* LaunchScreen.xib */,
 				7AA9F9BD1B9BD4AA00554EF0 /* Supporting Files */,
+				7AA9F9F51B9BD9FA00554EF0 /* WatsonSpeechToText.swift */,
+				7AA9F9F71B9CF7C400554EF0 /* test-audio.flac */,
 			);
 			path = SpeechToText;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA9F9F81B9CFCFE00554EF0 /* test-audio.flac in Resources */,
 				7AA9F9C51B9BD4AA00554EF0 /* Main.storyboard in Resources */,
 				7AA9F9CA1B9BD4AA00554EF0 /* LaunchScreen.xib in Resources */,
 				7AA9F9C71B9BD4AA00554EF0 /* Images.xcassets in Resources */,
@@ -261,6 +268,7 @@
 				7AA9F9EB1B9BD51900554EF0 /* Download.swift in Sources */,
 				7AA9F9C21B9BD4AA00554EF0 /* ViewController.swift in Sources */,
 				7AA9F9F11B9BD51900554EF0 /* ServerTrustPolicy.swift in Sources */,
+				7AA9F9F61B9BD9FA00554EF0 /* WatsonSpeechToText.swift in Sources */,
 				7AA9F9C01B9BD4AA00554EF0 /* AppDelegate.swift in Sources */,
 				7AA9F9F31B9BD51900554EF0 /* Validation.swift in Sources */,
 				7AA9F9EC1B9BD51900554EF0 /* Manager.swift in Sources */,

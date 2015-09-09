@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A7CF9241B9F816E0055D34F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7CF9231B9F816E0055D34F /* SwiftyJSON.swift */; };
 		7AA9F9C01B9BD4AA00554EF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9BF1B9BD4AA00554EF0 /* AppDelegate.swift */; };
 		7AA9F9C21B9BD4AA00554EF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F9C11B9BD4AA00554EF0 /* ViewController.swift */; };
 		7AA9F9C51B9BD4AA00554EF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F9C31B9BD4AA00554EF0 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A7CF9231B9F816E0055D34F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		7AA9F9BA1B9BD4AA00554EF0 /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA9F9BE1B9BD4AA00554EF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA9F9BF1B9BD4AA00554EF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				7AA9F9C61B9BD4AA00554EF0 /* Images.xcassets */,
 				7AA9F9C81B9BD4AA00554EF0 /* LaunchScreen.xib */,
 				7AA9F9BD1B9BD4AA00554EF0 /* Supporting Files */,
+				7A7CF9231B9F816E0055D34F /* SwiftyJSON.swift */,
 				7AA9F9F51B9BD9FA00554EF0 /* WatsonSpeechToText.swift */,
 				7AA9F9F71B9CF7C400554EF0 /* test-audio.flac */,
 			);
@@ -264,6 +267,7 @@
 				7AA9F9ED1B9BD51900554EF0 /* MultipartFormData.swift in Sources */,
 				7AA9F9EA1B9BD51900554EF0 /* Alamofire.swift in Sources */,
 				7AA9F9F01B9BD51900554EF0 /* ResponseSerialization.swift in Sources */,
+				7A7CF9241B9F816E0055D34F /* SwiftyJSON.swift in Sources */,
 				7AA9F9F21B9BD51900554EF0 /* Upload.swift in Sources */,
 				7AA9F9EB1B9BD51900554EF0 /* Download.swift in Sources */,
 				7AA9F9C21B9BD4AA00554EF0 /* ViewController.swift in Sources */,
@@ -469,6 +473,7 @@
 				7AA9F9DB1B9BD4AA00554EF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AA9F9DC1B9BD4AA00554EF0 /* Build configuration list for PBXNativeTarget "SpeechToTextTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +482,7 @@
 				7AA9F9DE1B9BD4AA00554EF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

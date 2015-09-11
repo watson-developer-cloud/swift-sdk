@@ -30,11 +30,11 @@ class ViewController: UIViewController {
         stt.transcribeFile(fileURL!) { transcription, error in
             if let transcription = transcription {
                 // textField.text = transcription
-                println(transcription)
+                print(transcription)
             } else if let error = error {
-                println(error)
+                print(error)
             } else {
-                println("Unexpected result. What happened?")
+                print("Unexpected result. What happened?")
             }
         }
 

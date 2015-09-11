@@ -172,6 +172,7 @@
 		BDC1ADB41B99FDBD00BD775E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "IBM Mobile Innovation Lab";
 				TargetAttributes = {

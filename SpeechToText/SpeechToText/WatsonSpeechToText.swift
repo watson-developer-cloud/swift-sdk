@@ -112,13 +112,13 @@ public class WatsonSpeechToText {
         
         // establish connection to Watson Speech to Text service
         let endpoint = "\(baseURL)/v1/recognize"
-        request(.GET, endpoint)
+        request(.GET, URLString: endpoint)
             .authenticate(user: username, password: password)
             .responseString() { _, _, _, _ in }
 
         // query Watson for transcript
         let headers = ["Content-Type": contentType!]
-        upload(.POST, endpoint, headers: headers, file: file)
+        upload(.POST, URLString: endpoint, headers: headers, file: file)
             .authenticate(user: username, password: password)
             .validate(contentType: ["application/json"])
             .responseJSON() { _, _, body, error in
@@ -147,7 +147,7 @@ public class WatsonSpeechToText {
     private func retrieveAuthenticationToken() {
         
         let authenticationURL = "\(tokenURL)?url=\(baseURL)"
-        request(.GET, authenticationURL)
+        request(.GET, URLString: authenticationURL)
             .authenticate(user: username, password: password)
             .validate(contentType: ["application/json"])
             .responseString { _, _, body, _ in

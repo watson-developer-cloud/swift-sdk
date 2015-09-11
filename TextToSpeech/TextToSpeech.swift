@@ -19,7 +19,7 @@ enum SpeechGender {
     case Male, Female
 }
 
-class SpeechSample {
+public class SpeechSample {
     
     // initial state is new and waiting to be downloaded
     var state = SpeechState.New
@@ -33,7 +33,7 @@ class SpeechSample {
     // once the text has been transcribed
     var soundData: NSData?
     
-    init(text:String) {
+    public init(text:String) {
         
         self.text = text
         self.language = "English (American Dialect"
@@ -42,15 +42,20 @@ class SpeechSample {
     }
 }
 
-class PendingOperations {
+public class PendingOperations {
     
-    lazy var downloadsInProgress = [NSIndexPath:NSOperation]()
-    lazy var downloadQueue:NSOperationQueue = {
+    public lazy var downloadsInProgress = [NSIndexPath:NSOperation]()
+    public lazy var downloadQueue:NSOperationQueue = {
         var queue = NSOperationQueue()
         queue.name = "Download queue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
+    
+    public init()
+    {
+        
+    }
     
 }
 
@@ -62,7 +67,7 @@ func bytesToDouble (firstByte: UInt8, secondByte: UInt8) -> Float
 
 extension SpeechDownloader {
     
-    func playAudio(player: AVAudioPlayer, data: NSData)
+    public func playAudio(player: AVAudioPlayer, data: NSData)
     {
    
         do {
@@ -92,24 +97,24 @@ extension SpeechDownloader {
 }
 
 
-class SpeechDownloader : NSOperation {
+public class SpeechDownloader : NSOperation {
     
     let ttsURL = NSURL(string: "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize")
     
     let speechSample : SpeechSample
 
     var player : AVAudioPlayer?
-    var audioEngine : AVAudioEngine?
+    lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
-    init(speechSample: SpeechSample) {
+    public init(speechSample: SpeechSample) {
         self.speechSample = speechSample
         
-        audioEngine = AVAudioEngine()
+        // audioEngine = AVAudioEngine()
     }
     
         
     
-    override func main() {
+    public override func main() {
         
         if self.cancelled {
             return
@@ -149,11 +154,11 @@ class SpeechDownloader : NSOperation {
                     self.speechSample.soundData = d
                     self.speechSample.state = .Downloaded
                 
-                    let processedSound = createPCM(d)
+                    //let processedSound = createPCM(d)
                     
-                    if let engine = self.audioEngine {
-                        playAudioPCM(engine, data: processedSound.samples)
-                    }
+                    
+                    // playAudioPCM(self.audioEngine, data: processedSound)
+                    
                     // playAudio(player, processedSound)
                 }
                 

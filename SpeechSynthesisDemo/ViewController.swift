@@ -9,15 +9,16 @@
 import UIKit
 
 import AVFoundation
-
+import TextToSpeech
 
 class ViewController: UIViewController, NSURLSessionDelegate {
 
+    
     var speech = [SpeechSample]()
     let pendingOperations = PendingOperations()
     
     var player : AVAudioPlayer?
-    var audioEngine : AVAudioEngine?
+    lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     
     @IBAction func handlePress(sender: AnyObject) {
         
-        if (audioEngine==nil) { audioEngine = AVAudioEngine()}
+        
         
         let fileURL = NSBundle.mainBundle().URLForResource("spain", withExtension: "wav")
         
@@ -45,7 +46,7 @@ class ViewController: UIViewController, NSURLSessionDelegate {
             
             if let d = data {
                 let pcm = createPCM( d )
-                playAudioPCM(audioEngine!, data: pcm.samples)
+                playAudioPCM(audioEngine, segment: pcm)
             }
         }
         

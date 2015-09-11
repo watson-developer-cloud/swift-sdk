@@ -35,9 +35,9 @@ public class ServerTrustPolicyManager {
         allows for scenarios such as using default evaluation for host1, certificate pinning for host2, public key 
         pinning for host3 and disabling evaluation for host4.
 
-        :param: policies A dictionary of all policies mapped to a particular host.
+        - parameter policies: A dictionary of all policies mapped to a particular host.
 
-        :returns: The new `ServerTrustPolicyManager` instance.
+        - returns: The new `ServerTrustPolicyManager` instance.
     */
     public init(policies: [String: ServerTrustPolicy]) {
         self.policies = policies
@@ -70,7 +70,7 @@ extension NSURLSession {
             return objc_getAssociatedObject(self, &AssociatedKeys.ManagerKey) as? ServerTrustPolicyManager
         }
         set (manager) {
-            objc_setAssociatedObject(self, &AssociatedKeys.ManagerKey, manager, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            objc_setAssociatedObject(self, &AssociatedKeys.ManagerKey, manager, UInt(objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         }
     }
 }
@@ -121,14 +121,14 @@ public enum ServerTrustPolicy {
     /**
         Returns all certificates within the given bundle with a `.cer` file extension.
 
-        :param: bundle The bundle to search for all `.cer` files.
+        - parameter bundle: The bundle to search for all `.cer` files.
 
-        :returns: All certificates within the given bundle.
+        - returns: All certificates within the given bundle.
     */
     public static func certificatesInBundle(bundle: NSBundle = NSBundle.mainBundle()) -> [SecCertificate] {
         var certificates: [SecCertificate] = []
 
-        for path in bundle.pathsForResourcesOfType(".cer", inDirectory: nil) as! [String] {
+        for path in bundle.pathsForResourcesOfType(".cer", inDirectory: nil) {
             if let
                 certificateData = NSData(contentsOfFile: path),
                 certificate = SecCertificateCreateWithData(nil, certificateData)?.takeRetainedValue()
@@ -143,14 +143,14 @@ public enum ServerTrustPolicy {
     /**
         Returns all public keys within the given bundle with a `.cer` file extension.
 
-        :param: bundle The bundle to search for all `*.cer` files.
+        - parameter bundle: The bundle to search for all `*.cer` files.
 
-        :returns: All public keys within the given bundle.
+        - returns: All public keys within the given bundle.
     */
     public static func publicKeysInBundle(bundle: NSBundle = NSBundle.mainBundle()) -> [SecKey] {
         var publicKeys: [SecKey] = []
 
-        for certificate in certificatesInBundle(bundle: bundle) {
+        for certificate in certificatesInBundle(bundle) {
             if let publicKey = publicKeyForCertificate(certificate) {
                 publicKeys.append(publicKey)
             }
@@ -164,10 +164,10 @@ public enum ServerTrustPolicy {
     /**
         Evaluates whether the server trust is valid for the given host.
 
-        :param: serverTrust The server trust to evaluate.
-        :param: host        The host of the challenge protection space.
+        - parameter serverTrust: The server trust to evaluate.
+        - parameter host:        The host of the challenge protection space.
 
-        :returns: Whether the server trust is valid.
+        - returns: Whether the server trust is valid.
     */
     public func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
         var serverTrustIsValid = false

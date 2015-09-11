@@ -2,6 +2,13 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "container:TextToSpeech/TextToSpeech.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Examples">
+   </Group>
+   <FileRef
       location = "group:SpeechToText/SpeechToText.xcodeproj">
    </FileRef>
    <FileRef

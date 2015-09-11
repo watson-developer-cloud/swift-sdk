@@ -7,44 +7,73 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E17D31AD1BA31DBB0052D43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D31A21BA31DBB0052D43C /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		E17D31AE1BA31DBB0052D43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A31BA31DBB0052D43C /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
-		E17D31AF1BA31DBB0052D43C /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D31A41BA31DBB0052D43C /* AudioUtils.swift */; settings = {ASSET_TAGS = (); }; };
-		E17D31B01BA31DBB0052D43C /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A51BA31DBB0052D43C /* Base.lproj */; settings = {ASSET_TAGS = (); }; };
-		E17D31B11BA31DBB0052D43C /* bison.wav in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A61BA31DBB0052D43C /* bison.wav */; settings = {ASSET_TAGS = (); }; };
-		E17D31B21BA31DBB0052D43C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A71BA31DBB0052D43C /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		E17D31B31BA31DBB0052D43C /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A81BA31DBB0052D43C /* spain.wav */; settings = {ASSET_TAGS = (); }; };
-		E17D31B41BA31DBB0052D43C /* spain2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E17D31A91BA31DBB0052D43C /* spain2.wav */; settings = {ASSET_TAGS = (); }; };
-		E17D31B51BA31DBB0052D43C /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D31AA1BA31DBB0052D43C /* TextToSpeech.swift */; settings = {ASSET_TAGS = (); }; };
-		E17D31B61BA31DBB0052D43C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D31AB1BA31DBB0052D43C /* ViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		E17D31B71BA31DBB0052D43C /* voices.plist in Resources */ = {isa = PBXBuildFile; fileRef = E17D31AC1BA31DBB0052D43C /* voices.plist */; settings = {ASSET_TAGS = (); }; };
-		E17D31BB1BA31E750052D43C /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D31BA1BA31E750052D43C /* TextToSpeechTests.swift */; settings = {ASSET_TAGS = (); }; };
-		E17DBEAE1BA05C1C000BFCF8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17DBEAD1BA05C1C000BFCF8 /* AVFoundation.framework */; };
+		E1D3AEEB1BA332D300B310AF /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = E1D3AEEA1BA332D300B310AF /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1D3AEFC1BA3330A00B310AF /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D3AEFB1BA3330A00B310AF /* TextToSpeechTests.swift */; };
+		E1D3AEFE1BA3330A00B310AF /* TextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D3AEE81BA332D200B310AF /* TextToSpeech.framework */; settings = {ASSET_TAGS = (); }; };
+		E1D3AF371BA3494F00B310AF /* SpeechSynthesisDemo in Resources */ = {isa = PBXBuildFile; fileRef = E1D3AF361BA3494F00B310AF /* SpeechSynthesisDemo */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E163D8B11BA386380003B1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E163D8AC1BA386380003B1F4 /* LanguageTranslation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BDC1ADBD1B99FDBD00BD775E;
+			remoteInfo = LanguageTranslation;
+		};
+		E163D8B31BA386380003B1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E163D8AC1BA386380003B1F4 /* LanguageTranslation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BDC1ADC81B99FDBD00BD775E;
+			remoteInfo = LanguageTranslationTests;
+		};
+		E163D8C21BA386990003B1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E163D8BE1BA386980003B1F4 /* SpeechSynthesisDemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E1D3AF0D1BA3348100B310AF;
+			remoteInfo = SpeechSynthesisDemo;
+		};
+		E1D3AEFF1BA3330A00B310AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E137A5C71B98BAA200A55596 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1D3AEE71BA332D200B310AF;
+			remoteInfo = TextToSpeech;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		E137A5CF1B98BAA200A55596 /* TextSpeech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextSpeech.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E17D31A21BA31DBB0052D43C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TextToSpeech/AppDelegate.swift; sourceTree = "<group>"; };
-		E17D31A31BA31DBB0052D43C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = TextToSpeech/Assets.xcassets; sourceTree = "<group>"; };
+		E163D8AC1BA386380003B1F4 /* LanguageTranslation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LanguageTranslation.xcodeproj; path = ../LanguageTranslation/LanguageTranslation.xcodeproj; sourceTree = "<group>"; };
+		E163D8BE1BA386980003B1F4 /* SpeechSynthesisDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpeechSynthesisDemo.xcodeproj; path = ../Examples/SpeechSynthesisDemo/SpeechSynthesisDemo.xcodeproj; sourceTree = "<group>"; };
 		E17D31A41BA31DBB0052D43C /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioUtils.swift; path = TextToSpeech/AudioUtils.swift; sourceTree = "<group>"; };
-		E17D31A51BA31DBB0052D43C /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = TextToSpeech/Base.lproj; sourceTree = "<group>"; };
-		E17D31A61BA31DBB0052D43C /* bison.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bison.wav; path = TextToSpeech/bison.wav; sourceTree = "<group>"; };
 		E17D31A71BA31DBB0052D43C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TextToSpeech/Info.plist; sourceTree = "<group>"; };
-		E17D31A81BA31DBB0052D43C /* spain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = spain.wav; path = TextToSpeech/spain.wav; sourceTree = "<group>"; };
 		E17D31A91BA31DBB0052D43C /* spain2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = spain2.wav; path = TextToSpeech/spain2.wav; sourceTree = "<group>"; };
 		E17D31AA1BA31DBB0052D43C /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextToSpeech.swift; path = TextToSpeech/TextToSpeech.swift; sourceTree = "<group>"; };
-		E17D31AB1BA31DBB0052D43C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = TextToSpeech/ViewController.swift; sourceTree = "<group>"; };
 		E17D31AC1BA31DBB0052D43C /* voices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = voices.plist; path = TextToSpeech/voices.plist; sourceTree = "<group>"; };
-		E17D31BA1BA31E750052D43C /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		E17DBEAD1BA05C1C000BFCF8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E1D3AEE81BA332D200B310AF /* TextToSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1D3AEEA1BA332D300B310AF /* TextToSpeech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TextToSpeech.h; path = TextToSpeech/TextToSpeech.h; sourceTree = "<group>"; };
+		E1D3AEF91BA3330A00B310AF /* TextToSpeechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1D3AEFB1BA3330A00B310AF /* TextToSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
+		E1D3AEFD1BA3330A00B310AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1D3AF361BA3494F00B310AF /* SpeechSynthesisDemo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SpeechSynthesisDemo; path = ../SpeechToText/Examples/SpeechSynthesisDemo/SpeechSynthesisDemo; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E137A5CC1B98BAA200A55596 /* Frameworks */ = {
+		E1D3AEE41BA332D200B310AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E17DBEAE1BA05C1C000BFCF8 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1D3AEF61BA3330A00B310AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1D3AEFE1BA3330A00B310AF /* TextToSpeech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,9 +83,12 @@
 		E137A5C61B98BAA200A55596 = {
 			isa = PBXGroup;
 			children = (
-				E17D31B91BA31E450052D43C /* TextToSpeechTests */,
+				E163D8BE1BA386980003B1F4 /* SpeechSynthesisDemo.xcodeproj */,
+				E163D8AC1BA386380003B1F4 /* LanguageTranslation.xcodeproj */,
+				E1D3AF361BA3494F00B310AF /* SpeechSynthesisDemo */,
 				E17D31B81BA31DDF0052D43C /* TextToSpeech */,
 				E17DBEAD1BA05C1C000BFCF8 /* AVFoundation.framework */,
+				E1D3AEFA1BA3330A00B310AF /* TextToSpeechTests */,
 				E137A5D01B98BAA200A55596 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,7 +96,25 @@
 		E137A5D01B98BAA200A55596 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E137A5CF1B98BAA200A55596 /* TextSpeech.app */,
+				E1D3AEE81BA332D200B310AF /* TextToSpeech.framework */,
+				E1D3AEF91BA3330A00B310AF /* TextToSpeechTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E163D8AD1BA386380003B1F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E163D8B21BA386380003B1F4 /* LanguageTranslation.framework */,
+				E163D8B41BA386380003B1F4 /* LanguageTranslationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E163D8BF1BA386980003B1F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E163D8C31BA386990003B1F4 /* SpeechSynthesisDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,48 +122,74 @@
 		E17D31B81BA31DDF0052D43C /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
-				E17D31A21BA31DBB0052D43C /* AppDelegate.swift */,
-				E17D31A31BA31DBB0052D43C /* Assets.xcassets */,
+				E1D3AEEA1BA332D300B310AF /* TextToSpeech.h */,
 				E17D31A41BA31DBB0052D43C /* AudioUtils.swift */,
-				E17D31A51BA31DBB0052D43C /* Base.lproj */,
-				E17D31A61BA31DBB0052D43C /* bison.wav */,
 				E17D31A71BA31DBB0052D43C /* Info.plist */,
-				E17D31A81BA31DBB0052D43C /* spain.wav */,
 				E17D31A91BA31DBB0052D43C /* spain2.wav */,
 				E17D31AA1BA31DBB0052D43C /* TextToSpeech.swift */,
-				E17D31AB1BA31DBB0052D43C /* ViewController.swift */,
 				E17D31AC1BA31DBB0052D43C /* voices.plist */,
 			);
 			name = TextToSpeech;
 			sourceTree = "<group>";
 		};
-		E17D31B91BA31E450052D43C /* TextToSpeechTests */ = {
+		E1D3AEFA1BA3330A00B310AF /* TextToSpeechTests */ = {
 			isa = PBXGroup;
 			children = (
-				E17D31BA1BA31E750052D43C /* TextToSpeechTests.swift */,
+				E1D3AEFB1BA3330A00B310AF /* TextToSpeechTests.swift */,
+				E1D3AEFD1BA3330A00B310AF /* Info.plist */,
 			);
-			name = TextToSpeechTests;
+			path = TextToSpeechTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		E1D3AEE51BA332D200B310AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1D3AEEB1BA332D300B310AF /* TextToSpeech.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		E137A5CE1B98BAA200A55596 /* TextSpeech */ = {
+		E1D3AEE71BA332D200B310AF /* TextToSpeech */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E137A5E11B98BAA200A55596 /* Build configuration list for PBXNativeTarget "TextSpeech" */;
+			buildConfigurationList = E1D3AEF11BA332D300B310AF /* Build configuration list for PBXNativeTarget "TextToSpeech" */;
 			buildPhases = (
-				E137A5CB1B98BAA200A55596 /* Sources */,
-				E137A5CC1B98BAA200A55596 /* Frameworks */,
-				E137A5CD1B98BAA200A55596 /* Resources */,
+				E1D3AEE31BA332D200B310AF /* Sources */,
+				E1D3AEE41BA332D200B310AF /* Frameworks */,
+				E1D3AEE51BA332D200B310AF /* Headers */,
+				E1D3AEE61BA332D200B310AF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TextSpeech;
-			productName = TextSpeech;
-			productReference = E137A5CF1B98BAA200A55596 /* TextSpeech.app */;
-			productType = "com.apple.product-type.application";
+			name = TextToSpeech;
+			productName = TextToSpeech;
+			productReference = E1D3AEE81BA332D200B310AF /* TextToSpeech.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E1D3AEF81BA3330A00B310AF /* TextToSpeechTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1D3AF011BA3330A00B310AF /* Build configuration list for PBXNativeTarget "TextToSpeechTests" */;
+			buildPhases = (
+				E1D3AEF51BA3330A00B310AF /* Sources */,
+				E1D3AEF61BA3330A00B310AF /* Frameworks */,
+				E1D3AEF71BA3330A00B310AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E1D3AF001BA3330A00B310AF /* PBXTargetDependency */,
+			);
+			name = TextToSpeechTests;
+			productName = TextToSpeechTests;
+			productReference = E1D3AEF91BA3330A00B310AF /* TextToSpeechTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -125,7 +201,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "IBM Mobile Innovation Lab";
 				TargetAttributes = {
-					E137A5CE1B98BAA200A55596 = {
+					E1D3AEE71BA332D200B310AF = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					E1D3AEF81BA3330A00B310AF = {
 						CreatedOnToolsVersion = 7.0;
 					};
 				};
@@ -141,44 +220,91 @@
 			mainGroup = E137A5C61B98BAA200A55596;
 			productRefGroup = E137A5D01B98BAA200A55596 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E163D8AD1BA386380003B1F4 /* Products */;
+					ProjectRef = E163D8AC1BA386380003B1F4 /* LanguageTranslation.xcodeproj */;
+				},
+				{
+					ProductGroup = E163D8BF1BA386980003B1F4 /* Products */;
+					ProjectRef = E163D8BE1BA386980003B1F4 /* SpeechSynthesisDemo.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				E137A5CE1B98BAA200A55596 /* TextSpeech */,
+				E1D3AEE71BA332D200B310AF /* TextToSpeech */,
+				E1D3AEF81BA3330A00B310AF /* TextToSpeechTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		E163D8B21BA386380003B1F4 /* LanguageTranslation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LanguageTranslation.framework;
+			remoteRef = E163D8B11BA386380003B1F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E163D8B41BA386380003B1F4 /* LanguageTranslationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LanguageTranslationTests.xctest;
+			remoteRef = E163D8B31BA386380003B1F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E163D8C31BA386990003B1F4 /* SpeechSynthesisDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SpeechSynthesisDemo.app;
+			remoteRef = E163D8C21BA386990003B1F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
-		E137A5CD1B98BAA200A55596 /* Resources */ = {
+		E1D3AEE61BA332D200B310AF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E17D31B31BA31DBB0052D43C /* spain.wav in Resources */,
-				E17D31B41BA31DBB0052D43C /* spain2.wav in Resources */,
-				E17D31B21BA31DBB0052D43C /* Info.plist in Resources */,
-				E17D31B01BA31DBB0052D43C /* Base.lproj in Resources */,
-				E17D31B71BA31DBB0052D43C /* voices.plist in Resources */,
-				E17D31AE1BA31DBB0052D43C /* Assets.xcassets in Resources */,
-				E17D31B11BA31DBB0052D43C /* bison.wav in Resources */,
+				E1D3AF371BA3494F00B310AF /* SpeechSynthesisDemo in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1D3AEF71BA3330A00B310AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E137A5CB1B98BAA200A55596 /* Sources */ = {
+		E1D3AEE31BA332D200B310AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E17D31AF1BA31DBB0052D43C /* AudioUtils.swift in Sources */,
-				E17D31B51BA31DBB0052D43C /* TextToSpeech.swift in Sources */,
-				E17D31B61BA31DBB0052D43C /* ViewController.swift in Sources */,
-				E17D31BB1BA31E750052D43C /* TextToSpeechTests.swift in Sources */,
-				E17D31AD1BA31DBB0052D43C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1D3AEF51BA3330A00B310AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1D3AEFC1BA3330A00B310AF /* TextToSpeechTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1D3AF001BA3330A00B310AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1D3AEE71BA332D200B310AF /* TextToSpeech */;
+			targetProxy = E1D3AEFF1BA3330A00B310AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E137A5DF1B98BAA200A55596 /* Debug */ = {
@@ -198,6 +324,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Dickerson (T3QMVDF9CL)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -223,6 +350,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -243,6 +371,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Dickerson (T3QMVDF9CL)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -261,30 +390,64 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		E137A5E21B98BAA200A55596 /* Debug */ = {
+		E1D3AEF21BA332D300B310AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TextToSpeech/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextSpeech;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TextToSpeech/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextToSpeech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		E137A5E31B98BAA200A55596 /* Release */ = {
+		E1D3AEF31BA332D300B310AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TextToSpeech/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextSpeech;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TextToSpeech/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextToSpeech;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E1D3AF021BA3330A00B310AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TextToSpeechTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextToSpeechTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E1D3AF031BA3330A00B310AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TextToSpeechTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.TextToSpeechTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -301,11 +464,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E137A5E11B98BAA200A55596 /* Build configuration list for PBXNativeTarget "TextSpeech" */ = {
+		E1D3AEF11BA332D300B310AF /* Build configuration list for PBXNativeTarget "TextToSpeech" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E137A5E21B98BAA200A55596 /* Debug */,
-				E137A5E31B98BAA200A55596 /* Release */,
+				E1D3AEF21BA332D300B310AF /* Debug */,
+				E1D3AEF31BA332D300B310AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1D3AF011BA3330A00B310AF /* Build configuration list for PBXNativeTarget "TextToSpeechTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1D3AF021BA3330A00B310AF /* Debug */,
+				E1D3AF031BA3330A00B310AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

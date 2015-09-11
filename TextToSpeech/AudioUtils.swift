@@ -15,18 +15,18 @@ import CoreAudio
 
 public struct AudioSegment
 {
-    let numChannels:Int!
+    let numChannels:Int
     // let bitsPerSample:Int
-    let samples:[Float32]!
+    var samples:[Float32]
     
-    init(numChannels: Int, samples: [Float32])
+    public init(numChannels: Int, samples: [Float32])
     {
         self.numChannels = numChannels
         self.samples = samples
     }
 }
 
-func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
+private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
 {
     let c1 = Int(a)
     let c2 = Int(b)<<8
@@ -37,7 +37,7 @@ func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
 }
 
 
-func createPCM(data: NSData) -> AudioSegment
+public func createPCM(data: NSData) -> AudioSegment
 {
     // using example from http://stackoverflow.com/questions/8754111/how-to-read-the-data-in-a-wav-file-to-an-array
     
@@ -142,7 +142,7 @@ func createPCM(data: NSData) -> AudioSegment
     
 }
 
-func playAudioPCM (engine: AVAudioEngine, data: [Float])
+public func playAudioPCM (engine: AVAudioEngine, segment: AudioSegment)
 {
     
         
@@ -153,7 +153,7 @@ func playAudioPCM (engine: AVAudioEngine, data: [Float])
         // let mixer = engine.mainMixerNode
         // let sampleRateHz: Float = Float(mixer.outputFormatForBus(0).sampleRate)
         // let numberOfSamples = AVAudioFrameCount((Float(durationMs) / 1000 * sampleRateHz))
-        let numberOfSamples = AVAudioFrameCount(data.count)
+        let numberOfSamples = AVAudioFrameCount(segment.samples.count)
         
         let format = AVAudioFormat(commonFormat: AVAudioCommonFormat.PCMFormatFloat32, sampleRate: Double(sampleRateHz),
             channels: AVAudioChannelCount(1),
@@ -164,9 +164,9 @@ func playAudioPCM (engine: AVAudioEngine, data: [Float])
         
         //var pos: Int = 0
         
-        for pos in 0...data.count-1
+        for pos in 0...segment.samples.count-1
         {
-            buffer.floatChannelData.memory[pos] = data[pos]
+            buffer.floatChannelData.memory[pos] = segment.samples[pos]
         }
         
         

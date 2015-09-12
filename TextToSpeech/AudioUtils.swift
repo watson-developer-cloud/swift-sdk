@@ -11,8 +11,7 @@ import AVFoundation
 import CoreAudio 
 
 
-// holds some information for PCM floats
-
+// holds some information for Audio PCM floats
 public struct AudioSegment
 {
     let numChannels:Int
@@ -142,6 +141,8 @@ public func createPCM(data: NSData) -> AudioSegment
     
 }
 
+// Used as a reference:
+// http://stackoverflow.com/questions/28058777/generating-a-tone-in-ios-with-16-bit-pcm-audioengine-connect-throws-ausetform
 public func playAudioPCM (engine: AVAudioEngine, audioSegment: AudioSegment)
 {
     

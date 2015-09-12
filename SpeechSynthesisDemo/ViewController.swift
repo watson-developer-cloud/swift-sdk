@@ -45,7 +45,8 @@ class ViewController: UIViewController, NSURLSessionDelegate {
             
             if let d = data {
                 let pcm = createPCM( d )
-                playAudioPCM(audioEngine, audioSegment: pcm)
+                
+                // playAudioPCM(audioEngine, audioSegment: pcm)
             }
         } else
         {

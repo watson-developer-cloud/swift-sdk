@@ -121,6 +121,8 @@ func bytesToDouble (firstByte: UInt8, secondByte: UInt8) -> Float
     return Float(s) / Float(UINT16_MAX)
 }
 
+
+// deprecated. IBM Watson returns a corrupted WAVE file that is not compatible
 extension SpeechDownloader {
     
     public func playAudio(player: AVAudioPlayer, data: NSData)
@@ -144,13 +146,6 @@ extension SpeechDownloader {
     }
 }
 
-// taken from:
-// http://stackoverflow.com/questions/28058777/generating-a-tone-in-ios-with-16-bit-pcm-audioengine-connect-throws-ausetform
-
-extension SpeechDownloader {
-    
-    
-}
 
 
 public class SpeechDownloader : NSOperation {

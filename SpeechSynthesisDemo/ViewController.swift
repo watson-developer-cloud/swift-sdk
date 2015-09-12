@@ -13,11 +13,10 @@ import TextToSpeech
 
 class ViewController: UIViewController, NSURLSessionDelegate {
 
+    lazy var ttsService : WatsonTextToSpeech = WatsonTextToSpeech()
     
-    var speech = [SpeechSample]()
-    let pendingOperations = PendingOperations()
     
-    var player : AVAudioPlayer?
+    lazy var player : AVAudioPlayer = AVAudioPlayer()
     lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
     override func viewDidLoad() {
@@ -46,31 +45,16 @@ class ViewController: UIViewController, NSURLSessionDelegate {
             
             if let d = data {
                 let pcm = createPCM( d )
-                playAudioPCM(audioEngine, segment: pcm)
+                playAudioPCM(audioEngine, audioSegment: pcm)
             }
+        } else
+        {
+            print("Could not find the audio file spain")
         }
+        
+        ttsService.synthesize("All the problems of the world could be settled easily if men were only willing to think.")
         
        
-        
-        let speechRequest = SpeechSample(text: "The rain in Spain stays mainly in the plain.")
-        self.speech.append(speechRequest)
-        
-        let downloader = SpeechDownloader(speechSample: speechRequest )
-        
-        downloader.completionBlock = {
-            if downloader.cancelled {
-                return
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                //self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
-                
-            })
-        }
-        
-        // Uncomment this to make the network call
-        // pendingOperations.downloadQueue.addOperation(downloader)
-
         // UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
         print("Pressed")
@@ -94,15 +78,15 @@ extension ViewController {
             
             player = try AVAudioPlayer(contentsOfURL: fileURL!)
             
-            if let p = player {
+            
                 
-                print("Duration is \(p.duration)")
+                print("Duration is \(player.duration)")
                 
-                p.prepareToPlay()
-                p.numberOfLoops = -1
-                p.play()
+                player.prepareToPlay()
+                player.numberOfLoops = -1
+                player.play()
                 
-            }
+            
             
         } catch let error as NSError {
             

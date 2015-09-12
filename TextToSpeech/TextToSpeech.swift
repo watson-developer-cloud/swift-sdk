@@ -19,6 +19,62 @@ enum SpeechGender {
     case Male, Female
 }
 
+enum SpeechLanguages {
+    case EnglishUS, EnglishUK, German, Spanish, Italian
+}
+
+protocol TextToSpeech
+{
+    func synthesize(text:String);
+}
+
+protocol TextToSpeechDelegate
+{
+    
+    func speechDownloaded()
+    func speechPlayed()
+}
+
+public class WatsonTextToSpeech : TextToSpeech
+{
+    
+    var speech = [SpeechSample]()
+    let pendingOperations = PendingOperations()
+    
+    public init()
+    {
+    
+    }
+    
+    public func synthesize(text:String)
+    {
+        let speechRequest = SpeechSample(text: "The rain in Spain stays mainly in the plain.")
+        self.speech.append(speechRequest)
+        
+        let downloader = SpeechDownloader(speechSample: speechRequest )
+        
+        downloader.completionBlock = {
+            if downloader.cancelled {
+                return
+            }
+            
+            self.delegate?.speechPlayed()
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                //self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
+                
+            })
+        }
+        
+        // Uncomment this to make the network call
+        pendingOperations.downloadQueue.addOperation(downloader)
+
+    }
+    
+    var delegate: TextToSpeechDelegate?
+    
+}
+
 public class SpeechSample {
     
     // initial state is new and waiting to be downloaded

@@ -142,7 +142,7 @@ public func createPCM(data: NSData) -> AudioSegment
     
 }
 
-public func playAudioPCM (engine: AVAudioEngine, segment: AudioSegment)
+public func playAudioPCM (engine: AVAudioEngine, audioSegment: AudioSegment)
 {
     
         
@@ -153,7 +153,7 @@ public func playAudioPCM (engine: AVAudioEngine, segment: AudioSegment)
         // let mixer = engine.mainMixerNode
         // let sampleRateHz: Float = Float(mixer.outputFormatForBus(0).sampleRate)
         // let numberOfSamples = AVAudioFrameCount((Float(durationMs) / 1000 * sampleRateHz))
-        let numberOfSamples = AVAudioFrameCount(segment.samples.count)
+        let numberOfSamples = AVAudioFrameCount(audioSegment.samples.count)
         
         let format = AVAudioFormat(commonFormat: AVAudioCommonFormat.PCMFormatFloat32, sampleRate: Double(sampleRateHz),
             channels: AVAudioChannelCount(1),
@@ -164,9 +164,9 @@ public func playAudioPCM (engine: AVAudioEngine, segment: AudioSegment)
         
         //var pos: Int = 0
         
-        for pos in 0...segment.samples.count-1
+        for pos in 0...audioSegment.samples.count-1
         {
-            buffer.floatChannelData.memory[pos] = segment.samples[pos]
+            buffer.floatChannelData.memory[pos] = audioSegment.samples[pos]
         }
         
         

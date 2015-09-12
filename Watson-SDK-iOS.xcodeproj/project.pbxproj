@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E11BB6691BA39446001289BB /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = E11BB6681BA39446001289BB /* spain.wav */; settings = {ASSET_TAGS = (); }; };
+		E11BB66A1BA3959B001289BB /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = E11BB6681BA39446001289BB /* spain.wav */; };
 		E163D8D61BA387F70003B1F4 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = E163D8D51BA387F70003B1F4 /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E163D8E21BA3881D0003B1F4 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163D8E11BA3881D0003B1F4 /* TextToSpeechTests.swift */; };
 		E163D8E41BA3881D0003B1F4 /* TextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163D8D21BA387F70003B1F4 /* TextToSpeech.framework */; settings = {ASSET_TAGS = (); }; };
 		E163D8EB1BA388610003B1F4 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163D8EA1BA388610003B1F4 /* AudioUtils.swift */; settings = {ASSET_TAGS = (); }; };
-		E163D8EF1BA388920003B1F4 /* spain2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E163D8EC1BA388920003B1F4 /* spain2.wav */; settings = {ASSET_TAGS = (); }; };
 		E163D8F01BA388920003B1F4 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163D8ED1BA388920003B1F4 /* TextToSpeech.swift */; settings = {ASSET_TAGS = (); }; };
 		E163D8F91BA388D40003B1F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163D8F81BA388D40003B1F4 /* AppDelegate.swift */; };
 		E163D8FB1BA388D40003B1F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163D8FA1BA388D40003B1F4 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E11BB6681BA39446001289BB /* spain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain.wav; sourceTree = "<group>"; };
 		E163D8D21BA387F70003B1F4 /* TextToSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E163D8D51BA387F70003B1F4 /* TextToSpeech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
 		E163D8D71BA387F70003B1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,7 +41,6 @@
 		E163D8E11BA3881D0003B1F4 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		E163D8E31BA3881D0003B1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E163D8EA1BA388610003B1F4 /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
-		E163D8EC1BA388920003B1F4 /* spain2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain2.wav; sourceTree = "<group>"; };
 		E163D8ED1BA388920003B1F4 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		E163D8F61BA388D40003B1F4 /* SpeechSynthesisDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechSynthesisDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E163D8F81BA388D40003B1F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				E163D8E01BA3881D0003B1F4 /* TextToSpeechTests */,
-				E163D8EC1BA388920003B1F4 /* spain2.wav */,
 				E163D8ED1BA388920003B1F4 /* TextToSpeech.swift */,
 				E163D8EA1BA388610003B1F4 /* AudioUtils.swift */,
 				E163D8D51BA387F70003B1F4 /* TextToSpeech.h */,
@@ -129,6 +129,7 @@
 		E163D8F71BA388D40003B1F4 /* SpeechSynthesisDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E11BB6681BA39446001289BB /* spain.wav */,
 				E163D8F81BA388D40003B1F4 /* AppDelegate.swift */,
 				E163D8FA1BA388D40003B1F4 /* ViewController.swift */,
 				E163D8FC1BA388D40003B1F4 /* Main.storyboard */,
@@ -251,7 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E163D8EF1BA388920003B1F4 /* spain2.wav in Resources */,
+				E11BB6691BA39446001289BB /* spain.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11BB66A1BA3959B001289BB /* spain.wav in Resources */,
 				E163D9031BA388D40003B1F4 /* LaunchScreen.storyboard in Resources */,
 				E163D9001BA388D40003B1F4 /* Assets.xcassets in Resources */,
 				E163D8FE1BA388D40003B1F4 /* Main.storyboard in Resources */,

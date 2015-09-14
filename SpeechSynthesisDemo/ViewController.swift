@@ -13,7 +13,7 @@ import TextToSpeech
 
 class ViewController: UIViewController, NSURLSessionDelegate {
 
-    lazy var ttsService : WatsonTextToSpeech = WatsonTextToSpeech()
+    //lazy var ttsService = WatsonTextToSpeechService(username: "user", password: "password")
     
     
     lazy var player : AVAudioPlayer = AVAudioPlayer()
@@ -46,14 +46,14 @@ class ViewController: UIViewController, NSURLSessionDelegate {
             if let d = data {
                 let pcm = createPCM( d )
                 
-                // playAudioPCM(audioEngine, audioSegment: pcm)
+                playAudioPCM(audioEngine, audioSegment: pcm)
             }
         } else
         {
             print("Could not find the audio file spain")
         }
         
-        ttsService.synthesize("All the problems of the world could be settled easily if men were only willing to think.")
+        //ttsService.synthesizeSpeech(<#T##text: String##String#>, voice: <#T##Voice#>)("All the problems of the world could be settled easily if men were only willing to think.")
         
        
         // UIApplication.sharedApplication().networkActivityIndicatorVisible = false

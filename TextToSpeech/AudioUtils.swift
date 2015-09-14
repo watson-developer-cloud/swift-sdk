@@ -12,7 +12,7 @@ import CoreAudio
 
 
 // holds some information for Audio PCM floats
-public struct AudioSegment
+public struct SpeechAudio
 {
     let numChannels:Int
     // let bitsPerSample:Int
@@ -35,8 +35,13 @@ private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
     return c1+c2+c3+c4
 }
 
+private func bytesToDouble(firstByte: UInt8, secondByte: UInt8) -> Float32
+{
+    let c:Int16 = Int16(secondByte) << 8 | Int16(firstByte)
+    return Float32(c)/Float32(Int16.max)
+}
 
-public func createPCM(data: NSData) -> AudioSegment
+public func createPCM(data: NSData) -> SpeechAudio
 {
     // using example from http://stackoverflow.com/questions/8754111/how-to-read-the-data-in-a-wav-file-to-an-array
     
@@ -137,13 +142,13 @@ public func createPCM(data: NSData) -> AudioSegment
     }
     
     // return NSData(bytes: pcmbuffer, length: numSamples)
-    return AudioSegment(numChannels: 1, samples: pcmbuffer)
+    return SpeechAudio(numChannels: 1, samples: pcmbuffer)
     
 }
 
 // Used as a reference:
 // http://stackoverflow.com/questions/28058777/generating-a-tone-in-ios-with-16-bit-pcm-audioengine-connect-throws-ausetform
-public func playAudioPCM (engine: AVAudioEngine, audioSegment: AudioSegment)
+public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio)
 {
     
         
@@ -155,7 +160,8 @@ public func playAudioPCM (engine: AVAudioEngine, audioSegment: AudioSegment)
         // let sampleRateHz: Float = Float(mixer.outputFormatForBus(0).sampleRate)
         // let numberOfSamples = AVAudioFrameCount((Float(durationMs) / 1000 * sampleRateHz))
         let numberOfSamples = AVAudioFrameCount(audioSegment.samples.count)
-        
+    
+        // support stereo? make parameterizable
         let format = AVAudioFormat(commonFormat: AVAudioCommonFormat.PCMFormatFloat32, sampleRate: Double(sampleRateHz),
             channels: AVAudioChannelCount(1),
             interleaved: false)
@@ -185,7 +191,9 @@ public func playAudioPCM (engine: AVAudioEngine, audioSegment: AudioSegment)
             audioPlayer.play()
             audioPlayer.scheduleBuffer(buffer, atTime: nil, options: AVAudioPlayerNodeBufferOptions.Interrupts, completionHandler: nil)
             
-        } catch {}
+        } catch {
+            // Log if an exception
+        }
         
     
     

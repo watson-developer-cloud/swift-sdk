@@ -2,8 +2,8 @@
 //  AudioUtils.swift
 //  WatsonTextToSpeech
 //
-//  Created by Glenn Fisher on 9/16/15.
-//  Copyright © 2015 MIL. All rights reserved.
+//  Created by Robert Dickerson on 9/16/15.
+//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
 import Foundation

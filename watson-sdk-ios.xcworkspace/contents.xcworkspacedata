@@ -2,12 +2,25 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:TextToSpeech/TextToSpeech.xcodeproj">
+      location = "group:WatsonCore/WatsonCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:SpeechToText/SpeechToText.xcodeproj">
+      location = "group:WatsonLanguageTranslation/WatsonLanguageTranslation.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:LanguageTranslation/LanguageTranslation.xcodeproj">
+      location = "group:WatsonSpeechToText/WatsonSpeechToText.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:WatsonTextToSpeech/WatsonTextToSpeech.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Examples">
+      <FileRef
+         location = "group:Examples/SpeechSynthesis/SpeechSynthesis.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Examples/SpeechRecognition/SpeechRecognition.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

@@ -2,8 +2,8 @@
 //  WatsonLanguageTranslation.swift
 //  WatsonLanguageTranslation
 //
-//  Created by Glenn Fisher on 9/16/15.
-//  Copyright © 2015 MIL. All rights reserved.
+//  Created by Karl Weinmeister on 9/16/15.
+//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
 import Foundation

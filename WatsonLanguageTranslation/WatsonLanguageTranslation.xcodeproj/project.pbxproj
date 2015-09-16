@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A1FCDFA1BA9EE760090E1EB /* WatsonLanguageTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDF91BA9EE760090E1EB /* WatsonLanguageTranslation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A1FCE011BA9EE760090E1EB /* WatsonLanguageTranslation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDF61BA9EE760090E1EB /* WatsonLanguageTranslation.framework */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE061BA9EE760090E1EB /* WatsonLanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE051BA9EE760090E1EB /* WatsonLanguageTranslationTests.swift */; };
+		7A1FCE111BA9EEA10090E1EB /* WatsonLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE101BA9EEA10090E1EB /* WatsonLanguage.swift */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE131BA9EEC80090E1EB /* WatsonLanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE121BA9EEC80090E1EB /* WatsonLanguageModel.swift */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE151BA9EED80090E1EB /* WatsonLanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE141BA9EED80090E1EB /* WatsonLanguageTranslation.swift */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE171BA9EEEB0090E1EB /* WatsonLanguageTranslationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE161BA9EEEB0090E1EB /* WatsonLanguageTranslationUtils.swift */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7A1FCE021BA9EE760090E1EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A1FCDED1BA9EE760090E1EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A1FCDF51BA9EE760090E1EB;
+			remoteInfo = WatsonLanguageTranslation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7A1FCDF61BA9EE760090E1EB /* WatsonLanguageTranslation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonLanguageTranslation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1FCDF91BA9EE760090E1EB /* WatsonLanguageTranslation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonLanguageTranslation.h; sourceTree = "<group>"; };
+		7A1FCDFB1BA9EE760090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A1FCE001BA9EE760090E1EB /* WatsonLanguageTranslationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonLanguageTranslationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1FCE051BA9EE760090E1EB /* WatsonLanguageTranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonLanguageTranslationTests.swift; sourceTree = "<group>"; };
+		7A1FCE071BA9EE760090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A1FCE101BA9EEA10090E1EB /* WatsonLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonLanguage.swift; sourceTree = "<group>"; };
+		7A1FCE121BA9EEC80090E1EB /* WatsonLanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonLanguageModel.swift; sourceTree = "<group>"; };
+		7A1FCE141BA9EED80090E1EB /* WatsonLanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonLanguageTranslation.swift; sourceTree = "<group>"; };
+		7A1FCE161BA9EEEB0090E1EB /* WatsonLanguageTranslationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonLanguageTranslationUtils.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A1FCDF21BA9EE760090E1EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A1FCDFD1BA9EE760090E1EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCE011BA9EE760090E1EB /* WatsonLanguageTranslation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7A1FCDEC1BA9EE760090E1EB = {
+			isa = PBXGroup;
+			children = (
+				7A1FCDF81BA9EE760090E1EB /* WatsonLanguageTranslation */,
+				7A1FCE041BA9EE760090E1EB /* WatsonLanguageTranslationTests */,
+				7A1FCDF71BA9EE760090E1EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7A1FCDF71BA9EE760090E1EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A1FCDF61BA9EE760090E1EB /* WatsonLanguageTranslation.framework */,
+				7A1FCE001BA9EE760090E1EB /* WatsonLanguageTranslationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7A1FCDF81BA9EE760090E1EB /* WatsonLanguageTranslation */ = {
+			isa = PBXGroup;
+			children = (
+				7A1FCDFB1BA9EE760090E1EB /* Info.plist */,
+				7A1FCE101BA9EEA10090E1EB /* WatsonLanguage.swift */,
+				7A1FCE121BA9EEC80090E1EB /* WatsonLanguageModel.swift */,
+				7A1FCDF91BA9EE760090E1EB /* WatsonLanguageTranslation.h */,
+				7A1FCE141BA9EED80090E1EB /* WatsonLanguageTranslation.swift */,
+				7A1FCE161BA9EEEB0090E1EB /* WatsonLanguageTranslationUtils.swift */,
+			);
+			path = WatsonLanguageTranslation;
+			sourceTree = "<group>";
+		};
+		7A1FCE041BA9EE760090E1EB /* WatsonLanguageTranslationTests */ = {
+			isa = PBXGroup;
+			children = (
+				7A1FCE051BA9EE760090E1EB /* WatsonLanguageTranslationTests.swift */,
+				7A1FCE071BA9EE760090E1EB /* Info.plist */,
+			);
+			path = WatsonLanguageTranslationTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7A1FCDF31BA9EE760090E1EB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCDFA1BA9EE760090E1EB /* WatsonLanguageTranslation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7A1FCDF51BA9EE760090E1EB /* WatsonLanguageTranslation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A1FCE0A1BA9EE760090E1EB /* Build configuration list for PBXNativeTarget "WatsonLanguageTranslation" */;
+			buildPhases = (
+				7A1FCDF11BA9EE760090E1EB /* Sources */,
+				7A1FCDF21BA9EE760090E1EB /* Frameworks */,
+				7A1FCDF31BA9EE760090E1EB /* Headers */,
+				7A1FCDF41BA9EE760090E1EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatsonLanguageTranslation;
+			productName = WatsonLanguageTranslation;
+			productReference = 7A1FCDF61BA9EE760090E1EB /* WatsonLanguageTranslation.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7A1FCDFF1BA9EE760090E1EB /* WatsonLanguageTranslationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A1FCE0D1BA9EE760090E1EB /* Build configuration list for PBXNativeTarget "WatsonLanguageTranslationTests" */;
+			buildPhases = (
+				7A1FCDFC1BA9EE760090E1EB /* Sources */,
+				7A1FCDFD1BA9EE760090E1EB /* Frameworks */,
+				7A1FCDFE1BA9EE760090E1EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A1FCE031BA9EE760090E1EB /* PBXTargetDependency */,
+			);
+			name = WatsonLanguageTranslationTests;
+			productName = WatsonLanguageTranslationTests;
+			productReference = 7A1FCE001BA9EE760090E1EB /* WatsonLanguageTranslationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7A1FCDED1BA9EE760090E1EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = MIL;
+				TargetAttributes = {
+					7A1FCDF51BA9EE760090E1EB = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					7A1FCDFF1BA9EE760090E1EB = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 7A1FCDF01BA9EE760090E1EB /* Build configuration list for PBXProject "WatsonLanguageTranslation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7A1FCDEC1BA9EE760090E1EB;
+			productRefGroup = 7A1FCDF71BA9EE760090E1EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7A1FCDF51BA9EE760090E1EB /* WatsonLanguageTranslation */,
+				7A1FCDFF1BA9EE760090E1EB /* WatsonLanguageTranslationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7A1FCDF41BA9EE760090E1EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A1FCDFE1BA9EE760090E1EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A1FCDF11BA9EE760090E1EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCE111BA9EEA10090E1EB /* WatsonLanguage.swift in Sources */,
+				7A1FCE131BA9EEC80090E1EB /* WatsonLanguageModel.swift in Sources */,
+				7A1FCE151BA9EED80090E1EB /* WatsonLanguageTranslation.swift in Sources */,
+				7A1FCE171BA9EEEB0090E1EB /* WatsonLanguageTranslationUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A1FCDFC1BA9EE760090E1EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCE061BA9EE760090E1EB /* WatsonLanguageTranslationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A1FCE031BA9EE760090E1EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A1FCDF51BA9EE760090E1EB /* WatsonLanguageTranslation */;
+			targetProxy = 7A1FCE021BA9EE760090E1EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7A1FCE081BA9EE760090E1EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7A1FCE091BA9EE760090E1EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7A1FCE0B1BA9EE760090E1EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatsonLanguageTranslation/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonLanguageTranslation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7A1FCE0C1BA9EE760090E1EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatsonLanguageTranslation/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonLanguageTranslation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7A1FCE0E1BA9EE760090E1EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WatsonLanguageTranslationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonLanguageTranslationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7A1FCE0F1BA9EE760090E1EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WatsonLanguageTranslationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonLanguageTranslationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A1FCDF01BA9EE760090E1EB /* Build configuration list for PBXProject "WatsonLanguageTranslation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A1FCE081BA9EE760090E1EB /* Debug */,
+				7A1FCE091BA9EE760090E1EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A1FCE0A1BA9EE760090E1EB /* Build configuration list for PBXNativeTarget "WatsonLanguageTranslation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A1FCE0B1BA9EE760090E1EB /* Debug */,
+				7A1FCE0C1BA9EE760090E1EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7A1FCE0D1BA9EE760090E1EB /* Build configuration list for PBXNativeTarget "WatsonLanguageTranslationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A1FCE0E1BA9EE760090E1EB /* Debug */,
+				7A1FCE0F1BA9EE760090E1EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7A1FCDED1BA9EE760090E1EB /* Project object */;
+}

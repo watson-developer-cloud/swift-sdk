@@ -65,12 +65,6 @@ public class WatsonLanguageTranslationUtils {
                 do {
                     if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
                         
-                        if let _ = json["code"] as? String,  message = json["message"] as? String {
-                            let errorDetails = [NSLocalizedFailureReasonErrorKey: message]
-                            let error = NSError(domain: "PresenceInsightsSDK", code: 1, userInfo: errorDetails)
-                            callback( nil, error)
-                            return
-                        }
                         callback(json, nil)
                         return
                     } else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {

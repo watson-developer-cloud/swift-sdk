@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; settings = {ASSET_TAGS = (); }; };
+		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; };
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
-		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; settings = {ASSET_TAGS = (); }; };
+		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; };
+		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreTests.swift; sourceTree = "<group>"; };
 		7A1FCDE11BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
+		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */,
 				7A1FCDD51BA9ED6A0090E1EB /* Info.plist */,
 				7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */,
+				E1605B161BAB5FA70084A056 /* Endpoints.plist */,
 			);
 			path = WatsonCore;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +387,7 @@
 				7A1FCDE61BA9ED6A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A1FCDE71BA9ED6A0090E1EB /* Build configuration list for PBXNativeTarget "WatsonCoreTests" */ = {
 			isa = XCConfigurationList;
@@ -391,6 +396,7 @@
 				7A1FCDE91BA9ED6A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

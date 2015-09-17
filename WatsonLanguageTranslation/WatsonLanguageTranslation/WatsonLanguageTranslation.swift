@@ -41,7 +41,7 @@ public class WatsonLanguageTranslation {
         let endpoint = _baseURL + "/v2/identifiable_languages"
         
         let request = utils.buildRequest(endpoint, method: GET, body: nil)
-        utils.performRequest(request, callback: {response in
+        utils.performRequest(request, callback: {response, error in
             
             var languages = [WatsonLanguage]()
             if let languageArray = response["languages"] as? NSArray {
@@ -77,7 +77,7 @@ public class WatsonLanguageTranslation {
         let endpoint = _baseURL + "/v2/identify"
         let request = utils.buildRequest(endpoint, method: POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), textContent: true)
         
-        utils.performRequest(request, callback: {response in
+        utils.performRequest(request, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
                 self.utils.printDebug("identify(): " + error_message)
@@ -95,7 +95,7 @@ public class WatsonLanguageTranslation {
         let body = buildTranslateRequestBody(sourceLanguage, targetLanguage: targetLanguage, text: text)
         let request = utils.buildRequest(endpoint, method: POST, body: body)
         
-        utils.performRequest(request, callback: {response in
+        utils.performRequest(request, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
                 self.utils.printDebug("translate(): " + error_message)

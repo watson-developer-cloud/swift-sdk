@@ -25,8 +25,7 @@ public struct SpeechAudio
     }
 }
 
-private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
-{
+private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int {
     let c1 = Int(a)
     let c2 = Int(b)<<8
     let c3 = Int(c)<<16
@@ -35,8 +34,7 @@ private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int
     return c1+c2+c3+c4
 }
 
-private func bytesToDouble(firstByte: UInt8, secondByte: UInt8) -> Float32
-{
+private func bytesToDouble(firstByte: UInt8, secondByte: UInt8) -> Float32 {
     let c:Int16 = Int16(secondByte) << 8 | Int16(firstByte)
     return Float32(c)/Float32(Int16.max)
 }
@@ -129,7 +127,7 @@ public func createPCM(data: NSData) -> SpeechAudio
         // 100 = d, 97=a, 116=t, 97=a
         if (pos%26==0)
         {
-            print("Subchunk boundary")
+            // print("Subchunk boundary")
             
         }
         
@@ -148,7 +146,7 @@ public func createPCM(data: NSData) -> SpeechAudio
 
 // Used as a reference:
 // http://stackoverflow.com/questions/28058777/generating-a-tone-in-ios-with-16-bit-pcm-audioengine-connect-throws-ausetform
-public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio)
+public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio, delegate: TextToSpeechServiceDelegate?)
 {
     
     
@@ -189,7 +187,14 @@ public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio)
         try engine.start()
         
         audioPlayer.play()
-        audioPlayer.scheduleBuffer(buffer, atTime: nil, options: AVAudioPlayerNodeBufferOptions.Interrupts, completionHandler: nil)
+        audioPlayer.scheduleBuffer(buffer, atTime: nil, options: AVAudioPlayerNodeBufferOptions.Interrupts, completionHandler: {
+            
+            
+            if let delegate = delegate {
+                delegate.speechDidPlay()
+            }
+            
+        })
         
     } catch {
         // Log if an exception

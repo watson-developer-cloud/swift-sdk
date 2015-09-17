@@ -14,7 +14,6 @@ Put the regions and languages into a plist
 
 **/
 
-
 import Foundation
 import UIKit
 import AVFoundation
@@ -24,11 +23,11 @@ enum SpeechState {
     case New, Downloaded, Played, Failed
 }
 
-enum VoiceGender {
+public enum VoiceGender {
     case Male, Female
 }
 
-enum SpeechLanguage {
+public enum SpeechLanguage {
     case EnglishUS, EnglishUK, German, Spanish, Italian
 }
 
@@ -44,7 +43,7 @@ public protocol Voice
 
 
 
-protocol TextToSpeechServiceDelegate
+public protocol TextToSpeechServiceDelegate
 {
     func speechDidDownload()
     func speechDidPlay()
@@ -63,7 +62,7 @@ public class WatsonVoice : Voice
     
     public func say(text: String) {
         
-        _speechService.synthesizeSpeech(text, voice: self)
+        _speechService.synthesizeSpeech(text, voice: self, callback: { error in })
     }
     
     public func prepareToSay(text:String)
@@ -72,13 +71,13 @@ public class WatsonVoice : Voice
     }
 }
 
-protocol TextToSpeechService
+public protocol TextToSpeechService
 {
-    //init(username: String, password: String)
+    init(username: String, password: String)
     func getDefaultVoice() -> Voice
     func getVoiceByName(name: String) -> Voice
     func getVoiceByType(gender: VoiceGender, language: SpeechLanguage) -> Voice
-    func synthesizeSpeech(text:String, voice: Voice)
+    func synthesizeSpeech(text:String, voice: Voice, callback: (NSError?)->())
     func downloadSpeech(text:String, voice: Voice)
 }
 
@@ -99,12 +98,12 @@ public class WatsonTextToSpeechService : TextToSpeechService
     
     // maximum size cache, cache purging?
     
-    public func synthesizeSpeech(text:String, voice: Voice)
+    public func synthesizeSpeech(text:String, voice: Voice, callback: (NSError?)->())
     {
         let speechRequest = SpeechRequest(text: text)
         _speechRequests.append(speechRequest)
         
-        let downloader = SpeechDownloadOperation(speechRequest: speechRequest )
+        let downloader = SpeechDownloadOperation(speechRequest: speechRequest, delegate: delegate )
         
         downloader.completionBlock = {
             if downloader.cancelled {
@@ -112,6 +111,8 @@ public class WatsonTextToSpeechService : TextToSpeechService
             }
             
             self.delegate?.speechDidPlay()
+            
+            callback(nil)
             
             dispatch_async(dispatch_get_main_queue(), {
                 //self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
@@ -124,24 +125,24 @@ public class WatsonTextToSpeechService : TextToSpeechService
         
     }
     
-    func getDefaultVoice() -> Voice
+    public func getDefaultVoice() -> Voice
     {
         return WatsonVoice(service: self)
     }
     
     
-    func getVoiceByName(name: String) -> Voice
+    public func getVoiceByName(name: String) -> Voice
     {
         return WatsonVoice(service: self)
     }
     
-    func getVoiceByType(gender: VoiceGender, language: SpeechLanguage) -> Voice
+    public func getVoiceByType(gender: VoiceGender, language: SpeechLanguage) -> Voice
     {
         return WatsonVoice(service: self)
     }
     
     
-    func downloadSpeech(text:String, voice: Voice)
+    public func downloadSpeech(text:String, voice: Voice)
     {
         
     }
@@ -238,11 +239,14 @@ public class SpeechDownloadOperation : NSOperation {
     
     var _speechRequest : SpeechRequest
     
+    var _delegate: TextToSpeechServiceDelegate?
+    
     // var player : AVAudioPlayer?
     lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
-    public init(speechRequest: SpeechRequest) {
+    public init(speechRequest: SpeechRequest, delegate: TextToSpeechServiceDelegate?) {
         _speechRequest = speechRequest
+        _delegate = delegate
         
         // audioEngine = AVAudioEngine()
     }
@@ -270,7 +274,11 @@ public class SpeechDownloadOperation : NSOperation {
         
         let request = NSMutableURLRequest(URL: ttsURL!)
         request.HTTPMethod = "POST"
-        request.HTTPBody = "{\"text\":\"All the problems of the world could be settled easily if men were only willing to think.\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        // request.HTTPBody = "{\"text\":\"All the problems of the world could be settled easily if men were only willing to think.\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let toSay = _speechRequest.text
+        
+        request.HTTPBody = "{\"text\":\"\(toSay)\"}".dataUsingEncoding(NSUTF8StringEncoding)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("audio/wav", forHTTPHeaderField: "Accept")
         
@@ -295,8 +303,12 @@ public class SpeechDownloadOperation : NSOperation {
                     
                     //let processedSound = createPCM(d)
                     
+                    if let audio = self._speechRequest.speechAudio {
+                        playAudioPCM(self.audioEngine, audioSegment: audio, delegate: nil)
+                    } else {
+                        print ("Could not read the audio")
+                    }
                     
-                    // playAudioPCM(self.audioEngine, data: processedSound)
                     
                     // playAudio(player, processedSound)
                 } else {

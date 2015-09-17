@@ -13,11 +13,33 @@ import WatsonTextToSpeech
 
 class ViewController: UIViewController, NSURLSessionDelegate {
     
-    //lazy var ttsService = WatsonTextToSpeechService(username: "user", password: "password")
+    // lazy var ttsService = WatsonTextToSpeechService(username: "user", password: "password")
     
+    var i = 0;
+    
+    let sayings:[String] = ["All the problems of the world could be settled easily if men were only willing to think.",
+        "When you come to a fork in the road, take it.",
+        "You can observe a lot by just watching.",
+        "It ain't over till it's over.",
+        "No one goes there nowadays, it's too crowded.",
+        "Always go to other people's funerals, otherwise they won't come to yours.",
+        "A nickel ain't worth a dime anymore.",
+        "Baseball is 90 percent mental and the other half is physical",
+        "In theory there is no difference between theory and practice. In practice, there is.",
+        "I never said most of the things I said.",
+        "Little League baseball is a very good thing because it keeps the parents off the streets."
+    ]
+    
+    @IBOutlet weak var speechTextView: UITextView!
+    @IBAction func swipeGesureRecognizer(sender: AnyObject) {
+        print("Swiped!")
+        i++;
+        speechTextView.text = sayings[i%sayings.count]
+    }
     
     lazy var player : AVAudioPlayer = AVAudioPlayer()
     lazy var audioEngine : AVAudioEngine = AVAudioEngine()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,29 +58,15 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     @IBAction func handlePress(sender: AnyObject) {
         
         
+        let ttsService = WatsonTextToSpeechService(username: "joe", password: "p@sswerd")
+        let voice = ttsService.getDefaultVoice()
         
-        let fileURL = NSBundle.mainBundle().URLForResource("spain", withExtension: "wav")
+        let toSay = speechTextView.text
         
-        if let url = fileURL
-        {
-            let data = NSData(contentsOfURL: url)
-            
-            if let d = data {
-                let pcm = createPCM( d )
-                
-                playAudioPCM(audioEngine, audioSegment: pcm)
-            }
-        } else
-        {
-            print("Could not find the audio file spain")
+        if (toSay != "") {
+            voice.say(toSay)
         }
         
-        //ttsService.synthesizeSpeech(<#T##text: String##String#>, voice: <#T##Voice#>)("All the problems of the world could be settled easily if men were only willing to think.")
-        
-        
-        // UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        
-        print("Pressed")
     }
     
     override func viewDidAppear(animated: Bool) {

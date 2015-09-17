@@ -14,8 +14,9 @@
 		7A1FCE2F1BA9F19A0090E1EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE2D1BA9F19A0090E1EB /* LaunchScreen.storyboard */; };
 		7A1FCE3A1BA9F19A0090E1EB /* SpeechSynthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE391BA9F19A0090E1EB /* SpeechSynthesisTests.swift */; };
 		7A1FCE451BA9F19A0090E1EB /* SpeechSynthesisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE441BA9F19A0090E1EB /* SpeechSynthesisUITests.swift */; };
-		7A1FCE531BAA004D0090E1EB /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE521BAA004D0090E1EB /* spain.wav */; settings = {ASSET_TAGS = (); }; };
-		7A1FCE7B1BAA01CB0090E1EB /* spain2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE7A1BAA01CB0090E1EB /* spain2.wav */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE531BAA004D0090E1EB /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE521BAA004D0090E1EB /* spain.wav */; };
+		7A1FCE7B1BAA01CB0090E1EB /* spain2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE7A1BAA01CB0090E1EB /* spain2.wav */; };
+		E1605B151BAB58490084A056 /* WatsonTextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7A1FCE461BA9F19A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCE521BAA004D0090E1EB /* spain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain.wav; sourceTree = "<group>"; };
 		7A1FCE7A1BAA01CB0090E1EB /* spain2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain2.wav; sourceTree = "<group>"; };
+		E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonTextToSpeech.framework; path = "../../WatsonTextToSpeech/build/Debug-iphoneos/WatsonTextToSpeech.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1605B151BAB58490084A056 /* WatsonTextToSpeech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		7A1FCE181BA9F19A0090E1EB = {
 			isa = PBXGroup;
 			children = (
+				E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */,
 				7A1FCE231BA9F19A0090E1EB /* SpeechSynthesis */,
 				7A1FCE381BA9F19A0090E1EB /* SpeechSynthesisTests */,
 				7A1FCE431BA9F19A0090E1EB /* SpeechSynthesisUITests */,
@@ -193,6 +197,7 @@
 		7A1FCE191BA9F19A0090E1EB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = MIL;
 				TargetAttributes = {
@@ -491,6 +496,7 @@
 				7A1FCE4B1BA9F19A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A1FCE4C1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +505,7 @@
 				7A1FCE4E1BA9F19A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A1FCE4F1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +514,7 @@
 				7A1FCE511BA9F19A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

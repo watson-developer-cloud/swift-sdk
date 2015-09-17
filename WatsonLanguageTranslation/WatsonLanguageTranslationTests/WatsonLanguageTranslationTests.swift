@@ -14,7 +14,7 @@ class WatsonLanguageTranslationTests: XCTestCase {
     private let timeout = 300.0
     //TODO: Move credentials to plist temporarily
     //TODO: Before release, change credentials to use <insert-username-here>
-    private var service : LanguageTranslation = LanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
+    private var service : WatsonLanguageTranslation = WatsonLanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
     
     override func setUp() {
         super.setUp()
@@ -29,7 +29,7 @@ class WatsonLanguageTranslationTests: XCTestCase {
     func testIdentifiableLanguages() {
         let expectation = expectationWithDescription("Identifiable Languages")
         
-        service.getIdentifiableLanguages({(languages:[Language]) in
+        service.getIdentifiableLanguages({(languages:[WatsonLanguage]) in
             XCTAssertEqual(languages.count,62,"Expected 62 identifiable languages")
             expectation.fulfill()
         })

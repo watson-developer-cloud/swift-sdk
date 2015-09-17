@@ -49,66 +49,64 @@ public class WatsonLanguageTranslationUtils {
     }
     
     
-    public func performRequest(request:NSURLRequest, callback:(NSDictionary!)->()) {
+    public func performRequest(request:NSURLRequest, callback:([String: AnyObject]!, NSError!)->()) {
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
             
-            if let error = error {
-                self.printDebug("performRequest(): " + error.localizedDescription)
-                callback(nil)
-            } else {
-                if let responseData = data {
-                    
-                    var error: NSError?
-                    if let json = NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.MutableLeaves, error: &error) as? NSDictionary {
-                        if (error != nil) {
-                            let dataString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
-                            self.printDebug("Could not parse response. " + (dataString as! String) + "\(error)")
-                        } else {
-                            callback(json)
+            guard error == nil else {
+                print(error, terminator: "")
+                callback(nil, error)
+                return
+            }
+            
+            // TODO: fix the case where the payload is a ASCII string not a JSON.
+            if let data = data {
+                do {
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
+                        
+                        if let _ = json["code"] as? String,  message = json["message"] as? String {
+                            let errorDetails = [NSLocalizedFailureReasonErrorKey: message]
+                            let error = NSError(domain: "PresenceInsightsSDK", code: 1, userInfo: errorDetails)
+                            callback( nil, error)
+                            return
                         }
-                    } else if let json = NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.MutableLeaves, error: &error) as? NSArray {
-                        if (error != nil) {
-                            let dataString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
-                            self.printDebug("Could not parse response. " + (dataString as! String) + "\(error)")
-                        } else {
-                            let returnVal = NSDictionary(object: json, forKey: "dataArray")
-                            callback(returnVal)
-                        }
+                        callback(json, nil)
+                        return
+                    } else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {
+                        let returnVal = [ "dataArray" : json]
+                        callback(returnVal, nil)
+                        return
                     } else {
-                        self.printDebug("performRequest(): Response is neither an array nor dictionary. Returning as string.")
-                        let dataString = NSString(data: responseData, encoding: NSUTF8StringEncoding)
-                        let returnVal = NSDictionary(object: dataString!, forKey: "data")
-                        callback(returnVal)
+                        let returnVal = [ "rawData" : data]
+                        callback(returnVal, nil)
                     }
-                    
-                } else {
-                    self.printDebug("performRequest(): No response data.")
-                    callback(nil)
+                } catch let error {
+                    let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    self.printDebug("Could not parse response. " + (dataString as! String) + "\(error)")
                 }
                 
+            } else {
+                self.printDebug("No response data.")
             }
         })
         task.resume()
     }
     
-    private func dictionaryToJSON(dictionary: NSDictionary) -> NSData {
-        var error: NSError?
-        if let deviceJSON = NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.allZeros, error: &error) {
-            if (error != nil) {
-                printDebug("Could not convert dictionary object to JSON. \(error)")
-            } else {
-                return deviceJSON
-            }
-            
-        } else {
-            printDebug("Could not convert dictionary object to JSON.")
+    
+    public func dictionaryToJSON(dictionary: [String: AnyObject]) -> NSData {
+        
+        do {
+            let deviceJSON = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
+            return deviceJSON
+        } catch let error as NSError {
+            printDebug("Could not convert dictionary object to JSON. \(error)")
         }
         
         return NSData()
         
     }
+    
     
     public func printDebug(message:String) {
         if _debug {

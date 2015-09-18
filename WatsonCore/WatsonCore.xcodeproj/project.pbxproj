@@ -12,6 +12,8 @@
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
 		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; };
 		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
+		7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */; settings = {ASSET_TAGS = (); }; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,7 @@
 		7A1FCDE11BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
 		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
+		7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAuthentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 			children = (
 				7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */,
 				7A1FCDD51BA9ED6A0090E1EB /* Info.plist */,
+				7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */,
 				7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */,
 				E1605B161BAB5FA70084A056 /* Endpoints.plist */,
 			);
@@ -202,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
+				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

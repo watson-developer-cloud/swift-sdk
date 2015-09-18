@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7A1FCE621BAA011B0090E1EB /* WatsonTextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCE611BAA011B0090E1EB /* WatsonTextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A1FCE691BAA011C0090E1EB /* WatsonTextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCE5E1BAA011B0090E1EB /* WatsonTextToSpeech.framework */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE691BAA011C0090E1EB /* WatsonTextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCE5E1BAA011B0090E1EB /* WatsonTextToSpeech.framework */; };
 		7A1FCE6E1BAA011C0090E1EB /* WatsonTextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE6D1BAA011C0090E1EB /* WatsonTextToSpeechTests.swift */; };
-		7A1FCE791BAA017A0090E1EB /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE781BAA017A0090E1EB /* AudioUtils.swift */; settings = {ASSET_TAGS = (); }; };
-		7A1FCE7D1BAA01EB0090E1EB /* WatsonTextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE7C1BAA01EB0090E1EB /* WatsonTextToSpeech.swift */; settings = {ASSET_TAGS = (); }; };
+		7A1FCE791BAA017A0090E1EB /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE781BAA017A0090E1EB /* AudioUtils.swift */; };
+		7A1FCE7D1BAA01EB0090E1EB /* WatsonTextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE7C1BAA01EB0090E1EB /* WatsonTextToSpeech.swift */; };
+		E1AD7D601BACCCAD00335BD6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD7D5F1BACCCAD00335BD6 /* Constants.swift */; };
+		E1AD7D621BACCEB900335BD6 /* WatsonVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD7D611BACCEB900335BD6 /* WatsonVoice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		7A1FCE6F1BAA011C0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCE781BAA017A0090E1EB /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		7A1FCE7C1BAA01EB0090E1EB /* WatsonTextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonTextToSpeech.swift; sourceTree = "<group>"; };
+		E1AD7D5F1BACCCAD00335BD6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E1AD7D611BACCEB900335BD6 /* WatsonVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonVoice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				7A1FCE631BAA011B0090E1EB /* Info.plist */,
 				7A1FCE781BAA017A0090E1EB /* AudioUtils.swift */,
 				7A1FCE7C1BAA01EB0090E1EB /* WatsonTextToSpeech.swift */,
+				E1AD7D5F1BACCCAD00335BD6 /* Constants.swift */,
+				E1AD7D611BACCEB900335BD6 /* WatsonVoice.swift */,
 			);
 			path = WatsonTextToSpeech;
 			sourceTree = "<group>";
@@ -202,6 +208,8 @@
 			files = (
 				7A1FCE791BAA017A0090E1EB /* AudioUtils.swift in Sources */,
 				7A1FCE7D1BAA01EB0090E1EB /* WatsonTextToSpeech.swift in Sources */,
+				E1AD7D621BACCEB900335BD6 /* WatsonVoice.swift in Sources */,
+				E1AD7D601BACCCAD00335BD6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +395,7 @@
 				7A1FCE741BAA011C0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A1FCE751BAA011C0090E1EB /* Build configuration list for PBXNativeTarget "WatsonTextToSpeechTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +404,7 @@
 				7A1FCE771BAA011C0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

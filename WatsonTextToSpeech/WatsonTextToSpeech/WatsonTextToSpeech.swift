@@ -1,109 +1,110 @@
-//
-//  WatsonTextToSpeech.swift
-//  WatsonTextToSpeech
-//
-//  Created by Robert Dickerson on 9/16/15.
-//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
-//
-
-
 /**
-TODO:
-
-Put the regions and languages into a plist
-
+*   TextToSpeechSDK
+*   WatsonTextToSpeech.swift
+*
+*   Object to contain all beacon information.
+*
+*   Copyright (c) 2015 IBM Corporation. All rights reserved.
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
 **/
+
 
 import Foundation
 import UIKit
 import AVFoundation
-import CoreAudio
 
-enum SpeechState {
-    case New, Downloaded, Played, Failed
+
+public enum SpeechState {
+    case New, Downloaded, Failed
 }
 
 public enum VoiceGender {
     case Male, Female
 }
 
-public enum SpeechLanguage {
+public enum VoiceLanguage {
     case EnglishUS, EnglishUK, German, Spanish, Italian
 }
+
+
+
+public typealias CompletionBlock = (error: NSError?) -> Void
 
 // enum region?
 
 // put regions and languages in plist
 
-public protocol Voice
-{
-    func say(text:String);
-    func prepareToSay(text:String)
-}
 
 
-
+// MARK: - Delegate protocol.
 public protocol TextToSpeechServiceDelegate
 {
     func speechDidDownload()
     func speechDidPlay()
-    // func speechWillPlay()
 }
 
-public class WatsonVoice : Voice
-{
-    
-    let _speechService: TextToSpeechService
-    
-    init (service: TextToSpeechService)
-    {
-        _speechService = service
-    }
-    
-    public func say(text: String) {
-        
-        _speechService.synthesizeSpeech(text, voice: self, callback: { error in })
-    }
-    
-    public func prepareToSay(text:String)
-    {
-        _speechService.downloadSpeech(text , voice: self)
-    }
-}
+
 
 public protocol TextToSpeechService
 {
     init(username: String, password: String)
     func getDefaultVoice() -> Voice
     func getVoiceByName(name: String) -> Voice
-    func getVoiceByType(gender: VoiceGender, language: SpeechLanguage) -> Voice
-    func synthesizeSpeech(text:String, voice: Voice, callback: (NSError?)->())
+    func getVoiceByType(gender: VoiceGender, language: VoiceLanguage) -> Voice
+    func synthesizeSpeech(text:String, voice: Voice)
+    func synthesizeSpeech(text:String, voice: Voice, completion: CompletionBlock)
     func downloadSpeech(text:String, voice: Voice)
+    func enableLogging()
 }
 
-public class WatsonTextToSpeechService : TextToSpeechService
+public class WatsonTextToSpeechService : NSObject, TextToSpeechService
 {
     
-    var _speechRequests = [SpeechRequest]()
-    let _pendingOperations = PendingOperations()
+    public var delegate: TextToSpeechServiceDelegate?
     
-    let _username : String
-    let _password : String
+    private var _speechRequests = [SpeechRequest]()
+    private let _pendingOperations = PendingOperations()
     
+    private let _username : String
+    private let _password : String
+    
+    private var _debug: Bool = false
+    
+    /**
+    Default object initializer.
+
+    - parameter username:   Username credential from Bluemix
+    - parameter password:   Password credential from Bluemix
+    */
     public required init(username: String, password: String)    {
         
         _username = username
         _password = password
     }
     
-    // maximum size cache, cache purging?
     
-    public func synthesizeSpeech(text:String, voice: Voice, callback: (NSError?)->())
+    public func synthesizeSpeech(text:String, voice: Voice)
+    {
+        
+    }
+    
+    public func synthesizeSpeech(text:String, voice: Voice, completion: CompletionBlock)
     {
         let speechRequest = SpeechRequest(text: text)
         _speechRequests.append(speechRequest)
         
-        let downloader = SpeechDownloadOperation(speechRequest: speechRequest, delegate: delegate )
+        let downloader = SpeechDownloadOperation(username: _username, password: _password, speechRequest: speechRequest, delegate: delegate )
         
         downloader.completionBlock = {
             if downloader.cancelled {
@@ -112,7 +113,7 @@ public class WatsonTextToSpeechService : TextToSpeechService
             
             self.delegate?.speechDidPlay()
             
-            callback(nil)
+            completion(error: nil)
             
             dispatch_async(dispatch_get_main_queue(), {
                 //self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
@@ -127,18 +128,18 @@ public class WatsonTextToSpeechService : TextToSpeechService
     
     public func getDefaultVoice() -> Voice
     {
-        return WatsonVoice(service: self)
+        return WatsonVoice(speechService: self)
     }
     
     
     public func getVoiceByName(name: String) -> Voice
     {
-        return WatsonVoice(service: self)
+        return WatsonVoice(speechService: self)
     }
     
-    public func getVoiceByType(gender: VoiceGender, language: SpeechLanguage) -> Voice
+    public func getVoiceByType(gender: VoiceGender, language: VoiceLanguage) -> Voice
     {
-        return WatsonVoice(service: self)
+        return WatsonVoice(speechService: self)
     }
     
     
@@ -147,8 +148,12 @@ public class WatsonTextToSpeechService : TextToSpeechService
         
     }
     
+    public func enableLogging() {
+        _debug = true
+    }
     
-    var delegate: TextToSpeechServiceDelegate?
+    
+    
     
     
     
@@ -156,26 +161,29 @@ public class WatsonTextToSpeechService : TextToSpeechService
 
 // SpeechRequest
 // change to struct
-public struct SpeechRequest {
+public class SpeechRequest: NSObject {
     
     // initial state is new and waiting to be downloaded
-    var state = SpeechState.New
+    public var state: SpeechState
     
-    // This is the text to synthesize
-    let text: String!
+    public let _text: String!
+    public let _language: VoiceLanguage!
+    public let _gender: VoiceGender!
     
-    // let language: String!
-    // let gender: SpeechGender!
+    public var speechAudio: SpeechAudio?
     
-    // once the text has been transcribed
-    // replace this with Sound information
-    var speechAudio: SpeechAudio?
-    
-    public init(text:String) {
+    public init(text:String, gender: VoiceGender, language: VoiceLanguage ) {
         
-        self.text = text
+        _text = text
+        state = .New
+        _language = .EnglishUS
+        _gender = .Male
         
-        
+    }
+    
+    public convenience init (text:String) {
+    
+        self.init(text: text, gender: .Male, language: .EnglishUS)
     }
 }
 
@@ -206,7 +214,7 @@ public class PendingOperations {
     
 }
 
-// deprecated. IBM Watson returns a corrupted WAVE file that is not compatible
+// MARK: - deprecated. IBM Watson returns a corrupted WAVE file that is not compatible. So the following method will not work.
 extension SpeechDownloadOperation {
     
     public func playAudio(player: AVAudioPlayer, data: NSData)
@@ -234,21 +242,24 @@ extension SpeechDownloadOperation {
 
 public class SpeechDownloadOperation : NSOperation {
     
-    // elevate this to the commons library
-    let ttsURL = NSURL(string: "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize")
+    let ttsURL = NSURL(string: Endpoints.TTS_ENDPOINT)
     
     var _speechRequest : SpeechRequest
     
+    let _username: String!
+    let _password: String!
+    
     var _delegate: TextToSpeechServiceDelegate?
     
-    // var player : AVAudioPlayer?
     lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
-    public init(speechRequest: SpeechRequest, delegate: TextToSpeechServiceDelegate?) {
+    public init(username: String, password: String, speechRequest: SpeechRequest, delegate: TextToSpeechServiceDelegate?) {
+       
         _speechRequest = speechRequest
         _delegate = delegate
+        _username = username
+        _password = password
         
-        // audioEngine = AVAudioEngine()
     }
     
     
@@ -260,23 +271,25 @@ public class SpeechDownloadOperation : NSOperation {
         }
         
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let userPasswordString = "***REMOVED***:***REMOVED***"
+        // let userPasswordString = "***REMOVED***:***REMOVED***"
+        
+        let userPasswordString = _username + ":" + _password
+        
         let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64EncodedCredential = userPasswordData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.EncodingEndLineWithLineFeed)
         let authString = "Basic \(base64EncodedCredential)"
         
         config.HTTPAdditionalHeaders = ["Authorization" : authString]
-        config.timeoutIntervalForRequest = 30.0
-        config.timeoutIntervalForResource = 60.0
-        config.HTTPMaximumConnectionsPerHost = 1
+        config.timeoutIntervalForRequest = NetworkOptions.TIMEOUT_REQUEST
+        config.timeoutIntervalForResource = NetworkOptions.TIMEOUT_RESOURCE
+        config.HTTPMaximumConnectionsPerHost = NetworkOptions.HTTP_CONNECTIONS_PER_HOST
         
         let session = NSURLSession(configuration: config)
         
         let request = NSMutableURLRequest(URL: ttsURL!)
         request.HTTPMethod = "POST"
-        // request.HTTPBody = "{\"text\":\"All the problems of the world could be settled easily if men were only willing to think.\"}".dataUsingEncoding(NSUTF8StringEncoding)
         
-        let toSay = _speechRequest.text
+        let toSay = _speechRequest._text
         
         request.HTTPBody = "{\"text\":\"\(toSay)\"}".dataUsingEncoding(NSUTF8StringEncoding)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -293,28 +306,24 @@ public class SpeechDownloadOperation : NSOperation {
                 print("Received a data payload that is \(d.length) bytes")
                 
                 
-                // if a success
-                if statusCode == 200
+                if statusCode == StatusCodes.SUCCESS
                 {
-                    //_speechRequest.soundData = d
                     
                     self._speechRequest.speechAudio = createPCM(d)
                     self._speechRequest.state = .Downloaded
                     
-                    //let processedSound = createPCM(d)
                     
                     if let audio = self._speechRequest.speechAudio {
                         playAudioPCM(self.audioEngine, audioSegment: audio, delegate: nil)
                     } else {
                         print ("Could not read the audio")
+                        self._speechRequest.state = .Failed
                     }
                     
-                    
-                    // playAudio(player, processedSound)
                 } else {
-                    // what should we do if not 500
-                    // log the problem
+                    
                     print("Received a bad response from server: \(statusCode)")
+                    self._speechRequest.state = .Failed
                 }
                 
             }

@@ -50,7 +50,6 @@ class WatsonLanguageTranslationTests: XCTestCase {
     }
     
     
-    //TODO: Test case currently failing due to error "no text being passed in" - need to investigate
     func testTranslation() {
         //TODO: Add additional test cases for missing inputs, wrong languages, etc.
         let expectation = expectationWithDescription("Translation")

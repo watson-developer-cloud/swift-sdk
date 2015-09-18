@@ -60,18 +60,46 @@ public class WatsonLanguageTranslationUtils {
                 return
             }
             
-            // TODO: fix the case where the payload is a ASCII string not a JSON.
             if let data = data {
                 do {
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
+                    let httpResponse = response as! NSHTTPURLResponse
+                    let contentType = httpResponse.allHeaderFields["Content-Type"] as? String
+                    
+                    //Missing contentType in header
+                    if contentType == nil {
+                        self.printDebug("Response is missing content-type header")
+                    }
+                        //Plain text
+                    else if contentType!.rangeOfString("text/plain") != nil {
+                        let returnVal = [ "rawData" : data]
+                        callback(returnVal, nil)
+                    }
+                        //Unknown content type
+                    else if contentType!.rangeOfString("application/json") == nil {
+                        self.printDebug("Unsupported content type returned: " + contentType!)
+                    }
+                        //JSON Dictionary
+                    else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
                         
+                        if let _ = json["code"] as? String,  message = json["message"] as? String {
+                            let errorDetails = [NSLocalizedFailureReasonErrorKey: message]
+                            let error = NSError(domain: "WatsonLanguage", code: 1, userInfo: errorDetails)
+                            callback( nil, error)
+                            return
+                        }
                         callback(json, nil)
                         return
-                    } else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {
+                    }
+                        //JSON Array
+                    else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {
                         let returnVal = [ "dataArray" : json]
                         callback(returnVal, nil)
                         return
-                    } else {
+                    }
+                        //JSON Unknown Type
+                    else {
+                        let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                        self.printDebug("Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)")
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }

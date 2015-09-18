@@ -84,7 +84,12 @@ public class WatsonLanguageTranslation {
                 callback(nil)
             }
             else {
-                callback(response["data"] as! String?)
+                if let rawData = response["rawData"] as! NSData? {
+                    if let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String?
+                    {
+                        callback(language)
+                    }
+                }
             }
         })
     }

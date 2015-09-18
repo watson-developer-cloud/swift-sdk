@@ -61,25 +61,16 @@
 */
 
 import Foundation
-
-import Foundation
+import WatsonCore
 
 public class WatsonSpeechToText {
     
-    private let baseURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    
-    private let username: String
-    private let password: String
-    private var token: String
+    private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    private let authentication: WatsonAuthentication
     
     /** Initialize the Watson Speech To Text service. */
     public init(username: String, password: String) {
-        
-        self.username = username
-        self.password = password
-        self.token = ""
-        
+        self.authentication = WatsonAuthentication(serviceURL: serviceURL, username: username, password: password)
     }
     
     /** Transcribe an audio file. */
@@ -94,53 +85,68 @@ public class WatsonSpeechToText {
         }
         
         // establish connection to Watson Speech to Text service
-        let endpoint = "\(baseURL)/v1/recognize"
-        request(.GET, endpoint)
-            .authenticate(user: username, password: password)
-            .responseString() { _, _, _, _ in }
-        
-        // query Watson for transcript
-        let headers = ["Content-Type": contentType!]
-        upload(.POST, endpoint, headers: headers, file: file)
-            .authenticate(user: username, password: password)
-            .validate(contentType: ["application/json"])
-            .responseJSON() { _, _, body, error in
-                
-                // successful transcription
-                if let body: AnyObject = body {
-                    let json = JSON(body)
-                    let transcript = json["results"][0]["alternatives"][0]["transcript"].stringValue
-                    completionHandler(transcript, nil)
-                }
-                    
-                    // networking error
-                else if let error = error {
-                    completionHandler(nil, error)
-                }
-                    
-                    // unknown error
-                else {
-                    let error = NSError(domain: "Unknown", code: 500, userInfo: [NSLocalizedDescriptionKey:"Internal server error"])
-                }
-                
+        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfiguration, delegate: authentication, delegateQueue: nil)
+        let endpoint = "\(serviceURL)/v1/recognize"
+        let url = NSURL(string: endpoint)
+        if let url = url {
+            let dataTask = session.dataTaskWithURL(url) {
+                data, response, error in
+                print(response)
+                print(data)
+                print(error)
+            }
+            dataTask.resume()
         }
+        
+//        // establish connection to Watson Speech to Text service
+//        let endpoint = "\(baseURL)/v1/recognize"
+//        request(.GET, endpoint)
+//            .authenticate(user: username, password: password)
+//            .responseString() { _, _, _, _ in }
+//        
+//        // query Watson for transcript
+//        let headers = ["Content-Type": contentType!]
+//        upload(.POST, endpoint, headers: headers, file: file)
+//            .authenticate(user: username, password: password)
+//            .validate(contentType: ["application/json"])
+//            .responseJSON() { _, _, body, error in
+//                
+//                // successful transcription
+//                if let body: AnyObject = body {
+//                    let json = JSON(body)
+//                    let transcript = json["results"][0]["alternatives"][0]["transcript"].stringValue
+//                    completionHandler(transcript, nil)
+//                }
+//                    
+//                    // networking error
+//                else if let error = error {
+//                    completionHandler(nil, error)
+//                }
+//                    
+//                    // unknown error
+//                else {
+//                    let error = NSError(domain: "Unknown", code: 500, userInfo: [NSLocalizedDescriptionKey:"Internal server error"])
+//                }
+//                
+//        }
     }
     
     /** Retrieve an authentication token. */
-    private func retrieveAuthenticationToken() {
-        
-        let authenticationURL = "\(tokenURL)?url=\(baseURL)"
-        request(.GET, authenticationURL)
-            .authenticate(user: username, password: password)
-            .validate(contentType: ["application/json"])
-            .responseString { _, _, body, _ in
-                
-                if let body = body {
-                    self.token = body
-                }
-                
-        }
-    }
+//    private func retrieveAuthenticationToken() {
+//        
+//        let authenticationURL = "\(tokenURL)?url=\(baseURL)"
+//        request(.GET, authenticationURL)
+//            .authenticate(user: username, password: password)
+//            .validate(contentType: ["application/json"])
+//            .responseString { _, _, body, _ in
+//                
+//                if let body = body {
+//                    self.token = body
+//                }
+//                
+//        }
+//    }
     
     /** Return a file's MIME Content-Type, if supported by the Watson Speech to Text service.
     Supported Content-Types: audio/wav, audio/flac, audio/l16 */

@@ -61,7 +61,7 @@ public class WatsonAuthentication: NSObject, NSURLSessionTaskDelegate {
         
         // cancel authentication after any previous failures
         guard challenge.previousFailureCount == 0 else {
-            print("WatsonAuthentication: Authentication request canceled due to previous authentication failure.")
+            WatsonError("WatsonAuthentication: Authentication request canceled due to previous authentication failure.")
             let disposition = NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge
             let credential: NSURLCredential? = nil
             completionHandler(disposition, credential)

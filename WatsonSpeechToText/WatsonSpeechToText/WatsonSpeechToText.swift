@@ -37,11 +37,19 @@ public class WatsonSpeechToText {
     /**
     An abstraction of a common pattern for handling asynchronous errors.
     */
-    private func asynchronousError(function: String, message: String, code: Int, completionHandler: (String?, NSError?) -> Void) {
+    private func asynchronousError(function: String, message: String, code: Int?, completionHandler: (String?, NSError?) -> Void) {
+        
         WatsonError("\(function): \(message)")
         let userInfo = [NSLocalizedDescriptionKey: message]
-        let error = NSError(domain: "WatsonSpeechToText", code: code, userInfo: userInfo)
+        let codeUnwrapped: Int
+        if let code = code {
+            codeUnwrapped = code
+        } else {
+            codeUnwrapped = 0
+        }
+        let error = NSError(domain: "WatsonSpeechToText", code: codeUnwrapped, userInfo: userInfo)
         completionHandler(nil, error)
+        
     }
     
     /**
@@ -88,7 +96,7 @@ public class WatsonSpeechToText {
                 let getStatusCode = (response as? NSHTTPURLResponse)?.statusCode
                 guard getStatusCode == 200 else {
                     let message = "HTTP error code returned for GET request."
-                    self.asynchronousError(function, message: message, code: getStatusCode!, completionHandler: completionHandler)
+                    self.asynchronousError(function, message: message, code: getStatusCode, completionHandler: completionHandler)
                     return
                 }
                 
@@ -104,14 +112,14 @@ public class WatsonSpeechToText {
                     let postStatusCode = (response as? NSHTTPURLResponse)?.statusCode
                     guard postStatusCode == 200 else {
                         let message = "HTTP error code returned for POST request."
-                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        self.asynchronousError(function, message: message, code: postStatusCode, completionHandler: completionHandler)
                         return
                     }
                     
                     // ensure response data is not nil
                     guard let data = data else {
                         let message = "Nil data returned for POST request."
-                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        self.asynchronousError(function, message: message, code: postStatusCode, completionHandler: completionHandler)
                         return
                     }
                     
@@ -122,7 +130,7 @@ public class WatsonSpeechToText {
                         completionHandler(transcript, nil)
                     } catch let error {
                         let message = "Error parsing JSON: \(error)"
-                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        self.asynchronousError(function, message: message, code: postStatusCode, completionHandler: completionHandler)
                         return
                     }
 

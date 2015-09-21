@@ -12,6 +12,7 @@
 		7A1FCD7C1BA9D63E0090E1EB /* WatsonSpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCD7B1BA9D63E0090E1EB /* WatsonSpeechToTextTests.swift */; };
 		7A1FCDC11BA9D6980090E1EB /* WatsonSpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDC01BA9D6980090E1EB /* WatsonSpeechToText.swift */; settings = {ASSET_TAGS = (); }; };
 		7A1FCDC51BA9ED1C0090E1EB /* WatsonTranscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDC41BA9ED1C0090E1EB /* WatsonTranscription.swift */; settings = {ASSET_TAGS = (); }; };
+		7A3C44101BB00D0300106EE9 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7A3C440F1BB00D0300106EE9 /* SpeechSample.flac */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		7A1FCD7D1BA9D63E0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCDC01BA9D6980090E1EB /* WatsonSpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSpeechToText.swift; sourceTree = "<group>"; };
 		7A1FCDC41BA9ED1C0090E1EB /* WatsonTranscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonTranscription.swift; sourceTree = "<group>"; };
+		7A3C440F1BB00D0300106EE9 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		7A1FCD7A1BA9D63E0090E1EB /* WatsonSpeechToTextTests */ = {
 			isa = PBXGroup;
 			children = (
+				7A3C440F1BB00D0300106EE9 /* SpeechSample.flac */,
 				7A1FCD7B1BA9D63E0090E1EB /* WatsonSpeechToTextTests.swift */,
 				7A1FCD7D1BA9D63E0090E1EB /* Info.plist */,
 			);
@@ -190,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3C44101BB00D0300106EE9 /* SpeechSample.flac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

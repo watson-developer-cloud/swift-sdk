@@ -6,85 +6,76 @@
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
-/* Watson Speech To Text Service
-
-    Documentation:
-
-        http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/
-
-    Example Call:
-
-        1. SpeechToTextObject.transcribeAudio(pathToAudioFile) { transcript, error in ... }
-
-        2. curl -u "***REMOVED***":"***REMOVED***" \
-           -H "content-type: audio/flac" --data-binary @"test-audio.flac" \
-           "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
-    Example Response:
-
-        {
-            "results": [
-                {
-                    "alternatives": [
-                        {
-                            "confidence": 0.869285523891449,
-                            "transcript": "several tornadoes touch down as a line of severe thunderstorms swept through colorado on sunday "
-                        }
-                    ],
-                    "final": true
-                }
-            ],
-            "result_index": 0
-        }
-
-*/
-
-/* Design Decisions and Questions:
-
-    How much functionality should be exposed to (or hidden from) the user?
-    - Get models (/v1/models)? -> Doesn't seem like a run-time decision.
-    - Get model details (/v1/models/{model_id})? -> Doesn't seem like a run-time decision.
-    - Session vs. sessionless modes? -> Expose session use cases, but hide management details.
-    - Multipart files? -> Should be supported somehow, for live/streaming client use cases.
-    - Return type? How much data should it expose? -> Enums with map convenience functions that can be chained?
-    - How should we expose varying amounts of complexity to the user? (e.g. per-word vs. per-transcription confidence?)
-
-*/
-
-/* TODO:
-
-    - Determine why the upload() function is troublesome.
-    - Ensure audio files meet the service's size constraints.
-    - Add support for l16 MIME-type.
-    - Add support for additional functionality, in-line with design decisions above.
-
-*/
-
 import Foundation
 import WatsonCore
 
+/**
+The WatsonSpeechToText class is a convenient wrapper around the IBM Watson Speech to Text service available on BlueMix.
+
+let stt = WatsonSpeechToText(username: username, password: password)
+stt.transcribeFile(file: file) {
+string, error in /* handle return values */
+}
+
+:param: username A string representing the username used to access the Watson Speech to Text service.
+:param: password A string representing the password used to access the Watson Speech to Text service.
+*/
 public class WatsonSpeechToText {
     
     private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
     private let authentication: WatsonAuthentication
     
-    /** Initialize the Watson Speech To Text service. */
+    /**
+    Initialize the Watson Speech To Text service.
+    */
     public init(username: String, password: String) {
+        
         self.authentication = WatsonAuthentication(serviceURL: serviceURL, username: username, password: password)
+        
     }
     
-    /** Transcribe an audio file. */
+    /**
+    An abstraction of a common pattern for handling asynchronous errors.
+    */
+    private func asynchronousError(function: String, message: String, code: Int, completionHandler: (String?, NSError?) -> Void) {
+        WatsonError("\(function): \(message)")
+        let userInfo = [NSLocalizedDescriptionKey: message]
+        let error = NSError(domain: "WatsonSpeechToText", code: code, userInfo: userInfo)
+        completionHandler(nil, error)
+    }
+    
+    /**
+    Transcribe an audio file.
+    */
     public func transcribeFile(file: NSURL, completionHandler: (String?, NSError?) -> Void) {
         
-        // ensure audio file format is supported by Watson
-        let contentType = MIMETypeOfFile(file)
-        if contentType == nil {
-            let error = NSError(domain: "FileType", code: 415, userInfo: [NSLocalizedDescriptionKey:"Unsupported media type"])
-            completionHandler(nil, error)
+        let function = "WatsonSpeechToText.transcribeFile()"
+        
+        // get audio data from file
+        guard let audioData = NSData(contentsOfURL: file) else {
+            let message = "Cannot read audio file."
+            asynchronousError(function, message: message, code: 0, completionHandler: completionHandler)
             return
         }
         
-        // establish connection to Watson Speech to Text service
+        // get content type and ensure it is supported by Watson
+        guard let contentType = MIMETypeOfFile(file) else {
+            let message = "Unsupported media type."
+            asynchronousError(function, message: message, code: 415, completionHandler: completionHandler)
+            return
+        }
+        
+        transcribeData(audioData, contentType: contentType, completionHandler: completionHandler)
+    }
+    
+    /**
+    Transcribe audio data.
+    */
+    public func transcribeData(audioData: NSData, contentType: String, completionHandler: (String?, NSError?) -> Void) {
+
+        let function = "WatsonSpeechToText.transcribeData()"
+        
+        // GET to establish connection
         let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfiguration, delegate: authentication, delegateQueue: nil)
         let endpoint = "\(serviceURL)/v1/recognize"
@@ -92,64 +83,62 @@ public class WatsonSpeechToText {
         if let url = url {
             let dataTask = session.dataTaskWithURL(url) {
                 data, response, error in
-                print(response)
-                print(data)
-                print(error)
+                
+                // ensure GET response status code of 200
+                let getStatusCode = (response as? NSHTTPURLResponse)?.statusCode
+                guard getStatusCode == 200 else {
+                    let message = "HTTP error code returned for GET request."
+                    self.asynchronousError(function, message: message, code: getStatusCode!, completionHandler: completionHandler)
+                    return
+                }
+                
+                // POST to send audio file
+                let request = NSMutableURLRequest(URL: url)
+                request.HTTPMethod = "POST"
+                request.HTTPBody = audioData
+                request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+                let uploadTask = session.dataTaskWithRequest(request) {
+                    data, response, error in
+                    
+                    // ensure POST response status code of 200
+                    let postStatusCode = (response as? NSHTTPURLResponse)?.statusCode
+                    guard postStatusCode == 200 else {
+                        let message = "HTTP error code returned for POST request."
+                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        return
+                    }
+                    
+                    // ensure response data is not nil
+                    guard let data = data else {
+                        let message = "Nil data returned for POST request."
+                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        return
+                    }
+                    
+                    // parse response data as JSON
+                    do {
+                        let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
+                        let transcript = json.valueForKey("results")?.objectAtIndex(0).valueForKey("alternatives")?.objectAtIndex(0).valueForKey("transcript") as? String
+                        completionHandler(transcript, nil)
+                    } catch let error {
+                        let message = "Error parsing JSON: \(error)"
+                        self.asynchronousError(function, message: message, code: postStatusCode!, completionHandler: completionHandler)
+                        return
+                    }
+
+                }
+                uploadTask.resume()
             }
             dataTask.resume()
         }
         
-//        // establish connection to Watson Speech to Text service
-//        let endpoint = "\(baseURL)/v1/recognize"
-//        request(.GET, endpoint)
-//            .authenticate(user: username, password: password)
-//            .responseString() { _, _, _, _ in }
-//        
-//        // query Watson for transcript
-//        let headers = ["Content-Type": contentType!]
-//        upload(.POST, endpoint, headers: headers, file: file)
-//            .authenticate(user: username, password: password)
-//            .validate(contentType: ["application/json"])
-//            .responseJSON() { _, _, body, error in
-//                
-//                // successful transcription
-//                if let body: AnyObject = body {
-//                    let json = JSON(body)
-//                    let transcript = json["results"][0]["alternatives"][0]["transcript"].stringValue
-//                    completionHandler(transcript, nil)
-//                }
-//                    
-//                    // networking error
-//                else if let error = error {
-//                    completionHandler(nil, error)
-//                }
-//                    
-//                    // unknown error
-//                else {
-//                    let error = NSError(domain: "Unknown", code: 500, userInfo: [NSLocalizedDescriptionKey:"Internal server error"])
-//                }
-//                
-//        }
     }
     
-    /** Retrieve an authentication token. */
-//    private func retrieveAuthenticationToken() {
-//        
-//        let authenticationURL = "\(tokenURL)?url=\(baseURL)"
-//        request(.GET, authenticationURL)
-//            .authenticate(user: username, password: password)
-//            .validate(contentType: ["application/json"])
-//            .responseString { _, _, body, _ in
-//                
-//                if let body = body {
-//                    self.token = body
-//                }
-//                
-//        }
-//    }
+    /**
+    Return a file's MIME Content-Type, if supported by the Watson Speech to Text service.
     
-    /** Return a file's MIME Content-Type, if supported by the Watson Speech to Text service.
-    Supported Content-Types: audio/wav, audio/flac, audio/l16 */
+    Supported Content-Types: audio/wav, audio/flac, audio/l16
+    */
     private func MIMETypeOfFile(file: NSURL) -> String? {
         
         var contentType: String?

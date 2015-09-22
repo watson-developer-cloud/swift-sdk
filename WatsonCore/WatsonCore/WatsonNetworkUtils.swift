@@ -1,28 +1,64 @@
 //
-//  WatsonLanguageTranslationUtils.swift
-//  WatsonLanguageTranslation
+//  WatsonNetworkUtils.swift
+//  WatsonCore
 //
 //  Created by Karl Weinmeister on 9/16/15.
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
-//TODO: Move this to a common project
 //TODO: Document this class and functions
 
 import Foundation
 
-public class WatsonLanguageTranslationUtils {
+public enum WatsonServiceType {
+    case Streaming, Standard
+}
+
+public enum WatsonHTTPMethod: String {
+    case GET = "GET"
+    case POST = "POST"
+    case PUT = "PUT"
+    case DELETE = "DELETE"
+}
+
+public class WatsonNetworkUtils {
+    private let TAG = "[WatsonCore] "
     private var _debug: Bool = true
-    private let TAG = "[LanguageTranslationSDK] "
     private let _httpContentTypeHeader = "Content-Type"
     private let _httpAcceptHeader = "Accept"
     private let _httpAuthorizationHeader = "Authorization"
     private let _contentTypeJSON = "application/json"
     private let _contentTypeText = "text/plain"
-    public var apiKey: String!
+    private let _protocol = "https"
+    private var _host = "gateway.watsonplatform.net"
+    private var apiKey: String!
     
-    public func buildRequest(endpoint:String, method:String, body: NSData?, textContent: Bool = false) -> NSURLRequest {
+    public init(type:WatsonServiceType = WatsonServiceType.Standard) {
+        configureHost(type)
+    }
+
+    public init(username:String, password:String, type:WatsonServiceType = WatsonServiceType.Standard) {
+        setUsernameAndPassword(username, password: password)
+        configureHost(type)
+    }
+    
+    private func configureHost(type:WatsonServiceType)
+    {
+        if type == WatsonServiceType.Streaming {
+            _host = "stream.watsonplatform.net"
+        }
+    }
+    
+    public func setUsernameAndPassword(username:String, password:String)
+    {
+        let authorizationString = username + ":" + password
+        apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
         
+    }
+    
+    public func buildRequest(path:String, method:String, body: NSData?, textContent: Bool = false) -> NSURLRequest {
+        
+        let endpoint = _protocol + "://" + _host + path
         if let url = NSURL(string: endpoint) {
             
             let request = NSMutableURLRequest(URL: url)

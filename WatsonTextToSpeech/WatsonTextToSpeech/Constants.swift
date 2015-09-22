@@ -37,3 +37,36 @@ struct NetworkOptions
     static let TIMEOUT_RESOURCE = 60.0
     static let HTTP_CONNECTIONS_PER_HOST = 1
 }
+
+func getVoiceId(gender: VoiceGender, language: VoiceLanguage) -> String
+{
+    switch (gender)
+    {
+    case .Male:
+        
+        switch (language)
+        {
+        case .German:
+            return "de-DE_DieterVoice"
+        case .EnglishUS:
+            return "en-US_MichaelVoice"
+        case .Spanish:
+            return "es-ES_EnriqueVoice"
+        default:
+            return "en-US_MichaelVoice"
+        }
+        
+    case .Female:
+        
+        switch (language)
+        {
+        case .German:
+            return "de-DE_BirgitVoice"
+        case .EnglishUS:
+            return "en-US_AllisonVoice"
+        default:
+            return "en-US_AllisonVoice"
+        }
+        
+    }
+}

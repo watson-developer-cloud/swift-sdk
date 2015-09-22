@@ -6,41 +6,31 @@
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
+import WatsonCore
 import Foundation
 
 //TODO: document functions
 
 public class WatsonLanguageTranslation {
     
-    private let TAG = "[LanguageTranslation] "
-    
-    //TODO: Move the GET/POST/PUT constants into a common project
-    private let GET = "GET"
-    private let POST = "POST"
-    private let PUT = "PUT"
-    
+    private let TAG = "[WatsonLanguageTranslation] "
+    private let _serviceURL = "/language-translation/api"
+
+    private let utils = WatsonNetworkUtils()
+
     private var _languages:[WatsonLanguage]?
-    private let _baseURL = "https://gateway.watsonplatform.net/language-translation/api"
-    private let utils = WatsonLanguageTranslationUtils()
     
     public init(username:String,password:String) {
         //TODO: Handle 401 errors (no or wrong username/password)
-        setUsernameAndPassword(username,password:password)
+        utils.setUsernameAndPassword(username,password:password)
         //TODO: Handle edge case where language list is not yet initialized by the time the user calls translate()
         //getIdentifiableLanguages({ self._languages = $0 })
     }
     
-    //TODO: Move the logic below to a common project
-    public func setUsernameAndPassword(username:String,password:String)
-    {
-        let authorizationString = username + ":" + password
-        utils.apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
-        
-    }
     public func getIdentifiableLanguages(callback: ([WatsonLanguage])->()) {
-        let endpoint = _baseURL + "/v2/identifiable_languages"
+        let path = _serviceURL + "/v2/identifiable_languages"
         
-        let request = utils.buildRequest(endpoint, method: GET, body: nil)
+        let request = utils.buildRequest(path, method: WatsonHTTPMethod.GET.rawValue, body: nil)
         utils.performRequest(request, callback: {response, error in
             
             var languages = [WatsonLanguage]()
@@ -74,8 +64,8 @@ public class WatsonLanguageTranslation {
     
     public func identify(text:String, callback: (String?)->()) {
         
-        let endpoint = _baseURL + "/v2/identify"
-        let request = utils.buildRequest(endpoint, method: POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), textContent: true)
+        let path = _serviceURL + "/v2/identify"
+        let request = utils.buildRequest(path, method: WatsonHTTPMethod.POST.rawValue, body: text.dataUsingEncoding(NSUTF8StringEncoding), textContent: true)
         
         utils.performRequest(request, callback: {response, error in
             if let error_message = response["error_message"] as? String
@@ -96,9 +86,9 @@ public class WatsonLanguageTranslation {
     
     public func translate(text:String,sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
         
-        let endpoint = _baseURL + "/v2/translate"
+        let path = _serviceURL + "/v2/translate"
         let body = buildTranslateRequestBody(sourceLanguage, targetLanguage: targetLanguage, text: text)
-        let request = utils.buildRequest(endpoint, method: POST, body: body)
+        let request = utils.buildRequest(path, method: WatsonHTTPMethod.POST.rawValue, body: body)
         
         utils.performRequest(request, callback: {response, error in
             if let error_message = response["error_message"] as? String

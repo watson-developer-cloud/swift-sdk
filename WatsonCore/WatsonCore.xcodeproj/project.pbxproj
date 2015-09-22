@@ -13,6 +13,7 @@
 		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; };
 		7A3C440E1BAFC4A400106EE9 /* WatsonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C440D1BAFC4A400106EE9 /* WatsonError.swift */; settings = {ASSET_TAGS = (); }; };
 		7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */; settings = {ASSET_TAGS = (); }; };
+		BDBF45211BB1C4D300860301 /* WatsonNetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF45201BB1C4D300860301 /* WatsonNetworkUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
 		7A3C440D1BAFC4A400106EE9 /* WatsonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonError.swift; sourceTree = "<group>"; };
 		7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAuthentication.swift; sourceTree = "<group>"; };
+		BDBF45201BB1C4D300860301 /* WatsonNetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonNetworkUtils.swift; sourceTree = "<group>"; };
 		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */,
 				7A3C440D1BAFC4A400106EE9 /* WatsonError.swift */,
 				7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */,
+				BDBF45201BB1C4D300860301 /* WatsonNetworkUtils.swift */,
 				E1605B161BAB5FA70084A056 /* Endpoints.plist */,
 			);
 			path = WatsonCore;
@@ -210,6 +213,7 @@
 				7A3C440E1BAFC4A400106EE9 /* WatsonError.swift in Sources */,
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
+				BDBF45211BB1C4D300860301 /* WatsonNetworkUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

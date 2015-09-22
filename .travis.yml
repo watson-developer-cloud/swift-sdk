@@ -3,3 +3,7 @@ language: objective-c
 osx_image: xcode7.0
 
 xcode_scheme: WatsonCore
+
+
+script:
+- xcodebuild clean build test -workspace watson-sdk-ios.xcworkspace -scheme SpeechSynthesis

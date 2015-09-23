@@ -8,6 +8,23 @@
 
 import Foundation
 
+/**
+Model Schema:
+
+{
+    "models": [
+        {
+            "name": "",
+            "rate": 0,
+            "language": "",
+            "description": "",
+            "url": ""
+        }
+    ]
+}
+
+*/
+
 public struct WatsonSpeechToTextModel {
     
     let name: String

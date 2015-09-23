@@ -8,6 +8,19 @@
 
 import Foundation
 
+/**
+Model Schema
+
+{
+    "session_id": "",
+    "new_session_uri": "",
+    "recognize": "",
+    "recognizeWS": "",
+    "observe_result": ""
+}
+
+*/
+
 public struct WatsonSpeechToTextSession {
     
     let sessionID: String

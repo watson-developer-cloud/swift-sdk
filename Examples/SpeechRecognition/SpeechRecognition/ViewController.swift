@@ -27,8 +27,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         // create file to store recordings
         let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
         
-        print(filePath) // debugging
-        
         // set up session and recorder
         let session = AVAudioSession.sharedInstance()
         var settings = [String: AnyObject]()
@@ -129,12 +127,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         let stt = WatsonSpeechToText(username: "***REMOVED***", password: "***REMOVED***")
         stt.transcribeFile(recorder.url) {
             string, error in
-            if let transcription = string {
-                self.transcriptionField.text = transcription
-            } else if let error = error {
-                self.transcriptionField.text = "\(error)"
-            } else {
-                self.transcriptionField.text = "Error transcribing audio. No response from the server."
+            dispatch_async(dispatch_get_main_queue()) {
+                if let transcription = string {
+                    self.transcriptionField.text = "\(transcription)"
+                } else if let error = error {
+                    self.transcriptionField.text = "\(error)"
+                } else {
+                    self.transcriptionField.text = "Error transcribing audio. No response from the server."
+                }
             }
         }
         

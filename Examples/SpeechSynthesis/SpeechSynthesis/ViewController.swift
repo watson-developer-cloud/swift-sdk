@@ -58,7 +58,8 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     @IBAction func handlePress(sender: AnyObject) {
         
         
-        let ttsService = WatsonTextToSpeechService(username: "joe", password: "p@sswerd")
+        let ttsService = WatsonTextToSpeechService(username: "***REMOVED***",
+            password: "***REMOVED***")
         let voice = ttsService.getDefaultVoice()
         
         let toSay = speechTextView.text

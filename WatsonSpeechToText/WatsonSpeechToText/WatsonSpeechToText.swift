@@ -93,7 +93,7 @@ public class WatsonSpeechToText {
     /**
     Retrieve information about an available model.
     */
-    private func retrieveModel(model: String = en_us_broadbandModel, completionHandler: (WatsonSpeechToTextModel?, WatsonSpeechToTextError?) -> Void) {
+    private func retrieveModel(model: String, completionHandler: (WatsonSpeechToTextModel?, WatsonSpeechToTextError?) -> Void) {
         // GET /v1/models/{model_id}
     }
     

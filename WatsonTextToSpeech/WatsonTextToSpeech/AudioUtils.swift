@@ -11,11 +11,14 @@ import AVFoundation
 import CoreAudio
 
 
-// holds some information for Audio PCM floats
+let debug = true
+
+/** 
+Holds some information for Audio PCM floats
+*/
 public struct SpeechAudio
 {
     let numChannels:Int
-    // let bitsPerSample:Int
     var samples:[Float32]
     
     public init(numChannels: Int, samples: [Float32])
@@ -25,6 +28,14 @@ public struct SpeechAudio
     }
 }
 
+/**
+Converts 4 little-endian bytes to an Int
+ - parameter a: lowest significant byte
+ - parameter b: 2nd lowest order byte
+ - parameter c: 3rd lowest order byte
+ - parameter d: most significant byte
+ - returns: an integer representing the byte array
+*/
 private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int {
     let c1 = Int(a)
     let c2 = Int(b)<<8
@@ -34,14 +45,24 @@ private func bytesToInt(a: UInt8, b: UInt8, c: UInt8, d: UInt8) -> Int {
     return c1+c2+c3+c4
 }
 
+/**
+Converts 2 bytes little-endian to a 32 bit float
+ - parameter firstByte: lowest significant byte
+ - parameter secondByte: highest signifiant byte
+ - returns: a 32 bit float approximation representing the byte array
+*/
 private func bytesToDouble(firstByte: UInt8, secondByte: UInt8) -> Float32 {
     let c:Int16 = Int16(secondByte) << 8 | Int16(firstByte)
     return Float32(c)/Float32(Int16.max)
 }
 
+/**
+Converts a downloaded binary WAV to a SpeechAudio structure
+ - parameter data: NSData binary for the WAV file
+ - returns: a SpeechAudio structure with audio data and information
+*/
 public func createPCM(data: NSData) -> SpeechAudio
 {
-    // using example from http://stackoverflow.com/questions/8754111/how-to-read-the-data-in-a-wav-file-to-an-array
     
     let count = data.length / sizeof(UInt8)
     
@@ -49,14 +70,16 @@ public func createPCM(data: NSData) -> SpeechAudio
     
     data.getBytes(&buffer, length: count * sizeof(UInt8))
     
-    print ("Number of channels is \(buffer[22])")
+    if debug {
+        print ("Number of channels is \(buffer[22])")
+    }
     
     // 4 byte RIFF
     // 4 byte chunk size
     // 4 byte WAVE ID
     var pos = 0
     
-    if buffer[0] == 82 && buffer[1] == 73 && buffer[2] == 70 && buffer[3] == 70
+    if buffer[0] == 82 && buffer[1] == 73 && buffer[2] == 70 && buffer[3] == 70 && debug
     {
         print("Got RIFF header!")
     }
@@ -67,52 +90,35 @@ public func createPCM(data: NSData) -> SpeechAudio
     
     pos = 12
     
-    if buffer[16] == 16
-    {
-        print ("PCM Format")
-    } else {
-        print ("Compressed format")
-    }
     
     let sampleRate = bytesToInt(buffer[24], b: buffer[25], c: buffer[26], d: buffer[27])
-    print ("Sample rate: \(sampleRate)")
     
-    // sampleRate * numChannels * bitsPerSample
     let byteRate = bytesToInt(buffer[28], b: buffer[29], c: buffer[30], d: buffer[31])
-    print ("Byte rate \(byteRate)")
     
-    // block align = NumChannels * bytesPerSample
     let blockAlign = bytesToInt(buffer[32], b: buffer[33], c: 0, d: 0)
-    print ("Block alignment is \(blockAlign)")
     
-    // bitsPerSample
     let bitsPerSample = bytesToInt(buffer[34], b: buffer[35], c: 0, d: 0)
-    print ("BitsPerSample is \(bitsPerSample)")
     
-    // subchunkSize
     let subchunkSize = bytesToInt(buffer[40], b: buffer[41], c: buffer[42], d: buffer[43])
-    print ("subchunkSize is \(subchunkSize)")
-    
-    /**
-    while (!(buffer[pos]==100 && buffer[pos+1]==97 && buffer[pos+2]==116))
-    {
-    pos += 4
-    let c1 : Int = Int(buffer[pos])
-    let c2 : Int = Int(buffer[pos+1])<<8
-    let c3 : Int = Int(buffer[pos+2])<<16
-    let c4 : Int = Int(buffer[pos+3])<<32
-    
-    let chunkSize = c1 + c2 + c3 + c4
-    
-    pos += 4 + chunkSize
-    }
-    
-    pos += 8
-    
-    **/
     
     let numSamples : Int = (buffer.count - 44)/2
-    print ("Number of samples is \(numSamples)")
+    
+    if debug {
+        print ("Sample rate: \(sampleRate)")
+        print ("Byte rate \(byteRate)")
+        print ("Block alignment is \(blockAlign)")
+        print ("BitsPerSample is \(bitsPerSample)")
+        print ("subchunkSize is \(subchunkSize)")
+        print ("Number of samples is \(numSamples)")
+        
+        if buffer[16] == 16
+        {
+            print ("PCM Format")
+        } else {
+            print ("Compressed format")
+        }
+
+    }
     
     pos = 0
     var i = 0
@@ -121,7 +127,6 @@ public func createPCM(data: NSData) -> SpeechAudio
     var pcmbuffer = [Float32](count: numSamples, repeatedValue: 0.0)
     while (i < numSamples) {
         
-        // pcmbuffer[i] = bytesToDouble(buffer[pos], secondByte: buffer[pos+1])
         let value = bytesToDouble(buffer[pos], secondByte: buffer[pos+1])
         
         // 100 = d, 97=a, 116=t, 97=a
@@ -139,24 +144,22 @@ public func createPCM(data: NSData) -> SpeechAudio
         
     }
     
-    // return NSData(bytes: pcmbuffer, length: numSamples)
     return SpeechAudio(numChannels: 1, samples: pcmbuffer)
     
 }
 
-// Used as a reference:
-// http://stackoverflow.com/questions/28058777/generating-a-tone-in-ios-with-16-bit-pcm-audioengine-connect-throws-ausetform
+/**
+Plays an audio segment using lower-level audio engine
+ - parameter engine: AVAudioEngine that has been initialized and outside the scope of the function for threading
+ - parameter audioSegment: SpeechAudio structure that holds the data to play
+ - parameter delegate: a protocol that can be invoked when the speech has finished playing
+*/
 public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio, delegate: TextToSpeechServiceDelegate?)
 {
     
     
     let sampleRateHz = 22050.0
-    // let numberOfSamples = data.length
-    // let durationMs = 5000
     
-    // let mixer = engine.mainMixerNode
-    // let sampleRateHz: Float = Float(mixer.outputFormatForBus(0).sampleRate)
-    // let numberOfSamples = AVAudioFrameCount((Float(durationMs) / 1000 * sampleRateHz))
     let numberOfSamples = AVAudioFrameCount(audioSegment.samples.count)
     
     // support stereo? make parameterizable
@@ -167,15 +170,11 @@ public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio, dele
     let buffer = AVAudioPCMBuffer(PCMFormat: format, frameCapacity: numberOfSamples)
     buffer.frameLength = numberOfSamples
     
-    //var pos: Int = 0
-    
     for pos in 0...audioSegment.samples.count-1
     {
         buffer.floatChannelData.memory[pos] = audioSegment.samples[pos]
     }
     
-    
-    // let audioEngine = AVAudioEngine()
     let audioPlayer = AVAudioPlayerNode()
     
     engine.attachNode(audioPlayer)
@@ -197,7 +196,8 @@ public func playAudioPCM (engine: AVAudioEngine, audioSegment: SpeechAudio, dele
         })
         
     } catch {
-        // Log if an exception
+        
+        print("Problem playing the audio")
     }
     
     

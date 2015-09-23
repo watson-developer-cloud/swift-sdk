@@ -8,6 +8,17 @@
 
 import Foundation
 
+/**
+Model Schema:
+
+{
+    "code": 0,
+    "error": "",
+    "help": ""
+}
+
+*/
+
 public struct WatsonSpeechToTextError {
     
     let error: String

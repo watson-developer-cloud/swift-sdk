@@ -8,6 +8,21 @@
 
 import Foundation
 
+/**
+
+Model Schema:
+
+{
+    "session": {
+        "state": "",
+        "model": "",
+        "recognize": "",
+        "observe_result": ""
+    }
+}
+
+*/
+
 public struct WatsonSpeechToTextSessionAvailability {
     
     let state: String

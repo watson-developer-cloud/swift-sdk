@@ -96,7 +96,26 @@ public class WatsonTextToSpeechService : NSObject, TextToSpeechService
     
     public func synthesizeSpeech(text:String, voice: Voice)
     {
+        let speechRequest = SpeechRequest(text: text)
+        _speechRequests.append(speechRequest)
         
+        let downloader = SpeechDownloadOperation(username: _username, password: _password, speechRequest: speechRequest, delegate: delegate )
+        
+        downloader.completionBlock = {
+            if downloader.cancelled {
+                return
+            }
+            
+            self.delegate?.speechDidPlay()
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                //self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
+                
+            })
+        }
+        
+        // Uncomment this to make the network call
+        _pendingOperations.downloadQueue.addOperation(downloader)
     }
     
     public func synthesizeSpeech(text:String, voice: Voice, completion: CompletionBlock)

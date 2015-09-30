@@ -42,10 +42,15 @@ public class WatsonNetworkUtils {
         configureHost(type)
     }
     
-    private func configureHost(type:WatsonServiceType)
+    public func configureHost(type:WatsonServiceType, host : String = "")
     {
         if type == WatsonServiceType.Streaming {
             _host = "stream.watsonplatform.net"
+        }
+        
+        if (!host.isEmpty)
+        {
+            _host = host
         }
     }
     

@@ -1,6 +1,6 @@
 //
-//  WatsonLanguageModel.swift
-//  WatsonLanguageTranslation
+//  LanguageModel.swift
+//  LanguageTranslation
 //
 //  Created by Karl Weinmeister on 9/16/15.
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WatsonLanguageModel
+public struct LanguageModel
 {
     var modelId = ""
     var name = ""

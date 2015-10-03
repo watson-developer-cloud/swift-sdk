@@ -6,54 +6,91 @@
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
-//TODO: Document this class and functions
-
 import Foundation
 
-public enum WatsonServiceType {
-    case Streaming, Standard
+/**
+Watson service types
+
+- Streaming: Watson services using streaming, i.e. Text to Speech and Speech to Text
+- Standard: Other Watson services written by IBM team
+- Alchemy: Alchemy Watson services
+*/
+public enum ServiceType: String {
+    case Streaming = "stream.watsonplatform.net"
+    case Standard = "gateway.watsonplatform.net"
+    case Alchemy = "gateway-a.watsonplatform.net"
 }
 
-public enum WatsonHTTPMethod: String {
+public enum ContentType: String {
+    case Text = "text/plain"
+    case JSON = "application/json"
+    case XML = "application/xml"
+}
+
+/**
+HTTP Methods used for REST operations
+
+- GET:    Get
+- POST:   Post
+- PUT:    Put
+- DELETE: Delete
+*/
+public enum HTTPMethod: String {
     case GET = "GET"
     case POST = "POST"
     case PUT = "PUT"
     case DELETE = "DELETE"
 }
 
-public class WatsonNetworkUtils {
-    private let TAG = "[WatsonCore] "
+/// Networking utilities used for performing REST operations into Watson services and parsing the input
+public class NetworkUtils {
+    private let TAG = "[Core] "
     private var _debug: Bool = true
     private let _httpContentTypeHeader = "Content-Type"
     private let _httpAcceptHeader = "Accept"
     private let _httpAuthorizationHeader = "Authorization"
-    private let _contentTypeJSON = "application/json"
-    private let _contentTypeText = "text/plain"
     private let _protocol = "https"
-    private var _host = "gateway.watsonplatform.net"
+    private var _host = ""
     private var apiKey: String!
+
+    /**
+    Initialize the networking utilities with a service type
     
-    public init(type:WatsonServiceType = WatsonServiceType.Standard) {
+    - parameter type: Service type
+    */
+    public init(type:ServiceType = ServiceType.Standard) {
         configureHost(type)
     }
 
-    public init(username:String, password:String, type:WatsonServiceType = WatsonServiceType.Standard) {
+    /**
+    Initialize the network utilities with a service type and authenticate
+    
+    - parameter username: username
+    - parameter password: password
+    - parameter type:     service type
+    
+    */
+    public init(username:String, password:String, type:ServiceType = ServiceType.Standard) {
         setUsernameAndPassword(username, password: password)
         configureHost(type)
     }
+
+    /**
+    Configures the host for service invocation
     
-    public func configureHost(type:WatsonServiceType, host : String = "")
+    - parameter type: service type
+    */
+    private func configureHost(type:ServiceType)
     {
-        if type == WatsonServiceType.Streaming {
-            _host = "stream.watsonplatform.net"
-        }
-        
-        if (!host.isEmpty)
-        {
-            _host = host
-        }
+        _host = type.rawValue
     }
+
+    /**
+    Sets the username and password on the service for invocation. Combines both together into an API Key.
     
+    - parameter username: username
+    - parameter password: password
+    */
     public func setUsernameAndPassword(username:String, password:String)
     {
         let authorizationString = username + ":" + password
@@ -61,42 +98,51 @@ public class WatsonNetworkUtils {
         
     }
     
-    public func buildRequest(path:String, method:String, body: NSData?, textContent: Bool = false) -> NSURLRequest {
+    /**
+    Build up the request to be passed into a Watson service
+    
+    - parameter path:        Path to the service, not including hostname
+    - parameter method:      The HTTP method to use
+    - parameter body:        The HTTP request body
+    - parameter textContent: If the
+    
+    - returns: A populated request object
+    */
+    public func buildRequest(path:String, method:HTTPMethod, body: NSData?, contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON) -> NSURLRequest? {
         
         let endpoint = _protocol + "://" + _host + path
         if let url = NSURL(string: endpoint) {
             
             let request = NSMutableURLRequest(URL: url)
             
-            request.HTTPMethod = method
+            request.HTTPMethod = method.rawValue
             request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
-            if (textContent) {
-                request.addValue(_contentTypeText, forHTTPHeaderField: _httpAcceptHeader)
-                request.addValue(_contentTypeText, forHTTPHeaderField: _httpContentTypeHeader)
-            } else {
-                request.addValue(_contentTypeJSON, forHTTPHeaderField: _httpAcceptHeader)
-                request.addValue(_contentTypeJSON, forHTTPHeaderField: _httpContentTypeHeader)
-            }
-            self.printDebug("buildRequest(): Content-Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!)
+            request.addValue(accept.rawValue, forHTTPHeaderField: _httpAcceptHeader)
+            request.addValue(contentType.rawValue, forHTTPHeaderField: _httpContentTypeHeader)
+            WatsonDebug("buildRequest(): Content Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!)
             
             if let bodyData = body {
                 request.HTTPBody = bodyData
             }
-            self.printDebug("buildRequest(): " + method + " " + endpoint)
+            WatsonDebug("buildRequest(): " + method.rawValue + " " + endpoint)
             return request
         }
-        self.printDebug("buildRequest(): Invalid endpoint")
-        return NSURLRequest()
+        WatsonLog("buildRequest(): Invalid endpoint")
+        return nil
     }
     
-    
+    /**
+    Invoke rest operation asynchronously and then call callback handler
+    - parameter request:  Request object populated from buildRequest()
+    - parameter callback: Callback handler to be invoked when a response is received
+    */
     public func performRequest(request:NSURLRequest, callback:([String: AnyObject]!, NSError!)->()) {
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
             
             guard error == nil else {
-                print(error, terminator: "")
+                WatsonLog("performRequest(): Error received when invoking operation - \(error?.localizedDescription)")
                 callback(nil, error)
                 return
             }
@@ -104,76 +150,71 @@ public class WatsonNetworkUtils {
             if let data = data {
                 do {
                     let httpResponse = response as! NSHTTPURLResponse
-                    let contentType = httpResponse.allHeaderFields["Content-Type"] as? String
+                    let contentType = httpResponse.allHeaderFields[self._httpContentTypeHeader] as? String
                     
                     //Missing contentType in header
                     if contentType == nil {
-                        self.printDebug("Response is missing content-type header")
+                        WatsonLog("Response is missing content-type header")
                     }
                         //Plain text
-                    else if contentType!.rangeOfString("text/plain") != nil {
+                    else if contentType!.rangeOfString(ContentType.Text.rawValue) != nil {
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }
                         //Unknown content type
-                    else if contentType!.rangeOfString("application/json") == nil {
-                        self.printDebug("Unsupported content type returned: " + contentType!)
+                    else if contentType!.rangeOfString(ContentType.JSON.rawValue) == nil {
+                        WatsonLog("Unsupported content type returned: " + contentType!)
                     }
                         //JSON Dictionary
                     else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
                         
                         if let _ = json["code"] as? String,  message = json["message"] as? String {
                             let errorDetails = [NSLocalizedFailureReasonErrorKey: message]
-                            let error = NSError(domain: "WatsonLanguage", code: 1, userInfo: errorDetails)
+                            let error = NSError(domain: "NetworkUtils", code: 1, userInfo: errorDetails)
                             callback( nil, error)
                             return
                         }
                         callback(json, nil)
-                        return
                     }
                         //JSON Array
                     else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {
                         let returnVal = [ "dataArray" : json]
                         callback(returnVal, nil)
-                        return
                     }
                         //JSON Unknown Type
                     else {
                         let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                        self.printDebug("Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)")
+                        WatsonLog("Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)")
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }
                 } catch let error {
                     let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    self.printDebug("Could not parse response. " + (dataString as! String) + "\(error)")
+                    WatsonLog("Could not parse response. " + (dataString as! String) + "\(error)")
                 }
                 
             } else {
-                self.printDebug("No response data.")
+                WatsonLog("No response data.")
             }
         })
         task.resume()
     }
     
+    /**
+    Convert dictionary object to JSON
     
-    public func dictionaryToJSON(dictionary: [String: AnyObject]) -> NSData {
+    - parameter dictionary: dictionary object to be converted
+    
+    - returns: NSData object populated with JSON
+    */
+    public func dictionaryToJSON(dictionary: [String: AnyObject]) -> NSData? {
         
         do {
-            let deviceJSON = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
-            return deviceJSON
+            let json = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
+            return json
         } catch let error as NSError {
-            printDebug("Could not convert dictionary object to JSON. \(error)")
+            WatsonLog("Could not convert dictionary object to JSON. \(error.localizedDescription)")
         }
-        
-        return NSData()
-        
-    }
-    
-    
-    public func printDebug(message:String) {
-        if _debug {
-            print(TAG + message)
-        }
+        return nil
     }
 }

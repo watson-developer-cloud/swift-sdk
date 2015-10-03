@@ -1,6 +1,6 @@
 //
-//  WatsonLanguageTranslation.swift
-//  WatsonLanguageTranslation
+//  LanguageTranslation.swift
+//  LanguageTranslation
 //
 //  Created by Karl Weinmeister on 9/16/15.
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
@@ -9,37 +9,51 @@
 import WatsonCore
 import Foundation
 
-//TODO: document functions
 
-public class WatsonLanguageTranslation {
+ /// The IBM Watson Language Translation service translate text from one language
+ /// to another and identifies the language in which text is written.
+
+public class LanguageTranslation {
     
-    private let TAG = "[WatsonLanguageTranslation] "
+    private let TAG = "[LanguageTranslation] "
     private let _serviceURL = "/language-translation/api"
 
-    private let utils = WatsonNetworkUtils()
+    private let utils = NetworkUtils()
 
-    private var _languages:[WatsonLanguage]?
+    private var _languages:[Language]?
+
+    /**
+    Initialize the language translation service
     
+    - parameter username: username
+    - parameter password: password
+    
+    */
     public init(username:String,password:String) {
         //TODO: Handle 401 errors (no or wrong username/password)
         utils.setUsernameAndPassword(username,password:password)
         //TODO: Handle edge case where language list is not yet initialized by the time the user calls translate()
         //getIdentifiableLanguages({ self._languages = $0 })
     }
+
+    /**
+    Retrieves the list of identifiable languages
     
-    public func getIdentifiableLanguages(callback: ([WatsonLanguage])->()) {
+    - parameter callback: callback method that is invoked with the identifiable languages
+    */
+    public func getIdentifiableLanguages(callback: ([Language])->()) {
         let path = _serviceURL + "/v2/identifiable_languages"
         
-        let request = utils.buildRequest(path, method: WatsonHTTPMethod.GET.rawValue, body: nil)
-        utils.performRequest(request, callback: {response, error in
+        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
+        utils.performRequest(request!, callback: {response, error in
             
-            var languages = [WatsonLanguage]()
+            var languages = [Language]()
             if let languageArray = response["languages"] as? NSArray {
                 
                 for languageDictionary in languageArray {
                     if let lang = languageDictionary["language"] as? String {
                         if let nm = languageDictionary["name"] as? String {
-                            languages.append(WatsonLanguage(language:lang,name:nm))
+                            languages.append(Language(language:lang,name:nm))
                         }
                         else {
                             //TODO: error handling
@@ -62,15 +76,21 @@ public class WatsonLanguageTranslation {
         })
     }
     
+    /**
+    Identify the language in which text is written
+    
+    - parameter text:     the text to identify
+    - parameter callback: the callback method to be invoked with the identified language
+    */
     public func identify(text:String, callback: (String?)->()) {
         
         let path = _serviceURL + "/v2/identify"
-        let request = utils.buildRequest(path, method: WatsonHTTPMethod.POST.rawValue, body: text.dataUsingEncoding(NSUTF8StringEncoding), textContent: true)
+        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
         
-        utils.performRequest(request, callback: {response, error in
+        utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
-                self.utils.printDebug("identify(): " + error_message)
+                WatsonLog("identify(): " + error_message, prefix:self.TAG)
                 callback(nil)
             }
             else {
@@ -84,16 +104,24 @@ public class WatsonLanguageTranslation {
         })
     }
     
+    /**
+    Translate text using source and target languages
+    
+    - parameter text:           The text to translate
+    - parameter sourceLanguage: The language that the original text is written in
+    - parameter targetLanguage: The language that the text will be translated into
+    - parameter callback:       The callback method that is invoked with the translated string
+    */
     public func translate(text:String,sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
         
         let path = _serviceURL + "/v2/translate"
         let body = buildTranslateRequestBody(sourceLanguage, targetLanguage: targetLanguage, text: text)
-        let request = utils.buildRequest(path, method: WatsonHTTPMethod.POST.rawValue, body: body)
+        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body)
         
-        utils.performRequest(request, callback: {response, error in
+        utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
-                self.utils.printDebug("translate(): " + error_message)
+                WatsonLog("translate(): " + error_message, prefix:self.TAG)
                 callback(nil)
             }
             else {
@@ -121,7 +149,7 @@ public class WatsonLanguageTranslation {
         body += "\"\(text)\"\n"
         body += "]\n"
         body += "}"
-        utils.printDebug("buildTranslateRequestBody(): \(body)")
+        WatsonDebug("buildTranslateRequestBody(): \(body)", prefix:self.TAG)
         return body.dataUsingEncoding(NSUTF8StringEncoding)
     }
     
@@ -129,7 +157,7 @@ public class WatsonLanguageTranslation {
         //TODO: Add support for translating multiple strings in one request
     }
     
-    public func translate(model:WatsonLanguageModel,callback: ([String])->()) {
+    public func translate(model:LanguageModel,callback: ([String])->()) {
         //TODO: Add support for translating using model objects
     }
     

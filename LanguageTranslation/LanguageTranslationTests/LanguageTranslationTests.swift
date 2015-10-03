@@ -54,22 +54,27 @@ class LanguageTranslationTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
-    
     func testTranslation() {
-        //TODO: Add additional test cases for missing inputs, wrong languages, etc.
         let expectation = expectationWithDescription("Translation")
 
-        service.translate(["Hello"],sourceLanguage:"en",targetLanguage:"es",callback:{(text:[String]?) in
+        service.translate(["Hello"],source:"en",target:"es",callback:{(text:[String]?) in
             XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
             expectation.fulfill()
         })
         
-        
-//        service.translate("Hello",sourceLanguage:"en",targetLanguage:"es",callback:{(text:[String]?) in
-//            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
-//            expectation.fulfill()
-//        })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+
+    func testGetModels() {
+        let expectation = expectationWithDescription("Get Models")
+        
+        service.getModels(callback:{(models:[LanguageModel]?) in
+            XCTAssertGreaterThan(models!.count,0,"Expected at least 1 model to be returned")
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
     
 }

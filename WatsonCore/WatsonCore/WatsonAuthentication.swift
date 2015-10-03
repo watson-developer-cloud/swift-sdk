@@ -22,6 +22,7 @@ let session = NSURLSession(configuration: sessionConfiguration, delegate: authen
 */
 public class WatsonAuthentication: NSObject, NSURLSessionTaskDelegate {
     
+    private let prefix = "[WatsonAuthentication] "
     private let serviceURL: String
     private let username: String
     private let password: String
@@ -33,6 +34,20 @@ public class WatsonAuthentication: NSObject, NSURLSessionTaskDelegate {
         self.password = password
         super.init()
         
+    }
+    
+    /**
+    This method supports reading properties files which provide information such as username and password strings.
+    */
+    public func readProperties(filename: String) -> NSDictionary? {
+        var myDict: NSDictionary?
+        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path)
+        }
+        else {
+            WatsonLog("Cannot read plist file: \(filename)", prefix: prefix)
+        }
+        return myDict
     }
 
     /**
@@ -61,7 +76,7 @@ public class WatsonAuthentication: NSObject, NSURLSessionTaskDelegate {
         
         // cancel authentication after any previous failures
         guard challenge.previousFailureCount == 0 else {
-            WatsonError("WatsonAuthentication: Authentication request canceled due to previous authentication failure.")
+            WatsonLog("WatsonAuthentication: Authentication request canceled due to previous authentication failure.")
             let disposition = NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge
             let credential: NSURLCredential? = nil
             completionHandler(disposition, credential)

@@ -1,20 +1,20 @@
 //
-//  WatsonLanguageTranslationTests.swift
-//  WatsonLanguageTranslationTests
+//  LanguageTranslationTests.swift
+//  LanguageTranslationTests
 //
 //  Created by Karl Weinmeister on 9/16/15.
 //  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
 import XCTest
-@testable import WatsonLanguageTranslation
+@testable import LanguageTranslation
 
-class WatsonLanguageTranslationTests: XCTestCase {
+class LanguageTranslationTests: XCTestCase {
     
-    private let timeout = 300.0
+    private let timeout = 60.0
     //TODO: Move credentials to plist temporarily
     //TODO: Before release, change credentials to use <insert-username-here>
-    private var service : WatsonLanguageTranslation = WatsonLanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
+    private var service : LanguageTranslation = LanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
     
     override func setUp() {
         super.setUp()
@@ -29,8 +29,8 @@ class WatsonLanguageTranslationTests: XCTestCase {
     func testIdentifiableLanguages() {
         let expectation = expectationWithDescription("Identifiable Languages")
         
-        service.getIdentifiableLanguages({(languages:[WatsonLanguage]) in
-            XCTAssertEqual(languages.count,62,"Expected 62 identifiable languages")
+        service.getIdentifiableLanguages({(languages:[Language]) in
+            XCTAssertGreaterThan(languages.count,0,"Expected at least 1 identifiable language to be returned")
             expectation.fulfill()
         })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })

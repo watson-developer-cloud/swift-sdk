@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:WatsonCore/WatsonCore.xcodeproj">
+      location = "group:LanguageTranslation/LanguageTranslation.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:WatsonLanguageTranslation/WatsonLanguageTranslation.xcodeproj">
+      location = "group:WatsonCore/WatsonCore.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WatsonSpeechToText/WatsonSpeechToText.xcodeproj">

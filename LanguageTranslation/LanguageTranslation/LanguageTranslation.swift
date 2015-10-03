@@ -109,14 +109,14 @@ public class LanguageTranslation {
     Translate text using source and target languages
     
     - parameter text:           The text to translate
-    - parameter sourceLanguage: The language that the original text is written in
-    - parameter targetLanguage: The language that the text will be translated into
+    - parameter source: The language that the original text is written in
+    - parameter target: The language that the text will be translated into
     - parameter callback:       The callback method that is invoked with the translated string
     */
-    public func translate(text:[String],sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
+    public func translate(text:[String], source:String, target:String, callback:([String]?)->()) {
         
         let path = _serviceURL + "/v2/translate"
-        let body = buildTranslateRequestBody(sourceLanguage, targetLanguage: targetLanguage, text: text)
+        let body = buildTranslateRequestBody(source, target: target, text: text)
         let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body)
         
         utils.performRequest(request!, callback: {response, error in
@@ -140,12 +140,12 @@ public class LanguageTranslation {
         })
     }
     
-    private func buildTranslateRequestBody(sourceLanguage:String,targetLanguage:String,text:[String]) -> NSData?
+    private func buildTranslateRequestBody(source:String, target:String,text:[String]) -> NSData?
     {
         //TODO: Support model objects too
         let dict = NSMutableDictionary()
-        dict.setObject(sourceLanguage, forKey: "source")
-        dict.setObject(targetLanguage, forKey: "target")
+        dict.setObject(source, forKey: "source")
+        dict.setObject(target, forKey: "target")
         dict.setObject(text as NSArray, forKey: "text")
         
         return utils.dictionaryToJSON(dict)
@@ -153,6 +153,62 @@ public class LanguageTranslation {
     
     public func translate(model:LanguageModel,callback: ([String])->()) {
         //TODO: Add support for translating using model objects
+    }
+    
+    let doStuff = {
+        
+        
+    }
+    
+    /**
+    Lists available standard and custom models by source or target language
+    
+    - parameter source:       Filter models by source language.
+    - parameter target:       Filter models by target language.
+    - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
+    - parameter callback:     The callback method to invoke after the response is received
+    */
+    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([LanguageModel]?)->())
+    {
+        let path = _serviceURL + "/v2/models"
+        
+        //TODO: Pass in source, target, and default parameters if non-nil to service
+        
+        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
+        utils.performRequest(request!, callback: {response, error in
+            guard let modelDictionaries:NSArray = response["models"] as! NSArray? else {
+                return
+            }
+            let models: [LanguageModel] = modelDictionaries.map {
+                (let dictionary) -> LanguageModel in
+                return self.dictionaryToModel(dictionary as! NSDictionary)
+            }
+            callback(models)
+        })
+
+    }
+    
+    /**
+    Converts a dictionary of strings returned by the Watson service to a native model object
+    
+    - parameter dictionary: a dictionary of key/value pairs
+    
+    - returns: A populated language model object
+    */
+    private func dictionaryToModel(dictionary: NSDictionary) -> LanguageModel
+    {
+        let source = dictionary["source"] as! String
+        let model_id = dictionary["model_id"] as! String
+        let target = dictionary["target"] as! String
+        let base_model_id = dictionary["base_model_id"] as! String
+        let domain = dictionary["domain"] as! String
+        let default_model = dictionary["default_model"] as! Bool
+        let owner = dictionary["owner"] as! String
+        let status = dictionary["status"] as! String
+        let customizable = dictionary["customizable"] as! Bool
+        let name = dictionary["name"] as! String
+
+        return LanguageModel(base_model_id:base_model_id, customizable:customizable, default_model:default_model, domain:domain, model_id:model_id, name:name, owner:owner, source:source, status:status, target:target)
     }
     
     //TODO: delete models

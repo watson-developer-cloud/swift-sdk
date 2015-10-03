@@ -10,7 +10,7 @@ import WatsonCore
 import Foundation
 
 
- /// The IBM Watson Language Translation service translate text from one language
+ /// The IBM Watson Language Translation service translates text from one language
  /// to another and identifies the language in which text is written.
 
 public class LanguageTranslation {
@@ -41,7 +41,7 @@ public class LanguageTranslation {
     
     - parameter callback: callback method that is invoked with the identifiable languages
     */
-    public func getIdentifiableLanguages(callback: ([Language])->()) {
+    public func getIdentifiableLanguages(callback: ([Language]?)->()) {
         let path = _serviceURL + "/v2/identifiable_languages"
         
         let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
@@ -56,22 +56,18 @@ public class LanguageTranslation {
                             languages.append(Language(language:lang,name:nm))
                         }
                         else {
-                            //TODO: error handling
-                            //Missing name
+                            WatsonLog("getIdentifiableLanguages(): Missing name for language \(lang)", prefix:self.TAG)
                         }
                     }
                     else {
-                        //Missing language
+                        WatsonLog("getIdentifiableLanguages(): Expected language attribute for languages array element", prefix:self.TAG)
                     }
                 }
-                //TODO: error handling
-                //TODO: Just do a return here or return a nil or empty value?
-                //return
             }
             else {
-                //Missing language array
+                WatsonLog("getIdentifiableLanguages(): Expected languages array in response", prefix:self.TAG)
+                callback(nil)
             }
-            
             callback(languages)
         })
     }
@@ -94,12 +90,17 @@ public class LanguageTranslation {
                 callback(nil)
             }
             else {
-                if let rawData = response["rawData"] as! NSData? {
-                    if let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String?
-                    {
-                        callback(language)
-                    }
+                guard let rawData = response["rawData"] as! NSData? else {
+                    WatsonLog("identify(): expected to find rawData in response", prefix:self.TAG)
+                    callback(nil)
+                    return
                 }
+                guard let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String? else {
+                    WatsonLog("identify(): error converting data to string", prefix:self.TAG)
+                    callback(nil)
+                    return
+                }
+                callback(language)
             }
         })
     }
@@ -112,7 +113,7 @@ public class LanguageTranslation {
     - parameter targetLanguage: The language that the text will be translated into
     - parameter callback:       The callback method that is invoked with the translated string
     */
-    public func translate(text:String,sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
+    public func translate(text:[String],sourceLanguage:String,targetLanguage:String,callback: ([String]?)->()) {
         
         let path = _serviceURL + "/v2/translate"
         let body = buildTranslateRequestBody(sourceLanguage, targetLanguage: targetLanguage, text: text)
@@ -125,36 +126,29 @@ public class LanguageTranslation {
                 callback(nil)
             }
             else {
-                if let translations = response["translations"] as? NSArray
+
+                guard let translations = response["translations"] as? NSArray else
                 {
-                    let firstTranslation = translations[0] as! NSDictionary
-                    let translation = firstTranslation["translation"] as! String
-                    callback([translation])
+                    WatsonLog("translate(): expected to find translations in response", prefix:self.TAG)
+                    callback(nil)
+                    return
                 }
+                let firstTranslation = translations[0] as! NSDictionary
+                let translation = firstTranslation["translation"] as! String
+                callback([translation])
             }
         })
     }
     
-    private func buildTranslateRequestBody(sourceLanguage:String,targetLanguage:String,text:String) -> NSData?
+    private func buildTranslateRequestBody(sourceLanguage:String,targetLanguage:String,text:[String]) -> NSData?
     {
-        //TODO: Use optionals
-        //TODO: Validation of inputs
         //TODO: Support model objects too
-        //TODO: Support arrays of text
-        //TODO: Consider alternative to JSON creation below via string manipulation
-        var body = "{\n"
-        body += "\"source\":\"\(sourceLanguage)\",\n"
-        body += "\"target\":\"\(targetLanguage)\",\n"
-        body += "\"text\": [\n"
-        body += "\"\(text)\"\n"
-        body += "]\n"
-        body += "}"
-        WatsonDebug("buildTranslateRequestBody(): \(body)", prefix:self.TAG)
-        return body.dataUsingEncoding(NSUTF8StringEncoding)
-    }
-    
-    public func translate(text:[String],sourceLanguage:String,targetLanguage:String,callback: ([String])->()) {
-        //TODO: Add support for translating multiple strings in one request
+        let dict = NSMutableDictionary()
+        dict.setObject(sourceLanguage, forKey: "source")
+        dict.setObject(targetLanguage, forKey: "target")
+        dict.setObject(text as NSArray, forKey: "text")
+        
+        return utils.dictionaryToJSON(dict)
     }
     
     public func translate(model:LanguageModel,callback: ([String])->()) {

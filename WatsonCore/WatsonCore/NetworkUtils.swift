@@ -119,15 +119,15 @@ public class NetworkUtils {
             request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
             request.addValue(accept.rawValue, forHTTPHeaderField: _httpAcceptHeader)
             request.addValue(contentType.rawValue, forHTTPHeaderField: _httpContentTypeHeader)
-            WatsonDebug("buildRequest(): Content Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!)
+            WatsonDebug("buildRequest(): Content Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!, prefix:self.TAG)
             
             if let bodyData = body {
                 request.HTTPBody = bodyData
             }
-            WatsonDebug("buildRequest(): " + method.rawValue + " " + endpoint)
+            WatsonDebug("buildRequest(): " + method.rawValue + " " + endpoint, prefix:self.TAG)
             return request
         }
-        WatsonLog("buildRequest(): Invalid endpoint")
+        WatsonLog("buildRequest(): Invalid endpoint", prefix:self.TAG)
         return nil
     }
     
@@ -142,7 +142,7 @@ public class NetworkUtils {
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
             
             guard error == nil else {
-                WatsonLog("performRequest(): Error received when invoking operation - \(error?.localizedDescription)")
+                WatsonLog("performRequest(): Error received when invoking operation - \(error?.localizedDescription)", prefix:self.TAG)
                 callback(nil, error)
                 return
             }
@@ -154,7 +154,8 @@ public class NetworkUtils {
                     
                     //Missing contentType in header
                     if contentType == nil {
-                        WatsonLog("Response is missing content-type header")
+                        WatsonLog("performRequest(): Response is missing content-type header", prefix:self.TAG)
+                        callback(nil,nil)
                     }
                         //Plain text
                     else if contentType!.rangeOfString(ContentType.Text.rawValue) != nil {
@@ -163,7 +164,8 @@ public class NetworkUtils {
                     }
                         //Unknown content type
                     else if contentType!.rangeOfString(ContentType.JSON.rawValue) == nil {
-                        WatsonLog("Unsupported content type returned: " + contentType!)
+                        WatsonLog("performRequest(): Unsupported content type returned: " + contentType!, prefix:self.TAG)
+                        callback(nil,nil)
                     }
                         //JSON Dictionary
                     else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
@@ -184,17 +186,19 @@ public class NetworkUtils {
                         //JSON Unknown Type
                     else {
                         let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                        WatsonLog("Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)")
+                        WatsonLog("performRequest(): Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)", prefix:self.TAG)
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }
-                } catch let error {
+                } catch let error as NSError {
                     let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    WatsonLog("Could not parse response. " + (dataString as! String) + "\(error)")
+                    WatsonLog("performRequest(): " + (dataString as! String) + " \(error)", prefix:self.TAG)
+                    callback(nil, error)
                 }
                 
             } else {
-                WatsonLog("No response data.")
+                WatsonLog("performRequest(): No response data.", prefix:self.TAG)
+                callback(nil, nil)
             }
         })
         task.resume()
@@ -207,13 +211,13 @@ public class NetworkUtils {
     
     - returns: NSData object populated with JSON
     */
-    public func dictionaryToJSON(dictionary: [String: AnyObject]) -> NSData? {
+    public func dictionaryToJSON(dictionary: NSDictionary) -> NSData? {
         
         do {
             let json = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
             return json
         } catch let error as NSError {
-            WatsonLog("Could not convert dictionary object to JSON. \(error.localizedDescription)")
+            WatsonLog("dictionaryToJSON(): Could not convert dictionary object to JSON. \(error.localizedDescription)", prefix:self.TAG)
         }
         return nil
     }

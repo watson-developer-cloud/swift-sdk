@@ -29,23 +29,28 @@ class LanguageTranslationTests: XCTestCase {
     func testIdentifiableLanguages() {
         let expectation = expectationWithDescription("Identifiable Languages")
         
-        service.getIdentifiableLanguages({(languages:[Language]) in
-            XCTAssertGreaterThan(languages.count,0,"Expected at least 1 identifiable language to be returned")
+        service.getIdentifiableLanguages({(languages:[Language]?) in
+            XCTAssertNotNil(languages,"Expected non-nil array of identifiable languages to be returned")
+            XCTAssertGreaterThan(languages!.count,0,"Expected at least 1 identifiable language to be returned")
             expectation.fulfill()
         })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
     func testIdentify() {
-        let expectation = expectationWithDescription("Identify")
+        let nilExpectation = expectationWithDescription("Nil")
+        let validExpectation = expectationWithDescription("Valid")
         
-        service.identify("hola", callback:{(language:String?) in
-            if let lang = language {
-                XCTAssertEqual(lang,"es","Expected 'hola' to be identified as 'es' language")
-                expectation.fulfill()
-            } else { XCTAssertNotNil(language, "Expected valid language result") }
+        service.identify("", callback:{(language:String?) in
+            XCTAssertNil(language, "Expected nil result when passing in an empty string to identify()")
+            nilExpectation.fulfill()
         })
         
+        service.identify("hola", callback:{(language:String?) in
+            XCTAssertEqual(language!,"es","Expected 'hola' to be identified as 'es' language")
+            validExpectation.fulfill()
+        })
+
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
@@ -53,22 +58,17 @@ class LanguageTranslationTests: XCTestCase {
     func testTranslation() {
         //TODO: Add additional test cases for missing inputs, wrong languages, etc.
         let expectation = expectationWithDescription("Translation")
-        
-        service.translate("Hello",sourceLanguage:"en",targetLanguage:"es",callback:{(textResult:[String]?) in
-            if let text = textResult {
-                if (text.isEmpty) {
-                    XCTAssertFalse(text.isEmpty,"Expected at least 1 translated string")
-                }
-                else {
-                    let translatedText = text.first!
-                    XCTAssertEqual(translatedText,"Hola","Expected hello to translate to Hola")
-                }
-            }
-            else {
-                XCTAssertNotNil(textResult,"Expected non-nil translated text array")
-            }
+
+        service.translate(["Hello"],sourceLanguage:"en",targetLanguage:"es",callback:{(text:[String]?) in
+            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
             expectation.fulfill()
         })
+        
+        
+//        service.translate("Hello",sourceLanguage:"en",targetLanguage:"es",callback:{(text:[String]?) in
+//            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
+//            expectation.fulfill()
+//        })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     

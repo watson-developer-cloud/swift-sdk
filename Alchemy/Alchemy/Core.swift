@@ -10,5 +10,5 @@ import Foundation
 
 public class Core : NSObject {
     
-    
+    //TODO NOTHING YET
 }

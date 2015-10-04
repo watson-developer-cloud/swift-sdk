@@ -9,31 +9,79 @@
 import Foundation
 
 
-// ADD COMMENTS
 
+/// The Constants needed for the input keys for the parameters
 public class Constants : NSObject
 {
 
     static let Host = "gateway-a.watsonplatform.net"
     static let Base = "/calls"
+    static let VisionPrefixURL = "/url/"
     
     // Image Link Extraction
-    enum ImageLinkExtraction { case URLGetImage, HTMLGetImage }
+    enum ImageLinkExtraction: String {
+        case URLGetImage = "URLGetImage"
+        case HTMLGetImage = "HTMLGetImage"
+    }
     
     // Image Tagging API
-    enum ImageTagging { case URLGetRankedImageKeywords, ImageGetRankedImageKeywords }
+    public enum ImageTagging: String {
+        case URLGetRankedImageKeywords = "URLGetRankedImageKeywords"
+        case ImageGetRankedImageKeywords = "ImageGetRankedImageKeywords"
+    }
     
     // Face Detection
-    enum FaceDetection { case URLGetRankedImageFaceTags, ImageGetRankedImageFaceTags }
+    enum FaceDetection: String {
+        case URLGetRankedImageFaceTags = "URLGetRankedImageFaceTags"
+        case ImageGetRankedImageFaceTags = "ImageGetRankedImageFaceTags"
+    }
     
-    public enum OutputMode { case JSON, HTML, XML, RDF}
     
-    public enum ImagePostMode { case Raw, Not_Raw}
+    /**
+    Input Parameter Keys
+    */
+    public enum OutputMode: String {
+        case JSON = "json"
+        case HTML = "html"
+        case XML = "xml"
+        case RDF = "rdf"
+    }
     
-    public enum ForceShowAll { case True, False}
+    public enum ImagePostMode: String {
+        case Raw = "raw"
+        case Not_Raw = "not-raw"
+    }
     
-    public enum KnowledgeGraph { case True, False}
+    public enum ForceShowAll: String {
+        case True = "1"
+        case False = "0"
+    }
     
-    public enum Status { case ERROR, SUCCESS}
+    public enum KnowledgeGraph: String {
+        case True = "1'"
+        case False = "0"
+    }
     
+    public enum Status: String {
+        case ERROR = "ERROR"
+        case OK = "OK"
+    }
+    
+    
+    /**
+    This enum is used to build the base URL information for each call
+    */
+    public enum WatsonURI: String {
+        case URL = "url"
+        case APIKey = "apikey"
+    }
+    
+    /**
+    This enum is used to build the full URL
+    */
+    public enum VisionURI: String {
+        case OutputMode = "outputMode"
+        case ForceShowAll = "forceShowAll"
+        case KnowledgeGraph = "knowledgeGraph"
+    }
 }

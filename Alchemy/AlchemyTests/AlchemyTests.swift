@@ -13,15 +13,17 @@ import WatsonCore
 class AlchemyTests: XCTestCase {
     private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "***REMOVED***", password: "***REMOVED***")
     private let timeout: NSTimeInterval = 60.0
-  //  private let timeout = 300.0
 
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     var test_url = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
-   // var test_image = './emaxfpo.jpg';
+   
+//    var test_url = "https://www.google.com/search?q=cat&espv=2&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIuOev14miyAIVEeqACh0mOwhq&biw=1440&bih=805"
+//    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
+//    var test_image = './emaxfpo.jpg';
 
     
-    var service : AlchemyServiceImpl = AlchemyServiceImpl( apiKey: "cc893a51b2703dcbed40e1416b7b6723f4f95f5d3")
+    var serviceVision : VisionImpl = VisionImpl( apiKey: "c893a51b2703dcbed40e1416b7b6723f4f95f5d3")
     
     override func setUp() {
         super.setUp()
@@ -33,40 +35,58 @@ class AlchemyTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-   
-    
+     /**
+    This will test an invalid API key for all three segments of Vision, Language and Data
+    */
     func testInvalidAPIKey() {
-        // finish this test out
+        
+        let expectation = expectationWithDescription("Test Invalid API Key")
+        
+        let service : VisionImpl = VisionImpl( apiKey: "WRONG")
+        
+        service.urlGetRankedImageKeywords(test_url, outputMode: Constants.OutputMode.XML, forceShowAll: true, knowledgeGraph: 1, callback: { response, resultStatus in
+            
+            XCTAssertNil(response, "Response is not nil.")
+            
+            XCTAssertNotNil(resultStatus, "Error is nil.")
+            
+            XCTAssertEqual(resultStatus.status, "\(Constants.Status.ERROR)")
+            
+            XCTAssertEqual(resultStatus.statusInfo, "invalid-api-key")
+            
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
     func testURLGetRankedImageKeywords(){
         
-         let expectation = expectationWithDescription("URL Get Rank Image")
+         let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
         
-        service.urlGetRankedImageKeywords(test_url, outputMode: Constants.OutputMode.JSON, imagePostMode: Constants.ImagePostMode.Not_Raw, forceShowAll: true, knowledgeGraph: 1,callback: {response, error in
-            // add some logic here for testing
+        serviceVision.urlGetRankedImageKeywords(test_url, outputMode: Constants.OutputMode.XML, forceShowAll: true, knowledgeGraph: 1, callback: { response, resultStatus in
             
+            XCTAssertNotNil(response, "Response is nil.")
+            
+            XCTAssertNotNil(resultStatus, "Error is nil.")
+            
+            XCTAssertEqual(resultStatus.status, "\(Constants.Status.OK)")
+            
+            XCTAssertEqual(resultStatus.statusInfo, "")
+            
+            XCTAssertGreaterThan(response.totalTransactions, 3)
+            
+            XCTAssertEqual(response.imageKeyWords.count, 1)
+            
+            XCTAssertEqual(response.imageKeyWords[0].text, "person")
+            
+            XCTAssertGreaterThan(response.imageKeyWords[0].score, 0.90)
+            
+            // add some logic here for testing
+            expectation.fulfill()
         })
         
-        // FIX TEST
-        
-        //waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-        
-        // test invalid URL 
-        
-        // test different output methods
-        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
 }

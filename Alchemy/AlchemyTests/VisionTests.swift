@@ -10,7 +10,7 @@ import XCTest
 @testable import Alchemy
 import WatsonCore
 
-class AlchemyTests: XCTestCase {
+class VisionTests: XCTestCase {
     private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "***REMOVED***", password: "***REMOVED***")
     private let timeout: NSTimeInterval = 60.0
 

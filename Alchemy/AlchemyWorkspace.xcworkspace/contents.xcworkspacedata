@@ -5,6 +5,6 @@
       location = "group:../WatsonCore/WatsonCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:Alchemy.xcodeproj">
+      location = "container:/Users/vincentherrin/Github/Watson-iOS-SDK-dev/Alchemy/AlchemyVision.xcodeproj">
    </FileRef>
 </Workspace>

@@ -74,3 +74,10 @@ public func addQueryStringParameter(url: String, values: [String: String]) -> St
     
     return newUrl
 }
+
+
+// MARK: - extension to make count more easily readable
+extension String {
+    var count: Int { return self.characters.count }
+}
+

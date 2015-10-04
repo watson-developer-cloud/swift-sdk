@@ -162,6 +162,11 @@ public class NetworkUtils {
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }
+                        // XML wrapper
+                    else if contentType!.rangeOfString("application/xml") != nil {
+                        let returnVal = [ "rawData"  : data]
+                        callback(returnVal, nil)
+                    }
                         //Unknown content type
                     else if contentType!.rangeOfString(ContentType.JSON.rawValue) == nil {
                         WatsonLog("performRequest(): Unsupported content type returned: " + contentType!, prefix:self.TAG)

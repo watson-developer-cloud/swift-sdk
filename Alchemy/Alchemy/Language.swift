@@ -10,5 +10,6 @@ import Foundation
 
 public class Language : NSObject {
     
+    //TODO NOTHING YET
     
 }

@@ -11,8 +11,12 @@
 		310272A71BB8EB20001BD88C /* Alchemy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102729C1BB8EB20001BD88C /* Alchemy.framework */; settings = {ASSET_TAGS = (); }; };
 		310272AC1BB8EB20001BD88C /* AlchemyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310272AB1BB8EB20001BD88C /* AlchemyTests.swift */; };
 		311ADBA81BB9EE0A0018CE97 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311ADBA71BB9EE0A0018CE97 /* WatsonCore.framework */; };
+		3145BE6E1BBD813E00067B54 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3145BE6D1BBD813E00067B54 /* BaseModel.swift */; settings = {ASSET_TAGS = (); }; };
+		3156CC6A1BBC57B000599B67 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156CC691BBC57B000599B67 /* Vision.swift */; settings = {ASSET_TAGS = (); }; };
+		3156CC6F1BBC7DE900599B67 /* RankedImageKeywordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156CC6E1BBC7DE900599B67 /* RankedImageKeywordsModel.swift */; settings = {ASSET_TAGS = (); }; };
+		3156CC711BBC837900599B67 /* ImageKeyWordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156CC701BBC837900599B67 /* ImageKeyWordsModel.swift */; settings = {ASSET_TAGS = (); }; };
 		31B191761BBB95B400FF4E11 /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B191751BBB95B400FF4E11 /* AEXML.swift */; settings = {ASSET_TAGS = (); }; };
-		31C6E0C21BBC1B9F00E6D856 /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C6E0C11BBC1B9F00E6D856 /* ResultModel.swift */; settings = {ASSET_TAGS = (); }; };
+		31C6E0C21BBC1B9F00E6D856 /* ResultStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C6E0C11BBC1B9F00E6D856 /* ResultStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B11BB8EB9D00F5C61D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AD1BB8EB9D00F5C61D /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B21BB8EB9D00F5C61D /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AE1BB8EB9D00F5C61D /* Core.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B31BB8EB9D00F5C61D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AF1BB8EB9D00F5C61D /* Language.swift */; settings = {ASSET_TAGS = (); }; };
@@ -39,8 +43,12 @@
 		310272AB1BB8EB20001BD88C /* AlchemyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyTests.swift; sourceTree = "<group>"; };
 		310272AD1BB8EB20001BD88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		311ADBA71BB9EE0A0018CE97 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		3145BE6D1BBD813E00067B54 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModel.swift; path = Models/BaseModel.swift; sourceTree = "<group>"; };
+		3156CC691BBC57B000599B67 /* Vision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
+		3156CC6E1BBC7DE900599B67 /* RankedImageKeywordsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankedImageKeywordsModel.swift; path = Models/RankedImageKeywordsModel.swift; sourceTree = "<group>"; };
+		3156CC701BBC837900599B67 /* ImageKeyWordsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageKeyWordsModel.swift; path = Models/ImageKeyWordsModel.swift; sourceTree = "<group>"; };
 		31B191751BBB95B400FF4E11 /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEXML.swift; sourceTree = "<group>"; };
-		31C6E0C11BBC1B9F00E6D856 /* ResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
+		31C6E0C11BBC1B9F00E6D856 /* ResultStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStatusModel.swift; sourceTree = "<group>"; };
 		31D385AD1BB8EB9D00F5C61D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		31D385AE1BB8EB9D00F5C61D /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		31D385AF1BB8EB9D00F5C61D /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
@@ -91,15 +99,15 @@
 		3102729E1BB8EB20001BD88C /* Alchemy */ = {
 			isa = PBXGroup;
 			children = (
+				3156CC6B1BBC5ADE00599B67 /* Helpers */,
+				3156CC641BBC48E100599B67 /* Models */,
 				31D385AD1BB8EB9D00F5C61D /* Constants.swift */,
 				31D385AE1BB8EB9D00F5C61D /* Core.swift */,
 				31D385AF1BB8EB9D00F5C61D /* Language.swift */,
 				31D385B01BB8EB9D00F5C61D /* Service.swift */,
 				3102729F1BB8EB20001BD88C /* Alchemy.h */,
 				310272A11BB8EB20001BD88C /* Info.plist */,
-				31B191751BBB95B400FF4E11 /* AEXML.swift */,
-				31D385B51BB9ABC000F5C61D /* Utils.swift */,
-				31C6E0C11BBC1B9F00E6D856 /* ResultModel.swift */,
+				3156CC691BBC57B000599B67 /* Vision.swift */,
 			);
 			path = Alchemy;
 			sourceTree = "<group>";
@@ -112,6 +120,26 @@
 				310272AD1BB8EB20001BD88C /* Info.plist */,
 			);
 			path = AlchemyTests;
+			sourceTree = "<group>";
+		};
+		3156CC641BBC48E100599B67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				31C6E0C11BBC1B9F00E6D856 /* ResultStatusModel.swift */,
+				3156CC6E1BBC7DE900599B67 /* RankedImageKeywordsModel.swift */,
+				3156CC701BBC837900599B67 /* ImageKeyWordsModel.swift */,
+				3145BE6D1BBD813E00067B54 /* BaseModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3156CC6B1BBC5ADE00599B67 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				31D385B51BB9ABC000F5C61D /* Utils.swift */,
+				31B191751BBB95B400FF4E11 /* AEXML.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,10 +253,14 @@
 			files = (
 				31D385B61BB9ABC000F5C61D /* Utils.swift in Sources */,
 				31B191761BBB95B400FF4E11 /* AEXML.swift in Sources */,
+				3145BE6E1BBD813E00067B54 /* BaseModel.swift in Sources */,
 				31D385B31BB8EB9D00F5C61D /* Language.swift in Sources */,
 				31D385B41BB8EB9D00F5C61D /* Service.swift in Sources */,
-				31C6E0C21BBC1B9F00E6D856 /* ResultModel.swift in Sources */,
+				31C6E0C21BBC1B9F00E6D856 /* ResultStatusModel.swift in Sources */,
+				3156CC6A1BBC57B000599B67 /* Vision.swift in Sources */,
 				31D385B21BB8EB9D00F5C61D /* Core.swift in Sources */,
+				3156CC711BBC837900599B67 /* ImageKeyWordsModel.swift in Sources */,
+				3156CC6F1BBC7DE900599B67 /* RankedImageKeywordsModel.swift in Sources */,
 				31D385B11BB8EB9D00F5C61D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +388,7 @@
 				INFOPLIST_FILE = Alchemy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.Alchemy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

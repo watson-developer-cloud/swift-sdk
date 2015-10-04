@@ -9,7 +9,7 @@
 import Foundation
 import WatsonCore
 
-
+/// TODO: move this to core
 public class AlchemyServiceImpl : NSObject {
     
     private let TAG = "[Alchemy] "

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		310272A01BB8EB20001BD88C /* Alchemy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3102729F1BB8EB20001BD88C /* Alchemy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		310272A71BB8EB20001BD88C /* Alchemy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102729C1BB8EB20001BD88C /* Alchemy.framework */; settings = {ASSET_TAGS = (); }; };
-		310272AC1BB8EB20001BD88C /* AlchemyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310272AB1BB8EB20001BD88C /* AlchemyTests.swift */; };
+		310272A01BB8EB20001BD88C /* Vision.h in Headers */ = {isa = PBXBuildFile; fileRef = 3102729F1BB8EB20001BD88C /* Vision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		310272A71BB8EB20001BD88C /* AlchemyVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102729C1BB8EB20001BD88C /* AlchemyVision.framework */; settings = {ASSET_TAGS = (); }; };
+		310272AC1BB8EB20001BD88C /* VisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310272AB1BB8EB20001BD88C /* VisionTests.swift */; };
 		311ADBA81BB9EE0A0018CE97 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311ADBA71BB9EE0A0018CE97 /* WatsonCore.framework */; };
 		3145BE6E1BBD813E00067B54 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3145BE6D1BBD813E00067B54 /* BaseModel.swift */; settings = {ASSET_TAGS = (); }; };
 		3156CC6A1BBC57B000599B67 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156CC691BBC57B000599B67 /* Vision.swift */; settings = {ASSET_TAGS = (); }; };
@@ -18,8 +18,6 @@
 		31B191761BBB95B400FF4E11 /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B191751BBB95B400FF4E11 /* AEXML.swift */; settings = {ASSET_TAGS = (); }; };
 		31C6E0C21BBC1B9F00E6D856 /* ResultStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C6E0C11BBC1B9F00E6D856 /* ResultStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B11BB8EB9D00F5C61D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AD1BB8EB9D00F5C61D /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
-		31D385B21BB8EB9D00F5C61D /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AE1BB8EB9D00F5C61D /* Core.swift */; settings = {ASSET_TAGS = (); }; };
-		31D385B31BB8EB9D00F5C61D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385AF1BB8EB9D00F5C61D /* Language.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B41BB8EB9D00F5C61D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385B01BB8EB9D00F5C61D /* Service.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B61BB9ABC000F5C61D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D385B51BB9ABC000F5C61D /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		31D385B81BB9AD8D00F5C61D /* emaxfpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 31D385B71BB9AD8D00F5C61D /* emaxfpo.jpg */; settings = {ASSET_TAGS = (); }; };
@@ -36,11 +34,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3102729C1BB8EB20001BD88C /* Alchemy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alchemy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3102729F1BB8EB20001BD88C /* Alchemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Alchemy.h; sourceTree = "<group>"; };
+		3102729C1BB8EB20001BD88C /* AlchemyVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3102729F1BB8EB20001BD88C /* Vision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vision.h; sourceTree = "<group>"; };
 		310272A11BB8EB20001BD88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		310272A61BB8EB20001BD88C /* AlchemyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		310272AB1BB8EB20001BD88C /* AlchemyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyTests.swift; sourceTree = "<group>"; };
+		310272A61BB8EB20001BD88C /* AlchemyVision.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyVision.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		310272AB1BB8EB20001BD88C /* VisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTests.swift; sourceTree = "<group>"; };
 		310272AD1BB8EB20001BD88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		311ADBA71BB9EE0A0018CE97 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		3145BE6D1BBD813E00067B54 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModel.swift; path = Models/BaseModel.swift; sourceTree = "<group>"; };
@@ -50,8 +48,6 @@
 		31B191751BBB95B400FF4E11 /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEXML.swift; sourceTree = "<group>"; };
 		31C6E0C11BBC1B9F00E6D856 /* ResultStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStatusModel.swift; sourceTree = "<group>"; };
 		31D385AD1BB8EB9D00F5C61D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		31D385AE1BB8EB9D00F5C61D /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
-		31D385AF1BB8EB9D00F5C61D /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		31D385B01BB8EB9D00F5C61D /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		31D385B51BB9ABC000F5C61D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		31D385B71BB9AD8D00F5C61D /* emaxfpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emaxfpo.jpg; sourceTree = "<group>"; };
@@ -70,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310272A71BB8EB20001BD88C /* Alchemy.framework in Frameworks */,
+				310272A71BB8EB20001BD88C /* AlchemyVision.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,8 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				311ADBA71BB9EE0A0018CE97 /* WatsonCore.framework */,
-				3102729E1BB8EB20001BD88C /* Alchemy */,
-				310272AA1BB8EB20001BD88C /* AlchemyTests */,
+				3102729E1BB8EB20001BD88C /* Vision */,
+				310272AA1BB8EB20001BD88C /* VisionTests */,
 				3102729D1BB8EB20001BD88C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,35 +86,35 @@
 		3102729D1BB8EB20001BD88C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3102729C1BB8EB20001BD88C /* Alchemy.framework */,
-				310272A61BB8EB20001BD88C /* AlchemyTests.xctest */,
+				3102729C1BB8EB20001BD88C /* AlchemyVision.framework */,
+				310272A61BB8EB20001BD88C /* AlchemyVision.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3102729E1BB8EB20001BD88C /* Alchemy */ = {
+		3102729E1BB8EB20001BD88C /* Vision */ = {
 			isa = PBXGroup;
 			children = (
 				3156CC6B1BBC5ADE00599B67 /* Helpers */,
 				3156CC641BBC48E100599B67 /* Models */,
 				31D385AD1BB8EB9D00F5C61D /* Constants.swift */,
-				31D385AE1BB8EB9D00F5C61D /* Core.swift */,
-				31D385AF1BB8EB9D00F5C61D /* Language.swift */,
 				31D385B01BB8EB9D00F5C61D /* Service.swift */,
-				3102729F1BB8EB20001BD88C /* Alchemy.h */,
+				3102729F1BB8EB20001BD88C /* Vision.h */,
 				310272A11BB8EB20001BD88C /* Info.plist */,
 				3156CC691BBC57B000599B67 /* Vision.swift */,
 			);
+			name = Vision;
 			path = Alchemy;
 			sourceTree = "<group>";
 		};
-		310272AA1BB8EB20001BD88C /* AlchemyTests */ = {
+		310272AA1BB8EB20001BD88C /* VisionTests */ = {
 			isa = PBXGroup;
 			children = (
 				31D385B71BB9AD8D00F5C61D /* emaxfpo.jpg */,
-				310272AB1BB8EB20001BD88C /* AlchemyTests.swift */,
+				310272AB1BB8EB20001BD88C /* VisionTests.swift */,
 				310272AD1BB8EB20001BD88C /* Info.plist */,
 			);
+			name = VisionTests;
 			path = AlchemyTests;
 			sourceTree = "<group>";
 		};
@@ -149,16 +145,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310272A01BB8EB20001BD88C /* Alchemy.h in Headers */,
+				310272A01BB8EB20001BD88C /* Vision.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3102729B1BB8EB20001BD88C /* Alchemy */ = {
+		3102729B1BB8EB20001BD88C /* AlchemyVision */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 310272B01BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "Alchemy" */;
+			buildConfigurationList = 310272B01BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyVision" */;
 			buildPhases = (
 				310272971BB8EB20001BD88C /* Sources */,
 				310272981BB8EB20001BD88C /* Frameworks */,
@@ -169,14 +165,14 @@
 			);
 			dependencies = (
 			);
-			name = Alchemy;
+			name = AlchemyVision;
 			productName = Alchemy;
-			productReference = 3102729C1BB8EB20001BD88C /* Alchemy.framework */;
+			productReference = 3102729C1BB8EB20001BD88C /* AlchemyVision.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		310272A51BB8EB20001BD88C /* AlchemyTests */ = {
+		310272A51BB8EB20001BD88C /* AlchemyVisionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 310272B31BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyTests" */;
+			buildConfigurationList = 310272B31BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyVisionTests" */;
 			buildPhases = (
 				310272A21BB8EB20001BD88C /* Sources */,
 				310272A31BB8EB20001BD88C /* Frameworks */,
@@ -187,9 +183,9 @@
 			dependencies = (
 				310272A91BB8EB20001BD88C /* PBXTargetDependency */,
 			);
-			name = AlchemyTests;
+			name = AlchemyVisionTests;
 			productName = AlchemyTests;
-			productReference = 310272A61BB8EB20001BD88C /* AlchemyTests.xctest */;
+			productReference = 310272A61BB8EB20001BD88C /* AlchemyVision.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 310272961BB8EB20001BD88C /* Build configuration list for PBXProject "Alchemy" */;
+			buildConfigurationList = 310272961BB8EB20001BD88C /* Build configuration list for PBXProject "AlchemyVision" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -222,8 +218,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3102729B1BB8EB20001BD88C /* Alchemy */,
-				310272A51BB8EB20001BD88C /* AlchemyTests */,
+				3102729B1BB8EB20001BD88C /* AlchemyVision */,
+				310272A51BB8EB20001BD88C /* AlchemyVisionTests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,11 +250,9 @@
 				31D385B61BB9ABC000F5C61D /* Utils.swift in Sources */,
 				31B191761BBB95B400FF4E11 /* AEXML.swift in Sources */,
 				3145BE6E1BBD813E00067B54 /* BaseModel.swift in Sources */,
-				31D385B31BB8EB9D00F5C61D /* Language.swift in Sources */,
 				31D385B41BB8EB9D00F5C61D /* Service.swift in Sources */,
 				31C6E0C21BBC1B9F00E6D856 /* ResultStatusModel.swift in Sources */,
 				3156CC6A1BBC57B000599B67 /* Vision.swift in Sources */,
-				31D385B21BB8EB9D00F5C61D /* Core.swift in Sources */,
 				3156CC711BBC837900599B67 /* ImageKeyWordsModel.swift in Sources */,
 				3156CC6F1BBC7DE900599B67 /* RankedImageKeywordsModel.swift in Sources */,
 				31D385B11BB8EB9D00F5C61D /* Constants.swift in Sources */,
@@ -269,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310272AC1BB8EB20001BD88C /* AlchemyTests.swift in Sources */,
+				310272AC1BB8EB20001BD88C /* VisionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +272,7 @@
 /* Begin PBXTargetDependency section */
 		310272A91BB8EB20001BD88C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3102729B1BB8EB20001BD88C /* Alchemy */;
+			target = 3102729B1BB8EB20001BD88C /* AlchemyVision */;
 			targetProxy = 310272A81BB8EB20001BD88C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -390,7 +384,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.Alchemy;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlchemyVision;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -412,7 +406,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.Alchemy;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlchemyVision;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -423,7 +417,7 @@
 				INFOPLIST_FILE = AlchemyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlchemyVision;
 			};
 			name = Debug;
 		};
@@ -433,14 +427,14 @@
 				INFOPLIST_FILE = AlchemyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlchemyVision;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		310272961BB8EB20001BD88C /* Build configuration list for PBXProject "Alchemy" */ = {
+		310272961BB8EB20001BD88C /* Build configuration list for PBXProject "AlchemyVision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				310272AE1BB8EB20001BD88C /* Debug */,
@@ -449,7 +443,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		310272B01BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "Alchemy" */ = {
+		310272B01BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyVision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				310272B11BB8EB20001BD88C /* Debug */,
@@ -458,7 +452,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		310272B31BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyTests" */ = {
+		310272B31BB8EB20001BD88C /* Build configuration list for PBXNativeTarget "AlchemyVisionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				310272B41BB8EB20001BD88C /* Debug */,

@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import WatsonCore
 
-public class ImageKeyWordsModel : BaseModel {
+public class ImageKeyWordsModel : WatsonCore.BaseModel {
 
     internal var text = ""
     internal var score = 0.0
@@ -19,42 +20,4 @@ public class ImageKeyWordsModel : BaseModel {
         self.score = score
         super.init()
     }
-    
-    override init() {
-        super.init()
-    }
-    
-    /**
-    Helper method to create an instance of ResultStatusModel
-    
-    - parameter rawData: <#rawData description#>
-    
-    - returns: <#return value description#>
-    */
-    public static func getRankedImageKeywordsModel(rawData: NSData)->ImageKeyWordsModel {
-        
-        let imageKeyWordsModel = ImageKeyWordsModel()
-        do {
-            let xmlDoc = try AEXMLDocument(xmlData: rawData)
-            
-            #if DEBUG
-                
-                // prints the same XML structure as original
-                print(xmlDoc.xmlString)
-                
-                for child in xmlDoc.root.children {
-                    print(child.name)
-                }
-                
-            #endif
-            
-        }
-        catch{
-            print("\(error)")
-        }
-        
-        imageKeyWordsModel.modelError = "failed to create ImageKeyWordsModel - " + Constants.Status.ERROR.rawValue
-        return imageKeyWordsModel
-    }
-    
 }

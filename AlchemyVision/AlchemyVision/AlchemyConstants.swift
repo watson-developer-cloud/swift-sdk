@@ -11,7 +11,7 @@ import Foundation
 
 
 /// The Constants needed for the input keys for the parameters
-public class Constants : NSObject
+public class AlchemyConstants
 {
 
     static let Host = "gateway-a.watsonplatform.net"

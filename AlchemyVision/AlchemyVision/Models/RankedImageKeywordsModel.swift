@@ -7,20 +7,19 @@
 //
 
 import Foundation
+import WatsonCore
 
-public class RankedImageKeywordsModel: BaseModel {
+public class RankedImageKeywordsModel: WatsonCore.BaseModel {
     
     internal var totalTransactions: Int = -1
     internal var imageKeyWords: [ImageKeyWordsModel] = []
 
-    
     init(totalTransactions: Int, imageKeyWords: [ImageKeyWordsModel], resultStatus: ResultStatusModel, rawData: NSData) {
 
         self.totalTransactions = totalTransactions
         self.imageKeyWords = imageKeyWords
        
-        super.init()
-        self.rawData = rawData
+        super.init(rawData: rawData, modelError: "")
     }
 
     override init() {
@@ -51,7 +50,7 @@ public class RankedImageKeywordsModel: BaseModel {
             if let imageKeywords = xmlDoc.root["imageKeywords"]["keyword"].all {
                 for keyword in imageKeywords {
                     
-                    var imageKeyword = ImageKeyWordsModel(text: keyword["text"].stringValue, score: keyword["score"].doubleValue, rawData: rawData)
+                    let imageKeyword = ImageKeyWordsModel(text: keyword["text"].stringValue, score: keyword["score"].doubleValue, rawData: rawData)
                     tempImageKeyWords.append(imageKeyword)
                 }
             }
@@ -63,7 +62,7 @@ public class RankedImageKeywordsModel: BaseModel {
         }
         catch{
             print("\(error)")
-            rankedImageKeywords.modelError = "Failed to create RankedImageKeywordsModel - " + Constants.Status.ERROR.rawValue
+            rankedImageKeywords.modelError = "Failed to create RankedImageKeywordsModel - " + AlchemyConstants.Status.ERROR.rawValue
         }
        
         return rankedImageKeywords

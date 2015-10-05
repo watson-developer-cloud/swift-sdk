@@ -189,6 +189,29 @@ public class LanguageTranslation {
     }
     
     /**
+    Retrieve a translation model
+    
+    - parameter model_id:       The model identifier
+    - parameter callback:     The callback method to invoke after the response is received
+    */
+    public func getModel(model_id: String, callback: (LanguageModel?)->())
+    {
+        let path = _serviceURL + "/v2/models/\(model_id)"
+        
+        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
+        utils.performRequest(request!, callback: {response, error in
+            if let error_message = response["error_message"] as? String
+            {
+                WatsonLog("translate(): " + error_message, prefix:self.TAG)
+            }
+            else if let dictionary = response as NSDictionary? {
+                return callback(self.dictionaryToModel(dictionary))
+            }
+            callback(nil)
+        })
+    }
+    
+    /**
     Converts a dictionary of strings returned by the Watson service to a native model object
     
     - parameter dictionary: a dictionary of key/value pairs

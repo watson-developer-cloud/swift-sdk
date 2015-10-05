@@ -75,6 +75,24 @@ class LanguageTranslationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+
+    
+    func testGetModel() {
+        let expectation1 = expectationWithDescription("Missing model")
+        let expectation2 = expectationWithDescription("Valid model")
+
+        service.getModel("MISSING_MODEL_ID", callback:{(model:LanguageModel?) in
+            XCTAssertNil(model,"Expected no model to be return for invalid id")
+            expectation1.fulfill()
+        })
+
+        service.getModel("en-es", callback:{(model:LanguageModel?) in
+            XCTAssertEqual(model!.model_id,"en-es","Expected to get en-es model")
+            expectation2.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
     
     
 }

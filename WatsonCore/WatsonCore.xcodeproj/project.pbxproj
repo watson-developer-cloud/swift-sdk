@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661791BC21D2300506913 /* BaseModel.swift */; settings = {ASSET_TAGS = (); }; };
 		31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617A1BC21D2300506913 /* ResultStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
-		31D661801BC21D3000506913 /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617E1BC21D3000506913 /* AEXML.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661811BC21D3000506913 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617F1BC21D3000506913 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661821BC21D4000506913 /* AlchemyCore.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661841BC21E8100506913 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		31D661791BC21D2300506913 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		31D6617A1BC21D2300506913 /* ResultStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStatusModel.swift; sourceTree = "<group>"; };
-		31D6617E1BC21D3000506913 /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEXML.swift; sourceTree = "<group>"; };
 		31D6617F1BC21D3000506913 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		31D661821BC21D4000506913 /* AlchemyCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCore.swift; sourceTree = "<group>"; };
 		31D661841BC21E8100506913 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 		31D6617D1BC21D3000506913 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				31D6617E1BC21D3000506913 /* AEXML.swift */,
 				31D6617F1BC21D3000506913 /* Utils.swift */,
 			);
 			path = Helpers;
@@ -249,7 +246,6 @@
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
 				31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
-				31D661801BC21D3000506913 /* AEXML.swift in Sources */,
 				31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
 				31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */,

@@ -35,29 +35,29 @@ public class ResultStatusModel : BaseModel {
     */
     public static func getResultStatusModel(rawData: NSData)->ResultStatusModel {
         
-        do {
-            let xmlDoc = try AEXMLDocument(xmlData: rawData)
-            
-            #if DEBUG
-                
-                // prints the same XML structure as original
-                print(xmlDoc.xmlString)
-                
-                for child in xmlDoc.root.children {
-                    print(child.name)
-                }
-                
-            #endif
-            
-            let resultModel = ResultStatusModel(status: xmlDoc.root["status"].stringValue, statusInfo: xmlDoc.root["statusInfo"].stringValue, rawData: rawData)
-            
-            if(resultModel.statusInfo.containsString("not found")) { resultModel.statusInfo = "" }
-            
-            return resultModel
-        }
-        catch{
-            print("\(error)")
-        }
+//        do {
+//            let xmlDoc = try AEXMLDocument(xmlData: rawData)
+//            
+//            #if DEBUG
+//                
+//                // prints the same XML structure as original
+//                print(xmlDoc.xmlString)
+//                
+//                for child in xmlDoc.root.children {
+//                    print(child.name)
+//                }
+//                
+//            #endif
+//            
+//            let resultModel = ResultStatusModel(status: xmlDoc.root["status"].stringValue, statusInfo: xmlDoc.root["statusInfo"].stringValue, rawData: rawData)
+//            
+//            if(resultModel.statusInfo.containsString("not found")) { resultModel.statusInfo = "" }
+//            
+//            return resultModel
+//        }
+//        catch{
+//            print("\(error)")
+//        }
         
         return ResultStatusModel(status: AlchemyConstants.Status.ERROR.rawValue, statusInfo: "failed to create result model", rawData: rawData)
     }

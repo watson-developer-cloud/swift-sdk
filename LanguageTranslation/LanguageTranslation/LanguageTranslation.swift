@@ -10,6 +10,9 @@ import WatsonCore
 import Foundation
 
 
+
+
+
  /// The IBM Watson Language Translation service translates text from one language
  /// to another and identifies the language in which text is written.
 
@@ -168,7 +171,7 @@ public class LanguageTranslation {
     - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
     - parameter callback:     The callback method to invoke after the response is received
     */
-    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([LanguageModel]?)->())
+    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([LanguageModel?]?)->())
     {
         let path = _serviceURL + "/v2/models"
         
@@ -179,8 +182,8 @@ public class LanguageTranslation {
             guard let modelDictionaries:NSArray = response["models"] as! NSArray? else {
                 return
             }
-            let models: [LanguageModel] = modelDictionaries.map {
-                (let dictionary) -> LanguageModel in
+            let models: [LanguageModel?] = modelDictionaries.map {
+                (let dictionary) -> LanguageModel? in
                 return self.dictionaryToModel(dictionary as! NSDictionary)
             }
             callback(models)
@@ -212,26 +215,53 @@ public class LanguageTranslation {
     }
     
     /**
+    Retrieve a translation model
+    
+    - parameter model_id:       The model identifier
+    - parameter callback:     The callback method to invoke after the response is received
+    */
+    public func createModel(model_id: String, callback: (LanguageModel?)->())
+    {
+        let path = _serviceURL + "/v2/models/\(model_id)"
+        
+        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
+        utils.performRequest(request!, callback: {response, error in
+            if let error_message = response["error_message"] as? String
+            {
+                WatsonLog("translate(): " + error_message, prefix:self.TAG)
+            }
+            else if let dictionary = response as NSDictionary? {
+                return callback(self.dictionaryToModel(dictionary))
+            }
+            callback(nil)
+        })
+    }
+    
+    /**
     Converts a dictionary of strings returned by the Watson service to a native model object
     
     - parameter dictionary: a dictionary of key/value pairs
     
     - returns: A populated language model object
     */
-    private func dictionaryToModel(dictionary: NSDictionary) -> LanguageModel
+    private func dictionaryToModel(dictionary: NSDictionary) -> LanguageModel?
     {
-        let source = dictionary["source"] as! String
-        let model_id = dictionary["model_id"] as! String
-        let target = dictionary["target"] as! String
-        let base_model_id = dictionary["base_model_id"] as! String
-        let domain = dictionary["domain"] as! String
-        let default_model = dictionary["default_model"] as! Bool
-        let owner = dictionary["owner"] as! String
-        let status = dictionary["status"] as! String
-        let customizable = dictionary["customizable"] as! Bool
-        let name = dictionary["name"] as! String
-
-        return LanguageModel(base_model_id:base_model_id, customizable:customizable, default_model:default_model, domain:domain, model_id:model_id, name:name, owner:owner, source:source, status:status, target:target)
+        if let source = dictionary[LanguageTranslationConstants.source] as? String,
+        modelID = dictionary[LanguageTranslationConstants.modelID] as? String,
+        target = dictionary[LanguageTranslationConstants.target] as? String,
+        baseModelID = dictionary[LanguageTranslationConstants.baseModelID] as? String,
+        domain = dictionary[LanguageTranslationConstants.domain] as? String,
+        defaultModel = dictionary[LanguageTranslationConstants.defaultModel] as? Bool,
+        owner = dictionary[LanguageTranslationConstants.owner] as? String,
+        status = dictionary[LanguageTranslationConstants.status] as? String,
+        customizable = dictionary[LanguageTranslationConstants.customizable] as? Bool,
+        name = dictionary[LanguageTranslationConstants.name] as? String
+        {
+            return LanguageModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
+        } else {
+            WatsonLog("Value missing from dictionary. Unable to convert to a Language model", prefix:self.TAG)
+            return nil
+        }
     }
     
     //TODO: delete models

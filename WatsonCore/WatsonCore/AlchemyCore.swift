@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import WatsonCore
 
 /// TODO: move this to core
-public class AlchemyServiceImpl : NSObject {
+public class AlchemyCoreImpl {
     
     private let TAG = "[Alchemy] "
     private let utils:NetworkUtils = NetworkUtils(type: ServiceType.Alchemy)
@@ -28,7 +27,6 @@ public class AlchemyServiceImpl : NSObject {
     public required init(apiKey: String) {
         
         _apiKey = apiKey
-        //utils = NetworkUtils(type: ServiceType.Alchemy)
     }
     
     
@@ -41,11 +39,11 @@ public class AlchemyServiceImpl : NSObject {
     */
     public func analyze(path: String, body: NSData, callback:(ResultStatusModel!, NSError!)->()) {
         
-        let fullPath = Constants.Base + path
+       // let fullPath = Constants.Base + path
         
         self.utils.setUsernameAndPassword("", password: "")
         
-        let request = utils.buildRequest(fullPath, method: HTTPMethod.POST, body: body )
+        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body )
         
         utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
@@ -62,10 +60,6 @@ public class AlchemyServiceImpl : NSObject {
                         callback(resultStatusModel,nil)
                     }
                 }
-                    //       else if(response is Dictionary) {
-                    //           let resultStatusModel = ResultStatusModel.getResultStatusModel(response)
-                    //           callback(resultStatusModel,nil)
-                    //       }
                 else {
                     callback(nil,nil)
                 }

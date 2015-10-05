@@ -14,8 +14,9 @@ on what the Alchemy service gives out.
 */
 public class ResultStatusModel : BaseModel {
     
-    internal var status: String = ""
-    internal var statusInfo: String = ""
+    /// TODO: Why in the world does this need to be public??  INVESTIGATE
+    public var status: String = ""
+    public var statusInfo: String = ""
     
     
     init(status: String, statusInfo: String, rawData: NSData) {
@@ -23,10 +24,6 @@ public class ResultStatusModel : BaseModel {
         self.status = status
         self.statusInfo = statusInfo
         super.init(rawData: rawData, modelError: "")
-    }
-    
-    override init() {
-        super.init()
     }
     
     /**
@@ -62,21 +59,7 @@ public class ResultStatusModel : BaseModel {
             print("\(error)")
         }
         
-        return ResultStatusModel(status: Constants.Status.ERROR.rawValue, statusInfo: "failed to create result model", rawData: rawData)
-    }
-    
-    public static func getResultStatusModel2(response: NSObject)->ResultStatusModel {
-        
-        do {
-            var resultModel = ResultStatusModel()
-            
-            return resultModel
-        }
-        catch{
-            print("\(error)")
-        }
-        return ResultStatusModel()
-       // return ResultStatusModel(status: Constants.Status.ERROR.rawValue, statusInfo: "failed to create result model", rawData: rawData)
+        return ResultStatusModel(status: AlchemyConstants.Status.ERROR.rawValue, statusInfo: "failed to create result model", rawData: rawData)
     }
 }
 

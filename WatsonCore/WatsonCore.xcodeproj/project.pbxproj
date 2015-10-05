@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661791BC21D2300506913 /* BaseModel.swift */; settings = {ASSET_TAGS = (); }; };
+		31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617A1BC21D2300506913 /* ResultStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
+		31D661801BC21D3000506913 /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617E1BC21D3000506913 /* AEXML.swift */; settings = {ASSET_TAGS = (); }; };
+		31D661811BC21D3000506913 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617F1BC21D3000506913 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
+		31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661821BC21D4000506913 /* AlchemyCore.swift */; settings = {ASSET_TAGS = (); }; };
+		31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661841BC21E8100506913 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; };
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
@@ -28,6 +34,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31D661791BC21D2300506913 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		31D6617A1BC21D2300506913 /* ResultStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStatusModel.swift; sourceTree = "<group>"; };
+		31D6617E1BC21D3000506913 /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEXML.swift; sourceTree = "<group>"; };
+		31D6617F1BC21D3000506913 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		31D661821BC21D4000506913 /* AlchemyCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCore.swift; sourceTree = "<group>"; };
+		31D661841BC21E8100506913 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
 		7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonCore.h; sourceTree = "<group>"; };
 		7A1FCDD51BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +72,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31D661781BC21D2300506913 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				31D661791BC21D2300506913 /* BaseModel.swift */,
+				31D6617A1BC21D2300506913 /* ResultStatusModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		31D6617D1BC21D3000506913 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				31D6617E1BC21D3000506913 /* AEXML.swift */,
+				31D6617F1BC21D3000506913 /* Utils.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7A1FCDC61BA9ED6A0090E1EB = {
 			isa = PBXGroup;
 			children = (
@@ -81,12 +111,16 @@
 		7A1FCDD21BA9ED6A0090E1EB /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
+				31D6617D1BC21D3000506913 /* Helpers */,
+				31D661781BC21D2300506913 /* Models */,
 				7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */,
 				7A1FCDD51BA9ED6A0090E1EB /* Info.plist */,
 				7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */,
 				7A3C440D1BAFC4A400106EE9 /* Logger.swift */,
 				7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */,
 				BDBF45201BB1C4D300860301 /* NetworkUtils.swift */,
+				31D661821BC21D4000506913 /* AlchemyCore.swift */,
+				31D661841BC21E8100506913 /* AlchemyConstants.swift */,
 				E1605B161BAB5FA70084A056 /* Endpoints.plist */,
 			);
 			path = WatsonCore;
@@ -211,9 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A3C440E1BAFC4A400106EE9 /* Logger.swift in Sources */,
+				31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */,
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
+				31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
+				31D661801BC21D3000506913 /* AEXML.swift in Sources */,
+				31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
+				31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */,
+				31D661811BC21D3000506913 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

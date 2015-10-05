@@ -10,16 +10,17 @@ import Foundation
 
 public class BaseModel {
     
-    internal var modelError: String = ""
-    internal var rawData: NSData = NSData()
+    /// TODO: Why in the world does this need to be public??  INVESTIGATE
+    public var modelError: String = ""
+    public var rawData: NSData = NSData()
     
-    init(rawData: NSData, modelError: String?) {
+    public init(rawData: NSData, modelError: String?) {
         
         self.modelError = modelError!
         self.rawData = rawData
     }
     
-    init() { }
+    public init() { }
     
     //TODO: create a method to determine the output type
     

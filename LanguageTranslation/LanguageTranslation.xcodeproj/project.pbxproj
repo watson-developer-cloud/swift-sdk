@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31D661771BC2191300506913 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D661761BC2191300506913 /* WatsonCore.framework */; };
 		BDAED1C61BBF57CA00BBF265 /* LanguageTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BDAED1CD1BBF57CA00BBF265 /* LanguageTranslation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAED1C21BBF57CA00BBF265 /* LanguageTranslation.framework */; settings = {ASSET_TAGS = (); }; };
 		BDAED1D21BBF57CA00BBF265 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1D11BBF57CA00BBF265 /* LanguageTranslationTests.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31D661761BC2191300506913 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		BDAED1C21BBF57CA00BBF265 /* LanguageTranslation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageTranslation.h; sourceTree = "<group>"; };
 		BDAED1C71BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31D661771BC2191300506913 /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +62,7 @@
 		BDAED1B81BBF57CA00BBF265 = {
 			isa = PBXGroup;
 			children = (
+				31D661761BC2191300506913 /* WatsonCore.framework */,
 				BDAED1C41BBF57CA00BBF265 /* LanguageTranslation */,
 				BDAED1D01BBF57CA00BBF265 /* LanguageTranslationTests */,
 				BDAED1C31BBF57CA00BBF265 /* Products */,
@@ -391,6 +395,7 @@
 				BDAED1D81BBF57CA00BBF265 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BDAED1D91BBF57CA00BBF265 /* Build configuration list for PBXNativeTarget "LanguageTranslationTests" */ = {
 			isa = XCConfigurationList;
@@ -399,6 +404,7 @@
 				BDAED1DB1BBF57CA00BBF265 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

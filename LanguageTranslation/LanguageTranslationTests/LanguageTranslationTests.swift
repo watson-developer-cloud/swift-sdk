@@ -68,7 +68,7 @@ class LanguageTranslationTests: XCTestCase {
     func testGetModels() {
         let expectation = expectationWithDescription("Get Models")
         
-        service.getModels(callback:{(models:[LanguageModel]?) in
+        service.getModels(callback:{(models:[LanguageModel?]?) in
             XCTAssertGreaterThan(models!.count,0,"Expected at least 1 model to be returned")
             expectation.fulfill()
         })
@@ -87,7 +87,7 @@ class LanguageTranslationTests: XCTestCase {
         })
 
         service.getModel("en-es", callback:{(model:LanguageModel?) in
-            XCTAssertEqual(model!.model_id,"en-es","Expected to get en-es model")
+            XCTAssertEqual(model!.modelID,"en-es","Expected to get en-es model")
             expectation2.fulfill()
         })
         

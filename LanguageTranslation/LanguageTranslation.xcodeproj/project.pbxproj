@@ -14,6 +14,7 @@
 		BDAED1E31BBF583100BBF265 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E01BBF583100BBF265 /* Language.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1E41BBF583100BBF265 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E11BBF583100BBF265 /* LanguageModel.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1E51BBF583100BBF265 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */; settings = {ASSET_TAGS = (); }; };
+		BDAFBF4D1BC31C56008ECC69 /* LanguageTranslationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		BDAED1E01BBF583100BBF265 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		BDAED1E11BBF583100BBF265 /* LanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
+		BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */,
 				BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */,
 				BDAED1C71BBF57CA00BBF265 /* Info.plist */,
+				BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */,
 			);
 			path = LanguageTranslation;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDAED1E31BBF583100BBF265 /* Language.swift in Sources */,
+				BDAFBF4D1BC31C56008ECC69 /* LanguageTranslationConstants.swift in Sources */,
 				BDAED1E41BBF583100BBF265 /* LanguageModel.swift in Sources */,
 				BDAED1E51BBF583100BBF265 /* LanguageTranslation.swift in Sources */,
 			);

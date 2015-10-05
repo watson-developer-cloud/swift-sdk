@@ -1,27 +1,28 @@
 //
-//  AlchemyTests.swift
-//  AlchemyTests
+//  AlchemyVisionTests.swift
+//  AlchemyVisionTests
 //
-//  Created by Vincent Herrin on 9/27/15.
+//  Created by Vincent Herrin on 10/4/15.
 //  Copyright © 2015 MIL. All rights reserved.
 //
 
 import XCTest
-@testable import Alchemy
+
+@testable import AlchemyVision
 import WatsonCore
 
-class VisionTests: XCTestCase {
+class AlchemyVisionTests: XCTestCase {
     private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "***REMOVED***", password: "***REMOVED***")
     private let timeout: NSTimeInterval = 60.0
-
+    
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     var test_url = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
-   
-//    var test_url = "https://www.google.com/search?q=cat&espv=2&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIuOev14miyAIVEeqACh0mOwhq&biw=1440&bih=805"
-//    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
-//    var test_image = './emaxfpo.jpg';
-
+    
+    //    var test_url = "https://www.google.com/search?q=cat&espv=2&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIuOev14miyAIVEeqACh0mOwhq&biw=1440&bih=805"
+    //    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
+    //    var test_image = './emaxfpo.jpg';
+    
     
     var serviceVision : VisionImpl = VisionImpl( apiKey: "c893a51b2703dcbed40e1416b7b6723f4f95f5d3")
     
@@ -35,7 +36,7 @@ class VisionTests: XCTestCase {
         super.tearDown()
     }
     
-     /**
+    /**
     This will test an invalid API key for all three segments of Vision, Language and Data
     */
     func testInvalidAPIKey() {
@@ -62,7 +63,7 @@ class VisionTests: XCTestCase {
     
     func testURLGetRankedImageKeywords(){
         
-         let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
+        let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
         
         serviceVision.urlGetRankedImageKeywords(test_url, outputMode: Constants.OutputMode.XML, forceShowAll: true, knowledgeGraph: 1, callback: { response, resultStatus in
             

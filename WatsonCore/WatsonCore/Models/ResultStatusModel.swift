@@ -19,11 +19,16 @@ public class ResultStatusModel : BaseModel {
     public var statusInfo: String = ""
     
     
-    init(status: String, statusInfo: String, rawData: NSData) {
+    init(status: String, statusInfo: String, rawData: AnyObject) {
         
         self.status = status
         self.statusInfo = statusInfo
         super.init(rawData: rawData, modelError: "")
+    }
+    
+    public static func createResultStatusModel()->ResultStatusModel {
+        
+        return ResultStatusModel(status: "",statusInfo: "", rawData: NSData())
     }
     
     /**
@@ -33,31 +38,48 @@ public class ResultStatusModel : BaseModel {
     
     - returns: <#return value description#>
     */
-    public static func getResultStatusModel(rawData: NSData)->ResultStatusModel {
+    public static func getResultStatusModel(rawData: AnyObject)->ResultStatusModel {
         
-//        do {
-//            let xmlDoc = try AEXMLDocument(xmlData: rawData)
-//            
-//            #if DEBUG
-//                
-//                // prints the same XML structure as original
-//                print(xmlDoc.xmlString)
-//                
-//                for child in xmlDoc.root.children {
-//                    print(child.name)
-//                }
-//                
-//            #endif
-//            
-//            let resultModel = ResultStatusModel(status: xmlDoc.root["status"].stringValue, statusInfo: xmlDoc.root["statusInfo"].stringValue, rawData: rawData)
-//            
-//            if(resultModel.statusInfo.containsString("not found")) { resultModel.statusInfo = "" }
-//            
-//            return resultModel
-//        }
-//        catch{
-//            print("\(error)")
-//        }
+        let resultModel = createResultStatusModel()
+        resultModel.rawData = rawData
+        
+        do {
+            if(rawData is NSDictionary) {
+                
+                for (key, value) in (rawData as! NSDictionary) {
+                    
+                    switch key as! String  {
+                    case "status":
+                        resultModel.status = value as! String
+                    case "statusInfo":
+                        resultModel.status = value as! String
+                    default: break
+                    }
+                }
+            }
+            else if (rawData is NSData) {
+                let xmlDoc = try AEXMLDocument(xmlData: rawData as! NSData)
+                
+                #if DEBUG
+                    // prints the same XML structure as original
+                    print(xmlDoc.xmlString)
+                    
+                    for child in xmlDoc.root.children {
+                        print(child.name)
+                    }
+                #endif
+                
+                resultModel.status = xmlDoc.root["status"].stringValue
+                resultModel.statusInfo = xmlDoc.root["statusInfo"].stringValue
+                
+                if(resultModel.statusInfo.containsString("not found")) { resultModel.statusInfo = "" }
+            }
+            
+            return resultModel
+        }
+        catch{
+            print("\(error)")
+        }
         
         return ResultStatusModel(status: AlchemyConstants.Status.ERROR.rawValue, statusInfo: "failed to create result model", rawData: rawData)
     }

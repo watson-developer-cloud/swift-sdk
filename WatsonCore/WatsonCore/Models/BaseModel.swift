@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class BaseModel {
+public class BaseModel : NSObject {
     
     /// TODO: Why in the world does this need to be public??  INVESTIGATE
     public var modelError: String = ""
-    public var rawData: NSData = NSData()
+    public var rawData: AnyObject!
     
-    public init(rawData: NSData, modelError: String?) {
+    public init(rawData: AnyObject, modelError: String = "") {
         
-        self.modelError = modelError!
+        self.modelError = modelError
         self.rawData = rawData
     }
     
-    public init() { }
+ //   public init() { }
     
     //TODO: create a method to determine the output type
     

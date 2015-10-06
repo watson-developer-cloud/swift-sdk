@@ -11,13 +11,14 @@ import WatsonCore
 
 public class ImageKeyWordsModel : WatsonCore.BaseModel {
 
-    internal var text = ""
-    internal var score = 0.0
+    var text = ""
+    var score = 0.0
     
-    init(text: String, score: Double, rawData: NSData) {
+    init(text: String = "", score: Double = 0.0, rawData: AnyObject) {
         
         self.text = text
         self.score = score
-        super.init()
+        super.init(rawData: rawData)
     }
+    
 }

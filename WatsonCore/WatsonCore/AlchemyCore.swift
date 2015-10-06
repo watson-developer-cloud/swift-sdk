@@ -29,7 +29,6 @@ public class AlchemyCoreImpl {
         _apiKey = apiKey
     }
     
-    
     /**
     This method will be used to call the Alchemy service.
     
@@ -59,6 +58,10 @@ public class AlchemyCoreImpl {
                         let resultStatusModel = ResultStatusModel.getResultStatusModel(rawData)
                         callback(resultStatusModel,nil)
                     }
+                }
+                else if let rawData = response as Dictionary? {
+                    let resultStatusModel = ResultStatusModel.getResultStatusModel(response)
+                    callback(resultStatusModel,nil)
                 }
                 else {
                     callback(nil,nil)

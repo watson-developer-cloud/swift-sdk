@@ -51,7 +51,7 @@ class AlchemyVisionTests: XCTestCase {
             
             XCTAssertNotNil(resultStatus, "Error is nil.")
             
-         //   XCTAssertEqual(resultStatus.status, "\(AlchemyConstants.Status.ERROR)")
+            XCTAssertEqual(resultStatus.status, "ERROR")
             
             XCTAssertEqual(resultStatus.statusInfo, "invalid-api-key")
             
@@ -61,7 +61,7 @@ class AlchemyVisionTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
-    func testURLGetRankedImageKeywords(){
+    func testURLGetRankedImageKeywordsXML(){
         
         let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
         
@@ -71,7 +71,36 @@ class AlchemyVisionTests: XCTestCase {
             
             XCTAssertNotNil(resultStatus, "Error is nil.")
             
-       //     XCTAssertEqual(resultStatus.status, "\(AlchemyConstants.Status.OK)")
+            XCTAssertEqual(resultStatus.status, "OK")
+            
+            XCTAssertEqual(resultStatus.statusInfo, "")
+            
+            XCTAssertGreaterThan(response.totalTransactions, 3)
+            
+            XCTAssertEqual(response.imageKeyWords.count, 1)
+            
+            XCTAssertEqual(response.imageKeyWords[0].text, "person")
+            
+            XCTAssertGreaterThan(response.imageKeyWords[0].score, 0.90)
+            
+            // add some logic here for testing
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    func testURLGetRankedImageKeywordsJSON(){
+        
+        let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
+        
+        serviceVision.urlGetRankedImageKeywords(test_url, outputMode: AlchemyConstants.OutputMode.JSON, forceShowAll: true, knowledgeGraph: 1, callback: { response, resultStatus in
+            
+            XCTAssertNotNil(response, "Response is nil.")
+            
+            XCTAssertNotNil(resultStatus, "Error is nil.")
+            
+            XCTAssertEqual(resultStatus.status, "OK")
             
             XCTAssertEqual(resultStatus.statusInfo, "")
             

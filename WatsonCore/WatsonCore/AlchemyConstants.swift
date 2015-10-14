@@ -14,12 +14,12 @@ import Foundation
 public class AlchemyConstants
 {
 
-    static let Host = "gateway-a.watsonplatform.net"
-    static let Base = "/calls"
-    static let VisionPrefixURL = "/url/"
+    public static let Host = "http://gateway-a.watsonplatform.net"
+    public static let Base = "/calls"
+    public static let VisionPrefixURL = "/url/"
     
     // Image Link Extraction
-    enum ImageLinkExtraction: String {
+    public enum ImageLinkExtraction: String {
         case URLGetImage = "URLGetImage"
         case HTMLGetImage = "HTMLGetImage"
     }
@@ -36,6 +36,9 @@ public class AlchemyConstants
         case ImageGetRankedImageFaceTags = "ImageGetRankedImageFaceTags"
     }
     
+    public enum Model: String {
+        case TotalTransactions = "totalTransactions"
+    }
     
     /**
     Input Parameter Keys

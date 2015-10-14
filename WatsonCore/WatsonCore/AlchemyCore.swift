@@ -6,7 +6,14 @@
 //  Copyright © 2015 MIL. All rights reserved.
 //
 
+
 import Foundation
+import SwiftyJSON
+import Alamofire
+
+public enum Method: String {
+    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+}
 
 /// TODO: move this to core
 public class AlchemyCoreImpl {
@@ -29,44 +36,40 @@ public class AlchemyCoreImpl {
         _apiKey = apiKey
     }
     
-    /**
-    This method will be used to call the Alchemy service.
-    
-    - parameter path:      The specific path for the incoming call.  This will be append to the Host for the full patth to be created
-    - parameter body:      value that contains the params for the specific call
-    - parameter callback:  Callback with Result and Error if present
-    */
-    public func analyze(path: String, body: NSData, callback:(ResultStatusModel!, NSError!)->()) {
-        
-       // let fullPath = Constants.Base + path
-        
-        self.utils.setUsernameAndPassword("", password: "")
-        
-        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body )
-        
-        utils.performRequest(request!, callback: {response, error in
-            if let error_message = response["error_message"] as? String
-            {
-                WatsonLog("analyze(): " + error_message)
-                callback(nil, error)
-            }
-            else {
-                if let rawData = response["rawData"] as! NSData? {
+    public func analyze(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Alamofire.request(method, url, parameters: parameters)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    Log.sharedLogger.info("Validation Successful")
+                    let coreResponse = CoreResponse(anyObject: data)
+                    completionHandler(returnValue: coreResponse)
                     
-                    if let _ = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String?
-                    {
-                        let resultStatusModel = ResultStatusModel.getResultStatusModel(rawData)
-                        callback(resultStatusModel,nil)
-                    }
+                case .Failure(let error):
+                    //  callback()
+                    Log.sharedLogger.info("add better error handling")
+                    //completionHandler(error)
+                    Log.sharedLogger.error(error.description)
+                } }
+    }
+    
+    public func getEndpoints() -> JSON {
+        
+        var jsonObj: JSON = JSON.null
+        if let path = NSBundle.mainBundle().pathForResource("alchemy_endpoints", ofType: "json") {
+            do {
+                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                jsonObj = JSON(data)
+                if jsonObj == JSON.null {
+                    print("could not get json from file, make sure that file contains valid json.")
                 }
-                else if let rawData = response as Dictionary? {
-                    let resultStatusModel = ResultStatusModel.getResultStatusModel(response)
-                    callback(resultStatusModel,nil)
-                }
-                else {
-                    callback(nil,nil)
-                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
             }
-        })
+        } else {
+            print("Invalid filename/path.")
+        }
+        return jsonObj
     }
 }

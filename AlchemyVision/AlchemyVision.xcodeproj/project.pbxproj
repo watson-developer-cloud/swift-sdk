@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */; settings = {ASSET_TAGS = (); }; };
 		31553DD61BC1F97B0086E516 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31553DD51BC1F97B0086E516 /* WatsonCore.framework */; };
-		31553DD81BC1F9FC0086E516 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31553DD71BC1F9FC0086E516 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		3179E2431BC1EA4000174C5A /* AlchemyVision.h in Headers */ = {isa = PBXBuildFile; fileRef = 3179E2421BC1EA4000174C5A /* AlchemyVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3179E24A1BC1EA4000174C5A /* AlchemyVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */; settings = {ASSET_TAGS = (); }; };
 		3179E24F1BC1EA4000174C5A /* AlchemyVisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */; };
-		31BCE6041BC1EF4F00756343 /* ImageKeyWordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6001BC1EF4F00756343 /* ImageKeyWordsModel.swift */; settings = {ASSET_TAGS = (); }; };
-		31BCE6051BC1EF4F00756343 /* RankedImageKeywordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6011BC1EF4F00756343 /* RankedImageKeywordsModel.swift */; settings = {ASSET_TAGS = (); }; };
+		31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */; settings = {ASSET_TAGS = (); }; };
 		31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6081BC1EF6000756343 /* Vision.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -28,16 +27,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
 		31553DD51BC1F97B0086E516 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../Watson-iOS-SDK-dev/WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
-		31553DD71BC1F9FC0086E516 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
 		3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3179E2421BC1EA4000174C5A /* AlchemyVision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlchemyVision.h; sourceTree = "<group>"; };
 		3179E2441BC1EA4000174C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3179E2491BC1EA4000174C5A /* AlchemyVisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyVisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyVisionTests.swift; sourceTree = "<group>"; };
 		3179E2501BC1EA4000174C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31BCE6001BC1EF4F00756343 /* ImageKeyWordsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWordsModel.swift; sourceTree = "<group>"; };
-		31BCE6011BC1EF4F00756343 /* RankedImageKeywordsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankedImageKeywordsModel.swift; sourceTree = "<group>"; };
+		31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWord.swift; sourceTree = "<group>"; };
 		31BCE6081BC1EF6000756343 /* Vision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +85,6 @@
 				3179E2421BC1EA4000174C5A /* AlchemyVision.h */,
 				31BCE5FE1BC1EF4F00756343 /* Models */,
 				3179E2441BC1EA4000174C5A /* Info.plist */,
-				31553DD71BC1F9FC0086E516 /* AlchemyConstants.swift */,
 				31BCE6081BC1EF6000756343 /* Vision.swift */,
 			);
 			path = AlchemyVision;
@@ -112,8 +109,8 @@
 		31BCE5FE1BC1EF4F00756343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				31BCE6001BC1EF4F00756343 /* ImageKeyWordsModel.swift */,
-				31BCE6011BC1EF4F00756343 /* RankedImageKeywordsModel.swift */,
+				31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */,
+				3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,10 +222,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31BCE6041BC1EF4F00756343 /* ImageKeyWordsModel.swift in Sources */,
-				31BCE6051BC1EF4F00756343 /* RankedImageKeywordsModel.swift in Sources */,
+				31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */,
 				31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */,
-				31553DD81BC1F9FC0086E516 /* AlchemyConstants.swift in Sources */,
+				3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

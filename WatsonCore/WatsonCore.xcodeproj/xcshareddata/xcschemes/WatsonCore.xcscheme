@@ -32,10 +32,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "310272A51BB8EB20001BD88C"
-               BuildableName = "AlchemyVision.xctest"
-               BlueprintName = "AlchemyVisionTests"
-               ReferencedContainer = "container:../Alchemy/AlchemyVision.xcodeproj">
+               BlueprintIdentifier = "7A1FCDD91BA9ED6A0090E1EB"
+               BuildableName = "WatsonCoreTests.xctest"
+               BlueprintName = "WatsonCoreTests"
+               ReferencedContainer = "container:WatsonCore.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

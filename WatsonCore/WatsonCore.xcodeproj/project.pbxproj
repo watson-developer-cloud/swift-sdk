@@ -21,9 +21,12 @@
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
 		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; };
 		7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */; settings = {ASSET_TAGS = (); }; };
-		BD308E711BCEDFD70092763A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308E6E1BCEDFD70092763A /* Alamofire.framework */; settings = {ASSET_TAGS = (); }; };
-		BD308E721BCEDFD70092763A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308E6F1BCEDFD70092763A /* SwiftyJSON.framework */; settings = {ASSET_TAGS = (); }; };
-		BD308E731BCEDFD70092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308E701BCEDFD70092763A /* XCGLogger.framework */; settings = {ASSET_TAGS = (); }; };
+		BD308EAD1BCF0F840092763A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EA71BCF0F570092763A /* Alamofire.framework */; };
+		BD308EAE1BCF0F840092763A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EA81BCF0F570092763A /* SwiftyJSON.framework */; };
+		BD308EAF1BCF0F840092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EA91BCF0F570092763A /* XCGLogger.framework */; };
+		BD308EB01BCF0FAC0092763A /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EA71BCF0F570092763A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD308EB11BCF0FAC0092763A /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EA81BCF0F570092763A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD308EB21BCF0FAC0092763A /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EA91BCF0F570092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF45201BB1C4D300860301 /* NetworkUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
 /* End PBXBuildFile section */
@@ -37,6 +40,21 @@
 			remoteInfo = WatsonCore;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BD308E961BCF0C430092763A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BD308EB01BCF0FAC0092763A /* Alamofire.framework in CopyFiles */,
+				BD308EB11BCF0FAC0092763A /* SwiftyJSON.framework in CopyFiles */,
+				BD308EB21BCF0FAC0092763A /* XCGLogger.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
@@ -56,9 +74,9 @@
 		7A1FCDE11BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
 		7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAuthentication.swift; sourceTree = "<group>"; };
-		BD308E6E1BCEDFD70092763A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
-		BD308E6F1BCEDFD70092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
-		BD308E701BCEDFD70092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCGLogger.framework; sourceTree = "<group>"; };
+		BD308EA71BCF0F570092763A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		BD308EA81BCF0F570092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
+		BD308EA91BCF0F570092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCGLogger.framework; sourceTree = "<group>"; };
 		BDBF45201BB1C4D300860301 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,9 +86,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD308E721BCEDFD70092763A /* SwiftyJSON.framework in Frameworks */,
-				BD308E711BCEDFD70092763A /* Alamofire.framework in Frameworks */,
-				BD308E731BCEDFD70092763A /* XCGLogger.framework in Frameworks */,
+				BD308EAD1BCF0F840092763A /* Alamofire.framework in Frameworks */,
+				BD308EAE1BCF0F840092763A /* SwiftyJSON.framework in Frameworks */,
+				BD308EAF1BCF0F840092763A /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,17 +111,6 @@
 			name = resources;
 			path = WatsonCore/resources;
 			sourceTree = SOURCE_ROOT;
-		};
-		31B9F2151BCEB98B004CCF9F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BD308E6E1BCEDFD70092763A /* Alamofire.framework */,
-				BD308E6F1BCEDFD70092763A /* SwiftyJSON.framework */,
-				BD308E701BCEDFD70092763A /* XCGLogger.framework */,
-			);
-			name = Frameworks;
-			path = ../../Frameworks;
-			sourceTree = "<group>";
 		};
 		31D661781BC21D2300506913 /* Models */ = {
 			isa = PBXGroup;
@@ -145,7 +152,7 @@
 		7A1FCDD21BA9ED6A0090E1EB /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
-				31B9F2151BCEB98B004CCF9F /* Frameworks */,
+				BD308EA61BCF0F570092763A /* Frameworks */,
 				31D6617D1BC21D3000506913 /* Helpers */,
 				31D661781BC21D2300506913 /* Models */,
 				3127A22D1BCDB47E00DD4CFE /* resources */,
@@ -171,6 +178,17 @@
 			path = WatsonCoreTests;
 			sourceTree = "<group>";
 		};
+		BD308EA61BCF0F570092763A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD308EA71BCF0F570092763A /* Alamofire.framework */,
+				BD308EA81BCF0F570092763A /* SwiftyJSON.framework */,
+				BD308EA91BCF0F570092763A /* XCGLogger.framework */,
+			);
+			name = Frameworks;
+			path = ../../Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -194,6 +212,7 @@
 				7A1FCDCD1BA9ED6A0090E1EB /* Headers */,
 				7A1FCDCE1BA9ED6A0090E1EB /* Resources */,
 				BD308E681BCEDA480092763A /* ShellScript */,
+				BD308E961BCF0C430092763A /* CopyFiles */,
 			);
 			buildRules = (
 			);

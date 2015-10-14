@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A1FCDCF1BA9ED6A0090E1EB"
+               BuildableName = "WatsonCore.framework"
+               BlueprintName = "WatsonCore"
+               ReferencedContainer = "container:../WatsonCore/WatsonCore.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BDAED1C11BBF57CA00BBF265"
                BuildableName = "LanguageTranslation.framework"
                BlueprintName = "LanguageTranslation"

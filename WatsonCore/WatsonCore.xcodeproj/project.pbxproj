@@ -7,16 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661791BC21D2300506913 /* BaseModel.swift */; settings = {ASSET_TAGS = (); }; };
-		31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617A1BC21D2300506913 /* ResultStatusModel.swift */; settings = {ASSET_TAGS = (); }; };
+		3127A22F1BCDB47E00DD4CFE /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */; settings = {ASSET_TAGS = (); }; };
+		31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA51BCC7031001BF3CB /* CoreResponse.swift */; settings = {ASSET_TAGS = (); }; };
+		31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA61BCC7031001BF3CB /* CoreResult.swift */; settings = {ASSET_TAGS = (); }; };
+		31383DAA1BCC7127001BF3CB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA91BCC7127001BF3CB /* Log.swift */; settings = {ASSET_TAGS = (); }; };
+		31383DAC1BCC718A001BF3CB /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAB1BCC718A001BF3CB /* XCGLogger.swift */; settings = {ASSET_TAGS = (); }; };
+		31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9AFC1BCE90920077DEA1 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661811BC21D3000506913 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617F1BC21D3000506913 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661821BC21D4000506913 /* AlchemyCore.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661841BC21E8100506913 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
+		31DC6FB61BCEAE820037BBCA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */; };
+		31DC6FB81BCEAEB20037BBCA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */; };
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; };
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
 		7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */; };
-		7A3C440E1BAFC4A400106EE9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C440D1BAFC4A400106EE9 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
 		7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */; settings = {ASSET_TAGS = (); }; };
 		BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF45201BB1C4D300860301 /* NetworkUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
@@ -33,11 +39,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		31D661791BC21D2300506913 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
-		31D6617A1BC21D2300506913 /* ResultStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStatusModel.swift; sourceTree = "<group>"; };
+		3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
+		31383DA51BCC7031001BF3CB /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
+		31383DA61BCC7031001BF3CB /* CoreResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResult.swift; sourceTree = "<group>"; };
+		31383DA91BCC7127001BF3CB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		31383DAB1BCC718A001BF3CB /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = "WatsonCore/Libraries/XCGLogger-master/XCGLogger/Library/XCGLogger/XCGLogger.swift"; sourceTree = SOURCE_ROOT; };
+		31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResultStatus.swift; sourceTree = "<group>"; };
+		31CB9AFC1BCE90920077DEA1 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		31D6617F1BC21D3000506913 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		31D661821BC21D4000506913 /* AlchemyCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCore.swift; sourceTree = "<group>"; };
 		31D661841BC21E8100506913 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
+		31DC6FB11BCEAE170037BBCA /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
+		31DC6FB31BCEAE410037BBCA /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = ../Carthage/Build/Mac/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
+		31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../Carthage/Checkouts/SwiftyJSON/build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../Carthage/Checkouts/Alamofire/build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonCore.h; sourceTree = "<group>"; };
 		7A1FCDD51BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,7 +60,6 @@
 		7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreTests.swift; sourceTree = "<group>"; };
 		7A1FCDE11BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
-		7A3C440D1BAFC4A400106EE9 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAuthentication.swift; sourceTree = "<group>"; };
 		BDBF45201BB1C4D300860301 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
@@ -56,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DC6FB81BCEAEB20037BBCA /* Alamofire.framework in Frameworks */,
+				31DC6FB61BCEAE820037BBCA /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,11 +86,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3127A22D1BCDB47E00DD4CFE /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */,
+			);
+			name = resources;
+			path = WatsonCore/resources;
+			sourceTree = SOURCE_ROOT;
+		};
 		31D661781BC21D2300506913 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				31D661791BC21D2300506913 /* BaseModel.swift */,
-				31D6617A1BC21D2300506913 /* ResultStatusModel.swift */,
+				31383DA51BCC7031001BF3CB /* CoreResponse.swift */,
+				31383DA61BCC7031001BF3CB /* CoreResult.swift */,
+				31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -82,6 +108,8 @@
 		31D6617D1BC21D3000506913 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				31383DAB1BCC718A001BF3CB /* XCGLogger.swift */,
+				31383DA91BCC7127001BF3CB /* Log.swift */,
 				31D6617F1BC21D3000506913 /* Utils.swift */,
 			);
 			path = Helpers;
@@ -90,6 +118,10 @@
 		7A1FCDC61BA9ED6A0090E1EB = {
 			isa = PBXGroup;
 			children = (
+				31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */,
+				31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */,
+				31DC6FB31BCEAE410037BBCA /* SwiftyJSON.framework.dSYM */,
+				31DC6FB11BCEAE170037BBCA /* SwiftyJSON.framework */,
 				7A1FCDD21BA9ED6A0090E1EB /* WatsonCore */,
 				7A1FCDDE1BA9ED6A0090E1EB /* WatsonCoreTests */,
 				7A1FCDD11BA9ED6A0090E1EB /* Products */,
@@ -110,11 +142,12 @@
 			children = (
 				31D6617D1BC21D3000506913 /* Helpers */,
 				31D661781BC21D2300506913 /* Models */,
+				3127A22D1BCDB47E00DD4CFE /* resources */,
 				7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */,
 				7A1FCDD51BA9ED6A0090E1EB /* Info.plist */,
 				7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */,
-				7A3C440D1BAFC4A400106EE9 /* Logger.swift */,
 				7A1FCDEA1BA9ED870090E1EB /* WatsonGateway.swift */,
+				31CB9AFC1BCE90920077DEA1 /* Logger.swift */,
 				BDBF45201BB1C4D300860301 /* NetworkUtils.swift */,
 				31D661821BC21D4000506913 /* AlchemyCore.swift */,
 				31D661841BC21E8100506913 /* AlchemyConstants.swift */,
@@ -223,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3127A22F1BCDB47E00DD4CFE /* alchemy_endpoints.json in Resources */,
 				E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,15 +275,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A3C440E1BAFC4A400106EE9 /* Logger.swift in Sources */,
 				31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */,
+				31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */,
+				31383DAA1BCC7127001BF3CB /* Log.swift in Sources */,
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
-				31D6617C1BC21D2300506913 /* ResultStatusModel.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
 				31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */,
+				31383DAC1BCC718A001BF3CB /* XCGLogger.swift in Sources */,
+				31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */,
+				31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
-				31D6617B1BC21D2300506913 /* BaseModel.swift in Sources */,
 				31D661811BC21D3000506913 /* Utils.swift in Sources */,
+				31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

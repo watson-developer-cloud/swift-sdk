@@ -11,10 +11,10 @@ import Foundation
 
 
 /// The Constants needed for the input keys for the parameters
-public class AlchemyConstants
+public class AlchemyConstantss
 {
 
-    static let Host = "gateway-a.watsonplatform.net"
+    static let Hosts = "https://gateway-a.watsonplatform.net"
     static let Base = "/calls"
     static let VisionPrefixURL = "/url/"
     

@@ -119,7 +119,14 @@ public class LanguageTranslation {
     public func translate(text:[String], source:String, target:String, callback:([String]?)->()) {
         
         let path = _serviceURL + "/v2/translate"
-        let body = buildTranslateRequestBody(source, target: target, text: text)
+        
+        let dict = NSMutableDictionary()
+        dict.setObject(source, forKey: "source")
+        dict.setObject(target, forKey: "target")
+        dict.setObject(text as NSArray, forKey: "text")
+        
+        let body = utils.dictionaryToJSON(dict)
+        
         let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body)
         
         utils.performRequest(request!, callback: {response, error in
@@ -143,24 +150,8 @@ public class LanguageTranslation {
         })
     }
     
-    private func buildTranslateRequestBody(source:String, target:String,text:[String]) -> NSData?
-    {
-        //TODO: Support model objects too
-        let dict = NSMutableDictionary()
-        dict.setObject(source, forKey: "source")
-        dict.setObject(target, forKey: "target")
-        dict.setObject(text as NSArray, forKey: "text")
-        
-        return utils.dictionaryToJSON(dict)
-    }
-    
-    public func translate(model:LanguageModel,callback: ([String])->()) {
+    public func translate(model:TranslationModel,callback: ([String])->()) {
         //TODO: Add support for translating using model objects
-    }
-    
-    let doStuff = {
-        
-        
     }
     
     /**
@@ -171,7 +162,7 @@ public class LanguageTranslation {
     - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
     - parameter callback:     The callback method to invoke after the response is received
     */
-    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([LanguageModel?]?)->())
+    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel?]?)->())
     {
         let path = _serviceURL + "/v2/models"
         
@@ -182,8 +173,8 @@ public class LanguageTranslation {
             guard let modelDictionaries:NSArray = response["models"] as! NSArray? else {
                 return
             }
-            let models: [LanguageModel?] = modelDictionaries.map {
-                (let dictionary) -> LanguageModel? in
+            let models: [TranslationModel?] = modelDictionaries.map {
+                (let dictionary) -> TranslationModel? in
                 return self.dictionaryToModel(dictionary as! NSDictionary)
             }
             callback(models)
@@ -194,12 +185,12 @@ public class LanguageTranslation {
     /**
     Retrieve a translation model
     
-    - parameter model_id:       The model identifier
+    - parameter modelID:       The model identifier
     - parameter callback:     The callback method to invoke after the response is received
     */
-    public func getModel(model_id: String, callback: (LanguageModel?)->())
+    public func getModel(modelID: String, callback: (TranslationModel?)->())
     {
-        let path = _serviceURL + "/v2/models/\(model_id)"
+        let path = _serviceURL + "/v2/models/\(modelID)"
         
         let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
         utils.performRequest(request!, callback: {response, error in
@@ -213,29 +204,58 @@ public class LanguageTranslation {
             callback(nil)
         })
     }
+  
+//    /**
+//    Uploads a TMX glossary file on top of a domain to customize a translation model.
+//    
+//    - parameter baseModelID:        (Required). Specifies the domain model that is used as the base for the training.
+//    - parameter name:               The model name. Valid characters are letters, numbers, -, and _. No spaces.
+//    - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
+//    - parameter callback:           Returns the created model
+//    */
+//    public func createModel(baseModelID: String, name: String? = nil, forcedGlossaryPath: String, callback: (String?)->())
+//    {
+//        //TODO: Return a model rather than a model ID
+//        let path = _serviceURL + "/v2/models"
+//        
+//        let queryParams = NSMutableDictionary()
+//        queryParams.setObject(baseModelID, forKey: "base_model_id")
+//        if let name = name {
+//            queryParams.setObject(name, forKey: "name")
+//        }
+//
+//        //let dict = NSMutableDictionary()
+//        //dict.setObject(readForcedGlossary(forcedGlossaryPath)!, forKey: "forced_glossary")
+//        
+//        //let body = utils.dictionaryToJSON(dict)
+//        let body = readForcedGlossary(forcedGlossaryPath)!
+//        
+//        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body, queryParams: queryParams)
+//        utils.performRequest(request!, callback: {response, error in
+//            if let error_message = response["error_message"] as? String
+//            {
+//                WatsonLog("createModel(): " + error_message, prefix:self.TAG)
+//            }
+//            else if let response = response as NSDictionary? {
+//                return callback(response["model_id"] as! String?)
+//            }
+//            callback(nil)
+//        })
+//    }
     
-    /**
-    Retrieve a translation model
-    
-    - parameter model_id:       The model identifier
-    - parameter callback:     The callback method to invoke after the response is received
-    */
-    public func createModel(model_id: String, callback: (LanguageModel?)->())
-    {
-        let path = _serviceURL + "/v2/models/\(model_id)"
-        
-        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
-        utils.performRequest(request!, callback: {response, error in
-            if let error_message = response["error_message"] as? String
-            {
-                WatsonLog("translate(): " + error_message, prefix:self.TAG)
-            }
-            else if let dictionary = response as NSDictionary? {
-                return callback(self.dictionaryToModel(dictionary))
-            }
-            callback(nil)
-        })
+    private func readForcedGlossary(path:String) -> String? {
+        do {
+            let data = try NSData(contentsOfFile: path)
+            let encodedContent = data?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            return encodedContent
+//            let fileContent = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+            //return fileContent as String
+        } catch {
+            
+        }
+        return nil
     }
+    
     
     /**
     Converts a dictionary of strings returned by the Watson service to a native model object
@@ -244,7 +264,7 @@ public class LanguageTranslation {
     
     - returns: A populated language model object
     */
-    private func dictionaryToModel(dictionary: NSDictionary) -> LanguageModel?
+    private func dictionaryToModel(dictionary: NSDictionary) -> TranslationModel?
     {
         if let source = dictionary[LanguageTranslationConstants.source] as? String,
         modelID = dictionary[LanguageTranslationConstants.modelID] as? String,
@@ -257,7 +277,7 @@ public class LanguageTranslation {
         customizable = dictionary[LanguageTranslationConstants.customizable] as? Bool,
         name = dictionary[LanguageTranslationConstants.name] as? String
         {
-            return LanguageModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
+            return TranslationModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
         } else {
             WatsonLog("Value missing from dictionary. Unable to convert to a Language model", prefix:self.TAG)
             return nil

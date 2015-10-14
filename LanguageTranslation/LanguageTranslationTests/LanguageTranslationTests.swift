@@ -68,7 +68,7 @@ class LanguageTranslationTests: XCTestCase {
     func testGetModels() {
         let expectation = expectationWithDescription("Get Models")
         
-        service.getModels(callback:{(models:[LanguageModel?]?) in
+        service.getModels(callback:{(models:[TranslationModel?]?) in
             XCTAssertGreaterThan(models!.count,0,"Expected at least 1 model to be returned")
             expectation.fulfill()
         })
@@ -77,16 +77,36 @@ class LanguageTranslationTests: XCTestCase {
     }
 
     
+    func testCreateModel() {
+//        let expectation1 = expectationWithDescription("Invalid parameters")
+        let expectation2 = expectationWithDescription("Valid parameters")
+        
+//        service.createModel("blah", name: "blah", forcedGlossaryPath: "blah", callback:{(modelID:String?) in
+//            XCTAssertNil(modelID,"Expected no model to be return for invalid parameters")
+//            expectation1.fulfill()
+//        })
+
+        let path = "/users/kweinmeister/Documents/Xcode/Watson-iOS-SDK/LanguageTranslation/LanguageTranslationTests/glossary.tmx"
+        service.createModel("en-es", name: "custom-english-to-spanish", forcedGlossaryPath: path, callback:{(modelID:String?) in
+            XCTAssertNotNil(modelID, "Model ID returned by create model should not be nil")
+            expectation2.fulfill()
+        })
+
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    
     func testGetModel() {
         let expectation1 = expectationWithDescription("Missing model")
         let expectation2 = expectationWithDescription("Valid model")
 
-        service.getModel("MISSING_MODEL_ID", callback:{(model:LanguageModel?) in
+        service.getModel("MISSING_MODEL_ID", callback:{(model:TranslationModel?) in
             XCTAssertNil(model,"Expected no model to be return for invalid id")
             expectation1.fulfill()
         })
 
-        service.getModel("en-es", callback:{(model:LanguageModel?) in
+        service.getModel("en-es", callback:{(model:TranslationModel?) in
             XCTAssertEqual(model!.modelID,"en-es","Expected to get en-es model")
             expectation2.fulfill()
         })

@@ -1,5 +1,5 @@
 //
-//  LanguageModel.swift
+//  TranslationModel.swift
 //  LanguageTranslation
 //
 //  Created by Karl Weinmeister on 9/16/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LanguageModel
+public struct TranslationModel
 {
     var baseModelID = ""
     var customizable = false

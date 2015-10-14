@@ -11,14 +11,15 @@
 		31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA51BCC7031001BF3CB /* CoreResponse.swift */; settings = {ASSET_TAGS = (); }; };
 		31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA61BCC7031001BF3CB /* CoreResult.swift */; settings = {ASSET_TAGS = (); }; };
 		31383DAA1BCC7127001BF3CB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA91BCC7127001BF3CB /* Log.swift */; settings = {ASSET_TAGS = (); }; };
-		31383DAC1BCC718A001BF3CB /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAB1BCC718A001BF3CB /* XCGLogger.swift */; settings = {ASSET_TAGS = (); }; };
 		31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		31B9F2191BCEB98B004CCF9F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B9F2161BCEB98B004CCF9F /* Alamofire.framework */; settings = {ASSET_TAGS = (); }; };
+		31B9F21A1BCEB98B004CCF9F /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B9F2171BCEB98B004CCF9F /* SwiftyJSON.framework */; settings = {ASSET_TAGS = (); }; };
+		31B9F21B1BCEB98B004CCF9F /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B9F2181BCEB98B004CCF9F /* XCGLogger.framework */; settings = {ASSET_TAGS = (); }; };
 		31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9AFC1BCE90920077DEA1 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661811BC21D3000506913 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617F1BC21D3000506913 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661821BC21D4000506913 /* AlchemyCore.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661841BC21E8100506913 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
-		31DC6FB61BCEAE820037BBCA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */; };
-		31DC6FB81BCEAEB20037BBCA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */; };
+		31F8D6B41BCEB54C009050F6 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F8D6B31BCEB54C009050F6 /* XCGLogger.swift */; settings = {ASSET_TAGS = (); }; };
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; };
 		7A1FCDE01BA9ED6A0090E1EB /* WatsonCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDDF1BA9ED6A0090E1EB /* WatsonCoreTests.swift */; };
@@ -43,16 +44,15 @@
 		31383DA51BCC7031001BF3CB /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
 		31383DA61BCC7031001BF3CB /* CoreResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResult.swift; sourceTree = "<group>"; };
 		31383DA91BCC7127001BF3CB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		31383DAB1BCC718A001BF3CB /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = "WatsonCore/Libraries/XCGLogger-master/XCGLogger/Library/XCGLogger/XCGLogger.swift"; sourceTree = SOURCE_ROOT; };
 		31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResultStatus.swift; sourceTree = "<group>"; };
+		31B9F2161BCEB98B004CCF9F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		31B9F2171BCEB98B004CCF9F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
+		31B9F2181BCEB98B004CCF9F /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCGLogger.framework; sourceTree = "<group>"; };
 		31CB9AFC1BCE90920077DEA1 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		31D6617F1BC21D3000506913 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		31D661821BC21D4000506913 /* AlchemyCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCore.swift; sourceTree = "<group>"; };
 		31D661841BC21E8100506913 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
-		31DC6FB11BCEAE170037BBCA /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
-		31DC6FB31BCEAE410037BBCA /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = ../Carthage/Build/Mac/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
-		31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../Carthage/Checkouts/SwiftyJSON/build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
-		31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../Carthage/Checkouts/Alamofire/build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		31F8D6B31BCEB54C009050F6 /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = "../../../../Watson-iOS-SDKtest55/WatsonCore/WatsonCore/Libraries/XCGLogger.swift"; sourceTree = "<group>"; };
 		7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonCore.h; sourceTree = "<group>"; };
 		7A1FCDD51BA9ED6A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,8 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31DC6FB81BCEAEB20037BBCA /* Alamofire.framework in Frameworks */,
-				31DC6FB61BCEAE820037BBCA /* SwiftyJSON.framework in Frameworks */,
+				31B9F21A1BCEB98B004CCF9F /* SwiftyJSON.framework in Frameworks */,
+				31B9F2191BCEB98B004CCF9F /* Alamofire.framework in Frameworks */,
+				31B9F21B1BCEB98B004CCF9F /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +96,17 @@
 			path = WatsonCore/resources;
 			sourceTree = SOURCE_ROOT;
 		};
+		31B9F2151BCEB98B004CCF9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31B9F2161BCEB98B004CCF9F /* Alamofire.framework */,
+				31B9F2171BCEB98B004CCF9F /* SwiftyJSON.framework */,
+				31B9F2181BCEB98B004CCF9F /* XCGLogger.framework */,
+			);
+			name = Frameworks;
+			path = ../../Frameworks;
+			sourceTree = "<group>";
+		};
 		31D661781BC21D2300506913 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,7 +120,7 @@
 		31D6617D1BC21D3000506913 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				31383DAB1BCC718A001BF3CB /* XCGLogger.swift */,
+				31F8D6B31BCEB54C009050F6 /* XCGLogger.swift */,
 				31383DA91BCC7127001BF3CB /* Log.swift */,
 				31D6617F1BC21D3000506913 /* Utils.swift */,
 			);
@@ -118,10 +130,6 @@
 		7A1FCDC61BA9ED6A0090E1EB = {
 			isa = PBXGroup;
 			children = (
-				31DC6FB71BCEAEB20037BBCA /* Alamofire.framework */,
-				31DC6FB51BCEAE820037BBCA /* SwiftyJSON.framework */,
-				31DC6FB31BCEAE410037BBCA /* SwiftyJSON.framework.dSYM */,
-				31DC6FB11BCEAE170037BBCA /* SwiftyJSON.framework */,
 				7A1FCDD21BA9ED6A0090E1EB /* WatsonCore */,
 				7A1FCDDE1BA9ED6A0090E1EB /* WatsonCoreTests */,
 				7A1FCDD11BA9ED6A0090E1EB /* Products */,
@@ -140,6 +148,7 @@
 		7A1FCDD21BA9ED6A0090E1EB /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
+				31B9F2151BCEB98B004CCF9F /* Frameworks */,
 				31D6617D1BC21D3000506913 /* Helpers */,
 				31D661781BC21D2300506913 /* Models */,
 				3127A22D1BCDB47E00DD4CFE /* resources */,
@@ -281,9 +290,9 @@
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
 				31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */,
-				31383DAC1BCC718A001BF3CB /* XCGLogger.swift in Sources */,
 				31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */,
 				31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */,
+				31F8D6B41BCEB54C009050F6 /* XCGLogger.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
 				31D661811BC21D3000506913 /* Utils.swift in Sources */,
 				31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */,
@@ -406,6 +415,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WatsonCore/Frameworks",
+				);
 				INFOPLIST_FILE = WatsonCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -424,6 +437,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WatsonCore/Frameworks",
+				);
 				INFOPLIST_FILE = WatsonCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

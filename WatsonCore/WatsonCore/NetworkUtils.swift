@@ -103,14 +103,16 @@ public class NetworkUtils {
     
     - parameter path:        Path to the service, not including hostname
     - parameter method:      The HTTP method to use
+    - parameter queryParams: The HTTP query parameters
     - parameter body:        The HTTP request body
     - parameter textContent: If the
     
     - returns: A populated request object
     */
-    public func buildRequest(path:String, method:HTTPMethod, body: NSData?, contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON) -> NSURLRequest? {
+    public func buildRequest(path:String, method:HTTPMethod, body: NSData?, contentType: ContentType = ContentType.JSON, queryParams: NSDictionary? = nil, accept: ContentType = ContentType.JSON) -> NSURLRequest? {
         
-        let endpoint = _protocol + "://" + _host + path
+        let endpoint = _protocol + "://" + _host + path + parseQueryParameters(queryParams)
+        
         if let url = NSURL(string: endpoint) {
             
             let request = NSMutableURLRequest(URL: url)
@@ -130,6 +132,36 @@ public class NetworkUtils {
         WatsonLog("buildRequest(): Invalid endpoint", prefix:self.TAG)
         return nil
     }
+    
+    /**
+    Helper function to create a URL encoded string for query parameters from a dictionary
+    
+    - parameter queryParams: query parameters
+    
+    - returns: URL encoded string that includes query parameters
+    */
+    private func parseQueryParameters(queryParams: NSDictionary?) -> String {
+        var paramString:String = ""
+        if let params = queryParams {
+            if params.count > 0 {
+                paramString += "?"
+                var first = true
+                for (key, value) in params {
+                    if !first {
+                        paramString += "&"
+                    }
+                    paramString += "\(key)=\(value)"
+                    first = false
+                }
+            }
+        }
+        guard let escapedString = paramString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) else {
+            WatsonLog("parseQueryParameters(): Unable to URL encode query parameter string: \(paramString)", prefix:self.TAG)
+            return ""
+        }
+        return escapedString
+    }
+    
     
     /**
     Invoke rest operation asynchronously and then call callback handler

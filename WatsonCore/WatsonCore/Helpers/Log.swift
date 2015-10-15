@@ -11,10 +11,10 @@ import XCGLogger
 public class Log {
     
     // privates
-    private static var fileName = "IBMLog.txt"
-    private static var consoleLogLevel = XCGLogger.LogLevel.Info
-    private static var fileLogLevel = XCGLogger.LogLevel.Error
-    private static var otherLogFileLocation = "/users/vincentherrin"
+    internal static var fileName = "IBMWatsonLog.txt"
+    internal static var consoleLogLevel = XCGLogger.LogLevel.Info
+    internal static var fileLogLevel = XCGLogger.LogLevel.Error
+    internal static var otherLogFileLocation = ""
 
     //plist keys
     private static let logfileNameKey = "Logfile name"
@@ -35,8 +35,8 @@ public class Log {
             .Severe: XCGLogger.XcodeColor(fg: UIColor.whiteColor(), bg: UIColor.redColor())
         ]
         #if Debug
-            Logger.consoleLogLevel = XCGLogger.LogLevel.Verbose
-            Logger.fileLogLevel = XCGLogger.LogLevel.Verbose
+            Log.consoleLogLevel = XCGLogger.LogLevel.Verbose
+            Log.fileLogLevel = XCGLogger.LogLevel.Verbose
         #endif
         
         #if USE_NSLOG // Set via Build Settings, under Other Swift Flags

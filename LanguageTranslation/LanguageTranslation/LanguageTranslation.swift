@@ -59,16 +59,16 @@ public class LanguageTranslation {
                             languages.append(Language(language:lang,name:nm))
                         }
                         else {
-                            WatsonLog("getIdentifiableLanguages(): Missing name for language \(lang)", prefix:self.TAG)
+                            Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Missing name for language \(lang)")
                         }
                     }
                     else {
-                        WatsonLog("getIdentifiableLanguages(): Expected language attribute for languages array element", prefix:self.TAG)
+                        Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Expected language attribute for languages array element")
                     }
                 }
             }
             else {
-                WatsonLog("getIdentifiableLanguages(): Expected languages array in response", prefix:self.TAG)
+                Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Expected languages array in response")
                 callback(nil)
             }
             callback(languages)
@@ -89,17 +89,17 @@ public class LanguageTranslation {
         utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
-                WatsonLog("identify(): " + error_message, prefix:self.TAG)
+                Log.sharedLogger.warning("\(self.TAG) identify(): \(error_message)")
                 callback(nil)
             }
             else {
                 guard let rawData = response["rawData"] as! NSData? else {
-                    WatsonLog("identify(): expected to find rawData in response", prefix:self.TAG)
+                    Log.sharedLogger.warning("\(self.TAG) identify(): expected to find rawData in response")
                     callback(nil)
                     return
                 }
                 guard let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String? else {
-                    WatsonLog("identify(): error converting data to string", prefix:self.TAG)
+                    Log.sharedLogger.warning("\(self.TAG) identify(): error converting data to string")
                     callback(nil)
                     return
                 }
@@ -132,14 +132,14 @@ public class LanguageTranslation {
         utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
-                WatsonLog("translate(): " + error_message, prefix:self.TAG)
+                Log.sharedLogger.warning("\(self.TAG) translate(): \(error_message)")
                 callback(nil)
             }
             else {
 
                 guard let translations = response["translations"] as? NSArray else
                 {
-                    WatsonLog("translate(): expected to find translations in response", prefix:self.TAG)
+                    Log.sharedLogger.warning("\(self.TAG) translate(): expected to find translations in response")
                     callback(nil)
                     return
                 }
@@ -196,7 +196,7 @@ public class LanguageTranslation {
         utils.performRequest(request!, callback: {response, error in
             if let error_message = response["error_message"] as? String
             {
-                WatsonLog("translate(): " + error_message, prefix:self.TAG)
+                Log.sharedLogger.warning("\(self.TAG) translate(): \(error_message)")
             }
             else if let dictionary = response as NSDictionary? {
                 return callback(self.dictionaryToModel(dictionary))
@@ -279,7 +279,7 @@ public class LanguageTranslation {
         {
             return TranslationModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
         } else {
-            WatsonLog("Value missing from dictionary. Unable to convert to a Language model", prefix:self.TAG)
+            Log.sharedLogger.warning("\(self.TAG) Value missing from dictionary. Unable to convert to a Language model")
             return nil
         }
     }

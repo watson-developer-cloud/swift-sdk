@@ -22,10 +22,22 @@ public struct CoreResultStatus {
     }
     
     init(anyObject: AnyObject) {
-        Log.sharedLogger.info("Need to add error handling and remove strings")
+        // TODO "Need to add error handling and remove strings"
+        
         var data = JSON(anyObject)
-        self.status = data["status"].string
-        self.statusInfo = data["statusInfo"].string
+        if (data == nil) {
+            status = "Error"
+            statusInfo = "Unknown"
+        }
+        else if (data["status"].string == nil) {
+            self.status = data["error_code"].intValue.description
+            self.statusInfo = data["error_message"].string
+        }
+        else {
+            self.status = data["status"].string
+            self.statusInfo = data["statusInfo"].string
+        }
+        
         self.rawData = anyObject
     }
 }

@@ -112,7 +112,6 @@
 		3179E2411BC1EA4000174C5A /* AlchemyVision */ = {
 			isa = PBXGroup;
 			children = (
-				31BCE5F91BC1EF4400756343 /* Helpers */,
 				3179E2421BC1EA4000174C5A /* AlchemyVision.h */,
 				31BCE5FE1BC1EF4F00756343 /* Models */,
 				3179E2441BC1EA4000174C5A /* Info.plist */,
@@ -128,13 +127,6 @@
 				3179E2501BC1EA4000174C5A /* Info.plist */,
 			);
 			path = AlchemyVisionTests;
-			sourceTree = "<group>";
-		};
-		31BCE5F91BC1EF4400756343 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		31BCE5FE1BC1EF4F00756343 /* Models */ = {

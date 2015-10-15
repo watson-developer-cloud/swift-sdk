@@ -121,15 +121,15 @@ public class NetworkUtils {
             request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
             request.addValue(accept.rawValue, forHTTPHeaderField: _httpAcceptHeader)
             request.addValue(contentType.rawValue, forHTTPHeaderField: _httpContentTypeHeader)
-            WatsonDebug("buildRequest(): Content Type = " + request.valueForHTTPHeaderField(_httpContentTypeHeader)!, prefix:self.TAG)
+            Log.sharedLogger.debug("buildRequest(): Content Type = \(request.valueForHTTPHeaderField(_httpContentTypeHeader)!)")
             
             if let bodyData = body {
                 request.HTTPBody = bodyData
             }
-            WatsonDebug("buildRequest(): " + method.rawValue + " " + endpoint, prefix:self.TAG)
+            Log.sharedLogger.debug("\(self.TAG) buildRequest(): \(method.rawValue) \(endpoint)")
             return request
         }
-        WatsonLog("buildRequest(): Invalid endpoint", prefix:self.TAG)
+        Log.sharedLogger.info("\(self.TAG) buildRequest(): Invalid endpoint")
         return nil
     }
     
@@ -156,7 +156,7 @@ public class NetworkUtils {
             }
         }
         guard let escapedString = paramString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) else {
-            WatsonLog("parseQueryParameters(): Unable to URL encode query parameter string: \(paramString)", prefix:self.TAG)
+            Log.sharedLogger.info("parseQueryParameters(): Unable to URL encode query parameter string: \(paramString)")
             return ""
         }
         return escapedString
@@ -174,7 +174,7 @@ public class NetworkUtils {
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
             
             guard error == nil else {
-                WatsonLog("performRequest(): Error received when invoking operation - \(error?.localizedDescription)", prefix:self.TAG)
+                Log.sharedLogger.info("\(self.TAG) performRequest(): Error received when invoking operation - \(error?.localizedDescription)")
                 callback(nil, error)
                 return
             }
@@ -186,7 +186,7 @@ public class NetworkUtils {
                     
                     //Missing contentType in header
                     if contentType == nil {
-                        WatsonLog("performRequest(): Response is missing content-type header", prefix:self.TAG)
+                        Log.sharedLogger.info("\(self.TAG) performRequest(): Response is missing content-type header")
                         callback(nil,nil)
                     }
                         //Plain text
@@ -201,7 +201,7 @@ public class NetworkUtils {
                     }
                         //Unknown content type
                     else if contentType!.rangeOfString(ContentType.JSON.rawValue) == nil {
-                        WatsonLog("performRequest(): Unsupported content type returned: " + contentType!, prefix:self.TAG)
+                        Log.sharedLogger.info("\(self.TAG) performRequest(): Unsupported content type returned: \(contentType!)")
                         callback(nil,nil)
                     }
                         //JSON Dictionary
@@ -223,18 +223,18 @@ public class NetworkUtils {
                         //JSON Unknown Type
                     else {
                         let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                        WatsonLog("performRequest(): Neither array nor dictionary type found in JSON response: " + (dataString as! String) + "\(error)", prefix:self.TAG)
+                        Log.sharedLogger.info("\(self.TAG) performRequest(): Neither array nor dictionary type found in JSON response: \(dataString as! String) \(error)")
                         let returnVal = [ "rawData" : data]
                         callback(returnVal, nil)
                     }
                 } catch let error as NSError {
                     let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    WatsonLog("performRequest(): " + (dataString as! String) + " \(error)", prefix:self.TAG)
+                    Log.sharedLogger.info("\(self.TAG) performRequest(): \(dataString as! String) \(error)")
                     callback(nil, error)
                 }
                 
             } else {
-                WatsonLog("performRequest(): No response data.", prefix:self.TAG)
+                Log.sharedLogger.info("\(self.TAG) performRequest(): No response data.")
                 callback(nil, nil)
             }
         })
@@ -254,7 +254,7 @@ public class NetworkUtils {
             let json = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
             return json
         } catch let error as NSError {
-            WatsonLog("dictionaryToJSON(): Could not convert dictionary object to JSON. \(error.localizedDescription)", prefix:self.TAG)
+            Log.sharedLogger.warning("\(self.TAG) dictionaryToJSON(): Could not convert dictionary object to JSON. \(error.localizedDescription)")
         }
         return nil
     }

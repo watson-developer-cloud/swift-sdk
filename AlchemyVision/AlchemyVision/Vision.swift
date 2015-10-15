@@ -6,7 +6,6 @@
 //  Copyright © 2015 MIL. All rights reserved.
 //
 
-import Alamofire
 import WatsonCore
 import Foundation
 
@@ -73,7 +72,7 @@ public class VisionImpl: AlchemyCoreImpl, VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        self.analyze(visionUrl, method: Alamofire.Method.POST, parameters: params, completionHandler: {response in
+        self.analyze(visionUrl, method: .POST, parameters: params, completionHandler: {response in
             Log.sharedLogger.info("need exception handler")
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)

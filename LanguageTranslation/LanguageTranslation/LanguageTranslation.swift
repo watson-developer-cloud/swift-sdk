@@ -224,43 +224,32 @@ public class LanguageTranslation {
         })
     }
   
-//    /**
-//    Uploads a TMX glossary file on top of a domain to customize a translation model.
-//    
-//    - parameter baseModelID:        (Required). Specifies the domain model that is used as the base for the training.
-//    - parameter name:               The model name. Valid characters are letters, numbers, -, and _. No spaces.
-//    - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
-//    - parameter callback:           Returns the created model
-//    */
-//    public func createModel(baseModelID: String, name: String? = nil, forcedGlossaryPath: String, callback: (String?)->())
-//    {
-//        //TODO: Return a model rather than a model ID
-//        let path = _serviceURL + "/v2/models"
-//        
-//        let queryParams = NSMutableDictionary()
-//        queryParams.setObject(baseModelID, forKey: "base_model_id")
-//        if let name = name {
-//            queryParams.setObject(name, forKey: "name")
-//        }
-//
-//        //let dict = NSMutableDictionary()
-//        //dict.setObject(readForcedGlossary(forcedGlossaryPath)!, forKey: "forced_glossary")
-//        
-//        //let body = utils.dictionaryToJSON(dict)
-//        let body = readForcedGlossary(forcedGlossaryPath)!
-//        
-//        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body, queryParams: queryParams)
-//        utils.performRequest(request!, callback: {response, error in
-//            if let error_message = response["error_message"] as? String
-//            {
-//                WatsonLog("createModel(): " + error_message, prefix:self.TAG)
-//            }
-//            else if let response = response as NSDictionary? {
-//                return callback(response["model_id"] as! String?)
-//            }
-//            callback(nil)
-//        })
-//    }
+    /**
+    Uploads a TMX glossary file on top of a domain to customize a translation model.
+    
+    - parameter baseModelID:        (Required). Specifies the domain model that is used as the base for the training.
+    - parameter name:               The model name. Valid characters are letters, numbers, -, and _. No spaces.
+    - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
+    - parameter callback:           Returns the created model
+    */
+    public func createModel(baseModelID: String, name: String? = nil, forcedGlossaryPath: NSURL, callback: (CoreResponse?)->())
+    {
+        //TODO: Return a model rather than a model ID
+        let path = _serviceURL + "/v2/models"
+        
+        var queryParams = Dictionary<String,String>()
+        queryParams.updateValue(baseModelID, forKey: "base_model_id")
+        if let name = name {
+            queryParams.updateValue(name, forKey: "name")
+        }
+
+        let request = utils.buildEndpoint(path)
+        utils.performBasicAuthFileUpload(request, fileURL: forcedGlossaryPath, parameters: queryParams, completionHandler: {response in
+            let data = JSON(response.data)
+            var returnValue = data["error_message"].stringValue
+            callback(response)
+        })
+    }
     
     private func readForcedGlossary(path:String) -> String? {
         do {

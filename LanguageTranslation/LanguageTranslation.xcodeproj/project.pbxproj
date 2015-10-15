@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31FF98E61BD0565D00520438 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */; };
 		BD308EC01BCF11520092763A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBD1BCF11520092763A /* Alamofire.framework */; };
 		BD308EC11BCF11520092763A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBE1BCF11520092763A /* SwiftyJSON.framework */; };
 		BD308EC21BCF11520092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBF1BCF11520092763A /* XCGLogger.framework */; };
@@ -21,7 +22,6 @@
 		BDAED1E41BBF583100BBF265 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E11BBF583100BBF265 /* TranslationModel.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1E51BBF583100BBF265 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAFBF4D1BC31C56008ECC69 /* LanguageTranslationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */; settings = {ASSET_TAGS = (); }; };
-		BDFD8C4C1BC33D6F009AE187 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,7 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDFD8C4C1BC33D6F009AE187 /* glossary.tmx in Resources */,
+				31FF98E61BD0565D00520438 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

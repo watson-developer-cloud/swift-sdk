@@ -197,7 +197,33 @@ public class NetworkUtils {
                     } }
         }
     
-    
+    public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
+            .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+                Log.sharedLogger.debug("\(totalBytesWritten)")
+                
+                // This closure is NOT called on the main queue for performance
+                // reasons. To update your ui, dispatch to the main queue.
+                dispatch_async(dispatch_get_main_queue()) {
+                    Log.sharedLogger.debug("Total bytes written on main queue: \(totalBytesWritten)")
+                }
+            }
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    Log.sharedLogger.debug("Response JSON Successful")
+                    let coreResponse = CoreResponse(anyObject: data)
+                    completionHandler(returnValue: coreResponse)
+                case .Failure(let error):
+                    //TODO add more error handling
+                    Log.sharedLogger.warning(error.description)
+                    // TODO create actual error code enum
+                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+                    completionHandler(returnValue: coreResponse)
+                } }
+        }
     
     /**
     Invoke rest operation asynchronously and then call callback handler

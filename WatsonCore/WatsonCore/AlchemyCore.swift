@@ -48,9 +48,11 @@ public class AlchemyCoreImpl {
                     
                 case .Failure(let error):
                     //  callback()
-                    Log.sharedLogger.info("add better error handling")
                     //completionHandler(error)
-                    Log.sharedLogger.error(error.description)
+                    // TODO create actual error code enum
+                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+                    completionHandler(returnValue: coreResponse)
                 } }
     }
     

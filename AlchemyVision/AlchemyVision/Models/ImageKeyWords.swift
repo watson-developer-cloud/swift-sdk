@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import WatsonCore
 
+// ImageKeyWordsEnum
 
 public struct ImageKeyWords {
     

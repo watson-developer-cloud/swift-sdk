@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 /**
 Watson service types
@@ -161,6 +162,41 @@ public class NetworkUtils {
         }
         return escapedString
     }
+
+    public func buildEndpoint(endpoint: String)->String {
+        
+        return _protocol + "://" + _host + endpoint
+    }
+    
+    private func buildHeader()-> [String: String]  {
+        guard apiKey != nil else {
+            Log.sharedLogger.error("No api present to build header")
+            return [:]
+        }
+        return ["Authorization" : apiKey as String]
+
+    }
+    
+    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        
+        Alamofire.request(method, url, parameters: parameters, headers: buildHeader() )
+                .validate()
+                .responseJSON { response in
+                    switch response.result {
+                    case .Success(let data):
+                        Log.sharedLogger.debug("Response JSON Successful")
+                        let coreResponse = CoreResponse(anyObject: data)
+                        completionHandler(returnValue: coreResponse)
+                    case .Failure(let error):
+                       //TODO add more error handling
+                        Log.sharedLogger.warning(error.description)
+                        // TODO create actual error code enum
+                        let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+                        let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+                        completionHandler(returnValue: coreResponse)
+                    } }
+        }
+    
     
     
     /**

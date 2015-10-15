@@ -27,6 +27,17 @@ class LanguageTranslationTests: XCTestCase {
         super.tearDown()
     }
     
+    func testIdentifiableLanguagesNEW() {
+        let expectation = expectationWithDescription("Identifiable Languages")
+        
+        service.getIdentifiableLanguagesNew({(languages:[Language]?) in
+            XCTAssertNotNil(languages,"Expected non-nil array of identifiable languages to be returned")
+            XCTAssertGreaterThan(languages!.count,0,"Expected at least 1 identifiable language to be returned")
+            expectation.fulfill()
+        })
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
     func testIdentifiableLanguages() {
         let expectation = expectationWithDescription("Identifiable Languages")
         

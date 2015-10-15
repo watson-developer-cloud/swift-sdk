@@ -8,6 +8,7 @@
 
 import WatsonCore
 import Foundation
+import SwiftyJSON
 
 
 
@@ -70,6 +71,24 @@ public class LanguageTranslation {
             else {
                 Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Expected languages array in response")
                 callback(nil)
+            }
+            callback(languages)
+        })
+    }
+    
+    public func getIdentifiableLanguagesNew(callback: ([Language]?)->()) {
+        let path = _serviceURL + "/v2/identifiable_languages"
+        
+        let request = utils.buildEndpoint(path)
+        utils.performBasicAuthRequest(request, method: .POST, parameters: [:], completionHandler: {response in
+            Log.sharedLogger.info("need exception handler")
+            var data = JSON(response.data)
+            
+            var languages : [Language] = []
+            
+            for (_,subJson):(String, JSON) in data["languages"] {
+                let language = Language(language: subJson["language"].stringValue, name: subJson["name"].stringValue)
+                languages.append(language)
             }
             callback(languages)
         })

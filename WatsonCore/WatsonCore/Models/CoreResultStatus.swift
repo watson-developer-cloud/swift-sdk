@@ -15,7 +15,7 @@ public struct CoreResultStatus {
     public let statusInfo: String!
     public let rawData: AnyObject!
     
-    init(status: String, statusInfo: String, rawData: String) {
+    init(status: String, statusInfo: String, rawData: String = "") {
         self.status = status
         self.statusInfo = statusInfo
         self.rawData = rawData

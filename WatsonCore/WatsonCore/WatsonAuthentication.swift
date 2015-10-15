@@ -36,19 +36,7 @@ public class WatsonAuthentication: NSObject, NSURLSessionTaskDelegate {
         
     }
     
-    /**
-    This method supports reading properties files which provide information such as username and password strings.
-    */
-    public func readProperties(filename: String) -> NSDictionary? {
-        var myDict: NSDictionary?
-        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path)
-        }
-        else {
-            WatsonLog("Cannot read plist file: \(filename)", prefix: prefix)
-        }
-        return myDict
-    }
+
 
     /**
     This method handles task-level authentication challenges in response to an authentication request from a remote server. In particular, it implements support for HTTP basic authentication.

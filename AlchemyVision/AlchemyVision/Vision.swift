@@ -81,7 +81,6 @@ public class VisionImpl: AlchemyCoreImpl, VisionService {
     }
     
     internal func buildVisionURL(visionUrl: String)->String {
-
         return (AlchemyConstants.Host + AlchemyConstants.Base + AlchemyConstants.VisionPrefixURL + visionUrl)
     }
     

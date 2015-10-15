@@ -46,11 +46,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BDAED1CB1BBF57CA00BBF265"
-               BuildableName = "LanguageTranslationTests.xctest"
-               BlueprintName = "LanguageTranslationTests"
-               ReferencedContainer = "container:LanguageTranslation.xcodeproj">
+               BlueprintIdentifier = "3179E2481BC1EA4000174C5A"
+               BuildableName = "AlchemyVisionTests.xctest"
+               BlueprintName = "AlchemyVisionTests"
+               ReferencedContainer = "container:../AlchemyVision/AlchemyVision.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AlchemyVisionTests/testAlamo()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

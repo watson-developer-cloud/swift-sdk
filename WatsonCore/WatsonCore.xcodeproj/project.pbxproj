@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3127A22F1BCDB47E00DD4CFE /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */; settings = {ASSET_TAGS = (); }; };
 		31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA51BCC7031001BF3CB /* CoreResponse.swift */; settings = {ASSET_TAGS = (); }; };
 		31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA61BCC7031001BF3CB /* CoreResult.swift */; settings = {ASSET_TAGS = (); }; };
-		31383DAA1BCC7127001BF3CB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA91BCC7127001BF3CB /* Log.swift */; settings = {ASSET_TAGS = (); }; };
 		31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FDC1BCF3F87002EA3F8 /* Log.swift */; settings = {ASSET_TAGS = (); }; };
+		31AC1FE01BCF3F87002EA3F8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FDD1BCF3F87002EA3F8 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
+		31AC1FE31BCF400C002EA3F8 /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */; settings = {ASSET_TAGS = (); }; };
 		31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9AFC1BCE90920077DEA1 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
-		31D661811BC21D3000506913 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6617F1BC21D3000506913 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661821BC21D4000506913 /* AlchemyCore.swift */; settings = {ASSET_TAGS = (); }; };
 		31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D661841BC21E8100506913 /* AlchemyConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,13 +57,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
 		31383DA51BCC7031001BF3CB /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
 		31383DA61BCC7031001BF3CB /* CoreResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResult.swift; sourceTree = "<group>"; };
-		31383DA91BCC7127001BF3CB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResultStatus.swift; sourceTree = "<group>"; };
+		31AC1FDC1BCF3F87002EA3F8 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		31AC1FDD1BCF3F87002EA3F8 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
 		31CB9AFC1BCE90920077DEA1 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		31D6617F1BC21D3000506913 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		31D661821BC21D4000506913 /* AlchemyCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCore.swift; sourceTree = "<group>"; };
 		31D661841BC21E8100506913 /* AlchemyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
 		7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,14 +103,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3127A22D1BCDB47E00DD4CFE /* resources */ = {
+		31AC1FDA1BCF3F87002EA3F8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3127A22E1BCDB47E00DD4CFE /* alchemy_endpoints.json */,
+				31AC1FDC1BCF3F87002EA3F8 /* Log.swift */,
+				31AC1FDD1BCF3F87002EA3F8 /* Utils.swift */,
 			);
-			name = resources;
-			path = WatsonCore/resources;
+			name = Utilities;
+			path = WatsonCore/Utilities;
 			sourceTree = SOURCE_ROOT;
+		};
+		31AC1FE11BCF400C002EA3F8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
 		};
 		31D661781BC21D2300506913 /* Models */ = {
 			isa = PBXGroup;
@@ -120,15 +129,6 @@
 				31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		31D6617D1BC21D3000506913 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				31383DA91BCC7127001BF3CB /* Log.swift */,
-				31D6617F1BC21D3000506913 /* Utils.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7A1FCDC61BA9ED6A0090E1EB = {
@@ -153,9 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				BD308EA61BCF0F570092763A /* Frameworks */,
-				31D6617D1BC21D3000506913 /* Helpers */,
+				31AC1FDA1BCF3F87002EA3F8 /* Utilities */,
 				31D661781BC21D2300506913 /* Models */,
-				3127A22D1BCDB47E00DD4CFE /* resources */,
+				31AC1FE11BCF400C002EA3F8 /* Configuration */,
 				7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */,
 				7A1FCDD51BA9ED6A0090E1EB /* Info.plist */,
 				7AC3348E1BAC7FEA00F2C664 /* WatsonAuthentication.swift */,
@@ -282,7 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3127A22F1BCDB47E00DD4CFE /* alchemy_endpoints.json in Resources */,
+				31AC1FE31BCF400C002EA3F8 /* alchemy_endpoints.json in Resources */,
 				E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,15 +319,15 @@
 			files = (
 				31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */,
 				31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */,
-				31383DAA1BCC7127001BF3CB /* Log.swift in Sources */,
+				31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */,
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
 				31D661831BC21D4000506913 /* AlchemyCore.swift in Sources */,
 				31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */,
 				31CB9AFD1BCE90920077DEA1 /* Logger.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
-				31D661811BC21D3000506913 /* Utils.swift in Sources */,
 				31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */,
+				31AC1FE01BCF3F87002EA3F8 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +454,8 @@
 				INFOPLIST_FILE = WatsonCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				New_Setting = "";
+				OTHER_SWIFT_FLAGS = "-DDebug";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -476,6 +478,7 @@
 				INFOPLIST_FILE = WatsonCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

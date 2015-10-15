@@ -14,7 +14,7 @@ import Foundation
 public struct CoreResponse{
 
     /// The data returned by the server.
-    public let data: AnyObject
+    public let data: AnyObject!
     
     /// The result of response serialization.
    // public let result: CoreResult<Value, Error>
@@ -23,8 +23,8 @@ public struct CoreResponse{
    // public let coreResult: CoreResult<Value, Error>
     
 
-    public init(data: NSData?, coreResultStatus: CoreResultStatus /* coreResult: CoreResult<Value, Error> */) {
-        self.data = data!
+    public init(data: AnyObject = "", coreResultStatus: CoreResultStatus /* coreResult: CoreResult<Value, Error> */) {
+        self.data = data
         self.coreResultStatus = coreResultStatus
      //   self.coreResult = coreResult
     }

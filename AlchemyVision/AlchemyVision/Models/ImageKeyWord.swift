@@ -10,6 +10,7 @@ import Foundation
 import WatsonCore
 import SwiftyJSON
 
+
 public struct ImageKeyWord {
 
     public let text: String
@@ -20,11 +21,4 @@ public struct ImageKeyWord {
         self.text = text
         self.score = score
     }
-    
-    init(anyObject: AnyObject) {
-        var data = JSON(anyObject)
-        self.text = data[AlchemyConstants.Model.TotalTransactions.rawValue].stringValue
-        self.score = data[AlchemyConstants.Model.TotalTransactions.rawValue].doubleValue
-    }
-    
 }

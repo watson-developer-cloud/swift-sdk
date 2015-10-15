@@ -57,6 +57,16 @@
                </Test>
             </SkippedTests>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDAED1CB1BBF57CA00BBF265"
+               BuildableName = "LanguageTranslationTests.xctest"
+               BlueprintName = "LanguageTranslationTests"
+               ReferencedContainer = "container:LanguageTranslation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

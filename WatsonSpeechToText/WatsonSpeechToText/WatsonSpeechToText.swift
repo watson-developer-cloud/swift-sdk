@@ -190,7 +190,7 @@ public class WatsonSpeechToText {
     */
     private func asynchronousError(function: String, message: String, code: Int?, completionHandler: (String?, NSError?) -> Void) {
         
-        WatsonLog("\(function): \(message)")
+        Log.sharedLogger.error("\(function): \(message)")
         let userInfo = [NSLocalizedDescriptionKey: message]
         let codeUnwrapped: Int
         if let code = code {

@@ -9,6 +9,21 @@
 import Foundation
 import SwiftyJSON
 
+// would be nice to have an automapper for this model
+private enum TranslationEnum: String {
+    case BaseModelID = "baseModelID"
+    case Customizable = "customizable"
+    case DefaultModel = "defaultModel"
+    case Domain = "domain"
+    case ModelID = "modelID"
+    case Name = "name"
+    case Owner = "owner"
+    case Source = "source"
+    case Status = "status"
+    case Target = "target"
+}
+
+
 public struct TranslationModel
 {
     var baseModelID = ""
@@ -39,6 +54,16 @@ public struct TranslationModel
     init(anyObject: AnyObject) {
         var data = JSON(anyObject)
         
+        self.baseModelID = data[TranslationEnum.BaseModelID.rawValue].stringValue
+        self.customizable = data[TranslationEnum.Customizable.rawValue].boolValue
+        self.defaultModel = data[TranslationEnum.DefaultModel.rawValue].boolValue
+        self.domain = data[TranslationEnum.Domain.rawValue].stringValue
+        self.source = data[TranslationEnum.Source.rawValue].stringValue
+        self.target = data[TranslationEnum.Target.rawValue].stringValue
+        self.modelID = data[TranslationEnum.ModelID.rawValue].stringValue
+        self.name = data[TranslationEnum.Name.rawValue].stringValue
+        self.owner = data[TranslationEnum.Owner.rawValue].stringValue
+        self.status = data[TranslationEnum.Status.rawValue].stringValue
         
     }
 }

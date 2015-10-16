@@ -24,18 +24,20 @@ public struct CoreResultStatus {
     init(anyObject: AnyObject) {
         // TODO "Need to add error handling and remove strings"
         
+        
         var data = JSON(anyObject)
-        if (data == nil) {
-            status = "Error"
-            statusInfo = "Unknown"
+
+        if (data["status"].string != nil) {
+            self.status = data["status"].stringValue
+            self.statusInfo = data["statusInfo"].stringValue
         }
-        else if (data["status"].string == nil) {
+        else if (data["error_message"].string != nil) {
             self.status = data["error_code"].intValue.description
-            self.statusInfo = data["error_message"].string
+            self.statusInfo = data["error_message"].stringValue
         }
         else {
-            self.status = data["status"].string
-            self.statusInfo = data["statusInfo"].string
+            status = "Error"
+            statusInfo = "Unknown"
         }
         
         self.rawData = anyObject

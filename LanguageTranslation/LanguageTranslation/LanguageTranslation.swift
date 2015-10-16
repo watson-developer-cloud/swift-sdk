@@ -112,6 +112,7 @@ public class LanguageTranslation {
 //        })
 //    }
     
+
     /**
     Translate text using source and target languages
     
@@ -120,13 +121,44 @@ public class LanguageTranslation {
     - parameter target: The language that the text will be translated into
     - parameter callback:       The callback method that is invoked with the translated string
     */
-    public func translate(text:[String], source:String, target:String, callback:([String]?)->()) {
+    public func translate(text:[String], source:String, target:String, callback:([String])->()) {
+        translate(text, source:source, target:target, modelID:nil, callback: callback)
+    }
+
+    /**
+    Translate text using a model specified by modelID
+    - parameter text:           The text to translate
+    - parameter modelID: The ID of the model that should be used for translation parameters
+    - parameter callback:       The callback method that is invoked with the translated string
+    */
+    public func translate(text:[String], modelID:String, callback:([String])->()) {
+        translate(text, source:nil, target:nil, modelID:modelID, callback: callback)
+    }
+    
+    /**
+    Private function that translation functions using either source&target or model ID parameters flow through
+    
+    - parameter text:           The text to translate
+    - parameter source: The language that the original text is written in
+    - parameter target: The language that the text will be translated into
+    - parameter modelID: The ID of the model that should be used for translation parameters
+    - parameter callback:       The callback method that is invoked with the translated string
+    */
+    private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String])->()) {
+        //TODO: Translate multiple strings
         
         let path = _serviceURL + "/v2/translate"
         
         let dict = NSMutableDictionary()
-        dict.setObject(source, forKey: "source")
-        dict.setObject(target, forKey: "target")
+        if let source = source {
+            dict.setObject(source, forKey: LanguageTranslationConstants.source)
+        }
+        if let target = target {
+            dict.setObject(target, forKey: LanguageTranslationConstants.target)
+        }
+        if let modelID = modelID {
+            dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
+        }
         dict.setObject(text as NSArray, forKey: "text")
         
         let body = utils.dictionaryToJSON(dict)
@@ -136,17 +168,17 @@ public class LanguageTranslation {
         utils.performRequest(request!, callback: {response, error in
             if response == nil {
                 Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
-                callback(nil)
+                callback([])
             } else if let error_message = response["error_message"] as? String {
                 Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
-                callback(nil)
+                callback([])
             }
             else {
 
                 guard let translations = response["translations"] as? NSArray else
                 {
                     Log.sharedLogger.warning("\(self.TAG) translate(): expected to find translations in response")
-                    callback(nil)
+                    callback([])
                     return
                 }
                 let firstTranslation = translations[0] as! NSDictionary
@@ -154,10 +186,6 @@ public class LanguageTranslation {
                 callback([translation])
             }
         })
-    }
-    
-    public func translate(model:TranslationModel,callback: ([String])->()) {
-        //TODO: Add support for translating using model objects
     }
     
     /**

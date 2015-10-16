@@ -56,11 +56,17 @@ class LanguageTranslationTests: XCTestCase {
 //    }
     
     func testTranslation() {
-        let expectation = expectationWithDescription("Translation")
+        let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
+        let modelExpectation = expectationWithDescription("Model Translation")
 
-        service.translate(["Hello"],source:"en",target:"es",callback:{(text:[String]?) in
-            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
-            expectation.fulfill()
+        service.translate(["Hello"],source:"en",target:"es",callback:{(text:[String]) in
+            XCTAssertEqual(text.first!,"Hola","Expected hello to translate to Hola")
+            sourceTargetExpectation.fulfill()
+        })
+
+        service.translate(["Hello"],modelID:"en-es",callback:{(text:[String]) in
+            XCTAssertEqual(text.first!,"Hola","Expected hello to translate to Hola")
+            modelExpectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })

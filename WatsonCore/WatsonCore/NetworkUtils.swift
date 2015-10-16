@@ -197,6 +197,31 @@ public class NetworkUtils {
                     } }
         }
     
+    public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(),
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: fileURL, name: fileURLKey)
+                
+                for (key, value) in parameters {
+                    multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+                }
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { response in
+                        Log.sharedLogger.debug("Response JSON Successful")
+                        let coreResponse = CoreResponse(anyObject: response.data!)
+                        completionHandler(returnValue: coreResponse)
+                    }
+                case .Failure(let encodingError):
+                    print(encodingError)
+                }
+            }
+        )
+    }
+    
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)

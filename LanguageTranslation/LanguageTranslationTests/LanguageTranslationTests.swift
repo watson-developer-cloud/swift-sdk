@@ -90,19 +90,13 @@ class LanguageTranslationTests: XCTestCase {
 
     
     func testCreateModel() {
-//        let expectation1 = expectationWithDescription("Invalid parameters")
         let expectation2 = expectationWithDescription("Valid parameters")
-        
-//        service.createModel("blah", name: "blah", forcedGlossaryPath: "blah", callback:{(modelID:String?) in
-//            XCTAssertNil(modelID,"Expected no model to be return for invalid parameters")
-//            expectation1.fulfill()
-//        })
 
         let testBundle = NSBundle(forClass: self.dynamicType)
         let fileURL = testBundle.URLForResource("glossary", withExtension: "tmx")
         XCTAssertNotNil(fileURL)
 
-        service.createModel("en-es", name: "custom-english-to-spanish", forcedGlossaryPath: fileURL!, callback:{ response in
+        service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!, callback:{ response in
             //XCTAssertNotNil(modelID, "Model ID returned by create model should not be nil")
             expectation2.fulfill()
         })

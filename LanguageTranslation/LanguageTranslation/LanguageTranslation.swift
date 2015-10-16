@@ -106,9 +106,11 @@ public class LanguageTranslation {
         let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
         
         utils.performRequest(request!, callback: {response, error in
-            if let error_message = response["error_message"] as? String
-            {
-                Log.sharedLogger.warning("\(self.TAG) identify(): \(error_message)")
+            if response == nil {
+                Log.sharedLogger.severe("\(self.TAG) identify(): nil response")
+                callback(nil)
+            } else if let error_message = response["error_message"] as? String {
+                Log.sharedLogger.severe("\(self.TAG) identify(): \(error_message)")
                 callback(nil)
             }
             else {
@@ -149,9 +151,11 @@ public class LanguageTranslation {
         let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body)
         
         utils.performRequest(request!, callback: {response, error in
-            if let error_message = response["error_message"] as? String
-            {
-                Log.sharedLogger.warning("\(self.TAG) translate(): \(error_message)")
+            if response == nil {
+                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
+                callback(nil)
+            } else if let error_message = response["error_message"] as? String {
+                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
                 callback(nil)
             }
             else {
@@ -189,7 +193,14 @@ public class LanguageTranslation {
         
         let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
         utils.performRequest(request!, callback: {response, error in
+            if response == nil {
+                Log.sharedLogger.severe("\(self.TAG) getModels(): nil response")
+                callback(nil)
+                return
+            }
             guard let modelDictionaries:NSArray = response["models"] as! NSArray? else {
+                Log.sharedLogger.severe("\(self.TAG) getModels(): models key not found in response")
+                callback(nil)
                 return
             }
             let models: [TranslationModel?] = modelDictionaries.map {
@@ -213,9 +224,10 @@ public class LanguageTranslation {
         
         let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
         utils.performRequest(request!, callback: {response, error in
-            if let error_message = response["error_message"] as? String
-            {
-                Log.sharedLogger.warning("\(self.TAG) translate(): \(error_message)")
+            if response == nil {
+                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
+            } else if let error_message = response["error_message"] as? String {
+                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
             }
             else if let dictionary = response as NSDictionary? {
                 return callback(self.dictionaryToModel(dictionary))

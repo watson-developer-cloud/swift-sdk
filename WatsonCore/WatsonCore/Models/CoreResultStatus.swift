@@ -13,10 +13,12 @@ public struct CoreResultStatus {
     
     public let status: String
     public let statusInfo: String
+    public let statusCode: Int
     
-    init(status: String, statusInfo: String, rawData: String = "") {
+    init(status: String, statusInfo: String, statusCode: Int = 200) {
         self.status = status
         self.statusInfo = statusInfo
+        self.statusCode = statusCode
     }
     
     init(anyObject: AnyObject) {
@@ -35,5 +37,8 @@ public struct CoreResultStatus {
             status = "Error"
             statusInfo = "Unknown"
         }
+        
+        // holder for now until I can get the actual value passed in
+        self.statusCode = 200
     }
 }

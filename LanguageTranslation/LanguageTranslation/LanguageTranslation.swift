@@ -173,31 +173,22 @@ public class LanguageTranslation {
     - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
     - parameter callback:     The callback method to invoke after the response is received
     */
-    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel?]?)->())
+    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel])->())
     {
-        let path = _serviceURL + "/v2/models"
-        
         //TODO: Pass in source, target, and default parameters if non-nil to service
         
-        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
-        utils.performRequest(request!, callback: {response, error in
-            if response == nil {
-                Log.sharedLogger.severe("\(self.TAG) getModels(): nil response")
-                callback(nil)
-                return
-            }
-            guard let modelDictionaries:NSArray = response["models"] as! NSArray? else {
-                Log.sharedLogger.severe("\(self.TAG) getModels(): models key not found in response")
-                callback(nil)
-                return
-            }
-            let models: [TranslationModel?] = modelDictionaries.map {
-                (let dictionary) -> TranslationModel? in
-                return self.dictionaryToModel(dictionary as! NSDictionary)
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models")
+        
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+            var models : [TranslationModel] = []
+            let json = JSON(response.data)["models"]
+            for (_,subJson):(String, JSON) in json {
+                if let model = self.dictionaryToModel(subJson) {
+                    models.append(model)
+                }
             }
             callback(models)
         })
-
     }
     
     /**
@@ -217,9 +208,10 @@ public class LanguageTranslation {
             } else if let error_message = response["error_message"] as? String {
                 Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
             }
-            else if let dictionary = response as NSDictionary? {
-                return callback(self.dictionaryToModel(dictionary))
-            }
+                //TODO: Fix commented out section below
+//            else if let dictionary = response as NSDictionary? {
+//                return callback(self.dictionaryToModel(dictionary))
+//            }
             callback(nil)
         })
     }
@@ -272,18 +264,18 @@ public class LanguageTranslation {
     
     - returns: A populated language model object
     */
-    private func dictionaryToModel(dictionary: NSDictionary) -> TranslationModel?
+    private func dictionaryToModel(json: JSON) -> TranslationModel?
     {
-        if let source = dictionary[LanguageTranslationConstants.source] as? String,
-        modelID = dictionary[LanguageTranslationConstants.modelID] as? String,
-        target = dictionary[LanguageTranslationConstants.target] as? String,
-        baseModelID = dictionary[LanguageTranslationConstants.baseModelID] as? String,
-        domain = dictionary[LanguageTranslationConstants.domain] as? String,
-        defaultModel = dictionary[LanguageTranslationConstants.defaultModel] as? Bool,
-        owner = dictionary[LanguageTranslationConstants.owner] as? String,
-        status = dictionary[LanguageTranslationConstants.status] as? String,
-        customizable = dictionary[LanguageTranslationConstants.customizable] as? Bool,
-        name = dictionary[LanguageTranslationConstants.name] as? String
+        if let source = json[LanguageTranslationConstants.source].string,
+        modelID = json[LanguageTranslationConstants.modelID].string,
+        target = json[LanguageTranslationConstants.target].string,
+        baseModelID = json[LanguageTranslationConstants.baseModelID].string,
+        domain = json[LanguageTranslationConstants.domain].string,
+        defaultModel = json[LanguageTranslationConstants.defaultModel].bool,
+        owner = json[LanguageTranslationConstants.owner].string,
+        status = json[LanguageTranslationConstants.status].string,
+        customizable = json[LanguageTranslationConstants.customizable].bool,
+        name = json[LanguageTranslationConstants.name].string
         {
             return TranslationModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
         } else {

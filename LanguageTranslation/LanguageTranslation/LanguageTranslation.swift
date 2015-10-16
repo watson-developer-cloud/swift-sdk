@@ -170,8 +170,6 @@ public class LanguageTranslation {
     */
     public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel])->())
     {
-        //TODO: Pass in source, target, and default parameters if non-nil to service
-        
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models")
         
         var params = Dictionary<String,String>()
@@ -188,7 +186,6 @@ public class LanguageTranslation {
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
             var models : [TranslationModel] = []
             let json = JSON(response.data)["models"]
-            print(json)
             for (_,subJson):(String, JSON) in json {
                 if let model = self.dictionaryToModel(subJson) {
                     models.append(model)
@@ -206,23 +203,14 @@ public class LanguageTranslation {
     */
     public func getModel(modelID: String, callback: (TranslationModel?)->())
     {
-        let path = _serviceURL + "/v2/models/\(modelID)"
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
         
-        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
-        utils.performRequest(request!, callback: {response, error in
-            if response == nil {
-                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
-            } else if let error_message = response["error_message"] as? String {
-                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
-            }
-                //TODO: Fix commented out section below
-//            else if let dictionary = response as NSDictionary? {
-//                return callback(self.dictionaryToModel(dictionary))
-//            }
-            callback(nil)
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+            return callback(self.dictionaryToModel(JSON(response.data)))
         })
     }
-  
+        
+    
     /**
     Uploads a TMX glossary file on top of a domain to customize a translation model.
     

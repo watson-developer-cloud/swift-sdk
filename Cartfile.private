@@ -1,4 +1,4 @@
 github "SwiftyJSON/SwiftyJSON" >= 2.1.2
 github "Alamofire/Alamofire" ~> 3.0
 github "DaveWoodCom/XCGLogger" ~> 3.0
-
+github "socketio/socket.io-client-swift" ~> 3.1.6

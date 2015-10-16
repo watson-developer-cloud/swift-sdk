@@ -181,25 +181,13 @@ public class NetworkUtils {
     public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader() )
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .Success(let data):
-                    Log.sharedLogger.debug("Response JSON Successful")
-                    let coreResponse = CoreResponse(anyObject: data)
-                    completionHandler(returnValue: coreResponse)
-                case .Failure(let error):
-                    //TODO add more error handling
-                    Log.sharedLogger.warning(error.description)
-                    // TODO create actual error code enum
-                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
-                    completionHandler(returnValue: coreResponse)
-                } }
+            .validate(statusCode: 200..<300)
+            .responseJSON {response in
+                completionHandler( returnValue: self.handleResponse(response))
+        }
     }
     
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(),
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: fileURL, name: fileURLKey)
@@ -233,35 +221,48 @@ public class NetworkUtils {
         )
     }
     
-    
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
             .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-                Log.sharedLogger.debug("\(totalBytesWritten)")
+                Log.sharedLogger.info("\(totalBytesWritten)")
                 
                 // This closure is NOT called on the main queue for performance
                 // reasons. To update your ui, dispatch to the main queue.
                 dispatch_async(dispatch_get_main_queue()) {
-                    Log.sharedLogger.debug("Total bytes written on main queue: \(totalBytesWritten)")
+                    Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
                 }
             }
+            .validate(statusCode: 200..<300)
             .responseJSON { response in
-                switch response.result {
-                case .Success(let data):
-                    Log.sharedLogger.debug("Response JSON Successful")
-                    let coreResponse = CoreResponse(anyObject: data)
-                    completionHandler(returnValue: coreResponse)
-                case .Failure(let error):
-                    //TODO add more error handling
-                    Log.sharedLogger.warning(error.description)
-                    // TODO create actual error code enum
-                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
-                    completionHandler(returnValue: coreResponse)
-                } }
+                completionHandler( returnValue: self.handleResponse(response))
+        }
     }
     
+    public func performRequestAPI(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Alamofire.request(method, url, parameters: parameters)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                completionHandler( returnValue: self.handleResponse(response))
+        }
+    }
+    
+    
+    public func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
+        switch response.result {
+        case .Success(let data):
+            Log.sharedLogger.info("Success")
+            let coreResponse = CoreResponse(anyObject: data)
+            return coreResponse
+        case .Failure(let error):
+            Log.sharedLogger.info("Failure")
+            let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+            let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+            return coreResponse
+        }
+        
+    }
+
     /**
     Invoke rest operation asynchronously and then call callback handler
     - parameter request:  Request object populated from buildRequest()

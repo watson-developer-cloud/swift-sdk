@@ -11,35 +11,29 @@ import SwiftyJSON
 
 public struct CoreResultStatus {
     
-    public let status: String!
-    public let statusInfo: String!
-    public let rawData: AnyObject!
+    public let status: String
+    public let statusInfo: String
     
     init(status: String, statusInfo: String, rawData: String = "") {
         self.status = status
         self.statusInfo = statusInfo
-        self.rawData = rawData
     }
     
     init(anyObject: AnyObject) {
-        // TODO "Need to add error handling and remove strings"
-        
         
         var data = JSON(anyObject)
-
-        if (data["status"].string != nil) {
-            self.status = data["status"].stringValue
+        
+        if let status = data["status"].string {
+            self.status = status
             self.statusInfo = data["statusInfo"].stringValue
         }
-        else if (data["error_message"].string != nil) {
-            self.status = data["error_code"].intValue.description
+        else if let error_message = data["error_message"].string {
+            self.status = String(error_message)
             self.statusInfo = data["error_message"].stringValue
         }
         else {
             status = "Error"
             statusInfo = "Unknown"
         }
-        
-        self.rawData = anyObject
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 /**
 Watson service types
@@ -53,7 +54,7 @@ public class NetworkUtils {
     private let _protocol = "https"
     private var _host = ""
     private var apiKey: String!
-
+    
     /**
     Initialize the networking utilities with a service type
     
@@ -62,7 +63,7 @@ public class NetworkUtils {
     public init(type:ServiceType = ServiceType.Standard) {
         configureHost(type)
     }
-
+    
     /**
     Initialize the network utilities with a service type and authenticate
     
@@ -75,7 +76,7 @@ public class NetworkUtils {
         setUsernameAndPassword(username, password: password)
         configureHost(type)
     }
-
+    
     /**
     Configures the host for service invocation
     
@@ -85,7 +86,7 @@ public class NetworkUtils {
     {
         _host = type.rawValue
     }
-
+    
     /**
     Sets the username and password on the service for invocation. Combines both together into an API Key.
     
@@ -162,7 +163,7 @@ public class NetworkUtils {
         }
         return escapedString
     }
-
+    
     public func buildEndpoint(endpoint: String)->String {
         
         return _protocol + "://" + _host + endpoint
@@ -174,28 +175,28 @@ public class NetworkUtils {
             return [:]
         }
         return ["Authorization" : apiKey as String]
-
+        
     }
     
     public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader() )
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                    case .Success(let data):
-                        Log.sharedLogger.debug("Response JSON Successful")
-                        let coreResponse = CoreResponse(anyObject: data)
-                        completionHandler(returnValue: coreResponse)
-                    case .Failure(let error):
-                       //TODO add more error handling
-                        Log.sharedLogger.warning(error.description)
-                        // TODO create actual error code enum
-                        let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-                        let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
-                        completionHandler(returnValue: coreResponse)
-                    } }
-        }
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    Log.sharedLogger.debug("Response JSON Successful")
+                    let coreResponse = CoreResponse(anyObject: data)
+                    completionHandler(returnValue: coreResponse)
+                case .Failure(let error):
+                    //TODO add more error handling
+                    Log.sharedLogger.warning(error.description)
+                    // TODO create actual error code enum
+                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+                    completionHandler(returnValue: coreResponse)
+                } }
+    }
     
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
@@ -212,8 +213,18 @@ public class NetworkUtils {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
                         Log.sharedLogger.debug("Response JSON Successful")
-                        let coreResponse = CoreResponse(anyObject: response.data!)
-                        completionHandler(returnValue: coreResponse)
+                        
+                        do {
+                            let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
+                            let coreResultStatus = CoreResultStatus(status: "Ok", statusInfo: "")
+                            let coreResponse = CoreResponse.init(data: json!, coreResultStatus: coreResultStatus)
+                            completionHandler(returnValue: coreResponse)
+                        }
+                        catch let error as NSError {
+                            let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
+                            let coreResponse = CoreResponse.init(data: response.data!, coreResultStatus: coreResultStatus)
+                            completionHandler(returnValue: coreResponse)
+                        }
                     }
                 case .Failure(let encodingError):
                     print(encodingError)
@@ -221,6 +232,7 @@ public class NetworkUtils {
             }
         )
     }
+    
     
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         
@@ -248,7 +260,7 @@ public class NetworkUtils {
                     let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
                     completionHandler(returnValue: coreResponse)
                 } }
-        }
+    }
     
     /**
     Invoke rest operation asynchronously and then call callback handler

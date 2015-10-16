@@ -197,7 +197,6 @@ public class NetworkUtils {
             .validate(statusCode: 200..<300)
             .responseJSON {response in
                 completionHandler( returnValue: self.handleResponse(response))
-                //let x = 1;
         }
     }
     

@@ -40,55 +40,24 @@ public class LanguageTranslation {
         //getIdentifiableLanguages({ self._languages = $0 })
     }
 
+
     /**
     Retrieves the list of identifiable languages
     
     - parameter callback: callback method that is invoked with the identifiable languages
     */
     public func getIdentifiableLanguages(callback: ([Language]?)->()) {
-        let path = _serviceURL + "/v2/identifiable_languages"
-        
-        let request = utils.buildRequest(path, method: HTTPMethod.GET, body: nil)
-        utils.performRequest(request!, callback: {response, error in
-            
-            var languages = [Language]()
-            if let languageArray = response["languages"] as? NSArray {
-                
-                for languageDictionary in languageArray {
-                    if let lang = languageDictionary["language"] as? String {
-                        if let nm = languageDictionary["name"] as? String {
-                            languages.append(Language(language:lang,name:nm))
-                        }
-                        else {
-                            Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Missing name for language \(lang)")
-                        }
-                    }
-                    else {
-                        Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Expected language attribute for languages array element")
-                    }
-                }
-            }
-            else {
-                Log.sharedLogger.warning("\(self.TAG) getIdentifiableLanguages(): Expected languages array in response")
-                callback(nil)
-            }
-            callback(languages)
-        })
-    }
-    
-    public func getIdentifiableLanguagesNew(callback: ([Language]?)->()) {
-        let path = _serviceURL + "/v2/identifiable_languages"
-        
-        let request = utils.buildEndpoint(path)
-        utils.performBasicAuthRequest(request, method: .POST, parameters: [:], completionHandler: {response in
-            Log.sharedLogger.info("need exception handler")
-            var data = JSON(response.data)
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identifiable_languages")
+
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+            let data = JSON(response.data)
             
             var languages : [Language] = []
             
             for (_,subJson):(String, JSON) in data["languages"] {
-                let language = Language(language: subJson["language"].stringValue, name: subJson["name"].stringValue)
-                languages.append(language)
+                if let language = subJson["language"].string, name = subJson["name"].string {
+                    languages.append(Language(language: language, name: name))
+                }
             }
             callback(languages)
         })
@@ -101,7 +70,6 @@ public class LanguageTranslation {
     - parameter callback: the callback method to be invoked with the identified language
     */
     public func identify(text:String, callback: (String?)->()) {
-        
         let path = _serviceURL + "/v2/identify"
         let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
         

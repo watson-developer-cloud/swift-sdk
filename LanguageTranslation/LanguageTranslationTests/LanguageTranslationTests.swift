@@ -67,12 +67,32 @@ class LanguageTranslationTests: XCTestCase {
     }
 
     func testGetModels() {
-        let expectation = expectationWithDescription("Get Models")
+        let allExpectation = expectationWithDescription("Get All Models")
+        let sourceExpectation = expectationWithDescription("Get Models by Source")
+        let targetExpectation = expectationWithDescription("Get Models by Target")
+        let defaultModelExpectation = expectationWithDescription("Get Models by Default")
         
         service.getModels(callback:{(models:[TranslationModel]) in
             XCTAssertGreaterThan(models.count,0,"Expected at least 1 model to be returned")
-            expectation.fulfill()
+            allExpectation.fulfill()
         })
+
+        service.getModels("es", callback:{(models:[TranslationModel]) in
+            XCTAssertEqual(models.count,3,"Expected exactly 3 models to be returned")
+            sourceExpectation.fulfill()
+        })
+
+        service.getModels(target:"pt", callback:{(models:[TranslationModel]) in
+            XCTAssertEqual(models.count,2,"Expected exactly 2 models to be returned")
+            targetExpectation.fulfill()
+        })
+        
+        
+        service.getModels(defaultModel:true, callback:{(models:[TranslationModel]) in
+            XCTAssertEqual(models.count,8,"Expected exactly 8 models to be returned")
+            defaultModelExpectation.fulfill()
+        })
+
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }

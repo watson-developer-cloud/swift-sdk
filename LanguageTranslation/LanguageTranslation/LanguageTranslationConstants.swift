@@ -20,4 +20,7 @@ public struct LanguageTranslationConstants {
     static let source = "source"
     static let status = "status"
     static let target = "target"
+    
+    //Used for getModels() query - can't use default for key, as this is a Swift reserved word
+    static let defaultStr = "default"
 }

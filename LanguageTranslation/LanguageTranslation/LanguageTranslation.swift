@@ -10,13 +10,8 @@ import WatsonCore
 import Foundation
 import SwiftyJSON
 
-
-
-
-
  /// The IBM Watson Language Translation service translates text from one language
  /// to another and identifies the language in which text is written.
-
 public class LanguageTranslation {
     
     private let TAG = "[LanguageTranslation] "
@@ -179,9 +174,21 @@ public class LanguageTranslation {
         
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models")
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+        var params = Dictionary<String,String>()
+        if let source = source {
+            params.updateValue(source, forKey: LanguageTranslationConstants.source)
+        }
+        if let target = target {
+            params.updateValue(target, forKey: LanguageTranslationConstants.target)
+        }
+        if let defaultModel = defaultModel {
+            params.updateValue(String(stringInterpolationSegment: defaultModel), forKey: LanguageTranslationConstants.defaultStr)
+        }
+        
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
             var models : [TranslationModel] = []
             let json = JSON(response.data)["models"]
+            print(json)
             for (_,subJson):(String, JSON) in json {
                 if let model = self.dictionaryToModel(subJson) {
                     models.append(model)
@@ -266,6 +273,7 @@ public class LanguageTranslation {
     */
     private func dictionaryToModel(json: JSON) -> TranslationModel?
     {
+        //TODO: Investigate using mapping library
         if let source = json[LanguageTranslationConstants.source].string,
         modelID = json[LanguageTranslationConstants.modelID].string,
         target = json[LanguageTranslationConstants.target].string,

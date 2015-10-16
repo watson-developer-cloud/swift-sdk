@@ -169,21 +169,35 @@ public class NetworkUtils {
         return _protocol + "://" + _host + endpoint
     }
     
-    private func buildHeader()-> [String: String]  {
+    // TODO may need to build this out more but this should work for now
+    // I really do not like the multiple return points but seems it is needed with guard
+    private func buildHeader(contentType: ContentType = ContentType.JSON)-> [String: String]  {
         guard apiKey != nil else {
-            Log.sharedLogger.error("No api present to build header")
+            Log.sharedLogger.error("No apiKey present to build header")
             return [:]
         }
-        return ["Authorization" : apiKey as String]
         
+        var header = [_httpAuthorizationHeader : apiKey as String]
+        
+        guard (header.updateValue(contentType.rawValue, forKey: _httpContentTypeHeader) == nil) else {
+            Log.sharedLogger.error("Error adding Content Type in header")
+            return [:]
+        }
+        
+        guard (header.updateValue(ContentType.JSON.rawValue, forKey: _httpAcceptHeader) == nil) else {
+            Log.sharedLogger.error("Error adding Accept info in header")
+            return [:]
+        }
+        
+        return header
     }
     
-    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        
-        Alamofire.request(method, url, parameters: parameters, headers: buildHeader() )
+    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, contentType: ContentType = ContentType.JSON, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
             .validate(statusCode: 200..<300)
             .responseJSON {response in
                 completionHandler( returnValue: self.handleResponse(response))
+                //let x = 1;
         }
     }
     
@@ -222,7 +236,6 @@ public class NetworkUtils {
     }
     
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
             .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                 Log.sharedLogger.info("\(totalBytesWritten)")

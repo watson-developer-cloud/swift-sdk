@@ -232,7 +232,7 @@ public class LanguageTranslation {
     - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
     - parameter callback:           Returns the created model
     */
-    public func createModel(baseModelID: String, name: String? = nil, forcedGlossaryPath: NSURL, callback: (CoreResponse?)->())
+    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (CoreResponse?)->())
     {
         //TODO: Return a model rather than a model ID
         let path = _serviceURL + "/v2/models"
@@ -244,9 +244,9 @@ public class LanguageTranslation {
         }
 
         let request = utils.buildEndpoint(path)
-        utils.performBasicAuthFileUpload(request, fileURL: forcedGlossaryPath, parameters: queryParams, completionHandler: {response in
+        utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
             let data = JSON(response.data)
-            var returnValue = data["error_message"].stringValue
+            var test = TranslationModel(anyObject: response.data)
             callback(response)
         })
     }

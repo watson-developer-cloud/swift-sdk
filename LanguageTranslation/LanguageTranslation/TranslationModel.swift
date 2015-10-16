@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public struct TranslationModel
 {
@@ -33,5 +34,11 @@ public struct TranslationModel
         self.name = name
         self.owner = owner
         self.status = status
+    }
+    
+    init(anyObject: AnyObject) {
+        var data = JSON(anyObject)
+        
+        
     }
 }

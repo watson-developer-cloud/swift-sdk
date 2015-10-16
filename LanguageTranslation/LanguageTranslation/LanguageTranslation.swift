@@ -62,7 +62,7 @@ public class LanguageTranslation {
             callback(languages)
         })
     }
-    
+
     /**
     Identify the language in which text is written
     
@@ -70,32 +70,52 @@ public class LanguageTranslation {
     - parameter callback: the callback method to be invoked with the identified language
     */
     public func identify(text:String, callback: (String?)->()) {
-        let path = _serviceURL + "/v2/identify"
-        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
         
-        utils.performRequest(request!, callback: {response, error in
-            if response == nil {
-                Log.sharedLogger.severe("\(self.TAG) identify(): nil response")
-                callback(nil)
-            } else if let error_message = response["error_message"] as? String {
-                Log.sharedLogger.severe("\(self.TAG) identify(): \(error_message)")
-                callback(nil)
-            }
-            else {
-                guard let rawData = response["rawData"] as! NSData? else {
-                    Log.sharedLogger.warning("\(self.TAG) identify(): expected to find rawData in response")
-                    callback(nil)
-                    return
-                }
-                guard let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String? else {
-                    Log.sharedLogger.warning("\(self.TAG) identify(): error converting data to string")
-                    callback(nil)
-                    return
-                }
-                callback(language)
-            }
+        let encodedText = text.dataUsingEncoding(NSUTF8StringEncoding)
+        //TODO: Set request body to encodedText
+        //TODO: Set Content-type header to "text/plain"
+        //TODO: Set Accept header to "text/plain"
+        
+        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: [:], completionHandler: {response in
+            //TODO: Confirm that CoreResponse object is returning the language on the response.data object directly. Previously the language was retrieved through response["rawData"]
+            callback(response.data as! String?)
         })
     }
+    
+//    /**
+//    Identify the language in which text is written
+//    
+//    - parameter text:     the text to identify
+//    - parameter callback: the callback method to be invoked with the identified language
+//    */
+//    public func identify(text:String, callback: (String?)->()) {
+//        let path = _serviceURL + "/v2/identify"
+//        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
+//        
+//        utils.performRequest(request!, callback: {response, error in
+//            if response == nil {
+//                Log.sharedLogger.severe("\(self.TAG) identify(): nil response")
+//                callback(nil)
+//            } else if let error_message = response["error_message"] as? String {
+//                Log.sharedLogger.severe("\(self.TAG) identify(): \(error_message)")
+//                callback(nil)
+//            }
+//            else {
+//                guard let rawData = response["rawData"] as! NSData? else {
+//                    Log.sharedLogger.warning("\(self.TAG) identify(): expected to find rawData in response")
+//                    callback(nil)
+//                    return
+//                }
+//                guard let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String? else {
+//                    Log.sharedLogger.warning("\(self.TAG) identify(): error converting data to string")
+//                    callback(nil)
+//                    return
+//                }
+//                callback(language)
+//            }
+//        })
+//    }
     
     /**
     Translate text using source and target languages

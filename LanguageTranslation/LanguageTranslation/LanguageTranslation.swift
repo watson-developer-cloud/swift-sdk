@@ -77,7 +77,7 @@ public class LanguageTranslation {
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, contentType: ContentType.Text, completionHandler: {response in
             print(response.data)
-            if (response.statusCode < 0) {
+            if (response.statusCode > 299) {
                 // this results with an NSError and status and status info contain the information along with response data acting as 
                 // the full object for reference.
                 Log.sharedLogger.error("Error response: \(response.status)")

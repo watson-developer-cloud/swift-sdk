@@ -11,6 +11,21 @@
 import SwiftyJSON
 import Foundation
 
+private enum CoreResponseEnum: String {
+    case Status = "status"
+    case StatusInfo = "statusInfo"
+    case ErrorCode = "error_code"
+    case ErrorMessage = "error_message"
+    case Ok = "Ok"
+    case Error = "Error"
+    case Unknown = "Unknown"
+    case Empty = ""
+}
+
+/**
+*  The Main response back for Watson Core.  It will contain the status, status info
+   and the status code for the http response.
+*/
 public struct CoreResponse{
 
     /// The data returned by the server.
@@ -20,8 +35,14 @@ public struct CoreResponse{
     public let statusInfo: String
     public let statusCode: Int
 
+    /**
+    Initialize core response by the caller
     
-    
+    - parameter status:     Status of the http respose
+    - parameter statusInfo: Additional information that complements status
+    - parameter statusCode: Status code returned from HTTP response
+    - parameter data:       Payload returned from HTTP response
+    */
     init(status: String, statusInfo: String, statusCode: Int = 0, data: AnyObject = "") {
         self.status = status
         self.statusInfo = statusInfo
@@ -29,52 +50,48 @@ public struct CoreResponse{
         self.data = data
     }
     
+    /**
+    Initialize core response based on Aggregate anyObject passed in
+    
+    - parameter anyObject:  Aggregate data of status and payload to be
+    - parameter statusCode: Status code returned from HTTP response
+    */
     init(anyObject: AnyObject, statusCode: Int) {
-        //TODO: remove strings
+        self.statusCode = statusCode
+        self.data = anyObject
         
         if (anyObject is String) {
-            self.data = anyObject as! String
-            self.statusCode = statusCode
-            self.status = ""
-            self.statusInfo = ""
+            self.status = CoreResponseEnum.Empty.rawValue
+            self.statusInfo = CoreResponseEnum.Empty.rawValue
         }
         else if (anyObject is NSError) {
-            self.data = anyObject
             let nsError = (anyObject as! NSError)
             self.status = nsError.userInfo.description
             self.statusInfo = nsError.description
-            self.statusCode = nsError.code
+            
         }
         else {
-            var data = JSON(anyObject)
-            
+            var returnData = JSON(anyObject)
             // Alchemy
-            if let status = data["status"].string {
+            if let status = returnData[CoreResponseEnum.Status.rawValue].string {
                 self.status = status
-                self.statusInfo = data["statusInfo"].stringValue
-                self.data = anyObject
-                self.statusCode = statusCode
+                self.statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].stringValue
             }
             // Language
-            else if let error_message = data["error_message"].string {
-                self.status = String(error_message)
-                self.statusInfo = data["error_message"].stringValue
-                self.data = anyObject
-                self.statusCode = statusCode
+            else if let error_message = returnData[CoreResponseEnum.ErrorCode.rawValue].string {
+                self.status = error_message
+                self.statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].stringValue
             }
             // Something else so not sure what the object is
             else {
                 if (statusCode == 200) {
-                    status = "Ok"
+                    status = CoreResponseEnum.Ok.rawValue
                     statusInfo = ""
                 }
                 else {
-                    status = "Error"
-                    statusInfo = "Unknown"
+                    status = CoreResponseEnum.Error.rawValue
+                    statusInfo = CoreResponseEnum.Unknown.rawValue
                 }
-
-                self.data = anyObject
-                self.statusCode = statusCode
             }
         }
 

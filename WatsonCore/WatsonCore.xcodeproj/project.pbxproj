@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA51BCC7031001BF3CB /* CoreResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA61BCC7031001BF3CB /* CoreResult.swift */; settings = {ASSET_TAGS = (); }; };
-		31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */; settings = {ASSET_TAGS = (); }; };
 		31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FDC1BCF3F87002EA3F8 /* Log.swift */; settings = {ASSET_TAGS = (); }; };
 		31AC1FE31BCF400C002EA3F8 /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */; settings = {ASSET_TAGS = (); }; };
 		31AC1FE51BCF4243002EA3F8 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FE41BCF4243002EA3F8 /* Files.swift */; settings = {ASSET_TAGS = (); }; };
@@ -58,8 +56,6 @@
 
 /* Begin PBXFileReference section */
 		31383DA51BCC7031001BF3CB /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
-		31383DA61BCC7031001BF3CB /* CoreResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResult.swift; sourceTree = "<group>"; };
-		31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResultStatus.swift; sourceTree = "<group>"; };
 		31AC1FDC1BCF3F87002EA3F8 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
 		31AC1FE41BCF4243002EA3F8 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
@@ -133,8 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				31383DA51BCC7031001BF3CB /* CoreResponse.swift */,
-				31383DA61BCC7031001BF3CB /* CoreResult.swift */,
-				31383DAD1BCC71F6001BF3CB /* CoreResultStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,7 +320,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				31D661851BC21E8100506913 /* AlchemyConstants.swift in Sources */,
-				31383DAE1BCC71F6001BF3CB /* CoreResultStatus.swift in Sources */,
 				31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */,
 				7A1FCDEB1BA9ED870090E1EB /* WatsonGateway.swift in Sources */,
 				7AC3348F1BAC7FEA00F2C664 /* WatsonAuthentication.swift in Sources */,
@@ -335,7 +328,6 @@
 				31AC1FE81BCF42D6002EA3F8 /* String.swift in Sources */,
 				31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */,
 				BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */,
-				31383DA81BCC7031001BF3CB /* CoreResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

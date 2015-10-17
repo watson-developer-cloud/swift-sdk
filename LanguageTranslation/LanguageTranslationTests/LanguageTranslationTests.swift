@@ -38,22 +38,22 @@ class LanguageTranslationTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
-//    func testIdentify() {
-//        let nilExpectation = expectationWithDescription("Nil")
-//        let validExpectation = expectationWithDescription("Valid")
-//        
-//        service.identify("", callback:{(language:String?) in
-//            XCTAssertNil(language, "Expected nil result when passing in an empty string to identify()")
-//            nilExpectation.fulfill()
-//        })
-//        
-//        service.identify("hola", callback:{(language:String?) in
-//            XCTAssertEqual(language!,"es","Expected 'hola' to be identified as 'es' language")
-//            validExpectation.fulfill()
-//        })
-//
-//        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-//    }
+    func testIdentify() {
+        let nilExpectation = expectationWithDescription("Nil")
+        let validExpectation = expectationWithDescription("Valid")
+        
+        service.identify("", callback:{(language:String?) in
+            XCTAssertNil(language, "Expected nil result when passing in an empty string to identify()")
+            nilExpectation.fulfill()
+        })
+        
+        service.identify("hola", callback:{(language:String?) in
+            XCTAssertEqual(language!,"es","Expected 'hola' to be identified as 'es' language")
+            validExpectation.fulfill()
+        })
+
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
     
     func testTranslation() {
         let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")

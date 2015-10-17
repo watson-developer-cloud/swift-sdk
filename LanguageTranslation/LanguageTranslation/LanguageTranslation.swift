@@ -67,20 +67,32 @@ public class LanguageTranslation {
     public func identify(text:String, callback: (String?)->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
         
-        let encodedText = text.dataUsingEncoding(NSUTF8StringEncoding)
+       // let encodedText = text.dataUsingEncoding(NSUTF8StringEncoding)
         //TODO: Set request body to encodedText
         //TODO: Set Content-type header to "text/plain"
         //TODO: Set Accept header to "text/plain"
+
+        var params = Dictionary<String,String>()
+        params.updateValue(text, forKey: "text")
         
-        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: [:], completionHandler: {response in
-            //TODO: Confirm that CoreResponse object is returning the language on the response.data object directly. Previously the language was retrieved through response["rawData"]
-            callback(response.data as! String?)
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, contentType: ContentType.Text, completionHandler: {response in
+            print(response.data)
+            if (response.statusCode < 0) {
+                // this results with an NSError and status and status info contain the information along with response data acting as 
+                // the full object for reference.
+                Log.sharedLogger.error("Error response: \(response.status)")
+                callback(nil)
+            }
+            else {
+                callback(response.data as! String?)
+            }
+
         })
     }
     
 //    /**
 //    Identify the language in which text is written
-//    
+//
 //    - parameter text:     the text to identify
 //    - parameter callback: the callback method to be invoked with the identified language
 //    */

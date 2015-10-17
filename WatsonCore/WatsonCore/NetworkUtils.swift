@@ -184,7 +184,7 @@ public class NetworkUtils {
             return [:]
         }
         
-        guard (header.updateValue(ContentType.JSON.rawValue, forKey: _httpAcceptHeader) == nil) else {
+        guard (header.updateValue(ContentType.Text.rawValue, forKey: _httpAcceptHeader) == nil) else {
             Log.sharedLogger.error("Error adding Accept info in header")
             return [:]
         }
@@ -196,8 +196,11 @@ public class NetworkUtils {
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
             .validate(statusCode: 200..<300)
             .responseJSON {response in
-                completionHandler( returnValue: self.handleResponse(response))
-        }
+                if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
+            }
+            .responseString {response in
+                if(contentType == ContentType.Text) { completionHandler( returnValue: self.handleResponse(response)) }
+            }
     }
     
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
@@ -217,13 +220,11 @@ public class NetworkUtils {
                         
                         do {
                             let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
-                            let coreResultStatus = CoreResultStatus(status: "Ok", statusInfo: "")
-                            let coreResponse = CoreResponse.init(data: json!, coreResultStatus: coreResultStatus)
+                            let coreResponse = CoreResponse(anyObject: json!, statusCode: response.response!.statusCode)
                             completionHandler(returnValue: coreResponse)
                         }
                         catch let error as NSError {
-                            let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-                            let coreResponse = CoreResponse.init(data: response.data!, coreResultStatus: coreResultStatus)
+                            let coreResponse = CoreResponse(anyObject: error, statusCode: response.response!.statusCode)
                             completionHandler(returnValue: coreResponse)
                         }
                     }
@@ -259,22 +260,36 @@ public class NetworkUtils {
         }
     }
     
-    
-    public func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
+    private func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let data):
-            Log.sharedLogger.info("Success")
-            let coreResponse = CoreResponse(anyObject: data)
+            Log.sharedLogger.info("Successfully Response")
+            let coreResponse = CoreResponse(anyObject: data, statusCode: (response.response?.statusCode)!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.info("Failure")
-            let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-            let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+            Log.sharedLogger.info("Failure Response")
+            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
+            return coreResponse
+        }
+    }
+
+    private func handleResponse(response: Response<String, NSError>)->CoreResponse {
+        
+        let statusCode = response.response?.statusCode
+
+        switch response.result {
+        case .Success(let result):
+            Log.sharedLogger.info("Successfully Response")
+            let coreResponse = CoreResponse(anyObject: result, statusCode: (response.response?.statusCode)!)
+            return coreResponse
+        case .Failure(let error):
+            Log.sharedLogger.info("Failure Response")
+            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
             return coreResponse
         }
         
     }
-
+    
     /**
     Invoke rest operation asynchronously and then call callback handler
     - parameter request:  Request object populated from buildRequest()

@@ -43,15 +43,10 @@ public class AlchemyCoreImpl {
                 switch response.result {
                 case .Success(let data):
                     Log.sharedLogger.info("Validation Successful")
-                    let coreResponse = CoreResponse(anyObject: data)
+                    let coreResponse = CoreResponse(anyObject: data, statusCode: response.response!.statusCode)
                     completionHandler(returnValue: coreResponse)
-                    
                 case .Failure(let error):
-                    //  callback()
-                    //completionHandler(error)
-                    // TODO create actual error code enum
-                    let coreResultStatus = CoreResultStatus(status: "Error", statusInfo: error.description)
-                    let coreResponse = CoreResponse.init(data: "", coreResultStatus: coreResultStatus)
+                    let coreResponse =  CoreResponse.init(anyObject: error, statusCode: response.response!.statusCode)
                     completionHandler(returnValue: coreResponse)
                 } }
     }

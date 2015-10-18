@@ -16,7 +16,6 @@ import Foundation
 // API Contract
 public protocol VisionService
 {
-    init(apiKey: String)
     
     func urlGetRankedImageKeywords(url: String, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (returnValue: ImageKeyWords) ->() )
     
@@ -24,12 +23,14 @@ public protocol VisionService
     //func imageGetRankedImageKeywords(base64Image: String, mode: Constants.OutputMode)
 }
 
-public class VisionImpl: AlchemyCoreImpl, VisionService {
+public class VisionImpl: VisionService {
     
     private let TAG = "[VISION] "
     
     /// your private api key
     let _apiKey : String
+    
+    private let utils: NetworkUtils
     
     /**
     Initialization of the main Alchemy service class
@@ -37,11 +38,10 @@ public class VisionImpl: AlchemyCoreImpl, VisionService {
     - parameter apiKey: your private api key
     
     */
-    public required init(apiKey: String) {
+    public init(apiKey: String) {
         
         _apiKey = apiKey
-        //utils = NetworkUtils(type: ServiceType.Alchemy)
-        super.init(apiKey: apiKey)
+        utils = NetworkUtils(type: ServiceType.Alchemy)
     }
     
     
@@ -55,7 +55,7 @@ public class VisionImpl: AlchemyCoreImpl, VisionService {
     */
     public func urlGetRankedImageKeywords(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
         
-        Log.sharedLogger.debug("enter urlGetRankedImageKeywords")
+        Log.sharedLogger.debug("Entered urlGetRankedImageKeywords")
         
         let visionUrl = buildVisionURL(AlchemyConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
         
@@ -72,8 +72,7 @@ public class VisionImpl: AlchemyCoreImpl, VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        self.analyze(visionUrl, method: .POST, parameters: params, completionHandler: {response in
-            Log.sharedLogger.info("need exception handler")
+        utils.performAPIRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
         })

@@ -169,8 +169,13 @@ public class NetworkUtils {
         return _protocol + "://" + _host + endpoint
     }
     
-    // TODO may need to build this out more but this should work for now
-    // I really do not like the multiple return points but seems it is needed with guard
+    /**
+    This helper function will manipulate the header as needed for a proper payload
+    
+    - parameter contentType: Changes the input to text or JSON.  Default is JSON
+    
+    - returns: The manipulated string for properly invoking the web call
+    */
     private func buildHeader(contentType: ContentType = ContentType.JSON)-> [String: String]  {
         guard apiKey != nil else {
             Log.sharedLogger.error("No apiKey present to build header")
@@ -192,8 +197,19 @@ public class NetworkUtils {
         return header
     }
     
+    /**
+    This Core call will make a basic authorization request by adding header information as part of the authentication.
+    
+    - parameter url:               The full url to use for the web REST call
+    - parameter method:            This indicates the method type such as POST or GET
+    - parameter parameters:        A dictionary of parameters to be using in the URL
+    - parameter contentType:       This will switch the input and outout request from text or json
+    - parameter completionHandler: The handler invoked when the function is completed.  It will contain a payload 
+                                   of valid data or NSError type all wrapped into the CoreResponse
+    */
     public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, contentType: ContentType = ContentType.JSON, completionHandler: (returnValue: CoreResponse) -> ()) {
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
+            // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
@@ -203,6 +219,15 @@ public class NetworkUtils {
             }
     }
     
+    // TODO: currently used for Alchemy since header manipulation is not needed that I know of yet.  May need to build out
+    public func performAPIRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Alamofire.request(method, url, parameters: parameters)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                completionHandler( returnValue: self.handleResponse(response))
+        }
+    }
+
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(),
             multipartFormData: { multipartFormData in
@@ -246,14 +271,6 @@ public class NetworkUtils {
                     Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
                 }
             }
-            .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                completionHandler( returnValue: self.handleResponse(response))
-        }
-    }
-    
-    public func performRequestAPI(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        Alamofire.request(method, url, parameters: parameters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 completionHandler( returnValue: self.handleResponse(response))
@@ -384,5 +401,24 @@ public class NetworkUtils {
             Log.sharedLogger.warning("\(self.TAG) dictionaryToJSON(): Could not convert dictionary object to JSON. \(error.localizedDescription)")
         }
         return nil
+    }
+    
+    public func getEndpoints() -> JSON {
+        
+        var jsonObj: JSON = JSON.null
+        if let path = NSBundle.mainBundle().pathForResource("alchemy_endpoints", ofType: "json") {
+            do {
+                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                jsonObj = JSON(data)
+                if jsonObj == JSON.null {
+                    print("could not get json from file, make sure that file contains valid json.")
+                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } else {
+            print("Invalid filename/path.")
+        }
+        return jsonObj
     }
 }

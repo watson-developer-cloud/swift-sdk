@@ -8,6 +8,9 @@
 import Foundation
 import XCGLogger
 
+/// Singleton Log Helper which uses XCGLogger as its core functionality
+/// To change the log level from defaults then update the swift compiler options with -DDEBUG to turn on verbose logging
+/// You can temporarily update the otherLogFileLocation to place the log file at your discretion but please do not check it in
 public class Log {
     
     // privates

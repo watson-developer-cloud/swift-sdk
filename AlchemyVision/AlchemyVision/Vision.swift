@@ -41,6 +41,7 @@ public class VisionImpl: VisionService {
     public init(apiKey: String) {
         
         _apiKey = apiKey
+        // TODO: investigate to see if this is really needed
         utils = NetworkUtils(type: ServiceType.Alchemy)
     }
     
@@ -72,7 +73,8 @@ public class VisionImpl: VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        utils.performAPIRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
+        utils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
+            Log.sharedLogger.debug("Entered urlGetRankedImageKeywords.callback")
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
         })

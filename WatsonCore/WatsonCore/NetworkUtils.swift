@@ -177,6 +177,7 @@ public class NetworkUtils {
     - returns: The manipulated string for properly invoking the web call
     */
     private func buildHeader(contentType: ContentType = ContentType.JSON)-> [String: String]  {
+        Log.sharedLogger.debug("Core: Entered buildHeader")
         guard apiKey != nil else {
             Log.sharedLogger.error("No apiKey present to build header")
             return [:]
@@ -198,37 +199,59 @@ public class NetworkUtils {
     }
     
     /**
-    This Core call will make a basic authorization request by adding header information as part of the authentication.
+    This core function will make a basic authorization request by adding header information as part of the authentication.
     
-    - parameter url:               The full url to use for the web REST call
-    - parameter method:            This indicates the method type such as POST or GET
-    - parameter parameters:        A dictionary of parameters to be using in the URL
+    - parameter url:               The full URL to use for the web REST call
+    - parameter method:            Indicates the method type such as POST or GET
+    - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter contentType:       This will switch the input and outout request from text or json
-    - parameter completionHandler: The handler invoked when the function is completed.  It will contain a payload 
-                                   of valid data or NSError type all wrapped into the CoreResponse
+    - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, contentType: ContentType = ContentType.JSON, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest")
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
+                Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
             }
             .responseString {response in
+                Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest.responseString")
                 if(contentType == ContentType.Text) { completionHandler( returnValue: self.handleResponse(response)) }
             }
     }
     
-    // TODO: currently used for Alchemy since header manipulation is not needed that I know of yet.  May need to build out
-    public func performAPIRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+    /**
+    This core function will perform a request passing in parameters.  This does not manipulate the request header or request body
+    
+    - parameter url:               The full URL to use for the web REST call
+    - parameter method:            Indicates the method type such as POST or GET
+    - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
+    - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
+    */
+    public func performRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Log.sharedLogger.debug("CORE: Entered performRequest")
         Alamofire.request(method, url, parameters: parameters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                Log.sharedLogger.debug("CORE: Entered performRequest.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
         }
     }
 
+    /**
+    This Core function will upload a file to the give URL.  The header is manipulated for authentication
+    TODO: this has the capability of uploading multiple files so this should be updated to take in a dictionary of fileURL,fielURLKey values
+    
+    - parameter url:               Full URL to use for the web REST call
+    - parameter fileURLKey:        Key used with the fileURL
+    - parameter fileURL:           File passed in as a NSURL
+    - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
+    - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
+    */
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart")
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(),
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: fileURL, name: fileURLKey)
@@ -238,11 +261,11 @@ public class NetworkUtils {
                 }
             },
             encodingCompletion: { encodingResult in
+                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion")
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
-                        Log.sharedLogger.debug("Response JSON Successful")
-                        
+                        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
                         do {
                             let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
                             let coreResponse = CoreResponse(anyObject: json!, statusCode: response.response!.statusCode)
@@ -260,47 +283,54 @@ public class NetworkUtils {
         )
     }
     
+    /**
+    This Core function will upload one file to the give URL.
+    
+    - parameter url:               Full URL to use for the web REST call
+    - parameter fileURL:           File passed in as a NSURL
+    - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
+    - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
+    */
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload")
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
             .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                 Log.sharedLogger.info("\(totalBytesWritten)")
-                
                 // This closure is NOT called on the main queue for performance
-                // reasons. To update your ui, dispatch to the main queue.
                 dispatch_async(dispatch_get_main_queue()) {
                     Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
                 }
             }
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
         }
     }
     
+    // TODO: Combine the to handleResponses
     private func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let data):
-            Log.sharedLogger.info("Successfully Response")
+            Log.sharedLogger.info("CORE: Successfully Response")
             let coreResponse = CoreResponse(anyObject: data, statusCode: (response.response?.statusCode)!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.info("Failure Response")
+            Log.sharedLogger.info("CORE: Failure Response")
             let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
             return coreResponse
         }
     }
 
+    // TODO: Combine the to handleResponses
     private func handleResponse(response: Response<String, NSError>)->CoreResponse {
-        
-        let statusCode = response.response?.statusCode
-
         switch response.result {
         case .Success(let result):
-            Log.sharedLogger.info("Successfully Response")
+            Log.sharedLogger.info("CORE: Successfully Response")
             let coreResponse = CoreResponse(anyObject: result, statusCode: (response.response?.statusCode)!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.info("Failure Response")
+            Log.sharedLogger.info("CORE: Failure Response")
             let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
             return coreResponse
         }

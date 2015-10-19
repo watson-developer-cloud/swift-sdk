@@ -189,7 +189,7 @@ public class NetworkUtils {
             return [:]
         }
         
-        guard (header.updateValue(ContentType.JSON.rawValue, forKey: _httpAcceptHeader) == nil) else {
+        guard (header.updateValue(contentType.rawValue, forKey: _httpAcceptHeader) == nil) else {
             Log.sharedLogger.error("Error adding Accept info in header")
             return [:]
         }
@@ -266,11 +266,11 @@ public class NetworkUtils {
                         Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
                         do {
                             let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
-                            let coreResponse = CoreResponse(anyObject: json!, responseStatusCode: response.response!.statusCode)
+                            let coreResponse = CoreResponse(anyObject: json!, statusCode: response.response!.statusCode)
                             completionHandler(returnValue: coreResponse)
                         }
                         catch let error as NSError {
-                            let coreResponse = CoreResponse(anyObject: error, responseStatusCode: response.response!.statusCode)
+                            let coreResponse = CoreResponse(anyObject: error, statusCode: response.response!.statusCode)
                             completionHandler(returnValue: coreResponse)
                         }
                     }
@@ -316,11 +316,11 @@ public class NetworkUtils {
         switch response.result {
         case .Success(let data):
             Log.sharedLogger.info("CORE: Successfully Response")
-            let coreResponse = CoreResponse(anyObject: data, responseStatusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: data, statusCode: (response.response?.statusCode)!)
             return coreResponse
         case .Failure(let error):
             Log.sharedLogger.info("CORE: Failure Response")
-            let coreResponse = CoreResponse(anyObject: error, responseStatusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
             return coreResponse
         }
     }
@@ -330,11 +330,11 @@ public class NetworkUtils {
         switch response.result {
         case .Success(let result):
             Log.sharedLogger.info("CORE: Successfully Response")
-            let coreResponse = CoreResponse(anyObject: result, responseStatusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: result, statusCode: (response.response?.statusCode)!)
             return coreResponse
         case .Failure(let error):
             Log.sharedLogger.info("CORE: Failure Response")
-            let coreResponse = CoreResponse(anyObject: error, responseStatusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
             return coreResponse
         }
         

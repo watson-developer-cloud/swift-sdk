@@ -16,7 +16,12 @@ public class AlchemyConstants
 
     public static let Host = "http://gateway-a.watsonplatform.net"
     public static let Base = "/calls"
-    public static let VisionPrefixURL = "/url/"
+
+    
+    public enum VisionPrefix: String {
+        case URL = "/url/"
+        case Image = "/image/"
+    }
     
     // Image Link Extraction
     public enum ImageLinkExtraction: String {
@@ -86,5 +91,6 @@ public class AlchemyConstants
         case OutputMode = "outputMode"
         case ForceShowAll = "forceShowAll"
         case KnowledgeGraph = "knowledgeGraph"
+        case ImagePostMode = "imagePostMode"
     }
 }

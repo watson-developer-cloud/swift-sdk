@@ -33,7 +33,8 @@ public struct CoreResponse{
 
     public let status: String
     public let statusInfo: String
-    public let statusCode: Int
+    public let responseStatusCode: Int
+    public let serviceStatusCode: Int
 
     /**
     Initialize core response by the caller
@@ -43,10 +44,11 @@ public struct CoreResponse{
     - parameter statusCode: Status code returned from HTTP response
     - parameter data:       Payload returned from HTTP response
     */
-    init(status: String, statusInfo: String, statusCode: Int = 0, data: AnyObject = "") {
+    init(status: String, statusInfo: String, responseStatusCode: Int = 0, serviceStatusCode: Int = 0, data: AnyObject = "") {
         self.status = status
         self.statusInfo = statusInfo
-        self.statusCode = statusCode
+        self.responseStatusCode = responseStatusCode
+        self.serviceStatusCode = serviceStatusCode
         self.data = data
     }
     
@@ -56,18 +58,20 @@ public struct CoreResponse{
     - parameter anyObject:  Aggregate data of status and payload to be
     - parameter statusCode: Status code returned from HTTP response
     */
-    init(anyObject: AnyObject, statusCode: Int) {
-        self.statusCode = statusCode
+    init(anyObject: AnyObject, responseStatusCode: Int) {
+        self.responseStatusCode = responseStatusCode
         self.data = anyObject
-        
+        Log.sharedLogger.verbose("\(anyObject)")
         if (anyObject is String) {
             self.status = CoreResponseEnum.Empty.rawValue
             self.statusInfo = CoreResponseEnum.Empty.rawValue
+            self.serviceStatusCode = 0
         }
         else if (anyObject is NSError) {
             let nsError = (anyObject as! NSError)
             self.status = nsError.userInfo.description
             self.statusInfo = nsError.description
+            self.serviceStatusCode = 0
             
         }
         else {
@@ -76,21 +80,26 @@ public struct CoreResponse{
             if let status = returnData[CoreResponseEnum.Status.rawValue].string {
                 self.status = status
                 self.statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].stringValue
+                self.serviceStatusCode = 0
             }
             // Language
-            else if let error_message = returnData[CoreResponseEnum.ErrorCode.rawValue].string {
-                self.status = error_message
+            else if let error_message = returnData[CoreResponseEnum.ErrorCode.rawValue].int {
+                self.status = error_message.description
                 self.statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].stringValue
+                self.serviceStatusCode = error_message
             }
             // Something else so not sure what the object is
             else {
-                if (statusCode == 200) {
+                if (responseStatusCode == 200) {
                     status = CoreResponseEnum.Ok.rawValue
                     statusInfo = ""
+                    self.serviceStatusCode = 0
                 }
                 else {
+                    Log.sharedLogger.error("\(anyObject)")
                     status = CoreResponseEnum.Error.rawValue
                     statusInfo = CoreResponseEnum.Unknown.rawValue
+                    self.serviceStatusCode = 0
                 }
             }
         }

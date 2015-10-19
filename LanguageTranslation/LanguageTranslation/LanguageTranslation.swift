@@ -69,15 +69,13 @@ public class LanguageTranslation {
         
        // let encodedText = text.dataUsingEncoding(NSUTF8StringEncoding)
         //TODO: Set request body to encodedText
-        //TODO: Set Content-type header to "text/plain"
-        //TODO: Set Accept header to "text/plain"
 
         var params = Dictionary<String,String>()
         params.updateValue(text, forKey: "text")
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, contentType: ContentType.Text, completionHandler: {response in
             print(response.data)
-            if (response.statusCode > 299) {
+            if (response.responseStatusCode > 299) {
                 // this results with an NSError and status and status info contain the information along with response data acting as 
                 // the full object for reference.
                 Log.sharedLogger.error("Error response: \(response.status)")
@@ -272,6 +270,7 @@ public class LanguageTranslation {
 
         let request = utils.buildEndpoint(path)
         utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
+            
             let data = JSON(response.data)
             var test = TranslationModel(anyObject: response.data)
             callback(response)

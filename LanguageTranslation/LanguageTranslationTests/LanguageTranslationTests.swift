@@ -118,6 +118,22 @@ class LanguageTranslationTests: XCTestCase {
 
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+
+    
+    func testDeleteModel() {
+        let unauthorizedExpectation = expectationWithDescription("Unauthorized expectation")
+        
+        //TODO: Check that 400 error is returned
+        //TODO: Ensure that 400 error is logged
+        
+        service.deleteModel("en-es", callback:{response in
+            print(response)
+            //XCTAssertEqual(response,400,"Expected unathorized exception when trying to delete an IBM model")
+            unauthorizedExpectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
     
     
     func testGetModel() {

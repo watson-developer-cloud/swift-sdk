@@ -290,6 +290,20 @@ public class LanguageTranslation {
         return nil
     }
     
+    /**
+    Delete a translation model
+    
+    - parameter modelID:       The model identifier
+    - parameter callback:     The callback method to invoke after the response is received
+    */
+    public func deleteModel(modelID: String, callback: ()->())
+    {
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
+        
+        utils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], completionHandler: {response in
+            return callback()
+        })
+    }
     
     /**
     Converts a dictionary of strings returned by the Watson service to a native model object
@@ -318,7 +332,5 @@ public class LanguageTranslation {
             return nil
         }
     }
-    
-    //TODO: delete models
-    
+
 }

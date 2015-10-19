@@ -12,10 +12,16 @@ import SwiftyJSON
 import Foundation
 
 private enum CoreResponseEnum: String {
-    case Status = "status"
-    case StatusInfo = "statusInfo"
-    case ErrorCode = "error_code"
-    case ErrorMessage = "error_message"
+    case BadRequest = "Bad Request"
+    case Unauthorized = "Unauthorized"
+    case Forbidden = "Forbidden"
+    case NotFound = "Not Found"
+    case InternalError = "Internal Server Error"
+
+  //  case Status = "status"
+  //  case StatusInfo = "statusInfo"
+  //  case ErrorCode = "error_code"
+  //  case ErrorMessage = "error_message"
     case Ok = "Ok"
     case Error = "Error"
     case Unknown = "Unknown"
@@ -31,10 +37,10 @@ public struct CoreResponse{
     /// The data returned by the server.
     public let data: AnyObject!
 
-    public let status: String
+    // public let status: String
     public let statusInfo: String
-    public let responseStatusCode: Int
-    public let serviceStatusCode: Int
+    public let statusCode: Int
+    //public let serviceStatusCode: Int
 
     /**
     Initialize core response by the caller
@@ -44,11 +50,9 @@ public struct CoreResponse{
     - parameter statusCode: Status code returned from HTTP response
     - parameter data:       Payload returned from HTTP response
     */
-    init(status: String, statusInfo: String, responseStatusCode: Int = 0, serviceStatusCode: Int = 0, data: AnyObject = "") {
-        self.status = status
+    init(status: String, statusInfo: String, statusCode: Int = 0, data: AnyObject = "") {
         self.statusInfo = statusInfo
-        self.responseStatusCode = responseStatusCode
-        self.serviceStatusCode = serviceStatusCode
+        self.statusCode = statusCode
         self.data = data
     }
     
@@ -58,10 +62,29 @@ public struct CoreResponse{
     - parameter anyObject:  Aggregate data of status and payload to be
     - parameter statusCode: Status code returned from HTTP response
     */
-    init(anyObject: AnyObject, responseStatusCode: Int) {
-        self.responseStatusCode = responseStatusCode
+    init(anyObject: AnyObject, statusCode: Int) {
+        self.statusCode = statusCode
         self.data = anyObject
         Log.sharedLogger.verbose("\(anyObject)")
+        
+        switch (statusCode) {
+            case 200:
+                statusInfo = CoreResponseEnum.Ok.rawValue
+            case 400:
+                statusInfo = CoreResponseEnum.BadRequest.rawValue
+            case 401:
+                statusInfo = CoreResponseEnum.Unauthorized.rawValue
+            case 403:
+                statusInfo = CoreResponseEnum.Forbidden.rawValue
+            case 404:
+                statusInfo = CoreResponseEnum.NotFound.rawValue
+            case 500:
+                statusInfo = CoreResponseEnum.InternalError.rawValue
+            default:
+                statusInfo = CoreResponseEnum.Unknown.rawValue
+        }
+        
+        /*
         if (anyObject is String) {
             self.status = CoreResponseEnum.Empty.rawValue
             self.statusInfo = CoreResponseEnum.Empty.rawValue
@@ -102,7 +125,7 @@ public struct CoreResponse{
                     self.serviceStatusCode = 0
                 }
             }
-        }
+        } */
 
     }
 }

@@ -35,6 +35,7 @@ class LanguageTranslationTests: XCTestCase {
             XCTAssertGreaterThan(languages!.count,0,"Expected at least 1 identifiable language to be returned")
             expectation.fulfill()
         })
+        
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
@@ -93,48 +94,49 @@ class LanguageTranslationTests: XCTestCase {
             targetExpectation.fulfill()
         })
         
-        
         service.getModels(defaultModel:true, callback:{(models:[TranslationModel]) in
             XCTAssertEqual(models.count,8,"Expected exactly 8 models to be returned")
             defaultModelExpectation.fulfill()
         })
-
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
-
     
     func testCreateModel() {
-        let expectation2 = expectationWithDescription("Valid parameters")
+        let deleteExpectation = self.expectationWithDescription("Delete model")
 
-        let testBundle = NSBundle(forClass: self.dynamicType)
-        let fileURL = testBundle.URLForResource("glossary", withExtension: "tmx")
+        let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("glossary", withExtension: "tmx")
+        print("URL: " + fileURL!.URLString)
         XCTAssertNotNil(fileURL)
 
-        service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!, callback:{ response in
-            //XCTAssertNotNil(modelID, "Model ID returned by create model should not be nil")
-            expectation2.fulfill()
-        })
+        service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!, callback:{(model:TranslationModel?) in
+            XCTAssertNotNil(model, "Model returned by create model should not be nil")
 
+            //Delete model after creating it
+            self.service.deleteModel(model!.modelID, callback:{response in
+                deleteExpectation.fulfill()
+            })
+        })
+        
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
 
-    
     func testDeleteModel() {
-        let unauthorizedExpectation = expectationWithDescription("Unauthorized expectation")
+        let unauthorizedDeleteExpectation = expectationWithDescription("Unauthorized expectation")
+        let missingDeleteExpectation = expectationWithDescription("Missing delete expectation")
         
-        //TODO: Check that 400 error is returned
-        //TODO: Ensure that 400 error is logged
-        
-        service.deleteModel("en-es", callback:{response in
-            print(response)
-            //XCTAssertEqual(response,400,"Expected unathorized exception when trying to delete an IBM model")
-            unauthorizedExpectation.fulfill()
+        service.deleteModel("en-es", callback:{(modelDeleted:Bool?) in
+            XCTAssertFalse(modelDeleted!,"Expected unauthorized exception when trying to delete an IBM model")
+            unauthorizedDeleteExpectation.fulfill()
+        })
+
+        service.deleteModel("qwerty", callback:{(modelDeleted:Bool?) in
+            XCTAssertFalse(modelDeleted!,"Expected missing delete exception when trying to delete a nonexistent model")
+            missingDeleteExpectation.fulfill()
         })
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
-    
     
     func testGetModel() {
         let expectation1 = expectationWithDescription("Missing model")
@@ -152,6 +154,4 @@ class LanguageTranslationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
-    
-    
 }

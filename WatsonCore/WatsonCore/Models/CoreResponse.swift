@@ -11,7 +11,7 @@
 import SwiftyJSON
 import Foundation
 
-private enum CoreResponseEnum: String {
+public enum CoreResponseEnum: String {
     case BadRequest = "Bad Request"
     case Unauthorized = "Unauthorized"
     case Forbidden = "Forbidden"

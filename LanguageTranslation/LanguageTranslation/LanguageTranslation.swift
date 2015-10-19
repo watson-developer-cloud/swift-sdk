@@ -29,12 +29,8 @@ public class LanguageTranslation {
     
     */
     public init(username:String,password:String) {
-        //TODO: Handle 401 errors (no or wrong username/password)
         utils.setUsernameAndPassword(username,password:password)
-        //TODO: Handle edge case where language list is not yet initialized by the time the user calls translate()
-        //getIdentifiableLanguages({ self._languages = $0 })
     }
-
 
     /**
     Retrieves the list of identifiable languages
@@ -67,15 +63,11 @@ public class LanguageTranslation {
     public func identify(text:String, callback: (String?)->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
         
-       // let encodedText = text.dataUsingEncoding(NSUTF8StringEncoding)
-        //TODO: Set request body to encodedText
-
         var params = Dictionary<String,String>()
         params.updateValue(text, forKey: "text")
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, contentType: ContentType.Text, completionHandler: {response in
-            print(response.data)
-            if (response.statusCode > 299) {
+            if (response.statusCode >= 300) {
                 // this results with an NSError and status and status info contain the information along with response data acting as 
                 // the full object for reference.
                 Log.sharedLogger.error("Error response: \(response.statusInfo)")
@@ -84,44 +76,8 @@ public class LanguageTranslation {
             else {
                 callback(response.data as! String?)
             }
-
         })
     }
-    
-//    /**
-//    Identify the language in which text is written
-//
-//    - parameter text:     the text to identify
-//    - parameter callback: the callback method to be invoked with the identified language
-//    */
-//    public func identify(text:String, callback: (String?)->()) {
-//        let path = _serviceURL + "/v2/identify"
-//        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: text.dataUsingEncoding(NSUTF8StringEncoding), contentType: ContentType.Text, accept: ContentType.Text)
-//        
-//        utils.performRequest(request!, callback: {response, error in
-//            if response == nil {
-//                Log.sharedLogger.severe("\(self.TAG) identify(): nil response")
-//                callback(nil)
-//            } else if let error_message = response["error_message"] as? String {
-//                Log.sharedLogger.severe("\(self.TAG) identify(): \(error_message)")
-//                callback(nil)
-//            }
-//            else {
-//                guard let rawData = response["rawData"] as! NSData? else {
-//                    Log.sharedLogger.warning("\(self.TAG) identify(): expected to find rawData in response")
-//                    callback(nil)
-//                    return
-//                }
-//                guard let language = NSString(data: rawData, encoding: NSUTF8StringEncoding) as String? else {
-//                    Log.sharedLogger.warning("\(self.TAG) identify(): error converting data to string")
-//                    callback(nil)
-//                    return
-//                }
-//                callback(language)
-//            }
-//        })
-//    }
-    
 
     /**
     Translate text using source and target languages
@@ -247,7 +203,6 @@ public class LanguageTranslation {
             return callback(self.dictionaryToModel(JSON(response.data)))
         })
     }
-        
     
     /**
     Uploads a TMX glossary file on top of a domain to customize a translation model.
@@ -257,9 +212,8 @@ public class LanguageTranslation {
     - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
     - parameter callback:           Returns the created model
     */
-    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (CoreResponse?)->())
+    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?)->())
     {
-        //TODO: Return a model rather than a model ID
         let path = _serviceURL + "/v2/models"
         
         var queryParams = Dictionary<String,String>()
@@ -270,38 +224,23 @@ public class LanguageTranslation {
 
         let request = utils.buildEndpoint(path)
         utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
-            
-            let data = JSON(response.data)
-            var test = TranslationModel(anyObject: response.data)
-            callback(response)
+            callback(self.dictionaryToModel(JSON(response.data)))
         })
     }
-    
-    private func readForcedGlossary(path:String) -> String? {
-        do {
-            let data = try NSData(contentsOfFile: path)
-            let encodedContent = data?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            return encodedContent
-//            let fileContent = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-            //return fileContent as String
-        } catch {
-            
-        }
-        return nil
-    }
-    
+        
     /**
     Delete a translation model
     
     - parameter modelID:       The model identifier
-    - parameter callback:     The callback method to invoke after the response is received
+    - parameter callback:     The callback method to invoke after the response is received, returns true if delete is successful
     */
-    public func deleteModel(modelID: String, callback: ()->())
+    public func deleteModel(modelID: String, callback: (Bool?)->())
     {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
         
         utils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], completionHandler: {response in
-            return callback()
+            print(response)
+            return callback(response.statusInfo == CoreResponseEnum.Ok.rawValue)
         })
     }
     

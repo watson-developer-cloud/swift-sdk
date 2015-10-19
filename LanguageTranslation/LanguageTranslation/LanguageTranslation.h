@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double LanguageTranslationVersionNumber;
 FOUNDATION_EXPORT const unsigned char LanguageTranslationVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <LanguageTranslation/PublicHeader.h>
-
-

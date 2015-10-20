@@ -9,6 +9,7 @@
 import WatsonCore
 import Foundation
 import SwiftyJSON
+import Alamofire
 
  /// The IBM Watson Language Translation service translates text from one language
  /// to another and identifies the language in which text is written.
@@ -113,28 +114,27 @@ public class LanguageTranslation {
         
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/translate")
         
-        let dict = NSMutableDictionary()
+        var params = [String : NSObject]()
+
         if let source = source {
-            dict.setObject(source, forKey: LanguageTranslationConstants.source)
+            params[LanguageTranslationConstants.source] = source
         }
         if let target = target {
-            dict.setObject(target, forKey: LanguageTranslationConstants.target)
+            params[LanguageTranslationConstants.target] = target
         }
         if let modelID = modelID {
-          dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
+            params[LanguageTranslationConstants.modelID] = modelID
         }
-
-        var json = JSON(dict)
-        json["text"].arrayObject = text
-
-        //TODO: Update method of sending body, currently does not work
-        var params = Dictionary<String,String>()
-        params.updateValue(String(json), forKey: "body")
         
-        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, completionHandler: {response in
-            //TODO: Parse response data
-            let json = JSON(response.data)
-            callback([])
+        params["text"] = text
+        
+        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, completionHandler: {response in
+            var translations : [String] = []
+            let json = JSON(response.data)["translations"]
+            for (_,subJson):(String, JSON) in json {
+                translations.append(subJson["translation"].stringValue)
+            }
+            callback(translations)
         })
     }
     

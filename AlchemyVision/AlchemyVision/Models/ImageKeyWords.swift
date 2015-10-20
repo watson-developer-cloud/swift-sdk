@@ -10,16 +10,10 @@ import Foundation
 import SwiftyJSON
 import WatsonCore
 
-
 private enum ImageKeyWordsEnum: String {
     case ImageKeywords = "imageKeywords"
-    case Text = "text"
-    case Score = "score"
     case TotalTransactions = "totalTransactions"
 }
-
-
-// ImageKeyWordsEnum
 
 public struct ImageKeyWords {
     
@@ -27,21 +21,18 @@ public struct ImageKeyWords {
     public let imageKeyWords: [ImageKeyWord]
     
     init(totalTransactions: Int, imageKeyWords: [ImageKeyWord]) {
-        
         self.totalTransactions = totalTransactions
         self.imageKeyWords = imageKeyWords
     }
     
     init(anyObject: AnyObject) {
-        
         var data = JSON(anyObject)
         
         var capturedImageKeywords: [ImageKeyWord] = []
         for (_,subJson):(String, JSON) in data[ImageKeyWordsEnum.ImageKeywords.rawValue] {
-            let imageKeyword = ImageKeyWord(text: subJson[ImageKeyWordsEnum.Text.rawValue].stringValue, score: subJson[ImageKeyWordsEnum.Score.rawValue].doubleValue)
+            let imageKeyword = ImageKeyWord(json: subJson)
             capturedImageKeywords.append(imageKeyword)
         }
-        
         self.imageKeyWords = capturedImageKeywords
         self.totalTransactions = data[ImageKeyWordsEnum.TotalTransactions.rawValue].intValue
     }

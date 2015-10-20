@@ -206,9 +206,9 @@ public class NetworkUtils {
     - parameter contentType:       This will switch the input and outout request from text or json
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, contentType: ContentType = ContentType.JSON, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: [String: AnyObject]?, contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL , completionHandler: (returnValue: CoreResponse) -> ()) {
         Log.sharedLogger.debug("\(TAG): Entered performBasicAuthRequest")
-        Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
+        Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: buildHeader(contentType) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
@@ -230,6 +230,8 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     public func performRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+    
+        
         Log.sharedLogger.debug("CORE: Entered performRequest")
         Alamofire.request(method, url, parameters: parameters)
             .validate(statusCode: 200..<300)

@@ -60,8 +60,9 @@ class LanguageTranslationTests: XCTestCase {
         let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
         let modelExpectation = expectationWithDescription("Model Translation")
         
-        service.translate(["Hello"],source:"en",target:"es",callback:{(text:[String]) in
-            XCTAssertEqual(text.first!,"Hola","Expected hello to translate to Hola")
+        service.translate(["Hello","Dog"],source:"en",target:"es",callback:{(text:[String]) in
+            XCTAssertEqual(text.first!,"Hola","Expected hello to translate to hola")
+            XCTAssertEqual(text.last!,"Perro","Expected dog to translate to perro")
             sourceTargetExpectation.fulfill()
         })
         

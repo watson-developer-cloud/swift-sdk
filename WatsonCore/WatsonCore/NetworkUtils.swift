@@ -229,7 +229,7 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performRequest(url: String, method: Alamofire.Method, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
     
         
         Log.sharedLogger.debug("CORE: Entered performRequest")

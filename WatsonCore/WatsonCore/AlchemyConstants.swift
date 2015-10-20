@@ -36,7 +36,7 @@ public class AlchemyConstants
     }
     
     // Face Detection
-    enum FaceDetection: String {
+    public enum FaceDetection: String {
         case URLGetRankedImageFaceTags = "URLGetRankedImageFaceTags"
         case ImageGetRankedImageFaceTags = "ImageGetRankedImageFaceTags"
     }

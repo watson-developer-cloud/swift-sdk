@@ -23,4 +23,8 @@ public struct LanguageTranslationConstants {
     
     //Used for getModels() query - can't use default for key, as this is a Swift reserved word
     static let defaultStr = "default"
+
+    //Used for translate() query
+    static let text = "text"
+
 }

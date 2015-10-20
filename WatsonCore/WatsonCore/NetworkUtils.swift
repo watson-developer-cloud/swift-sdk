@@ -320,7 +320,7 @@ public class NetworkUtils {
             return coreResponse
         case .Failure(let error):
             let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
-            Log.sharedLogger.error("\(self.TAG): Failure Response - \(coreResponse)")
+            Log.sharedLogger.error("\(self.TAG): Failure Response")
             return coreResponse
         }
     }
@@ -333,7 +333,7 @@ public class NetworkUtils {
             return coreResponse
         case .Failure(let error):
             let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
-            Log.sharedLogger.error("\(self.TAG): Failure Response - \(coreResponse)")
+            Log.sharedLogger.error("\(self.TAG): Failure Response")
             return coreResponse
         }
     }
@@ -414,24 +414,6 @@ public class NetworkUtils {
             }
         })
         task.resume()
-    }
-    
-    /**
-    Convert dictionary object to JSON
-    
-    - parameter dictionary: dictionary object to be converted
-    
-    - returns: NSData object populated with JSON
-    */
-    public func dictionaryToJSON(dictionary: NSDictionary) -> NSData? {
-        
-        do {
-            let json = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions())
-            return json
-        } catch let error as NSError {
-            Log.sharedLogger.warning("\(self.TAG) dictionaryToJSON(): Could not convert dictionary object to JSON. \(error.localizedDescription)")
-        }
-        return nil
     }
     
     public func getEndpoints() -> JSON {

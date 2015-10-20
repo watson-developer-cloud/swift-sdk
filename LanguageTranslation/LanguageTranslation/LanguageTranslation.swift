@@ -19,8 +19,6 @@ public class LanguageTranslation {
 
     private let utils = NetworkUtils()
 
-    private var _languages:[Language]?
-
     /**
     Initialize the language translation service
     
@@ -37,17 +35,17 @@ public class LanguageTranslation {
     
     - parameter callback: callback method that is invoked with the identifiable languages
     */
-    public func getIdentifiableLanguages(callback: ([Language]?)->()) {
+    public func getIdentifiableLanguages(callback: ([IdentifiableLanguage]?)->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identifiable_languages")
 
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
             let data = JSON(response.data)
             
-            var languages : [Language] = []
+            var languages : [IdentifiableLanguage] = []
             
             for (_,subJson):(String, JSON) in data["languages"] {
                 if let language = subJson["language"].string, name = subJson["name"].string {
-                    languages.append(Language(language: language, name: name))
+                    languages.append(IdentifiableLanguage(language: language, name: name))
                 }
             }
             callback(languages)
@@ -58,27 +56,28 @@ public class LanguageTranslation {
     Identify the language in which text is written
     
     - parameter text:     the text to identify
-    - parameter callback: the callback method to be invoked with the identified language
+    - parameter callback: the callback method to be invoked with an array of identified languages in descending order of confidence
     */
-    public func identify(text:String, callback: (String?)->()) {
+    public func identify(text:String, callback: ([IdentifiedLanguage])->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
+        
+        //TODO: Support confidence scores
         
         var params = Dictionary<String,String>()
         params.updateValue(text, forKey: "text")
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, contentType: ContentType.Text, completionHandler: {response in
-            if (response.statusCode >= 300) {
-                // this results with an NSError and status and status info contain the information along with response data acting as 
-                // the full object for reference.
-                Log.sharedLogger.error("Error response: \(response.statusInfo)")
-                callback(nil)
+        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
+            var languages:[IdentifiedLanguage] = []
+            let json = JSON(response.data)["languages"]
+            for (_,subJson):(String, JSON) in json {
+                let language = subJson["language"].stringValue
+                let confidence = subJson["confidence"].doubleValue
+                languages.append(IdentifiedLanguage(language:language, confidence:confidence))
             }
-            else {
-                callback(response.data as! String?)
-            }
+            callback(languages)
         })
     }
-
+    
     /**
     Translate text using source and target languages
     
@@ -113,45 +112,63 @@ public class LanguageTranslation {
     private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String])->()) {
         //TODO: Translate multiple strings
         
-        let path = _serviceURL + "/v2/translate"
+        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/translate")
         
-        let dict = NSMutableDictionary()
-        if let source = source {
-            dict.setObject(source, forKey: LanguageTranslationConstants.source)
-        }
-        if let target = target {
-            dict.setObject(target, forKey: LanguageTranslationConstants.target)
-        }
-        if let modelID = modelID {
-            dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
-        }
-        dict.setObject(text as NSArray, forKey: "text")
-        
-        let body = utils.dictionaryToJSON(dict)
-        
-        let request = utils.buildRequest(path, method: HTTPMethod.POST, body: body)
-        
-        utils.performRequest(request!, callback: {response, error in
-            if response == nil {
-                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
-                callback([])
-            } else if let error_message = response["error_message"] as? String {
-                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
-                callback([])
-            }
-            else {
+//        let dict = NSMutableDictionary()
+//        if let source = source {
+//            dict.setObject(source, forKey: LanguageTranslationConstants.source)
+//        }
+//        if let target = target {
+//            dict.setObject(target, forKey: LanguageTranslationConstants.target)
+//        }
+//        if let modelID = modelID {
+//            dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
+//        }
+//        
+//        dict.setObject(text as NSArray, forKey: "text")
+//        
+//        let body = utils.dictionaryToJSON(dict)
+//
+        var params = Dictionary<String,String>()
+        let bodyValue = "{\"source\": \"es\",\"target\": \"en\",\"text\": [\"test\",\"another test\"]}"
+        params.updateValue(bodyValue, forKey: "body")
 
-                guard let translations = response["translations"] as? NSArray else
-                {
-                    Log.sharedLogger.warning("\(self.TAG) translate(): expected to find translations in response")
-                    callback([])
-                    return
-                }
-                let firstTranslation = translations[0] as! NSDictionary
-                let translation = firstTranslation["translation"] as! String
-                callback([translation])
-            }
+        
+        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, completionHandler: {response in
+            
+//            var models : [TranslationModel] = []
+//            let json = JSON(response.data)["models"]
+//            for (_,subJson):(String, JSON) in json {
+//                if let model = self.dictionaryToModel(subJson) {
+//                    models.append(model)
+//                }
+//            }
+//            callback(models)
         })
+        
+        
+//        
+//        utils.performRequest(request!, callback: {response, error in
+//            if response == nil {
+//                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
+//                callback([])
+//            } else if let error_message = response["error_message"] as? String {
+//                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
+//                callback([])
+//            }
+//            else {
+//
+//                guard let translations = response["translations"] as? NSArray else
+//                {
+//                    Log.sharedLogger.warning("\(self.TAG) translate(): expected to find translations in response")
+//                    callback([])
+//                    return
+//                }
+//                let firstTranslation = translations[0] as! NSDictionary
+//                let translation = firstTranslation["translation"] as! String
+//                callback([translation])
+//            }
+//        })
     }
     
     /**
@@ -239,7 +256,6 @@ public class LanguageTranslation {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
         
         utils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], completionHandler: {response in
-            print(response)
             return callback(response.statusInfo == CoreResponseEnum.Ok.rawValue)
         })
     }

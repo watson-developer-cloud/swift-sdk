@@ -338,6 +338,20 @@ public class NetworkUtils {
         }
     }
     
+    /*
+    private func handleResponse<T>(response: T)->CoreResponse {
+        
+        
+        if((response is Response<AnyObject, NSError>)) {
+            
+        }
+        
+        if((response is Response<String, NSError>)) {
+            
+        }
+    }
+    */
+
     /**
     Invoke REST operation asynchronously and then call callback handler
     - parameter request:  Request object populated from buildRequest()

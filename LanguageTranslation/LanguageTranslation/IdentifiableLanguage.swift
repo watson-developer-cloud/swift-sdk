@@ -1,5 +1,5 @@
 //
-//  Language.swift
+//  IdentifiableLanguage.swift
 //  LanguageTranslation
 //
 //  Created by Karl Weinmeister on 9/16/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Language {
+public struct IdentifiableLanguage {
     var language:String
     var name:String
     

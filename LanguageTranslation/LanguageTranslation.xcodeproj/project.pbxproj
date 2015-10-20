@@ -15,10 +15,11 @@
 		BD308EC51BCF118E0092763A /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EBD1BCF11520092763A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC61BCF118E0092763A /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EBE1BCF11520092763A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC71BCF118E0092763A /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EBF1BCF11520092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD3699561BD5C8EE007DB2EC /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1C61BBF57CA00BBF265 /* LanguageTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BDAED1CD1BBF57CA00BBF265 /* LanguageTranslation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAED1C21BBF57CA00BBF265 /* LanguageTranslation.framework */; settings = {ASSET_TAGS = (); }; };
 		BDAED1D21BBF57CA00BBF265 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1D11BBF57CA00BBF265 /* LanguageTranslationTests.swift */; };
-		BDAED1E31BBF583100BBF265 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E01BBF583100BBF265 /* Language.swift */; settings = {ASSET_TAGS = (); }; };
+		BDAED1E31BBF583100BBF265 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E01BBF583100BBF265 /* IdentifiableLanguage.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1E41BBF583100BBF265 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E11BBF583100BBF265 /* TranslationModel.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1E51BBF583100BBF265 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAFBF4D1BC31C56008ECC69 /* LanguageTranslationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */; settings = {ASSET_TAGS = (); }; };
@@ -54,13 +55,14 @@
 		BD308EBE1BCF11520092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
 		BD308EBF1BCF11520092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		BD308EC31BCF11750092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
 		BDAED1C21BBF57CA00BBF265 /* LanguageTranslation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageTranslation.h; sourceTree = "<group>"; };
 		BDAED1C71BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDAED1CC1BBF57CA00BBF265 /* LanguageTranslationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTranslationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAED1D11BBF57CA00BBF265 /* LanguageTranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslationTests.swift; sourceTree = "<group>"; };
 		BDAED1D31BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BDAED1E01BBF583100BBF265 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		BDAED1E01BBF583100BBF265 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		BDAED1E11BBF583100BBF265 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
 		BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
 		BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationConstants.swift; sourceTree = "<group>"; };
@@ -137,7 +139,8 @@
 		BDFD8C481BC33704009AE187 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BDAED1E01BBF583100BBF265 /* Language.swift */,
+				BDAED1E01BBF583100BBF265 /* IdentifiableLanguage.swift */,
+				BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */,
 				BDAED1E11BBF583100BBF265 /* TranslationModel.swift */,
 			);
 			name = Models;
@@ -253,8 +256,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDAED1E31BBF583100BBF265 /* Language.swift in Sources */,
+				BDAED1E31BBF583100BBF265 /* IdentifiableLanguage.swift in Sources */,
 				BDAFBF4D1BC31C56008ECC69 /* LanguageTranslationConstants.swift in Sources */,
+				BD3699561BD5C8EE007DB2EC /* IdentifiedLanguage.swift in Sources */,
 				BDAED1E41BBF583100BBF265 /* TranslationModel.swift in Sources */,
 				BDAED1E51BBF583100BBF265 /* LanguageTranslation.swift in Sources */,
 			);

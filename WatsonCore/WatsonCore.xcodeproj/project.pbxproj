@@ -459,6 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.WatsonCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "-DDebug";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;

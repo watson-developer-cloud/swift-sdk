@@ -266,11 +266,11 @@ public class NetworkUtils {
                         Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
                         do {
                             let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
-                            let coreResponse = CoreResponse(anyObject: json!, statusCode: response.response!.statusCode)
+                            let coreResponse = CoreResponse(anyObject: json!, httpresponse: response.response!)
                             completionHandler(returnValue: coreResponse)
                         }
                         catch let error as NSError {
-                            let coreResponse = CoreResponse(anyObject: error, statusCode: response.response!.statusCode)
+                            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
                             completionHandler(returnValue: coreResponse)
                         }
                     }
@@ -306,7 +306,7 @@ public class NetworkUtils {
                 completionHandler( returnValue: self.handleResponse(response))
             }
             .responseString { response in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload.responseJSON")
+                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload.responseString")
                 completionHandler( returnValue: self.handleResponse(response))
         }
     }
@@ -316,29 +316,45 @@ public class NetworkUtils {
         switch response.result {
         case .Success(let data):
             Log.sharedLogger.info("CORE: Successfully Response")
-            let coreResponse = CoreResponse(anyObject: data, statusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: data, httpresponse: response.response!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.info("CORE: Failure Response")
-            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
+            Log.sharedLogger.error("CORE: Failure Response")
+            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
             return coreResponse
         }
     }
 
+    private func handleResponse(response: Response<String, NSError>)->CoreResponse {
+        switch response.result {
+        case .Success(let result):
+            Log.sharedLogger.info("CORE: Successfully Response")
+            let coreResponse = CoreResponse(anyObject: result, httpresponse: response.response!)
+            return coreResponse
+        case .Failure(let error):
+            Log.sharedLogger.info("CORE: Failure Response")
+            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
+            return coreResponse
+        }
+    }
+        
+    
+    /*
     // TODO: Combine the to handleResponses
     private func handleResponse(response: Response<String, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let result):
             Log.sharedLogger.info("CORE: Successfully Response")
-            let coreResponse = CoreResponse(anyObject: result, statusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: result, httpresponse: response.response!)
             return coreResponse
         case .Failure(let error):
             Log.sharedLogger.info("CORE: Failure Response")
-            let coreResponse = CoreResponse(anyObject: error, statusCode: (response.response?.statusCode)!)
+            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
             return coreResponse
         }
         
     }
+*/
     
     /**
     Invoke rest operation asynchronously and then call callback handler

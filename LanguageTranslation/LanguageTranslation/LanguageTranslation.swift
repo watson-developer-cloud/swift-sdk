@@ -8,8 +8,8 @@
 
 import WatsonCore
 import Foundation
-import SwiftyJSON
 import Alamofire
+import ObjectMapper
 
  /// The IBM Watson Language Translation service translates text from one language
  /// to another and identifies the language in which text is written.
@@ -40,13 +40,14 @@ public class LanguageTranslation {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identifiable_languages")
 
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
-            let data = JSON(response.data)
-            
+
             var languages : [IdentifiableLanguage] = []
-            
-            for (_,subJson):(String, JSON) in data["languages"] {
-                if let language = subJson["language"].string, name = subJson["name"].string {
-                    languages.append(IdentifiableLanguage(language: language, name: name))
+
+            if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
+                for rawLanguage in rawLanguages as! NSArray {
+                    if let language = Mapper<IdentifiableLanguage>().map(rawLanguage) {
+                        languages.append(language)
+                    }
                 }
             }
             callback(languages)
@@ -67,11 +68,12 @@ public class LanguageTranslation {
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
             var languages:[IdentifiedLanguage] = []
-            let json = JSON(response.data)["languages"]
-            for (_,subJson):(String, JSON) in json {
-                let language = subJson["language"].stringValue
-                let confidence = subJson["confidence"].doubleValue
-                languages.append(IdentifiedLanguage(language:language, confidence:confidence))
+            if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
+                for rawLanguage in rawLanguages as! NSArray  {
+                    if let language = Mapper<IdentifiedLanguage>().map(rawLanguage) {
+                        languages.append(language)
+                    }
+                }
             }
             callback(languages)
         })
@@ -128,9 +130,12 @@ public class LanguageTranslation {
         
         utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, completionHandler: {response in
             var translations : [String] = []
-            let json = JSON(response.data)["translations"]
-            for (_,subJson):(String, JSON) in json {
-                translations.append(subJson["translation"].stringValue)
+            if let rawTranslations = response.data[LanguageTranslationConstants.translations] {
+                for rawTranslation in rawTranslations as! NSArray  {
+                    if let translation = rawTranslation[LanguageTranslationConstants.translation] {
+                        translations.append(translation as! String)
+                    }
+                }
             }
             callback(translations)
         })
@@ -161,10 +166,12 @@ public class LanguageTranslation {
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
             var models : [TranslationModel] = []
-            let json = JSON(response.data)["models"]
-            for (_,subJson):(String, JSON) in json {
-                if let model = self.dictionaryToModel(subJson) {
-                    models.append(model)
+
+            if let rawModels = response.data[LanguageTranslationConstants.models] {
+                for rawModel in rawModels as! NSArray  {
+                    if let model = Mapper<TranslationModel>().map(rawModel) {
+                        models.append(model)
+                    }
                 }
             }
             callback(models)
@@ -182,7 +189,7 @@ public class LanguageTranslation {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
-            return callback(self.dictionaryToModel(JSON(response.data)))
+            return callback(Mapper<TranslationModel>().map(response.data))
         })
     }
     
@@ -197,14 +204,14 @@ public class LanguageTranslation {
     public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?)->())
     {
         var queryParams = Dictionary<String,String>()
-        queryParams.updateValue(baseModelID, forKey: "base_model_id")
+        queryParams.updateValue(baseModelID, forKey: LanguageTranslationConstants.baseModelID)
         if let name = name {
-            queryParams.updateValue(name, forKey: "name")
+            queryParams.updateValue(name, forKey: LanguageTranslationConstants.name)
         }
 
         let request = utils.buildEndpoint(_serviceURL + "/v2/models")
         utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
-            callback(self.dictionaryToModel(JSON(response.data)))
+            callback(Mapper<TranslationModel>().map(response.data))
         })
     }
         
@@ -222,33 +229,4 @@ public class LanguageTranslation {
             return callback(response.statusInfo == CoreResponseEnum.Ok.rawValue)
         })
     }
-    
-    /**
-    Converts a dictionary of strings returned by the Watson service to a native model object
-    
-    - parameter dictionary: a dictionary of key/value pairs
-    
-    - returns: A populated language model object
-    */
-    private func dictionaryToModel(json: JSON) -> TranslationModel?
-    {
-        //TODO: Investigate using mapping library
-        if let source = json[LanguageTranslationConstants.source].string,
-        modelID = json[LanguageTranslationConstants.modelID].string,
-        target = json[LanguageTranslationConstants.target].string,
-        baseModelID = json[LanguageTranslationConstants.baseModelID].string,
-        domain = json[LanguageTranslationConstants.domain].string,
-        defaultModel = json[LanguageTranslationConstants.defaultModel].bool,
-        owner = json[LanguageTranslationConstants.owner].string,
-        status = json[LanguageTranslationConstants.status].string,
-        customizable = json[LanguageTranslationConstants.customizable].bool,
-        name = json[LanguageTranslationConstants.name].string
-        {
-            return TranslationModel(baseModelID:baseModelID, customizable:customizable, defaultModel:defaultModel, domain:domain, modelID:modelID, name:name, owner:owner, source:source, status:status, target:target)
-        } else {
-            Log.sharedLogger.warning("\(self.TAG) Value missing from dictionary. Unable to convert to a Language model")
-            return nil
-        }
-    }
-
 }

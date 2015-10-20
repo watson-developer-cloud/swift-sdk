@@ -26,6 +26,8 @@
 		BD308EB21BCF0FAC0092763A /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EA91BCF0F570092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BDBF45211BB1C4D300860301 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF45201BB1C4D300860301 /* NetworkUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		BDF92BA01BD5E21C00C6A17C /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF92B9F1BD5E21C00C6A17C /* HTTPStatusCodes.swift */; settings = {ASSET_TAGS = (); }; };
+		BDF92BA21BD6DE4B00C6A17C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF92BA11BD6DE4B00C6A17C /* ObjectMapper.framework */; settings = {ASSET_TAGS = (); }; };
+		BDF92BA31BD6DEA200C6A17C /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BDF92BA11BD6DE4B00C6A17C /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1605B171BAB5FA70084A056 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1605B161BAB5FA70084A056 /* Endpoints.plist */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BD308EB01BCF0FAC0092763A /* Alamofire.framework in CopyFiles */,
+				BDF92BA31BD6DEA200C6A17C /* ObjectMapper.framework in CopyFiles */,
 				BD308EB11BCF0FAC0092763A /* SwiftyJSON.framework in CopyFiles */,
 				BD308EB21BCF0FAC0092763A /* XCGLogger.framework in CopyFiles */,
 			);
@@ -74,6 +77,7 @@
 		BD308EA91BCF0F570092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCGLogger.framework; sourceTree = "<group>"; };
 		BDBF45201BB1C4D300860301 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		BDF92B9F1BD5E21C00C6A17C /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
+		BDF92BA11BD6DE4B00C6A17C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = "<group>"; };
 		E1605B161BAB5FA70084A056 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +88,7 @@
 			files = (
 				BD308EAD1BCF0F840092763A /* Alamofire.framework in Frameworks */,
 				BD308EAE1BCF0F840092763A /* SwiftyJSON.framework in Frameworks */,
+				BDF92BA21BD6DE4B00C6A17C /* ObjectMapper.framework in Frameworks */,
 				BD308EAF1BCF0F840092763A /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF92B9F1BD5E21C00C6A17C /* HTTPStatusCodes.swift */,
+				BDF92BA11BD6DE4B00C6A17C /* ObjectMapper.framework */,
 				BD308EA71BCF0F570092763A /* Alamofire.framework */,
 				BD308EA81BCF0F570092763A /* SwiftyJSON.framework */,
 				BD308EA91BCF0F570092763A /* XCGLogger.framework */,

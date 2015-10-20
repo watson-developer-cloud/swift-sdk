@@ -17,7 +17,9 @@ class AlchemyVisionTests: XCTestCase {
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
-    var test_url = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
+    var testUrl = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
+    var faceTagURL = "http://demo1.alchemyapi.com/images/vision/mother-daughter.jpg"
+    
     
     //    var test_url = "https://www.google.com/search?q=cat&espv=2&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIuOev14miyAIVEeqACh0mOwhq&biw=1440&bih=805"
     //    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
@@ -48,7 +50,7 @@ class AlchemyVisionTests: XCTestCase {
         
         let service : VisionImpl = VisionImpl( apiKey: "WRONG")
         
-        service.urlGetRankedImageKeywords(test_url, forceShowAll: true, knowledgeGraph: 1, completionHandler: { response in
+        service.urlGetRankedImageKeywords(testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { response in
             
             XCTAssertEqual(response.totalTransactions, 0)
             
@@ -65,33 +67,40 @@ class AlchemyVisionTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
 
-    func testURLGetRankedImageKeywordsXML(){
+    func testURLGetRankedImageKeywords(){
         
-        let expectation = expectationWithDescription("Test URLGetRankedImageKeywords")
+        let emptyExpectation = expectationWithDescription("Empty")
+        let validExpectation = expectationWithDescription("Valid")
         
-        serviceVision.urlGetRankedImageKeywords(test_url, forceShowAll: true, knowledgeGraph: 1, completionHandler: { response in
-            
-            XCTAssertNotNil(response, "Response is nil.")
-            
-            Log.sharedLogger.verbose("add result return value ")
-          //  XCTAssertNotNil(resultStatus, "Error is nil.")
-            
-     //       XCTAssertEqual(resultStatus.status, "OK")
-            
-     //       XCTAssertEqual(resultStatus.statusInfo, "")
-            
-            XCTAssertGreaterThan(response.totalTransactions, 3)
-            
-            XCTAssertEqual(response.imageKeyWords.count, 1)
-            
-            XCTAssertEqual(response.imageKeyWords[0].text, "person")
-            
-            XCTAssertGreaterThan(response.imageKeyWords[0].score, 0.90)
-            
-            // add some logic here for testing
-            expectation.fulfill()
+        serviceVision.urlGetRankedImageKeywords("", forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
+            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 4")
+            emptyExpectation.fulfill()
         })
-    
+        
+        serviceVision.urlGetRankedImageKeywords(testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
+            XCTAssertEqual(1,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 1")
+            validExpectation.fulfill()
+        })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+   
+    
+    func testURLGetRankedImageFaceTags(){
+        
+        let emptyExpectation = expectationWithDescription("Empty")
+        let validExpectation = expectationWithDescription("Valid")
+        
+        serviceVision.urlGetRankedImageFaceTags("", forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags in
+            XCTAssertEqual(0,imageFaceTags.ImageFaces.count, "Expected result with a total imagefaces of 0")
+            emptyExpectation.fulfill()
+        })
+        
+        serviceVision.urlGetRankedImageFaceTags(faceTagURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags in
+            XCTAssertEqual(2,imageFaceTags.ImageFaces.count, "Expected result with a total imagefaces of 2")
+            validExpectation.fulfill()
+        })
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+
 }

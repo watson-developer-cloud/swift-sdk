@@ -9,4 +9,4 @@ branches:
      - master
 
 script:
-- xcodebuild clean build test -scheme WatsonLanguageTranslation -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0'
+- xcodebuild clean build test -scheme LanguageTranslation -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0'

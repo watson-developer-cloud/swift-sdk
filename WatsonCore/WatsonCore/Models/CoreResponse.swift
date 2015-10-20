@@ -64,10 +64,9 @@ public struct CoreResponse{
         else {
             var returnData = JSON(anyObject)
             // Alchemy
-            if let _statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].string {}
+            if let statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].string {self._statusInfo = statusInfo}
             // Language
-            else if let _statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].string {}
+            else if let statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].string {self._statusInfo = statusInfo}
         }
-        
     }
 }

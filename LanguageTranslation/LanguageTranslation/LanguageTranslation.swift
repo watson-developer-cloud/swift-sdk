@@ -62,8 +62,6 @@ public class LanguageTranslation {
     public func identify(text:String, callback: ([IdentifiedLanguage])->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
         
-        //TODO: Support confidence scores
-        
         var params = Dictionary<String,String>()
         params.updateValue(text, forKey: "text")
         
@@ -126,7 +124,7 @@ public class LanguageTranslation {
             params[LanguageTranslationConstants.modelID] = modelID
         }
         
-        params["text"] = text
+        params[LanguageTranslationConstants.text] = text
         
         utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, completionHandler: {response in
             var translations : [String] = []
@@ -198,15 +196,13 @@ public class LanguageTranslation {
     */
     public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?)->())
     {
-        let path = _serviceURL + "/v2/models"
-        
         var queryParams = Dictionary<String,String>()
         queryParams.updateValue(baseModelID, forKey: "base_model_id")
         if let name = name {
             queryParams.updateValue(name, forKey: "name")
         }
 
-        let request = utils.buildEndpoint(path)
+        let request = utils.buildEndpoint(_serviceURL + "/v2/models")
         utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
             callback(self.dictionaryToModel(JSON(response.data)))
         })

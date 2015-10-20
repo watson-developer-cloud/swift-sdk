@@ -29,8 +29,6 @@ class AlchemyVisionTests: XCTestCase {
     //var serviceVision : VisionImpl = VisionImpl( apiKey: "c893a51b2703dcbed40e1416b7b6723f4f95f5d3")
     var serviceVision : VisionImpl = VisionImpl( apiKey: "f11453e65d32e72c9b75ac0fb814996326dd80ed") //- not
     
-    
-    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -45,25 +43,14 @@ class AlchemyVisionTests: XCTestCase {
     This will test an invalid API key for all three segments of Vision, Language and Data
     */
     func testInvalidAPIKey() {
-        
-        let expectation = expectationWithDescription("Test Invalid API Key")
-        
+        let invalidExpectation = expectationWithDescription("Invalid API key")
         let service : VisionImpl = VisionImpl( apiKey: "WRONG")
         
-        service.urlGetRankedImageKeywords(testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { response in
-            
-            XCTAssertEqual(response.totalTransactions, 0)
-            
-            Log.sharedLogger.verbose("Add error handling in return value")
-      //      XCTAssertNotNil(resultStatus, "Error is nil.")
-            
-      //      XCTAssertEqual(resultStatus.status, "ERROR")
-            
-      //      XCTAssertEqual(resultStatus.statusInfo, "invalid-api-key")
-            
-            expectation.fulfill()
+        service.urlGetRankedImageKeywords(testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
+            XCTAssertEqual(0, imageKeyWords.totalTransactions, "Expected result with a total transaction of 0")
+            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
+            invalidExpectation.fulfill()
         })
-        
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
 
@@ -73,7 +60,7 @@ class AlchemyVisionTests: XCTestCase {
         let validExpectation = expectationWithDescription("Valid")
         
         serviceVision.urlGetRankedImageKeywords("", forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
-            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 4")
+            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
             emptyExpectation.fulfill()
         })
         
@@ -84,7 +71,6 @@ class AlchemyVisionTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
    
-    
     func testURLGetRankedImageFaceTags(){
         
         let emptyExpectation = expectationWithDescription("Empty")

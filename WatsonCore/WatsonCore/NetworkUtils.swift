@@ -124,7 +124,7 @@ public class NetworkUtils {
             request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
             request.addValue(accept.rawValue, forHTTPHeaderField: _httpAcceptHeader)
             request.addValue(contentType.rawValue, forHTTPHeaderField: _httpContentTypeHeader)
-            Log.sharedLogger.debug("buildRequest(): Content Type = \(request.valueForHTTPHeaderField(_httpContentTypeHeader)!)")
+            Log.sharedLogger.debug("\(TAG): buildRequest(): Content Type = \(request.valueForHTTPHeaderField(_httpContentTypeHeader)!)")
             
             if let bodyData = body {
                 request.HTTPBody = bodyData
@@ -178,19 +178,19 @@ public class NetworkUtils {
     - returns: The manipulated string for properly invoking the web call
     */
     private func buildHeader(contentType: ContentType = ContentType.JSON)-> [String: String]  {
-        Log.sharedLogger.debug("Core: Entered buildHeader")
+        Log.sharedLogger.debug("\(TAG): Entered buildHeader")
        
         var header = Dictionary<String, String>()
 
         if let localKey = apiKey { header.updateValue(localKey as String, forKey: _httpAuthorizationHeader )}
         
         guard (header.updateValue(contentType.rawValue, forKey: _httpContentTypeHeader) == nil) else {
-            Log.sharedLogger.error("Error adding Content Type in header")
+            Log.sharedLogger.error("\(TAG): Error adding Content Type in header")
             return [:]
         }
         
         guard (header.updateValue(contentType.rawValue, forKey: _httpAcceptHeader) == nil) else {
-            Log.sharedLogger.error("Error adding Accept info in header")
+            Log.sharedLogger.error("\(TAG): Error adding Accept info in header")
             return [:]
         }
         
@@ -207,16 +207,16 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: Dictionary<String,String>, contentType: ContentType = ContentType.JSON, completionHandler: (returnValue: CoreResponse) -> ()) {
-        Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest")
+        Log.sharedLogger.debug("\(TAG): Entered performBasicAuthRequest")
         Alamofire.request(method, url, parameters: parameters, headers: buildHeader(contentType) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest.responseJSON")
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
             }
             .responseString {response in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthRequest.responseString")
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthRequest.responseString")
                 if(contentType == ContentType.Text) { completionHandler( returnValue: self.handleResponse(response)) }
             }
     }
@@ -234,7 +234,7 @@ public class NetworkUtils {
         Alamofire.request(method, url, parameters: parameters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
-                Log.sharedLogger.debug("CORE: Entered performRequest.responseJSON")
+                Log.sharedLogger.debug("\(self.TAG): Entered performRequest.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
         }
     }
@@ -250,7 +250,7 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart")
+        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart")
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLENCODED),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
@@ -259,11 +259,11 @@ public class NetworkUtils {
                 multipartFormData.appendBodyPart(fileURL: fileURL, name: fileURLKey)                
             },
             encodingCompletion: { encodingResult in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion")
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart.encodingCompletion")
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
-                        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
+                        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
                         do {
                             let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
                             let coreResponse = CoreResponse(anyObject: json!, httpresponse: response.response!)
@@ -291,7 +291,7 @@ public class NetworkUtils {
     */
     // TODO: STILL IN PROGRESS
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
-        Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload")
+        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload")
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
             .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                 Log.sharedLogger.info("\(totalBytesWritten)")
@@ -302,25 +302,25 @@ public class NetworkUtils {
             }
             .validate(statusCode: 200..<300)
             .responseJSON { response in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload.responseJSON")
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
             }
             .responseString { response in
-                Log.sharedLogger.debug("CORE: Entered performBasicAuthFileUpload.responseString")
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseString")
                 completionHandler( returnValue: self.handleResponse(response))
         }
     }
     
-    // TODO: Combine the to handleResponses
+    // TODO: Combine the two handleResponses
     private func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let data):
-            Log.sharedLogger.info("CORE: Successfully Response")
+            Log.sharedLogger.info("\(self.TAG): Successful Response")
             let coreResponse = CoreResponse(anyObject: data, httpresponse: response.response!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.error("CORE: Failure Response")
             let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
+            Log.sharedLogger.error("\(self.TAG): Failure Response - \(coreResponse)")
             return coreResponse
         }
     }
@@ -328,36 +328,18 @@ public class NetworkUtils {
     private func handleResponse(response: Response<String, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let result):
-            Log.sharedLogger.info("CORE: Successfully Response")
+            Log.sharedLogger.info("\(self.TAG): Successful Response")
             let coreResponse = CoreResponse(anyObject: result, httpresponse: response.response!)
             return coreResponse
         case .Failure(let error):
-            Log.sharedLogger.info("CORE: Failure Response")
             let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
+            Log.sharedLogger.error("\(self.TAG): Failure Response - \(coreResponse)")
             return coreResponse
         }
     }
-        
-    
-    /*
-    // TODO: Combine the to handleResponses
-    private func handleResponse(response: Response<String, NSError>)->CoreResponse {
-        switch response.result {
-        case .Success(let result):
-            Log.sharedLogger.info("CORE: Successfully Response")
-            let coreResponse = CoreResponse(anyObject: result, httpresponse: response.response!)
-            return coreResponse
-        case .Failure(let error):
-            Log.sharedLogger.info("CORE: Failure Response")
-            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
-            return coreResponse
-        }
-        
-    }
-*/
     
     /**
-    Invoke rest operation asynchronously and then call callback handler
+    Invoke REST operation asynchronously and then call callback handler
     - parameter request:  Request object populated from buildRequest()
     - parameter callback: Callback handler to be invoked when a response is received
     */

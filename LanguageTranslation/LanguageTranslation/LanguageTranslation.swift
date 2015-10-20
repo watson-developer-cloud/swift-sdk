@@ -110,65 +110,32 @@ public class LanguageTranslation {
     - parameter callback:       The callback method that is invoked with the translated string
     */
     private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String])->()) {
-        //TODO: Translate multiple strings
         
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/translate")
         
-//        let dict = NSMutableDictionary()
-//        if let source = source {
-//            dict.setObject(source, forKey: LanguageTranslationConstants.source)
-//        }
-//        if let target = target {
-//            dict.setObject(target, forKey: LanguageTranslationConstants.target)
-//        }
-//        if let modelID = modelID {
-//            dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
-//        }
-//        
-//        dict.setObject(text as NSArray, forKey: "text")
-//        
-//        let body = utils.dictionaryToJSON(dict)
-//
-        var params = Dictionary<String,String>()
-        let bodyValue = "{\"source\": \"es\",\"target\": \"en\",\"text\": [\"test\",\"another test\"]}"
-        params.updateValue(bodyValue, forKey: "body")
+        let dict = NSMutableDictionary()
+        if let source = source {
+            dict.setObject(source, forKey: LanguageTranslationConstants.source)
+        }
+        if let target = target {
+            dict.setObject(target, forKey: LanguageTranslationConstants.target)
+        }
+        if let modelID = modelID {
+          dict.setObject(modelID, forKey: LanguageTranslationConstants.modelID)
+        }
 
+        var json = JSON(dict)
+        json["text"].arrayObject = text
+
+        //TODO: Update method of sending body, currently does not work
+        var params = Dictionary<String,String>()
+        params.updateValue(String(json), forKey: "body")
         
         utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, completionHandler: {response in
-            
-//            var models : [TranslationModel] = []
-//            let json = JSON(response.data)["models"]
-//            for (_,subJson):(String, JSON) in json {
-//                if let model = self.dictionaryToModel(subJson) {
-//                    models.append(model)
-//                }
-//            }
-//            callback(models)
+            //TODO: Parse response data
+            let json = JSON(response.data)
+            callback([])
         })
-        
-        
-//        
-//        utils.performRequest(request!, callback: {response, error in
-//            if response == nil {
-//                Log.sharedLogger.severe("\(self.TAG) translate(): nil response")
-//                callback([])
-//            } else if let error_message = response["error_message"] as? String {
-//                Log.sharedLogger.severe("\(self.TAG) translate(): \(error_message)")
-//                callback([])
-//            }
-//            else {
-//
-//                guard let translations = response["translations"] as? NSArray else
-//                {
-//                    Log.sharedLogger.warning("\(self.TAG) translate(): expected to find translations in response")
-//                    callback([])
-//                    return
-//                }
-//                let firstTranslation = translations[0] as! NSDictionary
-//                let translation = firstTranslation["translation"] as! String
-//                callback([translation])
-//            }
-//        })
     }
     
     /**

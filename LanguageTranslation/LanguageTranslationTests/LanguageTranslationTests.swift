@@ -60,9 +60,9 @@ class LanguageTranslationTests: XCTestCase {
         let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
         let modelExpectation = expectationWithDescription("Model Translation")
         
-        service.translate(["Hello","Dog"],source:"en",target:"es",callback:{(text:[String]) in
+        service.translate(["Hello","House"],source:"en",target:"es",callback:{(text:[String]) in
             XCTAssertEqual(text.first!,"Hola","Expected hello to translate to hola")
-            XCTAssertEqual(text.last!,"Perro","Expected dog to translate to perro")
+            XCTAssertEqual(text.last!,"Casa","Expected house to translate to casa")
             sourceTargetExpectation.fulfill()
         })
         
@@ -114,7 +114,7 @@ class LanguageTranslationTests: XCTestCase {
             XCTAssertNotNil(model, "Model returned by create model should not be nil")
             
             //Delete model after creating it
-            self.service.deleteModel(model!.modelID, callback:{response in
+            self.service.deleteModel(model!.modelID!, callback:{response in
                 deleteExpectation.fulfill()
             })
         })

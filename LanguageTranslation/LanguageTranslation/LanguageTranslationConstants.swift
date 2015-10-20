@@ -9,7 +9,8 @@
 import Foundation
 
 public struct LanguageTranslationConstants {
-    /// Constants used for key/value pairs in the Watson service
+
+    //Translation model
     static let baseModelID = "base_model_id"
     static let customizable = "customizable"
     static let defaultModel = "default_model"
@@ -21,10 +22,17 @@ public struct LanguageTranslationConstants {
     static let status = "status"
     static let target = "target"
     
-    //Used for getModels() query - can't use default for key, as this is a Swift reserved word
+    //getModels()
+    static let models = "models"
+    //Can't use default for key, as this is a Swift reserved word
     static let defaultStr = "default"
 
-    //Used for translate() query
+    //translate()
     static let text = "text"
+    static let translations = "translations"
+    static let translation = "translation"
 
+    //identify() and getIdentifiableLanguages()
+    static let languages = "languages"
+    
 }

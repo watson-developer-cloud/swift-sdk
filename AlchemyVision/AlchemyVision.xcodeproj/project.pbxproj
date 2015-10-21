@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		310E21371BD7DFE100E763BE /* VisionTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 310E21361BD7DFE100E763BE /* VisionTest.plist */; settings = {ASSET_TAGS = (); }; };
 		311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311980921BD3F2E70046EF85 /* emaxfpo.jpg */; settings = {ASSET_TAGS = (); }; };
 		3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */; settings = {ASSET_TAGS = (); }; };
 		316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */; settings = {ASSET_TAGS = (); }; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		310E21361BD7DFE100E763BE /* VisionTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VisionTest.plist; sourceTree = "<group>"; };
 		311980921BD3F2E70046EF85 /* emaxfpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emaxfpo.jpg; sourceTree = "<group>"; };
 		3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
 		316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFaceTags.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */,
 				311980921BD3F2E70046EF85 /* emaxfpo.jpg */,
 				3179E2501BC1EA4000174C5A /* Info.plist */,
+				310E21361BD7DFE100E763BE /* VisionTest.plist */,
 			);
 			path = AlchemyVisionTests;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				310E21371BD7DFE100E763BE /* VisionTest.plist in Resources */,
 				311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

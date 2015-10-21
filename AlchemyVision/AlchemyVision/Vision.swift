@@ -16,10 +16,8 @@ import Foundation
 // API Contract
 public protocol VisionService
 {
-    
     func urlGetRankedImageKeywords(url: String, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (returnValue: ImageKeyWords) ->() )
     
-    // I will add this back in once it url is finished
     func imageGetRankedImageKeywords(fileURL: NSURL, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (returnValue: ImageKeyWords) ->() )
     
     func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (returnValue: ImageFaceTags) ->() )
@@ -79,7 +77,7 @@ public class VisionImpl: VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        utils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
+        utils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
             Log.sharedLogger.debug("Entered urlGetRankedImageKeywords.callback")
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)

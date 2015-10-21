@@ -12,7 +12,6 @@ import XCTest
 import WatsonCore
 
 class AlchemyVisionTests: XCTestCase {
-   // private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "004db54a-c5e0-472b-a6eb-7b106fd31370", password: "o55eeuCST9YU")
     private let timeout: NSTimeInterval = 60.0
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
@@ -43,7 +42,7 @@ class AlchemyVisionTests: XCTestCase {
         super.tearDown()
     }
     
-    /**
+    /**a
     This will test an invalid API key for all three segments of Vision, Language and Data
     */
     func testInvalidAPIKey() {

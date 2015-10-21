@@ -11,15 +11,20 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
- /// The IBM Watson Language Translation service translates text from one language
- /// to another and identifies the language in which text is written.
+/// The IBM Watson Language Translation service translates text from one language
+/// to another and identifies the language in which text is written.
 public class LanguageTranslation {
     
     private let TAG = "[LanguageTranslation] "
     private let _serviceURL = "/language-translation/api"
-
+    
     private let utils = NetworkUtils()
-
+    
+    /**
+    Initialize the language translation service
+    */
+    public init() {}
+    
     /**
     Initialize the language translation service
     
@@ -28,9 +33,21 @@ public class LanguageTranslation {
     
     */
     public init(username:String,password:String) {
+        self.setUsernameAndPassword(username,password:password)
+    }
+    
+    /**
+    Set the username and password for the language translation service
+    
+    - parameter username: username
+    - parameter password: password
+    
+    */
+    public func setUsernameAndPassword(username:String, password:String) {
         utils.setUsernameAndPassword(username,password:password)
     }
-
+    
+    
     /**
     Retrieves the list of identifiable languages
     
@@ -38,11 +55,11 @@ public class LanguageTranslation {
     */
     public func getIdentifiableLanguages(callback: ([IdentifiableLanguage]?)->()) {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identifiable_languages")
-
+        
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
-
+            
             var languages : [IdentifiableLanguage] = []
-
+            
             if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
                 for rawLanguage in rawLanguages as! NSArray {
                     if let language = Mapper<IdentifiableLanguage>().map(rawLanguage) {
@@ -53,7 +70,7 @@ public class LanguageTranslation {
             callback(languages)
         })
     }
-
+    
     /**
     Identify the language in which text is written
     
@@ -90,7 +107,7 @@ public class LanguageTranslation {
     public func translate(text:[String], source:String, target:String, callback:([String])->()) {
         translate(text, source:source, target:target, modelID:nil, callback: callback)
     }
-
+    
     /**
     Translate text using a model specified by modelID
     - parameter text:           The text to translate
@@ -115,7 +132,7 @@ public class LanguageTranslation {
         let endpoint = utils.buildEndpoint(_serviceURL + "/v2/translate")
         
         var params = [String : NSObject]()
-
+        
         if let source = source {
             params[LanguageTranslationConstants.source] = source
         }
@@ -166,7 +183,7 @@ public class LanguageTranslation {
         
         utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
             var models : [TranslationModel] = []
-
+            
             if let rawModels = response.data[LanguageTranslationConstants.models] {
                 for rawModel in rawModels as! NSArray  {
                     if let model = Mapper<TranslationModel>().map(rawModel) {
@@ -208,13 +225,13 @@ public class LanguageTranslation {
         if let name = name {
             queryParams.updateValue(name, forKey: LanguageTranslationConstants.name)
         }
-
+        
         let request = utils.buildEndpoint(_serviceURL + "/v2/models")
         utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
             callback(Mapper<TranslationModel>().map(response.data))
         })
     }
-        
+    
     /**
     Delete a translation model
     

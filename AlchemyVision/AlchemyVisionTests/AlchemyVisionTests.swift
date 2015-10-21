@@ -12,7 +12,7 @@ import XCTest
 import WatsonCore
 
 class AlchemyVisionTests: XCTestCase {
-    private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "***REMOVED***", password: "***REMOVED***")
+   // private let authentication = WatsonAuthentication(serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: "***REMOVED***", password: "***REMOVED***")
     private let timeout: NSTimeInterval = 60.0
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
@@ -25,12 +25,16 @@ class AlchemyVisionTests: XCTestCase {
     //    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
     //    var test_image = './emaxfpo.jpg';
     
-    
-    //var serviceVision : VisionImpl = VisionImpl( apiKey: "c893a51b2703dcbed40e1416b7b6723f4f95f5d3")
-    var serviceVision : VisionImpl = VisionImpl( apiKey: "f11453e65d32e72c9b75ac0fb814996326dd80ed") //- not
+
+    var serviceVision = VisionImpl( apiKey: "")
     
     override func setUp() {
         super.setUp()
+        if let url = NSBundle(forClass: self.dynamicType).URLForResource("VisionTest", withExtension: "plist") {
+            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
+                serviceVision.setAPIKey(dict["apikey"]!)
+            }
+        }
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     

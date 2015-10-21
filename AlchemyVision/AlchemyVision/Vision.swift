@@ -30,9 +30,13 @@ public class VisionImpl: VisionService {
     private let TAG = "[VISION] "
     
     /// your private api key
-    let _apiKey : String
+    private  var apiKey : String
     
     private let utils: NetworkUtils
+    
+    public func setAPIKey(apiKey: String) {
+        self.apiKey = apiKey
+    }
     
     /**
     Initialization of the main Alchemy service class
@@ -42,7 +46,7 @@ public class VisionImpl: VisionService {
     */
     public init(apiKey: String) {
         
-        _apiKey = apiKey
+        self.apiKey = apiKey
         // TODO: investigate to see if this is really needed
         utils = NetworkUtils(type: ServiceType.Alchemy)
     }
@@ -63,7 +67,7 @@ public class VisionImpl: VisionService {
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
         
         var params = Dictionary<String,String>()
-        params.updateValue(_apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
+        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
         params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
         params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
         
@@ -89,7 +93,7 @@ public class VisionImpl: VisionService {
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
         
         var params = Dictionary<String,String>()
-        params.updateValue(_apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
+        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
         params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
         params.updateValue(AlchemyConstants.ImagePostMode.Raw.rawValue, forKey: AlchemyConstants.VisionURI.ImagePostMode.rawValue)
         
@@ -117,7 +121,7 @@ public class VisionImpl: VisionService {
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
         
         var params = Dictionary<String,String>()
-        params.updateValue(_apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
+        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
         params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
         params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
         

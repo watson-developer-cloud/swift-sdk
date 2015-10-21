@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		31FF98E61BD0565D00520438 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */; };
 		BD1F26A01BD712AF004F856F /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD1F269F1BD712AF004F856F /* Test.plist */; settings = {ASSET_TAGS = (); }; };
-		BD308EC01BCF11520092763A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBD1BCF11520092763A /* Alamofire.framework */; };
 		BD308EC21BCF11520092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBF1BCF11520092763A /* XCGLogger.framework */; };
 		BD308EC41BCF11750092763A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EC31BCF11750092763A /* WatsonCore.framework */; };
-		BD308EC51BCF118E0092763A /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EBD1BCF11520092763A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC71BCF118E0092763A /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD308EBF1BCF11520092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD3699561BD5C8EE007DB2EC /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */; settings = {ASSET_TAGS = (); }; };
 		BDAED1C61BBF57CA00BBF265 /* LanguageTranslation.h in Headers */ = {isa = PBXBuildFile; fileRef = BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,7 +41,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BD308EC51BCF118E0092763A /* Alamofire.framework in CopyFiles */,
 				BDF92BA61BD6DED200C6A17C /* ObjectMapper.framework in CopyFiles */,
 				BD308EC71BCF118E0092763A /* XCGLogger.framework in CopyFiles */,
 			);
@@ -53,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		BD1F269F1BD712AF004F856F /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
-		BD308EBD1BCF11520092763A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Frameworks/Alamofire.framework; sourceTree = "<group>"; };
 		BD308EBF1BCF11520092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		BD308EC31BCF11750092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
@@ -76,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD308EC01BCF11520092763A /* Alamofire.framework in Frameworks */,
 				BDF92BA51BD6DEB500C6A17C /* ObjectMapper.framework in Frameworks */,
 				BD308EC21BCF11520092763A /* XCGLogger.framework in Frameworks */,
 				BD308EC41BCF11750092763A /* WatsonCore.framework in Frameworks */,
@@ -99,7 +94,6 @@
 			children = (
 				BD308EC31BCF11750092763A /* WatsonCore.framework */,
 				BDF92BA41BD6DEB500C6A17C /* ObjectMapper.framework */,
-				BD308EBD1BCF11520092763A /* Alamofire.framework */,
 				BD308EBF1BCF11520092763A /* XCGLogger.framework */,
 				BDAED1C41BBF57CA00BBF265 /* LanguageTranslation */,
 				BDAED1D01BBF57CA00BBF265 /* LanguageTranslationTests */,

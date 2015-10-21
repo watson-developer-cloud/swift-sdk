@@ -45,6 +45,15 @@ public enum HTTPMethod: String {
     case DELETE = "DELETE"
 }
 
+public enum ParameterEncoding {
+    case URL
+    case URLEncodedInURL
+    case JSON
+    case PropertyList(NSPropertyListFormat, NSPropertyListWriteOptions)
+    case Custom((URLRequestConvertible, [String: AnyObject]?) -> (NSMutableURLRequest, NSError?))
+}
+
+
 /// Networking utilities used for performing REST operations into Watson services and parsing the input
 public class NetworkUtils {
     private let TAG = "[Core] "
@@ -206,9 +215,9 @@ public class NetworkUtils {
     - parameter contentType:       This will switch the input and outout request from text or json
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performBasicAuthRequest(url: String, method: Alamofire.Method, parameters: [String: AnyObject]?, contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL , completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performBasicAuthRequest(url: String, method: HTTPMethod, parameters: [String: AnyObject]?, contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL , completionHandler: (returnValue: CoreResponse) -> ()) {
         Log.sharedLogger.debug("\(TAG): Entered performBasicAuthRequest")
-        Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: buildHeader(contentType) )
+        Alamofire.request(convertMethod(method), url, parameters: parameters, encoding: convertParameterEncoding(encoding), headers: buildHeader(contentType) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
@@ -229,11 +238,11 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performRequest(url: String, method: Alamofire.Method, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performRequest(url: String, method: HTTPMethod, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
     
         
         Log.sharedLogger.debug("CORE: Entered performRequest")
-        Alamofire.request(method, url, parameters: parameters)
+        Alamofire.request(convertMethod(method), url, parameters: parameters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performRequest.responseJSON")
@@ -251,7 +260,8 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+ 
         Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart")
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLENCODED),
             multipartFormData: { multipartFormData in
@@ -292,8 +302,56 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     // TODO: STILL IN PROGRESS
-    public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: Dictionary<String,String>, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+    
+        let data = NSData(contentsOfURL: fileURL)
+        var image = UIImage(data: data!)
+        if let image = UIImage(data: data!) {
+            Log.sharedLogger.error("Could not make the image from the NSURL")
+        }
+        
         Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload")
+        
+        
+        var x = urlRequestWithComponents(url,parameters: parameters,imageData: data!)
+        
+        
+        
+  
+        /*
+        
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
+        .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+        Log.sharedLogger.info("\(totalBytesWritten)")
+        // This closure is NOT called on the main queue for performance
+        dispatch_async(dispatch_get_main_queue()) {
+        Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
+        }
+        }
+        .validate(statusCode: 200..<300)
+        .responseJSON { response in
+        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
+        completionHandler( returnValue: self.handleResponse(response))
+        }
+        .responseString { response in
+        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseString")
+        completionHandler( returnValue: self.handleResponse(response))
+        }
+        }
+*/
+        
+        
+        Alamofire.upload(x.0, data: x.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseJSON { response in
+                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
+                completionHandler( returnValue: self.handleResponse(response))
+        }
+        
+        
+        
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
             .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
                 Log.sharedLogger.info("\(totalBytesWritten)")
@@ -340,10 +398,94 @@ public class NetworkUtils {
         }
     }
     
+    // this function creates the required URLRequestConvertible and NSData we need to use Alamofire.upload
+    func urlRequestWithComponents(urlString:String, parameters:[String: AnyObject], imageData: NSData ) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        let boundaryConstant = "myRandomBoundary12345";
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        // add image
+        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData(imageData)
+        
+        // add parameters
+        for (key, value) in parameters {
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
+    }
+    
+    /**
+    Converts the Core HTTP request to Alamofire.
+    
+    - parameter httpMethod: The method of POST, GET etc...
+    
+    - returns: Alamofire equivalent method
+    */
+    private func convertMethod(httpMethod: HTTPMethod)->Alamofire.Method {
+        var method = Alamofire.Method.GET
+        
+        switch(httpMethod) {
+        case HTTPMethod.POST:
+            method = Alamofire.Method.POST
+        case HTTPMethod.PUT:
+            method = Alamofire.Method.PUT
+        case HTTPMethod.GET:
+            method = Alamofire.Method.GET
+        case HTTPMethod.DELETE:
+            method = Alamofire.Method.DELETE
+            // should never make it here
+        default:
+            Log.sharedLogger.error("Cannot convert HTTP method")
+        }
+        
+        return method
+    }
+    
+    /**
+    Converts the core paramEncoding to alamofire version
+    
+    - parameter paramEncoding: Core param of JSON, URL ...
+    
+    - returns: Alamofire equivalent parameter
+    */
+    private func convertParameterEncoding(paramEncoding: ParameterEncoding)->Alamofire.ParameterEncoding {
+        var encoding = Alamofire.ParameterEncoding.URL
+        
+        switch(paramEncoding) {
+        case ParameterEncoding.URL:
+            encoding = Alamofire.ParameterEncoding.URL
+        case ParameterEncoding.URLEncodedInURL:
+            encoding = Alamofire.ParameterEncoding.URLEncodedInURL
+        case ParameterEncoding.JSON:
+            encoding = Alamofire.ParameterEncoding.JSON
+        default:
+            Log.sharedLogger.error("Cannot convert encoding parameter")
+        }
+        
+        return encoding
+    }
+    
+    
     /*
     private func handleResponse<T>(response: T)->CoreResponse {
         
-        
+    
         if((response is Response<AnyObject, NSError>)) {
             
         }

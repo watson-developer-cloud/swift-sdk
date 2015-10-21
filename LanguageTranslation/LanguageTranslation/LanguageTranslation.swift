@@ -8,7 +8,6 @@
 
 import WatsonCore
 import Foundation
-import Alamofire
 import ObjectMapper
 
 /// The IBM Watson Language Translation service translates text from one language

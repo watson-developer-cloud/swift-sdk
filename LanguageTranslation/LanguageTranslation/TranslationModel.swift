@@ -23,7 +23,7 @@ public struct TranslationModel : Mappable
     var target: String?
     
     public init?(_ map: Map) {}
-
+    
     public mutating func mapping(map: Map) {
         baseModelID     <- map["base_model_id"]
         customizable    <- map["customizable"]

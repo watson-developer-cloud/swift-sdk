@@ -11,15 +11,20 @@ import UIKit
 @testable import LanguageTranslation
 
 class LanguageTranslationTests: XCTestCase {
+
+    /// Language translation service
+    private let service = LanguageTranslation()
     
-    private let timeout = 60.0
-    //TODO: Move credentials to plist temporarily
-    //TODO: Before release, change credentials to use <insert-username-here>
-    private var service : LanguageTranslation = LanguageTranslation(username:"5aa00deb-96c9-4606-9765-5f590912f3ee",password:"eXUSONytMoDy")
+    /// Timeout for an asynchronous call to return before failing the unit test
+    private let timeout = 15.0
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
+            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
+                service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+            }
+        }
     }
     
     override func tearDown() {
@@ -49,7 +54,12 @@ class LanguageTranslationTests: XCTestCase {
         })
         
         service.identify("hola", callback:{(languages:[IdentifiedLanguage]) in
-            XCTAssertEqual(languages.first!.language,"es", "Expected 'hola' to be identified as 'es' language")
+            if let firstLanguage = languages.first {
+                XCTAssertEqual(firstLanguage.language,"es", "Expected 'hola' to be identified as 'es' language")
+            }
+            else {
+                XCTFail("Identified languages returned empty array")
+            }
             validExpectation.fulfill()
         })
         
@@ -61,12 +71,20 @@ class LanguageTranslationTests: XCTestCase {
         let modelExpectation = expectationWithDescription("Model Translation")
         
         service.translate(["Hello","House"],source:"en",target:"es",callback:{(text:[String]) in
+            if text.isEmpty {
+                XCTFail("Expected non-empty array to be returned")
+                return
+            }
             XCTAssertEqual(text.first!,"Hola","Expected hello to translate to hola")
             XCTAssertEqual(text.last!,"Casa","Expected house to translate to casa")
             sourceTargetExpectation.fulfill()
         })
         
         service.translate(["Hello"],modelID:"en-es",callback:{(text:[String]) in
+            if text.isEmpty {
+                XCTFail("Expected non-empty array to be returned")
+                return
+            }
             XCTAssertEqual(text.first!,"Hola","Expected hello to translate to Hola")
             modelExpectation.fulfill()
         })
@@ -111,10 +129,14 @@ class LanguageTranslationTests: XCTestCase {
         XCTAssertNotNil(fileURL)
         
         service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!, callback:{(model:TranslationModel?) in
-            XCTAssertNotNil(model, "Model returned by create model should not be nil")
+            guard let model = model else {
+                XCTFail("Expected non-nil model to be returned")
+//                deleteExpectation.fulfill()
+                return
+            }
             
             //Delete model after creating it
-            self.service.deleteModel(model!.modelID!, callback:{response in
+            self.service.deleteModel(model.modelID!, callback:{response in
                 deleteExpectation.fulfill()
             })
         })
@@ -149,7 +171,11 @@ class LanguageTranslationTests: XCTestCase {
         })
         
         service.getModel("en-es", callback:{(model:TranslationModel?) in
-            XCTAssertEqual(model!.modelID,"en-es","Expected to get en-es model")
+            guard let model = model else {
+                XCTFail("Expected non-nil model to be returned")
+                return
+            }
+            XCTAssertEqual(model.modelID,"en-es","Expected to get en-es model")
             expectation2.fulfill()
         })
         

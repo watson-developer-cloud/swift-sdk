@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31FF98E61BD0565D00520438 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */; };
+		BD1F26A01BD712AF004F856F /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD1F269F1BD712AF004F856F /* Test.plist */; settings = {ASSET_TAGS = (); }; };
 		BD308EC01BCF11520092763A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBD1BCF11520092763A /* Alamofire.framework */; };
 		BD308EC21BCF11520092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EBF1BCF11520092763A /* XCGLogger.framework */; };
 		BD308EC41BCF11750092763A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EC31BCF11750092763A /* WatsonCore.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BD1F269F1BD712AF004F856F /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
 		BD308EBD1BCF11520092763A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Frameworks/Alamofire.framework; sourceTree = "<group>"; };
 		BD308EBF1BCF11520092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		BD308EC31BCF11750092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		BDAED1C71BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDAED1CC1BBF57CA00BBF265 /* LanguageTranslationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTranslationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAED1D11BBF57CA00BBF265 /* LanguageTranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslationTests.swift; sourceTree = "<group>"; };
-		BDAED1D31BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDAED1D31BBF57CA00BBF265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LanguageTranslationTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		BDAED1E01BBF583100BBF265 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		BDAED1E11BBF583100BBF265 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
 		BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */,
 				BDAED1D11BBF57CA00BBF265 /* LanguageTranslationTests.swift */,
 				BDAED1D31BBF57CA00BBF265 /* Info.plist */,
+				BD1F269F1BD712AF004F856F /* Test.plist */,
 			);
 			path = LanguageTranslationTests;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1F26A01BD712AF004F856F /* Test.plist in Resources */,
 				31FF98E61BD0565D00520438 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

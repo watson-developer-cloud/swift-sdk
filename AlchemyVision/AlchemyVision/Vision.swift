@@ -30,6 +30,7 @@ public class VisionImpl: VisionService {
     /// your private api key
     private  var apiKey : String
     
+    /// Watson core instance
     private let utils: NetworkUtils
     
     public func setAPIKey(apiKey: String) {
@@ -60,13 +61,8 @@ public class VisionImpl: VisionService {
     */
     public func urlGetRankedImageKeywords(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
         
-        Log.sharedLogger.debug("Entered urlGetRankedImageKeywords")
-        
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
-        
-        var params = Dictionary<String,String>()
-        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
-        params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
+        var params = buildCommonParams()
         params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
         
         if(forceShowAll == true) {
@@ -78,7 +74,6 @@ public class VisionImpl: VisionService {
         }
         
         utils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-            Log.sharedLogger.debug("Entered urlGetRankedImageKeywords.callback")
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
         })
@@ -86,16 +81,9 @@ public class VisionImpl: VisionService {
     
     public func imageGetRankedImageKeywords(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
         
-        Log.sharedLogger.debug("Entered imageGetRankedImageKeywords")
-        
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
-        
-        var params = Dictionary<String,String>()
-        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
-        params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
+        var params = buildCommonParams()
         params.updateValue(AlchemyConstants.ImagePostMode.Raw.rawValue, forKey: AlchemyConstants.VisionURI.ImagePostMode.rawValue)
-        
-       // params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
         
         if(forceShowAll == true) {
             params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
@@ -105,8 +93,7 @@ public class VisionImpl: VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        utils.performBasicAuthFileUploadMultiPart(visionUrl, fileURLKey: "image", fileURL: fileURL, parameters: params, completionHandler: {response in
-            Log.sharedLogger.debug("Entered imageGetRankedImageKeywords.callback")
+        utils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
         })
@@ -114,13 +101,8 @@ public class VisionImpl: VisionService {
     
     public func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
         
-        Log.sharedLogger.debug("Entered urlGetRankedImageFaceTags")
-        
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
-        
-        var params = Dictionary<String,String>()
-        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
-        params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
+        var params = buildCommonParams()
         params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
         
         if(forceShowAll == true) {
@@ -132,7 +114,6 @@ public class VisionImpl: VisionService {
         }
         
         utils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
-            Log.sharedLogger.debug("Entered urlGetRankedImageKeywords.callback")
             let imageFaceTags = ImageFaceTags(anyObject: response.data)
             completionHandler(returnValue: imageFaceTags)
         })
@@ -140,6 +121,13 @@ public class VisionImpl: VisionService {
     
     internal func buildVisionURL(visionPrefix: AlchemyConstants.VisionPrefix, endPoint: String)->String {
         return (AlchemyConstants.Host + AlchemyConstants.Base + visionPrefix.rawValue + endPoint)
+    }
+    
+    private func buildCommonParams()->Dictionary<String, AnyObject> {
+        var params = Dictionary<String, AnyObject>()
+        params.updateValue(apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
+        params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
+        return params
     }
     
 }

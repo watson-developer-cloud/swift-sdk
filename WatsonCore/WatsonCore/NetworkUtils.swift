@@ -303,72 +303,21 @@ public class NetworkUtils {
     */
     // TODO: STILL IN PROGRESS
     public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
-    
-        let data = NSData(contentsOfURL: fileURL)
-        var image = UIImage(data: data!)
-        if let image = UIImage(data: data!) {
-            Log.sharedLogger.error("Could not make the image from the NSURL")
+        
+        // TODO: This is not optimal but I had to append the params to the url in order for this to work correctly.
+        // I will get back to looking into this at some point but want to get it working
+        
+        var appendedURL:String = ""
+        if parameters.count > 0 {
+            appendedURL = addQueryStringParameter(url, values: parameters);
         }
         
-        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload")
-        
-        
-        var x = urlRequestWithComponents(url,parameters: parameters,imageData: data!)
-        
-        
-        
-  
-        /*
-        
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
-        .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-        Log.sharedLogger.info("\(totalBytesWritten)")
-        // This closure is NOT called on the main queue for performance
-        dispatch_async(dispatch_get_main_queue()) {
-        Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
-        }
-        }
-        .validate(statusCode: 200..<300)
-        .responseJSON { response in
-        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
-        completionHandler( returnValue: self.handleResponse(response))
-        }
-        .responseString { response in
-        Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseString")
-        completionHandler( returnValue: self.handleResponse(response))
-        }
-        }
-*/
-        
-        
-        Alamofire.upload(x.0, data: x.1)
-            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-            }
-            .responseJSON { response in
-                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
-                completionHandler( returnValue: self.handleResponse(response))
-        }
-        
-        
-        
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(), file: fileURL)
-            .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-                Log.sharedLogger.info("\(totalBytesWritten)")
-                // This closure is NOT called on the main queue for performance
-                dispatch_async(dispatch_get_main_queue()) {
-                    Log.sharedLogger.info("Total bytes written on main queue: \(totalBytesWritten)")
-                }
-            }
+        Alamofire.upload(Alamofire.Method.POST, (appendedURL != "") ? appendedURL:url, headers: buildHeader(ContentType.URLENCODED), file: fileURL)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
             }
-            .responseString { response in
-                Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseString")
-                completionHandler( returnValue: self.handleResponse(response))
-        }
     }
     
     // TODO: Combine the two handleResponses
@@ -376,10 +325,10 @@ public class NetworkUtils {
         switch response.result {
         case .Success(let data):
             Log.sharedLogger.info("\(self.TAG): Successful Response")
-            let coreResponse = CoreResponse(anyObject: data, httpresponse: response.response!)
+            let coreResponse = CoreResponse(anyObject: data, httpresponse: (response.response != nil ? response.response! : nil))
             return coreResponse
         case .Failure(let error):
-            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
+            let coreResponse = CoreResponse(anyObject: error, httpresponse: (response.response != nil ? response.response! : nil))
             Log.sharedLogger.error("\(self.TAG): Failure Response")
             return coreResponse
         }
@@ -389,45 +338,13 @@ public class NetworkUtils {
         switch response.result {
         case .Success(let result):
             Log.sharedLogger.info("\(self.TAG): Successful Response")
-            let coreResponse = CoreResponse(anyObject: result, httpresponse: response.response!)
+            let coreResponse = CoreResponse(anyObject: result, httpresponse: (response.response != nil ? response.response! : nil))
             return coreResponse
         case .Failure(let error):
-            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
+            let coreResponse = CoreResponse(anyObject: error, httpresponse: (response.response != nil ? response.response! : nil))
             Log.sharedLogger.error("\(self.TAG): Failure Response")
             return coreResponse
         }
-    }
-    
-    // this function creates the required URLRequestConvertible and NSData we need to use Alamofire.upload
-    func urlRequestWithComponents(urlString:String, parameters:[String: AnyObject], imageData: NSData ) -> (URLRequestConvertible, NSData) {
-        
-        // create url request to send
-        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
-        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
-        let boundaryConstant = "myRandomBoundary12345";
-        let contentType = "multipart/form-data;boundary="+boundaryConstant
-        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        
-        // create upload data to send
-        let uploadData = NSMutableData()
-        
-        // add image
-        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData(imageData)
-        
-        // add parameters
-        for (key, value) in parameters {
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        }
-        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        
-        
-        // return URLRequestConvertible and NSData
-        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
     /**
@@ -455,6 +372,35 @@ public class NetworkUtils {
         }
         
         return method
+    }
+    
+    private func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
+        if let components = NSURLComponents(string: url),
+            var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
+                // Key doesn't exist if reaches here
+                if let v = value {
+                    // Add key to URL query string
+                    queryItems.append(NSURLQueryItem(name: key, value: v))
+                    components.queryItems = queryItems
+                    return components.string!
+                }
+        }
+        
+        return url
+    }
+    
+    private func addQueryStringParameter(url: String, values: [String: AnyObject]) -> String {
+        var newUrl = url
+        
+        for item in values {
+            if let anyObject:String = (item.1 as! String) {
+                newUrl = addOrUpdateQueryStringParameter(newUrl, key: item.0, value: anyObject)
+            }
+            else {
+                Log.sharedLogger.error("error in adding value to parameter \(item) to URL string")
+            }
+        }
+        return newUrl
     }
     
     /**

@@ -30,14 +30,18 @@ and the status code for the http response.
 public struct CoreResponse{
     
     // private capture of the response to report back with certain values to the caller
-    let httpResponse: NSHTTPURLResponse
+    let httpResponse: NSHTTPURLResponse!
     
     /// The data returned by the server.
     public let data: AnyObject!
     
     public var statusCode:Int {
         get {
-            return HTTPStatusCode(HTTPResponse: httpResponse)!.rawValue
+            var codeValue = 0
+            if (httpResponse != nil) {
+                codeValue = HTTPStatusCode(HTTPResponse: httpResponse)!.rawValue
+            }
+            return codeValue
         }
     }
     
@@ -53,7 +57,7 @@ public struct CoreResponse{
         }
     }
 
-    init(anyObject: AnyObject, httpresponse: NSHTTPURLResponse) {
+    init(anyObject: AnyObject, httpresponse: NSHTTPURLResponse!) {
         self.httpResponse = httpresponse
         self.data = anyObject
         Log.sharedLogger.verbose("\(anyObject)")

@@ -74,6 +74,31 @@ class AlchemyVisionTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
    
+    func testImageGetRankedImageKeywords(){
+        
+        let emptyExpectation = expectationWithDescription("Empty")
+        let validExpectation = expectationWithDescription("Valid")
+        
+        let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("emaxfpo", withExtension: "jpg")
+        XCTAssertNotNil(fileURL)
+
+        let invalidURL = NSURL(string: "http://nowayitworks.comm/")
+        XCTAssertNotNil(invalidURL)
+ 
+        serviceVision.imageGetRankedImageKeywords(invalidURL!, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
+            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
+            emptyExpectation.fulfill()
+        })
+        
+        serviceVision.imageGetRankedImageKeywords(fileURL!, completionHandler: { imageKeyWords in
+            XCTAssertEqual(4, imageKeyWords.totalTransactions, "Expected result with a total transaction of 4")
+            XCTAssertEqual(1,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 1")
+            validExpectation.fulfill()
+        })
+
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
     func testURLGetRankedImageFaceTags(){
         
         let emptyExpectation = expectationWithDescription("Empty")

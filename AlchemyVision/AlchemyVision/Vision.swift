@@ -79,6 +79,26 @@ public class VisionImpl: VisionService {
         })
     }
     
+    public func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
+        
+        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
+        var params = buildCommonParams()
+        params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
+        
+        if(forceShowAll == true) {
+            params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
+        }
+        
+        if(knowledgeGraph > 0) {
+            params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
+        }
+        
+        utils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
+            let imageFaceTags = ImageFaceTags(anyObject: response.data)
+            completionHandler(returnValue: imageFaceTags)
+        })
+    }
+    
     public func imageGetRankedImageKeywords(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
         
         let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
@@ -98,12 +118,12 @@ public class VisionImpl: VisionService {
             completionHandler(returnValue: imageKeyWords)
         })
     }
-    
-    public func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
+
+    public func imageGetRankedImageFaceTags(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
         
-        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
+        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue)
         var params = buildCommonParams()
-        params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
+        params.updateValue(AlchemyConstants.ImagePostMode.Raw.rawValue, forKey: AlchemyConstants.VisionURI.ImagePostMode.rawValue)
         
         if(forceShowAll == true) {
             params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
@@ -113,7 +133,7 @@ public class VisionImpl: VisionService {
             params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
         }
         
-        utils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
+        utils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
             let imageFaceTags = ImageFaceTags(anyObject: response.data)
             completionHandler(returnValue: imageFaceTags)
         })

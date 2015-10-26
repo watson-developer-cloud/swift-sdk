@@ -12,7 +12,7 @@ import XCTest
 import WatsonCore
 
 class AlchemyVisionTests: XCTestCase {
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: NSTimeInterval = 15.0
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"

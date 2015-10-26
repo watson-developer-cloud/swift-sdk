@@ -1,5 +1,5 @@
 //
-//  WatsonNetworkUtils.swift
+//  NetworkUtils.swift
 //  WatsonCore
 //
 //  Created by Karl Weinmeister on 9/16/15.
@@ -23,15 +23,20 @@ public enum ServiceType: String {
     case Alchemy = "gateway-a.watsonplatform.net"
 }
 
+/**
+Watson content types
+
+- Text: Plain text
+- JSON: JSON
+- XML: XML
+- URLEncoded: Form URL Encoded
+*/
 public enum ContentType: String {
     case Text =         "text/plain"
     case JSON =         "application/json"
     case XML =          "application/xml"
-    case URLENCODED =   "application/x-www-form-urlencoded"
+    case URLEncoded =   "application/x-www-form-urlencoded"
 }
-
-
-
 
 /**
 HTTP Methods used for REST operations
@@ -47,6 +52,11 @@ public enum HTTPMethod: String {
     case PUT
     case DELETE
     
+    /**
+    Converts enum value from Watson HTTP methods to Alamofire methods, so that projects don't have to import Alamofire
+    
+    - returns: Equivalent Alamofire method
+    */
     func toAlamofireMethod() -> Alamofire.Method
     {
         switch self {
@@ -62,6 +72,15 @@ public enum HTTPMethod: String {
     }
 }
 
+/**
+Enumeration of possible parameter encodings used in Watson iOS SDK
+
+- URL:                                 A query string to be set as or appended to any existing URL query for GET, HEAD, and DELETE requests, or set as the body for requests with any other HTTP method.
+- URLEncodedInURL:                    Creates query string to be set as or appended to any existing URL query.
+- JSON:                               Uses NSJSONSerialization to create a JSON representation of the parameters object, which is set as the body of the request.
+- PropertyList:                       Uses NSPropertyListSerialization to create a plist representation of the parameters object.
+- Custom->:                           Uses the associated closure value to construct a new request given an existing request and parameters.
+*/
 public enum ParameterEncoding {
     case URL
     case URLEncodedInURL
@@ -69,6 +88,11 @@ public enum ParameterEncoding {
     case PropertyList(NSPropertyListFormat, NSPropertyListWriteOptions)
     case Custom((URLRequestConvertible, [String: AnyObject]?) -> (NSMutableURLRequest, NSError?))
     
+    /**
+    Converts enum value from Watson parameter encodings to Alamofire encdogins, so that projects don't have to import Alamofire
+    
+    - returns: Equivalent Alamofire parameter encoding
+    */
     func toAlamofireParameterEncoding()->Alamofire.ParameterEncoding {
         switch(self) {
         case ParameterEncoding.URL:
@@ -294,7 +318,7 @@ public class NetworkUtils {
     public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
  
         Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart")
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLENCODED),
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
                     multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: key)
@@ -343,7 +367,7 @@ public class NetworkUtils {
             appendedURL = addQueryStringParameter(url, values: parameters);
         }
         
-        Alamofire.upload(Alamofire.Method.POST, (appendedURL != "") ? appendedURL:url, headers: buildHeader(ContentType.URLENCODED), file: fileURL)
+        Alamofire.upload(Alamofire.Method.POST, (appendedURL != "") ? appendedURL:url, headers: buildHeader(ContentType.URLEncoded), file: fileURL)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")

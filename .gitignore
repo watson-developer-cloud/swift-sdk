@@ -3,4 +3,4 @@ Carthage
 DerivedData
 Frameworks
 Cartfile.resolved
-**/Test.plist
+**/*Test*.plist

@@ -22,6 +22,7 @@
 		BD308EBC1BCF111C0092763A /* XCGLogger.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BD308EB61BCF11070092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC91BCF11A50092763A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EC81BCF11A50092763A /* WatsonCore.framework */; };
 		BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */; settings = {ASSET_TAGS = (); }; };
+		BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		BD308EB61BCF11070092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		BD308EC81BCF11A50092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = VisionTest.plist; sourceTree = "<group>"; };
+		BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mother-daughter.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */,
 				311980921BD3F2E70046EF85 /* emaxfpo.jpg */,
 				3179E2501BC1EA4000174C5A /* Info.plist */,
+				BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */,
 				BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */,
 			);
 			path = AlchemyVisionTests;
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */,
+				BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */,
 				311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

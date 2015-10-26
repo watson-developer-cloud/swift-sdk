@@ -30,6 +30,9 @@ public enum ContentType: String {
     case URLENCODED =   "application/x-www-form-urlencoded"
 }
 
+
+
+
 /**
 HTTP Methods used for REST operations
 
@@ -39,10 +42,24 @@ HTTP Methods used for REST operations
 - DELETE: Delete
 */
 public enum HTTPMethod: String {
-    case GET = "GET"
-    case POST = "POST"
-    case PUT = "PUT"
-    case DELETE = "DELETE"
+    case GET
+    case POST
+    case PUT
+    case DELETE
+    
+    func toAlamofireMethod() -> Alamofire.Method
+    {
+        switch self {
+        case .GET:
+            return Alamofire.Method.GET
+        case .POST:
+            return Alamofire.Method.POST
+        case .PUT:
+            return Alamofire.Method.PUT
+        case .DELETE:
+            return Alamofire.Method.DELETE
+        }
+    }
 }
 
 public enum ParameterEncoding {
@@ -51,6 +68,20 @@ public enum ParameterEncoding {
     case JSON
     case PropertyList(NSPropertyListFormat, NSPropertyListWriteOptions)
     case Custom((URLRequestConvertible, [String: AnyObject]?) -> (NSMutableURLRequest, NSError?))
+    
+    func toAlamofireParameterEncoding()->Alamofire.ParameterEncoding {
+        switch(self) {
+        case ParameterEncoding.URL:
+            return Alamofire.ParameterEncoding.URL
+        case ParameterEncoding.URLEncodedInURL:
+            return Alamofire.ParameterEncoding.URLEncodedInURL
+        case ParameterEncoding.JSON:
+            return Alamofire.ParameterEncoding.JSON
+        default:
+            Log.sharedLogger.error("Unexpected parameter encoding conversion")
+            return Alamofire.ParameterEncoding.URL
+        }
+    }
 }
 
 
@@ -217,7 +248,7 @@ public class NetworkUtils {
     */
     public func performBasicAuthRequest(url: String, method: HTTPMethod, parameters: [String: AnyObject]?, contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL , completionHandler: (returnValue: CoreResponse) -> ()) {
         Log.sharedLogger.debug("\(TAG): Entered performBasicAuthRequest")
-        Alamofire.request(convertMethod(method), url, parameters: parameters, encoding: convertParameterEncoding(encoding), headers: buildHeader(contentType) )
+        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .validate(statusCode: 200..<300)
             .responseJSON {response in
@@ -242,7 +273,7 @@ public class NetworkUtils {
     
         
         Log.sharedLogger.debug("CORE: Entered performRequest")
-        Alamofire.request(convertMethod(method), url, parameters: parameters)
+        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performRequest.responseJSON")
@@ -347,33 +378,6 @@ public class NetworkUtils {
         }
     }
     
-    /**
-    Converts the Core HTTP request to Alamofire.
-    
-    - parameter httpMethod: The method of POST, GET etc...
-    
-    - returns: Alamofire equivalent method
-    */
-    private func convertMethod(httpMethod: HTTPMethod)->Alamofire.Method {
-        var method = Alamofire.Method.GET
-        
-        switch(httpMethod) {
-        case HTTPMethod.POST:
-            method = Alamofire.Method.POST
-        case HTTPMethod.PUT:
-            method = Alamofire.Method.PUT
-        case HTTPMethod.GET:
-            method = Alamofire.Method.GET
-        case HTTPMethod.DELETE:
-            method = Alamofire.Method.DELETE
-            // should never make it here
-        default:
-            Log.sharedLogger.error("Cannot convert HTTP method")
-        }
-        
-        return method
-    }
-    
     private func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
             var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
@@ -403,31 +407,6 @@ public class NetworkUtils {
         return newUrl
     }
     
-    /**
-    Converts the core paramEncoding to alamofire version
-    
-    - parameter paramEncoding: Core param of JSON, URL ...
-    
-    - returns: Alamofire equivalent parameter
-    */
-    private func convertParameterEncoding(paramEncoding: ParameterEncoding)->Alamofire.ParameterEncoding {
-        var encoding = Alamofire.ParameterEncoding.URL
-        
-        switch(paramEncoding) {
-        case ParameterEncoding.URL:
-            encoding = Alamofire.ParameterEncoding.URL
-        case ParameterEncoding.URLEncodedInURL:
-            encoding = Alamofire.ParameterEncoding.URLEncodedInURL
-        case ParameterEncoding.JSON:
-            encoding = Alamofire.ParameterEncoding.JSON
-        default:
-            Log.sharedLogger.error("Cannot convert encoding parameter")
-        }
-        
-        return encoding
-    }
-    
-    
     /*
     private func handleResponse<T>(response: T)->CoreResponse {
         
@@ -441,84 +420,6 @@ public class NetworkUtils {
         }
     }
     */
-
-    /**
-    Invoke REST operation asynchronously and then call callback handler
-    - parameter request:  Request object populated from buildRequest()
-    - parameter callback: Callback handler to be invoked when a response is received
-    */
-    public func performRequest(request:NSURLRequest, callback:([String: AnyObject]!, NSError!)->()) {
-        
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error in
-            
-            guard error == nil else {
-                Log.sharedLogger.info("\(self.TAG) performRequest(): Error received when invoking operation - \(error?.localizedDescription)")
-                callback(nil, error)
-                return
-            }
-            
-            if let data = data {
-                do {
-                    let httpResponse = response as! NSHTTPURLResponse
-                    let contentType = httpResponse.allHeaderFields[self._httpContentTypeHeader] as? String
-                    
-                    //Missing contentType in header
-                    if contentType == nil {
-                        Log.sharedLogger.info("\(self.TAG) performRequest(): Response is missing content-type header")
-                        callback(nil,nil)
-                    }
-                        //Plain text
-                    else if contentType!.rangeOfString(ContentType.Text.rawValue) != nil {
-                        let returnVal = [ "rawData" : data]
-                        callback(returnVal, nil)
-                    }
-                        // XML wrapper
-                    else if contentType!.rangeOfString("application/xml") != nil {
-                        let returnVal = [ "rawData"  : data]
-                        callback(returnVal, nil)
-                    }
-                        //Unknown content type
-                    else if contentType!.rangeOfString(ContentType.JSON.rawValue) == nil {
-                        Log.sharedLogger.info("\(self.TAG) performRequest(): Unsupported content type returned: \(contentType!)")
-                        callback(nil,nil)
-                    }
-                        //JSON Dictionary
-                    else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
-                        
-                        if let _ = json["code"] as? String,  message = json["message"] as? String {
-                            let errorDetails = [NSLocalizedFailureReasonErrorKey: message]
-                            let error = NSError(domain: "NetworkUtils", code: 1, userInfo: errorDetails)
-                            callback( nil, error)
-                            return
-                        }
-                        callback(json, nil)
-                    }
-                        //JSON Array
-                    else if let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [AnyObject] {
-                        let returnVal = [ "dataArray" : json]
-                        callback(returnVal, nil)
-                    }
-                        //JSON Unknown Type
-                    else {
-                        let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                        Log.sharedLogger.info("\(self.TAG) performRequest(): Neither array nor dictionary type found in JSON response: \(dataString as! String) \(error)")
-                        let returnVal = [ "rawData" : data]
-                        callback(returnVal, nil)
-                    }
-                } catch let error as NSError {
-                    let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    Log.sharedLogger.info("\(self.TAG) performRequest(): \(dataString as! String) \(error)")
-                    callback(nil, error)
-                }
-                
-            } else {
-                Log.sharedLogger.info("\(self.TAG) performRequest(): No response data.")
-                callback(nil, nil)
-            }
-        })
-        task.resume()
-    }
     
     public func getEndpoints() -> JSON {
         

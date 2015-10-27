@@ -29,7 +29,7 @@ public class Service {
     
     public func getEndpoint(path:String) -> String {
         let endpoint = _protocol + "://" + _host + _serviceURL + path
-        Log.sharedLogger.info("getEndpoint(): \(endpoint)")
+        Log.sharedLogger.info("\(endpoint)")
         return endpoint
     }
     

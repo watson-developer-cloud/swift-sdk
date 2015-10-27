@@ -16,14 +16,18 @@ class LanguageTranslationTests: XCTestCase {
     private let service = LanguageTranslation()
     
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout = 15.0
+    private let timeout: NSTimeInterval = 30.0
     
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
             if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
                 service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+            } else {
+                XCTFail("Unable to extract dictionary from plist")
             }
+        } else {
+            XCTFail("Plist file not found")
         }
     }
     

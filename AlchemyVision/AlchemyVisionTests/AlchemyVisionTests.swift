@@ -12,7 +12,7 @@ import XCTest
 import WatsonCore
 
 class AlchemyVisionTests: XCTestCase {
-    private let timeout: NSTimeInterval = 15.0
+    private let timeout: NSTimeInterval = 30.0
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
@@ -25,13 +25,13 @@ class AlchemyVisionTests: XCTestCase {
     //    var test_image = './emaxfpo.jpg';
     
 
-    var serviceVision = VisionImpl( apiKey: "")
+    let serviceVision = VisionImpl()
     
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).URLForResource("VisionTest", withExtension: "plist") {
             if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                serviceVision.setAPIKey(dict["apikey"]!)
+                serviceVision._apiKey = dict["apikey"]!
             }
         }
         // Put setup code here. This method is called before the invocation of each test method in the class.

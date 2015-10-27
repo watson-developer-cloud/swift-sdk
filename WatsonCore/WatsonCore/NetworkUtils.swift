@@ -11,19 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 /**
-Watson service types
-
-- Streaming: Watson services using streaming, i.e. Text to Speech and Speech to Text
-- Standard: Other Watson services written by IBM team
-- Alchemy: Alchemy Watson services
-*/
-public enum ServiceType: String {
-    case Streaming = "stream.watsonplatform.net"
-    case Standard = "gateway.watsonplatform.net"
-    case Alchemy = "gateway-a.watsonplatform.net"
-}
-
-/**
 Watson content types
 
 - Text: Plain text
@@ -108,97 +95,22 @@ public enum ParameterEncoding {
     }
 }
 
+extension Request {
+    public func debugLog() -> Self {
+        #if DEBUG
+            debugPrint(self)
+        #endif
+        return self
+    }
+}
 
 /// Networking utilities used for performing REST operations into Watson services and parsing the input
 public class NetworkUtils {
-    private let TAG = "[Core] "
-    private var _debug: Bool = true
-    private let _httpContentTypeHeader = "Content-Type"
-    private let _httpAcceptHeader = "Accept"
-    private let _httpAuthorizationHeader = "Authorization"
-    private let _protocol = "https"
-    private var _host = ""
-    private var apiKey: String!
-    
-    /**
-    Initialize the networking utilities with a service type
-    
-    - parameter type: Service type
-    */
-    public init(type:ServiceType = ServiceType.Standard) {
-        configureHost(type)
-    }
-    
-    /**
-    Initialize the network utilities with a service type and authenticate
-    
-    - parameter username: username
-    - parameter password: password
-    - parameter type:     service type
-    
-    */
-    public init(username:String, password:String, type:ServiceType = ServiceType.Standard) {
-        setUsernameAndPassword(username, password: password)
-        configureHost(type)
-    }
-    
-    /**
-    Configures the host for service invocation
-    
-    - parameter type: service type
-    */
-    private func configureHost(type:ServiceType)
-    {
-        _host = type.rawValue
-    }
-    
-    /**
-    Sets the username and password on the service for invocation. Combines both together into an API Key.
-    
-    - parameter username: username
-    - parameter password: password
-    */
-    public func setUsernameAndPassword(username:String, password:String)
-    {
-        let authorizationString = username + ":" + password
-        apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
-        
-    }
-    
-    /**
-    Build up the request to be passed into a Watson service
-    
-    - parameter path:        Path to the service, not including hostname
-    - parameter method:      The HTTP method to use
-    - parameter queryParams: The HTTP query parameters
-    - parameter body:        The HTTP request body
-    - parameter textContent: If the
-    
-    - returns: A populated request object
-    */
-    public func buildRequest(path:String, method:HTTPMethod, body: NSData?, contentType: ContentType = ContentType.JSON, queryParams: NSDictionary? = nil, accept: ContentType = ContentType.JSON) -> NSURLRequest? {
-        
-        let endpoint = _protocol + "://" + _host + path + parseQueryParameters(queryParams)
-        
-        if let url = NSURL(string: endpoint) {
-            
-            let request = NSMutableURLRequest(URL: url)
-            
-            request.HTTPMethod = method.rawValue
-            request.addValue(apiKey, forHTTPHeaderField: _httpAuthorizationHeader)
-            request.addValue(accept.rawValue, forHTTPHeaderField: _httpAcceptHeader)
-            request.addValue(contentType.rawValue, forHTTPHeaderField: _httpContentTypeHeader)
-            Log.sharedLogger.debug("\(TAG): buildRequest(): Content Type = \(request.valueForHTTPHeaderField(_httpContentTypeHeader)!)")
-            
-            if let bodyData = body {
-                request.HTTPBody = bodyData
-            }
-            Log.sharedLogger.debug("\(self.TAG) buildRequest(): \(method.rawValue) \(endpoint)")
-            return request
-        }
-        Log.sharedLogger.info("\(self.TAG) buildRequest(): Invalid endpoint")
-        return nil
-    }
+    private static let TAG = "[Core] "
+    private static var _debug: Bool = true
+    private static let _httpContentTypeHeader = "Content-Type"
+    private static let _httpAcceptHeader = "Accept"
+    private static let _httpAuthorizationHeader = "Authorization"
     
     /**
     Helper function to create a URL encoded string for query parameters from a dictionary
@@ -207,7 +119,7 @@ public class NetworkUtils {
     
     - returns: URL encoded string that includes query parameters
     */
-    private func parseQueryParameters(queryParams: NSDictionary?) -> String {
+    private static func parseQueryParameters(queryParams: NSDictionary?) -> String {
         var paramString:String = ""
         if let params = queryParams {
             if params.count > 0 {
@@ -229,11 +141,6 @@ public class NetworkUtils {
         return escapedString
     }
     
-    public func buildEndpoint(endpoint: String)->String {
-        
-        return _protocol + "://" + _host + endpoint
-    }
-    
     /**
     This helper function will manipulate the header as needed for a proper payload
     
@@ -241,7 +148,7 @@ public class NetworkUtils {
     
     - returns: The manipulated string for properly invoking the web call
     */
-    private func buildHeader(contentType: ContentType = ContentType.JSON)-> [String: String]  {
+    private static func buildHeader(contentType: ContentType = ContentType.JSON, apiKey: String?)-> [String: String]  {
         Log.sharedLogger.debug("\(TAG): Entered buildHeader")
        
         var header = Dictionary<String, String>()
@@ -270,10 +177,11 @@ public class NetworkUtils {
     - parameter contentType:       This will switch the input and outout request from text or json
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performBasicAuthRequest(url: String, method: HTTPMethod, parameters: [String: AnyObject]?, contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL , completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String, completionHandler: (returnValue: CoreResponse) -> ()) {
         Log.sharedLogger.debug("\(TAG): Entered performBasicAuthRequest")
-        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType) )
+        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
+            .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON {response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthRequest.responseJSON")
@@ -293,11 +201,12 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performRequest(url: String, method: HTTPMethod, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject] = [:], completionHandler: (returnValue: CoreResponse) -> ()) {
     
         
         Log.sharedLogger.debug("CORE: Entered performRequest")
         Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters)
+            .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performRequest.responseJSON")
@@ -315,10 +224,10 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String, completionHandler: (returnValue: CoreResponse) -> ()) {
  
         Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUploadMultiPart")
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded),
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded, apiKey: apiKey),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
                     multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: key)
@@ -357,17 +266,15 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     // TODO: STILL IN PROGRESS
-    public func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject], completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         // TODO: This is not optimal but I had to append the params to the url in order for this to work correctly.
         // I will get back to looking into this at some point but want to get it working
         
-        var appendedURL:String = ""
-        if parameters.count > 0 {
-            appendedURL = addQueryStringParameter(url, values: parameters);
-        }
-        
-        Alamofire.upload(Alamofire.Method.POST, (appendedURL != "") ? appendedURL:url, headers: buildHeader(ContentType.URLEncoded), file: fileURL)
+        let appendedUrl = addQueryStringParameter(url,values:parameters)
+
+        Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded, apiKey: apiKey), file: fileURL)
+            .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 Log.sharedLogger.debug("\(self.TAG): Entered performBasicAuthFileUpload.responseJSON")
@@ -376,7 +283,7 @@ public class NetworkUtils {
     }
     
     // TODO: Combine the two handleResponses
-    private func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
+    private static func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let data):
             Log.sharedLogger.info("\(self.TAG): Successful Response")
@@ -389,7 +296,7 @@ public class NetworkUtils {
         }
     }
 
-    private func handleResponse(response: Response<String, NSError>)->CoreResponse {
+    private static func handleResponse(response: Response<String, NSError>)->CoreResponse {
         switch response.result {
         case .Success(let result):
             Log.sharedLogger.info("\(self.TAG): Successful Response")
@@ -402,7 +309,7 @@ public class NetworkUtils {
         }
     }
     
-    private func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
+    private static func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
             var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
                 // Key doesn't exist if reaches here
@@ -417,7 +324,7 @@ public class NetworkUtils {
         return url
     }
     
-    private func addQueryStringParameter(url: String, values: [String: AnyObject]) -> String {
+    private static func addQueryStringParameter(url: String, values: [String: AnyObject]) -> String {
         var newUrl = url
         
         for item in values {
@@ -445,7 +352,7 @@ public class NetworkUtils {
     }
     */
     
-    public func getEndpoints() -> JSON {
+    public static func getEndpoints() -> JSON {
         
         var jsonObj: JSON = JSON.null
         if let path = NSBundle.mainBundle().pathForResource("alchemy_endpoints", ofType: "json") {

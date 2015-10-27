@@ -8,15 +8,10 @@
 
 import Foundation
 
-
-
 /// The Constants needed for the input keys for the parameters
 public class AlchemyConstants
 {
-
-    public static let Host = "http://gateway-a.watsonplatform.net"
-    public static let Base = "/calls"
-
+    public static let visionServiceURL = "/calls"
     
     public enum VisionPrefix: String {
         case URL = "/url/"

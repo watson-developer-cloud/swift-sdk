@@ -12,40 +12,13 @@ import ObjectMapper
 
 /// The IBM Watson Language Translation service translates text from one language
 /// to another and identifies the language in which text is written.
-public class LanguageTranslation {
-    
+public class LanguageTranslation: Service {
+    private let _serviceURL = "/language-translation/api"    
     private let TAG = "[LanguageTranslation] "
-    private let _serviceURL = "/language-translation/api"
-    
-    private let utils = NetworkUtils()
-    
-    /**
-    Initialize the language translation service
-    */
-    public init() {}
-    
-    /**
-    Initialize the language translation service
-    
-    - parameter username: username
-    - parameter password: password
-    
-    */
-    public init(username:String,password:String) {
-        self.setUsernameAndPassword(username,password:password)
+
+    public init() {
+        super.init(serviceURL:_serviceURL)
     }
-    
-    /**
-    Set the username and password for the language translation service
-    
-    - parameter username: username
-    - parameter password: password
-    
-    */
-    public func setUsernameAndPassword(username:String, password:String) {
-        utils.setUsernameAndPassword(username,password:password)
-    }
-    
     
     /**
     Retrieves the list of identifiable languages
@@ -53,9 +26,9 @@ public class LanguageTranslation {
     - parameter callback: callback method that is invoked with the identifiable languages
     */
     public func getIdentifiableLanguages(callback: ([IdentifiableLanguage]?)->()) {
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identifiable_languages")
+        let endpoint = getEndpoint("/v2/identifiable_languages")
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
             
             var languages : [IdentifiableLanguage] = []
             
@@ -77,12 +50,12 @@ public class LanguageTranslation {
     - parameter callback: the callback method to be invoked with an array of identified languages in descending order of confidence
     */
     public func identify(text:String, callback: ([IdentifiedLanguage])->()) {
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/identify")
+        let endpoint = getEndpoint("/v2/identify")
         
         var params = Dictionary<String,String>()
         params.updateValue(text, forKey: "text")
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             var languages:[IdentifiedLanguage] = []
             if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
                 for rawLanguage in rawLanguages as! NSArray  {
@@ -128,7 +101,7 @@ public class LanguageTranslation {
     */
     private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String])->()) {
         
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/translate")
+        let endpoint = getEndpoint("/v2/translate")
         
         var params = [String : NSObject]()
         
@@ -144,7 +117,7 @@ public class LanguageTranslation {
         
         params[LanguageTranslationConstants.text] = text
         
-        utils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, apiKey: _apiKey, completionHandler: {response in
             var translations : [String] = []
             if let rawTranslations = response.data[LanguageTranslationConstants.translations] {
                 for rawTranslation in rawTranslations as! NSArray  {
@@ -167,7 +140,7 @@ public class LanguageTranslation {
     */
     public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel])->())
     {
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models")
+        let endpoint = getEndpoint("/v2/models")
         
         var params = Dictionary<String,String>()
         if let source = source {
@@ -180,7 +153,7 @@ public class LanguageTranslation {
             params.updateValue(String(stringInterpolationSegment: defaultModel), forKey: LanguageTranslationConstants.defaultStr)
         }
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             var models : [TranslationModel] = []
             
             if let rawModels = response.data[LanguageTranslationConstants.models] {
@@ -202,9 +175,9 @@ public class LanguageTranslation {
     */
     public func getModel(modelID: String, callback: (TranslationModel?)->())
     {
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
+        let endpoint = getEndpoint("/v2/models/\(modelID)")
         
-        utils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
             return callback(Mapper<TranslationModel>().map(response.data))
         })
     }
@@ -225,8 +198,8 @@ public class LanguageTranslation {
             queryParams.updateValue(name, forKey: LanguageTranslationConstants.name)
         }
         
-        let request = utils.buildEndpoint(_serviceURL + "/v2/models")
-        utils.performBasicAuthFileUploadMultiPart(request, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, completionHandler: {response in
+        let endpoint = getEndpoint("/v2/models")
+        NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, apiKey: _apiKey, completionHandler: {response in
             callback(Mapper<TranslationModel>().map(response.data))
         })
     }
@@ -239,9 +212,9 @@ public class LanguageTranslation {
     */
     public func deleteModel(modelID: String, callback: (Bool?)->())
     {
-        let endpoint = utils.buildEndpoint(_serviceURL + "/v2/models/\(modelID)")
+        let endpoint = getEndpoint("/v2/models/\(modelID)")
         
-        utils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], completionHandler: {response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], apiKey: _apiKey, completionHandler: {response in
             return callback(response.statusInfo == CoreResponseEnum.Ok.rawValue)
         })
     }

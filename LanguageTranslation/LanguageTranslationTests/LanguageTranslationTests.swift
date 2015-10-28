@@ -7,11 +7,9 @@
 //
 
 import XCTest
-import UIKit
 @testable import LanguageTranslation
 
 class LanguageTranslationTests: XCTestCase {
-
     /// Language translation service
     private let service = LanguageTranslation()
     

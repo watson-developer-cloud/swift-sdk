@@ -9,7 +9,7 @@
 import Foundation
 
 /// The Constants needed for the input keys for the parameters
-public class AlchemyConstants
+public class VisionConstants
 {
     public static let visionServiceURL = "/calls"
     

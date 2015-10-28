@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD20F94C1BE177D8000041B8 /* Trait.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20F94B1BE177D8000041B8 /* Trait.swift */; };
+		BD20F94E1BE17CFC000041B8 /* PersonalityInsightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20F94D1BE17CFC000041B8 /* PersonalityInsightsConstants.swift */; };
 		BD5C90C11BE04F7A00EA13DE /* PersonalityInsights.h in Headers */ = {isa = PBXBuildFile; fileRef = BD5C90C01BE04F7A00EA13DE /* PersonalityInsights.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BD5C90C81BE04F7A00EA13DE /* PersonalityInsights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90BD1BE04F7A00EA13DE /* PersonalityInsights.framework */; settings = {ASSET_TAGS = (); }; };
+		BD5C90C81BE04F7A00EA13DE /* PersonalityInsights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90BD1BE04F7A00EA13DE /* PersonalityInsights.framework */; };
 		BD5C90CD1BE04F7A00EA13DE /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90CC1BE04F7A00EA13DE /* PersonalityInsightsTests.swift */; };
-		BD5C90D91BE04FB400EA13DE /* PersonalityInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90D81BE04FB400EA13DE /* PersonalityInsights.swift */; settings = {ASSET_TAGS = (); }; };
-		BD5C90DB1BE0634300EA13DE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90DA1BE0634300EA13DE /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
-		BD5C90DD1BE0658400EA13DE /* PersonalityInsightsTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD5C90DC1BE0658400EA13DE /* PersonalityInsightsTests.plist */; settings = {ASSET_TAGS = (); }; };
+		BD5C90D91BE04FB400EA13DE /* PersonalityInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90D81BE04FB400EA13DE /* PersonalityInsights.swift */; };
+		BD5C90DB1BE0634300EA13DE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90DA1BE0634300EA13DE /* Profile.swift */; };
+		BD5C90DD1BE0658400EA13DE /* PersonalityInsightsTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD5C90DC1BE0658400EA13DE /* PersonalityInsightsTests.plist */; };
 		BD5C90EE1BE0682C00EA13DE /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90ED1BE0682C00EA13DE /* WatsonCore.framework */; };
-		BD5C90F11BE06AD300EA13DE /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90F01BE06AD300EA13DE /* ObjectMapper.framework */; settings = {ASSET_TAGS = (); }; };
+		BD5C90F11BE06AD300EA13DE /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90F01BE06AD300EA13DE /* ObjectMapper.framework */; };
 		BD5C90F21BE06AE100EA13DE /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5C90F01BE06AD300EA13DE /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BD5C90F41BE06B9400EA13DE /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90F31BE06B9400EA13DE /* XCGLogger.framework */; settings = {ASSET_TAGS = (); }; };
+		BD5C90F41BE06B9400EA13DE /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90F31BE06B9400EA13DE /* XCGLogger.framework */; };
 		BD5C90F71BE070CA00EA13DE /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5C90F31BE06B9400EA13DE /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BD20F94B1BE177D8000041B8 /* Trait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trait.swift; sourceTree = "<group>"; };
+		BD20F94D1BE17CFC000041B8 /* PersonalityInsightsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsConstants.swift; sourceTree = "<group>"; };
 		BD5C90BD1BE04F7A00EA13DE /* PersonalityInsights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PersonalityInsights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD5C90C01BE04F7A00EA13DE /* PersonalityInsights.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalityInsights.h; sourceTree = "<group>"; };
 		BD5C90C21BE04F7A00EA13DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				BD5C90C01BE04F7A00EA13DE /* PersonalityInsights.h */,
 				BD5C90C21BE04F7A00EA13DE /* Info.plist */,
 				BD5C90D81BE04FB400EA13DE /* PersonalityInsights.swift */,
+				BD20F94D1BE17CFC000041B8 /* PersonalityInsightsConstants.swift */,
 			);
 			path = PersonalityInsights;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				BD5C90DA1BE0634300EA13DE /* Profile.swift */,
+				BD20F94B1BE177D8000041B8 /* Trait.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -250,6 +256,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD5C90D91BE04FB400EA13DE /* PersonalityInsights.swift in Sources */,
+				BD20F94E1BE17CFC000041B8 /* PersonalityInsightsConstants.swift in Sources */,
+				BD20F94C1BE177D8000041B8 /* Trait.swift in Sources */,
 				BD5C90DB1BE0634300EA13DE /* Profile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +448,7 @@
 				BD5C90D31BE04F7A00EA13DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD5C90D41BE04F7A00EA13DE /* Build configuration list for PBXNativeTarget "PersonalityInsightsTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +457,7 @@
 				BD5C90D61BE04F7A00EA13DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 public struct Profile: Mappable {
-    //var tree:TraitTreeNode?
+    var tree:Trait?
     var ID:String?
     var source:String?
     var wordCount:Int?
@@ -25,5 +25,6 @@ public struct Profile: Mappable {
         wordCount           <- map["word_count"]
         wordCountMessage    <- map["word_count_message"]
         processedLang       <- map["processed_lang"]
+        tree                <- map["tree"]
     }
 }

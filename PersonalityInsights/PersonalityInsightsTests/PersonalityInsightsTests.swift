@@ -31,20 +31,22 @@ class PersonalityInsightsTests: XCTestCase {
         }
     }
     
-    func testProfile() {
+    func testProfileWithTextInput() {
         let notEnoughWords = expectationWithDescription("NotEnoughWords")
         let valid = expectationWithDescription("Valid")
         
         let text = "Call me Ishmael. Some years ago-never mind how long precisely-having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off-then, I account it high time to get to sea as soon as I can."
         
         service.getProfile(text, callback:{(profile:Profile?) in
+            //TODO: Add check for error description
             notEnoughWords.fulfill()
         })
 
         service.getProfile(inputText!, callback:{(profile:Profile?) in
+            XCTAssertNotNil(profile,"Profile should not be nil")
+            XCTAssertEqual("root",profile!.tree!.name,"Tree root should be named root")
             valid.fulfill()
         })
-        
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }

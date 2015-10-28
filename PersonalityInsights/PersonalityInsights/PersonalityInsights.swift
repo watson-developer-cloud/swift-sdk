@@ -23,28 +23,20 @@ public class PersonalityInsights: Service {
     
     - parameter callback: callback method that is invoked with the identifiable languages
     */
-    public func getProfile(text:String, callback: (Profile?)->()) {
+    public func getProfile(text:String, includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?)->()) {
         //TODO: If not enough words, let the SDK user know
         //TODO: Figure out why description printout of the error gives a short version, i.e. 400 - bad request rather than the real error
-        //TODO: Swift 7.1
-        //TODO: Additional parameters, support JSON, etc.
         let endpoint = getEndpoint("/v2/profile")
         
         var params = Dictionary<String, AnyObject>()
-        params.updateValue(text, forKey: "text")
+        params.updateValue(text, forKey: PersonalityInsightsConstants.text)
+        params.updateValue(language, forKey: PersonalityInsightsConstants.language)
+        params.updateValue(acceptLanguage, forKey: PersonalityInsightsConstants.acceptLanguage)
+        params.updateValue(includeRaw, forKey: PersonalityInsightsConstants.includeRaw)
+        
         NetworkUtils.performBasicAuthRequest(endpoint, method: HTTPMethod.POST, contentType:ContentType.Text, parameters: params, apiKey: _apiKey, completionHandler: {response in
-            let profile = Mapper<Profile>().map(response.data)
+            let profile = Mapper<Profile>().map(response.data as! String)
             callback(profile)
-//            var languages : [IdentifiableLanguage] = []
-//            
-//            if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
-//                for rawLanguage in rawLanguages as! NSArray {
-//                    if let language = Mapper<IdentifiableLanguage>().map(rawLanguage) {
-//                        languages.append(language)
-//                    }
-//                }
-//            }
-//            callback(languages)
         })
     }
     

@@ -21,6 +21,7 @@
 		BD308EBB1BCF111C0092763A /* SwiftyJSON.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BD308EB51BCF11070092763A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EBC1BCF111C0092763A /* XCGLogger.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BD308EB61BCF11070092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC91BCF11A50092763A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EC81BCF11A50092763A /* WatsonCore.framework */; };
+		BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */; settings = {ASSET_TAGS = (); }; };
 		BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		BD308EB51BCF11070092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
 		BD308EB61BCF11070092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		BD308EC81BCF11A50092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = VisionTest.plist; sourceTree = "<group>"; };
 		BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mother-daughter.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 				31BCE5FE1BC1EF4F00756343 /* Models */,
 				3179E2441BC1EA4000174C5A /* Info.plist */,
 				31BCE6081BC1EF6000756343 /* Vision.swift */,
+				BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */,
 			);
 			path = AlchemyVision;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */,
 				3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */,
 				316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */,
+				BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

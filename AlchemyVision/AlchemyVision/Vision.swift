@@ -25,12 +25,10 @@ public protocol VisionService
 
 public class VisionImpl: Service, VisionService {
     
-    private let TAG = "[VISION] "
-    
     public init() {
-        super.init(type:ServiceType.Alchemy, serviceURL:AlchemyConstants.visionServiceURL)
+        super.init(type:ServiceType.Alchemy, serviceURL:VisionConstants.visionServiceURL)
     }
-
+    
     public convenience init(apiKey:String) {
         self.init()
         _apiKey = apiKey
@@ -46,19 +44,10 @@ public class VisionImpl: Service, VisionService {
     */
     public func urlGetRankedImageKeywords(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
         
-        let visionUrl = getEndpoint(AlchemyConstants.VisionPrefix.URL.rawValue + AlchemyConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
+        let visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
         
-//        buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
-        var params = buildCommonParams()
-        params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
-        
-        if(forceShowAll == true) {
-            params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
-        
-        if(knowledgeGraph > 0) {
-            params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
+        var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+        params.updateValue(url, forKey: VisionConstants.WatsonURI.URL.rawValue)
         
         NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
@@ -67,21 +56,11 @@ public class VisionImpl: Service, VisionService {
     }
     
     public func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
-
-        let visionUrl = getEndpoint(AlchemyConstants.VisionPrefix.URL.rawValue + AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
-
         
-//        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.URL, endPoint: AlchemyConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
-        var params = buildCommonParams()
-        params.updateValue(url, forKey: AlchemyConstants.WatsonURI.URL.rawValue)
+        let visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + VisionConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
         
-        if(forceShowAll == true) {
-            params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
-        
-        if(knowledgeGraph > 0) {
-            params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
+        var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+        params.updateValue(url, forKey: VisionConstants.WatsonURI.URL.rawValue)
         
         NetworkUtils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
             let imageFaceTags = ImageFaceTags(anyObject: response.data)
@@ -90,43 +69,25 @@ public class VisionImpl: Service, VisionService {
     }
     
     public func imageGetRankedImageKeywords(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
-
-        let visionUrl = getEndpoint(AlchemyConstants.VisionPrefix.Image.rawValue + AlchemyConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
         
-//        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
-        var params = buildCommonParams()
-        params.updateValue(AlchemyConstants.ImagePostMode.Raw.rawValue, forKey: AlchemyConstants.VisionURI.ImagePostMode.rawValue)
+        let visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
         
-        if(forceShowAll == true) {
-            params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
+        var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+        params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
         
-        if(knowledgeGraph > 0) {
-            params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
-
         NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, apiKey: _apiKey, completionHandler: {response in
             
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
         })
     }
-
+    
     public func imageGetRankedImageFaceTags(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
-
-        let visionUrl = getEndpoint(AlchemyConstants.VisionPrefix.Image.rawValue + AlchemyConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue)
         
-//        let visionUrl = buildVisionURL(AlchemyConstants.VisionPrefix.Image,  endPoint: AlchemyConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue)
-        var params = buildCommonParams()
-        params.updateValue(AlchemyConstants.ImagePostMode.Raw.rawValue, forKey: AlchemyConstants.VisionURI.ImagePostMode.rawValue)
+        let visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue)
         
-        if(forceShowAll == true) {
-            params.updateValue(forceShowAll.hashValue.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
-        
-        if(knowledgeGraph > 0) {
-            params.updateValue(knowledgeGraph.description, forKey: AlchemyConstants.VisionURI.ForceShowAll.rawValue)
-        }
+        var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+        params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
         
         NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, apiKey: _apiKey, completionHandler: {response in
             let imageFaceTags = ImageFaceTags(anyObject: response.data)
@@ -134,16 +95,27 @@ public class VisionImpl: Service, VisionService {
         })
     }
     
-//    internal func buildVisionURL(visionPrefix: AlchemyConstants.VisionPrefix, endPoint: String)->String {
-//        return (AlchemyConstants.Host + AlchemyConstants.Base + visionPrefix.rawValue + endPoint)
-//    }
+    /**
+    Constructs a dictionary of parameters used in all Alchemy Vision API calls
     
-    private func buildCommonParams()->Dictionary<String, AnyObject> {
+    - parameter forceShowAll:   Includes lower confidence tags
+    - parameter knowledgeGraph: Include knowledge graph information in the the results
+    
+    - returns: Dictionary of parameters common to all Alchemy Vision API calls
+    */
+    private func buildCommonParams(forceShowAll:Bool, knowledgeGraph:Int8)->Dictionary<String, AnyObject> {
         var params = Dictionary<String, AnyObject>()
-        params.updateValue(_apiKey, forKey: AlchemyConstants.WatsonURI.APIKey.rawValue)
-        params.updateValue(AlchemyConstants.OutputMode.JSON.rawValue, forKey: AlchemyConstants.VisionURI.OutputMode.rawValue)
+        params.updateValue(_apiKey, forKey: VisionConstants.WatsonURI.APIKey.rawValue)
+        params.updateValue(VisionConstants.OutputMode.JSON.rawValue, forKey: VisionConstants.VisionURI.OutputMode.rawValue)
+        
+        if(forceShowAll == true) {
+            params.updateValue(forceShowAll.hashValue.description, forKey: VisionConstants.VisionURI.ForceShowAll.rawValue)
+        }
+        
+        if(knowledgeGraph > 0) {
+            params.updateValue(knowledgeGraph.description, forKey: VisionConstants.VisionURI.ForceShowAll.rawValue)
+        }
+        
         return params
     }
-    
 }
-

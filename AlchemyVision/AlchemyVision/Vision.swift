@@ -75,7 +75,7 @@ public class VisionImpl: Service, VisionService {
         var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
         params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
         
-        NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, apiKey: _apiKey, completionHandler: {response in
+        NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
             
             let imageKeyWords = ImageKeyWords(anyObject: response.data)
             completionHandler(returnValue: imageKeyWords)
@@ -89,7 +89,7 @@ public class VisionImpl: Service, VisionService {
         var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
         params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
         
-        NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, apiKey: _apiKey, completionHandler: {response in
+        NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
             let imageFaceTags = ImageFaceTags(anyObject: response.data)
             completionHandler(returnValue: imageFaceTags)
         })

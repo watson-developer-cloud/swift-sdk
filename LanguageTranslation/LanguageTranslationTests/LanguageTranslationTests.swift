@@ -16,7 +16,7 @@ class LanguageTranslationTests: XCTestCase {
     private let service = LanguageTranslation()
     
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: NSTimeInterval = 60.0
     
     override func setUp() {
         super.setUp()

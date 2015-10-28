@@ -17,6 +17,7 @@ public enum CoreResponseEnum: String {
     case StatusInfo = "statusInfo"
     case ErrorCode = "error_code"
     case ErrorMessage = "error_message"
+    case ErrorMessage2 = "error"
     case Ok = "Ok"
     case Error = "Error"
     case Unknown = "Unknown"
@@ -27,7 +28,7 @@ public enum CoreResponseEnum: String {
 *  The Main response back for Watson Core.  It will contain the status, status info
 and the status code for the http response.
 */
-public struct CoreResponse{
+public struct CoreResponse: CustomStringConvertible {
     
     // private capture of the response to report back with certain values to the caller
     let httpResponse: NSHTTPURLResponse!
@@ -56,6 +57,10 @@ public struct CoreResponse{
             return _statusInfo
         }
     }
+    
+    public var description: String {
+        return "\(statusInfo)"
+    }
 
     init(anyObject: AnyObject, httpresponse: NSHTTPURLResponse!) {
         self.httpResponse = httpresponse
@@ -69,8 +74,11 @@ public struct CoreResponse{
             var returnData = JSON(anyObject)
             // Alchemy
             if let statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].string {self._statusInfo = statusInfo}
-            // Language
+            // Watson
             else if let statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].string {self._statusInfo = statusInfo}
+            // Some Watson services
+            else if let statusInfo = returnData[CoreResponseEnum.ErrorMessage2.rawValue].string {self._statusInfo = statusInfo}
         }
+        Log.sharedLogger.debug(description)
     }
 }

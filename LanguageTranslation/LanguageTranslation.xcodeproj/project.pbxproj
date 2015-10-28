@@ -50,8 +50,8 @@
 
 /* Begin PBXFileReference section */
 		BD1F269F1BD712AF004F856F /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
-		BD308EBF1BCF11520092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
-		BD308EC31BCF11750092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		BD308EBF1BCF11520092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
+		BD308EC31BCF11750092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		BD3699551BD5C8EE007DB2EC /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
 		BDAED1C21BBF57CA00BBF265 /* LanguageTranslation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageTranslation.h; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		BDAED1E11BBF583100BBF265 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
 		BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
 		BDAFBF4C1BC31C56008ECC69 /* LanguageTranslationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationConstants.swift; sourceTree = "<group>"; };
-		BDF92BA41BD6DEB500C6A17C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
+		BDF92BA41BD6DEB500C6A17C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
 		BDFD8C4B1BC33D6F009AE187 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,12 +89,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BDAED1B81BBF57CA00BBF265 = {
+		BD5C90EF1BE06A2200EA13DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				BD308EC31BCF11750092763A /* WatsonCore.framework */,
 				BDF92BA41BD6DEB500C6A17C /* ObjectMapper.framework */,
 				BD308EBF1BCF11520092763A /* XCGLogger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BDAED1B81BBF57CA00BBF265 = {
+			isa = PBXGroup;
+			children = (
 				BDAED1C41BBF57CA00BBF265 /* LanguageTranslation */,
 				BDAED1D01BBF57CA00BBF265 /* LanguageTranslationTests */,
 				BDAED1C31BBF57CA00BBF265 /* Products */,
@@ -113,6 +120,7 @@
 		BDAED1C41BBF57CA00BBF265 /* LanguageTranslation */ = {
 			isa = PBXGroup;
 			children = (
+				BD5C90EF1BE06A2200EA13DE /* Frameworks */,
 				BDFD8C481BC33704009AE187 /* Models */,
 				BDAED1E21BBF583100BBF265 /* LanguageTranslation.swift */,
 				BDAED1C51BBF57CA00BBF265 /* LanguageTranslation.h */,

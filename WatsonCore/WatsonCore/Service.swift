@@ -22,7 +22,7 @@ public enum ServiceType: String {
 }
 
 public class Service {
-    private let _protocol = "https"
+    private let _protocol = "http"
     private let _host: String
     private let _serviceURL: String
     public var _apiKey: String!

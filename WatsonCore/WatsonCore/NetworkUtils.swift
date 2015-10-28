@@ -108,7 +108,7 @@ public class NetworkUtils {
     
     - returns: The manipulated string for properly invoking the web call
     */
-    private static func buildHeader(contentType: ContentType = ContentType.JSON, apiKey: String? = nil)-> [String: String]  {
+    private static func buildHeader(contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, apiKey: String? = nil)-> [String: String]  {
         Log.sharedLogger.debug("Entered buildHeader")
        
         var header = Dictionary<String, String>()
@@ -120,7 +120,7 @@ public class NetworkUtils {
             return [:]
         }
         
-        guard (header.updateValue(contentType.rawValue, forKey: _httpAcceptHeader) == nil) else {
+        guard (header.updateValue(accept.rawValue, forKey: _httpAcceptHeader) == nil) else {
             Log.sharedLogger.error("Error adding Accept info in header")
             return [:]
         }
@@ -137,14 +137,14 @@ public class NetworkUtils {
     - parameter contentType:       This will switch the input and outout request from text or json
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Log.sharedLogger.debug("Entered performBasicAuthRequest")
 
-        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType, apiKey: apiKey) )
+        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .debugLog()
-            .validate(statusCode: 200..<300)
+//            .validate()
             .responseJSON {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
@@ -169,7 +169,7 @@ public class NetworkUtils {
         
         Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters)
             .debugLog()
-            .validate(statusCode: 200..<300)
+//            .validate()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performRequest.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
@@ -186,11 +186,11 @@ public class NetworkUtils {
     - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
-    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
  
         Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart")
         
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded, apiKey: apiKey),
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey: apiKey),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
                     multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: key)
@@ -229,16 +229,16 @@ public class NetworkUtils {
     - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
     */
     // TODO: STILL IN PROGRESS
-    public static func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         // TODO: This is not optimal but I had to append the params to the url in order for this to work correctly.
         // I will get back to looking into this at some point but want to get it working
         
         let appendedUrl = addQueryStringParameter(url,values:parameters)
 
-        Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded), file: fileURL)
+        Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey:apiKey), file: fileURL)
             .debugLog()
-            .validate(statusCode: 200..<300)
+//            .validate()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
@@ -282,8 +282,7 @@ public class NetworkUtils {
                     components.queryItems = queryItems
                     return components.string!
                 }
-        }
-        
+        }        
         return url
     }
     

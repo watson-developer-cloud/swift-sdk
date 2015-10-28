@@ -64,9 +64,9 @@
 		3179E2501BC1EA4000174C5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWord.swift; sourceTree = "<group>"; };
 		31BCE6081BC1EF6000756343 /* Vision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
-		BD308EB51BCF11070092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
-		BD308EB61BCF11070092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
-		BD308EC81BCF11A50092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		BD308EB51BCF11070092763A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../../Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
+		BD308EB61BCF11070092763A /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
+		BD308EC81BCF11A50092763A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = VisionTest.plist; sourceTree = "<group>"; };
 		BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mother-daughter.jpg"; sourceTree = "<group>"; };
@@ -97,9 +97,6 @@
 		3179E2351BC1EA4000174C5A = {
 			isa = PBXGroup;
 			children = (
-				BD308EC81BCF11A50092763A /* WatsonCore.framework */,
-				BD308EB51BCF11070092763A /* SwiftyJSON.framework */,
-				BD308EB61BCF11070092763A /* XCGLogger.framework */,
 				3179E2411BC1EA4000174C5A /* AlchemyVision */,
 				3179E24D1BC1EA4000174C5A /* AlchemyVisionTests */,
 				3179E2401BC1EA4000174C5A /* Products */,
@@ -118,6 +115,7 @@
 		3179E2411BC1EA4000174C5A /* AlchemyVision */ = {
 			isa = PBXGroup;
 			children = (
+				BD5C90DE1BE066BB00EA13DE /* Frameworks */,
 				3179E2421BC1EA4000174C5A /* AlchemyVision.h */,
 				31BCE5FE1BC1EF4F00756343 /* Models */,
 				3179E2441BC1EA4000174C5A /* Info.plist */,
@@ -148,6 +146,16 @@
 				316E5FB11BD6C48200EC4A68 /* ImageFace.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BD5C90DE1BE066BB00EA13DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD308EC81BCF11A50092763A /* WatsonCore.framework */,
+				BD308EB51BCF11070092763A /* SwiftyJSON.framework */,
+				BD308EB61BCF11070092763A /* XCGLogger.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

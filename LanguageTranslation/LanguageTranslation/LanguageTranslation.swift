@@ -13,9 +13,9 @@ import ObjectMapper
 /// The IBM Watson Language Translation service translates text from one language
 /// to another and identifies the language in which text is written.
 public class LanguageTranslation: Service {
-    private let _serviceURL = "/language-translation/api"    
+    private let _serviceURL = "/language-translation/api"
     private let TAG = "[LanguageTranslation] "
-
+    
     public init() {
         super.init(serviceURL:_serviceURL)
     }
@@ -32,8 +32,8 @@ public class LanguageTranslation: Service {
             
             var languages : [IdentifiableLanguage] = []
             
-            if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
-                for rawLanguage in rawLanguages as! NSArray {
+            if case let rawLanguages as NSArray = response.data[LanguageTranslationConstants.languages] {
+                for rawLanguage in rawLanguages {
                     if let language = Mapper<IdentifiableLanguage>().map(rawLanguage) {
                         languages.append(language)
                     }
@@ -57,8 +57,9 @@ public class LanguageTranslation: Service {
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             var languages:[IdentifiedLanguage] = []
-            if let rawLanguages = response.data[LanguageTranslationConstants.languages] {
-                for rawLanguage in rawLanguages as! NSArray  {
+            
+            if case let rawLanguages as NSArray = response.data[LanguageTranslationConstants.languages] {
+                for rawLanguage in rawLanguages {
                     if let language = Mapper<IdentifiedLanguage>().map(rawLanguage) {
                         languages.append(language)
                     }
@@ -119,8 +120,8 @@ public class LanguageTranslation: Service {
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, encoding: ParameterEncoding.JSON, apiKey: _apiKey, completionHandler: {response in
             var translations : [String] = []
-            if let rawTranslations = response.data[LanguageTranslationConstants.translations] {
-                for rawTranslation in rawTranslations as! NSArray  {
+            if case let rawTranslations as NSArray = response.data[LanguageTranslationConstants.translations] {
+                for rawTranslation in rawTranslations {
                     if let translation = rawTranslation[LanguageTranslationConstants.translation] {
                         translations.append(translation as! String)
                     }
@@ -156,8 +157,8 @@ public class LanguageTranslation: Service {
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             var models : [TranslationModel] = []
             
-            if let rawModels = response.data[LanguageTranslationConstants.models] {
-                for rawModel in rawModels as! NSArray  {
+            if case let rawModels as NSArray = response.data[LanguageTranslationConstants.models] {
+                for rawModel in rawModels {
                     if let model = Mapper<TranslationModel>().map(rawModel) {
                         models.append(model)
                     }
@@ -178,7 +179,11 @@ public class LanguageTranslation: Service {
         let endpoint = getEndpoint("/v2/models/\(modelID)")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
-            return callback(Mapper<TranslationModel>().map(response.data))
+            if case _ as String = response.data[LanguageTranslationConstants.modelID] {
+                return callback(Mapper<TranslationModel>().map(response.data))
+            }
+            Log.sharedLogger.warning("No model found with given ID")
+            return callback(nil)
         })
     }
     

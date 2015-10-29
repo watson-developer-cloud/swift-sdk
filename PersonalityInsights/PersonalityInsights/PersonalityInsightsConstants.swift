@@ -19,4 +19,5 @@ public struct PersonalityInsightsConstants {
     static let acceptLanguage = "acceptLanguage"
     static let includeRaw = "include_raw"
     static let text = "text"
+    static let contentItems = "contentItems"
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD20F94C1BE177D8000041B8 /* Trait.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20F94B1BE177D8000041B8 /* Trait.swift */; };
 		BD20F94E1BE17CFC000041B8 /* PersonalityInsightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20F94D1BE17CFC000041B8 /* PersonalityInsightsConstants.swift */; };
+		BD20F9501BE1889A000041B8 /* ContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD20F94F1BE1889A000041B8 /* ContentItem.swift */; };
 		BD5C90C11BE04F7A00EA13DE /* PersonalityInsights.h in Headers */ = {isa = PBXBuildFile; fileRef = BD5C90C01BE04F7A00EA13DE /* PersonalityInsights.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD5C90C81BE04F7A00EA13DE /* PersonalityInsights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90BD1BE04F7A00EA13DE /* PersonalityInsights.framework */; };
 		BD5C90CD1BE04F7A00EA13DE /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90CC1BE04F7A00EA13DE /* PersonalityInsightsTests.swift */; };
@@ -20,6 +21,7 @@
 		BD5C90F21BE06AE100EA13DE /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5C90F01BE06AD300EA13DE /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD5C90F41BE06B9400EA13DE /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C90F31BE06B9400EA13DE /* XCGLogger.framework */; };
 		BD5C90F71BE070CA00EA13DE /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5C90F31BE06B9400EA13DE /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD6B214A1BE1A2D0006BA83E /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5C90F01BE06AD300EA13DE /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +46,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BD6B21491BE1A2C7006BA83E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BD6B214A1BE1A2D0006BA83E /* ObjectMapper.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BD20F94B1BE177D8000041B8 /* Trait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trait.swift; sourceTree = "<group>"; };
 		BD20F94D1BE17CFC000041B8 /* PersonalityInsightsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsConstants.swift; sourceTree = "<group>"; };
+		BD20F94F1BE1889A000041B8 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentItem.swift; sourceTree = "<group>"; };
 		BD5C90BD1BE04F7A00EA13DE /* PersonalityInsights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PersonalityInsights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD5C90C01BE04F7A00EA13DE /* PersonalityInsights.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalityInsights.h; sourceTree = "<group>"; };
 		BD5C90C21BE04F7A00EA13DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,6 +144,7 @@
 			children = (
 				BD5C90DA1BE0634300EA13DE /* Profile.swift */,
 				BD20F94B1BE177D8000041B8 /* Trait.swift */,
+				BD20F94F1BE1889A000041B8 /* ContentItem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -185,6 +199,7 @@
 				BD5C90C31BE04F7A00EA13DE /* Sources */,
 				BD5C90C41BE04F7A00EA13DE /* Frameworks */,
 				BD5C90C51BE04F7A00EA13DE /* Resources */,
+				BD6B21491BE1A2C7006BA83E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -257,6 +272,7 @@
 			files = (
 				BD5C90D91BE04FB400EA13DE /* PersonalityInsights.swift in Sources */,
 				BD20F94E1BE17CFC000041B8 /* PersonalityInsightsConstants.swift in Sources */,
+				BD20F9501BE1889A000041B8 /* ContentItem.swift in Sources */,
 				BD20F94C1BE177D8000041B8 /* Trait.swift in Sources */,
 				BD5C90DB1BE0634300EA13DE /* Profile.swift in Sources */,
 			);

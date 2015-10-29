@@ -31,7 +31,7 @@ class PersonalityInsightsTests: XCTestCase {
         }
     }
     
-    func testProfileWithTextInput() {
+    func testProfileWithText() {
         let notEnoughWords = expectationWithDescription("NotEnoughWords")
         let valid = expectationWithDescription("Valid")
         
@@ -50,5 +50,34 @@ class PersonalityInsightsTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
-    
+
+    func testProfileWithContentItems() {
+        let valid = expectationWithDescription("Valid")
+        
+        let id = "245160944223793152"
+        let userid = "bob"
+        let sourceid = "twitter"
+        let created = 1427720427
+        let updated = 1427720427
+        let contenttype = "text/plain"
+        let charset = "UTF-8"
+        let language = "en-us"
+        let content = inputText!
+        let parentid = ""
+        let reply = false
+        let forward = false
+        
+        let contentItem = ContentItem(ID:id, userID:userid, sourceID:sourceid, created:created, updated:updated, contentType:contenttype, charset:charset, language:language, content:content, parentID:parentid, reply:reply, forward:forward)
+        
+        //Test an array of two elements (same values)
+        let contentItems:[ContentItem] = [contentItem, contentItem]
+        
+        service.getProfile(contentItems, includeRaw: true, language: "en", acceptLanguage: "en", callback:{(profile:Profile?) in
+            XCTAssertNotNil(profile,"Profile should not be nil")
+            XCTAssertEqual("root",profile!.tree!.name,"Tree root should be named root")
+            valid.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
 }

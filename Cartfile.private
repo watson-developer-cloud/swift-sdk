@@ -1,4 +1,4 @@
-øgithub "SwiftyJSON/SwiftyJSON" >= 2.3.1
+github "SwiftyJSON/SwiftyJSON" >= 2.3.1
 github "Alamofire/Alamofire" ~> 3.1
 github "DaveWoodCom/XCGLogger" ~> 3.1
 github "Hearst-DD/ObjectMapper" ~> 0.19

@@ -14,7 +14,6 @@ import ObjectMapper
 /// to another and identifies the language in which text is written.
 public class LanguageTranslation: Service {
     private let _serviceURL = "/language-translation/api"
-    private let TAG = "[LanguageTranslation] "
     
     public init() {
         super.init(serviceURL:_serviceURL)
@@ -233,7 +232,7 @@ public class LanguageTranslation: Service {
     {
         let endpoint = getEndpoint("/v2/models/" + modelID)
         NetworkUtils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], apiKey: _apiKey, completionHandler: {response in
-            return callback(response.statusInfo == CoreResponseEnum.Ok.rawValue)
+            return callback(response.info == CoreResponseEnum.Ok.rawValue)
         })
     }
 }

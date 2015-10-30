@@ -9,6 +9,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  A recursive model that contains information about a personality trait
+ */
 public struct Trait: Mappable {
     var ID:String?
     var name:String?

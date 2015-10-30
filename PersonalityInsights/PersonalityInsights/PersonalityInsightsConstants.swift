@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ *  Constants used by the PersonalityInsights service
+ */
 public struct PersonalityInsightsConstants {
 
     //Defaults

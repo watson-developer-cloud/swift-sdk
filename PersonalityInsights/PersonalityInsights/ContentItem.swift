@@ -9,6 +9,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  An input model object that is used to pass in detailed information about content into the PersonalityInsights service
+ */
 public struct ContentItem: Mappable {
 
     var ID:String?

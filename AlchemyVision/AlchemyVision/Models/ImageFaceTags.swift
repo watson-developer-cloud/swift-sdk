@@ -26,7 +26,11 @@ public struct ImageFaceTags {
         self.ImageFaces = imageFaces
     }
     
-    init(anyObject: AnyObject) {
+    init(anyObject: AnyObject?) {
+        guard let anyObject = anyObject else {
+            Log.sharedLogger.debug("Nil object passed into initializer")
+            return
+        }
         var data = JSON(anyObject)
         
         var capturedImageFaces: [ImageFace] = []

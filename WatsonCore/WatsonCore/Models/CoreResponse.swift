@@ -9,76 +9,76 @@
 //
 
 import SwiftyJSON
+import ObjectMapper
 import Foundation
-
-
-public enum CoreResponseEnum: String {
-    case Status = "status"
-    case StatusInfo = "statusInfo"
-    case ErrorCode = "error_code"
-    case ErrorMessage = "error_message"
-    case ErrorMessage2 = "error"
-    case Ok = "Ok"
-    case Error = "Error"
-    case Unknown = "Unknown"
-    case Empty = ""
-}
 
 /**
 *  The Main response back for Watson Core.  It will contain the status, status info
 and the status code for the http response.
 */
-public struct CoreResponse: CustomStringConvertible {
+public struct CoreResponse: Mappable, CustomStringConvertible {
+    public var data:AnyObject?
+    public var code:Int?
+    public var info:String?
+    public var help:String?
     
-    // private capture of the response to report back with certain values to the caller
-    let httpResponse: NSHTTPURLResponse!
+    //Alchemy
+    public var totalTransactions:Int?
+    public var usage:String?
+    public var status:String?
     
-    /// The data returned by the server.
-    public let data: AnyObject!
-    
-    public var statusCode:Int {
-        get {
-            var codeValue = 0
-            if (httpResponse != nil) {
-                codeValue = HTTPStatusCode(HTTPResponse: httpResponse)!.rawValue
-            }
-            return codeValue
-        }
-    }
-    
-    private var _statusInfo: String! = nil
-    
-    public var statusInfo: String {
-        get {
-            
-            if(_statusInfo == nil) {
-                return HTTPStatusCode(HTTPResponse: httpResponse)!.description
-            }
-            return _statusInfo
-        }
-    }
+    //NSError
+    public var domain:String?
     
     public var description: String {
-        return "\(statusInfo)"
+        var desc = ""
+        if let code = code {
+            desc += "\nCode: \(code)"
+        }
+        if let status = status {
+            desc += "\nStatus: \(status)"
+        }
+        if let domain = domain {
+            desc += "\nDomain: \(domain)"
+        }
+        if let info = info {
+            desc += "\nInfo: \(info)"
+        }
+        if let help = help {
+            desc += "\nHelp: \(help)"
+        }
+        return desc
     }
 
-    init(anyObject: AnyObject, httpresponse: NSHTTPURLResponse!) {
-        self.httpResponse = httpresponse
-        self.data = anyObject
-        Log.sharedLogger.verbose("\(anyObject)")
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        //Maps most verbose information last, so that it takes precedence in case of overlapping information
 
-        if (anyObject is NSError) {
-            _statusInfo = (anyObject as! NSError).description
-        }
-        else {
-            var returnData = JSON(anyObject)
-            // Alchemy
-            if let statusInfo = returnData[CoreResponseEnum.StatusInfo.rawValue].string {self._statusInfo = statusInfo}
-            // Watson
-            else if let statusInfo = returnData[CoreResponseEnum.ErrorMessage.rawValue].string {self._statusInfo = statusInfo}
-            // Some Watson services
-            else if let statusInfo = returnData[CoreResponseEnum.ErrorMessage2.rawValue].string {self._statusInfo = statusInfo}
-        }
-        Log.sharedLogger.debug(description)
+        //NSError
+        code                <-  map["errorCode"]
+        domain              <-  map["errorDomain"]
+        info                <-  map["errorLocalizedDescription"]
+
+        //NSURLHTTPResponse
+        code                <-  map["responseStatusCode"]
+        info                <-  map["responseInfo"]
+        
+        //Standard
+        data                <-  map["data"]
+        code                <- (map["data.code"], Transformation.stringToInt)
+        info                <-  map["data.error"]
+        info                <-  map["data.error_message"]
+        
+        //Personality Insights
+        help                <-  map["data.help"]
+        info                <-  map["data.description"]
+        
+        //Alchemy
+        totalTransactions   <- (map["data.totalTransactions"], Transformation.stringToInt)
+        status              <-  map["data.status"]
+        usage               <-  map["data.usage"]
+        info                <-  map["data.statusInfo"]
+        
     }
 }

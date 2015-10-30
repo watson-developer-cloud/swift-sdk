@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 import SwiftyJSON
 
 /**
@@ -144,7 +145,6 @@ public class NetworkUtils {
         Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .debugLog()
-//            .validate()
             .responseJSON {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: self.handleResponse(response)) }
@@ -169,7 +169,6 @@ public class NetworkUtils {
         
         Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters)
             .debugLog()
-//            .validate()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performRequest.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
@@ -203,18 +202,10 @@ public class NetworkUtils {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
                         Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
-                        do {
-                            let json = try NSJSONSerialization.JSONObjectWithData(response.data!, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject]
-                            let coreResponse = CoreResponse(anyObject: json!, httpresponse: response.response!)
-                            completionHandler(returnValue: coreResponse)
-                        }
-                        catch let error as NSError {
-                            let coreResponse = CoreResponse(anyObject: error, httpresponse: response.response!)
-                            completionHandler(returnValue: coreResponse)
-                        }
+                        completionHandler(returnValue: self.handleResponse(response))
                     }
                 case .Failure(let encodingError):
-                    print(encodingError)
+                    Log.sharedLogger.error("\(encodingError)")
                 }
             }
         )
@@ -238,40 +229,48 @@ public class NetworkUtils {
 
         Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey:apiKey), file: fileURL)
             .debugLog()
-//            .validate()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: self.handleResponse(response))
             }
     }
 
-    // TODO: Combine the two handleResponses
-    private static func handleResponse(response: Response<AnyObject, NSError>)->CoreResponse {
-        switch response.result {
-        case .Success(let data):
-            Log.sharedLogger.info("Successful Response")
-            let coreResponse = CoreResponse(anyObject: data, httpresponse: (response.response != nil ? response.response! : nil))
-            return coreResponse
-        case .Failure(let error):
-            let coreResponse = CoreResponse(anyObject: error, httpresponse: (response.response != nil ? response.response! : nil))
-            Log.sharedLogger.error("Failure Response")
-            return coreResponse
-        }
-    }
-
-    private static func handleResponse(response: Response<String, NSError>)->CoreResponse {
-        switch response.result {
-        case .Success(let result):
-            Log.sharedLogger.info("Successful Response")
-            let coreResponse = CoreResponse(anyObject: result, httpresponse: (response.response != nil ? response.response! : nil))
-            return coreResponse
-        case .Failure(let error):
-            let coreResponse = CoreResponse(anyObject: error, httpresponse: (response.response != nil ? response.response! : nil))
-            Log.sharedLogger.error("Failure Response")
-            return coreResponse
-        }
+    private static func handleResponse(response:Response<AnyObject,NSError>) -> CoreResponse {
+        return getCoreResponse(response.data, error: response.result.error, response: response.response)
     }
     
+    private static func handleResponse(response:Response<String,NSError>) -> CoreResponse {
+        return getCoreResponse(response.data, error: response.result.error, response: response.response)
+    }
+    
+    private static func getCoreResponse(data:NSData?, error:NSError?, response:NSHTTPURLResponse?) -> CoreResponse
+    {
+        var coreResponseDictionary: Dictionary<String,AnyObject> = Dictionary()
+        
+        if let data = data where data.length > 0 {
+            do {
+                if let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
+                    coreResponseDictionary.updateValue(jsonData, forKey: "data")
+                }
+            } catch {
+                Log.sharedLogger.error("Could not convert response data object to JSON")
+            }
+        }
+        if let error = error {
+            coreResponseDictionary.updateValue(error.code, forKey: "errorCode")
+            coreResponseDictionary.updateValue(error.localizedDescription, forKey: "errorLocalizedDescription")
+            coreResponseDictionary.updateValue(error.domain, forKey: "errorDomain")
+        }
+        if let response = response {
+            coreResponseDictionary.updateValue(response.statusCodeEnum.rawValue, forKey: "responseStatusCode")
+            coreResponseDictionary.updateValue(response.statusCodeEnum.localizedReasonPhrase, forKey: "responseInfo")
+        }
+        
+        let coreResponse = Mapper<CoreResponse>().map(coreResponseDictionary)!
+        Log.sharedLogger.info("\(coreResponse)")
+        return coreResponse
+    }
+
     private static func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
         if let components = NSURLComponents(string: url),
             var queryItems = (components.queryItems ?? []) as? [NSURLQueryItem] {
@@ -299,18 +298,4 @@ public class NetworkUtils {
         }
         return newUrl
     }
-    
-    /*
-    private func handleResponse<T>(response: T)->CoreResponse {
-        
-    
-        if((response is Response<AnyObject, NSError>)) {
-            
-        }
-        
-        if((response is Response<String, NSError>)) {
-            
-        }
-    }
-    */
 }

@@ -9,6 +9,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  Profile model object that is returned by PersonalityInsights service
+ */
 public struct Profile: Mappable {
     var tree:Trait?
     var ID:String?

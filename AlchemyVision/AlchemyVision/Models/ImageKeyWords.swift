@@ -25,7 +25,14 @@ public struct ImageKeyWords {
         self.imageKeyWords = imageKeyWords
     }
     
-    init(anyObject: AnyObject) {
+    init(anyObject: AnyObject?) {
+        guard let anyObject = anyObject else {
+            Log.sharedLogger.debug("Nil object passed into initializer")
+            totalTransactions = 0
+            imageKeyWords = []
+            return
+        }
+
         var data = JSON(anyObject)
         
         var capturedImageKeywords: [ImageKeyWord] = []

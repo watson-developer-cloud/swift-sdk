@@ -232,7 +232,7 @@ public class LanguageTranslation: Service {
     {
         let endpoint = getEndpoint("/v2/models/" + modelID)
         NetworkUtils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], apiKey: _apiKey, completionHandler: {response in
-            return callback(response.info == CoreResponseEnum.Ok.rawValue)
+            return callback(response.code == 200)
         })
     }
 }

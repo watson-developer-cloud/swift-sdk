@@ -21,30 +21,63 @@ public enum ServiceType: String {
     case Alchemy = "gateway-a.watsonplatform.net"
 }
 
+/// Superclass for all Watson services
 public class Service {
+    /// All services must use https protocol for security
     private let _protocol = "https"
+    /// Host for the service (e.g. stream.watsonplatform.net)
     private let _host: String
+    /// Service prefix that goes after host and before a specific operation (e.g. /personalityinsights/api)
     private let _serviceURL: String
+    /// API Key for the service
     public var _apiKey: String!
     
+    /**
+     Construct an endpoint URL for a Watson operation
+     
+     - parameter path: A path to a specific operation URL
+     
+     - returns: Full service URL that contains host, service, and operation
+     */
     public func getEndpoint(path:String) -> String {
         let endpoint = _protocol + "://" + _host + _serviceURL + path
         Log.sharedLogger.info("\(endpoint)")
         return endpoint
     }
     
+    /**
+     Initialize a service
+     
+     - parameter type:       Service type (Alchemy, Standard, or Streaming). Defaults to Standard.
+     - parameter serviceURL: Service prefix
+     */
     public init(type:ServiceType = ServiceType.Standard, serviceURL:String)
     {
         _host = type.rawValue
         _serviceURL = serviceURL
     }
     
+    /**
+     Convenience initializer for Alchemy services using an API key
+     
+     - parameter type:       Service type (Alchemy, Standard, or Streaming). Defaults to Standard.
+     - parameter serviceURL: Service prefix
+     - parameter apiKey:     API Key for authentication
+     */
     public convenience init(type:ServiceType = ServiceType.Standard, serviceURL:String, apiKey:String)
     {
         self.init(type:type, serviceURL:serviceURL)
         _apiKey = apiKey
     }
     
+    /**
+     Convenience initializer for Watson services using a username and password
+     
+     - parameter type:       Service type (Alchemy, Standard, or Streaming). Defaults to Standard.
+     - parameter serviceURL: Service prefix
+     - parameter username:     Username for authentication
+     - parameter password:     Password for authentication
+     */
     public convenience init(type:ServiceType = ServiceType.Standard, serviceURL:String, username:String, password:String)
     {
         self.init(type:type, serviceURL:serviceURL)

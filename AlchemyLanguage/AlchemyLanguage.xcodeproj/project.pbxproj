@@ -10,6 +10,7 @@
 		6E23DB501BEA6C61004B4047 /* AlchemyLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E23DB4F1BEA6C61004B4047 /* AlchemyLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E23DB571BEA6C61004B4047 /* AlchemyLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E23DB4C1BEA6C61004B4047 /* AlchemyLanguage.framework */; settings = {ASSET_TAGS = (); }; };
 		6E23DB5C1BEA6C61004B4047 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */; };
+		6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		6E23DB561BEA6C61004B4047 /* AlchemyLanguageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyLanguageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageTests.swift; sourceTree = "<group>"; };
 		6E23DB5D1BEA6C61004B4047 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		6E23DB4E1BEA6C61004B4047 /* AlchemyLanguage */ = {
 			isa = PBXGroup;
 			children = (
+				6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */,
 				6E23DB4F1BEA6C61004B4047 /* AlchemyLanguage.h */,
 				6E23DB511BEA6C61004B4047 /* Info.plist */,
 			);
@@ -195,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

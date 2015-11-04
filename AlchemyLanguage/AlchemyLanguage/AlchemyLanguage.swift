@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import WatsonCore
 
-class AlchemyLanguage {}
+
+class AlchemyLanguage: Service {}
 
 
 /**

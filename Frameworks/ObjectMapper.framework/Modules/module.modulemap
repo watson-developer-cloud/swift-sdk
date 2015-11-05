@@ -1,0 +1,10 @@
+framework module ObjectMapper {
+  umbrella header "ObjectMapper.h"
+
+  export *
+  module * { export * }
+}
+
+module ObjectMapper.Swift {
+    header "ObjectMapper-Swift.h"
+}

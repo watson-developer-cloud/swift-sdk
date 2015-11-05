@@ -14,6 +14,8 @@ Implemented services:
 
 Developer Setup
 ---------------
+**Stub text, insert text here when ready.**
+
 * Ensure you have the latest version of [XCode](https://developer.apple.com/xcode/) installed.
 * We encourage you to use [Cocoa Pods](http://cocoapods.org/) to import the SDK into your project. Cocoa Pods is a simple, but powerful dependency management tool. If you do not already use Cocoa Pods, it's very easy to [get started](http://guides.cocoapods.org/using/getting-started.html).
 

@@ -2,22 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:PersonalityInsights/PersonalityInsights.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:AlchemyVision/AlchemyVision.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:LanguageTranslation/LanguageTranslation.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WatsonCore/WatsonCore.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WatsonSpeechToText/WatsonSpeechToText.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WatsonTextToSpeech/WatsonTextToSpeech.xcodeproj">
+      location = "group:WatsonSDK/WatsonSDK.xcodeproj">
    </FileRef>
    <Group
       location = "container:"

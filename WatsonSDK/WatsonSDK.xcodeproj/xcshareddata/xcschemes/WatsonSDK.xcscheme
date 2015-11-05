@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A1FCD6B1BA9D63D0090E1EB"
-               BuildableName = "WatsonSpeechToText.framework"
-               BlueprintName = "WatsonSpeechToText"
-               ReferencedContainer = "container:WatsonSpeechToText.xcodeproj">
+               BlueprintIdentifier = "E1778B8D1BEA882D0097B05A"
+               BuildableName = "WatsonBundleSDK"
+               BlueprintName = "WatsonBundleSDK"
+               ReferencedContainer = "container:WatsonSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,20 +32,40 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A1FCD751BA9D63E0090E1EB"
-               BuildableName = "WatsonSpeechToTextTests.xctest"
-               BlueprintName = "WatsonSpeechToTextTests"
-               ReferencedContainer = "container:WatsonSpeechToText.xcodeproj">
+               BlueprintIdentifier = "BDAED1CB1BBF57CA00BBF265"
+               BuildableName = "LanguageTranslationTests.xctest"
+               BlueprintName = "LanguageTranslationTests"
+               ReferencedContainer = "container:../LanguageTranslation/LanguageTranslation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD5C90C61BE04F7A00EA13DE"
+               BuildableName = "PersonalityInsightsTests.xctest"
+               BlueprintName = "PersonalityInsightsTests"
+               ReferencedContainer = "container:../PersonalityInsights/PersonalityInsights.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3179E2481BC1EA4000174C5A"
+               BuildableName = "AlchemyVisionTests.xctest"
+               BlueprintName = "AlchemyVisionTests"
+               ReferencedContainer = "container:../AlchemyVision/AlchemyVision.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7A1FCD6B1BA9D63D0090E1EB"
-            BuildableName = "WatsonSpeechToText.framework"
-            BlueprintName = "WatsonSpeechToText"
-            ReferencedContainer = "container:WatsonSpeechToText.xcodeproj">
+            BlueprintIdentifier = "E1778B8D1BEA882D0097B05A"
+            BuildableName = "WatsonBundleSDK"
+            BlueprintName = "WatsonBundleSDK"
+            ReferencedContainer = "container:WatsonSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,10 +84,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7A1FCD6B1BA9D63D0090E1EB"
-            BuildableName = "WatsonSpeechToText.framework"
-            BlueprintName = "WatsonSpeechToText"
-            ReferencedContainer = "container:WatsonSpeechToText.xcodeproj">
+            BlueprintIdentifier = "E1778B8D1BEA882D0097B05A"
+            BuildableName = "WatsonBundleSDK"
+            BlueprintName = "WatsonBundleSDK"
+            ReferencedContainer = "container:WatsonSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +102,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7A1FCD6B1BA9D63D0090E1EB"
-            BuildableName = "WatsonSpeechToText.framework"
-            BlueprintName = "WatsonSpeechToText"
-            ReferencedContainer = "container:WatsonSpeechToText.xcodeproj">
+            BlueprintIdentifier = "E1778B8D1BEA882D0097B05A"
+            BuildableName = "WatsonBundleSDK"
+            BlueprintName = "WatsonBundleSDK"
+            ReferencedContainer = "container:WatsonSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

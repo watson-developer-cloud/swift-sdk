@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6E23DB501BEA6C61004B4047 /* AlchemyLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E23DB4F1BEA6C61004B4047 /* AlchemyLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6E23DB571BEA6C61004B4047 /* AlchemyLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E23DB4C1BEA6C61004B4047 /* AlchemyLanguage.framework */; settings = {ASSET_TAGS = (); }; };
+		6E23DB571BEA6C61004B4047 /* AlchemyLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E23DB4C1BEA6C61004B4047 /* AlchemyLanguage.framework */; };
 		6E23DB5C1BEA6C61004B4047 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */; };
-		6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */; settings = {ASSET_TAGS = (); }; };
+		6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */; };
+		E1778C261BEBBD8F0097B05A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1778C251BEBBD8F0097B05A /* WatsonCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageTests.swift; sourceTree = "<group>"; };
 		6E23DB5D1BEA6C61004B4047 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
+		E1778C251BEBBD8F0097B05A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1778C261BEBBD8F0097B05A /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +58,7 @@
 		6E23DB421BEA6C61004B4047 = {
 			isa = PBXGroup;
 			children = (
+				E1778C251BEBBD8F0097B05A /* WatsonCore.framework */,
 				6E23DB4E1BEA6C61004B4047 /* AlchemyLanguage */,
 				6E23DB5A1BEA6C61004B4047 /* AlchemyLanguageTests */,
 				6E23DB4D1BEA6C61004B4047 /* Products */,
@@ -150,7 +154,7 @@
 				TargetAttributes = {
 					6E23DB4B1BEA6C61004B4047 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = PF8FZC9FJZ;
+						DevelopmentTeam = 57U96AW229;
 					};
 					6E23DB551BEA6C61004B4047 = {
 						CreatedOnToolsVersion = 7.0;
@@ -313,6 +317,7 @@
 		6E23DB611BEA6C61004B4047 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -329,6 +334,7 @@
 		6E23DB621BEA6C61004B4047 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -381,6 +387,7 @@
 				6E23DB621BEA6C61004B4047 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E23DB631BEA6C61004B4047 /* Build configuration list for PBXNativeTarget "AlchemyLanguageTests" */ = {
 			isa = XCConfigurationList;
@@ -389,6 +396,7 @@
 				6E23DB651BEA6C61004B4047 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -20,6 +20,6 @@ public struct ImageKeyWord: Mappable {
     
     public mutating func mapping(map: Map) {
         text    <- map["text"]
-        score   <- map["score"]
+        score   <- (map["score"], Transformation.stringToDouble)
     }
 }

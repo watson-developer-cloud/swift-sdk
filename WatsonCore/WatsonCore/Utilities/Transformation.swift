@@ -9,18 +9,32 @@
 import Foundation
 import ObjectMapper
 public class Transformation {
-    
-    static let stringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
+  
+  public static let stringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
     // transform value from String? to Int?
     if let x = value {
-        return Int(x)
+      return Int(x)
     }
     return nil
     }, toJSON: { (value: Int?) -> String? in
-        // transform value from Int? to String?
-        if let value = value {
-            return String(value)
-        }
-        return nil
-})
+      // transform value from Int? to String?
+      if let value = value {
+        return String(value)
+      }
+      return nil
+  })
+  
+  public static let stringToDouble = TransformOf<Double, String>(fromJSON: { (value: String?) -> Double? in
+    // transform value from String? to Int?
+    if let x = value {
+      return Double(x)
+    }
+    return nil
+    }, toJSON: { (value: Double?) -> String? in
+      // transform value from Int? to String?
+      if let value = value {
+        return String(value)
+      }
+      return nil
+  })
 }

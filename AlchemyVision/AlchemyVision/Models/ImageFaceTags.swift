@@ -9,14 +9,14 @@
 import Foundation
 import SwiftyJSON
 import WatsonCore
+import ObjectMapper
 
-public enum ImageFaceTagsEnum: String {
-    case TotalTransactions  = "totalTransactions"
-    case ImageFaces         = "imageFaces"
-}
-
-public struct ImageFaceTags {
-    
+/**
+ *  <#Description#>
+ */
+public struct ImageFaceTags : Mappable {
+  
+  
     var totalTransactions = 0
     var ImageFaces: [ImageFace] = []
     
@@ -25,7 +25,14 @@ public struct ImageFaceTags {
         self.totalTransactions = totalTransactions
         self.ImageFaces = imageFaces
     }
-    
+  
+  /**
+   This populates the ImageFaceTags object from the payload
+   
+   - parameter anyObject: Payload from request call
+   
+   TODO: This will be removed once ObjectMapper supports StringPointers
+   */
     init(anyObject: AnyObject?) {
         guard let anyObject = anyObject else {
             Log.sharedLogger.debug("Nil object passed into initializer")
@@ -34,12 +41,23 @@ public struct ImageFaceTags {
         var data = JSON(anyObject)
         
         var capturedImageFaces: [ImageFace] = []
-        for (_,subJson):(String, JSON) in data[ImageFaceTagsEnum.ImageFaces.rawValue] {
+        for (_,subJson):(String, JSON) in data["imageFaces"] {
             let imageFace = ImageFace(json: subJson)
             capturedImageFaces.append(imageFace)
         }
         self.ImageFaces = capturedImageFaces
-        self.totalTransactions = data[ImageFaceTagsEnum.TotalTransactions.rawValue].intValue
+        self.totalTransactions = data["totalTransactions"].intValue
+    }
+    
+    public init() {
+        
+    }
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        totalTransactions   <- map["totalTransactions"]
+        ImageFaces          <- map["imageFaces"]
     }
     
 }

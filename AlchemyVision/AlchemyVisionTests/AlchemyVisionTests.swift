@@ -18,7 +18,8 @@ class AlchemyVisionTests: XCTestCase {
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     var testUrl = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
     var faceTagURL = "http://demo1.alchemyapi.com/images/vision/mother-daughter.jpg"
-    
+  
+  
     
     //    var test_url = "https://www.google.com/search?q=cat&espv=2&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIuOev14miyAIVEeqACh0mOwhq&biw=1440&bih=805"
     //    var test_url = "https://www.petfinder.com/wp-content/uploads/2012/11/138190243-cat-massage-632x475.jpg"
@@ -42,7 +43,7 @@ class AlchemyVisionTests: XCTestCase {
         super.tearDown()
     }
     
-    /**a
+    /**
     This will test an invalid API key for all three segments of Vision, Language and Data
     */
     func testInvalidAPIKey() {
@@ -50,7 +51,7 @@ class AlchemyVisionTests: XCTestCase {
         let service : VisionImpl = VisionImpl( apiKey: "WRONG")
         
         service.urlGetRankedImageKeywords(testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
-            XCTAssertEqual(0, imageKeyWords.totalTransactions, "Expected result with a total transaction of 0")
+            XCTAssertEqual(nil, imageKeyWords.totalTransactions, "Expected result with a total transaction of 0")
             XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
             invalidExpectation.fulfill()
         })
@@ -140,5 +141,56 @@ class AlchemyVisionTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+  
+  func testGetImageFromURL(){
+    
+    let emptyExpectation = expectationWithDescription("Empty")
+    let validExpectation = expectationWithDescription("Valid")
+
+    let validURL = "http://www.techcrunch.com/"
+    let invalidURL = "http://nowayitworks.comm/"
+    
+    serviceVision.getImageLink(ImageInputType.URL, inputString: invalidURL, completionHandler: { imageLink in
+      XCTAssertNotEqual ("",imageLink.url, "Expected url return of what is passed in")
+      XCTAssertEqual ("",imageLink.image, "Expected empty string")
+      emptyExpectation.fulfill()
+    })
+    
+    serviceVision.getImageLink(ImageInputType.URL, inputString: validURL, completionHandler: { imageLink in
+      XCTAssertNotEqual(nil, imageLink.url, "Expect URL")
+      XCTAssertNotEqual("", imageLink.url, "Expect URL")
+      XCTAssertNotEqual(nil,imageLink.image, "Expect image")
+      validExpectation.fulfill()
+    })
+    
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
+  
+  func testGetImageFromHTML(){
+    
+    let emptyExpectation = expectationWithDescription("Empty")
+    let validExpectation = expectationWithDescription("Valid")
+    
+    let fileURL = NSBundle(forClass: self.dynamicType).pathForResource("example", ofType: "html")
+    XCTAssertNotNil(fileURL)
+    
+    let htmlString = try? String(contentsOfFile: fileURL!, encoding: NSUTF8StringEncoding)
+    let invalidString = "http://nowayitworks.comm/"
+    
+    serviceVision.getImageLink(ImageInputType.HTML, inputString: invalidString, completionHandler: { imageLink in
+      XCTAssertEqual ("",imageLink.url, "Expected url to be an empty string")
+      XCTAssertEqual ("",imageLink.image, "Expected image to be an empty string")
+      emptyExpectation.fulfill()
+    })
+    
+    serviceVision.getImageLink(ImageInputType.HTML, inputString: htmlString!, completionHandler: { imageLink in
+     // XCTAssertNotEqual(nil, imageLink.url, "Expect URL")
+      XCTAssertEqual("", imageLink.url, "Expect empty string")
+      XCTAssertEqual("http://www.techcrunch.com/wp-content/uploads/2009/02/cp_1234354872_16947v1-max-250x250.jpg",imageLink.image, "Expect techcrunch jpg file" )
+      validExpectation.fulfill()
+    })
+    
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
 
 }

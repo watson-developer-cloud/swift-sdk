@@ -8,26 +8,18 @@
 
 import Foundation
 import WatsonCore
-import SwiftyJSON
+import ObjectMapper
 
 
-private enum ImageKeyWordEnum:String {
-    case Text = "text"
-    case Score = "score"
-}
+public struct ImageKeyWord: Mappable {
 
-public struct ImageKeyWord {
+  var text: String?
+  var score: Double?
 
-    var text = ""
-    var score = 0.0
+    public init?(_ map: Map) {}
     
-    init(text: String, score: Double) {
-        self.text = text
-        self.score = score
-    }
-    
-    init(json: JSON) {
-        text    = json[ImageKeyWordEnum.Text.rawValue].stringValue
-        score   = json[ImageKeyWordEnum.Score.rawValue].doubleValue
+    public mutating func mapping(map: Map) {
+        text    <- map["text"]
+        score   <- map["score"]
     }
 }

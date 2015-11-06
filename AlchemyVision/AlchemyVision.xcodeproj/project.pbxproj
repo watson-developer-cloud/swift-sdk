@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311980921BD3F2E70046EF85 /* emaxfpo.jpg */; };
 		3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */; };
+		316B6EB71BED22F900D60AF3 /* ImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316B6EB61BED22F900D60AF3 /* ImageLink.swift */; };
 		316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */; };
 		316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FB11BD6C48200EC4A68 /* ImageFace.swift */; };
 		3179E2431BC1EA4000174C5A /* AlchemyVision.h in Headers */ = {isa = PBXBuildFile; fileRef = 3179E2421BC1EA4000174C5A /* AlchemyVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		311980921BD3F2E70046EF85 /* emaxfpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emaxfpo.jpg; sourceTree = "<group>"; };
 		3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
+		316B6EB61BED22F900D60AF3 /* ImageLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLink.swift; sourceTree = "<group>"; };
 		316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFaceTags.swift; sourceTree = "<group>"; };
 		316E5FB11BD6C48200EC4A68 /* ImageFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFace.swift; sourceTree = "<group>"; };
 		3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 		31BCE5FE1BC1EF4F00756343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				316B6EB61BED22F900D60AF3 /* ImageLink.swift */,
 				31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */,
 				3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */,
 				316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */,
@@ -272,6 +275,7 @@
 				31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */,
 				31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */,
 				316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */,
+				316B6EB71BED22F900D60AF3 /* ImageLink.swift in Sources */,
 				3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */,
 				316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */,
 				BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */,

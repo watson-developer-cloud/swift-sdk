@@ -280,12 +280,15 @@ public class NetworkUtils {
      - returns: URL with key/value pair added/updated
      */
     private static func addOrUpdateQueryStringParameter(url: String, key: String, value: String?) -> String {
-        if let components = NSURLComponents(string: url), v = value,
-            var queryItems = components.queryItems ?? ([] as? [NSURLQueryItem]) {
-                    queryItems.append(NSURLQueryItem(name: key, value: v))
-                    components.queryItems = queryItems
-                    return components.string!
-        }        
+        if let components = NSURLComponents(string: url), v = value {
+            var queryItems = [NSURLQueryItem]()
+            if components.queryItems != nil {
+                queryItems = components.queryItems!
+            }
+            queryItems.append(NSURLQueryItem(name: key, value: v))
+            components.queryItems = queryItems
+            return components.string!
+        }
         return url
     }
     

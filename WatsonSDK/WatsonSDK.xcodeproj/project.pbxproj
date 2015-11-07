@@ -26,6 +26,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXContainerItemProxy section */
+		3103AE0C1BEE53C9005CA3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3103ADEA1BEE5390005CA3DC;
+			remoteInfo = NaturalLanguageClassifier;
+		};
+		3103AE0E1BEE53C9005CA3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3103ADF41BEE5390005CA3DC;
+			remoteInfo = NaturalLanguageClassifierTests;
+		};
 		7ABC02E41BECF5F1003A7BF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */;
@@ -162,6 +176,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NaturalLanguageClassifier.xcodeproj; path = ../NaturalLanguageClassifier/NaturalLanguageClassifier.xcodeproj; sourceTree = "<group>"; };
 		7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpeechToText.xcodeproj; path = ../SpeechToText/SpeechToText.xcodeproj; sourceTree = "<group>"; };
 		E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonCore.xcodeproj; path = ../WatsonCore/WatsonCore.xcodeproj; sourceTree = "<group>"; };
 		E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonTextToSpeech.xcodeproj; path = ../WatsonTextToSpeech/WatsonTextToSpeech.xcodeproj; sourceTree = "<group>"; };
@@ -175,6 +190,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		3103AE051BEE53C9005CA3DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3103AE0D1BEE53C9005CA3DC /* NaturalLanguageClassifier.framework */,
+				3103AE0F1BEE53C9005CA3DC /* NaturalLanguageClassifierTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7ABC02E01BECF5F0003A7BF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +214,7 @@
 				E1778C081BEADE930097B05A /* Resources */,
 				E1778BE01BEAD7150097B05A /* WatsonSDK */,
 				E1778BDF1BEAD7150097B05A /* Products */,
+				3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */,
 				E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */,
 				E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */,
 				E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */,
@@ -315,6 +340,10 @@
 					ProjectRef = E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */;
 				},
 				{
+					ProductGroup = 3103AE051BEE53C9005CA3DC /* Products */;
+					ProjectRef = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+				},
+				{
 					ProductGroup = E1778B971BEA88A90097B05A /* Products */;
 					ProjectRef = E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */;
 				},
@@ -339,6 +368,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		3103AE0D1BEE53C9005CA3DC /* NaturalLanguageClassifier.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NaturalLanguageClassifier.framework;
+			remoteRef = 3103AE0C1BEE53C9005CA3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3103AE0F1BEE53C9005CA3DC /* NaturalLanguageClassifierTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NaturalLanguageClassifierTests.xctest;
+			remoteRef = 3103AE0E1BEE53C9005CA3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7ABC02E51BECF5F1003A7BF3 /* SpeechToText.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

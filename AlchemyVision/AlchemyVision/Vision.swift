@@ -31,30 +31,28 @@ public class VisionImpl: Service {
    - parameter inputString:       The string that contains the URL or the HTML text
    - parameter completionHandler: ImageLink object is returned in the completionHandler
    */
-  public func getImageLink(inputType: VisionConstants.ImageInputType, inputString: String, completionHandler: (returnValue: ImageLink) ->() ) {
+  public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (returnValue: ImageLink) ->() ) {
   
     var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
     var visionUrl = ""
     
     switch(inputType) {
-    case VisionConstants.ImageInputType.URL:
-      
+    case VisionConstants.ImageLinkType.URL:
       endPoint = VisionConstants.ImageLinkExtraction.URLGetImage.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
       var params = buildCommonParams()
-      params.updateValue(inputString, forKey: VisionConstants.ImageInputType.URL.rawValue)
+      params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.URL.rawValue)
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
         completionHandler(returnValue: imageLink)
       })
       
       break
-    case VisionConstants.ImageInputType.HTML:
-
+    case VisionConstants.ImageLinkType.HTML:
       endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.HTML.rawValue + endPoint)
       var params = buildCommonParams()
-      params.updateValue(inputString, forKey: VisionConstants.ImageInputType.HTML.rawValue)
+      params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.HTML.rawValue)
       params.updateValue(_apiKey, forKey: "apikey")
       NetworkUtils.performBasicAuthRequest(visionUrl, method: HTTPMethod.POST, parameters: params, encoding: ParameterEncoding.URL, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
@@ -64,15 +62,23 @@ public class VisionImpl: Service {
     }
   }
   
+  /**
+   The getImageKeywords call is used to tag an image in a given web page or file. AlchemyAPI will extracting the primary image and perform image tagging.
+   
+   - parameter inputType:         Input type for either NSURL image file or URL string
+   - parameter stringURL:         The string URL to extract primary image
+   - parameter fileURL:           Image file to perform image tagging
+   - parameter forceShowAll:      Includes lower confidence tags
+   - parameter knowledgeGraph:    Possible values: 0 (default), 1
+   - parameter callback:          Callback with ImageKeyWords through the completion handler
+   */
   public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
     
-    
-    var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
+    var endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
     var visionUrl = ""
     
     switch(inputType) {
     case VisionConstants.ImageKeywordType.URL:
-      
       endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -87,7 +93,6 @@ public class VisionImpl: Service {
       
       break
     case VisionConstants.ImageKeywordType.FILE:
-      
       endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -103,102 +108,52 @@ public class VisionImpl: Service {
     }
   }
   
-  
-  
   /**
-   The URLGetRankedImageKeywords call is used to tag an image in a given web page. AlchemyAPI will download the requested URL, extracting the primary image
-   from the HTML document structure and perform image tagging.
+  The recognizeFaces call is used to recognize faces in a given web page or file. AlchemyAPI will extracting the primary image and perform face recognition.
    
-   - parameter url:             http url (must be uri-argument encoded)            REQUIRED
+   - parameter inputType:       Input type for either NSURL image file or URL string
+   - parameter stringURL:       The string URL to perform face tagging
+   - parameter fileURL:         Image file to perform face tagging
    - parameter forceShowAll:    Includes lower confidence tags
    - parameter knowledgeGraph:  Possible values: 0 (default), 1
    - parameter callback:        Callback with ImageKeyWords through the completion handler
    */
-  public func urlGetRankedImageKeywords(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
-    
-    let visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue)
-    var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-    params.updateValue(url, forKey: VisionConstants.WatsonURI.URL.rawValue)
-    
-    NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-      var imageKeywords = ImageKeyWords()
-      if case let data as Dictionary<String,AnyObject> = response.data {
-        imageKeywords = Mapper<ImageKeyWords>().map(data)!
-      }
-      completionHandler(returnValue: imageKeywords)
-    })
-  }
+  public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
   
-  /**
-   <#Description#>
-   
-   - parameter fileURL:           <#fileURL description#>
-   - parameter forceShowAll:    Includes lower confidence tags
-   - parameter knowledgeGraph:  Possible values: 0 (default), 1
-   - parameter callback:        Callback with ImageKeyWords through the completion handler
-   */
-  public func imageGetRankedImageKeywords(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
+    var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
+    var visionUrl = ""
     
-    let visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue)
-    var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-    params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-    
-    NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
-      var imageKeywords = ImageKeyWords()
-      if case let data as Dictionary<String,AnyObject> = response.data {
-        imageKeywords = Mapper<ImageKeyWords>().map(data)!
-      }
-      completionHandler(returnValue: imageKeywords)
-    })
-  }
-  
-  /**
-   <#Description#>
-   
-   - parameter url:               <#url description#>
-   - parameter forceShowAll:    Includes lower confidence tags
-   - parameter knowledgeGraph:  Possible values: 0 (default), 1
-   - parameter callback:        Callback with ImageKeyWords through the completion handler
-   */
-  public func urlGetRankedImageFaceTags(url: String, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
-    
-    let visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + VisionConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue)
-    var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-    params.updateValue(url, forKey: VisionConstants.WatsonURI.URL.rawValue)
-    
-    NetworkUtils.performRequest(visionUrl, method: .POST, parameters: params, completionHandler: {response in
-      let imageFaceTags = ImageFaceTags(anyObject: response.data)
-      completionHandler(returnValue: imageFaceTags)
-    })
-  }
-  
+    switch(inputType) {
+    case VisionConstants.ImageFacesType.URL:
+      endPoint = VisionConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue
+      visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
 
+      var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+      params.updateValue(stringURL!, forKey: VisionConstants.WatsonURI.URL.rawValue)
+      NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
+        var imageFaceTags = ImageFaceTags()
+        if case let data as Dictionary<String,AnyObject> = response.data {
+          imageFaceTags = Mapper<ImageFaceTags>().map(data)!
+        }
+        completionHandler(returnValue: imageFaceTags)
+      })
+      
+      break
+    case VisionConstants.ImageFacesType.FILE:
+      endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
+      visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
+      var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
+      params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
+      NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL!, parameters: params, completionHandler: {response in
+        var imageFaceTags = ImageFaceTags()
+        if case let data as Dictionary<String,AnyObject> = response.data {
+          imageFaceTags = Mapper<ImageFaceTags>().map(data)!
+        }
+        completionHandler(returnValue: imageFaceTags)
+      })
+      break
+    }
   
-  /**
-   <#Description#>
-   
-   - parameter fileURL:           <#fileURL description#>
-   - parameter forceShowAll:    Includes lower confidence tags
-   - parameter knowledgeGraph:  Possible values: 0 (default), 1
-   - parameter callback:        Callback with ImageKeyWords through the completion handler
-   */
-  public func imageGetRankedImageFaceTags(fileURL: NSURL, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
-    
-    let visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue)
-    var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-    params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-    
-    NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL, parameters: params, completionHandler: {response in
-      let imageFaceTags = ImageFaceTags(anyObject: response.data)
-      //        TODO: Once object mapper is fixed or a different way is established to get StringPointer info then the commented
-      //              code will be enabled
-      //          var imageFaceTags = ImageFaceTags()
-      //
-      //          if case let data as Dictionary<String,AnyObject> = response.data {
-      //              imageFaceTags = Mapper<ImageFaceTags>().map(data)!
-      //          }
-      completionHandler(returnValue: imageFaceTags)
-    })
   }
   
   /**

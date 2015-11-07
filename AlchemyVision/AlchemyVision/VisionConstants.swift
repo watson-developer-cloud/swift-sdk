@@ -14,13 +14,19 @@ public class VisionConstants
   public static let visionServiceURL = "/calls"
   
   // For GetImage
-  public enum ImageInputType: String {
+  public enum ImageLinkType: String {
     case HTML = "html"
     case URL = "url"
   }
   
   // For getImageKeywords
   public enum ImageKeywordType: String {
+    case FILE = "file"
+    case URL = "url"
+  }
+  
+  // For recognizeFaces
+  public enum ImageFacesType: String {
     case FILE = "file"
     case URL = "url"
   }

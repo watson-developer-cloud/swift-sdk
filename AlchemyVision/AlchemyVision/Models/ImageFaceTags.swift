@@ -17,7 +17,7 @@ import ObjectMapper
 public struct ImageFaceTags : Mappable {
   
   
-    var totalTransactions = 0
+    var totalTransactions: Int?
     var ImageFaces: [ImageFace] = []
     
     init(totalTransactions: Int, imageFaces: [ImageFace]) {
@@ -56,7 +56,7 @@ public struct ImageFaceTags : Mappable {
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
-        totalTransactions   <- map["totalTransactions"]
+        totalTransactions   <- (map["totalTransactions"], Transformation.stringToInt)
         ImageFaces          <- map["imageFaces"]
     }
     

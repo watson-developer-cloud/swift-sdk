@@ -10,6 +10,10 @@
 		3103ADEE1BEE5390005CA3DC /* NaturalLanguageClassifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 3103ADED1BEE5390005CA3DC /* NaturalLanguageClassifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3103ADF51BEE5390005CA3DC /* NaturalLanguageClassifier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3103ADEA1BEE5390005CA3DC /* NaturalLanguageClassifier.framework */; };
 		3103ADFA1BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103ADF91BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift */; };
+		3103AE181BEE55A4005CA3DC /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE171BEE55A4005CA3DC /* Classification.swift */; };
+		3103AE1A1BEE55C5005CA3DC /* Classifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE191BEE55C5005CA3DC /* Classifiers.swift */; };
+		3103AE1C1BEE55D8005CA3DC /* TrainingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */; };
+		3103AE1E1BEE55FD005CA3DC /* ClassifiedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		3103ADF41BEE5390005CA3DC /* NaturalLanguageClassifierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaturalLanguageClassifierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3103ADF91BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalLanguageClassifierTests.swift; sourceTree = "<group>"; };
 		3103ADFB1BEE5390005CA3DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3103AE171BEE55A4005CA3DC /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Models/Classification.swift; sourceTree = "<group>"; };
+		3103AE191BEE55C5005CA3DC /* Classifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classifiers.swift; path = Models/Classifiers.swift; sourceTree = "<group>"; };
+		3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingData.swift; path = Models/TrainingData.swift; sourceTree = "<group>"; };
+		3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifiedClass.swift; path = Models/ClassifiedClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 		3103ADEC1BEE5390005CA3DC /* NaturalLanguageClassifier */ = {
 			isa = PBXGroup;
 			children = (
+				3103AE161BEE5439005CA3DC /* Models */,
 				3103ADED1BEE5390005CA3DC /* NaturalLanguageClassifier.h */,
 				3103ADEF1BEE5390005CA3DC /* Info.plist */,
 			);
@@ -84,6 +93,17 @@
 				3103ADFB1BEE5390005CA3DC /* Info.plist */,
 			);
 			path = NaturalLanguageClassifierTests;
+			sourceTree = "<group>";
+		};
+		3103AE161BEE5439005CA3DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3103AE171BEE55A4005CA3DC /* Classification.swift */,
+				3103AE191BEE55C5005CA3DC /* Classifiers.swift */,
+				3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */,
+				3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3103AE1C1BEE55D8005CA3DC /* TrainingData.swift in Sources */,
+				3103AE1E1BEE55FD005CA3DC /* ClassifiedClass.swift in Sources */,
+				3103AE1A1BEE55C5005CA3DC /* Classifiers.swift in Sources */,
+				3103AE181BEE55A4005CA3DC /* Classification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +332,7 @@
 		3103ADFF1BEE5390005CA3DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +343,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.natural-language-classifier";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		3103AE001BEE5390005CA3DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

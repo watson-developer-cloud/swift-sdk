@@ -2,8 +2,8 @@
 //  TextToSpeech.h
 //  TextToSpeech
 //
-//  Created by Robert Dickerson on 11/6/15.
-//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
+//  Created by Karl Weinmeister on 11/7/15.
+//  Copyright © 2015 Watson Developer Cloud. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,5 +15,4 @@ FOUNDATION_EXPORT double TextToSpeechVersionNumber;
 FOUNDATION_EXPORT const unsigned char TextToSpeechVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <TextToSpeech/PublicHeader.h>
-#import <OpusHelper.h>
-
+#import "OpusHelper.h"

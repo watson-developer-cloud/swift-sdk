@@ -7,98 +7,187 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E1039BB81BEE5BE800B375D0 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1039BB61BEE5BE800B375D0 /* libogg.a */; };
-		E1039BB91BEE5BE800B375D0 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1039BB71BEE5BE800B375D0 /* libopus.a */; };
-		E1AEBA0B1BED357C0063A581 /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AEBA0A1BED357C0063A581 /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E1AEBA371BED35EB0063A581 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEBA361BED35EB0063A581 /* TextToSpeech.swift */; };
-		E1AEBA391BED36230063A581 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AEBA381BED36230063A581 /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E1AEBA3B1BED37980063A581 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AEBA3A1BED37980063A581 /* WatsonCore.framework */; };
-		E1AEBA821BEE525D0063A581 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AEBA811BEE525D0063A581 /* OpusHelper.m */; };
-		E1AEBA841BEE534F0063A581 /* opus in Resources */ = {isa = PBXBuildFile; fileRef = E1AEBA831BEE534F0063A581 /* opus */; };
+		BDE8D48D1BEE731300E108FA /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D48C1BEE731300E108FA /* TextToSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDE8D4941BEE731300E108FA /* TextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4891BEE731300E108FA /* TextToSpeech.framework */; };
+		BDE8D4991BEE731300E108FA /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4981BEE731300E108FA /* TextToSpeechTests.swift */; };
+		BDE8D4AE1BEE734B00E108FA /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4AC1BEE734B00E108FA /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDE8D4AF1BEE734B00E108FA /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4AD1BEE734B00E108FA /* OpusHelper.m */; };
+		BDE8D4B61BEE735C00E108FA /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4B01BEE735C00E108FA /* opus_defines.h */; };
+		BDE8D4B71BEE735C00E108FA /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4B11BEE735C00E108FA /* opus_header.c */; };
+		BDE8D4B81BEE735C00E108FA /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4B21BEE735C00E108FA /* opus_header.h */; };
+		BDE8D4B91BEE735C00E108FA /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4B31BEE735C00E108FA /* opus_multistream.h */; };
+		BDE8D4BA1BEE735C00E108FA /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4B41BEE735C00E108FA /* opus_types.h */; };
+		BDE8D4BB1BEE735C00E108FA /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4B51BEE735C00E108FA /* opus.h */; };
+		BDE8D4BF1BEE737100E108FA /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4BC1BEE737100E108FA /* ogg.h */; };
+		BDE8D4C01BEE737100E108FA /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4BD1BEE737100E108FA /* OggHelper.h */; };
+		BDE8D4C11BEE737100E108FA /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4BE1BEE737100E108FA /* OggHelper.m */; };
+		BDE8D4C31BEE738100E108FA /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4C21BEE738100E108FA /* os_types.h */; };
+		BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C41BEE73AB00E108FA /* libogg.a */; };
+		BDE8D4C71BEE73AB00E108FA /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
+		BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BDE8D4951BEE731300E108FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDE8D4801BEE731300E108FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDE8D4881BEE731300E108FA;
+			remoteInfo = TextToSpeech;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		E1039BB61BEE5BE800B375D0 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = TextToSpeech/lib/libogg.a; sourceTree = "<group>"; };
-		E1039BB71BEE5BE800B375D0 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = TextToSpeech/lib/libopus.a; sourceTree = "<group>"; };
-		E1AEBA071BED357C0063A581 /* TextToSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1AEBA0A1BED357C0063A581 /* TextToSpeech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
-		E1AEBA0C1BED357C0063A581 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1AEBA361BED35EB0063A581 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
-		E1AEBA381BED36230063A581 /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpusHelper.h; path = opus/OpusHelper.h; sourceTree = "<group>"; };
-		E1AEBA3A1BED37980063A581 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
-		E1AEBA811BEE525D0063A581 /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpusHelper.m; path = opus/OpusHelper.m; sourceTree = "<group>"; };
-		E1AEBA831BEE534F0063A581 /* opus */ = {isa = PBXFileReference; lastKnownFileType = folder; path = opus; sourceTree = "<group>"; };
+		BDE8D4891BEE731300E108FA /* TextToSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDE8D48C1BEE731300E108FA /* TextToSpeech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
+		BDE8D48E1BEE731300E108FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE8D4931BEE731300E108FA /* TextToSpeechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDE8D4981BEE731300E108FA /* TextToSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
+		BDE8D49A1BEE731300E108FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE8D4AC1BEE734B00E108FA /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
+		BDE8D4AD1BEE734B00E108FA /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
+		BDE8D4B01BEE735C00E108FA /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
+		BDE8D4B11BEE735C00E108FA /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
+		BDE8D4B21BEE735C00E108FA /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
+		BDE8D4B31BEE735C00E108FA /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
+		BDE8D4B41BEE735C00E108FA /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
+		BDE8D4B51BEE735C00E108FA /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
+		BDE8D4BC1BEE737100E108FA /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		BDE8D4BD1BEE737100E108FA /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OggHelper.h; sourceTree = "<group>"; };
+		BDE8D4BE1BEE737100E108FA /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OggHelper.m; sourceTree = "<group>"; };
+		BDE8D4C21BEE738100E108FA /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		BDE8D4C41BEE73AB00E108FA /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		BDE8D4C51BEE73AB00E108FA /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
+		BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E1AEBA031BED357C0063A581 /* Frameworks */ = {
+		BDE8D4851BEE731300E108FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1039BB81BEE5BE800B375D0 /* libogg.a in Frameworks */,
-				E1039BB91BEE5BE800B375D0 /* libopus.a in Frameworks */,
-				E1AEBA3B1BED37980063A581 /* WatsonCore.framework in Frameworks */,
+				BDE8D4C71BEE73AB00E108FA /* libopus.a in Frameworks */,
+				BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDE8D4901BEE731300E108FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDE8D4941BEE731300E108FA /* TextToSpeech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E1AEB9FD1BED357C0063A581 = {
+		BD94BFD51BEE75E300A3F32F /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				E1039BB61BEE5BE800B375D0 /* libogg.a */,
-				E1039BB71BEE5BE800B375D0 /* libopus.a */,
-				E1AEBA3A1BED37980063A581 /* WatsonCore.framework */,
-				E1AEBA091BED357C0063A581 /* TextToSpeech */,
-				E1AEBA081BED357C0063A581 /* Products */,
+				BDE8D4C41BEE73AB00E108FA /* libogg.a */,
+				BDE8D4C51BEE73AB00E108FA /* libopus.a */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		BD94BFD61BEE75ED00A3F32F /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				BDE8D4C21BEE738100E108FA /* os_types.h */,
+				BDE8D4BC1BEE737100E108FA /* ogg.h */,
+				BDE8D4BD1BEE737100E108FA /* OggHelper.h */,
+				BDE8D4BE1BEE737100E108FA /* OggHelper.m */,
+			);
+			name = ogg;
+			sourceTree = "<group>";
+		};
+		BD94BFD71BEE75F500A3F32F /* opus */ = {
+			isa = PBXGroup;
+			children = (
+				BDE8D4B01BEE735C00E108FA /* opus_defines.h */,
+				BDE8D4B11BEE735C00E108FA /* opus_header.c */,
+				BDE8D4B21BEE735C00E108FA /* opus_header.h */,
+				BDE8D4B31BEE735C00E108FA /* opus_multistream.h */,
+				BDE8D4B41BEE735C00E108FA /* opus_types.h */,
+				BDE8D4B51BEE735C00E108FA /* opus.h */,
+				BDE8D4AC1BEE734B00E108FA /* OpusHelper.h */,
+				BDE8D4AD1BEE734B00E108FA /* OpusHelper.m */,
+			);
+			name = opus;
+			sourceTree = "<group>";
+		};
+		BDE8D47F1BEE731300E108FA = {
+			isa = PBXGroup;
+			children = (
+				BD94BFD71BEE75F500A3F32F /* opus */,
+				BD94BFD61BEE75ED00A3F32F /* ogg */,
+				BD94BFD51BEE75E300A3F32F /* lib */,
+				BDE8D48B1BEE731300E108FA /* TextToSpeech */,
+				BDE8D4971BEE731300E108FA /* TextToSpeechTests */,
+				BDE8D48A1BEE731300E108FA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E1AEBA081BED357C0063A581 /* Products */ = {
+		BDE8D48A1BEE731300E108FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1AEBA071BED357C0063A581 /* TextToSpeech.framework */,
+				BDE8D4891BEE731300E108FA /* TextToSpeech.framework */,
+				BDE8D4931BEE731300E108FA /* TextToSpeechTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1AEBA091BED357C0063A581 /* TextToSpeech */ = {
+		BDE8D48B1BEE731300E108FA /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
-				E1AEBA831BEE534F0063A581 /* opus */,
-				E1AEBA811BEE525D0063A581 /* OpusHelper.m */,
-				E1AEBA381BED36230063A581 /* OpusHelper.h */,
-				E1AEBA361BED35EB0063A581 /* TextToSpeech.swift */,
-				E1AEBA0A1BED357C0063A581 /* TextToSpeech.h */,
-				E1AEBA0C1BED357C0063A581 /* Info.plist */,
+				BDE8D48C1BEE731300E108FA /* TextToSpeech.h */,
+				BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */,
+				BDE8D48E1BEE731300E108FA /* Info.plist */,
 			);
 			path = TextToSpeech;
+			sourceTree = "<group>";
+		};
+		BDE8D4971BEE731300E108FA /* TextToSpeechTests */ = {
+			isa = PBXGroup;
+			children = (
+				BDE8D4981BEE731300E108FA /* TextToSpeechTests.swift */,
+				BDE8D49A1BEE731300E108FA /* Info.plist */,
+			);
+			path = TextToSpeechTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E1AEBA041BED357C0063A581 /* Headers */ = {
+		BDE8D4861BEE731300E108FA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1AEBA0B1BED357C0063A581 /* TextToSpeech.h in Headers */,
-				E1AEBA391BED36230063A581 /* OpusHelper.h in Headers */,
+				BDE8D4BF1BEE737100E108FA /* ogg.h in Headers */,
+				BDE8D4B91BEE735C00E108FA /* opus_multistream.h in Headers */,
+				BDE8D4C31BEE738100E108FA /* os_types.h in Headers */,
+				BDE8D48D1BEE731300E108FA /* TextToSpeech.h in Headers */,
+				BDE8D4B61BEE735C00E108FA /* opus_defines.h in Headers */,
+				BDE8D4C01BEE737100E108FA /* OggHelper.h in Headers */,
+				BDE8D4B81BEE735C00E108FA /* opus_header.h in Headers */,
+				BDE8D4AE1BEE734B00E108FA /* OpusHelper.h in Headers */,
+				BDE8D4BA1BEE735C00E108FA /* opus_types.h in Headers */,
+				BDE8D4BB1BEE735C00E108FA /* opus.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E1AEBA061BED357C0063A581 /* TextToSpeech */ = {
+		BDE8D4881BEE731300E108FA /* TextToSpeech */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1AEBA1B1BED357C0063A581 /* Build configuration list for PBXNativeTarget "TextToSpeech" */;
+			buildConfigurationList = BDE8D49D1BEE731300E108FA /* Build configuration list for PBXNativeTarget "TextToSpeech" */;
 			buildPhases = (
-				E1AEBA021BED357C0063A581 /* Sources */,
-				E1AEBA031BED357C0063A581 /* Frameworks */,
-				E1AEBA041BED357C0063A581 /* Headers */,
-				E1AEBA051BED357C0063A581 /* Resources */,
+				BDE8D4841BEE731300E108FA /* Sources */,
+				BDE8D4851BEE731300E108FA /* Frameworks */,
+				BDE8D4861BEE731300E108FA /* Headers */,
+				BDE8D4871BEE731300E108FA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -106,67 +195,112 @@
 			);
 			name = TextToSpeech;
 			productName = TextToSpeech;
-			productReference = E1AEBA071BED357C0063A581 /* TextToSpeech.framework */;
+			productReference = BDE8D4891BEE731300E108FA /* TextToSpeech.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		BDE8D4921BEE731300E108FA /* TextToSpeechTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDE8D4A01BEE731300E108FA /* Build configuration list for PBXNativeTarget "TextToSpeechTests" */;
+			buildPhases = (
+				BDE8D48F1BEE731300E108FA /* Sources */,
+				BDE8D4901BEE731300E108FA /* Frameworks */,
+				BDE8D4911BEE731300E108FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDE8D4961BEE731300E108FA /* PBXTargetDependency */,
+			);
+			name = TextToSpeechTests;
+			productName = TextToSpeechTests;
+			productReference = BDE8D4931BEE731300E108FA /* TextToSpeechTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		E1AEB9FE1BED357C0063A581 /* Project object */ = {
+		BDE8D4801BEE731300E108FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "IBM Mobile Innovation Lab";
+				ORGANIZATIONNAME = "Watson Developer Cloud";
 				TargetAttributes = {
-					E1AEBA061BED357C0063A581 = {
+					BDE8D4881BEE731300E108FA = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 57U96AW229;
+					};
+					BDE8D4921BEE731300E108FA = {
+						CreatedOnToolsVersion = 7.1;
 					};
 				};
 			};
-			buildConfigurationList = E1AEBA011BED357C0063A581 /* Build configuration list for PBXProject "TextToSpeech" */;
+			buildConfigurationList = BDE8D4831BEE731300E108FA /* Build configuration list for PBXProject "TextToSpeech" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = E1AEB9FD1BED357C0063A581;
-			productRefGroup = E1AEBA081BED357C0063A581 /* Products */;
+			mainGroup = BDE8D47F1BEE731300E108FA;
+			productRefGroup = BDE8D48A1BEE731300E108FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E1AEBA061BED357C0063A581 /* TextToSpeech */,
+				BDE8D4881BEE731300E108FA /* TextToSpeech */,
+				BDE8D4921BEE731300E108FA /* TextToSpeechTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E1AEBA051BED357C0063A581 /* Resources */ = {
+		BDE8D4871BEE731300E108FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1AEBA841BEE534F0063A581 /* opus in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDE8D4911BEE731300E108FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E1AEBA021BED357C0063A581 /* Sources */ = {
+		BDE8D4841BEE731300E108FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1AEBA821BEE525D0063A581 /* OpusHelper.m in Sources */,
-				E1AEBA371BED35EB0063A581 /* TextToSpeech.swift in Sources */,
+				BDE8D4AF1BEE734B00E108FA /* OpusHelper.m in Sources */,
+				BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */,
+				BDE8D4C11BEE737100E108FA /* OggHelper.m in Sources */,
+				BDE8D4B71BEE735C00E108FA /* opus_header.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDE8D48F1BEE731300E108FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDE8D4991BEE731300E108FA /* TextToSpeechTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BDE8D4961BEE731300E108FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDE8D4881BEE731300E108FA /* TextToSpeech */;
+			targetProxy = BDE8D4951BEE731300E108FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		E1AEBA191BED357C0063A581 /* Debug */ = {
+		BDE8D49B1BEE731300E108FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -214,7 +348,7 @@
 			};
 			name = Debug;
 		};
-		E1AEBA1A1BED357C0063A581 /* Release */ = {
+		BDE8D49C1BEE731300E108FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -255,83 +389,100 @@
 			};
 			name = Release;
 		};
-		E1AEBA1C1BED357C0063A581 /* Debug */ = {
+		BDE8D49E1BEE731300E108FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/TextToSpeech/opus";
 				INFOPLIST_FILE = TextToSpeech/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TextToSpeech/lib",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/TextToSpeech/opus $(SRCROOT)/TextToSpeech/ogg";
 			};
 			name = Debug;
 		};
-		E1AEBA1D1BED357C0063A581 /* Release */ = {
+		BDE8D49F1BEE731300E108FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/TextToSpeech/opus";
 				INFOPLIST_FILE = TextToSpeech/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TextToSpeech/lib",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/TextToSpeech/opus $(SRCROOT)/TextToSpeech/ogg";
+			};
+			name = Release;
+		};
+		BDE8D4A11BEE731300E108FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TextToSpeechTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BDE8D4A21BEE731300E108FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TextToSpeechTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E1AEBA011BED357C0063A581 /* Build configuration list for PBXProject "TextToSpeech" */ = {
+		BDE8D4831BEE731300E108FA /* Build configuration list for PBXProject "TextToSpeech" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1AEBA191BED357C0063A581 /* Debug */,
-				E1AEBA1A1BED357C0063A581 /* Release */,
+				BDE8D49B1BEE731300E108FA /* Debug */,
+				BDE8D49C1BEE731300E108FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1AEBA1B1BED357C0063A581 /* Build configuration list for PBXNativeTarget "TextToSpeech" */ = {
+		BDE8D49D1BEE731300E108FA /* Build configuration list for PBXNativeTarget "TextToSpeech" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1AEBA1C1BED357C0063A581 /* Debug */,
-				E1AEBA1D1BED357C0063A581 /* Release */,
+				BDE8D49E1BEE731300E108FA /* Debug */,
+				BDE8D49F1BEE731300E108FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDE8D4A01BEE731300E108FA /* Build configuration list for PBXNativeTarget "TextToSpeechTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDE8D4A11BEE731300E108FA /* Debug */,
+				BDE8D4A21BEE731300E108FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = E1AEB9FE1BED357C0063A581 /* Project object */;
+	rootObject = BDE8D4801BEE731300E108FA /* Project object */;
 }

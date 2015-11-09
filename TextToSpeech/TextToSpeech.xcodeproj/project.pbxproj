@@ -23,8 +23,8 @@
 		BDE8D4C11BEE737100E108FA /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4BE1BEE737100E108FA /* OggHelper.m */; };
 		BDE8D4C31BEE738100E108FA /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4C21BEE738100E108FA /* os_types.h */; };
 		BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C41BEE73AB00E108FA /* libogg.a */; };
-		BDE8D4C71BEE73AB00E108FA /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
 		BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */; };
+		E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDE8D4C71BEE73AB00E108FA /* libopus.a in Frameworks */,
+				E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */,
 				BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +228,7 @@
 				TargetAttributes = {
 					BDE8D4881BEE731300E108FA = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 57U96AW229;
 					};
 					BDE8D4921BEE731300E108FA = {
 						CreatedOnToolsVersion = 7.1;
@@ -393,6 +394,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -406,6 +409,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -415,6 +419,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -428,6 +434,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

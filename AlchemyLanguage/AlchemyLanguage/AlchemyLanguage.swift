@@ -24,7 +24,7 @@ import WatsonCore
 // Microformats Parsing
 // Feed Detection
 // Linked Data Support
-class AlchemyLanguage: Service {}
+public final class AlchemyLanguage: Service {}
 
 
 /**

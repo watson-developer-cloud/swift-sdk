@@ -1,0 +1,636 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		E1778B8D1BEA882D0097B05A /* WatsonBundleSDK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E1778B8E1BEA882D0097B05A /* Build configuration list for PBXAggregateTarget "WatsonBundleSDK" */;
+			buildPhases = (
+				E1778BD21BEA89B60097B05A /* ShellScript */,
+			);
+			dependencies = (
+				E1778C241BEBBCB00097B05A /* PBXTargetDependency */,
+				E1778BC41BEA88BB0097B05A /* PBXTargetDependency */,
+				E1778BC61BEA88BB0097B05A /* PBXTargetDependency */,
+				E1778BC81BEA88BB0097B05A /* PBXTargetDependency */,
+				E1778B941BEA88470097B05A /* PBXTargetDependency */,
+			);
+			name = WatsonBundleSDK;
+			productName = WatsonSDK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		3103AE0C1BEE53C9005CA3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3103ADEA1BEE5390005CA3DC;
+			remoteInfo = NaturalLanguageClassifier;
+		};
+		3103AE0E1BEE53C9005CA3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3103ADF41BEE5390005CA3DC;
+			remoteInfo = NaturalLanguageClassifierTests;
+		};
+		7ABC02E41BECF5F1003A7BF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ABC02C51BECF5F0003A7BF3;
+			remoteInfo = SpeechToText;
+		};
+		7ABC02E61BECF5F1003A7BF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ABC02CF1BECF5F0003A7BF3;
+			remoteInfo = SpeechToTextTests;
+		};
+		E1778B801BEA88070097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A1FCDD01BA9ED6A0090E1EB;
+			remoteInfo = WatsonCore;
+		};
+		E1778B821BEA88070097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A1FCDDA1BA9ED6A0090E1EB;
+			remoteInfo = WatsonCoreTests;
+		};
+		E1778B891BEA880E0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A1FCE5E1BAA011B0090E1EB;
+			remoteInfo = WatsonTextToSpeech;
+		};
+		E1778B8B1BEA880E0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A1FCE681BAA011C0090E1EB;
+			remoteInfo = WatsonTextToSpeechTests;
+		};
+		E1778B931BEA88470097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A1FCDCF1BA9ED6A0090E1EB;
+			remoteInfo = WatsonCore;
+		};
+		E1778BA71BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3179E23F1BC1EA4000174C5A;
+			remoteInfo = AlchemyVision;
+		};
+		E1778BA91BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3179E2491BC1EA4000174C5A;
+			remoteInfo = AlchemyVisionTests;
+		};
+		E1778BAD1BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BDAED1C21BBF57CA00BBF265;
+			remoteInfo = LanguageTranslation;
+		};
+		E1778BAF1BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BDAED1CC1BBF57CA00BBF265;
+			remoteInfo = LanguageTranslationTests;
+		};
+		E1778BB31BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD5C90BD1BE04F7A00EA13DE;
+			remoteInfo = PersonalityInsights;
+		};
+		E1778BB51BEA88A90097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD5C90C71BE04F7A00EA13DE;
+			remoteInfo = PersonalityInsightsTests;
+		};
+		E1778BC31BEA88BB0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BD5C90BC1BE04F7A00EA13DE;
+			remoteInfo = PersonalityInsights;
+		};
+		E1778BC51BEA88BB0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3179E23E1BC1EA4000174C5A;
+			remoteInfo = AlchemyVision;
+		};
+		E1778BC71BEA88BB0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BDAED1C11BBF57CA00BBF265;
+			remoteInfo = LanguageTranslation;
+		};
+		E1778C1F1BEBBC9F0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E23DB4C1BEA6C61004B4047;
+			remoteInfo = AlchemyLanguage;
+		};
+		E1778C211BEBBC9F0097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E23DB561BEA6C61004B4047;
+			remoteInfo = AlchemyLanguageTests;
+		};
+		E1778C231BEBBCB00097B05A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E23DB4B1BEA6C61004B4047;
+			remoteInfo = AlchemyLanguage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NaturalLanguageClassifier.xcodeproj; path = ../NaturalLanguageClassifier/NaturalLanguageClassifier.xcodeproj; sourceTree = "<group>"; };
+		7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpeechToText.xcodeproj; path = ../SpeechToText/SpeechToText.xcodeproj; sourceTree = "<group>"; };
+		E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonCore.xcodeproj; path = ../WatsonCore/WatsonCore.xcodeproj; sourceTree = "<group>"; };
+		E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonTextToSpeech.xcodeproj; path = ../WatsonTextToSpeech/WatsonTextToSpeech.xcodeproj; sourceTree = "<group>"; };
+		E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PersonalityInsights.xcodeproj; path = ../PersonalityInsights/PersonalityInsights.xcodeproj; sourceTree = "<group>"; };
+		E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlchemyVision.xcodeproj; path = ../AlchemyVision/AlchemyVision.xcodeproj; sourceTree = "<group>"; };
+		E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LanguageTranslation.xcodeproj; path = ../LanguageTranslation/LanguageTranslation.xcodeproj; sourceTree = "<group>"; };
+		E1778BD31BEA8A1C0097B05A /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = License.txt; path = ../License.txt; sourceTree = "<group>"; };
+		E1778BE11BEAD7150097B05A /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
+		E1778BE31BEAD7150097B05A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlchemyLanguage.xcodeproj; path = ../AlchemyLanguage/AlchemyLanguage.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3103AE051BEE53C9005CA3DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3103AE0D1BEE53C9005CA3DC /* NaturalLanguageClassifier.framework */,
+				3103AE0F1BEE53C9005CA3DC /* NaturalLanguageClassifierTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7ABC02E01BECF5F0003A7BF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7ABC02E51BECF5F1003A7BF3 /* SpeechToText.framework */,
+				7ABC02E71BECF5F1003A7BF3 /* SpeechToTextTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778B731BEA87FC0097B05A = {
+			isa = PBXGroup;
+			children = (
+				E1778C081BEADE930097B05A /* Resources */,
+				E1778BE01BEAD7150097B05A /* WatsonSDK */,
+				E1778BDF1BEAD7150097B05A /* Products */,
+				3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */,
+				E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */,
+				E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */,
+				E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */,
+				E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */,
+				7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */,
+				E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */,
+				E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		E1778B7B1BEA88070097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778B811BEA88070097B05A /* WatsonCore.framework */,
+				E1778B831BEA88070097B05A /* WatsonCoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778B851BEA880E0097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778B8A1BEA880E0097B05A /* WatsonTextToSpeech.framework */,
+				E1778B8C1BEA880E0097B05A /* WatsonTextToSpeechTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778B971BEA88A90097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778BB41BEA88A90097B05A /* PersonalityInsights.framework */,
+				E1778BB61BEA88A90097B05A /* PersonalityInsightsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778B9A1BEA88A90097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778BA81BEA88A90097B05A /* AlchemyVision.framework */,
+				E1778BAA1BEA88A90097B05A /* AlchemyVisionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778B9D1BEA88A90097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778BAE1BEA88A90097B05A /* LanguageTranslation.framework */,
+				E1778BB01BEA88A90097B05A /* LanguageTranslationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778BDF1BEAD7150097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1778BE01BEAD7150097B05A /* WatsonSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E1778BE11BEAD7150097B05A /* WatsonSDK.h */,
+				E1778BE31BEAD7150097B05A /* Info.plist */,
+			);
+			path = WatsonSDK;
+			sourceTree = "<group>";
+		};
+		E1778C081BEADE930097B05A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1778BD31BEA8A1C0097B05A /* License.txt */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E1778C1B1BEBBC9F0097B05A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1778C201BEBBC9F0097B05A /* AlchemyLanguage.framework */,
+				E1778C221BEBBC9F0097B05A /* AlchemyLanguageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		E1778B741BEA87FC0097B05A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				TargetAttributes = {
+					E1778B8D1BEA882D0097B05A = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = E1778B771BEA87FC0097B05A /* Build configuration list for PBXProject "WatsonSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E1778B731BEA87FC0097B05A;
+			productRefGroup = E1778BDF1BEAD7150097B05A /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E1778C1B1BEBBC9F0097B05A /* Products */;
+					ProjectRef = E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */;
+				},
+				{
+					ProductGroup = E1778B9A1BEA88A90097B05A /* Products */;
+					ProjectRef = E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */;
+				},
+				{
+					ProductGroup = E1778B9D1BEA88A90097B05A /* Products */;
+					ProjectRef = E1778B9C1BEA88A90097B05A /* LanguageTranslation.xcodeproj */;
+				},
+				{
+					ProductGroup = 3103AE051BEE53C9005CA3DC /* Products */;
+					ProjectRef = 3103AE041BEE53C9005CA3DC /* NaturalLanguageClassifier.xcodeproj */;
+				},
+				{
+					ProductGroup = E1778B971BEA88A90097B05A /* Products */;
+					ProjectRef = E1778B961BEA88A90097B05A /* PersonalityInsights.xcodeproj */;
+				},
+				{
+					ProductGroup = 7ABC02E01BECF5F0003A7BF3 /* Products */;
+					ProjectRef = 7ABC02DF1BECF5F0003A7BF3 /* SpeechToText.xcodeproj */;
+				},
+				{
+					ProductGroup = E1778B7B1BEA88070097B05A /* Products */;
+					ProjectRef = E1778B7A1BEA88070097B05A /* WatsonCore.xcodeproj */;
+				},
+				{
+					ProductGroup = E1778B851BEA880E0097B05A /* Products */;
+					ProjectRef = E1778B841BEA880E0097B05A /* WatsonTextToSpeech.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				E1778B8D1BEA882D0097B05A /* WatsonBundleSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3103AE0D1BEE53C9005CA3DC /* NaturalLanguageClassifier.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NaturalLanguageClassifier.framework;
+			remoteRef = 3103AE0C1BEE53C9005CA3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3103AE0F1BEE53C9005CA3DC /* NaturalLanguageClassifierTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NaturalLanguageClassifierTests.xctest;
+			remoteRef = 3103AE0E1BEE53C9005CA3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7ABC02E51BECF5F1003A7BF3 /* SpeechToText.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SpeechToText.framework;
+			remoteRef = 7ABC02E41BECF5F1003A7BF3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7ABC02E71BECF5F1003A7BF3 /* SpeechToTextTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SpeechToTextTests.xctest;
+			remoteRef = 7ABC02E61BECF5F1003A7BF3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778B811BEA88070097B05A /* WatsonCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WatsonCore.framework;
+			remoteRef = E1778B801BEA88070097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778B831BEA88070097B05A /* WatsonCoreTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WatsonCoreTests.xctest;
+			remoteRef = E1778B821BEA88070097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778B8A1BEA880E0097B05A /* WatsonTextToSpeech.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WatsonTextToSpeech.framework;
+			remoteRef = E1778B891BEA880E0097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778B8C1BEA880E0097B05A /* WatsonTextToSpeechTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WatsonTextToSpeechTests.xctest;
+			remoteRef = E1778B8B1BEA880E0097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BA81BEA88A90097B05A /* AlchemyVision.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlchemyVision.framework;
+			remoteRef = E1778BA71BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BAA1BEA88A90097B05A /* AlchemyVisionTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AlchemyVisionTests.xctest;
+			remoteRef = E1778BA91BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BAE1BEA88A90097B05A /* LanguageTranslation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LanguageTranslation.framework;
+			remoteRef = E1778BAD1BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BB01BEA88A90097B05A /* LanguageTranslationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LanguageTranslationTests.xctest;
+			remoteRef = E1778BAF1BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BB41BEA88A90097B05A /* PersonalityInsights.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PersonalityInsights.framework;
+			remoteRef = E1778BB31BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778BB61BEA88A90097B05A /* PersonalityInsightsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PersonalityInsightsTests.xctest;
+			remoteRef = E1778BB51BEA88A90097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778C201BEBBC9F0097B05A /* AlchemyLanguage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlchemyLanguage.framework;
+			remoteRef = E1778C1F1BEBBC9F0097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1778C221BEBBC9F0097B05A /* AlchemyLanguageTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AlchemyLanguageTests.xctest;
+			remoteRef = E1778C211BEBBC9F0097B05A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E1778BD21BEA89B60097B05A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1778B941BEA88470097B05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WatsonCore;
+			targetProxy = E1778B931BEA88470097B05A /* PBXContainerItemProxy */;
+		};
+		E1778BC41BEA88BB0097B05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PersonalityInsights;
+			targetProxy = E1778BC31BEA88BB0097B05A /* PBXContainerItemProxy */;
+		};
+		E1778BC61BEA88BB0097B05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AlchemyVision;
+			targetProxy = E1778BC51BEA88BB0097B05A /* PBXContainerItemProxy */;
+		};
+		E1778BC81BEA88BB0097B05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LanguageTranslation;
+			targetProxy = E1778BC71BEA88BB0097B05A /* PBXContainerItemProxy */;
+		};
+		E1778C241BEBBCB00097B05A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AlchemyLanguage;
+			targetProxy = E1778C231BEBBCB00097B05A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E1778B781BEA87FC0097B05A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E1778B791BEA87FC0097B05A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		E1778B8F1BEA882D0097B05A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E1778B901BEA882D0097B05A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E1778B771BEA87FC0097B05A /* Build configuration list for PBXProject "WatsonSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1778B781BEA87FC0097B05A /* Debug */,
+				E1778B791BEA87FC0097B05A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1778B8E1BEA882D0097B05A /* Build configuration list for PBXAggregateTarget "WatsonBundleSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1778B8F1BEA882D0097B05A /* Debug */,
+				E1778B901BEA882D0097B05A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E1778B741BEA87FC0097B05A /* Project object */;
+}

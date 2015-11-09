@@ -11,7 +11,7 @@ import Foundation
 
 
 /// The Constants needed for the input keys for the parameters
-public class AlchemyConstantss
+public class AlchemyConstants
 {
 
     static let Hosts = "https://gateway-a.watsonplatform.net"

@@ -9,47 +9,50 @@
 import Foundation
 import WatsonCore
 import SwiftyJSON
+import ObjectMapper
 
-public enum ImageFaceEnum: String {
-    case Age        = "age"
-    case Gender     = "gender"
-    case Height     = "height"
-    case Width      = "width"
-    case PostionX   = "postionX"
-    case PostionY   = "postionY"
-}
-
-public struct ImageFace {
-    
+/**
+ *  ImageFace holds attribute information of height, width, positionX, positionY, age and gender
+ - parameter fileURL: adsf asdf
+ */
+public struct ImageFace : Mappable {
+  
     var age         = [String: AnyObject]()
     var gender      = [String: AnyObject]()
-    var height      = 0
-    var positionX   = 0
-    var positionY   = 0
-    var width       = 0
-    
-    init(age: [String: AnyObject], gender: [String: AnyObject], height: Int, width: Int, positionX: Int, positionY: Int) {
-        self.height     = height
-        self.width      = width
-        self.positionX  = positionX
-        self.positionY  = positionY
-        self.age        = age
-        self.gender     = gender
-    }
-    
+    var height:     Int?
+    var positionX:  Int?
+    var positionY:  Int?
+    var width:      Int?
+  
+    // this will go away once objectmapper can handle pointers
     init(json: JSON) {
         
-        height      = json[ImageFaceEnum.Height.rawValue].intValue
-        width       = json[ImageFaceEnum.Width.rawValue].intValue
-        positionX   = json[ImageFaceEnum.PostionX.rawValue].intValue
-        positionY   = json[ImageFaceEnum.PostionY.rawValue].intValue
+        height      = json["height"].intValue
+        width       = json["width"].intValue
+        positionX   = json["positionX"].intValue
+        positionY   = json["positionY"].intValue
         
-        for (key,subJson):(String, JSON) in json[ImageFaceEnum.Age.rawValue] {
+        for (key,subJson):(String, JSON) in json["age"] {
             age[key] = subJson.object
         }
         
-        for (key,subJson):(String, JSON) in json[ImageFaceEnum.Gender.rawValue] {
+        for (key,subJson):(String, JSON) in json["gender"] {
             gender[key] = subJson.object
         }
+    }
+    
+    public init() {
+        
+    }
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        height      <-  (map["height"], Transformation.stringToInt)
+        width       <-  (map["width"], Transformation.stringToInt)
+        positionX   <-   map["positionX"]
+        positionY   <-   map["positionY"]
+        age         <-   map["age"]
+        gender      <-   map["gender"]
     }
 }

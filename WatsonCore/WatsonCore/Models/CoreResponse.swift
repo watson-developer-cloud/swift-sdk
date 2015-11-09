@@ -27,6 +27,9 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
     public var usage:String?
     public var status:String?
     
+    //Concept Expansion
+    public var developer:String?
+    
     //NSError
     public var domain:String?
     
@@ -43,6 +46,9 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
         }
         if let info = info {
             desc += "\nInfo: \(info)"
+        }
+        if let developer = developer {
+            desc += "\nDeveloper: \(developer)"
         }
         if let help = help {
             desc += "\nHelp: \(help)"
@@ -74,6 +80,13 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
         help                <-  map["data.help"]
         info                <-  map["data.description"]
         
+        //Concept Expansion
+        code                <-  map["data.error.error_code"]
+        info                <-  map["data.message"]
+        info                <-  map["data.error.user_message"]
+        developer           <-  map["data.error.dev_message"]
+        help                <-  map["data.error.doc"]
+
         //Alchemy
         totalTransactions   <- (map["data.totalTransactions"], Transformation.stringToInt)
         status              <-  map["data.status"]

@@ -7,23 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311980921BD3F2E70046EF85 /* emaxfpo.jpg */; settings = {ASSET_TAGS = (); }; };
-		3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */; settings = {ASSET_TAGS = (); }; };
-		316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */; settings = {ASSET_TAGS = (); }; };
-		316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FB11BD6C48200EC4A68 /* ImageFace.swift */; settings = {ASSET_TAGS = (); }; };
+		3101767D1BED2962006D4DC3 /* ObjectMapper.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 316B6EB81BED28DF00D60AF3 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3101767F1BED29B4006D4DC3 /* example.html in Resources */ = {isa = PBXBuildFile; fileRef = 3101767E1BED29B4006D4DC3 /* example.html */; };
+		311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 311980921BD3F2E70046EF85 /* emaxfpo.jpg */; };
+		3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */; };
+		316B6EB71BED22F900D60AF3 /* ImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316B6EB61BED22F900D60AF3 /* ImageLink.swift */; };
+		316B6EB91BED28DF00D60AF3 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316B6EB81BED28DF00D60AF3 /* ObjectMapper.framework */; };
+		316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */; };
+		316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E5FB11BD6C48200EC4A68 /* ImageFace.swift */; };
 		3179E2431BC1EA4000174C5A /* AlchemyVision.h in Headers */ = {isa = PBXBuildFile; fileRef = 3179E2421BC1EA4000174C5A /* AlchemyVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3179E24A1BC1EA4000174C5A /* AlchemyVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */; settings = {ASSET_TAGS = (); }; };
+		3179E24A1BC1EA4000174C5A /* AlchemyVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */; };
 		3179E24F1BC1EA4000174C5A /* AlchemyVisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */; };
-		31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */; settings = {ASSET_TAGS = (); }; };
-		31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6081BC1EF6000756343 /* Vision.swift */; settings = {ASSET_TAGS = (); }; };
+		31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */; };
+		31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BCE6081BC1EF6000756343 /* Vision.swift */; };
 		BD308EB81BCF11070092763A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EB51BCF11070092763A /* SwiftyJSON.framework */; };
 		BD308EB91BCF11080092763A /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EB61BCF11070092763A /* XCGLogger.framework */; };
 		BD308EBB1BCF111C0092763A /* SwiftyJSON.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BD308EB51BCF11070092763A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EBC1BCF111C0092763A /* XCGLogger.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BD308EB61BCF11070092763A /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD308EC91BCF11A50092763A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD308EC81BCF11A50092763A /* WatsonCore.framework */; };
-		BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */; settings = {ASSET_TAGS = (); }; };
-		BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */; settings = {ASSET_TAGS = (); }; };
-		BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */; settings = {ASSET_TAGS = (); }; };
+		BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5C90AF1BE0469000EA13DE /* VisionConstants.swift */; };
+		BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1A1BDDB4A300153673 /* VisionTest.plist */; };
+		BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3101767D1BED2962006D4DC3 /* ObjectMapper.framework in Copy Files */,
 				BD308EBB1BCF111C0092763A /* SwiftyJSON.framework in Copy Files */,
 				BD308EBC1BCF111C0092763A /* XCGLogger.framework in Copy Files */,
 			);
@@ -52,8 +57,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3101767E1BED29B4006D4DC3 /* example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = example.html; sourceTree = "<group>"; };
 		311980921BD3F2E70046EF85 /* emaxfpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emaxfpo.jpg; sourceTree = "<group>"; };
 		3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
+		316B6EB61BED22F900D60AF3 /* ImageLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLink.swift; sourceTree = "<group>"; };
+		316B6EB81BED28DF00D60AF3 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
 		316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFaceTags.swift; sourceTree = "<group>"; };
 		316E5FB11BD6C48200EC4A68 /* ImageFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFace.swift; sourceTree = "<group>"; };
 		3179E23F1BC1EA4000174C5A /* AlchemyVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316B6EB91BED28DF00D60AF3 /* ObjectMapper.framework in Frameworks */,
 				BD308EB81BCF11070092763A /* SwiftyJSON.framework in Frameworks */,
 				BD308EB91BCF11080092763A /* XCGLogger.framework in Frameworks */,
 				BD308EC91BCF11A50092763A /* WatsonCore.framework in Frameworks */,
@@ -129,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				3179E24E1BC1EA4000174C5A /* AlchemyVisionTests.swift */,
+				3101767E1BED29B4006D4DC3 /* example.html */,
 				311980921BD3F2E70046EF85 /* emaxfpo.jpg */,
 				3179E2501BC1EA4000174C5A /* Info.plist */,
 				BD7A9B1C1BDDB7C200153673 /* mother-daughter.jpg */,
@@ -140,6 +150,7 @@
 		31BCE5FE1BC1EF4F00756343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				316B6EB61BED22F900D60AF3 /* ImageLink.swift */,
 				31BCE6001BC1EF4F00756343 /* ImageKeyWord.swift */,
 				3127A22B1BCDAE7800DD4CFE /* ImageKeyWords.swift */,
 				316E5FAF1BD6C3DE00EC4A68 /* ImageFaceTags.swift */,
@@ -152,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				BD308EC81BCF11A50092763A /* WatsonCore.framework */,
+				316B6EB81BED28DF00D60AF3 /* ObjectMapper.framework */,
 				BD308EB51BCF11070092763A /* SwiftyJSON.framework */,
 				BD308EB61BCF11070092763A /* XCGLogger.framework */,
 			);
@@ -259,6 +271,7 @@
 				BD7A9B1B1BDDB4A300153673 /* VisionTest.plist in Resources */,
 				BD7A9B1D1BDDB7C200153673 /* mother-daughter.jpg in Resources */,
 				311980931BD3F2E70046EF85 /* emaxfpo.jpg in Resources */,
+				3101767F1BED29B4006D4DC3 /* example.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +285,7 @@
 				31BCE6041BC1EF4F00756343 /* ImageKeyWord.swift in Sources */,
 				31BCE60A1BC1EF6000756343 /* Vision.swift in Sources */,
 				316E5FB21BD6C48200EC4A68 /* ImageFace.swift in Sources */,
+				316B6EB71BED22F900D60AF3 /* ImageLink.swift in Sources */,
 				3127A22C1BCDAE7800DD4CFE /* ImageKeyWords.swift in Sources */,
 				316E5FB01BD6C3DE00EC4A68 /* ImageFaceTags.swift in Sources */,
 				BD5C90B01BE0469000EA13DE /* VisionConstants.swift in Sources */,
@@ -398,7 +412,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyVision;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.alchemy-vision";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -415,7 +429,7 @@
 				INFOPLIST_FILE = AlchemyVision/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyVision;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.alchemy-vision";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -424,6 +438,7 @@
 		3179E2571BC1EA4000174C5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = AlchemyVisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyVisionTests;
@@ -434,6 +449,7 @@
 		3179E2581BC1EA4000174C5A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = AlchemyVisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyVisionTests;

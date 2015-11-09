@@ -5,6 +5,10 @@ This SDK makes it easy to use IBM's [Watson API](https://watson-api-explorer.myb
 
 [![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK)
 
+[![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
+
+https://codecov.io/github/IBM-MIL/Watson-iOS-SDK
+
 Implemented services:
 
 * Speech to Text

@@ -21,26 +21,9 @@ import WatsonCore
 /**
  * Alchemy generic model with the number of transactions of each operation.
  */
-public abstract class AlchemyGenericModel extends GenericModel {
+public protocol AlchemyGenericModel {
+    
+    /** The total transactions. */
+    var totalTransactions: Int! { get set }
 
-	/** The total transactions. */
-	private Integer totalTransactions;
-
-	/**
-	 * Gets the total transactions.
-	 *
-	 * @return the totalTransactions
-	 */
-	public Integer getTotalTransactions() {
-		return totalTransactions;
-	}
-
-	/**
-	 * Sets the total transactions.
-	 *
-	 * @param totalTransactions the totalTransactions to set
-	 */
-	public void setTotalTransactions(Integer totalTransactions) {
-		this.totalTransactions = totalTransactions;
-	}
 }

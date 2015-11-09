@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -36,16 +37,6 @@
                BuildableName = "LanguageTranslationTests.xctest"
                BlueprintName = "LanguageTranslationTests"
                ReferencedContainer = "container:../LanguageTranslation/LanguageTranslation.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BD5C90C61BE04F7A00EA13DE"
-               BuildableName = "PersonalityInsightsTests.xctest"
-               BlueprintName = "PersonalityInsightsTests"
-               ReferencedContainer = "container:../PersonalityInsights/PersonalityInsights.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference

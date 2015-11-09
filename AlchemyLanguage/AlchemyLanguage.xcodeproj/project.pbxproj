@@ -12,7 +12,7 @@
 		6E23DB5C1BEA6C61004B4047 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */; };
 		6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */; };
 		6EB6B4071BF10D98008C43B2 /* AlchemyGenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E01BF10D98008C43B2 /* AlchemyGenericModel.swift */; };
-		6EB6B4081BF10D98008C43B2 /* AlchemyLanguageGenericModel.java in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.java */; };
+		6EB6B4081BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift */; };
 		6EB6B4091BF10D98008C43B2 /* Article.java in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E21BF10D98008C43B2 /* Article.java */; };
 		6EB6B40A1BF10D98008C43B2 /* CombinedResults.java in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E31BF10D98008C43B2 /* CombinedResults.java */; };
 		6EB6B40B1BF10D98008C43B2 /* Concept.java in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B3E41BF10D98008C43B2 /* Concept.java */; };
@@ -72,7 +72,7 @@
 		6E23DB5D1BEA6C61004B4047 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E23DB6B1BEA75F0004B4047 /* AlchemyLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
 		6EB6B3E01BF10D98008C43B2 /* AlchemyGenericModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyGenericModel.swift; sourceTree = "<group>"; };
-		6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = AlchemyLanguageGenericModel.java; sourceTree = "<group>"; };
+		6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageGenericModel.swift; sourceTree = "<group>"; };
 		6EB6B3E21BF10D98008C43B2 /* Article.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Article.java; sourceTree = "<group>"; };
 		6EB6B3E31BF10D98008C43B2 /* CombinedResults.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = CombinedResults.java; sourceTree = "<group>"; };
 		6EB6B3E41BF10D98008C43B2 /* Concept.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Concept.java; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB6B3E01BF10D98008C43B2 /* AlchemyGenericModel.swift */,
-				6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.java */,
+				6EB6B3E11BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift */,
 				6EB6B3E21BF10D98008C43B2 /* Article.java */,
 				6EB6B3E31BF10D98008C43B2 /* CombinedResults.java */,
 				6EB6B3E41BF10D98008C43B2 /* Concept.java */,
@@ -364,7 +364,7 @@
 				6EB6B4111BF10D98008C43B2 /* DocumentsResult.java in Sources */,
 				6EB6B4121BF10D98008C43B2 /* DocumentText.java in Sources */,
 				6EB6B40C1BF10D98008C43B2 /* DisambiguatedLinks.java in Sources */,
-				6EB6B4081BF10D98008C43B2 /* AlchemyLanguageGenericModel.java in Sources */,
+				6EB6B4081BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift in Sources */,
 				6EB6B42A1BF10D98008C43B2 /* Taxonomies.java in Sources */,
 				6EB6B4241BF10D98008C43B2 /* PublicationDate.java in Sources */,
 			);

@@ -17,13 +17,10 @@
 import Foundation
 import WatsonCore
 
+/** Model protocol for Alchemy Language models. */
+public protocol AlchemyLanguageGenericModel: AlchemyGenericModel {
 
-/**
- Alchemy generic model with the number of transactions of each operation.
- */
-public protocol AlchemyGenericModel {
-    
-    /** The total transactions. */
-    var totalTransactions: Int! { get set }
+    var language: String! { get set }
+    var url: String! { get set }
 
 }

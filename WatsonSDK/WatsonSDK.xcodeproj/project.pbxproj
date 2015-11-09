@@ -14,6 +14,7 @@
 				E1778BD21BEA89B60097B05A /* ShellScript */,
 			);
 			dependencies = (
+				EB78E2311BF1331F00BCE6D8 /* PBXTargetDependency */,
 				E1778C241BEBBCB00097B05A /* PBXTargetDependency */,
 				E1778BC41BEA88BB0097B05A /* PBXTargetDependency */,
 				E1778BC61BEA88BB0097B05A /* PBXTargetDependency */,
@@ -173,6 +174,27 @@
 			remoteGlobalIDString = 6E23DB4B1BEA6C61004B4047;
 			remoteInfo = AlchemyLanguage;
 		};
+		EB78E21F1BF132DB00BCE6D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB78E1FE1BF132DA00BCE6D8;
+			remoteInfo = Dialog;
+		};
+		EB78E2211BF132DB00BCE6D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB78E2081BF132DA00BCE6D8;
+			remoteInfo = DialogTests;
+		};
+		EB78E2301BF1331F00BCE6D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EB78E1FD1BF132DA00BCE6D8;
+			remoteInfo = Dialog;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +209,7 @@
 		E1778BE11BEAD7150097B05A /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		E1778BE31BEAD7150097B05A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1778C1A1BEBBC9F0097B05A /* AlchemyLanguage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlchemyLanguage.xcodeproj; path = ../AlchemyLanguage/AlchemyLanguage.xcodeproj; sourceTree = "<group>"; };
+		EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dialog.xcodeproj; path = ../Dialog/Dialog.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -211,6 +234,7 @@
 		E1778B731BEA87FC0097B05A = {
 			isa = PBXGroup;
 			children = (
+				EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */,
 				E1778C081BEADE930097B05A /* Resources */,
 				E1778BE01BEAD7150097B05A /* WatsonSDK */,
 				E1778BDF1BEAD7150097B05A /* Products */,
@@ -303,6 +327,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EB78E2191BF132DA00BCE6D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB78E2201BF132DB00BCE6D8 /* Dialog.framework */,
+				EB78E2221BF132DB00BCE6D8 /* DialogTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXProject section */
@@ -334,6 +367,10 @@
 				{
 					ProductGroup = E1778B9A1BEA88A90097B05A /* Products */;
 					ProjectRef = E1778B991BEA88A90097B05A /* AlchemyVision.xcodeproj */;
+				},
+				{
+					ProductGroup = EB78E2191BF132DA00BCE6D8 /* Products */;
+					ProjectRef = EB78E2181BF132DA00BCE6D8 /* Dialog.xcodeproj */;
 				},
 				{
 					ProductGroup = E1778B9D1BEA88A90097B05A /* Products */;
@@ -480,6 +517,20 @@
 			remoteRef = E1778C211BEBBC9F0097B05A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		EB78E2201BF132DB00BCE6D8 /* Dialog.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Dialog.framework;
+			remoteRef = EB78E21F1BF132DB00BCE6D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EB78E2221BF132DB00BCE6D8 /* DialogTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DialogTests.xctest;
+			remoteRef = EB78E2211BF132DB00BCE6D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -523,6 +574,11 @@
 			isa = PBXTargetDependency;
 			name = AlchemyLanguage;
 			targetProxy = E1778C231BEBBCB00097B05A /* PBXContainerItemProxy */;
+		};
+		EB78E2311BF1331F00BCE6D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Dialog;
+			targetProxy = EB78E2301BF1331F00BCE6D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

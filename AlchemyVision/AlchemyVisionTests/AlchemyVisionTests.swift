@@ -84,7 +84,7 @@ class AlchemyVisionTests: XCTestCase {
     
     serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, fileURL: fileURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords in
       XCTAssertEqual(4, imageKeyWords.totalTransactions, "Expected result with a total transaction of 4")
-      XCTAssertEqual(2,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 2")
+      XCTAssertLessThan(1,imageKeyWords.imageKeyWords.count, "Expected result greater than one")
       validExpectation.fulfill()
     })
     

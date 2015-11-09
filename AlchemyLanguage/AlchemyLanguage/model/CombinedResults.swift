@@ -13,38 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.watson.developer_cloud.alchemy.v1.model;
 
-import java.util.List;
-
-import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
+import Foundation
+import WatsonCore
 
 /**
- * Feeds returned by the {@link AlchemyLanguage} service.
+ * Combined returned by the {@link AlchemyLanguage} service.
  *
- * @author Nizar Alseddeg (nmalsedd@us.ibm.com)
  */
-public class Feeds extends AlchemyLanguageGenericModel {
+public final class CombinedResults: AlchemyLanguageGenericModel {
 
-    /** The feeds. */
-    private List<Feed> feeds;
-
-	/**
-	 * Gets the feeds.
-	 *
-	 * @return the feeds
-	 */
-	public List<Feed> getFeeds() {
-		return feeds;
-	}
-
-	/**
-	 * Sets the feeds.
-	 *
-	 * @param feeds the feeds to set
-	 */
-	public void setFeeds(List<Feed> feeds) {
-		this.feeds = feeds;
-	}
+    var author: String!
+    var concepts: [Concepts]! = []
+    var entities: [Entities]! = []
+    var feeds: [Feed]! = []
+    var image: String!
+    var imageKeywords: [Keyword]! = []
+    var keywords: [Keyword]! = []
+    var publicationDate: PublicationDate!
+    var relations: [SAORelation]! = []
+    var sentiment: Sentiment!
+    var taxonomy: Taxonomy!
+    var title: String!
 
 }

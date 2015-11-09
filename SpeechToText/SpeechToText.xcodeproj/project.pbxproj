@@ -7,20 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A3C66741BED03D6007488B8 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3C66731BED03D6007488B8 /* SocketIO.framework */; };
 		7ABC02C91BECF5F0003A7BF3 /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ABC02C81BECF5F0003A7BF3 /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7ABC02D01BECF5F0003A7BF3 /* SpeechToText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABC02C51BECF5F0003A7BF3 /* SpeechToText.framework */; };
 		7ABC02D51BECF5F0003A7BF3 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02D41BECF5F0003A7BF3 /* SpeechToTextTests.swift */; };
 		7ABC02E91BECF7FD003A7BF3 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABC02E81BECF7FD003A7BF3 /* WatsonCore.framework */; };
 		7ABC02ED1BECF86F003A7BF3 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02EC1BECF86F003A7BF3 /* SpeechToText.swift */; };
 		7ABC02EF1BECF8A2003A7BF3 /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02EE1BECF8A2003A7BF3 /* SpeechToTextConstants.swift */; };
-		7ABC02F91BECFC79003A7BF3 /* WatsonSpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F11BECFC79003A7BF3 /* WatsonSpeechToText.swift */; };
-		7ABC02FA1BECFC79003A7BF3 /* WatsonSpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F21BECFC79003A7BF3 /* WatsonSpeechToTextDelegate.swift */; };
-		7ABC02FB1BECFC79003A7BF3 /* WatsonSpeechToTextError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F31BECFC79003A7BF3 /* WatsonSpeechToTextError.swift */; };
-		7ABC02FC1BECFC79003A7BF3 /* WatsonSpeechToTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F41BECFC79003A7BF3 /* WatsonSpeechToTextModel.swift */; };
-		7ABC02FD1BECFC79003A7BF3 /* WatsonSpeechToTextPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F51BECFC79003A7BF3 /* WatsonSpeechToTextPart.swift */; };
-		7ABC02FE1BECFC79003A7BF3 /* WatsonSpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F61BECFC79003A7BF3 /* WatsonSpeechToTextResult.swift */; };
-		7ABC02FF1BECFC79003A7BF3 /* WatsonSpeechToTextSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F71BECFC79003A7BF3 /* WatsonSpeechToTextSession.swift */; };
-		7ABC03001BECFC79003A7BF3 /* WatsonSpeechToTextSessionAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02F81BECFC79003A7BF3 /* WatsonSpeechToTextSessionAvailability.swift */; };
 		7ABC03021BECFCF2003A7BF3 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC03011BECFCF2003A7BF3 /* SpeechSample.flac */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A3C66731BED03D6007488B8 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = ../../Frameworks/SocketIO.framework; sourceTree = "<group>"; };
 		7ABC02C51BECF5F0003A7BF3 /* SpeechToText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpeechToText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABC02C81BECF5F0003A7BF3 /* SpeechToText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechToText.h; sourceTree = "<group>"; };
 		7ABC02CA1BECF5F0003A7BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ABC02E91BECF7FD003A7BF3 /* WatsonCore.framework in Frameworks */,
+				7A3C66741BED03D6007488B8 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +115,7 @@
 		7ABC02EA1BECF818003A7BF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A3C66731BED03D6007488B8 /* SocketIO.framework */,
 				7ABC02E81BECF7FD003A7BF3 /* WatsonCore.framework */,
 			);
 			name = Frameworks;
@@ -257,14 +253,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ABC02FA1BECFC79003A7BF3 /* WatsonSpeechToTextDelegate.swift in Sources */,
-				7ABC03001BECFC79003A7BF3 /* WatsonSpeechToTextSessionAvailability.swift in Sources */,
-				7ABC02FF1BECFC79003A7BF3 /* WatsonSpeechToTextSession.swift in Sources */,
-				7ABC02F91BECFC79003A7BF3 /* WatsonSpeechToText.swift in Sources */,
-				7ABC02FB1BECFC79003A7BF3 /* WatsonSpeechToTextError.swift in Sources */,
-				7ABC02FC1BECFC79003A7BF3 /* WatsonSpeechToTextModel.swift in Sources */,
-				7ABC02FE1BECFC79003A7BF3 /* WatsonSpeechToTextResult.swift in Sources */,
-				7ABC02FD1BECFC79003A7BF3 /* WatsonSpeechToTextPart.swift in Sources */,
 				7ABC02ED1BECF86F003A7BF3 /* SpeechToText.swift in Sources */,
 				7ABC02EF1BECF8A2003A7BF3 /* SpeechToTextConstants.swift in Sources */,
 			);
@@ -387,11 +375,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToText";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.speech-to-text";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -407,11 +396,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = SpeechToText/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToText";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.speech-to-text";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -456,6 +446,7 @@
 				7ABC02DB1BECF5F0003A7BF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7ABC02DC1BECF5F0003A7BF3 /* Build configuration list for PBXNativeTarget "SpeechToTextTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +455,7 @@
 				7ABC02DE1BECF5F0003A7BF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

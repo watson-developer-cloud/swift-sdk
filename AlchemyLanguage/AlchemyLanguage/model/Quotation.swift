@@ -21,7 +21,9 @@ import WatsonCore
  
  **Quotation**
  
- Returned by the AlchemyLanguage service.
- 
  */
-public final class Quotation{}
+public final class Quotation {
+
+    public var quotation: String!
+    
+}

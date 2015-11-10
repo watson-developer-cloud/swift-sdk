@@ -15,3 +15,25 @@
  */
 
 import Foundation
+import WatsonCore
+
+/**
+ 
+ **Taxonomies**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public final class Taxonomies: AlchemyLanguageGenericModel {
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Taxonomies
+    public var taxonomy: [Taxonomy]!
+    
+}

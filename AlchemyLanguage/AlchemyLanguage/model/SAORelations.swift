@@ -15,3 +15,26 @@
  */
 
 import Foundation
+import WatsonCore
+
+/**
+ 
+ **SAORelations**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public final class SAORelations: AlchemyLanguageGenericModel {
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: SAORelations
+    public var relations: [SAORelation]!
+    public var text: String!
+    
+}

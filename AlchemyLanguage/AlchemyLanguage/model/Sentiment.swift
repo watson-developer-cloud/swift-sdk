@@ -24,4 +24,26 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class Sentiment{}
+public final class Sentiment: AlchemyLanguageGenericModel {
+    
+    public final enum SentimentType {
+        
+        case POSITIVE,
+        case NEUTRAL,
+        case NEGATIVE
+        
+    }
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Sentiment
+    public var mixed: String!
+    public var score: Double!
+    public var type: SentimentType!
+    
+}

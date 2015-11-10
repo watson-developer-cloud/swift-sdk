@@ -17,4 +17,26 @@
 import Foundation
 import WatsonCore
 
-public final class Keyword{}
+/**
+ 
+ **Keyword**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public final class Keyword: AlchemyLanguageGenericModel {
+
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Keyword
+    public var knowledgeGraph: KnowledgeGraph!
+    public var relevance: Double!
+    public var sentiment: Sentiment!
+    public var text: String!
+    
+}

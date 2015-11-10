@@ -9,3 +9,8 @@
 import Foundation
 import WatsonCore
 
+public class Conversation {
+    
+    
+    
+}

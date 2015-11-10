@@ -7,107 +7,91 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB3478C21BF0F6990072F675 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3478C11BF0F6990072F675 /* Conversation.swift */; };
-		EB3478C41BF0F8640072F675 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3478C31BF0F8640072F675 /* Dialog.swift */; };
-		EBE3762B1BEBC9A500BE206E /* Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = EBE3762A1BEBC9A500BE206E /* Dialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EBE376321BEBC9A500BE206E /* Dialog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE376271BEBC9A500BE206E /* Dialog.framework */; };
-		EBE376371BEBC9A500BE206E /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE376361BEBC9A500BE206E /* DialogTests.swift */; };
-		EBE376561BEBC9D000BE206E /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE376551BEBC9D000BE206E /* WatsonCore.framework */; };
+		EB78E2021BF132DA00BCE6D8 /* Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = EB78E2011BF132DA00BCE6D8 /* Dialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB78E2091BF132DA00BCE6D8 /* Dialog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */; };
+		EB78E20E1BF132DA00BCE6D8 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */; };
+		EB78E22E1BF132F600BCE6D8 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E22C1BF132F600BCE6D8 /* Conversation.swift */; };
+		EB78E22F1BF132F600BCE6D8 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E22D1BF132F600BCE6D8 /* Dialog.swift */; };
+		EB87A2B71BF133D700F84086 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB87A2B61BF133D700F84086 /* WatsonCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EBE376331BEBC9A500BE206E /* PBXContainerItemProxy */ = {
+		EB78E20A1BF132DA00BCE6D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EBE3761E1BEBC9A500BE206E /* Project object */;
+			containerPortal = EB78E1F51BF132DA00BCE6D8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EBE376261BEBC9A500BE206E;
+			remoteGlobalIDString = EB78E1FD1BF132DA00BCE6D8;
 			remoteInfo = Dialog;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EB3478C11BF0F6990072F675 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		EB3478C31BF0F8640072F675 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
-		EBE376271BEBC9A500BE206E /* Dialog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dialog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBE3762A1BEBC9A500BE206E /* Dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
-		EBE3762C1BEBC9A500BE206E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBE376311BEBC9A500BE206E /* DialogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBE376361BEBC9A500BE206E /* DialogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
-		EBE376381BEBC9A500BE206E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBE376551BEBC9D000BE206E /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dialog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB78E2011BF132DA00BCE6D8 /* Dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
+		EB78E2031BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB78E2081BF132DA00BCE6D8 /* DialogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
+		EB78E20F1BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB78E22C1BF132F600BCE6D8 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		EB78E22D1BF132F600BCE6D8 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		EB87A2B61BF133D700F84086 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EBE376231BEBC9A500BE206E /* Frameworks */ = {
+		EB78E1FA1BF132DA00BCE6D8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE376561BEBC9D000BE206E /* WatsonCore.framework in Frameworks */,
+				EB87A2B71BF133D700F84086 /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3762E1BEBC9A500BE206E /* Frameworks */ = {
+		EB78E2051BF132DA00BCE6D8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE376321BEBC9A500BE206E /* Dialog.framework in Frameworks */,
+				EB78E2091BF132DA00BCE6D8 /* Dialog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB3478BF1BF0F6610072F675 /* Frameworks */ = {
+		EB78E1F41BF132DA00BCE6D8 = {
 			isa = PBXGroup;
 			children = (
-				EBE376551BEBC9D000BE206E /* WatsonCore.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB3478C01BF0F67D0072F675 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				EB3478C11BF0F6990072F675 /* Conversation.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		EBE3761D1BEBC9A500BE206E = {
-			isa = PBXGroup;
-			children = (
-				EBE376291BEBC9A500BE206E /* Dialog */,
-				EBE376351BEBC9A500BE206E /* DialogTests */,
-				EBE376281BEBC9A500BE206E /* Products */,
+				EB87A2B61BF133D700F84086 /* WatsonCore.framework */,
+				EB78E2001BF132DA00BCE6D8 /* Dialog */,
+				EB78E20C1BF132DA00BCE6D8 /* DialogTests */,
+				EB78E1FF1BF132DA00BCE6D8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		EBE376281BEBC9A500BE206E /* Products */ = {
+		EB78E1FF1BF132DA00BCE6D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EBE376271BEBC9A500BE206E /* Dialog.framework */,
-				EBE376311BEBC9A500BE206E /* DialogTests.xctest */,
+				EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */,
+				EB78E2081BF132DA00BCE6D8 /* DialogTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EBE376291BEBC9A500BE206E /* Dialog */ = {
+		EB78E2001BF132DA00BCE6D8 /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
-				EB3478C01BF0F67D0072F675 /* Models */,
-				EB3478BF1BF0F6610072F675 /* Frameworks */,
-				EBE3762A1BEBC9A500BE206E /* Dialog.h */,
-				EBE3762C1BEBC9A500BE206E /* Info.plist */,
-				EB3478C31BF0F8640072F675 /* Dialog.swift */,
+				EB78E22C1BF132F600BCE6D8 /* Conversation.swift */,
+				EB78E22D1BF132F600BCE6D8 /* Dialog.swift */,
+				EB78E2011BF132DA00BCE6D8 /* Dialog.h */,
+				EB78E2031BF132DA00BCE6D8 /* Info.plist */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
 		};
-		EBE376351BEBC9A500BE206E /* DialogTests */ = {
+		EB78E20C1BF132DA00BCE6D8 /* DialogTests */ = {
 			isa = PBXGroup;
 			children = (
-				EBE376361BEBC9A500BE206E /* DialogTests.swift */,
-				EBE376381BEBC9A500BE206E /* Info.plist */,
+				EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */,
+				EB78E20F1BF132DA00BCE6D8 /* Info.plist */,
 			);
 			path = DialogTests;
 			sourceTree = "<group>";
@@ -115,25 +99,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		EBE376241BEBC9A500BE206E /* Headers */ = {
+		EB78E1FB1BF132DA00BCE6D8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE3762B1BEBC9A500BE206E /* Dialog.h in Headers */,
+				EB78E2021BF132DA00BCE6D8 /* Dialog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		EBE376261BEBC9A500BE206E /* Dialog */ = {
+		EB78E1FD1BF132DA00BCE6D8 /* Dialog */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EBE3763B1BEBC9A500BE206E /* Build configuration list for PBXNativeTarget "Dialog" */;
+			buildConfigurationList = EB78E2121BF132DA00BCE6D8 /* Build configuration list for PBXNativeTarget "Dialog" */;
 			buildPhases = (
-				EBE376221BEBC9A500BE206E /* Sources */,
-				EBE376231BEBC9A500BE206E /* Frameworks */,
-				EBE376241BEBC9A500BE206E /* Headers */,
-				EBE376251BEBC9A500BE206E /* Resources */,
+				EB78E1F91BF132DA00BCE6D8 /* Sources */,
+				EB78E1FA1BF132DA00BCE6D8 /* Frameworks */,
+				EB78E1FB1BF132DA00BCE6D8 /* Headers */,
+				EB78E1FC1BF132DA00BCE6D8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -141,72 +125,72 @@
 			);
 			name = Dialog;
 			productName = Dialog;
-			productReference = EBE376271BEBC9A500BE206E /* Dialog.framework */;
+			productReference = EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EBE376301BEBC9A500BE206E /* DialogTests */ = {
+		EB78E2071BF132DA00BCE6D8 /* DialogTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EBE3763E1BEBC9A500BE206E /* Build configuration list for PBXNativeTarget "DialogTests" */;
+			buildConfigurationList = EB78E2151BF132DA00BCE6D8 /* Build configuration list for PBXNativeTarget "DialogTests" */;
 			buildPhases = (
-				EBE3762D1BEBC9A500BE206E /* Sources */,
-				EBE3762E1BEBC9A500BE206E /* Frameworks */,
-				EBE3762F1BEBC9A500BE206E /* Resources */,
+				EB78E2041BF132DA00BCE6D8 /* Sources */,
+				EB78E2051BF132DA00BCE6D8 /* Frameworks */,
+				EB78E2061BF132DA00BCE6D8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EBE376341BEBC9A500BE206E /* PBXTargetDependency */,
+				EB78E20B1BF132DA00BCE6D8 /* PBXTargetDependency */,
 			);
 			name = DialogTests;
 			productName = DialogTests;
-			productReference = EBE376311BEBC9A500BE206E /* DialogTests.xctest */;
+			productReference = EB78E2081BF132DA00BCE6D8 /* DialogTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		EBE3761E1BEBC9A500BE206E /* Project object */ = {
+		EB78E1F51BF132DA00BCE6D8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Jonathan Ballands";
+				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
-					EBE376261BEBC9A500BE206E = {
+					EB78E1FD1BF132DA00BCE6D8 = {
 						CreatedOnToolsVersion = 7.1;
 					};
-					EBE376301BEBC9A500BE206E = {
+					EB78E2071BF132DA00BCE6D8 = {
 						CreatedOnToolsVersion = 7.1;
 					};
 				};
 			};
-			buildConfigurationList = EBE376211BEBC9A500BE206E /* Build configuration list for PBXProject "Dialog" */;
+			buildConfigurationList = EB78E1F81BF132DA00BCE6D8 /* Build configuration list for PBXProject "Dialog" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = EBE3761D1BEBC9A500BE206E;
-			productRefGroup = EBE376281BEBC9A500BE206E /* Products */;
+			mainGroup = EB78E1F41BF132DA00BCE6D8;
+			productRefGroup = EB78E1FF1BF132DA00BCE6D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EBE376261BEBC9A500BE206E /* Dialog */,
-				EBE376301BEBC9A500BE206E /* DialogTests */,
+				EB78E1FD1BF132DA00BCE6D8 /* Dialog */,
+				EB78E2071BF132DA00BCE6D8 /* DialogTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EBE376251BEBC9A500BE206E /* Resources */ = {
+		EB78E1FC1BF132DA00BCE6D8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3762F1BEBC9A500BE206E /* Resources */ = {
+		EB78E2061BF132DA00BCE6D8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,35 +200,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EBE376221BEBC9A500BE206E /* Sources */ = {
+		EB78E1F91BF132DA00BCE6D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB3478C21BF0F6990072F675 /* Conversation.swift in Sources */,
-				EB3478C41BF0F8640072F675 /* Dialog.swift in Sources */,
+				EB78E22E1BF132F600BCE6D8 /* Conversation.swift in Sources */,
+				EB78E22F1BF132F600BCE6D8 /* Dialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBE3762D1BEBC9A500BE206E /* Sources */ = {
+		EB78E2041BF132DA00BCE6D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE376371BEBC9A500BE206E /* DialogTests.swift in Sources */,
+				EB78E20E1BF132DA00BCE6D8 /* DialogTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EBE376341BEBC9A500BE206E /* PBXTargetDependency */ = {
+		EB78E20B1BF132DA00BCE6D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EBE376261BEBC9A500BE206E /* Dialog */;
-			targetProxy = EBE376331BEBC9A500BE206E /* PBXContainerItemProxy */;
+			target = EB78E1FD1BF132DA00BCE6D8 /* Dialog */;
+			targetProxy = EB78E20A1BF132DA00BCE6D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		EBE376391BEBC9A500BE206E /* Debug */ = {
+		EB78E2101BF132DA00BCE6D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -292,7 +276,7 @@
 			};
 			name = Debug;
 		};
-		EBE3763A1BEBC9A500BE206E /* Release */ = {
+		EB78E2111BF132DA00BCE6D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -333,7 +317,7 @@
 			};
 			name = Release;
 		};
-		EBE3763C1BEBC9A500BE206E /* Debug */ = {
+		EB78E2131BF132DA00BCE6D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -351,7 +335,7 @@
 			};
 			name = Debug;
 		};
-		EBE3763D1BEBC9A500BE206E /* Release */ = {
+		EB78E2141BF132DA00BCE6D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -368,7 +352,7 @@
 			};
 			name = Release;
 		};
-		EBE3763F1BEBC9A500BE206E /* Debug */ = {
+		EB78E2161BF132DA00BCE6D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = DialogTests/Info.plist;
@@ -378,7 +362,7 @@
 			};
 			name = Debug;
 		};
-		EBE376401BEBC9A500BE206E /* Release */ = {
+		EB78E2171BF132DA00BCE6D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = DialogTests/Info.plist;
@@ -391,34 +375,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EBE376211BEBC9A500BE206E /* Build configuration list for PBXProject "Dialog" */ = {
+		EB78E1F81BF132DA00BCE6D8 /* Build configuration list for PBXProject "Dialog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EBE376391BEBC9A500BE206E /* Debug */,
-				EBE3763A1BEBC9A500BE206E /* Release */,
+				EB78E2101BF132DA00BCE6D8 /* Debug */,
+				EB78E2111BF132DA00BCE6D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBE3763B1BEBC9A500BE206E /* Build configuration list for PBXNativeTarget "Dialog" */ = {
+		EB78E2121BF132DA00BCE6D8 /* Build configuration list for PBXNativeTarget "Dialog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EBE3763C1BEBC9A500BE206E /* Debug */,
-				EBE3763D1BEBC9A500BE206E /* Release */,
+				EB78E2131BF132DA00BCE6D8 /* Debug */,
+				EB78E2141BF132DA00BCE6D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBE3763E1BEBC9A500BE206E /* Build configuration list for PBXNativeTarget "DialogTests" */ = {
+		EB78E2151BF132DA00BCE6D8 /* Build configuration list for PBXNativeTarget "DialogTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EBE3763F1BEBC9A500BE206E /* Debug */,
-				EBE376401BEBC9A500BE206E /* Release */,
+				EB78E2161BF132DA00BCE6D8 /* Debug */,
+				EB78E2171BF132DA00BCE6D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = EBE3761E1BEBC9A500BE206E /* Project object */;
+	rootObject = EB78E1F51BF132DA00BCE6D8 /* Project object */;
 }

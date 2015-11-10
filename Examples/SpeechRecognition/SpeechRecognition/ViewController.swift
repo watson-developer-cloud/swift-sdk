@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import WatsonSpeechToText
+import SpeechToText
 
 class ViewController: UIViewController, AVAudioRecorderDelegate {
 

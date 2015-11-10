@@ -2,8 +2,8 @@
 //  DialogTests.swift
 //  DialogTests
 //
-//  Created by Jonathan Ballands on 11/5/15.
-//  Copyright © 2015 Jonathan Ballands. All rights reserved.
+//  Created by Jonathan Ballands on 11/9/15.
+//  Copyright © 2015 IBM. All rights reserved.
 //
 
 import XCTest

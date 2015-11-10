@@ -69,12 +69,12 @@ public class DialogService: Service {
      *
      *  - returns: A `Conversation` object.
      */
-    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil) -> Conversation? {
+    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil, callback: (Conversation?) -> Void) {
         
         // Don't allow empty a dialogId
         guard (dialogId.characters.count > 0) else {
             print("dialogId can not be empty")
-            return nil
+            return
         }
         
         // Report when a new conversationId and/or clientId is being created
@@ -102,7 +102,11 @@ public class DialogService: Service {
         // Perform the API call
         NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: nil, apiKey: self._apiKey, completionHandler: { response in
             
+            if let data = response.data as? Dictionary<String, AnyObject> {
+                print(data)
+            }
             
+            callback(nil)
         })
     }
     
@@ -113,8 +117,8 @@ public class DialogService: Service {
      *
      *  - returns: A `Conversation` object.
      */
-    public func createConversation(let dialogId: String) -> Conversation? {
-        return self.converse(dialogId)
+    public func createConversation(let dialogId: String, callback: (Conversation?) -> Void) {
+        return self.converse(dialogId, callback: callback)
     }
     
     /**
@@ -125,17 +129,17 @@ public class DialogService: Service {
      *
      *  - returns: A `Dialog` object.
      */
-    public func createDialog(let name: String, let dialogFile: NSURL) -> Dialog {
+    /*public func createDialog(let name: String, let dialogFile: NSURL) -> Dialog {
         
-    }
+    }*/
     
     /**
      *  Delete a dialog from Watson.
      *
      *  - parameter dialogId: The ID of the dialog XML in the Dialog service.
      */
-    public func deleteDialog(let dialogId: String) {
+    /*public func deleteDialog(let dialogId: String) {
         
-    }
+    }*/
     
 }

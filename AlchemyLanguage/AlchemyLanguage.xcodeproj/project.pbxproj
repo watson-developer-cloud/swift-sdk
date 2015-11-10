@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E19158C1BF26CB400D73811 /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E19158B1BF26CB400D73811 /* Keywords.swift */; };
 		6E23DB501BEA6C61004B4047 /* AlchemyLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E23DB4F1BEA6C61004B4047 /* AlchemyLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E23DB571BEA6C61004B4047 /* AlchemyLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E23DB4C1BEA6C61004B4047 /* AlchemyLanguage.framework */; };
 		6E23DB5C1BEA6C61004B4047 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E23DB5B1BEA6C61004B4047 /* AlchemyLanguageTests.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E19158B1BF26CB400D73811 /* Keywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
 		6E23DB4C1BEA6C61004B4047 /* AlchemyLanguage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyLanguage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E23DB4F1BEA6C61004B4047 /* AlchemyLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlchemyLanguage.h; sourceTree = "<group>"; };
 		6E23DB511BEA6C61004B4047 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,11 +141,12 @@
 				6EB6B44C1BF186EC008C43B2 /* Feed.swift */,
 				6EB6B44E1BF186F2008C43B2 /* Feeds.swift */,
 				6EB6B4501BF18832008C43B2 /* Keyword.swift */,
+				6E19158B1BF26CB400D73811 /* Keywords.swift */,
 				6EB6B4441BF18196008C43B2 /* KnowledgeGraph.swift */,
 				6EB6B4521BF18852008C43B2 /* PublicationDate.swift */,
 				6EB6B4461BF1819E008C43B2 /* Quotation.swift */,
-				6EB6B4481BF181A5008C43B2 /* Sentiment.swift */,
 				6EB6B4541BF1887D008C43B2 /* SAORelation.swift */,
+				6EB6B4481BF181A5008C43B2 /* Sentiment.swift */,
 				6EB6B4561BF188B8008C43B2 /* Taxonomy.swift */,
 			);
 			path = model;
@@ -273,6 +276,7 @@
 				6EB6B4471BF1819E008C43B2 /* Quotation.swift in Sources */,
 				6E23DB6C1BEA75F0004B4047 /* AlchemyLanguage.swift in Sources */,
 				6EB6B4551BF1887D008C43B2 /* SAORelation.swift in Sources */,
+				6E19158C1BF26CB400D73811 /* Keywords.swift in Sources */,
 				6EB6B4071BF10D98008C43B2 /* AlchemyGenericModel.swift in Sources */,
 				6EB6B4081BF10D98008C43B2 /* AlchemyLanguageGenericModel.swift in Sources */,
 			);

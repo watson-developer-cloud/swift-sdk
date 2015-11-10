@@ -10,28 +10,29 @@ import Foundation
 import WatsonCore
 
 
-// MARK: AlchemyLanguage
-// http://www.alchemyapi.com/products/alchemylanguage
-// Entity Extraction
-// Sentiment Analysis
-// Keyword Extraction
-// Concept Tagging
-// Relation Extraction
-// Taxonomy Classification
-// Author Extraction
-// Language Detection
-// Text Extraction
-// Microformats Parsing
-// Feed Detection
-// Linked Data Support
+/**
+
+ **AlchemyLanguage**
+
+ http://www.alchemyapi.com/products/alchemylanguage
+
+ * Entity Extraction
+ * Sentiment Analysis
+ * Keyword Extraction
+ * Concept Tagging
+ * Relation Extraction
+ * Taxonomy Classification
+ * Author Extraction
+ * Language Detection
+ * Text Extraction
+ * Microformats Parsing
+ * Feed Detection
+ * Linked Data Support
+ */
 public final class AlchemyLanguage: Service {}
 
 
-/**
-
- MARK: RequestType Enum
-
-*/
+// MARK: RequestType Enum
 public extension AlchemyLanguage {
     
     public enum RequestType {
@@ -43,11 +44,11 @@ public extension AlchemyLanguage {
     }
     
 }
- 
 
+
+// MARK: Entity Extraction
 /**
  
- MARK: Entity Extraction
  
  http://www.alchemyapi.com/api/entity/proc.html
 
@@ -57,16 +58,16 @@ public extension AlchemyLanguage {
 
  */
 public extension AlchemyLanguage {
-
+    
     /**
-    Extracts a grouped, ranked list of named entities (people, companies,
-    organizations, etc.) from text, a URL or HTML.
-    
-     - Parameters: 
-        - The parameters to be used in the service call, text, html or url should be specified.
-    
+     Extracts a grouped, ranked list of named entities (people, companies,
+     organizations, etc.) from text, a URL or HTML.
+     
+     - Parameters:
+     - The parameters to be used in the service call, text, html or url should be specified.
+     
      - Returns: An **Entities** object.
-    */
+     */
     public func getEntities() -> Entities {
     
         return Entities()
@@ -76,10 +77,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Sentiment Analysis
 /**
- 
- MARK: Sentiment Analysis
- 
+
  http://www.alchemyapi.com/api/sentiment/proc.html
  
  */
@@ -96,26 +96,24 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Keyword Extraction
 /**
- 
- MARK: Keyword Extraction
- 
+
  http://www.alchemyapi.com/api/keyword/proc.html
  
  */
 public extension AlchemyLanguage {
-
+    
     public func URLGetRankedKeywords() {}
     public func HTMLGetRankedKeywords() {}
     public func TextGetRankedKeywords() {}
-
+    
 }
 
 
+// MARK: Concept Tagging
 /**
- 
- MARK: Concept Tagging
- 
+
  http://www.alchemyapi.com/api/concept/proc.html
  
  */
@@ -128,10 +126,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Relation Extraction
 /**
- 
- MARK: Relation Extraction
- 
+
  http://www.alchemyapi.com/api/relation/proc.html
  
  */
@@ -144,13 +141,12 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Taxonomy Classification
 /**
- 
- MARK: Taxonomy Classification
- 
+
  http://www.alchemyapi.com/api/taxonomy_calls/proc.html
- 
- */
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRankedTaxonomy() {}
@@ -160,10 +156,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Author Extraction
 /**
- 
- MARK: Author Extraction
- 
+
  http://www.alchemyapi.com/api/author/proc.html
  
  */
@@ -176,10 +171,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Language Detection
 /**
- 
- MARK: Language Detection
- 
+
  http://www.alchemyapi.com/api/lang/proc.html
  
  */
@@ -192,10 +186,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Text Extraction
 /**
- 
- MARK: Text Extraction
- 
+
  http://www.alchemyapi.com/api/text/proc.html
  
  */
@@ -213,10 +206,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Microformats Parsing
 /**
- 
- MARK: Microformats Parsing
- 
+
  http://www.alchemyapi.com/api/mformat/proc.html
  
  */
@@ -228,10 +220,9 @@ public extension AlchemyLanguage {
 }
 
 
+// MARK: Feed Detection
 /**
- 
- MARK: Feed Detection
- 
+
  http://www.alchemyapi.com/api/feed-detection/proc.html
  
  */

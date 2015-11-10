@@ -35,5 +35,12 @@ public final class CombinedResults: AlchemyLanguageGenericModel {
     var sentiment: Sentiment!
     var taxonomy: Taxonomy!
     var title: String!
+    // MARK: AlchemyLanguageGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
 
 }

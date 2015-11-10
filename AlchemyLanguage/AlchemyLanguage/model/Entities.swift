@@ -17,6 +17,14 @@ import Foundation
 */
 public final class Entities: AlchemyLanguageGenericModel {
     
-    var entities: [Entity]! = []
+    // MARK: AlchemyLanguageGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Entities
+    public var entities: [Entity]! = []
     
 }

@@ -24,4 +24,17 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class PublicationDate{}
+public final class PublicationDate: AlchemyLanguageGenericModel {
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+
+    // MARK: PublicationDate
+    public var confident: Bool!
+    public var date: NSDate!
+
+}

@@ -24,9 +24,9 @@
 		BDE8D4C31BEE738100E108FA /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE8D4C21BEE738100E108FA /* os_types.h */; };
 		BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C41BEE73AB00E108FA /* libogg.a */; };
 		BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */; };
+		E12648F91BF2925A00F137DA /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12648F81BF2925A00F137DA /* WatsonCore.framework */; };
 		E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
 		E3A2AEBB1BF15BBB00D21DC1 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */; };
-		E3A2AEBE1BF1682400D21DC1 /* bark.ogg in Resources */ = {isa = PBXBuildFile; fileRef = E3A2AEBC1BF1610B00D21DC1 /* bark.ogg */; };
 		E3E93DD91BF16DD00068B415 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = E3E93DD81BF16DA40068B415 /* testing.opus */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +62,9 @@
 		BDE8D4C41BEE73AB00E108FA /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		BDE8D4C51BEE73AB00E108FA /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = SOURCE_ROOT; };
+		E12648F81BF2925A00F137DA /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 		E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTSConfiguration.swift; sourceTree = "<group>"; };
-		E3A2AEBC1BF1610B00D21DC1 /* bark.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bark.ogg; sourceTree = "<group>"; };
-		E3E93DD81BF16DA40068B415 /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = testing.opus; sourceTree = "<group>"; };
+		E3E93DD81BF16DA40068B415 /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; name = testing.opus; path = ../testing.opus; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E12648F91BF2925A00F137DA /* WatsonCore.framework in Frameworks */,
 				E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */,
 				BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */,
 			);
@@ -126,11 +127,7 @@
 		BDE8D47F1BEE731300E108FA = {
 			isa = PBXGroup;
 			children = (
-				E3E93DD81BF16DA40068B415 /* testing.opus */,
-				E3A2AEBC1BF1610B00D21DC1 /* bark.ogg */,
-				BD94BFD71BEE75F500A3F32F /* opus */,
-				BD94BFD61BEE75ED00A3F32F /* ogg */,
-				BD94BFD51BEE75E300A3F32F /* lib */,
+				E12648FA1BF2933400F137DA /* Frameworks */,
 				BDE8D48B1BEE731300E108FA /* TextToSpeech */,
 				BDE8D4971BEE731300E108FA /* TextToSpeechTests */,
 				BDE8D48A1BEE731300E108FA /* Products */,
@@ -160,10 +157,22 @@
 		BDE8D4971BEE731300E108FA /* TextToSpeechTests */ = {
 			isa = PBXGroup;
 			children = (
+				E3E93DD81BF16DA40068B415 /* testing.opus */,
 				BDE8D4981BEE731300E108FA /* TextToSpeechTests.swift */,
 				BDE8D49A1BEE731300E108FA /* Info.plist */,
 			);
 			path = TextToSpeechTests;
+			sourceTree = "<group>";
+		};
+		E12648FA1BF2933400F137DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E12648F81BF2925A00F137DA /* WatsonCore.framework */,
+				BD94BFD71BEE75F500A3F32F /* opus */,
+				BD94BFD61BEE75ED00A3F32F /* ogg */,
+				BD94BFD51BEE75E300A3F32F /* lib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +284,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A2AEBE1BF1682400D21DC1 /* bark.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

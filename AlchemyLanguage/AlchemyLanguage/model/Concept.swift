@@ -8,4 +8,14 @@
 
 import Foundation
 
-public final class Concept{}
+public final class Concept {
+
+    public var census: String!
+    public var ciaFactbook: String!
+    public var crunchbase: String!
+    public var dbpedia: String!
+    public var freebase: String!
+    public var geo: String!
+    public var geonames: String!
+    
+}

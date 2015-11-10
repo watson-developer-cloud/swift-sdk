@@ -17,4 +17,12 @@
 import Foundation
 import WatsonCore
 
-public final class Feed{}
+public final class Feed: AlchemyGenericModel {
+
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: Feed
+    public var feed: String!
+
+}

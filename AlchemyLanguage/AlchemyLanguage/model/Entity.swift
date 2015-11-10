@@ -17,8 +17,12 @@
 import Foundation
 import WatsonCore
 
-public final class Entity {
+public final class Entity: AlchemyGenericModel {
     
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: Entity
     public var count: Int!
     public var disambiguated: DisambiguatedLinks!
     public var knowledgeGraph: KnowledgeGraph!

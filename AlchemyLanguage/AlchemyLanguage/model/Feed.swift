@@ -17,6 +17,13 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Feed**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class Feed: AlchemyGenericModel {
 
     // MARK: AlchemyGenericModel

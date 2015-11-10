@@ -17,6 +17,13 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Concept**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class Concept: AlchemyLanguageGenericModel {
 
     // MARK: AlchemyGenericModel

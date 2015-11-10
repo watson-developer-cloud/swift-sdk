@@ -17,4 +17,11 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Taxonomy**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class Taxonomy{}

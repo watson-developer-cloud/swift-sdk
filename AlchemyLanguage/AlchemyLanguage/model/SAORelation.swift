@@ -17,4 +17,11 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **SAORelation**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class SAORelation{}

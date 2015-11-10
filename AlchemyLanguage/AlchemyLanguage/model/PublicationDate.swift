@@ -17,4 +17,11 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **PublicationDate**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class PublicationDate{}

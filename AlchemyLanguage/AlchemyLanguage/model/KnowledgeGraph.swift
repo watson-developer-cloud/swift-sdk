@@ -17,4 +17,10 @@
 import Foundation
 import WatsonCore
 
-public final class KnowledgeGraph{}
+/**
+ 
+ **KnowledgeGraph**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */

@@ -17,4 +17,11 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Sentiment**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class Sentiment{}

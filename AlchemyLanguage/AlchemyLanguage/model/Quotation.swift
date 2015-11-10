@@ -17,4 +17,11 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Quotation**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class Quotation{}

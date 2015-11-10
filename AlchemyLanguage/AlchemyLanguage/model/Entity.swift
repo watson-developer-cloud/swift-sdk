@@ -17,6 +17,13 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **Entity**
+ 
+ Returned by the AlchemyLanguage & AlchemyDataNews services.
+ 
+ */
 public final class Entity: AlchemyGenericModel {
     
     // MARK: AlchemyGenericModel

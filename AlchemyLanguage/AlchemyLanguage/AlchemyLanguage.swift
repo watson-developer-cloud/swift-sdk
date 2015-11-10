@@ -51,7 +51,7 @@ public extension AlchemyLanguage {
     */
     public func getEntities() -> Entities {
     
-        
+        return Entities()
     
     }
     

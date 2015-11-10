@@ -40,10 +40,6 @@ public final class AlchemyLanguage: Service {}
  */
 public extension AlchemyLanguage {
 
-    public func URLGetRankedNamedEntities() {}
-    public func HTMLGetRankedNamedEntities() {}
-    public func TextGetRankedNamedEntities() {}
-
 }
 
 

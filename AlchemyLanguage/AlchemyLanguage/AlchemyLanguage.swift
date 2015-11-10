@@ -40,6 +40,21 @@ public final class AlchemyLanguage: Service {}
  */
 public extension AlchemyLanguage {
 
+    /**
+    Extracts a grouped, ranked list of named entities (people, companies,
+    organizations, etc.) from text, a URL or HTML.
+    
+     - Parameters: 
+        - The parameters to be used in the service call, text, html or url should be specified.
+    
+     - Returns: An **Entities** object.
+    */
+    public func getEntities() -> Entities {
+    
+        
+    
+    }
+    
 }
 
 

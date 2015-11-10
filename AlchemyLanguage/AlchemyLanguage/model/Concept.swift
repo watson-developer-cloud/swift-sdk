@@ -7,9 +7,18 @@
 //
 
 import Foundation
+import WatsonCore
 
-public final class Concept {
+public final class Concept: AlchemyLanguageGenericModel {
 
+    // MARK: AlchemyLanguageGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Concept
     public var census: String!
     public var ciaFactbook: String!
     public var crunchbase: String!

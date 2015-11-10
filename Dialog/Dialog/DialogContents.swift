@@ -1,5 +1,5 @@
 //
-//  Dialog.swift
+//  DialogContents.swift
 //  Dialog
 //
 //  Created by Jonathan Ballands on 11/9/15.
@@ -9,7 +9,7 @@
 import Foundation
 import WatsonCore
 
-public class Dialog {
+public class DialogContents {
     
     
     

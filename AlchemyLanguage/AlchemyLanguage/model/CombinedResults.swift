@@ -23,7 +23,7 @@ import WatsonCore
  */
 public final class CombinedResults: AlchemyLanguageGenericModel {
 
-    // MARK: AlchemyLanguageGenericModel
+    // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
     
     // MARK: AlchemyLanguageGenericModel

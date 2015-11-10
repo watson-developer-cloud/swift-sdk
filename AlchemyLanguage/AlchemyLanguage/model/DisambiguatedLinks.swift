@@ -19,7 +19,7 @@ import WatsonCore
 
 public final class DisambiguatedLinks: AlchemyLanguageGenericModel {
 
-    // MARK: AlchemyLanguageGenericModel
+    // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
     
     // MARK: AlchemyLanguageGenericModel

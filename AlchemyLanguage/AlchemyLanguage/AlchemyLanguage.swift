@@ -31,8 +31,12 @@ public final class AlchemyLanguage: Service {}
  
  MARK: Entity Extraction
  
- // http://www.alchemyapi.com/api/entity/proc.html
- 
+ http://www.alchemyapi.com/api/entity/proc.html
+
+ public func URLGetRankedNamedEntities() {}
+ public func HTMLGetRankedNamedEntities() {}
+ public func TextGetRankedNamedEntities() {}
+
  */
 public extension AlchemyLanguage {
 

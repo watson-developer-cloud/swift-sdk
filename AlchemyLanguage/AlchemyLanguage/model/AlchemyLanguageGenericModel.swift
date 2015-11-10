@@ -17,7 +17,13 @@
 import Foundation
 import WatsonCore
 
-/** Model protocol for Alchemy Language models. */
+/** 
+ 
+ **AlchemyLanguageGenericModel**
+ 
+ Model protocol for Alchemy Language models. 
+ 
+ */
 public protocol AlchemyLanguageGenericModel: AlchemyGenericModel {
 
     var language: String! { get set }

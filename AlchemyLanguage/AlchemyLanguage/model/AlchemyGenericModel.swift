@@ -17,13 +17,16 @@
 import Foundation
 import WatsonCore
 
-
 /**
+ 
+ **AlchemyGenericModel**
+ 
  Alchemy generic model with the number of transactions of each operation.
+ 
  */
 public protocol AlchemyGenericModel {
     
     /** The total transactions. */
     var totalTransactions: Int! { get set }
-
+    
 }

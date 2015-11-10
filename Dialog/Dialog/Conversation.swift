@@ -7,10 +7,34 @@
 //
 
 import Foundation
-import WatsonCore
+import ObjectMapper
 
-public class Conversation {
+public class Conversation: Mappable {
     
+    /*
+     *  MARK: Properties
+     */
     
+    var clientId: Int?
+    var conversationId: Int?
+    var input: String?
+    var confidence: Double?
+    var response: [String]?
+    
+    /*
+     *  MARK: Lifecycle
+     */
+    
+    public required init?(_ map: Map) {
+        // Nothing to do...
+    }
+    
+    /*
+     *  MARK: Mappable
+     */
+    
+    public func mapping(map: Map) {
+        
+    }
     
 }

@@ -10,7 +10,33 @@ import Foundation
 import WatsonCore
 
 /**
- *
+ *  Constants for the `DialogService`.
+ */
+private struct DialogServiceConstants {
+    
+    static let clientId = "client_id"
+    
+    static let conversationId = "conversation_id"
+    
+    static let dialogId = "dialog_id"
+    
+    static let input = "input"
+    
+    static let dateFrom = "date_from"
+    
+    static let dateTo = "date_to"
+
+    static let limit = "limit"
+    
+    static let offset = "offset"
+    
+    static let nameValues = "name_values"
+}
+
+/**
+ *  The IBM Watson Dialog service provides a comprehensive, robust,
+ *  platform for managing conversations between virtual agents and
+ *  users. These conversations are commonly referred to as `Dialog`s.
  */
 public class DialogService: Service {
     
@@ -43,9 +69,41 @@ public class DialogService: Service {
      *
      *  - returns: A `Conversation` object.
      */
-    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil) -> Conversation {
+    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil) -> Conversation? {
         
+        // Don't allow empty a dialogId
+        guard (dialogId.characters.count > 0) else {
+            print("dialogId can not be empty")
+            return nil
+        }
         
+        // Report when a new conversationId and/or clientId is being created
+        if (conversationId == nil) {
+            print("Creating a new conversationId for dialog: \(dialogId)")
+        }
+        if (clientId == nil) {
+            print("Creating a new clientId for dialog: \(dialogId)")
+        }
+        
+        // Prepare for the API call
+        let endpoint = self.getEndpoint(self.serviceURL)
+        var params = Dictionary<String, AnyObject>()
+        
+        if let convoId = conversationId {
+            params.updateValue(convoId, forKey: DialogServiceConstants.conversationId)
+        }
+        if let cliId = clientId {
+            params.updateValue(cliId, forKey: DialogServiceConstants.clientId)
+        }
+        if let inp = input {
+            params.updateValue(inp, forKey: DialogServiceConstants.input)
+        }
+        
+        // Perform the API call
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: nil, apiKey: self._apiKey, completionHandler: { response in
+            
+            
+        })
     }
     
     /**
@@ -55,7 +113,7 @@ public class DialogService: Service {
      *
      *  - returns: A `Conversation` object.
      */
-    public func createConversation(let dialogId: String) -> Conversation {
+    public func createConversation(let dialogId: String) -> Conversation? {
         return self.converse(dialogId)
     }
     
@@ -74,7 +132,7 @@ public class DialogService: Service {
     /**
      *  Delete a dialog from Watson.
      *
-     *  - parameter dialogId: Param 1
+     *  - parameter dialogId: The ID of the dialog XML in the Dialog service.
      */
     public func deleteDialog(let dialogId: String) {
         

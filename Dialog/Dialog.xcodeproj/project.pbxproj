@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB6C4E191BF2635500A87EB2 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E181BF2635500A87EB2 /* Dialog.swift */; };
-		EB6C4E1B1BF2652E00A87EB2 /* DialogContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E1A1BF2652E00A87EB2 /* DialogContents.swift */; };
+		EB6C4E1B1BF2652E00A87EB2 /* DialogContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */; };
 		EB78E2021BF132DA00BCE6D8 /* Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = EB78E2011BF132DA00BCE6D8 /* Dialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB78E2091BF132DA00BCE6D8 /* Dialog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */; };
 		EB78E20E1BF132DA00BCE6D8 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		EB6C4E181BF2635500A87EB2 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
-		EB6C4E1A1BF2652E00A87EB2 /* DialogContents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogContents.swift; sourceTree = "<group>"; };
+		EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogContent.swift; sourceTree = "<group>"; };
 		EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dialog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB78E2011BF132DA00BCE6D8 /* Dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
 		EB78E2031BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 			children = (
 				EB78E22C1BF132F600BCE6D8 /* Conversation.swift */,
 				EB6C4E181BF2635500A87EB2 /* Dialog.swift */,
-				EB6C4E1A1BF2652E00A87EB2 /* DialogContents.swift */,
+				EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6C4E191BF2635500A87EB2 /* Dialog.swift in Sources */,
-				EB6C4E1B1BF2652E00A87EB2 /* DialogContents.swift in Sources */,
+				EB6C4E1B1BF2652E00A87EB2 /* DialogContent.swift in Sources */,
 				EB78E22E1BF132F600BCE6D8 /* Conversation.swift in Sources */,
 				EB78E22F1BF132F600BCE6D8 /* DialogService.swift in Sources */,
 			);

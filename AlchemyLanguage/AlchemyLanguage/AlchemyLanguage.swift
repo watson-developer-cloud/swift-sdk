@@ -28,6 +28,24 @@ public final class AlchemyLanguage: Service {}
 
 
 /**
+
+ MARK: RequestType Enum
+
+*/
+public extension AlchemyLanguage {
+    
+    public enum RequestType {
+        
+        case URL
+        case HTML
+        case Text
+        
+    }
+    
+}
+ 
+
+/**
  
  MARK: Entity Extraction
  

@@ -24,4 +24,78 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class SAORelation{}
+public final class SAORelation: AlchemyLanguageGenericModel {
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: SAORelation
+    public var action: Action!
+    public var object: RelationObject!
+    public var sentence: String!
+    public var subject: Subject!
+    
+}
+
+
+// MARK: **Action**
+extension SAORelation {
+    
+    public final class Action {
+        
+        public var lemmatized: String!
+        public var text: String!
+        public var verb: Verb!
+        
+    }
+    
+    // MARK: Verb
+    extension Action {
+        
+        public final class Verb {
+            
+            public var negated: Int!
+            public var tense: String!
+            public var text: String!
+            
+        }
+        
+    }
+    
+}
+
+
+// MARK: **RelationObject**
+extension SAORelation {
+    
+    public final class RelationObject {
+
+        public var entity: Entity!
+        public var keywords: Keywords!
+        public var sentiment: Sentiment!
+        public var sentimentFromSubject: Sentiment!
+        public var text: String!
+        
+    }
+    
+}
+
+
+// MARK: **Subject**
+extension SAORelation {
+    
+    public final class Subject {
+        
+        public var entity: Entity!
+        public var keywords: Keywords!
+        public var sentiment: Sentiment!
+        public var text: String!
+        
+    }
+    
+}
+

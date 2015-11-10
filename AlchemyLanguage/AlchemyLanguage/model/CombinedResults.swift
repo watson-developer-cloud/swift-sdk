@@ -23,18 +23,6 @@ import WatsonCore
  */
 public final class CombinedResults: AlchemyLanguageGenericModel {
 
-    var author: String!
-    var concepts: [Concepts]! = []
-    var entities: [Entities]! = []
-    var feeds: [Feed]! = []
-    var image: String!
-    var imageKeywords: [Keyword]! = []
-    var keywords: [Keyword]! = []
-    var publicationDate: PublicationDate!
-    var relations: [SAORelation]! = []
-    var sentiment: Sentiment!
-    var taxonomy: Taxonomy!
-    var title: String!
     // MARK: AlchemyLanguageGenericModel
     public var totalTransactions: Int!
     
@@ -42,5 +30,18 @@ public final class CombinedResults: AlchemyLanguageGenericModel {
     public var language: String!
     public var url: String!
     
+    // MARK: CombinedResults
+    public var author: String!
+    public var concepts: [Concept]! = []
+    public var entities: [Entities]! = []
+    public var feeds: Feeds!
+    public var image: String!
+    public var imageKeywords: [Keyword]! = []
+    public var keywords: [Keyword]! = []
+    public var publicationDate: PublicationDate!
+    public var relations: [SAORelation]! = []
+    public var sentiment: Sentiment!
+    public var taxonomy: Taxonomy!
+    public var title: String!
 
 }

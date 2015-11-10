@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+/** 
+ 
+ **Entities**
+ 
+ Entities returned by the AlchemyLanguage service.
+ 
+*/
+public final class Entities: AlchemyLanguageGenericModel {
+    
+    var entities: [Entity]! = []
+    
+}

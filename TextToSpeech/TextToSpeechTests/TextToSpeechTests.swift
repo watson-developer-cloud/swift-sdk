@@ -12,6 +12,8 @@ import TextToSpeech
 
 class TextToSpeechTests: XCTestCase {
     
+    
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,12 +25,16 @@ class TextToSpeechTests: XCTestCase {
     }
     
     func testInit() {
-        let service = TextToSpeech()
+       // let service = TextToSpeech()
     }
     
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let service = TextToSpeech()
+        service.synthesize("Hello there!")
+        
     }
     
     func testPerformanceExample() {

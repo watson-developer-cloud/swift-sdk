@@ -54,15 +54,11 @@ extension SAORelation {
     }
     
     // MARK: Verb
-    extension Action {
+    public final class Verb {
         
-        public final class Verb {
-            
-            public var negated: Int!
-            public var tense: String!
-            public var text: String!
-            
-        }
+        public var negated: Int!
+        public var tense: String!
+        public var text: String!
         
     }
     

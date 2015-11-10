@@ -26,10 +26,10 @@ import WatsonCore
  */
 public final class Sentiment: AlchemyLanguageGenericModel {
     
-    public final enum SentimentType {
+    public enum SentimentType {
         
-        case POSITIVE,
-        case NEUTRAL,
+        case POSITIVE
+        case NEUTRAL
         case NEGATIVE
         
     }

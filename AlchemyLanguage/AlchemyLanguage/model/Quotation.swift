@@ -17,4 +17,13 @@
 import Foundation
 import WatsonCore
 
-public final class Quotation{}
+/**
+ 
+ **Quotation**
+ 
+ */
+public final class Quotation {
+
+    public var quotation: String!
+    
+}

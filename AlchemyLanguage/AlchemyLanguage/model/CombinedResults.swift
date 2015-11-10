@@ -18,12 +18,15 @@ import Foundation
 import WatsonCore
 
 /**
- * Combined returned by the {@link AlchemyLanguage} service.
- *
+ 
+ **CombinedResults**
+ 
+ Returned by the AlchemyLanguage service.
+ 
  */
 public final class CombinedResults: AlchemyLanguageGenericModel {
 
-    // MARK: AlchemyLanguageGenericModel
+    // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
     
     // MARK: AlchemyLanguageGenericModel

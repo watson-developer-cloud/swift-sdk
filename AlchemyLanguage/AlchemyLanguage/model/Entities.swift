@@ -26,7 +26,7 @@ import WatsonCore
 */
 public final class Entities: AlchemyLanguageGenericModel {
     
-    // MARK: AlchemyLanguageGenericModel
+    // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
     
     // MARK: AlchemyLanguageGenericModel

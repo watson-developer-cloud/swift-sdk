@@ -17,4 +17,23 @@
 import Foundation
 import WatsonCore
 
-public final class Feeds{}
+/**
+ 
+ **Feeds**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public final class Feeds: AlchemyLanguageGenericModel {
+
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Feeds
+    public var feeds: [Feed]!
+
+}

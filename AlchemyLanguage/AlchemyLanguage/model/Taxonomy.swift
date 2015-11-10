@@ -17,4 +17,25 @@
 import Foundation
 import WatsonCore
 
-public final class Taxonomy{}
+/**
+ 
+ **Taxonomy**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public final class Taxonomy: AlchemyLanguageGenericModel {
+    
+    // MARK: AlchemyGenericModel
+    public var totalTransactions: Int!
+    
+    // MARK: AlchemyLanguageGenericModel
+    public var language: String!
+    public var url: String!
+    
+    // MARK: Taxonomy
+    public var confident: Bool!
+    public var label: String!
+    public var score: Double!
+    
+}

@@ -17,9 +17,16 @@
 import Foundation
 import WatsonCore
 
+/**
+ 
+ **DisambiguatedLinks**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
 public final class DisambiguatedLinks: AlchemyLanguageGenericModel {
 
-    // MARK: AlchemyLanguageGenericModel
+    // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
     
     // MARK: AlchemyLanguageGenericModel

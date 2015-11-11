@@ -92,3 +92,17 @@ public extension AlchemyLanguageConstants {
     }
     
 }
+
+
+// MARK: Relation Extraction
+public extension AlchemyLanguageConstants {
+    
+    public static func GetRelations(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetRelations"
+        
+    }
+    
+}
+
+

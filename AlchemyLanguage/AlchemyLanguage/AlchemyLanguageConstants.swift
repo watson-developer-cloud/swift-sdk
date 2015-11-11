@@ -40,3 +40,15 @@ public final class AlchemyLanguageConstants {
     
 }
 
+// MARK: Entity Extraction
+public extension AlchemyLanguageConstants {
+
+    public static func GetEntities(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetRankedNameEntities"
+        
+    }
+
+}
+
+

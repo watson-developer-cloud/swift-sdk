@@ -14,6 +14,15 @@
 		3103AE1A1BEE55C5005CA3DC /* Classifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE191BEE55C5005CA3DC /* Classifiers.swift */; };
 		3103AE1C1BEE55D8005CA3DC /* TrainingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */; };
 		3103AE1E1BEE55FD005CA3DC /* ClassifiedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */; };
+		316E7C8A1BF12CD400780E59 /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E7C891BF12CD400780E59 /* NaturalLanguageClassifier.swift */; };
+		316E7C8C1BF12D1900780E59 /* NLCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E7C8B1BF12D1900780E59 /* NLCConstants.swift */; };
+		318E66A61BF38A4800E4B150 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 318E66A51BF38A4800E4B150 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		318E66A71BF38A5F00E4B150 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318E66A51BF38A4800E4B150 /* XCGLogger.framework */; };
+		31DCF0601BF39540005DB7EE /* NLCTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31DCF05F1BF39540005DB7EE /* NLCTest.plist */; };
+		31FE98031BF28EAE00D23BD0 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE98021BF28EAE00D23BD0 /* Classifier.swift */; };
+		31FE98051BF2935600D23BD0 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31FE98041BF2935600D23BD0 /* WatsonCore.framework */; };
+		31FE98071BF293B300D23BD0 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31FE98061BF293B300D23BD0 /* ObjectMapper.framework */; };
+		31FE980B1BF2961F00D23BD0 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31FE98061BF293B300D23BD0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +35,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		31FE980A1BF295FC00D23BD0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				318E66A61BF38A4800E4B150 /* XCGLogger.framework in CopyFiles */,
+				31FE980B1BF2961F00D23BD0 /* ObjectMapper.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3103ADEA1BEE5390005CA3DC /* NaturalLanguageClassifier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NaturalLanguageClassifier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3103ADED1BEE5390005CA3DC /* NaturalLanguageClassifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NaturalLanguageClassifier.h; sourceTree = "<group>"; };
@@ -37,6 +60,13 @@
 		3103AE191BEE55C5005CA3DC /* Classifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classifiers.swift; path = Models/Classifiers.swift; sourceTree = "<group>"; };
 		3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingData.swift; path = Models/TrainingData.swift; sourceTree = "<group>"; };
 		3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifiedClass.swift; path = Models/ClassifiedClass.swift; sourceTree = "<group>"; };
+		316E7C891BF12CD400780E59 /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
+		316E7C8B1BF12D1900780E59 /* NLCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NLCConstants.swift; sourceTree = "<group>"; };
+		318E66A51BF38A4800E4B150 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
+		31DCF05F1BF39540005DB7EE /* NLCTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NLCTest.plist; sourceTree = "<group>"; };
+		31FE98021BF28EAE00D23BD0 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
+		31FE98041BF2935600D23BD0 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		31FE98061BF293B300D23BD0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318E66A71BF38A5F00E4B150 /* XCGLogger.framework in Frameworks */,
+				31FE98071BF293B300D23BD0 /* ObjectMapper.framework in Frameworks */,
+				31FE98051BF2935600D23BD0 /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,9 +112,12 @@
 		3103ADEC1BEE5390005CA3DC /* NaturalLanguageClassifier */ = {
 			isa = PBXGroup;
 			children = (
+				31619FE11BF29B9B00A14F69 /* Frameworks */,
 				3103AE161BEE5439005CA3DC /* Models */,
 				3103ADED1BEE5390005CA3DC /* NaturalLanguageClassifier.h */,
 				3103ADEF1BEE5390005CA3DC /* Info.plist */,
+				316E7C891BF12CD400780E59 /* NaturalLanguageClassifier.swift */,
+				316E7C8B1BF12D1900780E59 /* NLCConstants.swift */,
 			);
 			path = NaturalLanguageClassifier;
 			sourceTree = "<group>";
@@ -90,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				3103ADF91BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift */,
+				31DCF05F1BF39540005DB7EE /* NLCTest.plist */,
 				3103ADFB1BEE5390005CA3DC /* Info.plist */,
 			);
 			path = NaturalLanguageClassifierTests;
@@ -102,8 +139,19 @@
 				3103AE191BEE55C5005CA3DC /* Classifiers.swift */,
 				3103AE1B1BEE55D8005CA3DC /* TrainingData.swift */,
 				3103AE1D1BEE55FD005CA3DC /* ClassifiedClass.swift */,
+				31FE98021BF28EAE00D23BD0 /* Classifier.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		31619FE11BF29B9B00A14F69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				318E66A51BF38A4800E4B150 /* XCGLogger.framework */,
+				31FE98041BF2935600D23BD0 /* WatsonCore.framework */,
+				31FE98061BF293B300D23BD0 /* ObjectMapper.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +176,7 @@
 				3103ADE61BEE5390005CA3DC /* Frameworks */,
 				3103ADE71BEE5390005CA3DC /* Headers */,
 				3103ADE81BEE5390005CA3DC /* Resources */,
+				31FE980A1BF295FC00D23BD0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -204,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DCF0601BF39540005DB7EE /* NLCTest.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,10 +264,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31FE98031BF28EAE00D23BD0 /* Classifier.swift in Sources */,
 				3103AE1C1BEE55D8005CA3DC /* TrainingData.swift in Sources */,
+				316E7C8A1BF12CD400780E59 /* NaturalLanguageClassifier.swift in Sources */,
 				3103AE1E1BEE55FD005CA3DC /* ClassifiedClass.swift in Sources */,
 				3103AE1A1BEE55C5005CA3DC /* Classifiers.swift in Sources */,
 				3103AE181BEE55A4005CA3DC /* Classification.swift in Sources */,
+				316E7C8C1BF12D1900780E59 /* NLCConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +316,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -277,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -311,6 +365,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -319,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -403,6 +458,7 @@
 				3103AE001BEE5390005CA3DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3103AE011BEE5390005CA3DC /* Build configuration list for PBXNativeTarget "NaturalLanguageClassifierTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +467,7 @@
 				3103AE031BEE5390005CA3DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

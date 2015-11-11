@@ -10,27 +10,43 @@ import XCTest
 @testable import NaturalLanguageClassifier
 
 class NaturalLanguageClassifierTests: XCTestCase {
-    
+  
+  /// Language translation service
+  private let service = NaturalLanguageClassifier()
+  
+  /// Timeout for an asynchronous call to return before failing the unit test
+  private let timeout: NSTimeInterval = 60.0
+  
+  
     override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+      super.setUp()
+      if let url = NSBundle(forClass: self.dynamicType).URLForResource("NLCTest", withExtension: "plist") {
+        if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
+          service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+        } else {
+          XCTFail("Unable to extract dictionary from plist")
+        }
+      } else {
+        XCTFail("Plist file not found")
+      }
     }
-    
+  
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+  func testGetClassifiers() {
+    let positiveExpectation = expectationWithDescription("Get All Classifiers")
+    //let negativeExpectation = expectationWithDescription("Get Models by Default")
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    service.getClassifiers({(classifiers:[Classifiers]?) in
+      XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
+      positiveExpectation.fulfill()
+    })
+
     
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
+  
 }

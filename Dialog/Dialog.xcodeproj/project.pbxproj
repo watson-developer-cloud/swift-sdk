@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB42857C1BF39D4700F930AA /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB42857B1BF39D4700F930AA /* ObjectMapper.framework */; };
 		EB6C4E191BF2635500A87EB2 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E181BF2635500A87EB2 /* Dialog.swift */; };
 		EB6C4E1B1BF2652E00A87EB2 /* DialogContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */; };
 		EB78E2021BF132DA00BCE6D8 /* Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = EB78E2011BF132DA00BCE6D8 /* Dialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB42857B1BF39D4700F930AA /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "/Users/ajballan/Documents/Work Stuff/Development/WatsonSDK/AlchemyVision/AlchemyVision/../../Frameworks/ObjectMapper.framework"; sourceTree = "<absolute>"; };
 		EB6C4E181BF2635500A87EB2 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogContent.swift; sourceTree = "<group>"; };
 		EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dialog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,7 +40,7 @@
 		EB78E20F1BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB78E22C1BF132F600BCE6D8 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		EB78E22D1BF132F600BCE6D8 /* DialogService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogService.swift; sourceTree = "<group>"; };
-		EB87A2B61BF133D700F84086 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		EB87A2B61BF133D700F84086 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB42857C1BF39D4700F930AA /* ObjectMapper.framework in Frameworks */,
 				EB87A2B71BF133D700F84086 /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +64,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB4285771BF39CBF00F930AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB42857B1BF39D4700F930AA /* ObjectMapper.framework */,
+				EB87A2B61BF133D700F84086 /* WatsonCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EB6C4E171BF2496F00A87EB2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +86,6 @@
 		EB78E1F41BF132DA00BCE6D8 = {
 			isa = PBXGroup;
 			children = (
-				EB87A2B61BF133D700F84086 /* WatsonCore.framework */,
 				EB78E2001BF132DA00BCE6D8 /* Dialog */,
 				EB78E20C1BF132DA00BCE6D8 /* DialogTests */,
 				EB78E1FF1BF132DA00BCE6D8 /* Products */,
@@ -93,6 +104,7 @@
 		EB78E2001BF132DA00BCE6D8 /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				EB4285771BF39CBF00F930AA /* Frameworks */,
 				EB6C4E171BF2496F00A87EB2 /* Models */,
 				EB78E22D1BF132F600BCE6D8 /* DialogService.swift */,
 				EB78E2011BF132DA00BCE6D8 /* Dialog.h */,
@@ -341,6 +353,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = Dialog/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -359,6 +372,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = Dialog/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

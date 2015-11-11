@@ -35,6 +35,20 @@ public final class AlchemyLanguageConstants {
         
     }
     
+    // check if "Text" request is unsupported
+    static private func TextUnsupported(call: String, requestType: AlchemyLanguage.RequestType) -> Bool {
+        
+        let unsupported = (requestType == AlchemyLanguage.RequestType.Text)
+        
+        if unsupported {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: \(call): Text request is unsupported.")
+        }
+        
+        return unsupported
+        
+    }
+    
     // instance methods - should not be called
     private init(){}
     
@@ -211,16 +225,10 @@ public extension AlchemyLanguageConstants {
 // MARK: Feed Detection
 public extension AlchemyLanguageConstants {
     
-    public static func GetFeedLinks(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
-        
-        guard requestType != AlchemyLanguage.RequestType.Text else {
-            // TODO: XCLogger-print
-            print("AlchemyLanguageConstants: GetFeedLinks: Text request is unsupported.")
-            return ""
-        }
-        
-        return Prefix(fromRequestType: requestType) + "GetFeedLinks"
-        
+    public static func GetFeedLinks(fromRequestType rt: AlchemyLanguage.RequestType) -> String {
+
+        return TextUnsupported("GetFeedLinks", requestType: rt) ? "" : (Prefix(fromRequestType: rt) + "GetFeedLinks")
+
     }
     
 }

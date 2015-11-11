@@ -70,6 +70,18 @@ public extension AlchemyLanguageConstants {
 }
 
 
+// MARK: Keyword Extraction
+public extension AlchemyLanguageConstants {
+    
+    public static func GetRankedKeywords(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetRankedKeywords"
+        
+    }
+    
+}
+
+
 // MARK: Concept Tagging
 public extension AlchemyLanguageConstants {
     

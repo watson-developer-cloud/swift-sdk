@@ -130,6 +130,26 @@ public class NetworkUtils {
     }
     
     /**
+     Request a Watson Authentication token. Tokens expire after one hour.
+     
+     - parameter tokenURL:          The URL of the token authentication endpoint (e.g. "https://stream.watsonplatform.net/authorization/api/v1/token")
+     - parameter serviceURL:        The URL of the service for which you want to obtain a token (e.g. "https://stream.watsonplatform.net/text-to-speech/api")
+     - parameter apiKey:            The authentication string used for HTTP basic authorization.
+     - parameter completionHandler: The closure called when the token request is complete.
+     */
+    public static func requestAuthToken(tokenURL: String, serviceURL: String, apiKey: String? = nil, completionHandler: (token: String?, error: NSError?) -> ()) {
+        
+        Log.sharedLogger.debug("Entered requestAuthToken")
+        
+        let parameters = ["url": serviceURL]
+        Alamofire.request(.GET, tokenURL, parameters: parameters, headers: buildHeader(.URLEncoded, accept: .URLEncoded, apiKey: apiKey))
+            .responseString {response in
+                Log.sharedLogger.debug("Entered requestAuthToken.responseString")
+                completionHandler(token: response.result.value, error: response.result.error)
+            }
+    }
+    
+    /**
      This core function will make a basic authorization request by adding header information as part of the authentication.
      
      - parameter url:               The full URL to use for the web REST call

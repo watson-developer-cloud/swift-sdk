@@ -12,7 +12,7 @@ public class NLCConstants {
   
   static let text = "text"
   static let Classifiers = "classifiers"
-  static let translation = "translation"
+  static let Classifier = "classifier"
   
 }
 

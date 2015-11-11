@@ -10,7 +10,6 @@
 		31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31383DA51BCC7031001BF3CB /* CoreResponse.swift */; };
 		31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FDC1BCF3F87002EA3F8 /* Log.swift */; };
 		31AC1FE31BCF400C002EA3F8 /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */; };
-		31AC1FE51BCF4243002EA3F8 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FE41BCF4243002EA3F8 /* Files.swift */; };
 		31AC1FE81BCF42D6002EA3F8 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1FE71BCF42D6002EA3F8 /* String.swift */; };
 		7A1FCDD41BA9ED6A0090E1EB /* WatsonCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A1FCDDB1BA9ED6A0090E1EB /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */; };
@@ -60,7 +59,6 @@
 		31383DA51BCC7031001BF3CB /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
 		31AC1FDC1BCF3F87002EA3F8 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		31AC1FE21BCF400C002EA3F8 /* alchemy_endpoints.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
-		31AC1FE41BCF4243002EA3F8 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		31AC1FE71BCF42D6002EA3F8 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7A1FCDD01BA9ED6A0090E1EB /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1FCDD31BA9ED6A0090E1EB /* WatsonCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonCore.h; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				31AC1FDC1BCF3F87002EA3F8 /* Log.swift */,
-				31AC1FE41BCF4243002EA3F8 /* Files.swift */,
 				BD5640B91BE2EA27000550E0 /* Transformation.swift */,
 			);
 			name = Utilities;
@@ -325,7 +322,6 @@
 				BD7A9B321BDEA77400153673 /* Service.swift in Sources */,
 				31AC1FDF1BCF3F87002EA3F8 /* Log.swift in Sources */,
 				BD5640BA1BE2EA27000550E0 /* Transformation.swift in Sources */,
-				31AC1FE51BCF4243002EA3F8 /* Files.swift in Sources */,
 				31AC1FE81BCF42D6002EA3F8 /* String.swift in Sources */,
 				31383DA71BCC7031001BF3CB /* CoreResponse.swift in Sources */,
 				BD5C90B21BE04BBA00EA13DE /* Request.swift in Sources */,

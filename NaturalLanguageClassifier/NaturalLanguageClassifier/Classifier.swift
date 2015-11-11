@@ -18,16 +18,12 @@ public enum Status: String {
 		
 		/** The available. */
 		case Available = "Available"
-		
 		/** The failed. */
 		case Failed = "Failed"
-		
 		/** The non existent. */
 		case NonExistent = "Non Existent"
-		
 		/** The training. */
 		case Training = "Training"
-		
 		/** The unavailable. */
 		case Unavailable = "Unavailable"
 }
@@ -47,7 +43,7 @@ public struct Classifier: Mappable {
   var name: String?
   
   /** The status. */
-  var status: Status = Status.Unavailable
+  var status: Status = Status.NonExistent
   
   /** The status description. */
   var statusDescription: String?
@@ -56,21 +52,16 @@ public struct Classifier: Mappable {
   var url: String?
   
   
-//    init() {
-//  
-//    }
-  
-  
   public init?(_ map: Map) {}
   
   public mutating func mapping(map: Map) {
-     created            <- map["created"]
-     id                 <- map["classifier_id"]
-     language           <- map["language"]
-     name               <- map["name"]
-     url                <- map["url"]
-     status             <- map["status"]
-     statusDescription  <- map["status_description"]
+    created            <- (map["created"], DateTransform())
+    id                 <- (map["classifier_id"])
+    language           <- map["language"]
+    name               <- map["name"]
+    url                <- map["url"]
+    status             <- (map["status"], EnumTransform())
+    statusDescription  <- map["status_description"]
   }
 }
 

@@ -17,7 +17,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
   /// Timeout for an asynchronous call to return before failing the unit test
   private let timeout: NSTimeInterval = 60.0
   
-  
     override func setUp() {
       super.setUp()
       if let url = NSBundle(forClass: self.dynamicType).URLForResource("NLCTest", withExtension: "plist") {
@@ -40,7 +39,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     let positiveExpectation = expectationWithDescription("Get All Classifiers")
     //let negativeExpectation = expectationWithDescription("Get Models by Default")
     
-    service.getClassifiers({(classifiers:[Classifiers]?) in
+    service.getClassifiers({(classifiers:[Classifier]?) in
       XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
       positiveExpectation.fulfill()
     })
@@ -48,5 +47,28 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
   }
+  
+  func testGetClassifier() {
+    let expectationValid = expectationWithDescription("Valid Expected")
+    let expectationInvalid = expectationWithDescription("Invalid Expect")
+    
+    service.getClassifier("MISSING_CLASSIFIER_ID", completionHandler:{(classifier:Classifier?) in
+      XCTAssertNil(classifier,"Expected no classifier to be return for invalid id")
+      expectationInvalid.fulfill()
+    })
+    
+    // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
+    service.getClassifier("CEADDEx6-nlc-1114", completionHandler:{(classifier:Classifier?) in
+      guard let classifier = classifier else {
+        XCTFail("Expected non-nil model to be returned")
+        return
+      }
+      XCTAssertEqual(classifier.id,"CEADDEx6-nlc-1114","Expected to get id requested in classifier")
+      expectationValid.fulfill()
+    })
+    
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
+  
   
 }

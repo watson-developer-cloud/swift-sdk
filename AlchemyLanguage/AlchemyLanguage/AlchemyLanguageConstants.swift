@@ -117,3 +117,22 @@ public extension AlchemyLanguageConstants {
     
 }
 
+
+// MARK: Author Extraction
+public extension AlchemyLanguageConstants {
+    
+    public static func GetAuthor(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetAuthor: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetAuthor"
+        
+    }
+    
+}
+
+

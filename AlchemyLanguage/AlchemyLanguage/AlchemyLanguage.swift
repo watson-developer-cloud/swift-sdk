@@ -50,6 +50,28 @@ public extension AlchemyLanguage {
         
     }
     
+    /** Input Parameter Keys */
+    public enum OutputMode: String {
+        
+        case JSON = "json"
+        case HTML = "html"
+        case XML = "xml"
+        case RDF = "rdf"
+        
+    }
+    
+    public enum SourceText {
+        
+        case cleaned_or_raw
+        case cleaned
+        case raw
+        case cquery
+        case xpath
+        case xpath_or_raw
+        case cleaned_and_xpath
+        
+    }
+    
 }
 
 

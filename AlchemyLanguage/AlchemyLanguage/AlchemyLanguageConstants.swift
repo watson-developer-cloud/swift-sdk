@@ -15,3 +15,28 @@
  */
 
 import Foundation
+import WatsonCore
+
+public final class AlchemyLanguageConstants {
+    
+    // static methods
+    static private func Calls() -> String { return "/calls" }
+
+    // use this, it already uses Calls()
+    static private func Prefix(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        switch requestType {
+            
+        case .URL: return Calls() + "/url/URL"
+        case .HTML: return Calls() + "/html/HTML"
+        case .Text: return Calls() + "/text/Text"
+            
+        }
+        
+    }
+    
+    // instance methods - should not be called
+    private init(){}
+    
+}
+

@@ -34,6 +34,20 @@
                ReferencedContainer = "container:TextToSpeech.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDE8D4921BEE731300E108FA"
+               BuildableName = "TextToSpeechTests.xctest"
+               BlueprintName = "TextToSpeechTests"
+               ReferencedContainer = "container:TextToSpeech.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,6 +56,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDAED1CB1BBF57CA00BBF265"
+               BuildableName = "LanguageTranslationTests.xctest"
+               BlueprintName = "LanguageTranslationTests"
+               ReferencedContainer = "container:../LanguageTranslation/LanguageTranslation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -147,6 +147,24 @@ public extension AlchemyLanguageConstants {
     
 }
 
+// MARK: Microformats Parsing
+public extension AlchemyLanguageConstants {
+    
+    public static func GetMicroformatData(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetMicroformatData: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetMicroformatData"
+        
+    }
+    
+}
+
+
 // MARK: Feed Detection
 public extension AlchemyLanguageConstants {
     

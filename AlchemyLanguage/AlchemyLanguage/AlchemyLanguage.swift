@@ -97,10 +97,30 @@ public extension AlchemyLanguage {
      
      - Returns: An **Entities** object.
      */
-    public func getEntities() -> Entities {
-    
-        return Entities()
-    
+    public func getEntities(requestType rt: RequestType,
+        url: NSURL,
+        outputMode: OutputMode,
+        jsonp: String,
+        disambiguate: Bool = true,
+        linkedData: Bool = true,
+        coreference: Bool = true,
+        quotations: Bool = false,
+        sentiment: Bool = false,
+        sourceText: SourceText,
+        showSourceText: Bool = false,
+        cquery: String,
+        xpath: String,
+        maxRetrieve: Int,
+        baseUrl: NSURL,
+        knowledgGraph: Bool = false,
+        stucturedEntities: Bool = true) -> Entities {
+            
+            let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            
+            print(accessString)
+            
+            return Entities()
+            
     }
     
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   TTSTestAuth.plist
+   TextToSpeech
+
+   Created by Robert Dickerson on 11/11/15.
+   Copyright (c) 2015 Watson Developer Cloud. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+    
+    </dict>
+</plist>

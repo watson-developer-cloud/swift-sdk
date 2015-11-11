@@ -50,6 +50,28 @@ public extension AlchemyLanguage {
         
     }
     
+    /** Input Parameter Keys */
+    public enum OutputMode: String {
+        
+        case JSON = "json"
+        case HTML = "html"
+        case XML = "xml"
+        case RDF = "rdf"
+        
+    }
+    
+    public enum SourceText {
+        
+        case cleaned_or_raw
+        case cleaned
+        case raw
+        case cquery
+        case xpath
+        case xpath_or_raw
+        case cleaned_and_xpath
+        
+    }
+    
 }
 
 
@@ -75,10 +97,30 @@ public extension AlchemyLanguage {
      
      - Returns: An **Entities** object.
      */
-    public func getEntities() -> Entities {
-    
-        return Entities()
-    
+    public func getEntities(requestType rt: RequestType,
+        url: NSURL,
+        outputMode: OutputMode,
+        jsonp: String,
+        disambiguate: Bool = true,
+        linkedData: Bool = true,
+        coreference: Bool = true,
+        quotations: Bool = false,
+        sentiment: Bool = false,
+        sourceText: SourceText,
+        showSourceText: Bool = false,
+        cquery: String,
+        xpath: String,
+        maxRetrieve: Int,
+        baseUrl: NSURL,
+        knowledgGraph: Bool = false,
+        stucturedEntities: Bool = true) -> Entities {
+            
+            let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            
+            print(accessString)
+            
+            return Entities()
+            
     }
     
 }

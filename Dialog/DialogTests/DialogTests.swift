@@ -3,7 +3,7 @@
 //  DialogTests
 //
 //  Created by Jonathan Ballands on 11/9/15.
-//  Copyright © 2015 IBM. All rights reserved.
+//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
 //
 
 import XCTest
@@ -11,26 +11,47 @@ import XCTest
 
 class DialogTests: XCTestCase {
     
+    /*
+     *  MARK: Properties
+     */
+    
+    private let testService = DialogService()
+    
+    private let timeout: NSTimeInterval = 60.0
+    
+    /*
+     *  MARK: Lifecycle
+     */
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
+            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
+                testService.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+            } else {
+                XCTFail("Unable to extract dictionary from plist")
+            }
+        } else {
+            XCTFail("Plist file not found")
+        }
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        // TODO: Tear down tests...
+        
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    /*
+     *  MARK: Tests
+     */
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testConverse() {
+        
+        
+        
     }
     
 }

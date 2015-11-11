@@ -74,6 +74,7 @@ public class DialogService: Service {
         // Don't allow empty a dialogId
         guard (dialogId.characters.count > 0) else {
             print("dialogId can not be empty")
+            callback(nil)
             return
         }
         

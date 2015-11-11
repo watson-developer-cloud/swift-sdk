@@ -25,6 +25,8 @@
 		BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C41BEE73AB00E108FA /* libogg.a */; };
 		BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */; };
 		E12648F91BF2925A00F137DA /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12648F81BF2925A00F137DA /* WatsonCore.framework */; };
+		E1A82DA91BF3B07100C0C756 /* TTSTestAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A82DA81BF3B07100C0C756 /* TTSTestAuth.plist */; };
+		E1A82DAB1BF3B65100C0C756 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DAA1BF3B65100C0C756 /* AudioUtils.swift */; };
 		E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
 		E3A2AEBB1BF15BBB00D21DC1 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */; };
 		E3E93DD91BF16DD00068B415 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = E3E93DD81BF16DA40068B415 /* testing.opus */; };
@@ -63,6 +65,8 @@
 		BDE8D4C51BEE73AB00E108FA /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = SOURCE_ROOT; };
 		E12648F81BF2925A00F137DA /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		E1A82DA81BF3B07100C0C756 /* TTSTestAuth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TTSTestAuth.plist; sourceTree = "<group>"; };
+		E1A82DAA1BF3B65100C0C756 /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTSConfiguration.swift; sourceTree = "<group>"; };
 		E3E93DD81BF16DA40068B415 /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; name = testing.opus; path = ../testing.opus; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,7 @@
 				BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */,
 				BDE8D48E1BEE731300E108FA /* Info.plist */,
 				E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */,
+				E1A82DAA1BF3B65100C0C756 /* AudioUtils.swift */,
 			);
 			path = TextToSpeech;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				E3E93DD81BF16DA40068B415 /* testing.opus */,
 				BDE8D4981BEE731300E108FA /* TextToSpeechTests.swift */,
 				BDE8D49A1BEE731300E108FA /* Info.plist */,
+				E1A82DA81BF3B07100C0C756 /* TTSTestAuth.plist */,
 			);
 			path = TextToSpeechTests;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A82DA91BF3B07100C0C756 /* TTSTestAuth.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +303,7 @@
 			files = (
 				BDE8D4AF1BEE734B00E108FA /* OpusHelper.m in Sources */,
 				E3A2AEBB1BF15BBB00D21DC1 /* TTSConfiguration.swift in Sources */,
+				E1A82DAB1BF3B65100C0C756 /* AudioUtils.swift in Sources */,
 				BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */,
 				BDE8D4C11BEE737100E108FA /* OggHelper.m in Sources */,
 				BDE8D4B71BEE735C00E108FA /* opus_header.c in Sources */,

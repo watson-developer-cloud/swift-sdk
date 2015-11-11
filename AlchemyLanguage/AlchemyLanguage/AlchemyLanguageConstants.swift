@@ -52,3 +52,13 @@ public extension AlchemyLanguageConstants {
 }
 
 
+// MARK: Concept Tagging
+public extension AlchemyLanguageConstants {
+    
+    public static func GetRankedConcepts(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetRankedConcepts"
+        
+    }
+    
+}

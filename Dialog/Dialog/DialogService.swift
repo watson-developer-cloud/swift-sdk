@@ -8,6 +8,7 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  *  Constants for the `DialogService`.
@@ -44,7 +45,7 @@ public class DialogService: Service {
      *  MARK: Properties
      */
     
-    private let serviceURL = "dialog/api"
+    private let serviceURL = "/dialog/api"
     
     /*
      *  MARK: Lifecycle
@@ -87,7 +88,7 @@ public class DialogService: Service {
         }
         
         // Prepare for the API call
-        let endpoint = self.getEndpoint(self.serviceURL)
+        let endpoint = self.getEndpoint("/v1/dialogs/\(dialogId)/conversation")
         var params = Dictionary<String, AnyObject>()
         
         if let convoId = conversationId {
@@ -101,13 +102,17 @@ public class DialogService: Service {
         }
         
         // Perform the API call
-        NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: nil, apiKey: self._apiKey, completionHandler: { response in
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, apiKey: self._apiKey, completionHandler: { response in
             
             if let data = response.data as? Dictionary<String, AnyObject> {
-                print(data)
+                if let conversation =  Mapper<Conversation>().map(data) {
+                    callback(conversation)
+                } else {
+                    callback(nil)
+                }
+            } else {
+                callback(nil)
             }
-            
-            callback(nil)
         })
     }
     

@@ -37,8 +37,7 @@ class LanguageTranslationTests: XCTestCase {
     func testIdentifiableLanguages() {
         let expectation = expectationWithDescription("Identifiable Languages")
         
-        service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?) in
-            XCTAssertNotNil(languages,"Expected non-nil array of identifiable languages to be returned")
+        serv3
             XCTAssertGreaterThan(languages!.count,0,"Expected at least 1 identifiable language to be returned")
             expectation.fulfill()
         })

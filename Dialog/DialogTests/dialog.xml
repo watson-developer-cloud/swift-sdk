@@ -1,0 +1,19 @@
+<dialog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd">
+    <flow>
+        <folder label="Main">
+            <input>
+                <grammar>
+                    <item>Hello, Watson.</item>
+                </grammar>
+                <output>
+                    <prompt>
+                        <item>
+                            Hello, Swift.
+                        </item>
+                    </prompt>
+                </output>
+            </input>
+        </folder>
+    </flow>
+</dialog>
+

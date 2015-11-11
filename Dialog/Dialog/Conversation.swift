@@ -34,7 +34,11 @@ public class Conversation: Mappable {
      */
     
     public func mapping(map: Map) {
-        
+        clientId            <- map["client_id"]
+        conversationId      <- map["conversation_id"]
+        input               <- map["input"]
+        confidence          <- map["confidence"]
+        response            <- map["response"]
     }
     
 }

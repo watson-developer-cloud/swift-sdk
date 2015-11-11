@@ -19,6 +19,8 @@ class DialogTests: XCTestCase {
     
     private let timeout: NSTimeInterval = 60.0
     
+    private var dialogId: String?
+    
     /*
      *  MARK: Lifecycle
      */
@@ -28,20 +30,15 @@ class DialogTests: XCTestCase {
         
         if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
             if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                testService.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+                self.testService.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+                self.dialogId = dict["DialogId"]
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }
         } else {
             XCTFail("Plist file not found")
         }
-    }
-    
-    override func tearDown() {
-        
-        // TODO: Tear down tests...
-        
-        super.tearDown()
+
     }
     
     /*
@@ -50,7 +47,25 @@ class DialogTests: XCTestCase {
     
     func testConverse() {
         
+        guard let dId = self.dialogId else {
+            XCTFail("There was no dialogId")
+            return
+        }
         
+        let expectation = expectationWithDescription("Converse")
+        
+        testService.converse(dId, input: "Hello, Watson.", callback: {(conversation: Conversation?) in
+            
+            XCTAssertNotNil(conversation)
+            XCTAssertEqual(conversation?.confidence, 0)
+            XCTAssertEqual(conversation?.input, "Hello, Watson.")
+            XCTAssertEqual(conversation?.response?.count, 1)
+            XCTAssertEqual(conversation?.response?[0], "Hello, Swift.")
+            
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     

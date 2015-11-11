@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB42857C1BF39D4700F930AA /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB42857B1BF39D4700F930AA /* ObjectMapper.framework */; };
+		EB4285871BF3B1D300F930AA /* Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB4285861BF3B1D300F930AA /* Test.plist */; };
 		EB6C4E191BF2635500A87EB2 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E181BF2635500A87EB2 /* Dialog.swift */; };
 		EB6C4E1B1BF2652E00A87EB2 /* DialogContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */; };
+		EB7509541BF3E30A00F878C8 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7509531BF3E30A00F878C8 /* ObjectMapper.framework */; };
+		EB7509551BF3E31700F878C8 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB7509531BF3E30A00F878C8 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB75095A1BF3E37B00F878C8 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7509591BF3E37B00F878C8 /* WatsonCore.framework */; };
+		EB75095D1BF3FDDA00F878C8 /* dialog.xml in Resources */ = {isa = PBXBuildFile; fileRef = EB75095C1BF3FDDA00F878C8 /* dialog.xml */; };
 		EB78E2021BF132DA00BCE6D8 /* Dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = EB78E2011BF132DA00BCE6D8 /* Dialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB78E2091BF132DA00BCE6D8 /* Dialog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */; };
 		EB78E20E1BF132DA00BCE6D8 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */; };
 		EB78E22E1BF132F600BCE6D8 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E22C1BF132F600BCE6D8 /* Conversation.swift */; };
 		EB78E22F1BF132F600BCE6D8 /* DialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB78E22D1BF132F600BCE6D8 /* DialogService.swift */; };
-		EB87A2B71BF133D700F84086 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB87A2B61BF133D700F84086 /* WatsonCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,10 +31,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EB75094F1BF3E24800F878C8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB7509551BF3E31700F878C8 /* ObjectMapper.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		EB42857B1BF39D4700F930AA /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "/Users/ajballan/Documents/Work Stuff/Development/WatsonSDK/AlchemyVision/AlchemyVision/../../Frameworks/ObjectMapper.framework"; sourceTree = "<absolute>"; };
+		EB4285861BF3B1D300F930AA /* Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Test.plist; sourceTree = "<group>"; };
 		EB6C4E181BF2635500A87EB2 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		EB6C4E1A1BF2652E00A87EB2 /* DialogContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogContent.swift; sourceTree = "<group>"; };
+		EB7509531BF3E30A00F878C8 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
+		EB7509591BF3E37B00F878C8 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		EB75095C1BF3FDDA00F878C8 /* dialog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dialog.xml; sourceTree = "<group>"; };
 		EB78E1FE1BF132DA00BCE6D8 /* Dialog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dialog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB78E2011BF132DA00BCE6D8 /* Dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
 		EB78E2031BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,7 +59,6 @@
 		EB78E20F1BF132DA00BCE6D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB78E22C1BF132F600BCE6D8 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		EB78E22D1BF132F600BCE6D8 /* DialogService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogService.swift; sourceTree = "<group>"; };
-		EB87A2B61BF133D700F84086 /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,8 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB42857C1BF39D4700F930AA /* ObjectMapper.framework in Frameworks */,
-				EB87A2B71BF133D700F84086 /* WatsonCore.framework in Frameworks */,
+				EB7509541BF3E30A00F878C8 /* ObjectMapper.framework in Frameworks */,
+				EB75095A1BF3E37B00F878C8 /* WatsonCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,8 +85,8 @@
 		EB4285771BF39CBF00F930AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EB42857B1BF39D4700F930AA /* ObjectMapper.framework */,
-				EB87A2B61BF133D700F84086 /* WatsonCore.framework */,
+				EB7509591BF3E37B00F878C8 /* WatsonCore.framework */,
+				EB7509531BF3E30A00F878C8 /* ObjectMapper.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,8 +134,10 @@
 		EB78E20C1BF132DA00BCE6D8 /* DialogTests */ = {
 			isa = PBXGroup;
 			children = (
+				EB75095C1BF3FDDA00F878C8 /* dialog.xml */,
 				EB78E20D1BF132DA00BCE6D8 /* DialogTests.swift */,
 				EB78E20F1BF132DA00BCE6D8 /* Info.plist */,
+				EB4285861BF3B1D300F930AA /* Test.plist */,
 			);
 			path = DialogTests;
 			sourceTree = "<group>";
@@ -144,6 +164,7 @@
 				EB78E1FA1BF132DA00BCE6D8 /* Frameworks */,
 				EB78E1FB1BF132DA00BCE6D8 /* Headers */,
 				EB78E1FC1BF132DA00BCE6D8 /* Resources */,
+				EB75094F1BF3E24800F878C8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -220,6 +241,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4285871BF3B1D300F930AA /* Test.plist in Resources */,
+				EB75095D1BF3FDDA00F878C8 /* dialog.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

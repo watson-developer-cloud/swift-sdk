@@ -33,6 +33,10 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
     //NSError
     public var domain:String?
     
+    public var error:NSError {
+        return NSError(domain: domain!, code: code!, userInfo: ["localizedDescription":info!])
+    }
+    
     public var description: String {
         var desc = ""
         if let code = code {

@@ -52,6 +52,24 @@ public extension AlchemyLanguageConstants {
 }
 
 
+// MARK: Sentiment Analysis
+public extension AlchemyLanguageConstants {
+    
+    public static func GetTextSentiment(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetTextSentiment"
+        
+    }
+    
+    public static func GetTargetedSentiment(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetTargetedSentiment"
+        
+    }
+    
+}
+
+
 // MARK: Concept Tagging
 public extension AlchemyLanguageConstants {
     

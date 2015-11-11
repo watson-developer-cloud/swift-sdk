@@ -106,3 +106,14 @@ public extension AlchemyLanguageConstants {
 }
 
 
+// MARK: Taxonomy Classification
+public extension AlchemyLanguageConstants {
+    
+    public static func GetRankedTaxonomy(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetRankedTaxonomy"
+        
+    }
+    
+}
+

@@ -136,3 +136,14 @@ public extension AlchemyLanguageConstants {
 }
 
 
+// MARK: Language Detection
+public extension AlchemyLanguageConstants {
+    
+    public static func GetLanguage(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        return Prefix(fromRequestType: requestType) + "GetLanguage"
+        
+    }
+    
+}
+

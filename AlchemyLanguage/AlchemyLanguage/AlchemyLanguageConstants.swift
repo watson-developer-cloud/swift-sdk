@@ -147,6 +147,49 @@ public extension AlchemyLanguageConstants {
     
 }
 
+
+// MARK: Text Extraction
+public extension AlchemyLanguageConstants {
+    
+    public static func GetText(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetText: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetText"
+        
+    }
+    
+    public static func GetRawText(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetRawText: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetRawText"
+        
+    }
+    
+    public static func GetTitle(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetTitle: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetTitle"
+        
+    }
+    
+}
+
+
 // MARK: Microformats Parsing
 public extension AlchemyLanguageConstants {
     

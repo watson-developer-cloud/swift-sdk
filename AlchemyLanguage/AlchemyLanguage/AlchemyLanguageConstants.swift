@@ -147,3 +147,19 @@ public extension AlchemyLanguageConstants {
     
 }
 
+// MARK: Feed Detection
+public extension AlchemyLanguageConstants {
+    
+    public static func GetFeedLinks(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+        
+        guard requestType != AlchemyLanguage.RequestType.Text else {
+            // TODO: XCLogger-print
+            print("AlchemyLanguageConstants: GetFeedLinks: Text request is unsupported.")
+            return ""
+        }
+        
+        return Prefix(fromRequestType: requestType) + "GetFeedLinks"
+        
+    }
+    
+}

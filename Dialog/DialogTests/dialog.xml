@@ -1,19 +1,44 @@
 <dialog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd">
-    <flow>
-        <folder label="Main">
+
+<flow>
+    
+        <output>
+            <prompt selectionType="RANDOM">
+                <item>Hello, Swift.</item>
+            </prompt>
+            <goto ref="getUserInput_999999999999990"/>
+        </output>
+        <getUserInput id="getUserInput_999999999999990">
+            <search ref="folder_2449611"/>
+            <default>
+                <output>
+                    <prompt selectionType="RANDOM">
+                        <item>
+                            Ask me what I like to do.
+                        </item>
+                    </prompt>
+                </output>
+            </default>
+        </getUserInput>
+    </folder>
+    <folder label="Library">
+        <folder label="Live Content" id="folder_2449611">
             <input>
                 <grammar>
-                    <item>Hello, Watson.</item>
+                    <item>What's your favorite thing to do?</item>
                 </grammar>
                 <output>
-                    <prompt>
-                        <item>
-                            Hello, Swift.
-                        </item>
+                    <prompt selectionType="RANDOM">
+                        <item>I like to get Schwifty.</item>
                     </prompt>
                 </output>
             </input>
         </folder>
-    </flow>
+        <folder label="Storage"/>
+    </folder>
+    <folder label="Global"/>
+    <folder label="Concepts"/>
+</flow>
+
 </dialog>
 

@@ -3,7 +3,7 @@ Watson iOS SDK
 
 This SDK makes it easy to use IBM's [Watson API](https://watson-api-explorer.mybluemix.net/) in your iOS projects.
 
-[![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK)
+[![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=develop)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK)
 
 Implemented services:
 

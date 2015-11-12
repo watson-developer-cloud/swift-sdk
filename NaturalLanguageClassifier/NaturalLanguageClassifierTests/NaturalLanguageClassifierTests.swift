@@ -14,7 +14,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
   /// Language translation service
   private let service = NaturalLanguageClassifier()
   
-  private let classifierIdInstance = "F7EECBx7-nlc-80"
+  private let classifierIdInstance = "F7EECBx7-nlc-126"
   
   /// Timeout for an asynchronous call to return before failing the unit test
   private let timeout: NSTimeInterval = 60.0
@@ -98,9 +98,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
       expectationInvalid.fulfill()
     })
     
+    // please note this test expects the classifier to be ready
     service.classify(self.classifierIdInstance, text: "is it sunny?", completionHandler:{(classification:Classification?) in
       guard let classification = classification else {
         XCTFail("Expected non-nil model to be returned")
+        expectationValid.fulfill()
         return
       }
       XCTAssertEqual(classification.id, self.classifierIdInstance,"Expected to get id requested in classifier")

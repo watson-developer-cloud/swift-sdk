@@ -8,9 +8,9 @@
 //  Copyright © 2015 MIL. All rights reserved.
 //
 
-import SwiftyJSON
 import ObjectMapper
 import Foundation
+import Alamofire
 
 /**
 *  The Main response back for Watson Core.  It will contain the status, status info
@@ -33,7 +33,7 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
     //NSError
     public var domain:String?
     
-    public var error:NSError {
+    public var error:NSError? {
         let errDomain = domain == nil ? WatsonCoreConstants.defaultErrorDomain : domain!
         let errCode = code == nil ? 0 : code!
         let errUserInfo = info == nil ? [:] : [WatsonCoreConstants.descriptionKey:info!]
@@ -65,7 +65,7 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
     }
 
     public init?(_ map: Map) {}
-    
+
     public mutating func mapping(map: Map) {
         //Maps most verbose information last, so that it takes precedence in case of overlapping information
 
@@ -100,6 +100,39 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
         status              <-  map["data.status"]
         usage               <-  map["data.usage"]
         info                <-  map["data.statusInfo"]
-        
     }
+  
+  /**
+   Given an AlamoFire response object, returns a Watson response object (CoreResponse) with standardized fields for errors and info
+   
+   - parameter response: AlamoFire Response
+   
+   - returns: A Watson CoreResponse
+   */
+  static func getCoreResponse<T>(response: Response<T,NSError>)->CoreResponse {
+    var coreResponseDictionary: Dictionary<String,AnyObject> = Dictionary()
+    
+    if let data = response.data where data.length > 0 {
+      do {
+        if let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
+          coreResponseDictionary.updateValue(jsonData, forKey: "data")
+        }
+      } catch {
+        Log.sharedLogger.error("Could not convert response data object to JSON")
+      }
+    }
+    if let error = response.result.error {
+      coreResponseDictionary.updateValue(error.code, forKey: "errorCode")
+      coreResponseDictionary.updateValue(error.localizedDescription, forKey: "errorLocalizedDescription")
+      coreResponseDictionary.updateValue(error.domain, forKey: "errorDomain")
+    }
+    if let response = response.response {
+      coreResponseDictionary.updateValue(response.statusCodeEnum.rawValue, forKey: "responseStatusCode")
+      coreResponseDictionary.updateValue(response.statusCodeEnum.localizedReasonPhrase, forKey: "responseInfo")
+    }
+    let coreResponse = Mapper<CoreResponse>().map(coreResponseDictionary)!
+    Log.sharedLogger.info("\(coreResponse)")
+    return coreResponse
+  }
+
 }

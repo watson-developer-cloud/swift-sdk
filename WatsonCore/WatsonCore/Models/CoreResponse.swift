@@ -34,7 +34,11 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
     public var domain:String?
     
     public var error:NSError {
-        return NSError(domain: domain!, code: code!, userInfo: ["localizedDescription":info!])
+        let errDomain = domain == nil ? WatsonCoreConstants.defaultErrorDomain : domain!
+        let errCode = code == nil ? 0 : code!
+        let errUserInfo = info == nil ? [:] : [WatsonCoreConstants.descriptionKey:info!]
+
+        return NSError(domain: errDomain, code: errCode, userInfo: errUserInfo)
     }
     
     public var description: String {

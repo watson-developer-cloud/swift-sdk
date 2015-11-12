@@ -7,3 +7,24 @@
 //
 
 import Foundation
+import ObjectMapper
+
+public struct Voice: Mappable {
+    
+    var url: String?
+    var gender: String?
+    var name: String?
+    var language: String?
+    var description: String?
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        url         <- map["url"]
+        gender      <- map["gender"]
+        name        <- map["name"]
+        language    <- map["language"]
+        description <- map["description"]
+    }
+    
+}

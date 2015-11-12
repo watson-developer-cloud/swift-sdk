@@ -93,17 +93,18 @@ class NaturalLanguageClassifierTests: XCTestCase {
     let expectationValid = expectationWithDescription("Valid Expected")
     let expectationInvalid = expectationWithDescription("Invalid Expect")
     
-    service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classifier:Classification?) in
-      XCTAssertNil(classifier,"Expected no classifier to be return for invalid id")
+    service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification:Classification?) in
+      XCTAssertNil(classification,"Expected no classifier to be return for invalid id")
       expectationInvalid.fulfill()
     })
     
-    service.classify(self.classifierIdInstance, text: "is it sunny?", completionHandler:{(classifier:Classification?) in
-      guard let classifier = classifier else {
+    service.classify(self.classifierIdInstance, text: "is it sunny?", completionHandler:{(classification:Classification?) in
+      guard let classification = classification else {
         XCTFail("Expected non-nil model to be returned")
         return
       }
-      XCTAssertEqual(classifier.id, self.classifierIdInstance,"Expected to get id requested in classifier")
+      XCTAssertEqual(classification.id, self.classifierIdInstance,"Expected to get id requested in classifier")
+      XCTAssertLessThan(1, (classification.classes!.count) as Int,"Expected to get more than one class")
       expectationValid.fulfill()
     })
     

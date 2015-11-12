@@ -19,6 +19,6 @@ public struct ClassifiedClass: Mappable {
   
   public mutating func mapping(map: Map) {
     name        <- map["class_name"]
-    confidence  <- (map["confidence"], Transformation.stringToDouble)
+    confidence  <- (map["confidence"])
   }
 }

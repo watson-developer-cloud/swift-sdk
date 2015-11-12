@@ -21,7 +21,7 @@ public struct Classification: Mappable {
   
   public mutating func mapping(map: Map) {
     id        <- map["classifier_id"]
-    text      <- map["name"]
+    text      <- map["text"]
     url       <- map["url"]
     topClass  <- map["top_class"]
     classes   <- map["classes"]

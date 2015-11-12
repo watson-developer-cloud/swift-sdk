@@ -47,7 +47,7 @@ public class NaturalLanguageClassifier : Service {
     
     guard (classifierId.characters.count > 0) else {
       Log.sharedLogger.error("ClassifierId is empty")
-      completionHandler(nil)
+      completionHandler(nil) 
       return
     }
     
@@ -60,7 +60,7 @@ public class NaturalLanguageClassifier : Service {
     var params = Dictionary<String, AnyObject>()
     params.updateValue(text, forKey: "text")
     
-    NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: [:], apiKey: _apiKey, completionHandler: {response in
+    NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
       if response.code == 200 {
         if case let data as Dictionary<String,AnyObject> = response.data {
           return completionHandler(Mapper<Classification>().map(data))

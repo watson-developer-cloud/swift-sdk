@@ -25,7 +25,6 @@ public class NaturalLanguageClassifier : Service {
     let endpoint = getEndpoint(NLCConstants.v1ClassifiersURI)
     
     NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
-      
       var classifiers : [Classifier] = []
       
       if case let data as Dictionary<String,AnyObject> = response.data {

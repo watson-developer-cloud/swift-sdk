@@ -39,14 +39,12 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
   func testGetClassifiers() {
     let positiveExpectation = expectationWithDescription("Get All Classifiers")
-    //let negativeExpectation = expectationWithDescription("Get Models by Default")
-    
+
     service.getClassifiers({(classifiers:[Classifier]?) in
       XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
       positiveExpectation.fulfill()
     })
 
-    
     waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
   }
   
@@ -132,5 +130,4 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
       waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
   }
-  
 }

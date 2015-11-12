@@ -42,13 +42,28 @@ public class NaturalLanguageClassifier : Service {
     })
   }
   
-  public func classify( classifierId: String, completionHandler: (Classifier?)->()) {
-    let endpoint = getEndpoint("/v1/classifiers/" + classifierId)
+  public func classify(classifierId: String, text: String, completionHandler: (Classification?)->()) {
+    let endpoint = getEndpoint("/v1/classifiers/" + classifierId + "/classify")
     
-    NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
+    guard (classifierId.characters.count > 0) else {
+      Log.sharedLogger.error("ClassifierId is empty")
+      completionHandler(nil)
+      return
+    }
+    
+    guard (text.characters.count > 0) else {
+      Log.sharedLogger.error("text input is empty")
+      completionHandler(nil)
+      return
+    }
+    
+    var params = Dictionary<String, AnyObject>()
+    params.updateValue(text, forKey: "text")
+    
+    NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: [:], apiKey: _apiKey, completionHandler: {response in
       if response.code == 200 {
         if case let data as Dictionary<String,AnyObject> = response.data {
-          return completionHandler(Mapper<Classifier>().map(data))
+          return completionHandler(Mapper<Classification>().map(data))
         }
       }
       Log.sharedLogger.warning("No classifier found with given ID")

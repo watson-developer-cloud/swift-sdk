@@ -61,7 +61,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     service.deleteClassifier(self.classifierIdInstance, completionHandler:{(classifier:Bool?) in
       XCTAssertTrue(classifier!,"Expected missing delete exception when trying to delete a nonexistent model")
-      missingDeleteExpectation.fulfill()
+      authorizedDeleteExpectation.fulfill()
     })
     
     waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
@@ -78,6 +78,27 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
     service.getClassifier(self.classifierIdInstance, completionHandler:{(classifier:Classifier?) in
+      guard let classifier = classifier else {
+        XCTFail("Expected non-nil model to be returned")
+        return
+      }
+      XCTAssertEqual(classifier.id, self.classifierIdInstance,"Expected to get id requested in classifier")
+      expectationValid.fulfill()
+    })
+    
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
+  
+  func testClassify() {
+    let expectationValid = expectationWithDescription("Valid Expected")
+    let expectationInvalid = expectationWithDescription("Invalid Expect")
+    
+    service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classifier:Classification?) in
+      XCTAssertNil(classifier,"Expected no classifier to be return for invalid id")
+      expectationInvalid.fulfill()
+    })
+    
+    service.classify(self.classifierIdInstance, text: "is it sunny?", completionHandler:{(classifier:Classification?) in
       guard let classifier = classifier else {
         XCTFail("Expected non-nil model to be returned")
         return

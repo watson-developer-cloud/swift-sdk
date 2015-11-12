@@ -23,7 +23,6 @@ public enum Status: String {
 }
 
 public struct Classifier: Mappable {
-
   var created: NSDate = NSDate()
   var id: String?
   var language: String?

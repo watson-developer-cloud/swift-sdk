@@ -60,10 +60,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BDAED1CB1BBF57CA00BBF265"
-               BuildableName = "LanguageTranslationTests.xctest"
-               BlueprintName = "LanguageTranslationTests"
-               ReferencedContainer = "container:../LanguageTranslation/LanguageTranslation.xcodeproj">
+               BlueprintIdentifier = "BDE8D4921BEE731300E108FA"
+               BuildableName = "TextToSpeechTests.xctest"
+               BlueprintName = "TextToSpeechTests"
+               ReferencedContainer = "container:TextToSpeech.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

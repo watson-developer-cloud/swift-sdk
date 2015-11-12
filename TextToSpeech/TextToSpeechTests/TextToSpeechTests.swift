@@ -12,7 +12,11 @@ import XCTest
 
 class TextToSpeechTests: XCTestCase {
     
+    // Text to Speech Service
     private let service = TextToSpeech()
+    
+    /// Timeout for an asynchronous call to return before failing the unit test
+    private let timeout: NSTimeInterval = 60.0
     
     override func setUp() {
         super.setUp()
@@ -35,6 +39,17 @@ class TextToSpeechTests: XCTestCase {
     
     func testListLanguages() {
       
+        let expectation = expectationWithDescription("Get Voices")
+        
+        service.listVoices({
+            voices, error in
+            
+            print(voices)
+            
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
@@ -43,7 +58,7 @@ class TextToSpeechTests: XCTestCase {
         
         service.synthesize("Hello there!", oncompletion: {
             data, error in
-                service.playAudio(engine, data: data)
+                // service.playAudio(engine, data: data)
            
         })
         

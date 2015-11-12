@@ -25,11 +25,15 @@
 		BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C41BEE73AB00E108FA /* libogg.a */; };
 		BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */; };
 		E12648F91BF2925A00F137DA /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12648F81BF2925A00F137DA /* WatsonCore.framework */; };
+		E16463861BF5469F009DFB68 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16463851BF5469F009DFB68 /* Voice.swift */; };
+		E16463881BF547E8009DFB68 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16463871BF547E8009DFB68 /* ObjectMapper.framework */; };
+		E164638C1BF5483A009DFB68 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E164638B1BF5483A009DFB68 /* XCGLogger.framework */; };
+		E164638E1BF5494C009DFB68 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E16463871BF547E8009DFB68 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E164638F1BF54A18009DFB68 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E164638B1BF5483A009DFB68 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1A82DA91BF3B07100C0C756 /* TTSTestAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A82DA81BF3B07100C0C756 /* TTSTestAuth.plist */; };
 		E1A82DAB1BF3B65100C0C756 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DAA1BF3B65100C0C756 /* AudioUtils.swift */; };
 		E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8D4C51BEE73AB00E108FA /* libopus.a */; };
 		E3A2AEBB1BF15BBB00D21DC1 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */; };
-		E3E93DD91BF16DD00068B415 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = E3E93DD81BF16DA40068B415 /* testing.opus */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,20 @@
 			remoteInfo = TextToSpeech;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E164638D1BF5493F009DFB68 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E164638F1BF54A18009DFB68 /* XCGLogger.framework in CopyFiles */,
+				E164638E1BF5494C009DFB68 /* ObjectMapper.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BDE8D4891BEE731300E108FA /* TextToSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +83,11 @@
 		BDE8D4C51BEE73AB00E108FA /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = SOURCE_ROOT; };
 		E12648F81BF2925A00F137DA /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
+		E16463821BF52839009DFB68 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = ../Frameworks/Starscream.framework; sourceTree = "<group>"; };
+		E16463851BF5469F009DFB68 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
+		E16463871BF547E8009DFB68 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
+		E16463891BF547F2009DFB68 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Frameworks/Alamofire.framework; sourceTree = "<group>"; };
+		E164638B1BF5483A009DFB68 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		E1A82DA81BF3B07100C0C756 /* TTSTestAuth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TTSTestAuth.plist; sourceTree = "<group>"; };
 		E1A82DAA1BF3B65100C0C756 /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		E3A2AEBA1BF15BBB00D21DC1 /* TTSConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTSConfiguration.swift; sourceTree = "<group>"; };
@@ -76,6 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E164638C1BF5483A009DFB68 /* XCGLogger.framework in Frameworks */,
+				E16463881BF547E8009DFB68 /* ObjectMapper.framework in Frameworks */,
 				E12648F91BF2925A00F137DA /* WatsonCore.framework in Frameworks */,
 				E3A2AEB91BF1536A00D21DC1 /* libopus.a in Frameworks */,
 				BDE8D4C61BEE73AB00E108FA /* libogg.a in Frameworks */,
@@ -150,6 +175,7 @@
 		BDE8D48B1BEE731300E108FA /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
+				E16463841BF5468E009DFB68 /* Models */,
 				BDE8D48C1BEE731300E108FA /* TextToSpeech.h */,
 				BDE8D4C81BEE73E300E108FA /* TextToSpeech.swift */,
 				BDE8D48E1BEE731300E108FA /* Info.plist */,
@@ -173,12 +199,24 @@
 		E12648FA1BF2933400F137DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E164638B1BF5483A009DFB68 /* XCGLogger.framework */,
+				E16463891BF547F2009DFB68 /* Alamofire.framework */,
+				E16463871BF547E8009DFB68 /* ObjectMapper.framework */,
+				E16463821BF52839009DFB68 /* Starscream.framework */,
 				E12648F81BF2925A00F137DA /* WatsonCore.framework */,
 				BD94BFD71BEE75F500A3F32F /* opus */,
 				BD94BFD61BEE75ED00A3F32F /* ogg */,
 				BD94BFD51BEE75E300A3F32F /* lib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E16463841BF5468E009DFB68 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E16463851BF5469F009DFB68 /* Voice.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +250,7 @@
 				BDE8D4851BEE731300E108FA /* Frameworks */,
 				BDE8D4861BEE731300E108FA /* Headers */,
 				BDE8D4871BEE731300E108FA /* Resources */,
+				E164638D1BF5493F009DFB68 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -282,7 +321,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3E93DD91BF16DD00068B415 /* testing.opus in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +341,7 @@
 			files = (
 				BDE8D4AF1BEE734B00E108FA /* OpusHelper.m in Sources */,
 				E3A2AEBB1BF15BBB00D21DC1 /* TTSConfiguration.swift in Sources */,
+				E16463861BF5469F009DFB68 /* Voice.swift in Sources */,
 				E1A82DAB1BF3B65100C0C756 /* AudioUtils.swift in Sources */,
 				BDE8D4C91BEE73E300E108FA /* TextToSpeech.swift in Sources */,
 				BDE8D4C11BEE737100E108FA /* OggHelper.m in Sources */,
@@ -428,6 +467,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = TextToSpeech/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -453,6 +493,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = TextToSpeech/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -15,42 +15,22 @@ import ObjectMapper
  * The Enum Status.
  */
 public enum Status: String {
-		
-		/** The available. */
 		case Available = "Available"
-		/** The failed. */
 		case Failed = "Failed"
-		/** The non existent. */
 		case NonExistent = "Non Existent"
-		/** The training. */
 		case Training = "Training"
-		/** The unavailable. */
 		case Unavailable = "Unavailable"
 }
 
 public struct Classifier: Mappable {
-  
-  /** The created. */
+
   var created: NSDate = NSDate()
-  
-  /** The id. */
   var id: String?
-  
-  /** The language. */
   var language: String?
-  
-  /** The name. */
   var name: String?
-  
-  /** The status. */
   var status: Status = Status.NonExistent
-  
-  /** The status description. */
   var statusDescription: String?
-  
-  /** The url. */
   var url: String?
-  
   
   public init?(_ map: Map) {}
   

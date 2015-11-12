@@ -1,3 +1,0 @@
-framework module SocketIO {
-    header "SocketIO-Swift.h"
-}

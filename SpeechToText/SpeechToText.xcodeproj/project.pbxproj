@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A3C66741BED03D6007488B8 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3C66731BED03D6007488B8 /* SocketIO.framework */; };
 		7A839BE11BF3E37B009BD837 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A839BE01BF3E37B009BD837 /* Starscream.framework */; };
 		7A839BE31BF3E9BE009BD837 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A839BE01BF3E37B009BD837 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A839BE41BF3E9E3009BD837 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A3C66731BED03D6007488B8 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7ABC02C91BECF5F0003A7BF3 /* SpeechToText.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ABC02C81BECF5F0003A7BF3 /* SpeechToText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7ABC02D01BECF5F0003A7BF3 /* SpeechToText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABC02C51BECF5F0003A7BF3 /* SpeechToText.framework */; };
 		7ABC02D51BECF5F0003A7BF3 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC02D41BECF5F0003A7BF3 /* SpeechToTextTests.swift */; };
@@ -37,7 +35,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7A839BE41BF3E9E3009BD837 /* SocketIO.framework in CopyFiles */,
 				7A839BE31BF3E9BE009BD837 /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,7 +42,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7A3C66731BED03D6007488B8 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = ../../Frameworks/SocketIO.framework; sourceTree = "<group>"; };
 		7A839BE01BF3E37B009BD837 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = ../../Frameworks/Starscream.framework; sourceTree = "<group>"; };
 		7ABC02C51BECF5F0003A7BF3 /* SpeechToText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpeechToText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABC02C81BECF5F0003A7BF3 /* SpeechToText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechToText.h; sourceTree = "<group>"; };
@@ -74,7 +70,6 @@
 			files = (
 				7ABC02E91BECF7FD003A7BF3 /* WatsonCore.framework in Frameworks */,
 				7A839BE11BF3E37B009BD837 /* Starscream.framework in Frameworks */,
-				7A3C66741BED03D6007488B8 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				7A839BE01BF3E37B009BD837 /* Starscream.framework */,
-				7A3C66731BED03D6007488B8 /* SocketIO.framework */,
 				7ABC02E81BECF7FD003A7BF3 /* WatsonCore.framework */,
 			);
 			name = Frameworks;

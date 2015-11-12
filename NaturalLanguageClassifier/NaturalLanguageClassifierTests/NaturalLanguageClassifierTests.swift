@@ -14,6 +14,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
   /// Language translation service
   private let service = NaturalLanguageClassifier()
   
+  private let classifierIdInstance = "F7EECBx7-nlc-80"
+  
   /// Timeout for an asynchronous call to return before failing the unit test
   private let timeout: NSTimeInterval = 60.0
   
@@ -48,6 +50,23 @@ class NaturalLanguageClassifierTests: XCTestCase {
     waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
   }
   
+  func testDeleteClassifier() {
+    let authorizedDeleteExpectation = expectationWithDescription("Unauthorized expectation")
+    let missingDeleteExpectation = expectationWithDescription("Missing delete expectation")
+    
+    service.deleteClassifier("Non-existance", completionHandler:{(classifier:Bool?) in
+      XCTAssertFalse(classifier!,"Expected missing delete exception when trying to delete a nonexistent model")
+      missingDeleteExpectation.fulfill()
+    })
+    
+    service.deleteClassifier(self.classifierIdInstance, completionHandler:{(classifier:Bool?) in
+      XCTAssertTrue(classifier!,"Expected missing delete exception when trying to delete a nonexistent model")
+      missingDeleteExpectation.fulfill()
+    })
+    
+    waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
+  
   func testGetClassifier() {
     let expectationValid = expectationWithDescription("Valid Expected")
     let expectationInvalid = expectationWithDescription("Invalid Expect")
@@ -58,17 +77,36 @@ class NaturalLanguageClassifierTests: XCTestCase {
     })
     
     // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
-    service.getClassifier("CEADDEx6-nlc-1114", completionHandler:{(classifier:Classifier?) in
+    service.getClassifier(self.classifierIdInstance, completionHandler:{(classifier:Classifier?) in
       guard let classifier = classifier else {
         XCTFail("Expected non-nil model to be returned")
         return
       }
-      XCTAssertEqual(classifier.id,"CEADDEx6-nlc-1114","Expected to get id requested in classifier")
+      XCTAssertEqual(classifier.id, self.classifierIdInstance,"Expected to get id requested in classifier")
       expectationValid.fulfill()
     })
     
     waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
   }
   
+  //TODO: this test is not functional since the API is not working as of yet
+  func testCreateClassifier() {
+    let expectationValid = expectationWithDescription("Valid Expected")
+    
+    
+    let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("weather_data_train", withExtension: "csv")
+    XCTAssertNotNil(fileURL)
+    
+    let invalidURL = NSURL(string: "http://nowayitworks.comm/")
+    XCTAssertNotNil(invalidURL)
+    
+    
+    // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
+    service.createClassifier("newName", trainerURL: fileURL!, completionHandler:{(classifier:Classifier?) in
+        expectationValid.fulfill()
+      })
+
+      waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+  }
   
 }

@@ -42,6 +42,20 @@ public class NaturalLanguageClassifier : Service {
     })
   }
   
+  public func classify( classifierId: String, completionHandler: (Classifier?)->()) {
+    let endpoint = getEndpoint("/v1/classifiers/" + classifierId)
+    
+    NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
+      if response.code == 200 {
+        if case let data as Dictionary<String,AnyObject> = response.data {
+          return completionHandler(Mapper<Classifier>().map(data))
+        }
+      }
+      Log.sharedLogger.warning("No classifier found with given ID")
+      return completionHandler(nil)
+    })
+  }
+  
   /**
    Retrieves a classifier
    

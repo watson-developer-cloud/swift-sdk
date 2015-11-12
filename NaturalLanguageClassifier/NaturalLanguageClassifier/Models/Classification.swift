@@ -7,3 +7,23 @@
 //
 
 import Foundation
+import ObjectMapper
+
+public struct Classification: Mappable {
+
+  var id: String?
+  var url: String?
+  var text: String?
+  var topClass: String?
+  var classes: [ClassifiedClass]?
+  
+  public init?(_ map: Map) {}
+  
+  public mutating func mapping(map: Map) {
+    id        <- map["classifier_id"]
+    text      <- map["name"]
+    url       <- map["url"]
+    topClass  <- map["top_class"]
+    classes   <- map["classes"]
+  }
+}

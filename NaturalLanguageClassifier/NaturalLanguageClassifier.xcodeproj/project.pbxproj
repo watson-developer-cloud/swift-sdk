@@ -12,6 +12,7 @@
 		3103ADFA1BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103ADF91BEE5390005CA3DC /* NaturalLanguageClassifierTests.swift */; };
 		3103AE181BEE55A4005CA3DC /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103AE171BEE55A4005CA3DC /* Classification.swift */; };
 		311BB1B01BF3F6EC0064C8E7 /* weather_data_train.csv in Resources */ = {isa = PBXBuildFile; fileRef = 311BB1AF1BF3F6EC0064C8E7 /* weather_data_train.csv */; };
+		311BB1B21BF433210064C8E7 /* ClassifiedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311BB1B11BF433210064C8E7 /* ClassifiedClass.swift */; };
 		316E7C8A1BF12CD400780E59 /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E7C891BF12CD400780E59 /* NaturalLanguageClassifier.swift */; };
 		316E7C8C1BF12D1900780E59 /* NLCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316E7C8B1BF12D1900780E59 /* NLCConstants.swift */; };
 		318E66A61BF38A4800E4B150 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 318E66A51BF38A4800E4B150 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,6 +57,7 @@
 		3103ADFB1BEE5390005CA3DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3103AE171BEE55A4005CA3DC /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Models/Classification.swift; sourceTree = "<group>"; };
 		311BB1AF1BF3F6EC0064C8E7 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
+		311BB1B11BF433210064C8E7 /* ClassifiedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifiedClass.swift; path = Models/ClassifiedClass.swift; sourceTree = "<group>"; };
 		316E7C891BF12CD400780E59 /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
 		316E7C8B1BF12D1900780E59 /* NLCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NLCConstants.swift; sourceTree = "<group>"; };
 		318E66A51BF38A4800E4B150 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		3103AE161BEE5439005CA3DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				311BB1B11BF433210064C8E7 /* ClassifiedClass.swift */,
 				3103AE171BEE55A4005CA3DC /* Classification.swift */,
 				31FE98021BF28EAE00D23BD0 /* Classifier.swift */,
 			);
@@ -262,6 +265,7 @@
 				31FE98031BF28EAE00D23BD0 /* Classifier.swift in Sources */,
 				316E7C8A1BF12CD400780E59 /* NaturalLanguageClassifier.swift in Sources */,
 				3103AE181BEE55A4005CA3DC /* Classification.swift in Sources */,
+				311BB1B21BF433210064C8E7 /* ClassifiedClass.swift in Sources */,
 				316E7C8C1BF12D1900780E59 /* NLCConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

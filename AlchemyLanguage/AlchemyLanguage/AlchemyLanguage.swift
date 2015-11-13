@@ -36,13 +36,21 @@ import WatsonCore
  * Feed Detection
  * Linked Data Support
  */
-public final class AlchemyLanguage: Service {}
+public final class AlchemyLanguage: Service {
 
+    init() {
         
+        super.init(
+            type: ServiceType.Alchemy,
+            serviceURL: AlchemyLanguageConstants.languageServiceURL()
+        )
         
     }
     
+    convenience init(apiKey:String) {
         
+        self.init()
+        _apiKey = apiKey
         
     }
 

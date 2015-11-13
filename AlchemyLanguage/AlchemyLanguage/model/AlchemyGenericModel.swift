@@ -16,6 +16,7 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  

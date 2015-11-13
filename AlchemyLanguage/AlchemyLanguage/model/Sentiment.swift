@@ -16,6 +16,7 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  
@@ -24,7 +25,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public struct Sentiment: AlchemyLanguageGenericModel {
+public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
     
     public enum SentimentType {
         

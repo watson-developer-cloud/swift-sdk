@@ -16,13 +16,14 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  
  **Quotation**
  
  */
-public struct Quotation {
+public struct Quotation: Mappable {
 
     public var quotation: String!
     

@@ -16,6 +16,7 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  
@@ -24,7 +25,7 @@ import WatsonCore
  Returned by the AlchemyLanguage & AlchemyDataNews services.
  
  */
-public struct Entity: AlchemyGenericModel {
+public struct Entity: AlchemyGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!

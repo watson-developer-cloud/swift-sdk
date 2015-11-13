@@ -17,6 +17,41 @@
 import Foundation
 import WatsonCore
 
+// MARK: RequestType Enum
+public extension AlchemyLanguageConstants {
+    
+    public enum RequestType {
+        
+        case URL
+        case HTML
+        case Text
+        
+    }
+    
+    /** Input Parameter Keys */
+    public enum OutputMode: String {
+        
+        case JSON = "json"
+        case HTML = "html"
+        case XML = "xml"
+        case RDF = "rdf"
+        
+    }
+    
+    public enum SourceText {
+        
+        case cleaned_or_raw
+        case cleaned
+        case raw
+        case cquery
+        case xpath
+        case xpath_or_raw
+        case cleaned_and_xpath
+        
+    }
+    
+}
+
 public final class AlchemyLanguageConstants {
     
     // static methods

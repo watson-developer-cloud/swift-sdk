@@ -16,13 +16,14 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
-
+ 
  **AlchemyLanguage**
-
+ 
  http://www.alchemyapi.com/products/alchemylanguage
-
+ 
  * Entity Extraction
  * Sentiment Analysis
  * Keyword Extraction
@@ -37,12 +38,12 @@ import WatsonCore
  * Linked Data Support
  */
 public final class AlchemyLanguage: Service {
-
+    
     init() {
         
         super.init(
             type: ServiceType.Alchemy,
-            serviceURL: AlchemyLanguageConstants.languageServiceURL()
+            serviceURL: AlchemyLanguageConstants.Calls()
         )
         
     }

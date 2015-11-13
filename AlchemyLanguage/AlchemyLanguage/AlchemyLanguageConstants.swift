@@ -50,21 +50,30 @@ public extension AlchemyLanguageConstants {
         
     }
     
+    /**
+     This enum is used to build the base URI for each call
+     */
+    public enum WatsonURI: String {
+        case URL = "url"
+        case APIKey = "apikey"
+    }
+    
 }
 
 public final class AlchemyLanguageConstants {
     
     // static methods
-    static func languageServiceURL() -> String { return "/calls" }
+    static func Calls() -> String { return "/calls" }
 
     // private
     static private func Prefix(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         switch requestType {
             
-        case .URL: return "/url/URL"
-        case .HTML: return "/html/HTML"
-        case .Text: return "/text/Text"
+        case .URL: return Calls() + "/url/URL"
+        case .HTML: return Calls() + "/html/HTML"
+        case .Text: return Calls() + "/text/Text"
+
             
         }
         

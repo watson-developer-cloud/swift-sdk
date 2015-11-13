@@ -103,16 +103,7 @@ public extension AlchemyLanguageConstants {
 
     public static func GetEntities(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        switch requestType {
-            
-        case RequestType.URL:
-            return "URLGetEntities"
-        case RequestType.HTML:
-            return "HTMLGetEntities"
-        case RequestType.Text:
-            return "TextGetEntities"
-            
-        }
+        return Prefix(fromRequestType: requestType) + "GetEntities"
         
     }
 

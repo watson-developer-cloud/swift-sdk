@@ -39,4 +39,23 @@ public struct Taxonomy: AlchemyLanguageGenericModel, Mappable {
     public var label: String!
     public var score: Double!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // taxonomy
+        confident <- map["confident"]
+        label <- map["label"]
+        score <- map["score"]
+        
+    }
+    
 }

@@ -38,4 +38,22 @@ public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
     public var relations: [SAORelation]!
     public var text: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // saoRelations
+        relations <- map["relations"]
+        text <- map["text"]
+        
+    }
+    
 }

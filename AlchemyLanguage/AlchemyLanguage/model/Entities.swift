@@ -43,7 +43,7 @@ public struct Entities: AlchemyLanguageGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map[""]
+        totalTransactions <- map["totalTransactions"]
         
         // alchemyLanguageGenericModel
         language <- map["language"]

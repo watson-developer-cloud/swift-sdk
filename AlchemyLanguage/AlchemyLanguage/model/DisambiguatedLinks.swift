@@ -106,5 +106,35 @@ public struct DisambiguatedLinks: AlchemyLanguageGenericModel, Mappable {
     * that exist in this linked data-set.
     */
     public var yago: String!
+    
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // disambiguatedLinks
+        census <- map["census"]
+        ciaFactbook <- map["ciaFactbook"]
+        crunchbase <- map["crunchbase"]
+        dbpedia <- map["dbpedia"]
+        freebase <- map["freebase"]
+        geo <- map["geo"]
+        geonames <- map["geonames"]
+        musicBrainz <- map["musicBrainz"]
+        name <- map["name"]
+        opencyc <- map["opencyc"]
+        subType <- map["subType"]
+        umbel <- map["umbel"]
+        website <- map["website"]
+        yago <- map["yago"]
+        
+    }
 
 }

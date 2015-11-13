@@ -37,4 +37,21 @@ public struct Taxonomies: AlchemyLanguageGenericModel, Mappable {
     // MARK: Taxonomies
     public var taxonomy: [Taxonomy]!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // taxonomies
+        taxonomy <- map["taxonomy"]
+        
+    }
+    
 }

@@ -55,25 +55,25 @@ public extension AlchemyLanguageConstants {
 public final class AlchemyLanguageConstants {
     
     // static methods
-    static private func Calls() -> String { return "/calls" }
+    static func languageServiceURL() -> String { return "/calls" }
 
-    // use this, it already uses Calls()
-    static private func Prefix(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    // private
+    static private func Prefix(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         switch requestType {
             
-        case .URL: return Calls() + "/url/URL"
-        case .HTML: return Calls() + "/html/HTML"
-        case .Text: return Calls() + "/text/Text"
+        case .URL: return "/url/URL"
+        case .HTML: return "/html/HTML"
+        case .Text: return "/text/Text"
             
         }
         
     }
     
     // check if "Text" request is unsupported
-    static private func TextUnsupported(call: String, requestType: AlchemyLanguage.RequestType) -> Bool {
+    static private func TextUnsupported(call: String, requestType: AlchemyLanguageConstants.RequestType) -> Bool {
         
-        let unsupported = (requestType == AlchemyLanguage.RequestType.Text)
+        let unsupported = (requestType == AlchemyLanguageConstants.RequestType.Text)
         
         if unsupported {
             // TODO: XCLogger-print
@@ -92,9 +92,18 @@ public final class AlchemyLanguageConstants {
 // MARK: Entity Extraction
 public extension AlchemyLanguageConstants {
 
-    public static func GetEntities(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetEntities(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        return Prefix(fromRequestType: requestType) + "GetRankedNameEntities"
+        switch requestType {
+            
+        case RequestType.URL:
+            return "URLGetEntities"
+        case RequestType.HTML:
+            return "HTMLGetEntities"
+        case RequestType.Text:
+            return "TextGetEntities"
+            
+        }
         
     }
 

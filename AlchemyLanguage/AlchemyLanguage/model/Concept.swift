@@ -43,4 +43,27 @@ public struct Concept: AlchemyLanguageGenericModel, Mappable {
     public var geo: String!
     public var geonames: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map[""]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // concept
+        census <- map["census"]
+        ciaFactbook <- map["ciaFactbook"]
+        crunchbase <- map["crunchbase"]
+        dbpedia <- map["dbpedia"]
+        freebase <- map["freebase"]
+        geo <- map["geo"]
+        geonames <- map["geonames"]
+        
+    }
+    
 }

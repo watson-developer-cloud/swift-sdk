@@ -16,15 +16,16 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
-/** 
+/**
  
  **Entities**
  
  Entities returned by the AlchemyLanguage service.
  
-*/
-public struct Entities: AlchemyLanguageGenericModel {
+ */
+public struct Entities: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
@@ -35,5 +36,22 @@ public struct Entities: AlchemyLanguageGenericModel {
     
     // MARK: Entities
     public var entities: [Entity]! = []
+    
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map[""]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // entities
+        entities <- map["entities"]
+        
+    }
     
 }

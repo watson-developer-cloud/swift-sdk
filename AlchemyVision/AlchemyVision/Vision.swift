@@ -133,7 +133,7 @@ public class VisionImpl: Service {
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = Mapper<ImageFaceTags>().map(data)!
+          imageFaceTags = ImageFaceTags(anyObject: data)
         }
         completionHandler(returnValue: imageFaceTags)
       })
@@ -147,7 +147,7 @@ public class VisionImpl: Service {
       NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL!, parameters: params, completionHandler: {response in
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = Mapper<ImageFaceTags>().map(data)!
+          imageFaceTags = ImageFaceTags(anyObject: data)
         }
         completionHandler(returnValue: imageFaceTags)
       })

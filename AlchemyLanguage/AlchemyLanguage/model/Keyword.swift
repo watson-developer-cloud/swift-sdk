@@ -40,4 +40,24 @@ public struct Keyword: AlchemyLanguageGenericModel, Mappable {
     public var sentiment: Sentiment!
     public var text: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // keyword
+        knowledgeGraph <- map["knowledgeGraph"]
+        relevance <- map["relevance"]
+        sentiment <- map["sentiment"]
+        text <- map["text"]
+        
+    }
+    
 }

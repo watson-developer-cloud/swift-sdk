@@ -32,5 +32,18 @@ public struct Feed: AlchemyGenericModel, Mappable {
     
     // MARK: Feed
     public var feed: String!
+    
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // feed
+        feed <- map["feed"]
+        
+    }
 
 }

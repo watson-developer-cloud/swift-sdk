@@ -28,6 +28,6 @@ import ObjectMapper
 public protocol AlchemyGenericModel {
     
     /** The total transactions. */
-    var totalTransactions: Int! { get set }
+    var totalTransactions: Int? { get set }
     
 }

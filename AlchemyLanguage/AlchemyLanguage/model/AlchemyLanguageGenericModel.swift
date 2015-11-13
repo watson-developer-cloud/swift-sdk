@@ -27,7 +27,7 @@ import ObjectMapper
  */
 public protocol AlchemyLanguageGenericModel: AlchemyGenericModel {
 
-    var language: String! { get set }
-    var url: String! { get set }
+    var language: String? { get set }
+    var url: String? { get set }
 
 }

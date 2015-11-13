@@ -37,6 +37,7 @@ public enum ContentType: String {
  - PUT:    Put
  - DELETE: Delete
  */
+ // typealias HTTPMethod = Alamofire.Method
 public enum HTTPMethod: String {
     case GET
     case POST
@@ -170,11 +171,11 @@ public class NetworkUtils {
             .debugLog()
             .responseJSON {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseJSON")
-                if(contentType == ContentType.JSON) { completionHandler( returnValue: getResponse(response)) }
+                if(contentType == ContentType.JSON) { completionHandler( returnValue: CoreResponse.getCoreResponse(response)) }
             }
             .responseString {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseString")
-                if(contentType == ContentType.Text) { completionHandler( returnValue: getResponse(response)) }
+                if(contentType == ContentType.Text) { completionHandler( returnValue: CoreResponse.getCoreResponse(response)) }
             }
             .responseData { response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseData")
@@ -198,7 +199,7 @@ public class NetworkUtils {
             .debugLog()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performRequest.responseJSON")
-                completionHandler( returnValue: getResponse(response))
+                completionHandler( returnValue: CoreResponse.getCoreResponse(response))
         }
     }
     
@@ -229,7 +230,7 @@ public class NetworkUtils {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
                         Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
-                        completionHandler(returnValue: getResponse(response))
+                        completionHandler(returnValue: CoreResponse.getCoreResponse(response))
                     }
                 case .Failure(let encodingError):
                     Log.sharedLogger.error("\(encodingError)")
@@ -258,48 +259,10 @@ public class NetworkUtils {
             .debugLog()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performBasicAuthFileUpload.responseJSON")
-                completionHandler( returnValue: getResponse(response))
+                completionHandler( returnValue: CoreResponse.getCoreResponse(response))
         }
     }
-
-    /**
-     Given an AlamoFire response object, returns a Watson response object (CoreResponse) with standardized fields for errors and info
-     
-     - parameter response: AlamoFire Response
-     
-     - returns: A Watson CoreResponse
-     */
-    private static func getResponse<T>(response: Response<T,NSError>) -> CoreResponse
-    {
-        var coreResponseDictionary: Dictionary<String,AnyObject> = Dictionary()
-        
-        if let data = response.data where data.length > 0 {
-            do {
-                if let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves) as? [String: AnyObject] {
-                    coreResponseDictionary.updateValue(jsonData, forKey: "data")
-                }
-            } catch {
-                Log.sharedLogger.error("Could not convert response data object to JSON")
-                
-                    // This might be fine so still store the data
-                    coreResponseDictionary.updateValue(data, forKey: "data")
-            }
-        }
-        if let error = response.result.error {
-            coreResponseDictionary.updateValue(error.code, forKey: "errorCode")
-            coreResponseDictionary.updateValue(error.localizedDescription, forKey: "errorLocalizedDescription")
-            coreResponseDictionary.updateValue(error.domain, forKey: "errorDomain")
-        }
-        if let response = response.response {
-            coreResponseDictionary.updateValue(response.statusCodeEnum.rawValue, forKey: "responseStatusCode")
-            coreResponseDictionary.updateValue(response.statusCodeEnum.localizedReasonPhrase, forKey: "responseInfo")
-        }
-        
-        let coreResponse = Mapper<CoreResponse>().map(coreResponseDictionary)!
-        Log.sharedLogger.info("\(coreResponse)")
-        return coreResponse
-    }
-    
+  
     /**
      Adds to or updates a query parameter to a URL
      

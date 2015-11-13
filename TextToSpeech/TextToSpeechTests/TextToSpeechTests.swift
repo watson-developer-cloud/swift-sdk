@@ -62,8 +62,6 @@ class TextToSpeechTests: XCTestCase {
         service.synthesize(testString, oncompletion: {
             data, error in
             
-                print (data)
-            
                 XCTAssertNotNil(data)
             
                 expectation.fulfill()

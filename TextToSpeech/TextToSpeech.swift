@@ -30,7 +30,7 @@ public class TextToSpeech : Service, TextToSpeechService
     let opus:OpusHelper = OpusHelper()
     
     private let _serviceURL = "/text-to-speech/api"
-    
+    private let DEFAULT_SAMPLE_RATE = 24000
     
     public init() {
         
@@ -55,7 +55,15 @@ public class TextToSpeech : Service, TextToSpeechService
             
             response in
                 
-                
+                if let data = response.data as? NSData {
+                    
+                    // Use codec to decompress the audio
+                    let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
+                    
+                    oncompletion(data: pcm, error: response.error)
+                } else {
+                    oncompletion(data: nil, error: response.error)
+                }
             
         })
         

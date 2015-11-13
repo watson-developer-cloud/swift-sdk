@@ -33,4 +33,17 @@ public struct KnowledgeGraph: AlchemyGenericModel, Mappable {
     // MARK: KnowledgeGraph
     public var typeHierarchy: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // knowledgeGraph
+        typeHierarchy <- map["typeHierarchy"]
+        
+    }
+    
 }

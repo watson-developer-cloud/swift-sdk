@@ -32,6 +32,11 @@
 		6EB6B4551BF1887D008C43B2 /* SAORelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B4541BF1887D008C43B2 /* SAORelation.swift */; };
 		6EB6B4571BF188B8008C43B2 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6B4561BF188B8008C43B2 /* Taxonomy.swift */; };
 		6EB9813D1BF65A8000AC1E52 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB9813C1BF65A8000AC1E52 /* ObjectMapper.framework */; };
+		6EB981491BF6889200AC1E52 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB981481BF6889200AC1E52 /* SwiftyJSON.framework */; };
+		6EB9814B1BF6889B00AC1E52 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB9814A1BF6889B00AC1E52 /* XCGLogger.framework */; };
+		6EB981531BF6891600AC1E52 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB9814A1BF6889B00AC1E52 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EB981541BF6891600AC1E52 /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB981481BF6889200AC1E52 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EB981551BF6891600AC1E52 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB9813C1BF65A8000AC1E52 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1778C261BEBBD8F0097B05A /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1778C251BEBBD8F0097B05A /* WatsonCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,21 @@
 			remoteInfo = AlchemyLanguage;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6EB9814C1BF688F200AC1E52 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6EB981531BF6891600AC1E52 /* XCGLogger.framework in CopyFiles */,
+				6EB981541BF6891600AC1E52 /* SwiftyJSON.framework in CopyFiles */,
+				6EB981551BF6891600AC1E52 /* ObjectMapper.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6E19158B1BF26CB400D73811 /* Keywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
@@ -74,6 +94,8 @@
 		6EB6B4541BF1887D008C43B2 /* SAORelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelation.swift; sourceTree = "<group>"; };
 		6EB6B4561BF188B8008C43B2 /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		6EB9813C1BF65A8000AC1E52 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = ../Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
+		6EB981481BF6889200AC1E52 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
+		6EB9814A1BF6889B00AC1E52 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = ../Frameworks/XCGLogger.framework; sourceTree = "<group>"; };
 		E1778C251BEBBD8F0097B05A /* WatsonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonCore.framework; path = "../WatsonCore/build/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB981491BF6889200AC1E52 /* SwiftyJSON.framework in Frameworks */,
+				6EB9814B1BF6889B00AC1E52 /* XCGLogger.framework in Frameworks */,
 				6EB9813D1BF65A8000AC1E52 /* ObjectMapper.framework in Frameworks */,
 				E1778C261BEBBD8F0097B05A /* WatsonCore.framework in Frameworks */,
 			);
@@ -168,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				E1778C251BEBBD8F0097B05A /* WatsonCore.framework */,
+				6EB9814A1BF6889B00AC1E52 /* XCGLogger.framework */,
+				6EB981481BF6889200AC1E52 /* SwiftyJSON.framework */,
 				6EB9813C1BF65A8000AC1E52 /* ObjectMapper.framework */,
 			);
 			name = Frameworks;
@@ -195,6 +221,7 @@
 				6E23DB481BEA6C61004B4047 /* Frameworks */,
 				6E23DB491BEA6C61004B4047 /* Headers */,
 				6E23DB4A1BEA6C61004B4047 /* Resources */,
+				6EB9814C1BF688F200AC1E52 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -234,7 +261,6 @@
 				TargetAttributes = {
 					6E23DB4B1BEA6C61004B4047 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 57U96AW229;
 					};
 					6E23DB551BEA6C61004B4047 = {
 						CreatedOnToolsVersion = 7.0;
@@ -422,6 +448,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = AlchemyLanguage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -439,6 +466,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				INFOPLIST_FILE = AlchemyLanguage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

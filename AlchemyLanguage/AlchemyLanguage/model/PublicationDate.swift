@@ -37,5 +37,23 @@ public struct PublicationDate: AlchemyLanguageGenericModel, Mappable {
     // MARK: PublicationDate
     public var confident: Bool!
     public var date: NSDate!
+    
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // publicationDate
+        confident <- map["confident"]
+        date <- map["date"]
+        
+    }
 
 }

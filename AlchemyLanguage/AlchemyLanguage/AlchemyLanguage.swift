@@ -94,8 +94,9 @@ public extension AlchemyLanguage {
         xpath: String,
         maxRetrieve: Int,
         baseUrl: NSURL,
-        knowledgGraph: Bool = false,
-        stucturedEntities: Bool = true) -> Entities {
+        knowledgGraph: Int8 = 0,
+        stucturedEntities: Bool = true,
+        completionHandler: (returnValue: Entities)->() ) {
             
             let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
             

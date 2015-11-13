@@ -119,6 +119,9 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
         }
       } catch {
         Log.sharedLogger.error("Could not convert response data object to JSON")
+        
+        // When binary data is received
+        coreResponseDictionary.updateValue(data, forKey: "data")
       }
     }
     if let error = response.result.error {

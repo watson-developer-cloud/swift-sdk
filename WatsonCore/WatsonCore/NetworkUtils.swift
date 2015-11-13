@@ -179,7 +179,7 @@ public class NetworkUtils {
             }
             .responseData { response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseData")
-                completionHandler ( returnValue: getResponse(response))
+                completionHandler ( returnValue: CoreResponse.getCoreResponse(response))
             }
     }
     

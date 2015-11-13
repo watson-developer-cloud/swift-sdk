@@ -38,4 +38,22 @@ public struct Keywords: AlchemyLanguageGenericModel, Mappable {
     public var keywords: [Keyword]!
     public var text: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // keywords
+        keywords <- map["keywords"]
+        text <- map["text"]
+        
+    }
+    
 }

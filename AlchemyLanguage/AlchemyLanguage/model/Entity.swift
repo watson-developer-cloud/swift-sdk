@@ -40,4 +40,24 @@ public struct Entity: AlchemyGenericModel, Mappable {
     public var text: String!
     public var type: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // entity
+        count <- map["count"]
+        disambiguated <- map["disambiguated"]
+        knowledgeGraph <- map["knowledgeGraph"]
+        quotations <- map["quotations"]
+        relevance <- map["relevance"]
+        sentiment <- map["sentiment"]
+        text <- map["text"]
+        type <- map["type"]
+        
+    }
+    
 }

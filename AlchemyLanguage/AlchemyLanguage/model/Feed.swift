@@ -28,10 +28,10 @@ import ObjectMapper
 public struct Feed: AlchemyGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: Feed
-    public var feed: String!
+    public var feed: String?
     
     
     public init?(_ map: Map) {}

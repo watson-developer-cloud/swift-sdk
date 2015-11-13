@@ -28,14 +28,14 @@ import ObjectMapper
 public struct Taxonomies: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: Taxonomies
-    public var taxonomy: [Taxonomy]!
+    public var taxonomy: [Taxonomy]?
     
     
     public init?(_ map: Map) {}

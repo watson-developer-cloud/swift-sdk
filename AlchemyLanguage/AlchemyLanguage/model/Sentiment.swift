@@ -36,16 +36,16 @@ public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
     }
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: Sentiment
-    public var mixed: String!
-    public var score: Double!
-    public var type: SentimentType!
+    public var mixed: String?
+    public var score: Double?
+    public var type: SentimentType?
     
     
     public init?(_ map: Map) {}

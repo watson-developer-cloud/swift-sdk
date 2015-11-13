@@ -28,25 +28,25 @@ import ObjectMapper
 public struct CombinedResults: AlchemyLanguageGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: CombinedResults
-    public var author: String!
-    public var concepts: [Concept]!
-    public var entities: Entities!
-    public var feeds: Feeds!
-    public var image: String!
-    public var imageKeywords: Keywords!
-    public var keywords: Keywords!
-    public var publicationDate: PublicationDate!
-    public var relations: SAORelations
-    public var sentiment: Sentiment!
-    public var taxonomy: Taxonomy!
-    public var title: String!
+    public var author: String?
+    public var concepts: [Concept]?
+    public var entities: Entities?
+    public var feeds: Feeds?
+    public var image: String?
+    public var imageKeywords: Keywords?
+    public var keywords: Keywords?
+    public var publicationDate: PublicationDate?
+    public var relations: SAORelations?
+    public var sentiment: Sentiment?
+    public var taxonomy: Taxonomy?
+    public var title: String?
     
     
     public init?(_ map: Map) {}

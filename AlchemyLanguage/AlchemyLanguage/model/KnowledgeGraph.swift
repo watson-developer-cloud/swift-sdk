@@ -28,10 +28,10 @@ import ObjectMapper
 public struct KnowledgeGraph: AlchemyGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: KnowledgeGraph
-    public var typeHierarchy: String!
+    public var typeHierarchy: String?
     
     
     public init?(_ map: Map) {}

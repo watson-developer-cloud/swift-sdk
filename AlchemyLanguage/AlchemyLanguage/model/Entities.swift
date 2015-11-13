@@ -28,14 +28,14 @@ import ObjectMapper
 public struct Entities: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: Entities
-    public var entities: [Entity]! = []
+    public var entities: [Entity]? = []
     
     
     public init?(_ map: Map) {}

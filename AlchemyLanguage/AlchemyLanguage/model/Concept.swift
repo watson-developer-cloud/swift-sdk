@@ -28,20 +28,20 @@ import ObjectMapper
 public struct Concept: AlchemyLanguageGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: Concept
-    public var census: String!
-    public var ciaFactbook: String!
-    public var crunchbase: String!
-    public var dbpedia: String!
-    public var freebase: String!
-    public var geo: String!
-    public var geonames: String!
+    public var census: String?
+    public var ciaFactbook: String?
+    public var crunchbase: String?
+    public var dbpedia: String?
+    public var freebase: String?
+    public var geo: String?
+    public var geonames: String?
     
     
     public init?(_ map: Map) {}

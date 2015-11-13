@@ -28,15 +28,15 @@ import ObjectMapper
 public struct Keywords: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: Keywords
-    public var keywords: [Keyword]!
-    public var text: String!
+    public var keywords: [Keyword]?
+    public var text: String?
     
     
     public init?(_ map: Map) {}

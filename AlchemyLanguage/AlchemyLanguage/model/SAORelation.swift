@@ -28,17 +28,17 @@ import ObjectMapper
 public struct SAORelation: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: SAORelation
-    public var action: Action!
-    public var object: RelationObject!
-    public var sentence: String!
-    public var subject: Subject!
+    public var action: Action?
+    public var object: RelationObject?
+    public var sentence: String?
+    public var subject: Subject?
     
     
     public init?(_ map: Map) {}
@@ -68,9 +68,9 @@ extension SAORelation {
     
     public struct Action {
         
-        public var lemmatized: String!
-        public var text: String!
-        public var verb: Verb!
+        public var lemmatized: String?
+        public var text: String?
+        public var verb: Verb?
         
         
         public init?(_ map: Map) {}
@@ -88,9 +88,9 @@ extension SAORelation {
     // MARK: Verb
     public struct Verb {
         
-        public var negated: Int!
-        public var tense: String!
-        public var text: String!
+        public var negated: Int?
+        public var tense: String?
+        public var text: String?
         
         
         public init?(_ map: Map) {}
@@ -113,11 +113,11 @@ extension SAORelation {
     
     public struct RelationObject {
 
-        public var entity: Entity!
-        public var keywords: Keywords!
-        public var sentiment: Sentiment!
-        public var sentimentFromSubject: Sentiment!
-        public var text: String!
+        public var entity: Entity?
+        public var keywords: Keywords?
+        public var sentiment: Sentiment?
+        public var sentimentFromSubject: Sentiment?
+        public var text: String?
         
         
         public init?(_ map: Map) {}
@@ -142,10 +142,10 @@ extension SAORelation {
     
     public struct Subject {
         
-        public var entity: Entity!
-        public var keywords: Keywords!
-        public var sentiment: Sentiment!
-        public var text: String!
+        public var entity: Entity?
+        public var keywords: Keywords?
+        public var sentiment: Sentiment?
+        public var text: String?
         
         
         public init?(_ map: Map) {}

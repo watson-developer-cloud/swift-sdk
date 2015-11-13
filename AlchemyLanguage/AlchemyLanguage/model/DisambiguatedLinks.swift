@@ -28,84 +28,84 @@ import ObjectMapper
 public struct DisambiguatedLinks: AlchemyLanguageGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: AlchemyLanguageGenericModel
-    public var language: String!
-    public var url: String!
+    public var language: String?
+    public var url: String?
     
     // MARK: DisambiguatedLinks
     /**
     * The link to the US Census for the disambiguated entity. Note: Provided only for
     * entities that exist in this linked data-set.
     */
-    public var census: String!
+    public var census: String?
     
     /**
     * The cia link to the CIA World Factbook for the disambiguated entity. Note: Provided
     * only for entities that exist in this linked data-set.
     */
-    public var ciaFactbook: String!
+    public var ciaFactbook: String?
     
     /**
     * The link to CrunchBase for the disambiguated entity. Note: Provided only for
     * entities that exist in CrunchBase.
     */
-    public var crunchbase: String!
+    public var crunchbase: String?
     
     /**
     * The link to DBpedia for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var dbpedia: String!
+    public var dbpedia: String?
     
     /**
     * The link to Freebase for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var freebase: String!
+    public var freebase: String?
     
     /** The geographic coordinates. */
-    public var geo: String!
+    public var geo: String?
     
     /**
     * The link to Geonames for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var geonames: String!
+    public var geonames: String?
 
     /**
     * The music link to MusicBrainz for the disambiguated entity. Note: Provided only for
     * entities that exist in this linked data-set.
     */
-    public var musicBrainz: String!
+    public var musicBrainz: String?
     
     /** The entity name. */
-    public var name: String!
+    public var name: String?
     
     /**
     * The link to OpenCyc for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var opencyc: String!
+    public var opencyc: String?
     
     /**  The disambiguated entity subType. */
-    public var subType: [String]!
+    public var subType: [String]?
     
     /**
     * The link to UMBEL for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var umbel: String!
+    public var umbel: String?
     
     /** The website. */
-    public var website: String!
+    public var website: String?
     
     /**
     * The link to YAGO for the disambiguated entity. Note: Provided only for entities
     * that exist in this linked data-set.
     */
-    public var yago: String!
+    public var yago: String?
     
     
     public init?(_ map: Map) {}

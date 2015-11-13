@@ -28,17 +28,17 @@ import ObjectMapper
 public struct Entity: AlchemyGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
-    public var totalTransactions: Int!
+    public var totalTransactions: Int?
     
     // MARK: Entity
-    public var count: Int!
-    public var disambiguated: DisambiguatedLinks!
-    public var knowledgeGraph: KnowledgeGraph!
-    public var quotations: [Quotation]! = []
-    public var relevance: Double!
-    public var sentiment: Sentiment!
-    public var text: String!
-    public var type: String!
+    public var count: Int?
+    public var disambiguated: DisambiguatedLinks?
+    public var knowledgeGraph: KnowledgeGraph?
+    public var quotations: [Quotation]? = []
+    public var relevance: Double?
+    public var sentiment: Sentiment?
+    public var text: String?
+    public var type: String?
     
     
     public init?(_ map: Map) {}

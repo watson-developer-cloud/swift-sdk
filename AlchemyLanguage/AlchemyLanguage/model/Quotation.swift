@@ -27,4 +27,13 @@ public struct Quotation: Mappable {
 
     public var quotation: String!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        quotation <- map["quotation"]
+        
+    }
+    
 }

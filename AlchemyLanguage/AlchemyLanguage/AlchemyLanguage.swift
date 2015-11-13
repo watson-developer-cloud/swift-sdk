@@ -71,16 +71,16 @@ public extension AlchemyLanguage {
      
      - Returns: An **Entities** object.
      */
-    public func getEntities(requestType rt: RequestType,
+    public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
         url: NSURL,
-        outputMode: OutputMode,
+        outputMode: AlchemyLanguageConstants.OutputMode,
         jsonp: String,
         disambiguate: Bool = true,
         linkedData: Bool = true,
         coreference: Bool = true,
         quotations: Bool = false,
         sentiment: Bool = false,
-        sourceText: SourceText,
+        sourceText: AlchemyLanguageConstants.SourceText,
         showSourceText: Bool = false,
         cquery: String,
         xpath: String,

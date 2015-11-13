@@ -16,6 +16,7 @@
 
 import Foundation
 import WatsonCore
+import ObjectMapper
 
 /**
  
@@ -24,7 +25,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public struct CombinedResults: AlchemyLanguageGenericModel {
+public struct CombinedResults: AlchemyLanguageGenericModel, Mappable {
 
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
@@ -35,16 +36,44 @@ public struct CombinedResults: AlchemyLanguageGenericModel {
     
     // MARK: CombinedResults
     public var author: String!
-    public var concepts: [Concept]! = []
-    public var entities: [Entities]! = []
+    public var concepts: [Concept]!
+    public var entities: Entities!
     public var feeds: Feeds!
     public var image: String!
-    public var imageKeywords: [Keyword]! = []
-    public var keywords: [Keyword]! = []
+    public var imageKeywords: Keywords!
+    public var keywords: Keywords!
     public var publicationDate: PublicationDate!
-    public var relations: [SAORelation]! = []
+    public var relations: SAORelations
     public var sentiment: Sentiment!
     public var taxonomy: Taxonomy!
     public var title: String!
+    
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // entities
+        author <- map["author"]
+        concepts <- map["concepts"]
+        entities <- map["entities"]
+        feeds <- map["feeds"]
+        image <- map["image"]
+        imageKeywords <- map["imageKeywords"]
+        keywords <- map["keywords"]
+        publicationDate <- map["publicationDate"]
+        relations <- map["relations"]
+        sentiment <- map["sentiment"]
+        taxonomy <- map["taxonomy"]
+        title <- map["title"]
+        
+    }
 
 }

@@ -47,4 +47,23 @@ public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
     public var score: Double!
     public var type: SentimentType!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // sentiment
+        mixed <- map["mixed"]
+        score <- map["score"]
+        type <- map["type"]
+        
+    }
+    
 }

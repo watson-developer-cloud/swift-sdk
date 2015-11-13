@@ -24,7 +24,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class Sentiment: AlchemyLanguageGenericModel {
+public struct Sentiment: AlchemyLanguageGenericModel {
     
     public enum SentimentType {
         

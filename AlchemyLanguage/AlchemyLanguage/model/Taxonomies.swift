@@ -24,7 +24,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class Taxonomies: AlchemyLanguageGenericModel {
+public struct Taxonomies: AlchemyLanguageGenericModel {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!

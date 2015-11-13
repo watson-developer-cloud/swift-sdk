@@ -24,7 +24,7 @@ import WatsonCore
  Returned by the AlchemyLanguage & AlchemyDataNews services.
  
  */
-public final class Entity: AlchemyGenericModel {
+public struct Entity: AlchemyGenericModel {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!

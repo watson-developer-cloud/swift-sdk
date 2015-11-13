@@ -24,7 +24,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class SAORelation: AlchemyLanguageGenericModel {
+public struct SAORelation: AlchemyLanguageGenericModel {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!
@@ -45,7 +45,7 @@ public final class SAORelation: AlchemyLanguageGenericModel {
 // MARK: **Action**
 extension SAORelation {
     
-    public final class Action {
+    public struct Action {
         
         public var lemmatized: String!
         public var text: String!
@@ -54,7 +54,7 @@ extension SAORelation {
     }
     
     // MARK: Verb
-    public final class Verb {
+    public struct Verb {
         
         public var negated: Int!
         public var tense: String!
@@ -68,7 +68,7 @@ extension SAORelation {
 // MARK: **RelationObject**
 extension SAORelation {
     
-    public final class RelationObject {
+    public struct RelationObject {
 
         public var entity: Entity!
         public var keywords: Keywords!
@@ -84,7 +84,7 @@ extension SAORelation {
 // MARK: **Subject**
 extension SAORelation {
     
-    public final class Subject {
+    public struct Subject {
         
         public var entity: Entity!
         public var keywords: Keywords!

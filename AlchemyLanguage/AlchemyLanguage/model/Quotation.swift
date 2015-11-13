@@ -22,7 +22,7 @@ import WatsonCore
  **Quotation**
  
  */
-public final class Quotation {
+public struct Quotation {
 
     public var quotation: String!
     

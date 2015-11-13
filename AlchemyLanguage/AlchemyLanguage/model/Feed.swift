@@ -24,7 +24,7 @@ import WatsonCore
  Returned by the AlchemyLanguage service.
  
  */
-public final class Feed: AlchemyGenericModel {
+public struct Feed: AlchemyGenericModel {
 
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int!

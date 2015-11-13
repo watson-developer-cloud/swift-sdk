@@ -113,13 +113,13 @@ public extension AlchemyLanguageConstants {
 // MARK: Sentiment Analysis
 public extension AlchemyLanguageConstants {
     
-    public static func GetTextSentiment(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetTextSentiment(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetTextSentiment"
         
     }
     
-    public static func GetTargetedSentiment(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetTargetedSentiment(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetTargetedSentiment"
         
@@ -131,7 +131,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Keyword Extraction
 public extension AlchemyLanguageConstants {
     
-    public static func GetRankedKeywords(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetRankedKeywords(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetRankedKeywords"
         
@@ -143,7 +143,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Concept Tagging
 public extension AlchemyLanguageConstants {
     
-    public static func GetRankedConcepts(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetRankedConcepts(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetRankedConcepts"
         
@@ -155,7 +155,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Relation Extraction
 public extension AlchemyLanguageConstants {
     
-    public static func GetRelations(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetRelations(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetRelations"
         
@@ -167,7 +167,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Taxonomy Classification
 public extension AlchemyLanguageConstants {
     
-    public static func GetRankedTaxonomy(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetRankedTaxonomy(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetRankedTaxonomy"
         
@@ -179,9 +179,9 @@ public extension AlchemyLanguageConstants {
 // MARK: Author Extraction
 public extension AlchemyLanguageConstants {
     
-    public static func GetAuthor(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetAuthor(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        guard requestType != AlchemyLanguage.RequestType.Text else {
+        guard requestType != AlchemyLanguageConstants.RequestType.Text else {
             // TODO: XCLogger-print
             print("AlchemyLanguageConstants: GetAuthor: Text request is unsupported.")
             return ""
@@ -197,7 +197,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Language Detection
 public extension AlchemyLanguageConstants {
     
-    public static func GetLanguage(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetLanguage(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
         return Prefix(fromRequestType: requestType) + "GetLanguage"
         
@@ -209,9 +209,9 @@ public extension AlchemyLanguageConstants {
 // MARK: Text Extraction
 public extension AlchemyLanguageConstants {
     
-    public static func GetText(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetText(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        guard requestType != AlchemyLanguage.RequestType.Text else {
+        guard requestType != AlchemyLanguageConstants.RequestType.Text else {
             // TODO: XCLogger-print
             print("AlchemyLanguageConstants: GetText: Text request is unsupported.")
             return ""
@@ -221,9 +221,9 @@ public extension AlchemyLanguageConstants {
         
     }
     
-    public static func GetRawText(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetRawText(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        guard requestType != AlchemyLanguage.RequestType.Text else {
+        guard requestType != AlchemyLanguageConstants.RequestType.Text else {
             // TODO: XCLogger-print
             print("AlchemyLanguageConstants: GetRawText: Text request is unsupported.")
             return ""
@@ -233,9 +233,9 @@ public extension AlchemyLanguageConstants {
         
     }
     
-    public static func GetTitle(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetTitle(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        guard requestType != AlchemyLanguage.RequestType.Text else {
+        guard requestType != AlchemyLanguageConstants.RequestType.Text else {
             // TODO: XCLogger-print
             print("AlchemyLanguageConstants: GetTitle: Text request is unsupported.")
             return ""
@@ -251,9 +251,9 @@ public extension AlchemyLanguageConstants {
 // MARK: Microformats Parsing
 public extension AlchemyLanguageConstants {
     
-    public static func GetMicroformatData(fromRequestType requestType: AlchemyLanguage.RequestType) -> String {
+    public static func GetMicroformatData(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        guard requestType != AlchemyLanguage.RequestType.Text else {
+        guard requestType != AlchemyLanguageConstants.RequestType.Text else {
             // TODO: XCLogger-print
             print("AlchemyLanguageConstants: GetMicroformatData: Text request is unsupported.")
             return ""
@@ -269,7 +269,7 @@ public extension AlchemyLanguageConstants {
 // MARK: Feed Detection
 public extension AlchemyLanguageConstants {
     
-    public static func GetFeedLinks(fromRequestType rt: AlchemyLanguage.RequestType) -> String {
+    public static func GetFeedLinks(fromRequestType rt: AlchemyLanguageConstants.RequestType) -> String {
 
         return TextUnsupported("GetFeedLinks", requestType: rt) ? "" : (Prefix(fromRequestType: rt) + "GetFeedLinks")
 

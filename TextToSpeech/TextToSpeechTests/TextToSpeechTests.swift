@@ -16,7 +16,7 @@ class TextToSpeechTests: XCTestCase {
     private let service = TextToSpeech()
     
     /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: NSTimeInterval = 20.0
     
     override func setUp() {
         super.setUp()
@@ -44,7 +44,7 @@ class TextToSpeechTests: XCTestCase {
         service.listVoices({
             voices, error in
             
-            print(voices)
+            XCTAssertGreaterThan(voices.count, 6, "Expected at least 6 voices to be returned");
             
             expectation.fulfill()
         })
@@ -55,20 +55,33 @@ class TextToSpeechTests: XCTestCase {
     
     func testSynthesize() {
         
+        let expectation = expectationWithDescription("Synthesize Audio")
         
-        service.synthesize("Hello there!", oncompletion: {
+        let testString = "All the problems of the world could be solved if men were only willing to think."
+        
+        service.synthesize(testString, oncompletion: {
             data, error in
+            
+                print (data)
+            
+                XCTAssertNotNil(data)
+            
+                expectation.fulfill()
+                
                 // service.playAudio(engine, data: data)
            
         })
         
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+        
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measureBlock {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
     
 }

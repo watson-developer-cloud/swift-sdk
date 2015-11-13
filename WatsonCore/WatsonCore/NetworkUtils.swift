@@ -24,6 +24,9 @@ public enum ContentType: String {
     case JSON =         "application/json"
     case XML =          "application/xml"
     case URLEncoded =   "application/x-www-form-urlencoded"
+    case AUDIO_OPUS =   "audio/ogg; codecs=opus"
+    case AUDIO_WAV  =   "audio/wav"
+    case AUDIO_FLAC =   "audio/flac"
 }
 
 /**
@@ -172,7 +175,11 @@ public class NetworkUtils {
             .responseString {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseString")
                 if(contentType == ContentType.Text) { completionHandler( returnValue: getResponse(response)) }
-        }
+            }
+            .responseData { response in
+                Log.sharedLogger.debug("Entered performBasicAuthRequest.responseData")
+                completionHandler ( returnValue: getResponse(response))
+            }
     }
     
     /**
@@ -273,6 +280,9 @@ public class NetworkUtils {
                 }
             } catch {
                 Log.sharedLogger.error("Could not convert response data object to JSON")
+                
+                    // This might be fine so still store the data
+                    coreResponseDictionary.updateValue(data, forKey: "data")
             }
         }
         if let error = response.result.error {

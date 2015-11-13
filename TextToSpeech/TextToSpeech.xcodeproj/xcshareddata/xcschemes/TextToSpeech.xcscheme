@@ -14,37 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A1FCDCF1BA9ED6A0090E1EB"
-               BuildableName = "WatsonCore.framework"
-               BlueprintName = "WatsonCore"
-               ReferencedContainer = "container:../WatsonCore/WatsonCore.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BDE8D4881BEE731300E108FA"
                BuildableName = "TextToSpeech.framework"
                BlueprintName = "TextToSpeech"
-               ReferencedContainer = "container:TextToSpeech.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BDE8D4921BEE731300E108FA"
-               BuildableName = "TextToSpeechTests.xctest"
-               BlueprintName = "TextToSpeechTests"
                ReferencedContainer = "container:TextToSpeech.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

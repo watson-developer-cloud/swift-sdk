@@ -40,7 +40,24 @@ public class TextToSpeech : Service, TextToSpeechService
     
     public func synthesize(theText:String, oncompletion: (data: NSData?, error:NSError?) -> Void ) {
         
-      
+        let endpoint = getEndpoint("/v1/synthesize")
+        
+        var params = Dictionary<String, String>()
+        params.updateValue(theText, forKey: "text")
+        //params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
+        
+        NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
+            parameters: params,
+            contentType: .AUDIO_OPUS,
+            accept: .AUDIO_OPUS,
+            apiKey: _apiKey,
+            completionHandler: {
+            
+            response in
+                
+                
+            
+        })
         
 //        if let url = NSBundle(forClass: self.dynamicType).URLForResource("testing", withExtension: "opus") {
 //            if let data = NSData(contentsOfURL: url) {
@@ -79,7 +96,7 @@ public class TextToSpeech : Service, TextToSpeechService
             }
            
             
-            oncompletion(voices: voices, error: nil)
+            oncompletion(voices: voices, error: response.error)
         })
 
     }

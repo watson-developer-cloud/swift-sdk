@@ -21,7 +21,7 @@ public protocol TextToSpeechService
     
     func saveAudio ( location: NSURL, data: NSData )
     
-    func playAudio ( audioEngine: AVAudioEngine, data: NSData )
+    func playAudio ( audioEngine: AVAudioEngine, data: NSData, oncompletion: (error: NSError?) -> Void )
     
 }
 
@@ -113,7 +113,9 @@ public class TextToSpeech : Service, TextToSpeechService
         
     }
     
-    public func playAudio( audioEngine: AVAudioEngine, data: NSData ) {
+    public func playAudio( audioEngine: AVAudioEngine, data: NSData, oncompletion: (error: NSError?) -> Void ) {
+        
+        oncompletion(error: nil)
         
 //        let sampleRateHz = 22050.0
 //        

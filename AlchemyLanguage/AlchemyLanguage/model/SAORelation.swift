@@ -40,6 +40,26 @@ public struct SAORelation: AlchemyLanguageGenericModel, Mappable {
     public var sentence: String!
     public var subject: Subject!
     
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        
+        // alchemyGenericModel
+        totalTransactions <- map["totalTransactions"]
+        
+        // alchemyLanguageGenericModel
+        language <- map["language"]
+        url <- map["url"]
+        
+        // saoRelation
+        action <- map["action"]
+        object <- map["object"]
+        sentence <- map["sentence"]
+        subject <- map["subject"]
+        
+    }
+    
 }
 
 
@@ -52,6 +72,17 @@ extension SAORelation {
         public var text: String!
         public var verb: Verb!
         
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            
+            lemmatized <- map["lemmatized"]
+            text <- map["text"]
+            verb <- map["verb"]
+            
+        }
+        
     }
     
     // MARK: Verb
@@ -60,6 +91,17 @@ extension SAORelation {
         public var negated: Int!
         public var tense: String!
         public var text: String!
+        
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+
+            negated <- map["negated"]
+            tense <- map["tense"]
+            text <- map["text"]
+            
+        }
         
     }
     
@@ -77,6 +119,19 @@ extension SAORelation {
         public var sentimentFromSubject: Sentiment!
         public var text: String!
         
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            
+            entity <- map["entity"]
+            keywords <- map["keywords"]
+            sentiment <- map["sentiment"]
+            sentimentFromSubject <- map["sentimentFromSubject"]
+            text <- map["text"]
+            
+        }
+        
     }
     
 }
@@ -91,6 +146,18 @@ extension SAORelation {
         public var keywords: Keywords!
         public var sentiment: Sentiment!
         public var text: String!
+        
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            
+            entity <- map["entity"]
+            keywords <- map["keywords"]
+            sentiment <- map["sentiment"]
+            text <- map["text"]
+            
+        }
         
     }
     

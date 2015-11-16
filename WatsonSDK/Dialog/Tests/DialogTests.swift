@@ -28,10 +28,10 @@ class DialogTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
-            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                self.testService.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
-                self.dialogId = dict["DialogId"]
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                self.testService.setUsernameAndPassword(dict["DialogUsername"]!, password: dict["DialogPassword"]!)
+                self.dialogId = dict["DialogID"]
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }

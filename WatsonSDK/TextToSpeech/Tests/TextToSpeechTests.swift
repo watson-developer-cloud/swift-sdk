@@ -21,9 +21,9 @@ class TextToSpeechTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).URLForResource("TTSTestAuth", withExtension: "plist") {
-            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                service.setUsernameAndPassword(dict["TextToSpeechUsername"]!, password: dict["TextToSpeechPassword"]!)
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }

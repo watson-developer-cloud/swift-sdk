@@ -18,9 +18,9 @@ class LanguageTranslationTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).URLForResource("Test", withExtension: "plist") {
-            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                service.setUsernameAndPassword(dict["LanguageTranslationUsername"]!, password: dict["LanguageTranslationPassword"]!)
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }

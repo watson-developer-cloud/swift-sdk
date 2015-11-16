@@ -1,6 +1,4 @@
 xcuserdata
 Carthage
 DerivedData
-Frameworks
-Cartfile.resolved
-**/*Test*.plist
+Credentials.plist

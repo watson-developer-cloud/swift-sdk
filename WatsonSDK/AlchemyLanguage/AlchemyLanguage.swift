@@ -53,7 +53,20 @@ public final class AlchemyLanguage: Service {
         _apiKey = apiKey
         
     }
-
+    
+    /** A dictionary of parameters used in all Alchemy Language API calls */
+    private var commonParameters: [String : AnyObject] {
+        
+        return [
+            
+            AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
+            
+            AlchemyLanguageConstants.OutputMode.JSON.rawValue : AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue
+            
+        ]
+        
+    }
+    
 }
 
 

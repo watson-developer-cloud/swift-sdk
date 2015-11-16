@@ -1,44 +1,51 @@
 <dialog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd">
-
-<flow>
-    
-        <output>
-            <prompt selectionType="RANDOM">
-                <item>Hello, Swift.</item>
-            </prompt>
-            <goto ref="getUserInput_999999999999990"/>
-        </output>
-        <getUserInput id="getUserInput_999999999999990">
-            <search ref="folder_2449611"/>
-            <default>
-                <output>
-                    <prompt selectionType="RANDOM">
-                        <item>
-                            Ask me what I like to do.
-                        </item>
-                    </prompt>
-                </output>
-            </default>
-        </getUserInput>
-    </folder>
-    <folder label="Library">
-        <folder label="Live Content" id="folder_2449611">
-            <input>
-                <grammar>
-                    <item>What's your favorite thing to do?</item>
-                </grammar>
-                <output>
-                    <prompt selectionType="RANDOM">
-                        <item>I like to get Schwifty.</item>
-                    </prompt>
-                </output>
-            </input>
+    <flow>
+        <folder label="Main">
+            <output>
+                <prompt selectionType="RANDOM">
+                    <item>Hello, Swift.</item>
+                </prompt>
+                <goto ref="getUserInput_244961400" />
+            </output>
+            <getUserInput id="getUserInput_244961400">
+                <search ref="folder_244961100" />
+                <default>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                You can only ask me what I like to do.
+                            </item>
+                        </prompt>
+                    </output>
+                </default>
+            </getUserInput>
         </folder>
-        <folder label="Storage"/>
-    </folder>
-    <folder label="Global"/>
-    <folder label="Concepts"/>
-</flow>
-
+        <folder label="Library">
+            <folder label="Live Content" id="folder_244961100">
+                <input>
+                    <grammar>
+                        <item>What do you like to do?</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                I like to get schwifty.
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+            </folder>
+            <folder label="Storage" />
+        </folder>
+        <folder label="Global" />
+        <folder label="Concepts" />
+    </flow>
+    <constants>
+        <var_folder name="Home" />
+    </constants>
+    <variables>
+        <var_folder name="Home">
+            <var name="CurrentModel" type="TEXT" description="The current model" />
+        </var_folder>
+    </variables>
 </dialog>
-

@@ -52,17 +52,41 @@ class DialogTests: XCTestCase {
             return
         }
         
-        let expectation = expectationWithDescription("Converse")
+        var conversationId: Int? = nil
+        var clientId: Int? = nil
+        
+        let expectation1 = expectationWithDescription("Converse")
         
         testService.converse(dId, input: "Hello, Watson.", callback: {(conversation: Conversation?) in
             
             XCTAssertNotNil(conversation)
             XCTAssertEqual(conversation?.confidence, 0)
-            XCTAssertEqual(conversation?.input, "Hello, Watson.")
+            XCTAssertEqual(conversation?.input, "")
             XCTAssertEqual(conversation?.response?.count, 1)
             XCTAssertEqual(conversation?.response?[0], "Hello, Swift.")
             
-            expectation.fulfill()
+            clientId = conversation?.clientId
+            conversationId = conversation?.conversationId
+            
+            expectation1.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+        let expectation2 = expectationWithDescription("Converse")
+        
+        testService.converse(dId, input: "What do you like to do?", clientId: clientId, conversationId: conversationId, callback: {(conversation: Conversation?) in
+            
+            XCTAssertNotNil(conversation)
+            XCTAssertEqual(conversation?.confidence, 0)
+            XCTAssertEqual(conversation?.input, "What do you like to do?")
+            XCTAssertEqual(conversation?.response?.count, 1)
+            XCTAssertEqual(conversation?.response?[0], "I like to get schwifty.")
+            
+            clientId = conversation?.clientId
+            conversationId = conversation?.conversationId
+            
+            expectation2.fulfill()
         })
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })

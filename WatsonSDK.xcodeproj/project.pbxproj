@@ -19,6 +19,8 @@
 		7A36F9C41BF8DEDF005E478F /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C51BF8DEDF005E478F /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C61BF8DEDF005E478F /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A72BCB91BFA4E2800CCC15B /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A72BCB61BFA4E2800CCC15B /* Credentials.plist */; };
+		7A72BCBB1BFA4E2800CCC15B /* WatsonSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */; };
 		7ADC3A4A1BF951AC00CD916E /* alchemy_endpoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A261BF950C800CD916E /* alchemy_endpoints.json */; };
 		7ADC3A4B1BF951AC00CD916E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A271BF950C800CD916E /* Logger.swift */; };
 		7ADC3A4E1BF951AC00CD916E /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */; };
@@ -93,7 +95,6 @@
 		7ADC3AA51BF959B800CD916E /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */; };
 		7ADC3AA61BF959BD00CD916E /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A071BF950C800CD916E /* SpeechSample.flac */; };
 		7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */; };
-		7ADE61741BFA43D8006AF780 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7ADE61721BFA2C6A006AF780 /* Credentials.plist */; };
 		7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; };
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */; };
@@ -156,6 +157,9 @@
 		7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
+		7A72BCB61BFA4E2800CCC15B /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		7A72BCB71BFA4E2800CCC15B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSDKTests.swift; sourceTree = "<group>"; };
 		7ADC39AB1BF950C800CD916E /* AlchemyLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
 		7ADC39AC1BF950C800CD916E /* AlchemyLanguageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageConstants.swift; sourceTree = "<group>"; };
 		7ADC39AE1BF950C800CD916E /* AlchemyGenericModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyGenericModel.swift; sourceTree = "<group>"; };
@@ -258,7 +262,6 @@
 		7ADC3A321BF950C800CD916E /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		7ADC3A331BF950C800CD916E /* Transformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
-		7ADE61721BFA2C6A006AF780 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		7AF96B881BF96BBB0083ED23 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +297,7 @@
 			children = (
 				7ADC37BB1BF9427F00CD916E /* Frameworks */,
 				7A36F99F1BF8DDCA005E478F /* WatsonSDK */,
+				7A72BCB51BFA4E2800CCC15B /* WatsonSDKTests */,
 				7A36F99E1BF8DDCA005E478F /* Products */,
 				7ADC39AA1BF950C800CD916E /* AlchemyLanguage */,
 				7ADC39C31BF950C800CD916E /* AlchemyVision */,
@@ -321,10 +325,19 @@
 			children = (
 				7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */,
 				7A36F9A21BF8DDCB005E478F /* Info.plist */,
-				7ADE61721BFA2C6A006AF780 /* Credentials.plist */,
 			);
 			path = WatsonSDK;
 			sourceTree = "<group>";
+		};
+		7A72BCB51BFA4E2800CCC15B /* WatsonSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				7A72BCB61BFA4E2800CCC15B /* Credentials.plist */,
+				7A72BCB71BFA4E2800CCC15B /* Info.plist */,
+				7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */,
+			);
+			path = WatsonSDKTests;
+			sourceTree = SOURCE_ROOT;
 		};
 		7ADC37BB1BF9427F00CD916E /* Frameworks */ = {
 			isa = PBXGroup;
@@ -808,13 +821,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ADE61741BFA43D8006AF780 /* Credentials.plist in Resources */,
 				7ADC3A9D1BF9593F00CD916E /* weather_data_train.csv in Resources */,
 				7ADC3A871BF9560800CD916E /* emaxfpo.jpg in Resources */,
 				7ADC3A8E1BF9587200CD916E /* dialog.xml in Resources */,
 				7ADC3AA61BF959BD00CD916E /* SpeechSample.flac in Resources */,
 				7ADC3A891BF9560800CD916E /* mother-daughter.jpg in Resources */,
 				7ADC3A951BF958A700CD916E /* glossary.tmx in Resources */,
+				7A72BCB91BFA4E2800CCC15B /* Credentials.plist in Resources */,
 				7ADC3A881BF9560800CD916E /* example.html in Resources */,
 				7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */,
 			);
@@ -908,6 +921,7 @@
 				7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */,
 				7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */,
 				7ADC3AA31BF9597D00CD916E /* PersonalityInsightsTests.swift in Sources */,
+				7A72BCBB1BFA4E2800CCC15B /* WatsonSDKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,17 @@ import XCTest
 
 class AlchemyLanguageTests: XCTestCase {
     
+    // timing
+    private let timeout: NSTimeInterval = 60.0
+    
+    // main instance
+    let instance = AlchemyLanguage()
+    var apiKeyNotSet: Bool { return instance._apiKey == nil }
+    
+    // test strings
+    var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
+    
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.

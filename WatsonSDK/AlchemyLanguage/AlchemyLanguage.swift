@@ -202,9 +202,6 @@ public extension AlchemyLanguage {
 // MARK: Author Extraction
 /**
 
- http://www.alchemyapi.com/api/author/proc.html
- 
- */
 public extension AlchemyLanguage {
     
     public func URLGetAuthor() {}

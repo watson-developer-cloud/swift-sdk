@@ -24,7 +24,7 @@ class AlchemyVisionTests: XCTestCase {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                serviceVision._apiKey = dict["AlchemyVisionAPIKey"]!
+                serviceVision._apiKey = dict["AlchemyAPIKey"]!
             }
         }
         // Put setup code here. This method is called before the invocation of each test method in the class.

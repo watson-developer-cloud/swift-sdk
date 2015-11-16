@@ -204,9 +204,6 @@ public extension AlchemyLanguage {
 
 public extension AlchemyLanguage {
     
-    public func URLGetAuthor() {}
-    public func HTMLGetAuthor() {}
-    public func TextGetAuthor() {}
     
 }
 

@@ -43,6 +43,34 @@ class AlchemyLanguageTests: XCTestCase {
     override func tearDown() { super.tearDown() }
     
     
+    // tests
+    func testHTMLGetAuthor() {
+        
+        let validExpectation = expectationWithDescription("Valid")
+        
+        instance.getAuthor(requestType: .HTML,
+            html: test_html,
+            url: nil) {
+                
+            (error, documentAuthor) in
+                
+                XCTAssertNotNil(documentAuthor)
+                XCTAssertNotNil(documentAuthor.author)
+                
+                if let author = documentAuthor.author {
+                    
+                    print("Success HTMLGetAuthor, author: \(author)")
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     func testInvalidHTMLGetAuthor() {
         
         

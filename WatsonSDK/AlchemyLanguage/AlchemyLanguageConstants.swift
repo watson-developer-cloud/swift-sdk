@@ -77,9 +77,9 @@ public final class AlchemyLanguageConstants {
         
         switch requestType {
             
-        case .URL: return Calls() + "/url/URL"
-        case .HTML: return Calls() + "/html/HTML"
-        case .Text: return Calls() + "/text/Text"
+        case .URL: return "/url/URL"
+        case .HTML: return "/html/HTML"
+        case .Text: return "/text/Text"
 
             
         }

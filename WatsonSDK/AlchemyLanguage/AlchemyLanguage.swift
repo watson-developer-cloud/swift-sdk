@@ -209,6 +209,32 @@ public extension AlchemyLanguage {
         url: String?,
         completionHandler: (error: NSError, returnValue: DocumentAuthor)->() ) {
             
+            var parameters = commonParameters
+            
+            let accessString = AlchemyLanguageConstants.GetAuthor(fromRequestType: rt)
+            
+            // update parameters
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(accessString,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let documentAuthor = Mapper<DocumentAuthor>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: documentAuthor)
+                    
+            }
     }
     
 }

@@ -22,9 +22,9 @@ class AlchemyVisionTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).URLForResource("VisionTest", withExtension: "plist") {
-            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                serviceVision._apiKey = dict["apikey"]!
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                serviceVision._apiKey = dict["AlchemyVisionAPIKey"]!
             }
         }
         // Put setup code here. This method is called before the invocation of each test method in the class.

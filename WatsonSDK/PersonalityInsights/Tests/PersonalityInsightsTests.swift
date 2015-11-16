@@ -19,9 +19,9 @@ class PersonalityInsightsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).URLForResource("PersonalityInsightsTests", withExtension: "plist") {
-            if let dict = NSDictionary(contentsOfURL: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["Username"]!, password: dict["Password"]!)
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                service.setUsernameAndPassword(dict["PersonalityInsightsUsername"]!, password: dict["PersonalityInsightsPassword"]!)
                 //Read long input text from plist file
                 inputText=dict["Input Text"]
             } else {

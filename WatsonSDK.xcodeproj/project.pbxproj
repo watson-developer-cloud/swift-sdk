@@ -93,6 +93,7 @@
 		7ADC3AA51BF959B800CD916E /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */; };
 		7ADC3AA61BF959BD00CD916E /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A071BF950C800CD916E /* SpeechSample.flac */; };
 		7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */; };
+		7ADE61741BFA43D8006AF780 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7ADE61721BFA2C6A006AF780 /* Credentials.plist */; };
 		7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; };
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */; };
@@ -257,6 +258,7 @@
 		7ADC3A321BF950C800CD916E /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		7ADC3A331BF950C800CD916E /* Transformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
+		7ADE61721BFA2C6A006AF780 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		7AF96B881BF96BBB0083ED23 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,6 +321,7 @@
 			children = (
 				7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */,
 				7A36F9A21BF8DDCB005E478F /* Info.plist */,
+				7ADE61721BFA2C6A006AF780 /* Credentials.plist */,
 			);
 			path = WatsonSDK;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ADE61741BFA43D8006AF780 /* Credentials.plist in Resources */,
 				7ADC3A9D1BF9593F00CD916E /* weather_data_train.csv in Resources */,
 				7ADC3A871BF9560800CD916E /* emaxfpo.jpg in Resources */,
 				7ADC3A8E1BF9587200CD916E /* dialog.xml in Resources */,

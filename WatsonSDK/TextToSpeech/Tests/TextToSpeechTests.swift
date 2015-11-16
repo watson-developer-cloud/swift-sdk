@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import TextToSpeech
+@testable import WatsonSDK
 
 class TextToSpeechTests: XCTestCase {
     

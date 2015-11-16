@@ -95,6 +95,26 @@
 		7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */; };
 		7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; };
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */; };
+		7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0D1BF950C800CD916E /* libogg.a */; };
+		7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0E1BF950C800CD916E /* libopus.a */; };
+		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; };
+		7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A111BF950C800CD916E /* OggHelper.h */; };
+		7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A121BF950C800CD916E /* OggHelper.m */; };
+		7AF96BAE1BF996560083ED23 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A131BF950C800CD916E /* os_types.h */; };
+		7AF96BAF1BF996560083ED23 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A151BF950C800CD916E /* opus.h */; };
+		7AF96BB01BF996560083ED23 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A161BF950C800CD916E /* opus_defines.h */; };
+		7AF96BB11BF996560083ED23 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A171BF950C800CD916E /* opus_header.c */; };
+		7AF96BB21BF996560083ED23 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A181BF950C800CD916E /* opus_header.h */; };
+		7AF96BB31BF996560083ED23 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A191BF950C800CD916E /* opus_multistream.h */; };
+		7AF96BB41BF996560083ED23 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A1A1BF950C800CD916E /* opus_types.h */; };
+		7AF96BB51BF996560083ED23 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A1B1BF950C800CD916E /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1C1BF950C800CD916E /* OpusHelper.m */; };
+		7AF96BB71BF996560083ED23 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1E1BF950C800CD916E /* Voice.swift */; };
+		7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A221BF950C800CD916E /* TextToSpeech.swift */; };
+		7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */; };
+		7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A201BF950C800CD916E /* testing.opus */; };
+		7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,9 +267,11 @@
 			files = (
 				7A36F9C01BF8DEB8005E478F /* XCGLogger.framework in Frameworks */,
 				7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */,
+				7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */,
 				7A36F9BF1BF8DEB8005E478F /* SwiftyJSON.framework in Frameworks */,
 				7A36F9BE1BF8DEB8005E478F /* ObjectMapper.framework in Frameworks */,
 				7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */,
+				7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */,
 				7A36F9BD1BF8DEB8005E478F /* HTTPStatusCodes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,6 +701,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF96BAF1BF996560083ED23 /* opus.h in Headers */,
+				7AF96BAB1BF996560083ED23 /* ogg.h in Headers */,
+				7AF96BB41BF996560083ED23 /* opus_types.h in Headers */,
+				7AF96BB21BF996560083ED23 /* opus_header.h in Headers */,
+				7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */,
+				7AF96BAE1BF996560083ED23 /* os_types.h in Headers */,
+				7AF96BB31BF996560083ED23 /* opus_multistream.h in Headers */,
+				7AF96BB51BF996560083ED23 /* OpusHelper.h in Headers */,
+				7AF96BB01BF996560083ED23 /* opus_defines.h in Headers */,
 				7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,6 +812,7 @@
 				7ADC3A891BF9560800CD916E /* mother-daughter.jpg in Resources */,
 				7ADC3A951BF958A700CD916E /* glossary.tmx in Resources */,
 				7ADC3A881BF9560800CD916E /* example.html in Resources */,
+				7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +824,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ADC3A991BF9593A00CD916E /* Classifier.swift in Sources */,
+				7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */,
 				7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */,
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A4B1BF951AC00CD916E /* Logger.swift in Sources */,
@@ -801,6 +834,7 @@
 				7ADC3A681BF9551500CD916E /* AlchemyGenericModel.swift in Sources */,
 				7ADC3A551BF951AC00CD916E /* Transformation.swift in Sources */,
 				7ADC3A6D1BF9551500CD916E /* Entities.swift in Sources */,
+				7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */,
 				7ADC3A8B1BF9579300CD916E /* Conversation.swift in Sources */,
 				7ADC3A531BF951AC00CD916E /* String.swift in Sources */,
 				7ADC3A971BF9593A00CD916E /* Classification.swift in Sources */,
@@ -818,6 +852,8 @@
 				7ADC3A6C1BF9551500CD916E /* DisambiguatedLinks.swift in Sources */,
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
+				7AF96BB71BF996560083ED23 /* Voice.swift in Sources */,
+				7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */,
 				7ADC3A9F1BF9597900CD916E /* Profile.swift in Sources */,
 				7ADC3A521BF951AC00CD916E /* Service.swift in Sources */,
 				7ADC3A4E1BF951AC00CD916E /* CoreResponse.swift in Sources */,
@@ -826,6 +862,7 @@
 				7ADC3A501BF951AC00CD916E /* NetworkUtils.swift in Sources */,
 				7ADC3A7A1BF9551500CD916E /* Taxonomy.swift in Sources */,
 				7ADC3A911BF958A200CD916E /* LanguageTranslationConstants.swift in Sources */,
+				7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */,
 				7ADC3A671BF9551500CD916E /* AlchemyLanguageConstants.swift in Sources */,
 				7ADC3A541BF951AC00CD916E /* Log.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
@@ -837,10 +874,12 @@
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
 				7ADC3A761BF9551500CD916E /* SAORelation.swift in Sources */,
 				7ADC3A561BF951AC00CD916E /* WatsonCoreConstants.swift in Sources */,
+				7AF96BB11BF996560083ED23 /* opus_header.c in Sources */,
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
 				7ADC3A8C1BF9579300CD916E /* Dialog.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
+				7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */,
 				7ADC3A8D1BF9579300CD916E /* DialogContent.swift in Sources */,
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,
@@ -862,6 +901,7 @@
 				7ADC3A9C1BF9593F00CD916E /* NaturalLanguageClassifierTests.swift in Sources */,
 				7ADC3A861BF9560800CD916E /* AlchemyVisionTests.swift in Sources */,
 				7ADC3A961BF958A700CD916E /* LanguageTranslationTests.swift in Sources */,
+				7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */,
 				7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */,
 				7ADC3AA31BF9597D00CD916E /* PersonalityInsightsTests.swift in Sources */,
 			);

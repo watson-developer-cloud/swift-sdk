@@ -204,6 +204,12 @@ public extension AlchemyLanguage {
 
 public extension AlchemyLanguage {
     
+    public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        completionHandler: (error: NSError, returnValue: DocumentAuthor)->() ) {
+            
+    }
     
 }
 

@@ -210,12 +210,13 @@ public extension AlchemyLanguage {
             var parameters = commonParameters
             
             let accessString = AlchemyLanguageConstants.GetAuthor(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
             
             // update parameters
             if let html = html { parameters["html"] = html }
             if let url = url { parameters["url"] = url }
             
-            NetworkUtils.performBasicAuthRequest(accessString,
+            NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,
                 parameters: parameters,
                 encoding: ParameterEncoding.URL) {

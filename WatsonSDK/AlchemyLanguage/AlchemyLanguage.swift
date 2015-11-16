@@ -200,8 +200,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Author Extraction
-/**
-
 public extension AlchemyLanguage {
     
     public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,

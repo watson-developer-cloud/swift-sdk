@@ -26,6 +26,8 @@ class TextToSpeechTests: XCTestCase {
     // Phrase used for testing
     let testString = "All the problems of the world could be solved if men were only willing to think."
     
+    let germanString = "Alle Probleme der Welt könnten gelöst werden, wenn Männer waren nur bereit, zu denken."
+    
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: NSTimeInterval = 20.0
     
@@ -60,6 +62,8 @@ class TextToSpeechTests: XCTestCase {
         service.listVoices({
             voices, error in
             
+            print(voices)
+            
             XCTAssertGreaterThan(voices.count, 6, "Expected at least 6 voices to be returned");
             
             voicesExpectation.fulfill()
@@ -93,17 +97,78 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /**
-    * Uses the AVAudioPlayer to play the WAV file
+     Tests if the user specifies a voice that does not exist.
     **/
+    func testSynthesizeIncorrectVoice() {
+        let voice = "No voice"
+        let synthIncorrectExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
+        
+        service.synthesize(testString, voice: voice, oncompletion: {
+            data, error in
+            
+            XCTAssertNotNil(error)
+            
+            if let error = error {
+                XCTAssertEqual(error.code, 404)
+            }
+         
+            synthIncorrectExpectation.fulfill()
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    /**
+     Uses the AVAudioPlayer to play the WAV file
+    */
     func testSynthAndPlay() {
         
-        let playExpectation = expectationWithDescription("Synthesize Audio")
+        let synthPlayExpectation = expectationWithDescription("Synthesize Audio")
         
         service.synthesize(testString, oncompletion: {
             data, error in
             
             if let data = data {
             
+                do {
+                    let audioPlayer = try AVAudioPlayer(data: data)
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    
+                    // Uncomment the line below to allow the test time to play the
+                    // audio through the speakers.
+                    
+                    // sleep(10)
+                    
+                    synthPlayExpectation.fulfill()
+                    
+                    
+                } catch {
+                    XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+                }
+                
+            }
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    /**
+     * Uses the AVAudioPlayer to play the WAV file in a German voice
+     **/
+    func testSynthAndPlayDieter() {
+        
+        let playExpectation = expectationWithDescription("Synthesize German Audio")
+        let dieterVoice = "de-DE_DieterVoice"
+        
+        service.synthesize(germanString, voice: dieterVoice,
+            oncompletion: {
+            data, error in
+            
+            if let data = data {
+                
                 do {
                     let audioPlayer = try AVAudioPlayer(data: data)
                     audioPlayer.prepareToPlay()
@@ -127,5 +192,6 @@ class TextToSpeechTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+
     
 }

@@ -21,7 +21,7 @@ import ObjectMapper
 
 public protocol TextToSpeechService
 {
-    func synthesize ( theText:String, oncompletion: (data: NSData?, error:NSError?) -> Void )
+    func synthesize ( theText:String, voice: String, oncompletion: (data: NSData?, error:NSError?) -> Void )
     
     func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
     
@@ -29,7 +29,8 @@ public protocol TextToSpeechService
 
 public class TextToSpeech : Service, TextToSpeechService
 {
-    let opus:OpusHelper = OpusHelper()
+    // Provides the Opus/Ogg decompression
+    let opus: OpusHelper = OpusHelper()
     
     // Default endpoint for TTS services
     private let _serviceURL = "/text-to-speech/api"
@@ -48,15 +49,25 @@ public class TextToSpeech : Service, TextToSpeechService
      produce a WAVE formatted NSData
 
      - parameter theText:           String that will be synthesized
+     - parameter voice:             String specifying the voice name
      - parameter oncompletion:      Callback function that will present the WAVE data
     */
-    public func synthesize(theText:String, oncompletion: (data: NSData?, error:NSError?) -> Void ) {
+    public func synthesize(theText: String,
+        voice: String = "",
+        oncompletion: (data: NSData?, error:NSError?) -> Void ) {
         
         let endpoint = getEndpoint("/v1/synthesize")
-        
+            
         var params = Dictionary<String, String>()
         params.updateValue(theText, forKey: "text")
-        //params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
+        // Opus codec is the default, so the accept type is optional
+        // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
+        
+        if (voice != "")
+        {
+            params.updateValue(voice, forKey: "voice")
+        }
+        
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
             parameters: params,
@@ -73,6 +84,7 @@ public class TextToSpeech : Service, TextToSpeechService
                     let waveData = self.addWaveHeader(pcm)
                     
                     oncompletion(data: waveData, error: response.error)
+                    
                 } else {
                     oncompletion(data: nil, error: response.error)
                 }
@@ -183,6 +195,7 @@ public class TextToSpeech : Service, TextToSpeechService
         
         return newWavData
     }
+    
     
     
 

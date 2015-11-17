@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2D497B1BFA81D100626B14 /* DocumentAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D497A1BFA81D100626B14 /* DocumentAuthor.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
 		7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B71BF8DEB8005E478F /* Alamofire.framework */; };
@@ -148,6 +149,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E2D497A1BFA81D100626B14 /* DocumentAuthor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthor.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		7A36F9A21BF8DDCB005E478F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				7ADC39B01BF950C800CD916E /* CombinedResults.swift */,
 				7ADC39B11BF950C800CD916E /* Concept.swift */,
 				7ADC39B21BF950C800CD916E /* DisambiguatedLinks.swift */,
+				6E2D497A1BFA81D100626B14 /* DocumentAuthor.swift */,
 				7ADC39B31BF950C800CD916E /* Entities.swift */,
 				7ADC39B41BF950C800CD916E /* Entity.swift */,
 				7ADC39B51BF950C800CD916E /* Feed.swift */,
@@ -898,6 +901,7 @@
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
 				7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */,
 				7ADC3A8D1BF9579300CD916E /* DialogContent.swift in Sources */,
+				6E2D497B1BFA81D100626B14 /* DocumentAuthor.swift in Sources */,
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,
 				7ADC3A6F1BF9551500CD916E /* Feed.swift in Sources */,
@@ -1046,6 +1050,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WatsonSDK/TextToSpeech/Libraries/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonSDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

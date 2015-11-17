@@ -11,19 +11,82 @@ import XCTest
 
 class AlchemyLanguageTests: XCTestCase {
     
+    // timing
+    private let timeout: NSTimeInterval = 60.0
+    
+    // main instance
+    let instance = AlchemyLanguage()
+    var apiKeyNotSet: Bool { return instance._apiKey == nil }
+    
+    // test strings
+    var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
+    
+    
+    // setup, teardown
     override func setUp() {
+        
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        
+        if let url = bundle.pathForResource("Credentials", ofType: "plist"),
+            let dict = NSDictionary(contentsOfFile: url) as? [String : String]
+            where apiKeyNotSet {
+                
+                instance._apiKey = dict["AlchemyAPIKey"]!
+                
+        }
+        
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    // called after the invocation of each test method in the class
+    override func tearDown() { super.tearDown() }
+    
+    
+    // tests
+    func testHTMLGetAuthor() {
+        
+        let validExpectation = expectationWithDescription("Valid")
+        
+        instance.getAuthor(requestType: .HTML,
+            html: test_html,
+            url: nil) {
+                
+            (error, documentAuthor) in
+                
+                XCTAssertNotNil(documentAuthor)
+                XCTAssertNotNil(documentAuthor.author)
+                
+                if let author = documentAuthor.author {
+                    
+                    print("Success HTMLGetAuthor, author: \(author)")
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInvalidHTMLGetAuthor() {
+        
+        
+        
+    }
+    
+    func testURLGetAuthor() {
+        
+        
+        
+    }
+    
+    func testInvalidURLGetAuthor() {
+        
+        
+        
     }
     
     func testPerformanceExample() {

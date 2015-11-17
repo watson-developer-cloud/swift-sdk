@@ -53,7 +53,20 @@ public final class AlchemyLanguage: Service {
         _apiKey = apiKey
         
     }
-
+    
+    /** A dictionary of parameters used in all Alchemy Language API calls */
+    private var commonParameters: [String : AnyObject] {
+        
+        return [
+            
+            AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
+            
+            AlchemyLanguageConstants.OutputMode.JSON.rawValue : AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue
+            
+        ]
+        
+    }
+    
 }
 
 
@@ -187,16 +200,41 @@ public extension AlchemyLanguage {
 
 
 // MARK: Author Extraction
-/**
-
- http://www.alchemyapi.com/api/author/proc.html
- 
- */
 public extension AlchemyLanguage {
     
-    public func URLGetAuthor() {}
-    public func HTMLGetAuthor() {}
-    public func TextGetAuthor() {}
+    public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        completionHandler: (error: NSError, returnValue: DocumentAuthor)->() ) {
+            
+            var parameters = commonParameters
+            
+            let accessString = AlchemyLanguageConstants.GetAuthor(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            // update parameters
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let documentAuthor = Mapper<DocumentAuthor>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: documentAuthor)
+                    
+            }
+    }
     
 }
 

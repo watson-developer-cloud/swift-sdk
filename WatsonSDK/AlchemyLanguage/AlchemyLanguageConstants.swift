@@ -57,6 +57,14 @@ public extension AlchemyLanguageConstants {
         case APIKey = "apikey"
     }
     
+    /**
+     This enum is used to build the full URL
+     */
+    public enum LanguageURI: String {
+        case OutputMode = "outputMode"
+        case KnowledgeGraph = "knowledgeGraph"
+    }
+    
 }
 
 public final class AlchemyLanguageConstants {
@@ -69,9 +77,9 @@ public final class AlchemyLanguageConstants {
         
         switch requestType {
             
-        case .URL: return Calls() + "/url/URL"
-        case .HTML: return Calls() + "/html/HTML"
-        case .Text: return Calls() + "/text/Text"
+        case .URL: return "/url/URL"
+        case .HTML: return "/html/HTML"
+        case .Text: return "/text/Text"
 
             
         }

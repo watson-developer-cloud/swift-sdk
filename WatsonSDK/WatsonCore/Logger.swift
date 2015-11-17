@@ -30,6 +30,6 @@ WatsonDebug("Could not connect to endpoint.", "[WatsonSpeechToText] ")
 */
 public func WatsonDebug(message: String,prefix: String = "[WatsonSDK] ") {
     #if DEBUG
-    WatsonLog(message,prefix)
+    WatsonLog(message,prefix: prefix)
     #endif
 }

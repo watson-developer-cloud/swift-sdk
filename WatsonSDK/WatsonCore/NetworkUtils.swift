@@ -179,7 +179,11 @@ public class NetworkUtils {
             }
             .responseData { response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseData")
-                completionHandler ( returnValue: CoreResponse.getCoreResponse(response))
+              if(contentType == ContentType.AUDIO_OPUS ||
+                 contentType == ContentType.AUDIO_WAV ||
+                 contentType == ContentType.AUDIO_FLAC) {
+                 completionHandler ( returnValue: CoreResponse.getCoreResponse(response))
+              }
             }
     }
     

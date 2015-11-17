@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2E42FA1BFBCAB800B32691 /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42F91BFBCAB800B32691 /* Authors.swift */; };
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
@@ -149,6 +150,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E2E42F91BFBCAB800B32691 /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			children = (
 				7ADC39AE1BF950C800CD916E /* AlchemyGenericModel.swift */,
 				7ADC39AF1BF950C800CD916E /* AlchemyLanguageGenericModel.swift */,
+				6E2E42F91BFBCAB800B32691 /* Authors.swift */,
 				7ADC39B01BF950C800CD916E /* CombinedResults.swift */,
 				7ADC39B11BF950C800CD916E /* Concept.swift */,
 				7ADC39B21BF950C800CD916E /* DisambiguatedLinks.swift */,
@@ -905,6 +908,7 @@
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,
 				7ADC3A6F1BF9551500CD916E /* Feed.swift in Sources */,
+				6E2E42FA1BFBCAB800B32691 /* Authors.swift in Sources */,
 				7ADC3AA41BF959B100CD916E /* SpeechToText.swift in Sources */,
 				7ADC3AA21BF9597900CD916E /* PersonalityInsightsConstants.swift in Sources */,
 				7ADC3A8A1BF9579300CD916E /* DialogService.swift in Sources */,

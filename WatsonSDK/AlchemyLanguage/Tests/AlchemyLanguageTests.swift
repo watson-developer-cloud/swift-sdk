@@ -76,7 +76,24 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testInvalidHTMLGetAuthor() {
         
+        let emptyExpectation = expectationWithDescription("Empty")
         
+        instance.getAuthors(requestType: .HTML,
+            html: test_html_no_author,
+            url: nil) {
+                
+            (error, documentAuthors) in
+                
+                if error.code == 200 {
+                    
+                    XCTAssertNil(documentAuthors.authors)
+                    emptyExpectation.fulfill()
+                    
+                }
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     

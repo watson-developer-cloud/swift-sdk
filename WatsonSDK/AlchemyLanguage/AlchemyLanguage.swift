@@ -61,7 +61,7 @@ public final class AlchemyLanguage: Service {
             
             AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
             
-            AlchemyLanguageConstants.OutputMode.JSON.rawValue : AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue
+            AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue : AlchemyLanguageConstants.OutputMode.JSON.rawValue
             
         ]
         

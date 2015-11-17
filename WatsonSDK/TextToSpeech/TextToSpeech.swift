@@ -1,10 +1,18 @@
-//
-//  TextToSpeech.swift
-//  WatsonTextToSpeech
-//
-//  Created by Robert Dickerson on 11/6/15.
-//  Copyright © 2015 MIL. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 import AVFoundation
@@ -17,18 +25,17 @@ public protocol TextToSpeechService
     
     func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
     
-    // func saveAudio ( location: NSURL, data: NSData )
-    
-    // func playAudio ( audioEngine: AVAudioEngine, data: NSData, oncompletion: (error: NSError?) -> Void )
-    
 }
 
 public class TextToSpeech : Service, TextToSpeechService
 {
     let opus:OpusHelper = OpusHelper()
     
+    // Default endpoint for TTS services
     private let _serviceURL = "/text-to-speech/api"
-    private let DEFAULT_SAMPLE_RATE = 24000
+    
+    // Sampling rate returned from the Opus decoder is 48KHz by default.
+    private let DEFAULT_SAMPLE_RATE = 48000
     
     public init() {
         
@@ -36,6 +43,13 @@ public class TextToSpeech : Service, TextToSpeechService
        
     }
     
+    /**
+     This function invokes a call to synthesize text and decompress the audio to 
+     produce a WAVE formatted NSData
+
+     - parameter theText:           String that will be synthesized
+     - parameter oncompletion:      Callback function that will present the WAVE data
+    */
     public func synthesize(theText:String, oncompletion: (data: NSData?, error:NSError?) -> Void ) {
         
         let endpoint = getEndpoint("/v1/synthesize")
@@ -55,7 +69,6 @@ public class TextToSpeech : Service, TextToSpeechService
                 
                 if let data = response.data as? NSData {
                     
-                    // Use codec to decompress the audio
                     let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
                     let waveData = self.addWaveHeader(pcm)
                     
@@ -68,6 +81,11 @@ public class TextToSpeech : Service, TextToSpeechService
     
     }
     
+    /**
+     This function returns a list of voices that Watson supports
+     
+     - parameter oncompletion:      Callback function that presents an array of Voices
+    */
     public func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void ) {
         let endpoint = getEndpoint("/v1/voices")
         
@@ -96,7 +114,10 @@ public class TextToSpeech : Service, TextToSpeechService
     }
     
     /**
-    * Converts a PCM of shorts to a WAVE file by prepending a header
+     This function converts a PCM of UInt16s to a WAVE file by prepending a header
+     
+     - parameter data:      Contains PCM (pulse coded modulation) raw data for audio
+     - returns:             WAVE formatted header prepended to the data
     **/
     private func addWaveHeader(data: NSData) -> NSData {
         
@@ -157,11 +178,7 @@ public class TextToSpeech : Service, TextToSpeechService
         header[42] = (UInt8) (totalAudioLen >> 16 & 0xff)
         header[43] = (UInt8) (totalAudioLen >> 24 & 0xff)
         
-        //var newWavData = [UInt8](count: totalDataLen, repeatedValue: 0)
-        //newWavData
-        //var newWavData = NSData(bytes: header, length: 44)
         let newWavData = NSMutableData(bytes: header, length: 44)
-        //newWavData.appendBytes(bytes: data., length: totalAudioLen)
         newWavData.appendData(data)
         
         return newWavData

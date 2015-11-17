@@ -127,12 +127,12 @@
         NSLog(@"encoding error %@",[self opusErrorMessage:encodedByteCount]);
         return nil;
     }
-
+    
     // Opus data initialized with size in the first byte
     NSMutableData *outputData = [[NSMutableData alloc] initWithCapacity:frameSize*2];
     // Append Opus data
     [outputData appendData:[NSData dataWithBytes:outBuffer length:encodedByteCount]];
-
+    
     return outputData;
 }
 
@@ -239,13 +239,12 @@
                     }
                     if(!has_opus_stream)
                     {
-                        
                         if(packet_count>0 && opus_serialno==os.serialno)
                         {
                             NSLog(@"Apparent chaining without changing serial number");
                             return nil;
                         }
-                        opus_serialno = (ogg_int32_t) os.serialno;
+                        opus_serialno = os.serialno;
                         has_opus_stream = 1;
                         has_tags_packet = 0;
                         link_out = 0;
@@ -366,7 +365,7 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
     *mapping_family = header.channel_mapping;
     *channels = header.channels;
     
-
+    
     if(!*rate)*rate=header.input_sample_rate;
     /*If the rate is unspecified we decode to 48000*/
     if(*rate==0)*rate=48000;
@@ -374,10 +373,10 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
         fprintf(stderr,"Warning: Crazy input_rate %d, decoding to 48000 instead.\n",*rate);
         *rate=48000;
     }
-
+    
     if(header.input_sample_rate != *rate)
         fprintf(stderr, "\n\n\n*** Sample rate detected: %d, using: %d ***\n\n\n", header.input_sample_rate, *rate);
-
+    
     *preskip = header.preskip;
     st = opus_multistream_decoder_create(48000, header.channels, header.nb_streams, header.nb_coupled, header.stream_map, &err);
     if(err != OPUS_OK){
@@ -396,7 +395,7 @@ static OpusMSDecoder *process_header(ogg_packet *op, opus_int32 *rate,
             *channels, *channels>1?"s":"");
     if(header.version!=1)fprintf(stderr, ", Header v%d",header.version);
     fprintf(stderr, "\n");
-
+    
     if (header.gain!=0)fprintf(stderr,"Playback gain: %f dB\n", header.gain/256.);
     if (manual_gain!=0)fprintf(stderr,"Manual gain: %f dB\n", manual_gain);
     

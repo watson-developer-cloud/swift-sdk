@@ -68,27 +68,25 @@ class AlchemyLanguageTests: XCTestCase {
     
     // tests
     func testHTMLGetAuthor() {
-        
+
         let validExpectation = expectationWithDescription("Valid")
+    
+        let html = htmlDocumentAsStringFromTitle("sample")
         
-        instance.getAuthor(requestType: .HTML,
-            html: test_html,
+        instance.getAuthors(requestType: .HTML,
+            html: html,
             url: nil) {
-                
-            (error, documentAuthors) in
-                
-                XCTAssertNotNil(documentAuthors)
-                
-                print("\n\(documentAuthors)")
-                
-                XCTAssertNotNil(documentAuthors.authors)
+        
+                (error, documentAuthors) in
                 
                 if let authors = documentAuthors.authors {
                     
-                    print("Success HTMLGetAuthor, authors: \(authors)")
+                    print("Success HTMLGetAuthor, authors' names: \(authors.names)")
                     
                 }
                 
+                XCTAssertNotNil(documentAuthors)
+                XCTAssertNotNil(documentAuthors.authors)
                 validExpectation.fulfill()
                 
         }

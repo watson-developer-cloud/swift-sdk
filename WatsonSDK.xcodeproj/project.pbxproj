@@ -102,7 +102,6 @@
 		7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */; };
 		7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; };
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */; };
 		7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0D1BF950C800CD916E /* libogg.a */; };
 		7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0E1BF950C800CD916E /* libopus.a */; };
 		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; };
@@ -119,7 +118,6 @@
 		7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1C1BF950C800CD916E /* OpusHelper.m */; };
 		7AF96BB71BF996560083ED23 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1E1BF950C800CD916E /* Voice.swift */; };
 		7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A221BF950C800CD916E /* TextToSpeech.swift */; };
-		7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */; };
 		7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A201BF950C800CD916E /* testing.opus */; };
 		7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */; };
 /* End PBXBuildFile section */
@@ -242,7 +240,6 @@
 		7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7ADC3A071BF950C800CD916E /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
 		7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
-		7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		7ADC3A0D1BF950C800CD916E /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		7ADC3A0E1BF950C800CD916E /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		7ADC3A101BF950C800CD916E /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
@@ -261,7 +258,6 @@
 		7ADC3A201BF950C800CD916E /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = testing.opus; sourceTree = "<group>"; };
 		7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		7ADC3A221BF950C800CD916E /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
-		7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSConfiguration.swift; sourceTree = "<group>"; };
 		7ADC3A261BF950C800CD916E /* alchemy_endpoints.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
 		7ADC3A271BF950C800CD916E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
@@ -610,12 +606,10 @@
 		7ADC3A091BF950C800CD916E /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
-				7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */,
 				7ADC3A0B1BF950C800CD916E /* Libraries */,
 				7ADC3A1D1BF950C800CD916E /* Models */,
 				7ADC3A1F1BF950C800CD916E /* Tests */,
 				7ADC3A221BF950C800CD916E /* TextToSpeech.swift */,
-				7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */,
 			);
 			name = TextToSpeech;
 			path = WatsonSDK/TextToSpeech;
@@ -887,7 +881,6 @@
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
 				7AF96BB71BF996560083ED23 /* Voice.swift in Sources */,
-				7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */,
 				7ADC3A9F1BF9597900CD916E /* Profile.swift in Sources */,
 				7ADC3A521BF951AC00CD916E /* Service.swift in Sources */,
 				7ADC3A4E1BF951AC00CD916E /* CoreResponse.swift in Sources */,
@@ -915,7 +908,6 @@
 				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
 				7ADC3A8C1BF9579300CD916E /* Dialog.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
-				7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */,
 				7ADC3A8D1BF9579300CD916E /* DialogContent.swift in Sources */,
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,

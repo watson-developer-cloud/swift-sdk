@@ -52,14 +52,17 @@ class AlchemyLanguageTests: XCTestCase {
             html: test_html,
             url: nil) {
                 
-            (error, documentAuthor) in
+            (error, documentAuthors) in
                 
-                XCTAssertNotNil(documentAuthor)
-                XCTAssertNotNil(documentAuthor.author)
+                XCTAssertNotNil(documentAuthors)
                 
-                if let author = documentAuthor.author {
+                print("\n\(documentAuthors)")
+                
+                XCTAssertNotNil(documentAuthors.authors)
+                
+                if let authors = documentAuthors.authors {
                     
-                    print("Success HTMLGetAuthor, author: \(author)")
+                    print("Success HTMLGetAuthor, authors: \(authors)")
                     
                 }
                 

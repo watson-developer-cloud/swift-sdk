@@ -57,13 +57,13 @@ class DialogTests: XCTestCase {
         
         let expectation1 = expectationWithDescription("Converse")
         
-        testService.converse(dId, input: "Hello, Watson.", callback: {(conversation: Conversation?) in
+        testService.converse(dId, callback: {(conversation: Conversation?) in
             
             XCTAssertNotNil(conversation)
             XCTAssertEqual(conversation?.confidence, 0)
             XCTAssertEqual(conversation?.input, "")
             XCTAssertEqual(conversation?.response?.count, 1)
-            // XCTAssertEqual(conversation?.response?[0], "Hello, Swift.")
+            XCTAssertEqual(conversation?.response?[0], "Hello, I'm willow, how are you today?")
             
             clientId = conversation?.clientId
             conversationId = conversation?.conversationId
@@ -75,13 +75,13 @@ class DialogTests: XCTestCase {
         
         let expectation2 = expectationWithDescription("Converse")
         
-        testService.converse(dId, input: "What do you like to do?", clientId: clientId, conversationId: conversationId, callback: {(conversation: Conversation?) in
+        testService.converse(dId, input: "What type of furniture is there?", clientId: clientId, conversationId: conversationId, callback: {(conversation: Conversation?) in
             
             XCTAssertNotNil(conversation)
             XCTAssertEqual(conversation?.confidence, 0)
-            XCTAssertEqual(conversation?.input, "What do you like to do?")
+            XCTAssertEqual(conversation?.input, "What type of furniture is there?")
             XCTAssertEqual(conversation?.response?.count, 1)
-            // XCTAssertEqual(conversation?.response?[0], "I like to get schwifty.")
+            XCTAssertEqual(conversation?.response?[0], "We have Tables and Vases")
             
             clientId = conversation?.clientId
             conversationId = conversation?.conversationId

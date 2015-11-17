@@ -104,6 +104,7 @@ public class DialogService: Service {
         NetworkUtils.performBasicAuthRequest(endpoint, method: .POST, parameters: params, apiKey: self._apiKey, completionHandler: { response in
             
             if let data = response.data as? Dictionary<String, AnyObject> {
+                
                 if let conversation =  Mapper<Conversation>().map(data) {
                     callback(conversation)
                 } else {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2E42FA1BFBCAB800B32691 /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42F91BFBCAB800B32691 /* Authors.swift */; };
+		6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */; };
+		6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */; };
+		6E2E43021BFBDBFA00B32691 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E43011BFBDBFA00B32691 /* sample.html */; };
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
@@ -97,7 +101,6 @@
 		7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */; };
 		7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; };
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */; };
 		7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0D1BF950C800CD916E /* libogg.a */; };
 		7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0E1BF950C800CD916E /* libopus.a */; };
 		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; };
@@ -114,7 +117,6 @@
 		7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1C1BF950C800CD916E /* OpusHelper.m */; };
 		7AF96BB71BF996560083ED23 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A1E1BF950C800CD916E /* Voice.swift */; };
 		7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A221BF950C800CD916E /* TextToSpeech.swift */; };
-		7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */; };
 		7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A201BF950C800CD916E /* testing.opus */; };
 		7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */; };
 		EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF8CA641BFBC6BF00808D92 /* Credentials.plist */; };
@@ -149,6 +151,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E2E42F91BFBCAB800B32691 /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
+		6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentText.swift; sourceTree = "<group>"; };
+		6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTitle.swift; sourceTree = "<group>"; };
+		6E2E43011BFBDBFA00B32691 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
@@ -233,7 +239,6 @@
 		7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7ADC3A071BF950C800CD916E /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
 		7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
-		7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		7ADC3A0D1BF950C800CD916E /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		7ADC3A0E1BF950C800CD916E /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		7ADC3A101BF950C800CD916E /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
@@ -252,7 +257,6 @@
 		7ADC3A201BF950C800CD916E /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = testing.opus; sourceTree = "<group>"; };
 		7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		7ADC3A221BF950C800CD916E /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
-		7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSConfiguration.swift; sourceTree = "<group>"; };
 		7ADC3A261BF950C800CD916E /* alchemy_endpoints.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = alchemy_endpoints.json; sourceTree = "<group>"; };
 		7ADC3A271BF950C800CD916E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
@@ -371,10 +375,13 @@
 			children = (
 				7ADC39AE1BF950C800CD916E /* AlchemyGenericModel.swift */,
 				7ADC39AF1BF950C800CD916E /* AlchemyLanguageGenericModel.swift */,
+				6E2E42F91BFBCAB800B32691 /* Authors.swift */,
 				7ADC39B01BF950C800CD916E /* CombinedResults.swift */,
 				7ADC39B11BF950C800CD916E /* Concept.swift */,
 				7ADC39B21BF950C800CD916E /* DisambiguatedLinks.swift */,
 				6EE643741BFB94DC00303010 /* DocumentAuthors.swift */,
+				6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */,
+				6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */,
 				7ADC39B31BF950C800CD916E /* Entities.swift */,
 				7ADC39B41BF950C800CD916E /* Entity.swift */,
 				7ADC39B51BF950C800CD916E /* Feed.swift */,
@@ -397,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				7ADC39C21BF950C800CD916E /* AlchemyLanguageTests.swift */,
+				6E2E43011BFBDBFA00B32691 /* sample.html */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -598,12 +606,10 @@
 		7ADC3A091BF950C800CD916E /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
-				7ADC3A0A1BF950C800CD916E /* AudioUtils.swift */,
 				7ADC3A0B1BF950C800CD916E /* Libraries */,
 				7ADC3A1D1BF950C800CD916E /* Models */,
 				7ADC3A1F1BF950C800CD916E /* Tests */,
 				7ADC3A221BF950C800CD916E /* TextToSpeech.swift */,
-				7ADC3A231BF950C800CD916E /* TTSConfiguration.swift */,
 			);
 			name = TextToSpeech;
 			path = WatsonSDK/TextToSpeech;
@@ -816,6 +822,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E2E43021BFBDBFA00B32691 /* sample.html in Resources */,
 				7ADC3A4A1BF951AC00CD916E /* alchemy_endpoints.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -874,7 +881,6 @@
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
 				7AF96BB71BF996560083ED23 /* Voice.swift in Sources */,
-				7AF96BB91BF996560083ED23 /* TTSConfiguration.swift in Sources */,
 				7ADC3A9F1BF9597900CD916E /* Profile.swift in Sources */,
 				7ADC3A521BF951AC00CD916E /* Service.swift in Sources */,
 				7ADC3A4E1BF951AC00CD916E /* CoreResponse.swift in Sources */,
@@ -888,6 +894,7 @@
 				7ADC3A541BF951AC00CD916E /* Log.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
 				7ADC3A741BF9551500CD916E /* PublicationDate.swift in Sources */,
+				6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */,
 				7ADC3A6E1BF9551500CD916E /* Entity.swift in Sources */,
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
@@ -898,13 +905,14 @@
 				7AF96BB11BF996560083ED23 /* opus_header.c in Sources */,
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
+				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
 				7ADC3A8C1BF9579300CD916E /* Dialog.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
-				7AF96BA81BF996560083ED23 /* AudioUtils.swift in Sources */,
 				7ADC3A8D1BF9579300CD916E /* DialogContent.swift in Sources */,
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,
 				7ADC3A6F1BF9551500CD916E /* Feed.swift in Sources */,
+				6E2E42FA1BFBCAB800B32691 /* Authors.swift in Sources */,
 				7ADC3AA41BF959B100CD916E /* SpeechToText.swift in Sources */,
 				7ADC3AA21BF9597900CD916E /* PersonalityInsightsConstants.swift in Sources */,
 				7ADC3A8A1BF9579300CD916E /* DialogService.swift in Sources */,

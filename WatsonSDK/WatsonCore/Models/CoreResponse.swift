@@ -109,7 +109,7 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
    
    - returns: A Watson CoreResponse
    */
-  static func getCoreResponse<T>(response: Response<T,NSError>)->CoreResponse {
+    static func getCoreResponse<T>(response: Response<T,NSError>)->CoreResponse {
     var coreResponseDictionary: Dictionary<String,AnyObject> = Dictionary()
     
     if let data = response.data where data.length > 0 {
@@ -118,7 +118,8 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
           coreResponseDictionary.updateValue(jsonData, forKey: "data")
         }
       } catch {
-        Log.sharedLogger.error("Could not convert response data object to JSON")
+        
+        Log.sharedLogger.info("Non-JSON payload received")
         
         // When binary data is received
         coreResponseDictionary.updateValue(data, forKey: "data")

@@ -72,15 +72,15 @@ public final class AlchemyLanguage: Service {
 
 // MARK: Entity Extraction
 /**
- 
- 
- http://www.alchemyapi.com/api/entity/proc.html
 
- public func URLGetRankedNamedEntities() {}
- public func HTMLGetRankedNamedEntities() {}
- public func TextGetRankedNamedEntities() {}
 
- */
+http://www.alchemyapi.com/api/entity/proc.html
+
+public func URLGetRankedNamedEntities() {}
+public func HTMLGetRankedNamedEntities() {}
+public func TextGetRankedNamedEntities() {}
+
+*/
 public extension AlchemyLanguage {
     
     /**
@@ -123,9 +123,9 @@ public extension AlchemyLanguage {
 // MARK: Sentiment Analysis
 /**
 
- http://www.alchemyapi.com/api/sentiment/proc.html
- 
- */
+http://www.alchemyapi.com/api/sentiment/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetTextSentiment() {}
@@ -142,9 +142,9 @@ public extension AlchemyLanguage {
 // MARK: Keyword Extraction
 /**
 
- http://www.alchemyapi.com/api/keyword/proc.html
- 
- */
+http://www.alchemyapi.com/api/keyword/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRankedKeywords() {}
@@ -157,9 +157,9 @@ public extension AlchemyLanguage {
 // MARK: Concept Tagging
 /**
 
- http://www.alchemyapi.com/api/concept/proc.html
- 
- */
+http://www.alchemyapi.com/api/concept/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRankedConcepts() {}
@@ -172,9 +172,9 @@ public extension AlchemyLanguage {
 // MARK: Relation Extraction
 /**
 
- http://www.alchemyapi.com/api/relation/proc.html
- 
- */
+http://www.alchemyapi.com/api/relation/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRelations() {}
@@ -187,7 +187,7 @@ public extension AlchemyLanguage {
 // MARK: Taxonomy Classification
 /**
 
- http://www.alchemyapi.com/api/taxonomy_calls/proc.html
+http://www.alchemyapi.com/api/taxonomy_calls/proc.html
 
 */
 public extension AlchemyLanguage {
@@ -202,14 +202,14 @@ public extension AlchemyLanguage {
 // MARK: Author Extraction
 public extension AlchemyLanguage {
     
-    public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,
+    public func getAuthors(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
         completionHandler: (error: NSError, returnValue: DocumentAuthors)->() ) {
             
             var parameters = commonParameters
             
-            let accessString = AlchemyLanguageConstants.GetAuthor(fromRequestType: rt)
+            let accessString = AlchemyLanguageConstants.GetAuthors(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
             
             // update parameters
@@ -242,9 +242,9 @@ public extension AlchemyLanguage {
 // MARK: Language Detection
 /**
 
- http://www.alchemyapi.com/api/lang/proc.html
- 
- */
+http://www.alchemyapi.com/api/lang/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetLanguage() {}
@@ -257,13 +257,53 @@ public extension AlchemyLanguage {
 // MARK: Text Extraction
 /**
 
- http://www.alchemyapi.com/api/text/proc.html
- 
- */
+http://www.alchemyapi.com/api/text/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetText() {}
     public func HTMLGetText() {}
+    
+    // TODO: raw or not raw text parameter
+    public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        useMetadata: Bool = true,
+        extractLinks: Bool = false,
+        sourceText: AlchemyLanguageConstants.SourceText = AlchemyLanguageConstants.SourceText.cleaned_or_raw,
+        completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
+            
+            var parameters = commonParameters
+            
+            let accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            // update parameters
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getText: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let documentText = Mapper<DocumentText>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: documentText)
+                    
+            }
+            
+    }
+    
     
     public func URLGetRawText() {}
     public func HTMLGetRawText() {}
@@ -277,9 +317,9 @@ public extension AlchemyLanguage {
 // MARK: Microformats Parsing
 /**
 
- http://www.alchemyapi.com/api/mformat/proc.html
- 
- */
+http://www.alchemyapi.com/api/mformat/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetMicroformatData() {}
@@ -291,9 +331,9 @@ public extension AlchemyLanguage {
 // MARK: Feed Detection
 /**
 
- http://www.alchemyapi.com/api/feed-detection/proc.html
- 
- */
+http://www.alchemyapi.com/api/feed-detection/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetFeedLinks() {}

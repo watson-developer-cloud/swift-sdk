@@ -19,12 +19,12 @@ import ObjectMapper
 
 /**
  
- **DocumentAuthor**
+ **DocumentAuthors**
  
- DocumentAuthor returned by the AlchemyLanguage service.
+ DocumentAuthors returned by the AlchemyLanguage service.
  
  */
-public struct DocumentAuthor: AlchemyLanguageGenericModel, Mappable {
+public struct DocumentAuthors: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int?
@@ -33,8 +33,8 @@ public struct DocumentAuthor: AlchemyLanguageGenericModel, Mappable {
     public var language: String?
     public var url: String?
     
-    // MARK: DocumentAuthor
-    public var author: String?
+    // MARK: DocumentAuthors
+    public var authors: [String]?
     
     
     public init?(_ map: Map) {}
@@ -48,8 +48,8 @@ public struct DocumentAuthor: AlchemyLanguageGenericModel, Mappable {
         language <- map["language"]
         url <- map["url"]
         
-        // documentAuthor
-        author <- map["author"]
+        // documentAuthors
+        authors <- map["authors"]
         
     }
     

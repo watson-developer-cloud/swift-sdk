@@ -1050,6 +1050,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WatsonSDK/TextToSpeech/Libraries/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonSDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

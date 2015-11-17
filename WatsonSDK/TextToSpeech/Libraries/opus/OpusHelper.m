@@ -239,12 +239,13 @@
                     }
                     if(!has_opus_stream)
                     {
+                        
                         if(packet_count>0 && opus_serialno==os.serialno)
                         {
                             NSLog(@"Apparent chaining without changing serial number");
                             return nil;
                         }
-                        opus_serialno = os.serialno;
+                        opus_serialno = (ogg_int32_t) os.serialno;
                         has_opus_stream = 1;
                         has_tags_packet = 0;
                         link_out = 0;

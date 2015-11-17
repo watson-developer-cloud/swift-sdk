@@ -14,7 +14,8 @@ class TextToSpeechTests: XCTestCase {
     
     // Text to Speech Service
     private let service = TextToSpeech()
-    private let audioEngine = AVAudioEngine()
+    
+   
     
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: NSTimeInterval = 20.0
@@ -30,6 +31,8 @@ class TextToSpeechTests: XCTestCase {
         } else {
             XCTFail("Plist file not found")
         }
+        
+       
 
     }
     
@@ -58,7 +61,9 @@ class TextToSpeechTests: XCTestCase {
         
         let synthExpectation = expectationWithDescription("Synthesize Audio")
         
-        let testString = "All the problems of the world could be solved if men were only willing to think."
+        // let testString = "All the problems of the world could be solved if men were only willing to think."
+        
+        let testString = "Hello my name is Willow"
         
         service.synthesize(testString, oncompletion: {
             data, error in
@@ -80,20 +85,28 @@ class TextToSpeechTests: XCTestCase {
         
         let playExpectation = expectationWithDescription("Synthesize Audio")
         
-        let testString = "All the problems of the world could be solved if men were only willing to think."
+        // let testString = "All the problems of the world could be solved if men were only willing to think."
+        let testString = "Hello my name is Willow"
         
         service.synthesize(testString, oncompletion: {
             data, error in
             
             if let data = data {
-            self.service.playAudio(self.audioEngine, data: data,
-                oncompletion:
-                {
-                    error in
+            
+                do {
+                    let audioPlayer = try AVAudioPlayer(data: data)
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    
+                    sleep(10)
                     
                     playExpectation.fulfill()
-            
-                })
+                    
+                    
+                } catch {
+                    XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+                }
+                
             }
             
             

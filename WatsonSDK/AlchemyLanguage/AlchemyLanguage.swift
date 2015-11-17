@@ -202,14 +202,14 @@ public extension AlchemyLanguage {
 // MARK: Author Extraction
 public extension AlchemyLanguage {
     
-    public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,
+    public func getAuthors(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
         completionHandler: (error: NSError, returnValue: DocumentAuthors)->() ) {
             
             var parameters = commonParameters
             
-            let accessString = AlchemyLanguageConstants.GetAuthor(fromRequestType: rt)
+            let accessString = AlchemyLanguageConstants.GetAuthors(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
             
             // update parameters

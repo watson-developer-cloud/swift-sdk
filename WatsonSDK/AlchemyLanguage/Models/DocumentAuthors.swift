@@ -34,7 +34,7 @@ public struct DocumentAuthors: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: DocumentAuthors
-    public var authors: [String]?
+    public var authors: Authors?
     
     
     public init?(_ map: Map) {}

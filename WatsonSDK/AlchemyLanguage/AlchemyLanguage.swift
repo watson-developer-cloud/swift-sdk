@@ -265,6 +265,46 @@ public extension AlchemyLanguage {
     public func URLGetText() {}
     public func HTMLGetText() {}
     
+    // TODO: raw or not raw text parameter
+    public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        useMetadata: Bool = true,
+        extractLinks: Bool = false,
+        sourceText: AlchemyLanguageConstants.SourceText = AlchemyLanguageConstants.SourceText.cleaned_or_raw,
+        completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
+            
+            var parameters = commonParameters
+            
+            let accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            // update parameters
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getText: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let documentText = Mapper<DocumentText>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: documentText)
+                    
+            }
+            
+    }
+    
+    
     public func URLGetRawText() {}
     public func HTMLGetRawText() {}
     

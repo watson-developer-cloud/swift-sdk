@@ -7,9 +7,30 @@
 //
 
 import Foundation
+import ObjectMapper
 
-public class Dialog {
+public struct Dialog: Mappable {
     
+    /*
+     *  MARK: Properties
+     */
     
+    // TODO: Put some props here
+    
+    /*
+     *  MARK: Lifecycle
+     */
+    
+    public init?(_ map: Map) {
+        // Nothing to do...
+    }
+    
+    /*
+     *  MARK: Mappable
+     */
+    
+    public mutating func mapping(map: Map) {
+        
+    }
     
 }

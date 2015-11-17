@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-public class Conversation: Mappable {
+public struct Conversation: Mappable {
     
     /*
      *  MARK: Properties
@@ -25,7 +25,7 @@ public class Conversation: Mappable {
      *  MARK: Lifecycle
      */
     
-    public required init?(_ map: Map) {
+    public init?(_ map: Map) {
         // Nothing to do...
     }
     
@@ -33,7 +33,7 @@ public class Conversation: Mappable {
      *  MARK: Mappable
      */
     
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         clientId            <- map["client_id"]
         conversationId      <- map["conversation_id"]
         input               <- map["input"]

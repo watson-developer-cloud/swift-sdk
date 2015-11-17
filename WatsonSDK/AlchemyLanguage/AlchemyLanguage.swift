@@ -61,7 +61,7 @@ public final class AlchemyLanguage: Service {
             
             AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
             
-            AlchemyLanguageConstants.OutputMode.JSON.rawValue : AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue
+            AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue : AlchemyLanguageConstants.OutputMode.JSON.rawValue
             
         ]
         
@@ -205,7 +205,7 @@ public extension AlchemyLanguage {
     public func getAuthor(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
-        completionHandler: (error: NSError, returnValue: DocumentAuthor)->() ) {
+        completionHandler: (error: NSError, returnValue: DocumentAuthors)->() ) {
             
             var parameters = commonParameters
             
@@ -229,9 +229,9 @@ public extension AlchemyLanguage {
                     let error = response.error!
                     let data = response.data ?? nil
                     
-                    let documentAuthor = Mapper<DocumentAuthor>().map(data)!
+                    let documentAuthors = Mapper<DocumentAuthors>().map(data)!
                     
-                    completionHandler(error: error, returnValue: documentAuthor)
+                    completionHandler(error: error, returnValue: documentAuthors)
                     
             }
     }

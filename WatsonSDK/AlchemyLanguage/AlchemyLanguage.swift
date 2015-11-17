@@ -72,15 +72,15 @@ public final class AlchemyLanguage: Service {
 
 // MARK: Entity Extraction
 /**
- 
- 
- http://www.alchemyapi.com/api/entity/proc.html
 
- public func URLGetRankedNamedEntities() {}
- public func HTMLGetRankedNamedEntities() {}
- public func TextGetRankedNamedEntities() {}
 
- */
+http://www.alchemyapi.com/api/entity/proc.html
+
+public func URLGetRankedNamedEntities() {}
+public func HTMLGetRankedNamedEntities() {}
+public func TextGetRankedNamedEntities() {}
+
+*/
 public extension AlchemyLanguage {
     
     /**
@@ -123,9 +123,9 @@ public extension AlchemyLanguage {
 // MARK: Sentiment Analysis
 /**
 
- http://www.alchemyapi.com/api/sentiment/proc.html
- 
- */
+http://www.alchemyapi.com/api/sentiment/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetTextSentiment() {}
@@ -142,9 +142,9 @@ public extension AlchemyLanguage {
 // MARK: Keyword Extraction
 /**
 
- http://www.alchemyapi.com/api/keyword/proc.html
- 
- */
+http://www.alchemyapi.com/api/keyword/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRankedKeywords() {}
@@ -157,9 +157,9 @@ public extension AlchemyLanguage {
 // MARK: Concept Tagging
 /**
 
- http://www.alchemyapi.com/api/concept/proc.html
- 
- */
+http://www.alchemyapi.com/api/concept/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRankedConcepts() {}
@@ -172,9 +172,9 @@ public extension AlchemyLanguage {
 // MARK: Relation Extraction
 /**
 
- http://www.alchemyapi.com/api/relation/proc.html
- 
- */
+http://www.alchemyapi.com/api/relation/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetRelations() {}
@@ -187,7 +187,7 @@ public extension AlchemyLanguage {
 // MARK: Taxonomy Classification
 /**
 
- http://www.alchemyapi.com/api/taxonomy_calls/proc.html
+http://www.alchemyapi.com/api/taxonomy_calls/proc.html
 
 */
 public extension AlchemyLanguage {
@@ -242,9 +242,9 @@ public extension AlchemyLanguage {
 // MARK: Language Detection
 /**
 
- http://www.alchemyapi.com/api/lang/proc.html
- 
- */
+http://www.alchemyapi.com/api/lang/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetLanguage() {}
@@ -257,9 +257,9 @@ public extension AlchemyLanguage {
 // MARK: Text Extraction
 /**
 
- http://www.alchemyapi.com/api/text/proc.html
- 
- */
+http://www.alchemyapi.com/api/text/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetText() {}
@@ -277,9 +277,9 @@ public extension AlchemyLanguage {
 // MARK: Microformats Parsing
 /**
 
- http://www.alchemyapi.com/api/mformat/proc.html
- 
- */
+http://www.alchemyapi.com/api/mformat/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetMicroformatData() {}
@@ -291,9 +291,9 @@ public extension AlchemyLanguage {
 // MARK: Feed Detection
 /**
 
- http://www.alchemyapi.com/api/feed-detection/proc.html
- 
- */
+http://www.alchemyapi.com/api/feed-detection/proc.html
+
+*/
 public extension AlchemyLanguage {
     
     public func URLGetFeedLinks() {}

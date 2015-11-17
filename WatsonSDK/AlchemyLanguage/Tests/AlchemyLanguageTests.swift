@@ -67,7 +67,7 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // tests
-    func testHTMLGetAuthor() {
+    func testHTMLGetAuthors() {
 
         let validExpectation = expectationWithDescription("Valid")
     
@@ -95,7 +95,7 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    func testInvalidHTMLGetAuthor() {
+    func testInvalidHTMLGetAuthors() {
         
         let emptyExpectation = expectationWithDescription("Empty")
         
@@ -118,13 +118,13 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    func testURLGetAuthor() {
+    func testURLGetAuthors() {
         
         
         
     }
     
-    func testInvalidURLGetAuthor() {
+    func testInvalidURLGetAuthors() {
         
         
         

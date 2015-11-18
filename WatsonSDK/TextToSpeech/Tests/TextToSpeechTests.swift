@@ -23,10 +23,15 @@ class TextToSpeechTests: XCTestCase {
     // Text to Speech Service
     private let service = TextToSpeech()
     
+    
+    private let playAudio = true
+    
     // Phrase used for testing
     let testString = "All the problems of the world could be solved if men were only willing to think."
     
     let germanString = "Alle Probleme der Welt könnten gelöst werden, wenn Männer waren nur bereit, zu denken."
+    
+    let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\"><say-as interpret-as=\"letters\">Hello</say-as></speak>"
     
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: NSTimeInterval = 20.0
@@ -135,11 +140,10 @@ class TextToSpeechTests: XCTestCase {
                     let audioPlayer = try AVAudioPlayer(data: data)
                     audioPlayer.prepareToPlay()
                     audioPlayer.play()
-                    
-                    // Uncomment the line below to allow the test time to play the
-                    // audio through the speakers.
-                    
-                    // sleep(10)
+    
+                    if (self.playAudio) {
+                        sleep(10)
+                    }
                     
                     synthPlayExpectation.fulfill()
                     
@@ -174,10 +178,9 @@ class TextToSpeechTests: XCTestCase {
                     audioPlayer.prepareToPlay()
                     audioPlayer.play()
                     
-                    // Uncomment the line below to allow the test time to play the
-                    // audio through the speakers.
-                    
-                    // sleep(10)
+                   if (self.playAudio) {
+                        sleep(10)
+                    }
                     
                     playExpectation.fulfill()
                     
@@ -192,6 +195,45 @@ class TextToSpeechTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
+    
+    /**
+     Uses the AVAudioPlayer to play the WAV file using SSML advanced features.
+     */
+    func testSynthAndPlaySSML() {
+        
+        let synthPlaySSMLExpectation = expectationWithDescription("Synthesize Audio")
+        
+        
+        
+        
+        service.synthesize(ssmlString, oncompletion: {
+            data, error in
+            
+            if let data = data {
+                
+                do {
+                    let audioPlayer = try AVAudioPlayer(data: data)
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    
+                   if (self.playAudio) {
+                        sleep(10)
+                    }
+                    
+                    synthPlaySSMLExpectation.fulfill()
+                    
+                    
+                } catch {
+                    XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+                }
+                
+            }
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+
 
     
 }

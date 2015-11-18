@@ -38,11 +38,21 @@ import ObjectMapper
  */
 public final class AlchemyLanguage: Service {
     
+    private typealias alcs = AlchemyLanguageConstants
+    private typealias optm = alcs.OutputMode
+    private typealias wuri = alcs.WatsonURI
+    private typealias luri = alcs.LanguageURI
+
+    
     init() {
+
+        print(AlchemyLanguageConstants.LanguageURI.SourceText.cleaned_or_raw)
+        
+        print(luri.SourceText.cleaned_or_raw)
         
         super.init(
             type: ServiceType.Alchemy,
-            serviceURL: AlchemyLanguageConstants.Calls()
+            serviceURL: alcs.Calls()
         )
         
     }
@@ -55,13 +65,13 @@ public final class AlchemyLanguage: Service {
     }
     
     /** A dictionary of parameters used in all Alchemy Language API calls */
-    private var commonParameters: [String : AnyObject] {
+    private var commonParameters: [String : String] {
         
         return [
             
-            AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
+            wuri.APIKey.rawValue : _apiKey,
             
-            AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue : AlchemyLanguageConstants.OutputMode.JSON.rawValue
+            luri.OutputMode.rawValue : optm.JSON.rawValue
             
         ]
         
@@ -87,14 +97,12 @@ public extension AlchemyLanguage {
         
         init(){}
         
-        var html: String?
-        var url: String?
         var disambiguate: Bool? = true
         var linkedData: Bool? = true
         var coreference: Bool? = true
         var quotations: Bool? = false
         var sentiment: Bool? = false
-        var sourceText: AlchemyLanguageConstants.SourceText? = AlchemyLanguageConstants.SourceText.cleaned_or_raw
+        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
         var showSourceText: Bool? = false
         var cquery: String?
         var xpath: String?
@@ -278,7 +286,7 @@ public extension AlchemyLanguage {
         url: String?,
         useMetadata: Bool = true,
         extractLinks: Bool = false,
-        sourceText: AlchemyLanguageConstants.SourceText = AlchemyLanguageConstants.SourceText.cleaned_or_raw,
+        sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
         completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
             
             var parameters = commonParameters

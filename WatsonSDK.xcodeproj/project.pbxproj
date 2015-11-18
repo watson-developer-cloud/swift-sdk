@@ -11,6 +11,8 @@
 		6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */; };
 		6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */; };
 		6E2E43021BFBDBFA00B32691 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E43011BFBDBFA00B32691 /* sample.html */; };
+		6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */; };
+		6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */; };
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
@@ -156,6 +158,8 @@
 		6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentText.swift; sourceTree = "<group>"; };
 		6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTitle.swift; sourceTree = "<group>"; };
 		6E2E43011BFBDBFA00B32691 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
+		6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageParametersProtocol.swift; sourceTree = "<group>"; };
+		6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCombineDictionaryUtil.swift; sourceTree = "<group>"; };
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
@@ -300,6 +304,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E2E43051BFCEB4F00B32691 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7A36F9931BF8DDCA005E478F = {
 			isa = PBXGroup;
 			children = (
@@ -365,7 +377,9 @@
 			children = (
 				7ADC39AB1BF950C800CD916E /* AlchemyLanguage.swift */,
 				7ADC39AC1BF950C800CD916E /* AlchemyLanguageConstants.swift */,
+				6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */,
 				7ADC39AD1BF950C800CD916E /* Models */,
+				6E2E43051BFCEB4F00B32691 /* Utils */,
 				7ADC39C11BF950C800CD916E /* Tests */,
 			);
 			name = AlchemyLanguage;
@@ -871,6 +885,7 @@
 				7ADC3A781BF9551500CD916E /* Sentiment.swift in Sources */,
 				7ADC3A691BF9551500CD916E /* AlchemyLanguageGenericModel.swift in Sources */,
 				7ADC3A6A1BF9551500CD916E /* CombinedResults.swift in Sources */,
+				6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */,
 				7ADC3A7D1BF955FF00CD916E /* AlchemyVision.swift in Sources */,
 				7ADC3AA51BF959B800CD916E /* SpeechToTextConstants.swift in Sources */,
 				7ADC3A711BF9551500CD916E /* Keyword.swift in Sources */,
@@ -882,6 +897,7 @@
 				E1D5C2ED1BFCE7FD0030EBD9 /* NSError.swift in Sources */,
 				7ADC3A731BF9551500CD916E /* KnowledgeGraph.swift in Sources */,
 				7ADC3A6C1BF9551500CD916E /* DisambiguatedLinks.swift in Sources */,
+				6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
 				7AF96BB71BF996560083ED23 /* Voice.swift in Sources */,

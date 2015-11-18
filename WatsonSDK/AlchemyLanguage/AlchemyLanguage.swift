@@ -311,10 +311,6 @@ public extension AlchemyLanguage {
             
     }
     
-    
-    public func URLGetRawText() {}
-    public func HTMLGetRawText() {}
-    
     public func URLGetTitle() {}
     public func HTMLGetTitle() {}
     

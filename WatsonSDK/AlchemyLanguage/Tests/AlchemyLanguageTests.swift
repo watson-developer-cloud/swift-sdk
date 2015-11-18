@@ -90,12 +90,46 @@ class AlchemyLanguageTests: XCTestCase {
 
         let validExpectation = expectationWithDescription("Valid")
     
+    func testInvalidHTMLGetEntities() {
+        
+        
+        
+    }
+    
+    func testURLGetEntities() {
+        
+        
+        
+    }
+    
+    func testInvalidURLGetEntities() {
+        
+        
+        
+    }
+    
+    func testTextGetEntities() {
+        
+        
+        
+    }
+    
+    func testInvalidTextGetEntities() {
+        
+        
+        
+    }
+    
+    func testHTMLGetAuthors() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
         let html = htmlDocumentAsStringFromTitle("sample")
         
         instance.getAuthors(requestType: .HTML,
             html: html,
             url: nil) {
-        
+                
                 (error, documentAuthors) in
                 
                 if let authors = documentAuthors.authors {

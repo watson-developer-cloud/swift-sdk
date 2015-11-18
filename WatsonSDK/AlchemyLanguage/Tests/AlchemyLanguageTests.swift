@@ -116,18 +116,18 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testInvalidHTMLGetAuthors() {
         
-        let emptyExpectation = expectationWithDescription("Empty")
+        let invalidExpectation = expectationWithDescription("invalid")
         
         instance.getAuthors(requestType: .HTML,
             html: test_html_no_author,
             url: nil) {
                 
-            (error, documentAuthors) in
+                (error, documentAuthors) in
                 
                 if error.code == 200 {
                     
                     XCTAssertNil(documentAuthors.authors)
-                    emptyExpectation.fulfill()
+                    invalidExpectation.fulfill()
                     
                 }
                 

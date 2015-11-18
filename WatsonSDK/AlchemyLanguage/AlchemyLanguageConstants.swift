@@ -68,6 +68,11 @@ public extension AlchemyLanguageConstants {
     /**
      Used in getText
     */
+    public enum TextType {
+        case Normal
+        case Raw
+    }
+    
 }
 
 public final class AlchemyLanguageConstants {

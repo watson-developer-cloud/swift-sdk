@@ -83,6 +83,28 @@ public func TextGetRankedNamedEntities() {}
 */
 public extension AlchemyLanguage {
     
+    public struct GetEntitiesParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var html: String?
+        var url: String?
+        var disambiguate: Bool? = true
+        var linkedData: Bool? = true
+        var coreference: Bool? = true
+        var quotations: Bool? = false
+        var sentiment: Bool? = false
+        var sourceText: AlchemyLanguageConstants.SourceText? = AlchemyLanguageConstants.SourceText.cleaned_or_raw
+        var showSourceText: Bool? = false
+        var cquery: String?
+        var xpath: String?
+        var maxRetrieve: Int? = 50
+        var baseUrl: String?
+        var knowledgGraph: Bool? = false
+        var stucturedEntities: Bool? = true
+        
+    }
+    
     /**
      Extracts a grouped, ranked list of named entities (people, companies,
      organizations, etc.) from text, a URL or HTML.
@@ -93,22 +115,7 @@ public extension AlchemyLanguage {
      - Returns: An **Entities** object.
      */
     public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
-        url: NSURL,
-        outputMode: AlchemyLanguageConstants.OutputMode,
-        jsonp: String,
-        disambiguate: Bool = true,
-        linkedData: Bool = true,
-        coreference: Bool = true,
-        quotations: Bool = false,
-        sentiment: Bool = false,
-        sourceText: AlchemyLanguageConstants.SourceText,
-        showSourceText: Bool = false,
-        cquery: String,
-        xpath: String,
-        maxRetrieve: Int,
-        baseUrl: NSURL,
-        knowledgGraph: Int8 = 0,
-        stucturedEntities: Bool = true,
+        entitiesParameters: GetEntitiesParameters = GetEntitiesParameters(),
         completionHandler: (returnValue: Entities)->() ) {
             
             let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)

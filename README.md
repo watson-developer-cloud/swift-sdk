@@ -3,6 +3,8 @@
 
 [![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK) [![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
 
+The Watson iOS SDK are a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift 2.0+ applications.
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
@@ -16,6 +18,10 @@
 	* [Personality Insights](#personality-insights)
 	* [Speech to Text](#speech-to-text)	
 	* [Text to Speech](#text-to-speech)
+* [Build + Test](#build--test)
+* [Open Source @ IBM](#open-source--ibm)
+* [License](#license)
+* [Contributing](#contributing)
 
 ## Installation
 
@@ -121,7 +127,26 @@ Probably Apache 2.0
 
 ## Contributing
 
-**Stub text, insert text here when ready.**
-
 See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.
+
+[personality_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
+[language_identification]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/lidapi/
+[machine_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/mtapi/
+[document_conversion]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/
+[relationship_extraction]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/sireapi/
+[language_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
+[visual_recognition]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/
+[tradeoff_analytics]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/
+[text_to_speech]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/
+[speech_to_text]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/
+[tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/
+[dialog]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/
+[concept-insights]: https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/concept-insights/
+[visual_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-insights/
+
+[alchemy_language]: http://www.alchemyapi.com/products/alchemylanguage
+[sentiment_analysis]: http://www.alchemyapi.com/products/alchemylanguage/sentiment-analysis
+[alchemy_vision]: http://www.alchemyapi.com/products/alchemyvision
+[alchemy_data_news]: http://www.alchemyapi.com/products/alchemydata-news
+
 

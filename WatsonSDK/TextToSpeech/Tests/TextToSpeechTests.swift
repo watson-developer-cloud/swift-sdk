@@ -125,6 +125,29 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /**
+     Tests if the user specifies a voice that does not exist.
+     **/
+    func testSynthesizeEmptyString() {
+        
+        let synthEmptyExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
+        
+        service.synthesize("", oncompletion: {
+            data, error in
+            
+            XCTAssertNotNil(error)
+            
+            if let error = error {
+                XCTAssertEqual(error.code, 404)
+            }
+            
+            synthEmptyExpectation.fulfill()
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+    }
+    
+    /**
      Uses the AVAudioPlayer to play the WAV file
     */
     func testSynthAndPlay() {

@@ -47,6 +47,13 @@ The Watson Developer Cloud offers a variety of services for building cognitive a
 
 The Text to Speech service gives your app the ability to synthesize spoken text in a variety of voices.
 
+Create a TextToSpeech service:
+
+```swift
+let service = TextToSpeech()
+service.setUsernameAndPassword(username: "yourname", password: "yourpass")
+```
+
 To call the service to synthesize text:
 
 ```swift 
@@ -69,7 +76,42 @@ audioPlayer.prepareToPlay()
 audioPlayer.play()
 ```
 
+The Watson TTS service contains support for many voices with different genders, languages, and dialects. For a complete list, see the [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) or call the service's to list the possible voices in an asynchronous callback:
 
+```swift
+service.listVoices({
+	voices, error in
+	
+	
+})
+```
+
+For some example
+
+Voice        | Language    | Gender
+------------ | ----------- | --------------- 
+de-DE_BirgitVoice     | German               | Female
+de-DE_DieterVoice     | German               | Male
+en-GB_KateVoice       | English (British)    | Female
+en-US_AllisonVoice    | English (US)         | Female
+en-US_LisaVoice       | English (US)         | Female
+es-ES_Enrique         | Spanish (Castilian)  | Male
+es-ES_Laura           | Spanish (Castilian)  | Female
+es-US_Sofia           | Spanish (North American) | Female
+fr-FR_Renee           | French               | Female
+it-IT_Francesca       | Italian              | Female
+
+To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
+
+```swift
+service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
+	data, error in 
+	
+	if let data = data {
+	
+	}
+)
+```
 
 
 

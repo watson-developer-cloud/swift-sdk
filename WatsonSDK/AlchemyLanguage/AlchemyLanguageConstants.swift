@@ -50,7 +50,7 @@ public extension AlchemyLanguageConstants {
     }
     
     /**
-     This enum is used to build the base URI for each call
+     Used to build the base URI for each call
      */
     public enum WatsonURI: String {
         case URL = "url"
@@ -58,13 +58,16 @@ public extension AlchemyLanguageConstants {
     }
     
     /**
-     This enum is used to build the full URL
+     Used to build the full URL
      */
     public enum LanguageURI: String {
         case OutputMode = "outputMode"
         case KnowledgeGraph = "knowledgeGraph"
     }
     
+    /**
+     Used in getText
+    */
 }
 
 public final class AlchemyLanguageConstants {

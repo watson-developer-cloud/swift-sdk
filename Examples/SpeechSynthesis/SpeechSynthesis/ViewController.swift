@@ -9,7 +9,7 @@
 import UIKit
 
 import AVFoundation
-import WatsonTextToSpeech
+import WatsonSDK
 
 class ViewController: UIViewController, NSURLSessionDelegate {
     
@@ -37,12 +37,19 @@ class ViewController: UIViewController, NSURLSessionDelegate {
         speechTextView.text = sayings[i%sayings.count]
     }
     
-    lazy var player : AVAudioPlayer = AVAudioPlayer()
-    lazy var audioEngine : AVAudioEngine = AVAudioEngine()
     
+    
+    let alchemy = AlchemyVision()
+
+    let ttsService = TextToSpeech()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ttsService.setUsernameAndPassword(
+            "***REMOVED***",
+            password: "***REMOVED***")
         
         // var error: NSError?
         
@@ -58,14 +65,30 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     @IBAction func handlePress(sender: AnyObject) {
         
         
-        let ttsService = WatsonTextToSpeechService(username: "***REMOVED***",
-            password: "***REMOVED***")
-        let voice = ttsService.getDefaultVoice()
+        
+        
+        // let voice = ttsService.getDefaultVoice()
         
         let toSay = speechTextView.text
         
         if (toSay != "") {
-            voice.say(toSay)
+            ttsService.synthesize(toSay, oncompletion: {
+                
+                data, error in
+                
+                if let data = data {
+                
+                    do {
+                        let player = try AVAudioPlayer(data: data)
+                        player.prepareToPlay()
+                        player.play()
+                    } catch {
+                        
+                    }
+                        
+                }
+                
+            })
         }
         
     }
@@ -76,33 +99,3 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     
 }
 
-extension ViewController {
-    
-    func playLocalFile(name : String)
-    {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        let fileURL = NSBundle.mainBundle().URLForResource("spain2", withExtension: "wav")
-        
-        do {
-            
-            player = try AVAudioPlayer(contentsOfURL: fileURL!)
-            
-            
-            
-            print("Duration is \(player.duration)")
-            
-            player.prepareToPlay()
-            player.numberOfLoops = -1
-            player.play()
-            
-            
-            
-        } catch let error as NSError {
-            
-            print(error.localizedDescription)
-            
-        }
-    }
-    
-}

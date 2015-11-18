@@ -30,15 +30,34 @@ class AlchemyLanguageTests: XCTestCase {
     
     var test_url_0 = "http://www.programmableweb.com/news/new-api-billionaire-text-extractor-alchemy/2011/09/16"
     
+    private func htmlDocumentFromURLString(url: String) -> String {
+        
+        var returnString = ""
+        
+        if let myURL = NSURL(string: url) {
+            
+            do { returnString = try NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding) as String } catch { }
+            
+        }
+        
+        return returnString
+        
+    }
+    
     private func htmlDocumentAsStringFromTitle(title: String) -> String {
         
-        do {
+        if let dir : NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             
-            if let path = NSBundle.mainBundle().pathForResource(title, ofType: "html") {
-                return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
-            }
+            let path = dir.stringByAppendingPathComponent("\(title).html")
             
-        } catch {}
+            do {
+                
+                let textAsString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+                return textAsString as String
+                
+            } catch { }
+            
+        } else { }
         
         return ""
         

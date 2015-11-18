@@ -123,12 +123,38 @@ public extension AlchemyLanguage {
      - Returns: An **Entities** object.
      */
     public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
-        entitiesParameters: GetEntitiesParameters = GetEntitiesParameters(),
-        completionHandler: (returnValue: Entities)->() ) {
+        html: String?,
+        url: String?,
+        entitiesParameters ep: GetEntitiesParameters = GetEntitiesParameters(),
+        completionHandler: (error: NSError, returnValue: Entities)->() ) {
             
-            let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let accessString = AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
             
-            print(accessString)
+            let entitiesParamDict = ep.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: entitiesParamDict)
+
+            if let html = html { parameters["html"] = html }
+            if let url = html { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let entities = Mapper<Entities>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: entities)
+                    
+            }
             
     }
     

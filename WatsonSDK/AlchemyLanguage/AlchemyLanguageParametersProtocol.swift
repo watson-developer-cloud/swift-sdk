@@ -23,8 +23,13 @@ extension AlchemyLanguageParameters {
             if let label = property.label {
                 
                 let value = property.value
-                let unwrappedValue = unwrap(value)
-                returnDictionary.updateValue("\(unwrappedValue)", forKey: label)
+                let unwrappedValueAsString = "\(unwrap(value))"
+                
+                if unwrappedValueAsString != "" {
+                    
+                    returnDictionary.updateValue("\(unwrappedValueAsString)", forKey: label)
+                    
+                }
                 
             }
             

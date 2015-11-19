@@ -125,6 +125,7 @@ public extension AlchemyLanguage {
     public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
+        text: String?,
         entitiesParameters ep: GetEntitiesParameters = GetEntitiesParameters(),
         completionHandler: (error: NSError, returnValue: Entities)->() ) {
             
@@ -136,6 +137,7 @@ public extension AlchemyLanguage {
 
             if let html = html { parameters["html"] = html }
             if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,

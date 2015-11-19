@@ -180,7 +180,7 @@ class AlchemyLanguageTests: XCTestCase {
                         
                     }
                     
-                    XCTAssertFalse(countryTypeFound && cityTypeFound)
+                    XCTAssertFalse(countryTypeFound || cityTypeFound)
                     
                     invalidExpectation.fulfill()
                     

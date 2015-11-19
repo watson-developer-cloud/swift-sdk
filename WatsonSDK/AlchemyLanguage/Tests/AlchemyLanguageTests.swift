@@ -367,35 +367,58 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    func testHTMLGetAuthors() {
+    func testHTMLGetTextSentiment() {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentAsStringFromTitle("sample")
+        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
         
-        instance.getAuthors(requestType: .HTML,
+        instance.getSentiment(requestType: .HTML,
             html: html,
-            url: nil) {
+            url: nil,
+            text: nil) {
                 
-                (error, documentAuthors) in
+                (error, sentiment) in
                 
-                if let authors = documentAuthors.authors {
+                XCTAssertNotNil(sentiment.docSentiment)
+                
+                if let docSentiment = sentiment.docSentiment {
                     
-                    print("Success HTMLGetAuthor, authors' names: \(authors.names)")
+                    let sentimentMixed = docSentiment.mixed
+                    let sentimentType = docSentiment.type
+                    
+                    XCTAssertEqual(sentimentMixed, "1")
+                    XCTAssertEqual(sentimentType, "negative")
+                    
+                    validExpectation.fulfill()
                     
                 }
+
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
+    func testInvalidHTMLGetTextSentiment() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.sentimentAnalysisDotComShouldNotExist.com")
+        
+        instance.getSentiment(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
                 
-                XCTAssertNotNil(documentAuthors)
-                XCTAssertNotNil(documentAuthors.authors?.names)
+                (error, sentiment) in
                 
-                if let names = documentAuthors.authors?.names {
-                    
-                    XCTAssertNotEqual(names.count, 0)
-                    
-                }
+                let language = sentiment.language
                 
+                XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentiment.docSentiment)
                 
-                validExpectation.fulfill()
+                invalidExpectation.fulfill()
                 
         }
         
@@ -403,20 +426,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    func testInvalidHTMLGetAuthors() {
+    func testURLGetTextSentiment() {
+    
+        let validExpectation = expectationWithDescription("valid")
         
-        let invalidExpectation = expectationWithDescription("invalid")
-        
-        instance.getAuthors(requestType: .HTML,
-            html: test_html_no_author,
-            url: nil) {
+        instance.getSentiment(requestType: .URL,
+            html: nil,
+            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            text: nil) {
                 
-                (error, documentAuthors) in
+                (error, sentiment) in
                 
-                if error.code == 200 {
+                XCTAssertNotNil(sentiment.docSentiment)
+                
+                if let docSentiment = sentiment.docSentiment {
                     
-                    XCTAssertNil(documentAuthors.authors?.names)
-                    invalidExpectation.fulfill()
+                    let sentimentMixed = docSentiment.mixed
+                    let sentimentType = docSentiment.type
+                    
+                    XCTAssertEqual(sentimentMixed, "1")
+                    XCTAssertEqual(sentimentType, "negative")
+                    
+                    validExpectation.fulfill()
                     
                 }
                 

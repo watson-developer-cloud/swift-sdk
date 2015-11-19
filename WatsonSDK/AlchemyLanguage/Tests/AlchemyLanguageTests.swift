@@ -481,6 +481,65 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testTextGetTextSentiment() {
+        
+        
+    }
+    
+    func testInvalidTextGetTextSentiment() {
+        
+        
+        
+    }
+    
+    func testHTMLGetTargetedSentiment() {
+        
+
+        
+    }
+    
+    func testInvalidHTMLGetTargetedSentiment() {
+        
+        
+        
+    }
+    
+    func testURLGetTargetedSentiment() {
+        
+
+        
+    }
+    
+    func testInvalidURLGetTargetedSentiment() {
+        
+        
+        
+    }
+    
+    func testTextGetTargetedSentiment() {
+        
+
+        
+    }
+    
+    func testInvalidTextGetTargetedSentiment() {
+        
+        
+        
+    }
+    
+    func testHTMLGetAuthors() {
+        
+
+        
+    }
+    
+    func testInvalidHTMLGetAuthors() {
+        
+
+        
+    }
+    
     func testURLGetAuthors() {
         
         

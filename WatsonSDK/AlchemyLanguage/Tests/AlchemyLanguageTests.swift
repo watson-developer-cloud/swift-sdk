@@ -30,15 +30,34 @@ class AlchemyLanguageTests: XCTestCase {
     
     var test_url_0 = "http://www.programmableweb.com/news/new-api-billionaire-text-extractor-alchemy/2011/09/16"
     
+    private func htmlDocumentFromURLString(url: String) -> String {
+        
+        var returnString = ""
+        
+        if let myURL = NSURL(string: url) {
+            
+            do { returnString = try NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding) as String } catch { }
+            
+        }
+        
+        return returnString
+        
+    }
+    
     private func htmlDocumentAsStringFromTitle(title: String) -> String {
         
-        do {
+        if let dir : NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             
-            if let path = NSBundle.mainBundle().pathForResource(title, ofType: "html") {
-                return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
-            }
+            let path = dir.stringByAppendingPathComponent("\(title).html")
             
-        } catch {}
+            do {
+                
+                let textAsString = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+                return textAsString as String
+                
+            } catch { }
+            
+        } else { }
         
         return ""
         
@@ -67,16 +86,94 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // tests
-    func testHTMLGetAuthors() {
-
-        let validExpectation = expectationWithDescription("Valid")
+    func testHTMLGetEntities() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString("https://en.wikipedia.org/wiki/Vladimir_Putin")
+        
+        instance.getEntities(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, entities) in
+                
+                let ents = entities.entities
+                
+                XCTAssertNotNil(ents)
+                XCTAssertTrue(ents!.count > 0)
+                
+                let unwrappedEntities = ents!
+                
+                var countryTypeFound = false
+                var cityTypeFound = false
+                var personTypeFound = false
+                
+                for entity in unwrappedEntities {
+                    
+                    XCTAssertNotNil(entity.type)
+                    
+                    let unwrappedType = entity.type!
+                    
+                    switch unwrappedType {
+                    case "Country": countryTypeFound = true
+                    case "City": cityTypeFound = true
+                    case "Person" : personTypeFound = true
+                    default: func nothing(){}; nothing()
+                    }
+                    
+                }
+                
+                XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
+    func testInvalidHTMLGetEntities() {
+        
+        
+        
+    }
+    
+    func testURLGetEntities() {
+        
+        
+        
+    }
+    
+    func testInvalidURLGetEntities() {
+        
+        
+        
+    }
+    
+    func testTextGetEntities() {
+        
+        
+        
+    }
+    
+    func testInvalidTextGetEntities() {
+        
+        
+        
+    }
+    
+    func testHTMLGetAuthors() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
         let html = htmlDocumentAsStringFromTitle("sample")
         
         instance.getAuthors(requestType: .HTML,
             html: html,
             url: nil) {
-        
+                
                 (error, documentAuthors) in
                 
                 if let authors = documentAuthors.authors {
@@ -97,18 +194,18 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testInvalidHTMLGetAuthors() {
         
-        let emptyExpectation = expectationWithDescription("Empty")
+        let invalidExpectation = expectationWithDescription("invalid")
         
         instance.getAuthors(requestType: .HTML,
             html: test_html_no_author,
             url: nil) {
                 
-            (error, documentAuthors) in
+                (error, documentAuthors) in
                 
                 if error.code == 200 {
                     
                     XCTAssertNil(documentAuthors.authors)
-                    emptyExpectation.fulfill()
+                    invalidExpectation.fulfill()
                     
                 }
                 

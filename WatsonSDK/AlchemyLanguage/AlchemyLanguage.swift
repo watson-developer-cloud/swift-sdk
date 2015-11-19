@@ -191,9 +191,56 @@ public extension AlchemyLanguage {
         
     }
     
-    public func URLGetTargetedSentiment() {}
-    public func HTMLGetTargetedSentiment() {}
-    public func TextGetTargetedSentiment() {}
+    public func getSentiment(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        sentimentType: alcs.SentimentType = alcs.SentimentType.Normal,
+        sentimentParameters sp: GetSentimentParameters = GetSentimentParameters(),
+        completionHandler: (error: NSError, returnValue: Sentiment)->() ) {
+            
+            var accessString: String!
+            
+            switch sentimentType {
+                
+            case .Normal:
+                accessString = alcs.GetTextSentiment(fromRequestType: rt)
+            
+            case .Targeted:
+                accessString = alcs.GetTargetedSentiment(fromRequestType: rt)
+                assert(sp.targets != "", "WatsonSDK: AlchemyLanguage: getSentiment: When using targeted sentiment calls, \"targets\" cannot be empty.")
+            
+            }
+            
+            let endpoint = getEndpoint(accessString)
+            
+            let sentimentParamDict = sp.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: sentimentParamDict)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = html { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getSentiment: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let sentiment = Mapper<Sentiment>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: sentiment)
+                    
+            }
+            
+    }
     
 }
 

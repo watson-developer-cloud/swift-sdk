@@ -169,9 +169,25 @@ http://www.alchemyapi.com/api/sentiment/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetTextSentiment() {}
-    public func HTMLGetTextSentiment() {}
-    public func TextGetTextSentiment() {}
+    /** 
+     
+     TODO: write about how targets is a string but requires arguments to be split by vertical bars, OR ask for an array and do it for the client.
+     
+     */
+    public struct GetSentimentParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sentiment: Int? = 0
+        var showSourceText: Int? = 0
+        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        var cquery: String? = ""
+        var xpath: String? = ""
+        
+        // required if targeted
+        var targets: String? = ""
+        
+    }
     
     public func URLGetTargetedSentiment() {}
     public func HTMLGetTargetedSentiment() {}

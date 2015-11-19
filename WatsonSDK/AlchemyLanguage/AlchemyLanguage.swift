@@ -351,9 +351,6 @@ http://www.alchemyapi.com/api/text/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetText() {}
-    public func HTMLGetText() {}
-    
     // TODO: raw or not raw text parameter
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
@@ -392,9 +389,6 @@ public extension AlchemyLanguage {
             }
             
     }
-    
-    public func URLGetTitle() {}
-    public func HTMLGetTitle() {}
     
 }
 

@@ -37,9 +37,6 @@ class ViewController: UIViewController, NSURLSessionDelegate {
         speechTextView.text = sayings[i%sayings.count]
     }
     
-    
-    
-    let alchemy = AlchemyVision()
 
     let ttsService = TextToSpeech()
 

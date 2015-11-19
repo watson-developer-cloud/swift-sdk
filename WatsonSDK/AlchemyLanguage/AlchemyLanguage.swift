@@ -188,9 +188,57 @@ http://www.alchemyapi.com/api/keyword/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRankedKeywords() {}
-    public func HTMLGetRankedKeywords() {}
-    public func TextGetRankedKeywords() {}
+    public struct GetKeywordsParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sentiment: Int? = 0
+        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var maxRetrieve: Int? = 50
+        var baseUrl: String? = ""
+        var knowledgGraph: Int? = 0
+        var keywordExtractMode: luri.KeywordExtractMode = luri.KeywordExtractMode.normal
+        
+    }
+    
+    public func getRankedKeywords(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        keywordsParameters kp: GetKeywordsParameters = GetKeywordsParameters(),
+        completionHandler: (error: NSError, returnValue: Keywords)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let keywordsParamDict = kp.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: keywordsParamDict)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = html { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let keywords = Mapper<Keywords>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: keywords)
+                    
+            }
+            
+    }
     
 }
 

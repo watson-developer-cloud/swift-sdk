@@ -18,10 +18,37 @@ extension AlchemyLanguageParameters {
         
         let mirror = Mirror(reflecting: self)
         
-        let property = mirror.children.first
-
+        for property in mirror.children {
+            
+            if let label = property.label {
+                
+                let value = property.value
+                let unwrappedValue = unwrap(value)
+                returnDictionary.updateValue("\(unwrappedValue)", forKey: label)
+                
+            }
+            
+        }
+        
         return returnDictionary
         
     }
     
+    // Reference [1]
+    func unwrap(any:Any) -> Any {
+        
+        let mi = Mirror(reflecting: any)
+        if mi.displayStyle != .Optional {
+            return any
+        }
+        
+        if mi.children.count == 0 { return NSNull() }
+        let (_, some) = mi.children.first!
+        return some
+        
+    }
+    
 }
+
+// REFERENCES
+// [1] http://stackoverflow.com/questions/27989094/how-to-unwrap-an-optional-value-from-any-type

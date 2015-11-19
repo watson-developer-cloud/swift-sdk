@@ -82,6 +82,16 @@ public extension AlchemyLanguageConstants {
         case Raw
     }
     
+    /**
+     Used in getSentiment
+     */
+    public enum SentimentType {
+        
+        case Normal
+        case Targeted
+        
+    }
+    
 }
 
 public final class AlchemyLanguageConstants {

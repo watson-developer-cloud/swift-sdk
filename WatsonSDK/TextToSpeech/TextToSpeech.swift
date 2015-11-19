@@ -58,6 +58,15 @@ public class TextToSpeech : Service, TextToSpeechService
         
         let endpoint = getEndpoint("/v1/synthesize")
             
+            
+        if (theText == "")
+        {
+            let error = NSError.createWatsonError(404,
+                description: "Cannot synthesize an empty string")
+            oncompletion(data: nil, error: error)
+            return
+        }
+            
         var params = Dictionary<String, String>()
         params.updateValue(theText, forKey: "text")
         // Opus codec is the default, so the accept type is optional

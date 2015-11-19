@@ -12,29 +12,10 @@
 		7A1FCE2A1BA9F19A0090E1EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE281BA9F19A0090E1EB /* Main.storyboard */; };
 		7A1FCE2C1BA9F19A0090E1EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE2B1BA9F19A0090E1EB /* Assets.xcassets */; };
 		7A1FCE2F1BA9F19A0090E1EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE2D1BA9F19A0090E1EB /* LaunchScreen.storyboard */; };
-		7A1FCE3A1BA9F19A0090E1EB /* SpeechSynthesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE391BA9F19A0090E1EB /* SpeechSynthesisTests.swift */; };
-		7A1FCE451BA9F19A0090E1EB /* SpeechSynthesisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE441BA9F19A0090E1EB /* SpeechSynthesisUITests.swift */; };
 		7A1FCE531BAA004D0090E1EB /* spain.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE521BAA004D0090E1EB /* spain.wav */; };
 		7A1FCE7B1BAA01CB0090E1EB /* spain2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE7A1BAA01CB0090E1EB /* spain2.wav */; };
-		E1605B151BAB58490084A056 /* WatsonTextToSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */; };
+		E1D5C3191BFD22C30030EBD9 /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D5C3181BFD22C30030EBD9 /* WatsonSDK.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7A1FCE361BA9F19A0090E1EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A1FCE191BA9F19A0090E1EB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A1FCE201BA9F19A0090E1EB;
-			remoteInfo = SpeechSynthesis;
-		};
-		7A1FCE411BA9F19A0090E1EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A1FCE191BA9F19A0090E1EB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7A1FCE201BA9F19A0090E1EB;
-			remoteInfo = SpeechSynthesis;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7A1FCE211BA9F19A0090E1EB /* SpeechSynthesis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechSynthesis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,15 +25,9 @@
 		7A1FCE2B1BA9F19A0090E1EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A1FCE2E1BA9F19A0090E1EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A1FCE301BA9F19A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A1FCE351BA9F19A0090E1EB /* SpeechSynthesisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechSynthesisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A1FCE391BA9F19A0090E1EB /* SpeechSynthesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesisTests.swift; sourceTree = "<group>"; };
-		7A1FCE3B1BA9F19A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A1FCE401BA9F19A0090E1EB /* SpeechSynthesisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechSynthesisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A1FCE441BA9F19A0090E1EB /* SpeechSynthesisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesisUITests.swift; sourceTree = "<group>"; };
-		7A1FCE461BA9F19A0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A1FCE521BAA004D0090E1EB /* spain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain.wav; sourceTree = "<group>"; };
 		7A1FCE7A1BAA01CB0090E1EB /* spain2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spain2.wav; sourceTree = "<group>"; };
-		E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonTextToSpeech.framework; path = "../../WatsonTextToSpeech/build/Debug-iphoneos/WatsonTextToSpeech.framework"; sourceTree = "<group>"; };
+		E1D5C3181BFD22C30030EBD9 /* WatsonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonSDK.framework; path = ExternalFrameworks/WatsonSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,21 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1605B151BAB58490084A056 /* WatsonTextToSpeech.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A1FCE321BA9F19A0090E1EB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A1FCE3D1BA9F19A0090E1EB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E1D5C3191BFD22C30030EBD9 /* WatsonSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,10 +45,7 @@
 		7A1FCE181BA9F19A0090E1EB = {
 			isa = PBXGroup;
 			children = (
-				E1605B141BAB58490084A056 /* WatsonTextToSpeech.framework */,
 				7A1FCE231BA9F19A0090E1EB /* SpeechSynthesis */,
-				7A1FCE381BA9F19A0090E1EB /* SpeechSynthesisTests */,
-				7A1FCE431BA9F19A0090E1EB /* SpeechSynthesisUITests */,
 				7A1FCE221BA9F19A0090E1EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,8 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				7A1FCE211BA9F19A0090E1EB /* SpeechSynthesis.app */,
-				7A1FCE351BA9F19A0090E1EB /* SpeechSynthesisTests.xctest */,
-				7A1FCE401BA9F19A0090E1EB /* SpeechSynthesisUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,6 +61,7 @@
 		7A1FCE231BA9F19A0090E1EB /* SpeechSynthesis */ = {
 			isa = PBXGroup;
 			children = (
+				E1D5C3181BFD22C30030EBD9 /* WatsonSDK.framework */,
 				7A1FCE241BA9F19A0090E1EB /* AppDelegate.swift */,
 				7A1FCE261BA9F19A0090E1EB /* ViewController.swift */,
 				7A1FCE281BA9F19A0090E1EB /* Main.storyboard */,
@@ -115,24 +72,6 @@
 				7A1FCE301BA9F19A0090E1EB /* Info.plist */,
 			);
 			path = SpeechSynthesis;
-			sourceTree = "<group>";
-		};
-		7A1FCE381BA9F19A0090E1EB /* SpeechSynthesisTests */ = {
-			isa = PBXGroup;
-			children = (
-				7A1FCE391BA9F19A0090E1EB /* SpeechSynthesisTests.swift */,
-				7A1FCE3B1BA9F19A0090E1EB /* Info.plist */,
-			);
-			path = SpeechSynthesisTests;
-			sourceTree = "<group>";
-		};
-		7A1FCE431BA9F19A0090E1EB /* SpeechSynthesisUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7A1FCE441BA9F19A0090E1EB /* SpeechSynthesisUITests.swift */,
-				7A1FCE461BA9F19A0090E1EB /* Info.plist */,
-			);
-			path = SpeechSynthesisUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,42 +94,6 @@
 			productReference = 7A1FCE211BA9F19A0090E1EB /* SpeechSynthesis.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7A1FCE341BA9F19A0090E1EB /* SpeechSynthesisTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A1FCE4C1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisTests" */;
-			buildPhases = (
-				7A1FCE311BA9F19A0090E1EB /* Sources */,
-				7A1FCE321BA9F19A0090E1EB /* Frameworks */,
-				7A1FCE331BA9F19A0090E1EB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A1FCE371BA9F19A0090E1EB /* PBXTargetDependency */,
-			);
-			name = SpeechSynthesisTests;
-			productName = SpeechSynthesisTests;
-			productReference = 7A1FCE351BA9F19A0090E1EB /* SpeechSynthesisTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		7A1FCE3F1BA9F19A0090E1EB /* SpeechSynthesisUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A1FCE4F1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisUITests" */;
-			buildPhases = (
-				7A1FCE3C1BA9F19A0090E1EB /* Sources */,
-				7A1FCE3D1BA9F19A0090E1EB /* Frameworks */,
-				7A1FCE3E1BA9F19A0090E1EB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7A1FCE421BA9F19A0090E1EB /* PBXTargetDependency */,
-			);
-			name = SpeechSynthesisUITests;
-			productName = SpeechSynthesisUITests;
-			productReference = 7A1FCE401BA9F19A0090E1EB /* SpeechSynthesisUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,14 +106,7 @@
 				TargetAttributes = {
 					7A1FCE201BA9F19A0090E1EB = {
 						CreatedOnToolsVersion = 7.0;
-					};
-					7A1FCE341BA9F19A0090E1EB = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 7A1FCE201BA9F19A0090E1EB;
-					};
-					7A1FCE3F1BA9F19A0090E1EB = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 7A1FCE201BA9F19A0090E1EB;
+						DevelopmentTeam = 57U96AW229;
 					};
 				};
 			};
@@ -228,8 +124,6 @@
 			projectRoot = "";
 			targets = (
 				7A1FCE201BA9F19A0090E1EB /* SpeechSynthesis */,
-				7A1FCE341BA9F19A0090E1EB /* SpeechSynthesisTests */,
-				7A1FCE3F1BA9F19A0090E1EB /* SpeechSynthesisUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -247,20 +141,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A1FCE331BA9F19A0090E1EB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A1FCE3E1BA9F19A0090E1EB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -273,36 +153,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7A1FCE311BA9F19A0090E1EB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A1FCE3A1BA9F19A0090E1EB /* SpeechSynthesisTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7A1FCE3C1BA9F19A0090E1EB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7A1FCE451BA9F19A0090E1EB /* SpeechSynthesisUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7A1FCE371BA9F19A0090E1EB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A1FCE201BA9F19A0090E1EB /* SpeechSynthesis */;
-			targetProxy = 7A1FCE361BA9F19A0090E1EB /* PBXContainerItemProxy */;
-		};
-		7A1FCE421BA9F19A0090E1EB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7A1FCE201BA9F19A0090E1EB /* SpeechSynthesis */;
-			targetProxy = 7A1FCE411BA9F19A0090E1EB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7A1FCE281BA9F19A0090E1EB /* Main.storyboard */ = {
@@ -411,10 +262,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpeechSynthesis",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SpeechSynthesis/ExternalFrameworks",
+				);
 				INFOPLIST_FILE = SpeechSynthesis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -422,58 +282,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpeechSynthesis",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SpeechSynthesis/ExternalFrameworks",
+				);
 				INFOPLIST_FILE = SpeechSynthesis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		7A1FCE4D1BA9F19A0090E1EB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SpeechSynthesisTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesisTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechSynthesis.app/SpeechSynthesis";
-			};
-			name = Debug;
-		};
-		7A1FCE4E1BA9F19A0090E1EB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SpeechSynthesisTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesisTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeechSynthesis.app/SpeechSynthesis";
-			};
-			name = Release;
-		};
-		7A1FCE501BA9F19A0090E1EB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = SpeechSynthesisUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesisUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SpeechSynthesis;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		7A1FCE511BA9F19A0090E1EB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = SpeechSynthesisUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.SpeechSynthesisUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SpeechSynthesis;
-				USES_XCTRUNNER = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -494,24 +315,6 @@
 			buildConfigurations = (
 				7A1FCE4A1BA9F19A0090E1EB /* Debug */,
 				7A1FCE4B1BA9F19A0090E1EB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A1FCE4C1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A1FCE4D1BA9F19A0090E1EB /* Debug */,
-				7A1FCE4E1BA9F19A0090E1EB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A1FCE4F1BA9F19A0090E1EB /* Build configuration list for PBXNativeTarget "SpeechSynthesisUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7A1FCE501BA9F19A0090E1EB /* Debug */,
-				7A1FCE511BA9F19A0090E1EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

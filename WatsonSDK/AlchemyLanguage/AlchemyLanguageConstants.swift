@@ -37,20 +37,8 @@ public extension AlchemyLanguageConstants {
         
     }
     
-    public enum SourceText {
-        
-        case cleaned_or_raw
-        case cleaned
-        case raw
-        case cquery
-        case xpath
-        case xpath_or_raw
-        case cleaned_and_xpath
-        
-    }
-    
     /**
-     This enum is used to build the base URI for each call
+     Used to build the base URI for each call
      */
     public enum WatsonURI: String {
         case URL = "url"
@@ -58,11 +46,33 @@ public extension AlchemyLanguageConstants {
     }
     
     /**
-     This enum is used to build the full URL
+     Used to build the full URL
      */
     public enum LanguageURI: String {
+        
         case OutputMode = "outputMode"
         case KnowledgeGraph = "knowledgeGraph"
+        
+        public enum SourceText {
+            
+            case cleaned_or_raw
+            case cleaned
+            case raw
+            case cquery
+            case xpath
+            case xpath_or_raw
+            case cleaned_and_xpath
+            
+        }
+        
+    }
+    
+    /**
+     Used in getText
+    */
+    public enum TextType {
+        case Normal
+        case Raw
     }
     
 }
@@ -110,7 +120,7 @@ public extension AlchemyLanguageConstants {
 
     public static func GetEntities(fromRequestType requestType: AlchemyLanguageConstants.RequestType) -> String {
         
-        return Prefix(fromRequestType: requestType) + "GetEntities"
+        return Prefix(fromRequestType: requestType) + "GetRankedNamedEntities"
         
     }
 

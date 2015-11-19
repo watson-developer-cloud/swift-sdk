@@ -38,11 +38,21 @@ import ObjectMapper
  */
 public final class AlchemyLanguage: Service {
     
+    private typealias alcs = AlchemyLanguageConstants
+    private typealias optm = alcs.OutputMode
+    private typealias wuri = alcs.WatsonURI
+    private typealias luri = alcs.LanguageURI
+
+    
     init() {
+
+        print(AlchemyLanguageConstants.LanguageURI.SourceText.cleaned_or_raw)
+        
+        print(luri.SourceText.cleaned_or_raw)
         
         super.init(
             type: ServiceType.Alchemy,
-            serviceURL: AlchemyLanguageConstants.Calls()
+            serviceURL: alcs.Calls()
         )
         
     }
@@ -55,13 +65,13 @@ public final class AlchemyLanguage: Service {
     }
     
     /** A dictionary of parameters used in all Alchemy Language API calls */
-    private var commonParameters: [String : AnyObject] {
+    private var commonParameters: [String : String] {
         
         return [
             
-            AlchemyLanguageConstants.WatsonURI.APIKey.rawValue : _apiKey,
+            wuri.APIKey.rawValue : _apiKey,
             
-            AlchemyLanguageConstants.LanguageURI.OutputMode.rawValue : AlchemyLanguageConstants.OutputMode.JSON.rawValue
+            luri.OutputMode.rawValue : optm.JSON.rawValue
             
         ]
         
@@ -83,6 +93,26 @@ public func TextGetRankedNamedEntities() {}
 */
 public extension AlchemyLanguage {
     
+    public struct GetEntitiesParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var disambiguate: Bool? = true
+        var linkedData: Bool? = true
+        var coreference: Bool? = true
+        var quotations: Bool? = false
+        var sentiment: Bool? = false
+        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        var showSourceText: Bool? = false
+        var cquery: String?
+        var xpath: String?
+        var maxRetrieve: Int? = 50
+        var baseUrl: String?
+        var knowledgGraph: Bool? = false
+        var stucturedEntities: Bool? = true
+        
+    }
+    
     /**
      Extracts a grouped, ranked list of named entities (people, companies,
      organizations, etc.) from text, a URL or HTML.
@@ -93,27 +123,38 @@ public extension AlchemyLanguage {
      - Returns: An **Entities** object.
      */
     public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
-        url: NSURL,
-        outputMode: AlchemyLanguageConstants.OutputMode,
-        jsonp: String,
-        disambiguate: Bool = true,
-        linkedData: Bool = true,
-        coreference: Bool = true,
-        quotations: Bool = false,
-        sentiment: Bool = false,
-        sourceText: AlchemyLanguageConstants.SourceText,
-        showSourceText: Bool = false,
-        cquery: String,
-        xpath: String,
-        maxRetrieve: Int,
-        baseUrl: NSURL,
-        knowledgGraph: Int8 = 0,
-        stucturedEntities: Bool = true,
-        completionHandler: (returnValue: Entities)->() ) {
+        html: String?,
+        url: String?,
+        entitiesParameters ep: GetEntitiesParameters = GetEntitiesParameters(),
+        completionHandler: (error: NSError, returnValue: Entities)->() ) {
             
-            let accessString = _apiKey + AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let accessString = AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
             
-            print(accessString)
+            let entitiesParamDict = ep.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: entitiesParamDict)
+
+            if let html = html { parameters["html"] = html }
+            if let url = html { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let entities = Mapper<Entities>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: entities)
+                    
+            }
             
     }
     
@@ -271,7 +312,7 @@ public extension AlchemyLanguage {
         url: String?,
         useMetadata: Bool = true,
         extractLinks: Bool = false,
-        sourceText: AlchemyLanguageConstants.SourceText = AlchemyLanguageConstants.SourceText.cleaned_or_raw,
+        sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
         completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
             
             var parameters = commonParameters
@@ -303,10 +344,6 @@ public extension AlchemyLanguage {
             }
             
     }
-    
-    
-    public func URLGetRawText() {}
-    public func HTMLGetRawText() {}
     
     public func URLGetTitle() {}
     public func HTMLGetTitle() {}

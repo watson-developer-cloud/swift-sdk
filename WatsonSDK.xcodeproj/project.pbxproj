@@ -11,6 +11,9 @@
 		6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */; };
 		6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */; };
 		6E2E43021BFBDBFA00B32691 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E43011BFBDBFA00B32691 /* sample.html */; };
+		6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */; };
+		6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */; };
+		6E2E43091BFD0DD200B32691 /* biography.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E43081BFD0DD200B32691 /* biography.html */; };
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
@@ -119,6 +122,7 @@
 		7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A221BF950C800CD916E /* TextToSpeech.swift */; };
 		7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A201BF950C800CD916E /* testing.opus */; };
 		7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */; };
+		E1D5C2ED1BFCE7FD0030EBD9 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5C2EC1BFCE7FD0030EBD9 /* NSError.swift */; };
 		EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF8CA641BFBC6BF00808D92 /* Credentials.plist */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +159,9 @@
 		6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentText.swift; sourceTree = "<group>"; };
 		6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTitle.swift; sourceTree = "<group>"; };
 		6E2E43011BFBDBFA00B32691 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
+		6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageParametersProtocol.swift; sourceTree = "<group>"; };
+		6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCombineDictionaryUtil.swift; sourceTree = "<group>"; };
+		6E2E43081BFD0DD200B32691 /* biography.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = biography.html; sourceTree = "<group>"; };
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
@@ -268,6 +275,7 @@
 		7ADC3A331BF950C800CD916E /* Transformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
 		7AF96B881BF96BBB0083ED23 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		E1D5C2EC1BFCE7FD0030EBD9 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		EBF8CA641BFBC6BF00808D92 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,6 +306,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E2E43051BFCEB4F00B32691 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7A36F9931BF8DDCA005E478F = {
 			isa = PBXGroup;
 			children = (
@@ -363,7 +379,9 @@
 			children = (
 				7ADC39AB1BF950C800CD916E /* AlchemyLanguage.swift */,
 				7ADC39AC1BF950C800CD916E /* AlchemyLanguageConstants.swift */,
+				6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */,
 				7ADC39AD1BF950C800CD916E /* Models */,
+				6E2E43051BFCEB4F00B32691 /* Utils */,
 				7ADC39C11BF950C800CD916E /* Tests */,
 			);
 			name = AlchemyLanguage;
@@ -404,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				7ADC39C21BF950C800CD916E /* AlchemyLanguageTests.swift */,
+				6E2E43081BFD0DD200B32691 /* biography.html */,
 				6E2E43011BFBDBFA00B32691 /* sample.html */,
 			);
 			path = Tests;
@@ -715,6 +734,7 @@
 			children = (
 				7ADC3A321BF950C800CD916E /* Log.swift */,
 				7ADC3A331BF950C800CD916E /* Transformation.swift */,
+				E1D5C2EC1BFCE7FD0030EBD9 /* NSError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -823,6 +843,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2E43021BFBDBFA00B32691 /* sample.html in Resources */,
+				6E2E43091BFD0DD200B32691 /* biography.html in Resources */,
 				7ADC3A4A1BF951AC00CD916E /* alchemy_endpoints.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -868,6 +889,7 @@
 				7ADC3A781BF9551500CD916E /* Sentiment.swift in Sources */,
 				7ADC3A691BF9551500CD916E /* AlchemyLanguageGenericModel.swift in Sources */,
 				7ADC3A6A1BF9551500CD916E /* CombinedResults.swift in Sources */,
+				6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */,
 				7ADC3A7D1BF955FF00CD916E /* AlchemyVision.swift in Sources */,
 				7ADC3AA51BF959B800CD916E /* SpeechToTextConstants.swift in Sources */,
 				7ADC3A711BF9551500CD916E /* Keyword.swift in Sources */,
@@ -876,8 +898,10 @@
 				7ADC3A841BF9560400CD916E /* ImageLink.swift in Sources */,
 				7ADC3A791BF9551500CD916E /* Taxonomies.swift in Sources */,
 				6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */,
+				E1D5C2ED1BFCE7FD0030EBD9 /* NSError.swift in Sources */,
 				7ADC3A731BF9551500CD916E /* KnowledgeGraph.swift in Sources */,
 				7ADC3A6C1BF9551500CD916E /* DisambiguatedLinks.swift in Sources */,
+				6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
 				7AF96BB71BF996560083ED23 /* Voice.swift in Sources */,

@@ -11,19 +11,23 @@ import Starscream
 
 public class SpeechToText: Service, WebSocketDelegate {
     
+    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
     private let serviceURL = "/speech-to-text/api"
-    let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
+    private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     var socket: WebSocket?
+    var audio: NSURL?
     
-    public init(username: String, password: String) {
-        super.init(type: .Streaming, serviceURL: serviceURL)
-        self.setUsernameAndPassword(username, password: password)
+    init() {
+        super.init(serviceURL: serviceURL)
     }
     
     public func transcribe(audio: NSURL, callback: (String?) -> Void) {
-        
-        let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-        let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
+        connectWebsocket()
+        self.audio = audio
+    }
+    
+    private func connectWebsocket() {
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey) {
             token, error in
             if let token = token {
@@ -40,6 +44,14 @@ public class SpeechToText: Service, WebSocketDelegate {
     public func websocketDidConnect(socket: WebSocket) {
         print("socket connected")
         socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
+        if let audio = self.audio {
+            if let audioData = NSData(contentsOfURL: audio) {
+                print("writing audio data")
+                socket.writeData(audioData)
+                socket.writeString("{\"action\": \"stop\"}")
+                print("wrote audio data")
+            }
+        }
     }
     
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -50,7 +62,7 @@ public class SpeechToText: Service, WebSocketDelegate {
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         print("socket received message")
         print(text)
-        socket.disconnect()
+        // socket.disconnect()
     }
     
     public func websocketDidReceiveData(socket: WebSocket, data: NSData) {

@@ -324,7 +324,15 @@ class AlchemyLanguageTests: XCTestCase {
                 }
                 
                 XCTAssertNotNil(documentAuthors)
-                XCTAssertNotNil(documentAuthors.authors)
+                XCTAssertNotNil(documentAuthors.authors?.names)
+                
+                if let names = documentAuthors.authors?.names {
+                    
+                    XCTAssertNotEqual(names.count, 0)
+                    
+                }
+                
+                
                 validExpectation.fulfill()
                 
         }
@@ -345,7 +353,7 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 if error.code == 200 {
                     
-                    XCTAssertNil(documentAuthors.authors)
+                    XCTAssertNil(documentAuthors.authors?.names)
                     invalidExpectation.fulfill()
                     
                 }

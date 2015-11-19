@@ -299,13 +299,71 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testTextGetEntities() {
         
+        let validExpectation = expectationWithDescription("valid")
         
+        instance.getEntities(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_get_entities_text_valid) {
+                
+                (error, entities) in
+                
+                let ents = entities.entities
+                
+                XCTAssertNotNil(ents)
+                
+                if let entities = entities.entities {
+                    
+                    XCTAssertTrue(entities.count > 0)
+                    
+                    var countryTypeFound = false
+                    var cityTypeFound = false
+                    var personTypeFound = false
+                    
+                    for entity in entities {
+                        
+                        XCTAssertNotNil(entity.type)
+                        
+                        let unwrappedType = entity.type!
+                        
+                        switch unwrappedType {
+                        case "Country": countryTypeFound = true
+                        case "City": cityTypeFound = true
+                        case "Person" : personTypeFound = true
+                        default: func nothing(){}; nothing()
+                        }
+                        
+                    }
+                    
+                    XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
+                    
+                    validExpectation.fulfill()
+                    
+                }
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
     func testInvalidTextGetEntities() {
         
+        let invalidExpectation = expectationWithDescription("invalid")
         
+        instance.getEntities(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_get_entities_text_invalid) {
+                
+                (error, entities) in
+                
+                XCTAssertNil(entities.entities)
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     

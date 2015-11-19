@@ -65,6 +65,13 @@ public extension AlchemyLanguageConstants {
             
         }
         
+        public enum KeywordExtractMode {
+            
+            case normal
+            case strict
+            
+        }
+        
     }
     
     /**

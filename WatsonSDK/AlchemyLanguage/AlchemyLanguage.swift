@@ -135,7 +135,7 @@ public extension AlchemyLanguage {
             var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: entitiesParamDict)
 
             if let html = html { parameters["html"] = html }
-            if let url = html { parameters["url"] = url }
+            if let url = url { parameters["url"] = url }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,

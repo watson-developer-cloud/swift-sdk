@@ -15,6 +15,7 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     
     // lazy var ttsService = WatsonTextToSpeechService(username: "user", password: "password")
     
+    var player : AVAudioPlayer = AVAudioPlayer()
     var i = 0;
     
     let sayings:[String] = ["All the problems of the world could be settled easily if men were only willing to think.",
@@ -76,13 +77,15 @@ class ViewController: UIViewController, NSURLSessionDelegate {
                 if let data = data {
                 
                     do {
-                        let player = try AVAudioPlayer(data: data)
-                        player.prepareToPlay()
-                        player.play()
+                        self.player = try AVAudioPlayer(data: data)
+                        self.player.prepareToPlay()
+                        self.player.play()
                     } catch {
-                        
+                        print("Could not create AVAudioPlayer")
                     }
                         
+                } else {
+                    print("Did not receive data")
                 }
                 
             })

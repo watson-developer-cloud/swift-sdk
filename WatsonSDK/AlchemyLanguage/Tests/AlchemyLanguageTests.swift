@@ -106,8 +106,6 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 let ents = entities.entities
                 
-                print("ents: \(entities.entities), count: \(ents?.count)")
-                
                 XCTAssertNotNil(ents)
                 
                 if let entities = entities.entities {
@@ -212,8 +210,6 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 let ents = entities.entities
                 
-                print("ents: \(entities.entities), count: \(ents?.count)")
-                
                 XCTAssertNotNil(ents)
                 
                 if let entities = entities.entities {
@@ -263,8 +259,6 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, entities) in
                 
                 let ents = entities.entities
-                
-                print("ents: \(entities.entities), count: \(ents?.count)")
                 
                 XCTAssertNotNil(ents)
                 

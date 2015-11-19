@@ -97,19 +97,19 @@ public extension AlchemyLanguage {
         
         init(){}
         
-        var disambiguate: Bool? = true
-        var linkedData: Bool? = true
-        var coreference: Bool? = true
-        var quotations: Bool? = false
-        var sentiment: Bool? = false
+        var disambiguate: Int? = 1
+        var linkedData: Int? = 1
+        var coreference: Int? = 1
+        var quotations: Int? = 0
+        var sentiment: Int? = 0
         var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
-        var showSourceText: Bool? = false
-        var cquery: String?
-        var xpath: String?
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
         var maxRetrieve: Int? = 50
-        var baseUrl: String?
-        var knowledgGraph: Bool? = false
-        var stucturedEntities: Bool? = true
+        var baseUrl: String? = ""
+        var knowledgGraph: Int? = 0
+        var stucturedEntities: Int? = 1
         
     }
     
@@ -310,8 +310,8 @@ public extension AlchemyLanguage {
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
-        useMetadata: Bool = true,
-        extractLinks: Bool = false,
+        useMetadata: Int = 1,
+        extractLinks: Int = 0,
         sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
         completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
             

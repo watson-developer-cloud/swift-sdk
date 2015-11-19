@@ -369,10 +369,11 @@ http://www.alchemyapi.com/api/text/proc.html
 */
 public extension AlchemyLanguage {
     
-    // TODO: raw or not raw text parameter
+    // TODO: getText params struct above this instead
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
+        textType: alcs.TextType = alcs.TextType.Normal,
         useMetadata: Int = 1,
         extractLinks: Int = 0,
         sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
@@ -382,6 +383,9 @@ public extension AlchemyLanguage {
             
             let accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
+    
+            // TODO: raw or not raw text parameter
+//            if textType == Raw
             
             // update parameters
             if let html = html { parameters["html"] = html }

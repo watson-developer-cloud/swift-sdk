@@ -457,6 +457,30 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidURLGetTextSentiment() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getSentiment(requestType: .URL,
+            html: nil,
+            url: "http://www.sentimentAnalysisDotComShouldNotExist.com",
+            text: nil) {
+                
+                (error, sentiment) in
+                
+                let language = sentiment.language
+                
+                XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentiment.docSentiment)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     func testURLGetAuthors() {
         
         

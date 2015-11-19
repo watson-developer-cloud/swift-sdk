@@ -3,17 +3,17 @@
         <folder label="Main">
             <output>
                 <prompt selectionType="RANDOM">
-                    <item>Hello, Swift.</item>
+                    <item>Hello, I'm willow, how are you today?</item>
                 </prompt>
-                <goto ref="getUserInput_244961400" />
+                <goto ref="getUserInput_2449614" />
             </output>
-            <getUserInput id="getUserInput_244961400">
-                <search ref="folder_244961100" />
+            <getUserInput id="getUserInput_2449614">
+                <search ref="folder_2449611" />
                 <default>
                     <output>
                         <prompt selectionType="RANDOM">
                             <item>
-                                You can only ask me what I like to do.
+                                I am sorry, I did not understand you. Please try again.
                             </item>
                         </prompt>
                     </output>
@@ -21,24 +21,218 @@
             </getUserInput>
         </folder>
         <folder label="Library">
-            <folder label="Live Content" id="folder_244961100">
+            <folder label="Live Content" id="folder_2449611">
                 <input>
                     <grammar>
-                        <item>What do you like to do?</item>
+                        <item>$ hi</item>
+                        <item>$ hello</item>
+                        <item>$ hey</item>
+                        <item>$ hola</item>
                     </grammar>
                     <output>
                         <prompt selectionType="RANDOM">
                             <item>
-                                I like to get schwifty.
+                                Hi there, I'm ready to help you today
+                            </item>
+                            <item>
+                                Yo wassup g?
+                            </item>
+                            <item>
+                                What's crack a lackin dawg?
+                            </item>
+                            <item>
+                                Yo homie, how can I hook you up?
                             </item>
                         </prompt>
                     </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>What type of furniture is there?</item>
+                        <item>$ What type of furniture is there?</item>
+                        <item>$ list of furniture</item>
+                        <item>What * furniture * there</item>
+                        <item>$ furniture * there</item>
+                        <item>$ list furniture * available</item>
+                        <item>$ what furniture * have</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>We have Tables and Vases</item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>What do you sell?</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                Are you looking for furniture or art?
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>furniture</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                I found some tables
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>art</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                We have framed pictures
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>Show me a table</item>
+                        <item>$ table</item>
+                    </grammar>
+                    <action varName="CurrentModel" operator="SET_TO">table</action>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                I found this table
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>Show me a vase</item>
+                        <item>$ vase</item>
+                    </grammar>
+                    <action varName="CurrentModel" operator="SET_TO">vase</action>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>
+                                I found this vase
+                            </item>
+                        </prompt>
+                    </output>
+                </input>
+                <input>
+                    <grammar>
+                        <item>$ black</item>
+                    </grammar>
+                    <if id="modelCheck_2456241">
+                        <cond varName="CurrentModel" operator="HAS_VALUE" />
+                        <if matchType="ANY">
+                            <cond varName="CurrentModel" operator="EQUALS">table</cond>
+                            <output>
+                                <prompt selectionType="RANDOM">
+                                    <item>
+                                        I found this black table
+                                    </item>
+                                </prompt>
+                            </output>
+                        </if>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>I'm sorry, I couldn't find that item.</item>
+                            </prompt>
+                        </output>
+                    </if>
+                </input>
+                <input>
+                    <grammar>
+                        <item>$ cherry</item>
+                    </grammar>
+                    <if id="modelCheck_2456242">
+                        <cond varName="CurrentModel" operator="HAS_VALUE" />
+                        <if matchType="ANY">
+                            <cond varName="CurrentModel" operator="EQUALS">table</cond>
+                            <output>
+                                <prompt selectionType="RANDOM">
+                                    <item>
+                                        I found this cherry table
+                                    </item>
+                                </prompt>
+                            </output>
+                        </if>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>I'm sorry, I couldn't find that item.</item>
+                            </prompt>
+                        </output>
+                    </if>
+                </input>
+                <input>
+                    <grammar>
+                        <item>$ storage</item>
+                        <item>$ cubby</item>
+                        <item>$ more space</item>
+                    </grammar>
+                    <if id="modelCheck_2456243">
+                        <cond varName="CurrentModel" operator="HAS_VALUE" />
+                        <if matchType="ANY">
+                            <cond varName="CurrentModel" operator="EQUALS">table</cond>
+                            <output>
+                                <prompt selectionType="RANDOM">
+                                    <item>
+                                        I found this table with storage
+                                    </item>
+                                </prompt>
+                            </output>
+                        </if>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>I'm sorry, I couldn't find that item.</item>
+                            </prompt>
+                        </output>
+                    </if>
+                </input>
+                <input>
+                    <grammar>
+                        <item>$ less storage</item>
+                        <item>$ smaller</item>
+                        <item>$ less space</item>
+                    </grammar>
+                    <if id="modelCheck_2456244">
+                        <cond varName="CurrentModel" operator="HAS_VALUE" />
+                        <if matchType="ANY">
+                            <cond varName="CurrentModel" operator="EQUALS">table</cond>
+                            <output>
+                                <prompt selectionType="RANDOM">
+                                    <item>
+                                        I found this table with less storage
+                                    </item>
+                                </prompt>
+                            </output>
+                        </if>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>I'm sorry, I couldn't find that item.</item>
+                            </prompt>
+                        </output>
+                    </if>
                 </input>
             </folder>
             <folder label="Storage" />
         </folder>
         <folder label="Global" />
-        <folder label="Concepts" />
+        <folder label="Concepts">
+            <concept>
+                <grammar>
+                    <item>furniture</item>
+                </grammar>
+            </concept>
+        </folder>
     </flow>
     <constants>
         <var_folder name="Home" />

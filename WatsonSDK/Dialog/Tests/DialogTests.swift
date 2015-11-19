@@ -45,7 +45,7 @@ class DialogTests: XCTestCase {
      *  MARK: Tests
      */
     
-    func testConverse() {
+    /*func testConverse() {
         
         guard let dId = self.dialogId else {
             XCTFail("There was no dialogId")
@@ -91,6 +91,6 @@ class DialogTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
-    }
+    }*/
     
 }

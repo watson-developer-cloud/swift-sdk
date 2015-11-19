@@ -22,15 +22,7 @@ private struct DialogServiceConstants {
     
     static let input = "input"
     
-    static let dateFrom = "date_from"
-    
-    static let dateTo = "date_to"
-
-    static let limit = "limit"
-    
-    static let offset = "offset"
-    
-    static let nameValues = "name_values"
+    static let name = "name"
 }
 
 /**
@@ -66,10 +58,10 @@ public class DialogService: Service {
      *  - parameter conversationId: If supplied, the ID of the conversation you would like
      8  to continue.
      *  - parameter clientId: If supplied, the ID of the client that is having the conversation.
-     *
-     *  - returns: A `Conversation` object.
+     *  - parameter callback: A callback that gets invoked when the API call comes back. A
+     *  `Conversation` object is used as its parameter.
      */
-    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil, callback: (Conversation?) -> Void) {
+    public func converse(let dialogId: String, let input: String? = nil, let conversationId: Int? = nil, let clientId: Int? = nil, callback: Conversation? -> Void) {
         
         // Don't allow empty a dialogId
         guard (dialogId.characters.count > 0) else {
@@ -120,8 +112,8 @@ public class DialogService: Service {
      *  Create a conversation with Watson.
      *
      *  - parameter dialogId: The ID of the dialog XML in the Dialog service.
-     *
-     *  - returns: A `Conversation` object.
+     *  - parameter callback: A callback that gets invoked when the API call comes back. A 
+     *  `Conversation` object is used as its parameter.
      */
     public func createConversation(let dialogId: String, callback: (Conversation?) -> Void) {
         return self.converse(dialogId, callback: callback)
@@ -132,12 +124,22 @@ public class DialogService: Service {
      *
      *  - parameter name: Param 1
      *  - parameter dialogFile: Param 2
-     *
-     *  - returns: A `Dialog` object.
+     *  - parameter callback: Param 3
      */
-    /*public func createDialog(let name: String, let dialogFile: NSURL) -> Dialog {
+    public func createDialog(let name: String, let dialogFile: NSURL, callback: Dialog? -> Void) {
         
-    }*/
+        // Don't allow an empty name
+        guard (name.characters.count > 0) else {
+            print("dialogId can not be empty")
+            callback(nil)
+            return
+        }
+        
+        let endpoint = self.getEndpoint("/v1/dialogs")
+        var params = []
+        
+        // TODO: Do file upload
+    }
     
     /**
      *  Delete a dialog from Watson.

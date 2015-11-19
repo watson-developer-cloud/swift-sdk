@@ -136,7 +136,49 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testInvalidHTMLGetEntities() {
         
+        let invalidExpectation = expectationWithDescription("invalid")
         
+        let html = htmlDocumentFromURLString("http://www.nooooooooooooooo.com/")
+        
+        instance.getEntities(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, entities) in
+                
+                let ents = entities.entities
+                
+                XCTAssertNotNil(ents)
+                XCTAssertTrue(ents!.count > 0)
+                
+                let unwrappedEntities = ents!
+                
+                var countryTypeFound = false
+                var cityTypeFound = false
+                var personTypeFound = false
+                
+                for entity in unwrappedEntities {
+                    
+                    XCTAssertNotNil(entity.type)
+                    
+                    let unwrappedType = entity.type!
+                    
+                    switch unwrappedType {
+                    case "Country": countryTypeFound = true
+                    case "City": cityTypeFound = true
+                    case "Person" : personTypeFound = true
+                    default: func nothing(){}; nothing()
+                    }
+                    
+                }
+                
+                XCTAssertFalse(countryTypeFound && cityTypeFound)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     

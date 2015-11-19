@@ -26,14 +26,6 @@ import ObjectMapper
  */
 public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
     
-    public enum SentimentType {
-        
-        case POSITIVE
-        case NEUTRAL
-        case NEGATIVE
-        
-    }
-    
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int?
     
@@ -41,10 +33,8 @@ public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
     public var language: String?
     public var url: String?
     
-    // MARK: Sentiment
-    public var mixed: String?
-    public var score: Double?
-    public var type: SentimentType?
+    // MARK: DocSentiment
+    public var docSentiment: DocSentiment?
     
     
     public init?(_ map: Map) {}
@@ -59,9 +49,26 @@ public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
         url <- map["url"]
         
         // sentiment
-        mixed <- map["mixed"]
-        score <- map["score"]
-        type <- map["type"]
+        docSentiment <- map["docSentiment"]
+        
+    }
+    
+    
+    public struct DocSentiment: Mappable {
+        
+        public var mixed: String?
+        public var score: Double?
+        public var type: String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            
+            mixed <- map["mixed"]
+            score <- map["score"]
+            type <- map["type"]
+            
+        }
         
     }
     

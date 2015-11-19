@@ -218,7 +218,7 @@ public extension AlchemyLanguage {
             var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: sentimentParamDict)
             
             if let html = html { parameters["html"] = html }
-            if let url = html { parameters["url"] = url }
+            if let url = url { parameters["url"] = url }
             if let text = text { parameters["text"] = text }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
@@ -282,7 +282,7 @@ public extension AlchemyLanguage {
             var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: keywordsParamDict)
             
             if let html = html { parameters["html"] = html }
-            if let url = html { parameters["url"] = url }
+            if let url = url { parameters["url"] = url }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,

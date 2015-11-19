@@ -94,7 +94,8 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getEntities(requestType: .HTML,
             html: html,
-            url: nil) {
+            url: nil,
+            text: nil) {
                 
                 (error, entities) in
                 
@@ -147,7 +148,8 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getEntities(requestType: .HTML,
             html: html,
-            url: nil) {
+            url: nil,
+            text: nil) {
                 
                 (error, entities) in
                 
@@ -198,7 +200,8 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getEntities(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin") {
+            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            text: nil) {
                 
                 (error, entities) in
                 
@@ -249,7 +252,8 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getEntities(requestType: .URL,
             html: nil,
-            url: "http://www.nooooooooooooooo.com/") {
+            url: "http://www.nooooooooooooooo.com/",
+            text: nil) {
                 
                 (error, entities) in
                 
@@ -291,6 +295,7 @@ class AlchemyLanguageTests: XCTestCase {
         }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
     }
     
     func testTextGetEntities() {

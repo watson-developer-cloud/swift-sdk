@@ -90,7 +90,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("https://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
         
         instance.getEntities(requestType: .HTML,
             html: html,
@@ -100,33 +100,38 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 let ents = entities.entities
                 
+                print("ents: \(entities.entities), count: \(ents?.count)")
+                
                 XCTAssertNotNil(ents)
-                XCTAssertTrue(ents!.count > 0)
                 
-                let unwrappedEntities = ents!
-                
-                var countryTypeFound = false
-                var cityTypeFound = false
-                var personTypeFound = false
-                
-                for entity in unwrappedEntities {
+                if let entities = entities.entities {
                     
-                    XCTAssertNotNil(entity.type)
+                    XCTAssertTrue(entities.count > 0)
                     
-                    let unwrappedType = entity.type!
+                    var countryTypeFound = false
+                    var cityTypeFound = false
+                    var personTypeFound = false
                     
-                    switch unwrappedType {
-                    case "Country": countryTypeFound = true
-                    case "City": cityTypeFound = true
-                    case "Person" : personTypeFound = true
-                    default: func nothing(){}; nothing()
+                    for entity in entities {
+                        
+                        XCTAssertNotNil(entity.type)
+                        
+                        let unwrappedType = entity.type!
+                        
+                        switch unwrappedType {
+                        case "Country": countryTypeFound = true
+                        case "City": cityTypeFound = true
+                        case "Person" : personTypeFound = true
+                        default: func nothing(){}; nothing()
+                        }
+                        
                     }
                     
+                    XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
+                    
+                    validExpectation.fulfill()
+                    
                 }
-                
-                XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
-                
-                validExpectation.fulfill()
                 
         }
         
@@ -149,32 +154,37 @@ class AlchemyLanguageTests: XCTestCase {
                 let ents = entities.entities
                 
                 XCTAssertNotNil(ents)
-                XCTAssertTrue(ents!.count > 0)
                 
-                let unwrappedEntities = ents!
-                
-                var countryTypeFound = false
-                var cityTypeFound = false
-                var personTypeFound = false
-                
-                for entity in unwrappedEntities {
+                if let entities = entities.entities {
                     
-                    XCTAssertNotNil(entity.type)
+                    XCTAssertTrue(ents!.count > 0)
                     
-                    let unwrappedType = entity.type!
+                    let unwrappedEntities = ents!
                     
-                    switch unwrappedType {
-                    case "Country": countryTypeFound = true
-                    case "City": cityTypeFound = true
-                    case "Person" : personTypeFound = true
-                    default: func nothing(){}; nothing()
+                    var countryTypeFound = false
+                    var cityTypeFound = false
+                    var personTypeFound = false
+                    
+                    for entity in unwrappedEntities {
+                        
+                        XCTAssertNotNil(entity.type)
+                        
+                        let unwrappedType = entity.type!
+                        
+                        switch unwrappedType {
+                        case "Country": countryTypeFound = true
+                        case "City": cityTypeFound = true
+                        case "Person" : personTypeFound = true
+                        default: func nothing(){}; nothing()
+                        }
+                        
                     }
                     
+                    XCTAssertFalse(countryTypeFound && cityTypeFound)
+                    
+                    invalidExpectation.fulfill()
+                    
                 }
-                
-                XCTAssertFalse(countryTypeFound && cityTypeFound)
-                
-                invalidExpectation.fulfill()
                 
         }
         
@@ -194,33 +204,38 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 let ents = entities.entities
                 
+                print("ents: \(entities.entities), count: \(ents?.count)")
+                
                 XCTAssertNotNil(ents)
-                XCTAssertTrue(ents!.count > 0)
                 
-                let unwrappedEntities = ents!
-                
-                var countryTypeFound = false
-                var cityTypeFound = false
-                var personTypeFound = false
-                
-                for entity in unwrappedEntities {
+                if let entities = entities.entities {
                     
-                    XCTAssertNotNil(entity.type)
+                    XCTAssertTrue(entities.count > 0)
                     
-                    let unwrappedType = entity.type!
+                    var countryTypeFound = false
+                    var cityTypeFound = false
+                    var personTypeFound = false
                     
-                    switch unwrappedType {
-                    case "Country": countryTypeFound = true
-                    case "City": cityTypeFound = true
-                    case "Person" : personTypeFound = true
-                    default: func nothing(){}; nothing()
+                    for entity in entities {
+                        
+                        XCTAssertNotNil(entity.type)
+                        
+                        let unwrappedType = entity.type!
+                        
+                        switch unwrappedType {
+                        case "Country": countryTypeFound = true
+                        case "City": cityTypeFound = true
+                        case "Person" : personTypeFound = true
+                        default: func nothing(){}; nothing()
+                        }
+                        
                     }
                     
+                    XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
+                    
+                    validExpectation.fulfill()
+                    
                 }
-                
-                XCTAssertTrue(countryTypeFound && cityTypeFound && personTypeFound)
-                
-                validExpectation.fulfill()
                 
         }
         

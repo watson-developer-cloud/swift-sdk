@@ -20,22 +20,26 @@ public class NaturalLanguageClassifier : Service {
      
      - parameter completionHandler: Callback with [Classifier]?
      */
-    public func getClassifiers(completionHandler: ([Classifier]?)->()) {
+    public func getClassifiers(completionHandler: ([Classifier]?, error: NSError?)->()) {
         let endpoint = getEndpoint(NLCConstants.v1ClassifiersURI)
         
         NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
             var classifiers : [Classifier] = []
             
-            if case let data as Dictionary<String,AnyObject> = response.data {
-                if case let rawClassifiers as [AnyObject] = data[NLCConstants.classifiers] {
-                    for rawClassifier in rawClassifiers {
-                        if let classifier = Mapper<Classifier>().map(rawClassifier) {
-                            classifiers.append(classifier)
+            if(response.code == 200) {
+                if case let data as Dictionary<String,AnyObject> = response.data {
+                    if case let rawClassifiers as [AnyObject] = data[NLCConstants.classifiers] {
+                        for rawClassifier in rawClassifiers {
+                            if let classifier = Mapper<Classifier>().map(rawClassifier) {
+                                classifiers.append(classifier)
+                            }
                         }
                     }
                 }
+                completionHandler(classifiers, error: nil)
+            } else {
+                completionHandler(nil, error: response.error)
             }
-            completionHandler(classifiers)
         })
     }
     
@@ -46,17 +50,23 @@ public class NaturalLanguageClassifier : Service {
      - parameter text:              Phrase to classify
      - parameter completionHandler: Callback with Classification?
      */
-    public func classify(classifierId: String, text: String, completionHandler: (Classification?)->()) {
+    public func classify(classifierId: String, text: String, completionHandler: (classification: Classification?, error: NSError?)->()) {
+
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)/classify")
         
-        guard (classifierId.characters.count > 0) else {
-            Log.sharedLogger.error("ClassifierId is empty")
-            completionHandler(nil)
+        var errorDescription = ""
+        guard (!classifierId.isEmpty) else {
+            errorDescription = "ClassifierId input is empty"
+            Log.sharedLogger.error("\(errorDescription)")
+            let error = NSError.createWatsonError(400, description: errorDescription)
+            completionHandler(classification: nil, error: error)
             return
         }
-        guard (text.characters.count > 0) else {
-            Log.sharedLogger.error("text input is empty")
-            completionHandler(nil)
+        guard (!text.isEmpty) else {
+            errorDescription = "Text input is empty"
+            Log.sharedLogger.error("\(errorDescription)")
+            let error = NSError.createWatsonError(400, description: errorDescription)
+            completionHandler(classification: nil, error: error)
             return
         }
         
@@ -66,12 +76,12 @@ public class NaturalLanguageClassifier : Service {
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             if response.code == 200 {
                 if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(Mapper<Classification>().map(data))
+                    completionHandler(classification: Mapper<Classification>().map(data), error: nil)
                     return
                 }
             }
             Log.sharedLogger.warning("No classifier found with given ID")
-            completionHandler(nil)
+            completionHandler(classification: nil, error: response.error)
         })
     }
     
@@ -81,21 +91,21 @@ public class NaturalLanguageClassifier : Service {
      - parameter classifierId:      The classifer ID used to retrieve the classifier
      - parameter completionHandler: Callback with Classifer?
      */
-    public func getClassifier( classifierId: String, completionHandler: (Classifier?)->()) {
+    public func getClassifier( classifierId: String, completionHandler: (classifier: Classifier?, error: NSError?)->()) {
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
             if response.code == 200 {
                 if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(Mapper<Classifier>().map(data))
+                    completionHandler(classifier: Mapper<Classifier>().map(data), error: nil)
                 }
                 else {
-                    completionHandler(nil)
+                    completionHandler(classifier: nil, error: response.error)
                 }
             }
             else {
                 Log.sharedLogger.warning("No classifier found with given ID")
-                completionHandler(nil)
+                completionHandler(classifier: nil, error: response.error)
             }
         })
     }
@@ -106,7 +116,7 @@ public class NaturalLanguageClassifier : Service {
      - parameter classifierId:      The classifer ID used to delete the classifier
      - parameter completionHandler: Bool return with true as success
      */
-    public func deleteClassifier( classifierId: String, completionHandler: (Bool)->()) {
+    public func deleteClassifier(classifierId: String, completionHandler: (Bool)->()) {
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], apiKey: _apiKey, completionHandler: {response in

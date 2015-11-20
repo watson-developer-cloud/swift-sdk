@@ -14,7 +14,9 @@ class NaturalLanguageClassifierTests: XCTestCase {
     /// Language translation service
     private let service = NaturalLanguageClassifier()
     
+    // this will change based on login instance
     private var classifierIdInstanceId = "0235B6x12-nlc-767"
+    
     private static var classifierIdInstanceIdToDelete: String?
     
     /// Timeout for an asynchronous call to return before failing the unit test
@@ -41,7 +43,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     func testGetClassifiers() {
         let positiveExpectation = expectationWithDescription("Get All Classifiers")
         
-        service.getClassifiers({(classifiers:[Classifier]?) in
+        service.getClassifiers({(classifiers:[Classifier]?, error) in
             XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
             positiveExpectation.fulfill()
         })
@@ -71,13 +73,13 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectationValid = expectationWithDescription("Valid Expected")
         let expectationInvalid = expectationWithDescription("Invalid Expect")
         
-        service.getClassifier("MISSING_CLASSIFIER_ID", completionHandler:{(classifier:Classifier?) in
+        service.getClassifier("MISSING_CLASSIFIER_ID", completionHandler:{(classifier:Classifier?, error) in
             XCTAssertNil(classifier,"Expected no classifier to be return for invalid id")
             expectationInvalid.fulfill()
         })
         
         // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
-        service.getClassifier(self.classifierIdInstanceId, completionHandler:{(classifier:Classifier?) in
+        service.getClassifier(self.classifierIdInstanceId, completionHandler:{(classifier:Classifier?, error) in
             guard let classifier = classifier else {
                 XCTFail("Expected non-nil model to be returned")
                 return
@@ -89,18 +91,17 @@ class NaturalLanguageClassifierTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
-    
     func testClassify() {
         let expectationValid = expectationWithDescription("Valid Expectation")
         let expectationInvalid = expectationWithDescription("Invalid Expectation")
         
-        service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification:Classification?) in
+        service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification, error) in
             XCTAssertNil(classification,"Expected no classifier to be return for invalid id")
             expectationInvalid.fulfill()
         })
         
         // please note this test expects the classifier to be ready
-        service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification:Classification?) in
+        service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
             XCTAssertNotNil(classification,"Expected object not nil")
             XCTAssertEqual(classification!.id, self.classifierIdInstanceId,"Expected to get id requested in classifier")
             XCTAssertLessThan(1, (classification!.classes!.count) as Int,"Expected to get more than one class")
@@ -147,7 +148,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     func  DeleteClassifiers() {
         let expectationValid = expectationWithDescription("Valid Expectation")
-        service.getClassifiers({(classifiers:[Classifier]?) in
+        service.getClassifiers({(classifiers:[Classifier]?, error) in
             for classifier in classifiers! {
                 if(classifier.id !=  self.classifierIdInstanceId) {
                     self.service.deleteClassifier(classifier.id!, completionHandler:{(classifier:Bool?) in
@@ -157,6 +158,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             }
             expectationValid.fulfill()
         })
+        
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
 }

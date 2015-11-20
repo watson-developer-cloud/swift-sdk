@@ -18,15 +18,18 @@ import Foundation
 import AVFoundation
 import ObjectMapper
 
-
+//TODO: doc
 public protocol TextToSpeechService
 {
+    //TODO: doc
     func synthesize ( theText:String, voice: String, oncompletion: (data: NSData?, error:NSError?) -> Void )
     
+    //TODO: doc
     func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
     
 }
 
+//TODO: doc
 public class TextToSpeech : Service, TextToSpeechService
 {
     // Provides the Opus/Ogg decompression
@@ -41,97 +44,96 @@ public class TextToSpeech : Service, TextToSpeechService
     public init() {
         
         super.init(type: .Streaming, serviceURL: _serviceURL)
-       
+        
     }
     
     /**
-     This function invokes a call to synthesize text and decompress the audio to 
+     This function invokes a call to synthesize text and decompress the audio to
      produce a WAVE formatted NSData
-
+     
      - parameter theText:           String that will be synthesized
      - parameter voice:             String specifying the voice name
      - parameter oncompletion:      Callback function that will present the WAVE data
-    */
+     */
     public func synthesize(theText: String,
         voice: String = "",
         oncompletion: (data: NSData?, error:NSError?) -> Void ) {
-        
-        let endpoint = getEndpoint("/v1/synthesize")
             
+            let endpoint = getEndpoint("/v1/synthesize")
             
-        if (theText == "")
-        {
-            let error = NSError.createWatsonError(404,
-                description: "Cannot synthesize an empty string")
-            oncompletion(data: nil, error: error)
-            return
-        }
+            //REVIEW: Changed from "" to isEmpty
+            if (theText.isEmpty)
+            {
+                let error = NSError.createWatsonError(404,
+                    description: "Cannot synthesize an empty string")
+                oncompletion(data: nil, error: error)
+                return
+            }
             
-        var params = Dictionary<String, String>()
-        params.updateValue(theText, forKey: "text")
-        // Opus codec is the default, so the accept type is optional
-        // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
-        
-        if (voice != "")
-        {
-            params.updateValue(voice, forKey: "voice")
-        }
-        
-        
-        NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
-            parameters: params,
-            contentType: .AUDIO_OPUS,
-            accept: .AUDIO_OPUS,
-            apiKey: _apiKey,
-            completionHandler: {
+            var params = Dictionary<String, String>()
+            params.updateValue(theText, forKey: "text")
+            // Opus codec is the default, so the accept type is optional
+            // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
             
-            response in
-                
-                if let data = response.data as? NSData {
+            //REVIEW: isEmpty
+            if (!voice.isEmpty)
+            {
+                params.updateValue(voice, forKey: "voice")
+            }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
+                parameters: params,
+                contentType: .AUDIO_OPUS,
+                accept: .AUDIO_OPUS,
+                apiKey: _apiKey,
+                completionHandler: {
                     
-                    let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
-                    let waveData = self.addWaveHeader(pcm)
+                    response in
                     
-                    oncompletion(data: waveData, error: response.error)
+                    if let data = response.data as? NSData {
+                        
+                        let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
+                        let waveData = self.addWaveHeader(pcm)
+                        
+                        oncompletion(data: waveData, error: response.error)
+                        
+                    } else {
+                        oncompletion(data: nil, error: response.error)
+                    }
                     
-                } else {
-                    oncompletion(data: nil, error: response.error)
-                }
+            })
             
-        })
-    
     }
     
     /**
      This function returns a list of voices that Watson supports
      
      - parameter oncompletion:      Callback function that presents an array of Voices
-    */
+     */
     public func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void ) {
         let endpoint = getEndpoint("/v1/voices")
         
         NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey,
             completionHandler: {response in
-            
-            var voices : [Voice] = []
-            
-            if case let data as Dictionary<String, AnyObject> = response.data {
                 
-                if case let rawVoices as [AnyObject] = data["voices"]
-                {
-                    for rawVoice in rawVoices {
-                        if let voice = Mapper<Voice>().map(rawVoice) {
-                            voices.append(voice)
+                var voices : [Voice] = []
+                
+                if case let data as Dictionary<String, AnyObject> = response.data {
+                    
+                    if case let rawVoices as [AnyObject] = data["voices"]
+                    {
+                        for rawVoice in rawVoices {
+                            if let voice = Mapper<Voice>().map(rawVoice) {
+                                voices.append(voice)
+                            }
                         }
                     }
+                    
                 }
                 
-            }
-           
-            
-            oncompletion(voices: voices, error: response.error)
+                oncompletion(voices: voices, error: response.error)
         })
-
+        
     }
     
     /**
@@ -139,7 +141,7 @@ public class TextToSpeech : Service, TextToSpeechService
      
      - parameter data:      Contains PCM (pulse coded modulation) raw data for audio
      - returns:             WAVE formatted header prepended to the data
-    **/
+     **/
     private func addWaveHeader(data: NSData) -> NSData {
         
         let headerSize: Int = 44
@@ -204,15 +206,4 @@ public class TextToSpeech : Service, TextToSpeechService
         
         return newWavData
     }
-    
-    
-    
-
 }
-    
-    
-    
- 
-
-    
-    

@@ -20,7 +20,7 @@ public class NaturalLanguageClassifier : Service {
      
      - parameter completionHandler: Callback with [Classifier]?
      */
-    public func getClassifiers(completionHandler: ([Classifier]?, error: NSError?)->()) {
+    public func getClassifiers(completionHandler: ([Classifier]?, NSError?)->()) {
         let endpoint = getEndpoint(NLCConstants.v1ClassifiersURI)
         
         NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
@@ -36,9 +36,9 @@ public class NaturalLanguageClassifier : Service {
                         }
                     }
                 }
-                completionHandler(classifiers, error: nil)
+                completionHandler(classifiers, nil)
             } else {
-                completionHandler(nil, error: response.error)
+                completionHandler(nil, response.error)
             }
         })
     }
@@ -50,7 +50,7 @@ public class NaturalLanguageClassifier : Service {
      - parameter text:              Phrase to classify
      - parameter completionHandler: Callback with Classification?
      */
-    public func classify(classifierId: String, text: String, completionHandler: (classification: Classification?, error: NSError?)->()) {
+    public func classify(classifierId: String, text: String, completionHandler: (Classification?, NSError?)->()) {
 
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)/classify")
         
@@ -59,14 +59,14 @@ public class NaturalLanguageClassifier : Service {
             errorDescription = "ClassifierId input is empty"
             Log.sharedLogger.error("\(errorDescription)")
             let error = NSError.createWatsonError(400, description: errorDescription)
-            completionHandler(classification: nil, error: error)
+            completionHandler(nil, error)
             return
         }
         guard (!text.isEmpty) else {
             errorDescription = "Text input is empty"
             Log.sharedLogger.error("\(errorDescription)")
             let error = NSError.createWatsonError(400, description: errorDescription)
-            completionHandler(classification: nil, error: error)
+            completionHandler(nil, error)
             return
         }
         
@@ -76,12 +76,12 @@ public class NaturalLanguageClassifier : Service {
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
             if response.code == 200 {
                 if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(classification: Mapper<Classification>().map(data), error: nil)
+                    completionHandler(Mapper<Classification>().map(data), nil)
                     return
                 }
             }
             Log.sharedLogger.warning("No classifier found with given ID")
-            completionHandler(classification: nil, error: response.error)
+            completionHandler(nil, response.error)
         })
     }
     
@@ -91,21 +91,21 @@ public class NaturalLanguageClassifier : Service {
      - parameter classifierId:      The classifer ID used to retrieve the classifier
      - parameter completionHandler: Callback with Classifer?
      */
-    public func getClassifier( classifierId: String, completionHandler: (classifier: Classifier?, error: NSError?)->()) {
+    public func getClassifier( classifierId: String, completionHandler: (Classifier?, NSError?)->()) {
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
             if response.code == 200 {
                 if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(classifier: Mapper<Classifier>().map(data), error: nil)
+                    completionHandler(Mapper<Classifier>().map(data), nil)
                 }
                 else {
-                    completionHandler(classifier: nil, error: response.error)
+                    completionHandler(nil, response.error)
                 }
             }
             else {
                 Log.sharedLogger.warning("No classifier found with given ID")
-                completionHandler(classifier: nil, error: response.error)
+                completionHandler(nil, response.error)
             }
         })
     }

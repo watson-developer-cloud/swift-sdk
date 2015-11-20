@@ -26,8 +26,8 @@ public class PersonalityInsights: Service {
      - parameter acceptLanguage: The desired language of the response. Both English ("en") and Spanish ("es") are supported
      - parameter callback:       Method to be invoked with the populated Profile object
      */
-    public func getProfile(text:String, includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?)->()) {
-        getProfile(text, contentItems: nil, includeRaw:includeRaw, language:language, acceptLanguage:acceptLanguage, callback:callback)
+    public func getProfile(text:String, includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?, NSError?)->()) {
+        getProfile(text, contentItems: nil, includeRaw:includeRaw, language:language, acceptLanguage:acceptLanguage, callback:(callback))
     }
     
     /**
@@ -39,14 +39,14 @@ public class PersonalityInsights: Service {
      - parameter acceptLanguage: The desired language of the response. Both English ("en") and Spanish ("es") are supported
      - parameter callback:       Method to be invoked with the populated Profile object
      */
-    public func getProfile(contentItems:[ContentItem], includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?)->()) {
+    public func getProfile(contentItems:[ContentItem], includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?, NSError?)->()) {
         getProfile(nil, contentItems:contentItems, includeRaw:includeRaw, language:language, acceptLanguage:acceptLanguage, callback:callback)
     }
 
     /**
      Private function that both getProfile() methods flow through for code reuse
      */
-    private func getProfile(text:String? = nil, contentItems:[ContentItem]? = nil, includeRaw: Bool, language:String, acceptLanguage:String, callback: (Profile?)->()) {
+    private func getProfile(text:String? = nil, contentItems:[ContentItem]? = nil, includeRaw: Bool, language:String, acceptLanguage:String, callback: (Profile?, NSError?)->()) {
         let endpoint = getEndpoint("/v2/profile")
         
         var params = Dictionary<String, AnyObject>()
@@ -77,7 +77,7 @@ public class PersonalityInsights: Service {
         params.updateValue(includeRaw, forKey: PersonalityInsightsConstants.includeRaw)
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: HTTPMethod.POST, contentType:ContentType.Text, parameters: params, apiKey: _apiKey, completionHandler: {response in
-            callback(Mapper<Profile>().map(response.data))
+            callback(Mapper<Profile>().map(response.data), response.error)
         })
     }    
 }

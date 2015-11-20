@@ -215,8 +215,11 @@ public class LanguageTranslation: Service {
             queryParams.updateValue(name, forKey: LanguageTranslationConstants.name)
         }
         
+        var fileParams = Dictionary<String,NSURL>()
+        fileParams.updateValue(fileURL, forKey: fileKey)
+        
         let endpoint = getEndpoint("/v2/models")
-        NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLKey: fileKey, fileURL: fileURL, parameters: queryParams, apiKey: _apiKey, completionHandler: {response in
+        NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLs: fileParams, parameters: queryParams, apiKey: _apiKey, completionHandler: {response in
             callback(Mapper<TranslationModel>().map(response.data))
         })
     }

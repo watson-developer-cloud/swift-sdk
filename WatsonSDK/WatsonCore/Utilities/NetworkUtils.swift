@@ -151,16 +151,18 @@ public class NetworkUtils {
      - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
      - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
      */
-    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLKey: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLs: [String:NSURL], parameters: [String: AnyObject]=[:], apiKey: String? = nil, contentType: ContentType = ContentType.URLEncoded, accept: ContentType = ContentType.URLEncoded, completionHandler: (returnValue: CoreResponse) -> ()) {
         
         Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart")
         
-        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey: apiKey),
+        Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(contentType, accept: accept, apiKey: apiKey),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
                     multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: key)
                 }
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: fileURLKey)
+                for (fileKey, fileValue) in fileURLs {
+                    multipartFormData.appendBodyPart(fileURL: fileValue, name: fileKey)
+                }
             },
             encodingCompletion: { encodingResult in
                 Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart.encodingCompletion")

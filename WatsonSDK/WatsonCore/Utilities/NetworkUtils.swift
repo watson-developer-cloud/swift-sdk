@@ -29,76 +29,10 @@ public enum ContentType: String {
     case AUDIO_FLAC =   "audio/flac"
 }
 
-/**
- HTTP Methods used for REST operations
- 
- - GET:    Get
- - POST:   Post
- - PUT:    Put
- - DELETE: Delete
- */
- // typealias HTTPMethod = Alamofire.Method
-public enum HTTPMethod: String {
-    case GET
-    case POST
-    case PUT
-    case DELETE
-    
-    /**
-     Converts enum value from Watson HTTP methods to Alamofire methods, so that projects don't have to import Alamofire
-     
-     - returns: Equivalent Alamofire method
-     */
-    func toAlamofireMethod() -> Alamofire.Method
-    {
-        switch self {
-        case .GET:
-            return Alamofire.Method.GET
-        case .POST:
-            return Alamofire.Method.POST
-        case .PUT:
-            return Alamofire.Method.PUT
-        case .DELETE:
-            return Alamofire.Method.DELETE
-        }
-    }
-}
-
-/**
- Enumeration of possible parameter encodings used in Watson iOS SDK
- 
- - URL:                                 A query string to be set as or appended to any existing URL query for GET, HEAD, and DELETE requests, or set as the body for requests with any other HTTP method.
- - URLEncodedInURL:                    Creates query string to be set as or appended to any existing URL query.
- - JSON:                               Uses NSJSONSerialization to create a JSON representation of the parameters object, which is set as the body of the request.
- - PropertyList:                       Uses NSPropertyListSerialization to create a plist representation of the parameters object.
- - Custom->:                           Uses the associated closure value to construct a new request given an existing request and parameters.
- */
-public enum ParameterEncoding {
-    case URL
-    case URLEncodedInURL
-    case JSON
-    case PropertyList(NSPropertyListFormat, NSPropertyListWriteOptions)
-    case Custom((URLRequestConvertible, [String: AnyObject]?) -> (NSMutableURLRequest, NSError?))
-    
-    /**
-     Converts enum value from Watson parameter encodings to Alamofire encdogins, so that projects don't have to import Alamofire
-     
-     - returns: Equivalent Alamofire parameter encoding
-     */
-    func toAlamofireParameterEncoding()->Alamofire.ParameterEncoding {
-        switch(self) {
-        case ParameterEncoding.URL:
-            return Alamofire.ParameterEncoding.URL
-        case ParameterEncoding.URLEncodedInURL:
-            return Alamofire.ParameterEncoding.URLEncodedInURL
-        case ParameterEncoding.JSON:
-            return Alamofire.ParameterEncoding.JSON
-        default:
-            Log.sharedLogger.error("Unexpected parameter encoding conversion")
-            return Alamofire.ParameterEncoding.URL
-        }
-    }
-}
+/// Alias to HTTPMethod to remove dependency on Alamofire from individual projects
+public typealias HTTPMethod = Alamofire.Method
+/// Alias to ParameterEncoding to remove dependency on Alamofire from individual projects
+public typealias ParameterEncoding = Alamofire.ParameterEncoding
 
 /// Networking utilities used for performing REST operations into Watson services and parsing the input
 public class NetworkUtils {
@@ -166,7 +100,7 @@ public class NetworkUtils {
         
         Log.sharedLogger.debug("Entered performBasicAuthRequest")
         
-        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters, encoding: encoding.toAlamofireParameterEncoding(), headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
+        Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .debugLog()
             .responseJSON {response in
@@ -199,7 +133,7 @@ public class NetworkUtils {
         
         Log.sharedLogger.debug("Entered performRequest")
         
-        Alamofire.request(method.toAlamofireMethod(), url, parameters: parameters)
+        Alamofire.request(method, url, parameters: parameters)
             .debugLog()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performRequest.responseJSON")

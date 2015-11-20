@@ -30,7 +30,7 @@ public class VisionImpl: Service {
    - parameter inputString:       The string that contains the URL or the HTML text
    - parameter completionHandler: ImageLink object is returned in the completionHandler
    */
-  public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (returnValue: ImageLink) ->() ) {
+    public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (ImageLink?, NSError?) ->() ) {
   
     var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
     var visionUrl = ""
@@ -43,7 +43,7 @@ public class VisionImpl: Service {
       params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.URL.rawValue)
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
-        completionHandler(returnValue: imageLink)
+        completionHandler(imageLink, nil)
       })
       
       break
@@ -55,7 +55,7 @@ public class VisionImpl: Service {
       params.updateValue(_apiKey, forKey: "apikey")
       NetworkUtils.performBasicAuthRequest(visionUrl, method: HTTPMethod.POST, parameters: params, encoding: ParameterEncoding.URL, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
-        completionHandler(returnValue: imageLink)
+        completionHandler(imageLink, nil)
       })
         break
     }
@@ -71,7 +71,7 @@ public class VisionImpl: Service {
    - parameter knowledgeGraph:    Possible values: 0 (default), 1
    - parameter callback:          Callback with ImageKeyWords through the completion handler
    */
-  public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageKeyWords) ->() ) {
+  public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords, NSError?) ->() ) {
     
     var endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
     var visionUrl = ""
@@ -87,7 +87,7 @@ public class VisionImpl: Service {
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageKeywords = Mapper<ImageKeyWords>().map(data)!
         }
-        completionHandler(returnValue: imageKeywords)
+        completionHandler(imageKeywords, nil)
       })
       
       break
@@ -101,7 +101,7 @@ public class VisionImpl: Service {
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageKeywords = Mapper<ImageKeyWords>().map(data)!
         }
-        completionHandler(returnValue: imageKeywords)
+        completionHandler(imageKeywords, nil)
       })
       break
     }
@@ -117,7 +117,7 @@ public class VisionImpl: Service {
    - parameter knowledgeGraph:  Possible values: 0 (default), 1
    - parameter callback:        Callback with ImageKeyWords through the completion handler
    */
-  public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (returnValue: ImageFaceTags) ->() ) {
+  public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) ->() ) {
   
     var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
     var visionUrl = ""
@@ -134,7 +134,7 @@ public class VisionImpl: Service {
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
         }
-        completionHandler(returnValue: imageFaceTags)
+        completionHandler(imageFaceTags, nil)
       })
       
       break
@@ -148,7 +148,7 @@ public class VisionImpl: Service {
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
         }
-        completionHandler(returnValue: imageFaceTags)
+        completionHandler(imageFaceTags, nil)
       })
       break
     }

@@ -123,7 +123,10 @@ service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 
 ## License
 
-Probably Apache 2.0
+This library is licensed under Apache 2.0. Full license text is
+available in [LICENSE](LICENSE).
+
+This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
 ## Contributing
 

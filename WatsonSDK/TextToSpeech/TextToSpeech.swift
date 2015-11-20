@@ -18,18 +18,35 @@ import Foundation
 import AVFoundation
 import ObjectMapper
 
-//TODO: doc
+/**
+ *  Protocol defining the Watson Text to Speech service.
+ */
 public protocol TextToSpeechService
 {
-    //TODO: doc
-    func synthesize ( theText:String, voice: String, oncompletion: (data: NSData?, error:NSError?) -> Void )
+    /**
+     This function invokes a call to synthesize text and decompress the audio to
+     produce a WAVE formatted NSData.
+     
+     - parameter theText:           String that will be synthesized
+     - parameter voice:             String specifying the voice name
+     - parameter oncompletion:      Callback function that will present the WAVE data
+     */
+    func synthesize ( theText:String, voice: String,
+        oncompletion: (data: NSData?, error:NSError?) -> Void )
     
-    //TODO: doc
+    /**
+     This function returns a list of voices (gender, language, dialect) supported.
+     
+     - parameter oncompletion:      Callback function that presents an array of Voices
+     */
     func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
     
 }
 
-//TODO: doc
+
+/**
+ * Implementation for the Watson Text To Speech protocol.
+ */
 public class TextToSpeech : Service, TextToSpeechService
 {
     // Provides the Opus/Ogg decompression
@@ -49,7 +66,7 @@ public class TextToSpeech : Service, TextToSpeechService
     
     /**
      This function invokes a call to synthesize text and decompress the audio to
-     produce a WAVE formatted NSData
+     produce a WAVE formatted NSData.
      
      - parameter theText:           String that will be synthesized
      - parameter voice:             String specifying the voice name
@@ -61,7 +78,6 @@ public class TextToSpeech : Service, TextToSpeechService
             
             let endpoint = getEndpoint("/v1/synthesize")
             
-            //REVIEW: Changed from "" to isEmpty
             if (theText.isEmpty)
             {
                 let error = NSError.createWatsonError(404,
@@ -75,7 +91,6 @@ public class TextToSpeech : Service, TextToSpeechService
             // Opus codec is the default, so the accept type is optional
             // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
             
-            //REVIEW: isEmpty
             if (!voice.isEmpty)
             {
                 params.updateValue(voice, forKey: "voice")
@@ -106,7 +121,7 @@ public class TextToSpeech : Service, TextToSpeechService
     }
     
     /**
-     This function returns a list of voices that Watson supports
+     This function returns a list of voices supported.
      
      - parameter oncompletion:      Callback function that presents an array of Voices
      */
@@ -137,7 +152,8 @@ public class TextToSpeech : Service, TextToSpeechService
     }
     
     /**
-     This function converts a PCM of UInt16s to a WAVE file by prepending a header
+     This helper method converts a PCM of UInt16s produced by the Opus codec
+     to a WAVE file by prepending a WAVE header.
      
      - parameter data:      Contains PCM (pulse coded modulation) raw data for audio
      - returns:             WAVE formatted header prepended to the data

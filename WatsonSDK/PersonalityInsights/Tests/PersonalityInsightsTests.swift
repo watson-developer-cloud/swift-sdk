@@ -41,11 +41,11 @@ class PersonalityInsightsTests: XCTestCase {
         
         let text = "Call me Ishmael. Some years ago-never mind how long precisely-having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off-then, I account it high time to get to sea as soon as I can."
         
-        service.getProfile(text, callback:{(profile:Profile?) in
+        service.getProfile(text, callback:{(profile:Profile?, error) in
             notEnoughWords.fulfill()
         })
 
-        service.getProfile(inputText!, callback:{(profile:Profile?) in
+        service.getProfile(inputText!, callback:{(profile, error) in
             XCTAssertNotNil(profile,"Profile should not be nil")
             XCTAssertEqual("root",profile!.tree!.name,"Tree root should be named root")
             valid.fulfill()
@@ -78,7 +78,7 @@ class PersonalityInsightsTests: XCTestCase {
         //Test an array of two elements (same values)
         let contentItems = [contentItem, contentItem]
         
-        service.getProfile(contentItems, includeRaw: true, language: "en", acceptLanguage: "en", callback:{(profile:Profile?) in
+        service.getProfile(contentItems, includeRaw: true, language: "en", acceptLanguage: "en", callback:{(profile, error) in
             XCTAssertNotNil(profile,"Profile should not be nil")
             XCTAssertEqual("root",profile!.tree!.name,"Tree root should be named root")
             valid.fulfill()

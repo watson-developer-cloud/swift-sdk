@@ -75,6 +75,15 @@ public class SpeechToText: Service, WebSocketDelegate {
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("socket disconnected")
         print(error)
+        
+        if let err = error {
+            
+            if err.code == 101 {
+                connectWebsocket()
+            } else {
+                Log.sharedLogger.warning(err.localizedDescription)
+            }
+        }
     }
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {

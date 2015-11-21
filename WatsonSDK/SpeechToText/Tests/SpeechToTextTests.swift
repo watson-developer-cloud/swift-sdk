@@ -33,6 +33,10 @@ class SpeechToTextTests: XCTestCase {
         super.tearDown()
     }
     
+    func testEncoding() {
+        
+    }
+    
     func testWebsockets() {
         let expectation = expectationWithDescription("WebSockets")
         service.transcribe(NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")!) {

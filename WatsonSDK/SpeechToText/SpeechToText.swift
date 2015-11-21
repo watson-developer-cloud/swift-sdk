@@ -27,13 +27,20 @@ public class SpeechToText: Service, WebSocketDelegate {
     private let serviceURL = "/speech-to-text/api"
     private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    
+    private let WATSON_AUDIO_SAMPLE_RATE: Int32 = 16000
+    private let WATSON_AUDIO_FRAME_SIZE: Int32 = 160
+    
     var socket: WebSocket?
     var audio: NSURL?
+    
+    private let opus: OpusHelper = OpusHelper()
     
     var callback: ((String?, NSError?) -> Void)?
     
     init() {
         super.init(serviceURL: serviceURL)
+        opus.createEncoder(WATSON_AUDIO_SAMPLE_RATE)
     }
     
     /**
@@ -46,6 +53,19 @@ public class SpeechToText: Service, WebSocketDelegate {
         connectWebsocket()
         self.audio = audio
         self.callback = callback
+    }
+    
+    /**
+     Description
+     
+     - parameter data: PCM data
+     
+     - returns: Opus encoded audio
+     */
+    public func encodeOpus(data: NSData) -> NSData
+    {
+        let data = opus.encode(data, frameSize: WATSON_AUDIO_FRAME_SIZE)
+        return data
     }
     
     private func connectWebsocket() {

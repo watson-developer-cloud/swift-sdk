@@ -41,12 +41,20 @@ public class SpeechToText: Service, WebSocketDelegate {
             
             if let token = token {
                 
-                let authURL = "\(self.url)?watson-token=\(token)"
+                //let authURL = "\(self.url)?watson-token=\(token)"
+                let authURL = self.url
                 self.socket = WebSocket(url: NSURL(string: authURL)!)
                 if let socket = self.socket {
                     socket.delegate = self
+                    socket.headers["X-Watson-Authorization-Token"] = token
+                    //socket.selfSignedSSL = true
                     socket.connect()
+                    //socket.writePing(NSData())
+                } else {
+                    Log.sharedLogger.error("Socket could not be created")
                 }
+            } else {
+                Log.sharedLogger.error("Could not get token from Watson")
             }
         }
     }

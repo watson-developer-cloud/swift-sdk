@@ -1,14 +1,26 @@
-//
-//  SpeechToText.swift
-//  SpeechToText
-//
-//  Created by Glenn Fisher on 11/6/15.
-//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 import Starscream
+import ObjectMapper
 
+/**
+ * Implementation of the Watson speech to text service
+ */
 public class SpeechToText: Service, WebSocketDelegate {
     
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
@@ -18,25 +30,48 @@ public class SpeechToText: Service, WebSocketDelegate {
     var socket: WebSocket?
     var audio: NSURL?
     
+    var callback: ((String?, NSError?) -> Void)?
+    
     init() {
         super.init(serviceURL: serviceURL)
     }
     
-    public func transcribe(audio: NSURL, callback: (String?) -> Void) {
+    /**
+     This function takes audio data a returns a callback with the string transcription
+     
+     - parameter audio:    <#audio description#>
+     - parameter callback: <#callback description#>
+     */
+    public func transcribe(audio: NSURL, callback: (String?, NSError?) -> Void) {
         connectWebsocket()
         self.audio = audio
+        self.callback = callback
     }
     
     private func connectWebsocket() {
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey) {
             token, error in
+            
+            if let error = error {
+                print(error)
+            }
+            
             if let token = token {
-                let authURL = "\(self.url)?watson-token=\(token)"
+                
+                //let authURL = "\(self.url)?watson-token=\(token)"
+                let authURL = self.url
                 self.socket = WebSocket(url: NSURL(string: authURL)!)
                 if let socket = self.socket {
                     socket.delegate = self
+                    socket.headers["X-Watson-Authorization-Token"] = token
+                    //socket.selfSignedSSL = true
                     socket.connect()
+                    //socket.writePing(NSData())
+                } else {
+                    Log.sharedLogger.error("Socket could not be created")
                 }
+            } else {
+                Log.sharedLogger.error("Could not get token from Watson")
             }
         }
     }
@@ -57,11 +92,36 @@ public class SpeechToText: Service, WebSocketDelegate {
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("socket disconnected")
         print(error)
+        
+        if let err = error {
+            
+            if err.code == 101 {
+                connectWebsocket()
+            } else {
+                Log.sharedLogger.warning(err.localizedDescription)
+            }
+        }
     }
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         print("socket received message")
-        print(text)
+        
+        // parse the data.
+        // print(text)
+        
+        let result = Mapper<STTResponse>().map(text)
+        
+        if let callback = self.callback {
+            
+            if let result = result {
+                
+                if result.state == "listening" {
+                    Log.sharedLogger.info("Speech recognition is listening")
+                } else {
+                    callback(text, nil)
+                }
+            }
+        }
         // socket.disconnect()
     }
     

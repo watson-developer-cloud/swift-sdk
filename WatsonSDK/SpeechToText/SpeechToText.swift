@@ -8,6 +8,7 @@
 
 import Foundation
 import Starscream
+import ObjectMapper
 
 public class SpeechToText: Service, WebSocketDelegate {
     
@@ -18,19 +19,28 @@ public class SpeechToText: Service, WebSocketDelegate {
     var socket: WebSocket?
     var audio: NSURL?
     
+    var callback: ((String?, NSError?) -> Void)?
+    
     init() {
         super.init(serviceURL: serviceURL)
     }
     
-    public func transcribe(audio: NSURL, callback: (String?) -> Void) {
+    public func transcribe(audio: NSURL, callback: (String?, NSError?) -> Void) {
         connectWebsocket()
         self.audio = audio
+        self.callback = callback
     }
     
     private func connectWebsocket() {
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey) {
             token, error in
+            
+            if let error = error {
+                print(error)
+            }
+            
             if let token = token {
+                
                 let authURL = "\(self.url)?watson-token=\(token)"
                 self.socket = WebSocket(url: NSURL(string: authURL)!)
                 if let socket = self.socket {
@@ -61,7 +71,20 @@ public class SpeechToText: Service, WebSocketDelegate {
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         print("socket received message")
-        print(text)
+        
+        // parse the data.
+        // print(text)
+        
+        let result = Mapper<STTResponse>().map(text)
+        
+        
+        
+        if let callback = self.callback {
+            
+            if let result = result {
+                callback(text, nil)
+            }
+        }
         // socket.disconnect()
     }
     

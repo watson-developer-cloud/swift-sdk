@@ -34,7 +34,20 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testEncoding() {
-        
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "raw")
+        if let url = url
+        {
+            if let data = NSData(contentsOfURL: url)
+            {
+                let encodedAudio = service.encodeOpus( data)
+                
+                XCTAssertLessThan(encodedAudio.length, data.length, "Encoded audio must be smaller than the original.")
+            } else {
+                XCTAssert(true, "Could not load test PCM file")
+            }
+            
+        }
+    
     }
     
     func testWebsockets() {

@@ -851,7 +851,36 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    //    func testInvalidHTMLGetRankedKeywords()
+    func testInvalidHTMLGetRankedKeywords() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.keywordAnalysisDotComShouldNotExist.com")
+        
+        instance.getRankedKeywords(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNotNil(keywords.language)
+                XCTAssertNil(keywords.keywords)
+                
+                if let language = keywords.language {
+                    
+                    XCTAssertEqual(language, "unknown")
+                    
+                }
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     func testURLGetRankedKeywords() {
         
@@ -894,7 +923,34 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    //    func testInvalidURLGetRankedKeywords()
+    func testInvalidURLGetRankedKeywords() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getRankedKeywords(requestType: .URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com",
+            text: nil) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNotNil(keywords.language)
+                XCTAssertNil(keywords.keywords)
+                
+                if let language = keywords.language {
+                    
+                    XCTAssertEqual(language, "unknown")
+                    
+                }
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     func testTextGetRankedKeywords() {
         
@@ -937,7 +993,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    //    func testInvalidTextGetRankedKeywords()
+    func testInvalidTextGetRankedKeywords() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getRankedKeywords(requestType: .URL,
+            html: nil,
+            url: nil,
+            text: test_get_text_sentiment_invalid) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNil(keywords.language)
+                XCTAssertNil(keywords.keywords)
+
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     // MARK: Concept Tagging
     //    func testHTMLGetRankedConcepts()

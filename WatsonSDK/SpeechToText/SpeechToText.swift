@@ -155,9 +155,26 @@ extension SpeechToText : WebSocketDelegate
     }
 }
 
+
 extension SpeechToText : AVAudioRecorderDelegate
 {
-    public func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+     public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
+        successfully flag: Bool) {
+    
+        
+        print("Finished audio recording")
+        
+        
+    }
+}
+
+extension SpeechToText : AVAudioSessionDelegate
+{
+    public func beginInterruption() {
+        
+    }
+    
+    public func inputIsAvailableChanged(isInputAvailable: Bool) {
         
     }
 }

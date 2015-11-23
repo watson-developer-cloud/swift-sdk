@@ -15,6 +15,9 @@ class SpeechToTextTests: XCTestCase {
     private var inputText: String?
     private let timeout: NSTimeInterval = 30.0
     
+    var recorder: AVAudioRecorder!
+    var recordingSession: AVAudioSession!
+    
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
@@ -25,6 +28,16 @@ class SpeechToTextTests: XCTestCase {
             }
         } else {
             XCTFail("Plist file not found")
+        }
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            
+        } catch {
+            
         }
     }
     
@@ -52,6 +65,8 @@ class SpeechToTextTests: XCTestCase {
     
     func testRecording() {
     
+        let recordExpectation = expectationWithDescription("Record")
+        
         let recordSettings = [
             AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
             AVNumberOfChannelsKey: 1,
@@ -66,16 +81,27 @@ class SpeechToTextTests: XCTestCase {
                 if let soundFileURL = soundFileURL {
                     
                     do {
-                        let recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
                         
-                        recorder.meteringEnabled = true
-                        recorder.prepareToRecord()
-                        recorder.record()
+                        self.recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
+                    
+                        self.recorder.meteringEnabled = true
                         
-                        sleep(10)
+                        self.recorder.delegate = self.service
+                        // self.recorder.prepareToRecord()
+                        self.recorder.recordForDuration(3.0)
+                        
+                        sleep(5)
+                        
+                        print(self.recorder.recording)
+                        
+                        self.recorder.stop()
+                        
+                        recordExpectation.fulfill()
                         
                     } catch {
-                            XCTAssertTrue(false, "Could not create audio recorder")
+                        
+                        
+                        XCTAssertTrue(false, "Could not create audio recorder")
                     }
                 }
 
@@ -83,6 +109,9 @@ class SpeechToTextTests: XCTestCase {
             
         })
         
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
     }
     
     

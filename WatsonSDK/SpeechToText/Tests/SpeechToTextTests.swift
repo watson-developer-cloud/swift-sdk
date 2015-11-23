@@ -73,10 +73,15 @@ class SpeechToTextTests: XCTestCase {
             AVSampleRateKey : 16000.0
         ]
         
+        let dirsPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let docsDir = dirsPaths[0] as String
+        let soundFilePath = docsDir + "/test.wav"
+        
+        print("Saving recorded audio file in \(soundFilePath)")
         AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
             in
             if granted {
-                let soundFileURL = NSURL(string: "test.raw")
+                let soundFileURL = NSURL(string: soundFilePath)
                 
                 if let soundFileURL = soundFileURL {
                     

@@ -161,8 +161,9 @@ extension SpeechToText : AVAudioRecorderDelegate
      public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
         successfully flag: Bool) {
     
-        
-        print("Finished audio recording")
+        let data = NSData(contentsOfURL: recorder.url)
+            
+        print("Finished audio recording length was \(data?.length)" )
         
         
     }

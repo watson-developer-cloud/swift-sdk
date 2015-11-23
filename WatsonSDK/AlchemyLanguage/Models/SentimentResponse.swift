@@ -34,7 +34,8 @@ public struct SentimentResponse: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: DocSentiment
-    public var sentimentResults: [DocumentSentiment]?
+    public var docSentiment: Sentiment?                     // Normal
+    public var sentimentResults: [DocumentSentiment]?       // Targeted
     public var usage: String?
     public var warningMessage: String?
 
@@ -51,7 +52,9 @@ public struct SentimentResponse: AlchemyLanguageGenericModel, Mappable {
         url <- map["url"]
         
         // sentiment - alchemyLanguage sometimes returns as "docSentiment," sometimes as "sentiment"
+        docSentiment <- map["docSentiment"]
         sentimentResults <- map["results"]
+
         usage <- map["usage"]
         warningMessage <- map["warningMessage"]
         

@@ -53,22 +53,22 @@ public extension AlchemyLanguageConstants {
         case OutputMode = "outputMode"
         case KnowledgeGraph = "knowledgeGraph"
         
-        public enum SourceText {
+        public enum SourceText: String {
             
-            case cleaned_or_raw
-            case cleaned
-            case raw
-            case cquery
-            case xpath
-            case xpath_or_raw
-            case cleaned_and_xpath
+            case cleaned_or_raw = "cleaned_or_raw"
+            case cleaned = "cleaned"
+            case raw = "raw"
+            case cquery = "cquery"
+            case xpath = "xpath"
+            case xpath_or_raw = "xpath_or_raw"
+            case cleaned_and_xpath = "cleaned_and_xpath"
             
         }
         
-        public enum KeywordExtractMode {
+        public enum KeywordExtractMode: String {
             
-            case normal
-            case strict
+            case normal = "normal"
+            case strict = "strict"
             
         }
         

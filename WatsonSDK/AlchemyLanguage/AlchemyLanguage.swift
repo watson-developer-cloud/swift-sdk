@@ -254,14 +254,14 @@ public extension AlchemyLanguage {
         init(){}
         
         var sentiment: Int? = 0
-        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
         var showSourceText: Int? = 0
         var cquery: String? = ""
         var xpath: String? = ""
         var maxRetrieve: Int? = 50
         var baseUrl: String? = ""
         var knowledgGraph: Int? = 0
-        var keywordExtractMode: luri.KeywordExtractMode = luri.KeywordExtractMode.normal
+        var keywordExtractMode: String? = luri.KeywordExtractMode.normal.rawValue
         
     }
     

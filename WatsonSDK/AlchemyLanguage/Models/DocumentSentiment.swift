@@ -37,8 +37,6 @@ public struct DocumentSentiment: Mappable {
         text <- map["text"]
         sentiment <- map["sentiment"]
         
-        print("ruslan: DocumentSentiment: \(self)")
-        
     }
     
 }

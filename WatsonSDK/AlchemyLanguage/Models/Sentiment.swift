@@ -39,8 +39,6 @@ public struct Sentiment: Mappable {
         score <- map["score"]
         type <- map["type"]
         
-        print("ruslan: Sentiment: \(self)")
-        
     }
     
 }

@@ -54,16 +54,6 @@ public struct SentimentResponse: AlchemyLanguageGenericModel, Mappable {
         sentimentResults <- map["results"]
         usage <- map["usage"]
         warningMessage <- map["warningMessage"]
-
-        print("")
-        
-        print("ruslan: SentimentResponse: \(self)")
-        
-        print("usage: \(usage)")
-        print("sentimentResults: \(sentimentResults)")
-        print("\nmap: \(map)\n")
-        
-        print("")
         
     }
     

@@ -452,24 +452,24 @@ class AlchemyLanguageTests: XCTestCase {
                 XCTAssertNotNil(sentimentResponse.docSentiment)
                 
                 if let sentiment = sentimentResponse.docSentiment {
+                    
+                    let sentimentMixed = sentiment.mixed
+                    let sentimentScore = sentiment.score
+                    let sentimentType = sentiment.type
+                    
+                    XCTAssertNotNil(sentimentMixed)
+                    XCTAssertNotNil(sentimentScore)
+                    
+                    if let sentimentMixed = sentimentMixed {
                         
-                        let sentimentMixed = sentiment.mixed
-                        let sentimentScore = sentiment.score
-                        let sentimentType = sentiment.type
+                        XCTAssertEqual(sentimentMixed, 1)
                         
-                        XCTAssertNotNil(sentimentMixed)
-                        XCTAssertNotNil(sentimentScore)
-                        
-                        if let sentimentMixed = sentimentMixed {
-                            
-                            XCTAssertEqual(sentimentMixed, 1)
-                            
-                        }
-                        
-                        XCTAssertEqual(sentimentType, "negative")
-                        
-                        validExpectation.fulfill()
-                        
+                    }
+                    
+                    XCTAssertEqual(sentimentType, "negative")
+                    
+                    validExpectation.fulfill()
+                    
                 }
                 
         }
@@ -516,24 +516,24 @@ class AlchemyLanguageTests: XCTestCase {
                 XCTAssertNotNil(sentimentResponse.docSentiment)
                 
                 if let sentiment = sentimentResponse.docSentiment {
+                    
+                    let sentimentMixed = sentiment.mixed
+                    let sentimentScore = sentiment.score
+                    let sentimentType = sentiment.type
+                    
+                    XCTAssertNotNil(sentimentMixed)
+                    XCTAssertNotNil(sentimentScore)
+                    
+                    if let sentimentMixed = sentimentMixed {
                         
-                        let sentimentMixed = sentiment.mixed
-                        let sentimentScore = sentiment.score
-                        let sentimentType = sentiment.type
+                        XCTAssertEqual(sentimentMixed, 1)
                         
-                        XCTAssertNotNil(sentimentMixed)
-                        XCTAssertNotNil(sentimentScore)
-                        
-                        if let sentimentMixed = sentimentMixed {
-                            
-                            XCTAssertEqual(sentimentMixed, 1)
-                            
-                        }
-                        
-                        XCTAssertEqual(sentimentType, "negative")
-                        
-                        validExpectation.fulfill()
-                        
+                    }
+                    
+                    XCTAssertEqual(sentimentType, "negative")
+                    
+                    validExpectation.fulfill()
+                    
                 }
                 
         }
@@ -558,7 +558,7 @@ class AlchemyLanguageTests: XCTestCase {
                 if let language = sentimentResponse.language {
                     
                     XCTAssertEqual(language, "unknown")
-                XCTAssertNil(sentimentResponse.docSentiment)
+                    XCTAssertNil(sentimentResponse.docSentiment)
                     
                 }
                 
@@ -824,28 +824,26 @@ class AlchemyLanguageTests: XCTestCase {
                 XCTAssertNotNil(keywords)
                 XCTAssertNotNil(keywords.keywords)
                 
+                var putinSeen = false
                 
-                
-                if let sentiment = sentimentResponse.docSentiment {
+                if let keywords = keywords.keywords {
                     
-                    let sentimentMixed = sentiment.mixed
-                    let sentimentScore = sentiment.score
-                    let sentimentType = sentiment.type
-                    
-                    XCTAssertNotNil(sentimentMixed)
-                    XCTAssertNotNil(sentimentScore)
-                    
-                    if let sentimentMixed = sentimentMixed {
+                    for keyword in keywords {
                         
-                        XCTAssertEqual(sentimentMixed, 1)
+                        if keyword.text == "Putin" {
+                            
+                            putinSeen = true
+                            
+                        }
+                        
+                        XCTAssertNotNil(keyword.relevance)
                         
                     }
                     
-                    XCTAssertEqual(sentimentType, "negative")
-                    
-                    validExpectation.fulfill()
-                    
                 }
+                
+                XCTAssertTrue(putinSeen)
+                validExpectation.fulfill()
                 
         }
         
@@ -853,84 +851,166 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-//    func testInvalidHTMLGetRankedKeywords()
-//    func testURLGetRankedKeywords()
-//    func testInvalidURLGetRankedKeywords()
-//    func testTextGetRankedKeywords()
-//    func testInvalidTextGetRankedKeywords()
+    //    func testInvalidHTMLGetRankedKeywords()
+    
+    func testURLGetRankedKeywords() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getRankedKeywords(requestType: .URL,
+            html: nil,
+            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            text: nil) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNotNil(keywords.keywords)
+                
+                var putinSeen = false
+                
+                if let keywords = keywords.keywords {
+                    
+                    for keyword in keywords {
+                        
+                        if keyword.text == "Putin" {
+                            
+                            putinSeen = true
+                            
+                        }
+                        
+                        XCTAssertNotNil(keyword.relevance)
+                        
+                    }
+                    
+                }
+                
+                XCTAssertTrue(putinSeen)
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
+    //    func testInvalidURLGetRankedKeywords()
+    
+    func testTextGetRankedKeywords() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getRankedKeywords(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_get_entities_text_valid) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNotNil(keywords.keywords)
+                
+                var putinSeen = false
+                
+                if let keywords = keywords.keywords {
+                    
+                    for keyword in keywords {
+                        
+                        if keyword.text == "Putin" {
+                            
+                            putinSeen = true
+                            
+                        }
+                        
+                        XCTAssertNotNil(keyword.relevance)
+                        
+                    }
+                    
+                }
+                
+                XCTAssertTrue(putinSeen)
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
+    //    func testInvalidTextGetRankedKeywords()
     
     // MARK: Concept Tagging
-//    func testHTMLGetRankedConcepts()
-//    func testInvalidHTMLGetRankedConcepts()
-//    func testURLGetRankedConcepts()
-//    func testInvalidURLGetRankedConcepts()
-//    func testTextGetRankedConcepts()
-//    func testInvalidTextGetRankedConcepts()
-
+    //    func testHTMLGetRankedConcepts()
+    //    func testInvalidHTMLGetRankedConcepts()
+    //    func testURLGetRankedConcepts()
+    //    func testInvalidURLGetRankedConcepts()
+    //    func testTextGetRankedConcepts()
+    //    func testInvalidTextGetRankedConcepts()
+    
     
     // MARK: Relation Extraction
-//    func testHTMLGetRelations()
-//    func testInvalidHTMLGetRelations()
-//    func testURLGetRelations()
-//    func testInvalidURLGetRelations()
-//    func testTextGetRelations()
-//    func testInvalidTextGetRelations()
-
+    //    func testHTMLGetRelations()
+    //    func testInvalidHTMLGetRelations()
+    //    func testURLGetRelations()
+    //    func testInvalidURLGetRelations()
+    //    func testTextGetRelations()
+    //    func testInvalidTextGetRelations()
+    
     
     // MARK: Taxonomy Classification
-//    func testHTMLGetRankedTaxonomy()
-//    func testInvalidHTMLGetRankedTaxonomy()
-//    func testURLGetRankedTaxonomy()
-//    func testInvalidURLGetRankedTaxonomy()
-//    func testTextGetRankedTaxonomy()
-//    func testInvalidTextGetRankedTaxonomy()
-
+    //    func testHTMLGetRankedTaxonomy()
+    //    func testInvalidHTMLGetRankedTaxonomy()
+    //    func testURLGetRankedTaxonomy()
+    //    func testInvalidURLGetRankedTaxonomy()
+    //    func testTextGetRankedTaxonomy()
+    //    func testInvalidTextGetRankedTaxonomy()
+    
     
     // MARK: Author Extraction
-//    func testHTMLGetAuthors() { }
-//    func testInvalidHTMLGetAuthors() { }
-//    func testURLGetAuthors() { }
-//    func testInvalidURLGetAuthors() { }
+    //    func testHTMLGetAuthors() { }
+    //    func testInvalidHTMLGetAuthors() { }
+    //    func testURLGetAuthors() { }
+    //    func testInvalidURLGetAuthors() { }
     
     
     // MARK: Language Detection
-//    func testHTMLGetLanguage()
-//    func testInvalidHTMLGetLanguage()
-//    func testURLGetLanguage()
-//    func testInvalidURLGetLanguage()
-//    func testTextGetLanguage()
-//    func testInvalidTextGetLanguage()
-
+    //    func testHTMLGetLanguage()
+    //    func testInvalidHTMLGetLanguage()
+    //    func testURLGetLanguage()
+    //    func testInvalidURLGetLanguage()
+    //    func testTextGetLanguage()
+    //    func testInvalidTextGetLanguage()
+    
     
     // MARK: Text Extraction
-//    func testHTMLGetText()
-//    func testInvalidHTMLGetText()
-//    func testURLGetText()
-//    func testInvalidURLGetText()
-
-//    func testHTMLGetRawText()
-//    func testInvalidHTMLGetRawText()
-//    func testURLGetRawText()
-//    func testInvalidURLGetRawText()
-
-//    func testHTMLGetTitle()
-//    func testInvalidHTMLGetTitle()
-//    func testURLGetTitle()
-//    func testInvalidURLGetTitle()
-
+    //    func testHTMLGetText()
+    //    func testInvalidHTMLGetText()
+    //    func testURLGetText()
+    //    func testInvalidURLGetText()
+    
+    //    func testHTMLGetRawText()
+    //    func testInvalidHTMLGetRawText()
+    //    func testURLGetRawText()
+    //    func testInvalidURLGetRawText()
+    
+    //    func testHTMLGetTitle()
+    //    func testInvalidHTMLGetTitle()
+    //    func testURLGetTitle()
+    //    func testInvalidURLGetTitle()
+    
     
     // MARK: Microformats Parsing
-//    func testHTMLGetMicroformatData()
-//    func testInvalidHTMLGetMicroformatData()
-//    func testURLGetMicroformatData()
-//    func testInvalidURLGetMicroformatData()
-
+    //    func testHTMLGetMicroformatData()
+    //    func testInvalidHTMLGetMicroformatData()
+    //    func testURLGetMicroformatData()
+    //    func testInvalidURLGetMicroformatData()
+    
     
     // MARK: Feed Detection
-//    func testHTMLGetFeedLinks()
-//    func testInvalidHTMLGetFeedLinks()
-//    func testURLGetFeedLinks()
-//    func testInvalidURLGetFeedLinks()
+    //    func testHTMLGetFeedLinks()
+    //    func testInvalidHTMLGetFeedLinks()
+    //    func testURLGetFeedLinks()
+    //    func testInvalidURLGetFeedLinks()
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {

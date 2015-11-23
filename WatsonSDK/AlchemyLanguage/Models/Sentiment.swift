@@ -26,7 +26,7 @@ import ObjectMapper
  */
 public struct Sentiment: Mappable {
     
-    public var mixed: Bool?
+    public var mixed: Int?
     public var score: Double?
     public var type: String?
     
@@ -35,8 +35,8 @@ public struct Sentiment: Mappable {
     
     public mutating func mapping(map: Map) {
         
-        mixed <- map["mixed"]
-        score <- map["score"]
+        mixed <- (map["mixed"], Transformation.stringToInt)
+        score <- (map["score"], Transformation.stringToDouble)
         type <- map["type"]
         
     }

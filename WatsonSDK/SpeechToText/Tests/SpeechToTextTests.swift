@@ -50,6 +50,42 @@ class SpeechToTextTests: XCTestCase {
     
     }
     
+    func testRecording() {
+    
+        let recordSettings = [
+            AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
+            AVNumberOfChannelsKey: 1,
+            AVSampleRateKey : 16000.0
+        ]
+        
+        AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
+            in
+            if granted {
+                let soundFileURL = NSURL(string: "test.raw")
+                
+                if let soundFileURL = soundFileURL {
+                    
+                    do {
+                        let recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
+                        
+                        recorder.meteringEnabled = true
+                        recorder.prepareToRecord()
+                        recorder.record()
+                        
+                        sleep(10)
+                        
+                    } catch {
+                            XCTAssertTrue(false, "Could not create audio recorder")
+                    }
+                }
+
+            }
+            
+        })
+        
+    }
+    
+    
     func testWebsockets() {
         let expectation = expectationWithDescription("WebSockets")
         service.transcribe(NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")!) {

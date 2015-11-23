@@ -22,7 +22,7 @@ public enum ServiceType: String {
 }
 
 /// Superclass for all Watson services
-public class Service {
+public class Service : NSObject {
     /// All services must use https protocol for security
     private let _protocol = "https"
     /// Host for the service (e.g. stream.watsonplatform.net)

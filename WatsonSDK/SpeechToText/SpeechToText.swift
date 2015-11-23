@@ -21,7 +21,7 @@ import ObjectMapper
 /**
  * Implementation of the Watson speech to text service
  */
-public class SpeechToText: Service, WebSocketDelegate {
+public class SpeechToText: Service {
     
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
     private let serviceURL = "/speech-to-text/api"
@@ -96,6 +96,11 @@ public class SpeechToText: Service, WebSocketDelegate {
         }
     }
     
+  
+}
+
+extension SpeechToText : WebSocketDelegate
+{
     public func websocketDidConnect(socket: WebSocket) {
         print("socket connected")
         socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
@@ -147,5 +152,12 @@ public class SpeechToText: Service, WebSocketDelegate {
     
     public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         print("socket received data")
+    }
+}
+
+extension SpeechToText : AVAudioRecorderDelegate
+{
+    public func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        
     }
 }

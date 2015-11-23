@@ -606,6 +606,23 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    // MARK: Keyword Extraction
+    
+    // MARK: Concept Tagging
+    
+    // MARK: Relation Extraction
+    
+    // MARK: Taxonomy Classification
+    
+    // MARK: Author Extraction
+    
+    // MARK: Language Detection
+    
+    // MARK: Text Extraction
+    
+    // MARK: Microformats Parsing
+    
+    // MARK: Feed Detection
     func testHTMLGetAuthors() {
         
 

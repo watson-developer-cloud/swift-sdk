@@ -92,6 +92,7 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // tests
+    // MARK: Entities
     func testHTMLGetEntities() {
         
         let validExpectation = expectationWithDescription("valid")
@@ -368,6 +369,7 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    // MARK: Sentiment
     func testHTMLGetTextSentiment() {
         
         let validExpectation = expectationWithDescription("valid")
@@ -379,22 +381,31 @@ class AlchemyLanguageTests: XCTestCase {
             url: nil,
             text: nil) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                XCTAssertNotNil(sentiment.docSentiment)
+                XCTAssertNotNil(sentimentResponse.docSentiment)
                 
-                if let docSentiment = sentiment.docSentiment {
+                if let sentiment = sentimentResponse.docSentiment {
                     
-                    let sentimentMixed = docSentiment.mixed
-                    let sentimentType = docSentiment.type
+                    let sentimentMixed = sentiment.mixed
+                    let sentimentScore = sentiment.score
+                    let sentimentType = sentiment.type
                     
-                    XCTAssertEqual(sentimentMixed, "1")
+                    XCTAssertNotNil(sentimentMixed)
+                    XCTAssertNotNil(sentimentScore)
+                    
+                    if let sentimentMixed = sentimentMixed {
+                        
+                        XCTAssertEqual(sentimentMixed, 1)
+                        
+                    }
+                    
                     XCTAssertEqual(sentimentType, "negative")
                     
                     validExpectation.fulfill()
                     
                 }
-
+                
         }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
@@ -412,12 +423,12 @@ class AlchemyLanguageTests: XCTestCase {
             url: nil,
             text: nil) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                let language = sentiment.language
+                let language = sentimentResponse.language
                 
                 XCTAssertEqual(language, "unknown")
-                XCTAssertNil(sentiment.docSentiment)
+                XCTAssertNil(sentimentResponse.docSentiment)
                 
                 invalidExpectation.fulfill()
                 
@@ -428,7 +439,7 @@ class AlchemyLanguageTests: XCTestCase {
     }
     
     func testURLGetTextSentiment() {
-    
+        
         let validExpectation = expectationWithDescription("valid")
         
         instance.getSentiment(requestType: .URL,
@@ -436,20 +447,29 @@ class AlchemyLanguageTests: XCTestCase {
             url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
             text: nil) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                XCTAssertNotNil(sentiment.docSentiment)
+                XCTAssertNotNil(sentimentResponse.docSentiment)
                 
-                if let docSentiment = sentiment.docSentiment {
-                    
-                    let sentimentMixed = docSentiment.mixed
-                    let sentimentType = docSentiment.type
-                    
-                    XCTAssertEqual(sentimentMixed, "1")
-                    XCTAssertEqual(sentimentType, "negative")
-                    
-                    validExpectation.fulfill()
-                    
+                if let sentiment = sentimentResponse.docSentiment {
+                        
+                        let sentimentMixed = sentiment.mixed
+                        let sentimentScore = sentiment.score
+                        let sentimentType = sentiment.type
+                        
+                        XCTAssertNotNil(sentimentMixed)
+                        XCTAssertNotNil(sentimentScore)
+                        
+                        if let sentimentMixed = sentimentMixed {
+                            
+                            XCTAssertEqual(sentimentMixed, 1)
+                            
+                        }
+                        
+                        XCTAssertEqual(sentimentType, "negative")
+                        
+                        validExpectation.fulfill()
+                        
                 }
                 
         }
@@ -467,12 +487,12 @@ class AlchemyLanguageTests: XCTestCase {
             url: "http://www.sentimentAnalysisDotComShouldNotExist.com",
             text: nil) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                let language = sentiment.language
+                let language = sentimentResponse.language
                 
                 XCTAssertEqual(language, "unknown")
-                XCTAssertNil(sentiment.docSentiment)
+                XCTAssertNil(sentimentResponse.docSentiment)
                 
                 invalidExpectation.fulfill()
                 
@@ -491,20 +511,29 @@ class AlchemyLanguageTests: XCTestCase {
             url: nil,
             text: test_get_entities_text_valid) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                XCTAssertNotNil(sentiment.docSentiment)
+                XCTAssertNotNil(sentimentResponse.docSentiment)
                 
-                if let docSentiment = sentiment.docSentiment {
-                    
-                    let sentimentMixed = docSentiment.mixed
-                    let sentimentType = docSentiment.type
-                    
-                    XCTAssertEqual(sentimentMixed, "1")
-                    XCTAssertEqual(sentimentType, "negative")
-                    
-                    validExpectation.fulfill()
-                    
+                if let sentiment = sentimentResponse.docSentiment {
+                        
+                        let sentimentMixed = sentiment.mixed
+                        let sentimentScore = sentiment.score
+                        let sentimentType = sentiment.type
+                        
+                        XCTAssertNotNil(sentimentMixed)
+                        XCTAssertNotNil(sentimentScore)
+                        
+                        if let sentimentMixed = sentimentMixed {
+                            
+                            XCTAssertEqual(sentimentMixed, 1)
+                            
+                        }
+                        
+                        XCTAssertEqual(sentimentType, "negative")
+                        
+                        validExpectation.fulfill()
+                        
                 }
                 
         }
@@ -522,12 +551,16 @@ class AlchemyLanguageTests: XCTestCase {
             url: nil,
             text: test_get_text_sentiment_invalid) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                let language = sentiment.language
+                XCTAssertNotNil(sentimentResponse.language)
                 
-                XCTAssertEqual(language, "unknown")
-                XCTAssertNil(sentiment.docSentiment)
+                if let language = sentimentResponse.language {
+                    
+                    XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentimentResponse.docSentiment)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -554,20 +587,31 @@ class AlchemyLanguageTests: XCTestCase {
             sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
             sentimentParameters: parameters) {
                 
-                (error, sentiment) in
+                (error, sentimentResponse) in
                 
-                XCTAssertNotNil(sentiment.docSentiment)
+                XCTAssertNotNil(sentimentResponse.sentimentResults?.first)
                 
-                if let docSentiment = sentiment.docSentiment {
-                    
-                    let sentimentMixed = docSentiment.mixed
-                    let sentimentType = docSentiment.type
-                    
-                    XCTAssertEqual(sentimentMixed, "1")
-                    XCTAssertEqual(sentimentType, "negative")
-                    
-                    validExpectation.fulfill()
-                    
+                if let sentimentResults = sentimentResponse.sentimentResults,
+                    let first = sentimentResults.first,
+                    let sentiment = first.sentiment {
+                        
+                        let sentimentMixed = sentiment.mixed
+                        let sentimentScore = sentiment.score
+                        let sentimentType = sentiment.type
+                        
+                        XCTAssertNotNil(sentimentMixed)
+                        XCTAssertNotNil(sentimentScore)
+                        
+                        if let sentimentMixed = sentimentMixed {
+                            
+                            XCTAssertEqual(sentimentMixed, 1)
+                            
+                        }
+                        
+                        XCTAssertEqual(sentimentType, "negative")
+                        
+                        validExpectation.fulfill()
+                        
                 }
                 
         }
@@ -578,31 +622,188 @@ class AlchemyLanguageTests: XCTestCase {
     
     func testInvalidHTMLGetTargetedSentiment() {
         
+        let invalidExpectation = expectationWithDescription("invalid")
         
+        let html = htmlDocumentFromURLString("http://www.sentimentAnalysisDotComShouldNotExist.com")
+        
+        var parameters = AlchemyLanguage.GetSentimentParameters()
+        
+        parameters.targets = "Putin"
+        
+        instance.getSentiment(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil,
+            sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
+            sentimentParameters: parameters) {
+                
+                (error, sentimentResponse) in
+                
+                let language = sentimentResponse.language
+                
+                XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentimentResponse.docSentiment)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
     func testURLGetTargetedSentiment() {
         
-
+        let validExpectation = expectationWithDescription("valid")
+        
+        var parameters = AlchemyLanguage.GetSentimentParameters()
+        
+        parameters.targets = "Putin"
+        
+        instance.getSentiment(requestType: .URL,
+            html: nil,
+            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            text: nil,
+            sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
+            sentimentParameters: parameters) {
+                
+                (error, sentimentResponse) in
+                
+                XCTAssertNotNil(sentimentResponse.sentimentResults?.first)
+                
+                if let sentimentResults = sentimentResponse.sentimentResults,
+                    let first = sentimentResults.first,
+                    let sentiment = first.sentiment {
+                        
+                        let sentimentMixed = sentiment.mixed
+                        let sentimentScore = sentiment.score
+                        let sentimentType = sentiment.type
+                        
+                        XCTAssertNotNil(sentimentMixed)
+                        XCTAssertNotNil(sentimentScore)
+                        
+                        if let sentimentMixed = sentimentMixed {
+                            
+                            XCTAssertEqual(sentimentMixed, 1)
+                            
+                        }
+                        
+                        XCTAssertEqual(sentimentType, "negative")
+                        
+                        validExpectation.fulfill()
+                        
+                }
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
     func testInvalidURLGetTargetedSentiment() {
         
+        let invalidExpectation = expectationWithDescription("invalid")
         
+        var parameters = AlchemyLanguage.GetSentimentParameters()
+        
+        parameters.targets = "Putin"
+        
+        instance.getSentiment(requestType: .URL,
+            html: nil,
+            url: "http://www.sentimentAnalysisDotComShouldNotExist.com",
+            text: nil,
+            sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
+            sentimentParameters: parameters) {
+                
+                (error, sentimentResponse) in
+                
+                let language = sentimentResponse.language
+                
+                XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentimentResponse.docSentiment)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
     func testTextGetTargetedSentiment() {
         
-
+        let validExpectation = expectationWithDescription("valid")
+        
+        var parameters = AlchemyLanguage.GetSentimentParameters()
+        
+        parameters.targets = "Putin"
+        
+        instance.getSentiment(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_get_entities_text_valid,
+            sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
+            sentimentParameters: parameters) {
+                
+                (error, sentimentResponse) in
+                
+                XCTAssertNotNil(sentimentResponse.sentimentResults?.first)
+                
+                if let sentimentResults = sentimentResponse.sentimentResults,
+                    let first = sentimentResults.first,
+                    let sentiment = first.sentiment {
+                        
+                        let sentimentMixed = sentiment.mixed
+                        let sentimentScore = sentiment.score
+                        let sentimentType = sentiment.type
+                        
+                        XCTAssertNotNil(sentimentScore)
+                        
+                        if let sentimentMixed = sentimentMixed {
+                            
+                            XCTAssertEqual(sentimentMixed, 1)
+                            
+                        }
+                        
+                        XCTAssertEqual(sentimentType, "negative")
+                        
+                        validExpectation.fulfill()
+                        
+                }
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     
     func testInvalidTextGetTargetedSentiment() {
         
+        let invalidExpectation = expectationWithDescription("invalid")
         
+        var parameters = AlchemyLanguage.GetSentimentParameters()
+        
+        parameters.targets = "Putin"
+        
+        instance.getSentiment(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_get_text_sentiment_invalid,
+            sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
+            sentimentParameters: parameters) {
+                
+                (error, sentimentResponse) in
+                
+                let language = sentimentResponse.language
+                
+                XCTAssertEqual(language, "unknown")
+                XCTAssertNil(sentimentResponse.sentimentResults)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
     

@@ -808,7 +808,51 @@ class AlchemyLanguageTests: XCTestCase {
     }
     
     // MARK: Keyword Extraction
-//    func testHTMLGetRankedKeywords()
+    func testHTMLGetRankedKeywords() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        
+        instance.getRankedKeywords(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
+                
+                (error, keywords) in
+                
+                XCTAssertNotNil(keywords)
+                XCTAssertNotNil(keywords.keywords)
+                
+                
+                
+                if let sentiment = sentimentResponse.docSentiment {
+                    
+                    let sentimentMixed = sentiment.mixed
+                    let sentimentScore = sentiment.score
+                    let sentimentType = sentiment.type
+                    
+                    XCTAssertNotNil(sentimentMixed)
+                    XCTAssertNotNil(sentimentScore)
+                    
+                    if let sentimentMixed = sentimentMixed {
+                        
+                        XCTAssertEqual(sentimentMixed, 1)
+                        
+                    }
+                    
+                    XCTAssertEqual(sentimentType, "negative")
+                    
+                    validExpectation.fulfill()
+                    
+                }
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
 //    func testInvalidHTMLGetRankedKeywords()
 //    func testURLGetRankedKeywords()
 //    func testInvalidURLGetRankedKeywords()

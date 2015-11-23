@@ -44,7 +44,7 @@ public struct Taxonomy: AlchemyLanguageGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
         
         // alchemyLanguageGenericModel
         language <- map["language"]

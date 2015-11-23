@@ -38,7 +38,7 @@ public struct Feed: AlchemyGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
         
         // feed
         feed <- map["feed"]

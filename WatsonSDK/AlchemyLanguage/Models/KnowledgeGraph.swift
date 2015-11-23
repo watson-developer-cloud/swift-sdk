@@ -38,7 +38,7 @@ public struct KnowledgeGraph: AlchemyGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
         
         // knowledgeGraph
         typeHierarchy <- map["typeHierarchy"]

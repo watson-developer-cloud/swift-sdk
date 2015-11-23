@@ -45,7 +45,7 @@ public struct Entity: AlchemyGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
         
         // entity
         count <- map["count"]

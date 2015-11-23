@@ -45,7 +45,7 @@ public struct Keyword: AlchemyLanguageGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
         
         // alchemyLanguageGenericModel
         language <- map["language"]
@@ -53,7 +53,7 @@ public struct Keyword: AlchemyLanguageGenericModel, Mappable {
         
         // keyword
         knowledgeGraph <- map["knowledgeGraph"]
-        relevance <- map["relevance"]
+        relevance <- (map["relevance"], Transformation.stringToDouble)
         sentiment <- map["sentiment"]
         text <- map["text"]
         

@@ -268,10 +268,11 @@ public extension AlchemyLanguage {
     public func getRankedKeywords(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
+        text: String?,
         keywordsParameters kp: GetKeywordsParameters = GetKeywordsParameters(),
         completionHandler: (error: NSError, returnValue: Keywords)->() ) {
             
-            let accessString = AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
+            let accessString = AlchemyLanguageConstants.GetRankedKeywords(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
             
             let keywordsParamDict = kp.asDictionary()
@@ -279,6 +280,7 @@ public extension AlchemyLanguage {
             
             if let html = html { parameters["html"] = html }
             if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,

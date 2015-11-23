@@ -24,51 +24,22 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-public struct Sentiment: AlchemyLanguageGenericModel, Mappable {
+public struct Sentiment: Mappable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: DocSentiment
-    public var docSentiment: DocSentiment?
+    public var mixed: Bool?
+    public var score: Double?
+    public var type: String?
     
     
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
         
-        // alchemyGenericModel
-        totalTransactions <- map["totalTransactions"]
+        mixed <- map["mixed"]
+        score <- map["score"]
+        type <- map["type"]
         
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // sentiment
-        docSentiment <- map["docSentiment"]
-        
-    }
-    
-    
-    public struct DocSentiment: Mappable {
-        
-        public var mixed: String?
-        public var score: Double?
-        public var type: String?
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            
-            mixed <- map["mixed"]
-            score <- map["score"]
-            type <- map["type"]
-            
-        }
+        print("ruslan: Sentiment: \(self)")
         
     }
     

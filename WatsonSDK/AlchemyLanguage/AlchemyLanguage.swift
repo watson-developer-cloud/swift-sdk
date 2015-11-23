@@ -197,7 +197,7 @@ public extension AlchemyLanguage {
         text: String?,
         sentimentType: alcs.SentimentType = alcs.SentimentType.Normal,
         sentimentParameters sp: GetSentimentParameters = GetSentimentParameters(),
-        completionHandler: (error: NSError, returnValue: Sentiment)->() ) {
+        completionHandler: (error: NSError, returnValue: SentimentResponse)->() ) {
             
             var accessString: String!
             
@@ -234,9 +234,9 @@ public extension AlchemyLanguage {
                     let error = response.error!
                     let data = response.data ?? nil
                     
-                    let sentiment = Mapper<Sentiment>().map(data)!
+                    let sentimentResponse = Mapper<SentimentResponse>().map(data)!
                     
-                    completionHandler(error: error, returnValue: sentiment)
+                    completionHandler(error: error, returnValue: sentimentResponse)
                     
             }
             

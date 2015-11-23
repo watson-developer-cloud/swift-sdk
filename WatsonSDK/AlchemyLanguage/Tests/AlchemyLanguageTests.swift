@@ -808,46 +808,85 @@ class AlchemyLanguageTests: XCTestCase {
     }
     
     // MARK: Keyword Extraction
+//    func testHTMLGetRankedKeywords()
+//    func testInvalidHTMLGetRankedKeywords()
+//    func testURLGetRankedKeywords()
+//    func testInvalidURLGetRankedKeywords()
+//    func testTextGetRankedKeywords()
+//    func testInvalidTextGetRankedKeywords()
     
     // MARK: Concept Tagging
+//    func testHTMLGetRankedConcepts()
+//    func testInvalidHTMLGetRankedConcepts()
+//    func testURLGetRankedConcepts()
+//    func testInvalidURLGetRankedConcepts()
+//    func testTextGetRankedConcepts()
+//    func testInvalidTextGetRankedConcepts()
+
     
     // MARK: Relation Extraction
+//    func testHTMLGetRelations()
+//    func testInvalidHTMLGetRelations()
+//    func testURLGetRelations()
+//    func testInvalidURLGetRelations()
+//    func testTextGetRelations()
+//    func testInvalidTextGetRelations()
+
     
     // MARK: Taxonomy Classification
+//    func testHTMLGetRankedTaxonomy()
+//    func testInvalidHTMLGetRankedTaxonomy()
+//    func testURLGetRankedTaxonomy()
+//    func testInvalidURLGetRankedTaxonomy()
+//    func testTextGetRankedTaxonomy()
+//    func testInvalidTextGetRankedTaxonomy()
+
     
     // MARK: Author Extraction
+//    func testHTMLGetAuthors() { }
+//    func testInvalidHTMLGetAuthors() { }
+//    func testURLGetAuthors() { }
+//    func testInvalidURLGetAuthors() { }
+    
     
     // MARK: Language Detection
+//    func testHTMLGetLanguage()
+//    func testInvalidHTMLGetLanguage()
+//    func testURLGetLanguage()
+//    func testInvalidURLGetLanguage()
+//    func testTextGetLanguage()
+//    func testInvalidTextGetLanguage()
+
     
     // MARK: Text Extraction
+//    func testHTMLGetText()
+//    func testInvalidHTMLGetText()
+//    func testURLGetText()
+//    func testInvalidURLGetText()
+
+//    func testHTMLGetRawText()
+//    func testInvalidHTMLGetRawText()
+//    func testURLGetRawText()
+//    func testInvalidURLGetRawText()
+
+//    func testHTMLGetTitle()
+//    func testInvalidHTMLGetTitle()
+//    func testURLGetTitle()
+//    func testInvalidURLGetTitle()
+
     
     // MARK: Microformats Parsing
+//    func testHTMLGetMicroformatData()
+//    func testInvalidHTMLGetMicroformatData()
+//    func testURLGetMicroformatData()
+//    func testInvalidURLGetMicroformatData()
+
     
     // MARK: Feed Detection
-    func testHTMLGetAuthors() {
-        
-
-        
-    }
-    
-    func testInvalidHTMLGetAuthors() {
-        
-
-        
-    }
-    
-    func testURLGetAuthors() {
-        
-        
-        
-    }
-    
-    func testInvalidURLGetAuthors() {
-        
-        
-        
-    }
-    
+//    func testHTMLGetFeedLinks()
+//    func testInvalidHTMLGetFeedLinks()
+//    func testURLGetFeedLinks()
+//    func testInvalidURLGetFeedLinks()
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {

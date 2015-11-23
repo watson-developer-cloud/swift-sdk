@@ -46,10 +46,6 @@ public final class AlchemyLanguage: Service {
     
     init() {
 
-        print(AlchemyLanguageConstants.LanguageURI.SourceText.cleaned_or_raw)
-        
-        print(luri.SourceText.cleaned_or_raw)
-        
         super.init(
             type: ServiceType.Alchemy,
             serviceURL: alcs.Calls()

@@ -68,6 +68,9 @@ public class SpeechToText: Service {
         return data
     }
     
+    /**
+     Establishes a Websocket connection if one does not exist already.
+     */
     private func connectWebsocket() {
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey) {
             token, error in
@@ -99,6 +102,7 @@ public class SpeechToText: Service {
   
 }
 
+// MARK: - <#WebSocketDelegate#>
 extension SpeechToText : WebSocketDelegate
 {
     public func websocketDidConnect(socket: WebSocket) {
@@ -155,20 +159,39 @@ extension SpeechToText : WebSocketDelegate
     }
 }
 
-
+// MARK: - <#AVAudioRecorderDelegate#>
 extension SpeechToText : AVAudioRecorderDelegate
 {
+    /**
+     This function gets invoked when the AVAudioPlayer has stopped recording. If the recording
+     is successful, the audio is transcribed and the delegate's callback is invoked.
+     
+     - parameter recorder: <#recorder description#>
+     - parameter flag:     flag description
+     */
      public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
         successfully flag: Bool) {
     
-        let data = NSData(contentsOfURL: recorder.url)
-            
-        print("Finished audio recording length was \(data?.length)" )
+            let fileLocation = recorder.url.absoluteString
         
+            let data = NSData(contentsOfFile: fileLocation)
+       
+            if let data = data {
+                print("Finished audio recording \(fileLocation) length is \(data.length)" )
+                
+                transcribe(<#T##audio: NSURL##NSURL#>, callback: <#T##(String?, NSError?) -> Void#>)
+                
+            } else {
+                Log.sharedLogger.warning("Could not find file at \(fileLocation)")
+            }
+        
+            
+            
         
     }
 }
 
+// MARK: - <#AVAudioSessionDelegate#>
 extension SpeechToText : AVAudioSessionDelegate
 {
     public func beginInterruption() {

@@ -68,7 +68,7 @@ class SpeechToTextTests: XCTestCase {
         let recordExpectation = expectationWithDescription("Record")
         
         let recordSettings = [
-            AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
+            // AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
             AVNumberOfChannelsKey: 1,
             AVSampleRateKey : 16000.0
         ]

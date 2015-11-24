@@ -77,16 +77,6 @@ public final class AlchemyLanguage: Service {
 
 
 // MARK: Entity Extraction
-/**
-
-
-http://www.alchemyapi.com/api/entity/proc.html
-
-public func URLGetRankedNamedEntities() {}
-public func HTMLGetRankedNamedEntities() {}
-public func TextGetRankedNamedEntities() {}
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetEntitiesParameters: AlchemyLanguageParameters {
@@ -110,6 +100,9 @@ public extension AlchemyLanguage {
     }
     
     /**
+
+     http://www.alchemyapi.com/api/entity/proc.html
+     
      Extracts a grouped, ranked list of named entities (people, companies,
      organizations, etc.) from text, a URL or HTML.
      
@@ -143,7 +136,7 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil
@@ -160,18 +153,8 @@ public extension AlchemyLanguage {
 
 
 // MARK: Sentiment Analysis
-/**
-
-http://www.alchemyapi.com/api/sentiment/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    /** 
-     
-     TODO: write about how targets is a string but requires arguments to be split by vertical bars, OR ask for an array and do it for the client.
-     
-     */
     public struct GetSentimentParameters: AlchemyLanguageParameters {
         
         init(){}
@@ -181,12 +164,15 @@ public extension AlchemyLanguage {
         var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
         var cquery: String? = ""
         var xpath: String? = ""
-        
-        // required if targeted
-        var targets: String? = ""
+        var targets: String? = ""           // required if targeted
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/sentiment/proc.html
+     
+     */
     public func getSentiment(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
@@ -290,7 +276,7 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil
@@ -314,9 +300,58 @@ http://www.alchemyapi.com/api/concept/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRankedConcepts() {}
-    public func HTMLGetRankedConcepts() {}
-    public func TextGetRankedConcepts() {}
+    public struct GetRankedConceptsParameters: AlchemyLanguageParameters {
+        
+        init(){}
+
+        var linkedData: Int? = 1
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var maxRetrieve: Int? = 50
+        var baseUrl: String? = ""
+        var knowledgGraph: Int? = 0
+        
+    }
+    
+    public func getRankedConcepts(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        conceptsParameters pd: GetRankedConceptsParameters = GetRankedConceptsParameters(),
+        completionHandler: (error: NSError, returnValue: ConceptResponse)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetRankedConcepts(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let conceptResponse = Mapper<ConceptResponse>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: conceptResponse)
+                    
+            }
+            
+    }
     
 }
 
@@ -329,9 +364,64 @@ http://www.alchemyapi.com/api/relation/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRelations() {}
-    public func HTMLGetRelations() {}
-    public func TextGetRelations() {}
+    public struct GetRelationsParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var entities: Int? = 0          // extra call
+        var keywords: Int? = 0          // extra call
+        var requireEntities: Int? = 0
+        var sentimentExcludeEntities: Int? = 1
+        var disambiguate: Int? = 1
+        var linkedData: Int? = 1
+        var coreference: Int? = 1
+        var sentiment: Int? = 1         // extra call
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var maxRetrieve: Int? = 50
+        var baseUrl: String? = ""
+        
+    }
+    
+    public func getRelations(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        relationsParameters pd: GetRelationsParameters = GetRelationsParameters(),
+        completionHandler: (error: NSError, returnValue: SAORelations)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetRelations(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let saoRelations = Mapper<SAORelations>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: saoRelations)
+                    
+            }
+            
+    }
     
 }
 
@@ -344,9 +434,54 @@ http://www.alchemyapi.com/api/taxonomy_calls/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRankedTaxonomy() {}
-    public func HTMLGetRankedTaxonomy() {}
-    public func TextGetRankedTaxonomy() {}
+    public struct GetRankedTaxonomyParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var baseUrl: String? = ""
+        
+    }
+    
+    public func getRankedTaxonomy(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        taxonomyParameters pd: GetRankedTaxonomyParameters = GetRankedTaxonomyParameters(),
+        completionHandler: (error: NSError, returnValue: Taxonomies)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetRankedTaxonomy(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let taxonomies = Mapper<Taxonomies>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: taxonomies)
+                    
+            }
+            
+    }
     
 }
 
@@ -376,7 +511,7 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil
@@ -392,45 +527,116 @@ public extension AlchemyLanguage {
 
 
 // MARK: Language Detection
-/**
-
-http://www.alchemyapi.com/api/lang/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    public func URLGetLanguage() {}
-    public func HTMLGetLanguage() {}
-    public func TextGetLanguage() {}
+    public struct GetLanguageParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        
+    }
+    
+    /**
+     
+     http://www.alchemyapi.com/api/lang/proc.html
+     
+     */
+    public func getLanguage(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        taxonomyParameters pd: GetLanguageParameters = GetLanguageParameters(),
+        completionHandler: (error: NSError, returnValue: Language)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetLanguage(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let language = Mapper<Language>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: language)
+                    
+            }
+            
+    }
     
 }
 
 
 // MARK: Text Extraction
-/**
-
-http://www.alchemyapi.com/api/text/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    // TODO: getText params struct above this instead
+    public struct GetTextParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var useMetadata: Int? = 1
+        var extractLinks: Int? = 0
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        
+    }
+    
+    /**
+    
+     http://www.alchemyapi.com/api/text/proc.html
+     
+     **AlchemyLanguageConstants** includes a **TextType**, default is "normal"
+    
+     * "getText" --> Normal
+     * "getRawText" --> Raw
+     * "getTitle" --> Title
+    
+    */
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
         textType: alcs.TextType = alcs.TextType.Normal,
-        useMetadata: Int = 1,
-        extractLinks: Int = 0,
-        sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
-        completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
+        getTextParameters pd: GetTextParameters = GetTextParameters(),
+        completionHandler: (error: NSError, returnValue: (text: DocumentText, title: DocumentTitle))->() ) {
             
-            var parameters = commonParameters
+            var accessString: String!
             
-            let accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            func nothing() {}; nothing()
+            
+            switch textType {
+                
+            case .Normal:
+                accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            case .Raw:
+                accessString = AlchemyLanguageConstants.GetRawText(fromRequestType: rt)
+            case .Title:
+                accessString = AlchemyLanguageConstants.GetTitle(fromRequestType: rt)
+                
+            }
+            
             let endpoint = getEndpoint(accessString)
-    
-            // TODO: raw or not raw text parameter
-//            if textType == Raw
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
             
             // update parameters
             if let html = html { parameters["html"] = html }
@@ -444,14 +650,15 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getText: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil
                     
                     let documentText = Mapper<DocumentText>().map(data)!
+                    let documentTitle = Mapper<DocumentTitle>().map(data)!
                     
-                    completionHandler(error: error, returnValue: documentText)
+                    completionHandler(error: error, returnValue: (text: documentText, title: documentTitle))
                     
             }
             
@@ -461,28 +668,91 @@ public extension AlchemyLanguage {
 
 
 // MARK: Microformats Parsing
-/**
-
-http://www.alchemyapi.com/api/mformat/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    public func URLGetMicroformatData() {}
-    public func HTMLGetMicroformatData() {}
+    /**
+     
+     http://www.alchemyapi.com/api/mformat/proc.html
+     
+     */
+    public func getMicroformatData(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        completionHandler: (error: NSError, returnValue: Microformats)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetMicroformatData(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            var parameters = commonParameters
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let microformats = Mapper<Microformats>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: microformats)
+                    
+            }
+            
+    }
     
 }
 
 
 // MARK: Feed Detection
-/**
 
-http://www.alchemyapi.com/api/feed-detection/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    public func URLGetFeedLinks() {}
-    public func HTMLGetFeedLinks() {}
+    /**
+     
+     http://www.alchemyapi.com/api/feed-detection/proc.html
+     
+     */
+    public func getFeedLinks(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        completionHandler: (error: NSError, returnValue: Feeds)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetFeedLinks(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            var parameters = commonParameters
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let feeds = Mapper<Feeds>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: feeds)
+                    
+            }
+            
+    }
     
 }

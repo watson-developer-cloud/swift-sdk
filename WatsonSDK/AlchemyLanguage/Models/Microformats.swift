@@ -19,24 +19,22 @@ import ObjectMapper
 
 /**
  
- **SAORelations**
+ **Keywords**
  
  Returned by the AlchemyLanguage service.
  
  */
-public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
-
+public struct Microformats: AlchemyLanguageGenericModel, Mappable {
+    
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int?
-
+    
     // MARK: AlchemyLanguageGenericModel
     public var language: String?
     public var url: String?
     
-    // MARK: SAORelations
-    public var text: String?
-    public var relations: [SAORelation]?
-
+    // MARK: Keywords
+    public var microformats: [Microformat]?
     
     
     public init?(_ map: Map) {}
@@ -50,9 +48,8 @@ public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
         language <- map["language"]
         url <- map["url"]
         
-        // saoRelations
-        text <- map["text"]
-        relations <- map["relations"]
+        // keywords
+        microformats <- map["microformats"]
         
     }
     

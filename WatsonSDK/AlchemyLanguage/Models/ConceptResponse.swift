@@ -19,24 +19,22 @@ import ObjectMapper
 
 /**
  
- **SAORelations**
+ **ConceptResponse**
  
  Returned by the AlchemyLanguage service.
  
  */
-public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
-
+public struct ConceptResponse: AlchemyLanguageGenericModel, Mappable {
+    
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int?
-
+    
     // MARK: AlchemyLanguageGenericModel
     public var language: String?
     public var url: String?
     
-    // MARK: SAORelations
-    public var text: String?
-    public var relations: [SAORelation]?
-
+    // MARK: Concepts
+    public var concepts: [Concept]?
     
     
     public init?(_ map: Map) {}
@@ -44,15 +42,14 @@ public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
     public mutating func mapping(map: Map) {
         
         // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
+        totalTransactions <- map[""]
         
         // alchemyLanguageGenericModel
         language <- map["language"]
         url <- map["url"]
         
-        // saoRelations
-        text <- map["text"]
-        relations <- map["relations"]
+        // concept
+        concepts <- map["concepts"]
         
     }
     

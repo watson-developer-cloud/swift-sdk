@@ -24,19 +24,11 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-public struct SAORelation: AlchemyLanguageGenericModel, Mappable {
+public struct SAORelation: Mappable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: SAORelation
     public var action: Action?
-    public var object: RelationObject?
     public var sentence: String?
+    public var object: RelationObject?
     public var subject: Subject?
     
     
@@ -44,14 +36,6 @@ public struct SAORelation: AlchemyLanguageGenericModel, Mappable {
     
     public mutating func mapping(map: Map) {
         
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // saoRelation
         action <- map["action"]
         object <- map["object"]
         sentence <- map["sentence"]
@@ -65,7 +49,7 @@ public struct SAORelation: AlchemyLanguageGenericModel, Mappable {
 // MARK: **Action**
 extension SAORelation {
     
-    public struct Action {
+    public struct Action: Mappable {
         
         public var lemmatized: String?
         public var text: String?
@@ -85,7 +69,7 @@ extension SAORelation {
     }
     
     // MARK: Verb
-    public struct Verb {
+    public struct Verb: Mappable {
         
         public var negated: Int?
         public var tense: String?
@@ -96,7 +80,7 @@ extension SAORelation {
         
         public mutating func mapping(map: Map) {
 
-            negated <- map["negated"]
+            negated <- (map["negated"], Transformation.stringToInt)
             tense <- map["tense"]
             text <- map["text"]
             
@@ -110,7 +94,7 @@ extension SAORelation {
 // MARK: **RelationObject**
 extension SAORelation {
     
-    public struct RelationObject {
+    public struct RelationObject: Mappable {
 
         public var entity: Entity?
         public var keywords: Keywords?
@@ -120,15 +104,15 @@ extension SAORelation {
         
         
         public init?(_ map: Map) {}
-        
+
         public mutating func mapping(map: Map) {
-            
+
             entity <- map["entity"]
             keywords <- map["keywords"]
             sentiment <- map["sentiment"]
             sentimentFromSubject <- map["sentimentFromSubject"]
             text <- map["text"]
-            
+
         }
         
     }
@@ -139,7 +123,7 @@ extension SAORelation {
 // MARK: **Subject**
 extension SAORelation {
     
-    public struct Subject {
+    public struct Subject: Mappable {
         
         public var entity: Entity?
         public var keywords: Keywords?

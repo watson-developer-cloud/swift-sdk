@@ -24,16 +24,8 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-public struct Keyword: AlchemyLanguageGenericModel, Mappable {
+public struct Keyword: Mappable {
 
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: Keyword
     public var knowledgeGraph: KnowledgeGraph?
     public var relevance: Double?
     public var sentiment: Sentiment?
@@ -44,14 +36,6 @@ public struct Keyword: AlchemyLanguageGenericModel, Mappable {
     
     public mutating func mapping(map: Map) {
         
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // keyword
         knowledgeGraph <- map["knowledgeGraph"]
         relevance <- (map["relevance"], Transformation.stringToDouble)
         sentiment <- map["sentiment"]

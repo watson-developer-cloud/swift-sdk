@@ -1531,6 +1531,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidURLGetRankedTaxonomy() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getRankedTaxonomy(requestType: .URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com",
+            text: nil) {
+                
+                (error, taxonomies) in
+                
+                XCTAssertNotNil(taxonomies)
+                XCTAssertNil(taxonomies.taxonomy)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     func testTextGetRankedTaxonomy() {
         
         let validExpectation = expectationWithDescription("valid")

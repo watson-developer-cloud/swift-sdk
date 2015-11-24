@@ -1567,6 +1567,29 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidTextGetRankedTaxonomy() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getRankedTaxonomy(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_text_invalid) {
+                
+                (error, taxonomies) in
+                
+                XCTAssertNotNil(taxonomies)
+                XCTAssertNil(taxonomies.taxonomy)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
+    
     // MARK: Author Extraction
     //    func testHTMLGetAuthors() { }
     //    func testInvalidHTMLGetAuthors() { }

@@ -607,7 +607,18 @@ http://www.alchemyapi.com/api/text/proc.html
 */
 public extension AlchemyLanguage {
     
-    // TODO: getText params struct above this instead
+    public struct GetTextParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var useMetadata: Int? = 1
+        var extractLinks: Int? = 0
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        
+    }
+    
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,

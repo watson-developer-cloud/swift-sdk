@@ -329,6 +329,43 @@ public extension AlchemyLanguage {
         
     }
     
+    public func getRankedConcepts(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        conceptsParameters pd: GetRankedConceptsParameters = GetRankedConceptsParameters(),
+        completionHandler: (error: NSError, returnValue: ConceptResponse)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetRankedConcepts(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let conceptResponse = Mapper<ConceptResponse>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: conceptResponse)
+                    
+            }
+            
+    }
     
 }
 

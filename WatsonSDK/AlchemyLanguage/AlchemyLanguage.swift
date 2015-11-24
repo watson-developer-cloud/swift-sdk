@@ -735,5 +735,38 @@ public extension AlchemyLanguage {
      http://www.alchemyapi.com/api/feed-detection/proc.html
      
      */
+    public func getFeedLinks(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        completionHandler: (error: NSError, returnValue: Feeds)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetFeedLinks(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            var parameters = commonParameters
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let feeds = Mapper<Feeds>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: feeds)
+                    
+            }
+            
+    }
     
 }

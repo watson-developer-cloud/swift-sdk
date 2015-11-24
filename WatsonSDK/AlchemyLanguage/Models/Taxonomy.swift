@@ -21,20 +21,12 @@ import ObjectMapper
  
  **Taxonomy**
  
- Returned by the AlchemyLanguage service.
+ Child class of Taxonomies
  
  */
-public struct Taxonomy: AlchemyLanguageGenericModel, Mappable {
+public struct Taxonomy: Mappable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: Taxonomy
-    public var confident: Bool?
+    public var confident: Int?
     public var label: String?
     public var score: Double?
     
@@ -43,17 +35,9 @@ public struct Taxonomy: AlchemyLanguageGenericModel, Mappable {
     
     public mutating func mapping(map: Map) {
         
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // taxonomy
-        confident <- map["confident"]
+        confident <- (map["confident"], Transformation.stringToInt)
         label <- map["label"]
-        score <- map["score"]
+        score <- (map["score"], Transformation.stringToDouble)
         
     }
     

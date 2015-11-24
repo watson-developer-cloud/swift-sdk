@@ -29,16 +29,24 @@ public class SpeechToText: Service {
     private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
+    public enum SpeechToTextAudioFormat: String {
+        case OGG        = "audio/ogg;codecs=opus"
+        case FLAC       = "audio/flac"
+        case PCM        = "audio/l16"
+        case WAV        = "audio/wav"
+    }
+    
     private let WATSON_AUDIO_SAMPLE_RATE: Int32 = 16000
     private let WATSON_AUDIO_FRAME_SIZE: Int32 = 160
     
     var socket: WebSocket?
-    var audio: NSURL?
+    
+    var audioData: NSData?
     
     private let opus: OpusHelper = OpusHelper()
     
     // If set, contains the callback function after a transcription request.
-    var callback: ((String?, NSError?) -> Void)?
+    var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
     
     init() {
         
@@ -52,13 +60,18 @@ public class SpeechToText: Service {
      This function takes audio data a returns a callback with the string transcription
      
      - parameter audio:    <#audio description#>
-     - parameter callback: <#callback description#>
+     - parameter callback: A function that will return the string
      */
-    public func transcribe(audio: NSURL, callback: (String?, NSError?) -> Void) {
+    public func transcribe(audioData: NSData,
+        format: SpeechToTextAudioFormat = .FLAC,
+        oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
         
         connectWebsocket()
-        self.audio = audio
-        self.callback = callback
+        
+        // check if the data format is PCM, then encode it.
+        
+        self.audioData = audioData
+        self.callback = oncompletion
         
     }
     
@@ -124,27 +137,34 @@ public class SpeechToText: Service {
 // MARK: - <#WebSocketDelegate#>
 extension SpeechToText : WebSocketDelegate
 {
+    
     /**
      Websocket callback when a web socket connection has been opened.
      
      - parameter socket: <#socket description#>
      */
     public func websocketDidConnect(socket: WebSocket) {
-        print("socket connected")
+        
+        Log.sharedLogger.info("Websocket connected")
+        
         socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
-        if let audio = self.audio {
-            if let audioData = NSData(contentsOfURL: audio) {
-                print("writing audio data")
-                socket.writeData(audioData)
-                socket.writeString("{\"action\": \"stop\"}")
-                print("wrote audio data")
-            }
+        
+        if let audioData = self.audioData {
+            
+            
+            Log.sharedLogger.info("Sending audio data through WebSocket")
+            socket.writeData(audioData)
+            
+            socket.writeString("{\"action\": \"stop\"}")
+            print("wrote audio data")
+            
+            
         }
     }
     
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("socket disconnected")
-        print(error)
+     
+        Log.sharedLogger.info("Websocket disconnected")
         
         if let err = error {
             
@@ -160,7 +180,6 @@ extension SpeechToText : WebSocketDelegate
     }
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("socket received message")
         
         // parse the data.
         // print(text)
@@ -172,12 +191,18 @@ extension SpeechToText : WebSocketDelegate
             if let result = result {
                 
                 if result.state == "listening" {
+                    
                     Log.sharedLogger.info("Speech recognition is listening")
+                    
                 } else {
-                    callback(text, nil)
+                    
+                    callback(result, nil)
+                    
                 }
             } else {
-                callback(nil, NSError.createWatsonError(404, description: "Could not parse the recieved data"))
+                
+                callback(nil, NSError.createWatsonError(404, description: "Could not parse the received data"))
+                
             }
         } else {
             Log.sharedLogger.warning("No callback has been defined for this request.")

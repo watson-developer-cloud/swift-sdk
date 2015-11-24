@@ -120,12 +120,49 @@ class SpeechToTextTests: XCTestCase {
     }
     
     
-    func testWebsockets() {
+    func testSimpleTranscription() {
         let expectation = expectationWithDescription("WebSockets")
-        service.transcribe(NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")!) {
-            transcription in
-            expectation.fulfill()
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
         }
+        
+        service.transcribe( audioData, format: .FLAC, oncompletion: {
+            response, error in
+            
+            if let response = response {
+                
+                if let results = response.results {
+                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+                    
+                    if let alternatives = results[0].alternatives {
+                        
+                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+                        
+                        
+                            if let transcript = alternatives[0].transcript
+                            {
+                                XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
+                                
+                            }
+                        
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } else {
+                    XCTFail("Could not get back results for the response")
+                }
+                
+            } else {
+                XCTFail("Could not get back SpeechToTextResponse structure")
+            }
+            
+            
+        })
+            
         waitForExpectationsWithTimeout(timeout) {
             error in XCTAssertNil(error, "Timeout")
         }

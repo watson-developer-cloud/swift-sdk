@@ -24,11 +24,14 @@ public struct SpeechToTextResult: Mappable
 {
     var alternatives: [SpeechToTextAlternative]?
     
+    var final: Bool?
+    
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
         
         alternatives        <- map["alternatives"]
+        final               <- map["final"]
         
     }
     

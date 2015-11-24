@@ -80,6 +80,7 @@ public extension AlchemyLanguageConstants {
     public enum TextType {
         case Normal
         case Raw
+        case Title
     }
     
     /**

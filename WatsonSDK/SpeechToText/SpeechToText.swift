@@ -19,8 +19,9 @@ import Starscream
 import ObjectMapper
 
 /**
- * Implementation of the Watson speech to text service
- */
+    The IBM® Speech to Text service provides an Application Programming Interface (API) that
+    enables you to add speech transcription capabilities to your applications.
+*/
 public class SpeechToText: Service {
     
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
@@ -36,11 +37,15 @@ public class SpeechToText: Service {
     
     private let opus: OpusHelper = OpusHelper()
     
+    // If set, contains the callback function after a transcription request.
     var callback: ((String?, NSError?) -> Void)?
     
     init() {
+        
         super.init(serviceURL: serviceURL)
+        
         opus.createEncoder(WATSON_AUDIO_SAMPLE_RATE)
+        
     }
     
     /**
@@ -50,9 +55,11 @@ public class SpeechToText: Service {
      - parameter callback: <#callback description#>
      */
     public func transcribe(audio: NSURL, callback: (String?, NSError?) -> Void) {
+        
         connectWebsocket()
         self.audio = audio
         self.callback = callback
+        
     }
     
     /**
@@ -68,7 +75,20 @@ public class SpeechToText: Service {
         return data
     }
     
+    /**
+     Establishes a Websocket connection if one does not exist already.
+     */
     private func connectWebsocket() {
+        
+        // check to see if a connection has been established.
+        if let socket = socket {
+            
+            if socket.isConnected {
+                return
+            }
+        }
+        
+        
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey) {
             token, error in
             
@@ -82,11 +102,13 @@ public class SpeechToText: Service {
                 let authURL = self.url
                 self.socket = WebSocket(url: NSURL(string: authURL)!)
                 if let socket = self.socket {
+                    
                     socket.delegate = self
+                    
                     socket.headers["X-Watson-Authorization-Token"] = token
-                    //socket.selfSignedSSL = true
+                   
                     socket.connect()
-                    //socket.writePing(NSData())
+                    
                 } else {
                     Log.sharedLogger.error("Socket could not be created")
                 }
@@ -99,8 +121,14 @@ public class SpeechToText: Service {
   
 }
 
+// MARK: - <#WebSocketDelegate#>
 extension SpeechToText : WebSocketDelegate
 {
+    /**
+     Websocket callback when a web socket connection has been opened.
+     
+     - parameter socket: <#socket description#>
+     */
     public func websocketDidConnect(socket: WebSocket) {
         print("socket connected")
         socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
@@ -120,6 +148,9 @@ extension SpeechToText : WebSocketDelegate
         
         if let err = error {
             
+            /**
+            *  Sometimes the WebSocket cannot be elevated on the first couple of tries.
+            */
             if err.code == 101 {
                 connectWebsocket()
             } else {
@@ -134,7 +165,7 @@ extension SpeechToText : WebSocketDelegate
         // parse the data.
         // print(text)
         
-        let result = Mapper<STTResponse>().map(text)
+        let result = Mapper<SpeechToTextResponse>().map(text)
         
         if let callback = self.callback {
             
@@ -145,30 +176,60 @@ extension SpeechToText : WebSocketDelegate
                 } else {
                     callback(text, nil)
                 }
+            } else {
+                callback(nil, NSError.createWatsonError(404, description: "Could not parse the recieved data"))
             }
+        } else {
+            Log.sharedLogger.warning("No callback has been defined for this request.")
         }
         // socket.disconnect()
     }
     
+    /**
+     This function is invoked if the WebSocket receives binary data, which should never occur.
+     
+     - parameter socket: <#socket description#>
+     - parameter data:   <#data description#>
+     */
     public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-        print("socket received data")
+        // print("socket received data")
+        Log.sharedLogger.warning("Websocket received binary data")
     }
 }
 
-
+// MARK: - <#AVAudioRecorderDelegate#>
 extension SpeechToText : AVAudioRecorderDelegate
 {
+    /**
+     This function gets invoked when the AVAudioPlayer has stopped recording. If the recording
+     is successful, the audio is transcribed and the delegate's callback is invoked.
+     
+     - parameter recorder: <#recorder description#>
+     - parameter flag:     flag description
+     */
      public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
         successfully flag: Bool) {
     
-        let data = NSData(contentsOfURL: recorder.url)
-            
-        print("Finished audio recording length was \(data?.length)" )
+            let fileLocation = recorder.url.absoluteString
         
+            let data = NSData(contentsOfFile: fileLocation)
+       
+            if let data = data {
+                print("Finished audio recording \(fileLocation) length is \(data.length)" )
+                
+                // transcribe(<#T##audio: NSURL##NSURL#>, callback: <#T##(String?, NSError?) -> Void#>)
+                
+            } else {
+                Log.sharedLogger.warning("Could not find file at \(fileLocation)")
+            }
+        
+            
+            
         
     }
 }
 
+// MARK: - <#AVAudioSessionDelegate#>
 extension SpeechToText : AVAudioSessionDelegate
 {
     public func beginInterruption() {

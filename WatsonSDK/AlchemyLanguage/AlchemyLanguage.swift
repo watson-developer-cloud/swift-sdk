@@ -548,9 +548,16 @@ http://www.alchemyapi.com/api/lang/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetLanguage() {}
-    public func HTMLGetLanguage() {}
-    public func TextGetLanguage() {}
+    public struct GetLanguageParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        
+    }
+    
     
 }
 

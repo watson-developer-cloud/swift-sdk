@@ -1457,6 +1457,44 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // MARK: Taxonomy Classification
+    func testHTMLGetRankedTaxonomy() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        
+        instance.getRankedTaxonomy(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
+                
+                (error, taxonomies) in
+                
+                XCTAssertNotNil(taxonomies)
+                XCTAssertNotNil(taxonomies.language)
+                XCTAssertNotNil(taxonomies.taxonomy)
+                
+                if let taxonomy = taxonomies.taxonomy {
+                    
+                    XCTAssertNotNil(taxonomy.first)
+                    
+                    if let first = taxonomy.first {
+                        
+                        XCTAssertNotNil(first.label)
+                        XCTAssertNotNil(first.score)
+                        
+                    }
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Author Extraction

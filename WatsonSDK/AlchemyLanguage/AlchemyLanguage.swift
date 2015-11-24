@@ -77,16 +77,6 @@ public final class AlchemyLanguage: Service {
 
 
 // MARK: Entity Extraction
-/**
-
-
-http://www.alchemyapi.com/api/entity/proc.html
-
-public func URLGetRankedNamedEntities() {}
-public func HTMLGetRankedNamedEntities() {}
-public func TextGetRankedNamedEntities() {}
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetEntitiesParameters: AlchemyLanguageParameters {
@@ -110,6 +100,9 @@ public extension AlchemyLanguage {
     }
     
     /**
+
+     http://www.alchemyapi.com/api/entity/proc.html
+     
      Extracts a grouped, ranked list of named entities (people, companies,
      organizations, etc.) from text, a URL or HTML.
      
@@ -160,18 +153,8 @@ public extension AlchemyLanguage {
 
 
 // MARK: Sentiment Analysis
-/**
-
-http://www.alchemyapi.com/api/sentiment/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    /** 
-     
-     TODO: write about how targets is a string but requires arguments to be split by vertical bars, OR ask for an array and do it for the client.
-     
-     */
     public struct GetSentimentParameters: AlchemyLanguageParameters {
         
         init(){}
@@ -181,12 +164,15 @@ public extension AlchemyLanguage {
         var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
         var cquery: String? = ""
         var xpath: String? = ""
-        
-        // required if targeted
-        var targets: String? = ""
+        var targets: String? = ""           // required if targeted
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/sentiment/proc.html
+     
+     */
     public func getSentiment(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,

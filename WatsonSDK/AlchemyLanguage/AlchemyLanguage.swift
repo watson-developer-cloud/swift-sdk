@@ -727,14 +727,13 @@ public extension AlchemyLanguage {
 
 
 // MARK: Feed Detection
-/**
 
-http://www.alchemyapi.com/api/feed-detection/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    public func URLGetFeedLinks() {}
-    public func HTMLGetFeedLinks() {}
+    /**
+     
+     http://www.alchemyapi.com/api/feed-detection/proc.html
+     
+     */
     
 }

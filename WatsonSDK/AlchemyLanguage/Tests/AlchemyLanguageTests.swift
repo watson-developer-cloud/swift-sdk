@@ -1199,6 +1199,64 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // MARK: Relation Extraction
+    func testHTMLGetRelations() {
+    
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        
+        instance.getRelations(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
+                
+                (error, saoRelations) in
+                
+                XCTAssertNotNil(saoRelations)
+                XCTAssertNotNil(saoRelations.relations)
+                XCTAssertNotNil(saoRelations.relations?.first)
+                
+                if let relations = saoRelations.relations,
+                    let first = relations.first {
+                        
+                        print(first)
+                        
+                        XCTAssertNotNil(first.sentence)
+                        XCTAssertNotNil(first.subject)
+                        
+                        if let subject = first.subject {
+                            
+                            XCTAssertNotNil(subject.text)
+                            
+                        }
+                        
+                        XCTAssertNotNil(first.action)
+                        
+                        if let action = first.action {
+                            
+                            XCTAssertNotNil(action.text)
+                            XCTAssertNotNil(action.lemmatized)
+                            XCTAssertNotNil(action.verb)
+                            
+                            if let verb = action.verb {
+                                
+                                XCTAssertNotNil(verb.text)
+                                XCTAssertNotNil(verb.tense)
+                                
+                            }
+                            
+                        }
+                        
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Taxonomy Classification

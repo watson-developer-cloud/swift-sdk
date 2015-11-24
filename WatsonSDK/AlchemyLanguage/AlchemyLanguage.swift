@@ -558,6 +558,43 @@ public extension AlchemyLanguage {
      http://www.alchemyapi.com/api/lang/proc.html
      
      */
+    public func getLanguage(requestType rt: AlchemyLanguageConstants.RequestType,
+        html: String?,
+        url: String?,
+        text: String?,
+        taxonomyParameters pd: GetLanguageParameters = GetLanguageParameters(),
+        completionHandler: (error: NSError, returnValue: Language)->() ) {
+            
+            let accessString = AlchemyLanguageConstants.GetLanguage(fromRequestType: rt)
+            let endpoint = getEndpoint(accessString)
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
+            
+            if let html = html { parameters["html"] = html }
+            if let url = url { parameters["url"] = url }
+            if let text = text { parameters["text"] = text }
+            
+            NetworkUtils.performBasicAuthRequest(endpoint,
+                method: HTTPMethod.POST,
+                parameters: parameters,
+                encoding: ParameterEncoding.URL) {
+                    
+                    response in
+                    
+                    // TODO: explore NSError, for now assume non-nil is guaranteed
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
+                    
+                    let error = response.error!
+                    let data = response.data ?? nil
+                    
+                    let language = Mapper<Language>().map(data)!
+                    
+                    completionHandler(error: error, returnValue: language)
+                    
+            }
+            
+    }
     
 }
 

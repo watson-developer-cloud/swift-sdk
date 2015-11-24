@@ -1139,6 +1139,42 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testTextGetRankedConcepts() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getRankedConcepts(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_text_valid) {
+                
+                (error, conceptResponse) in
+                
+                XCTAssertNotNil(conceptResponse)
+                XCTAssertNotNil(conceptResponse.language)
+                XCTAssertNotNil(conceptResponse.concepts?.first)
+                
+                if let concepts = conceptResponse.concepts,
+                    let first = concepts.first {
+                        
+                        XCTAssertNotNil(first.text)
+                        if let text = first.text { XCTAssertEqual(text, "Vladimir Putin") }
+                        
+                        XCTAssertNotNil(first.dbpedia)
+                        XCTAssertNotNil(first.freebase)
+                        XCTAssertNotNil(first.opencyc)
+                        XCTAssertNotNil(first.yago)
+                        
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Relation Extraction

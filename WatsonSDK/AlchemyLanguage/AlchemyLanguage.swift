@@ -670,8 +670,9 @@ public extension AlchemyLanguage {
                     let data = response.data ?? nil
                     
                     let documentText = Mapper<DocumentText>().map(data)!
+                    let documentTitle = Mapper<DocumentTitle>().map(data)!
                     
-                    completionHandler(error: error, returnValue: documentText)
+                    completionHandler(error: error, returnValue: (text: documentText, title: documentTitle))
                     
             }
             

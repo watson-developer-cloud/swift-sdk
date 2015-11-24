@@ -1175,6 +1175,27 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidTextGetRankedConcepts() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getRankedConcepts(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_text_invalid) {
+                
+                (error, conceptResponse) in
+                
+                XCTAssertNotNil(conceptResponse)
+                XCTAssertNil(conceptResponse.concepts)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     
     // MARK: Relation Extraction

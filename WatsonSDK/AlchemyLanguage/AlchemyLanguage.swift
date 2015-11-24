@@ -629,18 +629,28 @@ public extension AlchemyLanguage {
         html: String?,
         url: String?,
         textType: alcs.TextType = alcs.TextType.Normal,
-        useMetadata: Int = 1,
-        extractLinks: Int = 0,
-        sourceText: luri.SourceText = luri.SourceText.cleaned_or_raw,
-        completionHandler: (error: NSError, returnValue: DocumentText)->() ) {
+        getTextParameters pd: GetTextParameters = GetTextParameters(),
+        completionHandler: (error: NSError, returnValue: (text: DocumentText, title: DocumentTitle))->() ) {
             
-            var parameters = commonParameters
+            var accessString: String!
             
-            let accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            func nothing() {}; nothing()
+            
+            switch textType {
+                
+            case .Normal:
+                accessString = AlchemyLanguageConstants.GetText(fromRequestType: rt)
+            case .Raw:
+                accessString = AlchemyLanguageConstants.GetRawText(fromRequestType: rt)
+            case .Title:
+                accessString = AlchemyLanguageConstants.GetTitle(fromRequestType: rt)
+                
+            }
+            
             let endpoint = getEndpoint(accessString)
-    
-            // TODO: raw or not raw text parameter
-//            if textType == Raw
+            
+            let parametersDictionary = pd.asDictionary()
+            var parameters = AlchemyCombineDictionaryUtil.combineParameterDictionary(commonParameters, withDictionary: parametersDictionary)
             
             // update parameters
             if let html = html { parameters["html"] = html }

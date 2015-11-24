@@ -25,17 +25,18 @@ import ObjectMapper
  
  */
 public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
-    
+
     // MARK: AlchemyGenericModel
     public var totalTransactions: Int?
-    
+
     // MARK: AlchemyLanguageGenericModel
     public var language: String?
     public var url: String?
     
     // MARK: SAORelations
-    public var relations: [SAORelation]?
     public var text: String?
+    public var relations: [SAORelation]?
+
     
     
     public init?(_ map: Map) {}
@@ -50,8 +51,8 @@ public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
         url <- map["url"]
         
         // saoRelations
-        relations <- map["relations"]
         text <- map["text"]
+        relations <- map["relations"]
         
     }
     

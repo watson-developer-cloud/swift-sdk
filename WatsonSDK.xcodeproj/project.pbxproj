@@ -16,6 +16,7 @@
 		6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */; };
 		6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */; };
 		6E2E43091BFD0DD200B32691 /* biography.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E2E43081BFD0DD200B32691 /* biography.html */; };
+		6E75353A1C04CA79003EAECE /* ConceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7535391C04CA79003EAECE /* ConceptResponse.swift */; };
 		6EC1CAAD1C037DD200F43CFB /* DocumentSentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1CAAC1C037DD200F43CFB /* DocumentSentiment.swift */; };
 		6EC1CAAF1C03885C00F43CFB /* SentimentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1CAAE1C03885C00F43CFB /* SentimentResponse.swift */; };
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
@@ -168,6 +169,7 @@
 		6E2E43031BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageParametersProtocol.swift; sourceTree = "<group>"; };
 		6E2E43061BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCombineDictionaryUtil.swift; sourceTree = "<group>"; };
 		6E2E43081BFD0DD200B32691 /* biography.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = biography.html; sourceTree = "<group>"; };
+		6E7535391C04CA79003EAECE /* ConceptResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptResponse.swift; sourceTree = "<group>"; };
 		6EC1CAAC1C037DD200F43CFB /* DocumentSentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSentiment.swift; sourceTree = "<group>"; };
 		6EC1CAAE1C03885C00F43CFB /* SentimentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResponse.swift; sourceTree = "<group>"; };
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				7ADC39AF1BF950C800CD916E /* AlchemyLanguageGenericModel.swift */,
 				6E2E42F91BFBCAB800B32691 /* Authors.swift */,
 				7ADC39B01BF950C800CD916E /* CombinedResults.swift */,
+				6E7535391C04CA79003EAECE /* ConceptResponse.swift */,
 				7ADC39B11BF950C800CD916E /* Concept.swift */,
 				7ADC39B21BF950C800CD916E /* DisambiguatedLinks.swift */,
 				6EE643741BFB94DC00303010 /* DocumentAuthors.swift */,
@@ -946,6 +949,7 @@
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
 				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
+				6E75353A1C04CA79003EAECE /* ConceptResponse.swift in Sources */,
 				7ADC3A8C1BF9579300CD916E /* Dialog.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
 				7ADC3A8D1BF9579300CD916E /* DialogContent.swift in Sources */,

@@ -1199,21 +1199,9 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // MARK: Relation Extraction
-    //    func testHTMLGetRelations()
-    //    func testInvalidHTMLGetRelations()
-    //    func testURLGetRelations()
-    //    func testInvalidURLGetRelations()
-    //    func testTextGetRelations()
-    //    func testInvalidTextGetRelations()
     
     
     // MARK: Taxonomy Classification
-    //    func testHTMLGetRankedTaxonomy()
-    //    func testInvalidHTMLGetRankedTaxonomy()
-    //    func testURLGetRankedTaxonomy()
-    //    func testInvalidURLGetRankedTaxonomy()
-    //    func testTextGetRankedTaxonomy()
-    //    func testInvalidTextGetRankedTaxonomy()
     
     
     // MARK: Author Extraction

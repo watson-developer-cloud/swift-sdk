@@ -1257,6 +1257,36 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidHTMLGetRelations() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.keywordAnalysisDotComShouldNotExist.com")
+        
+        instance.getRelations(requestType: .HTML,
+            html: html,
+            url: nil,
+            text: nil) {
+                
+                (error, saoRelations) in
+                
+                XCTAssertNotNil(saoRelations)
+                XCTAssertNil(saoRelations.relations)
+                
+                if let language = saoRelations.language {
+                    
+                    XCTAssertEqual(language, "unknown")
+                    
+                }
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Taxonomy Classification

@@ -1371,6 +1371,62 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testTextGetRelations() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getRelations(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_text_valid) {
+                
+                (error, saoRelations) in
+                
+                XCTAssertNotNil(saoRelations)
+                XCTAssertNotNil(saoRelations.relations)
+                XCTAssertNotNil(saoRelations.relations?.first)
+                
+                if let relations = saoRelations.relations,
+                    let first = relations.first {
+                        
+                        print(first)
+                        
+                        XCTAssertNotNil(first.sentence)
+                        XCTAssertNotNil(first.subject)
+                        
+                        if let subject = first.subject {
+                            
+                            XCTAssertNotNil(subject.text)
+                            
+                        }
+                        
+                        XCTAssertNotNil(first.action)
+                        
+                        if let action = first.action {
+                            
+                            XCTAssertNotNil(action.text)
+                            XCTAssertNotNil(action.lemmatized)
+                            XCTAssertNotNil(action.verb)
+                            
+                            if let verb = action.verb {
+                                
+                                XCTAssertNotNil(verb.text)
+                                XCTAssertNotNil(verb.tense)
+                                
+                            }
+                            
+                        }
+                        
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Taxonomy Classification

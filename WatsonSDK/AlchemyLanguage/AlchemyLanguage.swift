@@ -525,7 +525,7 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getAuthor: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil
@@ -593,7 +593,7 @@ public extension AlchemyLanguage {
                     response in
                     
                     // TODO: explore NSError, for now assume non-nil is guaranteed
-                    assert(response.error != nil, "AlchemyLanguage: getText: reponse.error should not be nil.")
+                    assert(response.error != nil, "AlchemyLanguage: reponse.error should not be nil.")
                     
                     let error = response.error!
                     let data = response.data ?? nil

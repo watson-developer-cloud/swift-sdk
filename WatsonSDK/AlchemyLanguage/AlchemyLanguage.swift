@@ -314,9 +314,21 @@ http://www.alchemyapi.com/api/concept/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRankedConcepts() {}
-    public func HTMLGetRankedConcepts() {}
-    public func TextGetRankedConcepts() {}
+    public struct GetRankedConceptsParameters: AlchemyLanguageParameters {
+        
+        init(){}
+
+        var linkedData: Int? = 1
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var maxRetrieve: Int? = 50
+        var baseUrl: String? = ""
+        var knowledgGraph: Int? = 0
+        
+    }
+    
     
 }
 

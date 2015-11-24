@@ -541,11 +541,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Language Detection
-/**
-
-http://www.alchemyapi.com/api/lang/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetLanguageParameters: AlchemyLanguageParameters {
@@ -558,6 +553,11 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/lang/proc.html
+     
+     */
     
 }
 

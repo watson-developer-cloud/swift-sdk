@@ -682,15 +682,13 @@ public extension AlchemyLanguage {
 
 
 // MARK: Microformats Parsing
-/**
-
-http://www.alchemyapi.com/api/mformat/proc.html
-
-*/
 public extension AlchemyLanguage {
     
-    public func URLGetMicroformatData() {}
-    public func HTMLGetMicroformatData() {}
+    /**
+     
+     http://www.alchemyapi.com/api/mformat/proc.html
+     
+     */
     
 }
 

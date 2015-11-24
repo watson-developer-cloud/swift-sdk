@@ -448,9 +448,17 @@ http://www.alchemyapi.com/api/taxonomy_calls/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRankedTaxonomy() {}
-    public func HTMLGetRankedTaxonomy() {}
-    public func TextGetRankedTaxonomy() {}
+    public struct GetRankedTaxonomyParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var baseUrl: String? = ""
+        
+    }
+    
     
 }
 

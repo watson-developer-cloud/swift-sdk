@@ -378,9 +378,27 @@ http://www.alchemyapi.com/api/relation/proc.html
 */
 public extension AlchemyLanguage {
     
-    public func URLGetRelations() {}
-    public func HTMLGetRelations() {}
-    public func TextGetRelations() {}
+    public struct GetRelationsParameters: AlchemyLanguageParameters {
+        
+        init(){}
+        
+        var entities: Int? = 0          // extra call
+        var keywords: Int? = 0          // extra call
+        var requireEntities: Int? = 0
+        var sentimentExcludeEntities: Int? = 1
+        var disambiguate: Int? = 1
+        var linkedData: Int? = 1
+        var coreference: Int? = 1
+        var sentiment: Int? = 1         // extra call
+        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        var showSourceText: Int? = 0
+        var cquery: String? = ""
+        var xpath: String? = ""
+        var maxRetrieve: Int? = 50
+        var baseUrl: String? = ""
+        
+    }
+    
     
 }
 

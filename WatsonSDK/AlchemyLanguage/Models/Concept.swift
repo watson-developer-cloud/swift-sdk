@@ -24,44 +24,42 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-public struct Concept: AlchemyLanguageGenericModel, Mappable {
+public struct Concept: Mappable {
 
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: Concept
-    public var census: String?
-    public var ciaFactbook: String?
-    public var crunchbase: String?
-    public var dbpedia: String?
-    public var freebase: String?
+    public var text: String?
+    public var relevance: Int?
+    public var knowledgeGraph: KnowledgeGraph?
+    public var website: String?
     public var geo: String?
+    public var dbpedia: String?
+    public var yago: String?
+    public var opencyc: String?
+    public var freebase: String?
+    public var ciaFactbook: String?
+    public var census: String?
     public var geonames: String?
+    public var musicBrainz: String?
+    public var crunchbase: String?
     
     
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- map[""]
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // concept
-        census <- map["census"]
-        ciaFactbook <- map["ciaFactbook"]
-        crunchbase <- map["crunchbase"]
-        dbpedia <- map["dbpedia"]
-        freebase <- map["freebase"]
+
+        text <- map["text"]
+        relevance <- map["relevance"]
+        knowledgeGraph <- map["knowledgeGraph"]
+        website <- map["website"]
         geo <- map["geo"]
+        dbpedia <- map["dbpedia"]
+        yago <- map["yago"]
+        opencyc <- map["opencyc"]
+        freebase <- map["freebase"]
+        ciaFactbook <- map["ciaFactbook"]
+        census <- map["census"]
         geonames <- map["geonames"]
+        musicBrainz <- map["musicBrainz"]
+        crunchbase <- map["crunchbase"]
         
     }
     

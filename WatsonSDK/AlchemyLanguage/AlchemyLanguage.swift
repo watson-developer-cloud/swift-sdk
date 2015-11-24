@@ -600,11 +600,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Text Extraction
-/**
-
-http://www.alchemyapi.com/api/text/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetTextParameters: AlchemyLanguageParameters {
@@ -619,6 +614,17 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+    
+     http://www.alchemyapi.com/api/text/proc.html
+     
+     **AlchemyLanguageConstants** includes a **TextType**, default is "normal"
+    
+     * "getText" --> Normal
+     * "getRawText" --> Raw
+     * "getTitle" --> Title
+    
+    */
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,

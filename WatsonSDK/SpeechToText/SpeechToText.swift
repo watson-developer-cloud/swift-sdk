@@ -36,23 +36,27 @@ public class SpeechToText: Service {
         case WAV        = "audio/wav"
     }
     
-    private let WATSON_AUDIO_SAMPLE_RATE: Int32 = 16000
-    private let WATSON_AUDIO_FRAME_SIZE: Int32 = 160
+    private let WATSON_AUDIO_SAMPLE_RATE = 16000
+    private let WATSON_AUDIO_FRAME_SIZE = 160
     
     var socket: WebSocket?
     
-    var audioData: NSData?
-    
     private let opus: OpusHelper = OpusHelper()
+    private let ogg: OggHelper = OggHelper()
+    
+    var format: SpeechToTextAudioFormat = .FLAC
+    
+    var audioData: NSData?
     
     // If set, contains the callback function after a transcription request.
     var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
+    
     
     init() {
         
         super.init(serviceURL: serviceURL)
         
-        opus.createEncoder(WATSON_AUDIO_SAMPLE_RATE)
+        opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         
     }
     
@@ -66,12 +70,21 @@ public class SpeechToText: Service {
         format: SpeechToTextAudioFormat = .FLAC,
         oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
         
-        connectWebsocket()
+            connectWebsocket()
         
-        // check if the data format is PCM, then encode it.
-        
-        self.audioData = audioData
-        self.callback = oncompletion
+            // check if the data format is PCM, then encode it.
+            if format == .PCM {
+                
+                self.audioData = opus.encode(audioData, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+                self.format = .OGG
+                
+            } else {
+                self.audioData = audioData
+                self.format = format
+            }
+            
+            self.callback = oncompletion
+            
         
     }
     
@@ -84,7 +97,34 @@ public class SpeechToText: Service {
      */
     public func encodeOpus(data: NSData) -> NSData
     {
-        let data = opus.encode(data, frameSize: WATSON_AUDIO_FRAME_SIZE)
+        
+        let length: Int = data.length
+        let chunkSize: Int = WATSON_AUDIO_FRAME_SIZE * 2
+        var offset : Int = 0
+        
+        var ptr = UnsafeMutablePointer<UInt8>(data.bytes)
+        
+        repeat {
+            let thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset
+            
+            ptr += offset
+            let chunk = NSData(bytesNoCopy: ptr, length: thisChunkSize, freeWhenDone: false)
+            
+            let compressed : NSData = opus.encode(chunk, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+            
+            if compressed.length != 0 {
+                let newData : NSMutableData = ogg.writePacket(compressed, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+                
+                if newData.length != 0 {
+                    // send to websocket
+                }
+            }
+            
+            offset += thisChunkSize
+            
+        } while offset < length
+        
+        let data = opus.encode(data, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
         return data
     }
     
@@ -147,7 +187,10 @@ extension SpeechToText : WebSocketDelegate
         
         Log.sharedLogger.info("Websocket connected")
         
-        socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
+        // socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
+        
+        let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
+        socket.writeString(command)
         
         if let audioData = self.audioData {
             

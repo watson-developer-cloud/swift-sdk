@@ -105,10 +105,10 @@
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0D1BF950C800CD916E /* libogg.a */; };
 		7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0E1BF950C800CD916E /* libopus.a */; };
-		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; };
-		7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A111BF950C800CD916E /* OggHelper.h */; };
+		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A111BF950C800CD916E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A121BF950C800CD916E /* OggHelper.m */; };
-		7AF96BAE1BF996560083ED23 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A131BF950C800CD916E /* os_types.h */; };
+		7AF96BAE1BF996560083ED23 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A131BF950C800CD916E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF96BAF1BF996560083ED23 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A151BF950C800CD916E /* opus.h */; };
 		7AF96BB01BF996560083ED23 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A161BF950C800CD916E /* opus_defines.h */; };
 		7AF96BB11BF996560083ED23 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A171BF950C800CD916E /* opus_header.c */; };

@@ -113,10 +113,11 @@ public class SpeechToText: Service {
             let compressed : NSData = opus.encode(chunk, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
             
             if compressed.length != 0 {
-                let newData : NSMutableData = ogg.writePacket(compressed, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+                let newData = ogg.writePacket(compressed, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
                 
-                if newData.length != 0 {
+                if newData != nil {
                     // send to websocket
+                    Log.sharedLogger.info("Writing a chunk with \(newData.length) bytes")
                 }
             }
             

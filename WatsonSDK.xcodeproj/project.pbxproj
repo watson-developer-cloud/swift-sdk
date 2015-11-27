@@ -130,6 +130,8 @@
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
 		E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */; };
+		E1A07EFE1C08FD3E00DCD45C /* SpeechSample.wav in Resources */ = {isa = PBXBuildFile; fileRef = E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */; };
+		E1A07F001C08FE4900DCD45C /* SpeechSample.ogg in Resources */ = {isa = PBXBuildFile; fileRef = E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */; };
 		EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF8CA641BFBC6BF00808D92 /* Credentials.plist */; };
 /* End PBXBuildFile section */
 
@@ -290,6 +292,8 @@
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
 		E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
+		E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample.wav; sourceTree = "<group>"; };
+		E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
 		EBF8CA641BFBC6BF00808D92 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -636,6 +640,8 @@
 		7ADC3A061BF950C800CD916E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */,
+				E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */,
 				E143FC2A1C00029D00D92053 /* test.raw */,
 				7ADC3A071BF950C800CD916E /* SpeechSample.flac */,
 				7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */,
@@ -887,9 +893,11 @@
 				E143FC2B1C0002A000D92053 /* test.raw in Resources */,
 				7ADC3AA61BF959BD00CD916E /* SpeechSample.flac in Resources */,
 				7ADC3A891BF9560800CD916E /* mother-daughter.jpg in Resources */,
+				E1A07F001C08FE4900DCD45C /* SpeechSample.ogg in Resources */,
 				7ADC3A951BF958A700CD916E /* glossary.tmx in Resources */,
 				7ADC3A881BF9560800CD916E /* example.html in Resources */,
 				7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */,
+				E1A07EFE1C08FD3E00DCD45C /* SpeechSample.wav in Resources */,
 				3124F11E1BFEC8D3006AAF16 /* missing_training_meta.txt in Resources */,
 				3124F11F1BFEC8D5006AAF16 /* training_meta.txt in Resources */,
 			);

@@ -39,6 +39,13 @@ public class SpeechToText: Service {
     private let WATSON_AUDIO_SAMPLE_RATE = 16000
     private let WATSON_AUDIO_FRAME_SIZE = 160
     
+    
+    // NSOperationQueues
+    var audioProcessingQueue: NSOperationQueue!
+    // var transcriptionQueue: NSOperationQueue!
+    
+    public var delegate : SpeechToTextDelegate?
+    
     var socket: WebSocket?
     
     private let opus: OpusHelper = OpusHelper()
@@ -58,6 +65,17 @@ public class SpeechToText: Service {
         
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         
+        audioProcessingQueue = NSOperationQueue()
+        audioProcessingQueue.name = "Audio processing"
+        audioProcessingQueue.maxConcurrentOperationCount = 1
+        
+        /*
+        transcriptionQueue = NSOperationQueue()
+        transcriptionQueue.name = "Transcription processing"
+        transcriptionQueue.maxConcurrentOperationCount = 1
+         */
+        
+        
     }
     
     /**
@@ -72,16 +90,9 @@ public class SpeechToText: Service {
         
             connectWebsocket()
         
-            // check if the data format is PCM, then encode it.
-            if format == .PCM {
-                
-                self.audioData = opus.encode(audioData, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
-                self.format = .OGG
-                
-            } else {
-                self.audioData = audioData
-                self.format = format
-            }
+           
+            self.audioData = audioData
+            self.format = format
             
             self.callback = oncompletion
             
@@ -266,46 +277,66 @@ extension SpeechToText : WebSocketDelegate
     }
 }
 
-// MARK: - <#AVAudioRecorderDelegate#>
-extension SpeechToText : AVAudioRecorderDelegate
+// MARK: - <#AVCaptureAudioDataOutput#>
+extension SpeechToText : AVCaptureAudioDataOutputSampleBufferDelegate
 {
-    /**
-     This function gets invoked when the AVAudioPlayer has stopped recording. If the recording
-     is successful, the audio is transcribed and the delegate's callback is invoked.
-     
-     - parameter recorder: <#recorder description#>
-     - parameter flag:     flag description
-     */
-     public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
-        successfully flag: Bool) {
     
-            let fileLocation = recorder.url.absoluteString
-        
-            let data = NSData(contentsOfFile: fileLocation)
-       
-            if let data = data {
-                print("Finished audio recording \(fileLocation) length is \(data.length)" )
-                
-                // transcribe(<#T##audio: NSURL##NSURL#>, callback: <#T##(String?, NSError?) -> Void#>)
-                
-            } else {
-                Log.sharedLogger.warning("Could not find file at \(fileLocation)")
-            }
-        
+    public func captureOutput(captureOutput: AVCaptureOutput!,
+        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
+        fromConnection connection: AVCaptureConnection!) {
             
-            
+          
         
+        let o1 = AudioProcessingOperation(data: NSData())
+        let o2 = TranscriptionOperation()
+            
+        o2.addDependency(o1)
+            
+        audioProcessingQueue.addOperations([o1,o2], waitUntilFinished: true)
+        
+        
+    }
+    
+}
+
+public struct TranscriptionRequest
+{
+    var rawData: NSData?
+    var compressedData: NSData?
+    var text: String?
+    
+    
+}
+
+public class AudioProcessingOperation : NSOperation {
+    
+    private var data: NSData!
+    
+    public init(data: NSData){
+        self.data = data
+        
+    }
+    
+    public override func main() {
+        
+        if self.cancelled {
+            return
+        }
+        
+        // encode as opus
+        
+        // add to transcription queue
     }
 }
 
-// MARK: - <#AVAudioSessionDelegate#>
-extension SpeechToText : AVAudioSessionDelegate
-{
-    public func beginInterruption() {
-        
+public class TranscriptionOperation : NSOperation {
+    
+    public override init() {
     }
     
-    public func inputIsAvailableChanged(isInputAvailable: Bool) {
-        
+    public override func main() {
+        if self.cancelled {
+            return
+        }
     }
 }

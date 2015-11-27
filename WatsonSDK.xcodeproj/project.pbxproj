@@ -129,6 +129,7 @@
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
+		E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */; };
 		EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF8CA641BFBC6BF00808D92 /* Credentials.plist */; };
 /* End PBXBuildFile section */
 
@@ -288,6 +289,7 @@
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
+		E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
 		EBF8CA641BFBC6BF00808D92 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -610,6 +612,7 @@
 				7ADC3A041BF950C800CD916E /* SpeechToText.swift */,
 				7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */,
 				7ADC3A061BF950C800CD916E /* Tests */,
+				E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */,
 			);
 			name = SpeechToText;
 			path = WatsonSDK/SpeechToText;
@@ -955,6 +958,7 @@
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
+				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
 				7ADC3A761BF9551500CD916E /* SAORelation.swift in Sources */,
 				7ADC3A561BF951AC00CD916E /* WatsonCoreConstants.swift in Sources */,
 				BDAF7E161BFEBA28009BB0E8 /* NSError.swift in Sources */,

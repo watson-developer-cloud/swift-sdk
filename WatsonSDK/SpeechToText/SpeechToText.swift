@@ -59,7 +59,18 @@ public class SpeechToText: Service {
     var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
     
     
+    struct AudioRecorderState {
+        var dataFormat: AudioStreamBasicDescription
+        var queue: AudioQueueRef
+        var buffers: [AudioQueueBufferRef]
+        var bufferByteSize: UInt32
+        var currentPacket: Int64
+        var isRunning: Bool
+    }
     
+    let NUM_BUFFERS = 2
+    let BUFFER_SIZE:UInt32 = 4096
+
     
     init() {
         
@@ -75,15 +86,13 @@ public class SpeechToText: Service {
     
     public func startListening()
     {
-        let NUM_BUFFERS = 2
-        let BUFFER_SIZE:UInt32 = 4096
-    
+        
         var queue = AudioQueueRef()
-        var buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
+        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
             AudioQueueBufferRef(),
             AudioQueueBufferRef()]
         
-        var format = AudioStreamBasicDescription(
+        let format = AudioStreamBasicDescription(
             mSampleRate: 16000,
             mFormatID: kAudioFormatLinearPCM,
             mFormatFlags: kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked,
@@ -94,26 +103,55 @@ public class SpeechToText: Service {
             mBitsPerChannel: 8 * 2,
             mReserved: 0)
         
-        AudioQueueNewInput(&format, recordCallback, nil,
+        var audioState = AudioRecorderState(dataFormat: format,
+            queue: AudioQueueRef(),
+            buffers: buffers,
+            bufferByteSize: BUFFER_SIZE,
+            currentPacket: 0,
+            isRunning: true)
+        
+        AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
             CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &queue)
 
         for index in 0...NUM_BUFFERS {
-            AudioQueueAllocateBuffer(queue, BUFFER_SIZE, &buffers[index])
-            //&buffers[index].maAudioDataByteSize = BUFFER_SIZE
-            recordCallback(nil, queue, buffers[index], nil, 0, nil )
+            AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index])
+            
+            
+            AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index], 0, nil)
+            // recordCallback(nil, queue, buffers[index], nil, 0, nil )
         }
         
-        AudioQueueStart(queue, nil)
-        CFRunLoopRun()
+        AudioQueueStart(audioState.queue, nil)
+        
+        sleep(3)
+        
+        AudioQueueStop(audioState.queue, true)
+        
+        audioState.isRunning = false
+        
+        AudioQueueDispose(audioState.queue, true)
+        
+        // CFRunLoopRun()
         
     }
     
     var recordCallback : AudioQueueInputCallback =
     {
-         inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
+        inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
+        
+        let pUserData = UnsafeMutablePointer<AudioRecorderState>(inUserData)
+        
+        let data: AudioRecorderState = pUserData.memory
+        
+        
+            
+        AudioQueueEnqueueBuffer(data.queue, inBuffer, 0, nil)
         
     
         print("inside of callback")
+        
+        
+        
     }
     
     /**

@@ -67,16 +67,7 @@ class SpeechToTextTests: XCTestCase {
     
     func testContinuousRecording() {
         
-        var format = AudioStreamBasicDescription()
-        format.mSampleRate = 16000
-        format.mFormatID = kAudioFormatLinearPCM
-        format.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger
-        format.mBytesPerPacket = 2
-        format.mFramesPerPacket = 1
-        format.mBytesPerFrame = 2
-        format.mChannelsPerFrame = 1
-        format.mBitsPerChannel = 16
-        format.mReserved = 0
+        service.startListening()
                 
     }
     

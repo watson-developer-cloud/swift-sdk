@@ -68,7 +68,7 @@ public class SpeechToText: Service {
         var isRunning: Bool
     }
     
-    let NUM_BUFFERS = 2
+    let NUM_BUFFERS = 3
     let BUFFER_SIZE:UInt32 = 4096
 
     
@@ -87,10 +87,10 @@ public class SpeechToText: Service {
     public func startListening()
     {
         
-        var queue = AudioQueueRef()
-        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
-            AudioQueueBufferRef(),
-            AudioQueueBufferRef()]
+        //var queue = AudioQueueRef()
+//        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
+//            AudioQueueBufferRef(),
+//            AudioQueueBufferRef()]
         
         let format = AudioStreamBasicDescription(
             mSampleRate: 16000,
@@ -105,20 +105,19 @@ public class SpeechToText: Service {
         
         var audioState = AudioRecorderState(dataFormat: format,
             queue: AudioQueueRef(),
-            buffers: buffers,
+            buffers: [AudioQueueBufferRef(), AudioQueueBufferRef(), AudioQueueBufferRef()],
             bufferByteSize: BUFFER_SIZE,
             currentPacket: 0,
             isRunning: true)
         
         AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
-            CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &queue)
+            CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &audioState.queue)
 
-        for index in 0...NUM_BUFFERS {
-            AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index])
+        for index in 1...NUM_BUFFERS {
+            AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
             
-            
-            AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index], 0, nil)
-            // recordCallback(nil, queue, buffers[index], nil, 0, nil )
+            AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index-1], 0, nil)
+
         }
         
         AudioQueueStart(audioState.queue, nil)

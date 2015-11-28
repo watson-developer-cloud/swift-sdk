@@ -71,60 +71,60 @@ class SpeechToTextTests: XCTestCase {
                 
     }
     
-    func testRecording() {
-    
-        let recordExpectation = expectationWithDescription("Record")
-        
-        let recordSettings = [
-            // AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
-            AVNumberOfChannelsKey: 1,
-            AVSampleRateKey : 16000.0
-        ]
-        
-        let dirsPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let docsDir = dirsPaths[0] as String
-        let soundFilePath = docsDir + "/test.wav"
-        
-        print("Saving recorded audio file in \(soundFilePath)")
-        AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
-            in
-            if granted {
-                let soundFileURL = NSURL(string: soundFilePath)
-                
-                if let soundFileURL = soundFileURL {
-                    
-                    do {
-                        
-                        self.recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
-                    
-                        self.recorder.meteringEnabled = true
-                        
-                        // self.recorder.prepareToRecord()
-                        self.recorder.recordForDuration(3.0)
-                        
-                        sleep(5)
-                        
-                        print(self.recorder.recording)
-                        
-                        self.recorder.stop()
-                        
-                        recordExpectation.fulfill()
-                        
-                    } catch {
-                        
-                        
-                        XCTAssertTrue(false, "Could not create audio recorder")
-                    }
-                }
-
-            }
-            
-        })
-        
-        waitForExpectationsWithTimeout(timeout) {
-            error in XCTAssertNil(error, "Timeout")
-        }
-    }
+//    func testRecording() {
+//    
+//        let recordExpectation = expectationWithDescription("Record")
+//        
+//        let recordSettings = [
+//            // AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
+//            AVNumberOfChannelsKey: 1,
+//            AVSampleRateKey : 16000.0
+//        ]
+//        
+//        let dirsPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+//        let docsDir = dirsPaths[0] as String
+//        let soundFilePath = docsDir + "/test.wav"
+//        
+//        print("Saving recorded audio file in \(soundFilePath)")
+//        AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
+//            in
+//            if granted {
+//                let soundFileURL = NSURL(string: soundFilePath)
+//                
+//                if let soundFileURL = soundFileURL {
+//                    
+//                    do {
+//                        
+//                        self.recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
+//                    
+//                        self.recorder.meteringEnabled = true
+//                        
+//                        // self.recorder.prepareToRecord()
+//                        self.recorder.recordForDuration(3.0)
+//                        
+//                        sleep(5)
+//                        
+//                        print(self.recorder.recording)
+//                        
+//                        self.recorder.stop()
+//                        
+//                        recordExpectation.fulfill()
+//                        
+//                    } catch {
+//                        
+//                        
+//                        XCTAssertTrue(false, "Could not create audio recorder")
+//                    }
+//                }
+//
+//            }
+//            
+//        })
+//        
+//        waitForExpectationsWithTimeout(timeout) {
+//            error in XCTAssertNil(error, "Timeout")
+//        }
+//    }
     
     func testSimplePCMTranscription() {
         let expectation = expectationWithDescription("WebSockets")

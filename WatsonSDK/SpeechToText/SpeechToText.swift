@@ -111,7 +111,7 @@ public class SpeechToText: Service {
             isRunning: true)
         
         AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
-            CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &audioState.queue)
+            nil, kCFRunLoopCommonModes, 0, &audioState.queue)
 
         for index in 1...NUM_BUFFERS {
             AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
@@ -122,7 +122,7 @@ public class SpeechToText: Service {
         
         AudioQueueStart(audioState.queue, nil)
         
-        sleep(3)
+        sleep(10)
         
         AudioQueueStop(audioState.queue, true)
         
@@ -139,14 +139,13 @@ public class SpeechToText: Service {
         inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
         
         let pUserData = UnsafeMutablePointer<AudioRecorderState>(inUserData)
-        
         let data: AudioRecorderState = pUserData.memory
         
+        let buffer = inBuffer.memory
         
             
         AudioQueueEnqueueBuffer(data.queue, inBuffer, 0, nil)
         
-    
         print("inside of callback")
         
         

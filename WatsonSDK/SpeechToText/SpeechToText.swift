@@ -59,6 +59,8 @@ public class SpeechToText: Service {
     var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
     
     
+    
+    
     init() {
         
         super.init(serviceURL: serviceURL)
@@ -69,13 +71,49 @@ public class SpeechToText: Service {
         audioProcessingQueue.name = "Audio processing"
         audioProcessingQueue.maxConcurrentOperationCount = 1
         
-        /*
-        transcriptionQueue = NSOperationQueue()
-        transcriptionQueue.name = "Transcription processing"
-        transcriptionQueue.maxConcurrentOperationCount = 1
-         */
+    }
+    
+    public func startListening()
+    {
+        let NUM_BUFFERS = 2
+        let BUFFER_SIZE:UInt32 = 4096
+    
+        var queue = AudioQueueRef()
+        var buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
+            AudioQueueBufferRef(),
+            AudioQueueBufferRef()]
         
+        var format = AudioStreamBasicDescription(
+            mSampleRate: 16000,
+            mFormatID: kAudioFormatLinearPCM,
+            mFormatFlags: kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked,
+            mBytesPerPacket: 2,
+            mFramesPerPacket: 1,
+            mBytesPerFrame: 2,
+            mChannelsPerFrame: 1,
+            mBitsPerChannel: 8 * 2,
+            mReserved: 0)
         
+        AudioQueueNewInput(&format, recordCallback, nil,
+            CFRunLoopGetCurrent(), kCFRunLoopCommonModes, 0, &queue)
+
+        for index in 0...NUM_BUFFERS {
+            AudioQueueAllocateBuffer(queue, BUFFER_SIZE, &buffers[index])
+            //&buffers[index].maAudioDataByteSize = BUFFER_SIZE
+            recordCallback(nil, queue, buffers[index], nil, 0, nil )
+        }
+        
+        AudioQueueStart(queue, nil)
+        CFRunLoopRun()
+        
+    }
+    
+    var recordCallback : AudioQueueInputCallback =
+    {
+         inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
+        
+    
+        print("inside of callback")
     }
     
     /**
@@ -299,11 +337,12 @@ extension SpeechToText : AVCaptureAudioDataOutputSampleBufferDelegate
     
 }
 
+
+
 public struct TranscriptionRequest
 {
     var rawData: NSData?
     var compressedData: NSData?
-    var text: String?
     
     
 }

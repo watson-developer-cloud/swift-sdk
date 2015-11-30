@@ -262,9 +262,20 @@ public extension AlchemyLanguage {
         
     }
     
-    /**
+     /**
      
-     http://www.alchemyapi.com/api/keyword/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/keyword/proc.html)
+     
+     Extracts keywords from given content.
+     
+     - parameter requestType: .HTML, .URL, or .Text
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter text: input text if a .Text request. otherwise can set to 'nil'
+     - parameter keywordsParameters: instantiate a **GetKeywordsParameters** struct and change any values you'd like to manually set
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **Keywords** object
      
      */
     public func getRankedKeywords(requestType rt: AlchemyLanguageConstants.RequestType,

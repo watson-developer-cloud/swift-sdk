@@ -2163,4 +2163,27 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testURLGetTitle() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.URL,
+            html: nil,
+            url: test_url,
+            textType: AlchemyLanguageConstants.TextType.Title,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(title)
+                XCTAssertNotNil(title.title)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
 }

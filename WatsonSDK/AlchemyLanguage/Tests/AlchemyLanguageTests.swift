@@ -1740,6 +1740,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidURLGetAuthors() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getAuthors(requestType: .URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com") {
+                
+                (error, documentAuthors) in
+                
+                XCTAssertNotNil(documentAuthors)
+                XCTAssertNotNil(documentAuthors.authors)
+                XCTAssertNil(documentAuthors.authors?.names)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Text Extraction

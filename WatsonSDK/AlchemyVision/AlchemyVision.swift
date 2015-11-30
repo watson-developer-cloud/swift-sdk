@@ -9,16 +9,21 @@
 import Foundation
 import ObjectMapper
 
+//public protocol AlchemyVisionService
+//{
+//    func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String?, image: UIImage?, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (ImageFaceTags?, NSError?) ->() )
+//}
+
 
 /// Implementation of Alchemy Vision Service
-public class VisionImpl: Service {
+public class AlchemyVision: Service {
   
 
-  init() {
+  public init() {
     super.init(type:ServiceType.Alchemy, serviceURL:VisionConstants.visionServiceURL)
   }
   
-  convenience init(apiKey:String) {
+  public convenience init(apiKey:String) {
     self.init()
     _apiKey = apiKey
   }
@@ -71,7 +76,7 @@ public class VisionImpl: Service {
    - parameter knowledgeGraph:    Possible values: 0 (default), 1
    - parameter callback:          Callback with ImageKeyWords through the completion handler
    */
-  public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords, NSError?) ->() ) {
+  public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords?, NSError?) ->() ) {
     
     var endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
     var visionUrl = ""
@@ -89,19 +94,44 @@ public class VisionImpl: Service {
         }
         completionHandler(imageKeywords, nil)
       })
-      
       break
     case VisionConstants.ImageKeywordType.FILE:
       endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
       params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-      NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL!, parameters: params, completionHandler: {response in
+      
+      guard let image = image else {
+        let error = NSError.createWatsonError(404,
+            description: "Cannot receive image keywords without a valid input image")
+        completionHandler(nil, error)
+        return
+      }
+      
+      let urlObject = getImageURL(image)
+      
+      guard urlObject.1 == nil else {
+        completionHandler(nil, urlObject.1)
+        return
+      }
+   
+      NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
+        var error:NSError?
+        let fileManager = NSFileManager.defaultManager()
+        do {
+            Log.sharedLogger.error(urlObject.0!.path)
+            try fileManager.removeItemAtPath(urlObject.0!.path)
+        }
+        catch let catchError as NSError {
+            error = catchError
+            Log.sharedLogger.error("\(error)")
+        }
+
         var imageKeywords = ImageKeyWords()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageKeywords = Mapper<ImageKeyWords>().map(data)!
         }
-        completionHandler(imageKeywords, nil)
+        completionHandler(imageKeywords, error)
       })
       break
     }
@@ -117,7 +147,7 @@ public class VisionImpl: Service {
    - parameter knowledgeGraph:  Possible values: 0 (default), 1
    - parameter callback:        Callback with ImageKeyWords through the completion handler
    */
-  public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, fileURL: NSURL? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) ->() ) {
+  public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) ->() ) {
   
     var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
     var visionUrl = ""
@@ -136,14 +166,41 @@ public class VisionImpl: Service {
         }
         completionHandler(imageFaceTags, nil)
       })
-      
       break
     case VisionConstants.ImageFacesType.FILE:
       endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
       params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-      NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: fileURL!, parameters: params, completionHandler: {response in
+      
+      guard let image = image else {
+        let error = NSError.createWatsonError(404,
+            description: "Cannot receive image keywords without a valid input image")
+        completionHandler(nil, error)
+        return
+      }
+      
+      let urlObject = getImageURL(image)
+      
+      guard urlObject.1 == nil else {
+        completionHandler(nil, urlObject.1)
+        return
+      }
+      
+      NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
+        var error:NSError?
+        let fileManager = NSFileManager.defaultManager()
+        
+        // delete temp file from documents directory
+        do {
+            Log.sharedLogger.error(urlObject.0!.path)
+            try fileManager.removeItemAtPath(urlObject.0!.path)
+        }
+        catch let catchError as NSError {
+            error = catchError
+            Log.sharedLogger.error("\(error)")
+        }
+        
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
@@ -152,9 +209,39 @@ public class VisionImpl: Service {
       })
       break
     }
-  
   }
   
+    /**
+     Returns the ImageURL which contains an NSURL and path to the image
+     
+     - parameter image: image to create a reference
+     
+     - returns: ImageURL, NSError
+     */
+    private func getImageURL(image: UIImage) ->(ImageURL?,NSError?) {
+        var error:NSError?
+
+        let data = UIImagePNGRepresentation(image);
+        
+        guard data != nil else {
+            error = NSError.createWatsonError(404,
+                description: "Error creating data object from imput image")
+            return (nil, error)
+        }
+        
+        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/" + String.randomAlphaNumericString(12)
+        
+        guard (!filePath.isEmpty) else {
+            error = NSError.createWatsonError(404,
+                description: "Error creating file path from input image")
+            return (nil, error)
+        }
+
+        data?.writeToFile(filePath, atomically: true)
+        let url = NSURL(fileURLWithPath: filePath)
+        return (ImageURL(path: filePath, url: url), nil)        
+    }
+    
   /**
    Constructs a dictionary of parameters used in all Alchemy Vision API calls
    

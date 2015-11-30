@@ -13,5 +13,8 @@
       <FileRef
          location = "group:SpeechSynthesis/SpeechSynthesis.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:/Users/vincentherrin/Github/Watson-iOS-SDK-dev/Examples/VisionInsights/VisionInsights.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>

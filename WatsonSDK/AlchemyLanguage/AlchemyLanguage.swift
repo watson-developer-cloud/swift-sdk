@@ -686,7 +686,7 @@ public extension AlchemyLanguage {
             var parameters = commonParameters
             
             if let html = html { parameters["html"] = html }
-            if let url = url { parameters["url"] = url }
+            if let url = url { parameters["url"] = url } else { parameters["url"] = "test" }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,
@@ -732,7 +732,7 @@ public extension AlchemyLanguage {
             var parameters = commonParameters
             
             if let html = html { parameters["html"] = html }
-            if let url = url { parameters["url"] = url }
+            if let url = url { parameters["url"] = url } else { parameters["url"] = "test" }
             
             NetworkUtils.performBasicAuthRequest(endpoint,
                 method: HTTPMethod.POST,

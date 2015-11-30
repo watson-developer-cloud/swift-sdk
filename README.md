@@ -10,8 +10,8 @@ The Watson iOS SDK are a collection of services to allow developers to quickly a
 * [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
-	* [Alchemy Language](#alchemy-language)
-	* [Alchemy Vision](#alchemy-vision)
+	* [AlchemyLanguage](#alchemylanguage)
+	* [AlchemyVision](#alchemyvision)
 	* [Dialog](#dialog)
 	* [Language Translation](#language-translation)
 	* [Natural Language Classifier](#natural-language-classifier)
@@ -46,7 +46,71 @@ Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the
 The Watson Developer Cloud offers a variety of services for building cognitive applications.
 
 
-### Alchemy Language
+### AlchemyLanguage
+
+The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide high-level semantic information about your content.
+
+
+##### AlchemyLanguage Features
+
+* Entity Extraction
+* Sentiment Analysis
+* Keyword Extraction
+* Concept Tagging
+* Relation Extraction
+* Taxonomy Classification
+* Author Extraction
+* Language Detection
+* Text Extraction
+* Microformats Parsing
+* Feed Detection
+
+
+##### Requirements
+
+* Review the original AlchemyLanguage API [here](http://www.alchemyapi.com/products/alchemylanguage)
+* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+
+
+##### Usage
+
+Instantiate an **AlchemyLanguage** object and set its api key via either
+
+```swift
+
+let alchemyLanguageInstance = AlchemyLanguage(apiKey: **String**)
+
+```
+
+or 
+
+```swift
+
+let alchemyLanguageInstance = AlchemyLanguage()
+alchemyLanguageInstance._apiKey = **API_KEY**
+
+
+```
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+e.g. 
+
+```swift
+
+        alchemyLanguageInstance.getEntities(requestType: .HTML,
+            html: nil,
+            url: "http://www.google.com",
+            text: nil) {
+
+            (error, entities) in
+
+            // returned data is inside "entities" in this case
+            // code here
+
+       }
+
+```
 
 
 ### Text to Speech

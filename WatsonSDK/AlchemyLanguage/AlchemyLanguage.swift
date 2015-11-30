@@ -767,9 +767,18 @@ public extension AlchemyLanguage {
 // MARK: Microformats Parsing
 public extension AlchemyLanguage {
     
-    /**
+     /**
      
-     http://www.alchemyapi.com/api/mformat/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/mformat/proc.html)
+     
+     Performs analysis using multiple features on any web page or posted HTML file.
+     
+     - parameter requestType: .HTML, .URL
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **Microformats** object
      
      */
     public func getMicroformatData(requestType rt: AlchemyLanguageConstants.RequestType,

@@ -1865,6 +1865,34 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testTextGetLanguage() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getLanguage(requestType: .Text,
+            html: nil,
+            url: nil,
+            text: test_text_valid) {
+                
+                (error, language) in
+                
+                XCTAssertNotNil(language)
+                XCTAssertNotNil(language.language)
+                XCTAssertNotNil(language.iso6391)
+                XCTAssertNotNil(language.iso6392)
+                XCTAssertNotNil(language.iso6393)
+                XCTAssertNotNil(language.ethnologue)
+                XCTAssertNotNil(language.nativeSpeakers)
+                XCTAssertNotNil(language.wikipedia)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     // MARK: Text Extraction
     //    func testHTMLGetText()
     //    func testInvalidHTMLGetText()

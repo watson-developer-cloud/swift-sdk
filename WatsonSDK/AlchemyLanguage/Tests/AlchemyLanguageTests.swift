@@ -19,7 +19,8 @@ class AlchemyLanguageTests: XCTestCase {
     var apiKeyNotSet: Bool { return instance._apiKey == nil }
     
     // test strings
-    var test_url = "http://en.wikipedia.org/wiki/Vladimir_Putin"
+    let test_url = "http://en.wikipedia.org/wiki/Vladimir_Putin"
+    let test_url_feeds = "http://www.engadget.com/"
     
     var test_html_no_author = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     

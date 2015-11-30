@@ -337,9 +337,20 @@ public extension AlchemyLanguage {
         
     }
     
-    /**
+     /**
      
-     http://www.alchemyapi.com/api/concept/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/concept/proc.html)
+     
+     Extracts concepts tags for given content.
+     
+     - parameter requestType: .HTML, .URL, or .Text
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter text: input text if a .Text request. otherwise can set to 'nil'
+     - parameter conceptsParameters: instantiate a **GetRankedConceptsParameters** struct and change any values you'd like to manually set
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **ConceptResponse** object
      
      */
     public func getRankedConcepts(requestType rt: AlchemyLanguageConstants.RequestType,

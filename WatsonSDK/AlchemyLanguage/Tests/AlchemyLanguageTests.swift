@@ -1639,11 +1639,39 @@ class AlchemyLanguageTests: XCTestCase {
     
     
     // MARK: Author Extraction
-    //    func testHTMLGetAuthors() { }
-    //    func testInvalidHTMLGetAuthors() { }
-    //    func testURLGetAuthors() { }
-    //    func testInvalidURLGetAuthors() { }
+    func testHTMLGetAuthors() {
     
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString(test_url)
+        
+        instance.getAuthors(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, documentAuthors) in
+                
+                XCTAssertNotNil(documentAuthors)
+                XCTAssertNotNil(documentAuthors.authors)
+                
+                if let authors = documentAuthors.authors {
+                    
+                    XCTAssertNotNil(authors.names)
+                    XCTAssertNotNil(authors.confident)
+                    
+                    if let names = authors.names {
+                        
+                        XCTAssertNotNil(names.first)
+                        
+                    }
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     
     // MARK: Language Detection
     //    func testHTMLGetLanguage()
@@ -1652,6 +1680,32 @@ class AlchemyLanguageTests: XCTestCase {
     //    func testInvalidURLGetLanguage()
     //    func testTextGetLanguage()
     //    func testInvalidTextGetLanguage()
+    }
+    
+    func testInvalidHTMLGetAuthors() {
+    
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.keywordAnalysisDotComShouldNotExist.com")
+        
+        instance.getAuthors(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, documentAuthors) in
+                
+                XCTAssertNotNil(documentAuthors)
+                XCTAssertNotNil(documentAuthors.authors)
+                XCTAssertNil(documentAuthors.authors?.names)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Text Extraction

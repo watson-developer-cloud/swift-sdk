@@ -413,12 +413,12 @@
 			children = (
 				7ADC39AE1BF950C800CD916E /* AlchemyGenericModel.swift */,
 				7ADC39AF1BF950C800CD916E /* AlchemyLanguageGenericModel.swift */,
-				6E2E42F91BFBCAB800B32691 /* Authors.swift */,
 				7ADC39B01BF950C800CD916E /* CombinedResults.swift */,
 				6E7535391C04CA79003EAECE /* ConceptResponse.swift */,
 				7ADC39B11BF950C800CD916E /* Concept.swift */,
 				7ADC39B21BF950C800CD916E /* DisambiguatedLinks.swift */,
 				6EE643741BFB94DC00303010 /* DocumentAuthors.swift */,
+				6E2E42F91BFBCAB800B32691 /* Authors.swift */,
 				6E2E42FB1BFBD26E00B32691 /* DocumentText.swift */,
 				6E2E42FD1BFBD27500B32691 /* DocumentTitle.swift */,
 				7ADC39B31BF950C800CD916E /* Entities.swift */,

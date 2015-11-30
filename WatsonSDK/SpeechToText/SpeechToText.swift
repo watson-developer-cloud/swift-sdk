@@ -134,6 +134,7 @@ public class SpeechToText: Service {
         
     }
     
+    /// Callback function when the audio buffer is full
     var recordCallback : AudioQueueInputCallback =
     {
         inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in

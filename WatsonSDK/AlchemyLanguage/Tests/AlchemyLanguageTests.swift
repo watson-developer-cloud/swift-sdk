@@ -1706,6 +1706,40 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testURLGetAuthors() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getAuthors(requestType: .URL,
+            html: nil,
+            url: test_url) {
+                
+                (error, documentAuthors) in
+                
+                XCTAssertNotNil(documentAuthors)
+                XCTAssertNotNil(documentAuthors.authors)
+                
+                if let authors = documentAuthors.authors {
+                    
+                    XCTAssertNotNil(authors.names)
+                    XCTAssertNotNil(authors.confident)
+                    
+                    if let names = authors.names {
+                        
+                        XCTAssertNotNil(names.first)
+                        
+                    }
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Text Extraction

@@ -2385,4 +2385,32 @@ class AlchemyLanguageTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
+    
+    func testURLGetFeedLinks() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getFeedLinks(requestType: .URL,
+            html: nil,
+            url: test_url_feeds) {
+                
+                (error, feeds) in
+                
+                XCTAssertNotNil(feeds)
+                XCTAssertNotNil(feeds.feeds)
+                XCTAssertNotNil(feeds.feeds?.first)
+                
+                if let feeds = feeds.feeds, let first = feeds.first {
+                    
+                    XCTAssertNotNil(first.feed)
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
 }

@@ -2067,6 +2067,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testURLGetRawText() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.URL,
+            html: nil,
+            url: test_url,
+            textType: AlchemyLanguageConstants.TextType.Raw,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertNotNil(text.text)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     // MARK: Feed Detection
     //    func testHTMLGetFeedLinks()

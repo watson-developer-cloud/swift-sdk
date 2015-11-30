@@ -228,11 +228,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Keyword Extraction
-/**
-
-http://www.alchemyapi.com/api/keyword/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetKeywordsParameters: AlchemyLanguageParameters {
@@ -251,6 +246,11 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/keyword/proc.html
+     
+     */
     public func getRankedKeywords(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
@@ -293,11 +293,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Concept Tagging
-/**
-
-http://www.alchemyapi.com/api/concept/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetRankedConceptsParameters: AlchemyLanguageParameters {
@@ -315,6 +310,11 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/concept/proc.html
+     
+     */
     public func getRankedConcepts(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
@@ -357,11 +357,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Relation Extraction
-/**
-
-http://www.alchemyapi.com/api/relation/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetRelationsParameters: AlchemyLanguageParameters {
@@ -385,6 +380,11 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/relation/proc.html
+     
+     */
     public func getRelations(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
@@ -427,11 +427,6 @@ public extension AlchemyLanguage {
 
 
 // MARK: Taxonomy Classification
-/**
-
-http://www.alchemyapi.com/api/taxonomy_calls/proc.html
-
-*/
 public extension AlchemyLanguage {
     
     public struct GetRankedTaxonomyParameters: AlchemyLanguageParameters {
@@ -445,6 +440,11 @@ public extension AlchemyLanguage {
         
     }
     
+    /**
+     
+     http://www.alchemyapi.com/api/taxonomy_calls/proc.html
+     
+     */
     public func getRankedTaxonomy(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,

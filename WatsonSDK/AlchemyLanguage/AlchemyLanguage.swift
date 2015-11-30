@@ -174,7 +174,19 @@ public extension AlchemyLanguage {
     
     /**
      
-     http://www.alchemyapi.com/api/sentiment/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/sentiment/proc.html)
+     
+     Calculates the sentiment (Positive, Neutral, Negative) for given content.
+     
+     - parameter requestType: .HTML, .URL, or .Text
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter text: input text if a .Text request. otherwise can set to 'nil'
+     - parameter sentimentType: .Normal or .Raw (see [AlchemyDocs](http://www.alchemyapi.com/api/sentiment/proc.html) for details)
+     - parameter sentimentParameters: instantiate a **GetSentimentParameters** struct and change any values you'd like to manually set
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **SentimentResponse** object
      
      */
     public func getSentiment(requestType rt: AlchemyLanguageConstants.RequestType,

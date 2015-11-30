@@ -49,7 +49,7 @@ public struct DocumentText: AlchemyLanguageGenericModel, Mappable {
         url <- map["url"]
         
         // documentText
-        text <- map["Text"]
+        text <- map["text"]
         
     }
     

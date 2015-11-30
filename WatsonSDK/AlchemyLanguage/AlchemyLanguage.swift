@@ -616,7 +616,7 @@ public extension AlchemyLanguage {
         url: String?,
         textType: alcs.TextType = alcs.TextType.Normal,
         getTextParameters pd: GetTextParameters = GetTextParameters(),
-        completionHandler: (error: NSError, returnValue: (text: DocumentText, title: DocumentTitle))->() ) {
+        completionHandler: (error: NSError, text: DocumentText, title: DocumentTitle)->() ) {
             
             var accessString: String!
             
@@ -658,7 +658,7 @@ public extension AlchemyLanguage {
                     let documentText = Mapper<DocumentText>().map(data)!
                     let documentTitle = Mapper<DocumentTitle>().map(data)!
                     
-                    completionHandler(error: error, returnValue: (text: documentText, title: documentTitle))
+                    completionHandler(error: error, text: documentText, title: documentTitle)
                     
             }
             

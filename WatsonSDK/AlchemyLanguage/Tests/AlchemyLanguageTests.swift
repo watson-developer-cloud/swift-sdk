@@ -2216,4 +2216,40 @@ class AlchemyLanguageTests: XCTestCase {
     }
     
     
+    // MARK: Microformats Parsing
+    func testHTMLGetMicroformatData() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString(test_url)
+        
+        instance.getMicroformatData(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, microformats) in
+                
+                XCTAssertNotNil(microformats)
+                XCTAssertNotNil(microformats.microformats)
+                
+                if let microformats = microformats.microformats {
+                    
+                    XCTAssertNotNil(microformats.first)
+                    
+                    if let first = microformats.first {
+                        
+                        XCTAssertNotNil(first.field)
+                        XCTAssertNotNil(first.data)
+                        
+                    }
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
 }

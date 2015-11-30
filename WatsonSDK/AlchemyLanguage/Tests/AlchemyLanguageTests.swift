@@ -1919,10 +1919,31 @@ class AlchemyLanguageTests: XCTestCase {
 
     
     // MARK: Text Extraction
-    //    func testHTMLGetText()
-    //    func testInvalidHTMLGetText()
-    //    func testURLGetText()
-    //    func testInvalidURLGetText()
+    func testHTMLGetText() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString(test_url)
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.HTML,
+            html: html,
+            url: nil,
+            textType: AlchemyLanguageConstants.TextType.Normal,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertNotNil(text.language)
+                XCTAssertNotNil(text.text)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     //    func testHTMLGetRawText()
     //    func testInvalidHTMLGetRawText()

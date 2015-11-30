@@ -1994,6 +1994,28 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidURLGetText() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com",
+            textType: AlchemyLanguageConstants.TextType.Normal,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertEqual(text.text, "")
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     // MARK: Microformats Parsing
     //    func testHTMLGetMicroformatData()

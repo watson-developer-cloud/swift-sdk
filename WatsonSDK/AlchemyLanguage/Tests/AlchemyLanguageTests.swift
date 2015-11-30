@@ -2331,4 +2331,36 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    
+    // MARK: Feed Detection
+    func testHTMLGetFeedLinks() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString(test_url_feeds)
+        
+        instance.getFeedLinks(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, feeds) in
+                
+                XCTAssertNotNil(feeds)
+                XCTAssertNotNil(feeds.feeds)
+                XCTAssertNotNil(feeds.feeds?.first)
+                
+                if let feeds = feeds.feeds, let first = feeds.first {
+                    
+                    XCTAssertNotNil(first.feed)
+                    
+                }
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
 }

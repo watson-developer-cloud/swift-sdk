@@ -2413,4 +2413,33 @@ class AlchemyLanguageTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
     }
+    
+    func testInvalidURLGetFeedLinks() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getFeedLinks(requestType: .URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com") {
+                
+                (error, feeds) in
+                
+                XCTAssertNotNil(feeds)
+                XCTAssertNil(feeds.feeds)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
+    //    func testPerformanceExample() {
+    //        // This is an example of a performance test case.
+    //        self.measureBlock {
+    //            // Put the code you want to measure the time of here.
+    //        }
+    //    }
+        
 }

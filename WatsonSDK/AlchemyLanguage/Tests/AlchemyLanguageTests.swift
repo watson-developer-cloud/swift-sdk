@@ -2090,16 +2090,29 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    // MARK: Feed Detection
-    //    func testHTMLGetFeedLinks()
-    //    func testInvalidHTMLGetFeedLinks()
-    //    func testURLGetFeedLinks()
-    //    func testInvalidURLGetFeedLinks()
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    func testInvalidURLGetRawText() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com",
+            textType: AlchemyLanguageConstants.TextType.Raw,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertEqual(text.text, "")
+                
+                invalidExpectation.fulfill()
+                
         }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     }
     
 }

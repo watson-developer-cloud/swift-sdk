@@ -19,6 +19,8 @@ class AlchemyLanguageTests: XCTestCase {
     var apiKeyNotSet: Bool { return instance._apiKey == nil }
     
     // test strings
+    var test_url = "http://en.wikipedia.org/wiki/Vladimir_Putin"
+    
     var test_html_no_author = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     
     var test_html_charles_dickens = "<img alt=\"\" src=\"//upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg/244px-Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg\" width=\"244\" height=\"211\" class=\"thumbimage\" srcset=\"//upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg/366px-Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg/488px-Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne%2C_1859.jpg 2x\" data-file-width=\"2699\" data-file-height=\"2330\" /></a><div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/wiki/File:Charles_Dickens-_A_Tale_of_Two_Cities-With_Illustrations_by_H_K_Browne,_1859.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair…</div></div></div>"
@@ -97,7 +99,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getEntities(requestType: .HTML,
             html: html,
@@ -205,7 +207,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getEntities(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, entities) in
@@ -374,7 +376,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getSentiment(requestType: .HTML,
             html: html,
@@ -444,7 +446,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getSentiment(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, sentimentResponse) in
@@ -574,7 +576,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         var parameters = AlchemyLanguage.GetSentimentParameters()
         
@@ -662,7 +664,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getSentiment(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil,
             sentimentType: AlchemyLanguageConstants.SentimentType.Targeted,
             sentimentParameters: parameters) {
@@ -812,7 +814,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getRankedKeywords(requestType: .HTML,
             html: html,
@@ -888,7 +890,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getRankedKeywords(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, keywords) in
@@ -1021,7 +1023,7 @@ class AlchemyLanguageTests: XCTestCase {
     
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getRankedConcepts(requestType: .HTML,
             html: html,
@@ -1086,7 +1088,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getRankedConcepts(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, conceptResponse) in
@@ -1203,7 +1205,7 @@ class AlchemyLanguageTests: XCTestCase {
     
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getRelations(requestType: .HTML,
             html: html,
@@ -1293,7 +1295,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getRelations(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, saoRelations) in
@@ -1461,7 +1463,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let validExpectation = expectationWithDescription("valid")
         
-        let html = htmlDocumentFromURLString("http://en.wikipedia.org/wiki/Vladimir_Putin")
+        let html = htmlDocumentFromURLString(test_url)
         
         instance.getRankedTaxonomy(requestType: .HTML,
             html: html,
@@ -1525,7 +1527,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         instance.getRankedTaxonomy(requestType: .URL,
             html: nil,
-            url: "http://en.wikipedia.org/wiki/Vladimir_Putin",
+            url: test_url,
             text: nil) {
                 
                 (error, taxonomies) in

@@ -824,7 +824,16 @@ public extension AlchemyLanguage {
     
     /**
      
-     http://www.alchemyapi.com/api/feed-detection/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/feed-detection/proc.html)
+     
+     Locates feed links from within a provided web page.
+     
+     - parameter requestType: .HTML, .URL
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **Feeds** object
      
      */
     public func getFeedLinks(requestType rt: AlchemyLanguageConstants.RequestType,

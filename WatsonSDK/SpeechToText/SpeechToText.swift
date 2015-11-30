@@ -41,8 +41,9 @@ public class SpeechToText: Service {
     
     
     // NSOperationQueues
-    var audioProcessingQueue: NSOperationQueue!
-    // var transcriptionQueue: NSOperationQueue!
+    var audioUploadQueue: NSOperationQueue!
+    var transcriptionQueue: NSOperationQueue!
+    
     
     public var delegate : SpeechToTextDelegate?
     
@@ -66,6 +67,10 @@ public class SpeechToText: Service {
         var bufferByteSize: UInt32
         var currentPacket: Int64
         var isRunning: Bool
+        var opusEncoder: OpusHelper
+        var oggEncoder: OggHelper
+        var audioUploadQueue: NSOperationQueue
+        var socket: WebSocket?
     }
     
     let NUM_BUFFERS = 3
@@ -78,9 +83,9 @@ public class SpeechToText: Service {
         
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         
-        audioProcessingQueue = NSOperationQueue()
-        audioProcessingQueue.name = "Audio processing"
-        audioProcessingQueue.maxConcurrentOperationCount = 1
+        audioUploadQueue = NSOperationQueue()
+        audioUploadQueue.name = "Audio upload"
+        audioUploadQueue.maxConcurrentOperationCount = 1
         
     }
     
@@ -91,6 +96,8 @@ public class SpeechToText: Service {
 //        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
 //            AudioQueueBufferRef(),
 //            AudioQueueBufferRef()]
+        
+        connectWebsocket()
         
         let format = AudioStreamBasicDescription(
             mSampleRate: 16000,
@@ -108,7 +115,12 @@ public class SpeechToText: Service {
             buffers: [AudioQueueBufferRef(), AudioQueueBufferRef(), AudioQueueBufferRef()],
             bufferByteSize: BUFFER_SIZE,
             currentPacket: 0,
-            isRunning: true)
+            isRunning: true,
+            opusEncoder: opus,
+            oggEncoder: ogg,
+            audioUploadQueue: audioUploadQueue,
+            socket: socket
+        )
         
         AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
             nil, kCFRunLoopCommonModes, 0, &audioState.queue)
@@ -139,16 +151,64 @@ public class SpeechToText: Service {
     {
         inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
         
+        let watsonFrameSize = 160
+        
         let pUserData = UnsafeMutablePointer<AudioRecorderState>(inUserData)
         let data: AudioRecorderState = pUserData.memory
         
         let buffer = inBuffer.memory
+        let length: Int = Int(buffer.mAudioDataByteSize)
         
+        if length == 0 {
+            return 
+        }
+        
+        let chunkSize: Int = watsonFrameSize * 2
+        var offset : Int = 0
+        
+        var ptr = UnsafeMutablePointer<UInt8>(buffer.mAudioData)
+        
+        repeat {
+        
+            let thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset
+            ptr += offset
             
+            let chunk = NSData(bytesNoCopy: ptr, length: thisChunkSize, freeWhenDone: false)
+            
+            let compressed = data.opusEncoder.encode(chunk, frameSize: Int32(watsonFrameSize))
+            
+            if compressed.length != 0 {
+                // Log.sharedLogger.info("Compressed the packet")
+                
+                let newData = data.oggEncoder.writePacket(compressed, frameSize: Int32(watsonFrameSize))
+                
+                if newData != nil {
+                    // Log.sharedLogger.info("Wrote an OGG packet")
+                    
+                        if let socket = data.socket {
+                            
+                            Log.sharedLogger.info("Added the audio to the queue")
+                            let o1 = AudioUploadOperation(data: newData, socket: socket)
+                            data.audioUploadQueue.addOperation(o1)
+                        } else {
+                            
+                            Log.sharedLogger.warning("Could not get handle to socket")
+                            
+                        }
+        
+                    
+                    
+                }
+            }
+            
+            offset += thisChunkSize
+        
+        } while offset < length
+        
+        
+        
+        // Tell the buffer it's free to accept more data
         AudioQueueEnqueueBuffer(data.queue, inBuffer, 0, nil)
-        
-        print("inside of callback")
-        
         
         
     }
@@ -352,45 +412,16 @@ extension SpeechToText : WebSocketDelegate
     }
 }
 
-// MARK: - <#AVCaptureAudioDataOutput#>
-extension SpeechToText : AVCaptureAudioDataOutputSampleBufferDelegate
-{
-    
-    public func captureOutput(captureOutput: AVCaptureOutput!,
-        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
-        fromConnection connection: AVCaptureConnection!) {
-            
-          
-        
-        let o1 = AudioProcessingOperation(data: NSData())
-        let o2 = TranscriptionOperation()
-            
-        o2.addDependency(o1)
-            
-        audioProcessingQueue.addOperations([o1,o2], waitUntilFinished: true)
-        
-        
-    }
-    
-}
 
-
-
-public struct TranscriptionRequest
-{
-    var rawData: NSData?
-    var compressedData: NSData?
+public class AudioUploadOperation : NSOperation {
     
+    private let data: NSData!
     
-}
-
-public class AudioProcessingOperation : NSOperation {
+    private let socket: WebSocket!
     
-    private var data: NSData!
-    
-    public init(data: NSData){
+    public init(data: NSData, socket: WebSocket){
         self.data = data
-        
+        self.socket = socket
     }
     
     public override func main() {
@@ -399,7 +430,9 @@ public class AudioProcessingOperation : NSOperation {
             return
         }
         
-        // encode as opus
+        Log.sharedLogger.info("Uploading audio of length \(data.length)")
+        
+        // socket.writeData( data)
         
         // add to transcription queue
     }

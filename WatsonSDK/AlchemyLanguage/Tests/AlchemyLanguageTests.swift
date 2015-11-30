@@ -2138,6 +2138,29 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidHTMLGetTitle() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.keywordAnalysisDotComShouldNotExist.com")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.HTML,
+            html: html,
+            url: nil,
+            textType: AlchemyLanguageConstants.TextType.Title,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(title)
+                XCTAssertNil(title.title)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
     }
     
 }

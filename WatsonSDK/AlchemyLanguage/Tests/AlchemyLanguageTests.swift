@@ -2363,4 +2363,26 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidHTMLGetFeedLinks() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        let html = htmlDocumentFromURLString("http://www.keywordAnalysisDotComShouldNotExist.com")
+        
+        instance.getFeedLinks(requestType: .HTML,
+            html: html,
+            url: nil) {
+                
+                (error, feeds) in
+                
+                XCTAssertNotNil(feeds)
+                XCTAssertNil(feeds.feeds)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
 }

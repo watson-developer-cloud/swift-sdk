@@ -27,12 +27,14 @@ import ObjectMapper
 public struct Authors: Mappable {
     
     // MARK: Authors
+    public var confident: String?
     public var names: [String]?
     
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
         
+        confident <- map["confident"]
         names <- map["names"]
         
     }

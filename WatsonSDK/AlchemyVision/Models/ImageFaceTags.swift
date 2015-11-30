@@ -17,12 +17,12 @@ public struct ImageFaceTags : Mappable {
   
   
     var totalTransactions: Int?
-    var ImageFaces: [ImageFace] = []
+    public var imageFaces: [ImageFace] = []
     
     init(totalTransactions: Int, imageFaces: [ImageFace]) {
         
         self.totalTransactions = totalTransactions
-        self.ImageFaces = imageFaces
+        self.imageFaces = imageFaces
     }
   
   /**
@@ -44,7 +44,7 @@ public struct ImageFaceTags : Mappable {
             let imageFace = ImageFace(json: subJson)
             capturedImageFaces.append(imageFace)
         }
-        self.ImageFaces = capturedImageFaces
+        self.imageFaces = capturedImageFaces
         self.totalTransactions = data["totalTransactions"].intValue
     }
     
@@ -56,7 +56,7 @@ public struct ImageFaceTags : Mappable {
     
     public mutating func mapping(map: Map) {
         totalTransactions   <- (map["totalTransactions"], Transformation.stringToInt)
-        ImageFaces          <- map["imageFaces"]
+        imageFaces          <- map["imageFaces"]
     }
     
 }

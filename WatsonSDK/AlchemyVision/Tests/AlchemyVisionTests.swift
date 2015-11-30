@@ -11,14 +11,14 @@ import XCTest
 @testable import WatsonSDK
 
 class AlchemyVisionTests: XCTestCase {
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: NSTimeInterval = 120.0
     
     var test_text = "this is a silly sentence to test the Node.js SDK"
     var test_html = "<html><head><title>The best SDK Test | AlchemyAPI</title></head><body><h1>Hello World!</h1><p>My favorite language is Javascript</p></body></html>"
     var testUrl = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
     var faceTagURL = "http://demo1.alchemyapi.com/images/vision/mother-daughter.jpg"
 
-    let serviceVision = VisionImpl()
+    let serviceVision = AlchemyVision()
     
     override func setUp() {
         super.setUp()
@@ -40,11 +40,11 @@ class AlchemyVisionTests: XCTestCase {
     */
     func testInvalidAPIKey() {
         let invalidExpectation = expectationWithDescription("Invalid API key")
-        let service : VisionImpl = VisionImpl( apiKey: "WRONG")
+        let service = AlchemyVision( apiKey: "WRONG")
         
         service.getImageKeywords(VisionConstants.ImageKeywordType.URL, stringURL: testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
-            XCTAssertEqual(nil, imageKeyWords.totalTransactions, "Expected result with a total transaction of 0")
-            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
+            XCTAssertEqual(nil, imageKeyWords!.totalTransactions, "Expected result with a total transaction of 0")
+            XCTAssertEqual(0,imageKeyWords!.imageKeyWords.count, "Expected result with a total keywords of 0")
             invalidExpectation.fulfill()
         })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
@@ -55,12 +55,12 @@ class AlchemyVisionTests: XCTestCase {
         let validExpectation = expectationWithDescription("Valid")
         
         serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.URL, stringURL: "", forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
-            XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
+            XCTAssertEqual(0,imageKeyWords!.imageKeyWords.count, "Expected result with a total keywords of 0")
             emptyExpectation.fulfill()
         })
         
         serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.URL, stringURL: testUrl, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
-            XCTAssertEqual(1,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 1")
+            XCTAssertEqual(1,imageKeyWords!.imageKeyWords.count, "Expected result with a total keywords of 1")
             validExpectation.fulfill()
         })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
@@ -71,19 +71,21 @@ class AlchemyVisionTests: XCTestCase {
     let validExpectation = expectationWithDescription("Valid")
     
     let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("emaxfpo", withExtension: "jpg")
-    XCTAssertNotNil(fileURL)
+    let validData = NSData(contentsOfURL: fileURL!)
+    let imageFromURL = UIImage(data: validData!)
+    XCTAssertNotNil(imageFromURL)
     
-    let invalidURL = NSURL(string: "http://nowayitworks.comm/")
-    XCTAssertNotNil(invalidURL)
-    
-    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, fileURL: invalidURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
-      XCTAssertEqual(0,imageKeyWords.imageKeyWords.count, "Expected result with a total keywords of 0")
+    let invalidFromURL = UIImage()
+    XCTAssertNotNil(invalidFromURL)
+
+    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
+      XCTAssertEqual(404,error!.code, "Expected result with a total keywords of 0")
       emptyExpectation.fulfill()
     })
     
-    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, fileURL: fileURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
-      XCTAssertEqual(4, imageKeyWords.totalTransactions, "Expected result with a total transaction of 4")
-      XCTAssertLessThan(1,imageKeyWords.imageKeyWords.count, "Expected result greater than one")
+    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, image: imageFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
+      XCTAssertEqual(4, imageKeyWords!.totalTransactions, "Expected result with a total transaction of 4")
+      XCTAssertLessThan(1,imageKeyWords!.imageKeyWords.count, "Expected result greater than one")
       validExpectation.fulfill()
     })
     
@@ -111,18 +113,21 @@ class AlchemyVisionTests: XCTestCase {
     let validExpectation = expectationWithDescription("Valid")
     
     let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("mother-daughter", withExtension: "jpg")
+    let validData = NSData(contentsOfURL: fileURL!)
+    let imageFromURL = UIImage(data: validData!)
     XCTAssertNotNil(fileURL)
     
     let invalidURL = NSURL(string: "http://nowayitworks.comm/")
+   // let invalidData = NSData(contentsOfURL: invalidURL!)
+    let invalidFromURL = UIImage()
     XCTAssertNotNil(invalidURL)
     
-    
-    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, fileURL: invalidURL!, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
-      XCTAssertEqual(0,imageFaceTags!.ImageFaces.count, "Expected result with a total keywords of 0")
+    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
+      XCTAssertNotEqual(nil,error, "error should have value")
       emptyExpectation.fulfill()
     })
     
-    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, fileURL: fileURL!, completionHandler: { imageFaceTags, error in
+    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: imageFromURL!, completionHandler: { imageFaceTags, error in
       XCTAssertEqual(4, imageFaceTags!.totalTransactions, "Expected result with a total transaction of 4")
       XCTAssertEqual(2, imageFaceTags!.ImageFaces.count, "Expected result with a total keywords of 1")
       validExpectation.fulfill()

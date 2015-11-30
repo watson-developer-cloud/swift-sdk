@@ -16,12 +16,12 @@ import ObjectMapper
  */
 public struct ImageFace : Mappable {
   
-    var age         = [String: AnyObject]()
-    var gender      = [String: AnyObject]()
-    var height:     Int?
-    var positionX:  Int?
-    var positionY:  Int?
-    var width:      Int?
+    public var age         = [String: AnyObject]()
+    public var gender      = [String: AnyObject]()
+    public var height:     Int?
+    public var positionX:  Int?
+    public var positionY:  Int?
+    public var width:      Int?
   
     // this will go away once objectmapper can handle pointers
     init(json: JSON) {

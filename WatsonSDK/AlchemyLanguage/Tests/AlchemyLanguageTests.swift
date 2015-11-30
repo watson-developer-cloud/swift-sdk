@@ -2017,11 +2017,31 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    // MARK: Microformats Parsing
-    //    func testHTMLGetMicroformatData()
-    //    func testInvalidHTMLGetMicroformatData()
-    //    func testURLGetMicroformatData()
-    //    func testInvalidURLGetMicroformatData()
+    func testHTMLGetRawText() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        let html = htmlDocumentFromURLString(test_url)
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.HTML,
+            html: html,
+            url: nil,
+            textType: AlchemyLanguageConstants.TextType.Raw,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertNotNil(text.text)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
     
     
     // MARK: Feed Detection

@@ -35,9 +35,9 @@ public struct Language: AlchemyLanguageGenericModel, Mappable {
     
     // MARK: Keyword
     public var ethnologue: String?
-    public var ios6391: String?
-    public var ios6392: String?
-    public var ios6393: String?
+    public var iso6391: String?
+    public var iso6392: String?
+    public var iso6393: String?
     public var nativeSpeakers: String?
     public var wikipedia: String?
     
@@ -55,10 +55,10 @@ public struct Language: AlchemyLanguageGenericModel, Mappable {
         
         // keyword
         ethnologue <- map["ethnologue"]
-        ios6391 <- map["ios6391"]
-        ios6391 <- map["ios6392"]
-        ios6391 <- map["ios6393"]
-        nativeSpeakers <- map["nativeSpeakers"]
+        iso6391 <- map["iso-639-1"]
+        iso6392 <- map["iso-639-2"]
+        iso6393 <- map["iso-639-3"]
+        nativeSpeakers <- map["native-speakers"]
         wikipedia <- map["wikipedia"]
         
     }

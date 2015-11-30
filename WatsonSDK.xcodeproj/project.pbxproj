@@ -111,10 +111,10 @@
 		7AF96B8A1BF96C2A0083ED23 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AF96B881BF96BBB0083ED23 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0D1BF950C800CD916E /* libogg.a */; };
 		7AF96BAA1BF996560083ED23 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ADC3A0E1BF950C800CD916E /* libopus.a */; };
-		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; };
-		7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A111BF950C800CD916E /* OggHelper.h */; };
+		7AF96BAB1BF996560083ED23 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A101BF950C800CD916E /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AF96BAC1BF996560083ED23 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A111BF950C800CD916E /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A121BF950C800CD916E /* OggHelper.m */; };
-		7AF96BAE1BF996560083ED23 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A131BF950C800CD916E /* os_types.h */; };
+		7AF96BAE1BF996560083ED23 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A131BF950C800CD916E /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF96BAF1BF996560083ED23 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A151BF950C800CD916E /* opus.h */; };
 		7AF96BB01BF996560083ED23 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADC3A161BF950C800CD916E /* opus_defines.h */; };
 		7AF96BB11BF996560083ED23 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A171BF950C800CD916E /* opus_header.c */; };
@@ -133,6 +133,9 @@
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
+		E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */; };
+		E1A07EFE1C08FD3E00DCD45C /* SpeechSample.wav in Resources */ = {isa = PBXBuildFile; fileRef = E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */; };
+		E1A07F001C08FE4900DCD45C /* SpeechSample.ogg in Resources */ = {isa = PBXBuildFile; fileRef = E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */; };
 		EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF8CA641BFBC6BF00808D92 /* Credentials.plist */; };
 /* End PBXBuildFile section */
 
@@ -296,6 +299,9 @@
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
+		E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
+		E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample.wav; sourceTree = "<group>"; };
+		E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
 		EBF8CA641BFBC6BF00808D92 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -623,6 +629,7 @@
 				7ADC3A041BF950C800CD916E /* SpeechToText.swift */,
 				7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */,
 				7ADC3A061BF950C800CD916E /* Tests */,
+				E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */,
 			);
 			name = SpeechToText;
 			path = WatsonSDK/SpeechToText;
@@ -646,6 +653,8 @@
 		7ADC3A061BF950C800CD916E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E1A07EFF1C08FE4900DCD45C /* SpeechSample.ogg */,
+				E1A07EFD1C08FD3E00DCD45C /* SpeechSample.wav */,
 				E143FC2A1C00029D00D92053 /* test.raw */,
 				7ADC3A071BF950C800CD916E /* SpeechSample.flac */,
 				7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */,
@@ -896,9 +905,11 @@
 				E143FC2B1C0002A000D92053 /* test.raw in Resources */,
 				7ADC3AA61BF959BD00CD916E /* SpeechSample.flac in Resources */,
 				7ADC3A891BF9560800CD916E /* mother-daughter.jpg in Resources */,
+				E1A07F001C08FE4900DCD45C /* SpeechSample.ogg in Resources */,
 				7ADC3A951BF958A700CD916E /* glossary.tmx in Resources */,
 				7ADC3A881BF9560800CD916E /* example.html in Resources */,
 				7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */,
+				E1A07EFE1C08FD3E00DCD45C /* SpeechSample.wav in Resources */,
 				3124F11E1BFEC8D3006AAF16 /* missing_training_meta.txt in Resources */,
 				3124F11F1BFEC8D5006AAF16 /* training_meta.txt in Resources */,
 			);
@@ -969,6 +980,7 @@
 				6E4029F11C051F0300D3ADB0 /* SpeechToTextResponse.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
+				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
 				7ADC3A761BF9551500CD916E /* SAORelation.swift in Sources */,
 				7ADC3A561BF951AC00CD916E /* WatsonCoreConstants.swift in Sources */,
 				BDAF7E161BFEBA28009BB0E8 /* NSError.swift in Sources */,

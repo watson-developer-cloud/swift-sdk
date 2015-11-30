@@ -29,22 +29,127 @@ public class SpeechToText: Service {
     private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
-    private let WATSON_AUDIO_SAMPLE_RATE: Int32 = 16000
-    private let WATSON_AUDIO_FRAME_SIZE: Int32 = 160
+    public enum SpeechToTextAudioFormat: String {
+        case OGG        = "audio/ogg;codecs=opus"
+        case FLAC       = "audio/flac"
+        case PCM        = "audio/l16"
+        case WAV        = "audio/wav"
+    }
+    
+    private let WATSON_AUDIO_SAMPLE_RATE = 16000
+    private let WATSON_AUDIO_FRAME_SIZE = 160
+    
+    
+    // NSOperationQueues
+    var audioProcessingQueue: NSOperationQueue!
+    // var transcriptionQueue: NSOperationQueue!
+    
+    public var delegate : SpeechToTextDelegate?
     
     var socket: WebSocket?
-    var audio: NSURL?
     
     private let opus: OpusHelper = OpusHelper()
+    private let ogg: OggHelper = OggHelper()
+    
+    var format: SpeechToTextAudioFormat = .FLAC
+    
+    var audioData: NSData?
     
     // If set, contains the callback function after a transcription request.
-    var callback: ((String?, NSError?) -> Void)?
+    var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
+    
+    
+    struct AudioRecorderState {
+        var dataFormat: AudioStreamBasicDescription
+        var queue: AudioQueueRef
+        var buffers: [AudioQueueBufferRef]
+        var bufferByteSize: UInt32
+        var currentPacket: Int64
+        var isRunning: Bool
+    }
+    
+    let NUM_BUFFERS = 3
+    let BUFFER_SIZE:UInt32 = 4096
+
     
     init() {
         
         super.init(serviceURL: serviceURL)
         
-        opus.createEncoder(WATSON_AUDIO_SAMPLE_RATE)
+        opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
+        
+        audioProcessingQueue = NSOperationQueue()
+        audioProcessingQueue.name = "Audio processing"
+        audioProcessingQueue.maxConcurrentOperationCount = 1
+        
+    }
+    
+    public func startListening()
+    {
+        
+        //var queue = AudioQueueRef()
+//        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
+//            AudioQueueBufferRef(),
+//            AudioQueueBufferRef()]
+        
+        let format = AudioStreamBasicDescription(
+            mSampleRate: 16000,
+            mFormatID: kAudioFormatLinearPCM,
+            mFormatFlags: kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked,
+            mBytesPerPacket: 2,
+            mFramesPerPacket: 1,
+            mBytesPerFrame: 2,
+            mChannelsPerFrame: 1,
+            mBitsPerChannel: 8 * 2,
+            mReserved: 0)
+        
+        var audioState = AudioRecorderState(dataFormat: format,
+            queue: AudioQueueRef(),
+            buffers: [AudioQueueBufferRef(), AudioQueueBufferRef(), AudioQueueBufferRef()],
+            bufferByteSize: BUFFER_SIZE,
+            currentPacket: 0,
+            isRunning: true)
+        
+        AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
+            nil, kCFRunLoopCommonModes, 0, &audioState.queue)
+
+        for index in 1...NUM_BUFFERS {
+            AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
+            
+            AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index-1], 0, nil)
+
+        }
+        
+        AudioQueueStart(audioState.queue, nil)
+        
+        sleep(10)
+        
+        AudioQueueStop(audioState.queue, true)
+        
+        audioState.isRunning = false
+        
+        AudioQueueDispose(audioState.queue, true)
+        
+        // CFRunLoopRun()
+        
+    }
+    
+    /// Callback function when the audio buffer is full
+    var recordCallback : AudioQueueInputCallback =
+    {
+        inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
+        
+        let pUserData = UnsafeMutablePointer<AudioRecorderState>(inUserData)
+        let data: AudioRecorderState = pUserData.memory
+        
+        let buffer = inBuffer.memory
+        
+            
+        AudioQueueEnqueueBuffer(data.queue, inBuffer, 0, nil)
+        
+        print("inside of callback")
+        
+        
         
     }
     
@@ -52,13 +157,20 @@ public class SpeechToText: Service {
      This function takes audio data a returns a callback with the string transcription
      
      - parameter audio:    <#audio description#>
-     - parameter callback: <#callback description#>
+     - parameter callback: A function that will return the string
      */
-    public func transcribe(audio: NSURL, callback: (String?, NSError?) -> Void) {
+    public func transcribe(audioData: NSData,
+        format: SpeechToTextAudioFormat = .FLAC,
+        oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
         
-        connectWebsocket()
-        self.audio = audio
-        self.callback = callback
+            connectWebsocket()
+        
+           
+            self.audioData = audioData
+            self.format = format
+            
+            self.callback = oncompletion
+            
         
     }
     
@@ -71,7 +183,35 @@ public class SpeechToText: Service {
      */
     public func encodeOpus(data: NSData) -> NSData
     {
-        let data = opus.encode(data, frameSize: WATSON_AUDIO_FRAME_SIZE)
+        
+        let length: Int = data.length
+        let chunkSize: Int = WATSON_AUDIO_FRAME_SIZE * 2
+        var offset : Int = 0
+        
+        var ptr = UnsafeMutablePointer<UInt8>(data.bytes)
+        
+        repeat {
+            let thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset
+            
+            ptr += offset
+            let chunk = NSData(bytesNoCopy: ptr, length: thisChunkSize, freeWhenDone: false)
+            
+            let compressed : NSData = opus.encode(chunk, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+            
+            if compressed.length != 0 {
+                let newData = ogg.writePacket(compressed, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
+                
+                if newData != nil {
+                    // send to websocket
+                    Log.sharedLogger.info("Writing a chunk with \(newData.length) bytes")
+                }
+            }
+            
+            offset += thisChunkSize
+            
+        } while offset < length
+        
+        let data = opus.encode(data, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
         return data
     }
     
@@ -124,27 +264,37 @@ public class SpeechToText: Service {
 // MARK: - <#WebSocketDelegate#>
 extension SpeechToText : WebSocketDelegate
 {
+    
     /**
      Websocket callback when a web socket connection has been opened.
      
      - parameter socket: <#socket description#>
      */
     public func websocketDidConnect(socket: WebSocket) {
-        print("socket connected")
-        socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
-        if let audio = self.audio {
-            if let audioData = NSData(contentsOfURL: audio) {
-                print("writing audio data")
-                socket.writeData(audioData)
-                socket.writeString("{\"action\": \"stop\"}")
-                print("wrote audio data")
-            }
+        
+        Log.sharedLogger.info("Websocket connected")
+        
+        // socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
+        
+        let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
+        socket.writeString(command)
+        
+        if let audioData = self.audioData {
+            
+            
+            Log.sharedLogger.info("Sending audio data through WebSocket")
+            socket.writeData(audioData)
+            
+            socket.writeString("{\"action\": \"stop\"}")
+            print("wrote audio data")
+            
+            
         }
     }
     
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("socket disconnected")
-        print(error)
+     
+        Log.sharedLogger.info("Websocket disconnected")
         
         if let err = error {
             
@@ -160,7 +310,6 @@ extension SpeechToText : WebSocketDelegate
     }
     
     public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("socket received message")
         
         // parse the data.
         // print(text)
@@ -172,12 +321,18 @@ extension SpeechToText : WebSocketDelegate
             if let result = result {
                 
                 if result.state == "listening" {
+                    
                     Log.sharedLogger.info("Speech recognition is listening")
+                    
                 } else {
-                    callback(text, nil)
+                    
+                    callback(result, nil)
+                    
                 }
             } else {
-                callback(nil, NSError.createWatsonError(404, description: "Could not parse the recieved data"))
+                
+                callback(nil, NSError.createWatsonError(404, description: "Could not parse the received data"))
+                
             }
         } else {
             Log.sharedLogger.warning("No callback has been defined for this request.")
@@ -197,46 +352,67 @@ extension SpeechToText : WebSocketDelegate
     }
 }
 
-// MARK: - <#AVAudioRecorderDelegate#>
-extension SpeechToText : AVAudioRecorderDelegate
+// MARK: - <#AVCaptureAudioDataOutput#>
+extension SpeechToText : AVCaptureAudioDataOutputSampleBufferDelegate
 {
-    /**
-     This function gets invoked when the AVAudioPlayer has stopped recording. If the recording
-     is successful, the audio is transcribed and the delegate's callback is invoked.
-     
-     - parameter recorder: <#recorder description#>
-     - parameter flag:     flag description
-     */
-     public func audioRecorderDidFinishRecording( recorder: AVAudioRecorder,
-        successfully flag: Bool) {
     
-            let fileLocation = recorder.url.absoluteString
-        
-            let data = NSData(contentsOfFile: fileLocation)
-       
-            if let data = data {
-                print("Finished audio recording \(fileLocation) length is \(data.length)" )
-                
-                // transcribe(<#T##audio: NSURL##NSURL#>, callback: <#T##(String?, NSError?) -> Void#>)
-                
-            } else {
-                Log.sharedLogger.warning("Could not find file at \(fileLocation)")
-            }
-        
+    public func captureOutput(captureOutput: AVCaptureOutput!,
+        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
+        fromConnection connection: AVCaptureConnection!) {
             
-            
+          
         
+        let o1 = AudioProcessingOperation(data: NSData())
+        let o2 = TranscriptionOperation()
+            
+        o2.addDependency(o1)
+            
+        audioProcessingQueue.addOperations([o1,o2], waitUntilFinished: true)
+        
+        
+    }
+    
+}
+
+
+
+public struct TranscriptionRequest
+{
+    var rawData: NSData?
+    var compressedData: NSData?
+    
+    
+}
+
+public class AudioProcessingOperation : NSOperation {
+    
+    private var data: NSData!
+    
+    public init(data: NSData){
+        self.data = data
+        
+    }
+    
+    public override func main() {
+        
+        if self.cancelled {
+            return
+        }
+        
+        // encode as opus
+        
+        // add to transcription queue
     }
 }
 
-// MARK: - <#AVAudioSessionDelegate#>
-extension SpeechToText : AVAudioSessionDelegate
-{
-    public func beginInterruption() {
-        
+public class TranscriptionOperation : NSOperation {
+    
+    public override init() {
     }
     
-    public func inputIsAvailableChanged(isInputAvailable: Bool) {
-        
+    public override func main() {
+        if self.cancelled {
+            return
+        }
     }
 }

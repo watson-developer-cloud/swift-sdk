@@ -47,6 +47,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testEncoding() {
+        
         let url = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "raw")
         if let url = url
         {
@@ -55,6 +56,7 @@ class SpeechToTextTests: XCTestCase {
                 let encodedAudio = service.encodeOpus( data)
                 
                 XCTAssertLessThan(encodedAudio.length, data.length, "Encoded audio must be smaller than the original.")
+                
             } else {
                 XCTAssert(true, "Could not load test PCM file")
             }
@@ -63,54 +65,205 @@ class SpeechToTextTests: XCTestCase {
     
     }
     
-    func testRecording() {
-    
-        let recordExpectation = expectationWithDescription("Record")
+    func testContinuousRecording() {
         
-        let recordSettings = [
-            // AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
-            AVNumberOfChannelsKey: 1,
-            AVSampleRateKey : 16000.0
-        ]
-        
-        let dirsPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let docsDir = dirsPaths[0] as String
-        let soundFilePath = docsDir + "/test.wav"
-        
-        print("Saving recorded audio file in \(soundFilePath)")
-        AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
-            in
-            if granted {
-                let soundFileURL = NSURL(string: soundFilePath)
+        service.startListening()
                 
-                if let soundFileURL = soundFileURL {
+    }
+    
+//    func testRecording() {
+//    
+//        let recordExpectation = expectationWithDescription("Record")
+//        
+//        let recordSettings = [
+//            // AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatLinearPCM),
+//            AVNumberOfChannelsKey: 1,
+//            AVSampleRateKey : 16000.0
+//        ]
+//        
+//        let dirsPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+//        let docsDir = dirsPaths[0] as String
+//        let soundFilePath = docsDir + "/test.wav"
+//        
+//        print("Saving recorded audio file in \(soundFilePath)")
+//        AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool) -> Void
+//            in
+//            if granted {
+//                let soundFileURL = NSURL(string: soundFilePath)
+//                
+//                if let soundFileURL = soundFileURL {
+//                    
+//                    do {
+//                        
+//                        self.recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
+//                    
+//                        self.recorder.meteringEnabled = true
+//                        
+//                        // self.recorder.prepareToRecord()
+//                        self.recorder.recordForDuration(3.0)
+//                        
+//                        sleep(5)
+//                        
+//                        print(self.recorder.recording)
+//                        
+//                        self.recorder.stop()
+//                        
+//                        recordExpectation.fulfill()
+//                        
+//                    } catch {
+//                        
+//                        
+//                        XCTAssertTrue(false, "Could not create audio recorder")
+//                    }
+//                }
+//
+//            }
+//            
+//        })
+//        
+//        waitForExpectationsWithTimeout(timeout) {
+//            error in XCTAssertNil(error, "Timeout")
+//        }
+//    }
+    
+    func testSimplePCMTranscription() {
+        let expectation = expectationWithDescription("WebSockets")
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "raw")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
+        }
+        
+        service.transcribe( audioData, format: .PCM, oncompletion: {
+            response, error in
+            
+            if let response = response {
+                
+                if let results = response.results {
+                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
                     
-                    do {
+                    if let alternatives = results[0].alternatives {
                         
-                        self.recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
-                    
-                        self.recorder.meteringEnabled = true
-                        
-                        self.recorder.delegate = self.service
-                        // self.recorder.prepareToRecord()
-                        self.recorder.recordForDuration(3.0)
-                        
-                        sleep(5)
-                        
-                        print(self.recorder.recording)
-                        
-                        self.recorder.stop()
-                        
-                        recordExpectation.fulfill()
-                        
-                    } catch {
+                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
                         
                         
-                        XCTAssertTrue(false, "Could not create audio recorder")
+                        if let transcript = alternatives[0].transcript
+                        {
+                            XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
+                            
+                        }
+                        
                     }
+                    
+                    expectation.fulfill()
+                    
+                } else {
+                    XCTFail("Could not get back results for the response")
                 }
-
+                
+            } else {
+                XCTFail("Could not get back SpeechToTextResponse structure")
             }
+            
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+    }
+
+    
+    
+    func testSimpleFLACTranscription() {
+        let expectation = expectationWithDescription("WebSockets")
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
+        }
+        
+        service.transcribe( audioData, format: .FLAC, oncompletion: {
+            response, error in
+            
+            if let response = response {
+                
+                if let results = response.results {
+                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+                    
+                    if let alternatives = results[0].alternatives {
+                        
+                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+                        
+                        
+                            if let transcript = alternatives[0].transcript
+                            {
+                                XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
+                                
+                            }
+                        
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } else {
+                    XCTFail("Could not get back results for the response")
+                }
+                
+            } else {
+                XCTFail("Could not get back SpeechToTextResponse structure")
+            }
+            
+            
+        })
+            
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+    }
+    
+    func testSimpleWAVTranscription() {
+        let expectation = expectationWithDescription("WebSockets")
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "wav")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
+        }
+        
+        service.transcribe( audioData, format: .WAV, oncompletion: {
+            response, error in
+            
+            if let response = response {
+                
+                if let results = response.results {
+                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+                    
+                    if let alternatives = results[0].alternatives {
+                        
+                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+                        
+                        
+                        if let transcript = alternatives[0].transcript
+                        {
+                            XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
+                            
+                        }
+                        
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } else {
+                    XCTFail("Could not get back results for the response")
+                }
+                
+            } else {
+                XCTFail("Could not get back SpeechToTextResponse structure")
+            }
+            
             
         })
         
@@ -119,13 +272,49 @@ class SpeechToTextTests: XCTestCase {
         }
     }
     
-    
-    func testWebsockets() {
+    func testSimpleOGGTranscription() {
         let expectation = expectationWithDescription("WebSockets")
-        service.transcribe(NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")!) {
-            transcription in
-            expectation.fulfill()
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "ogg")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
         }
+        
+        service.transcribe( audioData, format: .OGG, oncompletion: {
+            response, error in
+            
+            if let response = response {
+                
+                if let results = response.results {
+                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+                    
+                    if let alternatives = results[0].alternatives {
+                        
+                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+                        
+                        
+                        if let transcript = alternatives[0].transcript
+                        {
+                            XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
+                            
+                        }
+                        
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } else {
+                    XCTFail("Could not get back results for the response")
+                }
+                
+            } else {
+                XCTFail("Could not get back SpeechToTextResponse structure")
+            }
+            
+            
+        })
+        
         waitForExpectationsWithTimeout(timeout) {
             error in XCTAssertNil(error, "Timeout")
         }

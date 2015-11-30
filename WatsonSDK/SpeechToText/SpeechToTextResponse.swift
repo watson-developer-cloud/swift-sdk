@@ -39,6 +39,12 @@ public struct SpeechToTextResponse: Mappable
         state           <- map["state"]
     }
     
+    public func transcription () -> String {
+        
+        
+        return ""
+    }
+    
 }
 
 

@@ -685,22 +685,34 @@ public extension AlchemyLanguage {
         
     }
     
-    /**
-    
-     http://www.alchemyapi.com/api/text/proc.html
+     /**
      
-     **AlchemyLanguageConstants** includes a **TextType**, default is "normal"
+     [AlchemyDocs](http://www.alchemyapi.com/api/text/proc.html)
+     
+     **Normal:** Extracts cleaned text (sans ads, navigation, etc.) for given content.
+     **Raw:** Extracts raw text for given content.
+     **Titles:** Extracts the title of given content.
     
+     **AlchemyLanguageConstants** includes a **TextType**, default is "Normal"
+     
      * "getText" --> Normal
      * "getRawText" --> Raw
      * "getTitle" --> Title
-    
-    */
+     
+     - parameter requestType: .HTML, .URL
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter textParameters: instantiate a **GetTextParameters** struct and change any values you'd like to manually set
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: **DocumentText** and **DocumentTitle** objects.
+     
+     */
     public func getText(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
         textType: alcs.TextType = alcs.TextType.Normal,
-        getTextParameters pd: GetTextParameters = GetTextParameters(),
+        textParameters pd: GetTextParameters = GetTextParameters(),
         completionHandler: (error: NSError, text: DocumentText, title: DocumentTitle)->() ) {
             
             var accessString: String!

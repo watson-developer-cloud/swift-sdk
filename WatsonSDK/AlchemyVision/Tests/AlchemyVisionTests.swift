@@ -97,12 +97,12 @@ class AlchemyVisionTests: XCTestCase {
         let validExpectation = expectationWithDescription("Valid")
         
         serviceVision.recognizeFaces(VisionConstants.ImageFacesType.URL, stringURL: "", forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
-            XCTAssertEqual(0,imageFaceTags!.ImageFaces.count, "Expected result with a total imagefaces of 0")
+            XCTAssertEqual(0,imageFaceTags!.imageFaces.count, "Expected result with a total imagefaces of 0")
             emptyExpectation.fulfill()
         })
         
         serviceVision.recognizeFaces(VisionConstants.ImageFacesType.URL, stringURL: faceTagURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
-            XCTAssertEqual(2,imageFaceTags!.ImageFaces.count, "Expected result with a total imagefaces of 2")
+            XCTAssertEqual(2,imageFaceTags!.imageFaces.count, "Expected result with a total imagefaces of 2")
             validExpectation.fulfill()
         })
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
@@ -129,7 +129,7 @@ class AlchemyVisionTests: XCTestCase {
     
     serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: imageFromURL!, completionHandler: { imageFaceTags, error in
       XCTAssertEqual(4, imageFaceTags!.totalTransactions, "Expected result with a total transaction of 4")
-      XCTAssertEqual(2, imageFaceTags!.ImageFaces.count, "Expected result with a total keywords of 1")
+      XCTAssertEqual(2, imageFaceTags!.imageFaces.count, "Expected result with a total keywords of 1")
       validExpectation.fulfill()
     })
     

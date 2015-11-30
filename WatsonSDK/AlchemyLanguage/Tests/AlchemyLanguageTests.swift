@@ -2310,4 +2310,25 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
+    func testInvalidURLGetMicroformatData() {
+        
+        let invalidExpectation = expectationWithDescription("invalid")
+        
+        instance.getMicroformatData(requestType: .URL,
+            html: nil,
+            url: "http://www.keywordAnalysisDotComShouldNotExist.com") {
+                
+                (error, microformats) in
+                
+                XCTAssertNotNil(microformats)
+                XCTAssertNil(microformats.microformats)
+                
+                invalidExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
+    
 }

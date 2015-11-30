@@ -12,10 +12,9 @@ import WatsonSDK
 class VisionImage: NSObject {
     var name: String
     var image: String
-    var age: String {
-
-        return self.imageFaceTags.imageFaces[0].age.description
-    }
+    var gender: String? { return (self.imageFaceTags.imageFaces[0].gender["gender"]?.description) }
+    var age: String? { return (self.imageFaceTags.imageFaces[0].age["ageRange"]?.description) }
+    var ageScore: String? { return (self.imageFaceTags.imageFaces[0].age["score"]?.description) }
     
     private var imageFaceTags: ImageFaceTags
 

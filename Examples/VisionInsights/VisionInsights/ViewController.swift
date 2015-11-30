@@ -115,7 +115,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         let image = images[indexPath.item]
         
-        cell.name.text = image.name
+      //  cell.name.text = image.name
+        cell.gender.text = image.gender
+        cell.age.text = image.age
+        cell.ageScore.text = image.ageScore
         
         let path = getDocumentsDirectory().stringByAppendingPathComponent(image.image)
         cell.imageView.image = UIImage(contentsOfFile: path)
@@ -125,28 +128,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         cell.imageView.layer.cornerRadius = 3
         cell.layer.cornerRadius = 7
         
-        cell.age.text = image.age
+
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let person = images[indexPath.item]
-        
-        let ac = UIAlertController(title: "Rename image", message: nil, preferredStyle: .Alert)
-        ac.addTextFieldWithConfigurationHandler(nil)
-        
-        ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        
-        ac.addAction(UIAlertAction(title: "OK", style: .Default) { [unowned self, ac] _ in
-            let newName = ac.textFields![0]
-            person.name = newName.text!
-            
-            self.collectionView.reloadData()
-            })
-        
-        presentViewController(ac, animated: true, completion: nil)
-    }
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        let person = images[indexPath.item]
+//        
+//      //  let ac = UIAlertController(title: "Rename image", message: nil, preferredStyle: .Alert)
+//        ac.addTextFieldWithConfigurationHandler(nil)
+//        
+//        ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+//        
+//        ac.addAction(UIAlertAction(title: "OK", style: .Default) { [unowned self, ac] _ in
+//            let newName = ac.textFields![0]
+//            person.name = newName.text!
+//            
+//            self.collectionView.reloadData()
+//            })
+//        
+//        presentViewController(ac, animated: true, completion: nil)
+//    }
     
     func getDocumentsDirectory() -> NSString {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3141A4681C0CC95F00145454 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3141A4671C0CC95F00145454 /* Credentials.plist */; };
 		317948DD1C08D101007E2469 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317948DC1C08D101007E2469 /* AppDelegate.swift */; };
 		317948DF1C08D101007E2469 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317948DE1C08D101007E2469 /* ViewController.swift */; };
 		317948E21C08D101007E2469 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 317948E01C08D101007E2469 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3141A4671C0CC95F00145454 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = ../../../WatsonSDKTests/Credentials.plist; sourceTree = "<group>"; };
 		317948D91C08D101007E2469 /* VisionInsights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionInsights.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		317948DC1C08D101007E2469 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		317948DE1C08D101007E2469 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		317948DB1C08D101007E2469 /* VisionInsights */ = {
 			isa = PBXGroup;
 			children = (
+				3141A4671C0CC95F00145454 /* Credentials.plist */,
 				317948DC1C08D101007E2469 /* AppDelegate.swift */,
 				317948DE1C08D101007E2469 /* ViewController.swift */,
 				317948E01C08D101007E2469 /* Main.storyboard */,
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				317948E71C08D101007E2469 /* LaunchScreen.storyboard in Resources */,
+				3141A4681C0CC95F00145454 /* Credentials.plist in Resources */,
 				317948E41C08D101007E2469 /* Assets.xcassets in Resources */,
 				317948E21C08D101007E2469 /* Main.storyboard in Resources */,
 			);

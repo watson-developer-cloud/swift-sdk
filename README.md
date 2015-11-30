@@ -78,7 +78,7 @@ Instantiate an **AlchemyLanguage** object and set its api key via either
 
 ```swift
 
-let alchemyLanguageInstance = AlchemyLanguage(apiKey: **String**)
+let alchemyLanguageInstance = AlchemyLanguage(apiKey: String)
 
 ```
 
@@ -87,7 +87,7 @@ or
 ```swift
 
 let alchemyLanguageInstance = AlchemyLanguage()
-alchemyLanguageInstance._apiKey = **API_KEY**
+alchemyLanguageInstance._apiKey = API_KEY
 
 
 ```
@@ -98,17 +98,17 @@ e.g.
 
 ```swift
 
-        alchemyLanguageInstance.getEntities(requestType: .HTML,
-            html: nil,
-            url: "http://www.google.com",
-            text: nil) {
+alchemyLanguageInstance.getEntities(requestType: .URL,
+  html: nil,
+  url: "http://www.google.com",
+  text: nil) {
 
-            (error, entities) in
+    (error, entities) in
 
-            // returned data is inside "entities" in this case
-            // code here
+    // returned data is inside "entities" in this case
+    // code here
 
-       }
+}
 
 ```
 

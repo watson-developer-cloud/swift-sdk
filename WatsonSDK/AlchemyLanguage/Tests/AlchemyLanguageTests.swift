@@ -1970,10 +1970,29 @@ class AlchemyLanguageTests: XCTestCase {
         
     }
     
-    //    func testHTMLGetTitle()
-    //    func testInvalidHTMLGetTitle()
-    //    func testURLGetTitle()
-    //    func testInvalidURLGetTitle()
+    func testURLGetText() {
+        
+        let validExpectation = expectationWithDescription("valid")
+        
+        instance.getText(requestType: AlchemyLanguageConstants.RequestType.URL,
+            html: nil,
+            url: test_url,
+            textType: AlchemyLanguageConstants.TextType.Normal,
+            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+                
+                (error, text, title) in
+                
+                XCTAssertNotNil(text)
+                XCTAssertNotNil(text.language)
+                XCTAssertNotNil(text.text)
+                
+                validExpectation.fulfill()
+                
+        }
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     
     // MARK: Microformats Parsing

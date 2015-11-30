@@ -229,7 +229,7 @@ public class AlchemyVision: Service {
             return (nil, error)
         }
         
-        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/" + String.randomAlphaNumericString(12)
+        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/" + NSUUID().UUIDString
         
         guard (!filePath.isEmpty) else {
             error = NSError.createWatsonError(404,

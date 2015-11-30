@@ -127,7 +127,6 @@
 		7AF96BB81BF996560083ED23 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A221BF950C800CD916E /* TextToSpeech.swift */; };
 		7AF96BBA1BF9965A0083ED23 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC3A201BF950C800CD916E /* testing.opus */; };
 		7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A211BF950C800CD916E /* TextToSpeechTests.swift */; };
-		BDAF7E121BFEB9D2009BB0E8 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E111BFEB9D2009BB0E8 /* String.swift */; };
 		BDAF7E161BFEBA28009BB0E8 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E151BFEBA28009BB0E8 /* NSError.swift */; };
 		BDAF7E181BFEBA40009BB0E8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E171BFEBA40009BB0E8 /* Request.swift */; };
 		BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */; };
@@ -291,7 +290,6 @@
 		7ADC3A331BF950C800CD916E /* Transformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
 		7AF96B881BF96BBB0083ED23 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		BDAF7E111BFEB9D2009BB0E8 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
 		BDAF7E151BFEBA28009BB0E8 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSError.swift; path = Extensions/NSError.swift; sourceTree = "<group>"; };
 		BDAF7E171BFEBA40009BB0E8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Extensions/Request.swift; sourceTree = "<group>"; };
 		BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
@@ -765,7 +763,6 @@
 			children = (
 				BDAF7E151BFEBA28009BB0E8 /* NSError.swift */,
 				BDAF7E171BFEBA40009BB0E8 /* Request.swift */,
-				BDAF7E111BFEB9D2009BB0E8 /* String.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -959,7 +956,6 @@
 				7ADC3A9B1BF9593A00CD916E /* NLCConstants.swift in Sources */,
 				7ADC3A9A1BF9593A00CD916E /* NaturalLanguageClassifier.swift in Sources */,
 				7ADC3A7A1BF9551500CD916E /* Taxonomy.swift in Sources */,
-				BDAF7E121BFEB9D2009BB0E8 /* String.swift in Sources */,
 				7ADC3A911BF958A200CD916E /* LanguageTranslationConstants.swift in Sources */,
 				7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */,
 				7ADC3A671BF9551500CD916E /* AlchemyLanguageConstants.swift in Sources */,

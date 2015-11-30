@@ -549,6 +549,20 @@ public extension AlchemyLanguage {
 // MARK: Author Extraction
 public extension AlchemyLanguage {
     
+    /**
+     
+     [AlchemyDocs](http://www.alchemyapi.com/api/api-calls-authors-extraction)
+     
+     Extracts document authors from given content.
+     
+     - parameter requestType: .HTML, .URL
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
+     
+     - returns: A **DocumentAuthors** object
+     
+     */
     public func getAuthors(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,

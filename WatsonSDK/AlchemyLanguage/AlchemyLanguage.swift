@@ -633,7 +633,7 @@ public extension AlchemyLanguage {
         html: String?,
         url: String?,
         text: String?,
-        taxonomyParameters pd: GetLanguageParameters = GetLanguageParameters(),
+        languageParameters pd: GetLanguageParameters = GetLanguageParameters(),
         completionHandler: (error: NSError, returnValue: Language)->() ) {
             
             let accessString = AlchemyLanguageConstants.GetLanguage(fromRequestType: rt)

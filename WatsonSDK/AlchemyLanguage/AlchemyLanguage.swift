@@ -101,15 +101,19 @@ public extension AlchemyLanguage {
     
     /**
 
-     http://www.alchemyapi.com/api/entity/proc.html
+     [AlchemyDocs](http://www.alchemyapi.com/api/entity/proc.html)
      
-     Extracts a grouped, ranked list of named entities (people, companies,
-     organizations, etc.) from text, a URL or HTML.
+     Extracts a grouped, ranked list of named entities (people, companies, organizations, etc.) from HTML, URL, or Text
      
-     - Parameters:
-     - The parameters to be used in the service call, text, html or url should be specified.
+     - parameter requestType: .HTML, .URL, or .Text
+     - parameter html: input html if a .HTML request. otherwise can set to 'nil'
+     - parameter url: input url if a .URL request. otherwise can set to 'nil'
+     - parameter text: input text if a .Text request. otherwise can set to 'nil'
+     - parameter entitiesParameters: instantiate a **GetEntitiesParameters** struct and change any values you'd like to manually set
+     - parameter completionHandler: block of code to run on completion. contains result data model instance
      
-     - Returns: An **Entities** object.
+     - returns: An **Entities** object
+     
      */
     public func getEntities(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,

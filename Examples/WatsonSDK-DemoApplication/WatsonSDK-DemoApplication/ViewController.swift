@@ -8,8 +8,31 @@
 
 import UIKit
 
+/**
+
+ This is the base ViewController for the WatsonSDK Demo Application.
+
+ Installing your sample app for your respective service is easy:
+ 
+ 1. Copy-paste your project, in one directory, into "Children"
+ 2. Have your root **UIViewController** inherit from **ChildViewController**
+   * Implement "childTitle"
+   * Implement "config" as a dictionary of keys you require and empty values
+ 3. Add an instance of your root view controller to the "children" array below
+ 4. Done!
+ 
+ **ViewController** will automatically populate the selection and setting screens for you.
+ 
+*/
 class ViewController: UIViewController {
 
+    // add your child view controller here
+    let children: [ChildViewController] = [
+    
+        SampleChildViewController()
+    
+    ]
+    
     // sizing
     private var screenBounds: CGRect { return UIScreen.mainScreen().bounds }
     var screenWidth: CGFloat { return screenBounds.width }
@@ -21,6 +44,9 @@ class ViewController: UIViewController {
     // height
     var barHeight: CGFloat { return 40.0 }
     var childScreenHeight : CGFloat { return screenHeight - barHeight }
+    
+    // mutable versions of copied dictionaries
+    private var configDictionaries: [String : [String : String] ] = [ "" : [ "" : ""] ]
     
     // ui components
     private var barView: BarView!
@@ -45,13 +71,15 @@ class ViewController: UIViewController {
         
         configureBarView()
         
-        configureChildView()
+        configureFirstChildView()
         
     }
     
     private func configureBarView() {
         
-        self.barView = NSBundle.mainBundle().loadNibNamed("BarView", owner: self, options: nil).first! as! BarView
+        var _barView = self.barView
+        
+        _barView = NSBundle.mainBundle().loadNibNamed("BarView", owner: self, options: nil).first! as! BarView
         
         let barViewFrame = CGRect(
             x: 0.0,
@@ -60,14 +88,51 @@ class ViewController: UIViewController {
             height: barHeight
         )
         
-        self.barView.frame = barViewFrame
+        _barView.delegate = self
+        _barView.frame = barViewFrame
         
-        self.view.addSubview(self.barView)
+        self.view.addSubview(_barView)
         
     }
     
     // TODO: implement
-    private func configureChildView() {}
+    private func configureFirstChildView() {
+    
+        assert(children.first != nil, "ViewController: Children array cannot be empty!")
+        
+        let firstChild = children.first!
+        
+        presentChild(firstChild)
+    
+    }
+    
+    func presentChild(child: ChildViewController) {
 
+        // make entry for data if not present, else configure selection screen with present data
+        
+        // configure currently selected in selection screen
+        
+        // configure settings popover based on current child
+        
+        
+    }
+
+}
+
+
+extension ViewController: BarViewDelegate {
+    
+    func presentSelect() {
+        
+        print("TODO: Show select screen.")
+        
+    }
+    
+    func presentSettings() {
+        
+        print("TODO: Show settings screen.")
+        
+    }
+    
 }
 

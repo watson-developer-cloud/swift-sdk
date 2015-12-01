@@ -1,5 +1,5 @@
 //
-//  BarViewParentProtocol.swift
+//  BarViewDelegate.swift
 //  WatsonSDK-DemoApplication
 //
 //  Created by Ruslan Ardashev on 12/1/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BarViewParentProtocol {
+protocol BarViewDelegate {
     
     func presentSelect()
     func presentSettings()

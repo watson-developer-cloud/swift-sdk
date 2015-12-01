@@ -363,7 +363,17 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 (error, entities) in
                 
-                XCTAssertNil(entities.entities)
+                print("ruslan:")
+                print(entities.entities)
+                
+                XCTAssertNotNil(entities)
+                
+                if let entities = entities.entities {
+                    
+                    XCTAssertEqual(entities.count, 0)
+                    
+                }
+                
                 invalidExpectation.fulfill()
                 
         }
@@ -1073,7 +1083,12 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 XCTAssertNotNil(conceptResponse)
                 XCTAssertEqual(conceptResponse.language, "unknown")
-                XCTAssertNil(conceptResponse.concepts)
+                
+                if let concepts = conceptResponse.concepts {
+                    
+                    XCTAssertEqual(concepts.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -1132,7 +1147,12 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 XCTAssertNotNil(conceptResponse)
                 XCTAssertEqual(conceptResponse.language, "unknown")
-                XCTAssertNil(conceptResponse.concepts)
+                
+                if let concepts = conceptResponse.concepts {
+                    
+                    XCTAssertEqual(concepts.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -1190,7 +1210,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, conceptResponse) in
                 
                 XCTAssertNotNil(conceptResponse)
-                XCTAssertNil(conceptResponse.concepts)
+                
+                if let concepts = conceptResponse.concepts {
+                    
+                    XCTAssertEqual(concepts.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -1274,7 +1299,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, saoRelations) in
                 
                 XCTAssertNotNil(saoRelations)
-                XCTAssertNil(saoRelations.relations)
+                
+                if let relations = saoRelations.relations {
+                    
+                    XCTAssertEqual(relations.count, 0)
+                    
+                }
                 
                 if let language = saoRelations.language {
                     
@@ -1358,7 +1388,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, saoRelations) in
                 
                 XCTAssertNotNil(saoRelations)
-                XCTAssertNil(saoRelations.relations)
+                
+                if let relations = saoRelations.relations {
+                    
+                    XCTAssertEqual(relations.count, 0)
+                    
+                }
                 
                 if let language = saoRelations.language {
                     
@@ -1442,7 +1477,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, saoRelations) in
                 
                 XCTAssertNotNil(saoRelations)
-                XCTAssertNil(saoRelations.relations)
+                
+                if let relations = saoRelations.relations {
+                    
+                    XCTAssertEqual(relations.count, 0)
+                    
+                }
                 
                 if let language = saoRelations.language {
                     
@@ -2266,7 +2306,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, microformats) in
                 
                 XCTAssertNotNil(microformats)
-                XCTAssertNil(microformats.microformats)
+                
+                if let microformats = microformats.microformats {
+                    
+                    XCTAssertEqual(microformats.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -2321,7 +2366,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, microformats) in
                 
                 XCTAssertNotNil(microformats)
-                XCTAssertNil(microformats.microformats)
+                
+                if let microformats = microformats.microformats {
+                    
+                    XCTAssertEqual(microformats.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -2376,7 +2426,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, feeds) in
                 
                 XCTAssertNotNil(feeds)
-                XCTAssertNil(feeds.feeds)
+                
+                if let feeds = feeds.feeds {
+                    
+                    XCTAssertEqual(feeds.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 
@@ -2425,7 +2480,12 @@ class AlchemyLanguageTests: XCTestCase {
                 (error, feeds) in
                 
                 XCTAssertNotNil(feeds)
-                XCTAssertNil(feeds.feeds)
+                
+                if let feeds = feeds.feeds {
+                    
+                    XCTAssertEqual(feeds.count, 0)
+                    
+                }
                 
                 invalidExpectation.fulfill()
                 

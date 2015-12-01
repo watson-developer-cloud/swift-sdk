@@ -7,3 +7,20 @@
 //
 
 import Foundation
+import UIKit
+
+class BarView: UIView {
+    
+    @IBAction func selectPress() {
+        
+        func nothing(){}; nothing() // for now
+        
+    }
+    
+    @IBAction func settingsPress() {
+        
+        func nothing(){}; nothing() // for now
+        
+    }
+    
+}

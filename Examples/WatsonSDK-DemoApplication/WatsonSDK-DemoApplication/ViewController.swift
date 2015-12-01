@@ -154,12 +154,6 @@ class ViewController: UIViewController {
 
 extension ViewController: BarViewDelegate {
     
-    /**
-
-     tag 0 --> hidden
-     tag 1 --> present
-     
-    */
     func presentSelect() {
         
         // instantiate if nil
@@ -180,33 +174,65 @@ extension ViewController: BarViewDelegate {
             
         }
         
-        if self.selectScreenPopup!.tag == 0 {
-            
-            UIView.animateWithDuration(popupDuration) {
-                
-                self.selectScreenPopup!.frame.offsetInPlace(dx: 0.0, dy: -self.screenHeight)
-                
-            }
-            
-            self.selectScreenPopup!.tag = 1
-            
-        } else {
-            
-            UIView.animateWithDuration(popupDuration) {
-                
-                self.selectScreenPopup!.frame.offsetInPlace(dx: 0.0, dy: self.screenHeight)
-                
-            }
-
-            self.selectScreenPopup!.tag = 0
-            
-        }
+        presentPopoverScreen(self.selectScreenPopup!)
         
     }
     
     func presentSettings() {
         
-        print("TODO: Show settings screen.")
+        // instantiate if nil
+        if self.settingsScreenPopup == nil {
+            
+            let settingsScreenPopupFrame = CGRect(
+                x: 0.0,
+                y: screenHeight,
+                width: screenWidth,
+                height: childViewHeight / 2.0
+            )
+            
+            self.settingsScreenPopup = UIView(frame: settingsScreenPopupFrame)
+            self.settingsScreenPopup!.layer.zPosition = 3.0
+            self.settingsScreenPopup!.backgroundColor = UIColor.yellowColor()
+            
+            self.view.addSubview(self.settingsScreenPopup!)
+            
+        }
+        
+        presentPopoverScreen(self.settingsScreenPopup!)
+        
+    }
+    
+    /**
+     
+     tag 0 --> hidden
+     tag 1 --> present
+     
+     */
+    private func presentPopoverScreen(viewToPresent: UIView) {
+        
+        let dy = viewToPresent.frame.height + self.barHeight
+        
+        if viewToPresent.tag == 0 {
+            
+            UIView.animateWithDuration(popupDuration) {
+                
+                viewToPresent.frame.offsetInPlace(dx: 0.0, dy: -dy)
+                
+            }
+            
+           viewToPresent.tag = 1
+            
+        } else {
+            
+            UIView.animateWithDuration(popupDuration) {
+                
+                viewToPresent.frame.offsetInPlace(dx: 0.0, dy: dy)
+                
+            }
+            
+            viewToPresent.tag = 0
+            
+        }
         
     }
     

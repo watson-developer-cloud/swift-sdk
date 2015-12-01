@@ -1935,7 +1935,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Normal,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -1961,7 +1961,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Normal,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -1984,7 +1984,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: test_url,
             textType: AlchemyLanguageConstants.TextType.Normal,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2008,7 +2008,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: "http://www.keywordAnalysisDotComShouldNotExist.com",
             textType: AlchemyLanguageConstants.TextType.Normal,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2033,7 +2033,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Raw,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2058,7 +2058,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Raw,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2081,7 +2081,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: test_url,
             textType: AlchemyLanguageConstants.TextType.Raw,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2104,7 +2104,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: "http://www.keywordAnalysisDotComShouldNotExist.com",
             textType: AlchemyLanguageConstants.TextType.Raw,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2129,7 +2129,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Title,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2154,7 +2154,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: html,
             url: nil,
             textType: AlchemyLanguageConstants.TextType.Title,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2177,7 +2177,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: test_url,
             textType: AlchemyLanguageConstants.TextType.Title,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 
@@ -2200,7 +2200,7 @@ class AlchemyLanguageTests: XCTestCase {
             html: nil,
             url: "http://www.keywordAnalysisDotComShouldNotExist.com",
             textType: AlchemyLanguageConstants.TextType.Title,
-            getTextParameters: AlchemyLanguage.GetTextParameters()) {
+            textParameters: AlchemyLanguage.GetTextParameters()) {
                 
                 (error, text, title) in
                 

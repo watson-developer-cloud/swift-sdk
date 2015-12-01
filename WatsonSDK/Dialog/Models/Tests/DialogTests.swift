@@ -522,293 +522,293 @@ class DialogTests: XCTestCase {
     
     // MARK: - Negative Tests
     
-    // Invoke getContent() with an invalid Dialog ID
-    func getContentInvalidDialogID() {
-        let description = "Try to get the content for each node using an invalid Dialog ID."
-        let expectation = expectationWithDescription(description)
-
-        // get content
-        service!.getContent(invalidDialogID) { nodes, error in
-            
-            // verify expected response
-            XCTAssertNil(nodes)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 404)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke updateContent() with an invalid Dialog ID
-    func updateContentInvalidDialogID() {
-        let description = "Try to update the content for nodes using an invalid Dialog ID."
-        let expectation = expectationWithDescription(description)
-        
-        // define the updates to the initial node
-        let nodes = [Dialog.Node(content: initialResponse, node: self.initialNode)]
-        
-        // update the initial node
-        service!.updateContent(invalidDialogID, nodes: nodes) { error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 404)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke updateContent() with invalid content
-    func updateContentInvalidContent() {
-        let description = "Try to update the initial node with invalid content."
-        let expectation = expectationWithDescription(description)
-        
-        // define an empty node
-        let nodes = [Dialog.Node()]
-        
-        // update the node
-        service!.updateContent(dialogID!, nodes: nodes) { error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke createDialog() with a name that is too long
-    func createDialogWithLongName() {
-        let description = "Try to create a Dialog with a very long name."
-        let expectation = expectationWithDescription(description)
-        
-        // define the long name
-        var longDialogName = dialogName
-        for _ in 1...100 {
-            longDialogName += dialogName
-        }
-        
-        // create Dialog application
-        service!.createDialog(longDialogName, fileURL: dialogFile!) { dialogID, error in
-            
-            // verify expected response
-            XCTAssertNil(dialogID)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 422)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke createDialog() with a file that doesn't exist
-    func createDialogWithoutFile() {
-        let description = "Try to create a Dialog with a Dialog file that doesn't exist."
-        let expectation = expectationWithDescription(description)
-        
-        // define file path
-        let manager = NSFileManager.defaultManager()
-        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-            inDomains: .UserDomainMask)[0]
-        let pathComponent = "invalidFile.json"
-        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-        
-        // create Dialog application
-        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
-            
-            // verify expected response
-            XCTAssertNil(dialogID)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke createDialog() with an invalid file
-    func createDialogWithInvalidFile() {
-        let description = "Try to create a Dialog with an invalid Dialog file."
-        let expectation = expectationWithDescription(description)
-        
-        // define file path
-        let manager = NSFileManager.defaultManager()
-        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-            inDomains: .UserDomainMask)[0]
-        let pathComponent = "invalidFile.json"
-        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-        let fileURLString = fileURL.URLString
-        
-        // write to the file
-        do {
-            let contents = "{ \"Hello\": \"World\" }"
-            try contents.writeToFile(fileURLString, atomically: false,
-                encoding: NSUTF8StringEncoding)
-        } catch {
-            XCTFail("Unable to create file.")
-        }
-        
-        // create Dialog application
-        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
-            
-            // verify expected response
-            XCTAssertNil(dialogID)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-        
-        // delete the file to prevent conflicts
-        do {
-            try manager.removeItemAtURL(fileURL)
-        } catch {
-            XCTFail("Unable to delete invalid Dialog file.")
-        }
-    }
-    
-    // Invoke deleteDialog() with an invalid Dialog ID
-    func deleteDialogWithInvalidDialogID() {
-        let description = "Try to delete a Dialog using an invalid Dialog ID."
-        let expectation = expectationWithDescription(description)
-        
-        // delete Dialog application
-        service!.deleteDialog(invalidDialogID) { error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 404)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke getDialogFile() with an invalid Dialog ID
-    func downloadDialogFileWithInvalidDialogID() {
-        let description = "Try to download the Dialog file using an invalid Dialog ID."
-        let expectation = expectationWithDescription(description)
-        
-        // download the Dialog file
-        service!.getDialogFile(invalidDialogID) { file, error in
-            
-            // verify expected response
-            XCTAssertNil(file)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 404)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke updateDialog() with invalid Dialog ID
-    func updateDialogWithInvalidDialogID() {
-        let description = "Try to update a Dialog using an invalid Dialog ID."
-        let expectation = expectationWithDescription(description)
-        
-        // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: dialogFile!, fileType: .WDSXML) {
-            error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 404)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke updateDialog() with a file that doesn't exist
-    func updateDialogWithoutFile() {
-        let description = "Try to update a Dialog with a Dialog file that doesn't exist."
-        let expectation = expectationWithDescription(description)
-        
-        // define file path
-        let manager = NSFileManager.defaultManager()
-        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-            inDomains: .UserDomainMask)[0]
-        let pathComponent = "invalidFile.json"
-        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-        
-        // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-            
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
-    // Invoke updateDialog() with an invalid file
-    func updateDialogWithInvalidFile() {
-        let description = "Try to update a Dialog with an invalid Dialog file."
-        let expectation = expectationWithDescription(description)
-        
-        // define file path
-        let manager = NSFileManager.defaultManager()
-        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-            inDomains: .UserDomainMask)[0]
-        let pathComponent = "invalidFile.json"
-        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-        let fileURLString = fileURL.URLString
-        
-        // write to the file
-        do {
-            let contents = "{ \"Hello\": \"World\" }"
-            try contents.writeToFile(fileURLString, atomically: false,
-                encoding: NSUTF8StringEncoding)
-        } catch {
-            XCTFail("Unable to create file.")
-        }
-        
-        // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
-            
-            // verify expected response
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-            
-            expectation.fulfill()
-        }
-        
-        // delete the file to prevent conflicts
-        do {
-            try manager.removeItemAtURL(fileURL)
-        } catch {
-            XCTFail("Unable to delete invalid Dialog file.")
-        }
-    }
+//    // Invoke getContent() with an invalid Dialog ID
+//    func getContentInvalidDialogID() {
+//        let description = "Try to get the content for each node using an invalid Dialog ID."
+//        let expectation = expectationWithDescription(description)
+//
+//        // get content
+//        service!.getContent(invalidDialogID) { nodes, error in
+//            
+//            // verify expected response
+//            XCTAssertNil(nodes)
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 404)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke updateContent() with an invalid Dialog ID
+//    func updateContentInvalidDialogID() {
+//        let description = "Try to update the content for nodes using an invalid Dialog ID."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define the updates to the initial node
+//        let nodes = [Dialog.Node(content: initialResponse, node: self.initialNode)]
+//        
+//        // update the initial node
+//        service!.updateContent(invalidDialogID, nodes: nodes) { error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 404)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke updateContent() with invalid content
+//    func updateContentInvalidContent() {
+//        let description = "Try to update the initial node with invalid content."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define an empty node
+//        let nodes = [Dialog.Node()]
+//        
+//        // update the node
+//        service!.updateContent(dialogID!, nodes: nodes) { error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 400)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke createDialog() with a name that is too long
+//    func createDialogWithLongName() {
+//        let description = "Try to create a Dialog with a very long name."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define the long name
+//        var longDialogName = dialogName
+//        for _ in 1...100 {
+//            longDialogName += dialogName
+//        }
+//        
+//        // create Dialog application
+//        service!.createDialog(longDialogName, fileURL: dialogFile!) { dialogID, error in
+//            
+//            // verify expected response
+//            XCTAssertNil(dialogID)
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 422)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke createDialog() with a file that doesn't exist
+//    func createDialogWithoutFile() {
+//        let description = "Try to create a Dialog with a Dialog file that doesn't exist."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define file path
+//        let manager = NSFileManager.defaultManager()
+//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+//            inDomains: .UserDomainMask)[0]
+//        let pathComponent = "invalidFile.json"
+//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+//        
+//        // create Dialog application
+//        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+//            
+//            // verify expected response
+//            XCTAssertNil(dialogID)
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke createDialog() with an invalid file
+//    func createDialogWithInvalidFile() {
+//        let description = "Try to create a Dialog with an invalid Dialog file."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define file path
+//        let manager = NSFileManager.defaultManager()
+//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+//            inDomains: .UserDomainMask)[0]
+//        let pathComponent = "invalidFile.json"
+//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+//        let fileURLString = fileURL.URLString
+//        
+//        // write to the file
+//        do {
+//            let contents = "{ \"Hello\": \"World\" }"
+//            try contents.writeToFile(fileURLString, atomically: false,
+//                encoding: NSUTF8StringEncoding)
+//        } catch {
+//            XCTFail("Unable to create file.")
+//        }
+//        
+//        // create Dialog application
+//        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+//            
+//            // verify expected response
+//            XCTAssertNil(dialogID)
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 400)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//        
+//        // delete the file to prevent conflicts
+//        do {
+//            try manager.removeItemAtURL(fileURL)
+//        } catch {
+//            XCTFail("Unable to delete invalid Dialog file.")
+//        }
+//    }
+//    
+//    // Invoke deleteDialog() with an invalid Dialog ID
+//    func deleteDialogWithInvalidDialogID() {
+//        let description = "Try to delete a Dialog using an invalid Dialog ID."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // delete Dialog application
+//        service!.deleteDialog(invalidDialogID) { error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 404)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke getDialogFile() with an invalid Dialog ID
+//    func downloadDialogFileWithInvalidDialogID() {
+//        let description = "Try to download the Dialog file using an invalid Dialog ID."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // download the Dialog file
+//        service!.getDialogFile(invalidDialogID) { file, error in
+//            
+//            // verify expected response
+//            XCTAssertNil(file)
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 404)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke updateDialog() with invalid Dialog ID
+//    func updateDialogWithInvalidDialogID() {
+//        let description = "Try to update a Dialog using an invalid Dialog ID."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // upload the Dialog file
+//        service!.updateDialog(dialogID!, fileURL: dialogFile!, fileType: .WDSXML) {
+//            error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 404)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke updateDialog() with a file that doesn't exist
+//    func updateDialogWithoutFile() {
+//        let description = "Try to update a Dialog with a Dialog file that doesn't exist."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define file path
+//        let manager = NSFileManager.defaultManager()
+//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+//            inDomains: .UserDomainMask)[0]
+//        let pathComponent = "invalidFile.json"
+//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+//        
+//        // upload the Dialog file
+//        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
+//            
+//            expectation.fulfill()
+//        }
+//        waitForExpectation()
+//    }
+//    
+//    // Invoke updateDialog() with an invalid file
+//    func updateDialogWithInvalidFile() {
+//        let description = "Try to update a Dialog with an invalid Dialog file."
+//        let expectation = expectationWithDescription(description)
+//        
+//        // define file path
+//        let manager = NSFileManager.defaultManager()
+//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+//            inDomains: .UserDomainMask)[0]
+//        let pathComponent = "invalidFile.json"
+//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+//        let fileURLString = fileURL.URLString
+//        
+//        // write to the file
+//        do {
+//            let contents = "{ \"Hello\": \"World\" }"
+//            try contents.writeToFile(fileURLString, atomically: false,
+//                encoding: NSUTF8StringEncoding)
+//        } catch {
+//            XCTFail("Unable to create file.")
+//        }
+//        
+//        // upload the Dialog file
+//        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
+//            
+//            // verify expected response
+//            XCTAssertNotNil(error)
+//            
+//            // ensure error is as expected
+//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
+//            
+//            expectation.fulfill()
+//        }
+//        
+//        // delete the file to prevent conflicts
+//        do {
+//            try manager.removeItemAtURL(fileURL)
+//        } catch {
+//            XCTFail("Unable to delete invalid Dialog file.")
+//        }
+//    }
     
     // TODO: Write negative test for getConversation()
     

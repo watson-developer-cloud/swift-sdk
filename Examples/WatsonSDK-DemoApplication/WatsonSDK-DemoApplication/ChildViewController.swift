@@ -7,3 +7,22 @@
 //
 
 import Foundation
+import UIKit
+
+class ChildViewController: UIViewController { }
+
+extension ChildViewController: ChildProtocol {
+    
+    var childTitle: String! {
+     
+        fatalError("ChildViewController \(self.dynamicType) must override the title property.")
+        
+    }
+    
+    var config: [String : String]! {
+    
+        fatalError("ChildViewController \(self.dynamicType) must override the title property.")
+    
+    }
+    
+}

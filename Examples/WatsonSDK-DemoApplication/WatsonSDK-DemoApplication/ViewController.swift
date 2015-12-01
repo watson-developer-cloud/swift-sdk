@@ -43,24 +43,27 @@ class ViewController: UIViewController {
     
     // height
     var barHeight: CGFloat { return 40.0 }
-    var childScreenHeight : CGFloat { return screenHeight - barHeight }
+    var childViewHeight : CGFloat { return screenHeight - barHeight }
     
+    // child size
+    var childViewSize: CGRect {
+        
+        return CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: screenWidth,
+            height: childViewHeight
+        )
+
+    }
+   
     // mutable versions of copied dictionaries
     private var configDictionaries: [String : [String : String] ] = [ "" : [ "" : ""] ]
     
     // ui components
     private var barView: BarView!
-    private var childViewContainer: UIView!
-    
-    var childViewController: UIViewController? {
-        
-        didSet {
-            
-            
-            
-        }
-        
-    }
+    private var currentChildView: UIView?
+    private var currentChildViewController: UIViewController?
 
     
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
@@ -83,7 +86,7 @@ class ViewController: UIViewController {
         
         let barViewFrame = CGRect(
             x: 0.0,
-            y: childScreenHeight,
+            y: childViewHeight,
             width: screenWidth,
             height: barHeight
         )
@@ -95,7 +98,6 @@ class ViewController: UIViewController {
         
     }
     
-    // TODO: implement
     private func configureFirstChildView() {
     
         assert(children.first != nil, "ViewController: Children array cannot be empty!")
@@ -108,15 +110,26 @@ class ViewController: UIViewController {
     
     func presentChild(child: ChildViewController) {
 
-        // make entry for data if not present, else configure selection screen with present data
         
-        // configure currently selected in selection screen
+        removeCurrentChild()            // remove old child if present
         
-        // configure settings popover based on current child
+                                        // make entry for data if not present, else configure selection screen with present data
+        
+        
+                                        // configure currently selected in selection screen
+        
+                                        // configure settings popover based on current child
         
         
     }
-
+    
+    private func removeCurrentChild() {
+        
+        self.currentChildView?.removeFromSuperview()
+        self.currentChildViewController?.removeFromParentViewController()
+        
+    }
+    
 }
 
 

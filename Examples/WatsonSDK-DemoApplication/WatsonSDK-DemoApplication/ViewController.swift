@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     var childViewHeight : CGFloat { return screenHeight - barHeight }
     
     // child size
-    var childViewSize: CGRect {
+    var childViewFrame: CGRect {
         
         return CGRect(
             x: 0.0,
@@ -64,7 +64,14 @@ class ViewController: UIViewController {
     private var barView: BarView!
     private var currentChildView: UIView?
     private var currentChildViewController: UIViewController?
+    // select screen
+    private var selectScreenPopup: UIView?
+    // settings screen
+    private var settingsScreenPopup: UIView?
 
+    // animations
+    private var popupDuration: NSTimeInterval = 1.0
+    
     
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
@@ -93,6 +100,7 @@ class ViewController: UIViewController {
         
         _barView.delegate = self
         _barView.frame = barViewFrame
+        _barView.layer.zPosition = 4.0
         
         self.view.addSubview(_barView)
         
@@ -112,6 +120,17 @@ class ViewController: UIViewController {
 
         
         removeCurrentChild()            // remove old child if present
+        
+        self.currentChildView = child.view
+        self.currentChildView!.layer.zPosition = 2.0
+        
+        self.currentChildViewController = child
+        
+        
+        
+        child.view.frame = childViewFrame
+        self.addChildViewController(child)
+        self.view.addSubview(child.view)
         
                                         // make entry for data if not present, else configure selection screen with present data
         
@@ -135,9 +154,53 @@ class ViewController: UIViewController {
 
 extension ViewController: BarViewDelegate {
     
+    /**
+
+     tag 0 --> hidden
+     tag 1 --> present
+     
+    */
     func presentSelect() {
         
-        print("TODO: Show select screen.")
+        // instantiate if nil
+        if self.selectScreenPopup == nil {
+            
+            let selectScreenPopupFrame = CGRect(
+                x: 0.0,
+                y: screenHeight,
+                width: screenWidth,
+                height: childViewHeight
+            )
+            
+            self.selectScreenPopup = UIView(frame: selectScreenPopupFrame)
+            self.selectScreenPopup!.layer.zPosition = 3.0
+            self.selectScreenPopup!.backgroundColor = UIColor.purpleColor()
+            
+            self.view.addSubview(self.selectScreenPopup!)
+            
+        }
+        
+        if self.selectScreenPopup!.tag == 0 {
+            
+            UIView.animateWithDuration(popupDuration) {
+                
+                self.selectScreenPopup!.frame.offsetInPlace(dx: 0.0, dy: -self.screenHeight)
+                
+            }
+            
+            self.selectScreenPopup!.tag = 1
+            
+        } else {
+            
+            UIView.animateWithDuration(popupDuration) {
+                
+                self.selectScreenPopup!.frame.offsetInPlace(dx: 0.0, dy: self.screenHeight)
+                
+            }
+
+            self.selectScreenPopup!.tag = 0
+            
+        }
         
     }
     

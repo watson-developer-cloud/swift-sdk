@@ -20,6 +20,7 @@ If you want to contribute to the repository, here's a quick guide:
   4. Commit your changes
   5. Push to your fork and submit a pull request to the **dev** branch
 
+
 # Developer's Certificate of Origin 1.1
 
 By making a contribution to this project, I certify that:
@@ -54,3 +55,4 @@ By making a contribution to this project, I certify that:
 [dw]: https://developer.ibm.com/answers/questions/ask/?topics=watson
 [stackoverflow]: http://stackoverflow.com/questions/ask?tags=ibm-watson
 [styleguide]: https://github.com/IBM-MIL/swift-style-guide
+

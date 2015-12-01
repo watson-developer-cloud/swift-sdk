@@ -5,3 +5,4 @@ github "Hearst-DD/ObjectMapper" == 1.0.1
 github "rhodgkins/SwiftHTTPStatusCodes" == 2.0.1
 github "daltoniam/Starscream" == 1.0.2
 github "Quick/Nimble" == 3.0.0
+github "tristanhimmelman/AlamofireObjectMapper" == 2.1.0

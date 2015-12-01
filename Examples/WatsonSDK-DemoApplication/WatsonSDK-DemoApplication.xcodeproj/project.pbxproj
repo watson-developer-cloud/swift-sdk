@@ -12,8 +12,12 @@
 		6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */; };
 		6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */; };
 		6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */; };
-		6E9632881C0E3E440055D402 /* BarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9632871C0E3E440055D402 /* BarView.xib */; };
-		6E96328A1C0E3ED10055D402 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632891C0E3ED10055D402 /* BarView.swift */; };
+		6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328B1C0E49880055D402 /* ChildProtocol.swift */; };
+		6E96328E1C0E4A8B0055D402 /* ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */; };
+		6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */; };
+		6E9632941C0E4DF00055D402 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632921C0E4DF00055D402 /* BarView.swift */; };
+		6E9632951C0E4DF00055D402 /* BarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9632931C0E4DF00055D402 /* BarView.xib */; };
+		6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +28,12 @@
 		6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E3C0D111C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E9632871C0E3E440055D402 /* BarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarView.xib; sourceTree = "<group>"; };
-		6E9632891C0E3ED10055D402 /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		6E96328B1C0E49880055D402 /* ChildProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildProtocol.swift; sourceTree = "<group>"; };
+		6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildViewController.swift; sourceTree = "<group>"; };
+		6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleChildViewController.swift; sourceTree = "<group>"; };
+		6E9632921C0E4DF00055D402 /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		6E9632931C0E4DF00055D402 /* BarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarView.xib; sourceTree = "<group>"; };
+		6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +68,9 @@
 			children = (
 				6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */,
 				6E3C0D091C0E3A93001BF15A /* ViewController.swift */,
-				6E9632891C0E3ED10055D402 /* BarView.swift */,
-				6E9632871C0E3E440055D402 /* BarView.xib */,
+				6E9632911C0E4DF00055D402 /* BarView */,
+				6E96328B1C0E49880055D402 /* ChildProtocol.swift */,
+				6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */,
 				6E3C0D191C0E3B33001BF15A /* Children */,
 				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
 			);
@@ -71,6 +80,7 @@
 		6E3C0D191C0E3B33001BF15A /* Children */ = {
 			isa = PBXGroup;
 			children = (
+				6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -84,6 +94,16 @@
 				6E3C0D131C0E3A93001BF15A /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6E9632911C0E4DF00055D402 /* BarView */ = {
+			isa = PBXGroup;
+			children = (
+				6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */,
+				6E9632921C0E4DF00055D402 /* BarView.swift */,
+				6E9632931C0E4DF00055D402 /* BarView.xib */,
+			);
+			path = BarView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E9632881C0E3E440055D402 /* BarView.xib in Resources */,
+				6E9632951C0E4DF00055D402 /* BarView.xib in Resources */,
 				6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */,
 				6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */,
 				6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */,
@@ -159,7 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E96328A1C0E3ED10055D402 /* BarView.swift in Sources */,
+				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
+				6E9632941C0E4DF00055D402 /* BarView.swift in Sources */,
+				6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */,
+				6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */,
+				6E96328E1C0E4A8B0055D402 /* ChildViewController.swift in Sources */,
 				6E3C0D0A1C0E3A93001BF15A /* ViewController.swift in Sources */,
 				6E3C0D081C0E3A93001BF15A /* AppDelegate.swift in Sources */,
 			);

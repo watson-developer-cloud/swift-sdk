@@ -7,3 +7,36 @@
 //
 
 import Foundation
+import UIKit
+
+class SampleChildViewController: ChildViewController {
+    
+    override var childTitle: String! {
+    
+        return "SampleChildViewController"
+        
+    }
+    
+    override var config: [String : String]! {
+    
+        return [
+        
+            "apiKey" : "",
+            "bogusKey" : ""
+            
+        ]
+    
+    }
+    
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        print("ruslan: viewDidLoad! view: \(self.view)")
+        
+        self.view.backgroundColor = UIColor.redColor()
+        
+    }
+    
+}

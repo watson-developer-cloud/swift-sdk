@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+/** Intended for child **UIViewController**s to implement. */
+protocol ChildProtocol: class {
+    
+    var childTitle: String! { get }
+    var config: [String : String]! { get }
+    
+}

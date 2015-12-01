@@ -8,9 +8,6 @@
       location = "group:Examples"
       name = "Examples">
       <FileRef
-         location = "group:AlchemyLanguageSampleApp/AlchemyLanguageSampleApp.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:SpeechRecognition/SpeechRecognition.xcodeproj">
       </FileRef>
       <FileRef

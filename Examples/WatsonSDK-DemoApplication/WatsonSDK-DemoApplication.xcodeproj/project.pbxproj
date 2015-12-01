@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6EDC62CF1C0DFAFD00AEB5C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC62CE1C0DFAFD00AEB5C9 /* AppDelegate.swift */; };
-		6EDC62D11C0DFAFD00AEB5C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC62D01C0DFAFD00AEB5C9 /* ViewController.swift */; };
-		6EDC62D41C0DFAFD00AEB5C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC62D21C0DFAFD00AEB5C9 /* Main.storyboard */; };
-		6EDC62D61C0DFAFD00AEB5C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC62D51C0DFAFD00AEB5C9 /* Assets.xcassets */; };
-		6EDC62D91C0DFAFD00AEB5C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC62D71C0DFAFD00AEB5C9 /* LaunchScreen.storyboard */; };
+		6E3C0D081C0E3A93001BF15A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */; };
+		6E3C0D0A1C0E3A93001BF15A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C0D091C0E3A93001BF15A /* ViewController.swift */; };
+		6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */; };
+		6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */; };
+		6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6EDC62CB1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlchemyLanguageSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6EDC62CE1C0DFAFD00AEB5C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6EDC62D01C0DFAFD00AEB5C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6EDC62D31C0DFAFD00AEB5C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6EDC62D51C0DFAFD00AEB5C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EDC62D81C0DFAFD00AEB5C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6EDC62DA1C0DFAFD00AEB5C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E3C0D041C0E3A93001BF15A /* WatsonSDK-DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatsonSDK-DemoApplication.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E3C0D091C0E3A93001BF15A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E3C0D0C1C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E3C0D111C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6EDC62C81C0DFAFD00AEB5C9 /* Frameworks */ = {
+		6E3C0D011C0E3A93001BF15A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,72 +35,88 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6EDC62C21C0DFAFD00AEB5C9 = {
+		6E3C0CFB1C0E3A92001BF15A = {
 			isa = PBXGroup;
 			children = (
-				6EDC62CD1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp */,
-				6EDC62CC1C0DFAFD00AEB5C9 /* Products */,
+				6E3C0D061C0E3A93001BF15A /* WatsonSDK-DemoApplication */,
+				6E3C0D051C0E3A93001BF15A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		6EDC62CC1C0DFAFD00AEB5C9 /* Products */ = {
+		6E3C0D051C0E3A93001BF15A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EDC62CB1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp.app */,
+				6E3C0D041C0E3A93001BF15A /* WatsonSDK-DemoApplication.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6EDC62CD1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp */ = {
+		6E3C0D061C0E3A93001BF15A /* WatsonSDK-DemoApplication */ = {
 			isa = PBXGroup;
 			children = (
-				6EDC62CE1C0DFAFD00AEB5C9 /* AppDelegate.swift */,
-				6EDC62D01C0DFAFD00AEB5C9 /* ViewController.swift */,
-				6EDC62D21C0DFAFD00AEB5C9 /* Main.storyboard */,
-				6EDC62D51C0DFAFD00AEB5C9 /* Assets.xcassets */,
-				6EDC62D71C0DFAFD00AEB5C9 /* LaunchScreen.storyboard */,
-				6EDC62DA1C0DFAFD00AEB5C9 /* Info.plist */,
+				6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */,
+				6E3C0D091C0E3A93001BF15A /* ViewController.swift */,
+				6E3C0D191C0E3B33001BF15A /* Children */,
+				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
 			);
-			path = AlchemyLanguageSampleApp;
+			path = "WatsonSDK-DemoApplication";
+			sourceTree = "<group>";
+		};
+		6E3C0D191C0E3B33001BF15A /* Children */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Children;
+			sourceTree = "<group>";
+		};
+		6E3C0D1A1C0E3B4E001BF15A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */,
+				6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */,
+				6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */,
+				6E3C0D131C0E3A93001BF15A /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6EDC62CA1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp */ = {
+		6E3C0D031C0E3A93001BF15A /* WatsonSDK-DemoApplication */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EDC62DD1C0DFAFD00AEB5C9 /* Build configuration list for PBXNativeTarget "AlchemyLanguageSampleApp" */;
+			buildConfigurationList = 6E3C0D161C0E3A93001BF15A /* Build configuration list for PBXNativeTarget "WatsonSDK-DemoApplication" */;
 			buildPhases = (
-				6EDC62C71C0DFAFD00AEB5C9 /* Sources */,
-				6EDC62C81C0DFAFD00AEB5C9 /* Frameworks */,
-				6EDC62C91C0DFAFD00AEB5C9 /* Resources */,
+				6E3C0D001C0E3A93001BF15A /* Sources */,
+				6E3C0D011C0E3A93001BF15A /* Frameworks */,
+				6E3C0D021C0E3A93001BF15A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AlchemyLanguageSampleApp;
-			productName = AlchemyLanguageSampleApp;
-			productReference = 6EDC62CB1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp.app */;
+			name = "WatsonSDK-DemoApplication";
+			productName = "WatsonSDK-DemoApplication";
+			productReference = 6E3C0D041C0E3A93001BF15A /* WatsonSDK-DemoApplication.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6EDC62C31C0DFAFD00AEB5C9 /* Project object */ = {
+		6E3C0CFC1C0E3A93001BF15A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = ibm.mil;
 				TargetAttributes = {
-					6EDC62CA1C0DFAFD00AEB5C9 = {
+					6E3C0D031C0E3A93001BF15A = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = PF8FZC9FJZ;
 					};
 				};
 			};
-			buildConfigurationList = 6EDC62C61C0DFAFD00AEB5C9 /* Build configuration list for PBXProject "AlchemyLanguageSampleApp" */;
+			buildConfigurationList = 6E3C0CFF1C0E3A93001BF15A /* Build configuration list for PBXProject "WatsonSDK-DemoApplication" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -108,54 +124,54 @@
 				en,
 				Base,
 			);
-			mainGroup = 6EDC62C21C0DFAFD00AEB5C9;
-			productRefGroup = 6EDC62CC1C0DFAFD00AEB5C9 /* Products */;
+			mainGroup = 6E3C0CFB1C0E3A92001BF15A;
+			productRefGroup = 6E3C0D051C0E3A93001BF15A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6EDC62CA1C0DFAFD00AEB5C9 /* AlchemyLanguageSampleApp */,
+				6E3C0D031C0E3A93001BF15A /* WatsonSDK-DemoApplication */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6EDC62C91C0DFAFD00AEB5C9 /* Resources */ = {
+		6E3C0D021C0E3A93001BF15A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EDC62D91C0DFAFD00AEB5C9 /* LaunchScreen.storyboard in Resources */,
-				6EDC62D61C0DFAFD00AEB5C9 /* Assets.xcassets in Resources */,
-				6EDC62D41C0DFAFD00AEB5C9 /* Main.storyboard in Resources */,
+				6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */,
+				6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */,
+				6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6EDC62C71C0DFAFD00AEB5C9 /* Sources */ = {
+		6E3C0D001C0E3A93001BF15A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EDC62D11C0DFAFD00AEB5C9 /* ViewController.swift in Sources */,
-				6EDC62CF1C0DFAFD00AEB5C9 /* AppDelegate.swift in Sources */,
+				6E3C0D0A1C0E3A93001BF15A /* ViewController.swift in Sources */,
+				6E3C0D081C0E3A93001BF15A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6EDC62D21C0DFAFD00AEB5C9 /* Main.storyboard */ = {
+		6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6EDC62D31C0DFAFD00AEB5C9 /* Base */,
+				6E3C0D0C1C0E3A93001BF15A /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		6EDC62D71C0DFAFD00AEB5C9 /* LaunchScreen.storyboard */ = {
+		6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6EDC62D81C0DFAFD00AEB5C9 /* Base */,
+				6E3C0D111C0E3A93001BF15A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -163,7 +179,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6EDC62DB1C0DFAFD00AEB5C9 /* Debug */ = {
+		6E3C0D141C0E3A93001BF15A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -207,7 +223,7 @@
 			};
 			name = Debug;
 		};
-		6EDC62DC1C0DFAFD00AEB5C9 /* Release */ = {
+		6E3C0D151C0E3A93001BF15A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,24 +260,24 @@
 			};
 			name = Release;
 		};
-		6EDC62DE1C0DFAFD00AEB5C9 /* Debug */ = {
+		6E3C0D171C0E3A93001BF15A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = AlchemyLanguageSampleApp/Info.plist;
+				INFOPLIST_FILE = "WatsonSDK-DemoApplication/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyLanguageSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.mil.WatsonSDK-DemoApplication";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		6EDC62DF1C0DFAFD00AEB5C9 /* Release */ = {
+		6E3C0D181C0E3A93001BF15A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = AlchemyLanguageSampleApp/Info.plist;
+				INFOPLIST_FILE = "WatsonSDK-DemoApplication/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyLanguageSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.mil.WatsonSDK-DemoApplication";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -269,24 +285,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6EDC62C61C0DFAFD00AEB5C9 /* Build configuration list for PBXProject "AlchemyLanguageSampleApp" */ = {
+		6E3C0CFF1C0E3A93001BF15A /* Build configuration list for PBXProject "WatsonSDK-DemoApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6EDC62DB1C0DFAFD00AEB5C9 /* Debug */,
-				6EDC62DC1C0DFAFD00AEB5C9 /* Release */,
+				6E3C0D141C0E3A93001BF15A /* Debug */,
+				6E3C0D151C0E3A93001BF15A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EDC62DD1C0DFAFD00AEB5C9 /* Build configuration list for PBXNativeTarget "AlchemyLanguageSampleApp" */ = {
+		6E3C0D161C0E3A93001BF15A /* Build configuration list for PBXNativeTarget "WatsonSDK-DemoApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6EDC62DE1C0DFAFD00AEB5C9 /* Debug */,
-				6EDC62DF1C0DFAFD00AEB5C9 /* Release */,
+				6E3C0D171C0E3A93001BF15A /* Debug */,
+				6E3C0D181C0E3A93001BF15A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 6EDC62C31C0DFAFD00AEB5C9 /* Project object */;
+	rootObject = 6E3C0CFC1C0E3A93001BF15A /* Project object */;
 }

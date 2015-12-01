@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:AlchemyLanguageSampleApp.xcodeproj">
+      location = "self:WatsonSDK-DemoApplication.xcodeproj">
    </FileRef>
 </Workspace>

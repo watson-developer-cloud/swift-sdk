@@ -83,6 +83,7 @@ public class AlchemyVision: Service {
     
     switch(inputType) {
     case VisionConstants.ImageKeywordType.URL:
+        
       endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -91,10 +92,12 @@ public class AlchemyVision: Service {
         var imageKeywords = ImageKeyWords()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageKeywords = Mapper<ImageKeyWords>().map(data)!
+          completionHandler(imageKeywords, nil)
         }
-        completionHandler(imageKeywords, nil)
+        else {
+          completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
+        }
       })
-      break
     case VisionConstants.ImageKeywordType.FILE:
       endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
@@ -102,8 +105,7 @@ public class AlchemyVision: Service {
       params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
       
       guard let image = image else {
-        let error = NSError.createWatsonError(404,
-            description: "Cannot receive image keywords without a valid input image")
+        let error = NSError.createWatsonError(400, description: "Cannot receive image keywords without a valid input image")
         completionHandler(nil, error)
         return
       }
@@ -119,7 +121,6 @@ public class AlchemyVision: Service {
         var error:NSError?
         let fileManager = NSFileManager.defaultManager()
         do {
-            Log.sharedLogger.error(urlObject.0!.path)
             try fileManager.removeItemAtPath(urlObject.0!.path)
         }
         catch let catchError as NSError {
@@ -129,11 +130,12 @@ public class AlchemyVision: Service {
 
         var imageKeywords = ImageKeyWords()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageKeywords = Mapper<ImageKeyWords>().map(data)!
+            imageKeywords = Mapper<ImageKeyWords>().map(data)!
+            completionHandler(imageKeywords, nil)
+        } else {
+            completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
-        completionHandler(imageKeywords, error)
       })
-      break
     }
   }
   
@@ -163,10 +165,12 @@ public class AlchemyVision: Service {
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
+          completionHandler(imageFaceTags, nil)
+        } else {
+            completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
-        completionHandler(imageFaceTags, nil)
+
       })
-      break
     case VisionConstants.ImageFacesType.FILE:
       endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
@@ -176,8 +180,8 @@ public class AlchemyVision: Service {
       guard let image = image else {
         let error = NSError.createWatsonError(404,
             description: "Cannot receive image keywords without a valid input image")
-        completionHandler(nil, error)
-        return
+            completionHandler(nil, error)
+            return
       }
       
       let urlObject = getImageURL(image)
@@ -204,10 +208,12 @@ public class AlchemyVision: Service {
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
+          completionHandler(imageFaceTags, nil)
         }
-        completionHandler(imageFaceTags, nil)
+        else {
+            completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
+        }
       })
-      break
     }
   }
   
@@ -232,9 +238,7 @@ public class AlchemyVision: Service {
         let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/" + NSUUID().UUIDString
         
         guard (!filePath.isEmpty) else {
-            error = NSError.createWatsonError(404,
-                description: "Error creating file path from input image")
-            return (nil, error)
+            return (nil, NSError.createWatsonError(400, description: "Error creating file path from input image"))
         }
 
         data?.writeToFile(filePath, atomically: true)

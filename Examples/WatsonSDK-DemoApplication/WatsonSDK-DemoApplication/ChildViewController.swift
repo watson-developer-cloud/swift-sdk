@@ -25,4 +25,16 @@ extension ChildViewController: ChildProtocol {
     
     }
     
+    var viewFrame: CGRect { return self.view.frame }
+    
+    
+    func displayFullscreenChildViewController(child: UIViewController) {
+        
+        assert(child.view != nil, "Subclass of ChildViewController should have a valid view before calling"
+            + " displayFullscreenChildViewController. Offending VC: \(self), type: \(self.dynamicType)")
+        
+        // TODO: implement
+        
+    }
+    
 }

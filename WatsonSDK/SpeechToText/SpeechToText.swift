@@ -36,17 +36,14 @@ public class SpeechToText : Service {
     // NSOperationQueues
     var transcriptionQueue: NSOperationQueue!
     
-    
     public var delegate : SpeechToTextDelegate?
-    
-    
     
     private let opus: OpusHelper = OpusHelper()
     private let ogg: OggHelper = OggHelper()
     
-    private let watsonSocket = WatsonSocket()
+    private var watsonSocket: WatsonSocket?
    
-    
+    var audioState: AudioRecorderState?
     var audioData: NSData?
     
     // If set, contains the callback function after a transcription request.
@@ -66,7 +63,7 @@ public class SpeechToText : Service {
     }
     
     let NUM_BUFFERS = 3
-    let BUFFER_SIZE:UInt32 = 4096
+    let BUFFER_SIZE: UInt32 = 4096
 
     
     init() {
@@ -78,17 +75,7 @@ public class SpeechToText : Service {
         
     }
     
-    public func getToken( oncompletion: (String?, NSError) -> Void)
-    {
-        
-        NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey, completionHandler: {
-            
-            token, error in
-            
-            oncompletion(token!, error!)
-        })
-        
-    }
+    
     
     public func startListening()
     {
@@ -111,7 +98,7 @@ public class SpeechToText : Service {
             mBitsPerChannel: 8 * 2,
             mReserved: 0)
         
-        var audioState = AudioRecorderState(
+        audioState = AudioRecorderState(
             dataFormat: format,
             queue: AudioQueueRef(),
             buffers: [AudioQueueBufferRef(), AudioQueueBufferRef(), AudioQueueBufferRef()],
@@ -120,31 +107,43 @@ public class SpeechToText : Service {
             isRunning: true,
             opusEncoder: opus,
             oggEncoder: ogg,
-            watsonSocket: watsonSocket
+            watsonSocket: watsonSocket!
         )
         
-        AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
-            nil, kCFRunLoopCommonModes, 0, &audioState.queue)
+        
+        if var audioState = audioState {
+        
+            AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
+                nil, kCFRunLoopCommonModes, 0, &audioState.queue)
 
-        for index in 1...NUM_BUFFERS {
-            AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
+            for index in 1...NUM_BUFFERS {
+                AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
             
-            AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index-1], 0, nil)
+                AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index-1], 0, nil)
 
+            }
+        
+            AudioQueueStart(audioState.queue, nil)
+        
+        } else {
+            Log.sharedLogger.error("No audio state object was created.")
         }
         
-        AudioQueueStart(audioState.queue, nil)
+    }
+    
+    public func stopListening()
+    {
+        if var audioState = audioState {
+            
+            AudioQueueStop(audioState.queue, true)
         
-        sleep(10)
+            audioState.isRunning = false
         
-        AudioQueueStop(audioState.queue, true)
-        
-        audioState.isRunning = false
-        
-        AudioQueueDispose(audioState.queue, true)
-        
-        // CFRunLoopRun()
-        
+            AudioQueueDispose(audioState.queue, true)
+            
+        } else {
+            Log.sharedLogger.error("Audio state not created")
+        }
     }
     
     /// Callback function when the audio buffer is full

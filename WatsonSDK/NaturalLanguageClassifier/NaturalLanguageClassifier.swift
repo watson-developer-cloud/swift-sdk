@@ -111,7 +111,7 @@ public class NaturalLanguageClassifier : Service {
     }
     
     /**
-     Deletes the classifier based on the classifiyID passed in
+     Deletes the classifier with the classifierId
      
      - parameter classifierId:      The classifer ID used to delete the classifier
      - parameter completionHandler: Bool return with true as success

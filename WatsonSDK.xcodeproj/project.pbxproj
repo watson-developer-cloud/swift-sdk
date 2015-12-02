@@ -131,6 +131,7 @@
 		BDAF7E181BFEBA40009BB0E8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E171BFEBA40009BB0E8 /* Request.swift */; };
 		BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */; };
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
+		E1535A791C0E4153006B05FC /* WatsonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1535A781C0E4153006B05FC /* WatsonSocket.swift */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
 		E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */; };
@@ -297,6 +298,7 @@
 		BDAF7E171BFEBA40009BB0E8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Extensions/Request.swift; sourceTree = "<group>"; };
 		BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
+		E1535A781C0E4153006B05FC /* WatsonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocket.swift; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
 		E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				7ADC3A051BF950C800CD916E /* SpeechToTextConstants.swift */,
 				7ADC3A061BF950C800CD916E /* Tests */,
 				E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */,
+				E1535A781C0E4153006B05FC /* WatsonSocket.swift */,
 			);
 			name = SpeechToText;
 			path = WatsonSDK/SpeechToText;
@@ -926,6 +929,7 @@
 				BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */,
 				7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */,
 				7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */,
+				E1535A791C0E4153006B05FC /* WatsonSocket.swift in Sources */,
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,

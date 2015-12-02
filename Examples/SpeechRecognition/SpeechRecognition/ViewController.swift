@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import WatsonSpeechToText
+import SpeechToText
 
 class ViewController: UIViewController, AVAudioRecorderDelegate {
 
@@ -18,7 +18,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var transcriptionField: UITextView!
     
     var player: AVAudioPlayer? = nil
-    var recorder: AVAudioRecorder? = nil
+    var recorder: AVAudioRecorder!
+    
     
     override func viewDidLoad() {
         

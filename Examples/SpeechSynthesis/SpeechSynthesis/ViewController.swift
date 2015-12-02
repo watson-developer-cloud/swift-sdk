@@ -9,12 +9,13 @@
 import UIKit
 
 import AVFoundation
-import WatsonTextToSpeech
+import WatsonSDK
 
 class ViewController: UIViewController, NSURLSessionDelegate {
     
     // lazy var ttsService = WatsonTextToSpeechService(username: "user", password: "password")
     
+    var player : AVAudioPlayer = AVAudioPlayer()
     var i = 0;
     
     let sayings:[String] = ["All the problems of the world could be settled easily if men were only willing to think.",
@@ -37,12 +38,16 @@ class ViewController: UIViewController, NSURLSessionDelegate {
         speechTextView.text = sayings[i%sayings.count]
     }
     
-    lazy var player : AVAudioPlayer = AVAudioPlayer()
-    lazy var audioEngine : AVAudioEngine = AVAudioEngine()
-    
+
+    let ttsService = TextToSpeech()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ttsService.setUsernameAndPassword(
+            "***REMOVED***",
+            password: "***REMOVED***")
         
         // var error: NSError?
         
@@ -58,14 +63,32 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     @IBAction func handlePress(sender: AnyObject) {
         
         
-        let ttsService = WatsonTextToSpeechService(username: "***REMOVED***",
-            password: "***REMOVED***")
-        let voice = ttsService.getDefaultVoice()
+        
+        
+        // let voice = ttsService.getDefaultVoice()
         
         let toSay = speechTextView.text
         
         if (toSay != "") {
-            voice.say(toSay)
+            ttsService.synthesize(toSay, oncompletion: {
+                
+                data, error in
+                
+                if let data = data {
+                
+                    do {
+                        self.player = try AVAudioPlayer(data: data)
+                        self.player.prepareToPlay()
+                        self.player.play()
+                    } catch {
+                        print("Could not create AVAudioPlayer")
+                    }
+                        
+                } else {
+                    print("Did not receive data")
+                }
+                
+            })
         }
         
     }
@@ -76,33 +99,3 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     
 }
 
-extension ViewController {
-    
-    func playLocalFile(name : String)
-    {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        let fileURL = NSBundle.mainBundle().URLForResource("spain2", withExtension: "wav")
-        
-        do {
-            
-            player = try AVAudioPlayer(contentsOfURL: fileURL!)
-            
-            
-            
-            print("Duration is \(player.duration)")
-            
-            player.prepareToPlay()
-            player.numberOfLoops = -1
-            player.play()
-            
-            
-            
-        } catch let error as NSError {
-            
-            print(error.localizedDescription)
-            
-        }
-    }
-    
-}

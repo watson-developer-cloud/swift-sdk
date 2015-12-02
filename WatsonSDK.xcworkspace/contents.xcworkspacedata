@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:WatsonSDK.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:Examples"
+      name = "Examples">
+      <FileRef
+         location = "group:SpeechRecognition/SpeechRecognition.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:SpeechSynthesis/SpeechSynthesis.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/vincentherrin/Github/Watson-iOS-SDK-dev/Examples/VisionInsights/VisionInsights.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>

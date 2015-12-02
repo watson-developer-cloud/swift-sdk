@@ -65,9 +65,11 @@ class ViewController: UIViewController {
     private var currentChildView: UIView?
     private var currentChildViewController: UIViewController?
     // select screen
-    private var selectScreenPopup: UIView?
+    private var selectScreenPopup: UIView!
+    private var selectScreenTableView: UITableView!
     // settings screen
-    private var settingsScreenPopup: UIView?
+    private var settingsScreenPopup: UIView!
+    private var settingsScreenTableView: UITableView!
 
     // animations
     private var popupDuration: NSTimeInterval = 1.0
@@ -79,9 +81,15 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
+        configureView()
         configureBarView()
-        
         configureFirstChildView()
+        
+    }
+    
+    private func configureView() {
+        
+        self.view.backgroundColor = UIColor.blackColor()
         
     }
     
@@ -116,6 +124,7 @@ class ViewController: UIViewController {
     
     }
     
+    /** use this method when selecting various services from the selection popover */
     func presentChild(child: ChildViewController) {
 
         
@@ -125,8 +134,6 @@ class ViewController: UIViewController {
         self.currentChildView!.layer.zPosition = 2.0
         
         self.currentChildViewController = child
-        
-        
         
         child.view.frame = childViewFrame
         self.addChildViewController(child)
@@ -152,6 +159,7 @@ class ViewController: UIViewController {
 }
 
 
+// MARK: BarViewDelegate
 extension ViewController: BarViewDelegate {
     
     func presentSelect() {
@@ -167,10 +175,15 @@ extension ViewController: BarViewDelegate {
             )
             
             self.selectScreenPopup = UIView(frame: selectScreenPopupFrame)
-            self.selectScreenPopup!.layer.zPosition = 3.0
-            self.selectScreenPopup!.backgroundColor = UIColor.purpleColor()
+            self.selectScreenPopup.layer.zPosition = 3.0
+            self.selectScreenPopup.backgroundColor = UIColor.purpleColor()
             
-            self.view.addSubview(self.selectScreenPopup!)
+            self.selectScreenTableView = UITableView(frame: selectScreenPopupFrame)
+            self.selectScreenTableView.delegate = self
+            self.selectScreenTableView.dataSource = self
+            self.selectScreenPopup.addSubview(self.selectScreenTableView)
+            
+            self.view.addSubview(self.selectScreenPopup)
             
         }
         
@@ -191,14 +204,14 @@ extension ViewController: BarViewDelegate {
             )
             
             self.settingsScreenPopup = UIView(frame: settingsScreenPopupFrame)
-            self.settingsScreenPopup!.layer.zPosition = 3.0
-            self.settingsScreenPopup!.backgroundColor = UIColor.yellowColor()
+            self.settingsScreenPopup.layer.zPosition = 3.0
+            self.settingsScreenPopup.backgroundColor = UIColor.yellowColor()
             
-            self.view.addSubview(self.settingsScreenPopup!)
+            self.view.addSubview(self.settingsScreenPopup)
             
         }
         
-        presentPopoverScreen(self.settingsScreenPopup!)
+        presentPopoverScreen(self.settingsScreenPopup)
         
     }
     
@@ -238,3 +251,63 @@ extension ViewController: BarViewDelegate {
     
 }
 
+
+// MARK: UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        func nothing(){}
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        case self.selectScreenTableView: nothing()
+        case self.settingsScreenTableView: nothing()
+        default: nothing()
+            
+        }
+        
+    }
+
+}
+
+
+// MARK: BarViewDelegate
+extension ViewController: UITableViewDataSource {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        func nothing(){}
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        case self.selectScreenTableView: nothing()
+        case self.settingsScreenTableView: nothing()
+        default: nothing()
+            
+        }
+        
+        return 0
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        func nothing(){}
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        case self.selectScreenTableView: nothing()
+        case self.settingsScreenTableView: nothing()
+        default: nothing()
+            
+        }
+        
+        return UITableViewCell()
+        
+    }
+
+}

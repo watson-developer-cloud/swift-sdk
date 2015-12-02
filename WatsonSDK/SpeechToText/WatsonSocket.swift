@@ -19,11 +19,8 @@ import Starscream
 import ObjectMapper
 
 /// This class abstracts the network handling of sending messages through a websocket
-public class WatsonSocket : Service {
+public class WatsonSocket {
     
-    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    private let serviceURL = "/speech-to-text/api"
-    private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
     var audioUploadQueue: NSOperationQueue!
@@ -32,17 +29,16 @@ public class WatsonSocket : Service {
     
     var socket: WebSocket?
 
+    public var token: String?
+    
     init() {
-        
-        super.init(serviceURL: serviceURL)
-
+    
         audioUploadQueue = NSOperationQueue()
         audioUploadQueue.name = "Audio upload"
         audioUploadQueue.maxConcurrentOperationCount = 1
         
         audioUploadQueue.suspended = true
         
-        Log.sharedLogger.info("The auth token is \(self._apiKey)")
     }
     
     /**
@@ -54,8 +50,6 @@ public class WatsonSocket : Service {
         
         connectWebsocket()
         
-        
-            
         let uploadOp = AudioUploadOperation(data: data, watsonSocket: self)
         
         audioUploadQueue.addOperation(uploadOp)
@@ -75,47 +69,32 @@ public class WatsonSocket : Service {
             }
         }
         
-        Log.sharedLogger.info("API key is: \(self._apiKey)")
-        
-        
-        NetworkUtils.requestAuthToken(tokenURL,
-            serviceURL: serviceURLFull,
-            apiKey: self._apiKey) {
+        if let token = token {
                 
-            token, error in
+            //let authURL = "\(self.url)?watson-token=\(token)"
+            let authURL = self.url
+            self.socket = WebSocket(url: NSURL(string: authURL)!)
             
-            if let error = error {
-                Log.sharedLogger.error(error.localizedDescription)
-            }
-            
-            Log.sharedLogger.info("Token is now \(token)")
-                
-            if let token = token {
-                
-                //let authURL = "\(self.url)?watson-token=\(token)"
-                let authURL = self.url
-                self.socket = WebSocket(url: NSURL(string: authURL)!)
-                if let socket = self.socket {
+            if let socket = self.socket {
                     
-                    socket.delegate = self
+                socket.delegate = self
                     
-                    socket.headers["X-Watson-Authorization-Token"] = token
+                socket.headers["X-Watson-Authorization-Token"] = token
                     
-                    socket.connect()
+                socket.connect()
                     
-                } else {
-                    Log.sharedLogger.error("Socket could not be created")
-                }
             } else {
-                Log.sharedLogger.error("Could not get token from Watson")
+                Log.sharedLogger.error("Socket could not be created")
             }
+            
         }
     }
 
 }
 
-
+// MARK: - <#WebSocketDelegate#>
 extension WatsonSocket : WebSocketDelegate {
+    
     /**
      Websocket callback when a web socket connection has been opened.
      
@@ -215,8 +194,10 @@ public class AudioUploadOperation : NSOperation {
     private let watsonSocket: WatsonSocket!
     
     public init(data: NSData, watsonSocket: WatsonSocket){
+        
         self.data = data
         self.watsonSocket = watsonSocket
+        
     }
     
     public override func main() {

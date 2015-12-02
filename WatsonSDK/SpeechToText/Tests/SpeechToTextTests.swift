@@ -21,20 +21,23 @@ class SpeechToTextTests: XCTestCase {
     
     private let service = SpeechToText()
     
-    
-    private let socket = WatsonSocket()
-    
     private var inputText: String?
     private let timeout: NSTimeInterval = 30.0
     
     var recorder: AVAudioRecorder!
     var recordingSession: AVAudioSession!
     
+    private lazy var username: String = ""
+    private lazy var password: String = ""
+    
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
                
+                username = dict["SpeechToTextUsername"]!
+                password = dict["SpeechToTextPassword"]!
+                
                 service.setUsernameAndPassword(
                     dict["SpeechToTextUsername"]!,
                     password: dict["SpeechToTextPassword"]!)
@@ -85,23 +88,58 @@ class SpeechToTextTests: XCTestCase {
     
     func testGetToken() {
         
-        service.getToken({
+        let expectation = expectationWithDescription("TokenExpectation")
+        
+        let socket = WatsonSocket()
+        socket.username = self.username
+        socket.password = self.password
+    
+        socket.getToken(username, password: password, oncompletion: {
             token, error in
             
             XCTAssertNotNil(token, "Token must be returned")
+            
+            if let token = token {
+                XCTAssertGreaterThan(token.characters.count, 10,
+                    "Token does not appear to be long enough")
+            }
+            
             Log.sharedLogger.info(token)
+            expectation.fulfill()
             
         })
+        
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
         
     }
     
     func testWatsonSockets() {
     
+        let expectation = expectationWithDescription("WatsonSocket Expectation")
+        
         let data = NSData()
         
+        let socket = WatsonSocket()
+        socket.username = self.username
+        socket.password = self.password
+
         socket.send(data)
+            
+        sleep(5)
         
-        sleep(10)
+        if let ws = socket.socket {
+            XCTAssertTrue(ws.isConnected, "Web socket is not connected")
+        }
+            
+        expectation.fulfill()
+        
+        
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+
         
     }
     

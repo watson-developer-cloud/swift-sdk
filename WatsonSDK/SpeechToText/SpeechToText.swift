@@ -22,9 +22,12 @@ import ObjectMapper
     The IBM® Speech to Text service provides an Application Programming Interface (API) that
     enables you to add speech transcription capabilities to your applications.
 */
-public class SpeechToText {
+public class SpeechToText : Service {
     
-    
+    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    private let serviceURL = "/speech-to-text/api"
+    private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
+   
     
     private let WATSON_AUDIO_SAMPLE_RATE = 16000
     private let WATSON_AUDIO_FRAME_SIZE = 160
@@ -68,7 +71,22 @@ public class SpeechToText {
     
     init() {
         
+        
+        super.init(serviceURL: serviceURL)
+        
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
+        
+    }
+    
+    public func getToken( oncompletion: (String?, NSError) -> Void)
+    {
+        
+        NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull, apiKey: self._apiKey, completionHandler: {
+            
+            token, error in
+            
+            oncompletion(token!, error!)
+        })
         
     }
     
@@ -154,7 +172,8 @@ public class SpeechToText {
         
         let newData = NSData(bytesNoCopy: ptr, length: Int(buffer.mAudioDataByteSize), freeWhenDone: false)
         
-        Log.sharedLogger.info("Added the audio to the queue")
+        data.watsonSocket.send(newData)
+        // Log.sharedLogger.info("Added the audio to the queue")
         //let o1 = AudioUploadOperation(data: newData, socket: data.socket!)
         //data.audioUploadQueue.addOperation(o1)
         

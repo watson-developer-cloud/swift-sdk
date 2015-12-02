@@ -35,7 +35,7 @@ class SpeechToTextTests: XCTestCase {
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
                
-                socket.setUsernameAndPassword(
+                service.setUsernameAndPassword(
                     dict["SpeechToTextUsername"]!,
                     password: dict["SpeechToTextPassword"]!)
                 
@@ -82,6 +82,18 @@ class SpeechToTextTests: XCTestCase {
     
     }
     
+    
+    func testGetToken() {
+        
+        service.getToken({
+            token, error in
+            
+            XCTAssertNotNil(token, "Token must be returned")
+            Log.sharedLogger.info(token)
+            
+        })
+        
+    }
     
     func testWatsonSockets() {
     

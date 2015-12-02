@@ -15,7 +15,7 @@ import ObjectMapper
 //}
 
 
-/// Implementation of Alchemy Vision Service
+/// AlchemyVision employs deep learning innovations to understand a picture's content and context
 public class AlchemyVision: Service {
   
 

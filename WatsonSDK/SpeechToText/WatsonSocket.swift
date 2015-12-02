@@ -18,18 +18,36 @@ import Foundation
 import Starscream
 import ObjectMapper
 
-/// This class abstracts the network handling of sending messages through a websocket
-public class WatsonSocket {
+
+/// Watson Web Socket abstraction
+internal class WatsonSocket {
     
+    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    private let serviceURL = "/speech-to-text/api"
+    private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
     var audioUploadQueue: NSOperationQueue!
     
+    // The format for continuous PCM based recognition requires OGG
     var format: SpeechToTextAudioFormat = .OGG
     
+    // Starscream websocket
     var socket: WebSocket?
 
-    public var token: String?
+    // The Basic authentication Base64 request
+    internal var apiKey: String?
+    
+    internal var username: String?
+    internal var password: String?
+    
+    /** If set, will use the username and password specified to generate Watson Token
+      Normally, a token should be provided.
+    */
+    internal var generateToken: Bool = true
+    
+    // The received token from Watson
+    internal var token: String?
     
     init() {
     
@@ -37,16 +55,17 @@ public class WatsonSocket {
         audioUploadQueue.name = "Audio upload"
         audioUploadQueue.maxConcurrentOperationCount = 1
         
+        // Wait until connection established before uploading samples
         audioUploadQueue.suspended = true
         
     }
     
     /**
-     <#Description#>
+     This function sends compressed audio frames for transcription by Watson
      
-     - parameter data: data description
+     - parameter data: Compressed audio frame
      */
-    public func send(data: NSData) {
+    internal func send(data: NSData) {
         
         connectWebsocket()
         
@@ -57,40 +76,82 @@ public class WatsonSocket {
     }
     
     /**
+     Fetches a token that is valid for 1 hr.
+     
+     - parameter username:     Watson generated username
+     - parameter password:     Watson generated password
+     - parameter oncompletion: completion block for when a token is sent by server
+     */
+    internal func getToken( username: String, password: String,
+        oncompletion: (String?, NSError?) -> Void)
+    {
+        let authorizationString = username + ":" + password
+        let apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
+        
+        NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull,
+            apiKey: apiKey, completionHandler: {
+            
+            token, error in
+            
+            Log.sharedLogger.info("Token received was \(token)")
+                
+            self.token = token
+                
+            oncompletion(token, error)
+        })
+        
+    }
+    
+    /**
      Establishes a Websocket connection if one does not exist already.
      */
-    private func connectWebsocket() {
+    internal func connectWebsocket() {
         
         // check to see if a connection has been established.
-        if let socket = socket {
-            
-            if socket.isConnected {
-                return
-            }
+//        if let socket = socket {
+//            
+//            if socket.isConnected {
+//                return
+//            }
+//        }
+        
+        if (username == nil || password == nil)
+        {
+            Log.sharedLogger.error("API key was not set")
+            return
         }
         
-        if let token = token {
+        getToken(username!, password: password!, oncompletion: {
+            token, error in
+            
+            Log.sharedLogger.info("Got a response back from the server")
+            
+            if let token = token {
                 
-            //let authURL = "\(self.url)?watson-token=\(token)"
-            let authURL = self.url
-            self.socket = WebSocket(url: NSURL(string: authURL)!)
-            
-            if let socket = self.socket {
+                //let authURL = "\(self.url)?watson-token=\(token)"
+                let authURL = self.url
+                self.socket = WebSocket(url: NSURL(string: authURL)!)
+                
+                if let socket = self.socket {
                     
-                socket.delegate = self
+                    socket.delegate = self
                     
-                socket.headers["X-Watson-Authorization-Token"] = token
+                    socket.headers["X-Watson-Authorization-Token"] = token
                     
-                socket.connect()
+                    socket.connect()
                     
-            } else {
-                Log.sharedLogger.error("Socket could not be created")
+                } else {
+                    Log.sharedLogger.error("Socket could not be created")
+                }
+                
             }
-            
-        }
-    }
 
+            
+        })
+    }
 }
+
+
 
 // MARK: - <#WebSocketDelegate#>
 extension WatsonSocket : WebSocketDelegate {
@@ -100,7 +161,7 @@ extension WatsonSocket : WebSocketDelegate {
      
      - parameter socket: <#socket description#>
      */
-    public func websocketDidConnect(socket: WebSocket) {
+    internal func websocketDidConnect(socket: WebSocket) {
         
         Log.sharedLogger.info("Websocket connected")
         
@@ -124,7 +185,7 @@ extension WatsonSocket : WebSocketDelegate {
 //        }
     }
     
-    public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         
         Log.sharedLogger.info("Websocket disconnected")
         
@@ -139,9 +200,11 @@ extension WatsonSocket : WebSocketDelegate {
                 Log.sharedLogger.warning(err.localizedDescription)
             }
         }
+        
+        audioUploadQueue.suspended = true
     }
     
-    public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         
         // parse the data.
         // print(text)
@@ -180,7 +243,7 @@ extension WatsonSocket : WebSocketDelegate {
      - parameter socket: <#socket description#>
      - parameter data:   <#data description#>
      */
-    public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
+    internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         // print("socket received data")
         Log.sharedLogger.warning("Websocket received binary data")
     }
@@ -188,19 +251,19 @@ extension WatsonSocket : WebSocketDelegate {
 }
 
 /// Holds upload information
-public class AudioUploadOperation : NSOperation {
+internal class AudioUploadOperation : NSOperation {
     
     private let data: NSData!
     private let watsonSocket: WatsonSocket!
     
-    public init(data: NSData, watsonSocket: WatsonSocket){
+    internal init(data: NSData, watsonSocket: WatsonSocket){
         
         self.data = data
         self.watsonSocket = watsonSocket
         
     }
     
-    public override func main() {
+    internal override func main() {
         
         if self.cancelled {
             return
@@ -215,3 +278,5 @@ public class AudioUploadOperation : NSOperation {
         // add to transcription queue
     }
 }
+
+

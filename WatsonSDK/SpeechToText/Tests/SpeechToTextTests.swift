@@ -1,10 +1,18 @@
-//
-//  SpeechToTextTests.swift
-//  SpeechToTextTests
-//
-//  Created by Glenn Fisher on 11/6/15.
-//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import XCTest
 @testable import WatsonSDK
@@ -12,6 +20,10 @@ import XCTest
 class SpeechToTextTests: XCTestCase {
     
     private let service = SpeechToText()
+    
+    
+    private let socket = WatsonSocket()
+    
     private var inputText: String?
     private let timeout: NSTimeInterval = 30.0
     
@@ -22,7 +34,11 @@ class SpeechToTextTests: XCTestCase {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["SpeechToTextUsername"]!, password: dict["SpeechToTextPassword"]!)
+               
+                socket.setUsernameAndPassword(
+                    dict["SpeechToTextUsername"]!,
+                    password: dict["SpeechToTextPassword"]!)
+                
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }
@@ -55,7 +71,8 @@ class SpeechToTextTests: XCTestCase {
             {
                 let encodedAudio = service.encodeOpus( data)
                 
-                XCTAssertLessThan(encodedAudio.length, data.length, "Encoded audio must be smaller than the original.")
+                XCTAssertLessThan(encodedAudio.length, data.length,
+                    "Encoded audio must be smaller than the original.")
                 
             } else {
                 XCTAssert(true, "Could not load test PCM file")
@@ -63,6 +80,17 @@ class SpeechToTextTests: XCTestCase {
             
         }
     
+    }
+    
+    
+    func testWatsonSockets() {
+    
+        let data = NSData()
+        
+        socket.send(data)
+        
+        sleep(10)
+        
     }
     
     func testContinuousRecording() {

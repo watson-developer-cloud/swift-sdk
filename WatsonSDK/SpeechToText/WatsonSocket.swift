@@ -175,10 +175,6 @@ extension WatsonSocket : WebSocketDelegate {
      */
     internal func websocketDidConnect(socket: WebSocket) {
         
-        Log.sharedLogger.info("Websocket connected")
-        
-        // socket.writeString("{\"action\": \"start\", \"content-type\": \"audio/flac\"}")
-        
         let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
         socket.writeString(command)
         
@@ -188,17 +184,6 @@ extension WatsonSocket : WebSocketDelegate {
         
         delegate?.onConnected()
         
-//        if let audioData = self.audioData {
-//            
-//            
-//            Log.sharedLogger.info("Sending audio data through WebSocket")
-//            socket.writeData(audioData)
-//            
-//            socket.writeString("{\"action\": \"stop\"}")
-//            print("wrote audio data")
-//            
-//            
-//        }
     }
     
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -234,8 +219,6 @@ extension WatsonSocket : WebSocketDelegate {
         
         Log.sharedLogger.info(result?.transcription())
         
-        delegate?.onMessageReceived()
-        
             if let result = result {
                 
                 if result.state == "listening" {
@@ -247,6 +230,9 @@ extension WatsonSocket : WebSocketDelegate {
                     
                 } else {
                     
+                    if (result.results?.count > 0 ) {
+                        delegate?.onMessageReceived(result.results!)
+                    }
                     // callback(result, nil)
                     
                 }
@@ -269,7 +255,7 @@ extension WatsonSocket : WebSocketDelegate {
      */
     internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         // print("socket received data")
-        Log.sharedLogger.warning("Websocket received binary data")
+        Log.sharedLogger.error("Websocket received binary data")
     }
 
 }
@@ -295,7 +281,13 @@ internal class AudioUploadOperation : NSOperation {
         
         Log.sharedLogger.info("Uploading audio of length \(data.length)")
         
-        
+        if let ws = watsonSocket.socket {
+            ws.writeData(data)
+            ws.writeString("{\"action\": \"stop\"}")
+            
+        } else {
+            Log.sharedLogger.error("Websocket should be created")
+        }
         
         // socket.writeData( data)
         

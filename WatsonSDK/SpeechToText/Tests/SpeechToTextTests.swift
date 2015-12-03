@@ -86,63 +86,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     
-    func testGetToken() {
-        
-        let expectation = expectationWithDescription("TokenExpectation")
-        
-        let socket = WatsonSocket()
-        socket.username = self.username
-        socket.password = self.password
-    
-        socket.getToken(username, password: password, oncompletion: {
-            token, error in
-            
-            XCTAssertNotNil(token, "Token must be returned")
-            
-            if let token = token {
-                XCTAssertGreaterThan(token.characters.count, 10,
-                    "Token does not appear to be long enough")
-            }
-            
-            Log.sharedLogger.info(token)
-            expectation.fulfill()
-            
-        })
-        
-        waitForExpectationsWithTimeout(timeout) {
-            error in XCTAssertNil(error, "Timeout")
-        }
-        
-    }
-    
-    func testWatsonSockets() {
-    
-        let expectation = expectationWithDescription("WatsonSocket Expectation")
-        
-        let data = NSData()
-        
-        let socket = WatsonSocket()
-        socket.username = self.username
-        socket.password = self.password
-
-        socket.send(data)
-            
-        sleep(5)
-        
-        if let ws = socket.socket {
-            XCTAssertTrue(ws.isConnected, "Web socket is not connected")
-        }
-            
-        expectation.fulfill()
-        
-        
-        waitForExpectationsWithTimeout(timeout) {
-            error in XCTAssertNil(error, "Timeout")
-        }
-
-        
-    }
-    
+       
     func testContinuousRecording() {
         
         service.startListening()

@@ -80,28 +80,32 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     
     func testWatsonSockets() {
         
+        let url = NSBundle(forClass: self.dynamicType)
+            .URLForResource("SpeechSample", withExtension: "flac")
+        
+        guard let audioData = NSData(contentsOfURL: url!) else {
+            XCTFail("Need to read file")
+            return
+        }
+
         connectionExpectation = expectationWithDescription("connection")
         listeningExpectation = expectationWithDescription("listening")
         messageExpectation = expectationWithDescription("receive message")
         disconnectExpectation = expectationWithDescription("disconnect")
         
-        let data = NSData()
+        // let data = NSData()
         
         socket.username = self.username
         socket.password = self.password
         socket.delegate = self
+        socket.format = .FLAC
         
-        socket.send(data)
-        
+        socket.send(audioData)
         
         if let ws = socket.socket {
             XCTAssertTrue(ws.isConnected, "Web socket is not connected")
         }
         
-        
-        
-        
-
         waitForExpectationsWithTimeout(timeout) {
             error in XCTAssertNil(error, "Timeout")
         }
@@ -109,9 +113,14 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
         
     }
     
-    func onMessageReceived() {
+    func onMessageReceived(results: [SpeechToTextResult]) {
         
+        Log.sharedLogger.info("Received: \(results)")
+        // XCTAssertNotnil(results)
         messageExpectation?.fulfill()
+        
+        socket.disconnect()
+
     }
     
     func onConnected() {
@@ -126,7 +135,6 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
         listeningExpectation?.fulfill()
         XCTAssertTrue(socket.isListening, "Listening property should be set true")
         
-        socket.disconnect()
         
     }
     

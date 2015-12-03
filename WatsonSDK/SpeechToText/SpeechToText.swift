@@ -41,7 +41,7 @@ public class SpeechToText : Service {
     private let opus: OpusHelper = OpusHelper()
     private let ogg: OggHelper = OggHelper()
     
-    private var watsonSocket: WatsonSocket?
+    private var watsonSocket: WatsonSocket = WatsonSocket()
    
     var audioState: AudioRecorderState?
     var audioData: NSData?
@@ -107,7 +107,7 @@ public class SpeechToText : Service {
             isRunning: true,
             opusEncoder: opus,
             oggEncoder: ogg,
-            watsonSocket: watsonSocket!
+            watsonSocket: watsonSocket
         )
         
         

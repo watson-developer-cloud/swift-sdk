@@ -130,6 +130,8 @@
 		BDAF7E161BFEBA28009BB0E8 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E151BFEBA28009BB0E8 /* NSError.swift */; };
 		BDAF7E181BFEBA40009BB0E8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E171BFEBA40009BB0E8 /* Request.swift */; };
 		BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */; };
+		E1023E0B1C10C49B00C6602B /* WebsocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E0A1C10C49B00C6602B /* WebsocketTests.swift */; };
+		E1023E0E1C10C60E00C6602B /* WatsonSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E0C1C10C60600C6602B /* WatsonSocketDelegate.swift */; };
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
 		E1535A791C0E4153006B05FC /* WatsonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1535A781C0E4153006B05FC /* WatsonSocket.swift */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
@@ -297,6 +299,8 @@
 		BDAF7E151BFEBA28009BB0E8 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSError.swift; path = Extensions/NSError.swift; sourceTree = "<group>"; };
 		BDAF7E171BFEBA40009BB0E8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Extensions/Request.swift; sourceTree = "<group>"; };
 		BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		E1023E0A1C10C49B00C6602B /* WebsocketTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebsocketTests.swift; sourceTree = "<group>"; };
+		E1023E0C1C10C60600C6602B /* WatsonSocketDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocketDelegate.swift; sourceTree = "<group>"; };
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
 		E1535A781C0E4153006B05FC /* WatsonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocket.swift; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
@@ -633,6 +637,7 @@
 				7ADC3A061BF950C800CD916E /* Tests */,
 				E1A07EFB1C077CA500DCD45C /* SpeechToTextDelegate.swift */,
 				E1535A781C0E4153006B05FC /* WatsonSocket.swift */,
+				E1023E0C1C10C60600C6602B /* WatsonSocketDelegate.swift */,
 			);
 			name = SpeechToText;
 			path = WatsonSDK/SpeechToText;
@@ -661,6 +666,7 @@
 				E143FC2A1C00029D00D92053 /* test.raw */,
 				7ADC3A071BF950C800CD916E /* SpeechSample.flac */,
 				7ADC3A081BF950C800CD916E /* SpeechToTextTests.swift */,
+				E1023E0A1C10C49B00C6602B /* WebsocketTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -978,6 +984,7 @@
 				6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
 				7ADC3A741BF9551500CD916E /* PublicationDate.swift in Sources */,
+				E1023E0E1C10C60E00C6602B /* WatsonSocketDelegate.swift in Sources */,
 				6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */,
 				7ADC3A6E1BF9551500CD916E /* Entity.swift in Sources */,
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
@@ -1020,6 +1027,7 @@
 				7ADC3A961BF958A700CD916E /* LanguageTranslationTests.swift in Sources */,
 				7AF96BBB1BF9965A0083ED23 /* TextToSpeechTests.swift in Sources */,
 				7ADC3AA71BF959BD00CD916E /* SpeechToTextTests.swift in Sources */,
+				E1023E0B1C10C49B00C6602B /* WebsocketTests.swift in Sources */,
 				7ADC3AA31BF9597D00CD916E /* PersonalityInsightsTests.swift in Sources */,
 				7A72BCBB1BFA4E2800CCC15B /* WatsonSDKTests.swift in Sources */,
 			);

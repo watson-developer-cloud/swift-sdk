@@ -218,9 +218,10 @@ public class Dialog: WatsonService {
             
         // execute request
         r.authenticate(user: user, password: password)
-         .response { _, response, data, error in
-            let includeFileURL = { (error: NSError?) in
-                completionHandler(fileURL, error) }
+         .response { _, response, _, error in
+            var data: NSData? = nil
+            if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
+            let includeFileURL = { (error: NSError?) in completionHandler(fileURL, error) }
             validate(response, data: data, error: error, serviceError: DialogError(),
                 completionHandler: includeFileURL)
         }
@@ -305,7 +306,6 @@ public class Dialog: WatsonService {
             .authenticate(user: user, password: password)
             .responseArray("conversations") {
                 (response: Response<[Conversation], NSError>) in
-                print(response.debugDescription) // TODO: debugging
                 validate(response, serviceError: DialogError(),
                     completionHandler: completionHandler)
             }

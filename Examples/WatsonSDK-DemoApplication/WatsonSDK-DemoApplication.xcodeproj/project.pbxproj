@@ -18,6 +18,8 @@
 		6E9632941C0E4DF00055D402 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632921C0E4DF00055D402 /* BarView.swift */; };
 		6E9632951C0E4DF00055D402 /* BarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9632931C0E4DF00055D402 /* BarView.xib */; };
 		6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */; };
+		6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */; };
+		6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		6E9632921C0E4DF00055D402 /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		6E9632931C0E4DF00055D402 /* BarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarView.xib; sourceTree = "<group>"; };
 		6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarViewDelegate.swift; sourceTree = "<group>"; };
+		6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */,
 				6E3C0D091C0E3A93001BF15A /* ViewController.swift */,
 				6E9632911C0E4DF00055D402 /* BarView */,
+				6ED6DBB31C1099CF00682B81 /* SelectionView */,
+				6ED6DBB51C1099CF00682B81 /* SettingsView */,
 				6E96328B1C0E49880055D402 /* ChildProtocol.swift */,
 				6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */,
 				6E3C0D191C0E3B33001BF15A /* Children */,
@@ -104,6 +110,22 @@
 				6E9632931C0E4DF00055D402 /* BarView.xib */,
 			);
 			path = BarView;
+			sourceTree = "<group>";
+		};
+		6ED6DBB31C1099CF00682B81 /* SelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */,
+			);
+			path = SelectionView;
+			sourceTree = "<group>";
+		};
+		6ED6DBB51C1099CF00682B81 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +201,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */,
 				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
+				6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */,
 				6E9632941C0E4DF00055D402 /* BarView.swift in Sources */,
 				6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */,
 				6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */,

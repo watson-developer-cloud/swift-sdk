@@ -155,16 +155,19 @@ class ViewController: UIViewController {
     private func removeCurrentChild() {
         
         self.currentChildView?.removeFromSuperview()
+        self.currentChildView = nil
+        
         self.currentChildViewController?.removeFromParentViewController()
+        self.currentChildViewController = nil
         
     }
     
     private func configureNewChildView(child: ChildViewController) {
         
-        self.currentChildView = child.view
-        self.currentChildView!.layer.zPosition = 2.0
-        
         self.currentChildViewController = child
+        self.currentChildView = child.view
+        
+        self.currentChildView!.layer.zPosition = 2.0
         
         child.view.frame = childViewFrame
         self.addChildViewController(child)
@@ -185,7 +188,9 @@ class ViewController: UIViewController {
     
     private func configureSettingsViewWithNewChild(child: ChildViewController) {
         
-        
+        // get key value pairs from child view controller
+        // populate current dictionary, first level dictionary based on childViewController title
+        // TODO: think of the case when two child view controller titles match / conflict
         
     }
     
@@ -296,8 +301,6 @@ extension ViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        func nothing(){}
-        
         // respond differently based on the tableview
         switch tableView {
             
@@ -309,9 +312,9 @@ extension ViewController: UITableViewDelegate {
          [2]
             
         */
-        case self.selectScreenTableView: nothing()
-        case self.settingsScreenTableView: nothing()
-        default: nothing()
+        case self.selectScreenTableView: return
+        case self.settingsScreenTableView: func nothing(){}; nothing()  // don't do anything here
+        default: return
             
         }
         
@@ -325,18 +328,28 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        func nothing(){}
-        
         // respond differently based on the tableview
         switch tableView {
             
-        case self.selectScreenTableView: nothing()
-        case self.settingsScreenTableView: nothing()
-        default: nothing()
+        case self.selectScreenTableView:
+            return 0
+            
+        case self.settingsScreenTableView:
+            
+            if let title = self.currentChildViewController?.title,
+                let configEntriesForCurrentChildVC = self.configDictionaries[title] {
+                    
+                    return configEntriesForCurrentChildVC.count
+                    
+            } else {
+                
+                return 0
+                
+            }
+            
+        default: return 0
             
         }
-        
-        return 0
         
     }
     

@@ -52,6 +52,8 @@ internal class WatsonSocket {
     // The received token from Watson
     internal var token: String?
     
+    var isListening: Bool = false
+    
     init() {
     
         audioUploadQueue = NSOperationQueue()
@@ -75,6 +77,12 @@ internal class WatsonSocket {
         let uploadOp = AudioUploadOperation(data: data, watsonSocket: self)
         
         audioUploadQueue.addOperation(uploadOp)
+        
+    }
+    
+    internal func disconnect() {
+        
+        socket?.disconnect()
         
     }
     
@@ -203,13 +211,18 @@ extension WatsonSocket : WebSocketDelegate {
             *  Sometimes the WebSocket cannot be elevated on the first couple of tries.
             */
             if err.code == 101 {
+                
                 connectWebsocket()
+                
             } else {
                 Log.sharedLogger.warning(err.localizedDescription)
             }
         }
         
         audioUploadQueue.suspended = true
+        isListening = false
+        
+        delegate?.onDisconnected()
     }
     
     internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
@@ -223,27 +236,28 @@ extension WatsonSocket : WebSocketDelegate {
         
         delegate?.onMessageReceived()
         
-//        if let callback = self.callback {
-//            
-//            if let result = result {
-//                
-//                if result.state == "listening" {
-//                    
-//                    Log.sharedLogger.info("Speech recognition is listening")
-//                    
-//                } else {
-//                    
-//                    callback(result, nil)
-//                    
-//                }
-//            } else {
-//                
-//                callback(nil, NSError.createWatsonError(404, description: "Could not parse the received data"))
-//                
-//            }
-//        } else {
-//            Log.sharedLogger.warning("No callback has been defined for this request.")
-//        }
+            if let result = result {
+                
+                if result.state == "listening" {
+                    
+                    Log.sharedLogger.info("Speech recognition is listening")
+                    
+                    isListening = true
+                    delegate?.onListening()
+                    
+                } else {
+                    
+                    // callback(result, nil)
+                    
+                }
+            } else {
+                
+                Log.sharedLogger.error("Could not parse the response from the Websocket")
+                
+                //callback(nil, NSError.createWatsonError(404, description: "Could not parse the received data"))
+                
+            }
+        
         // socket.disconnect()
     }
     

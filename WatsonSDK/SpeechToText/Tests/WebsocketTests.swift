@@ -19,13 +19,17 @@ import XCTest
 
 class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     
+    let socket = WatsonSocket()
+
     private let timeout: NSTimeInterval = 30.0
 
     private lazy var username: String = ""
     private lazy var password: String = ""
     
     var connectionExpectation: XCTestExpectation?
+    var listeningExpectation: XCTestExpectation?
     var messageExpectation: XCTestExpectation?
+    var disconnectExpectation: XCTestExpectation?
     
     override func setUp() {
         super.setUp()
@@ -50,7 +54,6 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
         
         let expectation = expectationWithDescription("TokenExpectation")
         
-        let socket = WatsonSocket()
         socket.username = self.username
         socket.password = self.password
         
@@ -78,23 +81,25 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     func testWatsonSockets() {
         
         connectionExpectation = expectationWithDescription("connection")
+        listeningExpectation = expectationWithDescription("listening")
         messageExpectation = expectationWithDescription("receive message")
+        disconnectExpectation = expectationWithDescription("disconnect")
         
         let data = NSData()
         
-        let socket = WatsonSocket()
         socket.username = self.username
         socket.password = self.password
         socket.delegate = self
         
-        
         socket.send(data)
         
-        sleep(5)
         
         if let ws = socket.socket {
             XCTAssertTrue(ws.isConnected, "Web socket is not connected")
         }
+        
+        
+        
         
 
         waitForExpectationsWithTimeout(timeout) {
@@ -112,10 +117,26 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     func onConnected() {
         
         connectionExpectation?.fulfill()
+        
+        XCTAssertFalse(socket.audioUploadQueue.suspended, "Audio upload queue should be running")
+    }
+    
+    func onListening() {
+        
+        listeningExpectation?.fulfill()
+        XCTAssertTrue(socket.isListening, "Listening property should be set true")
+        
+        socket.disconnect()
+        
     }
     
     func onDisconnected() {
     
+        disconnectExpectation?.fulfill()
+        
+        XCTAssertTrue(socket.audioUploadQueue.suspended, "Audio queue should be suspended when disconnected")
+        XCTAssertFalse(socket.isListening, "Listening property should be set false")
+        
     }
 
     

@@ -27,6 +27,9 @@ internal class WatsonSocket {
     private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
     private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
+    // Set this to receive updates about the websocket activity
+    var delegate: WatsonSocketDelegate?
+    
     var audioUploadQueue: NSOperationQueue!
     
     // The format for continuous PCM based recognition requires OGG
@@ -86,7 +89,8 @@ internal class WatsonSocket {
         oncompletion: (String?, NSError?) -> Void)
     {
         let authorizationString = username + ":" + password
-        let apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
+        let apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?
+            .base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
         
         NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull,
             apiKey: apiKey, completionHandler: {
@@ -170,7 +174,11 @@ extension WatsonSocket : WebSocketDelegate {
         let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
         socket.writeString(command)
         
+        Log.sharedLogger.info("Sending \(command) through socket")
+        
         audioUploadQueue.suspended = false
+        
+        delegate?.onConnected()
         
 //        if let audioData = self.audioData {
 //            
@@ -212,6 +220,8 @@ extension WatsonSocket : WebSocketDelegate {
         let result = Mapper<SpeechToTextResponse>().map(text)
         
         Log.sharedLogger.info(result?.transcription())
+        
+        delegate?.onMessageReceived()
         
 //        if let callback = self.callback {
 //            

@@ -83,6 +83,7 @@ class ViewController: UIViewController {
         
         configureView()
         configureBarView()
+        configureSelectionScreenFromChildren()
         configureFirstChildView()
         
     }
@@ -114,6 +115,12 @@ class ViewController: UIViewController {
         
     }
     
+    private func configureSelectionScreenFromChildren() {
+        
+        
+        
+    }
+    
     private func configureFirstChildView() {
     
         assert(children.first != nil, "ViewController: Children array cannot be empty!")
@@ -124,11 +131,35 @@ class ViewController: UIViewController {
     
     }
     
-    /** use this method when selecting various services from the selection popover */
+    /** 
+     
+     use this method when selecting various services from the selection popover 
+     
+     [1] removes current child if present
+     [2] configures new child view with size, vc, z position
+     [3] remove old settings table view if present
+     [4] reconfigures settings view to appropriately reflect
+     [5] highlight the appropriate selection screen item to avoid double selection
+     
+     */
     func presentChild(child: ChildViewController) {
-
+   
+        removeCurrentChild()
+        configureNewChildView(child)
+        removeOldSettingsTableViewIfPresent()
+        configureSettingsViewWithNewChild(child)
+        highlightAppropriateSelectionScreenItem(child)
         
-        removeCurrentChild()            // remove old child if present
+    }
+    
+    private func removeCurrentChild() {
+        
+        self.currentChildView?.removeFromSuperview()
+        self.currentChildViewController?.removeFromParentViewController()
+        
+    }
+    
+    private func configureNewChildView(child: ChildViewController) {
         
         self.currentChildView = child.view
         self.currentChildView!.layer.zPosition = 2.0
@@ -139,20 +170,28 @@ class ViewController: UIViewController {
         self.addChildViewController(child)
         self.view.addSubview(child.view)
         
-                                        // make entry for data if not present, else configure selection screen with present data
+    }
+    
+    private func removeOldSettingsTableViewIfPresent() {
         
+        if self.settingsScreenTableView != nil {
+            
+            self.settingsScreenTableView.removeFromSuperview()
+            self.settingsScreenTableView = nil
+            
+        }
         
-                                        // configure currently selected in selection screen
+    }
+    
+    private func configureSettingsViewWithNewChild(child: ChildViewController) {
         
-                                        // configure settings popover based on current child
         
         
     }
     
-    private func removeCurrentChild() {
+    private func highlightAppropriateSelectionScreenItem(child: ChildViewController) {
         
-        self.currentChildView?.removeFromSuperview()
-        self.currentChildViewController?.removeFromParentViewController()
+        
         
     }
     
@@ -262,6 +301,14 @@ extension ViewController: UITableViewDelegate {
         // respond differently based on the tableview
         switch tableView {
             
+        /** 
+         
+         if already selected item, do not present again, otherwise 
+            
+         [1] get title
+         [2]
+            
+        */
         case self.selectScreenTableView: nothing()
         case self.settingsScreenTableView: nothing()
         default: nothing()

@@ -58,8 +58,8 @@ class ViewController: UIViewController {
     }
     
     private var childrenTitles: [String] {
-    
-        if _childrenTitles == nil { _childrenTitles = children.map( {$0.title!} ) }
+
+        if _childrenTitles == nil { _childrenTitles = children.map( {$0.childTitle!} ) }
         return _childrenTitles
         
     }
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         
         configureView()
         configureBarView()
-        configureSelectionView()
+        configureSelectView()
         configureSettingsView()
         configureFirstChildView()
         
@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func configureSelectionView() {
+    private func configureSelectView() {
         
         let selectScreenPopupFrame = CGRect(
             x: 0.0,
@@ -138,26 +138,20 @@ class ViewController: UIViewController {
         self.selectView.layer.zPosition = 3.0
         self.selectView.backgroundColor = UIColor.purpleColor()
         
-        self.selectTableView = UITableView(frame: selectScreenPopupFrame, style: .Plain)
+        let selectTableViewFrame = CGRect(
+            origin: CGPointZero,
+            size: selectScreenPopupFrame.size
+        )
+        
+        self.selectTableView = UITableView(frame: selectTableViewFrame, style: .Plain)
         self.selectTableView.delegate = self
         self.selectTableView.dataSource = self
+        self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.selectTableView.layer.zPosition = 4.0
-        
-        // explore
-        self.selectTableView.beginUpdates()
-//        self.selectTableView.
-        //
+        self.selectTableView.backgroundView = nil
+        self.selectTableView.backgroundColor = UIColor.clearColor()
         
         self.selectView.addSubview(self.selectTableView)
-        
-        self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "nonEmptyString")
-        
-        self.selectTableView.contentSize = selectScreenPopupFrame.size
-        
-        self.selectTableView.backgroundView = nil
-        self.selectTableView.backgroundColor = UIColor.greenColor()
-        print(self.selectTableView)
-        
         self.view.addSubview(self.selectView)
         
     }
@@ -182,10 +176,7 @@ class ViewController: UIViewController {
     private func configureFirstChildView() {
     
         assert(children.first != nil, "ViewController: Children array cannot be empty!")
-        
-        let firstChild = children.first!
-        
-        presentChild(firstChild)
+        presentChild(children.first!)
     
     }
     
@@ -267,18 +258,15 @@ extension ViewController: BarViewDelegate {
     func presentSelect() {
         
         presentPopoverScreen(self.selectView!)
+        self.view.bringSubviewToFront(self.selectView)
         self.selectTableView.flashScrollIndicators()
-        
-        print(self.selectTableView.layer.zPosition)
-        print("row height: \(self.selectTableView.rowHeight)")
-        self.selectTableView.rowHeight = 40.0
-//        print("row height: \(self.selectTableView.rowHeight)")
         
     }
     
     func presentSettings() {
         
         presentPopoverScreen(self.settingsView)
+        self.view.bringSubviewToFront(self.settingsView)
         
     }
     
@@ -335,7 +323,7 @@ extension ViewController: UITableViewDelegate {
          [2]
             
         */
-        case self.selectTableView: return
+        case self.selectTableView: print("selected a cell at indexpath: \(indexPath) in select table view"); return
         case self.settingsScreenTableView: func nothing(){}; nothing()  // don't do anything here
         default: return
             
@@ -384,10 +372,12 @@ extension ViewController: UITableViewDataSource {
             
         case self.selectTableView:
             
-            return UITableViewCell()
+            let cell = self.selectTableView.dequeueReusableCellWithIdentifier("cell")!
+            cell.backgroundColor = UIColor.clearColor()
+            cell.textLabel?.text = childrenTitles[indexPath.row]
+            return cell
             
         case self.settingsScreenTableView:
-            
             
             return UITableViewCell()
             

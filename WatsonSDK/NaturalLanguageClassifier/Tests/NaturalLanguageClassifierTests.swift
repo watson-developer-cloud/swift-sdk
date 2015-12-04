@@ -74,7 +74,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectationInvalid = expectationWithDescription("Invalid Expect")
         
         service.getClassifier("MISSING_CLASSIFIER_ID", completionHandler:{(classifier:Classifier?, error) in
-            XCTAssertNil(classifier,"Expected no classifier to be return for invalid id")
+            XCTAssertEqual(classifier!.id, nil, "Expect classifierid to be nil")
+            XCTAssertEqual(error!.code, 404, "Expect 404 error code")
             expectationInvalid.fulfill()
         })
         
@@ -96,7 +97,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectationInvalid = expectationWithDescription("Invalid Expectation")
         
         service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification, error) in
-            XCTAssertNil(classification,"Expected no classifier to be return for invalid id")
+            XCTAssertEqual(classification!.id, nil, "Expect classifierid to be nil")
+            XCTAssertEqual(error!.code, 404, "Expect 404 error code")
             expectationInvalid.fulfill()
         })
         
@@ -125,10 +127,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         XCTAssertNotNil(missingFileMetaURL)
         
         service.createClassifier(missingFileMetaURL!, trainerURL: fileURL!, completionHandler:{(classifier:Classifier?, error) in
-            Log.sharedLogger.error("\(error)")
-            if(classifier != nil) {
-                XCTFail("Expected nil model to be returned")
-            }
+            XCTAssertEqual(classifier!.id, nil, "Expect classifierid to be nil")
+            XCTAssertEqual(error!.code, 400, "Expect 400 error code")
             expectationInvalid.fulfill()
         })
         

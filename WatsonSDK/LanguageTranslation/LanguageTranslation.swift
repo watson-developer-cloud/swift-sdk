@@ -23,7 +23,7 @@ public class LanguageTranslation: Service {
      
      - parameter callback: callback method that is invoked with the identifiable languages
      */
-    public func getIdentifiableLanguages(callback: ([IdentifiableLanguage]?)->()) {
+    public func getIdentifiableLanguages(callback: ([IdentifiableLanguage], NSError?)->()) {
         let endpoint = getEndpoint("/v2/identifiable_languages")
         
         NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
@@ -39,7 +39,7 @@ public class LanguageTranslation: Service {
                     }
                 }
             }
-            callback(languages)
+            callback(languages, response.error)
         })
     }
     
@@ -49,7 +49,7 @@ public class LanguageTranslation: Service {
      - parameter text:     the text to identify
      - parameter callback: the callback method to be invoked with an array of identified languages in descending order of confidence
      */
-    public func identify(text:String, callback: ([IdentifiedLanguage])->()) {
+    public func identify(text:String, callback: ([IdentifiedLanguage], NSError?)->()) {
         let endpoint = getEndpoint("/v2/identify")
         
         var params = Dictionary<String,String>()
@@ -67,7 +67,7 @@ public class LanguageTranslation: Service {
                     }
                 }
             }
-            callback(languages)
+            callback(languages, response.error)
         })
     }
     
@@ -79,7 +79,7 @@ public class LanguageTranslation: Service {
      - parameter target: The language that the text will be translated into
      - parameter callback:       The callback method that is invoked with the translated string
      */
-    public func translate(text:[String], source:String, target:String, callback:([String])->()) {
+    public func translate(text:[String], source:String, target:String, callback:([String], NSError?)->()) {
         translate(text, source:source, target:target, modelID:nil, callback: callback)
     }
     
@@ -89,7 +89,7 @@ public class LanguageTranslation: Service {
      - parameter modelID: The ID of the model that should be used for translation parameters
      - parameter callback:       The callback method that is invoked with the translated string
      */
-    public func translate(text:[String], modelID:String, callback:([String])->()) {
+    public func translate(text:[String], modelID:String, callback:([String], NSError?)->()) {
         translate(text, source:nil, target:nil, modelID:modelID, callback: callback)
     }
     
@@ -102,7 +102,7 @@ public class LanguageTranslation: Service {
      - parameter modelID: The ID of the model that should be used for translation parameters
      - parameter callback:       The callback method that is invoked with the translated string
      */
-    private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String])->()) {
+    private func translate(text:[String], source:String? = nil, target:String? = nil, modelID:String? = nil, callback:([String], NSError?)->()) {
         
         let endpoint = getEndpoint("/v2/translate")
         
@@ -134,7 +134,7 @@ public class LanguageTranslation: Service {
                     }
                 }
             }
-            callback(translations)
+            callback(translations, response.error)
         })
     }
     
@@ -146,7 +146,7 @@ public class LanguageTranslation: Service {
      - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
      - parameter callback:     The callback method to invoke after the response is received
      */
-    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel])->())
+    public func getModels(source: String? = nil, target: String? = nil, defaultModel: Bool? = nil, callback: ([TranslationModel], NSError?)->())
     {
         let endpoint = getEndpoint("/v2/models")
         
@@ -174,7 +174,7 @@ public class LanguageTranslation: Service {
                     }
                 }
             }
-            callback(models)
+            callback(models, response.error)
         })
     }
     
@@ -184,18 +184,18 @@ public class LanguageTranslation: Service {
      - parameter modelID:       The model identifier
      - parameter callback:     The callback method to invoke after the response is received
      */
-    public func getModel(modelID: String, callback: (TranslationModel?)->())
+    public func getModel(modelID: String, callback: (TranslationModel?, NSError?)->())
     {
         let endpoint = getEndpoint("/v2/models/" + modelID)
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
             if case let data as Dictionary<String,AnyObject> = response.data {
                 if case _ as String = data[LanguageTranslationConstants.modelID] {
-                    return callback(Mapper<TranslationModel>().map(response.data))
+                    return callback(Mapper<TranslationModel>().map(response.data), response.error)
                 }
             }
             Log.sharedLogger.warning("No model found with given ID")
-            return callback(nil)
+            return callback(nil, response.error)
         })
     }
     
@@ -207,7 +207,7 @@ public class LanguageTranslation: Service {
      - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
      - parameter callback:           Returns the created model
      */
-    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?)->())
+    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?, NSError?)->())
     {
         var queryParams = Dictionary<String,String>()
         queryParams.updateValue(baseModelID, forKey: LanguageTranslationConstants.baseModelID)
@@ -220,7 +220,7 @@ public class LanguageTranslation: Service {
         
         let endpoint = getEndpoint("/v2/models")
         NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLs: fileParams, parameters: queryParams, apiKey: _apiKey, completionHandler: {response in
-            callback(Mapper<TranslationModel>().map(response.data))
+            callback(Mapper<TranslationModel>().map(response.data), response.error)
         })
     }
     
@@ -230,7 +230,7 @@ public class LanguageTranslation: Service {
      - parameter modelID:       The model identifier
      - parameter callback:     The callback method to invoke after the response is received, returns true if delete is successful
      */
-    public func deleteModel(modelID: String, callback: (Bool?)->())
+    public func deleteModel(modelID: String, callback: (Bool)->())
     {
         let endpoint = getEndpoint("/v2/models/" + modelID)
         NetworkUtils.performBasicAuthRequest(endpoint, method: .DELETE, parameters: [:], apiKey: _apiKey, completionHandler: {response in

@@ -21,7 +21,7 @@ extension ChildViewController: ChildProtocol {
     
     var config: [String : String]! {
     
-        fatalError("ChildViewController \(self.dynamicType) must override the title property.")
+        fatalError("ChildViewController \(self.dynamicType) must override the config property.")
     
     }
     

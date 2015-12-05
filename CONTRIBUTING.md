@@ -1,25 +1,36 @@
-# Questions
+This document contains information and guidelines about contributing to this project. Please read it before you start participating.
 
-If you are having difficulties using the APIs or have a question about the IBM Watson Services,
-please ask a question on [dW Answers][dw] or [Stack Overflow][stackoverflow].
+# Asking Questions
 
-# Issues
+We don't use GitHub as a support forum. For any usage questions that are not specific to the project itself, please ask on [dW Answers][dw] or [Stack Overflow][stackoverflow]. By doing so, you'll be more likely to quickly solve your problem, and you'll also allow anyone else with the same question to find the answer.
 
-If you encounter an issue with the iOS Watson SDK, you are welcome to submit a [bug report](https://github.com/IBM-MIL/Watson-iOS-SDK/issues).
-Before that, please search for similar issues. It's possible somebody has encountered this issue already.
+# Reporting Issues
+
+If you encounter a bug with the iOS Watson SDK, please submit a detailed [issue](https://github.com/IBM-MIL/Watson-iOS-SDK/issues) so that it can be addressed quickly. We always appreciate a well-written, thorough bug report.
+
+Please check that the project issues database doesn't already include that problem or suggestion before submitting an issue. If you find a match, add a quick "+1" or "I have this problem too." Doing so helps prioritize the most common problems and requests.
+
+When reporting issues, please include the following:
+
+* The version of Xcode you're using
+* The version of iOS you're targeting
+* The full output of any stack trace or compiler error
+* A code snippet that reproduces the described behavior, if applicable
+* Any other details that would be useful in understanding the problem.
+
+This information will help us review and fix your issue faster.
 
 # Pull Requests
 
 If you want to contribute to the repository, here's a quick guide:
-  1. Fork the repository
-  2. develop and test your code changes, build successfully and run tests in test navigator.
+  1. Fork the repository.
+  2. Develop and test your code changes. Be sure to build the project and run tests in the test navigator.
     * Respect the original code [style guide][styleguide].
     * Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-    * Check for unnecessary whitespace with git diff --check before committing.
-  3. Make the test pass
-  4. Commit your changes
-  5. Push to your fork and submit a pull request to the **dev** branch
-
+    * Check for unnecessary whitespace with `git diff --check` before committing.
+  3. Ensure all tests pass successfully.
+  4. Commit your changes.
+  5. Push to your fork and submit a pull request to the **dev** branch.
 
 # Developer's Certificate of Origin 1.1
 
@@ -56,3 +67,6 @@ By making a contribution to this project, I certify that:
 [stackoverflow]: http://stackoverflow.com/questions/ask?tags=ibm-watson
 [styleguide]: https://github.com/IBM-MIL/swift-style-guide
 
+---
+
+*Some of the ideas and wording for the statements above were based on work by the [Alamofire](https://github.com/Alamofire/Alamofire/blob/master/CONTRIBUTING.md), [Docker](https://github.com/docker/docker/blob/master/CONTRIBUTING.md), and [Linux](http://elinux.org/Developer_Certificate_Of_Origin) communities. We commend them for their efforts to facilitate collaboration in their projects.*

@@ -28,8 +28,7 @@ class WebsocketTests: XCTestCase {
     var listeningExpectation: XCTestExpectation?
     var messageExpectation: XCTestExpectation?
     var disconnectExpectation: XCTestExpectation?
-    
-    
+
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
@@ -46,42 +45,17 @@ class WebsocketTests: XCTestCase {
         }
         
     }
-
-    
-    
-    func testGetToken() {
-        
-        let socket = WatsonSocket()
-        
-        let expectation = expectationWithDescription("TokenExpectation")
-        
-        socket.username = self.username
-        socket.password = self.password
-        
-        socket.getToken(username, password: password, oncompletion: {
-            token, error in
-            
-            XCTAssertNotNil(token, "Token must be returned")
-            
-            if let token = token {
-                XCTAssertGreaterThan(token.characters.count, 10,
-                    "Token does not appear to be long enough")
-            }
-            
-            Log.sharedLogger.info(token)
-            expectation.fulfill()
-            
-        })
-        
-        waitForExpectationsWithTimeout(timeout) {
-            error in XCTAssertNil(error, "Timeout")
-        }
-        
-    }
     
     func testWatsonSockets() {
         
-        let socket = WatsonSocket()
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        
+        let socket = WatsonSocket(authStrategy: basicAuth)
         
         let url = NSBundle(forClass: self.dynamicType)
             .URLForResource("SpeechSample", withExtension: "flac")
@@ -98,8 +72,6 @@ class WebsocketTests: XCTestCase {
         
         // let data = NSData()
         
-        socket.username = self.username
-        socket.password = self.password
         socket.delegate = SocketTestDelegate(socket: socket, disconnectExpectation: disconnectExpectation!)
         socket.format = .FLAC
         

@@ -19,8 +19,6 @@ import XCTest
 
 class SpeechToTextTests: XCTestCase {
     
-    private let service = SpeechToText()
-    
     private var inputText: String?
     private let timeout: NSTimeInterval = 30.0
     
@@ -38,9 +36,6 @@ class SpeechToTextTests: XCTestCase {
                 username = dict["SpeechToTextUsername"]!
                 password = dict["SpeechToTextPassword"]!
                 
-                service.setUsernameAndPassword(
-                    dict["SpeechToTextUsername"]!,
-                    password: dict["SpeechToTextPassword"]!)
                 
             } else {
                 XCTFail("Unable to extract dictionary from plist")
@@ -67,6 +62,15 @@ class SpeechToTextTests: XCTestCase {
     
     func testEncoding() {
         
+        
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let service = SpeechToText(authStrategy: basicAuth)
+        
         let url = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "raw")
         if let url = url
         {
@@ -88,6 +92,14 @@ class SpeechToTextTests: XCTestCase {
     
        
     func testContinuousRecording() {
+        
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let service = SpeechToText(authStrategy: basicAuth)
         
         service.startListening()
                 
@@ -148,57 +160,17 @@ class SpeechToTextTests: XCTestCase {
 //        }
 //    }
     
-    func testSimplePCMTranscription() {
-        let expectation = expectationWithDescription("WebSockets")
-        let url = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "raw")
-        
-        guard let audioData = NSData(contentsOfURL: url!) else {
-            XCTFail("Need to read file")
-            return
-        }
-        
-        service.transcribe( audioData, format: .PCM, oncompletion: {
-            response, error in
-            
-            if let response = response {
-                
-                if let results = response.results {
-                    XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
-                    
-                    if let alternatives = results[0].alternatives {
-                        
-                        XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
-                        
-                        
-                        if let transcript = alternatives[0].transcript
-                        {
-                            XCTAssertEqual(transcript, "several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday ")
-                            
-                        }
-                        
-                    }
-                    
-                    expectation.fulfill()
-                    
-                } else {
-                    XCTFail("Could not get back results for the response")
-                }
-                
-            } else {
-                XCTFail("Could not get back SpeechToTextResponse structure")
-            }
-            
-            
-        })
-        
-        waitForExpectationsWithTimeout(timeout) {
-            error in XCTAssertNil(error, "Timeout")
-        }
-    }
 
-    
-    
     func testSimpleFLACTranscription() {
+        
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let service = SpeechToText(authStrategy: basicAuth)
+        
         let expectation = expectationWithDescription("WebSockets")
         let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "flac")
         
@@ -247,6 +219,15 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testSimpleWAVTranscription() {
+        
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let service = SpeechToText(authStrategy: basicAuth)
+        
         let expectation = expectationWithDescription("WebSockets")
         let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "wav")
         
@@ -295,6 +276,15 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testSimpleOGGTranscription() {
+        
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let service = SpeechToText(authStrategy: basicAuth)
+        
         let expectation = expectationWithDescription("WebSockets")
         let url = NSBundle(forClass: self.dynamicType).URLForResource("SpeechSample", withExtension: "ogg")
         

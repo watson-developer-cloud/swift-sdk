@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+public enum SpeechToTextAudioFormat: String {
+    case OGG        = "audio/ogg;codecs=opus"
+    case FLAC       = "audio/flac"
+    case PCM        = "audio/l16"
+    case WAV        = "audio/wav"
+}

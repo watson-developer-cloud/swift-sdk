@@ -16,8 +16,21 @@
 
 import Foundation
 
-public protocol SpeechToTextDelegate {
+
+class TokenAuthenticationStrategy: AuthenticationStrategy {
     
-    func onSpeechRecognized(text: String)
+    var token: String?
+    
+    init(token: String) {
+        
+        self.token = token
+        
+    }
+    
+    func authenticate(onauthenticated: (token: String?, error: NSError?) -> Void) {
+        
+        onauthenticated(token: token, error: nil)
+        
+    }
     
 }

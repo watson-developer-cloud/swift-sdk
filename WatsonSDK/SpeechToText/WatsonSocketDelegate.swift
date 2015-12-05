@@ -16,8 +16,12 @@
 
 import Foundation
 
-public protocol SpeechToTextDelegate {
+
+internal protocol WatsonSocketDelegate {
     
-    func onSpeechRecognized(text: String)
+    func onConnected()
+    func onListening()
+    func onDisconnected()
+    func onMessageReceived(results: [SpeechToTextResult])
     
 }

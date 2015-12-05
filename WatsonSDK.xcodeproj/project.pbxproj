@@ -143,6 +143,11 @@
 		BDAF7E161BFEBA28009BB0E8 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E151BFEBA28009BB0E8 /* NSError.swift */; };
 		BDAF7E181BFEBA40009BB0E8 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E171BFEBA40009BB0E8 /* Request.swift */; };
 		BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */; };
+		E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E7D1C13549C00C6602B /* WatsonSocket.swift */; };
+		E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E7E1C13549C00C6602B /* WatsonSocketDelegate.swift */; };
+		E1023E851C1354C100C6602B /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */; };
+		E1023E861C1354C100C6602B /* BasicAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */; };
+		E1023E871C1354C100C6602B /* TokenAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */; };
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
@@ -322,6 +327,11 @@
 		BDAF7E151BFEBA28009BB0E8 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSError.swift; path = Extensions/NSError.swift; sourceTree = "<group>"; };
 		BDAF7E171BFEBA40009BB0E8 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Extensions/Request.swift; sourceTree = "<group>"; };
 		BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		E1023E7D1C13549C00C6602B /* WatsonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocket.swift; sourceTree = "<group>"; };
+		E1023E7E1C13549C00C6602B /* WatsonSocketDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocketDelegate.swift; sourceTree = "<group>"; };
+		E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationStrategy.swift; sourceTree = "<group>"; };
+		E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationStrategy.swift; sourceTree = "<group>"; };
+		E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenAuthenticationStrategy.swift; sourceTree = "<group>"; };
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
@@ -681,6 +691,8 @@
 		7ADC39FA1BF950C800CD916E /* SpeechToText */ = {
 			isa = PBXGroup;
 			children = (
+				E1023E811C1354AF00C6602B /* Authentication */,
+				E1023E7C1C13548100C6602B /* Networking */,
 				E1A07EF61C04DAC300DCD45C /* Models */,
 				7ADC39FB1BF950C800CD916E /* Reference */,
 				7ADC3A041BF950C800CD916E /* SpeechToText.swift */,
@@ -831,6 +843,25 @@
 				BDAF7E171BFEBA40009BB0E8 /* Request.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		E1023E7C1C13548100C6602B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E1023E7D1C13549C00C6602B /* WatsonSocket.swift */,
+				E1023E7E1C13549C00C6602B /* WatsonSocketDelegate.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		E1023E811C1354AF00C6602B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */,
+				E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */,
+				E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */,
+			);
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 		E1A07EF61C04DAC300DCD45C /* Models */ = {
@@ -985,10 +1016,12 @@
 				BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */,
 				7A89EF9C1C0DF15E00281B77 /* DialogModel.swift in Sources */,
 				7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */,
+				E1023E861C1354C100C6602B /* BasicAuthenticationStrategy.swift in Sources */,
 				7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */,
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,
+				E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */,
 				7ADC3A801BF9560400CD916E /* ImageFaceTags.swift in Sources */,
 				7ADC3A681BF9551500CD916E /* AlchemyGenericModel.swift in Sources */,
 				7ADC3A551BF951AC00CD916E /* Transformation.swift in Sources */,
@@ -1037,6 +1070,7 @@
 				7AF96BB61BF996560083ED23 /* OpusHelper.m in Sources */,
 				7ADC3A671BF9551500CD916E /* AlchemyLanguageConstants.swift in Sources */,
 				7ADC3A541BF951AC00CD916E /* Log.swift in Sources */,
+				E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */,
 				7A89EF9A1C0DF15E00281B77 /* DialogConversationResponse.swift in Sources */,
 				6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
@@ -1045,6 +1079,7 @@
 				7ADC3A6E1BF9551500CD916E /* Entity.swift in Sources */,
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				6E4029F11C051F0300D3ADB0 /* SpeechToTextResponse.swift in Sources */,
+				E1023E851C1354C100C6602B /* AuthenticationStrategy.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
 				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
@@ -1055,6 +1090,7 @@
 				7A89EF971C0DF15E00281B77 /* DialogConstants.swift in Sources */,
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
+				E1023E871C1354C100C6602B /* TokenAuthenticationStrategy.swift in Sources */,
 				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
 				6E75353A1C04CA79003EAECE /* ConceptResponse.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,

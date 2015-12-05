@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		313B6A721C13A4EF0087F661 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 313B6A711C13A4EF0087F661 /* Credentials.plist */; };
 		7A1FCE251BA9F19A0090E1EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE241BA9F19A0090E1EB /* AppDelegate.swift */; };
 		7A1FCE271BA9F19A0090E1EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCE261BA9F19A0090E1EB /* ViewController.swift */; };
 		7A1FCE2A1BA9F19A0090E1EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCE281BA9F19A0090E1EB /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		313B6A711C13A4EF0087F661 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = ../../../WatsonSDKTests/Credentials.plist; sourceTree = "<group>"; };
 		7A1FCE211BA9F19A0090E1EB /* SpeechSynthesis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechSynthesis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1FCE241BA9F19A0090E1EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A1FCE261BA9F19A0090E1EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		7A1FCE231BA9F19A0090E1EB /* SpeechSynthesis */ = {
 			isa = PBXGroup;
 			children = (
+				313B6A711C13A4EF0087F661 /* Credentials.plist */,
 				E1D5C3181BFD22C30030EBD9 /* WatsonSDK.framework */,
 				7A1FCE241BA9F19A0090E1EB /* AppDelegate.swift */,
 				7A1FCE261BA9F19A0090E1EB /* ViewController.swift */,
@@ -136,6 +139,7 @@
 				7A1FCE7B1BAA01CB0090E1EB /* spain2.wav in Resources */,
 				7A1FCE531BAA004D0090E1EB /* spain.wav in Resources */,
 				7A1FCE2F1BA9F19A0090E1EB /* LaunchScreen.storyboard in Resources */,
+				313B6A721C13A4EF0087F661 /* Credentials.plist in Resources */,
 				7A1FCE2C1BA9F19A0090E1EB /* Assets.xcassets in Resources */,
 				7A1FCE2A1BA9F19A0090E1EB /* Main.storyboard in Resources */,
 			);

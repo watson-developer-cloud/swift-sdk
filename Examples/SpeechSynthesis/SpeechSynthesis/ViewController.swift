@@ -44,11 +44,15 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ttsService.setUsernameAndPassword(
-            "***REMOVED***",
-            password: "***REMOVED***")
-        
+
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                ttsService.setUsernameAndPassword(
+                    dict["TextToSpeechUsername"]!,
+                    password: dict["TextToSpeechPassword"]!)
+            }
+        }
+
         // var error: NSError?
         
         // Do any additional setup after loading the view, typically from a nib.

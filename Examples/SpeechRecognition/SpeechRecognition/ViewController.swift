@@ -20,6 +20,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     var player: AVAudioPlayer? = nil
     var recorder: AVAudioRecorder!
     
+    private let username = ""
+    private let password = ""
     
     override func viewDidLoad() {
         
@@ -55,6 +57,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         // disable play and transcribe buttons
         playRecordingButton.enabled = false
         transcribeButton.enabled = false
+        
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                self.username = dict["SpeechToTextUsername"]
+                self.password = dict["SpeechToTextPassword"]
+            }
+        }
         
     }
     
@@ -125,7 +134,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         print("Transcribing recording...")
-        let stt = WatsonSpeechToText(username: "***REMOVED***", password: "***REMOVED***")
+        let stt = WatsonSpeechToText(username: username, password: password)
         stt.transcribeFile(recorder.url) {
             string, error in
             dispatch_async(dispatch_get_main_queue()) {

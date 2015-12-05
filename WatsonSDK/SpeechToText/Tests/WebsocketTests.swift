@@ -17,10 +17,8 @@
 import XCTest
 @testable import WatsonSDK
 
-class WebsocketTests: XCTestCase, WatsonSocketDelegate {
+class WebsocketTests: XCTestCase {
     
-    let socket = WatsonSocket()
-
     private let timeout: NSTimeInterval = 30.0
 
     private lazy var username: String = ""
@@ -30,6 +28,7 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     var listeningExpectation: XCTestExpectation?
     var messageExpectation: XCTestExpectation?
     var disconnectExpectation: XCTestExpectation?
+    
     
     override func setUp() {
         super.setUp()
@@ -51,6 +50,8 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     
     
     func testGetToken() {
+        
+        let socket = WatsonSocket()
         
         let expectation = expectationWithDescription("TokenExpectation")
         
@@ -80,6 +81,8 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
     
     func testWatsonSockets() {
         
+        let socket = WatsonSocket()
+        
         let url = NSBundle(forClass: self.dynamicType)
             .URLForResource("SpeechSample", withExtension: "flac")
         
@@ -88,16 +91,16 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
             return
         }
 
-        connectionExpectation = expectationWithDescription("connection")
-        listeningExpectation = expectationWithDescription("listening")
-        messageExpectation = expectationWithDescription("receive message")
+        //connectionExpectation = expectationWithDescription("connection")
+        //listeningExpectation = expectationWithDescription("listening")
+        //messageExpectation = expectationWithDescription("receive message")
         disconnectExpectation = expectationWithDescription("disconnect")
         
         // let data = NSData()
         
         socket.username = self.username
         socket.password = self.password
-        socket.delegate = self
+        socket.delegate = SocketTestDelegate(socket: socket, disconnectExpectation: disconnectExpectation!)
         socket.format = .FLAC
         
         socket.send(audioData)
@@ -113,26 +116,42 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
         
     }
     
+    
+    class SocketTestDelegate : WatsonSocketDelegate {
+        
+        let socket: WatsonSocket!
+        
+        var disconnectExpectation: XCTestExpectation?
+        
+        init(socket: WatsonSocket, disconnectExpectation: XCTestExpectation)
+        {
+            self.socket = socket
+            self.disconnectExpectation = disconnectExpectation
+        }
+        
     func onMessageReceived(results: [SpeechToTextResult]) {
         
         Log.sharedLogger.info("Received: \(results)")
         // XCTAssertNotnil(results)
-        messageExpectation?.fulfill()
+        //messageExpectation?.fulfill()
         
-        socket.disconnect()
+        if results[0].alternatives![0].transcript?.characters.count > 1 {
+        
+            socket.disconnect()
+        }
 
     }
     
     func onConnected() {
         
-        connectionExpectation?.fulfill()
+        //connectionExpectation?.fulfill()
         
         XCTAssertFalse(socket.audioUploadQueue.suspended, "Audio upload queue should be running")
     }
     
     func onListening() {
         
-        listeningExpectation?.fulfill()
+        //listeningExpectation?.fulfill()
         XCTAssertTrue(socket.isListening, "Listening property should be set true")
         
         
@@ -144,6 +163,8 @@ class WebsocketTests: XCTestCase, WatsonSocketDelegate {
         
         XCTAssertTrue(socket.audioUploadQueue.suspended, "Audio queue should be suspended when disconnected")
         XCTAssertFalse(socket.isListening, "Listening property should be set false")
+        
+    }
         
     }
 

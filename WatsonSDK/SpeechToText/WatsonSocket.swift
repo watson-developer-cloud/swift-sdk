@@ -38,24 +38,14 @@ internal class WatsonSocket {
     // Starscream websocket
     var socket: WebSocket?
 
-    // The Basic authentication Base64 request
-    internal var apiKey: String?
-    
-    internal var username: String?
-    internal var password: String?
-    
-    /** If set, will use the username and password specified to generate Watson Token
-      Normally, a token should be provided.
-    */
-    internal var generateToken: Bool = true
-    
-    // The received token from Watson
-    internal var token: String?
+    let authStrategy: AuthenticationStrategy!
     
     var isListening: Bool = false
     
-    init() {
+    init(authStrategy: AuthenticationStrategy) {
     
+        self.authStrategy = authStrategy
+        
         audioUploadQueue = NSOperationQueue()
         audioUploadQueue.name = "Audio upload"
         audioUploadQueue.maxConcurrentOperationCount = 1
@@ -86,34 +76,7 @@ internal class WatsonSocket {
         
     }
     
-    /**
-     Fetches a token that is valid for 1 hr.
-     
-     - parameter username:     Watson generated username
-     - parameter password:     Watson generated password
-     - parameter oncompletion: completion block for when a token is sent by server
-     */
-    internal func getToken( username: String, password: String,
-        oncompletion: (String?, NSError?) -> Void)
-    {
-        let authorizationString = username + ":" + password
-        let apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?
-            .base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
         
-        NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURLFull,
-            apiKey: apiKey, completionHandler: {
-            
-            token, error in
-            
-            Log.sharedLogger.info("Token received was \(token)")
-                
-            self.token = token
-                
-            oncompletion(token, error)
-        })
-        
-    }
-    
     /**
      Establishes a Websocket connection if one does not exist already.
      */
@@ -127,13 +90,8 @@ internal class WatsonSocket {
 //            }
 //        }
         
-        if (username == nil || password == nil)
-        {
-            Log.sharedLogger.error("API key was not set")
-            return
-        }
-        
-        getToken(username!, password: password!, oncompletion: {
+        authStrategy.authenticate({
+            
             token, error in
             
             Log.sharedLogger.info("Got a response back from the server")

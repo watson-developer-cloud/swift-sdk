@@ -109,9 +109,61 @@ alchemyLanguageInstance.getEntities(requestType: .URL,
     // code here
 
 }
-
 ```
 
+### Dialog
+
+The IBM Watson Dialog service provides a comprehensive and robust platform for managing conversations between virtual agents and users through an application programming interface (API). Developers automate branching conversations that use natural language to automatically respond to user questions, cross-sell and up-sell, walk users through processes or applications, or even hand-hold users through difficult tasks.
+
+To use the Dialog service, developers script conversations as they would happen in the real world, upload them to a Dialog application, and enable back-and-forth conversations with a user.
+
+Instantiate the Dialog service:
+
+```swift
+let service = Dialog(user: "yourusername", password: "yourpassword")
+```
+
+Create a Dialog application by uploading a Dialog file:
+
+```swift
+var dialogID: Dialog.DialogID?
+service.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
+	self.dialogID = dialogID
+}
+```
+
+Start a conversation with the Dialog application:
+
+```swift
+var conversationID: Int?
+var clientID: Int?
+service.converse(dialogID!) { response, error in
+	// save conversation parameters
+	self.conversationID = response?.conversationID
+	self.clientID = response?.clientID
+
+	// print message from Watson
+	print(response?.response)
+}
+```
+
+Continue a conversation with the Dialog application:
+
+```swift
+service.converse(dialogID!, conversationID: conversationID!,
+	clientID: clientID!, input: input) { response, error in
+
+	// print message from Watson
+	print(response?.response)
+}
+```
+
+The following links provide additional information about the IBM Watson Dialog Service:
+
+* [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
+* [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
+* [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
+* [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
 ### Text to Speech
 

@@ -192,6 +192,12 @@ public class SpeechToText : Service {
     public func transcribe(audioData: NSData,
         format: SpeechToTextAudioFormat = .FLAC,
         oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
+            
+            
+            watsonSocket.format = format
+            watsonSocket.send(audioData)
+            
+            self.callback = oncompletion
         
 //            connectWebsocket()
 //        

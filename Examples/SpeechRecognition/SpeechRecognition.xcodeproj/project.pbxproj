@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		313B6A741C13A5030087F661 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 313B6A731C13A5030087F661 /* Credentials.plist */; };
 		7A1285CD1BB08A0200130896 /* WatsonCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1285CC1BB08A0200130896 /* WatsonCore.framework */; };
 		7A1285CE1BB08A0200130896 /* WatsonCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1285CC1BB08A0200130896 /* WatsonCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A1285D11BB08A0A00130896 /* WatsonSpeechToText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1285D01BB08A0A00130896 /* WatsonSpeechToText.framework */; };
@@ -18,7 +19,7 @@
 		7A1FCD9D1BA9D66D0090E1EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD9B1BA9D66D0090E1EB /* LaunchScreen.storyboard */; };
 		7A1FCDA81BA9D66D0090E1EB /* SpeechRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDA71BA9D66D0090E1EB /* SpeechRecognitionTests.swift */; };
 		7A1FCDB31BA9D66D0090E1EB /* SpeechRecognitionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCDB21BA9D66D0090E1EB /* SpeechRecognitionUITests.swift */; };
-		7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */; settings = {ASSET_TAGS = (); }; };
+		7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		313B6A731C13A5030087F661 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = ../../../WatsonSDKTests/Credentials.plist; sourceTree = "<group>"; };
 		7A1285CC1BB08A0200130896 /* WatsonCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WatsonCore.framework; path = "/Users/glennfisher/Library/Developer/Xcode/DerivedData/watson-sdk-ios-bhrfwaccyyzenjbumiwgqmrrzkxa/Build/Products/Debug-iphoneos/WatsonCore.framework"; sourceTree = "<absolute>"; };
 		7A1285D01BB08A0A00130896 /* WatsonSpeechToText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WatsonSpeechToText.framework; path = "/Users/glennfisher/Library/Developer/Xcode/DerivedData/watson-sdk-ios-bhrfwaccyyzenjbumiwgqmrrzkxa/Build/Products/Debug-iphoneos/WatsonSpeechToText.framework"; sourceTree = "<absolute>"; };
 		7A1FCD8F1BA9D66D0090E1EB /* SpeechRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 		7A1FCD911BA9D66D0090E1EB /* SpeechRecognition */ = {
 			isa = PBXGroup;
 			children = (
+				313B6A731C13A5030087F661 /* Credentials.plist */,
 				7A1FCD921BA9D66D0090E1EB /* AppDelegate.swift */,
 				7A1FCD941BA9D66D0090E1EB /* ViewController.swift */,
 				7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */,
@@ -261,6 +264,7 @@
 			files = (
 				7A1FCD9D1BA9D66D0090E1EB /* LaunchScreen.storyboard in Resources */,
 				7A1FCD9A1BA9D66D0090E1EB /* Assets.xcassets in Resources */,
+				313B6A741C13A5030087F661 /* Credentials.plist in Resources */,
 				7A1FCD981BA9D66D0090E1EB /* Main.storyboard in Resources */,
 				7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */,
 			);

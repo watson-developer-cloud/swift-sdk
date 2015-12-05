@@ -1,21 +1,23 @@
-//
-//  Vision.swift
-//  Alchemy
-//
-//  Created by Vincent Herrin on 9/30/15.
-//  Copyright © 2015 MIL. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 import ObjectMapper
 
-//public protocol AlchemyVisionService
-//{
-//    func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String?, image: UIImage?, forceShowAll: Bool, knowledgeGraph: Int8, completionHandler: (ImageFaceTags?, NSError?) ->() )
-//}
-
-
-/// Implementation of Alchemy Vision Service
+/// AlchemyVision employs deep learning innovations to understand a picture's content and context
 public class AlchemyVision: Service {
   
 
@@ -39,7 +41,7 @@ public class AlchemyVision: Service {
   
     var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
     var visionUrl = ""
-    
+        
     switch(inputType) {
     case VisionConstants.ImageLinkType.URL:
       endPoint = VisionConstants.ImageLinkExtraction.URLGetImage.rawValue
@@ -48,10 +50,8 @@ public class AlchemyVision: Service {
       params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.URL.rawValue)
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
-        completionHandler(imageLink, nil)
+        completionHandler(imageLink, response.error)
       })
-      
-      break
     case VisionConstants.ImageLinkType.HTML:
       endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.HTML.rawValue + endPoint)
@@ -60,9 +60,8 @@ public class AlchemyVision: Service {
       params.updateValue(_apiKey, forKey: "apikey")
       NetworkUtils.performBasicAuthRequest(visionUrl, method: HTTPMethod.POST, parameters: params, encoding: ParameterEncoding.URL, completionHandler: {response in
         let imageLink = Mapper<ImageLink>().map(response.data)!
-        completionHandler(imageLink, nil)
+        completionHandler(imageLink, response.error)
       })
-        break
     }
   }
   
@@ -92,7 +91,7 @@ public class AlchemyVision: Service {
         var imageKeywords = ImageKeyWords()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageKeywords = Mapper<ImageKeyWords>().map(data)!
-          completionHandler(imageKeywords, nil)
+          completionHandler(imageKeywords, response.error)
         }
         else {
           completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
@@ -131,7 +130,7 @@ public class AlchemyVision: Service {
         var imageKeywords = ImageKeyWords()
         if case let data as Dictionary<String,AnyObject> = response.data {
             imageKeywords = Mapper<ImageKeyWords>().map(data)!
-            completionHandler(imageKeywords, nil)
+            completionHandler(imageKeywords, response.error)
         } else {
             completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
@@ -165,7 +164,7 @@ public class AlchemyVision: Service {
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
-          completionHandler(imageFaceTags, nil)
+          completionHandler(imageFaceTags, response.error)
         } else {
             completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
@@ -208,7 +207,7 @@ public class AlchemyVision: Service {
         var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
           imageFaceTags = ImageFaceTags(anyObject: data)
-          completionHandler(imageFaceTags, nil)
+          completionHandler(imageFaceTags, response.error)
         }
         else {
             completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))

@@ -25,10 +25,10 @@ import UIKit
  
 */
 class ViewController: UIViewController {
-
+    
     // add your child view controller here
     let children: [ChildViewController] = [
-    
+
         SampleChildViewController()
     
     ]
@@ -56,6 +56,15 @@ class ViewController: UIViewController {
         )
 
     }
+    
+    private var childrenTitles: [String] {
+
+        if _childrenTitles == nil { _childrenTitles = children.map( {$0.childTitle!} ) }
+        return _childrenTitles
+        
+    }
+    
+    private var _childrenTitles: [String]!
    
     // mutable versions of copied dictionaries
     private var configDictionaries: [String : [String : String] ] = [ "" : [ "" : ""] ]
@@ -65,9 +74,11 @@ class ViewController: UIViewController {
     private var currentChildView: UIView?
     private var currentChildViewController: UIViewController?
     // select screen
-    private var selectScreenPopup: UIView?
+    private var selectView: UIView!
+    private var selectTableView: UITableView!
     // settings screen
-    private var settingsScreenPopup: UIView?
+    private var settingsView: UIView!
+    private var settingsScreenTableView: UITableView!
 
     // animations
     private var popupDuration: NSTimeInterval = 1.0
@@ -79,9 +90,17 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
+        configureView()
         configureBarView()
-        
+        configureSelectView()
+        configureSettingsView()
         configureFirstChildView()
+        
+    }
+    
+    private func configureView() {
+        
+        self.view.backgroundColor = UIColor.blackColor()
         
     }
     
@@ -106,99 +125,148 @@ class ViewController: UIViewController {
         
     }
     
+    private func configureSelectView() {
+        
+        let selectScreenPopupFrame = CGRect(
+            x: 0.0,
+            y: screenHeight,
+            width: screenWidth,
+            height: childViewHeight
+        )
+        
+        self.selectView = UIView(frame: selectScreenPopupFrame)
+        self.selectView.layer.zPosition = 3.0
+        self.selectView.backgroundColor = UIColor.purpleColor()
+        
+        let selectTableViewFrame = CGRect(
+            origin: CGPointZero,
+            size: selectScreenPopupFrame.size
+        )
+        
+        self.selectTableView = UITableView(frame: selectTableViewFrame, style: .Plain)
+        self.selectTableView.delegate = self
+        self.selectTableView.dataSource = self
+        self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.selectTableView.layer.zPosition = 4.0
+        self.selectTableView.backgroundView = nil
+        self.selectTableView.backgroundColor = UIColor.clearColor()
+        
+        self.selectView.addSubview(self.selectTableView)
+        self.view.addSubview(self.selectView)
+        
+    }
+    
+    private func configureSettingsView() {
+        
+        let settingsScreenPopupFrame = CGRect(
+            x: 0.0,
+            y: screenHeight,
+            width: screenWidth,
+            height: childViewHeight / 2.0
+        )
+        
+        self.settingsView = UIView(frame: settingsScreenPopupFrame)
+        self.settingsView.layer.zPosition = 3.0
+        self.settingsView.backgroundColor = UIColor.yellowColor()
+        
+        self.view.addSubview(self.settingsView)
+        
+    }
+    
     private func configureFirstChildView() {
     
         assert(children.first != nil, "ViewController: Children array cannot be empty!")
-        
-        let firstChild = children.first!
-        
-        presentChild(firstChild)
+        presentChild(children.first!)
     
     }
     
+    /** 
+     
+     use this method when selecting various services from the selection popover 
+     
+     [1] removes current child if present
+     [2] configures new child view with size, vc, z position
+     [3] remove old settings table view if present
+     [4] reconfigures settings view to appropriately reflect
+     [5] highlight the appropriate selection screen item to avoid double selection
+     
+     */
     func presentChild(child: ChildViewController) {
-
-        
-        removeCurrentChild()            // remove old child if present
-        
-        self.currentChildView = child.view
-        self.currentChildView!.layer.zPosition = 2.0
-        
-        self.currentChildViewController = child
-        
-        
-        
-        child.view.frame = childViewFrame
-        self.addChildViewController(child)
-        self.view.addSubview(child.view)
-        
-                                        // make entry for data if not present, else configure selection screen with present data
-        
-        
-                                        // configure currently selected in selection screen
-        
-                                        // configure settings popover based on current child
-        
+   
+        removeCurrentChild()
+        configureNewChildView(child)
+        removeOldSettingsTableViewIfPresent()
+        configureSettingsViewWithNewChild(child)
+        highlightAppropriateSelectionScreenItem(child)
         
     }
     
     private func removeCurrentChild() {
         
         self.currentChildView?.removeFromSuperview()
+        self.currentChildView = nil
+        
         self.currentChildViewController?.removeFromParentViewController()
+        self.currentChildViewController = nil
+        
+    }
+    
+    private func configureNewChildView(child: ChildViewController) {
+        
+        self.currentChildViewController = child
+        self.currentChildView = child.view
+        
+        self.currentChildView!.layer.zPosition = 2.0
+        
+        child.view.frame = childViewFrame
+        self.addChildViewController(child)
+        self.view.addSubview(child.view)
+        
+    }
+    
+    private func removeOldSettingsTableViewIfPresent() {
+        
+        if self.settingsScreenTableView != nil {
+            
+            self.settingsScreenTableView.removeFromSuperview()
+            self.settingsScreenTableView = nil
+            
+        }
+        
+    }
+    
+    private func configureSettingsViewWithNewChild(child: ChildViewController) {
+        
+        // get key value pairs from child view controller
+        // populate current dictionary, first level dictionary based on childViewController title
+        // TODO: think of the case when two child view controller titles match / conflict
+        
+    }
+    
+    private func highlightAppropriateSelectionScreenItem(child: ChildViewController) {
+        
+        
         
     }
     
 }
 
 
+// MARK: BarViewDelegate
 extension ViewController: BarViewDelegate {
     
     func presentSelect() {
         
-        // instantiate if nil
-        if self.selectScreenPopup == nil {
-            
-            let selectScreenPopupFrame = CGRect(
-                x: 0.0,
-                y: screenHeight,
-                width: screenWidth,
-                height: childViewHeight
-            )
-            
-            self.selectScreenPopup = UIView(frame: selectScreenPopupFrame)
-            self.selectScreenPopup!.layer.zPosition = 3.0
-            self.selectScreenPopup!.backgroundColor = UIColor.purpleColor()
-            
-            self.view.addSubview(self.selectScreenPopup!)
-            
-        }
-        
-        presentPopoverScreen(self.selectScreenPopup!)
+        presentPopoverScreen(self.selectView!)
+        self.view.bringSubviewToFront(self.selectView)
+        self.selectTableView.flashScrollIndicators()
         
     }
     
     func presentSettings() {
         
-        // instantiate if nil
-        if self.settingsScreenPopup == nil {
-            
-            let settingsScreenPopupFrame = CGRect(
-                x: 0.0,
-                y: screenHeight,
-                width: screenWidth,
-                height: childViewHeight / 2.0
-            )
-            
-            self.settingsScreenPopup = UIView(frame: settingsScreenPopupFrame)
-            self.settingsScreenPopup!.layer.zPosition = 3.0
-            self.settingsScreenPopup!.backgroundColor = UIColor.yellowColor()
-            
-            self.view.addSubview(self.settingsScreenPopup!)
-            
-        }
-        
-        presentPopoverScreen(self.settingsScreenPopup!)
+        presentPopoverScreen(self.settingsView)
+        self.view.bringSubviewToFront(self.settingsView)
         
     }
     
@@ -238,3 +306,85 @@ extension ViewController: BarViewDelegate {
     
 }
 
+
+// MARK: UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        /** 
+         
+         if already selected item, do not present again, otherwise 
+            
+         [1] get title
+         [2]
+            
+        */
+        case self.selectTableView: print("selected a cell at indexpath: \(indexPath) in select table view"); return
+        case self.settingsScreenTableView: func nothing(){}; nothing()  // don't do anything here
+        default: return
+            
+        }
+        
+    }
+
+}
+
+
+// MARK: BarViewDelegate
+extension ViewController: UITableViewDataSource {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        case self.selectTableView:
+            
+            return children.count
+            
+        case self.settingsScreenTableView:
+            
+            if let title = self.currentChildViewController?.title,
+                let configEntriesForCurrentChildVC = self.configDictionaries[title] {
+                    
+                    return configEntriesForCurrentChildVC.count
+                    
+            } else {
+                
+                return 0
+                
+            }
+            
+        default: return 0
+            
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // respond differently based on the tableview
+        switch tableView {
+            
+        case self.selectTableView:
+            
+            let cell = self.selectTableView.dequeueReusableCellWithIdentifier("cell")!
+            cell.backgroundColor = UIColor.clearColor()
+            cell.textLabel?.text = childrenTitles[indexPath.row]
+            return cell
+            
+        case self.settingsScreenTableView:
+            
+            return UITableViewCell()
+            
+        default: return UITableViewCell()
+            
+        }
+        
+    }
+
+}

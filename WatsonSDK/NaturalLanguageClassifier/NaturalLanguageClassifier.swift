@@ -1,10 +1,18 @@
-//
-//  NaturalLanguageClassifier.swift
-//  NaturalLanguageClassifier
-//
-//  Created by Vincent Herrin on 11/9/15.
-//  Copyright © 2015 IBM. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 import ObjectMapper
@@ -26,20 +34,16 @@ public class NaturalLanguageClassifier : Service {
         NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey, completionHandler: {response in
             var classifiers : [Classifier] = []
             
-            if(response.code == 200) {
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    if case let rawClassifiers as [AnyObject] = data[NLCConstants.classifiers] {
-                        for rawClassifier in rawClassifiers {
-                            if let classifier = Mapper<Classifier>().map(rawClassifier) {
-                                classifiers.append(classifier)
-                            }
+            if case let data as Dictionary<String,AnyObject> = response.data {
+                if case let rawClassifiers as [AnyObject] = data[NLCConstants.classifiers] {
+                    for rawClassifier in rawClassifiers {
+                        if let classifier = Mapper<Classifier>().map(rawClassifier) {
+                            classifiers.append(classifier)
                         }
                     }
                 }
-                completionHandler(classifiers, nil)
-            } else {
-                completionHandler(nil, response.error)
             }
+            completionHandler(classifiers, response.error)
         })
     }
     
@@ -51,7 +55,7 @@ public class NaturalLanguageClassifier : Service {
      - parameter completionHandler: Callback with Classification?
      */
     public func classify(classifierId: String, text: String, completionHandler: (Classification?, NSError?)->()) {
-
+        
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)/classify")
         
         var errorDescription = ""
@@ -74,14 +78,11 @@ public class NaturalLanguageClassifier : Service {
         params.updateValue(text, forKey: "text")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: params, apiKey: _apiKey, completionHandler: {response in
-            if response.code == 200 {
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(Mapper<Classification>().map(data), nil)
-                    return
-                }
+            var classification:Classification? = nil
+            if case let data as Dictionary<String,AnyObject> = response.data {
+                classification = Mapper<Classification>().map(data)
             }
-            Log.sharedLogger.warning("No classifier found with given ID")
-            completionHandler(nil, response.error)
+            completionHandler(classification, response.error)
         })
     }
     
@@ -95,23 +96,16 @@ public class NaturalLanguageClassifier : Service {
         let endpoint = getEndpoint("\(NLCConstants.v1ClassifiersURI)/\(classifierId)")
         
         NetworkUtils.performBasicAuthRequest(endpoint, method: .GET, parameters: [:], apiKey: _apiKey, completionHandler: {response in
-            if response.code == 200 {
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    completionHandler(Mapper<Classifier>().map(data), nil)
-                }
-                else {
-                    completionHandler(nil, response.error)
-                }
+            var classifier:Classifier? = nil
+            if case let data as Dictionary<String,AnyObject> = response.data {
+                classifier = Mapper<Classifier>().map(data)
             }
-            else {
-                Log.sharedLogger.warning("No classifier found with given ID")
-                completionHandler(nil, response.error)
-            }
+            completionHandler(classifier, response.error)
         })
     }
     
     /**
-     Deletes the classifier based on the classifiyID passed in
+     Deletes the classifier with the classifierId
      
      - parameter classifierId:      The classifer ID used to delete the classifier
      - parameter completionHandler: Bool return with true as success
@@ -142,13 +136,11 @@ public class NaturalLanguageClassifier : Service {
         params.updateValue(trainerURL, forKey: NLCConstants.TrainerProperty.TrainingData.rawValue)
         
         NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLs: params, parameters: [:], apiKey: _apiKey, contentType: ContentType.JSON, accept: ContentType.JSON, completionHandler: {response in
-            if let classifier = Mapper<Classifier>().map(response.data) {
-                if let _ = classifier.id {
-                    completionHandler(classifier: classifier, error: response.error)
-                    return
-                }
+            var classifier:Classifier? = nil
+            if let mapClassifier = Mapper<Classifier>().map(response.data) {
+                classifier = mapClassifier
             }
-            completionHandler(classifier: nil, error: response.error)
+            completionHandler(classifier: classifier, error: response.error)
         })
     }
 }

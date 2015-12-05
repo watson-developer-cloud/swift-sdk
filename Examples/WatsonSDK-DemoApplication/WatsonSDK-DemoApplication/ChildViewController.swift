@@ -21,8 +21,20 @@ extension ChildViewController: ChildProtocol {
     
     var config: [String : String]! {
     
-        fatalError("ChildViewController \(self.dynamicType) must override the title property.")
+        fatalError("ChildViewController \(self.dynamicType) must override the config property.")
     
+    }
+    
+    var viewFrame: CGRect { return self.view.frame }
+    
+    
+    func displayFullscreenChildViewController(child: UIViewController) {
+        
+        assert(child.view != nil, "Subclass of ChildViewController should have a valid view before calling"
+            + " displayFullscreenChildViewController. Offending VC: \(self), type: \(self.dynamicType)")
+        
+        // TODO: implement
+        
     }
     
 }

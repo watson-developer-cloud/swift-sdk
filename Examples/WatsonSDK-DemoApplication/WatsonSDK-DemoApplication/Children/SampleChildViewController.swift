@@ -33,8 +33,6 @@ class SampleChildViewController: ChildViewController {
         
         super.viewDidLoad()
         
-        print("ruslan: viewDidLoad! view: \(self.view)")
-        
         self.view.backgroundColor = UIColor.redColor()
         
     }

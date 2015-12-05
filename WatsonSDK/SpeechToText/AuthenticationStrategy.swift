@@ -16,21 +16,10 @@
 
 import Foundation
 
-public class NLCConstants {
-  
-  static let serviceURL = "/natural-language-classifier/api"
-  
-  static let text = "text"
-  static let classifiers = "classifiers"
-  static let classifier = "classifier"
-  static let v1ClassifiersURI = "/v1/classifiers"
-  
-  public enum TrainerProperty: String {
-    case Language     = "language"
-    case Name         = "name"
-    case TrainingMeta = "training_metadata"
-    case TrainingData = "training_data"
-  }
-  
+public protocol AuthenticationStrategy {
+        
+    func authenticate(onauthenticated: (token: String?, error: NSError?)->Void)
+    
+    var token: String? { get }
+    
 }
-

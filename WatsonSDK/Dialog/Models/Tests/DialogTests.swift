@@ -48,12 +48,141 @@ class DialogTests: XCTestCase {
     
     // invalid parameters for negative tests
     let invalidDialogID = "9354b734-d5b2-4fd3-bee0-e38adbcab575"
+    let invalidConversationID = 177530
+    let invalidClientID = 170351
     
     // timeout for asynchronous completion handlers
     private let timeout: NSTimeInterval = 30.0
     
     // the separator to use between sets of output
     let separator = "----------"
+    
+    // MARK: - Dialog Tests
+    
+    /// Test the Dialog service by executing each operation with valid parameters.
+    func testDialog() {
+        
+        // delete any Dialog applications with the same name as our testing application
+        deleteConflictingDialogApp()
+        
+        // load the Dialog file to be used for creating the application
+        loadDialogFile()
+        
+        // create the Dialog application
+        createDialogApp()
+        
+        // verify the content of the initial response node
+        verifyInitialNode(initialResponse)
+        
+        // update and verify changes to the initial node
+        // (changes should be reset by uploadDialogFile())
+        updateInitialNode(initialResponse2)
+        verifyInitialNode(initialResponse2)
+        
+        // verify list of Dialog applications to ensure our application was created
+        verifyListOfDialogApplications()
+        
+        // download the Dialog file in various formats
+        // (note: each file is immediately deleted to avoid naming conflicts)
+        downloadDialogFile()
+        downloadDialogFile(.OctetStream)
+        downloadDialogFile(.WDSJSON)
+        downloadDialogFile(.WDSXML)
+        
+        // upload the original Dialog file to reset the application
+        uploadDialogFile()
+        
+        // verify successful upload/reset
+        verifyInitialNode(initialResponse)
+        
+        // converse with the Dialog application
+        startConversation()
+        continueConversation()
+        
+        // get all conversation session history
+        // getAllConversationHistory()
+        
+        // associate profile parameters with this client
+        setProfileParameters()
+        
+        // verify profile parameters for this client
+        verifyProfileParameters()
+        
+        // verify the first profile parameter for this client
+        verifyProfileParameter()
+        
+        // verify error conditions
+        executeNegativeTests()
+        
+        // delete the Dialog application
+        deleteDialogApp()
+        
+    }
+    
+    /// Test the Dialog service by executing each operation with invalid parameters.
+    func executeNegativeTests() {
+        
+        // invoke getContent() with an invalid Dialog ID
+        getContentInvalidDialogID()
+        
+        // invoke updateContent() with an invalid Dialog ID
+        updateContentInvalidDialogID()
+        
+        // invoke updateContent() with invalid content
+        updateContentInvalidContent()
+        
+        // invoke createDialog() with a name that is too long
+        createDialogWithLongName()
+        
+        // invoke createDialog() with a file that doesn't exist
+        createDialogWithoutFile()
+        
+        // invoke createDialog() with an invalid file
+        createDialogWithInvalidFile()
+        
+        // invoke deleteDialog() with an invalid Dialog ID
+        deleteDialogWithInvalidDialogID()
+        
+        // invoke getDialogFile() with an invalid Dialog ID
+        downloadDialogFileWithInvalidDialogID()
+        
+        // invoke updateDialog() with invalid Dialog ID
+        updateDialogWithInvalidDialogID()
+        
+        // invoke updateDialog() with a file that doesn't exist
+        updateDialogWithoutFile()
+        
+        // invoke updateDialog() with an invalid file
+        updateDialogWithInvalidFile()
+        
+        // invoke converse() with an invalid Dialog ID
+        startConversationInvalidDialogID()
+        
+        // invoke converse() with an invalid Conversation ID and Client ID
+        startConversationInvalidConversationIDAndClientID()
+        
+        // invoke converse() with unexpected input on initial response
+        startConversationUnexpectedInput()
+        
+        // invoke getProfile() with an invalid Dialog ID
+        getProfileWithInvalidDialogID()
+        
+        // invoke getProfile() with an invalid Client ID
+        getProfileWithInvalidClientID()
+        
+        // invoke getProfile() with invalid profile parameter names
+        getProfileWithInvalidParameterNames()
+        
+        // invoke updateProfile() with an invalid Dialog ID
+        updateProfileWithInvalidDialogID()
+        
+        // invoke updateProfile() with an invalid Client ID
+        updateProfileWithInvalidClientID()
+        
+        // Invoke updateProfile() with invalid profile parameters
+        updateProfileWithInvalidParameterNames()
+        
+    }
     
     // MARK: - Helper functions
     
@@ -100,63 +229,6 @@ class DialogTests: XCTestCase {
     
     // MARK: - Positive tests
     
-    /// Test the Dialog service by executing each operation with valid parameters.
-    func testDialog() {
-        
-        // delete any Dialog applications with the same name as our testing application
-        deleteConflictingDialogApp()
-        
-        // load the Dialog file to be used for creating the application
-        loadDialogFile()
-        
-        // create the Dialog application
-        createDialogApp()
-        
-        // read nodes to verify the initial response
-        verifyInitialNode(initialResponse)
-        
-        // update and verify changes to the initial node
-        // (changes should be reset by uploadDialogFile())
-        updateInitialNode(initialResponse2)
-        verifyInitialNode(initialResponse2)
-        
-        // verify list of Dialog applications to ensure our application was created
-        verifyListOfDialogApplications()
-        
-        // download the Dialog file in various formats
-        // (note: each file is immediately deleted to avoid naming conflicts)
-        downloadDialogFile()
-        downloadDialogFile(.OctetStream)
-        downloadDialogFile(.WDSJSON)
-        downloadDialogFile(.WDSXML)
-        
-        // upload the original Dialog file to reset the application
-        uploadDialogFile()
-        
-        // verify successful upload/reset
-        verifyInitialNode(initialResponse)
-        
-        // converse with the Dialog application
-        startConversation()
-        continueConversation()
-        
-        // get all conversation session history
-        // getAllConversationHistory()
-        
-        // associate profile parameters with this client
-        setProfileParameters()
-        
-        // verify profile parameters for this client
-        verifyProfileParameters()
-        
-        // verify the first profile parameter for this client
-        verifyProfileParameter()
-        
-        // delete the Dialog application
-        deleteDialogApp()
-        
-    }
-    
     /// Delete any Dialog applications with the same name as our testing application.
     /// (This will prevent naming conflicts from any previously unsuccessful tests.)
     func deleteConflictingDialogApp() {
@@ -197,7 +269,6 @@ class DialogTests: XCTestCase {
         XCTAssertNotNil(dialogPath, "Dialog File cannot be found.")
         dialogFile = NSURL(fileURLWithPath: dialogPath!)
         XCTAssertNotNil(dialogFile, "Dialog File could not be loaded.")
-        
     }
     
     /// Create the Dialog application.
@@ -226,7 +297,7 @@ class DialogTests: XCTestCase {
         waitForExpectation()
     }
     
-    /// Print the content of all nodes of the Dialog application.
+    /// Verify the content of the initial response node
     func verifyInitialNode(initialResponse: String) {
         let description = "Verifying the content of the initial node."
         let expectation = expectationWithDescription(description)
@@ -244,6 +315,7 @@ class DialogTests: XCTestCase {
                 let responseMatch = (node.content == initialResponse)
                 if nodeMatch && responseMatch {
                     expectation.fulfill()
+                    break
                 }
             }
             
@@ -257,7 +329,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // define the updates to the initial node
-        let nodes = [Dialog.Node(content: initialResponse, node: self.initialNode)]
+        let nodes = [Dialog.Node(content: initialResponse, node: initialNode)]
         
         // update the initial node
         service!.updateContent(dialogID!, nodes: nodes) { error in
@@ -272,7 +344,6 @@ class DialogTests: XCTestCase {
     
     /// Verify list of Dialog applications to ensure our application was created
     func verifyListOfDialogApplications() {
-        
         let description = "Check the list of Dialog applications for our testing app."
         let expectation = expectationWithDescription(description)
         
@@ -297,7 +368,6 @@ class DialogTests: XCTestCase {
     
     /// Download the Dialog file associated with our testing application
     func downloadDialogFile(format: MediaType? = nil) {
-        
         let description = "Downloading the Dialog file for our testing app."
         let expectation = expectationWithDescription(description)
         
@@ -323,7 +393,6 @@ class DialogTests: XCTestCase {
 
     /// Upload the original Dialog file to reset the application.
     func uploadDialogFile() {
-        
         let description = "Uploading the original Dialog file to reset application."
         let expectation = expectationWithDescription(description)
         
@@ -341,7 +410,6 @@ class DialogTests: XCTestCase {
     
     /// Start a conversation with the Dialog application.
     func startConversation() {
-        
         let description = "Start a conversation with the Dialog application."
         let expectation = expectationWithDescription(description)
         
@@ -366,13 +434,12 @@ class DialogTests: XCTestCase {
     
     /// Continue a conversation with the Dialog application.
     func continueConversation() {
-        
         let description = "Continue the conversation with the Dialog application."
         let expectation = expectationWithDescription(description)
         
         // continue conversation
-        service!.converse(dialogID!, conversationID: self.conversationID!,
-            clientID: self.clientID!, input: self.input) { response, error in
+        service!.converse(dialogID!, conversationID: conversationID!,
+            clientID: clientID!, input: input) { response, error in
             
             // verify expected response
             XCTAssertNotNil(response)
@@ -386,49 +453,7 @@ class DialogTests: XCTestCase {
         waitForExpectation()
     }
     
-    /// Get all conversation session history.
-//    func getAllConversationHistory() {
-//        
-//        let description = "Get all recorded conversation history."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // construct date range
-//        let dateFrom = NSDate(timeIntervalSinceNow: -120)
-//        let dateTo = NSDate()
-//        
-//        // get conversation history
-//        service!.getConversation(dialogID!, dateFrom: dateFrom, dateTo: dateTo) {
-//            conversations, error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(conversations)
-//            XCTAssertNil(error)
-//            
-//            // ensure history is as expected
-//            for conversation in conversations! {
-//                let idMatch = conversation.conversationID == self.conversationID
-//                let clientMatch = conversation.clientID == self.clientID
-//                if idMatch && clientMatch {
-//
-//                    
-//                    // ensure hit nodes match
-//                    var hitNode1: Bool?
-//                    var hitNode2: Bool?
-//                    for hitNode in conversation.hitNodes! {
-//                        if hitNode.nodeID == initialNode {
-//                            hitNode1 = true
-//                        }
-//                        if hitNode.nodeID == node2 {
-//                            hitNode2 = true
-//                        }
-//                    }
-//                    
-//                    expectation.fulfill()
-//                }
-//            }
-//        }
-//        waitForExpectation()
-//    }
+    // TODO: Get all conversation session history.
     
     /// Associate profile parameters with this client.
     func setProfileParameters() {
@@ -452,7 +477,7 @@ class DialogTests: XCTestCase {
         let description = "Verifying profile parameters with this client."
         let expectation = expectationWithDescription(description)
         
-        // get all variables
+        // get all profile parameters
         service!.getProfile(dialogID!, clientID: clientID!) { parameters, error in
             
             // verify expected response
@@ -466,7 +491,7 @@ class DialogTests: XCTestCase {
                 let parameterMatch = returnedValue == setValue
                 XCTAssert(parameterMatch)
             }
-            
+
             expectation.fulfill()
         }
         waitForExpectation()
@@ -522,299 +547,481 @@ class DialogTests: XCTestCase {
     
     // MARK: - Negative Tests
     
-//    // Invoke getContent() with an invalid Dialog ID
-//    func getContentInvalidDialogID() {
-//        let description = "Try to get the content for each node using an invalid Dialog ID."
-//        let expectation = expectationWithDescription(description)
-//
-//        // get content
-//        service!.getContent(invalidDialogID) { nodes, error in
-//            
-//            // verify expected response
-//            XCTAssertNil(nodes)
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 404)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke updateContent() with an invalid Dialog ID
-//    func updateContentInvalidDialogID() {
-//        let description = "Try to update the content for nodes using an invalid Dialog ID."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define the updates to the initial node
-//        let nodes = [Dialog.Node(content: initialResponse, node: self.initialNode)]
-//        
-//        // update the initial node
-//        service!.updateContent(invalidDialogID, nodes: nodes) { error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 404)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke updateContent() with invalid content
-//    func updateContentInvalidContent() {
-//        let description = "Try to update the initial node with invalid content."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define an empty node
-//        let nodes = [Dialog.Node()]
-//        
-//        // update the node
-//        service!.updateContent(dialogID!, nodes: nodes) { error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 400)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke createDialog() with a name that is too long
-//    func createDialogWithLongName() {
-//        let description = "Try to create a Dialog with a very long name."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define the long name
-//        var longDialogName = dialogName
-//        for _ in 1...100 {
-//            longDialogName += dialogName
-//        }
-//        
-//        // create Dialog application
-//        service!.createDialog(longDialogName, fileURL: dialogFile!) { dialogID, error in
-//            
-//            // verify expected response
-//            XCTAssertNil(dialogID)
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 422)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke createDialog() with a file that doesn't exist
-//    func createDialogWithoutFile() {
-//        let description = "Try to create a Dialog with a Dialog file that doesn't exist."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define file path
-//        let manager = NSFileManager.defaultManager()
-//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-//            inDomains: .UserDomainMask)[0]
-//        let pathComponent = "invalidFile.json"
-//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-//        
-//        // create Dialog application
-//        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
-//            
-//            // verify expected response
-//            XCTAssertNil(dialogID)
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke createDialog() with an invalid file
-//    func createDialogWithInvalidFile() {
-//        let description = "Try to create a Dialog with an invalid Dialog file."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define file path
-//        let manager = NSFileManager.defaultManager()
-//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-//            inDomains: .UserDomainMask)[0]
-//        let pathComponent = "invalidFile.json"
-//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-//        let fileURLString = fileURL.URLString
-//        
-//        // write to the file
-//        do {
-//            let contents = "{ \"Hello\": \"World\" }"
-//            try contents.writeToFile(fileURLString, atomically: false,
-//                encoding: NSUTF8StringEncoding)
-//        } catch {
-//            XCTFail("Unable to create file.")
-//        }
-//        
-//        // create Dialog application
-//        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
-//            
-//            // verify expected response
-//            XCTAssertNil(dialogID)
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 400)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//        
-//        // delete the file to prevent conflicts
-//        do {
-//            try manager.removeItemAtURL(fileURL)
-//        } catch {
-//            XCTFail("Unable to delete invalid Dialog file.")
-//        }
-//    }
-//    
-//    // Invoke deleteDialog() with an invalid Dialog ID
-//    func deleteDialogWithInvalidDialogID() {
-//        let description = "Try to delete a Dialog using an invalid Dialog ID."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // delete Dialog application
-//        service!.deleteDialog(invalidDialogID) { error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 404)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke getDialogFile() with an invalid Dialog ID
-//    func downloadDialogFileWithInvalidDialogID() {
-//        let description = "Try to download the Dialog file using an invalid Dialog ID."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // download the Dialog file
-//        service!.getDialogFile(invalidDialogID) { file, error in
-//            
-//            // verify expected response
-//            XCTAssertNil(file)
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 404)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke updateDialog() with invalid Dialog ID
-//    func updateDialogWithInvalidDialogID() {
-//        let description = "Try to update a Dialog using an invalid Dialog ID."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // upload the Dialog file
-//        service!.updateDialog(dialogID!, fileURL: dialogFile!, fileType: .WDSXML) {
-//            error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 404)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke updateDialog() with a file that doesn't exist
-//    func updateDialogWithoutFile() {
-//        let description = "Try to update a Dialog with a Dialog file that doesn't exist."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define file path
-//        let manager = NSFileManager.defaultManager()
-//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-//            inDomains: .UserDomainMask)[0]
-//        let pathComponent = "invalidFile.json"
-//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-//        
-//        // upload the Dialog file
-//        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectation()
-//    }
-//    
-//    // Invoke updateDialog() with an invalid file
-//    func updateDialogWithInvalidFile() {
-//        let description = "Try to update a Dialog with an invalid Dialog file."
-//        let expectation = expectationWithDescription(description)
-//        
-//        // define file path
-//        let manager = NSFileManager.defaultManager()
-//        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-//            inDomains: .UserDomainMask)[0]
-//        let pathComponent = "invalidFile.json"
-//        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
-//        let fileURLString = fileURL.URLString
-//        
-//        // write to the file
-//        do {
-//            let contents = "{ \"Hello\": \"World\" }"
-//            try contents.writeToFile(fileURLString, atomically: false,
-//                encoding: NSUTF8StringEncoding)
-//        } catch {
-//            XCTFail("Unable to create file.")
-//        }
-//        
-//        // upload the Dialog file
-//        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .JSON) { error in
-//            
-//            // verify expected response
-//            XCTAssertNotNil(error)
-//            
-//            // ensure error is as expected
-//            XCTAssert(error!.code == 400) // TODO: should fail (Alamofire instead)
-//            
-//            expectation.fulfill()
-//        }
-//        
-//        // delete the file to prevent conflicts
-//        do {
-//            try manager.removeItemAtURL(fileURL)
-//        } catch {
-//            XCTFail("Unable to delete invalid Dialog file.")
-//        }
-//    }
+    // Invoke getContent() with an invalid Dialog ID
+    func getContentInvalidDialogID() {
+        let description = "Try to get the content for each node using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+
+        // get content
+        service!.getContent(invalidDialogID) { nodes, error in
+            
+            // verify expected response
+            XCTAssertNil(nodes)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateContent() with an invalid Dialog ID
+    func updateContentInvalidDialogID() {
+        let description = "Try to update the content for nodes using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // define the updates to the initial node
+        let nodes = [Dialog.Node(content: initialResponse, node: initialNode)]
+        
+        // update the initial node
+        service!.updateContent(invalidDialogID, nodes: nodes) { error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateContent() with invalid content
+    func updateContentInvalidContent() {
+        let description = "Try to update the initial node with invalid content."
+        let expectation = expectationWithDescription(description)
+        
+        // define an empty node
+        let nodes = [Dialog.Node(content: initialNode, node: initialResponse)]
+        
+        // update the node
+        service!.updateContent(dialogID!, nodes: nodes) { error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 422)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke createDialog() with a name that is too long
+    func createDialogWithLongName() {
+        let description = "Try to create a Dialog with a very long name."
+        let expectation = expectationWithDescription(description)
+        
+        // define the long name
+        var longDialogName = dialogName
+        for _ in 1...100 {
+            longDialogName += dialogName
+        }
+        
+        // create Dialog application
+        service!.createDialog(longDialogName, fileURL: dialogFile!) { dialogID, error in
+            
+            // verify expected response
+            XCTAssertNil(dialogID)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 422)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke createDialog() with a file that doesn't exist
+    func createDialogWithoutFile() {
+        let description = "Try to create a Dialog with a Dialog file that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        // define file path
+        let manager = NSFileManager.defaultManager()
+        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+            inDomains: .UserDomainMask)[0]
+        let pathComponent = "invalidFile.json"
+        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+        
+        // create Dialog application
+        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+            
+            // verify expected response
+            XCTAssertNil(dialogID)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == -6008)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke createDialog() with an invalid file
+    func createDialogWithInvalidFile() {
+        let description = "Try to create a Dialog with an invalid Dialog file."
+        let expectation = expectationWithDescription(description)
+        
+        // define file path
+        let manager = NSFileManager.defaultManager()
+        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+            inDomains: .UserDomainMask)[0]
+        let pathComponent = "invalidFile.json"
+        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+        let file = fileURL.path!
+        
+        // write to the file
+        do {
+            let contents = "{ \"Hello\": \"World\" }"
+            try contents.writeToFile(file, atomically: true,
+                encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTFail("Unable to create file.")
+        }
+        
+        // create Dialog application
+        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+            
+            // verify expected response
+            XCTAssertNil(dialogID)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 400)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+        
+        // delete the file to prevent conflicts
+        do {
+            try manager.removeItemAtURL(fileURL)
+        } catch {
+            XCTFail("Unable to delete invalid Dialog file.")
+        }
+    }
+    
+    // Invoke deleteDialog() with an invalid Dialog ID
+    func deleteDialogWithInvalidDialogID() {
+        let description = "Try to delete a Dialog using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // delete Dialog application
+        service!.deleteDialog(invalidDialogID) { error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke getDialogFile() with an invalid Dialog ID
+    func downloadDialogFileWithInvalidDialogID() {
+        let description = "Try to download the Dialog file using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // download the Dialog file
+        service!.getDialogFile(invalidDialogID) { file, error in
+            
+            // verify expected response
+            XCTAssertNotNil(file)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            // delete the downloaded file to prevent conflicts
+            do {
+                let manager = NSFileManager.defaultManager()
+                try manager.removeItemAtURL(file!)
+            } catch {
+                XCTFail("Unable to delete downloaded Dialog file.")
+            }
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateDialog() with invalid Dialog ID
+    func updateDialogWithInvalidDialogID() {
+        let description = "Try to update a Dialog using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // upload the Dialog file
+        service!.updateDialog(invalidDialogID, fileURL: dialogFile!, fileType: .WDSXML) {
+            error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateDialog() with a file that doesn't exist
+    func updateDialogWithoutFile() {
+        let description = "Try to update a Dialog with a Dialog file that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        // define file path
+        let manager = NSFileManager.defaultManager()
+        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+            inDomains: .UserDomainMask)[0]
+        let pathComponent = "invalidFile.json"
+        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+        
+        // upload the Dialog file
+        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .WDSJSON) { error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 400)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateDialog() with an invalid file
+    func updateDialogWithInvalidFile() {
+        let description = "Try to update a Dialog with an invalid Dialog file."
+        let expectation = expectationWithDescription(description)
+        
+        // define file path
+        let manager = NSFileManager.defaultManager()
+        let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+            inDomains: .UserDomainMask)[0]
+        let pathComponent = "invalidFile.json"
+        let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
+        let file = fileURL.path!
+        
+        // write to the file
+        do {
+            let contents = "{ \"Hello\": \"World\" }"
+            try contents.writeToFile(file, atomically: true,
+                encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTFail("Unable to create file.")
+        }
+        
+        // upload the Dialog file
+        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .WDSJSON) { error in
+            
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 400)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+        
+        // delete the file to prevent conflicts
+        do {
+            try manager.removeItemAtURL(fileURL)
+        } catch {
+            XCTFail("Unable to delete invalid Dialog file.")
+        }
+    }
     
     // TODO: Write negative test for getConversation()
     
-    // TODO: Write negative test for converse()
+    // Invoke converse() with an invalid Dialog ID
+    func startConversationInvalidDialogID() {
+        let description = "Try to converse with an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // start a new conversation
+        service!.converse(invalidDialogID) { response, error in
+            
+            // verify expected response
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
     
-    // TODO: Write negative test for getProfile()
-
-    // TODO: Write negative test for updateProfile()
+    // Invoke converse() with an invalid Conversation ID and Client ID
+    func startConversationInvalidConversationIDAndClientID() {
+        let description = "Try to converse with an invalid Conversation ID and Client ID."
+        let expectation = expectationWithDescription(description)
+        
+        // start a new conversation
+        service!.converse(dialogID!, conversationID: invalidConversationID,
+            clientID: invalidClientID) { response, error in
+                
+            // verify expected response
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+                
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke converse() with unexpected input on initial response
+    func startConversationUnexpectedInput() {
+        let description = "Try to start a conversation with unexpected input."
+        let expectation = expectationWithDescription(description)
+        
+        // start a new conversation
+        service!.converse(dialogID!, input: input) { response, error in
+            
+            // verify expected response
+            XCTAssertNotNil(response)
+            XCTAssertNil(error)
+            
+            // ensure initial response is as expected
+            if response?.response![0] == self.initialResponse {
+                expectation.fulfill()
+            }
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke getProfile() with an invalid Dialog ID
+    func getProfileWithInvalidDialogID() {
+        let description = "Try to get a client's profile using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // get all profile parameters
+        service!.getProfile(invalidDialogID, clientID: clientID!) { parameters, error in
+            
+            // verify expected response
+            XCTAssertNil(parameters)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke getProfile() with an invalid Client ID
+    func getProfileWithInvalidClientID() {
+        let description = "Try to get a client's profile using an invalid Client ID."
+        let expectation = expectationWithDescription(description)
+        
+        // get all profile parameters
+        service!.getProfile(dialogID!, clientID: invalidClientID) { parameters, error in
+            
+            // verify expected response
+            XCTAssertNotNil(parameters)
+            XCTAssertNil(error)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke getProfile() with invalid profile parameter names
+    func getProfileWithInvalidParameterNames() {
+        let description = "Try to get a client's profile using invalid parameter names."
+        let expectation = expectationWithDescription(description)
+        
+        // invalid profile parameter names
+        let invalidNames = ["Hello", "World"]
+        
+        // get invalid profile parameters
+        service!.getProfile(dialogID!, clientID: clientID!, names: invalidNames) {
+            parameters, error in
+            
+            // verify expected response
+            XCTAssertNil(parameters)
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 422)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateProfile() with an invalid Dialog ID
+    func updateProfileWithInvalidDialogID() {
+        let description = "Try to update a client's profile using an invalid Dialog ID."
+        let expectation = expectationWithDescription(description)
+        
+        // set profile parameters
+        service!.updateProfile(invalidDialogID, clientID: clientID!,
+            parameters: parameters) { error in
+                
+            // verify expected response
+            XCTAssertNotNil(error)
+            
+            // ensure error is as expected
+            XCTAssert(error!.code == 404)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateProfile() with an invalid Client ID
+    func updateProfileWithInvalidClientID() {
+        let description = "Try to update a client's profile using an invalid Client ID."
+        let expectation = expectationWithDescription(description)
+        
+        // set profile parameters
+        service!.updateProfile(dialogID!, clientID: invalidClientID,
+            parameters: parameters) { error in
+                
+            // verify expected response
+            XCTAssertNil(error)
+                
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // Invoke updateProfile() with invalid profile parameters
+    func updateProfileWithInvalidParameterNames() {
+        let description = "Try to update a client's profile using invalid parameter names."
+        let expectation = expectationWithDescription(description)
+        
+        // invalid profile parameters
+        let invalidParameters = ["Hello": "World"]
+        
+        // update invalid profile parameters
+        service!.updateProfile(dialogID!, clientID: clientID!,
+            parameters: invalidParameters) { error in
+            
+            // verify expected response
+            XCTAssertNil(error)
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
 }

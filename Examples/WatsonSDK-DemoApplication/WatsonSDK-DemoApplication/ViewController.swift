@@ -245,7 +245,7 @@ class ViewController: UIViewController {
     
     private func highlightAppropriateSelectionScreenItem(child: ChildViewController) {
         
-        
+        // TODO: implement
         
     }
     
@@ -323,8 +323,14 @@ extension ViewController: UITableViewDelegate {
          [2]
             
         */
-        case self.selectTableView: print("selected a cell at indexpath: \(indexPath) in select table view"); return
+        case self.selectTableView:
+            self.selectTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            presentChild(children[indexPath.row])
+            presentPopoverScreen(self.selectView!)
+            return
+            
         case self.settingsScreenTableView: func nothing(){}; nothing()  // don't do anything here
+            
         default: return
             
         }

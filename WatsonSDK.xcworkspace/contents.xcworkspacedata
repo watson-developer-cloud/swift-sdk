@@ -8,13 +8,16 @@
       location = "group:Examples"
       name = "Examples">
       <FileRef
+         location = "group:WatsonSDK-DemoApplication/WatsonSDK-DemoApplication.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:SpeechRecognition/SpeechRecognition.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:SpeechSynthesis/SpeechSynthesis.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:/Users/vincentherrin/Github/Watson-iOS-SDK-dev/Examples/VisionInsights/VisionInsights.xcodeproj">
+         location = "group:VisionInsights/VisionInsights.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

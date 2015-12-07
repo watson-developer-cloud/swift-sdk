@@ -12,6 +12,7 @@
 		6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */; };
 		6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */; };
 		6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */; };
+		6E9517AD1C16137500CD0B04 /* AlchemyLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */; };
 		6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328B1C0E49880055D402 /* ChildProtocol.swift */; };
 		6E96328E1C0E4A8B0055D402 /* ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */; };
 		6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */; };
@@ -30,6 +31,7 @@
 		6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E3C0D111C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageViewController.swift; sourceTree = "<group>"; };
 		6E96328B1C0E49880055D402 /* ChildProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildProtocol.swift; sourceTree = "<group>"; };
 		6E96328D1C0E4A8B0055D402 /* ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildViewController.swift; sourceTree = "<group>"; };
 		6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleChildViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */,
+				6E9517AB1C16136600CD0B04 /* AlchemyLanguageSampleApp */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -100,6 +103,14 @@
 				6E3C0D131C0E3A93001BF15A /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6E9517AB1C16136600CD0B04 /* AlchemyLanguageSampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
+			);
+			path = AlchemyLanguageSampleApp;
 			sourceTree = "<group>";
 		};
 		6E9632911C0E4DF00055D402 /* BarView */ = {
@@ -205,6 +216,7 @@
 				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
 				6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */,
 				6E9632941C0E4DF00055D402 /* BarView.swift in Sources */,
+				6E9517AD1C16137500CD0B04 /* AlchemyLanguageViewController.swift in Sources */,
 				6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */,
 				6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */,
 				6E96328E1C0E4A8B0055D402 /* ChildViewController.swift in Sources */,

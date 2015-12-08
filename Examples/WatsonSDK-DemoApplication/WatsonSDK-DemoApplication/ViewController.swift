@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatsonSDK
 
 /**
 
@@ -29,6 +30,16 @@ class ViewController: UIViewController {
     // add your child view controller here
     var children: [ChildProtocol] = [
 
+        {
+            
+            let sb = UIStoryboard(name: "AlchemyVision", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyVisionViewController") as! AlchemyVisionViewController
+            return vc
+            
+        }(),
+        
+        AlchemyLanguageViewController(),
+        
         SampleChildViewController()
     
     ]

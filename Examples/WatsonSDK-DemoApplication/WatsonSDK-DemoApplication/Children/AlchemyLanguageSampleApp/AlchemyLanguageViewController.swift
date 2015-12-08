@@ -18,18 +18,12 @@ extension AlchemyLanguageViewController: ChildProtocol {
         
     }
     
-    var config: [String : String]! {
-        
-        return ["apiKey" : ""]
-        
-    }
-    
 }
 
 class AlchemyLanguageViewController: UIViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad(); self.view.backgroundColor = UIColor.cyanColor()
+        super.viewDidLoad()
     }
     
 }

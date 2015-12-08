@@ -189,6 +189,18 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
+
+### Speech to Text
+
+The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
+
+The following links provide additional information about the IBM Speech to Text service:
+
+* [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
+* [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
+* [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
+
+
 ### Text to Speech
 
 The Text to Speech service gives your app the ability to synthesize spoken text in a variety of voices.
@@ -259,7 +271,11 @@ service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 )
 ```
 
+The following links provide more information about the Text To Speech service:
 
+* [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
+* [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
+* [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
 ## License
 

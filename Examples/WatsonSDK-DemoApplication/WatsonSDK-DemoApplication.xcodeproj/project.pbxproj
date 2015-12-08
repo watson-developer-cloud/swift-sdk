@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E3295171C176332001CE8B7 /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3295161C176332001CE8B7 /* WatsonSDK.framework */; };
+		6E3295191C176E2A001CE8B7 /* AlchemyLanguage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */; };
+		6E32951B1C177281001CE8B7 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32951A1C177281001CE8B7 /* UIColorExtension.swift */; };
 		6E3C0D081C0E3A93001BF15A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */; };
 		6E3C0D0A1C0E3A93001BF15A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C0D091C0E3A93001BF15A /* ViewController.swift */; };
 		6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		6E3295161C176332001CE8B7 /* WatsonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonSDK.framework; path = "../../build/Debug-iphoneos/WatsonSDK.framework"; sourceTree = "<group>"; };
+		6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyLanguage.storyboard; sourceTree = "<group>"; };
+		6E32951A1C177281001CE8B7 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		6E3C0D041C0E3A93001BF15A /* WatsonSDK-DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatsonSDK-DemoApplication.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E3C0D091C0E3A93001BF15A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +97,7 @@
 				6ED6DBB51C1099CF00682B81 /* SettingsView */,
 				6E96328B1C0E49880055D402 /* ChildProtocol.swift */,
 				6E3C0D191C0E3B33001BF15A /* Children */,
-				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
+				6E32951A1C177281001CE8B7 /* UIColorExtension.swift */,
 			);
 			path = "WatsonSDK-DemoApplication";
 			sourceTree = "<group>";
@@ -117,6 +121,7 @@
 				6E3C0D131C0E3A93001BF15A /* Info.plist */,
 			);
 			name = Resources;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		6E51B26C1C173BA300D5EF12 /* AlchemyVisionSampleApp */ = {
@@ -135,7 +140,9 @@
 		6E9517AB1C16136600CD0B04 /* AlchemyLanguageSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
 				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
+				6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */,
 			);
 			path = AlchemyLanguageSampleApp;
 			sourceTree = "<group>";
@@ -229,6 +236,7 @@
 				6E9632951C0E4DF00055D402 /* BarView.xib in Resources */,
 				6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */,
 				6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */,
+				6E3295191C176E2A001CE8B7 /* AlchemyLanguage.storyboard in Resources */,
 				6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +250,7 @@
 			files = (
 				6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */,
 				6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */,
+				6E32951B1C177281001CE8B7 /* UIColorExtension.swift in Sources */,
 				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
 				6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */,
 				6E9632941C0E4DF00055D402 /* BarView.swift in Sources */,

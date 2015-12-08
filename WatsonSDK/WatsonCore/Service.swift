@@ -30,7 +30,7 @@ public class Service : NSObject {
     /// Service prefix that goes after host and before a specific operation (e.g. /personalityinsights/api)
     private let _serviceURL: String
     /// API Key for the service
-    public var _apiKey: String!
+    var _apiKey: String!
     
     /**
      Construct an endpoint URL for a Watson operation

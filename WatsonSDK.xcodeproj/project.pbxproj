@@ -84,7 +84,6 @@
 		7ADC3A791BF9551500CD916E /* Taxonomies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39BF1BF950C800CD916E /* Taxonomies.swift */; };
 		7ADC3A7A1BF9551500CD916E /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C01BF950C800CD916E /* Taxonomy.swift */; };
 		7ADC3A7B1BF955E600CD916E /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C21BF950C800CD916E /* AlchemyLanguageTests.swift */; };
-		7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C41BF950C800CD916E /* AlchemyConstants.swift */; };
 		7ADC3A7D1BF955FF00CD916E /* AlchemyVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C51BF950C800CD916E /* AlchemyVision.swift */; };
 		7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C61BF950C800CD916E /* AlchemyVisionConstants.swift */; };
 		7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC39C81BF950C800CD916E /* ImageFace.swift */; };
@@ -257,7 +256,6 @@
 		7ADC39BF1BF950C800CD916E /* Taxonomies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomies.swift; sourceTree = "<group>"; };
 		7ADC39C01BF950C800CD916E /* Taxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		7ADC39C21BF950C800CD916E /* AlchemyLanguageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageTests.swift; sourceTree = "<group>"; };
-		7ADC39C41BF950C800CD916E /* AlchemyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyConstants.swift; sourceTree = "<group>"; };
 		7ADC39C51BF950C800CD916E /* AlchemyVision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyVision.swift; sourceTree = "<group>"; };
 		7ADC39C61BF950C800CD916E /* AlchemyVisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyVisionConstants.swift; sourceTree = "<group>"; };
 		7ADC39C81BF950C800CD916E /* ImageFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFace.swift; sourceTree = "<group>"; };
@@ -549,7 +547,6 @@
 		7ADC39C31BF950C800CD916E /* AlchemyVision */ = {
 			isa = PBXGroup;
 			children = (
-				7ADC39C41BF950C800CD916E /* AlchemyConstants.swift */,
 				7ADC39C51BF950C800CD916E /* AlchemyVision.swift */,
 				7ADC39C61BF950C800CD916E /* AlchemyVisionConstants.swift */,
 				7ADC39C71BF950C800CD916E /* Models */,
@@ -1019,7 +1016,6 @@
 				BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */,
 				7A89EF9C1C0DF15E00281B77 /* DialogModel.swift in Sources */,
 				7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */,
-				7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */,
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,

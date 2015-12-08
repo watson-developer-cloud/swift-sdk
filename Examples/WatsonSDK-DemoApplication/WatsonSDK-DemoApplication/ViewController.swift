@@ -154,7 +154,6 @@ class ViewController: UIViewController {
         
         self.selectView = UIView(frame: selectScreenPopupFrame)
         self.selectView.layer.zPosition = 3.0
-        self.selectView.backgroundColor = UIColor.purpleColor()
         
         let size = CGSize(
             width: screenWidth,
@@ -172,7 +171,7 @@ class ViewController: UIViewController {
         self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.selectTableView.layer.zPosition = 4.0
         self.selectTableView.backgroundView = nil
-        self.selectTableView.backgroundColor = UIColor(rgba: "#02577a")
+        self.selectTableView.backgroundColor = UIColor(rgba: "#89d6fb")
         self.selectTableView.rowHeight = 60.0
         
         self.selectView.addSubview(self.selectTableView)
@@ -403,7 +402,7 @@ extension ViewController: UITableViewDataSource {
             let cell = self.selectTableView.dequeueReusableCellWithIdentifier("cell")!
             cell.backgroundColor = UIColor.clearColor()
             cell.textLabel?.text = childrenTitles[indexPath.row]
-            cell.textLabel?.textColor = UIColor(rgba: "#89d6fb")
+            cell.textLabel?.textColor = UIColor(rgba: "#02577a")
             return cell
             
         case self.settingsScreenTableView:

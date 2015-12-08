@@ -74,21 +74,11 @@ The AlchemyLanguage API utilizes sophisticated natural language processing techn
 
 ##### Usage
 
-Instantiate an **AlchemyLanguage** object and set its api key via either
+Instantiate an **AlchemyLanguage** object and set its api key
 
 ```swift
 
 let alchemyLanguageInstance = AlchemyLanguage(apiKey: String)
-
-```
-
-or 
-
-```swift
-
-let alchemyLanguageInstance = AlchemyLanguage()
-alchemyLanguageInstance._apiKey = API_KEY
-
 
 ```
 
@@ -107,6 +97,40 @@ alchemyLanguageInstance.getEntities(requestType: .URL,
 
     // returned data is inside "entities" in this case
     // code here
+
+}
+```
+###Alchemy Vision
+
+AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
+
+##### Links
+* AlchemyVision API docs [here](http://www.alchemyapi.com/products/alchemyla)
+* Try out the [demo](http://www.alchemyapi.com/products/alchemyVision)
+
+##### Requirements
+* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+
+##### Usage
+Instantiate an **AlchemyVision** object and set its api key
+
+```swift
+
+let alchemyVisionInstance = AlchemyVision(apiKey: String)
+
+```
+
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+e.g. 
+
+```swift
+serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
+    image: imageFromURL!,
+    completionHandler: { imageFaceTags, error in
+
+	// code here
 
 }
 ```

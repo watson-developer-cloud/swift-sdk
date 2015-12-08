@@ -13,6 +13,5 @@ import UIKit
 protocol ChildProtocol: class {
     
     var childTitle: String! { get }
-    var config: [String : String]! { get }
     
 }

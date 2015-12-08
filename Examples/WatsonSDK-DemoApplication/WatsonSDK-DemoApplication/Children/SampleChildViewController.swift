@@ -18,17 +18,6 @@ extension SampleChildViewController : ChildProtocol {
         
     }
     
-    var config: [String : String]! {
-        
-        return [
-            
-            "apiKey" : "",
-            "bogusKey" : ""
-            
-        ]
-        
-    }
-    
 }
 
 

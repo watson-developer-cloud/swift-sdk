@@ -77,9 +77,6 @@ class ViewController: UIViewController {
     
     private var _childrenTitles: [String]!
    
-    // mutable versions of copied dictionaries
-    private var configDictionaries: [String : [String : String] ] = [ "" : [ "" : ""] ]
-    
     // ui components
     private var barView: BarView!
     private var currentChildView: UIView?
@@ -372,23 +369,8 @@ extension ViewController: UITableViewDataSource {
         // respond differently based on the tableview
         switch tableView {
             
-        case self.selectTableView:
-            
-            return children.count
-            
-        case self.settingsScreenTableView:
-            
-            if let title = self.currentChildViewController?.title,
-                let configEntriesForCurrentChildVC = self.configDictionaries[title] {
-                    
-                    return configEntriesForCurrentChildVC.count
-                    
-            } else {
-                
-                return 0
-                
-            }
-            
+        case self.selectTableView: return children.count
+        case self.settingsScreenTableView: return 0
         default: return 0
             
         }

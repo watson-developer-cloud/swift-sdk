@@ -10,10 +10,8 @@ import UIKit
 import WatsonSDK
 //import SwiftSpinner
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDelegate {
+class AlchemyVisionCollectionViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDelegate {
 
-    
-    
     @IBOutlet weak var activityIndicatorView:UIActivityIndicatorView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,6 +24,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -38,6 +37,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 self.serviceVision = AlchemyVision(apiKey: dict["AlchemyAPIKey"]!)
             }
         }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        print("ruslan: view did appear: \(self.view)")
+        print("superview: \(self.view.superview)")
+        print("parent: \(self.presentingViewController)")
         
     }
 
@@ -94,6 +102,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         
         let visionImage = UIImage(contentsOfFile: imagePath)
+        
+        print("ruslan:")
+        print(visionImage)
         
         serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: visionImage, completionHandler: { imageFaceTags, error in
             SwiftSpinner.hide()

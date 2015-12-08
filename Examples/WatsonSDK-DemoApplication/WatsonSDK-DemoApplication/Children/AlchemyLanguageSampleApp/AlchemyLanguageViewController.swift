@@ -9,8 +9,21 @@
 import Foundation
 import UIKit
 
-class AlchemyLanguageViewController: ChildViewController {
+
+extension AlchemyLanguageViewController: ChildProtocol {
     
+    var childTitle: String! {
+        
+        return "AlchemyLanguageViewController"
+        
+    }
     
+}
+
+class AlchemyLanguageViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
 }

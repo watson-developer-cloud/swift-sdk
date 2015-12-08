@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wrn-9z-fgJ">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--Alchemy Language View Controller-->
+        <scene sceneID="sc6-Vu-lKc">
+            <objects>
+                <viewController storyboardIdentifier="AlchemyLanguageViewController" id="wrn-9z-fgJ" customClass="AlchemyLanguageViewController" customModule="WatsonSDK_DemoApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Jg-uN-ta3"/>
+                        <viewControllerLayoutGuide type="bottom" id="BQS-Iw-2og"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NIi-ks-qMV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.0078431372549019607" green="0.3411764705882353" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nME-LR-Ttz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="322" y="436"/>
+        </scene>
+    </scenes>
+</document>

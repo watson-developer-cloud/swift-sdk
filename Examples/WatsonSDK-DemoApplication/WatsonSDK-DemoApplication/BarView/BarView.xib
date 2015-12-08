@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,7 +15,7 @@
                     <rect key="frame" x="8" y="5" width="44" height="30"/>
                     <animations/>
                     <state key="normal" title="Select">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.0078431372549019607" green="0.66274509803921566" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="selectPress" destination="iN0-l3-epB" eventType="touchUpInside" id="VQj-o9-K1f"/>
@@ -25,7 +25,7 @@
                     <rect key="frame" x="535" y="5" width="57" height="30"/>
                     <animations/>
                     <state key="normal" title="Settings">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.0078431372549019607" green="0.66274509803921566" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="settingsPress" destination="iN0-l3-epB" eventType="touchUpInside" id="mrz-uH-7e9"/>
@@ -33,7 +33,7 @@
                 </button>
             </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0039215686274509803" green="0.18823529411764706" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="AwP-gM-OoP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="0vu-1l-Eb0"/>
                 <constraint firstAttribute="trailing" secondItem="8bX-QU-7SA" secondAttribute="trailing" constant="8" id="H4g-oG-7ud"/>

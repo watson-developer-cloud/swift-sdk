@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatsonSDK
 
 /**
 
@@ -27,8 +28,24 @@ import UIKit
 class ViewController: UIViewController {
     
     // add your child view controller here
-    let children: [ChildViewController] = [
+    var children: [ChildProtocol] = [
 
+        {
+            
+            let sb = UIStoryboard(name: "AlchemyVision", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyVisionViewController") as! AlchemyVisionViewController
+            return vc
+            
+        }(),
+        
+        {
+            
+            let sb = UIStoryboard(name: "AlchemyLanguage", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageViewController") as! AlchemyLanguageViewController
+            return vc
+            
+        }(),
+        
         SampleChildViewController()
     
     ]
@@ -66,9 +83,6 @@ class ViewController: UIViewController {
     
     private var _childrenTitles: [String]!
    
-    // mutable versions of copied dictionaries
-    private var configDictionaries: [String : [String : String] ] = [ "" : [ "" : ""] ]
-    
     // ui components
     private var barView: BarView!
     private var currentChildView: UIView?
@@ -127,20 +141,28 @@ class ViewController: UIViewController {
     
     private func configureSelectView() {
         
+        let selectTableViewCellHeight = CGFloat(60.0)
+        let shownCells = CGFloat(3.5)
+        let selectTableViewHeight = selectTableViewCellHeight * shownCells
+        
         let selectScreenPopupFrame = CGRect(
             x: 0.0,
             y: screenHeight,
             width: screenWidth,
-            height: childViewHeight
+            height: selectTableViewHeight
         )
         
         self.selectView = UIView(frame: selectScreenPopupFrame)
         self.selectView.layer.zPosition = 3.0
-        self.selectView.backgroundColor = UIColor.purpleColor()
+        
+        let size = CGSize(
+            width: screenWidth,
+            height: selectTableViewHeight
+        )
         
         let selectTableViewFrame = CGRect(
             origin: CGPointZero,
-            size: selectScreenPopupFrame.size
+            size: size
         )
         
         self.selectTableView = UITableView(frame: selectTableViewFrame, style: .Plain)
@@ -149,7 +171,8 @@ class ViewController: UIViewController {
         self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.selectTableView.layer.zPosition = 4.0
         self.selectTableView.backgroundView = nil
-        self.selectTableView.backgroundColor = UIColor.clearColor()
+        self.selectTableView.backgroundColor = UIColor(rgba: "#89d6fb")
+        self.selectTableView.rowHeight = 60.0
         
         self.selectView.addSubview(self.selectTableView)
         self.view.addSubview(self.selectView)
@@ -191,13 +214,18 @@ class ViewController: UIViewController {
      [5] highlight the appropriate selection screen item to avoid double selection
      
      */
-    func presentChild(child: ChildViewController) {
+    func presentChild(child: ChildProtocol) {
    
-        removeCurrentChild()
-        configureNewChildView(child)
-        removeOldSettingsTableViewIfPresent()
-        configureSettingsViewWithNewChild(child)
-        highlightAppropriateSelectionScreenItem(child)
+        if let child = child as? UIViewController {
+            
+            removeCurrentChild()
+            configureNewChildView(child)
+            removeOldSettingsTableViewIfPresent()
+            configureSettingsViewWithNewChild(child)
+            highlightAppropriateSelectionScreenItem(child)
+            signalDidMoveChildViewController(child)
+            
+        }
         
     }
     
@@ -211,7 +239,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func configureNewChildView(child: ChildViewController) {
+    private func configureNewChildView(child: UIViewController) {
         
         self.currentChildViewController = child
         self.currentChildView = child.view
@@ -220,7 +248,9 @@ class ViewController: UIViewController {
         
         child.view.frame = childViewFrame
         self.addChildViewController(child)
+        
         self.view.addSubview(child.view)
+        self.view.bringSubviewToFront(child.view)
         
     }
     
@@ -235,7 +265,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func configureSettingsViewWithNewChild(child: ChildViewController) {
+    private func configureSettingsViewWithNewChild(child: UIViewController) {
         
         // get key value pairs from child view controller
         // populate current dictionary, first level dictionary based on childViewController title
@@ -243,9 +273,15 @@ class ViewController: UIViewController {
         
     }
     
-    private func highlightAppropriateSelectionScreenItem(child: ChildViewController) {
+    private func highlightAppropriateSelectionScreenItem(child: UIViewController) {
         
         // TODO: implement
+        
+    }
+    
+    private func signalDidMoveChildViewController(child: UIViewController) {
+        
+        child.didMoveToParentViewController(self)
         
     }
     
@@ -348,23 +384,8 @@ extension ViewController: UITableViewDataSource {
         // respond differently based on the tableview
         switch tableView {
             
-        case self.selectTableView:
-            
-            return children.count
-            
-        case self.settingsScreenTableView:
-            
-            if let title = self.currentChildViewController?.title,
-                let configEntriesForCurrentChildVC = self.configDictionaries[title] {
-                    
-                    return configEntriesForCurrentChildVC.count
-                    
-            } else {
-                
-                return 0
-                
-            }
-            
+        case self.selectTableView: return children.count
+        case self.settingsScreenTableView: return 0
         default: return 0
             
         }
@@ -381,6 +402,7 @@ extension ViewController: UITableViewDataSource {
             let cell = self.selectTableView.dequeueReusableCellWithIdentifier("cell")!
             cell.backgroundColor = UIColor.clearColor()
             cell.textLabel?.text = childrenTitles[indexPath.row]
+            cell.textLabel?.textColor = UIColor(rgba: "#02577a")
             return cell
             
         case self.settingsScreenTableView:

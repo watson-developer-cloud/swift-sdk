@@ -98,6 +98,7 @@
 				6E96328B1C0E49880055D402 /* ChildProtocol.swift */,
 				6E3C0D191C0E3B33001BF15A /* Children */,
 				6E32951A1C177281001CE8B7 /* UIColorExtension.swift */,
+				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
 			);
 			path = "WatsonSDK-DemoApplication";
 			sourceTree = "<group>";
@@ -121,7 +122,6 @@
 				6E3C0D131C0E3A93001BF15A /* Info.plist */,
 			);
 			name = Resources;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		6E51B26C1C173BA300D5EF12 /* AlchemyVisionSampleApp */ = {
@@ -140,9 +140,8 @@
 		6E9517AB1C16136600CD0B04 /* AlchemyLanguageSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
-				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
 				6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */,
+				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
 			);
 			path = AlchemyLanguageSampleApp;
 			sourceTree = "<group>";

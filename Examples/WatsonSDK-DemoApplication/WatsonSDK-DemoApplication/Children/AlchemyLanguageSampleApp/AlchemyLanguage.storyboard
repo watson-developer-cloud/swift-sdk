@@ -8,7 +8,7 @@
         <!--Alchemy Language View Controller-->
         <scene sceneID="sc6-Vu-lKc">
             <objects>
-                <viewController id="wrn-9z-fgJ" customClass="AlchemyLanguageViewController" customModule="WatsonSDK_DemoApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AlchemyLanguageViewController" id="wrn-9z-fgJ" customClass="AlchemyLanguageViewController" customModule="WatsonSDK_DemoApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Jg-uN-ta3"/>
                         <viewControllerLayoutGuide type="bottom" id="BQS-Iw-2og"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0078431372549019607" green="0.3411764705882353" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nME-LR-Ttz" userLabel="First Responder" sceneMemberID="firstResponder"/>

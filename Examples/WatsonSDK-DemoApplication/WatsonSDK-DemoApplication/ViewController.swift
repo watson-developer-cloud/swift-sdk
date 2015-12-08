@@ -27,7 +27,7 @@ import UIKit
 class ViewController: UIViewController {
     
     // add your child view controller here
-    let children: [ChildViewController] = [
+    var children: [ChildProtocol] = [
 
         SampleChildViewController()
     
@@ -191,13 +191,18 @@ class ViewController: UIViewController {
      [5] highlight the appropriate selection screen item to avoid double selection
      
      */
-    func presentChild(child: ChildViewController) {
+    func presentChild(child: ChildProtocol) {
    
-        removeCurrentChild()
-        configureNewChildView(child)
-        removeOldSettingsTableViewIfPresent()
-        configureSettingsViewWithNewChild(child)
-        highlightAppropriateSelectionScreenItem(child)
+        if let child = child as? UIViewController {
+            
+            removeCurrentChild()
+            configureNewChildView(child)
+            removeOldSettingsTableViewIfPresent()
+            configureSettingsViewWithNewChild(child)
+            highlightAppropriateSelectionScreenItem(child)
+            signalDidMoveChildViewController(child)
+            
+        }
         
     }
     
@@ -211,7 +216,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func configureNewChildView(child: ChildViewController) {
+    private func configureNewChildView(child: UIViewController) {
         
         self.currentChildViewController = child
         self.currentChildView = child.view
@@ -220,7 +225,9 @@ class ViewController: UIViewController {
         
         child.view.frame = childViewFrame
         self.addChildViewController(child)
+        
         self.view.addSubview(child.view)
+        self.view.bringSubviewToFront(child.view)
         
     }
     
@@ -235,7 +242,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func configureSettingsViewWithNewChild(child: ChildViewController) {
+    private func configureSettingsViewWithNewChild(child: UIViewController) {
         
         // get key value pairs from child view controller
         // populate current dictionary, first level dictionary based on childViewController title
@@ -243,9 +250,15 @@ class ViewController: UIViewController {
         
     }
     
-    private func highlightAppropriateSelectionScreenItem(child: ChildViewController) {
+    private func highlightAppropriateSelectionScreenItem(child: UIViewController) {
         
         // TODO: implement
+        
+    }
+    
+    private func signalDidMoveChildViewController(child: UIViewController) {
+        
+        child.didMoveToParentViewController(self)
         
     }
     

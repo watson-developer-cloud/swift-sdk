@@ -38,7 +38,13 @@ class ViewController: UIViewController {
             
         }(),
         
-        AlchemyLanguageViewController(),
+        {
+            
+            let sb = UIStoryboard(name: "AlchemyLanguage", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageViewController") as! AlchemyLanguageViewController
+            return vc
+            
+        }(),
         
         SampleChildViewController()
     

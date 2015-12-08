@@ -73,7 +73,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
                 
                 self.token = token
                 
-                onauthenticated(token: token, error: error)
+                completionHandler(token: token, error: error)
         })
 
         

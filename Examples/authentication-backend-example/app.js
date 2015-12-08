@@ -22,35 +22,44 @@ var plist       = require('plist');
 var url         = require('url');
 var http        = require('http');
 var when        = require('when');
+var request     = require('request');
+
 
 var app = express();
 
 function readConfigFile() {
+
   var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
   // console.log(JSON.stringify(obj));
 
-  return obj
+  return obj;
 }
 
 function getWatsonToken(tokenURL, serviceURL, username, password) {
 
-  var options = {
-    host: tokenURL,
-    path: "?url=" + serviceURL
-  }
+  var deferred = when.defer();
 
-  console.log("Making a call to " + JSON.stringify(options));
+  var url = tokenURL + "?url=" + serviceURL;
 
-  return "token"
+  request.get(url, function (error, response, body) {
+
+    if (error) { deferred.reject(error); }
+    deferred.resolve(body);
+
+  }).auth(username, password, false)
+
+
   // callback = function(response)
+  return deferred.promise;
+}
 
+function handleError(e) {
+  return "No token"
 }
 
 app.get('/', function (req, res) {
 
-  readConfigFile();
-
-  res.send('Hello World!');
+  res.send('Watson Token Gateway');
 
 });
 
@@ -60,17 +69,23 @@ app.get('/auth', function (req, res) {
   var query = url_parts.query;
   console.log(query);
 
-  keys = readConfigFile();
+  var keys = readConfigFile();
 
-  username = keys[query["service"] + "Username"]
+  var username = keys["TextToSpeechUsername"];
+  var password = keys["TextToSpeechPassword"];
 
   getWatsonToken(
     "https://stream.watsonplatform.net/authorization/api/v1/token",
     "https://stream.watsonplatform.net/text-to-speech/api",
-    "username", "password"
-  )
+    username, password
+    )
+    .done(function(tokenResponse) {
+      res.send(tokenResponse)
+    });
 
-  res.send(username)
+    /**
+    username = keys[query["service"] + "Username"]
+    **/
 
 });
 

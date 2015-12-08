@@ -135,20 +135,29 @@ class ViewController: UIViewController {
     
     private func configureSelectView() {
         
+        let selectTableViewCellHeight = CGFloat(60.0)
+        let shownCells = CGFloat(3.5)
+        let selectTableViewHeight = selectTableViewCellHeight * shownCells
+        
         let selectScreenPopupFrame = CGRect(
             x: 0.0,
             y: screenHeight,
             width: screenWidth,
-            height: childViewHeight
+            height: selectTableViewHeight
         )
         
         self.selectView = UIView(frame: selectScreenPopupFrame)
         self.selectView.layer.zPosition = 3.0
         self.selectView.backgroundColor = UIColor.purpleColor()
         
+        let size = CGSize(
+            width: screenWidth,
+            height: selectTableViewHeight
+        )
+        
         let selectTableViewFrame = CGRect(
             origin: CGPointZero,
-            size: selectScreenPopupFrame.size
+            size: size
         )
         
         self.selectTableView = UITableView(frame: selectTableViewFrame, style: .Plain)
@@ -157,7 +166,8 @@ class ViewController: UIViewController {
         self.selectTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.selectTableView.layer.zPosition = 4.0
         self.selectTableView.backgroundView = nil
-        self.selectTableView.backgroundColor = UIColor.clearColor()
+        self.selectTableView.backgroundColor = UIColor(rgba: "#02577a")
+        self.selectTableView.rowHeight = 60.0
         
         self.selectView.addSubview(self.selectTableView)
         self.view.addSubview(self.selectView)
@@ -387,6 +397,7 @@ extension ViewController: UITableViewDataSource {
             let cell = self.selectTableView.dequeueReusableCellWithIdentifier("cell")!
             cell.backgroundColor = UIColor.clearColor()
             cell.textLabel?.text = childrenTitles[indexPath.row]
+            cell.textLabel?.textColor = UIColor(rgba: "#89d6fb")
             return cell
             
         case self.settingsScreenTableView:

@@ -9,25 +9,30 @@
 import Foundation
 import UIKit
 
-class SampleChildViewController: ChildViewController {
+
+extension SampleChildViewController : ChildProtocol {
     
-    override var childTitle: String! {
-    
+    var childTitle: String! {
+        
         return "SampleChildViewController"
         
     }
     
-    override var config: [String : String]! {
-    
-        return [
+    var config: [String : String]! {
         
+        return [
+            
             "apiKey" : "",
             "bogusKey" : ""
             
         ]
-    
+        
     }
     
+}
+
+
+class SampleChildViewController: UIViewController {
     
     override func viewDidLoad() {
         

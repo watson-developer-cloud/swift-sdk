@@ -23,7 +23,7 @@ var url         = require('url');
 var http        = require('http');
 var when        = require('when');
 var request     = require('request');
-
+var passport    = require('passport');
 
 var app = express();
 
@@ -63,30 +63,38 @@ app.get('/', function (req, res) {
 
 });
 
-app.get('/auth', function (req, res) {
+app.get('/authorization/api/v1/token', function (req, res) {
 
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
-  console.log(query);
+
+  var serviceURL = query["url"];
 
   var keys = readConfigFile();
 
-  var username = keys["TextToSpeechUsername"];
-  var password = keys["TextToSpeechPassword"];
+  var serviceName = keys["URLs"][serviceURL];
+
+  if (!serviceName) {
+    res.send("ERROR: need to specify a url to the service you are using.");
+  }
+  console.log(keys);
+
+  var username = keys[serviceName + "Username"];
+  var password = keys[serviceName + "Password"];
+
+  if (!username || !password) {
+    res.send("ERROR: could not find stored authentication in Credentials.plist");
+  }
 
   getWatsonToken(
     "https://stream.watsonplatform.net/authorization/api/v1/token",
-    "https://stream.watsonplatform.net/text-to-speech/api",
+    serviceURL,
     username, password
     )
     .done(function(tokenResponse) {
       res.send(tokenResponse)
     });
-
-    /**
-    username = keys[query["service"] + "Username"]
-    **/
-
+    
 });
 
 

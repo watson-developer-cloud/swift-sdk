@@ -145,10 +145,10 @@
 		BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */; };
 		E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E7D1C13549C00C6602B /* WatsonSocket.swift */; };
 		E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E7E1C13549C00C6602B /* WatsonSocketDelegate.swift */; };
-		E1023E851C1354C100C6602B /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */; };
-		E1023E861C1354C100C6602B /* BasicAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */; };
-		E1023E871C1354C100C6602B /* TokenAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */; };
 		E1023E8A1C13554F00C6602B /* WebsocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1023E881C13553700C6602B /* WebsocketTests.swift */; };
+		E1103A9A1C16557A0062BEB6 /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1103A971C16557A0062BEB6 /* AuthenticationStrategy.swift */; };
+		E1103A9B1C16557A0062BEB6 /* BasicAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1103A981C16557A0062BEB6 /* BasicAuthenticationStrategy.swift */; };
+		E1103A9C1C16557A0062BEB6 /* TokenAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1103A991C16557A0062BEB6 /* TokenAuthenticationStrategy.swift */; };
 		E143FC2B1C0002A000D92053 /* test.raw in Resources */ = {isa = PBXBuildFile; fileRef = E143FC2A1C00029D00D92053 /* test.raw */; };
 		E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */; };
 		E1A07EFA1C04DF0400DCD45C /* SpeechToTextAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */; };
@@ -330,10 +330,10 @@
 		BDAF7E191BFEBA57009BB0E8 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		E1023E7D1C13549C00C6602B /* WatsonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocket.swift; sourceTree = "<group>"; };
 		E1023E7E1C13549C00C6602B /* WatsonSocketDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSocketDelegate.swift; sourceTree = "<group>"; };
-		E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationStrategy.swift; sourceTree = "<group>"; };
-		E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenAuthenticationStrategy.swift; sourceTree = "<group>"; };
 		E1023E881C13553700C6602B /* WebsocketTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebsocketTests.swift; sourceTree = "<group>"; };
+		E1103A971C16557A0062BEB6 /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationStrategy.swift; path = Authentication/AuthenticationStrategy.swift; sourceTree = "<group>"; };
+		E1103A981C16557A0062BEB6 /* BasicAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicAuthenticationStrategy.swift; path = Authentication/BasicAuthenticationStrategy.swift; sourceTree = "<group>"; };
+		E1103A991C16557A0062BEB6 /* TokenAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenAuthenticationStrategy.swift; path = Authentication/TokenAuthenticationStrategy.swift; sourceTree = "<group>"; };
 		E143FC2A1C00029D00D92053 /* test.raw */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.raw; sourceTree = "<group>"; };
 		E1A07EF71C04DED300DCD45C /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextResult.swift; sourceTree = "<group>"; };
 		E1A07EF91C04DF0400DCD45C /* SpeechToTextAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAlternative.swift; sourceTree = "<group>"; };
@@ -693,7 +693,6 @@
 		7ADC39FA1BF950C800CD916E /* SpeechToText */ = {
 			isa = PBXGroup;
 			children = (
-				E1023E811C1354AF00C6602B /* Authentication */,
 				E1023E7C1C13548100C6602B /* Networking */,
 				E1A07EF61C04DAC300DCD45C /* Models */,
 				7ADC39FB1BF950C800CD916E /* Reference */,
@@ -811,6 +810,7 @@
 		7ADC3A241BF950C800CD916E /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
+				E1103A961C1655690062BEB6 /* Authentication */,
 				BDAF7E101BFEB9BC009BB0E8 /* Extensions */,
 				7ADC3A281BF950C800CD916E /* Models */,
 				7ADC3A311BF950C800CD916E /* Utilities */,
@@ -857,12 +857,12 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
-		E1023E811C1354AF00C6602B /* Authentication */ = {
+		E1103A961C1655690062BEB6 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				E1023E821C1354C100C6602B /* AuthenticationStrategy.swift */,
-				E1023E831C1354C100C6602B /* BasicAuthenticationStrategy.swift */,
-				E1023E841C1354C100C6602B /* TokenAuthenticationStrategy.swift */,
+				E1103A971C16557A0062BEB6 /* AuthenticationStrategy.swift */,
+				E1103A981C16557A0062BEB6 /* BasicAuthenticationStrategy.swift */,
+				E1103A991C16557A0062BEB6 /* TokenAuthenticationStrategy.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -1019,11 +1019,11 @@
 				BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */,
 				7A89EF9C1C0DF15E00281B77 /* DialogModel.swift in Sources */,
 				7AF96BAD1BF996560083ED23 /* OggHelper.m in Sources */,
-				E1023E861C1354C100C6602B /* BasicAuthenticationStrategy.swift in Sources */,
 				7ADC3A7C1BF955FF00CD916E /* AlchemyConstants.swift in Sources */,
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,
+				E1103A9C1C16557A0062BEB6 /* TokenAuthenticationStrategy.swift in Sources */,
 				E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */,
 				7ADC3A801BF9560400CD916E /* ImageFaceTags.swift in Sources */,
 				7ADC3A681BF9551500CD916E /* AlchemyGenericModel.swift in Sources */,
@@ -1056,6 +1056,7 @@
 				7ADC3A731BF9551500CD916E /* KnowledgeGraph.swift in Sources */,
 				7ADC3A6C1BF9551500CD916E /* DisambiguatedLinks.swift in Sources */,
 				7A89EFB01C0DF1D100281B77 /* WatsonRequest.swift in Sources */,
+				E1103A9B1C16557A0062BEB6 /* BasicAuthenticationStrategy.swift in Sources */,
 				6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
 				7ADC3A981BF9593A00CD916E /* ClassifiedClass.swift in Sources */,
@@ -1076,13 +1077,13 @@
 				E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */,
 				7A89EF9A1C0DF15E00281B77 /* DialogConversationResponse.swift in Sources */,
 				6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */,
+				E1103A9A1C16557A0062BEB6 /* AuthenticationStrategy.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
 				7ADC3A741BF9551500CD916E /* PublicationDate.swift in Sources */,
 				6E2E42FE1BFBD27500B32691 /* DocumentTitle.swift in Sources */,
 				7ADC3A6E1BF9551500CD916E /* Entity.swift in Sources */,
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				6E4029F11C051F0300D3ADB0 /* SpeechToTextResponse.swift in Sources */,
-				E1023E851C1354C100C6602B /* AuthenticationStrategy.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
 				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
@@ -1093,7 +1094,6 @@
 				7A89EF971C0DF15E00281B77 /* DialogConstants.swift in Sources */,
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
-				E1023E871C1354C100C6602B /* TokenAuthenticationStrategy.swift in Sources */,
 				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
 				6E75353A1C04CA79003EAECE /* ConceptResponse.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,

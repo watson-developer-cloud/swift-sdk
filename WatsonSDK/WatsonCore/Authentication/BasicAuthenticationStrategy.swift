@@ -50,7 +50,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
      - parameter onauthenticated: <#onauthenticated description#>
      - parameter error:           <#error description#>
      */
-    func authenticate(onauthenticated: (token: String?, error: NSError?)->Void) {
+    func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
         
         
         if token != nil {

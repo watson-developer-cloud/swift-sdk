@@ -18,7 +18,7 @@ import Foundation
 
 public protocol AuthenticationStrategy {
         
-    func authenticate(onauthenticated: (token: String?, error: NSError?)->Void)
+    func getToken(completionHandler: (token: String?, error: NSError?)->Void)
     
     var token: String? { get }
     

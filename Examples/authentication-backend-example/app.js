@@ -1,60 +1,83 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+'use strict';
+
+var express     = require('express');
+var fs          = require('fs');
+var plist       = require('plist');
+var url         = require('url');
+var http        = require('http');
+var when        = require('when');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+function readConfigFile() {
+  var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
+  // console.log(JSON.stringify(obj));
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+  return obj
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+function getWatsonToken(tokenURL, serviceURL, username, password) {
+
+  var options = {
+    host: tokenURL,
+    path: "?url=" + serviceURL
+  }
+
+  console.log("Making a call to " + JSON.stringify(options));
+
+  return "token"
+  // callback = function(response)
+
+}
+
+app.get('/', function (req, res) {
+
+  readConfigFile();
+
+  res.send('Hello World!');
+
+});
+
+app.get('/auth', function (req, res) {
+
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+  console.log(query);
+
+  keys = readConfigFile();
+
+  username = keys[query["service"] + "Username"]
+
+  getWatsonToken(
+    "https://stream.watsonplatform.net/authorization/api/v1/token",
+    "https://stream.watsonplatform.net/text-to-speech/api",
+    "username", "password"
+  )
+
+  res.send(username)
+
 });
 
 
-module.exports = app;
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});

@@ -22,7 +22,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     let imagePicker: UIImagePickerController! = UIImagePickerController()
     
-    let serviceVision = AlchemyVision()
+    var serviceVision: AlchemyVision!
     
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                serviceVision._apiKey = dict["AlchemyAPIKey"]!
+                self.serviceVision = AlchemyVision(apiKey: dict["AlchemyAPIKey"]!)
             }
         }
         

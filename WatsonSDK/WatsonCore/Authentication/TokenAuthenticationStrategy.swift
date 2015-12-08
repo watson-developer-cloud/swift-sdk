@@ -29,7 +29,7 @@ class TokenAuthenticationStrategy: AuthenticationStrategy {
     
     func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
         
-        onauthenticated(token: token, error: nil)
+        completionHandler(token: token, error: nil)
         
     }
     

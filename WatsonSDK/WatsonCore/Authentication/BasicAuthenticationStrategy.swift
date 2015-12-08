@@ -55,7 +55,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
         
         if token != nil {
             
-            onauthenticated(token: token, error: nil)
+            completionHandler(token: token, error: nil)
             
         }
         

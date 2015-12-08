@@ -17,17 +17,15 @@ extension AlchemyVisionViewController: ChildProtocol {
         
     }
     
-    var config: [String : String]! {
-        
-        return [
-            
-            "apiKey" : ""
-            
-        ]
-        
-    }
-    
 }
 
 
-class AlchemyVisionViewController: UINavigationController { }
+class AlchemyVisionViewController: UINavigationController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationBar.barTintColor = UIColor(rgba: "#01303f")
+        self.navigationBar.tintColor = UIColor(rgba: "#02a9f7")
+    }
+    
+}

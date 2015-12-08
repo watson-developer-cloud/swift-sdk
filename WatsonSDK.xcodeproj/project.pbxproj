@@ -949,7 +949,7 @@
 				TargetAttributes = {
 					7A36F99C1BF8DDCA005E478F = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = CDXLDASP22;
+						DevelopmentTeam = 57U96AW229;
 					};
 					7A36F9A61BF8DDCB005E478F = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1235,6 +1235,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1262,6 +1263,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

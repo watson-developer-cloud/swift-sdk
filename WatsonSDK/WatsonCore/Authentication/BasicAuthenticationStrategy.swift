@@ -16,6 +16,16 @@
 
 import Foundation
 
+/**
+* BasicAuthenticationStrategy is an example implementation of obtaining a Watson token
+* using basic authentication. A username and password pair that is generated automatically 
+* for each Watson service in a Bluemix app. The strategy goes to the token service to request
+* a token, and returns a temporary token valid for 1 hour. 
+*
+* WARNING: This authentication strategy has some serious security flaws in that if a username and 
+* password are bundled in an App distribution, they can be munged by third parties to have the 
+* information to generate new Watson keys and subsequent queries without limitation.
+*/
 class BasicAuthenticationStrategy : AuthenticationStrategy {
     
     let username: String!
@@ -26,7 +36,9 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
     var token: String?
     
     /**
-     Creates a Basic Authentication handler that will request a token from the server
+     Creates a Basic Authentication handler that will request a token from the server. Requires 
+     the URL for the token granter and the corresponsing service as well as the username and password
+     pair.
      
      - parameter tokenURL:   URL for the granter of the token
      - parameter serviceURL: URL for the targetting service of the token

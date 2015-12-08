@@ -23,7 +23,8 @@ import Foundation
 public protocol AuthenticationStrategy {
     
     /**
-     <#Description#>
+     Get token is responsible for obtaining a token to the callee in order to service a 
+     service request.
      
      - parameter completionHandler: a callback for when a token has been obtained.
      - parameter error:             an error in token retrieval

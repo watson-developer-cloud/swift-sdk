@@ -77,7 +77,9 @@ app.get('/authorization/api/v1/token', function (req, res) {
   if (!serviceName) {
     res.send("ERROR: need to specify a url to the service you are using.");
   }
-  console.log(keys);
+
+  console.log("Fetching key for " + serviceName);
+  // console.log(keys);
 
   var username = keys[serviceName + "Username"];
   var password = keys[serviceName + "Password"];
@@ -94,7 +96,7 @@ app.get('/authorization/api/v1/token', function (req, res) {
     .done(function(tokenResponse) {
       res.send(tokenResponse)
     });
-    
+
 });
 
 

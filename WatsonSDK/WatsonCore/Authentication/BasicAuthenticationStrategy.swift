@@ -28,12 +28,11 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
     /**
      Creates a Basic Authentication handler that will request a token from the server
      
-     - parameter tokenURL:   <#tokenURL description#>
-     - parameter serviceURL: <#serviceURL description#>
-     - parameter username:   <#username description#>
-     - parameter password:   <#password description#>
+     - parameter tokenURL:   URL for the granter of the token
+     - parameter serviceURL: URL for the targetting service of the token
+     - parameter username:   Watson basic auth username
+     - parameter password:   Watson basic auth password
      
-     - returns: <#return value description#>
      */
     init(tokenURL: String, serviceURL: String, username: String, password: String) {
         
@@ -45,10 +44,11 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
     }
     
     /**
-     <#Description#>
+     getToken uses the username and password and fetches a temporary token from the
+     Watson key generator at tokenURL.
      
-     - parameter onauthenticated: <#onauthenticated description#>
-     - parameter error:           <#error description#>
+     - parameter completionHandler: callback for when a token has been obtained
+     - parameter error:           an error in case the token could not be obtained.
      */
     func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
         

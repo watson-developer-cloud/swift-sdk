@@ -17,6 +17,10 @@
 import Foundation
 
 
+/** TokenAuthenticationStrategy handles the trivial case where the
+ token used for the service does not change and is provided by the client
+ in some manner.
+*/
 class TokenAuthenticationStrategy: AuthenticationStrategy {
     
     var token: String?

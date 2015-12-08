@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Alchemy Language View Controller-->
@@ -16,9 +17,63 @@
                     <view key="view" contentMode="scaleToFill" id="NIi-ks-qMV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter URL" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IbB-5O-bg1">
+                                <rect key="frame" x="20" y="512" width="522" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Text" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqQ-sp-8cg">
+                                <rect key="frame" x="20" y="550" width="522" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXp-fQ-n43">
+                                <rect key="frame" x="550" y="550" width="30" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8rI-pG-5Jr"/>
+                                    <constraint firstAttribute="width" constant="30" id="Vrb-Aa-Ogs"/>
+                                </constraints>
+                                <state key="normal" title="GO"/>
+                                <connections>
+                                    <action selector="goTextButtonPress" destination="wrn-9z-fgJ" eventType="touchUpInside" id="QGI-32-Qa7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyA-99-cw4">
+                                <rect key="frame" x="550" y="512" width="30" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="TvF-bS-ahP"/>
+                                    <constraint firstAttribute="height" constant="30" id="h0Z-wb-s8Q"/>
+                                </constraints>
+                                <state key="normal" title="GO"/>
+                                <connections>
+                                    <action selector="goURLButtonPress" destination="wrn-9z-fgJ" eventType="touchUpInside" id="hZ9-gO-bR8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0078431372549019607" green="0.3411764705882353" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="dqQ-sp-8cg" firstAttribute="top" secondItem="IbB-5O-bg1" secondAttribute="bottom" constant="8" id="5pb-0r-Bz2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VXp-fQ-n43" secondAttribute="trailing" id="Imo-vn-va8"/>
+                            <constraint firstItem="OyA-99-cw4" firstAttribute="leading" secondItem="IbB-5O-bg1" secondAttribute="trailing" constant="8" id="Lh3-rg-lp4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="dqQ-sp-8cg" secondAttribute="leading" id="UDn-Ku-uOf"/>
+                            <constraint firstItem="VXp-fQ-n43" firstAttribute="top" secondItem="OyA-99-cw4" secondAttribute="bottom" constant="8" id="Vsc-5T-Xcq"/>
+                            <constraint firstItem="BQS-Iw-2og" firstAttribute="top" secondItem="dqQ-sp-8cg" secondAttribute="bottom" constant="20" id="d5E-wJ-E2Z"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="IbB-5O-bg1" secondAttribute="leading" id="gDS-qZ-pPG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OyA-99-cw4" secondAttribute="trailing" id="iJC-yg-Oqo"/>
+                            <constraint firstItem="VXp-fQ-n43" firstAttribute="leading" secondItem="dqQ-sp-8cg" secondAttribute="trailing" constant="8" id="kRx-tP-8ba"/>
+                            <constraint firstItem="VXp-fQ-n43" firstAttribute="centerY" secondItem="dqQ-sp-8cg" secondAttribute="centerY" id="mSg-UA-0aV"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="goTextButton" destination="VXp-fQ-n43" id="XkR-lJ-rxg"/>
+                        <outlet property="goURLButton" destination="OyA-99-cw4" id="rvY-c2-GGL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nME-LR-Ttz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

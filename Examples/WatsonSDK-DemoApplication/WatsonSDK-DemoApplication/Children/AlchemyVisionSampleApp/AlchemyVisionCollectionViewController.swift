@@ -26,7 +26,6 @@ class AlchemyVisionCollectionViewController: UIViewController, UINavigationContr
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action:"addNewImage")
         
@@ -40,19 +39,8 @@ class AlchemyVisionCollectionViewController: UIViewController, UINavigationContr
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        print("ruslan: view did appear: \(self.view)")
-        print("superview: \(self.view.superview)")
-        print("parent: \(self.presentingViewController)")
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 
     func addNewImage() {
         let picker = UIImagePickerController()
@@ -102,9 +90,6 @@ class AlchemyVisionCollectionViewController: UIViewController, UINavigationContr
         }
         
         let visionImage = UIImage(contentsOfFile: imagePath)
-        
-        print("ruslan:")
-        print(visionImage)
         
         serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: visionImage, completionHandler: { imageFaceTags, error in
             SwiftSpinner.hide()

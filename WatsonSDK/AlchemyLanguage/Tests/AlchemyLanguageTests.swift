@@ -363,9 +363,6 @@ class AlchemyLanguageTests: XCTestCase {
                 
                 (error, entities) in
                 
-                print("ruslan:")
-                print(entities.entities)
-                
                 XCTAssertNotNil(entities)
                 
                 if let entities = entities.entities {

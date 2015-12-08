@@ -17,6 +17,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  The mapping of a image keyword and score
+ */
 public struct ImageKeyWord: Mappable {
 
   var text: String?

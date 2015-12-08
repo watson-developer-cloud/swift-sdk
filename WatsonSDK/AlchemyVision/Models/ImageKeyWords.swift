@@ -17,6 +17,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  Contains the total transactions and the array of image keywords
+ */
 public struct ImageKeyWords: Mappable {
     
     var totalTransactions: Int?

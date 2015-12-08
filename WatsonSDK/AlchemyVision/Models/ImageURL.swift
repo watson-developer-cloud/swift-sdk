@@ -16,6 +16,9 @@
 
 import Foundation
 
+/**
+ *  Maps the path and the url of an image
+ */
 public struct ImageURL {
     
     let path: String

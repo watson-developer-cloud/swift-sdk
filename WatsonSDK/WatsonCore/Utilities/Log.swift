@@ -41,28 +41,24 @@ public class Log {
             Log.consoleLogLevel = XCGLogger.LogLevel.Verbose
             Log.fileLogLevel = XCGLogger.LogLevel.Verbose
         #endif
-        
-        if #available(iOS 9.0, *) {
-            #if USE_NSLOG // Set via Build Settings, under Other Swift Flags
-                instance.removeLogDestination(XCGLogger.constants.baseConsoleLogDestinationIdentifier)
-                instance.addLogDestination(XCGNSLogDestination(owner: instance, identifier: XCGLogger.constants.nslogDestinationIdentifier))
-                instance.logAppDetails()
-            #else
-                let docURL = NSURL(fileURLWithPath: Log.fileName, relativeToURL: Log.getLogDirectory())
-                instance.setup(Log.consoleLogLevel,
-                    showThreadName: true,
-                    showLogLevel: true,
-                    showFileNames: true,
-                    showLineNumbers: true,
-                    writeToFile: docURL,
-                    fileLogLevel: Log.fileLogLevel)
-            #endif
-        } else {
-            // Fallback on earlier versions
-        }
 
+        #if USE_NSLOG // Set via Build Settings, under Other Swift Flags
+            instance.removeLogDestination(XCGLogger.constants.baseConsoleLogDestinationIdentifier)
+            instance.addLogDestination(XCGNSLogDestination(owner: instance, identifier: XCGLogger.constants.nslogDestinationIdentifier))
+            instance.logAppDetails()
+        #else
+            let docURL = NSURL(fileURLWithPath: Log.fileName, relativeToURL: Log.getLogDirectory())
+            instance.setup(Log.consoleLogLevel,
+                showThreadName: true,
+                showLogLevel: true,
+                showFileNames: true,
+                showLineNumbers: true,
+                writeToFile: docURL,
+                fileLogLevel: Log.fileLogLevel)
+        #endif
+        
         return instance
-        }()
+    }()
     
     
     /**

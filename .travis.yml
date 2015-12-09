@@ -8,6 +8,10 @@ branches:
   only:
      - master
 
+before_install:
+- brew update
+- brew install carthage
+
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 

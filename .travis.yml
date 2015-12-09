@@ -12,4 +12,6 @@ after_success:
 - bash <(curl -s https://codecov.io/bash)
 
 script:
-- xcodebuild clean build  -scheme WatsonSDK -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES 
+# - xcodebuild clean build  -scheme WatsonSDK -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES 
+- carthage update --platform iOS
+- xcodebuild clean build  -scheme WatsonSDK -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0'

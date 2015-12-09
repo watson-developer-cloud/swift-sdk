@@ -100,7 +100,7 @@ alchemyLanguageInstance.getEntities(requestType: .URL,
 
 }
 ```
-###Alchemy Vision
+###AlchemyVision
 
 AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
 

@@ -798,7 +798,6 @@
 			children = (
 				E1103A961C1655690062BEB6 /* Authentication */,
 				BDAF7E101BFEB9BC009BB0E8 /* Extensions */,
-				7ADC3A281BF950C800CD916E /* Models */,
 				7A741BA81C1883A7002C85A7 /* Routers - Networking */,
 				7ADC3A311BF950C800CD916E /* Utilities */,
 				7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */,
@@ -808,13 +807,6 @@
 			);
 			name = WatsonCore;
 			path = WatsonSDK/WatsonCore;
-			sourceTree = "<group>";
-		};
-		7ADC3A281BF950C800CD916E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		7ADC3A311BF950C800CD916E /* Utilities */ = {

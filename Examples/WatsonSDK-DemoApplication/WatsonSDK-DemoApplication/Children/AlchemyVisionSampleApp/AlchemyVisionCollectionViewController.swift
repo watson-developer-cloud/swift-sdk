@@ -10,10 +10,8 @@ import UIKit
 import WatsonSDK
 //import SwiftSpinner
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDelegate {
+class AlchemyVisionCollectionViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDelegate {
 
-    
-    
     @IBOutlet weak var activityIndicatorView:UIActivityIndicatorView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,8 +24,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action:"addNewImage")
         
@@ -40,11 +38,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated) }
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 
     func addNewImage() {
         let picker = UIImagePickerController()

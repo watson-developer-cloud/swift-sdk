@@ -19,8 +19,7 @@ import SwiftyJSON
 import ObjectMapper
 
 /**
- *  ImageFace holds attribute information of height, width, positionX, positionY, age and gender
- - parameter fileURL: adsf asdf
+ *  ImageFace contains attribute information of height, width, positionX, positionY, age and gender
  */
 public struct ImageFace : Mappable {
   

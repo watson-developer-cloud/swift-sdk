@@ -209,5 +209,4 @@ internal func validate<Error: WatsonError>(
             completionHandler(dialogError?.nsError)
         }
     }
-        
 }

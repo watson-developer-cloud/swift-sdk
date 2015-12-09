@@ -90,7 +90,8 @@ internal class WatsonSocket {
 //            }
 //        }
         
-        authStrategy.authenticate({
+        authStrategy.getToken({ 
+      
             
             token, error in
             

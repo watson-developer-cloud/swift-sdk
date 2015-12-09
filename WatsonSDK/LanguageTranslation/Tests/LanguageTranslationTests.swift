@@ -139,7 +139,7 @@ class LanguageTranslationTests: XCTestCase {
         XCTAssertNotNil(fileURL)
         
         service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!, callback:{(model:TranslationModel?, error) in
-            guard let model = model else {
+            guard let _ = model else {
                 XCTFail("Expected non-nil model to be returned")
 //                deleteExpectation.fulfill()
                 return

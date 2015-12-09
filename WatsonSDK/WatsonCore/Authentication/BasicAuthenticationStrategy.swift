@@ -16,6 +16,16 @@
 
 import Foundation
 
+/**
+* BasicAuthenticationStrategy is an example implementation of obtaining a Watson token
+* using basic authentication. A username and password pair that is generated automatically 
+* for each Watson service in a Bluemix app. The strategy goes to the token service to request
+* a token, and returns a temporary token valid for 1 hour. 
+*
+* WARNING: This authentication strategy has some serious security flaws in that if a username and 
+* password are bundled in an App distribution, they can be munged by third parties to have the 
+* information to generate new Watson keys and subsequent queries without limitation.
+*/
 class BasicAuthenticationStrategy : AuthenticationStrategy {
     
     let username: String!
@@ -26,14 +36,15 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
     var token: String?
     
     /**
-     Creates a Basic Authentication handler that will request a token from the server
+     Creates a Basic Authentication handler that will request a token from the server. Requires 
+     the URL for the token granter and the corresponsing service as well as the username and password
+     pair.
      
-     - parameter tokenURL:   <#tokenURL description#>
-     - parameter serviceURL: <#serviceURL description#>
-     - parameter username:   <#username description#>
-     - parameter password:   <#password description#>
+     - parameter tokenURL:   URL for the granter of the token
+     - parameter serviceURL: URL for the targetting service of the token
+     - parameter username:   Watson basic auth username
+     - parameter password:   Watson basic auth password
      
-     - returns: <#return value description#>
      */
     init(tokenURL: String, serviceURL: String, username: String, password: String) {
         
@@ -45,17 +56,18 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
     }
     
     /**
-     <#Description#>
+     getToken uses the username and password and fetches a temporary token from the
+     Watson key generator at tokenURL.
      
-     - parameter onauthenticated: <#onauthenticated description#>
-     - parameter error:           <#error description#>
+     - parameter completionHandler: callback for when a token has been obtained
+     - parameter error:           an error in case the token could not be obtained.
      */
-    func authenticate(onauthenticated: (token: String?, error: NSError?)->Void) {
+    func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
         
         
         if token != nil {
             
-            onauthenticated(token: token, error: nil)
+            completionHandler(token: token, error: nil)
             
         }
         
@@ -73,7 +85,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
                 
                 self.token = token
                 
-                onauthenticated(token: token, error: error)
+                completionHandler(token: token, error: error)
         })
 
         

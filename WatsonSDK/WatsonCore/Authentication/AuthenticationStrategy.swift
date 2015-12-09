@@ -16,10 +16,22 @@
 
 import Foundation
 
+/**
+ *  AuthenticationStrategy is a protocol that all authentication types must implement. Services use
+ *  the getToken method internally to obtain a temporary token to use Watson services.
+ */
 public protocol AuthenticationStrategy {
-        
-    func authenticate(onauthenticated: (token: String?, error: NSError?)->Void)
     
+    /**
+     Get token is responsible for obtaining a token to the callee in order to service a 
+     service request.
+     
+     - parameter completionHandler: a callback for when a token has been obtained.
+     - parameter error:             an error in token retrieval
+     */
+    func getToken(completionHandler: (token: String?, error: NSError?)->Void)
+    
+    /// A Watson token is a generated hexadecimal String
     var token: String? { get }
     
 }

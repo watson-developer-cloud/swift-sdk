@@ -32,7 +32,7 @@ internal class AlchemyRequest: WatsonRequest {
      - returns: An AlchemyRequest object for use with Alamofire.
      */
     init(
-        method: HTTPMethod,
+        method: HTTPMethod2,
         serviceURL: String,
         endpoint: String,
         accept: MediaType? = nil,

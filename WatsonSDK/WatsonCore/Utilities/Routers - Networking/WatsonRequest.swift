@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 /// HTTP method definitions
-internal typealias HTTPMethod = Alamofire.Method
+internal typealias HTTPMethod2 = Alamofire.Method
 
 /**
  A WatsonRequest object represents a REST request supported by IBM Watson.
@@ -20,7 +20,7 @@ internal typealias HTTPMethod = Alamofire.Method
 internal class WatsonRequest: URLRequestConvertible {
     
     /// The operation's HTTP method.
-    let method: HTTPMethod
+    let method: HTTPMethod2
     
     /// The service's URL.
     /// (e.g. "https://gateway.watsonplatform.net/personality-insights/api")
@@ -94,7 +94,7 @@ internal class WatsonRequest: URLRequestConvertible {
      - returns: A WatsonRequest object for use with Alamofire.
      */
     init(
-        method: HTTPMethod,
+        method: HTTPMethod2,
         serviceURL: String,
         endpoint: String,
         accept: MediaType? = nil,

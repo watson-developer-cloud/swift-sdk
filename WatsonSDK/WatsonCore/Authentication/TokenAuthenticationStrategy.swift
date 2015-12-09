@@ -17,6 +17,10 @@
 import Foundation
 
 
+/** TokenAuthenticationStrategy handles the trivial case where the
+ token used for the service does not change and is provided by the client
+ in some manner.
+*/
 class TokenAuthenticationStrategy: AuthenticationStrategy {
     
     var token: String?
@@ -27,9 +31,9 @@ class TokenAuthenticationStrategy: AuthenticationStrategy {
         
     }
     
-    func authenticate(onauthenticated: (token: String?, error: NSError?) -> Void) {
+    func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
         
-        onauthenticated(token: token, error: nil)
+        completionHandler(token: token, error: nil)
         
     }
     

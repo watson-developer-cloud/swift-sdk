@@ -19,7 +19,7 @@ import SwiftyJSON
 import ObjectMapper
 
 /**
- *  <#Description#>
+ *  Image face tags that holds the image faces array and transactions
  */
 public struct ImageFaceTags : Mappable {
   

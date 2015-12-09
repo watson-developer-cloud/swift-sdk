@@ -10,8 +10,8 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
-	* [AlchemyLanguage](#alchemylanguage)
-	* [AlchemyVision](#alchemyvision)
+	* [Alchemy Language](#alchemylanguage)
+	* [Alchemy Vision](#alchemyvision)
 	* [Dialog](#dialog)
 	* [Language Translation](#language-translation)
 	* [Natural Language Classifier](#natural-language-classifier)
@@ -34,7 +34,7 @@ carthage update
 ## Examples 
 
 
-A sample app can be found in the [BoxContentSDKSampleApp](../../tree/master/BoxContentSDKSampleApp) folder. The sample app demonstrates how to authenticate a user, and manage the user's files and folders.
+A sample app can be found in the [WatsonSDK-DemoApplication](../../tree/master/Examples/WatsonSDK-DemoApplication) folder. The sample app demonstrates how instantiate and use some of the provided Watson SDK Services.
 
 
 ## Tests
@@ -46,7 +46,7 @@ Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the
 The Watson Developer Cloud offers a variety of services for building cognitive applications.
 
 
-### AlchemyLanguage
+### Alchemy Language
 
 The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide high-level semantic information about your content.
 
@@ -74,21 +74,11 @@ The AlchemyLanguage API utilizes sophisticated natural language processing techn
 
 ##### Usage
 
-Instantiate an **AlchemyLanguage** object and set its api key via either
+Instantiate an **AlchemyLanguage** object and set its api key
 
 ```swift
 
 let alchemyLanguageInstance = AlchemyLanguage(apiKey: String)
-
-```
-
-or 
-
-```swift
-
-let alchemyLanguageInstance = AlchemyLanguage()
-alchemyLanguageInstance._apiKey = API_KEY
-
 
 ```
 
@@ -107,6 +97,40 @@ alchemyLanguageInstance.getEntities(requestType: .URL,
 
     // returned data is inside "entities" in this case
     // code here
+
+}
+```
+###Alchemy Vision
+
+AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
+
+##### Links
+* AlchemyVision API docs [here](http://www.alchemyapi.com/products/alchemyla)
+* Try out the [demo](http://www.alchemyapi.com/products/alchemyVision)
+
+##### Requirements
+* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+
+##### Usage
+Instantiate an **AlchemyVision** object and set its api key
+
+```swift
+
+let alchemyVisionInstance = AlchemyVision(apiKey: String)
+
+```
+
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+e.g. 
+
+```swift
+serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
+    image: imageFromURL!,
+    completionHandler: { imageFaceTags, error in
+
+	// code here
 
 }
 ```
@@ -164,6 +188,22 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
+
+###Language Translation
+
+The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+
+
+### Speech to Text
+
+The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
+
+The following links provide additional information about the IBM Speech to Text service:
+
+* [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
+* [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
+* [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
+
 
 ### Text to Speech
 
@@ -235,7 +275,11 @@ service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 )
 ```
 
+The following links provide more information about the Text To Speech service:
 
+* [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
+* [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
+* [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
 ## License
 

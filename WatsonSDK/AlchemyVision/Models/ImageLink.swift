@@ -17,6 +17,9 @@
 import Foundation
 import ObjectMapper
 
+/**
+ *  Contains the url string and the image string
+ */
 public struct ImageLink: Mappable {
   
   var url: String?

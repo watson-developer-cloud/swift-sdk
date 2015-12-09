@@ -32,16 +32,16 @@ class ViewController: UIViewController {
 
         {
             
-            let sb = UIStoryboard(name: "AlchemyVision", bundle: nil)
-            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyVisionViewController") as! AlchemyVisionViewController
+            let sb = UIStoryboard(name: "AlchemyLanguage", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageViewController") as! AlchemyLanguageViewController
             return vc
             
         }(),
         
         {
             
-            let sb = UIStoryboard(name: "AlchemyLanguage", bundle: nil)
-            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageViewController") as! AlchemyLanguageViewController
+            let sb = UIStoryboard(name: "AlchemyVision", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("AlchemyVisionViewController") as! AlchemyVisionViewController
             return vc
             
         }(),

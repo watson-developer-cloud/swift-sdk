@@ -225,7 +225,6 @@
 				TargetAttributes = {
 					7A1FCD8E1BA9D66D0090E1EB = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = CDXLDASP22;
 					};
 					7A1FCDA21BA9D66D0090E1EB = {
 						CreatedOnToolsVersion = 7.0;

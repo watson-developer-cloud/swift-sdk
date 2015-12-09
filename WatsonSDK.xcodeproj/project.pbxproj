@@ -22,7 +22,6 @@
 		6E75353C1C051220003EAECE /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75353B1C051220003EAECE /* Language.swift */; };
 		6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75353D1C0515F3003EAECE /* Microformat.swift */; };
 		6E7535401C0515F9003EAECE /* Microformats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75353F1C0515F9003EAECE /* Microformats.swift */; };
-		6E9517B11C1618E300CD0B04 /* pizza_sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E9517AF1C1618E300CD0B04 /* pizza_sample.xml */; };
 		6E9517B21C1618EB00CD0B04 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9517AE1C1618E300CD0B04 /* DialogTests.swift */; };
 		6EC1CAAD1C037DD200F43CFB /* DocumentSentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1CAAC1C037DD200F43CFB /* DocumentSentiment.swift */; };
 		6EC1CAAF1C03885C00F43CFB /* SentimentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1CAAE1C03885C00F43CFB /* SentimentResponse.swift */; };
@@ -40,6 +39,13 @@
 		7A36F9C51BF8DEDF005E478F /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C61BF8DEDF005E478F /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A72BCBB1BFA4E2800CCC15B /* WatsonSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */; };
+		7A741BA51C18838A002C85A7 /* Routers - Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BA41C18838A002C85A7 /* Routers - Service.swift */; };
+		7A741BA71C188394002C85A7 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BA61C188394002C85A7 /* Mapper.swift */; };
+		7A741BAD1C1883A7002C85A7 /* AlchemyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BA91C1883A7002C85A7 /* AlchemyRequest.swift */; };
+		7A741BAE1C1883A7002C85A7 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BAA1C1883A7002C85A7 /* MediaType.swift */; };
+		7A741BAF1C1883A7002C85A7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BAB1C1883A7002C85A7 /* Validation.swift */; };
+		7A741BB01C1883A7002C85A7 /* WatsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BAC1C1883A7002C85A7 /* WatsonRequest.swift */; };
+		7A741BB11C1883FF002C85A7 /* pizza_sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E9517AF1C1618E300CD0B04 /* pizza_sample.xml */; };
 		7A89EF961C0DF15E00281B77 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF8C1C0DF15E00281B77 /* Dialog.swift */; };
 		7A89EF971C0DF15E00281B77 /* DialogConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF8D1C0DF15E00281B77 /* DialogConstants.swift */; };
 		7A89EF981C0DF15E00281B77 /* DialogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF8E1C0DF15E00281B77 /* DialogError.swift */; };
@@ -49,12 +55,6 @@
 		7A89EF9C1C0DF15E00281B77 /* DialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF931C0DF15E00281B77 /* DialogModel.swift */; };
 		7A89EF9D1C0DF15E00281B77 /* DialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF941C0DF15E00281B77 /* DialogNode.swift */; };
 		7A89EF9E1C0DF15E00281B77 /* DialogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EF951C0DF15E00281B77 /* DialogProfile.swift */; };
-		7A89EFAC1C0DF1D100281B77 /* MapperExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFA51C0DF1D100281B77 /* MapperExtension.swift */; };
-		7A89EFAD1C0DF1D100281B77 /* AlchemyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFA71C0DF1D100281B77 /* AlchemyRequest.swift */; };
-		7A89EFAE1C0DF1D100281B77 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFA81C0DF1D100281B77 /* MediaType.swift */; };
-		7A89EFAF1C0DF1D100281B77 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFA91C0DF1D100281B77 /* Validation.swift */; };
-		7A89EFB01C0DF1D100281B77 /* WatsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFAA1C0DF1D100281B77 /* WatsonRequest.swift */; };
-		7A89EFB11C0DF1D100281B77 /* Service2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A89EFAB1C0DF1D100281B77 /* Service2.swift */; };
 		7A89EFB31C0DF48100281B77 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A89EFB21C0DF48100281B77 /* AlamofireObjectMapper.framework */; };
 		7A89EFB41C0DF4A100281B77 /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A89EFB21C0DF48100281B77 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7ADC3A4E1BF951AC00CD916E /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */; };
@@ -218,6 +218,12 @@
 		7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A72BCB71BFA4E2800CCC15B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSDKTests.swift; sourceTree = "<group>"; };
+		7A741BA41C18838A002C85A7 /* Routers - Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Routers - Service.swift"; sourceTree = "<group>"; };
+		7A741BA61C188394002C85A7 /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mapper.swift; path = Extensions/Mapper.swift; sourceTree = "<group>"; };
+		7A741BA91C1883A7002C85A7 /* AlchemyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyRequest.swift; sourceTree = "<group>"; };
+		7A741BAA1C1883A7002C85A7 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		7A741BAB1C1883A7002C85A7 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		7A741BAC1C1883A7002C85A7 /* WatsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonRequest.swift; sourceTree = "<group>"; };
 		7A89EF8C1C0DF15E00281B77 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7A89EF8D1C0DF15E00281B77 /* DialogConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConstants.swift; sourceTree = "<group>"; };
 		7A89EF8E1C0DF15E00281B77 /* DialogError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogError.swift; sourceTree = "<group>"; };
@@ -227,12 +233,6 @@
 		7A89EF931C0DF15E00281B77 /* DialogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogModel.swift; sourceTree = "<group>"; };
 		7A89EF941C0DF15E00281B77 /* DialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
 		7A89EF951C0DF15E00281B77 /* DialogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogProfile.swift; sourceTree = "<group>"; };
-		7A89EFA51C0DF1D100281B77 /* MapperExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapperExtension.swift; path = ../../WatsonCore2/MapperExtension.swift; sourceTree = "<group>"; };
-		7A89EFA71C0DF1D100281B77 /* AlchemyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlchemyRequest.swift; path = ../../../WatsonCore2/Networking/AlchemyRequest.swift; sourceTree = "<group>"; };
-		7A89EFA81C0DF1D100281B77 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaType.swift; path = ../../../WatsonCore2/Networking/MediaType.swift; sourceTree = "<group>"; };
-		7A89EFA91C0DF1D100281B77 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = ../../../WatsonCore2/Networking/Validation.swift; sourceTree = "<group>"; };
-		7A89EFAA1C0DF1D100281B77 /* WatsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatsonRequest.swift; path = ../../../WatsonCore2/Networking/WatsonRequest.swift; sourceTree = "<group>"; };
-		7A89EFAB1C0DF1D100281B77 /* Service2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service2.swift; path = ../../WatsonCore2/Service2.swift; sourceTree = "<group>"; };
 		7A89EFB21C0DF48100281B77 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		7ADC39AB1BF950C800CD916E /* AlchemyLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
 		7ADC39AC1BF950C800CD916E /* AlchemyLanguageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageConstants.swift; sourceTree = "<group>"; };
@@ -393,7 +393,6 @@
 				7ADC39FA1BF950C800CD916E /* SpeechToText */,
 				7ADC3A091BF950C800CD916E /* TextToSpeech */,
 				7ADC3A241BF950C800CD916E /* WatsonCore */,
-				7A89EFA41C0DF1D100281B77 /* WatsonCore2 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -425,6 +424,18 @@
 			path = WatsonSDKTests;
 			sourceTree = SOURCE_ROOT;
 		};
+		7A741BA81C1883A7002C85A7 /* Routers - Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7A741BA91C1883A7002C85A7 /* AlchemyRequest.swift */,
+				7A741BAA1C1883A7002C85A7 /* MediaType.swift */,
+				7A741BAB1C1883A7002C85A7 /* Validation.swift */,
+				7A741BAC1C1883A7002C85A7 /* WatsonRequest.swift */,
+			);
+			name = "Routers - Networking";
+			path = "Utilities/Routers - Networking";
+			sourceTree = "<group>";
+		};
 		7A89EF8F1C0DF15E00281B77 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,28 +457,6 @@
 			);
 			name = Tests;
 			path = Models/Tests;
-			sourceTree = "<group>";
-		};
-		7A89EFA41C0DF1D100281B77 /* WatsonCore2 */ = {
-			isa = PBXGroup;
-			children = (
-				7A89EFA51C0DF1D100281B77 /* MapperExtension.swift */,
-				7A89EFAB1C0DF1D100281B77 /* Service2.swift */,
-				7A89EFA61C0DF1D100281B77 /* Networking */,
-			);
-			name = WatsonCore2;
-			path = WatsonSDK/WatsonCore/WatsonCore2;
-			sourceTree = "<group>";
-		};
-		7A89EFA61C0DF1D100281B77 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				7A89EFA71C0DF1D100281B77 /* AlchemyRequest.swift */,
-				7A89EFA81C0DF1D100281B77 /* MediaType.swift */,
-				7A89EFA91C0DF1D100281B77 /* Validation.swift */,
-				7A89EFAA1C0DF1D100281B77 /* WatsonRequest.swift */,
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		7ADC37BB1BF9427F00CD916E /* Frameworks */ = {
@@ -810,9 +799,11 @@
 				E1103A961C1655690062BEB6 /* Authentication */,
 				BDAF7E101BFEB9BC009BB0E8 /* Extensions */,
 				7ADC3A281BF950C800CD916E /* Models */,
+				7A741BA81C1883A7002C85A7 /* Routers - Networking */,
 				7ADC3A311BF950C800CD916E /* Utilities */,
 				7ADC3A2B1BF950C800CD916E /* CoreResponse.swift */,
 				7ADC3A2F1BF950C800CD916E /* Service.swift */,
+				7A741BA41C18838A002C85A7 /* Routers - Service.swift */,
 				7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */,
 			);
 			name = WatsonCore;
@@ -839,6 +830,7 @@
 		BDAF7E101BFEB9BC009BB0E8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7A741BA61C188394002C85A7 /* Mapper.swift */,
 				BDAF7E151BFEBA28009BB0E8 /* NSError.swift */,
 				BDAF7E171BFEBA40009BB0E8 /* Request.swift */,
 			);
@@ -978,7 +970,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2E43021BFBDBFA00B32691 /* sample.html in Resources */,
-				6E9517B11C1618E300CD0B04 /* pizza_sample.xml in Resources */,
 				6E2E43091BFD0DD200B32691 /* biography.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -987,6 +978,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A741BB11C1883FF002C85A7 /* pizza_sample.xml in Resources */,
 				EBF8CA651BFBC6BF00808D92 /* Credentials.plist in Resources */,
 				7ADC3A9D1BF9593F00CD916E /* weather_data_train.csv in Resources */,
 				7ADC3A871BF9560800CD916E /* emaxfpo.jpg in Resources */,
@@ -1011,7 +1003,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A89EF961C0DF15E00281B77 /* Dialog.swift in Sources */,
-				7A89EFB11C0DF1D100281B77 /* Service2.swift in Sources */,
 				7ADC3A991BF9593A00CD916E /* Classifier.swift in Sources */,
 				BDAF7E1A1BFEBA57009BB0E8 /* NetworkUtils.swift in Sources */,
 				7A89EF9C1C0DF15E00281B77 /* DialogModel.swift in Sources */,
@@ -1020,6 +1011,7 @@
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,
 				E1103A9C1C16557A0062BEB6 /* TokenAuthenticationStrategy.swift in Sources */,
+				7A741BB01C1883A7002C85A7 /* WatsonRequest.swift in Sources */,
 				E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */,
 				7ADC3A801BF9560400CD916E /* ImageFaceTags.swift in Sources */,
 				7ADC3A681BF9551500CD916E /* AlchemyGenericModel.swift in Sources */,
@@ -1032,7 +1024,6 @@
 				7ADC3A691BF9551500CD916E /* AlchemyLanguageGenericModel.swift in Sources */,
 				7ADC3A6A1BF9551500CD916E /* CombinedResults.swift in Sources */,
 				BDAF7E181BFEBA40009BB0E8 /* Request.swift in Sources */,
-				7A89EFAE1C0DF1D100281B77 /* MediaType.swift in Sources */,
 				6E2E43041BFCE4CF00B32691 /* AlchemyLanguageParametersProtocol.swift in Sources */,
 				7A89EF9B1C0DF15E00281B77 /* DialogFormat.swift in Sources */,
 				7ADC3A7D1BF955FF00CD916E /* AlchemyVision.swift in Sources */,
@@ -1040,18 +1031,16 @@
 				7ADC3A711BF9551500CD916E /* Keyword.swift in Sources */,
 				7ADC3A661BF9551500CD916E /* AlchemyLanguage.swift in Sources */,
 				7ADC3AA01BF9597900CD916E /* Trait.swift in Sources */,
-				7A89EFAF1C0DF1D100281B77 /* Validation.swift in Sources */,
 				E1A07EF81C04DED300DCD45C /* SpeechToTextResult.swift in Sources */,
 				6EC1CAAD1C037DD200F43CFB /* DocumentSentiment.swift in Sources */,
 				7ADC3A841BF9560400CD916E /* ImageLink.swift in Sources */,
 				7ADC3A791BF9551500CD916E /* Taxonomies.swift in Sources */,
 				6EC1CAAF1C03885C00F43CFB /* SentimentResponse.swift in Sources */,
-				7A89EFAC1C0DF1D100281B77 /* MapperExtension.swift in Sources */,
 				7A89EF991C0DF15E00281B77 /* DialogConversation.swift in Sources */,
 				6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */,
+				7A741BAD1C1883A7002C85A7 /* AlchemyRequest.swift in Sources */,
 				7ADC3A731BF9551500CD916E /* KnowledgeGraph.swift in Sources */,
 				7ADC3A6C1BF9551500CD916E /* DisambiguatedLinks.swift in Sources */,
-				7A89EFB01C0DF1D100281B77 /* WatsonRequest.swift in Sources */,
 				E1103A9B1C16557A0062BEB6 /* BasicAuthenticationStrategy.swift in Sources */,
 				6E2E43071BFCEB6300B32691 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7ADC3A901BF958A200CD916E /* LanguageTranslation.swift in Sources */,
@@ -1073,6 +1062,7 @@
 				E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */,
 				7A89EF9A1C0DF15E00281B77 /* DialogConversationResponse.swift in Sources */,
 				6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */,
+				7A741BA71C188394002C85A7 /* Mapper.swift in Sources */,
 				E1103A9A1C16557A0062BEB6 /* AuthenticationStrategy.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
 				7ADC3A741BF9551500CD916E /* PublicationDate.swift in Sources */,
@@ -1081,6 +1071,7 @@
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				6E4029F11C051F0300D3ADB0 /* SpeechToTextResponse.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
+				7A741BA51C18838A002C85A7 /* Routers - Service.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
 				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
 				7ADC3A761BF9551500CD916E /* SAORelation.swift in Sources */,
@@ -1090,11 +1081,12 @@
 				7A89EF971C0DF15E00281B77 /* DialogConstants.swift in Sources */,
 				7ADC3A931BF958A200CD916E /* IdentifiedLanguage.swift in Sources */,
 				7ADC3A701BF9551500CD916E /* Feeds.swift in Sources */,
+				7A741BAF1C1883A7002C85A7 /* Validation.swift in Sources */,
+				7A741BAE1C1883A7002C85A7 /* MediaType.swift in Sources */,
 				6E2E42FC1BFBD26E00B32691 /* DocumentText.swift in Sources */,
 				6E75353A1C04CA79003EAECE /* ConceptResponse.swift in Sources */,
 				7ADC3A941BF958A200CD916E /* TranslationModel.swift in Sources */,
 				7ADC3A771BF9551500CD916E /* SAORelations.swift in Sources */,
-				7A89EFAD1C0DF1D100281B77 /* AlchemyRequest.swift in Sources */,
 				7ADC3A6B1BF9551500CD916E /* Concept.swift in Sources */,
 				7ADC3A6F1BF9551500CD916E /* Feed.swift in Sources */,
 				6E2E42FA1BFBCAB800B32691 /* Authors.swift in Sources */,

@@ -10,8 +10,8 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
-	* [AlchemyLanguage](#alchemylanguage)
-	* [AlchemyVision](#alchemyvision)
+	* [Alchemy Language](#alchemylanguage)
+	* [Alchemy Vision](#alchemyvision)
 	* [Dialog](#dialog)
 	* [Language Translation](#language-translation)
 	* [Natural Language Classifier](#natural-language-classifier)
@@ -46,7 +46,7 @@ Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the
 The Watson Developer Cloud offers a variety of services for building cognitive applications.
 
 
-### AlchemyLanguage
+### Alchemy Language
 
 The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide high-level semantic information about your content.
 
@@ -188,6 +188,10 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
+
+###Language Translation
+
+The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
 
 ### Speech to Text

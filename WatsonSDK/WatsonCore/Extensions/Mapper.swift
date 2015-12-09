@@ -1,5 +1,5 @@
 //
-//  ObjectMapperExtension.swift
+//  Mapper.swift
 //  WatsonSDK
 //
 //  Created by Glenn Fisher on 11/20/15.

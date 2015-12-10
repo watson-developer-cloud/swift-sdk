@@ -59,6 +59,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 9) Add the code below to the viewDidLoad method in the ViewController class
 
+```swift
         var player: AVAudioPlayer?    
         override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
             }
         }
      }
+```
 
 <img src="./images/viewDidLoad.png" width="500">
 

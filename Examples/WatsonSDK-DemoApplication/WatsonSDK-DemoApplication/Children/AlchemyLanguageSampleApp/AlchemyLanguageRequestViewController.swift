@@ -90,6 +90,23 @@ class AlchemyLanguageRequestViewController: UIViewController {
         print(self.activityIndicatorView)
         print(self.activityIndicatorView.frame)
         
+        // api key
+        var apiKey: String?
+        
+        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
+                apiKey = dict["AlchemyAPIKey"]
+            }
+        }
+        
+        if let apiKey = apiKey {
+            
+        } else {
+            
+            displayError()
+            
+        }
+        
         // start request
         let alchemyLanguage = AlchemyLanguage(apiKey: "")
         
@@ -104,6 +121,27 @@ class AlchemyLanguageRequestViewController: UIViewController {
             // if failure
                 // red indicator
                 // alert with failure, try again
+        
+    }
+    
+    private func displayError() {
+        
+        if self.activityIndicatorView != nil {
+
+            self.activityIndicatorView.hidesWhenStopped = false
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.color = UIColor.redColor()
+            
+        }
+        
+        let alertController = UIAlertController(
+            title: "Network Error Occurred",
+            message:"Please try again.",
+            preferredStyle: .Alert
+        )
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+        self.presentViewController(alertController, animated: true){ }
         
     }
     

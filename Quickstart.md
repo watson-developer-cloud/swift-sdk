@@ -14,12 +14,11 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
 
 1) Create a **"Single View App"** in XCODE 
 
-![SingeViewApplication](./images/SingleViewapp.png)
+<img src="./images/SingleViewapp.png" width="500">
 
 2) Fill in the fields Project Name, Organization Name, Organization Indentifier, Bundle Identifier fields  
 
-![WatsonSpeak](./images/WatsonSpeak.png =500x)
-
+<img src="./images/WatsonSpeak.png" width="500">
 
 3) Create cartfile using the information below
 
@@ -87,24 +86,24 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
 
 11) Add the plist information to the info.plist in the WatsonSpeek app to whitelist the URI
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-	<plist version="1.0">
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>stream.watsonplatform.net</key>
-			<dict>
-				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
-	</plist>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>stream.watsonplatform.net</key>
+            <dict>
+                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+    </plist>
 
 ![plist](./images/plist.png =500x)
 

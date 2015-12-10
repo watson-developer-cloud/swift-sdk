@@ -1,12 +1,12 @@
 #Quick Start Guide
 
-This is a quick walkthrough to create a synthesized speech app from the Watson's Text To Speech service
+This is a quick walkthrough to demonstrate how to create a iOS app that uses Watson's Text To Speech service to speak German.
 
 ###Prerequisite 
 
-A running Watson service is required for this quick start guide to work correctly.  Please review and setup an instance of the Watson Text to Speech service.  The credentials will be used as part of this getting started guide.  The credentials can be found once the service is started and you click on the “Show Credentials” link on the service. [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted)
+Before beginning to create the iOS client, make sure you set up your BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application, it does not matter in this example since we will not be deploying any server-side code. Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted)
 
-In addition, this quick guide uses Carthage so install carthage from [here](https://github.com/Carthage/Carthage) by following **"Installing Carthage"** section. 
+In addition, this quick guide uses Carthage to fetch necessary depedencies that the Watson iOS SDK requires. You can install  [Carthage](https://github.com/Carthage/Carthage) by following **"Installing Carthage"** section. If you use Homebrew you can simply run "brew install carthage".
 
 
 

@@ -5,6 +5,8 @@
 
 The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift 2.0+ applications.
 
+[Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md)
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)

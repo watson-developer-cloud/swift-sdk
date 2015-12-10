@@ -12,7 +12,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 ###Create a Text to Speach App
 
-1) Create a **"Single View App"** in XCode.
+1) Create a **"Single View App"** in XCode and name it "WatsonSpeaks".
 
 <img src="./images/SingleViewapp.png" width="500">
 
@@ -45,21 +45,21 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/NewGroup.png" width="300">
 
-6) Select all the .framework files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop into the frameworks group but please **make sure** to deselect copy items
+6) Select all the .framework files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
 
 <img src="./images/frameworksInGroup.png" width="300">
 
-7) Select the project target and add **New Copy File Phase** available in Build Phases
+7) In XCode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add **New Copy File Phase**
 
 <img src="./images/BuildPhases.png" width="600">
 
-8) Add the frameworks to the Copy Files Phase
+8) Add all of the frameworks you added to XCode to the Copy Files Phase.
 
 <img src="./images/AddedCopyFiles.png" width="600">
 
-8) Add **import WatsonSDK** below import UIKit in the ViewController class
+8) Open your ViewController class and add **import WatsonSDK** under the import of UIKit.
 
-9) Add the code below to the viewDidLoad method in the ViewController class
+9) Add the code below to the ***viewDidLoad*** method in the ViewController class:
 
 ```swift
         var player: AVAudioPlayer?    
@@ -86,9 +86,9 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/viewDidLoad.png" width="500">
 
-10) Set username and password in the setUserNameAndPassword function
+10) Use the credentials that Bluemix created and set them for username and password in the setUserNameAndPassword function.
 
-11) Add the plist information to the info.plist in the WatsonSpeak App to whitelist the URI
+11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the stream.watsonplatform.net server.
 
 ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -114,10 +114,10 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/plist.png" width="500">
 
-12) Run application and you should hear speech from the simulator
+12) Run application in a Simulator, and you should hear speech coming from the speaker.
 
 13) Enjoy!
 
 
-You can download all the source code for the Watson iOS SDK [here](https://github.com/IBM-MIL/Watson-iOS-SDK)
+You can download all the source code for the Watson iOS SDK [here](https://github.com/IBM-MIL/Watson-iOS-SDK).
 

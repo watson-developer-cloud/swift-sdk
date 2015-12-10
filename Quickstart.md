@@ -14,7 +14,7 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
 
 1) Create a **"Single View App"** in XCODE 
 
-![SingeViewApplication](../../tree/master/images/SingleViewapp.png =500x)
+![SingeViewApplication](./images/SingleViewapp.png)
 
 2) Fill in the fields Project Name, Organization Name, Organization Indentifier, Bundle Identifier fields  
 

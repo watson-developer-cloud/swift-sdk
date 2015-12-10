@@ -31,7 +31,6 @@
 		6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */; };
 		6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */; };
 		6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */; };
-		6EF237851C1A13DD00663E7D /* AlchemyLanguageProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF237841C1A13DD00663E7D /* AlchemyLanguageProgressView.xib */; };
 		6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +61,6 @@
 		6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyVision.storyboard; sourceTree = "<group>"; };
-		6EF237841C1A13DD00663E7D /* AlchemyLanguageProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlchemyLanguageProgressView.xib; sourceTree = "<group>"; };
 		6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlchemyLanguageResultsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,7 +150,6 @@
 				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
 				6E32951E1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard */,
 				6E32951C1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift */,
-				6EF237831C1A13BD00663E7D /* AlchemyLanguageProgressView */,
 				6EF237821C1A13BD00663E7D /* AlchemyLanguageResultsView */,
 			);
 			path = AlchemyLanguageSampleApp;
@@ -190,14 +187,6 @@
 				6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */,
 			);
 			path = AlchemyLanguageResultsView;
-			sourceTree = "<group>";
-		};
-		6EF237831C1A13BD00663E7D /* AlchemyLanguageProgressView */ = {
-			isa = PBXGroup;
-			children = (
-				6EF237841C1A13DD00663E7D /* AlchemyLanguageProgressView.xib */,
-			);
-			path = AlchemyLanguageProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +256,6 @@
 				6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */,
 				6E3295191C176E2A001CE8B7 /* AlchemyLanguage.storyboard in Resources */,
 				6E3C0D0D1C0E3A93001BF15A /* Main.storyboard in Resources */,
-				6EF237851C1A13DD00663E7D /* AlchemyLanguageProgressView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

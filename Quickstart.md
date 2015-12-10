@@ -119,7 +119,10 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 ```
 
-<img src="./images/plist.png" width="500">
+<img src="./images/plistPropertyList.png" width="600">
+
+<img src="./images/plistSource.png" width="600">
+
 
 12) Run application in a Simulator, and you should hear speech coming from the speaker.
 

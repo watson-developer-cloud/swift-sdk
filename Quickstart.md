@@ -62,25 +62,35 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 9) Add the code below to the ***viewDidLoad*** method in the ViewController class:
 
 ```swift
-        var player: AVAudioPlayer?    
-        override func viewDidLoad() {
+    
+    var player: AVAudioPlayer?    
+
+    // Do any additional setup after loading the view, typically from a nib.
+    override func viewDidLoad() {
+
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         let tts = TextToSpeech()
         tts.setUsernameAndPassword("YOUR TTS USERNAME", password: "YOUR TTS PASSWORD")
-        tts.synthesize("Hallo! Wie gehen Ihnen? Sprechen Sie Deutsch!") { data, error in
+        tts.synthesize("Hallo! Wie gehen Ihnen? Sprechen Sie Deutsch!") { 
+
+            data, error in
+
             if let audio = data {
+
                 do {
                     self.player = try AVAudioPlayer(data: audio)
                     self.player!.play()
                 } catch {
                     print("Couldn't create player.")
                 }
+
             } else {
                 print(error)
             }
+            
         }
+
      }
 ```
 

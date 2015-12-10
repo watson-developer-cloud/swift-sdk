@@ -128,6 +128,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 13) Enjoy!
 
+You can review the different voices and languages [here](https://github.com/IBM-MIL/Watson-iOS-SDK#text-to-speech).
 
 You can download all the source code for the Watson iOS SDK [here](https://github.com/IBM-MIL/Watson-iOS-SDK).
 

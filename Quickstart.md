@@ -45,7 +45,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/NewGroup.png" width="300">
 
-6) Select all the .framework files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
+6) Select all the .framework (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger) files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
 
 <img src="./images/frameworksInGroup.png" width="300">
 

@@ -12,16 +12,17 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 ###Create a Text to Speach App
 
-1) Create a **"Single View App"** in XCODE 
+1) Create a **"Single View App"** in XCode
 
 <img src="./images/SingleViewapp.png" width="500">
 
-2) Fill in the fields Project Name, Organization Name, Organization Indentifier, Bundle Identifier fields  
+2) Fill in the fields for Project Name, Organization Name, Organization Indentifier, Bundle Identifier  
 
 <img src="./images/WatsonSpeak.png" width="500">
 
 3) Create cartfile using the information below
 
+```
         # cartfile contents
         github "SwiftyJSON/SwiftyJSON" == 2.3.1
         github "Alamofire/Alamofire" == 3.1.2
@@ -32,6 +33,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
         github "Quick/Nimble" == 3.0.0
         github "daltoniam/Starscream" == 1.0.2
         github "https://github.com/IBM-MIL/Watson-iOS-SDK"
+```
 
 <img src="./images/cartfile.png" width="400">
 
@@ -86,7 +88,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 10) Set username and password in the setUserNameAndPassword function
 
-11) Add the plist information to the info.plist in the WatsonSpeek app to whitelist the URI
+11) Add the plist information to the info.plist in the WatsonSpeak App to whitelist the URI
 
 ```xml
     <?xml version="1.0" encoding="UTF-8"?>

@@ -41,7 +41,7 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
 
 5) Create group in Xcode called Frameworks
 
-<img src="./images/newGroup.png" width="300">
+<img src="./images/NewGroup.png" width="300">
 
 6) Select all files in the carthage/build/ios/*.framworks except for **Nimble** and drag-and-drop into the frameworks group but please **make sure** to deselect copy items
 

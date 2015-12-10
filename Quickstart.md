@@ -72,7 +72,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
         
         let tts = TextToSpeech()
         tts.setUsernameAndPassword("YOUR TTS USERNAME", password: "YOUR TTS PASSWORD")
-        tts.synthesize("Hallo! Wie gehen Ihnen? Sprechen Sie Deutsch!") { 
+        tts.synthesize("All the problems of the world could be settled easily if men were only willing to think.") { 
 
             data, error in
 

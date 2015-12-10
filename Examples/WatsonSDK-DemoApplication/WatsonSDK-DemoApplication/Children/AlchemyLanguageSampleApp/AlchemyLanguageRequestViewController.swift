@@ -34,6 +34,8 @@ class AlchemyLanguageRequestViewController: UIViewController {
     @IBOutlet weak var keywordsEntry1: UILabel!
     @IBOutlet weak var keywordsEntry2: UILabel!
     
+    var activityIndicatorView: UIActivityIndicatorView!
+    
     
     var _requestType: AlchemyLanguageConstants.RequestType!
     var requestType: AlchemyLanguageConstants.RequestType! {
@@ -72,7 +74,36 @@ class AlchemyLanguageRequestViewController: UIViewController {
         
         super.viewDidAppear(animated)
         
+        // activity indicator
+        self.activityIndicatorView = UIActivityIndicatorView(frame: CGRect(
+            origin: CGPointZero,
+            size: CGSize(
+                width: 50.0,
+                height: 50.0
+            )
+        ))
         
+        self.activityIndicatorView.center = self.view.center
+        self.view.addSubview(self.activityIndicatorView)
+        self.activityIndicatorView.startAnimating()
+        
+        print(self.activityIndicatorView)
+        print(self.activityIndicatorView.frame)
+        
+        // start request
+        let alchemyLanguage = AlchemyLanguage(apiKey: "")
+        
+            // on completion
+        
+            // if success
+                // play animation where green / stop
+                // parse objects
+                // fade out indicator
+                // add objects hidden, fade in objects
+        
+            // if failure
+                // red indicator
+                // alert with failure, try again
         
     }
     

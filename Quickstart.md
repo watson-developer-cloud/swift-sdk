@@ -88,6 +88,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 11) Add the plist information to the info.plist in the WatsonSpeek app to whitelist the URI
 
+```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -106,6 +107,8 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
         </dict>
     </dict>
     </plist>
+
+```
 
 <img src="./images/plist.png" width="500">
 

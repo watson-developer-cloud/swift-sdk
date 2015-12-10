@@ -33,27 +33,27 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
         github "daltoniam/Starscream" == 1.0.2
         github "https://github.com/IBM-MIL/Watson-iOS-SDK"
 
-![cartfile](./images/cartfile.png =400x)
+<img src="./images/cartfile.png" width="400">
 
 4) Run "carthage update --platform iOS" from the command line at the root of the project.  The off chance you receive a compile failure for framework AlamofireObjectMapper so just rerun the carthage update command another time.
 
-![runCarthage.png](./images/runCarthage.png =500x)
+<img src="./images/runCarthage.png" width="500">
 
 5) Create group in Xcode called Frameworks
 
-![newGroup](./images/newGroup.png =300x)
+<img src="./images/newGroup.png" width="300">
 
 6) Select all files in the carthage/build/ios/*.framworks except for **Nimble** and drag-and-drop into the frameworks group but please **make sure** to deselect copy items
 
-![frameworksInGroup](./images/frameworksInGroup.png =300x)
+<img src="./images/frameworksInGroup.png" width="300">
 
 7) Select the project target and add **New Copy File Phase** available in Build Phases
 
-![BuildPhases](./images/BuildPhases.png =600x)
+<img src="./images/BuildPhases.png" width="600">
 
 8) Add the frameworks to the Copy Files Phase
 
-![AddedCopyFiles](./images/AddedCopyFiles.png =600x)
+<img src="./images/AddedCopyFiles.png" width="600">
 
 8) Add **import WatsonSDK** below import UIKit in the ViewController class
 
@@ -80,7 +80,7 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
         }
      }
 
-![viewDidLoad](./images/viewDidLoad.png =500x)
+<img src="./images/viewDidLoad.png" width="500">
 
 10) Set username and password in the setUserNameAndPassword function
 
@@ -105,7 +105,7 @@ In addition, this quick guide uses Carthage so install carthage from [here](http
     </dict>
     </plist>
 
-![plist](./images/plist.png =500x)
+<img src="./images/plist.png" width="500">
 
 12) Run application and you should hear speech from the simulator
 

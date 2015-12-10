@@ -12,15 +12,15 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 ###Create a Text to Speach App
 
-1) Create a **"Single View App"** in XCode
+1) Create a **"Single View App"** in XCode.
 
 <img src="./images/SingleViewapp.png" width="500">
 
-2) Fill in the fields for Project Name, Organization Name, Organization Indentifier, Bundle Identifier  
+2) Fill in the fields for Project Name, Organization Name, Organization Indentifier, and Bundle Identifier.  
 
 <img src="./images/WatsonSpeak.png" width="500">
 
-3) Create cartfile using the information below
+3) Create a file called "Cartfile" in the root directory of your project and put the following inside the file:
 
 ```
         # cartfile contents
@@ -37,15 +37,15 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/cartfile.png" width="400">
 
-4) Run "carthage update --platform iOS" from the command line at the root of the project.  The off chance you receive a compile failure for framework AlamofireObjectMapper so just rerun the carthage update command another time.
+4) Run "carthage update --platform iOS" from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run "carthage update" again.
 
 <img src="./images/runCarthage.png" width="500">
 
-5) Create group in Xcode called Frameworks
+5) Create new Group in your Xcode project and call it "Frameworks".
 
 <img src="./images/NewGroup.png" width="300">
 
-6) Select all files in the carthage/build/ios/*.framworks except for **Nimble** and drag-and-drop into the frameworks group but please **make sure** to deselect copy items
+6) Select all the .framework files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop into the frameworks group but please **make sure** to deselect copy items
 
 <img src="./images/frameworksInGroup.png" width="300">
 

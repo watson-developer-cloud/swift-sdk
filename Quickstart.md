@@ -4,7 +4,7 @@ This is a quick walkthrough to demonstrate how to create a iOS app that uses Wat
 
 ###Prerequisite 
 
-Before beginning to create the iOS client, make sure you set up your BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application, it does not matter in this example since we will not be deploying any server-side code. Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted)
+Before beginning to create the iOS client, make sure you set up your BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application, it does not matter in this example since we will not be deploying any server-side code. Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. For more information about creating Bluemix applications and attaching Bluemix and Watson services read [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted).
 
 In addition, this quick guide uses Carthage to fetch necessary depedencies that the Watson iOS SDK requires. You can install  [Carthage](https://github.com/Carthage/Carthage) by following **"Installing Carthage"** section. If you use Homebrew you can simply run "brew install carthage".
 
@@ -49,7 +49,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/frameworksInGroup.png" width="300">
 
-7) In XCode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add **New Copy File Phase**
+7) In XCode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
 
 <img src="./images/BuildPhases.png" width="600">
 

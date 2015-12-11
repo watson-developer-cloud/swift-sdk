@@ -44,7 +44,7 @@ public final class AlchemyLanguage: Service {
     private typealias luri = alcs.LanguageURI
 
     
-    init() {
+    public init() {
 
         super.init(
             type: ServiceType.Alchemy,
@@ -53,7 +53,7 @@ public final class AlchemyLanguage: Service {
         
     }
     
-    convenience init(apiKey:String) {
+    public convenience init(apiKey:String) {
         
         self.init()
         _apiKey = apiKey

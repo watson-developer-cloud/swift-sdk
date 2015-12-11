@@ -17,25 +17,27 @@
 import Foundation
 import ObjectMapper
 
-/**
- *  Profile model object that is returned by PersonalityInsights service
- */
-public struct Profile: Mappable {
-    var tree:Trait?
-    var ID:String?
-    var source:String?
-    var wordCount:Int?
-    var wordCountMessage:Int?
-    var processedLang:String?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        ID                  <- map["id"]
-        source              <- map["source"]
-        wordCount           <- map["word_count"]
-        wordCountMessage    <- map["word_count_message"]
-        processedLang       <- map["processed_lang"]
-        tree                <- map["tree"]
+extension PersonalityInsights {
+
+    /// Profile model object that is returned by PersonalityInsights service
+    public struct Profile: Mappable {
+        
+        var tree:Trait?
+        var ID:String?
+        var source:String?
+        var wordCount:Int?
+        var wordCountMessage:Int?
+        var processedLang:String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            ID                  <- map["id"]
+            source              <- map["source"]
+            wordCount           <- map["word_count"]
+            wordCountMessage    <- map["word_count_message"]
+            processedLang       <- map["processed_lang"]
+            tree                <- map["tree"]
+        }
     }
 }

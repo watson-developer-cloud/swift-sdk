@@ -15,77 +15,128 @@
  **/
 
 import Foundation
+import Alamofire
+import AlamofireObjectMapper
 import ObjectMapper
 
-/// The Watson Personality Insights service uses linguistic analytics to extract a spectrum of cognitive and social characteristics from the text data that a person generates through blogs, tweets, forum posts, and more.
-public class PersonalityInsights: Service {
-    private let _serviceURL = "/personality-insights/api"
- 
-    public init() {
-        super.init(serviceURL:_serviceURL)
-    }
+/**
+ The Watson Personality Insights service uses linguistic analytics to extract a spectrum
+ of cognitive and social characteristics from the text data that a person generates
+ through blogs, tweets, forum posts, and more.
+ */
+public class PersonalityInsights: WatsonService {
     
     /**
-     Takes input text and generates a personality profile.
+     Analyze input text to generate a personality profile.
      
-     - parameter text:           (Required) The text to analyze, plain text (the default) or HTML.
-     - parameter includeRaw:     If true, a raw score for each characteristic is returned in addition to a normalized score; raw scores are not compared with a sample population. A raw sampling error for each characteristic is also returned. Default: 'false'.
-     - parameter language:       The request language. Both English ("en") and Spanish ("es") are supported. Default: 'en'.
-     - parameter acceptLanguage: The desired language of the response. Both English ("en") and Spanish ("es") are supported
-     - parameter callback:       Method to be invoked with the populated Profile object
+     - Parameters
+        - text: The text to analyze.
+        - includeRaw: If true, a raw score for each characteristic is returned in
+                in addition to a normalized score. Raw scores are not compared with
+                a sample population. A raw sampling error for each characteristic
+                is also returned. Default: "false".
+        - language: The request language. Both English ("en") and Spanish ("es") are
+                supported.
+        - acceptLanguage: The desired language of the response. Both English ("en")
+                and Spanish ("es") are supported.
+        - completionHandler: A function invoked with the response from Watson.
      */
-    public func getProfile(text:String, includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?, NSError?)->()) {
-        getProfile(text, contentItems: nil, includeRaw:includeRaw, language:language, acceptLanguage:acceptLanguage, callback:(callback))
-    }
-    
-    /**
-     Takes content items model and generates a personality profile.
-     
-     - parameter contentItems:   (Required) A JSON request must conform to the ContentItem model.
-     - parameter includeRaw:     If true, a raw score for each characteristic is returned in addition to a normalized score; raw scores are not compared with a sample population. A raw sampling error for each characteristic is also returned. Default: 'false'.
-     - parameter language:       The request language. Both English ("en") and Spanish ("es") are supported. Default: 'en'.
-     - parameter acceptLanguage: The desired language of the response. Both English ("en") and Spanish ("es") are supported
-     - parameter callback:       Method to be invoked with the populated Profile object
-     */
-    public func getProfile(contentItems:[ContentItem], includeRaw: Bool = false, language:String = PersonalityInsightsConstants.defaultLanguage, acceptLanguage:String = PersonalityInsightsConstants.defaultAcceptLanguage, callback: (Profile?, NSError?)->()) {
-        getProfile(nil, contentItems:contentItems, includeRaw:includeRaw, language:language, acceptLanguage:acceptLanguage, callback:callback)
-    }
-
-    /**
-     Private function that both getProfile() methods flow through for code reuse
-     */
-    private func getProfile(text:String? = nil, contentItems:[ContentItem]? = nil, includeRaw: Bool, language:String, acceptLanguage:String, callback: (Profile?, NSError?)->()) {
-        let endpoint = getEndpoint("/v2/profile")
+    public func getProfile(
+        text: String,
+        acceptLanguage: String? = nil,
+        contentLanguage: String? = nil,
+        includeRaw: Bool? = nil,
+        completionHandler: (Profile?, NSError?) -> ()) {
         
-        var params = Dictionary<String, AnyObject>()
-        
-        if let text = text {
-            params.updateValue(text, forKey: PersonalityInsightsConstants.text)
-        } else if let contentItems = contentItems {
-            
-            //Create string that starts with JSON array element contentItems
-            var contentItemsStr = "{\"" + PersonalityInsightsConstants.contentItems + "\":["
-            
-            //Iterate through each contentItem and append the item as a JSON string
-            for (index, element) in contentItems.enumerate() {
-                if let contentItemStr = Mapper().toJSONString(element, prettyPrint: true)
-                {
-                    contentItemsStr += contentItemStr
-                    //Add separator to the end of all items except for the last
-                    if index < contentItems.count - 1 { contentItemsStr += "," }
-                }
-            }
-            //Close the array
-            contentItemsStr += "]}"
-            
-            params.updateValue(contentItemsStr, forKey: PersonalityInsightsConstants.contentItems)
+        // construct url query parameters
+        var urlParams = [NSURLQueryItem]()
+        if let includeRaw = includeRaw {
+            urlParams.append(NSURLQueryItem(name: "include_raw", value: "\(includeRaw)"))
         }
-        params.updateValue(language, forKey: PersonalityInsightsConstants.language)
-        params.updateValue(acceptLanguage, forKey: PersonalityInsightsConstants.acceptLanguage)
-        params.updateValue(includeRaw, forKey: PersonalityInsightsConstants.includeRaw)
+            
+        // construct header parameters
+        var headerParams = [String: String]()
+        if let acceptLanguage = acceptLanguage {
+            headerParams["Accept-Language"] = acceptLanguage
+        }
+        if let contentLanguage = contentLanguage {
+            headerParams["Content-Language"] = contentLanguage
+        }
+            
+        // construct request
+        let request = WatsonRequest(
+            method: .POST,
+            serviceURL: Constants.serviceURL,
+            endpoint: Constants.profile,
+            accept: .JSON,
+            contentType: .Plain,
+            urlParams: urlParams,
+            headerParams: headerParams,
+            messageBody: text.dataUsingEncoding(NSUTF8StringEncoding))
         
-        NetworkUtils.performBasicAuthRequest(endpoint, method: HTTPMethod.POST, contentType:ContentType.Text, parameters: params, apiKey: _apiKey, completionHandler: {response in
-            callback(Mapper<Profile>().map(response.data), response.error)
-        })
-    }    
+        // execute request
+        Alamofire.request(request)
+            .authenticate(user: user, password: password)
+            .responseObject { (response: Response<Profile, NSError>) in
+                validate(response, serviceError: PersonalityInsightsError(),
+                    completionHandler: completionHandler)
+            }
+    }
+    
+    /**
+     Analyze input context items to generate a personality profile.
+     
+     - Parameters
+        - contentItems: The content items to analyze.
+        - includeRaw: If true, a raw score for each characteristic is returned in
+                in addition to a normalized score. Raw scores are not compared with
+                a sample population. A raw sampling error for each characteristic
+                is also returned. Default: "false".
+        - language: The request language. Both English ("en") and Spanish ("es") are
+                supported.
+        - acceptLanguage: The desired language of the response. Both English ("en")
+                and Spanish ("es") are supported.
+        - completionHandler: A function invoked with the response from Watson.
+     */
+    public func getProfile(
+        contentItems: [ContentItem],
+        acceptLanguage: String? = nil,
+        contentLanguage: String? = nil,
+        includeRaw: Bool? = nil,
+        completionHandler: (Profile?, NSError?) -> ()) {
+            
+        // construct url query parameters
+        var urlParams = [NSURLQueryItem]()
+        if let includeRaw = includeRaw {
+            urlParams.append(NSURLQueryItem(name: "include_raw", value: "\(includeRaw)"))
+        }
+        
+        // construct header parameters
+        var headerParams = [String: String]()
+        if let acceptLanguage = acceptLanguage {
+            headerParams["Accept-Language"] = acceptLanguage
+        }
+        if let contentLanguage = contentLanguage {
+            headerParams["Content-Language"] = contentLanguage
+        }
+        
+        // construct request
+        let request = WatsonRequest(
+            method: .POST,
+            serviceURL: Constants.serviceURL,
+            endpoint: Constants.profile,
+            accept: .JSON,
+            contentType: .JSON,
+            urlParams: urlParams,
+            headerParams: headerParams,
+            messageBody: Mapper().toJSONData(contentItems, header: "contentItems"))
+        
+        // execute request
+        Alamofire.request(request)
+            .authenticate(user: user, password: password)
+            .responseObject { (response: Response<Profile, NSError>) in
+                validate(response, serviceError: PersonalityInsightsError(),
+                    completionHandler: completionHandler)
+        }
+    }
 }

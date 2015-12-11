@@ -18,6 +18,7 @@
 		6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */; };
 		6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */; };
 		6E42340E1C175DC80020C3D1 /* AlchemyVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42340D1C175DC80020C3D1 /* AlchemyVisionViewController.swift */; };
+		6E49AC261C1A339500BFBD07 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC251C1A339500BFBD07 /* Credentials.plist */; };
 		6E51B2711C173BA300D5EF12 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */; };
 		6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */; };
 		6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26F1C173BA300D5EF12 /* VisionImage.swift */; };
@@ -31,6 +32,7 @@
 		6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */; };
 		6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */; };
 		6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */; };
+		6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,7 @@
 		6E3C0D111C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E42340D1C175DC80020C3D1 /* AlchemyVisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionViewController.swift; sourceTree = "<group>"; };
+		6E49AC251C1A339500BFBD07 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionCollectionViewController.swift; sourceTree = "<group>"; };
 		6E51B26F1C173BA300D5EF12 /* VisionImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionImage.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyVision.storyboard; sourceTree = "<group>"; };
+		6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlchemyLanguageResultsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 		6E3C0D1A1C0E3B4E001BF15A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E49AC251C1A339500BFBD07 /* Credentials.plist */,
 				6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */,
 				6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */,
 				6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */,
@@ -148,6 +153,7 @@
 				6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */,
 				6E32951E1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard */,
 				6E32951C1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift */,
+				6EF237821C1A13BD00663E7D /* AlchemyLanguageResultsView */,
 			);
 			path = AlchemyLanguageSampleApp;
 			sourceTree = "<group>";
@@ -176,6 +182,14 @@
 				6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		6EF237821C1A13BD00663E7D /* AlchemyLanguageResultsView */ = {
+			isa = PBXGroup;
+			children = (
+				6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */,
+			);
+			path = AlchemyLanguageResultsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,7 +251,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E49AC261C1A339500BFBD07 /* Credentials.plist in Resources */,
 				6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */,
+				6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */,
 				6E9632951C0E4DF00055D402 /* BarView.xib in Resources */,
 				6E32951F1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard in Resources */,
 				6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */,

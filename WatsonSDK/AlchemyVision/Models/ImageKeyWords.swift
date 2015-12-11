@@ -22,8 +22,8 @@ import ObjectMapper
  */
 public struct ImageKeyWords: Mappable {
     
-    var totalTransactions: Int?
-    var imageKeyWords: [ImageKeyWord] = []
+    public var totalTransactions: Int?
+    public var imageKeyWords: [ImageKeyWord] = []
     
     public init() {
 

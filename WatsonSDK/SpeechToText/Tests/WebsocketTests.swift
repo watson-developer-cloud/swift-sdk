@@ -101,18 +101,17 @@ class WebsocketTests: XCTestCase {
             self.disconnectExpectation = disconnectExpectation
         }
         
-    func onMessageReceived(results: [SpeechToTextResult]) {
+        func onMessageReceived(results: SpeechToTextResponse) {
         
-        Log.sharedLogger.info("Received: \(results)")
-        // XCTAssertNotnil(results)
-        //messageExpectation?.fulfill()
+            Log.sharedLogger.info("Received: \(results)")
+       
         
-        if results[0].alternatives![0].transcript?.characters.count > 1 {
+            //if results[0].alternatives![0].transcript?.characters.count > 1 {
         
-            socket.disconnect()
-        }
+                socket.disconnect()
+            //}
 
-    }
+        }
     
     func onConnected() {
         

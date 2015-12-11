@@ -69,6 +69,7 @@ public class SpeechToText {
     init( authStrategy: AuthenticationStrategy ) {
         
         watsonSocket = WatsonSocket( authStrategy: authStrategy )
+        watsonSocket.delegate = self
         
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         
@@ -249,11 +250,23 @@ public class SpeechToText {
         let data = opus.encode(data, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
         return data
     }
-    
-    
-  
+
 }
 
+extension SpeechToText: WatsonSocketDelegate {
+    
+    func onConnected() {}
+    func onListening() {}
+    func onDisconnected() {}
+    
+    func onMessageReceived(result: SpeechToTextResponse) {
+    
+        callback?(result, nil)
+    
+    }
+
+    
+}
 
 
 

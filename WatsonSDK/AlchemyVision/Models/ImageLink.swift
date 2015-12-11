@@ -21,18 +21,18 @@ import ObjectMapper
  *  Contains the url string and the image string
  */
 public struct ImageLink: Mappable {
-  
-  var url: String?
-  var image: String?
-  
-  init() {
     
-  }
-  
-  public init?(_ map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    url    <- map["url"]
-    image   <- map["image"]
-  }
+    public var url: String?
+    public var image: String?
+    
+    init() {
+        
+    }
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+        url    <- map["url"]
+        image   <- map["image"]
+    }
 }

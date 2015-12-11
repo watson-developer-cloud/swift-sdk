@@ -1,6 +1,6 @@
 #Quick Start Guide
 
-This is a quick walkthrough to demonstrate how to create a iOS app that uses Watson's Text To Speech service to speak German.
+This is a quick walkthrough to demonstrate how to create a iOS app that uses Watson's Text To Speech service to speak in English.
 
 ###Prerequisite 
 

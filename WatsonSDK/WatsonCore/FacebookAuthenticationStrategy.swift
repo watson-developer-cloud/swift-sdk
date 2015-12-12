@@ -55,18 +55,27 @@ class FacebookAuthenticationStrategy: AuthenticationStrategy {
         let url = "\(tokenURL)?fbtoken=\(fbToken)"
         
         Alamofire.request(.GET, url)
-            .responseString {
+            .responseJSON {
                 
                 response in
                 
                 
-                if let watsonToken = response.result.value {
+                if let JSON = response.result.value {
                     
-                    self.token = watsonToken
-                    completionHandler(token: self.token, error: nil)
+                    
+                    if let rtoken = JSON["token"] as? String {
+                        self.token = rtoken
+                        completionHandler(token: self.token, error: nil)
+                    } else {
+                        let err = NSError.createWatsonError(503, description: "Facebook rejected token")
+                        completionHandler(token: nil, error: err)
+                    }
+                    
+                    
+                   
                 } else {
                     completionHandler(token: nil,
-                        error: NSError.createWatsonError(400, description: "Could not get token"))
+                        error: NSError.createWatsonError(400, description: "Could not parse response"))
                 }
                 
                 

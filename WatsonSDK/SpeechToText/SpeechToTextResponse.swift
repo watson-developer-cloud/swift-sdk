@@ -39,9 +39,30 @@ public struct SpeechToTextResponse: Mappable
         state           <- map["state"]
     }
     
+    /**
+    * The transcription property helps return a simple String result for a transcription
+    */
     public func transcription () -> String {
         
-        
+        if let results = results {
+            
+            if results.count > 0 {
+                
+                let result = results[0]
+                
+                if let alternatives = result.alternatives {
+                    
+                    if alternatives.count > 0 {
+                        
+                        
+                        return alternatives[0].transcript!
+                        
+                    }
+                }
+                
+            }
+            
+        }
         return ""
     }
     

@@ -46,7 +46,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         var settings = [String: AnyObject]()
         // settings[AVFormatIDKey] = NSNumber(unsignedInt: kAudioFormatMPEG4AAC)
         settings[AVSampleRateKey] = NSNumber(float: 44100.0)
-        settings[AVNumberOfChannelsKey] = NSNumber(int: 2)
+        settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
         do {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
             recorder = try AVAudioRecorder(URL: filePath, settings: settings)
@@ -156,6 +156,24 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         print("Transcribing recording...")
+        
+        if let sttService = sttService {
+            
+            let data = NSData(contentsOfURL: recorder.url)
+            
+            if let data = data {
+                sttService.transcribe(data , format: .WAV, oncompletion: {
+                
+                    response, error in
+                
+                        print(response)
+                    
+                })
+            } else {
+                Log.sharedLogger.error("Could not find data at \(recorder.url)")
+            }
+            
+        }
         // let stt = WatsonSpeechToText(username: username, password: password)
 //        sttService.transcribeFile(recorder.url) {
 //            string, error in

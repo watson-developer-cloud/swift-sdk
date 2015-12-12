@@ -51,10 +51,24 @@ class FacebookAuthenticationStrategy: AuthenticationStrategy {
      */
     func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
         
-        Alamofire.request(.GET, tokenURL)
-            .response { request, response, data, error in
+        let url = "\(tokenURL)?fbtoken=\(fbToken)"
+        
+        Alamofire.request(.GET, url)
+            .responseString {
                 
-                completionHandler(token: self.token, error: nil)
+                response in
+                
+                
+                if let watsonToken = response.result.value {
+                    
+                    self.token = watsonToken
+                    completionHandler(token: self.token, error: nil)
+                } else {
+                    completionHandler(token: nil,
+                        error: NSError.createWatsonError(400, description: "Could not get token"))
+                }
+                
+                
         }
         
     }

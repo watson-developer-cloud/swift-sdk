@@ -26,14 +26,14 @@ import Foundation
 * password are bundled in an App distribution, they can be munged by third parties to have the 
 * information to generate new Watson keys and subsequent queries without limitation.
 */
-class BasicAuthenticationStrategy : AuthenticationStrategy {
+public class BasicAuthenticationStrategy : AuthenticationStrategy {
     
     let username: String!
     let password: String!
     let serviceURL: String!
     let tokenURL: String!
     
-    var token: String?
+    public var token: String?
     
     /**
      Creates a Basic Authentication handler that will request a token from the server. Requires 
@@ -46,7 +46,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
      - parameter password:   Watson basic auth password
      
      */
-    init(tokenURL: String, serviceURL: String, username: String, password: String) {
+    public init(tokenURL: String, serviceURL: String, username: String, password: String) {
         
         self.username = username
         self.password = password
@@ -62,7 +62,7 @@ class BasicAuthenticationStrategy : AuthenticationStrategy {
      - parameter completionHandler: callback for when a token has been obtained
      - parameter error:           an error in case the token could not be obtained.
      */
-    func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
+    public func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
         
         
         if token != nil {

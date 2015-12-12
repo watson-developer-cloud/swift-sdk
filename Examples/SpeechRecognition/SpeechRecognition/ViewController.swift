@@ -166,7 +166,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
                 
                     response, error in
                 
-                        print(response)
+                        // print(response)
+                    
+                    
+                    self.transcriptionField.text = response?.transcription()
                     
                 })
             } else {

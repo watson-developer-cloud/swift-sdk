@@ -1,14 +1,23 @@
-//
-//  ViewController.swift
-//  SpeechRecognition
-//
-//  Created by Glenn R. Fisher on 9/16/15.
-//  Copyright © 2015 IBM Mobile Innovation Lab. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2015
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import UIKit
 import AVFoundation
-import SpeechToText
+
+import WatsonSDK
 
 class ViewController: UIViewController, AVAudioRecorderDelegate {
 
@@ -17,6 +26,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var transcribeButton: UIButton!
     @IBOutlet weak var transcriptionField: UITextView!
     
+    
+    var sttService : SpeechToText?
     var player: AVAudioPlayer? = nil
     var recorder: AVAudioRecorder!
     
@@ -60,10 +71,21 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                self.username = dict["SpeechToTextUsername"]
-                self.password = dict["SpeechToTextPassword"]
+                let username = dict["SpeechToTextUsername"]
+                let password = dict["SpeechToTextPassword"]
+                
+                let basicAuth = BasicAuthenticationStrategy(
+                    tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+                    serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+                    username: username!,
+                    password: password!)
+                
+                sttService = SpeechToText(authStrategy: basicAuth)
+                
             }
         }
+        
+        
         
     }
     
@@ -134,19 +156,19 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         print("Transcribing recording...")
-        let stt = WatsonSpeechToText(username: username, password: password)
-        stt.transcribeFile(recorder.url) {
-            string, error in
-            dispatch_async(dispatch_get_main_queue()) {
-                if let transcription = string {
-                    self.transcriptionField.text = "\(transcription)"
-                } else if let error = error {
-                    self.transcriptionField.text = "\(error)"
-                } else {
-                    self.transcriptionField.text = "Error transcribing audio. No response from the server."
-                }
-            }
-        }
+        // let stt = WatsonSpeechToText(username: username, password: password)
+//        sttService.transcribeFile(recorder.url) {
+//            string, error in
+//            dispatch_async(dispatch_get_main_queue()) {
+//                if let transcription = string {
+//                    self.transcriptionField.text = "\(transcription)"
+//                } else if let error = error {
+//                    self.transcriptionField.text = "\(error)"
+//                } else {
+//                    self.transcriptionField.text = "Error transcribing audio. No response from the server."
+//                }
+//            }
+//        }
         
     }
     

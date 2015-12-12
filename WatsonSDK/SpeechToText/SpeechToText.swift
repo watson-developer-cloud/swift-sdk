@@ -66,7 +66,7 @@ public class SpeechToText {
     let BUFFER_SIZE: UInt32 = 4096
 
     
-    init( authStrategy: AuthenticationStrategy ) {
+    public init( authStrategy: AuthenticationStrategy ) {
         
         watsonSocket = WatsonSocket( authStrategy: authStrategy )
         watsonSocket.delegate = self

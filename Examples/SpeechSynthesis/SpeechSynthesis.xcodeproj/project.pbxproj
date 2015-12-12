@@ -269,9 +269,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SpeechSynthesis",
+					"$(PROJECT_DIR)/../../Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/SpeechSynthesis/ExternalFrameworks",
 				);
 				INFOPLIST_FILE = SpeechSynthesis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -289,9 +288,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SpeechSynthesis",
+					"$(PROJECT_DIR)/../../Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/SpeechSynthesis/ExternalFrameworks",
 				);
 				INFOPLIST_FILE = SpeechSynthesis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;

@@ -14,13 +14,6 @@
 		7A1FCD9A1BA9D66D0090E1EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD991BA9D66D0090E1EB /* Assets.xcassets */; };
 		7A1FCD9D1BA9D66D0090E1EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD9B1BA9D66D0090E1EB /* LaunchScreen.storyboard */; };
 		7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */; };
-		E1071B811C1C787F00E19A28 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7A1C1C787F00E19A28 /* Alamofire.framework */; };
-		E1071B821C1C787F00E19A28 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7B1C1C787F00E19A28 /* AlamofireObjectMapper.framework */; };
-		E1071B831C1C787F00E19A28 /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7C1C1C787F00E19A28 /* HTTPStatusCodes.framework */; };
-		E1071B841C1C787F00E19A28 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7D1C1C787F00E19A28 /* ObjectMapper.framework */; };
-		E1071B851C1C787F00E19A28 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7E1C1C787F00E19A28 /* Starscream.framework */; };
-		E1071B861C1C787F00E19A28 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B7F1C1C787F00E19A28 /* SwiftyJSON.framework */; };
-		E1071B871C1C787F00E19A28 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B801C1C787F00E19A28 /* XCGLogger.framework */; };
 		E1071B891C1C788F00E19A28 /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1071B881C1C788F00E19A28 /* WatsonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,13 +43,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1071B891C1C788F00E19A28 /* WatsonSDK.framework in Frameworks */,
-				E1071B811C1C787F00E19A28 /* Alamofire.framework in Frameworks */,
-				E1071B821C1C787F00E19A28 /* AlamofireObjectMapper.framework in Frameworks */,
-				E1071B831C1C787F00E19A28 /* HTTPStatusCodes.framework in Frameworks */,
-				E1071B841C1C787F00E19A28 /* ObjectMapper.framework in Frameworks */,
-				E1071B851C1C787F00E19A28 /* Starscream.framework in Frameworks */,
-				E1071B861C1C787F00E19A28 /* SwiftyJSON.framework in Frameworks */,
-				E1071B871C1C787F00E19A28 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

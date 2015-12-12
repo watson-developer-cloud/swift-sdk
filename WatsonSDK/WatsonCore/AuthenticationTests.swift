@@ -52,12 +52,17 @@ class AuthenticationTests: XCTestCase {
         
         // read Dialog username
         guard let fbToken = credentials["FacebookOAuth"] else {
-            XCTFail("Unable to read Dialog username.")
+            XCTFail("Unable to read the Facebook OAuth token.")
+            return
+        }
+        
+        guard let tokenURL = credentials["FacebookOAuthURL"] else {
+            XCTFail("Unable to read the token URL.")
             return
         }
         
         let fbAuthentication = FacebookAuthenticationStrategy(
-            tokenURL: "http://watsonsdkdemo.mybluemix.net/TextToSpeech/api/v1/token",
+            tokenURL: tokenURL,
             fbToken: fbToken
             )
         
@@ -86,8 +91,27 @@ class AuthenticationTests: XCTestCase {
         let facebookNegativeExpectation: XCTestExpectation =
             expectationWithDescription("Facebook Negative Authentication")
         
+        // identify credentials file
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.pathForResource("Credentials", ofType: "plist") else {
+            XCTFail("Unable to locate credentials file.")
+            return
+        }
+        
+        // load credentials from file
+        let dict = NSDictionary(contentsOfFile: url)
+        guard let credentials = dict as? Dictionary<String, String> else {
+            XCTFail("Unable to read credentials file.")
+            return
+        }
+        
+        guard let tokenURL = credentials["FacebookOAuthURL"] else {
+            XCTFail("Unable to read the token URL.")
+            return
+        }
+        
         let fbAuthentication = FacebookAuthenticationStrategy(
-            tokenURL: "http://watsonsdkdemo.mybluemix.net/TextToSpeech/api/v1/token",
+            tokenURL: tokenURL,
             fbToken: "SomeBogusOAuthTokenGoesHere"
         )
         

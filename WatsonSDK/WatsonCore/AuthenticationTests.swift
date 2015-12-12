@@ -80,6 +80,34 @@ class AuthenticationTests: XCTestCase {
 
         
     }
+    
+    func testFacebookOAuthBadCredentials() {
+        
+        let facebookNegativeExpectation: XCTestExpectation =
+            expectationWithDescription("Facebook Negative Authentication")
+        
+        let fbAuthentication = FacebookAuthenticationStrategy(
+            tokenURL: "http://watsonsdkdemo.mybluemix.net/TextToSpeech/api/v1/token",
+            fbToken: "SomeBogusOAuthTokenGoesHere"
+        )
+        
+        fbAuthentication.getToken({
+            token, error in
+            
+            XCTAssertNil(token)
+            XCTAssertNotNil(error)
+            
+            Log.sharedLogger.info("Received a Watson token \(token)")
+            
+            facebookNegativeExpectation.fulfill()
+            
+        })
+        
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+        
+    }
 
     
 }

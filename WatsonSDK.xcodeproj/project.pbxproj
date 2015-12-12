@@ -809,6 +809,7 @@
 		7ADC3A241BF950C800CD916E /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
+				E1071B771C1BB84800E19A28 /* Tests */,
 				E1103A961C1655690062BEB6 /* Authentication */,
 				BDAF7E101BFEB9BC009BB0E8 /* Extensions */,
 				7A741BA81C1883A7002C85A7 /* Routers - Networking */,
@@ -862,7 +863,6 @@
 		E1103A961C1655690062BEB6 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				E1071B771C1BB84800E19A28 /* Tests */,
 				E1103A971C16557A0062BEB6 /* AuthenticationStrategy.swift */,
 				E1103A981C16557A0062BEB6 /* BasicAuthenticationStrategy.swift */,
 				E1103A991C16557A0062BEB6 /* TokenAuthenticationStrategy.swift */,

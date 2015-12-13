@@ -25,13 +25,24 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [License](#license)
 * [Contributing](#contributing)
 
-## Installation
 
-The Watson iOS SDK requires some third-party libraries such as ObjectMapper and Alamofire. To download these frameworks to the project path, make sure you are in the root of the project directory and run 
+
+## Installation
+ 
+The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency managagment tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
+
+The second method of installing is using Homebrew for the download and installation of carthage with the following commands
+
+```
+brew update && brew install carthage
+```
+
+Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
 
 ``` 
 carthage update
 ```
+
 
 ## Examples 
 

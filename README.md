@@ -12,8 +12,8 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
-	* [Alchemy Language](#alchemylanguage)
-	* [Alchemy Vision](#alchemyvision)
+	* [Alchemy Language](#alchemy-language)
+	* [Alchemy Vision](#alchemy-vision)
 	* [Dialog](#dialog)
 	* [Language Translation](#language-translation)
 	* [Natural Language Classifier](#natural-language-classifier)
@@ -243,7 +243,7 @@ The following links provide more information about the Natural Language Classifi
 * [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
-### Personanlity Insights
+### Personality Insights
 
 The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
 

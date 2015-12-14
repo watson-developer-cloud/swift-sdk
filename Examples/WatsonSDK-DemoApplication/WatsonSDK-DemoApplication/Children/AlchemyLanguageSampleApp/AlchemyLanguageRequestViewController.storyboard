@@ -9,7 +9,6 @@
         <!--Alchemy Language Request View Controller-->
         <scene sceneID="O3P-Vo-AFo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cva-zG-s0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AlchemyLanguageRequestViewController" id="nEZ-gi-6Xg" customClass="AlchemyLanguageRequestViewController" customModule="WatsonSDK_DemoApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qJz-po-7EU"/>
@@ -47,6 +46,7 @@
                         <outlet property="closeButton" destination="pQz-r4-qNQ" id="dkZ-G3-IGb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cva-zG-s0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="576" y="418"/>
         </scene>

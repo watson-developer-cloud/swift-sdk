@@ -12,8 +12,8 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
-	* [Alchemy Language](#alchemylanguage)
-	* [Alchemy Vision](#alchemyvision)
+	* [Alchemy Language](#alchemy-language)
+	* [Alchemy Vision](#alchemy-vision)
 	* [Dialog](#dialog)
 	* [Language Translation](#language-translation)
 	* [Natural Language Classifier](#natural-language-classifier)
@@ -113,7 +113,7 @@ alchemyLanguageInstance.getEntities(requestType: .URL,
 
 }
 ```
-###Alchemy Vision
+### Alchemy Vision
 
 AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
 
@@ -145,7 +145,7 @@ serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
 
 	// code here
 
-}
+})
 ```
 
 ### Dialog
@@ -202,10 +202,65 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
-###Language Translation
+### Language Translation
 
 The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
+How to instantiate and use the Language Translation service:
+
+```swift
+let service = LanguageTranslation(user: "yourusername", password: "yourpassword")
+service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
+
+	// code here
+})
+```
+
+The following links provide more information about the Language Translation service:
+
+* [IBM Watson Language Translation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
+* [IBM Watson Language Translation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
+* [IBM Watson Language Translation - Demo](https://language-translation-demo.mybluemix.net/)
+
+### Natural Language Classifier
+
+The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text inputs.
+
+How to instantiate and use the Natural Language Classifier service:
+
+```swift
+let service = NaturalLanguageClassifier(user: "yourusername", password: "yourpassword")
+
+service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
+
+	// code here
+})
+```
+
+The following links provide more information about the Natural Language Classifier service:
+
+* [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/nl-classifier.html)
+* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier)
+* [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
+
+### Personality Insights
+
+The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
+
+```swift
+let service = PersonalityInsights(user: "yourusername", password: "yourpassword")
+
+service!.getProfile("Some text here") { profile, error in
+    
+    // code here
+}
+```
+
+The following links provide more information about the Personality Insights service:
+
+* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
+* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-demo.mybluemix.net/)
 
 ### Speech to Text
 
@@ -293,6 +348,9 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+
+## Open Source @ IBM
+Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
 ## License
 

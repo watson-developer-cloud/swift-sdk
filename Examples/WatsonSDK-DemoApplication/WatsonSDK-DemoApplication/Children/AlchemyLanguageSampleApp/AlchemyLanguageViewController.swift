@@ -40,6 +40,9 @@ class AlchemyLanguageViewController: UIViewController {
     @IBAction func goTextButtonPress() { presentResponseViewControllerWithRequestType(.Text, requestString: self.textTextView.text) }
     
     // iboutlets
+    @IBOutlet weak var urlDemoLabel: UILabel!
+    @IBOutlet weak var textDemoLabel: UILabel!
+        
     @IBOutlet weak var goURLButton: UIButton!
     @IBOutlet weak var goTextButton: UIButton!
     

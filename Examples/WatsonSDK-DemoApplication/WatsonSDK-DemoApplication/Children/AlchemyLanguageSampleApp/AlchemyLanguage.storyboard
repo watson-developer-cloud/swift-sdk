@@ -100,7 +100,9 @@
                     <connections>
                         <outlet property="goTextButton" destination="VXp-fQ-n43" id="XkR-lJ-rxg"/>
                         <outlet property="goURLButton" destination="OyA-99-cw4" id="rvY-c2-GGL"/>
+                        <outlet property="textDemoLabel" destination="vun-mo-SWk" id="tjC-5A-veN"/>
                         <outlet property="textTextView" destination="ecW-1U-sAG" id="YOm-Pb-cuu"/>
+                        <outlet property="urlDemoLabel" destination="0h7-Pw-BIL" id="KT2-Zu-DMA"/>
                         <outlet property="urlTextField" destination="IbB-5O-bg1" id="p12-7e-8Xo"/>
                     </connections>
                 </viewController>

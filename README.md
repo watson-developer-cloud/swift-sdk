@@ -349,6 +349,9 @@ The following links provide more information about the Text To Speech service:
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
+## Open Source @ IBM
+Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
+
 ## License
 
 This library is licensed under Apache 2.0. Full license text is

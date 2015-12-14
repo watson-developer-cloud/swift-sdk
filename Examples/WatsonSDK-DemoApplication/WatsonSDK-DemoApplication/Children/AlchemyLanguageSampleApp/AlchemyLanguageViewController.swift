@@ -37,7 +37,7 @@ class AlchemyLanguageViewController: UIViewController {
 
     // ibactions
     @IBAction func goURLButtonPress() { presentResponseViewControllerWithRequestType(.URL, requestString: self.urlTextField.text) }
-    @IBAction func goTextButtonPress() { presentResponseViewControllerWithRequestType(.Text, requestString: self.textTextField.text) }
+    @IBAction func goTextButtonPress() { presentResponseViewControllerWithRequestType(.Text, requestString: self.textTextView.text) }
     
     // iboutlets
     @IBOutlet weak var goURLButton: UIButton!
@@ -45,6 +45,8 @@ class AlchemyLanguageViewController: UIViewController {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var textTextView: UITextView!
+    
+    var requestVC: AlchemyLanguageRequestViewController!
     
     // title animation
     var titleAnimation: SKView!
@@ -101,22 +103,40 @@ class AlchemyLanguageViewController: UIViewController {
     
     private func presentResponseViewControllerWithRequestType(requestType: alcs.RequestType, requestString: String!) {
         
+        func verifyUrl (urlString: String?) -> Bool {
+            if let urlString = urlString, let url = NSURL(string: urlString) {
+                return UIApplication.sharedApplication().canOpenURL(url)
+            }
+            return false
+        }
+        
         if requestString != "" {
+        
+            // check url if url request
+            if requestType == alcs.RequestType.URL {
+                
+                if !verifyUrl(requestString) {
+                    print("ruslan: invalid url: \(requestString)")
+                    return
+                }
+                
+            }
             
             let sb = UIStoryboard(name: "AlchemyLanguageRequestViewController", bundle: nil)
             
-            let requestVC = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageRequestViewController") as! AlchemyLanguageRequestViewController
+            self.requestVC = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageRequestViewController") as! AlchemyLanguageRequestViewController
             
-            requestVC.requestType = requestType
-            requestVC.requestString = requestString
-            requestVC.view.alpha = 0.0
-            requestVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            self.requestVC.dismisser = self
+            self.requestVC.requestType = requestType
+            self.requestVC.requestString = requestString
+            self.requestVC.view.alpha = 0.0
+            self.requestVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             
             self.presentViewController(requestVC, animated: false) {
                 
                 UIView.animateWithDuration(self.animationDuration) {
                     
-                    requestVC.view.alpha = 1.0
+                    self.requestVC.view.alpha = 1.0
                     
                 }
                 
@@ -132,6 +152,22 @@ class AlchemyLanguageViewController: UIViewController {
             
             alertController.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
             self.presentViewController(alertController, animated: true){ }
+            
+        }
+        
+    }
+    
+}
+
+
+extension AlchemyLanguageViewController: AlchemyLanguageDismissalProtocol {
+    
+    func dismissRequestVC() {
+        
+        self.requestVC.dismissViewControllerAnimated(true) {
+            
+            // on completion eliminate the reference and let ARC create a new one
+            self.requestVC = nil
             
         }
         

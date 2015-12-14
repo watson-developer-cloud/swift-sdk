@@ -67,8 +67,15 @@ public class FacebookAuthenticationStrategy: AuthenticationStrategy {
                         self.token = rtoken
                         completionHandler(token: self.token, error: nil)
                     } else {
-                        let err = NSError.createWatsonError(503, description: "Facebook rejected token")
-                        completionHandler(token: nil, error: err)
+                        
+                        if let e = JSON["error"] as? NSDictionary {
+                            let message = e["message"] as? String
+                            let err = NSError.createWatsonError(503, description: message!)
+                            completionHandler(token: nil, error: err)
+                        } else {
+                            let err = NSError.createWatsonError(503, description: "Some other error occurred")
+                            completionHandler(token: nil, error: err)
+                        }
                     }
                     
                     

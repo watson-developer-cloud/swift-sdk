@@ -145,7 +145,7 @@ serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
 
 	// code here
 
-}
+})
 ```
 
 ### Dialog
@@ -206,6 +206,16 @@ The following links provide additional information about the IBM Watson Dialog S
 
 The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
+How to instantiate and use the Language Translation service:
+
+```swift
+let service = LanguageTranslation(user: "yourusername", password: "yourpassword")
+service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
+
+	// code here
+})
+```
+
 The following links provide more information about the Language Translation service:
 
 * [IBM Watson Language Translation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
@@ -216,6 +226,17 @@ The following links provide more information about the Language Translation serv
 
 The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text inputs.
 
+How to instantiate and use the Natural Language Classifier service:
+
+```swift
+let service = NaturalLanguageClassifier(user: "yourusername", password: "yourpassword")
+
+service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
+
+	// code here
+})
+```
+
 The following links provide more information about the Natural Language Classifier service:
 
 * [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/nl-classifier.html)
@@ -225,6 +246,15 @@ The following links provide more information about the Natural Language Classifi
 ### Personanlity Insights
 
 The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
+
+```swift
+let service = PersonalityInsights(user: "yourusername", password: "yourpassword")
+
+service!.getProfile("Some text here") { profile, error in
+    
+    // code here
+}
+```
 
 The following links provide more information about the Personality Insights service:
 

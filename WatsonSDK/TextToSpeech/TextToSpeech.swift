@@ -58,7 +58,7 @@ public class TextToSpeech : Service, TextToSpeechService
     // Sampling rate returned from the Opus decoder is 48KHz by default.
     private let DEFAULT_SAMPLE_RATE = 48000
     
-    public init() {
+    public init( authStrategy: AuthenticationStrategy ) {
         
         super.init(type: .Streaming, serviceURL: _serviceURL)
         

@@ -20,22 +20,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     
-    @IBOutlet weak var entitiesLabel: UILabel!
-    @IBOutlet weak var entitiesEntry0: UILabel!
-    @IBOutlet weak var entitiesEntry1: UILabel!
-    @IBOutlet weak var entitiesEntry2: UILabel!
-    
-    @IBOutlet weak var sentimentLabel: UILabel!
-    @IBOutlet weak var sentimentEntry0: UILabel!
-    @IBOutlet weak var sentimentEntry1: UILabel!
-    
-    @IBOutlet weak var keywordsLabel: UILabel!
-    @IBOutlet weak var keywordsEntry0: UILabel!
-    @IBOutlet weak var keywordsEntry1: UILabel!
-    @IBOutlet weak var keywordsEntry2: UILabel!
-    
     var activityIndicatorView: UIActivityIndicatorView!
-    
     
     var _requestType: AlchemyLanguageConstants.RequestType!
     var requestType: AlchemyLanguageConstants.RequestType! {

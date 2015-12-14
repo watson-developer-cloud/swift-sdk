@@ -105,7 +105,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>stream.watsonplatform.net</key>
+			<key>watsonplatform.net</key>
 			<dict>
 				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
 				<false/>

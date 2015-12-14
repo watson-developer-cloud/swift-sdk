@@ -18,20 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IbB-5O-bg1">
-                                <rect key="frame" x="20" y="512" width="522" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://en.wikipedia.org/wiki/Eiffel_Tower" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IbB-5O-bg1">
+                                <rect key="frame" x="20" y="397" width="522" height="30"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqQ-sp-8cg">
-                                <rect key="frame" x="20" y="550" width="522" height="30"/>
-                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="JtF-Qr-dF1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXp-fQ-n43">
-                                <rect key="frame" x="550" y="550" width="30" height="30"/>
+                                <rect key="frame" x="550" y="513" width="30" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8rI-pG-5Jr"/>
@@ -42,8 +39,33 @@
                                     <action selector="goTextButtonPress" destination="wrn-9z-fgJ" eventType="touchUpInside" id="QGI-32-Qa7"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ecW-1U-sAG">
+                                <rect key="frame" x="20" y="464" width="522" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="igF-X3-cLN"/>
+                                </constraints>
+                                <string key="text">The Eiffel Tower is a wrought iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower. Constructed in 1889 as the entrance to the 1889 World's Fair, it was initially criticized by some of France's leading artists and intellectuals for its design, but has become a global cultural icon of France and one of the most recognisable structures in the world. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vun-mo-SWk">
+                                <rect key="frame" x="20" y="435" width="83" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.83137254901960778" green="0.94117647058823528" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0h7-Pw-BIL">
+                                <rect key="frame" x="20" y="368" width="82" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.83137254900000002" green="0.94117647059999998" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyA-99-cw4">
-                                <rect key="frame" x="550" y="512" width="30" height="30"/>
+                                <rect key="frame" x="550" y="397" width="30" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="TvF-bS-ahP"/>
@@ -58,23 +80,27 @@
                         <animations/>
                         <color key="backgroundColor" red="0.0078431372549019607" green="0.3411764705882353" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="dqQ-sp-8cg" firstAttribute="top" secondItem="IbB-5O-bg1" secondAttribute="bottom" constant="8" id="5pb-0r-Bz2"/>
+                            <constraint firstItem="BQS-Iw-2og" firstAttribute="top" secondItem="ecW-1U-sAG" secondAttribute="bottom" constant="8" id="53c-4l-CrZ"/>
+                            <constraint firstItem="IbB-5O-bg1" firstAttribute="top" secondItem="0h7-Pw-BIL" secondAttribute="bottom" constant="8" id="EKZ-fa-sGk"/>
+                            <constraint firstItem="vun-mo-SWk" firstAttribute="top" secondItem="IbB-5O-bg1" secondAttribute="bottom" constant="8" id="EeU-UM-AcJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VXp-fQ-n43" secondAttribute="trailing" id="Imo-vn-va8"/>
+                            <constraint firstItem="VXp-fQ-n43" firstAttribute="leading" secondItem="ecW-1U-sAG" secondAttribute="trailing" constant="8" id="JQO-N2-C9e"/>
                             <constraint firstItem="OyA-99-cw4" firstAttribute="leading" secondItem="IbB-5O-bg1" secondAttribute="trailing" constant="8" id="Lh3-rg-lp4"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="dqQ-sp-8cg" secondAttribute="leading" id="UDn-Ku-uOf"/>
-                            <constraint firstItem="VXp-fQ-n43" firstAttribute="top" secondItem="OyA-99-cw4" secondAttribute="bottom" constant="8" id="Vsc-5T-Xcq"/>
-                            <constraint firstItem="BQS-Iw-2og" firstAttribute="top" secondItem="dqQ-sp-8cg" secondAttribute="bottom" constant="20" id="d5E-wJ-E2Z"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="vun-mo-SWk" secondAttribute="leading" id="YH0-xi-5yR"/>
+                            <constraint firstItem="OyA-99-cw4" firstAttribute="centerY" secondItem="IbB-5O-bg1" secondAttribute="centerY" id="ZHw-7H-ewh"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="0h7-Pw-BIL" secondAttribute="leading" id="aqh-Bn-lH3"/>
                             <constraint firstAttribute="leadingMargin" secondItem="IbB-5O-bg1" secondAttribute="leading" id="gDS-qZ-pPG"/>
+                            <constraint firstItem="VXp-fQ-n43" firstAttribute="centerY" secondItem="ecW-1U-sAG" secondAttribute="centerY" id="gQ9-Hz-AKm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OyA-99-cw4" secondAttribute="trailing" id="iJC-yg-Oqo"/>
-                            <constraint firstItem="VXp-fQ-n43" firstAttribute="leading" secondItem="dqQ-sp-8cg" secondAttribute="trailing" constant="8" id="kRx-tP-8ba"/>
-                            <constraint firstItem="VXp-fQ-n43" firstAttribute="centerY" secondItem="dqQ-sp-8cg" secondAttribute="centerY" id="mSg-UA-0aV"/>
+                            <constraint firstItem="ecW-1U-sAG" firstAttribute="top" secondItem="vun-mo-SWk" secondAttribute="bottom" constant="8" id="pS6-wO-dx2"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ecW-1U-sAG" secondAttribute="leading" id="yxB-dm-wit"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="goTextButton" destination="VXp-fQ-n43" id="XkR-lJ-rxg"/>
                         <outlet property="goURLButton" destination="OyA-99-cw4" id="rvY-c2-GGL"/>
-                        <outlet property="textTextField" destination="dqQ-sp-8cg" id="VDY-7C-Uyf"/>
+                        <outlet property="textTextView" destination="ecW-1U-sAG" id="YOm-Pb-cuu"/>
                         <outlet property="urlTextField" destination="IbB-5O-bg1" id="p12-7e-8Xo"/>
                     </connections>
                 </viewController>

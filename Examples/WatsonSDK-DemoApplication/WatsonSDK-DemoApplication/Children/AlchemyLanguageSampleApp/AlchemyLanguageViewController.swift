@@ -64,6 +64,17 @@ class AlchemyLanguageViewController: UIViewController {
         
         configureButtons()
         
+        // TODO remove when ready to handle URLs
+        func temporarilyRemoveURLCapabilities() {
+            
+            self.urlDemoLabel.hidden = true
+            self.goURLButton.hidden = true
+            self.urlTextField.hidden = true
+            
+        }
+        
+        temporarilyRemoveURLCapabilities()
+        
     }
     
     private func configureButtons() {

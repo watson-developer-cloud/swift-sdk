@@ -44,7 +44,7 @@ class AlchemyLanguageViewController: UIViewController {
     @IBOutlet weak var goTextButton: UIButton!
     
     @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var textTextField: UITextField!
+    @IBOutlet weak var textTextView: UITextView!
     
     // title animation
     var titleAnimation: SKView!
@@ -106,6 +106,7 @@ class AlchemyLanguageViewController: UIViewController {
             let sb = UIStoryboard(name: "AlchemyLanguageRequestViewController", bundle: nil)
             
             let requestVC = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageRequestViewController") as! AlchemyLanguageRequestViewController
+            
             requestVC.requestType = requestType
             requestVC.requestString = requestString
             requestVC.view.alpha = 0.0

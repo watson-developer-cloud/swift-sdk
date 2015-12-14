@@ -19,6 +19,7 @@
 		6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */; };
 		6E42340E1C175DC80020C3D1 /* AlchemyVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42340D1C175DC80020C3D1 /* AlchemyVisionViewController.swift */; };
 		6E49AC261C1A339500BFBD07 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC251C1A339500BFBD07 /* Credentials.plist */; };
+		6E49AC281C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC271C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift */; };
 		6E51B2711C173BA300D5EF12 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */; };
 		6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */; };
 		6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26F1C173BA300D5EF12 /* VisionImage.swift */; };
@@ -50,6 +51,7 @@
 		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E42340D1C175DC80020C3D1 /* AlchemyVisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionViewController.swift; sourceTree = "<group>"; };
 		6E49AC251C1A339500BFBD07 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		6E49AC271C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageResultsView.swift; sourceTree = "<group>"; };
 		6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionCollectionViewController.swift; sourceTree = "<group>"; };
 		6E51B26F1C173BA300D5EF12 /* VisionImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionImage.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */,
+				6E49AC271C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift */,
 			);
 			path = AlchemyLanguageResultsView;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */,
 				6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */,
+				6E49AC281C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift in Sources */,
 				6E32951B1C177281001CE8B7 /* UIColorExtension.swift in Sources */,
 				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
 				6E32951D1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift in Sources */,

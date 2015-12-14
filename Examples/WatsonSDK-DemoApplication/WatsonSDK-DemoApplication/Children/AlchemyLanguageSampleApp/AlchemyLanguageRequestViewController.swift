@@ -21,6 +21,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     var activityIndicatorView: UIActivityIndicatorView!
+    var resultsView: AlchemyLanguageResultsView!
     
     var _requestType: AlchemyLanguageConstants.RequestType!
     var requestType: AlchemyLanguageConstants.RequestType! {
@@ -85,27 +86,127 @@ class AlchemyLanguageRequestViewController: UIViewController {
         }
         
         if let apiKey = apiKey {
+         
+            self.resultsView = NSBundle.mainBundle().loadNibNamed("AlchemyLanguageResultsView", owner: self, options: nil).first as! AlchemyLanguageResultsView
+            self.resultsView.frame = self.activeFrame
+            
+            // start request
+            let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
+            let asynchronousDispatchGroup = dispatch_group_create()
+            
+            dispatch_group_enter(asynchronousDispatchGroup)
+            alchemyLanguage.getEntities(requestType: self.requestType,
+                html: nil,
+                url: nil,
+                text: self.requestString) {
+                    
+                    error, entities in
+                    
+                    // code
+                    if let entities = entities.entities where entities.count != 0 {
+                        
+                        self.resultsView.setNumberKeywords(entities.count)
+                        
+                        switch entities.count {
+                            
+                        case 0: func void(){}; void()
+                            
+                        case 1:
+                            if let label = entities[0].text { self.resultsView.setEntityLabel(label, atIndex: 0) }
+                            
+                        case 2:
+                            if let label = entities[0].text { self.resultsView.setEntityLabel(label, atIndex: 0) }
+                            if let label = entities[1].text { self.resultsView.setEntityLabel(label, atIndex: 1) }
+                            
+                        default:
+                            if let label = entities[0].text { self.resultsView.setEntityLabel(label, atIndex: 0) }
+                            if let label = entities[1].text { self.resultsView.setEntityLabel(label, atIndex: 1) }
+                            if let label = entities[2].text { self.resultsView.setEntityLabel(label, atIndex: 2) }
+                            
+                        }
+                        
+                    } else {
+                        
+                        self.displayError()
+                        
+                    }
+                    
+                    dispatch_group_leave(asynchronousDispatchGroup)
+                    
+            }
+            
+            dispatch_group_enter(asynchronousDispatchGroup)
+            alchemyLanguage.getSentiment(requestType: self.requestType,
+                html: nil,
+                url: self.requestString,
+                text: self.requestString) {
+                    
+                    error, sentimentResponse in
+                    
+                    print("ruslan: sentiment type: \(sentimentResponse.docSentiment!.type)")
+                    
+                    if let sentiment = sentimentResponse.docSentiment, let score = sentiment.score {
+                        
+                        if let positive = sentiment.type {
+                            
+                            switch positive {
+                            case "positive": self.resultsView.setPositiveSentiment(withValue: score)
+                            case "negative": self.resultsView.setNegativeSentiment(withValue: score)
+                            default: func void(){}; void()
+                            }
+                            
+                        }
+                        
+                    } else {
+                        
+                        self.displayError()
+                        
+                    }
+                    
+                    dispatch_group_leave(asynchronousDispatchGroup)
+                    
+            }
+            
+            dispatch_group_enter(asynchronousDispatchGroup)
+            alchemyLanguage.getRankedKeywords(requestType: self.requestType,
+                html: nil,
+                url: self.requestString,
+                text: self.requestString) {
+                    
+                    error, keywords in
+                    
+                    if let keywords = keywords.keywords where keywords.count != 0 {
+                        
+                        print("Success")
+                        
+                        // if success
+                        // play animation where green / stop
+                        // parse objects
+                        // fade out indicator
+                        // add objects hidden, fade in objects
+                        
+                    } else {
+                        
+                        self.displayError()
+                        
+                    }
+                    
+                    dispatch_group_leave(asynchronousDispatchGroup)
+                    
+            }
+            
+            dispatch_group_notify(asynchronousDispatchGroup, dispatch_get_main_queue()) {
+                
+                self.activityIndicatorView.removeFromSuperview()
+                self.view.addSubview(self.resultsView)
+                
+            }
             
         } else {
             
             displayError()
             
         }
-        
-        // start request
-        let alchemyLanguage = AlchemyLanguage(apiKey: "")
-        
-            // on completion
-        
-            // if success
-                // play animation where green / stop
-                // parse objects
-                // fade out indicator
-                // add objects hidden, fade in objects
-        
-            // if failure
-                // red indicator
-                // alert with failure, try again
         
     }
     

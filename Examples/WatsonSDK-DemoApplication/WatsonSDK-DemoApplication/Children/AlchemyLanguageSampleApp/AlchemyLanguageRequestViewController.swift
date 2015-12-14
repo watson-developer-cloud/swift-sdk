@@ -111,7 +111,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     // code
                     if let entities = entities.entities where entities.count != 0 {
                         
-                        self.resultsView.setNumberKeywords(entities.count)
+                        self.resultsView.setNumberEntities(entities.count)
                         
                         switch entities.count {
                             
@@ -181,12 +181,25 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     
                     if let keywords = keywords.keywords where keywords.count != 0 {
                         
+                        self.resultsView.setNumberEntities(keywords.count)
                         
-                        // if success
-                        // play animation where green / stop
-                        // parse objects
-                        // fade out indicator
-                        // add objects hidden, fade in objects
+                        switch keywords.count {
+                            
+                        case 0: func void(){}; void()
+                            
+                        case 1:
+                            if let label = keywords[0].text { self.resultsView.setKeywordLabel(label, atIndex: 0) }
+                            
+                        case 2:
+                            if let label = keywords[0].text { self.resultsView.setKeywordLabel(label, atIndex: 0) }
+                            if let label = keywords[1].text { self.resultsView.setKeywordLabel(label, atIndex: 1) }
+                            
+                        default:
+                            if let label = keywords[0].text { self.resultsView.setKeywordLabel(label, atIndex: 0) }
+                            if let label = keywords[1].text { self.resultsView.setKeywordLabel(label, atIndex: 1) }
+                            if let label = keywords[2].text { self.resultsView.setKeywordLabel(label, atIndex: 2) }
+                            
+                        }
                         
                     } else {
                         

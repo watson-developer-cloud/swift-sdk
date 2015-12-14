@@ -14,7 +14,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
     
     @IBAction func closeButtonPress() {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismisser.dismissRequestVC()
         
     }
     
@@ -33,6 +33,12 @@ class AlchemyLanguageRequestViewController: UIViewController {
     var requestString: String! {
         get { assert(_requestString != nil, "Set AlchemyLanguageRequestViewController requestString before displaying."); return _requestString }
         set { _requestString = newValue }
+    }
+    
+    var _dismisser: AlchemyLanguageDismissalProtocol!
+    var dismisser: AlchemyLanguageDismissalProtocol! {
+        get { assert(_dismisser != nil, "Set AlchemyLanguageRequestViewController dismisser before displaying."); return _dismisser }
+        set { _dismisser = newValue }
     }
     
     // sizing
@@ -143,8 +149,6 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     
                     error, sentimentResponse in
                     
-                    print("ruslan: sentiment type: \(sentimentResponse.docSentiment!.type)")
-                    
                     if let sentiment = sentimentResponse.docSentiment, let score = sentiment.score {
                         
                         if let positive = sentiment.type {
@@ -177,7 +181,6 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     
                     if let keywords = keywords.keywords where keywords.count != 0 {
                         
-                        print("Success")
                         
                         // if success
                         // play animation where green / stop

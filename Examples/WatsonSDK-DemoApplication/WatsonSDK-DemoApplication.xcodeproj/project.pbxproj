@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6E3295171C176332001CE8B7 /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3295161C176332001CE8B7 /* WatsonSDK.framework */; };
 		6E3295191C176E2A001CE8B7 /* AlchemyLanguage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */; };
-		6E32951B1C177281001CE8B7 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32951A1C177281001CE8B7 /* UIColorExtension.swift */; };
 		6E32951D1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32951C1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift */; };
 		6E32951F1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E32951E1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard */; };
 		6E3C0D081C0E3A93001BF15A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */; };
@@ -22,6 +21,12 @@
 		6E49AC2A1C1F787B00BFBD07 /* AlchemyLanguageDismissalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC291C1F787B00BFBD07 /* AlchemyLanguageDismissalProtocol.swift */; };
 		6E49AC411C2080E600BFBD07 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC401C2080E600BFBD07 /* Credentials.plist */; };
 		6E49AC431C20832500BFBD07 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC421C20832500BFBD07 /* README.md */; };
+		6E49AC4E1C2084A200BFBD07 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC461C2084A200BFBD07 /* BarView.swift */; };
+		6E49AC4F1C2084A200BFBD07 /* BarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC471C2084A200BFBD07 /* BarView.xib */; };
+		6E49AC501C2084A200BFBD07 /* BarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC481C2084A200BFBD07 /* BarViewDelegate.swift */; };
+		6E49AC511C2084A200BFBD07 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4A1C2084A200BFBD07 /* SelectionTableViewCell.swift */; };
+		6E49AC521C2084A200BFBD07 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */; };
+		6E49AC531C2084A200BFBD07 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4D1C2084A200BFBD07 /* UIColorExtension.swift */; };
 		6E51B2711C173BA300D5EF12 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */; };
 		6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */; };
 		6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26F1C173BA300D5EF12 /* VisionImage.swift */; };
@@ -29,11 +34,6 @@
 		6E9517AD1C16137500CD0B04 /* AlchemyLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */; };
 		6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328B1C0E49880055D402 /* ChildProtocol.swift */; };
 		6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */; };
-		6E9632941C0E4DF00055D402 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632921C0E4DF00055D402 /* BarView.swift */; };
-		6E9632951C0E4DF00055D402 /* BarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9632931C0E4DF00055D402 /* BarView.xib */; };
-		6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */; };
-		6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */; };
-		6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */; };
 		6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */; };
 		6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */; };
 /* End PBXBuildFile section */
@@ -41,7 +41,6 @@
 /* Begin PBXFileReference section */
 		6E3295161C176332001CE8B7 /* WatsonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonSDK.framework; path = "../../build/Debug-iphoneos/WatsonSDK.framework"; sourceTree = "<group>"; };
 		6E3295181C176E2A001CE8B7 /* AlchemyLanguage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyLanguage.storyboard; sourceTree = "<group>"; };
-		6E32951A1C177281001CE8B7 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		6E32951C1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageRequestViewController.swift; sourceTree = "<group>"; };
 		6E32951E1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyLanguageRequestViewController.storyboard; sourceTree = "<group>"; };
 		6E3C0D041C0E3A93001BF15A /* WatsonSDK-DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatsonSDK-DemoApplication.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +55,12 @@
 		6E49AC291C1F787B00BFBD07 /* AlchemyLanguageDismissalProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageDismissalProtocol.swift; sourceTree = "<group>"; };
 		6E49AC401C2080E600BFBD07 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = ../../WatsonSDKTests/Credentials.plist; sourceTree = "<group>"; };
 		6E49AC421C20832500BFBD07 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6E49AC461C2084A200BFBD07 /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		6E49AC471C2084A200BFBD07 /* BarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarView.xib; sourceTree = "<group>"; };
+		6E49AC481C2084A200BFBD07 /* BarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarViewDelegate.swift; sourceTree = "<group>"; };
+		6E49AC4A1C2084A200BFBD07 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		6E49AC4D1C2084A200BFBD07 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionCollectionViewController.swift; sourceTree = "<group>"; };
 		6E51B26F1C173BA300D5EF12 /* VisionImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionImage.swift; sourceTree = "<group>"; };
@@ -63,11 +68,6 @@
 		6E9517AC1C16137500CD0B04 /* AlchemyLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageViewController.swift; sourceTree = "<group>"; };
 		6E96328B1C0E49880055D402 /* ChildProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildProtocol.swift; sourceTree = "<group>"; };
 		6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleChildViewController.swift; sourceTree = "<group>"; };
-		6E9632921C0E4DF00055D402 /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
-		6E9632931C0E4DF00055D402 /* BarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarView.xib; sourceTree = "<group>"; };
-		6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarViewDelegate.swift; sourceTree = "<group>"; };
-		6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
-		6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6EE88A561C175A1D004E3950 /* AlchemyVision.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlchemyVision.storyboard; sourceTree = "<group>"; };
 		6EF237861C1A13E700663E7D /* AlchemyLanguageResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlchemyLanguageResultsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,12 +108,9 @@
 			children = (
 				6E3C0D071C0E3A93001BF15A /* AppDelegate.swift */,
 				6E3C0D091C0E3A93001BF15A /* ViewController.swift */,
-				6E9632911C0E4DF00055D402 /* BarView */,
-				6ED6DBB31C1099CF00682B81 /* SelectionView */,
-				6ED6DBB51C1099CF00682B81 /* SettingsView */,
 				6E96328B1C0E49880055D402 /* ChildProtocol.swift */,
 				6E3C0D191C0E3B33001BF15A /* Children */,
-				6E32951A1C177281001CE8B7 /* UIColorExtension.swift */,
+				6E49AC441C2084A200BFBD07 /* Components */,
 				6E3C0D1A1C0E3B4E001BF15A /* Resources */,
 			);
 			path = "WatsonSDK-DemoApplication";
@@ -140,6 +137,43 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6E49AC441C2084A200BFBD07 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6E49AC451C2084A200BFBD07 /* BarView */,
+				6E49AC491C2084A200BFBD07 /* SelectionView */,
+				6E49AC4B1C2084A200BFBD07 /* SettingsView */,
+				6E49AC4D1C2084A200BFBD07 /* UIColorExtension.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6E49AC451C2084A200BFBD07 /* BarView */ = {
+			isa = PBXGroup;
+			children = (
+				6E49AC461C2084A200BFBD07 /* BarView.swift */,
+				6E49AC471C2084A200BFBD07 /* BarView.xib */,
+				6E49AC481C2084A200BFBD07 /* BarViewDelegate.swift */,
+			);
+			path = BarView;
+			sourceTree = "<group>";
+		};
+		6E49AC491C2084A200BFBD07 /* SelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				6E49AC4A1C2084A200BFBD07 /* SelectionTableViewCell.swift */,
+			);
+			path = SelectionView;
+			sourceTree = "<group>";
+		};
+		6E49AC4B1C2084A200BFBD07 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		6E51B26C1C173BA300D5EF12 /* AlchemyVisionSampleApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,32 +198,6 @@
 				6EF237821C1A13BD00663E7D /* AlchemyLanguageResultsView */,
 			);
 			path = AlchemyLanguageSampleApp;
-			sourceTree = "<group>";
-		};
-		6E9632911C0E4DF00055D402 /* BarView */ = {
-			isa = PBXGroup;
-			children = (
-				6E9632961C0E4DFF0055D402 /* BarViewDelegate.swift */,
-				6E9632921C0E4DF00055D402 /* BarView.swift */,
-				6E9632931C0E4DF00055D402 /* BarView.xib */,
-			);
-			path = BarView;
-			sourceTree = "<group>";
-		};
-		6ED6DBB31C1099CF00682B81 /* SelectionView */ = {
-			isa = PBXGroup;
-			children = (
-				6ED6DBB91C109A7100682B81 /* SelectionTableViewCell.swift */,
-			);
-			path = SelectionView;
-			sourceTree = "<group>";
-		};
-		6ED6DBB51C1099CF00682B81 /* SettingsView */ = {
-			isa = PBXGroup;
-			children = (
-				6ED6DBBB1C109A7A00682B81 /* SettingsTableViewCell.swift */,
-			);
-			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		6EF237821C1A13BD00663E7D /* AlchemyLanguageResultsView */ = {
@@ -262,8 +270,8 @@
 				6E49AC411C2080E600BFBD07 /* Credentials.plist in Resources */,
 				6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */,
 				6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */,
-				6E9632951C0E4DF00055D402 /* BarView.xib in Resources */,
 				6E32951F1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard in Resources */,
+				6E49AC4F1C2084A200BFBD07 /* BarView.xib in Resources */,
 				6E3C0D121C0E3A93001BF15A /* LaunchScreen.storyboard in Resources */,
 				6E3C0D0F1C0E3A93001BF15A /* Assets.xcassets in Resources */,
 				6E3295191C176E2A001CE8B7 /* AlchemyLanguage.storyboard in Resources */,
@@ -279,20 +287,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */,
-				6ED6DBBA1C109A7100682B81 /* SelectionTableViewCell.swift in Sources */,
+				6E49AC511C2084A200BFBD07 /* SelectionTableViewCell.swift in Sources */,
+				6E49AC521C2084A200BFBD07 /* SettingsTableViewCell.swift in Sources */,
 				6E49AC281C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift in Sources */,
-				6E32951B1C177281001CE8B7 /* UIColorExtension.swift in Sources */,
-				6E9632971C0E4DFF0055D402 /* BarViewDelegate.swift in Sources */,
+				6E49AC531C2084A200BFBD07 /* UIColorExtension.swift in Sources */,
 				6E32951D1C178E37001CE8B7 /* AlchemyLanguageRequestViewController.swift in Sources */,
-				6ED6DBBC1C109A7A00682B81 /* SettingsTableViewCell.swift in Sources */,
-				6E9632941C0E4DF00055D402 /* BarView.swift in Sources */,
 				6E51B2741C173BA300D5EF12 /* VisionImageCell.swift in Sources */,
 				6E9517AD1C16137500CD0B04 /* AlchemyLanguageViewController.swift in Sources */,
 				6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */,
 				6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */,
 				6E42340E1C175DC80020C3D1 /* AlchemyVisionViewController.swift in Sources */,
 				6E49AC431C20832500BFBD07 /* README.md in Sources */,
+				6E49AC4E1C2084A200BFBD07 /* BarView.swift in Sources */,
 				6E51B2711C173BA300D5EF12 /* SwiftSpinner.swift in Sources */,
+				6E49AC501C2084A200BFBD07 /* BarViewDelegate.swift in Sources */,
 				6E9632901C0E4C920055D402 /* SampleChildViewController.swift in Sources */,
 				6E49AC2A1C1F787B00BFBD07 /* AlchemyLanguageDismissalProtocol.swift in Sources */,
 				6E3C0D0A1C0E3A93001BF15A /* ViewController.swift in Sources */,

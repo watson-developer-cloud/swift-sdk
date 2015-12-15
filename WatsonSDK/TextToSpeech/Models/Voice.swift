@@ -17,6 +17,18 @@
 import Foundation
 import ObjectMapper
 
+public struct TextToSpeechResponse: Mappable {
+    
+    var voices: [Voice]?
+    
+    public init?(_ map: Map) {}
+    
+    public mutating func mapping(map: Map) {
+     
+        voices      <-  map["voices"]
+    }
+}
+
 public struct Voice: Mappable {
     
     // URL for addressing the voice in a synthesize call

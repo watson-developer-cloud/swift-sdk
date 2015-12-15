@@ -21,7 +21,7 @@ import XCTest
 class TextToSpeechTests: XCTestCase {
     
     // Text to Speech Service
-    private let service = TextToSpeech()
+    private var service:TextToSpeech?
     
     
     private let playAudio = true
@@ -41,7 +41,18 @@ class TextToSpeechTests: XCTestCase {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["TextToSpeechUsername"]!, password: dict["TextToSpeechPassword"]!)
+                
+                    let username = dict["TextToSpeechUsername"]
+                    let password = dict["TextToSpeechPassword"]
+                    
+                    let basicAuth = BasicAuthenticationStrategy(
+                        tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+                        serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+                        username: username!,
+                        password: password!)
+                    
+                    service = TextToSpeech(authStrategy: basicAuth)
+                
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }
@@ -64,7 +75,7 @@ class TextToSpeechTests: XCTestCase {
       
         let voicesExpectation = expectationWithDescription("Get Voices")
         
-        service.listVoices({
+        service!.listVoices({
             voices, error in
             
             print(voices)
@@ -85,7 +96,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthExpectation = expectationWithDescription("Synthesize Audio")
     
-        service.synthesize(testString, oncompletion: {
+        service!.synthesize(testString, oncompletion: {
             data, error in
             
                 XCTAssertNotNil(data)
@@ -108,7 +119,7 @@ class TextToSpeechTests: XCTestCase {
         let voice = "No voice"
         let synthIncorrectExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service.synthesize(testString, voice: voice, oncompletion: {
+        service!.synthesize(testString, voice: voice, oncompletion: {
             data, error in
             
             XCTAssertNotNil(error)
@@ -131,7 +142,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthEmptyExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service.synthesize("", oncompletion: {
+        service!.synthesize("", oncompletion: {
             data, error in
             
             XCTAssertNotNil(error)
@@ -154,7 +165,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthPlayExpectation = expectationWithDescription("Synthesize Audio")
         
-        service.synthesize(testString, oncompletion: {
+        service!.synthesize(testString, oncompletion: {
             data, error in
             
             if let data = data {
@@ -190,7 +201,7 @@ class TextToSpeechTests: XCTestCase {
         let playExpectation = expectationWithDescription("Synthesize German Audio")
         let dieterVoice = "de-DE_DieterVoice"
         
-        service.synthesize(germanString, voice: dieterVoice,
+        service!.synthesize(germanString, voice: dieterVoice,
             oncompletion: {
             data, error in
             
@@ -229,7 +240,7 @@ class TextToSpeechTests: XCTestCase {
         
         
         
-        service.synthesize(ssmlString, oncompletion: {
+        service!.synthesize(ssmlString, oncompletion: {
             data, error in
             
             if let data = data {

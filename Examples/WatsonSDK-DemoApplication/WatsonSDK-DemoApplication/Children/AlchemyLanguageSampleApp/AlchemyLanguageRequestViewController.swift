@@ -99,6 +99,9 @@ class AlchemyLanguageRequestViewController: UIViewController {
             // start request
             let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
             let asynchronousDispatchGroup = dispatch_group_create()
+            var entitiesSuccess = false
+            var sentimentSuccess = false
+            var keywordsSuccess = false
             
             dispatch_group_enter(asynchronousDispatchGroup)
             alchemyLanguage.getEntities(requestType: self.requestType,
@@ -109,7 +112,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     error, entities in
                     
                     // code
-                    if let entities = entities.entities where entities.count != 0 {
+                    if let entities = entities.entities {
                         
                         self.resultsView.setNumberEntities(entities.count)
                         
@@ -131,9 +134,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
                             
                         }
                         
-                    } else {
-                        
-                        self.displayError()
+                        entitiesSuccess = true
                         
                     }
                     
@@ -160,10 +161,12 @@ class AlchemyLanguageRequestViewController: UIViewController {
                             }
                             
                         }
+
+                        sentimentSuccess = true
                         
                     } else {
                         
-                        self.displayError()
+                        self.resultsView.setNoSentimentFound()
                         
                     }
                     
@@ -179,9 +182,10 @@ class AlchemyLanguageRequestViewController: UIViewController {
                     
                     error, keywords in
                     
-                    if let keywords = keywords.keywords where keywords.count != 0 {
-                        
-                        self.resultsView.setNumberEntities(keywords.count)
+                    if let keywords = keywords.keywords {
+                    
+                        // done here and in the else as well because AL API sometimes returns a valid, empty array, and sometimes no array at all
+                        self.resultsView.setNumberKeywords(keywords.count)
                         
                         switch keywords.count {
                             
@@ -201,9 +205,11 @@ class AlchemyLanguageRequestViewController: UIViewController {
                             
                         }
                         
+                        keywordsSuccess = true
+                        
                     } else {
                         
-                        self.displayError()
+                        self.resultsView.setNumberKeywords(0)
                         
                     }
                     
@@ -215,6 +221,13 @@ class AlchemyLanguageRequestViewController: UIViewController {
                 
                 self.activityIndicatorView.removeFromSuperview()
                 self.view.addSubview(self.resultsView)
+                
+                let completeFailure = ((entitiesSuccess || sentimentSuccess || keywordsSuccess) == false)
+                if completeFailure {
+                    
+                    self.displayError()
+                    
+                }
                 
             }
             

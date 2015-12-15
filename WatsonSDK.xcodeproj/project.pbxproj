@@ -31,12 +31,10 @@
 		7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B71BF8DEB8005E478F /* Alamofire.framework */; };
 		7A36F9BD1BF8DEB8005E478F /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B81BF8DEB8005E478F /* HTTPStatusCodes.framework */; };
 		7A36F9BE1BF8DEB8005E478F /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */; };
-		7A36F9BF1BF8DEB8005E478F /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */; };
 		7A36F9C01BF8DEB8005E478F /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */; };
 		7A36F9C21BF8DEDF005E478F /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9B71BF8DEB8005E478F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C31BF8DEDF005E478F /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9B81BF8DEB8005E478F /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C41BF8DEDF005E478F /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A36F9C51BF8DEDF005E478F /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A36F9C61BF8DEDF005E478F /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A72BCBB1BFA4E2800CCC15B /* WatsonSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */; };
 		7A741BA51C18838A002C85A7 /* Routers - Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A741BA41C18838A002C85A7 /* Routers - Service.swift */; };
@@ -184,7 +182,6 @@
 				7A36F9C21BF8DEDF005E478F /* Alamofire.framework in CopyFiles */,
 				7A36F9C31BF8DEDF005E478F /* HTTPStatusCodes.framework in CopyFiles */,
 				7A36F9C41BF8DEDF005E478F /* ObjectMapper.framework in CopyFiles */,
-				7A36F9C51BF8DEDF005E478F /* SwiftyJSON.framework in CopyFiles */,
 				7A36F9C61BF8DEDF005E478F /* XCGLogger.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,7 +216,6 @@
 		7A36F9B71BF8DEB8005E478F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		7A36F9B81BF8DEB8005E478F /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTTPStatusCodes.framework; path = Carthage/Build/iOS/HTTPStatusCodes.framework; sourceTree = "<group>"; };
 		7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
-		7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A72BCB71BFA4E2800CCC15B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSDKTests.swift; sourceTree = "<group>"; };
@@ -359,7 +355,6 @@
 				7A36F9C01BF8DEB8005E478F /* XCGLogger.framework in Frameworks */,
 				7AF96B891BF96BBB0083ED23 /* Starscream.framework in Frameworks */,
 				7AF96BA91BF996560083ED23 /* libogg.a in Frameworks */,
-				7A36F9BF1BF8DEB8005E478F /* SwiftyJSON.framework in Frameworks */,
 				7A89EFB31C0DF48100281B77 /* AlamofireObjectMapper.framework in Frameworks */,
 				7A36F9BE1BF8DEB8005E478F /* ObjectMapper.framework in Frameworks */,
 				7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */,
@@ -477,7 +472,6 @@
 				7A36F9B81BF8DEB8005E478F /* HTTPStatusCodes.framework */,
 				7A36F9B91BF8DEB8005E478F /* ObjectMapper.framework */,
 				7AF96B881BF96BBB0083ED23 /* Starscream.framework */,
-				7A36F9BA1BF8DEB8005E478F /* SwiftyJSON.framework */,
 				7A36F9BB1BF8DEB8005E478F /* XCGLogger.framework */,
 			);
 			name = Frameworks;

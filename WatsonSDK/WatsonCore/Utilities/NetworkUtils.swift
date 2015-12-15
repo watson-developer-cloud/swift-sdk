@@ -17,7 +17,6 @@
 import Foundation
 import Alamofire
 import ObjectMapper
-import SwiftyJSON
 
 /**
  Watson content types

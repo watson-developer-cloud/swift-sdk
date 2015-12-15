@@ -86,12 +86,12 @@ class AlchemyVisionTests: XCTestCase {
     let invalidFromURL = UIImage()
     XCTAssertNotNil(invalidFromURL)
 
-    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
+    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.UIImage, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
       XCTAssertEqual(404,error!.code, "Expected result with a total keywords of 0")
       emptyExpectation.fulfill()
     })
     
-    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.FILE, image: imageFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
+    serviceVision.getImageKeywords(VisionConstants.ImageKeywordType.UIImage, image: imageFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageKeyWords, error in
       XCTAssertEqual(4, imageKeyWords!.totalTransactions, "Expected result with a total transaction of 4")
       XCTAssertLessThan(1,imageKeyWords!.imageKeyWords.count, "Expected result greater than one")
       validExpectation.fulfill()
@@ -130,12 +130,12 @@ class AlchemyVisionTests: XCTestCase {
     let invalidFromURL = UIImage()
     XCTAssertNotNil(invalidURL)
     
-    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
+    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.UIImage, image: invalidFromURL, forceShowAll: true, knowledgeGraph: 1, completionHandler: { imageFaceTags, error in
       XCTAssertNotEqual(nil,error, "error should have value")
       emptyExpectation.fulfill()
     })
     
-    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: imageFromURL!, completionHandler: { imageFaceTags, error in
+    serviceVision.recognizeFaces(VisionConstants.ImageFacesType.UIImage, image: imageFromURL!, completionHandler: { imageFaceTags, error in
       XCTAssertEqual(4, imageFaceTags!.totalTransactions, "Expected result with a total transaction of 4")
       XCTAssertEqual(2, imageFaceTags!.imageFaces.count, "Expected result with a total keywords of 1")
       validExpectation.fulfill()

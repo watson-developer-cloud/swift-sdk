@@ -97,7 +97,7 @@ public class AlchemyVision: Service {
           completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
       })
-    case VisionConstants.ImageKeywordType.FILE:
+    case VisionConstants.ImageKeywordType.UIImage:
       endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -170,7 +170,7 @@ public class AlchemyVision: Service {
         }
 
       })
-    case VisionConstants.ImageFacesType.FILE:
+    case VisionConstants.ImageFacesType.UIImage:
       endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)

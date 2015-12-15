@@ -29,13 +29,13 @@ public class VisionConstants
   
   // For getImageKeywords
   public enum ImageKeywordType: String {
-    case FILE = "file"
+    case UIImage = "file"
     case URL = "url"
   }
   
   // For recognizeFaces
   public enum ImageFacesType: String {
-    case FILE = "file"
+    case UIImage = "file"
     case URL = "url"
   }
   

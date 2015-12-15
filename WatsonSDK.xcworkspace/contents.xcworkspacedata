@@ -16,8 +16,5 @@
       <FileRef
          location = "group:SpeechSynthesis/SpeechSynthesis.xcodeproj">
       </FileRef>
-      <FileRef
-         location = "group:VisionInsights/VisionInsights.xcodeproj">
-      </FileRef>
    </Group>
 </Workspace>

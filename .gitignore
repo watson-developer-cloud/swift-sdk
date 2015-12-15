@@ -1,6 +1,7 @@
 xcuserdata
 Carthage
 DerivedData
+Credentials.plist
 Cartfile.resolved
 build/
 docs/

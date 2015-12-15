@@ -47,7 +47,7 @@ public protocol TextToSpeechService
 /**
  * Implementation for the Watson Text To Speech protocol.
  */
-public class TextToSpeech : Service, TextToSpeechService
+public class TextToSpeech : WatsonService, TextToSpeechService
 {
     // Provides the Opus/Ogg decompression
     let opus: OpusHelper = OpusHelper()

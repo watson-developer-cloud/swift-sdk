@@ -17,7 +17,7 @@
 import Foundation
 
 /// The superclass for all Watson services.
-internal class WatsonService {
+public class WatsonService {
     
     /// The authentication strategy to obtain authorization tokens.
     internal var authStrategy: AuthenticationStrategy

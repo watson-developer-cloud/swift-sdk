@@ -87,11 +87,12 @@ The AlchemyLanguage API utilizes sophisticated natural language processing techn
 
 ##### Usage
 
-Instantiate an **AlchemyLanguage** object and set its api key
+Instantiate an **AlchemyLanguage** object and set its api key via a **TokenAuthenticationStrategy**
 
 ```swift
 
-let alchemyLanguageInstance = AlchemyLanguage(apiKey: String)
+let token = TokenAuthenticationStrategy(token: <API_KEY>)
+let alchemyLanguageInstance = AlchemyLanguage(tokenAuthenticationStrategy: token)
 
 ```
 

@@ -81,6 +81,14 @@ class AlchemyLanguageResultsView: UIView {
         
     }
     
+    func setNoSentimentFound() {
+        
+        sentimentLabel.text = "No Sentiment Found"
+        sentimentEntry0.hidden = true
+        sentimentEntry1.hidden = true
+        
+    }
+    
     private func setSentimentValue(value: Double) {
         
         sentimentEntry1.text = "\(value)"

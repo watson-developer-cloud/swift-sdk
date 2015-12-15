@@ -385,10 +385,7 @@
 		7A36F9931BF8DDCA005E478F = {
 			isa = PBXGroup;
 			children = (
-				7ADC37BB1BF9427F00CD916E /* Frameworks */,
 				7A36F99F1BF8DDCA005E478F /* WatsonSDK */,
-				7A72BCB51BFA4E2800CCC15B /* WatsonSDKTests */,
-				7A36F99E1BF8DDCA005E478F /* Products */,
 				7ADC39AA1BF950C800CD916E /* AlchemyLanguage */,
 				7ADC39C31BF950C800CD916E /* AlchemyVision */,
 				7ADC39D41BF950C800CD916E /* Dialog */,
@@ -398,6 +395,9 @@
 				7ADC39FA1BF950C800CD916E /* SpeechToText */,
 				7ADC3A091BF950C800CD916E /* TextToSpeech */,
 				7ADC3A241BF950C800CD916E /* WatsonCore */,
+				7ADC37BB1BF9427F00CD916E /* Frameworks */,
+				7A36F99E1BF8DDCA005E478F /* Products */,
+				7A72BCB51BFA4E2800CCC15B /* WatsonSDKTests */,
 			);
 			sourceTree = "<group>";
 		};

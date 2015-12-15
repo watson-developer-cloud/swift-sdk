@@ -230,7 +230,6 @@
 				TargetAttributes = {
 					6E3C0D031C0E3A93001BF15A = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = PF8FZC9FJZ;
 					};
 				};
 			};
@@ -404,9 +403,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "WatsonSDK-DemoApplication/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.mil.WatsonSDK-DemoApplication";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.DemoApplication";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -415,9 +415,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "WatsonSDK-DemoApplication/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.mil.WatsonSDK-DemoApplication";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.DemoApplication";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -422,9 +422,9 @@
 		7A72BCB51BFA4E2800CCC15B /* WatsonSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				EBF8CA641BFBC6BF00808D92 /* Credentials.plist */,
 				7A72BCB71BFA4E2800CCC15B /* Info.plist */,
 				7A72BCB81BFA4E2800CCC15B /* WatsonSDKTests.swift */,
-				EBF8CA641BFBC6BF00808D92 /* Credentials.plist */,
 			);
 			path = WatsonSDKTests;
 			sourceTree = SOURCE_ROOT;

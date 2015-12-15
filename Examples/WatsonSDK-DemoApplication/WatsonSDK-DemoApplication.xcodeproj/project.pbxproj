@@ -51,7 +51,7 @@
 		6E3C0D111C0E3A93001BF15A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E3C0D131C0E3A93001BF15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E42340D1C175DC80020C3D1 /* AlchemyVisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionViewController.swift; sourceTree = "<group>"; };
-		6E49AC251C1A339500BFBD07 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		6E49AC251C1A339500BFBD07 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = "WatsonSDK-DemoApplication/Credentials.plist"; sourceTree = "<group>"; };
 		6E49AC271C1F1C7200BFBD07 /* AlchemyLanguageResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageResultsView.swift; sourceTree = "<group>"; };
 		6E49AC291C1F787B00BFBD07 /* AlchemyLanguageDismissalProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageDismissalProtocol.swift; sourceTree = "<group>"; };
 		6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
@@ -86,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				6E3295161C176332001CE8B7 /* WatsonSDK.framework */,
+				6E49AC251C1A339500BFBD07 /* Credentials.plist */,
 				6E3C0D061C0E3A93001BF15A /* WatsonSDK-DemoApplication */,
 				6E3C0D051C0E3A93001BF15A /* Products */,
 			);
@@ -128,7 +129,6 @@
 		6E3C0D1A1C0E3B4E001BF15A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6E49AC251C1A339500BFBD07 /* Credentials.plist */,
 				6E3C0D0B1C0E3A93001BF15A /* Main.storyboard */,
 				6E3C0D0E1C0E3A93001BF15A /* Assets.xcassets */,
 				6E3C0D101C0E3A93001BF15A /* LaunchScreen.storyboard */,

@@ -18,7 +18,9 @@ import Foundation
 import Alamofire
 
 /// HTTP method definitions
-internal typealias HTTPMethod2 = Alamofire.Method
+internal enum Method: String {
+    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+}
 
 /**
  A WatsonRequest object represents a REST request supported by IBM Watson.
@@ -28,7 +30,7 @@ internal typealias HTTPMethod2 = Alamofire.Method
 internal class WatsonRequest: URLRequestConvertible {
     
     /// The operation's HTTP method.
-    let method: HTTPMethod2
+    let method: Method
     
     /// The service's URL.
     /// (e.g. "https://gateway.watsonplatform.net/personality-insights/api")
@@ -36,6 +38,9 @@ internal class WatsonRequest: URLRequestConvertible {
     
     /// The operation's endpoint. (e.g. "/v2/profile")
     let endpoint: String
+    
+    /// The authentication strategy for obtaining a token.
+    let authStrategy: AuthenticationStrategy
     
     /// The acceptable MediaType of the response.
     let accept: MediaType?
@@ -66,6 +71,9 @@ internal class WatsonRequest: URLRequestConvertible {
         request.HTTPMethod = method.rawValue
         request.HTTPBody = messageBody
         
+        // set Watson authentication token
+        request.setValue(authStrategy.token, forHTTPHeaderField: "X-Watson-Authorization-Token")
+        
         // set accept type of request
         if let accept = accept {
             request.setValue(accept.rawValue, forHTTPHeaderField: "Accept")
@@ -93,6 +101,7 @@ internal class WatsonRequest: URLRequestConvertible {
      - parameter method:       The operation's HTTP method.
      - parameter serviceURL:   The service's URL.
      - parameter endpoint:     The operation's endpoint. (e.g. "/v2/profile")
+     - parameter authStrategy: The authentication strategy for obtaining a token.
      - parameter accept:       The acceptable MediaType for the response.
      - parameter contentType:  The MediaType of the message body.
      - parameter urlParams:    The query parameters to be encoded in the URL.
@@ -102,22 +111,24 @@ internal class WatsonRequest: URLRequestConvertible {
      - returns: A WatsonRequest object for use with Alamofire.
      */
     init(
-        method: HTTPMethod2,
+        method: Method,
         serviceURL: String,
         endpoint: String,
+        authStrategy: AuthenticationStrategy,
         accept: MediaType? = nil,
         contentType: MediaType? = nil,
         urlParams: [NSURLQueryItem]? = nil,
         headerParams: [String: String]? = nil,
         messageBody: NSData? = nil) {
             
-        self.method = method
-        self.serviceURL = serviceURL
-        self.endpoint = endpoint
-        self.accept = accept
-        self.contentType = contentType
-        self.urlParams = urlParams
-        self.headerParams = headerParams
-        self.messageBody = messageBody
+            self.method = method
+            self.serviceURL = serviceURL
+            self.endpoint = endpoint
+            self.authStrategy = authStrategy
+            self.accept = accept
+            self.contentType = contentType
+            self.urlParams = urlParams
+            self.headerParams = headerParams
+            self.messageBody = messageBody
     }
 }

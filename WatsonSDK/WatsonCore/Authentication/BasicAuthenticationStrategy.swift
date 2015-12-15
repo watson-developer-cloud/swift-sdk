@@ -17,81 +17,129 @@
 import Foundation
 
 /**
-* BasicAuthenticationStrategy is an example implementation of obtaining a Watson token
-* using basic authentication. A username and password pair that is generated automatically 
-* for each Watson service in a Bluemix app. The strategy goes to the token service to request
-* a token, and returns a temporary token valid for 1 hour. 
-*
-* WARNING: This authentication strategy has some serious security flaws in that if a username and 
-* password are bundled in an App distribution, they can be munged by third parties to have the 
-* information to generate new Watson keys and subsequent queries without limitation.
-*/
-public class BasicAuthenticationStrategy : AuthenticationStrategy {
+ A `BasicAuthenticationStrategy` captures all information necessary to authenticate
+ with a Watson Developer Cloud service using HTTP basic authentication to obtain tokens.
+ The `BasicAuthenticationStrategy` is used internally to obtain tokens, refresh expired
+ tokens, and maintain associated state information.
+ */
+public class BasicAuthenticationStrategy: NSObject, AuthenticationStrategy,
+    NSURLSessionTaskDelegate {
     
-    let username: String!
-    let password: String!
-    let serviceURL: String!
-    let tokenURL: String!
-    
+    // The token that shall be used to authenticate with Watson.
     public var token: String?
     
+    // Is the token currently being refreshed?
+    public var isRefreshing = false
+    
+    // The number of times the network manager has tried refreshing the token.
+    public var retries = 0
+    
+    // The URL of the endpoint used to obtain a token for the given service.
+    private let tokenURL: String
+    
+    // The URL of the given service, passed as a parameter to the token URL endpoint.
+    private let serviceURL: String
+    
+    // The username credential associated with the Watson Developer Cloud service.
+    private let username: String
+    
+    // The password credential associated with the Watson Developer Cloud service.
+    private let password: String
+    
     /**
-     Creates a Basic Authentication handler that will request a token from the server. Requires 
-     the URL for the token granter and the corresponsing service as well as the username and password
-     pair.
+     Authenticate with a Watson Developer Cloud service using HTTP basic authentication.
      
-     - parameter tokenURL:   URL for the granter of the token
-     - parameter serviceURL: URL for the targetting service of the token
-     - parameter username:   Watson basic auth username
-     - parameter password:   Watson basic auth password
+     Basic authentication is used to obtain and refresh temporary authorization tokens
+     for a Watson Developer Cloud service. The token is then used internally to
+     authenticate with the service.
      
+     - parameter tokenURL:   The URL of the endpoint used to obtain a token for the service.
+     - parameter serviceURL: The URL of the service.
+     - parameter username:   The username associated with the service.
+     - parameter password:   The password associated with the service.
      */
     public init(tokenURL: String, serviceURL: String, username: String, password: String) {
-        
         self.username = username
         self.password = password
         self.tokenURL = tokenURL
         self.serviceURL = serviceURL
-        
     }
     
     /**
-     getToken uses the username and password and fetches a temporary token from the
-     Watson key generator at tokenURL.
+     Refresh the token using the Watson token generator with HTTP basic authentication.
      
-     - parameter completionHandler: callback for when a token has been obtained
-     - parameter error:           an error in case the token could not be obtained.
+     - parameter completionHandler: The function executed after receiving a response.
      */
-    public func getToken(completionHandler: (token: String?, error: NSError?)->Void) {
+    public func refreshToken(completionHandler: NSError? -> Void) {
         
-        
-        if token != nil {
-            
-            completionHandler(token: token, error: nil)
-            
+        let urlComponents = NSURLComponents(string: tokenURL)
+        urlComponents?.queryItems = [NSURLQueryItem(name: "url", value: serviceURL)]
+        guard let url = urlComponents?.URL else {
+            let code = -1
+            let description = "Unable to construct URL."
+            let error = NSError.createWatsonError(code, description: description)
+            completionHandler(error)
+            return
         }
         
-
-        let authorizationString = username + ":" + password
-        let apiKey = "Basic " + (authorizationString.dataUsingEncoding(NSASCIIStringEncoding)?
-            .base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength))!
-        
-        NetworkUtils.requestAuthToken(tokenURL, serviceURL: serviceURL,
-            apiKey: apiKey, completionHandler: {
-                
-                token, error in
-                
-                Log.sharedLogger.info("Token received was \(token)")
-                
-                self.token = token
-                
-                completionHandler(token: token, error: error)
-        })
-
-        
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
+        let task = session.dataTaskWithURL(url) { data, response, error in
+            guard let response = response as? NSHTTPURLResponse else {
+                completionHandler(error)
+                return
+            }
+            
+            switch response.statusCode {
+            case 200:
+                guard let data = data else {
+                    let code = -1
+                    let description = "Expected token data to be received from server."
+                    let error = NSError.createWatsonError(code, description: description)
+                    completionHandler(error)
+                    return
+                }
+                self.token = String(data: data, encoding: NSUTF8StringEncoding)
+                completionHandler(nil)
+                return
+            case 401:
+                let code = response.statusCode
+                let description = "Response code was unacceptable: \(response.statusCode)"
+                let error = NSError.createWatsonError(code, description: description)
+                completionHandler(error)
+                return
+            default:
+                let code = response.statusCode
+                let description = "Response code was unacceptable: \(response.statusCode)"
+                let error = NSError.createWatsonError(code, description: description)
+                completionHandler(error)
+                return
+            }
+        }
+        task.resume()
     }
     
+    /**
+     Respond to a request for HTTP basic authentication credentials.
     
-
-    
+     - parameter session: The session containing the task whose request requires authentication.
+     - parameter task: The task whose request requires authentication.
+     - parameter challenge: An object that contains the request for authentication.
+     - parameter completionHandler: A handler that your delegate method must call.
+     */
+    public func URLSession(
+        session: NSURLSession,
+        task: NSURLSessionTask,
+        didReceiveChallenge challenge: NSURLAuthenticationChallenge,
+        completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+            
+        guard challenge.previousFailureCount == 0 else {
+            completionHandler(.CancelAuthenticationChallenge, nil)
+            return
+        }
+            
+        let credential = NSURLCredential(user: username, password: password,
+            persistence: .None)
+        completionHandler(.UseCredential, credential)
+    }
 }

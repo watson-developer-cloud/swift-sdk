@@ -91,7 +91,7 @@ class AlchemyVisionCollectionViewController: UIViewController, UINavigationContr
         
         let visionImage = UIImage(contentsOfFile: imagePath)
         
-        serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE, image: visionImage, completionHandler: { imageFaceTags, error in
+        serviceVision.recognizeFaces(VisionConstants.ImageFacesType.UIImage, image: visionImage, completionHandler: { imageFaceTags, error in
             SwiftSpinner.hide()
             let image = VisionImage(name: "Unknown", image: imageName, imageFaceTags: imageFaceTags!)
             Log.sharedLogger.error("\(image.age)")

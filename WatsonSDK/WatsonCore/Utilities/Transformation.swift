@@ -17,32 +17,47 @@
 import Foundation
 import ObjectMapper
 public class Transformation {
-  
-  public static let stringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
-    // transform value from String? to Int?
-    if let x = value {
-      return Int(x)
-    }
-    return nil
-    }, toJSON: { (value: Int?) -> String? in
-      // transform value from Int? to String?
-      if let value = value {
-        return String(value)
-      }
-      return nil
-  })
-  
-  public static let stringToDouble = TransformOf<Double, String>(fromJSON: { (value: String?) -> Double? in
-    // transform value from String? to Double?
-    if let x = value {
-      return Double(x)
-    }
-    return nil
-    }, toJSON: { (value: Double?) -> String? in
-      // transform value from Double? to String?
-      if let value = value {
-        return String(value)
-      }
-      return nil
-  })
+    
+    public static let stringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
+        // transform value from String? to Int?
+        if let x = value {
+            return Int(x)
+        }
+        return nil
+        }, toJSON: { (value: Int?) -> String? in
+            // transform value from Int? to String?
+            if let value = value {
+                return String(value)
+            }
+            return nil
+    })
+    
+    public static let stringToDouble = TransformOf<Double, String>(fromJSON: { (value: String?) -> Double? in
+        // transform value from String? to Double?
+        if let x = value {
+            return Double(x)
+        }
+        return nil
+        }, toJSON: { (value: Double?) -> String? in
+            // transform value from Double? to String?
+            if let value = value {
+                return String(value)
+            }
+            return nil
+    })
+    
+    public static let anyObjectToInt = TransformOf<Int, AnyObject>(fromJSON: { (value: AnyObject?) -> Int? in
+        // transform value from AnyObject? to Int?
+        if let x = value {
+            return Int(x as! String)
+        }
+        return nil
+        }, toJSON: { (value: Int?) -> AnyObject? in
+            // transform value from Double? to String?
+            if let value = value {
+                let any:AnyObject = value
+                return any
+            }
+            return nil
+    })
 }

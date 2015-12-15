@@ -161,9 +161,8 @@ public class AlchemyVision: Service {
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
       params.updateValue(stringURL!, forKey: VisionConstants.WatsonURI.URL.rawValue)
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-        var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = ImageFaceTags(anyObject: data)
+          let imageFaceTags = Mapper<ImageFaceTags>().map(data)
           completionHandler(imageFaceTags, response.error)
         } else {
             completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
@@ -204,9 +203,8 @@ public class AlchemyVision: Service {
             Log.sharedLogger.error("\(error)")
         }
         
-        var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = ImageFaceTags(anyObject: data)
+        let imageFaceTags = Mapper<ImageFaceTags>().map(data)
           completionHandler(imageFaceTags, response.error)
         }
         else {

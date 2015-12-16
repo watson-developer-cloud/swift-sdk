@@ -75,15 +75,15 @@ class TextToSpeechTests: XCTestCase {
       
         let voicesExpectation = expectationWithDescription("Get Voices")
         
-        service!.listVoices({
-            voices, error in
+        service!.listVoices { voices, error in
             
             print(voices)
             
-            XCTAssertGreaterThan(voices.count, 6, "Expected at least 6 voices to be returned");
+            XCTAssertNotNil(voices)
+            XCTAssertGreaterThan(voices!.count, 6, "Expected at least 6 voices to be returned");
             
             voicesExpectation.fulfill()
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
@@ -96,8 +96,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthExpectation = expectationWithDescription("Synthesize Audio")
     
-        service!.synthesize(testString, oncompletion: {
-            data, error in
+        service!.synthesize(testString) { data, error in
             
                 print(error)
                 XCTAssertNil(error)
@@ -108,7 +107,7 @@ class TextToSpeechTests: XCTestCase {
                 
                 // service.playAudio(engine, data: data)
            
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
         
@@ -121,7 +120,7 @@ class TextToSpeechTests: XCTestCase {
         let voice = "No voice"
         let synthIncorrectExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service!.synthesize(testString, voice: voice, oncompletion: {
+        service!.synthesize(testString, voice: voice) {
             data, error in
             
             XCTAssertNotNil(error)
@@ -132,7 +131,7 @@ class TextToSpeechTests: XCTestCase {
          
             synthIncorrectExpectation.fulfill()
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
@@ -144,8 +143,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthEmptyExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service!.synthesize("", oncompletion: {
-            data, error in
+        service!.synthesize("") { data, error in
             
             XCTAssertNotNil(error)
             
@@ -155,7 +153,7 @@ class TextToSpeechTests: XCTestCase {
             
             synthEmptyExpectation.fulfill()
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
@@ -167,7 +165,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthPlayExpectation = expectationWithDescription("Synthesize Audio")
         
-        service!.synthesize(testString, oncompletion: {
+        service!.synthesize(testString) {
             data, error in
             
             if let data = data {
@@ -190,7 +188,7 @@ class TextToSpeechTests: XCTestCase {
                 
             }
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
@@ -203,8 +201,7 @@ class TextToSpeechTests: XCTestCase {
         let playExpectation = expectationWithDescription("Synthesize German Audio")
         let dieterVoice = "de-DE_DieterVoice"
         
-        service!.synthesize(germanString, voice: dieterVoice,
-            oncompletion: {
+        service!.synthesize(germanString, voice: dieterVoice) {
             data, error in
             
             if let data = data {
@@ -227,7 +224,7 @@ class TextToSpeechTests: XCTestCase {
                 
             }
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
@@ -242,8 +239,7 @@ class TextToSpeechTests: XCTestCase {
         
         
         
-        service!.synthesize(ssmlString, oncompletion: {
-            data, error in
+        service!.synthesize(ssmlString) { data, error in
             
             if let data = data {
                 
@@ -265,7 +261,7 @@ class TextToSpeechTests: XCTestCase {
                 
             }
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }

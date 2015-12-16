@@ -17,43 +17,33 @@
 import Foundation
 import ObjectMapper
 
-public struct TextToSpeechResponse: Mappable {
-    
-    var voices: [Voice]?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-     
-        voices      <-  map["voices"]
-    }
-}
+extension TextToSpeech {
 
-public struct Voice: Mappable {
-    
-    // URL for addressing the voice in a synthesize call
-    var url: String?
-    
-    // Gender of the voice
-    var gender: String?
-    
-    // Name of the voice
-    var name: String?
-    
-    // Language of the voice
-    var language: String?
-    
-    // Description of the voice
-    var description: String?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        url         <- map["url"]
-        gender      <- map["gender"]
-        name        <- map["name"]
-        language    <- map["language"]
-        description <- map["description"]
+    public struct Voice: Mappable {
+        
+        // URL for addressing the voice in a synthesize call
+        var url: String?
+        
+        // Gender of the voice
+        var gender: String?
+        
+        // Name of the voice
+        var name: String?
+        
+        // Language of the voice
+        var language: String?
+        
+        // Description of the voice
+        var description: String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            url         <- map["url"]
+            gender      <- map["gender"]
+            name        <- map["name"]
+            language    <- map["language"]
+            description <- map["description"]
+        }
     }
-    
 }

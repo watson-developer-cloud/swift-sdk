@@ -56,14 +56,12 @@ public class TextToSpeech : WatsonService
                 return
             }
             
-            //var params = Dictionary<String, String>()
-            //params.updateValue(theText, forKey: "text")
-            
+    
             var params = [NSURLQueryItem]()
             let query = NSURLQueryItem(name: "text", value: theText)
             params.append(query)
-            // Opus codec is the default, so the accept type is optional
-            // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
+    
+            // Opus codec is the default
             
             if (!voice.isEmpty)
             {
@@ -104,30 +102,7 @@ public class TextToSpeech : WatsonService
         
     }
 
-//            NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
-//                parameters: params,
-//                contentType: .AUDIO_OPUS,
-//                accept: .AUDIO_OPUS,
-//                apiKey: _apiKey,
-//                completionHandler: {
-//                    
-//                    response in
-//                    
-//                    if let data = response.data as? NSData {
-//                        
-//                        let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
-//                        let waveData = self.addWaveHeader(pcm)
-//                        
-//                        oncompletion(data: waveData, error: response.error)
-//                        
-//                    } else {
-//                        oncompletion(data: nil, error: response.error)
-//                    }
-//                    
-//            })
-            
 
-    
     /**
      This function returns a list of voices supported.
      

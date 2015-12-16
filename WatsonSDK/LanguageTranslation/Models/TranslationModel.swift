@@ -17,30 +17,32 @@
 import Foundation
 import ObjectMapper
 
-public struct TranslationModel : Mappable
-{
-    var baseModelID: String?
-    var customizable: Bool?
-    var defaultModel: Bool?
-    var domain: String?
-    var modelID: String?
-    var name: String?
-    var owner: String?
-    var source: String?
-    var status: String?
-    var target: String?
+extension LanguageTranslation {
     
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        baseModelID     <- map["base_model_id"]
-        customizable    <- map["customizable"]
-        defaultModel    <- map["default_model"]
-        domain          <- map["domain"]
-        modelID         <- map["model_id"]
-        name            <- map["name"]
-        owner           <- map["owner"]
-        status          <- map["status"]
-        target          <- map["target"]
+    public struct TranslationModel: Mappable {
+        public var baseModelID: String?
+        public var customizable: Bool?
+        public var defaultModel: Bool?
+        public var domain: String?
+        public var modelID: String?
+        public var name: String?
+        public var owner: String?
+        public var source: String?
+        public var status: String?
+        public var target: String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            baseModelID     <- map["base_model_id"]
+            customizable    <- map["customizable"]
+            defaultModel    <- map["default_model"]
+            domain          <- map["domain"]
+            modelID         <- map["model_id"]
+            name            <- map["name"]
+            owner           <- map["owner"]
+            status          <- map["status"]
+            target          <- map["target"]
+        }
     }
 }

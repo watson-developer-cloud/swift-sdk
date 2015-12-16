@@ -20,7 +20,7 @@ extension TextToSpeech {
     
     internal struct Constants {
         
-        static let serviceURL = "https://gateway.watsonplatform.net/dialog/api"
+        static let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
         static let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
         static let errorDomain = "com.watsonplatform.texttospeech"
         

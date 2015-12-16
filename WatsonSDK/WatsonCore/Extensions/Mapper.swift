@@ -64,7 +64,7 @@ extension Mapper {
     }
     
     // Maps an optional NSData object to an object that conforms to Mappable.
-    public func map(JSONData: NSData?, keyPath: String?) -> N? {
+    public func mapData(JSONData: NSData?, keyPath: String? = nil) -> N? {
         guard let JSONData = JSONData else {
             return nil
         }
@@ -87,7 +87,7 @@ extension Mapper {
     }
     
     // Maps an optional NSData object to an array of objects that conform to Mappable
-    public func mapArray(JSONData: NSData?, keyPath: String?) -> [N]? {
+    public func mapDataArray(JSONData: NSData?, keyPath: String? = nil) -> [N]? {
         guard let JSONData = JSONData else {
             return nil
         }

@@ -19,7 +19,10 @@ import Foundation
 /// The superclass for all Watson services.
 public class WatsonService {
     
-    /// The authentication strategy to obtain authorization tokens.
+    // The shared WatsonGateway singleton.
+    internal let gateway = WatsonGateway.sharedInstance
+    
+    // The authentication strategy to obtain authorization tokens.
     internal var authStrategy: AuthenticationStrategy
     
     init(authStrategy: AuthenticationStrategy) {

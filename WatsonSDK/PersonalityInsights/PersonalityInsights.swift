@@ -81,7 +81,7 @@ public class PersonalityInsights: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
-            let profile = Mapper<Profile>().map(data)
+            let profile = Mapper<Profile>().mapData(data)
             completionHandler(profile, error)
         }
     }
@@ -137,7 +137,7 @@ public class PersonalityInsights: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
-            let profile = Mapper<Profile>().map(data)
+            let profile = Mapper<Profile>().mapData(data)
             completionHandler(profile, error)
         }
     }

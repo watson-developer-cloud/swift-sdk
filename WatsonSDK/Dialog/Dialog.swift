@@ -52,7 +52,7 @@ public class Dialog: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let nodes = Mapper<Node>().mapArray(data, keyPath: "items")
+            let nodes = Mapper<Node>().mapDataArray(data, keyPath: "items")
             completionHandler(nodes, error)
         }
     }
@@ -101,7 +101,7 @@ public class Dialog: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let dialogs = Mapper<DialogModel>().mapArray(data, keyPath: "dialogs")
+            let dialogs = Mapper<DialogModel>().mapDataArray(data, keyPath: "dialogs")
             completionHandler(dialogs, error)
         }
     }
@@ -321,7 +321,7 @@ public class Dialog: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let conversations = Mapper<Conversation>().mapArray(data, keyPath: "conversations")
+            let conversations = Mapper<Conversation>().mapDataArray(data, keyPath: "conversations")
             completionHandler(conversations, error)
         }
     }
@@ -369,7 +369,7 @@ public class Dialog: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let conversationResponse = Mapper<ConversationResponse>().map(data)
+            let conversationResponse = Mapper<ConversationResponse>().mapData(data)
             completionHandler(conversationResponse, error)
         }
     }
@@ -409,7 +409,7 @@ public class Dialog: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let parameters = Mapper<Parameter>().mapArray(data, keyPath: "name_values")
+            let parameters = Mapper<Parameter>().mapDataArray(data, keyPath: "name_values")
             completionHandler(parameters, error)
         }
     }

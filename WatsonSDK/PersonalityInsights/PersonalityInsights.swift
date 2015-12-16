@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import AlamofireObjectMapper
 import ObjectMapper
 
 /**
@@ -25,6 +23,12 @@ import ObjectMapper
  through blogs, tweets, forum posts, and more.
  */
 public class PersonalityInsights: WatsonService {
+    
+    public init(username: String, password: String) {
+        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
+            serviceURL: Constants.serviceURL, username: username, password: password)
+        super.init(authStrategy: authStrategy)
+    }
     
     /**
      Analyze input text to generate a personality profile.
@@ -68,6 +72,7 @@ public class PersonalityInsights: WatsonService {
             method: .POST,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.profile,
+            authStrategy: authStrategy,
             accept: .JSON,
             contentType: .Plain,
             urlParams: urlParams,
@@ -75,12 +80,10 @@ public class PersonalityInsights: WatsonService {
             messageBody: text.dataUsingEncoding(NSUTF8StringEncoding))
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseObject { (response: Response<Profile, NSError>) in
-                validate(response, serviceError: PersonalityInsightsError(),
-                    completionHandler: completionHandler)
-            }
+        gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
+            let profile = Mapper<Profile>().map(data)
+            completionHandler(profile, error)
+        }
     }
     
     /**
@@ -125,6 +128,7 @@ public class PersonalityInsights: WatsonService {
             method: .POST,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.profile,
+            authStrategy: authStrategy,
             accept: .JSON,
             contentType: .JSON,
             urlParams: urlParams,
@@ -132,11 +136,9 @@ public class PersonalityInsights: WatsonService {
             messageBody: Mapper().toJSONData(contentItems, header: "contentItems"))
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseObject { (response: Response<Profile, NSError>) in
-                validate(response, serviceError: PersonalityInsightsError(),
-                    completionHandler: completionHandler)
+        gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
+            let profile = Mapper<Profile>().map(data)
+            completionHandler(profile, error)
         }
     }
 }

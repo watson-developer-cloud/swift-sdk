@@ -21,6 +21,7 @@ extension PersonalityInsights {
     internal struct Constants {
         
         static let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+        static let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
         static let errorDomain = "com.watsonplatform.personalityinsights"
         
         static let profile = "/v2/profile"

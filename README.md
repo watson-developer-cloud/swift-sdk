@@ -9,7 +9,6 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 
 ## Table of Contents
 * [Installation](#installation)
-* [Usage](#usage)
 * [Examples](#examples)
 * [IBM Watson Services](#ibm-watson-services)
 	* [Alchemy Language](#alchemy-language)
@@ -363,6 +362,12 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+
+## Build + Test
+
+***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
+
+There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
 
 ## Open Source @ IBM
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)

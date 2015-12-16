@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import ObjectMapper
 
 extension Dialog {

@@ -209,24 +209,63 @@ public class LanguageTranslation: WatsonService {
      - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
      - parameter callback:           Returns the created model
      */
-    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, callback: (TranslationModel?, NSError?)->())
-    {
+    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, completionHandler: (String?, NSError?) -> ()) {
         
-        // TODO: requires WatsonGateway to support multi-part file upload
-        
-        var queryParams = Dictionary<String,String>()
-        queryParams.updateValue(baseModelID, forKey: LanguageTranslationConstants.baseModelID)
-        if let name = name {
-            queryParams.updateValue(name, forKey: LanguageTranslationConstants.name)
+        // force token to refresh
+        // TODO: can remove this after its handled by WatsonGateway
+        authStrategy.refreshToken() { error in
+            
+            // add token to header params
+            // TODO: can remove this after its handled by WatsonGateway
+            var headerParams = [String: String]()
+            if let token = self.authStrategy.token {
+                headerParams["X-Watson-Authorization-Token"] = token
+            }
+            
+            // construct url query parameters
+            var urlParams = [NSURLQueryItem]()
+            urlParams.append(NSURLQueryItem(name: "base_model_id", value: baseModelID))
+            if let name = name {
+                urlParams.append(NSURLQueryItem(name: "name", value: name))
+            }
+            
+            // construct request
+            let request = WatsonRequest(
+                method: .POST,
+                serviceURL: Constants.serviceURL,
+                endpoint: Constants.models,
+                authStrategy: self.authStrategy,
+                accept: .JSON,
+                headerParams: headerParams)
+            
+            // execute request
+            Alamofire.upload(request,
+                multipartFormData: { multipartFormData in
+                    // encode files as form data
+                    multipartFormData.appendBodyPart(fileURL: fileURL, name: fileKey)
+                },
+                encodingCompletion: { encodingResult in
+                    print(encodingResult)
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        // execute encoded request
+                        upload.response { request, response, data, error in
+                            print(response?.statusCode)
+                            let customModel = Mapper<CustomModel>().mapData(data)
+                            // TODO: handle non-200 case (error)
+                            completionHandler(customModel?.modelID, error)
+                        }
+                    case .Failure:
+                        // construct and return error
+                        let nsError = NSError(
+                            domain: "com.alamofire.error",
+                            code: -6008,
+                            userInfo: [NSLocalizedDescriptionKey:
+                                "Unable to encode data as multipart form."])
+                        completionHandler(nil, nsError)
+                    }
+            })
         }
-        
-        var fileParams = Dictionary<String,NSURL>()
-        fileParams.updateValue(fileURL, forKey: fileKey)
-        
-        let endpoint = getEndpoint("/v2/models")
-        NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLs: fileParams, parameters: queryParams, apiKey: _apiKey, completionHandler: {response in
-            callback(Mapper<TranslationModel>().map(response.data), response.error)
-        })
     }
     
     /**

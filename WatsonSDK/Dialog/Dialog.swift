@@ -21,7 +21,17 @@ import ObjectMapper
 
 public class Dialog: WatsonService {
     
-    public convenience init(username: String, password: String) {
+    // The shared WatsonGateway singleton.
+    let gateway = WatsonGateway.sharedInstance
+    
+    // The authentication strategy to obtain authorization tokens.
+    var authStrategy: AuthenticationStrategy
+    
+    public required init(authStrategy: AuthenticationStrategy) {
+        self.authStrategy = authStrategy
+    }
+    
+    public convenience required init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
             serviceURL: Constants.serviceURL, username: username, password: password)
         self.init(authStrategy: authStrategy)

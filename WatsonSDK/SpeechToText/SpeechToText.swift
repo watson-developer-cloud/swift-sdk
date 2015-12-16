@@ -66,20 +66,28 @@ public class SpeechToText: WatsonService {
     let BUFFER_SIZE: UInt32 = 4096
 
     
-    public override init(authStrategy: AuthenticationStrategy) {
+    
+    // The shared WatsonGateway singleton.
+    let gateway = WatsonGateway.sharedInstance
+    
+    // The authentication strategy to obtain authorization tokens.
+    let authStrategy: AuthenticationStrategy
+    
+    public required init(authStrategy: AuthenticationStrategy) {
         watsonSocket = WatsonSocket(authStrategy: authStrategy)
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
-        super.init(authStrategy: authStrategy)
+        self.authStrategy = authStrategy
         watsonSocket.delegate = self
     }
     
-    public convenience init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
-            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: username, password: password)
+    public convenience required init(username: String, password: String) {
+        let authStrategy = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
         self.init(authStrategy: authStrategy)
     }
-    
-    
     
     public func startListening()
     {

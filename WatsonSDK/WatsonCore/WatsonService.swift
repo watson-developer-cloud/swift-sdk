@@ -17,15 +17,12 @@
 import Foundation
 
 /// The superclass for all Watson services.
-public class WatsonService {
+internal protocol WatsonService {
     
-    // The shared WatsonGateway singleton.
-    internal let gateway = WatsonGateway.sharedInstance
+    var gateway: WatsonGateway { get }
+    var authStrategy: AuthenticationStrategy { get }
     
-    // The authentication strategy to obtain authorization tokens.
-    internal var authStrategy: AuthenticationStrategy
-    
-    init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
-    }
+    init(authStrategy: AuthenticationStrategy)
+    init(username: String, password: String)
+
 }

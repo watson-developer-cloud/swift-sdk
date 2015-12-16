@@ -37,7 +37,7 @@ internal class WatsonSocket {
     // Starscream websocket
     var socket: WebSocket?
 
-    let authStrategy: AuthenticationStrategy!
+    var authStrategy: AuthenticationStrategy!
     
     var isListening: Bool = false
     
@@ -89,14 +89,14 @@ internal class WatsonSocket {
 //            }
 //        }
         
-        authStrategy.getToken({ 
+        authStrategy.refreshToken({
       
             
-            token, error in
+            error in
             
             Log.sharedLogger.info("Got a response back from the server")
             
-            if let token = token {
+            if let token = self.authStrategy.token {
                 
                 //let authURL = "\(self.url)?watson-token=\(token)"
                 let authURL = self.url

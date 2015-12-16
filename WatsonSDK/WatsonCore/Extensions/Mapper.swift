@@ -19,8 +19,8 @@ import ObjectMapper
 
 extension Mapper {
     
-    /// Maps an Object to a JSON string with the given header
-    func toJSONString(object: N, header: String) -> String? {
+    // Maps an Object to a JSON string with the given header
+    public func toJSONString(object: N, header: String) -> String? {
         let json = toJSONString(object)
         if let json = json {
             return "{ \"\(header)\": \(json) }"
@@ -29,8 +29,8 @@ extension Mapper {
         }
     }
     
-    /// Maps an array of Objects to a JSON string with the given header
-    func toJSONString(objects: [N], header: String) -> String? {
+    // Maps an array of Objects to a JSON string with the given header
+    public func toJSONString(objects: [N], header: String) -> String? {
         let json = toJSONString(objects)
         if let json = json {
             return "{ \"\(header)\": \(json) }"
@@ -39,28 +39,74 @@ extension Mapper {
         }
     }
     
-    /// Maps an Object to a JSON string and represents it as NSData
-    func toJSONData(object: N) -> NSData? {
+    // Maps an Object to a JSON string and represents it as NSData
+    public func toJSONData(object: N) -> NSData? {
         let json = toJSONString(object)
         return json?.dataUsingEncoding(NSUTF8StringEncoding)
     }
     
-    /// Maps an array of Objects to a JSON string and represents it as NSData
-    func toJSONData(objects: [N]) -> NSData? {
+    // Maps an array of Objects to a JSON string and represents it as NSData
+    public func toJSONData(objects: [N]) -> NSData? {
         let json = toJSONString(objects)
         return json?.dataUsingEncoding(NSUTF8StringEncoding)
     }
     
-    /// Maps an Object to a JSON string with the given header and represents it as NSData
-    func toJSONData(object: N, header: String) -> NSData? {
+    // Maps an Object to a JSON string with the given header and represents it as NSData
+    public func toJSONData(object: N, header: String) -> NSData? {
         let json = toJSONString(object, header: header)
         return json?.dataUsingEncoding(NSUTF8StringEncoding)
     }
     
-    /// Maps an array of Objects to a JSON string with the given header and represents it as NSData
-    func toJSONData(objects: [N], header: String) -> NSData? {
+    // Maps an array of Objects to a JSON string with the given header and represents it as NSData
+    public func toJSONData(objects: [N], header: String) -> NSData? {
         let json = toJSONString(objects, header: header)
         return json?.dataUsingEncoding(NSUTF8StringEncoding)
+    }
+    
+    // Maps an optional NSData object to an object that conforms to Mappable.
+    public func map(JSONData: NSData?, keyPath: String?) -> N? {
+        guard let JSONData = JSONData else {
+            return nil
+        }
+        
+        var JSON: AnyObject?
+        do {
+            JSON = try NSJSONSerialization.JSONObjectWithData(JSONData, options: .AllowFragments)
+        } catch {
+            return nil
+        }
+        
+        var JSONToMap: AnyObject?
+        if let JSON = JSON, keyPath = keyPath where !keyPath.isEmpty {
+            JSONToMap = JSON.valueForKeyPath(keyPath)
+        } else {
+            JSONToMap = JSON
+        }
+        
+        return map(JSONToMap)
+    }
+    
+    // Maps an optional NSData object to an array of objects that conform to Mappable
+    public func mapArray(JSONData: NSData?, keyPath: String?) -> [N]? {
+        guard let JSONData = JSONData else {
+            return nil
+        }
+        
+        var JSON: AnyObject?
+        do {
+            JSON = try NSJSONSerialization.JSONObjectWithData(JSONData, options: .AllowFragments)
+        } catch {
+            return nil
+        }
+        
+        var JSONToMap: AnyObject?
+        if let JSON = JSON, keyPath = keyPath where !keyPath.isEmpty {
+            JSONToMap = JSON.valueForKeyPath(keyPath)
+        } else {
+            JSONToMap = JSON
+        }
+
+        return mapArray(JSONToMap)
     }
     
 }

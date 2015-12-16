@@ -58,7 +58,11 @@ internal class WatsonRequest: URLRequestConvertible {
         // construct URL
         let urlString = serviceURL + endpoint
         let urlComponents = NSURLComponents(string: urlString)!
-        urlComponents.queryItems = urlParams
+        if let urlParams = urlParams {
+            if !urlParams.isEmpty {
+                urlComponents.queryItems = urlParams
+            }
+        }
         let url = urlComponents.URL!
         
         // construct mutable base request

@@ -17,57 +17,52 @@
 import Foundation
 import ObjectMapper
 
-/**
- *  <#Description#>
- */
-public struct SpeechToTextResponse: Mappable
-{
-    /// Contains a list of transcription results.
-    var results: [SpeechToTextResult]?
+extension SpeechToText {
     
-    /**
-    Contains the state of the service
-    
-    - listening
-    */
-    var state: String?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        results         <- map["results"]
-        state           <- map["state"]
-    }
-    
-    /**
-    * The transcription property helps return a simple String result for a transcription
-    */
-    public func transcription () -> String {
+    public struct SpeechToTextResponse: Mappable
+    {
+        /// Contains a list of transcription results.
+        var results: [SpeechToTextResult]?
         
-        if let results = results {
+        /**
+        Contains the state of the service
+        
+        - listening
+        */
+        var state: String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            results         <- map["results"]
+            state           <- map["state"]
+        }
+        
+        /**
+        * The transcription property helps return a simple String result for a transcription
+        */
+        public func transcription () -> String {
             
-            if results.count > 0 {
+            if let results = results {
                 
-                let result = results[0]
-                
-                if let alternatives = result.alternatives {
+                if results.count > 0 {
                     
-                    if alternatives.count > 0 {
+                    let result = results[0]
+                    
+                    if let alternatives = result.alternatives {
                         
-                        
-                        return alternatives[0].transcript!
-                        
+                        if alternatives.count > 0 {
+                            
+                            
+                            return alternatives[0].transcript!
+                            
+                        }
                     }
+                    
                 }
                 
             }
-            
+            return ""
         }
-        return ""
     }
-    
 }
-
-
-
-

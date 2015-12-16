@@ -174,7 +174,7 @@ extension WatsonSocket : WebSocketDelegate {
         // parse the data.
         // print(text)
         
-        let result = Mapper<SpeechToTextResponse>().map(text)
+        let result = Mapper<SpeechToText.SpeechToTextResponse>().map(text)
         
         Log.sharedLogger.info(result?.transcription())
         

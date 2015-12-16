@@ -17,20 +17,22 @@
 import Foundation
 import ObjectMapper
 
-/**
- *  If a result has multiple transcription possibilities, there is an alternative 
- *  provided with a confidence rating.
- */
-public struct SpeechToTextAlternative: Mappable
-{
-    var transcript: String?
-    var confidence: Double?
+extension SpeechToText {
     
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        transcript          <- map["transcript"]
-        confidence          <- map["confidence"]
+    /**
+     If a result has multiple transcription possibilities, there is an alternative
+     provided with a confidence rating.
+     */
+    public struct SpeechToTextAlternative: Mappable {
+        var transcript: String?
+        var confidence: Double?
         
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            transcript          <- map["transcript"]
+            confidence          <- map["confidence"]
+            
+        }
     }
 }

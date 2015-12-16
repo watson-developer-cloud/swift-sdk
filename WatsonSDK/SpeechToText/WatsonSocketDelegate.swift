@@ -22,6 +22,6 @@ internal protocol WatsonSocketDelegate {
     func onConnected()
     func onListening()
     func onDisconnected()
-    func onMessageReceived(result: SpeechToTextResponse)
+    func onMessageReceived(result: SpeechToText.SpeechToTextResponse)
     
 }

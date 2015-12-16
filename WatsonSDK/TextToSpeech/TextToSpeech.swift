@@ -69,23 +69,26 @@ public class TextToSpeech: WatsonService {
             
         // construct url query parameters
         var urlParams = [NSURLQueryItem]()
+            
+        urlParams.append(NSURLQueryItem(name: "text", value: text))
+            
         if let voice = voice {
+            
             urlParams.append(NSURLQueryItem(name: "voice", value: "\(voice)"))
         }
             
         // construct message body
-        let body = "{ \"text\": \"\(text)\" }"
+        // let body = "{ \"text\": \"\(text)\" }"
             
         // construct request
         let request = WatsonRequest(
-            method: .POST,
+            method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.synthesize,
             authStrategy: authStrategy,
             accept: .OPUS,
             contentType: .JSON,
-            urlParams: urlParams,
-            messageBody: body.dataUsingEncoding(NSUTF8StringEncoding))
+            urlParams: urlParams)
         
         // execute request
         gateway.request(request, serviceError: TextToSpeechError()) { data, error in

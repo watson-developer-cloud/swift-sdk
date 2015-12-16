@@ -133,23 +133,55 @@ public class NaturalLanguageClassifier: WatsonService {
      - parameter completionHandler: Callback with Classifier?
      */
     public func createClassifier(trainerMetaURL: NSURL, trainerURL: NSURL,
-        completionHandler: (classifier: Classifier?, error: NSError?) -> ()) {
-            
-        // TODO: complete after WatsonGateway supports uploads!
+        completionHandler: (Classifier?, NSError?) -> ()) {
         
-        let endpoint = getEndpoint(Constants.v1ClassifiersURI)
+        // force token to refresh
+        // TODO: can remove this after its handled by WatsonGateway
+        authStrategy.refreshToken() { error in
         
-        var params = Dictionary<String, NSURL>()
-        
-        params.updateValue(trainerMetaURL, forKey: Constants.TrainerProperty.TrainingMeta.rawValue)
-        params.updateValue(trainerURL, forKey: Constants.TrainerProperty.TrainingData.rawValue)
-        
-        NetworkUtils.performBasicAuthFileUploadMultiPart(endpoint, fileURLs: params, parameters: [:], apiKey: _apiKey, contentType: ContentType.JSON, accept: ContentType.JSON, completionHandler: {response in
-            var classifier:Classifier? = nil
-            if let mapClassifier = Mapper<Classifier>().map(response.data) {
-                classifier = mapClassifier
+            // add token to header params
+            // TODO: can remove this after its handled by WatsonGateway
+            var headerParams = [String: String]()
+            if let token = self.authStrategy.token {
+                headerParams["X-Watson-Authorization-Token"] = token
             }
-            completionHandler(classifier: classifier, error: response.error)
-        })
+                
+            // construct request
+            let request = WatsonRequest(
+                method: .POST,
+                serviceURL: Constants.serviceURL,
+                endpoint: Constants.classifiers,
+                authStrategy: self.authStrategy,
+                accept: .JSON,
+                headerParams: headerParams)
+            
+            // execute request
+            Alamofire.upload(request,
+                multipartFormData: { multipartFormData in
+                    // encode files as form data
+                    multipartFormData.appendBodyPart(fileURL: trainerMetaURL, name: "training_metadata")
+                    multipartFormData.appendBodyPart(fileURL:
+                        trainerURL, name: "training_data")
+                },
+                encodingCompletion: { encodingResult in
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        // execute encoded request
+                        upload.response { request, response, data, error in
+                            let classifier = Mapper<Classifier>().mapData(data)
+                            // TODO: handle non-200 case (error)
+                            completionHandler(classifier, error)
+                        }
+                    case .Failure:
+                        // construct and return error
+                        let nsError = NSError(
+                            domain: "com.alamofire.error",
+                            code: -6008,
+                            userInfo: [NSLocalizedDescriptionKey:
+                                "Unable to encode data as multipart form."])
+                        completionHandler(nil, nsError)
+                    }
+                })
+        }
     }
 }

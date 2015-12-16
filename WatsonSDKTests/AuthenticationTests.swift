@@ -67,17 +67,17 @@ class AuthenticationTests: XCTestCase {
             )
         
         
-        fbAuthentication.getToken({
-            token, error in
+        fbAuthentication.refreshToken {
+            error in
             
-                XCTAssertNotNil(token)
+                XCTAssertNotNil(fbAuthentication.token)
                 XCTAssertNil(error)
             
-                Log.sharedLogger.info("Received a Watson token \(token)")
+                Log.sharedLogger.info("Received a Watson token \(fbAuthentication.token)")
             
                 facebookExpectation.fulfill()
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout) {
             error in XCTAssertNil(error, "Timeout")
@@ -115,17 +115,17 @@ class AuthenticationTests: XCTestCase {
             fbToken: "SomeBogusOAuthTokenGoesHere"
         )
         
-        fbAuthentication.getToken({
-            token, error in
+        fbAuthentication.refreshToken {
+            error in
             
-            XCTAssertNil(token)
+            XCTAssertNil(fbAuthentication.token)
             XCTAssertNotNil(error)
             
-            Log.sharedLogger.info("Received a Watson token \(token)")
+            Log.sharedLogger.info("Received a Watson token \(fbAuthentication.token)")
             
             facebookNegativeExpectation.fulfill()
             
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout) {
             error in XCTAssertNil(error, "Timeout")

@@ -228,6 +228,10 @@ class DialogTests: XCTestCase {
         service = Dialog(username: username, password: password)
     }
     
+    override func tearDown() {
+        super.tearDown()
+    }
+    
     /// Wait for an expectation to be fulfilled.
     func waitForExpectation() {
         waitForExpectationsWithTimeout(timeout) { error in

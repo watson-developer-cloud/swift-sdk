@@ -15,13 +15,8 @@
  **/
 
 import Foundation
-import Alamofire
 
-extension Request {
-    public func debugLog() -> Self {
-        #if DEBUG
-            debugPrint(self)
-        #endif
-        return self
-    }
+// HTTP method definitions
+internal enum Method: String {
+    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }

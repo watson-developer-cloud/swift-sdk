@@ -17,15 +17,17 @@
 import Foundation
 import ObjectMapper
 
-extension Dialog {
+extension TextToSpeech {
     
-    internal struct DialogError: WatsonError {
+    internal struct TextToSpeechError: WatsonError {
         var error: String!
         var code: Int!
+        var codeDescription: String!
         
         var nsError: NSError {
-            let domain = Constants.errorDoman
-            let userInfo = [NSLocalizedDescriptionKey: self.error]
+            let domain = Constants.errorDomain
+            let userInfo = [NSLocalizedDescriptionKey: error,
+                            NSLocalizedFailureReasonErrorKey: codeDescription]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         }
         
@@ -34,10 +36,9 @@ extension Dialog {
         init?(_ map: Map) {}
         
         mutating func mapping(map: Map) {
-            error <- map["error"]
-            code <- map["code"]
+            error           <- map["error"]
+            code            <- map["code"]
+            codeDescription <- map["code_description"]
         }
     }
-    
-    
 }

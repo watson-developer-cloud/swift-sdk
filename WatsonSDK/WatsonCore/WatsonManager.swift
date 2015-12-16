@@ -18,7 +18,6 @@ import Foundation
 import ObjectMapper
 
 // TODO: make sure the refreshed token is persistent (i.e. inout authStrategy)
-// TODO: add support for keypath... (use AnyObject.valueForKeyPath() method)
 
 /**
  A `WatsonGateway` is used to perform HTTP networking requests to Watson Developer

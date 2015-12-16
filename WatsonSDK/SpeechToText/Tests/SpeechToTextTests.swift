@@ -293,7 +293,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
         
-        service.transcribe( audioData, format: .OGG, oncompletion: {
+        service.transcribe( audioData, format: .OPUS, oncompletion: {
             response, error in
             
             if let response = response {

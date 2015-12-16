@@ -18,11 +18,11 @@ import Foundation
 import Alamofire
 
 /**
- A WatsonRequest object represents a REST request supported by IBM Watson.
- It captures all arguments required to construct an HTTP request message
- and can represent itself as an NSMutableURLRequest for use with Alamofire.
+ An `AlchemyRequest` object represents a REST request supported by an IBM Watson
+ Alchemy service. It captures all arguments required to construct an HTTP request
+ message and can represent itself as an NSMutableURLRequest for use with Alamofire.
  */
-internal class WatsonRequest: URLRequestConvertible {
+internal class AlchemyRequest: URLRequestConvertible {
     
     /// The operation's HTTP method.
     let method: Method

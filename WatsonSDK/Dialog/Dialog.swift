@@ -41,14 +41,13 @@ public class Dialog: WatsonService {
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.content(dialogID),
+            authStrategy: authStrategy,
             accept: .JSON)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseArray("items") { (response: Response<[Node], NSError>) in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            let nodes = Mapper<Node>().mapArray(data, keyPath: "items")
+            completionHandler(nodes, error)
         }
     }
     
@@ -68,15 +67,13 @@ public class Dialog: WatsonService {
             method: .PUT,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.content(dialogID),
+            authStrategy: authStrategy,
             contentType: .JSON,
             messageBody: Mapper().toJSONData(nodes, header: "items"))
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseData { response in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            completionHandler(error)
         }
     }
     
@@ -93,14 +90,13 @@ public class Dialog: WatsonService {
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogs,
+            authStrategy: authStrategy,
             accept: .JSON)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseArray("dialogs") { (response: Response<[DialogModel], NSError>) in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            let dialogs = Mapper<DialogModel>().mapArray(data, keyPath: "dialogs")
+            completionHandler(dialogs, error)
         }
     }
     
@@ -124,12 +120,15 @@ public class Dialog: WatsonService {
      */
     public func createDialog(name: String, fileURL: NSURL,
         completionHandler: (DialogID?, NSError?) -> Void) {
+        
+        // TODO: requires WatsonGateway to support upload
             
         // construct request
         let request = WatsonRequest(
             method: .POST,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogs,
+            authStrategy: authStrategy,
             accept: .JSON)
         
         // execute request
@@ -181,14 +180,12 @@ public class Dialog: WatsonService {
         let request = WatsonRequest(
             method: .DELETE,
             serviceURL: Constants.serviceURL,
-            endpoint: Constants.dialogID(dialogID))
+            endpoint: Constants.dialogID(dialogID),
+            authStrategy: authStrategy)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseData { response in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            completionHandler(error)
         }
     }
     
@@ -205,11 +202,14 @@ public class Dialog: WatsonService {
     public func getDialogFile(dialogID: DialogID, format: MediaType? = nil,
         completionHandler: (NSURL?, NSError?) -> Void) {
         
+        // TODO: required WatsonGateway to support download
+            
         // construct request
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogID(dialogID),
+            authStrategy: authStrategy,
             accept: format)
         
         // construct Alamofire request
@@ -250,11 +250,14 @@ public class Dialog: WatsonService {
     public func updateDialog(dialogID: DialogID, fileURL: NSURL,
         fileType: MediaType, completionHandler: NSError? -> Void) {
 
+        // TODO: requires WatsonGateway to support upload
+        
         // construct request
         let request = WatsonRequest(
             method: .PUT,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogID(dialogID),
+            authStrategy: authStrategy,
             contentType: fileType)
         
         // execute request
@@ -306,17 +309,15 @@ public class Dialog: WatsonService {
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.conversation(dialogID),
+            authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseArray("conversations") {
-                (response: Response<[Conversation], NSError>) in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
-            }
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            let conversations = Mapper<Conversation>().mapArray(data, keyPath: "conversations")
+            completionHandler(conversations, error)
+        }
     }
     
     /**
@@ -356,16 +357,15 @@ public class Dialog: WatsonService {
             method: .POST,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.conversation(dialogID),
+            authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseObject { (response: Response<ConversationResponse, NSError>) in
-                validate(response, successCode: 201, serviceError: DialogError(),
-                    completionHandler: completionHandler)
-            }
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            let conversationResponse = Mapper<ConversationResponse>().map(data)
+            completionHandler(conversationResponse, error)
+        }
     }
     
     // MARK: Profile Operations
@@ -397,16 +397,15 @@ public class Dialog: WatsonService {
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.profile(dialogID),
+            authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseArray("name_values") { (response: Response<[Parameter], NSError>) in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
-            }
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            let parameters = Mapper<Parameter>().mapArray(data, keyPath: "name_values")
+            completionHandler(parameters, error)
+        }
     }
 
     /**
@@ -431,14 +430,12 @@ public class Dialog: WatsonService {
             method: .PUT,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.profile(dialogID),
+            authStrategy: authStrategy,
             messageBody: Mapper().toJSONData(profile))
         
         // execute request
-        Alamofire.request(request)
-            .authenticate(user: user, password: password)
-            .responseData { response in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
-            }
+        gateway.request(request, serviceError: DialogError()) { data, error in
+            completionHandler(error)
+        }
     }
 }

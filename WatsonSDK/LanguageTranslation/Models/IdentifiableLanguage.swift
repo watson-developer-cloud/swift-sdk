@@ -17,14 +17,17 @@
 import Foundation
 import ObjectMapper
 
-public struct IdentifiableLanguage: Mappable {
-    var language:String?
-    var name:String?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        language    <- map["language"]
-        name        <- map["name"]
+extension LanguageTranslation {
+
+    public struct IdentifiableLanguage: Mappable {
+        public var language:String?
+        public var name:String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            language    <- map["language"]
+            name        <- map["name"]
+        }
     }
 }

@@ -17,8 +17,7 @@
 import Foundation
 import Starscream
 import ObjectMapper
-
-
+    
 /// Watson Web Socket abstraction
 internal class WatsonSocket {
     
@@ -33,7 +32,7 @@ internal class WatsonSocket {
     var audioUploadQueue: NSOperationQueue!
     
     // The format for continuous PCM based recognition requires OGG
-    var format: SpeechToTextAudioFormat = .OGG
+    var format: MediaType = .OPUS
     
     // Starscream websocket
     var socket: WebSocket?
@@ -174,7 +173,7 @@ extension WatsonSocket : WebSocketDelegate {
         // parse the data.
         // print(text)
         
-        let result = Mapper<SpeechToTextResponse>().map(text)
+        let result = Mapper<SpeechToText.SpeechToTextResponse>().map(text)
         
         Log.sharedLogger.info(result?.transcription())
         

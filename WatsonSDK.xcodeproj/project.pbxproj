@@ -42,6 +42,8 @@
 		7A03EFBE1C212D4600EBE0AC /* TranslateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFBD1C212D4600EBE0AC /* TranslateResponse.swift */; };
 		7A03EFC01C213FC900EBE0AC /* TextToSpeechConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFBF1C213FC900EBE0AC /* TextToSpeechConstants.swift */; };
 		7A03EFC21C2144C600EBE0AC /* TextToSpeechError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC11C2144C600EBE0AC /* TextToSpeechError.swift */; };
+		7A03EFC41C215E3600EBE0AC /* AlchemyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */; };
+		7A03EFC61C215F6700EBE0AC /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC51C215F6700EBE0AC /* HTTPMethods.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
 		7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B71BF8DEB8005E478F /* Alamofire.framework */; };
@@ -229,6 +231,8 @@
 		7A03EFBD1C212D4600EBE0AC /* TranslateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateResponse.swift; sourceTree = "<group>"; };
 		7A03EFBF1C213FC900EBE0AC /* TextToSpeechConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechConstants.swift; sourceTree = "<group>"; };
 		7A03EFC11C2144C600EBE0AC /* TextToSpeechError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechError.swift; sourceTree = "<group>"; };
+		7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyRequest.swift; sourceTree = "<group>"; };
+		7A03EFC51C215F6700EBE0AC /* HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		7A36F9A21BF8DDCB005E478F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -787,6 +791,7 @@
 				7ADC3A2F1BF950C800CD916E /* Service.swift */,
 				7A03EFB11C20BFAB00EBE0AC /* WatsonManager.swift */,
 				7A03EFB31C20BFB900EBE0AC /* WatsonRequest.swift */,
+				7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */,
 				7A741BA41C18838A002C85A7 /* WatsonService.swift */,
 				7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */,
 			);
@@ -803,6 +808,7 @@
 				7ADC3A321BF950C800CD916E /* Log.swift */,
 				7ADC3A331BF950C800CD916E /* Transformation.swift */,
 				7A03EFB51C20C30A00EBE0AC /* WatsonError.swift */,
+				7A03EFC51C215F6700EBE0AC /* HTTPMethods.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -992,6 +998,7 @@
 				7ADC3A7E1BF955FF00CD916E /* AlchemyVisionConstants.swift in Sources */,
 				7ADC3A821BF9560400CD916E /* ImageKeyWord.swift in Sources */,
 				7ADC3A921BF958A200CD916E /* IdentifiableLanguage.swift in Sources */,
+				7A03EFC61C215F6700EBE0AC /* HTTPMethods.swift in Sources */,
 				7A03EFB01C20BF9900EBE0AC /* MediaType.swift in Sources */,
 				E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */,
 				7ADC3A801BF9560400CD916E /* ImageFaceTags.swift in Sources */,
@@ -1056,6 +1063,7 @@
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7A741BA51C18838A002C85A7 /* WatsonService.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,
+				7A03EFC41C215E3600EBE0AC /* AlchemyRequest.swift in Sources */,
 				7A03EFC21C2144C600EBE0AC /* TextToSpeechError.swift in Sources */,
 				E1A07EFC1C077CA500DCD45C /* SpeechToTextDelegate.swift in Sources */,
 				7ADC3A761BF9551500CD916E /* SAORelation.swift in Sources */,

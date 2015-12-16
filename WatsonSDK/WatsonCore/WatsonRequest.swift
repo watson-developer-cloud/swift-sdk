@@ -17,11 +17,6 @@
 import Foundation
 import Alamofire
 
-/// HTTP method definitions
-internal enum Method: String {
-    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
-}
-
 /**
  A WatsonRequest object represents a REST request supported by IBM Watson.
  It captures all arguments required to construct an HTTP request message

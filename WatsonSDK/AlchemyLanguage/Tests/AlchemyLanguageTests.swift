@@ -92,7 +92,7 @@ class AlchemyLanguageTests: XCTestCase {
             let dict = NSDictionary(contentsOfFile: url) as? [String : String]
             where apiKeyNotSet {
                 
-                instance.tokenAuthenticationStrategy = TokenAuthenticationStrategy(token: dict["AlchemyAPIKey"]!)
+                instance.tokenAuthenticationStrategy = APIKeyAuthenticationStrategy(apiKey: dict["AlchemyAPIKey"]!)
                 
         }
         

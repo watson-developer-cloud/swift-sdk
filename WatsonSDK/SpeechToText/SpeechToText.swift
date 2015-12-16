@@ -190,7 +190,7 @@ public class SpeechToText {
      - parameter callback: A function that will return the string
      */
     public func transcribe(audioData: NSData,
-        format: SpeechToTextAudioFormat = .FLAC,
+        format: MediaType = .FLAC,
         oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
             
             

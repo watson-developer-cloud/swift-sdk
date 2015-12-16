@@ -15,21 +15,27 @@
  **/
 
 import Foundation
+import ObjectMapper
 
 extension LanguageTranslation {
     
-    internal struct Constants {
+    internal struct LanguageTranslationError: WatsonError {
+        var errorCode: Int!
+        var errorMessage: String!
         
-        static let serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
-        static let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
-        static let errorDomain = "com.watsonplatform.languagetranslation"
+        var nsError: NSError {
+            let domain = Constants.errorDomain
+            let userInfo = [NSLocalizedDescriptionKey: errorMessage]
+            return NSError(domain: domain, code: errorCode, userInfo: userInfo)
+        }
         
-        static let identifiableLanguages = "/v2/identifiable_languages"
-        static let identify = "/v2/identify"
-        static let translate = "/v2/translate"
-        static let models = "/v2/models"
-        static func model(modelID: String) -> String {
-            return "/v2/models/\(modelID)"
+        init() {}
+        
+        init?(_ map: Map) {}
+        
+        mutating func mapping(map: Map) {
+            errorCode    <- map["error_code"]
+            errorMessage <- map["error_message"]
         }
     }
 }

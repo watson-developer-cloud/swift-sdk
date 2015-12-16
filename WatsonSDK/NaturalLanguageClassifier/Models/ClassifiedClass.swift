@@ -17,15 +17,18 @@
 import Foundation
 import ObjectMapper
 
-public struct ClassifiedClass: Mappable {
+extension NaturalLanguageClassifier {
 
-  var name: String?
-  var confidence: Double?
-  
-  public init?(_ map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    name        <- map["class_name"]
-    confidence  <- (map["confidence"])
-  }
+    public struct ClassifiedClass: Mappable {
+
+      public var name: String?
+      public var confidence: Double?
+      
+      public init?(_ map: Map) {}
+      
+      public mutating func mapping(map: Map) {
+        name        <- map["class_name"]
+        confidence  <- (map["confidence"])
+      }
+    }
 }

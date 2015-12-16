@@ -25,4 +25,7 @@ public enum MediaType: String {
     case OctetStream = "application/octet-stream"
     case WDSJSON = "application/wds+json"
     case WDSXML = "application/wds+xml"
+    case OPUS = "audio/ogg; codecs=opus"
+    case WAV = "audio/wav"
+    case FLAC = "audio/flac"
 }

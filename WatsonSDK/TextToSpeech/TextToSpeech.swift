@@ -19,32 +19,6 @@ import AVFoundation
 import ObjectMapper
 
 /**
- *  Protocol defining the Watson Text to Speech service.
- */
-public protocol TextToSpeechService
-{
-    /**
-     This function invokes a call to synthesize text and decompress the audio to
-     produce a WAVE formatted NSData.
-     
-     - parameter theText:           String that will be synthesized
-     - parameter voice:             String specifying the voice name
-     - parameter oncompletion:      Callback function that will present the WAVE data
-     */
-    func synthesize ( theText:String, voice: String,
-        oncompletion: (data: NSData?, error:NSError?) -> Void )
-    
-    /**
-     This function returns a list of voices (gender, language, dialect) supported.
-     
-     - parameter oncompletion:      Callback function that presents an array of Voices
-     */
-    func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
-    
-}
-
-
-/**
  * Implementation for the Watson Text To Speech protocol.
  */
 public class TextToSpeech : WatsonService
@@ -68,30 +42,65 @@ public class TextToSpeech : WatsonService
      - parameter voice:             String specifying the voice name
      - parameter oncompletion:      Callback function that will present the WAVE data
      */
-//    public func synthesize(theText: String,
-//        voice: String = "",
-//        oncompletion: (data: NSData?, error:NSError?) -> Void ) {
-//            
-//            let endpoint = getEndpoint("/v1/synthesize")
-//            
-//            if (theText.isEmpty)
-//            {
-//                let error = NSError.createWatsonError(404,
-//                    description: "Cannot synthesize an empty string")
-//                oncompletion(data: nil, error: error)
-//                return
-//            }
-//            
-//            var params = Dictionary<String, String>()
-//            params.updateValue(theText, forKey: "text")
-//            // Opus codec is the default, so the accept type is optional
-//            // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
-//            
-//            if (!voice.isEmpty)
-//            {
-//                params.updateValue(voice, forKey: "voice")
-//            }
-//            
+    public func synthesize(theText: String,
+        voice: String = "",
+        oncompletion: (data: NSData?, error:NSError?) -> Void ) {
+            
+            // let endpoint = getEndpoint("/v1/synthesize")
+            
+            if (theText.isEmpty)
+            {
+                let error = NSError.createWatsonError(404,
+                    description: "Cannot synthesize an empty string")
+                oncompletion(data: nil, error: error)
+                return
+            }
+            
+            var params = Dictionary<String, String>()
+            params.updateValue(theText, forKey: "text")
+            
+            let query = NSURLQueryItem(name: "text", value: theText)
+            // Opus codec is the default, so the accept type is optional
+            // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
+            
+            if (!voice.isEmpty)
+            {
+                params.updateValue(voice, forKey: "voice")
+            }
+            
+            let request = WatsonRequest(
+                method: .GET,
+                serviceURL: self._serviceURL,
+                endpoint: "/v1/synthesize",
+                authStrategy: self.authStrategy,
+                accept: .OPUS,
+                contentType: .OPUS,
+                urlParams: [query]
+            )
+
+            WatsonGateway.sharedInstance.request(
+                request,
+                serviceError: TextToSpeechError()) {
+                    
+                    data, error in
+                    
+                    if let data = data  {
+                        
+                        let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
+                        let waveData = self.addWaveHeader(pcm)
+                        
+                        oncompletion(data: waveData, error: error)
+                        
+                    } else {
+                        
+                        oncompletion(data: nil, error: error)
+                        
+                    }
+                    
+            }
+        
+    }
+
 //            NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
 //                parameters: params,
 //                contentType: .AUDIO_OPUS,
@@ -113,8 +122,8 @@ public class TextToSpeech : WatsonService
 //                    }
 //                    
 //            })
-//            
-//    }
+            
+
     
     /**
      This function returns a list of voices supported.

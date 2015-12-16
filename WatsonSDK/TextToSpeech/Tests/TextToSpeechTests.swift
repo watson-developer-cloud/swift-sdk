@@ -92,25 +92,27 @@ class TextToSpeechTests: XCTestCase {
     /**
     * Fetches the synthesized speech back and decompresses the Opus audio
     **/
-//    func testSynthesize() {
-//        
-//        let synthExpectation = expectationWithDescription("Synthesize Audio")
-//    
-//        service!.synthesize(testString, oncompletion: {
-//            data, error in
-//            
-//                XCTAssertNotNil(data)
-//                XCTAssertGreaterThan(data!.length, 100, "Expecting the decompressed audio to be more than 100 bytes")
-//            
-//                synthExpectation.fulfill()
-//                
-//                // service.playAudio(engine, data: data)
-//           
-//        })
-//        
-//        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-//        
-//    }
+    func testSynthesize() {
+        
+        let synthExpectation = expectationWithDescription("Synthesize Audio")
+    
+        service!.synthesize(testString, oncompletion: {
+            data, error in
+            
+                print(error)
+                XCTAssertNil(error)
+                XCTAssertNotNil(data)
+                XCTAssertGreaterThan(data!.length, 100, "Expecting the decompressed audio to be more than 100 bytes")
+            
+                synthExpectation.fulfill()
+                
+                // service.playAudio(engine, data: data)
+           
+        })
+        
+        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        
+    }
     
     /**
      Tests if the user specifies a voice that does not exist.

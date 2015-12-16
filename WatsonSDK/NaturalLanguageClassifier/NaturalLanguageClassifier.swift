@@ -44,7 +44,7 @@ public class NaturalLanguageClassifier: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: NLCError()) { data, error in
-            let classifiers = Mapper<Classifier>().mapArray(data, keyPath: "classifiers")
+            let classifiers = Mapper<Classifier>().mapDataArray(data, keyPath: "classifiers")
             completionHandler(classifiers, error)
         }
     }
@@ -71,7 +71,7 @@ public class NaturalLanguageClassifier: WatsonService {
             
         // execute request
         gateway.request(request, serviceError: NLCError()) { data, error in
-            let classification = Mapper<Classification>().map(data)
+            let classification = Mapper<Classification>().mapData(data)
             completionHandler(classification, error)
         }
     }
@@ -95,7 +95,7 @@ public class NaturalLanguageClassifier: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: NLCError()) { data, error in
-            let classifier = Mapper<Classifier>().map(data)
+            let classifier = Mapper<Classifier>().mapData(data)
             completionHandler(classifier, error)
         }
     }

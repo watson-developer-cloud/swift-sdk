@@ -47,7 +47,7 @@ public class LanguageTranslation: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let languages = Mapper<IdentifiableLanguage>().mapArray(data, keyPath: "languages")
+            let languages = Mapper<IdentifiableLanguage>().mapDataArray(data, keyPath: "languages")
             completionHandler(languages, error)
         }
     }
@@ -74,7 +74,7 @@ public class LanguageTranslation: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let languages = Mapper<IdentifiedLanguage>().mapArray(data, keyPath: "languages")
+            let languages = Mapper<IdentifiedLanguage>().mapDataArray(data, keyPath: "languages")
             completionHandler(languages, error)
         }
     }
@@ -133,7 +133,7 @@ public class LanguageTranslation: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let translations = Mapper<TranslateResponse>().map(data)?.translationStrings
+            let translations = Mapper<TranslateResponse>().mapData(data)?.translationStrings
             completionHandler(translations, error)
         }
     }
@@ -172,7 +172,7 @@ public class LanguageTranslation: WatsonService {
             
         // execute request
         gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let models = Mapper<TranslationModel>().mapArray(data, keyPath: "models")
+            let models = Mapper<TranslationModel>().mapDataArray(data, keyPath: "models")
             completionHandler(models, error)
         }
     }
@@ -196,7 +196,7 @@ public class LanguageTranslation: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let model = Mapper<TranslationModel>().map(data)
+            let model = Mapper<TranslationModel>().mapData(data)
             completionHandler(model, error)
         }
     }

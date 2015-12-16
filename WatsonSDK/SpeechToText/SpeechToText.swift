@@ -22,7 +22,7 @@ import ObjectMapper
     The IBM® Speech to Text service provides an Application Programming Interface (API) that
     enables you to add speech transcription capabilities to your applications.
 */
-public class SpeechToText {
+public class SpeechToText: WatsonService {
     
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
     private let serviceURL = "/speech-to-text/api"
@@ -66,13 +66,17 @@ public class SpeechToText {
     let BUFFER_SIZE: UInt32 = 4096
 
     
-    public init( authStrategy: AuthenticationStrategy ) {
-        
-        watsonSocket = WatsonSocket( authStrategy: authStrategy )
-        watsonSocket.delegate = self
-        
+    public override init(authStrategy: AuthenticationStrategy) {
+        watsonSocket = WatsonSocket(authStrategy: authStrategy)
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
-        
+        super.init(authStrategy: authStrategy)
+        watsonSocket.delegate = self
+    }
+    
+    public convenience init(username: String, password: String) {
+        let authStrategy = BasicAuthenticationStrategy(tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api", username: username, password: password)
+        self.init(authStrategy: authStrategy)
     }
     
     

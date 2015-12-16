@@ -21,6 +21,12 @@ import ObjectMapper
 
 public class Dialog: WatsonService {
     
+    public convenience init(username: String, password: String) {
+        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
+            serviceURL: Constants.serviceURL, username: username, password: password)
+        self.init(authStrategy: authStrategy)
+    }
+    
     // MARK: Content Operations
     
     /**

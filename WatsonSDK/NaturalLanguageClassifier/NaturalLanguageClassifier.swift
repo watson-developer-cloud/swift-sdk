@@ -15,14 +15,15 @@
  **/
 
 import Foundation
+import Alamofire
 import ObjectMapper
 
 public class NaturalLanguageClassifier: WatsonService {
     
-    public init(username: String, password: String) {
+    public convenience init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
             serviceURL: Constants.serviceURL, username: username, password: password)
-        super.init(authStrategy: authStrategy)
+        self.init(authStrategy: authStrategy)
     }
     
     /**

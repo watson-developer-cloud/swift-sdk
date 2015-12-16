@@ -56,16 +56,19 @@ public class TextToSpeech : WatsonService
                 return
             }
             
-            var params = Dictionary<String, String>()
-            params.updateValue(theText, forKey: "text")
+            //var params = Dictionary<String, String>()
+            //params.updateValue(theText, forKey: "text")
             
+            var params = [NSURLQueryItem]()
             let query = NSURLQueryItem(name: "text", value: theText)
+            params.append(query)
             // Opus codec is the default, so the accept type is optional
             // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
             
             if (!voice.isEmpty)
             {
-                params.updateValue(voice, forKey: "voice")
+                let voiceQuery = NSURLQueryItem(name: "voice", value: voice)
+                params.append( voiceQuery )
             }
             
             let request = WatsonRequest(
@@ -75,7 +78,7 @@ public class TextToSpeech : WatsonService
                 authStrategy: self.authStrategy,
                 accept: .OPUS,
                 contentType: .OPUS,
-                urlParams: [query]
+                urlParams: params
             )
 
             WatsonGateway.sharedInstance.request(

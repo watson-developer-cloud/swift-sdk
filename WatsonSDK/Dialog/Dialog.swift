@@ -127,49 +127,55 @@ public class Dialog: WatsonService {
     public func createDialog(name: String, fileURL: NSURL,
         completionHandler: (DialogID?, NSError?) -> Void) {
         
-        // TODO: requires WatsonGateway to support upload
+        // force token to refresh
+        // TODO: can remove this after its handled by WatsonGateway
+        authStrategy.refreshToken() { error in
             
-        // construct request
-        let request = WatsonRequest(
-            method: .POST,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.dialogs,
-            authStrategy: authStrategy,
-            accept: .JSON)
-        
-        // execute request
-        Alamofire.upload(request,
-            multipartFormData: { multipartFormData in
-                // encode the name and file as form data
-                let nameData = name.dataUsingEncoding(NSUTF8StringEncoding)!
-                multipartFormData.appendBodyPart(data: nameData, name: "name")
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "file")
-            },
-            encodingCompletion: { encodingResult in
-                // was the encoding successful?
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    // execute encoded request
-                    upload.authenticate(user: self.user, password: self.password)
-                    upload.responseObject {
-                        (response: Response<DialogIDModel, NSError>) in
-                        let unwrapID = {
-                            (dialogID: DialogIDModel?, error: NSError?) in
-                            completionHandler(dialogID?.id, error) }
-                        validate(response, successCode: 201,
-                            serviceError: DialogError(),
-                            completionHandler: unwrapID)
+            // add token to header params
+            // TODO: can remove this after its handled by WatsonGateway
+            var headerParams = [String: String]()
+            if let token = self.authStrategy.token {
+                headerParams["X-Watson-Authorization-Token"] = token
+            }
+            
+            // construct request
+            let request = WatsonRequest(
+                method: .POST,
+                serviceURL: Constants.serviceURL,
+                endpoint: Constants.dialogs,
+                authStrategy: self.authStrategy,
+                accept: .JSON,
+                headerParams: headerParams)
+            
+            // execute request
+            Alamofire.upload(request,
+                multipartFormData: { multipartFormData in
+                    // encode the name and file as form data
+                    let nameData = name.dataUsingEncoding(NSUTF8StringEncoding)!
+                    multipartFormData.appendBodyPart(data: nameData, name: "name")
+                    multipartFormData.appendBodyPart(fileURL: fileURL, name: "file")
+                },
+                encodingCompletion: { encodingResult in
+                    // was the encoding successful?
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        // execute encoded request
+                        upload.response { request, response, data, error in
+                            let dialogID = Mapper<DialogIDModel>().mapData(data)
+                            // TODO: handle non-200 case (error)
+                            completionHandler(dialogID?.id, error)
+                        }
+                    case .Failure:
+                        // construct and return error
+                        let nsError = NSError(
+                            domain: "com.alamofire.error",
+                            code: -6008,
+                            userInfo: [NSLocalizedDescriptionKey:
+                                "Unable to encode data as multipart form."])
+                        completionHandler(nil, nsError)
                     }
-                case .Failure:
-                    // construct and return error
-                    let nsError = NSError(
-                        domain: "com.alamofire.error",
-                        code: -6008,
-                        userInfo: [NSLocalizedDescriptionKey:
-                            "Unable to encode data as multipart form."])
-                    completionHandler(nil, nsError)
-                }
-        })
+            })
+        }
     }
     
     /**
@@ -208,39 +214,46 @@ public class Dialog: WatsonService {
     public func getDialogFile(dialogID: DialogID, format: MediaType? = nil,
         completionHandler: (NSURL?, NSError?) -> Void) {
         
-        // TODO: required WatsonGateway to support download
+        // force token to refresh
+        // TODO: can remove this after its handled by WatsonGateway
+        authStrategy.refreshToken() { error in
             
-        // construct request
-        let request = WatsonRequest(
-            method: .GET,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.dialogID(dialogID),
-            authStrategy: authStrategy,
-            accept: format)
-        
-        // construct Alamofire request
-        var fileURL: NSURL?
-        let r = Alamofire.download(request) { (temporaryURL, response) in
-            // specify download destination
-            let manager = NSFileManager.defaultManager()
-            let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
-                inDomains: .UserDomainMask)[0]
-            let pathComponent = response.suggestedFilename
-            fileURL = directoryURL.URLByAppendingPathComponent(pathComponent!)
-            return fileURL!
-        }
+            // add token to header params
+            // TODO: can remove this after its handled by WatsonGateway
+            var headerParams = [String: String]()
+            if let token = self.authStrategy.token {
+                headerParams["X-Watson-Authorization-Token"] = token
+            }
             
-        // execute request
-        r.authenticate(user: user, password: password)
-         .response { _, response, _, error in
-            var data: NSData? = nil
-            if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
-            let includeFileURL = { (error: NSError?) in completionHandler(fileURL, error) }
-            validate(response, data: data, error: error, serviceError: DialogError(),
-                completionHandler: includeFileURL)
+            // construct request
+            let request = WatsonRequest(
+                method: .GET,
+                serviceURL: Constants.serviceURL,
+                endpoint: Constants.dialogID(dialogID),
+                authStrategy: self.authStrategy,
+                accept: format,
+                headerParams: headerParams)
+            
+            // construct Alamofire request
+            var fileURL: NSURL?
+            let r = Alamofire.download(request) { (temporaryURL, response) in
+                // specify download destination
+                let manager = NSFileManager.defaultManager()
+                let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
+                    inDomains: .UserDomainMask)[0]
+                let pathComponent = response.suggestedFilename
+                fileURL = directoryURL.URLByAppendingPathComponent(pathComponent!)
+                return fileURL!
+            }
+                
+            // execute request
+            r.response { _, response, _, error in
+                completionHandler(fileURL, error)
+                // TODO: handle non-200 case (error)
+            }
         }
     }
-    
+
     /**
      Update an existing Dialog application by uploading a Dialog file.
      
@@ -256,22 +269,32 @@ public class Dialog: WatsonService {
     public func updateDialog(dialogID: DialogID, fileURL: NSURL,
         fileType: MediaType, completionHandler: NSError? -> Void) {
 
-        // TODO: requires WatsonGateway to support upload
+        // force token to refresh
+        // TODO: can remove this after its handled by WatsonGateway
+        authStrategy.refreshToken() { error in
         
-        // construct request
-        let request = WatsonRequest(
-            method: .PUT,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.dialogID(dialogID),
-            authStrategy: authStrategy,
-            contentType: fileType)
-        
-        // execute request
-        Alamofire.upload(request, file: fileURL)
-            .authenticate(user: user, password: password)
-            .responseData { response in
-                validate(response, serviceError: DialogError(),
-                    completionHandler: completionHandler)
+            // add token to header params
+            // TODO: can remove this after its handled by WatsonGateway
+            var headerParams = [String: String]()
+            if let token = self.authStrategy.token {
+                headerParams["X-Watson-Authorization-Token"] = token
+            }
+            
+            // construct request
+            let request = WatsonRequest(
+                method: .PUT,
+                serviceURL: Constants.serviceURL,
+                endpoint: Constants.dialogID(dialogID),
+                authStrategy: self.authStrategy,
+                contentType: fileType,
+                headerParams: headerParams)
+            
+            // execute request
+            Alamofire.upload(request, file: fileURL)
+                .response { request, response, data, error in
+                    completionHandler(error)
+                    // TODO: handle non-200 case (error)
+            }
         }
     }
     

@@ -28,4 +28,5 @@ public enum MediaType: String {
     case OPUS = "audio/ogg; codecs=opus"
     case WAV = "audio/wav"
     case FLAC = "audio/flac"
+    case PCM = "audio/l16"
 }

@@ -47,9 +47,16 @@ public class TextToSpeech: WatsonService {
      - parameter voice:             String specifying the voice name
      - parameter completionHandler: Callback function that will present the WAVE data
      */
-    public func synthesize(text: String, voice: String?,
+    public func synthesize(text: String, voice: String? = nil,
         completionHandler: (NSData?, NSError?) -> Void ) {
         
+        if (text.isEmpty) {
+            let error = NSError.createWatsonError(404,
+                description: "Cannot synthesize an empty string")
+            completionHandler(nil, error)
+            return
+        }
+            
         // construct url query parameters
         var urlParams = [NSURLQueryItem]()
         if let voice = voice {
@@ -57,7 +64,7 @@ public class TextToSpeech: WatsonService {
         }
             
         // construct message body
-        let body = "{ \"text\": \(text) }"
+        let body = "{ \"text\": \"\(text)\" }"
             
         // construct request
         let request = WatsonRequest(
@@ -99,7 +106,7 @@ public class TextToSpeech: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: TextToSpeechError()) { data, error in
-            let voices = Mapper<Voice>().mapArray(data, keyPath: "voices")
+            let voices = Mapper<Voice>().mapDataArray(data, keyPath: "voices")
             completionHandler(voices, error)
         }
     }

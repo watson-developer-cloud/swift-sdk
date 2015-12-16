@@ -43,6 +43,20 @@ Once the dependency manager is installed, the next step is to download the neede
 carthage update
 ```
 
+**Frameworks Used**
+
+[Alamofire](https://github.com/Alamofire/Alamofire)
+
+[XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
+
+[ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
+
+[HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
+
+[Starscream](https://github.com/daltoniam/Starscream)
+
+[AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+
 
 ## Examples 
 

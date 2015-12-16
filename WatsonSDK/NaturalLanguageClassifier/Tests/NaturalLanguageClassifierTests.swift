@@ -20,7 +20,7 @@ import XCTest
 class NaturalLanguageClassifierTests: XCTestCase {
     
     /// Language translation service
-    private let service = NaturalLanguageClassifier()
+    private var service: NaturalLanguageClassifier?
     
     // this will change based on login instance
     private var classifierIdInstanceId = "0235B6x12-nlc-767"
@@ -34,7 +34,9 @@ class NaturalLanguageClassifierTests: XCTestCase {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                service.setUsernameAndPassword(dict["NaturalLanguageClassifierUsername"]!, password: dict["NaturalLanguageClassifierPassword"]!)
+                let username = dict["NaturalLanguageClassifierUsername"]!
+                let password = dict["NaturalLanguageClassifierPassword"]!
+                service = NaturalLanguageClassifier(username: username, password: password)
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }
@@ -51,7 +53,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     func testGetClassifiers() {
         let positiveExpectation = expectationWithDescription("Get All Classifiers")
         
-        service.getClassifiers({(classifiers:[Classifier]?, error) in
+        service!.getClassifiers({(classifiers:[NaturalLanguageClassifier.Classifier]?, error) in
             XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
             positiveExpectation.fulfill()
         })
@@ -63,13 +65,13 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let authorizedDeleteExpectation = expectationWithDescription("Unauthorized expectation")
         let missingDeleteExpectation = expectationWithDescription("Missing delete expectation")
         
-        service.deleteClassifier("Non-existance", completionHandler:{(classifier:Bool?) in
-            XCTAssertFalse(classifier!,"Expected missing delete exception when trying to delete a nonexistent model")
+        service!.deleteClassifier("Non-existance", completionHandler:{ error in
+            XCTAssertNotNil(error, "Expected missing delete exception when trying to delete a nonexistent model")
             missingDeleteExpectation.fulfill()
         })
         
-        service.deleteClassifier(NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete!, completionHandler:{(classifier:Bool?) in
-            XCTAssertTrue(classifier!,"Expected missing delete exception when trying to delete a nonexistent model")
+        service!.deleteClassifier(NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete!, completionHandler:{ error in
+            XCTAssertNil(error, "Expected missing delete exception when trying to delete a nonexistent model")
             NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete = ""
             authorizedDeleteExpectation.fulfill()
         })
@@ -81,21 +83,19 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectationValid = expectationWithDescription("Valid Expected")
         let expectationInvalid = expectationWithDescription("Invalid Expect")
         
-        service.getClassifier("MISSING_CLASSIFIER_ID", completionHandler:{(classifier:Classifier?, error) in
-            XCTAssertEqual(classifier!.id, nil, "Expect classifierid to be nil")
+        service!.getClassifier("MISSING_CLASSIFIER_ID") { classifier, error in
+            XCTAssertNil(classifier)
+            XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, 404, "Expect 404 error code")
             expectationInvalid.fulfill()
-        })
+        }
         
         // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
-        service.getClassifier(self.classifierIdInstanceId, completionHandler:{(classifier:Classifier?, error) in
-            guard let classifier = classifier else {
-                XCTFail("Expected non-nil model to be returned")
-                return
-            }
-            XCTAssertEqual(classifier.id, self.classifierIdInstanceId,"Expected to get id requested in classifier")
+        service!.getClassifier(classifierIdInstanceId) { classifier, error in
+            XCTAssertNotNil(classifier)
+            XCTAssertEqual(classifier!.id, self.classifierIdInstanceId, "Expected to get id requested in classifier")
             expectationValid.fulfill()
-        })
+        }
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
@@ -104,14 +104,14 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectationValid = expectationWithDescription("Valid Expectation")
         let expectationInvalid = expectationWithDescription("Invalid Expectation")
         
-        service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification, error) in
+        service!.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification, error) in
             XCTAssertEqual(classification!.id, nil, "Expect classifierid to be nil")
             XCTAssertEqual(error!.code, 404, "Expect 404 error code")
             expectationInvalid.fulfill()
         })
         
         // please note this test expects the classifier to be ready
-        service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
+        service!.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
             XCTAssertNotNil(classification,"Expected object not nil")
             XCTAssertEqual(classification!.id, self.classifierIdInstanceId,"Expected to get id requested in classifier")
             XCTAssertLessThan(1, (classification!.classes!.count) as Int,"Expected to get more than one class")
@@ -134,14 +134,15 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let missingFileMetaURL = NSBundle(forClass: self.dynamicType).URLForResource("missing_training_meta", withExtension: "txt")
         XCTAssertNotNil(missingFileMetaURL)
         
-        service.createClassifier(missingFileMetaURL!, trainerURL: fileURL!, completionHandler:{(classifier:Classifier?, error) in
-            XCTAssertEqual(classifier!.id, nil, "Expect classifierid to be nil")
+        service!.createClassifier(missingFileMetaURL!, trainerURL: fileURL!) { classifier, error in
+            XCTAssertNil(classifier)
+            XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, 400, "Expect 400 error code")
             expectationInvalid.fulfill()
-        })
+        }
         
         // positive test is tested using CreateClassifer in the class
-        service.createClassifier(fileMetaURL!, trainerURL: fileURL!, completionHandler:{(classifier:Classifier?, error) in
+        service!.createClassifier(fileMetaURL!, trainerURL: fileURL!, completionHandler:{(classifier:NaturalLanguageClassifier.Classifier?, error) in
             guard let classifier = classifier else {
                 XCTFail("Expected model to be returned")
                 return
@@ -156,10 +157,10 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     func  DeleteClassifiers() {
         let expectationValid = expectationWithDescription("Valid Expectation")
-        service.getClassifiers({(classifiers:[Classifier]?, error) in
+        service!.getClassifiers({(classifiers:[NaturalLanguageClassifier.Classifier]?, error) in
             for classifier in classifiers! {
                 if(classifier.id !=  self.classifierIdInstanceId) {
-                    self.service.deleteClassifier(classifier.id!, completionHandler:{(classifier:Bool?) in
+                    self.service!.deleteClassifier(classifier.id!, completionHandler:{ error in
                         
                     })
                 }

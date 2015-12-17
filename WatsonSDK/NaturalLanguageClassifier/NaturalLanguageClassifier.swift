@@ -177,10 +177,10 @@ public class NaturalLanguageClassifier: WatsonService {
                     switch encodingResult {
                     case .Success(let upload, _, _):
                         // execute encoded request
-                        upload.response { request, response, data, error in
-                            let classifier = Mapper<Classifier>().mapData(data)
-                            // TODO: handle non-200 case (error)
-                            completionHandler(classifier, error)
+                        upload.responseObject {
+                            (response: Response<Classifier, NSError>) in
+                            validate(response, serviceError: NLCError(),
+                                completionHandler: completionHandler)
                         }
                     case .Failure:
                         // construct and return error

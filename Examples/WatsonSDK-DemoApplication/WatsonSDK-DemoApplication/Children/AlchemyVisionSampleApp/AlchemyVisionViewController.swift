@@ -13,7 +13,7 @@ extension AlchemyVisionViewController: ChildProtocol {
     
     var childTitle: String! {
         
-        return "AlchemyVisionViewController"
+        return "AlchemyVision"
         
     }
     

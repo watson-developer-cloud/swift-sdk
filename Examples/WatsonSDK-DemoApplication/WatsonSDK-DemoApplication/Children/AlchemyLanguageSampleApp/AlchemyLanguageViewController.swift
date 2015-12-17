@@ -14,13 +14,13 @@ import WatsonSDK
 
 // MARK: ChildProtocol
 extension AlchemyLanguageViewController: ChildProtocol {
-    
+
     var childTitle: String! {
-        
-        return "AlchemyLanguageViewController"
-        
+
+        return "AlchemyLanguage"
+
     }
-    
+
 }
 
 

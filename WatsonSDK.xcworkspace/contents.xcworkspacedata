@@ -11,9 +11,6 @@
          location = "group:WatsonSDK-DemoApplication/WatsonSDK-DemoApplication.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:SpeechRecognition/SpeechRecognition.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:SpeechSynthesis/SpeechSynthesis.xcodeproj">
       </FileRef>
    </Group>

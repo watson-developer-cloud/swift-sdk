@@ -19,7 +19,17 @@ import AVFoundation
 
 import WatsonSDK
 
-class ViewController: UIViewController, AVAudioRecorderDelegate {
+extension SpeechRecognitionViewController: ChildProtocol {
+    
+    var childTitle: String! {
+        
+        return "Speech Recognition"
+        
+    }
+    
+}
+
+class SpeechRecognitionViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBOutlet weak var startStopRecordingButton: UIButton!
     @IBOutlet weak var playRecordingButton: UIButton!

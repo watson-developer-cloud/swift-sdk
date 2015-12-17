@@ -46,6 +46,14 @@ class ViewController: UIViewController {
             
         }(),
         
+        {
+            
+            let sb = UIStoryboard(name: "SpeechRecognition", bundle: nil)
+            let vc = sb.instantiateViewControllerWithIdentifier("SpeechRecognitionViewController") as! SpeechRecognitionViewController
+            return vc
+            
+        }(),
+        
         SampleChildViewController()
     
     ]

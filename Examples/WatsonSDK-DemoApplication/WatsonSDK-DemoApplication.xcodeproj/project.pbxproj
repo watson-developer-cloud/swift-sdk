@@ -27,6 +27,9 @@
 		6E49AC511C2084A200BFBD07 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4A1C2084A200BFBD07 /* SelectionTableViewCell.swift */; };
 		6E49AC521C2084A200BFBD07 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */; };
 		6E49AC531C2084A200BFBD07 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC4D1C2084A200BFBD07 /* UIColorExtension.swift */; };
+		6E49AC581C23159C00BFBD07 /* SpeechRecognition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC551C23159C00BFBD07 /* SpeechRecognition.storyboard */; };
+		6E49AC591C23159C00BFBD07 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 6E49AC561C23159C00BFBD07 /* SpeechSample.flac */; };
+		6E49AC5A1C23159C00BFBD07 /* SpeechRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AC571C23159C00BFBD07 /* SpeechRecognitionViewController.swift */; };
 		6E51B2711C173BA300D5EF12 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */; };
 		6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */; };
 		6E51B2731C173BA300D5EF12 /* VisionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E51B26F1C173BA300D5EF12 /* VisionImage.swift */; };
@@ -61,6 +64,9 @@
 		6E49AC4A1C2084A200BFBD07 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6E49AC4D1C2084A200BFBD07 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		6E49AC551C23159C00BFBD07 /* SpeechRecognition.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeechRecognition.storyboard; sourceTree = "<group>"; };
+		6E49AC561C23159C00BFBD07 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
+		6E49AC571C23159C00BFBD07 /* SpeechRecognitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionViewController.swift; sourceTree = "<group>"; };
 		6E51B26D1C173BA300D5EF12 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		6E51B26E1C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionCollectionViewController.swift; sourceTree = "<group>"; };
 		6E51B26F1C173BA300D5EF12 /* VisionImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionImage.swift; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 				6E96328F1C0E4C920055D402 /* SampleChildViewController.swift */,
 				6E51B26C1C173BA300D5EF12 /* AlchemyVisionSampleApp */,
 				6E9517AB1C16136600CD0B04 /* AlchemyLanguageSampleApp */,
+				6E49AC541C23159C00BFBD07 /* SpeechRecognition */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -172,6 +179,16 @@
 				6E49AC4C1C2084A200BFBD07 /* SettingsTableViewCell.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		6E49AC541C23159C00BFBD07 /* SpeechRecognition */ = {
+			isa = PBXGroup;
+			children = (
+				6E49AC551C23159C00BFBD07 /* SpeechRecognition.storyboard */,
+				6E49AC571C23159C00BFBD07 /* SpeechRecognitionViewController.swift */,
+				6E49AC561C23159C00BFBD07 /* SpeechSample.flac */,
+			);
+			path = SpeechRecognition;
 			sourceTree = "<group>";
 		};
 		6E51B26C1C173BA300D5EF12 /* AlchemyVisionSampleApp */ = {
@@ -267,7 +284,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E49AC591C23159C00BFBD07 /* SpeechSample.flac in Resources */,
 				6E49AC411C2080E600BFBD07 /* Credentials.plist in Resources */,
+				6E49AC581C23159C00BFBD07 /* SpeechRecognition.storyboard in Resources */,
 				6EE88A571C175A1D004E3950 /* AlchemyVision.storyboard in Resources */,
 				6EF237871C1A13E700663E7D /* AlchemyLanguageResultsView.xib in Resources */,
 				6E32951F1C178E7A001CE8B7 /* AlchemyLanguageRequestViewController.storyboard in Resources */,
@@ -296,6 +315,7 @@
 				6E9517AD1C16137500CD0B04 /* AlchemyLanguageViewController.swift in Sources */,
 				6E96328C1C0E49880055D402 /* ChildProtocol.swift in Sources */,
 				6E51B2721C173BA300D5EF12 /* AlchemyVisionCollectionViewController.swift in Sources */,
+				6E49AC5A1C23159C00BFBD07 /* SpeechRecognitionViewController.swift in Sources */,
 				6E42340E1C175DC80020C3D1 /* AlchemyVisionViewController.swift in Sources */,
 				6E49AC431C20832500BFBD07 /* README.md in Sources */,
 				6E49AC4E1C2084A200BFBD07 /* BarView.swift in Sources */,

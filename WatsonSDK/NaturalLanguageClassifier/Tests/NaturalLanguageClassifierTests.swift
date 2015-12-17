@@ -19,155 +19,293 @@ import XCTest
 
 class NaturalLanguageClassifierTests: XCTestCase {
     
-    /// Language translation service
-    private var service: NaturalLanguageClassifier?
+    // MARK: - Parameters and constants
     
-    // this will change based on login instance
-    private var classifierIdInstanceId = "0235B6x12-nlc-767"
+    // the NaturalLanguageClassifier service
+    var service: NaturalLanguageClassifier!
     
-    private static var classifierIdInstanceIdToDelete: String?
+    // a classifier that is already trained with the given weather data
+    let trainedClassifierID = "A3FCCBx16-nlc-248"
+    let trainedClassifierName = "iOS SDK Test Classifier"
+    let availableStatus = NaturalLanguageClassifier.Status.Available
     
-    /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    // the classifier that will be created then deleted during tests
+    var temporaryClassifierID: String!
     
+    // timeout for asynchronous completion handlers
+    let timeout: NSTimeInterval = 30.0
+    
+    // MARK: - Helper functions
+    
+    // Load credentials and instantiate NLC service
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                let username = dict["NaturalLanguageClassifierUsername"]!
-                let password = dict["NaturalLanguageClassifierPassword"]!
-                service = NaturalLanguageClassifier(username: username, password: password)
-            } else {
-                XCTFail("Unable to extract dictionary from plist")
-            }
-        } else {
-            XCTFail("Plist file not found")
+        
+        // identify credentials file
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.pathForResource("Credentials", ofType: "plist") else {
+            XCTFail("Unable to locate credentials file.")
+            return
         }
+        
+        // load credentials from file
+        let dict = NSDictionary(contentsOfFile: url)
+        guard let credentials = dict as? Dictionary<String, String> else {
+            XCTFail("Unable to read credentials file.")
+            return
+        }
+        
+        // read NLC username
+        guard let username = credentials["NaturalLanguageClassifierUsername"] else {
+            XCTFail("Unable to read Dialog username.")
+            return
+        }
+        
+        // read NLC password
+        guard let password = credentials["NaturalLanguageClassifierPassword"] else {
+            XCTFail("Unable to read Dialog password.")
+            return
+        }
+        
+        // instantiate the service
+        service = NaturalLanguageClassifier(username: username, password: password)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testGetClassifiers() {
-        let positiveExpectation = expectationWithDescription("Get All Classifiers")
-        
-        service!.getClassifiers({(classifiers:[NaturalLanguageClassifier.Classifier]?, error) in
-            XCTAssertGreaterThan((classifiers!.count),0,"Expected at least 1 model to be returned")
-            positiveExpectation.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
-    func testDeleteClassifier() {
-        let authorizedDeleteExpectation = expectationWithDescription("Unauthorized expectation")
-        let missingDeleteExpectation = expectationWithDescription("Missing delete expectation")
-        
-        service!.deleteClassifier("Non-existance", completionHandler:{ error in
-            XCTAssertNotNil(error, "Expected missing delete exception when trying to delete a nonexistent model")
-            missingDeleteExpectation.fulfill()
-        })
-        
-        service!.deleteClassifier(NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete!, completionHandler:{ error in
-            XCTAssertNil(error, "Expected missing delete exception when trying to delete a nonexistent model")
-            NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete = ""
-            authorizedDeleteExpectation.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
-    func testGetClassifier() {
-        let expectationValid = expectationWithDescription("Valid Expected")
-        let expectationInvalid = expectationWithDescription("Invalid Expect")
-        
-        service!.getClassifier("MISSING_CLASSIFIER_ID") { classifier, error in
-            XCTAssertNil(classifier)
-            XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, 404, "Expect 404 error code")
-            expectationInvalid.fulfill()
+    // Wait for an expectation to be fulfilled
+    func waitForExpectation() {
+        waitForExpectationsWithTimeout(timeout) { error in
+            XCTAssertNil(error, "Timeout.")
         }
+    }
+    
+    // MARK: - Positive test: create, list, lookup, then delete
+    
+    func testCreateListLookupDelete() {
+        createClassifier()
+        verifyListOfClassifiers()
+        lookupClassifier()
+        deleteClassifier()
+    }
+    
+    func createClassifier() {
+        let description = "Create a classifier."
+        let expectation = expectationWithDescription(description)
         
-        // todo use create to get id then delete the classifier afterwards.  All api calls need to be in place first
-        service!.getClassifier(classifierIdInstanceId) { classifier, error in
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let trainerURL = bundle.URLForResource("weather_data_train", withExtension: "csv")
+        let trainerMetaURL = bundle.URLForResource("training_meta", withExtension: "txt")
+        
+        service.createClassifier(trainerMetaURL!, trainerURL: trainerURL!) {
+            classifier, error in
             XCTAssertNotNil(classifier)
-            XCTAssertEqual(classifier!.id, self.classifierIdInstanceId, "Expected to get id requested in classifier")
-            expectationValid.fulfill()
+            XCTAssertNotEqual("", classifier!.id, "Expected to get an id")
+            XCTAssertNil(error)
+            self.temporaryClassifierID = classifier!.id
+            expectation.fulfill()
         }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        waitForExpectation()
     }
     
-    func testClassify() {
-        let expectationValid = expectationWithDescription("Valid Expectation")
-        let expectationInvalid = expectationWithDescription("Invalid Expectation")
+    func verifyListOfClassifiers() {
+        let description = "Check the list of classifiers to ensure ours was created."
+        let expectation = expectationWithDescription(description)
         
-        service!.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?", completionHandler:{(classification, error) in
-            XCTAssertEqual(classification!.id, nil, "Expect classifierid to be nil")
-            XCTAssertEqual(error!.code, 404, "Expect 404 error code")
-            expectationInvalid.fulfill()
-        })
-        
-        // please note this test expects the classifier to be ready
-        service!.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
-            XCTAssertNotNil(classification,"Expected object not nil")
-            XCTAssertEqual(classification!.id, self.classifierIdInstanceId,"Expected to get id requested in classifier")
-            XCTAssertLessThan(1, (classification!.classes!.count) as Int,"Expected to get more than one class")
-            expectationValid.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
-    func testCreateClassifier() {
-        let expectationValid = expectationWithDescription("Valid Expectation")
-        let expectationInvalid = expectationWithDescription("Invalid Expectation")
-        
-        let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("weather_data_train", withExtension: "csv")
-        XCTAssertNotNil(fileURL)
-        
-        let fileMetaURL = NSBundle(forClass: self.dynamicType).URLForResource("training_meta", withExtension: "txt")
-        XCTAssertNotNil(fileMetaURL)
-        
-        let missingFileMetaURL = NSBundle(forClass: self.dynamicType).URLForResource("missing_training_meta", withExtension: "txt")
-        XCTAssertNotNil(missingFileMetaURL)
-        
-        service!.createClassifier(missingFileMetaURL!, trainerURL: fileURL!) { classifier, error in
-            XCTAssertNil(classifier)
-            XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, 400, "Expect 400 error code")
-            expectationInvalid.fulfill()
-        }
-        
-        // positive test is tested using CreateClassifer in the class
-        service!.createClassifier(fileMetaURL!, trainerURL: fileURL!, completionHandler:{(classifier:NaturalLanguageClassifier.Classifier?, error) in
-            guard let classifier = classifier else {
-                XCTFail("Expected model to be returned")
-                return
-            }
-            NaturalLanguageClassifierTests.classifierIdInstanceIdToDelete = classifier.id
-            XCTAssertNotEqual("", classifier.id, "Expected to get an id")
-            expectationValid.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
-    func  DeleteClassifiers() {
-        let expectationValid = expectationWithDescription("Valid Expectation")
-        service!.getClassifiers({(classifiers:[NaturalLanguageClassifier.Classifier]?, error) in
+        service.getClassifiers { classifiers, error in
+            XCTAssertNotNil(classifiers)
+            XCTAssertNil(error)
             for classifier in classifiers! {
-                if(classifier.id !=  self.classifierIdInstanceId) {
-                    self.service!.deleteClassifier(classifier.id!, completionHandler:{ error in
-                        
-                    })
+                if classifier.id == self.temporaryClassifierID {
+                    expectation.fulfill()
+                    break
                 }
             }
-            expectationValid.fulfill()
-        })
+        }
+        waitForExpectation()
+    }
+    
+    func lookupClassifier() {
+        let description = "Lookup our classifier to get its properties."
+        let expectation = expectationWithDescription(description)
         
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        service.getClassifier(temporaryClassifierID) { classifier, error in
+            XCTAssertNotNil(classifier)
+            XCTAssertNil(error)
+            XCTAssertEqual(classifier!.id, self.temporaryClassifierID)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    func deleteClassifier() {
+        let description = "Delete the classifier we created for this test."
+        let expectation = expectationWithDescription(description)
+        
+        service.deleteClassifier(temporaryClassifierID) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // MARK: - Positive test: classify
+    
+    func testClassifyWithTrainedClassifier() {
+        lookupTrainedClassifier()
+        classify()
+    }
+    
+    func lookupTrainedClassifier() {
+        let description = "Ensure the given trained classifier is available."
+        let expectation = expectationWithDescription(description)
+        
+        func createTrainedClassifier() {
+            let bundle = NSBundle(forClass: self.dynamicType)
+            let trainerURL = bundle.URLForResource("weather_data_train", withExtension: "csv")
+            let trainerMetaURL = bundle.URLForResource("training_meta", withExtension: "txt")
+            
+            service.createClassifier(trainerMetaURL!, trainerURL: trainerURL!) {
+                classifier, error in
+                XCTAssertNotNil(classifier)
+                XCTAssertNotEqual("", classifier!.id, "Expected to get an id")
+                XCTAssertNil(error)
+                let message = "A trained classifier was not found. It has been created and " +
+                              "is currently being trained. You will need to set the " +
+                              "trainedClassifierID property using the classifier id " +
+                              "printed below. Then wait a few minutes for training to " +
+                              "complete before running the tests again.\n"
+                print(message)
+                print("** trainedClassifierID: \(classifier!.id)\n")
+                XCTFail("Trained classifier not found. Set trainedClassifierID and try again.")
+            }
+        }
+        
+        service.getClassifier(trainedClassifierID) { classifier, error in
+            if let error = error {
+                XCTAssertEqual(error.code, 404, "Cannot locate the trained classifier.")
+            }
+            
+            guard let classifier = classifier else {
+                createTrainedClassifier()
+                return
+            }
+            
+            guard classifier.name == self.trainedClassifierName else {
+                let message = "The wrong classifier was provided as a trained " +
+                              "classifier. The trained classifier will be recreated."
+                print(message)
+                createTrainedClassifier()
+                return
+            }
+            
+            guard classifier.status == self.availableStatus else {
+                XCTFail("Please wait. The given classifier is still being trained.")
+                return
+            }
+            
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    func createTrainedClassifier() {
+        let description = "Create and train a classifier for future tests."
+        let expectation = expectationWithDescription(description)
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let trainerURL = bundle.URLForResource("weather_data_train", withExtension: "csv")
+        let trainerMetaURL = bundle.URLForResource("training_meta", withExtension: "txt")
+        
+        service.createClassifier(trainerMetaURL!, trainerURL: trainerURL!) {
+            classifier, error in
+            XCTAssertNotNil(classifier)
+            XCTAssertNotEqual("", classifier!.id, "Expected to get an id")
+            XCTAssertNil(error)
+            let message = "A trained classifier was not found. It has been created and " +
+                          "is currently being trained. You will need to set the " +
+                          "trainedClassifierID property using the classifier id " +
+                          "printed below. Then wait a few minutes for training to " +
+                          "complete before running the tests again.\n\n"
+            print(message)
+            print("trainedClassifierID: \(classifier!.id)")
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // please note this test expects the classifier to be available
+    func classify() {
+        let description = "Classify the string: `is it sunny?`"
+        let expectation = expectationWithDescription(description)
+        
+        service.classify(trainedClassifierID, text: "is it sunny?") { classification, error in
+            XCTAssertNotNil(classification)
+            XCTAssertEqual(classification!.id, self.trainedClassifierID)
+            XCTAssertGreaterThan(classification!.classes!.count, 1)
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    // MARK: - Negative tests
+    
+    func testCreateClassifierWithEmptyFile() {
+        let description = "Try to create a classifier with an empty file."
+        let expectation = expectationWithDescription(description)
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let trainerURL = bundle.URLForResource("weather_data_train", withExtension: "csv")
+        let emptyFileURL = bundle.URLForResource("missing_training_meta", withExtension: "txt")
+        
+        service.createClassifier(emptyFileURL!, trainerURL: trainerURL!) {
+            classifier, error in
+            XCTAssertNil(classifier)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, 400)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    func testLookupUnknownClassifier() {
+        let description = "Try to lookup a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        service.getClassifier("MISSING_CLASSIFIER_ID") { classifier, error in
+            XCTAssertNil(classifier)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, 404)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    func testDeleteUnknownClassifier() {
+        let description = "Try to delete a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        service.deleteClassifier("MISSING_CLASSIFIER_ID") { error in
+            XCTAssertNotNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+    
+    func testClassifyWithUnknownClassifier() {
+        let description = "Try to classify with a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        service.classify("MISSING_CLASSIFIER_ID", text: "is it sunny?") {
+            classification, error in
+            XCTAssertNil(classification)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, 404)
+            expectation.fulfill()
+        }
+        waitForExpectation()
     }
 }

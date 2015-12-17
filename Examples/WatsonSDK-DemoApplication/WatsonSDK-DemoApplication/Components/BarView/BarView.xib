@@ -21,24 +21,12 @@
                         <action selector="selectPress" destination="iN0-l3-epB" eventType="touchUpInside" id="VQj-o9-K1f"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bX-QU-7SA">
-                    <rect key="frame" x="535" y="5" width="57" height="30"/>
-                    <animations/>
-                    <state key="normal" title="Settings">
-                        <color key="titleColor" red="0.0078431372549019607" green="0.66274509803921566" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="settingsPress" destination="iN0-l3-epB" eventType="touchUpInside" id="mrz-uH-7e9"/>
-                    </connections>
-                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.0039215686274509803" green="0.18823529411764706" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="AwP-gM-OoP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="0vu-1l-Eb0"/>
-                <constraint firstAttribute="trailing" secondItem="8bX-QU-7SA" secondAttribute="trailing" constant="8" id="H4g-oG-7ud"/>
                 <constraint firstItem="AwP-gM-OoP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="RLz-wA-Z6t"/>
-                <constraint firstItem="8bX-QU-7SA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="wsK-pX-4EH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="405" y="481"/>

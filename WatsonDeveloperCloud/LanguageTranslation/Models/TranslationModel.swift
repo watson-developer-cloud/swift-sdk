@@ -36,7 +36,7 @@ extension LanguageTranslation {
         public mutating func mapping(map: Map) {
             baseModelID     <- map["base_model_id"]
             customizable    <- map["customizable"]
-            defaultModel    <- map["default_model"]
+            defaultModel    <- map["default"]
             domain          <- map["domain"]
             modelID         <- map["model_id"]
             name            <- map["name"]

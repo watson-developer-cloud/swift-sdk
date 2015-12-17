@@ -387,10 +387,6 @@
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
-				7A0F97301C232CB5004C01C0 /* Frameworks */,
-				7A0F95B51C23288E004C01C0 /* WatsonDeveloperCloud */,
-				7A0F95C11C23288E004C01C0 /* WatsonDeveloperCloudTests */,
-				7A0F95B41C23288E004C01C0 /* Products */,
 				7A0F95CD1C232B96004C01C0 /* AlchemyLanguage */,
 				7A0F95F51C232B96004C01C0 /* AlchemyVision */,
 				7A0F96041C232B96004C01C0 /* Dialog */,
@@ -400,6 +396,10 @@
 				7A0F96391C232B96004C01C0 /* SpeechToText */,
 				7A0F96481C232B96004C01C0 /* TextToSpeech */,
 				7A0F96641C232B96004C01C0 /* WatsonCore */,
+				7A0F95B51C23288E004C01C0 /* WatsonDeveloperCloud */,
+				7A0F95C11C23288E004C01C0 /* WatsonDeveloperCloudTests */,
+				7A0F97301C232CB5004C01C0 /* Frameworks */,
+				7A0F95B41C23288E004C01C0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};

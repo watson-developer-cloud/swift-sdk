@@ -26,50 +26,48 @@ import WatsonSDK
  
 */
 class ViewController: UIViewController {
-    
+
     // add your child view controller here
     var children: [ChildProtocol] = [
 
         {
-            
+
             let sb = UIStoryboard(name: "AlchemyLanguage", bundle: nil)
             let vc = sb.instantiateViewControllerWithIdentifier("AlchemyLanguageViewController") as! AlchemyLanguageViewController
             return vc
-            
+
         }(),
-        
+
         {
-            
+
             let sb = UIStoryboard(name: "AlchemyVision", bundle: nil)
             let vc = sb.instantiateViewControllerWithIdentifier("AlchemyVisionViewController") as! AlchemyVisionViewController
             return vc
-            
+
         }(),
-        
+
         {
-            
+
             let sb = UIStoryboard(name: "SpeechRecognition", bundle: nil)
             let vc = sb.instantiateViewControllerWithIdentifier("SpeechRecognitionViewController") as! SpeechRecognitionViewController
             return vc
-            
-        }(),
+
+        }()
         
-        SampleChildViewController()
-    
     ]
     
     // sizing
     private var screenBounds: CGRect { return UIScreen.mainScreen().bounds }
     var screenWidth: CGFloat { return screenBounds.width }
     var screenHeight: CGFloat { return screenBounds.height }
-    
+
     // width
     var popoverWidth: CGFloat { return 1.0 * screenWidth }
-    
+
     // height
     var barHeight: CGFloat { return 40.0 }
     var childViewHeight : CGFloat { return screenHeight - barHeight }
-    
+
     // child size
     var childViewFrame: CGRect {
         

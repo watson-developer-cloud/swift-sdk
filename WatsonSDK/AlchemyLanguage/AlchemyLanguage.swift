@@ -38,10 +38,10 @@ import ObjectMapper
  */
 public final class AlchemyLanguage: Service {
     
-    private var _apiKeyAuthenticationStrategy: APIKeyAuthenticationStrategy!
-    public var apiKeyAuthenticationStrategy: APIKeyAuthenticationStrategy! {
-        get { return _apiKeyAuthenticationStrategy }
-        set { _apiKeyAuthenticationStrategy = newValue; _apiKey = newValue.token }
+    private var _tokenAuthenticationStrategy: APIKeyAuthenticationStrategy!
+    public var tokenAuthenticationStrategy: APIKeyAuthenticationStrategy! {
+        get { return _tokenAuthenticationStrategy }
+        set { _tokenAuthenticationStrategy = newValue; _apiKey = newValue.token }
     }
     
     
@@ -60,10 +60,10 @@ public final class AlchemyLanguage: Service {
         
     }
     
-    public convenience init(apiKeyAuthenticationStrategy: APIKeyAuthenticationStrategy) {
+    public convenience init(tokenAuthenticationStrategy: APIKeyAuthenticationStrategy) {
         
         self.init()
-        self.apiKeyAuthenticationStrategy = apiKeyAuthenticationStrategy
+        self.tokenAuthenticationStrategy = tokenAuthenticationStrategy
         
     }
     

@@ -73,6 +73,7 @@
 		7A8DCF081C1913520037BC34 /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A8DCF041C19090C0037BC34 /* KennedySpeech.txt */; };
 		7A8DCF091C1913560037BC34 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A8DCF051C19090C0037BC34 /* MobyDickIntro.txt */; };
 		7AC5C18A1C18EA9500D8B00F /* PersonalityInsightsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5C1891C18EA9500D8B00F /* PersonalityInsightsError.swift */; };
+		7ACEBA2F1C22462200A08B20 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACEBA2E1C22462200A08B20 /* Validation.swift */; };
 		7ADC3A521BF951AC00CD916E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A2F1BF950C800CD916E /* Service.swift */; };
 		7ADC3A541BF951AC00CD916E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A321BF950C800CD916E /* Log.swift */; };
 		7ADC3A551BF951AC00CD916E /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADC3A331BF950C800CD916E /* Transformation.swift */; };
@@ -260,6 +261,7 @@
 		7A8DCF041C19090C0037BC34 /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
 		7A8DCF051C19090C0037BC34 /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
 		7AC5C1891C18EA9500D8B00F /* PersonalityInsightsError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsError.swift; sourceTree = "<group>"; };
+		7ACEBA2E1C22462200A08B20 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		7ADC39AB1BF950C800CD916E /* AlchemyLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
 		7ADC39AC1BF950C800CD916E /* AlchemyLanguageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageConstants.swift; sourceTree = "<group>"; };
 		7ADC39AE1BF950C800CD916E /* AlchemyGenericModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyGenericModel.swift; sourceTree = "<group>"; };
@@ -797,6 +799,7 @@
 				7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */,
 				7A741BA41C18838A002C85A7 /* WatsonService.swift */,
 				7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */,
+				7ACEBA2E1C22462200A08B20 /* Validation.swift */,
 			);
 			name = WatsonCore;
 			path = WatsonSDK/WatsonCore;
@@ -1005,6 +1008,7 @@
 				7A03EFB01C20BF9900EBE0AC /* MediaType.swift in Sources */,
 				E1023E7F1C13549C00C6602B /* WatsonSocket.swift in Sources */,
 				7ADC3A801BF9560400CD916E /* ImageFaceTags.swift in Sources */,
+				7ACEBA2F1C22462200A08B20 /* Validation.swift in Sources */,
 				7ADC3A681BF9551500CD916E /* AlchemyGenericModel.swift in Sources */,
 				7ADC3A551BF951AC00CD916E /* Transformation.swift in Sources */,
 				7ADC3A6D1BF9551500CD916E /* Entities.swift in Sources */,

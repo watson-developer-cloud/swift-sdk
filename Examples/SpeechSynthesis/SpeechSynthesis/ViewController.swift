@@ -39,7 +39,10 @@ class ViewController: UIViewController, NSURLSessionDelegate {
     }
     
 
-    let ttsService = TextToSpeech()
+  
+
+    
+    var ttsService : TextToSpeech?
 
     
     override func viewDidLoad() {
@@ -47,9 +50,16 @@ class ViewController: UIViewController, NSURLSessionDelegate {
 
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                ttsService.setUsernameAndPassword(
-                    dict["TextToSpeechUsername"]!,
-                    password: dict["TextToSpeechPassword"]!)
+                
+                let username = dict["TextToSpeechUsername"]
+                let password = dict["TextToSpeechPassword"]
+                
+                
+                ttsService = TextToSpeech(username: username!, password: password!)
+                
+                //ttsService.setUsernameAndPassword(
+                //    dict["TextToSpeechUsername"]!,
+                //    password: dict["TextToSpeechPassword"]!)
             }
         }
 
@@ -74,25 +84,29 @@ class ViewController: UIViewController, NSURLSessionDelegate {
         let toSay = speechTextView.text
         
         if (toSay != "") {
-            ttsService.synthesize(toSay, oncompletion: {
+            
+            if let tts = ttsService {
+                tts.synthesize(toSay) {
                 
-                data, error in
+                    data, error in
                 
-                if let data = data {
+                    if let data = data {
                 
-                    do {
-                        self.player = try AVAudioPlayer(data: data)
-                        self.player.prepareToPlay()
-                        self.player.play()
-                    } catch {
-                        print("Could not create AVAudioPlayer")
-                    }
+                        do {
+                            self.player = try AVAudioPlayer(data: data)
+                            self.player.prepareToPlay()
+                            self.player.play()
+                        } catch {
+                            print("Could not create AVAudioPlayer")
+                        }
                         
-                } else {
-                    print("Did not receive data")
+                    } else {
+                        print("Did not receive data")
+                    }
+                
                 }
                 
-            })
+            }
         }
         
     }

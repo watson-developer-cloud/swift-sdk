@@ -17,6 +17,7 @@
 import Foundation
 import ObjectMapper
 
+/// Helper extension to map from one type of object to another type
 extension Mapper {
     
     // Maps an Object to a JSON string with the given header

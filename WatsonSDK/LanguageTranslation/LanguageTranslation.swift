@@ -256,15 +256,17 @@ public class LanguageTranslation: WatsonService {
                     multipartFormData.appendBodyPart(fileURL: fileURL, name: fileKey)
                 },
                 encodingCompletion: { encodingResult in
-                    print(encodingResult)
                     switch encodingResult {
                     case .Success(let upload, _, _):
                         // execute encoded request
-                        upload.response { request, response, data, error in
-                            print(response?.statusCode)
-                            let customModel = Mapper<CustomModel>().mapData(data)
-                            // TODO: handle non-200 case (error)
-                            completionHandler(customModel?.modelID, error)
+                        upload.responseObject {
+                            (response: Response<CustomModel, NSError>) in
+                            let unwrapID = {
+                                (customModel: CustomModel?, error: NSError?) in
+                                completionHandler(customModel?.modelID, error) }
+                            print(response)
+                            validate(response, serviceError: LanguageTranslationError(),
+                                completionHandler: unwrapID)
                         }
                     case .Failure:
                         // construct and return error

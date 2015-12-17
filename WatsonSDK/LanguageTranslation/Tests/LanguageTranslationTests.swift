@@ -148,7 +148,7 @@ class LanguageTranslationTests: XCTestCase {
             creationExpectation.fulfill()
             
             self.service!.deleteModel(model!) { error in
-                XCTAssertNotNil(error)
+                XCTAssertNil(error)
                 deletionExpectation.fulfill()
             }
         }

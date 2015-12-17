@@ -213,7 +213,7 @@ class DialogTests: XCTestCase {
         }
         
         // read Dialog username
-        guard let user = credentials["DialogUsername"] else {
+        guard let username = credentials["DialogUsername"] else {
             XCTFail("Unable to read Dialog username.")
             return
         }
@@ -225,7 +225,11 @@ class DialogTests: XCTestCase {
         }
         
         // instantiate the service
-        service = Dialog(user: user, password: password)
+        service = Dialog(username: username, password: password)
+    }
+    
+    override func tearDown() {
+        super.tearDown()
     }
     
     /// Wait for an expectation to be fulfilled.

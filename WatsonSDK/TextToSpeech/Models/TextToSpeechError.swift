@@ -15,28 +15,33 @@
  **/
 
 import Foundation
+
 import ObjectMapper
 
-extension Dialog {
+struct TextToSpeechError: WatsonError {
     
-    internal struct DialogError: WatsonError {
-        var error: String!
-        var code: Int!
-        
-        var nsError: NSError {
-            let domain = Constants.errorDoman
-            let userInfo = [NSLocalizedDescriptionKey: self.error]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
-        }
-        
-        init() {}
-        
-        init?(_ map: Map) {}
-        
-        mutating func mapping(map: Map) {
-            error <- map["error"]
-            code <- map["code"]
-        }
+    var error: String!
+    var code: Int!
+    
+    var code_description: String!
+    
+    var nsError: NSError {
+        let domain = "com.watsonplatform.text_to_speech"
+        let userInfo = [NSLocalizedDescriptionKey: error,
+            NSLocalizedRecoverySuggestionErrorKey: self.code_description
+        ]
+    
+        return NSError(domain: domain, code: code, userInfo: userInfo)
+    }
+    
+    init() {}
+    
+    init?(_ map: Map) {}
+    
+    mutating func mapping(map: Map) {
+        code    <- map["code"]
+        error   <- map["error"]
+        code_description <- map["code_description"]
     }
     
     

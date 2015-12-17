@@ -16,31 +16,20 @@
 
 import Foundation
 
-public struct LanguageTranslationConstants {
-
-    //Translation model
-    static let baseModelID = "base_model_id"
-    static let customizable = "customizable"
-    static let defaultModel = "default_model"
-    static let domain = "domain"
-    static let modelID = "model_id"
-    static let name = "name"
-    static let owner = "owner"
-    static let source = "source"
-    static let status = "status"
-    static let target = "target"
+extension LanguageTranslation {
     
-    //getModels()
-    static let models = "models"
-    //Can't use default for key, as this is a Swift reserved word
-    static let defaultStr = "default"
-
-    //translate()
-    static let text = "text"
-    static let translations = "translations"
-    static let translation = "translation"
-
-    //identify() and getIdentifiableLanguages()
-    static let languages = "languages"
-    
+    internal struct Constants {
+        
+        static let serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+        static let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
+        static let errorDomain = "com.watsonplatform.languagetranslation"
+        
+        static let identifiableLanguages = "/v2/identifiable_languages"
+        static let identify = "/v2/identify"
+        static let translate = "/v2/translate"
+        static let models = "/v2/models"
+        static func model(modelID: String) -> String {
+            return "/v2/models/\(modelID)"
+        }
+    }
 }

@@ -17,15 +17,17 @@
 import Foundation
 import ObjectMapper
 
-extension Dialog {
+extension NaturalLanguageClassifier {
     
-    internal struct DialogError: WatsonError {
+    internal struct NLCError: WatsonError {
+        var description: String!
         var error: String!
         var code: Int!
         
         var nsError: NSError {
-            let domain = Constants.errorDoman
-            let userInfo = [NSLocalizedDescriptionKey: self.error]
+            let domain = Constants.errorDomain
+            let userInfo = [NSLocalizedDescriptionKey: error,
+                            NSLocalizedRecoverySuggestionErrorKey: description]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         }
         
@@ -34,10 +36,9 @@ extension Dialog {
         init?(_ map: Map) {}
         
         mutating func mapping(map: Map) {
-            error <- map["error"]
-            code <- map["code"]
+            description <- map["description"]
+            error       <- map["error"]
+            code        <- map["code"]
         }
     }
-    
-    
 }

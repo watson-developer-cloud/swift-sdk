@@ -17,21 +17,22 @@
 import Foundation
 
 /**
- *  AuthenticationStrategy is a protocol that all authentication types must implement. Services use
- *  the getToken method internally to obtain a temporary token to use Watson services.
+ An `AuthenticationStrategy` captures all information necessary to authenticate with a
+ Watson Developer Cloud service. The `AuthenticationStrategy` is used internally to
+ obtain tokens, refresh expired tokens, and maintain associated state information.
  */
 public protocol AuthenticationStrategy {
     
-    /**
-     Get token is responsible for obtaining a token to the callee in order to service a 
-     service request.
-     
-     - parameter completionHandler: a callback for when a token has been obtained.
-     - parameter error:             an error in token retrieval
-     */
-    func getToken(completionHandler: (token: String?, error: NSError?)->Void)
+    // The token that shall be used to authenticate with Watson.
+    var token: String? { get set }
     
-    /// A Watson token is a generated hexadecimal String
-    var token: String? { get }
+    // Is the token currently being refreshed?
+    var isRefreshing: Bool { get set }
+    
+    // The number of times the network manager has tried refreshing the token.
+    var retries: Int { get set }
+    
+    // Refresh the `AuthenticationStrategy`'s token.
+    mutating func refreshToken(completionHandler: NSError? -> Void)
     
 }

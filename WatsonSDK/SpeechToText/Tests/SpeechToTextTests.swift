@@ -91,19 +91,19 @@ class SpeechToTextTests: XCTestCase {
     
     
        
-    func testContinuousRecording() {
+   // func testContinuousRecording() {
+   //
+   //     let basicAuth = BasicAuthenticationStrategy(
+   //         tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+   //         serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+   //         username: username,
+   //         password: password)
         
-        let basicAuth = BasicAuthenticationStrategy(
-            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
-            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
-            username: username,
-            password: password)
+   //     let service = SpeechToText(authStrategy: basicAuth)
         
-        let service = SpeechToText(authStrategy: basicAuth)
-        
-        service.startListening()
+   //     service.startListening()
                 
-    }
+    //}
     
 //    func testRecording() {
 //    
@@ -293,7 +293,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
         
-        service.transcribe( audioData, format: .OGG, oncompletion: {
+        service.transcribe( audioData, format: .OPUS, oncompletion: {
             response, error in
             
             if let response = response {

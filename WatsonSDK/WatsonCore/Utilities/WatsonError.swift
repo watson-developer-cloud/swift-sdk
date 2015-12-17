@@ -17,17 +17,11 @@
 import Foundation
 import ObjectMapper
 
-extension LanguageTranslation {
-    
-    public struct IdentifiedLanguage: Mappable {
-        public var language: String?
-        public var confidence: Double?
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
-        }
-    }
+/**
+ A WatsonError object represents the structure of an error response from Watson.
+ It can be instantiated from response data using ObjectMapper and can be
+ conveniently passed to clients by representing itself as an NSError.
+ */
+protocol WatsonError: Mappable {
+    var nsError: NSError { get }
 }

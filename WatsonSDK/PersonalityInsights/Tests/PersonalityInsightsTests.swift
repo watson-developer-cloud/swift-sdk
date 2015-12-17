@@ -82,7 +82,7 @@ class PersonalityInsightsTests: XCTestCase {
         }
         
         // instantiate the service
-        service = PersonalityInsights(user: user, password: password)
+        service = PersonalityInsights(username: user, password: password)
 
     }
     

@@ -101,7 +101,7 @@ class WebsocketTests: XCTestCase {
             self.disconnectExpectation = disconnectExpectation
         }
         
-        func onMessageReceived(results: SpeechToTextResponse) {
+        func onMessageReceived(results: SpeechToText.SpeechToTextResponse) {
         
             Log.sharedLogger.info("Received: \(results)")
        

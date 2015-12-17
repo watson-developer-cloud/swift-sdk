@@ -19,15 +19,23 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    public struct IdentifiedLanguage: Mappable {
-        public var language: String?
-        public var confidence: Double?
+    internal struct LanguageTranslationError: WatsonError {
+        var errorCode: Int!
+        var errorMessage: String!
         
-        public init?(_ map: Map) {}
+        var nsError: NSError {
+            let domain = Constants.errorDomain
+            let userInfo = [NSLocalizedDescriptionKey: errorMessage]
+            return NSError(domain: domain, code: errorCode, userInfo: userInfo)
+        }
         
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
+        init() {}
+        
+        init?(_ map: Map) {}
+        
+        mutating func mapping(map: Map) {
+            errorCode    <- map["error_code"]
+            errorMessage <- map["error_message"]
         }
     }
 }

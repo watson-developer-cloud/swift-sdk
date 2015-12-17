@@ -15,19 +15,17 @@
  **/
 
 import Foundation
-import ObjectMapper
 
-extension LanguageTranslation {
+extension TextToSpeech {
     
-    public struct IdentifiedLanguage: Mappable {
-        public var language: String?
-        public var confidence: Double?
+    internal struct Constants {
         
-        public init?(_ map: Map) {}
+        static let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
+        static let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+        static let errorDomain = "com.watsonplatform.texttospeech"
         
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
-        }
+        static let synthesize = "/v1/synthesize"
+        static let voices = "/v1/voices"
+        
     }
 }

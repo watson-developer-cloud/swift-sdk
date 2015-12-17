@@ -17,27 +17,32 @@
 import Foundation
 import ObjectMapper
 
-extension Dialog {
+extension LanguageTranslation {
     
-    internal struct DialogError: WatsonError {
-        var error: String!
-        var code: Int!
+    internal struct TranslateRequest: Mappable {
+        var modelID: String?
+        var source: String?
+        var target: String?
+        var text: [String]?
         
-        var nsError: NSError {
-            let domain = Constants.errorDoman
-            let userInfo = [NSLocalizedDescriptionKey: self.error]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+        init(text: [String], modelID: String) {
+            self.text = text
+            self.modelID = modelID
         }
         
-        init() {}
+        init(text: [String], source: String, target: String) {
+            self.text = text
+            self.source = source
+            self.target = target
+        }
         
         init?(_ map: Map) {}
         
         mutating func mapping(map: Map) {
-            error <- map["error"]
-            code <- map["code"]
+            modelID <- map["model_id"]
+            source  <- map["source"]
+            target  <- map["target"]
+            text    <- map["text"]
         }
     }
-    
-    
 }

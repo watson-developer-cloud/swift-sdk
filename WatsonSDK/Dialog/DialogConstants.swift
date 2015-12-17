@@ -21,6 +21,7 @@ extension Dialog {
     internal struct Constants {
         
         static let serviceURL = "https://gateway.watsonplatform.net/dialog/api"
+        static let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
         static let errorDoman = "com.watsonplatform.dialog"
         
         // MARK: Content Operations

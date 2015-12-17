@@ -19,156 +19,117 @@ import AVFoundation
 import ObjectMapper
 
 /**
- *  Protocol defining the Watson Text to Speech service.
+ Designed for streaming low-latency synthesis of audio from written text. The service
+ synthesizes natural-sounding speech from the text in a variety of languages and voices
+ that speak with appropriate cadence and intonation. Multiple voices, both male and
+ female, are available for a number of languages, including English, French, German,
+ Italian, and Spanish.
  */
-public protocol TextToSpeechService
-{
-    /**
-     This function invokes a call to synthesize text and decompress the audio to
-     produce a WAVE formatted NSData.
-     
-     - parameter theText:           String that will be synthesized
-     - parameter voice:             String specifying the voice name
-     - parameter oncompletion:      Callback function that will present the WAVE data
-     */
-    func synthesize ( theText:String, voice: String,
-        oncompletion: (data: NSData?, error:NSError?) -> Void )
+public class TextToSpeech: WatsonService {
     
-    /**
-     This function returns a list of voices (gender, language, dialect) supported.
-     
-     - parameter oncompletion:      Callback function that presents an array of Voices
-     */
-    func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void )
+    // The shared WatsonGateway singleton.
+    let gateway = WatsonGateway.sharedInstance
     
-}
-
-
-/**
- * Implementation for the Watson Text To Speech protocol.
- */
-public class TextToSpeech : Service, TextToSpeechService
-{
-    // Provides the Opus/Ogg decompression
+    // The authentication strategy to obtain authorization tokens.
+    var authStrategy: AuthenticationStrategy
+    
+    public required init(authStrategy: AuthenticationStrategy) {
+        self.authStrategy = authStrategy
+    }
+    
+    public convenience required init(username: String, password: String) {
+        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
+            serviceURL: Constants.serviceURL, username: username, password: password)
+        self.init(authStrategy: authStrategy)
+    }
+    
+    // Provides the Opus/Ogg decompression.
     let opus: OpusHelper = OpusHelper()
     
-    // Default endpoint for TTS services
-    private let _serviceURL = "/text-to-speech/api"
-    
     // Sampling rate returned from the Opus decoder is 48KHz by default.
-    private let DEFAULT_SAMPLE_RATE = 48000
-    
-    private var token: String?
-    
-    public init( authStrategy: AuthenticationStrategy ) {
-        
-        super.init(type: .Streaming, serviceURL: _serviceURL)
-        
-        authStrategy.getToken({
-            token, error in
-            
-            self.token = token
-            
-            Log.sharedLogger.info("Received token \(token)")
-            Log.sharedLogger.error("Token error: \(error?.localizedDescription)")
-            
-        })
-        
-    }
-    
+    private let defaultSampleRate = 48000
+
     /**
-     This function invokes a call to synthesize text and decompress the audio to
-     produce a WAVE formatted NSData.
+     Invokes a call to synthesize text and decompress the audio to produce a WAVE
+     formatted NSData.
      
-     - parameter theText:           String that will be synthesized
+     - parameter text:              String that will be synthesized
      - parameter voice:             String specifying the voice name
-     - parameter oncompletion:      Callback function that will present the WAVE data
+     - parameter completionHandler: Callback function that will present the WAVE data
      */
-    public func synthesize(theText: String,
-        voice: String = "",
-        oncompletion: (data: NSData?, error:NSError?) -> Void ) {
+    public func synthesize(text: String, voice: String? = nil,
+        completionHandler: (NSData?, NSError?) -> Void ) {
+        
+        if (text.isEmpty) {
+            let error = NSError.createWatsonError(404,
+                description: "Cannot synthesize an empty string")
+            completionHandler(nil, error)
+            return
+        }
             
-            let endpoint = getEndpoint("/v1/synthesize")
+        // construct url query parameters
+        var urlParams = [NSURLQueryItem]()
             
-            if (theText.isEmpty)
-            {
-                let error = NSError.createWatsonError(404,
-                    description: "Cannot synthesize an empty string")
-                oncompletion(data: nil, error: error)
-                return
+        urlParams.append(NSURLQueryItem(name: "text", value: text))
+            
+        if let voice = voice {
+            
+            urlParams.append(NSURLQueryItem(name: "voice", value: "\(voice)"))
+        }
+            
+        // construct message body
+        // let body = "{ \"text\": \"\(text)\" }"
+            
+        // construct request
+        let request = WatsonRequest(
+            method: .GET,
+            serviceURL: Constants.serviceURL,
+            endpoint: Constants.synthesize,
+            authStrategy: authStrategy,
+            accept: .OPUS,
+            contentType: .JSON,
+            urlParams: urlParams)
+        
+        // execute request
+        gateway.request(request, serviceError: TextToSpeechError()) { data, error in
+            if let data = data {
+                let pcm = self.opus.opusToPCM(data, sampleRate: self.defaultSampleRate)
+                let wave = self.addWaveHeader(pcm)
+                completionHandler(wave, error)
+            } else {
+                completionHandler(nil, error)
             }
-            
-            var params = Dictionary<String, String>()
-            params.updateValue(theText, forKey: "text")
-            // Opus codec is the default, so the accept type is optional
-            // params.updateValue("audio/ogg; codecs=opus", forKey: "accept")
-            
-            if (!voice.isEmpty)
-            {
-                params.updateValue(voice, forKey: "voice")
-            }
-            
-            NetworkUtils.performBasicAuthRequest(endpoint, method: .GET,
-                parameters: params,
-                contentType: .AUDIO_OPUS,
-                accept: .AUDIO_OPUS,
-                apiKey: _apiKey,
-                completionHandler: {
-                    
-                    response in
-                    
-                    if let data = response.data as? NSData {
-                        
-                        let pcm = self.opus.opusToPCM(data, sampleRate: self.DEFAULT_SAMPLE_RATE)
-                        let waveData = self.addWaveHeader(pcm)
-                        
-                        oncompletion(data: waveData, error: response.error)
-                        
-                    } else {
-                        oncompletion(data: nil, error: response.error)
-                    }
-                    
-            })
-            
+        }
     }
-    
+
     /**
      This function returns a list of voices supported.
      
-     - parameter oncompletion:      Callback function that presents an array of Voices
+     - parameter completionHandler: Callback function that presents an array of Voices
      */
-    public func listVoices ( oncompletion: (voices: [Voice], error:NSError?) -> Void ) {
-        let endpoint = getEndpoint("/v1/voices")
+    public func listVoices(completionHandler: ([Voice]?, NSError?) -> Void) {
         
-        NetworkUtils.performBasicAuthRequest(endpoint, apiKey: _apiKey,
-            completionHandler: {response in
-                
-                var voices : [Voice] = []
-                
-                if case let data as Dictionary<String, AnyObject> = response.data {
-                    
-                    if case let rawVoices as [AnyObject] = data["voices"]
-                    {
-                        for rawVoice in rawVoices {
-                            if let voice = Mapper<Voice>().map(rawVoice) {
-                                voices.append(voice)
-                            }
-                        }
-                    }
-                    
-                }
-                
-                oncompletion(voices: voices, error: response.error)
-        })
+        // construct request
+        let request = WatsonRequest(
+            method: .GET,
+            serviceURL: Constants.serviceURL,
+            endpoint: Constants.voices,
+            authStrategy: authStrategy,
+            accept: .JSON)
         
+        // execute request
+        gateway.request(request, serviceError: TextToSpeechError()) { data, error in
+            let voices = Mapper<Voice>().mapDataArray(data, keyPath: "voices")
+            completionHandler(voices, error)
+        }
     }
     
     /**
      This helper method converts a PCM of UInt16s produced by the Opus codec
      to a WAVE file by prepending a WAVE header.
      
-     - parameter data:      Contains PCM (pulse coded modulation) raw data for audio
-     - returns:             WAVE formatted header prepended to the data
+     - parameter data: Contains PCM (pulse coded modulation) raw data for audio
+     - returns:        WAVE formatted header prepended to the data
      **/
     private func addWaveHeader(data: NSData) -> NSData {
         

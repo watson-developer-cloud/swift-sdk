@@ -17,8 +17,7 @@
 import Foundation
 import Starscream
 import ObjectMapper
-
-
+    
 /// Watson Web Socket abstraction
 internal class WatsonSocket {
     
@@ -33,12 +32,12 @@ internal class WatsonSocket {
     var audioUploadQueue: NSOperationQueue!
     
     // The format for continuous PCM based recognition requires OGG
-    var format: SpeechToTextAudioFormat = .OGG
+    var format: MediaType = .OPUS
     
     // Starscream websocket
     var socket: WebSocket?
 
-    let authStrategy: AuthenticationStrategy!
+    var authStrategy: AuthenticationStrategy!
     
     var isListening: Bool = false
     
@@ -90,14 +89,14 @@ internal class WatsonSocket {
 //            }
 //        }
         
-        authStrategy.getToken({ 
+        authStrategy.refreshToken({
       
             
-            token, error in
+            error in
             
             Log.sharedLogger.info("Got a response back from the server")
             
-            if let token = token {
+            if let token = self.authStrategy.token {
                 
                 //let authURL = "\(self.url)?watson-token=\(token)"
                 let authURL = self.url
@@ -174,7 +173,7 @@ extension WatsonSocket : WebSocketDelegate {
         // parse the data.
         // print(text)
         
-        let result = Mapper<SpeechToTextResponse>().map(text)
+        let result = Mapper<SpeechToText.SpeechToTextResponse>().map(text)
         
         Log.sharedLogger.info(result?.transcription())
         

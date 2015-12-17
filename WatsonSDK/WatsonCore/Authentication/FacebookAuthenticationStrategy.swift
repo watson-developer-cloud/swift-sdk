@@ -25,6 +25,10 @@ public class FacebookAuthenticationStrategy: AuthenticationStrategy {
     
     public var token: String?
     
+    public var isRefreshing = false
+    
+    public var retries = 0
+    
     let tokenURL: String!
     var fbToken: String!
  
@@ -50,8 +54,8 @@ public class FacebookAuthenticationStrategy: AuthenticationStrategy {
      - parameter completionHandler: <#completionHandler description#>
      - parameter error:             <#error description#>
      */
-    public func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
-        
+    public func refreshToken(completionHandler: NSError? -> Void) {
+       
         let url = "\(tokenURL)?fbtoken=\(fbToken)"
         
         Alamofire.request(.GET, url)
@@ -65,24 +69,24 @@ public class FacebookAuthenticationStrategy: AuthenticationStrategy {
                     
                     if let rtoken = JSON["token"] as? String {
                         self.token = rtoken
-                        completionHandler(token: self.token, error: nil)
+                        completionHandler(nil)
                     } else {
                         
                         if let e = JSON["error"] as? NSDictionary {
                             let message = e["message"] as? String
                             let err = NSError.createWatsonError(503, description: message!)
-                            completionHandler(token: nil, error: err)
+                            completionHandler(err)
                         } else {
                             let err = NSError.createWatsonError(503, description: "Some other error occurred")
-                            completionHandler(token: nil, error: err)
+                            completionHandler(err)
                         }
                     }
                     
                     
                    
                 } else {
-                    completionHandler(token: nil,
-                        error: NSError.createWatsonError(400, description: "Could not parse response"))
+                    completionHandler(
+                        NSError.createWatsonError(400, description: "Could not parse response"))
                 }
                 
                 

@@ -17,22 +17,17 @@
 import Foundation
 import ObjectMapper
 
-/**
- *  <#Description#>
- */
-public struct SpeechToTextResult: Mappable
-{
-    var alternatives: [SpeechToTextAlternative]?
+extension SpeechToText {
     
-    var final: Bool?
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
+    public struct SpeechToTextResult: Mappable {
+        var alternatives: [SpeechToTextAlternative]?
+        var final: Bool?
         
-        alternatives        <- map["alternatives"]
-        final               <- map["final"]
+        public init?(_ map: Map) {}
         
+        public mutating func mapping(map: Map) {
+            alternatives        <- map["alternatives"]
+            final               <- map["final"]
+        }
     }
-    
 }

@@ -109,7 +109,6 @@ public class NetworkUtils {
         
         Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
-            .debugLog()
             .responseJSON {response in
                 Log.sharedLogger.debug("Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: CoreResponse.getCoreResponse(response)) }
@@ -141,7 +140,6 @@ public class NetworkUtils {
         Log.sharedLogger.debug("Entered performRequest")
         
         Alamofire.request(method, url, parameters: parameters)
-            .debugLog()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performRequest.responseJSON")
                 completionHandler( returnValue: CoreResponse.getCoreResponse(response))
@@ -203,7 +201,6 @@ public class NetworkUtils {
         let appendedUrl = addQueryStringParameter(url,values:parameters)
         
         Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey:apiKey), file: fileURL)
-            .debugLog()
             .responseJSON { response in
                 Log.sharedLogger.debug("Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: CoreResponse.getCoreResponse(response))

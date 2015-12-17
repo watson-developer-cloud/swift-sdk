@@ -15,19 +15,14 @@
  **/
 
 import Foundation
-import ObjectMapper
 
-extension LanguageTranslation {
+/// The superclass for all Watson services.
+internal protocol WatsonService {
     
-    public struct IdentifiedLanguage: Mappable {
-        public var language: String?
-        public var confidence: Double?
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
-        }
-    }
+    var gateway: WatsonGateway { get }
+    var authStrategy: AuthenticationStrategy { get }
+    
+    init(authStrategy: AuthenticationStrategy)
+    init(username: String, password: String)
+
 }

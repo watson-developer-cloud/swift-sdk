@@ -19,15 +19,13 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    public struct IdentifiedLanguage: Mappable {
-        public var language: String?
-        public var confidence: Double?
+    internal struct CustomModel: Mappable {
+        var modelID: String?
         
-        public init?(_ map: Map) {}
+        init?(_ map: Map) {}
         
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
+        mutating func mapping(map: Map) {
+            modelID <- map["model_id"]
         }
     }
 }

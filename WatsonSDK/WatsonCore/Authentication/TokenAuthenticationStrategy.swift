@@ -16,25 +16,44 @@
 
 import Foundation
 
-
-/** TokenAuthenticationStrategy handles the trivial case where the
- token used for the service does not change and is provided by the client
- in some manner.
-*/
-public class TokenAuthenticationStrategy: AuthenticationStrategy {
+/**
+ An `APIKeyAuthenticationStrategy` captures all information necessary to authenticate
+ with a Watson Developer Cloud service using an API key. This pattern is required for
+ all Alchemy services. The `APIKeyAuthenticationStrategy` is used internally to obtain
+ the API key and maintain associated state information.
+ */
+public class APIKeyAuthenticationStrategy: AuthenticationStrategy {
     
+    // The token that shall be used to authenticate with Watson.
     public var token: String?
     
-    public init(token: String) {
-        
-        self.token = token
-        
+    // Is the token currently being refreshed?
+    public var isRefreshing = false
+    
+    // The number of times the network manager has tried refreshing the token.
+    public var retries = 0
+    
+    // The API key used to authenticate with a Watson Alchemy service.
+    private var apiKey: String!
+    
+    /**
+     Authenticate with a Watson Developer Cloud service using an API key.
+    
+     - parameter apiKey: The API kay that shall be used to authenticate with the service.
+     */
+    public init(apiKey: String) {
+        self.apiKey = apiKey
+        self.token = apiKey
     }
     
-    public func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
-        
-        completionHandler(token: token, error: nil)
-        
+    /**
+     Ensure that the API key provided on initialization is still used as the token.
+     
+     - parameter completionHandler: The function executed after updating the token.
+     */
+    public func refreshToken(completionHandler: NSError? -> Void) {
+        self.token = self.apiKey
+        completionHandler(nil)
     }
     
 }

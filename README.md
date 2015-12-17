@@ -273,7 +273,7 @@ The following links provide more information about the Personality Insights serv
 
 ### Speech to Text
 
-The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
+The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text. The services takes audio data encoded in [Opus/OGG](https://www.opus-codec.org/), [FLAC](https://xiph.org/flac/), WAV, and Linear 16-bit PCM uncompressed formats. The service automatically downmixes to one channel during transcoding.
 
 Create a SpeechToText service:
 

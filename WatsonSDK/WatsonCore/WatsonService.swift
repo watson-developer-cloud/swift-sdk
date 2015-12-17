@@ -16,10 +16,13 @@
 
 import Foundation
 
-/// The superclass for all Watson services.
+// The `WatsonService` protocol enforces consistency among all Watson services.
 internal protocol WatsonService {
     
+    // The shared WatsonGateway singleton.
     var gateway: WatsonGateway { get }
+    
+    // The authentication strategy to obtain authorization tokens.
     var authStrategy: AuthenticationStrategy { get }
     
     init(authStrategy: AuthenticationStrategy)

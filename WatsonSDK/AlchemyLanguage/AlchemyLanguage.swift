@@ -36,44 +36,47 @@ import ObjectMapper
  * Feed Detection
  * Linked Data Support
  */
-public final class AlchemyLanguage: Service {
+public final class AlchemyLanguage: AlchemyService {
     
-    private var _tokenAuthenticationStrategy: APIKeyAuthenticationStrategy!
-    public var tokenAuthenticationStrategy: APIKeyAuthenticationStrategy! {
-        get { return _tokenAuthenticationStrategy }
-        set { _tokenAuthenticationStrategy = newValue; _apiKey = newValue.token }
+    // The authentication strategy to obtain authorization tokens.
+    var authStrategy: AuthenticationStrategy
+    
+    // The non-expiring Alchemy API key returned by the authentication strategy.
+    // TODO: this can be removed after migrating to WatsonGateway
+    private var _apiKey: String! {
+        return authStrategy.token
     }
     
+    public required init(var authStrategy: AuthenticationStrategy) {
+        
+        self.authStrategy = authStrategy
+        
+        // refresh to obtain the API key
+        // TODO: this can be removed after migrating to WatsonGateway
+        authStrategy.refreshToken { error in
+            guard error != nil else {
+                return
+            }
+        }
+        
+    }
+    
+    public convenience required init(apiKey: String) {
+        let authStrategy = APIKeyAuthenticationStrategy(apiKey: apiKey)
+        self.init(authStrategy: authStrategy)
+    }
     
     private typealias alcs = AlchemyLanguageConstants
     private typealias optm = alcs.OutputMode
     private typealias wuri = alcs.WatsonURI
     private typealias luri = alcs.LanguageURI
-
-    
-    public init() {
-
-        super.init(
-            type: ServiceType.Alchemy,
-            serviceURL: alcs.Calls()
-        )
-        
-    }
-    
-    public convenience init(tokenAuthenticationStrategy: APIKeyAuthenticationStrategy) {
-        
-        self.init()
-        self.tokenAuthenticationStrategy = tokenAuthenticationStrategy
-        
-    }
     
     /** A dictionary of parameters used in all Alchemy Language API calls */
     private var commonParameters: [String : String] {
         
         return [
             
-            wuri.APIKey.rawValue : _apiKey,
-            
+            wuri.APIKey.rawValue : authStrategy.token!,
             luri.OutputMode.rawValue : optm.JSON.rawValue
             
         ]

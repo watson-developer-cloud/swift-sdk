@@ -23,8 +23,7 @@ class AlchemyLanguageTests: XCTestCase {
     private let timeout: NSTimeInterval = 60.0
     
     // main instance
-    let instance = AlchemyLanguage()
-    var apiKeyNotSet: Bool { return instance.tokenAuthenticationStrategy == nil }
+    var instance: AlchemyLanguage!
     
     // test strings
     let test_url = "http://en.wikipedia.org/wiki/Vladimir_Putin"
@@ -88,12 +87,20 @@ class AlchemyLanguageTests: XCTestCase {
         
         let bundle = NSBundle(forClass: self.dynamicType)
         
-        if let url = bundle.pathForResource("Credentials", ofType: "plist"),
-            let dict = NSDictionary(contentsOfFile: url) as? [String : String]
-            where apiKeyNotSet {
-                
-                instance.tokenAuthenticationStrategy = APIKeyAuthenticationStrategy(apiKey: dict["AlchemyAPIKey"]!)
-                
+        guard let url = bundle.pathForResource("Credentials", ofType: "plist") else {
+            return
+        }
+        
+        guard let dict = NSDictionary(contentsOfFile: url) as? [String : String] else {
+            return
+        }
+        
+        guard let apiKey = dict["AlchemyAPIKey"] else {
+            return
+        }
+        
+        if instance == nil {
+            instance = AlchemyLanguage(apiKey: apiKey)
         }
         
     }

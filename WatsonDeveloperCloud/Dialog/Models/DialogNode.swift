@@ -19,8 +19,13 @@ import ObjectMapper
 
 extension Dialog {
     
+    // A Dialog node
     public struct Node: Mappable {
+        
+        // The content associated with the node
         public var content: String?
+        
+        // The type of the node
         public var node: String?
         
         init(content: String? = nil, node: String? = nil) {

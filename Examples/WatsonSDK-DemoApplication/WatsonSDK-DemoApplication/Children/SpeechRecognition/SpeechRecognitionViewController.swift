@@ -16,8 +16,8 @@
 
 import UIKit
 import AVFoundation
-
 import WatsonSDK
+
 
 extension SpeechRecognitionViewController: ChildProtocol {
     
@@ -28,6 +28,7 @@ extension SpeechRecognitionViewController: ChildProtocol {
     }
     
 }
+
 
 class SpeechRecognitionViewController: UIViewController, AVAudioRecorderDelegate {
 

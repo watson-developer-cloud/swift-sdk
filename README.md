@@ -5,13 +5,11 @@
 [![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift 2.0+ applications.
-
-[Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md)
+The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
 
 ## Table of Contents
 * [Installation](#installation)
-* [Examples](#examples)
+
 * [IBM Watson Services](#ibm-watson-services)
 	* [Alchemy Language](#alchemy-language)
 	* [Alchemy Vision](#alchemy-vision)
@@ -21,7 +19,8 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 	* [Personality Insights](#personality-insights)
 	* [Speech to Text](#speech-to-text)	
 	* [Text to Speech](#text-to-speech)
-* [Build + Test](#build--test)
+* [Authentication](#authentication)
+* [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
 * [License](#license)
 * [Contributing](#contributing)
@@ -54,15 +53,6 @@ carthage update --platform iOS
 * [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
 
 
-## Examples 
-
-
-A sample app can be found in the [WatsonSDK-DemoApplication](../../tree/master/Examples/WatsonSDK-DemoApplication) folder. The sample app demonstrates how instantiate and use some of the provided Watson SDK Services.
-
-
-## Tests
-
-Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## IBM Watson Services
 
@@ -259,7 +249,7 @@ The following links provide more information about the Natural Language Classifi
 The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
 
 ```swift
-let service = PersonalityInsights(user: "yourusername", password: "yourpassword")
+let service = PersonalityInsights(username: "yourusername", password: "yourpassword")
 
 service!.getProfile("Some text here") { profile, error in
     
@@ -403,11 +393,17 @@ The following links provide more information about the Text To Speech service:
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
+## Authentication
+
+IBM Watson Services are hosted in the Bluemix platform. 
+
 ## Build + Test
 
 ***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
 
 There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
+
+Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## Open Source @ IBM
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)

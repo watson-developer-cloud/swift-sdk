@@ -170,10 +170,14 @@ public class Dialog: WatsonService {
                     switch encodingResult {
                     case .Success(let upload, _, _):
                         // execute encoded request
-                        upload.response { request, response, data, error in
-                            let dialogID = Mapper<DialogIDModel>().mapData(data)
-                            // TODO: handle non-200 case (error)
-                            completionHandler(dialogID?.id, error)
+                        upload.responseObject {
+                            (response: Response<DialogIDModel, NSError>) in
+                            let unwrapID = {
+                                (dialogID: DialogIDModel?, error: NSError?) in
+                                completionHandler(dialogID?.id, error) }
+                            validate(response, successCode: 201,
+                                serviceError: DialogError(),
+                                completionHandler: unwrapID)
                         }
                     case .Failure:
                         // construct and return error
@@ -258,8 +262,11 @@ public class Dialog: WatsonService {
                 
             // execute request
             r.response { _, response, _, error in
-                completionHandler(fileURL, error)
-                // TODO: handle non-200 case (error)
+                var data: NSData? = nil
+                if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
+                let includeFileURL = { (error: NSError?) in completionHandler(fileURL, error) }
+                validate(response, data: data, error: error, serviceError: DialogError(),
+                    completionHandler: includeFileURL)
             }
         }
     }
@@ -301,9 +308,9 @@ public class Dialog: WatsonService {
             
             // execute request
             Alamofire.upload(request, file: fileURL)
-                .response { request, response, data, error in
-                    completionHandler(error)
-                    // TODO: handle non-200 case (error)
+                .responseData { response in
+                    validate(response, serviceError: DialogError(),
+                        completionHandler: completionHandler)
             }
         }
     }

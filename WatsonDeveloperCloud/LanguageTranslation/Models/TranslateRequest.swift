@@ -19,6 +19,7 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
+    // A translation request
     internal struct TranslateRequest: Mappable {
         var modelID: String?
         var source: String?

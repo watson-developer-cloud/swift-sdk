@@ -19,7 +19,10 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
+    // A Language Translation custom model
     internal struct CustomModel: Mappable {
+        
+        // The base model that this translation model was trained on
         var modelID: String?
         
         init?(_ map: Map) {}

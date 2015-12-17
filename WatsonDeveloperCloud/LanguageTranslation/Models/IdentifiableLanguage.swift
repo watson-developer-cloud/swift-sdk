@@ -19,8 +19,13 @@ import ObjectMapper
 
 extension LanguageTranslation {
 
+    // An identifiable language
     public struct IdentifiableLanguage: Mappable {
+        
+        // The language
         public var language:String?
+        
+        // The name
         public var name:String?
         
         public init?(_ map: Map) {}

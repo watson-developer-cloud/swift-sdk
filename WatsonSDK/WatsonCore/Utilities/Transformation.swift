@@ -16,8 +16,11 @@
 
 import Foundation
 import ObjectMapper
+
+/// Object Mapper transformations
 public class Transformation {
     
+    /// Transforms String to Int
     public static let stringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
         // transform value from String? to Int?
         if let x = value {
@@ -32,6 +35,7 @@ public class Transformation {
             return nil
     })
     
+    /// Transforms String to Double
     public static let stringToDouble = TransformOf<Double, String>(fromJSON: { (value: String?) -> Double? in
         // transform value from String? to Double?
         if let x = value {
@@ -46,6 +50,7 @@ public class Transformation {
             return nil
     })
     
+    /// Transforms AnyObject to Int
     public static let anyObjectToInt = TransformOf<Int, AnyObject>(fromJSON: { (value: AnyObject?) -> Int? in
         // transform value from AnyObject? to Int?
         if let x = value {

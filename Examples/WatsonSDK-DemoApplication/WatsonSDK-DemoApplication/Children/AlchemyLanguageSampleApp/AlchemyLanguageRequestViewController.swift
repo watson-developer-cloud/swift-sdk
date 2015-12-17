@@ -98,7 +98,7 @@ class AlchemyLanguageRequestViewController: UIViewController {
             
             // start request
             let apiKeyAuthenticationStrategy = APIKeyAuthenticationStrategy(apiKey: apiKey)
-            let alchemyLanguage = AlchemyLanguage(tokenAuthenticationStrategy: apiKeyAuthenticationStrategy)
+            let alchemyLanguage = AlchemyLanguage(authStrategy: apiKeyAuthenticationStrategy)
             let asynchronousDispatchGroup = dispatch_group_create()
             var entitiesSuccess = false
             var sentimentSuccess = false

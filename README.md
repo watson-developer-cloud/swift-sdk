@@ -275,6 +275,49 @@ The following links provide more information about the Personality Insights serv
 
 The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
 
+Create a SpeechToText service:
+
+```swift 
+let stt = SpeechToText(authStrategy: strategy)
+```
+
+You can create an AVAudioRecorder with the necessary settings:
+
+```swift
+
+let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
+        
+let session = AVAudioSession.sharedInstance()
+var settings = [String: AnyObject]()
+        
+settings[AVSampleRateKey] = NSNumber(float: 44100.0)
+settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
+do {
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        recorder = try AVAudioRecorder(URL: filePath, settings: settings)
+} catch {
+        // error
+}
+```
+
+To make a call for transcription, use:
+
+```swift
+let data = NSData(contentsOfURL: recorder.url)
+            
+if let data = data {
+        
+        sttService.transcribe(data , format: .WAV, oncompletion: {
+            
+            response, error in
+            
+            // use response.transcription()
+        }
+}
+```
+        
+
+
 The following links provide additional information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)

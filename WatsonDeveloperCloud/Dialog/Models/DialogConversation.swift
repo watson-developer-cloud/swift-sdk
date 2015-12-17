@@ -19,12 +19,22 @@ import ObjectMapper
 
 extension Dialog {
     
+    // A Dialog conversation
     public struct Conversation: Mappable {
 
+        // The nodes that were executed by the conversation
         var hitNodes: [HitNode]?
+        
+        // The conversation identifier
         var conversationID: Int?
+        
+        // The client identifier
         var clientID: Int?
+        
+        // The messages exchanged during the conversation
         var messages: [Message]?
+        
+        // The profile variables associated with the conversation
         var profile: [String: String]?
         
         public init?(_ map: Map) {}
@@ -38,11 +48,19 @@ extension Dialog {
         }
     }
     
+    // A Dialog hit node
     public struct HitNode: Mappable {
         
+        // The details of the node
         var details: String?
+        
+        // The label of the node
         var label: String?
+        
+        // The type of the node
         var type: String?
+        
+        // The node identifier
         var nodeID: Int?
         
         public init?(_ map: Map) {}
@@ -55,10 +73,16 @@ extension Dialog {
         }
     }
     
+    // A Dialog message
     public struct Message: Mappable {
         
+        // The text of the message
         var text: String?
+        
+        // The date and time of the message
         var dateTime: NSDate?
+        
+        // The client that prompted the message to be sent
         var fromClient: String?
         
         public init?(_ map: Map) {}

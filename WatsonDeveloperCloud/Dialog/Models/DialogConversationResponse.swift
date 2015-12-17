@@ -19,12 +19,22 @@ import ObjectMapper
 
 extension Dialog {
     
+    // A Dialog conversation response
     public struct ConversationResponse: Mappable {
         
+        // The response from the Dialog application
         public var response: [String]?
+        
+        // The input string that prompted the Dialog application to respond
         public var input: String?
+        
+        // The conversation identifier
         public var conversationID: Int?
+        
+        // The confidence associated with the conversation response
         public var confidence: Double?
+        
+        // The client identifier
         public var clientID: Int?
         
         public init?(_ map: Map) {}

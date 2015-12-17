@@ -18,9 +18,11 @@ import Foundation
 import ObjectMapper
 
 extension Dialog {
-
+    
+    // A collection of Dialog models
     internal struct DialogModelCollection: Mappable {
         
+        // The Dialog models
         var dialogs: [DialogModel]?
         
         init?(_ map: Map) {}
@@ -29,12 +31,17 @@ extension Dialog {
             dialogs <- map["dialogs"]
         }
     }
-
+    
+    // A DialogID uniquely identifies a Dialog application
     public typealias DialogID = String
     
+    // A Dialog model
     public struct DialogModel: Mappable {
         
+        // The Dialog application identifier
         public var dialogID: DialogID?
+        
+        // The name of the Dialog application
         public var name: String?
         
         public init?(_ map: Map) {}
@@ -45,8 +52,10 @@ extension Dialog {
         }
     }
     
+    // A Dialog model identifier
     internal struct DialogIDModel: Mappable {
         
+        // The dialog identifier
         var id: DialogID?
         
         init?(_ map: Map) {}

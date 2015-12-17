@@ -16,19 +16,14 @@
 
 import Foundation
 
-/**
- *  Constants used by the PersonalityInsights service
- */
-public struct PersonalityInsightsConstants {
-
-    //Defaults
-    static let defaultLanguage = "en"
-    static let defaultAcceptLanguage = "en"
-
-    //Request parameters
-    static let language = "language"
-    static let acceptLanguage = "acceptLanguage"
-    static let includeRaw = "include_raw"
-    static let text = "text"
-    static let contentItems = "contentItems"
+extension PersonalityInsights {
+    
+    internal struct Constants {
+        
+        static let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+        static let errorDomain = "com.watsonplatform.personalityinsights"
+        
+        static let profile = "/v2/profile"
+        
+    }
 }

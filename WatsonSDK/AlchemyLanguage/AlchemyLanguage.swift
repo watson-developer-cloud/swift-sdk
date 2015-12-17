@@ -38,13 +38,20 @@ import ObjectMapper
  */
 public final class AlchemyLanguage: Service {
     
+    private var _tokenAuthenticationStrategy: TokenAuthenticationStrategy!
+    public var tokenAuthenticationStrategy: TokenAuthenticationStrategy! {
+        get { return _tokenAuthenticationStrategy }
+        set { _tokenAuthenticationStrategy = newValue; _apiKey = newValue.token }
+    }
+    
+    
     private typealias alcs = AlchemyLanguageConstants
     private typealias optm = alcs.OutputMode
     private typealias wuri = alcs.WatsonURI
     private typealias luri = alcs.LanguageURI
 
     
-    init() {
+    public init() {
 
         super.init(
             type: ServiceType.Alchemy,
@@ -53,10 +60,10 @@ public final class AlchemyLanguage: Service {
         
     }
     
-    convenience init(apiKey:String) {
+    public convenience init(tokenAuthenticationStrategy: TokenAuthenticationStrategy) {
         
         self.init()
-        _apiKey = apiKey
+        self.tokenAuthenticationStrategy = tokenAuthenticationStrategy
         
     }
     

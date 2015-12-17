@@ -97,7 +97,7 @@ public class AlchemyVision: Service {
           completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
       })
-    case VisionConstants.ImageKeywordType.FILE:
+    case VisionConstants.ImageKeywordType.UIImage:
       endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -161,16 +161,15 @@ public class AlchemyVision: Service {
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
       params.updateValue(stringURL!, forKey: VisionConstants.WatsonURI.URL.rawValue)
       NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-        var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = ImageFaceTags(anyObject: data)
+          let imageFaceTags = Mapper<ImageFaceTags>().map(data)
           completionHandler(imageFaceTags, response.error)
         } else {
             completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
         }
 
       })
-    case VisionConstants.ImageFacesType.FILE:
+    case VisionConstants.ImageFacesType.UIImage:
       endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
       visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
       var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
@@ -204,9 +203,8 @@ public class AlchemyVision: Service {
             Log.sharedLogger.error("\(error)")
         }
         
-        var imageFaceTags = ImageFaceTags()
         if case let data as Dictionary<String,AnyObject> = response.data {
-          imageFaceTags = ImageFaceTags(anyObject: data)
+        let imageFaceTags = Mapper<ImageFaceTags>().map(data)
           completionHandler(imageFaceTags, response.error)
         }
         else {

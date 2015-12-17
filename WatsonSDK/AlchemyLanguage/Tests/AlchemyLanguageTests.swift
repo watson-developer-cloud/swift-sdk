@@ -16,7 +16,7 @@ class AlchemyLanguageTests: XCTestCase {
     
     // main instance
     let instance = AlchemyLanguage()
-    var apiKeyNotSet: Bool { return instance._apiKey == nil }
+    var apiKeyNotSet: Bool { return instance.tokenAuthenticationStrategy == nil }
     
     // test strings
     let test_url = "http://en.wikipedia.org/wiki/Vladimir_Putin"
@@ -84,7 +84,7 @@ class AlchemyLanguageTests: XCTestCase {
             let dict = NSDictionary(contentsOfFile: url) as? [String : String]
             where apiKeyNotSet {
                 
-                instance._apiKey = dict["AlchemyAPIKey"]!
+                instance.tokenAuthenticationStrategy = TokenAuthenticationStrategy(token: dict["AlchemyAPIKey"]!)
                 
         }
         

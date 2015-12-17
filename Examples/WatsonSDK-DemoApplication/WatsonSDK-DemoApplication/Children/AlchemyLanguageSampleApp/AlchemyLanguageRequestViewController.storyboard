@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQz-r4-qNQ">
-                                <rect key="frame" x="560" y="20" width="40" height="40"/>
+                                <rect key="frame" x="553" y="8" width="40" height="40"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="VUI-TZ-ufz"/>
@@ -30,17 +30,21 @@
                                     <color key="titleColor" red="0.83137254901960778" green="0.94117647058823528" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="closeButton" destination="nEZ-gi-6Xg" eventType="touchUpInside" id="uZf-Vy-8qK"/>
+                                    <action selector="closeButtonPress" destination="nEZ-gi-6Xg" eventType="touchUpInside" id="xQv-rQ-x0a"/>
                                 </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0078431372549019607" green="0.3411764705882353" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pQz-r4-qNQ" secondAttribute="trailing" constant="-20" id="roB-Ll-b2N"/>
-                            <constraint firstItem="pQz-r4-qNQ" firstAttribute="top" secondItem="qJz-po-7EU" secondAttribute="bottom" id="x0u-z6-Hlo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pQz-r4-qNQ" secondAttribute="trailing" constant="-13" id="Ma0-ar-U5a"/>
+                            <constraint firstItem="pQz-r4-qNQ" firstAttribute="top" secondItem="qJz-po-7EU" secondAttribute="bottom" constant="8" id="pnA-W4-kz6"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="closeButton" destination="pQz-r4-qNQ" id="dkZ-G3-IGb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cva-zG-s0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

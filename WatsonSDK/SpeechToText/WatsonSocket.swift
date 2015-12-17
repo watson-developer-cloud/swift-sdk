@@ -190,7 +190,7 @@ extension WatsonSocket : WebSocketDelegate {
                 } else {
                     
                     if (result.results?.count > 0 ) {
-                        delegate?.onMessageReceived(result.results!)
+                        delegate?.onMessageReceived(result)
                     }
                     // callback(result, nil)
                     

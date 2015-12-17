@@ -21,17 +21,17 @@ import Foundation
  token used for the service does not change and is provided by the client
  in some manner.
 */
-class TokenAuthenticationStrategy: AuthenticationStrategy {
+public class TokenAuthenticationStrategy: AuthenticationStrategy {
     
-    var token: String?
+    public var token: String?
     
-    init(token: String) {
+    public init(token: String) {
         
         self.token = token
         
     }
     
-    func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
+    public func getToken(completionHandler: (token: String?, error: NSError?) -> Void) {
         
         completionHandler(token: token, error: nil)
         

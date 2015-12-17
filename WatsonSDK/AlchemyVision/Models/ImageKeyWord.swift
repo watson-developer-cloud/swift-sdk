@@ -21,10 +21,10 @@ import ObjectMapper
  *  The mapping of a image keyword and score
  */
 public struct ImageKeyWord: Mappable {
-
-  var text: String?
-  var score: Double?
-
+    
+    public var text: String?
+    public var score: Double?
+    
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {

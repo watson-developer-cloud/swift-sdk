@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import SwiftyJSON
 import ObjectMapper
 
 /**
@@ -29,35 +28,17 @@ public struct ImageFace : Mappable {
     public var positionX:  Int?
     public var positionY:  Int?
     public var width:      Int?
-  
-    // this will go away once objectmapper can handle pointers
-    init(json: JSON) {
-        
-        height      = json["height"].intValue
-        width       = json["width"].intValue
-        positionX   = json["positionX"].intValue
-        positionY   = json["positionY"].intValue
-        
-        for (key,subJson):(String, JSON) in json["age"] {
-            age[key] = subJson.object
-        }
-        
-        for (key,subJson):(String, JSON) in json["gender"] {
-            gender[key] = subJson.object
-        }
-    }
-    
-    public init() {
-        
-    }
-    
+
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
+        
+        Log.sharedLogger.error("ERRRRRR \(map[""])")
+        
         height      <-  (map["height"], Transformation.stringToInt)
         width       <-  (map["width"], Transformation.stringToInt)
-        positionX   <-   map["positionX"]
-        positionY   <-   map["positionY"]
+        positionX   <-  (map["positionX"], Transformation.anyObjectToInt)
+        positionY   <-  (map["positionY"], Transformation.anyObjectToInt)
         age         <-   map["age"]
         gender      <-   map["gender"]
     }

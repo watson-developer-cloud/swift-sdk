@@ -26,7 +26,10 @@ import ObjectMapper
  */
 public struct DocumentSentiment: Mappable {
     
+    /** inputted text */
     public var text: String?
+
+    /** see **Sentiment** */
     public var sentiment: Sentiment?
     
 

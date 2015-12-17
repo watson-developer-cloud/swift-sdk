@@ -24,6 +24,7 @@ import ObjectMapper
  */
 public struct Quotation: Mappable {
 
+	/** contained quote */
     public var quotation: String!
     
     

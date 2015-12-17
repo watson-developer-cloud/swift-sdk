@@ -49,6 +49,7 @@ public struct Entities: AlchemyLanguageGenericModel, Mappable {
         url <- map["url"]
         
         // entities
+        /** result, see **Entity** */
         entities <- map["entities"]
         
     }

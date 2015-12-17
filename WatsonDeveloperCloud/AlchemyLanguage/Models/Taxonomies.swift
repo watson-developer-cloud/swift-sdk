@@ -34,6 +34,7 @@ public struct Taxonomies: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Taxonomies
+    /** results here (see **Taxonomy**) */
     public var taxonomy: [Taxonomy]?
     
     

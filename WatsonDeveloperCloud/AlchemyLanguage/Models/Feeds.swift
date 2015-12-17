@@ -34,6 +34,7 @@ public struct Feeds: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Feeds
+    /** results, see **Feed** */
     public var feeds: [Feed]?
     
     

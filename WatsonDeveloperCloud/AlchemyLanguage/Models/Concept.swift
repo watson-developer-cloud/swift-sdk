@@ -26,19 +26,89 @@ import ObjectMapper
  */
 public struct Concept: Mappable {
 
+    /** detected concept tag*/
     public var text: String?
+
+    /** 
+    relevance score for a detected concept tag.
+
+    Possible values: (0.0 - 1.0)   [1.0 = most relevant]
+    */
     public var relevance: Int?
+
+    // linked data for the detected concept tag (sent only if linkedData is enabled)
+    /** 
+    The path through the knowledge graph to the appropriate keyword. Only returned when request parameter is provided: knowledgeGraph=1
+    */
     public var knowledgeGraph: KnowledgeGraph?
+
+    /** the website associated with this concept tag */
     public var website: String?
+
+    /** latitude longitude - the geographic coordinates associated with this concept tag */
     public var geo: String?
+
+    /**  
+    sameAs link to DBpedia for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var dbpedia: String?
+
+    /**  
+    sameAs link to YAGO for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var yago: String?
+
+    /**  s
+    ameAs link to OpenCyc for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var opencyc: String?
+
+    /**  
+    sameAs link to Freebase for this concept tag.
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var freebase: String?
+
+    /**  
+    sameAs link to the CIA World Factbook for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var ciaFactbook: String?
+
+    /**     
+    sameAs link to the US Census for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var census: String?
+
+    /**  
+    sameAs link to Geonames for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var geonames: String?
+
+    /**  
+    sameAs link to MusicBrainz for this concept tag
+
+    Note: Provided only for entities that exist in this linked data-set
+    */
     public var musicBrainz: String?
+
+    /**  
+    website link to CrunchBase for this concept tag.
+
+    Note: Provided only for entities that exist in CrunchBase.
+    */
     public var crunchbase: String?
     
     

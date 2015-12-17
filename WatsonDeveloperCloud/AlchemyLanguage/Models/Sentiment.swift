@@ -26,8 +26,13 @@ import ObjectMapper
  */
 public struct Sentiment: Mappable {
     
+    /** is a mix of positive, neutral, and/or negative sentiments detected */
     public var mixed: Int?
+
+    /** strength of prevalent sentiment, 0.0 to 1.0 */
     public var score: Double?
+
+    /** "positive", "neutral", or "negative" */
     public var type: String?
     
     

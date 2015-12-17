@@ -34,7 +34,10 @@ public struct PublicationDate: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
 
     // MARK: PublicationDate
+    /** are we confident in our result */
     public var confident: Bool?
+
+    /** date of publication */
     public var date: NSDate?
     
     

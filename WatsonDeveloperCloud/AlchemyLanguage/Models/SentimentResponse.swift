@@ -34,9 +34,16 @@ public struct SentimentResponse: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: DocSentiment
+    /** response when normal sentimented call is used */
     public var docSentiment: Sentiment?                     // Normal
+
+    /** response when targeted sentimented call is used */
     public var sentimentResults: [DocumentSentiment]?       // Targeted
+
+    /** (undocumented) */
     public var usage: String?
+
+    /** warnings about incorrect usage or failures in detection */
     public var warningMessage: String?
 
     

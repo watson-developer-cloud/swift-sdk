@@ -34,6 +34,7 @@ public struct Microformats: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Keywords
+    /** results (see **Microformat**) */
     public var microformats: [Microformat]?
     
     

@@ -26,9 +26,16 @@ import ObjectMapper
  */
 public struct SAORelation: Mappable {
     
+    /** how an object relates */
     public var action: Action?
+
+    /** sentence in which it's used */
     public var sentence: String?
+
+    /** object that acts upon another */
     public var object: RelationObject?
+
+    /** subject of object's action */
     public var subject: Subject?
     
     

@@ -26,7 +26,10 @@ import ObjectMapper
  */
 public struct Microformat: Mappable {
     
+    /** structured microformats data (hCard, etc.) extracted from this web page */
     public var data: String?
+
+    /** (undocumented) */
     public var field: String?
     
     

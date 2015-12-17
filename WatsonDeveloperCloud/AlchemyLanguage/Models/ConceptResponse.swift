@@ -34,6 +34,7 @@ public struct ConceptResponse: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Concepts
+    /** returned concepts (see **Concept** class)*/
     public var concepts: [Concept]?
     
     

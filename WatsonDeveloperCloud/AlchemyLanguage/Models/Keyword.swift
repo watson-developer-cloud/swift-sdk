@@ -26,9 +26,16 @@ import ObjectMapper
  */
 public struct Keyword: Mappable {
 
+    /** The path through the knowledge graph to the appropriate keyword */
     public var knowledgeGraph: KnowledgeGraph?
+
+    /** relevance to inputted content */
     public var relevance: Double?
+
+    /** sentiment concerning content */
     public var sentiment: Sentiment?
+
+    /** related text */
     public var text: String?
     
     

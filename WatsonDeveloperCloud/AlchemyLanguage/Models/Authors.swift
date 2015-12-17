@@ -27,7 +27,10 @@ import ObjectMapper
 public struct Authors: Mappable {
     
     // MARK: Authors
+    /** "yes" / "no" about results*/
     public var confident: String?
+
+    /** author names*/
     public var names: [String]?
     
     public init?(_ map: Map) {}

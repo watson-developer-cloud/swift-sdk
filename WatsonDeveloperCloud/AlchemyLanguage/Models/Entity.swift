@@ -30,13 +30,28 @@ public struct Entity: AlchemyGenericModel, Mappable {
     public var totalTransactions: Int?
     
     // MARK: Entity
+    /** how often this entity is seen */
     public var count: Int?
+
+    /** disambiguation information for the detected entity (sent only if disambiguation occurred) */
     public var disambiguated: DisambiguatedLinks?
+
+    /** see **KnowledgeGraph** */
     public var knowledgeGraph: KnowledgeGraph?
+
+    /** example usage of our keyword */
     public var quotations: [Quotation]? = []
+
+    /** relevance to content */
     public var relevance: Double?
+
+    /** sentiment concerning keyword */
     public var sentiment: Sentiment?
+
+    /** surrounding text */
     public var text: String?
+
+    /** Person, City, Country */
     public var type: String?
     
     

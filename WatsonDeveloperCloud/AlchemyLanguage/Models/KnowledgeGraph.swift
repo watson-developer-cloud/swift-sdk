@@ -30,6 +30,7 @@ public struct KnowledgeGraph: AlchemyGenericModel, Mappable {
     public var totalTransactions: Int?
     
     // MARK: KnowledgeGraph
+    /** The path through the knowledge graph to the appropriate keyword */
     public var typeHierarchy: String?
     
     

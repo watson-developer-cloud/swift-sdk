@@ -30,6 +30,7 @@ public struct Feed: AlchemyGenericModel, Mappable {
     public var totalTransactions: Int?
     
     // MARK: Feed
+    /** a link to the feed */
     public var feed: String?
     
     

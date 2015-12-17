@@ -34,6 +34,7 @@ public struct DocumentText: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: DocumentText
+    /** returned text */
     public var text: String?
     
     

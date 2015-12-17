@@ -34,7 +34,10 @@ public struct SAORelations: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: SAORelations
+    /** text inputted */
     public var text: String?
+
+    /** results (see **SAORelation**) */
     public var relations: [SAORelation]?
 
     

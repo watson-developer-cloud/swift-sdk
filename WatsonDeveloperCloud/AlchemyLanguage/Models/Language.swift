@@ -34,11 +34,22 @@ public struct Language: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Keyword
+    /** link to Ethnologue containing information on the detected language */
     public var ethnologue: String?
+
+    /** ISO-639-1 code for the detected language */
     public var iso6391: String?
+
+    /** ISO-639-2 code for the detected language */
     public var iso6392: String?
+
+    /** ISO-639-3 code for the detected language */
     public var iso6393: String?
+
+    /** how many people speak this language */
     public var nativeSpeakers: String?
+
+    /** a useful wiki on this language */
     public var wikipedia: String?
     
     

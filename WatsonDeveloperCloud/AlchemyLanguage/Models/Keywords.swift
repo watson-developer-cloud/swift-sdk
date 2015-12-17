@@ -34,7 +34,10 @@ public struct Keywords: AlchemyLanguageGenericModel, Mappable {
     public var url: String?
     
     // MARK: Keywords
+    /** keywords response (see **Keyword**) */
     public var keywords: [Keyword]?
+
+    /** inputted text */
     public var text: String?
     
     

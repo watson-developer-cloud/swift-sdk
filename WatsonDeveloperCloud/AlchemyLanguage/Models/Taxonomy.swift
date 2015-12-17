@@ -26,8 +26,13 @@ import ObjectMapper
  */
 public struct Taxonomy: Mappable {
     
+    /** confidence in result: 0 or 1 */
     public var confident: Int?
+
+    /**  category of taxonomy */
     public var label: String?
+
+    /** confidence score for detected category, 0.0 to 1.0, higher is better */
     public var score: Double?
     
     

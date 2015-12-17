@@ -26,16 +26,17 @@ class AlchemyVisionTests: XCTestCase {
     var testUrl = "http://www.nytimes.com/2013/07/13/us/politics/a-day-of-friction-notable-even-for-a-fractious-congress.html?_r=0"
     var faceTagURL = "http://demo1.alchemyapi.com/images/vision/mother-daughter.jpg"
 
-    let serviceVision = AlchemyVision()
+    var serviceVision: AlchemyVision!
     
     override func setUp() {
         super.setUp()
         if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                serviceVision._apiKey = dict["AlchemyAPIKey"]!
+                if serviceVision == nil {
+                    serviceVision = AlchemyVision(apiKey: dict["AlchemyAPIKey"]!)
+                }
             }
         }
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {

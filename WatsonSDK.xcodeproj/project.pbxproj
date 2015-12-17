@@ -28,7 +28,7 @@
 		6EE643751BFB94DC00303010 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE643741BFB94DC00303010 /* DocumentAuthors.swift */; };
 		7A03EFA61C20BE0700EBE0AC /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFA31C20BE0700EBE0AC /* AuthenticationStrategy.swift */; };
 		7A03EFA71C20BE0700EBE0AC /* BasicAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFA41C20BE0700EBE0AC /* BasicAuthenticationStrategy.swift */; };
-		7A03EFA81C20BE0700EBE0AC /* TokenAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFA51C20BE0700EBE0AC /* TokenAuthenticationStrategy.swift */; };
+		7A03EFA81C20BE0700EBE0AC /* APIKeyAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFA51C20BE0700EBE0AC /* APIKeyAuthenticationStrategy.swift */; };
 		7A03EFAA1C20BF1F00EBE0AC /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFA91C20BF1F00EBE0AC /* AuthenticationTests.swift */; };
 		7A03EFAC1C20BF3D00EBE0AC /* FacebookAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFAB1C20BF3D00EBE0AC /* FacebookAuthenticationStrategy.swift */; };
 		7A03EFAE1C20BF7500EBE0AC /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFAD1C20BF7500EBE0AC /* CoreResponse.swift */; };
@@ -219,7 +219,7 @@
 		6EE643741BFB94DC00303010 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
 		7A03EFA31C20BE0700EBE0AC /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationStrategy.swift; path = Authentication/AuthenticationStrategy.swift; sourceTree = "<group>"; };
 		7A03EFA41C20BE0700EBE0AC /* BasicAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicAuthenticationStrategy.swift; path = Authentication/BasicAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7A03EFA51C20BE0700EBE0AC /* TokenAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenAuthenticationStrategy.swift; path = Authentication/TokenAuthenticationStrategy.swift; sourceTree = "<group>"; };
+		7A03EFA51C20BE0700EBE0AC /* APIKeyAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIKeyAuthenticationStrategy.swift; path = Authentication/APIKeyAuthenticationStrategy.swift; sourceTree = "<group>"; };
 		7A03EFA91C20BF1F00EBE0AC /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		7A03EFAB1C20BF3D00EBE0AC /* FacebookAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacebookAuthenticationStrategy.swift; path = Authentication/FacebookAuthenticationStrategy.swift; sourceTree = "<group>"; };
 		7A03EFAD1C20BF7500EBE0AC /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
@@ -842,7 +842,7 @@
 			children = (
 				7A03EFA31C20BE0700EBE0AC /* AuthenticationStrategy.swift */,
 				7A03EFA41C20BE0700EBE0AC /* BasicAuthenticationStrategy.swift */,
-				7A03EFA51C20BE0700EBE0AC /* TokenAuthenticationStrategy.swift */,
+				7A03EFA51C20BE0700EBE0AC /* APIKeyAuthenticationStrategy.swift */,
 				7A03EFAB1C20BF3D00EBE0AC /* FacebookAuthenticationStrategy.swift */,
 			);
 			name = Authentication;
@@ -1067,7 +1067,7 @@
 				7ADC3AA11BF9597900CD916E /* PersonalityInsights.swift in Sources */,
 				7A03EFBA1C21241A00EBE0AC /* LanguageTranslationError.swift in Sources */,
 				6E4029F11C051F0300D3ADB0 /* SpeechToTextResponse.swift in Sources */,
-				7A03EFA81C20BE0700EBE0AC /* TokenAuthenticationStrategy.swift in Sources */,
+				7A03EFA81C20BE0700EBE0AC /* APIKeyAuthenticationStrategy.swift in Sources */,
 				7ADC3A9E1BF9597900CD916E /* ContentItem.swift in Sources */,
 				7A741BA51C18838A002C85A7 /* WatsonService.swift in Sources */,
 				7ADC3A831BF9560400CD916E /* ImageKeyWords.swift in Sources */,

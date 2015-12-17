@@ -22,14 +22,14 @@ extension SpeechToText {
     public struct SpeechToTextResponse: Mappable
     {
         /// Contains a list of transcription results.
-        var results: [SpeechToTextResult]?
+        public var results: [SpeechToTextResult]?
         
         /**
         Contains the state of the service
         
         - listening
         */
-        var state: String?
+        public var state: String?
         
         public init?(_ map: Map) {}
         

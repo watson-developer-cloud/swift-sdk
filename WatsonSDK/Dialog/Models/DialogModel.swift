@@ -34,8 +34,8 @@ extension Dialog {
     
     public struct DialogModel: Mappable {
         
-        var dialogID: DialogID?
-        var name: String?
+        public var dialogID: DialogID?
+        public var name: String?
         
         public init?(_ map: Map) {}
         

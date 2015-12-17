@@ -22,18 +22,18 @@ extension PersonalityInsights {
     /// An input model object used to pass detailed information about content items.
     public struct ContentItem: Mappable {
 
-        var ID:String?
-        var userID: String?
-        var sourceID: String?
-        var created: Int?
-        var updated: Int?
-        var contentType: String?
-        var charset: String?
-        var language: String?
-        var content: String?
-        var parentID: String?
-        var reply: Bool?
-        var forward: Bool?
+        public var ID:String?
+        public var userID: String?
+        public var sourceID: String?
+        public var created: Int?
+        public var updated: Int?
+        public var contentType: String?
+        public var charset: String?
+        public var language: String?
+        public var content: String?
+        public var parentID: String?
+        public var reply: Bool?
+        public var forward: Bool?
         
         public init?(_ map: Map) {}
         

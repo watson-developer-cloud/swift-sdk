@@ -18,7 +18,7 @@ import Foundation
 import ObjectMapper
 
 extension NaturalLanguageClassifier {
-
+    
     public struct Classification: Mappable {
         public var id: String?
         public var url: String?

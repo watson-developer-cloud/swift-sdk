@@ -20,8 +20,8 @@ import ObjectMapper
 extension Dialog {
     
     public struct Node: Mappable {
-        var content: String?
-        var node: String?
+        public var content: String?
+        public var node: String?
         
         init(content: String? = nil, node: String? = nil) {
             self.content = content

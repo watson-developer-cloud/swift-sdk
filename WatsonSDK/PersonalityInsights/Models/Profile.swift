@@ -22,12 +22,12 @@ extension PersonalityInsights {
     /// Profile model object that is returned by PersonalityInsights service
     public struct Profile: Mappable {
         
-        var tree:Trait?
-        var ID:String?
-        var source:String?
-        var wordCount:Int?
-        var wordCountMessage:Int?
-        var processedLang:String?
+        public var tree:Trait?
+        public var ID:String?
+        public var source:String?
+        public var wordCount:Int?
+        public var wordCountMessage:Int?
+        public var processedLang:String?
         
         public init?(_ map: Map) {}
         

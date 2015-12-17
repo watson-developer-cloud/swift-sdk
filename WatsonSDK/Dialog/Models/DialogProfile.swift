@@ -21,8 +21,8 @@ extension Dialog {
     
     public struct Profile: Mappable {
         
-        var clientID: Int?
-        var parameters: [Parameter]?
+        public var clientID: Int?
+        public var parameters: [Parameter]?
         
         public init(clientID: Int? = nil, parameters: [String: String]? = nil) {
             self.clientID = clientID
@@ -46,8 +46,8 @@ extension Dialog {
     
     public struct Parameter: Mappable {
         
-        var name: String?
-        var value: String?
+        public var name: String?
+        public var value: String?
         
         public init(name: String? = nil, value: String? = nil) {
             self.name = name

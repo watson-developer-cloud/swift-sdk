@@ -24,8 +24,8 @@ extension SpeechToText {
      provided with a confidence rating.
      */
     public struct SpeechToTextAlternative: Mappable {
-        var transcript: String?
-        var confidence: Double?
+        public var transcript: String?
+        public var confidence: Double?
         
         public init?(_ map: Map) {}
         

@@ -22,14 +22,14 @@ extension PersonalityInsights {
     /// A recursive model that contains information about a personality trait.
     public struct Trait: Mappable {
         
-        var ID:String?
-        var name:String?
-        var category:String?
-        var percentage:Double?
-        var samplingError:Double?
-        var rawScore:Double?
-        var rawSamplingError:Double?
-        var children:[Trait]?
+        public var ID:String?
+        public var name:String?
+        public var category:String?
+        public var percentage:Double?
+        public var samplingError:Double?
+        public var rawScore:Double?
+        public var rawSamplingError:Double?
+        public var children:[Trait]?
         
         public init?(_ map: Map) {}
         

@@ -22,19 +22,19 @@ extension TextToSpeech {
     public struct Voice: Mappable {
         
         // URL for addressing the voice in a synthesize call
-        var url: String?
+        public var url: String?
         
         // Gender of the voice
-        var gender: String?
+        public var gender: String?
         
         // Name of the voice
-        var name: String?
+        public var name: String?
         
         // Language of the voice
-        var language: String?
+        public var language: String?
         
         // Description of the voice
-        var description: String?
+        public var description: String?
         
         public init?(_ map: Map) {}
         

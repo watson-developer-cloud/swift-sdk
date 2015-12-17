@@ -21,11 +21,11 @@ extension Dialog {
     
     public struct ConversationResponse: Mappable {
         
-        var response: [String]?
-        var input: String?
-        var conversationID: Int?
-        var confidence: Double?
-        var clientID: Int?
+        public var response: [String]?
+        public var input: String?
+        public var conversationID: Int?
+        public var confidence: Double?
+        public var clientID: Int?
         
         public init?(_ map: Map) {}
         

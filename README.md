@@ -11,14 +11,14 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [Installation](#installation)
 
 * [IBM Watson Services](#ibm-watson-services)
-	* [Alchemy Language](#alchemy-language)
-	* [Alchemy Vision](#alchemy-vision)
-	* [Dialog](#dialog)
-	* [Language Translation](#language-translation)
-	* [Natural Language Classifier](#natural-language-classifier)
-	* [Personality Insights](#personality-insights)
-	* [Speech to Text](#speech-to-text)	
-	* [Text to Speech](#text-to-speech)
+	- [Alchemy Language](#alchemy-language)
+	- [Alchemy Vision](#alchemy-vision)
+	- [Dialog](#dialog)
+	- [Language Translation](#language-translation)
+	- [Natural Language Classifier](#natural-language-classifier)
+	- [Personality Insights](#personality-insights)
+	- [Speech to Text](#speech-to-text)	
+	- [Text to Speech](#text-to-speech)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
@@ -33,17 +33,17 @@ The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Al
 
 The second method of installing is using Homebrew for the download and installation of carthage with the following commands
 
-```
+```shell
 brew update && brew install carthage
 ```
 
 Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
 
-``` 
+``` shell
 carthage update --platform iOS
 ```
 
-**Frameworks Used**
+**Frameworks Used:**
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)
 * [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
@@ -395,7 +395,12 @@ The following links provide more information about the Text To Speech service:
 
 ## Authentication
 
-IBM Watson Services are hosted in the Bluemix platform. 
+IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
+
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a series of *AuthenticationStrategy*. 
+
+To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
+
 
 ## Build + Test
 

@@ -45,6 +45,7 @@
 		7A03EFC41C215E3600EBE0AC /* AlchemyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */; };
 		7A03EFC61C215F6700EBE0AC /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC51C215F6700EBE0AC /* HTTPMethods.swift */; };
 		7A03EFC81C21D53800EBE0AC /* CustomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03EFC71C21D53800EBE0AC /* CustomModel.swift */; };
+		7A0F95A81C230FCB004C01C0 /* AlchemyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F95A71C230FCB004C01C0 /* AlchemyService.swift */; };
 		7A36F9A11BF8DDCB005E478F /* WatsonSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A36F9A81BF8DDCB005E478F /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */; };
 		7A36F9BC1BF8DEB8005E478F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36F9B71BF8DEB8005E478F /* Alamofire.framework */; };
@@ -236,6 +237,7 @@
 		7A03EFC31C215E3600EBE0AC /* AlchemyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyRequest.swift; sourceTree = "<group>"; };
 		7A03EFC51C215F6700EBE0AC /* HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
 		7A03EFC71C21D53800EBE0AC /* CustomModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomModel.swift; sourceTree = "<group>"; };
+		7A0F95A71C230FCB004C01C0 /* AlchemyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyService.swift; sourceTree = "<group>"; };
 		7A36F99D1BF8DDCA005E478F /* WatsonSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A36F9A01BF8DDCB005E478F /* WatsonSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonSDK.h; sourceTree = "<group>"; };
 		7A36F9A21BF8DDCB005E478F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				7A741BA41C18838A002C85A7 /* WatsonService.swift */,
 				7ADC3A341BF950C800CD916E /* WatsonCoreConstants.swift */,
 				7ACEBA2E1C22462200A08B20 /* Validation.swift */,
+				7A0F95A71C230FCB004C01C0 /* AlchemyService.swift */,
 			);
 			name = WatsonCore;
 			path = WatsonSDK/WatsonCore;
@@ -1058,6 +1061,7 @@
 				E1023E801C13549C00C6602B /* WatsonSocketDelegate.swift in Sources */,
 				7A89EF9A1C0DF15E00281B77 /* DialogConversationResponse.swift in Sources */,
 				6E75353E1C0515F3003EAECE /* Microformat.swift in Sources */,
+				7A0F95A81C230FCB004C01C0 /* AlchemyService.swift in Sources */,
 				7A741BA71C188394002C85A7 /* Mapper.swift in Sources */,
 				7ADC3A7F1BF9560400CD916E /* ImageFace.swift in Sources */,
 				7A03EFC81C21D53800EBE0AC /* CustomModel.swift in Sources */,

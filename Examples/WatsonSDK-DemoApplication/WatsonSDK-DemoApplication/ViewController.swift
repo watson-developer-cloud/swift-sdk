@@ -303,7 +303,14 @@ extension ViewController: BarViewDelegate {
         
         presentPopoverScreen(self.selectView!)
         self.view.bringSubviewToFront(self.selectView)
-        self.selectTableView.flashScrollIndicators()
+        let nanosecondDelay = UInt64(pow(10, 9) * popupDuration)
+        let delayedTime = DISPATCH_TIME_NOW + nanosecondDelay
+        
+        dispatch_after(delayedTime, dispatch_get_main_queue()) {
+            
+            self.selectTableView.flashScrollIndicators()
+            
+        }
         
     }
     

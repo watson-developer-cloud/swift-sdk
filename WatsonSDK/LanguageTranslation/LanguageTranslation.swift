@@ -246,7 +246,8 @@ public class LanguageTranslation: WatsonService {
                 endpoint: Constants.models,
                 authStrategy: self.authStrategy,
                 accept: .JSON,
-                headerParams: headerParams)
+                headerParams: headerParams,
+                urlParams: urlParams)
             
             // execute request
             Alamofire.upload(request,

@@ -1,7 +1,9 @@
 # Watson iOS SDK
 
 
-[![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK) [![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
+[![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK) 
+[![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift 2.0+ applications.
 
@@ -39,22 +41,17 @@ brew update && brew install carthage
 Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
 
 ``` 
-carthage update
+carthage update --platform iOS
 ```
 
 **Frameworks Used**
 
-[Alamofire](https://github.com/Alamofire/Alamofire)
-
-[XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
-
-[ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
-
-[HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
-
-[Starscream](https://github.com/daltoniam/Starscream)
-
-[AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Alamofire](https://github.com/Alamofire/Alamofire)
+* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
+* [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Starscream](https://github.com/daltoniam/Starscream)
+* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
+* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
 
 
 ## Examples 
@@ -65,7 +62,7 @@ A sample app can be found in the [WatsonSDK-DemoApplication](../../tree/master/E
 
 ## Tests
 
-Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
+Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## IBM Watson Services
 
@@ -278,7 +275,50 @@ The following links provide more information about the Personality Insights serv
 
 ### Speech to Text
 
-The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
+The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text. The services takes audio data encoded in [Opus/OGG](https://www.opus-codec.org/), [FLAC](https://xiph.org/flac/), WAV, and Linear 16-bit PCM uncompressed formats. The service automatically downmixes to one channel during transcoding.
+
+Create a SpeechToText service:
+
+```swift 
+let stt = SpeechToText(authStrategy: strategy)
+```
+
+You can create an AVAudioRecorder with the necessary settings:
+
+```swift
+
+let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
+        
+let session = AVAudioSession.sharedInstance()
+var settings = [String: AnyObject]()
+        
+settings[AVSampleRateKey] = NSNumber(float: 44100.0)
+settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
+do {
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        recorder = try AVAudioRecorder(URL: filePath, settings: settings)
+} catch {
+        // error
+}
+```
+
+To make a call for transcription, use:
+
+```swift
+let data = NSData(contentsOfURL: recorder.url)
+            
+if let data = data {
+        
+        sttService.transcribe(data , format: .WAV, oncompletion: {
+            
+            response, error in
+            
+            // use response.transcription()
+        }
+}
+```
+        
+
 
 The following links provide additional information about the IBM Speech to Text service:
 
@@ -330,7 +370,7 @@ service.listVoices({
 })
 ```
 
-For some example
+The following voices can be used:
 
 Voice        | Language    | Gender
 ------------ | ----------- | --------------- 
@@ -339,11 +379,11 @@ de-DE_DieterVoice     | German               | Male
 en-GB_KateVoice       | English (British)    | Female
 en-US_AllisonVoice    | English (US)         | Female
 en-US_LisaVoice       | English (US)         | Female
-es-ES_Enrique         | Spanish (Castilian)  | Male
-es-ES_Laura           | Spanish (Castilian)  | Female
-es-US_Sofia           | Spanish (North American) | Female
-fr-FR_Renee           | French               | Female
-it-IT_Francesca       | Italian              | Female
+es-ES_EnriqueVoice    | Spanish (Castilian)  | Male
+es-ES_LauraVoice      | Spanish (Castilian)  | Female
+es-US_SofiaVoice      | Spanish (North American) | Female
+fr-FR_ReneeVoice      | French               | Female
+it-IT_FrancescaVoice  | Italian              | Female
 
 To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
 

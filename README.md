@@ -39,22 +39,17 @@ brew update && brew install carthage
 Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
 
 ``` 
-carthage update
+carthage update --platform iOS
 ```
 
 **Frameworks Used**
 
-[Alamofire](https://github.com/Alamofire/Alamofire)
-
-[XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
-
-[ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
-
-[HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
-
-[Starscream](https://github.com/daltoniam/Starscream)
-
-[AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Alamofire](https://github.com/Alamofire/Alamofire)
+* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
+* [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Starscream](https://github.com/daltoniam/Starscream)
+* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
+* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
 
 
 ## Examples 
@@ -65,7 +60,7 @@ A sample app can be found in the [WatsonSDK-DemoApplication](../../tree/master/E
 
 ## Tests
 
-Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
+Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## IBM Watson Services
 
@@ -330,7 +325,7 @@ service.listVoices({
 })
 ```
 
-For some example
+The following voices can be used:
 
 Voice        | Language    | Gender
 ------------ | ----------- | --------------- 
@@ -339,11 +334,11 @@ de-DE_DieterVoice     | German               | Male
 en-GB_KateVoice       | English (British)    | Female
 en-US_AllisonVoice    | English (US)         | Female
 en-US_LisaVoice       | English (US)         | Female
-es-ES_Enrique         | Spanish (Castilian)  | Male
-es-ES_Laura           | Spanish (Castilian)  | Female
-es-US_Sofia           | Spanish (North American) | Female
-fr-FR_Renee           | French               | Female
-it-IT_Francesca       | Italian              | Female
+es-ES_EnriqueVoice    | Spanish (Castilian)  | Male
+es-ES_LauraVoice      | Spanish (Castilian)  | Female
+es-US_SofiaVoice      | Spanish (North American) | Female
+fr-FR_ReneeVoice      | French               | Female
+it-IT_FrancescaVoice  | Italian              | Female
 
 To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
 

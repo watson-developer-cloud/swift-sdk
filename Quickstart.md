@@ -28,7 +28,7 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/cartfile.png" width="400">
 
-4) Run "carthage update --platform iOS" from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run the command again.
+4) Run `carthage update --platform iOS` from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run the command again.
 
 <img src="./images/runCarthage.png" width="500">
 

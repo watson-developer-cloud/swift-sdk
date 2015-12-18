@@ -7,7 +7,7 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 
 Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Watson!
 
-> *The Watson iOS SDK is currently in beta.
+> *The Watson iOS SDK is currently in beta.*
 
 ## Table of Contents
 * [Installation](#installation)

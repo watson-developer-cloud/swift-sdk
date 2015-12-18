@@ -307,7 +307,7 @@ if let data = data {
             
             response, error in
             
-            // use response.transcription()
+            // code here
         }
 }
 ```
@@ -339,7 +339,7 @@ service.synthesize("Hello World", oncompletion: {
 	data, error in 
 	
 	if let data = data {
-	
+	     // code here
 	}
 )
 ```
@@ -359,7 +359,7 @@ The Watson TTS service contains support for many voices with different genders, 
 ```swift
 service.listVoices({
 	voices, error in
-	
+	  // code here
 	
 })
 ```
@@ -386,7 +386,7 @@ service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 	data, error in 
 	
 	if let data = data {
-	
+		// code here
 	}
 )
 ```

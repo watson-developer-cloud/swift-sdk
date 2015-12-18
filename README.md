@@ -29,7 +29,7 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
 
 ## Installation
  
-The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency managagment tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
+The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
 
 The second method of installing is using Homebrew for the download and installation of carthage with the following commands
 

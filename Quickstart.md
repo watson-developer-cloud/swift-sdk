@@ -1,22 +1,21 @@
 #Quick Start Guide
 
-This is a quick walkthrough to demonstrate how to create a iOS app that uses Watson's Text To Speech service to speak in English.
+This is a quick walkthrough to demonstrate how to create an iOS app that uses Watson's Text To Speech service to speak in English.
 
 ###Prerequisite 
 
-Before beginning to create the iOS client, make sure you set up your BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application, it does not matter in this example since we will not be deploying any server-side code. Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. For more information about creating Bluemix applications and attaching Bluemix and Watson services read [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted).
+Before beginning to create the iOS application, make sure you set up a BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application (it does not matter in this example since we will not be deploying any server-side code). Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. For more information about creating Bluemix applications and attaching Bluemix and Watson services read [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted).
 
-In addition, this quick guide uses Carthage to fetch necessary depedencies that the Watson iOS SDK requires. You can install  [Carthage](https://github.com/Carthage/Carthage) by following **"Installing Carthage"** section. If you use Homebrew you can simply run "brew install carthage".
+In addition, this quick guide uses Carthage to fetch the Watson iOS SDK and its dependencies. [Carthage](https://github.com/Carthage/Carthage) provides instruction for [Installing Carthage](https://github.com/Carthage/Carthage#installing-carthage).
 
 
+###Create a Text to Speech App
 
-###Create a Text to Speach App
-
-1) Create a **"Single View App"** in XCode and name it "WatsonSpeaks".
+1) Create a **"Single View App"** in Xcode and name it "WatsonSpeaks".
 
 <img src="./images/SingleViewapp.png" width="500">
 
-2) Fill in the fields for Project Name, Organization Name, Organization Indentifier, and Bundle Identifier.  
+2) Fill in the fields for Product Name, Organization Name, and Organization Identifier.  
 
 <img src="./images/WatsonSpeak.png" width="500">
 
@@ -24,28 +23,28 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 ```
 # cartfile contents
-github "https://github.com/watson-developer-cloud/ios-sdk"
+github "watson-developer-cloud/ios-sdk"
 ```
 
 <img src="./images/cartfile.png" width="400">
 
-4) Run "carthage update --platform iOS" from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run "carthage update" again.
+4) Run "carthage update --platform iOS" from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run the command again.
 
 <img src="./images/runCarthage.png" width="500">
 
-5) Create new Group in your Xcode project and call it "Frameworks".
+5) Create a new Group in your Xcode project called "Frameworks".
 
 <img src="./images/NewGroup.png" width="300">
 
-6) Select all the .framework (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger) files in the carthage/build/ios/ directory. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
+6) Select all the .framework files in the `Carthage/Build/iOS/` directory of your project (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger). Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in Xcode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them.
 
 <img src="./images/frameworksInGroup.png" width="400">
 
-7) In XCode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
+7) In Xcode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
 
 <img src="./images/BuildPhases.png" width="600">
 
-8) Add all of the frameworks you added to XCode to the Copy Files Phase.
+8) Add all of the frameworks you added to Xcode to the Copy Files Phase.
 
 <img src="./images/AddedCopyFiles.png" width="600">
 
@@ -122,4 +121,3 @@ github "https://github.com/watson-developer-cloud/ios-sdk"
 You can review the different voices and languages [here](https://github.com/watson-developer-cloud/ios-sdk#text-to-speech).
 
 You can download all the source code for the Watson iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).
-

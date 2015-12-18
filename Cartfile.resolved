@@ -1,0 +1,6 @@
+github "Alamofire/Alamofire" "3.1.2"
+github "Hearst-DD/ObjectMapper" "1.0.1"
+github "daltoniam/Starscream" "1.0.2"
+github "rhodgkins/SwiftHTTPStatusCodes" "2.0.1"
+github "DaveWoodCom/XCGLogger" "Version_3.1.1"
+github "tristanhimmelman/AlamofireObjectMapper" "2.1.0"

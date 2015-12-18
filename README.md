@@ -1,11 +1,9 @@
 # Watson iOS SDK
 
 
-[![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK) 
-[![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
+The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](Quickstart.md).
 
 ## Table of Contents
 * [Installation](#installation)
@@ -40,6 +38,8 @@ Once the dependency manager is installed, the next step is to download the neede
 ``` shell
 carthage update --platform iOS
 ```
+
+For more details on using the iOS SDK in your application, please review the [Quickstart Guide](Quickstart.md).
 
 **Frameworks Used:**
 
@@ -309,7 +309,7 @@ if let data = data {
             
             response, error in
             
-            // use response.transcription()
+            // code here
         }
 }
 ```
@@ -341,7 +341,7 @@ service.synthesize("Hello World", oncompletion: {
 	data, error in 
 	
 	if let data = data {
-	
+	     // code here
 	}
 )
 ```
@@ -361,7 +361,7 @@ The Watson TTS service contains support for many voices with different genders, 
 ```swift
 service.listVoices({
 	voices, error in
-	
+	  // code here
 	
 })
 ```
@@ -388,7 +388,7 @@ service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 	data, error in 
 	
 	if let data = data {
-	
+		// code here
 	}
 )
 ```
@@ -403,10 +403,11 @@ The following links provide more information about the Text To Speech service:
 
 IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
 
-It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a series of *AuthenticationStrategy*. 
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a collection of classes that use the protocol *AuthenticationStrategy*. 
 
 To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
 
+You can create a new AuthenticationStrategy unique for your application by creating a new class using the *AuthenticationStrategy* protocol. The required method *refreshToken* must be implemented and this is responsible for fetching a new token from a web services and storing the internal property token inside of the class.
 
 ## Build + Test
 

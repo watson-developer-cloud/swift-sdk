@@ -1,6 +1,6 @@
 # Watson iOS SDK
 
-
+[![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=develop)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.

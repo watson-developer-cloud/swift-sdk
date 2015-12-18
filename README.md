@@ -39,6 +39,8 @@ Once the dependency manager is installed, the next step is to download the neede
 carthage update --platform iOS
 ```
 
+For more details on using the iOS SDK in your application, please review the [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
+
 **Frameworks Used:**
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)

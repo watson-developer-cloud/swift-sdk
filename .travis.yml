@@ -1,7 +1,7 @@
 language: objective-c
 
 osx_image: xcode7.2
-xcode_project: WatsonDeveloperCloud
+xcode_project: WatsonDeveloperCloud.xcodeproj
 xcode_scheme: WatsonDeveloperCloud
 xcode_sdk: iphonesimulator9.2
 

@@ -40,7 +40,7 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/frameworksInGroup.png" width="400">
 
-7) In Xcode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
+7) In Xcode, select the "WatsonSpeaks" project then select its "WatsonSpeaks" build target. In the "Build Phases" tab, add a new **Copy Files Phase** and set its destination to "Frameworks".
 
 <img src="./images/BuildPhases.png" width="600">
 
@@ -86,9 +86,9 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/viewDidLoad.png" width="500">
 
-10) Use the credentials that Bluemix created and set them for username and password in the setUserNameAndPassword function.
+10) Update the initialization of `TextToSpeech` to use the credentials you obtained in the "Prerequisite" section above.
 
-11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the stream.watsonplatform.net server.
+11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the watsonplatform.net server.
 
 ```xml
 	<key>NSAppTransportSecurity</key>

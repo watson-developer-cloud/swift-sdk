@@ -86,9 +86,9 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/viewDidLoad.png" width="500">
 
-10) Use the credentials that Bluemix created and set them for username and password in the setUserNameAndPassword function.
+10) Update the initialization of `TextToSpeech` to use the credentials you obtained in the "Prerequisite" section above.
 
-11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the stream.watsonplatform.net server.
+11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the watsonplatform.net server.
 
 ```xml
 	<key>NSAppTransportSecurity</key>

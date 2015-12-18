@@ -1,3 +1,2 @@
 #!/bin/bash
-#  jazzy -a IBM -m WatsonSDK -g https://github.com/IBM-MIL/Watson-iOS-SDK
-jazzy -m WatsonSDK -g https://github.com/IBM-MIL/Watson-iOS-SDKl
+jazzy -m WatsonDeveloperCloud -g https://github.com/watson-developer-cloud/ios-sdk --skip-undocumented --hide-documentation-coverage --exclude ./WatsonDeveloperCloud/WatsonCore/Utilities/NetworkUtils.swift,./WatsonDeveloperCloud/WatsonCore/Utilities/AlchemyService.swift,./WatsonDeveloperCloud/WatsonCore/Service.swift,./WatsonDeveloperCloud/AlchemyVision/AlchemyVisionConstants.swift,./WatsonDeveloperCloud/WatsonCore/Extensions/Mapper.swift

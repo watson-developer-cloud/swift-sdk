@@ -23,16 +23,8 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 3) Create a file called "Cartfile" in the root directory of your project and put the following inside the file:
 
 ```
-        # cartfile contents
-        github "SwiftyJSON/SwiftyJSON" == 2.3.1
-        github "Alamofire/Alamofire" == 3.1.2
-        github "DaveWoodCom/XCGLogger" == 3.1.1
-        github "Hearst-DD/ObjectMapper" == 1.0.1
-        github "rhodgkins/SwiftHTTPStatusCodes" == 2.0.1
-        github "tristanhimmelman/AlamofireObjectMapper" == 2.1.0
-        github "Quick/Nimble" == 3.0.0
-        github "daltoniam/Starscream" == 1.0.2
-        github "https://github.com/IBM-MIL/Watson-iOS-SDK"
+# cartfile contents
+github "https://github.com/watson-developer-cloud/ios-sdk"
 ```
 
 <img src="./images/cartfile.png" width="400">
@@ -45,9 +37,9 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/NewGroup.png" width="300">
 
-6) Select all the .framework (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger) files in the carthage/build/ios/ directory except for **Nimble**. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
+6) Select all the .framework (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger) files in the carthage/build/ios/ directory. Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in XCode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them. 
 
-<img src="./images/frameworksInGroup.png" width="300">
+<img src="./images/frameworksInGroup.png" width="400">
 
 7) In XCode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
 
@@ -57,7 +49,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 <img src="./images/AddedCopyFiles.png" width="600">
 
-8) Open your ViewController class and add **import WatsonSDK** under the import of UIKit.
+8) Open your ViewController class and add **import WatsonDeveloperCloud** under the import of UIKit.
 
 9) Add the code below to the ***viewDidLoad*** method in the ViewController class:
 
@@ -70,8 +62,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
         super.viewDidLoad()
         
-        let tts = TextToSpeech()
-        tts.setUsernameAndPassword("YOUR TTS USERNAME", password: "YOUR TTS PASSWORD")
+        let tts = TextToSpeech(username: "YOUR TTS USERNAME", password: "YOUR TTS PASSWORD")
         tts.synthesize("All the problems of the world could be settled easily if men were only willing to think.") { 
 
             data, error in
@@ -128,7 +119,7 @@ In addition, this quick guide uses Carthage to fetch necessary depedencies that 
 
 13) Enjoy!
 
-You can review the different voices and languages [here](https://github.com/IBM-MIL/Watson-iOS-SDK#text-to-speech).
+You can review the different voices and languages [here](https://github.com/watson-developer-cloud/ios-sdk#text-to-speech).
 
-You can download all the source code for the Watson iOS SDK [here](https://github.com/IBM-MIL/Watson-iOS-SDK).
+You can download all the source code for the Watson iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).
 

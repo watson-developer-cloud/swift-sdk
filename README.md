@@ -2,29 +2,28 @@
 
 
 [![Build Status](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK.svg?token=YPHGLjpSd2i3xBsMhsyL&branch=master)](https://magnum.travis-ci.com/IBM-MIL/Watson-iOS-SDK) 
+[![codecov.io](http://codecov.io/github/IBM-MIL/Watson-iOS-SDK/coverage.svg?branch=develop)](https://codecov.io/github/IBM-MIL/Watson-iOS-SDK?branch=develop)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift 2.0+ applications.
-
-[Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md)
+The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
 
 ## Table of Contents
 * [Installation](#installation)
-* [Examples](#examples)
+
 * [IBM Watson Services](#ibm-watson-services)
-	* [Alchemy Language](#alchemy-language)
-	* [Alchemy Vision](#alchemy-vision)
-	* [Dialog](#dialog)
-	* [Language Translation](#language-translation)
-	* [Natural Language Classifier](#natural-language-classifier)
-	* [Personality Insights](#personality-insights)
-	* [Speech to Text](#speech-to-text)	
-	* [Text to Speech](#text-to-speech)
-* [Build + Test](#build--test)
+	- [Alchemy Language](#alchemy-language)
+	- [Alchemy Vision](#alchemy-vision)
+	- [Dialog](#dialog)
+	- [Language Translation](#language-translation)
+	- [Natural Language Classifier](#natural-language-classifier)
+	- [Personality Insights](#personality-insights)
+	- [Speech to Text](#speech-to-text)	
+	- [Text to Speech](#text-to-speech)
+* [Authentication](#authentication)
+* [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
 * [License](#license)
 * [Contributing](#contributing)
-
-
 
 ## Installation
  
@@ -32,44 +31,38 @@ The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Al
 
 The second method of installing is using Homebrew for the download and installation of carthage with the following commands
 
-```
+```shell
 brew update && brew install carthage
 ```
 
 Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
 
-``` 
-carthage update
+``` shell
+carthage update --platform iOS
 ```
 
-**Frameworks Used**
+**Frameworks Used:**
 
-[Alamofire](https://github.com/Alamofire/Alamofire)
-
-[XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
-
-[ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
-
-[HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
-
-[Starscream](https://github.com/daltoniam/Starscream)
-
-[AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Alamofire](https://github.com/Alamofire/Alamofire)
+* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
+* [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Starscream](https://github.com/daltoniam/Starscream)
+* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
+* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
 
 
-## Examples 
-
-
-A sample app can be found in the [WatsonSDK-DemoApplication](../../tree/master/Examples/WatsonSDK-DemoApplication) folder. The sample app demonstrates how instantiate and use some of the provided Watson SDK Services.
-
-
-## Tests
-
-Tests can be found in the 'BoxContentSDKTests' target. [Use XCode to execute the tests](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## IBM Watson Services
 
-The Watson Developer Cloud offers a variety of services for building cognitive applications.
+**Getting started with Watson Developer Cloud and Bluemix**
+
+The IBM Watson™ Developer Cloud (WDC) offers a variety of services for developing cognitive applications. Each Watson service provides a Representational State Transfer (REST) Application Programming Interface (API) for interacting with the service. Some services, such as the Speech to Text service, provide additional interfaces. 
+
+IBM Bluemix™ is the cloud platform in which you deploy applications that you develop with Watson Developer Cloud services. The Watson Developer Cloud documentation provides information for developing applications with Watson services in Bluemix. You can learn more about Bluemix from the following links:
+
+The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
+IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
+
 
 
 ### Alchemy Language
@@ -171,7 +164,7 @@ To use the Dialog service, developers script conversations as they would happen 
 Instantiate the Dialog service:
 
 ```swift
-let service = Dialog(user: "yourusername", password: "yourpassword")
+let service = Dialog(username: "yourusername", password: "yourpassword")
 ```
 
 Create a Dialog application by uploading a Dialog file:
@@ -223,7 +216,7 @@ The IBM Watson™ Language Translation service provides an Application Programmi
 How to instantiate and use the Language Translation service:
 
 ```swift
-let service = LanguageTranslation(user: "yourusername", password: "yourpassword")
+let service = LanguageTranslation(username: "yourusername", password: "yourpassword")
 service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
 
 	// code here
@@ -243,7 +236,7 @@ The IBM Watson™ Natural Language Classifier service uses machine learning algo
 How to instantiate and use the Natural Language Classifier service:
 
 ```swift
-let service = NaturalLanguageClassifier(user: "yourusername", password: "yourpassword")
+let service = NaturalLanguageClassifier(username: "yourusername", password: "yourpassword")
 
 service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
 
@@ -262,7 +255,7 @@ The following links provide more information about the Natural Language Classifi
 The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
 
 ```swift
-let service = PersonalityInsights(user: "yourusername", password: "yourpassword")
+let service = PersonalityInsights(username: "yourusername", password: "yourpassword")
 
 service!.getProfile("Some text here") { profile, error in
     
@@ -278,7 +271,50 @@ The following links provide more information about the Personality Insights serv
 
 ### Speech to Text
 
-The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text.
+The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text. The services takes audio data encoded in [Opus/OGG](https://www.opus-codec.org/), [FLAC](https://xiph.org/flac/), WAV, and Linear 16-bit PCM uncompressed formats. The service automatically downmixes to one channel during transcoding.
+
+Create a SpeechToText service:
+
+```swift 
+let stt = SpeechToText(authStrategy: strategy)
+```
+
+You can create an AVAudioRecorder with the necessary settings:
+
+```swift
+
+let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
+        
+let session = AVAudioSession.sharedInstance()
+var settings = [String: AnyObject]()
+        
+settings[AVSampleRateKey] = NSNumber(float: 44100.0)
+settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
+do {
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        recorder = try AVAudioRecorder(URL: filePath, settings: settings)
+} catch {
+        // error
+}
+```
+
+To make a call for transcription, use:
+
+```swift
+let data = NSData(contentsOfURL: recorder.url)
+            
+if let data = data {
+        
+        sttService.transcribe(data , format: .WAV, oncompletion: {
+            
+            response, error in
+            
+            // use response.transcription()
+        }
+}
+```
+        
+
 
 The following links provide additional information about the IBM Speech to Text service:
 
@@ -330,7 +366,7 @@ service.listVoices({
 })
 ```
 
-For some example
+The following voices can be used:
 
 Voice        | Language    | Gender
 ------------ | ----------- | --------------- 
@@ -339,11 +375,11 @@ de-DE_DieterVoice     | German               | Male
 en-GB_KateVoice       | English (British)    | Female
 en-US_AllisonVoice    | English (US)         | Female
 en-US_LisaVoice       | English (US)         | Female
-es-ES_Enrique         | Spanish (Castilian)  | Male
-es-ES_Laura           | Spanish (Castilian)  | Female
-es-US_Sofia           | Spanish (North American) | Female
-fr-FR_Renee           | French               | Female
-it-IT_Francesca       | Italian              | Female
+es-ES_EnriqueVoice    | Spanish (Castilian)  | Male
+es-ES_LauraVoice      | Spanish (Castilian)  | Female
+es-US_SofiaVoice      | Spanish (North American) | Female
+fr-FR_ReneeVoice      | French               | Female
+it-IT_FrancescaVoice  | Italian              | Female
 
 To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
 
@@ -363,11 +399,24 @@ The following links provide more information about the Text To Speech service:
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
+## Authentication
+
+IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
+
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a series of *AuthenticationStrategy*. 
+
+To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
+
+
 ## Build + Test
 
 ***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
 
+In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to comumnicate with the running Watson services.  A copy of this file is located in the project's folder under **WatsonDeveloperCloudTests**.  The **credentials.plist** file contains a key and value for each service's user name and password.  For example, Personality Insights has a key of PersonalityInsightsUsername for the user name and a key of PersonalityInsightsPassword for the password.  A user name and password can be optained from a running Watson service on Bluemix.  Please refer to the [IBM Watson Services](#ibm-watson-services) section for more information about Watson Services and Bluemix
+
 There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
+
+Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## Open Source @ IBM
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)

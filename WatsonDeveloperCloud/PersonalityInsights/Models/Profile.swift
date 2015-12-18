@@ -23,10 +23,15 @@ extension PersonalityInsights {
     public struct Profile: Mappable {
         
         public var tree:Trait?
+        /// The unique identifier for which these characteristics were computed, from the "userid" field of the input ContentItems
         public var ID:String?
+        /// The source for which these characteristics were computed, from the "sourceid" field of the input ContentItems
         public var source:String?
+        /// The number of words found in the input
         public var wordCount:Int?
+        /// A message indicating the number of words found and where that value falls in the range of required or suggested number of words when guidance is available
         public var wordCountMessage:Int?
+        /// The language model that was used to process the input, one of "en" or "es"
         public var processedLang:String?
         
         public init?(_ map: Map) {}

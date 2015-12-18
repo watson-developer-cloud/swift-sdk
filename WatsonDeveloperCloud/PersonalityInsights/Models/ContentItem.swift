@@ -21,18 +21,29 @@ extension PersonalityInsights {
     
     /// An input model object used to pass detailed information about content items.
     public struct ContentItem: Mappable {
-
+        
+        /// Unique identifier for this content item
         public var ID:String?
+        /// Unique identifier for the author of this content
         public var userID: String?
+        /// Identifier for the source of this content. For example, blog123, twitter
         public var sourceID: String?
+        /// Timestamp that identifies when this content was created. In milliseconds since midnight 1/1/1970 UTC
         public var created: Int?
+        /// Timestamp that identifies when this content last updated. In milliseconds since midnight 1/1/1970 UTC
         public var updated: Int?
+        /// MIME type of the content, for example, "text/plain, text/html". The tags are stripped from HTML content before it is analyzed. Other MIME types are processed as is
         public var contentType: String?
         public var charset: String?
+        /// Language identifier (two-letter ISO 639-1 identifier). Currently only English content (en) is supported
         public var language: String?
+        /// Content to be analyzed. Up to 20MB of content is supported
         public var content: String?
+        /// Unique id of the parent content item. Used to identify hierarchical relationships between posts/replies, messages/replies, etc.
         public var parentID: String?
+        /// Indicates whether this content item is a reply to another content item
         public var reply: Bool?
+        /// Indicates whether this content item is a forwarded/copied version of another content item
         public var forward: Bool?
         
         public init?(_ map: Map) {}

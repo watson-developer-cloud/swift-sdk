@@ -40,7 +40,7 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/frameworksInGroup.png" width="400">
 
-7) In Xcode, select your project "WatsonSpeaks", then select your build target. In the "Build Phases" tab, add a new **Copy File Phase**.
+7) In Xcode, select the "WatsonSpeaks" project then select its "WatsonSpeaks" build target. In the "Build Phases" tab, add a new **Copy Files Phase** and set its destination to "Frameworks".
 
 <img src="./images/BuildPhases.png" width="600">
 

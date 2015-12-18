@@ -21,7 +21,9 @@ extension NaturalLanguageClassifier {
 
     public struct ClassifiedClass: Mappable {
 
+      /// Class label
       public var name: String?
+      /// A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
       public var confidence: Double?
       
       public init?(_ map: Map) {}

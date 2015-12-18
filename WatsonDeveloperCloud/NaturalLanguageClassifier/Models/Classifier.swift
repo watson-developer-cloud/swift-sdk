@@ -26,27 +26,34 @@ extension NaturalLanguageClassifier {
         case Training = "Training"
         case Unavailable = "Unavailable"
     }
-
+    
     public struct Classifier: Mappable {
-      public var created: NSDate = NSDate()
-      public var id: String?
-      public var language: String?
-      public var name: String?
-      public var status: Status = Status.NonExistent
-      public var statusDescription: String?
-      public var url: String?
-      
-      public init?(_ map: Map) {}
-      
-      public mutating func mapping(map: Map) {
-        created            <- (map["created"], DateTransform())
-        id                 <- (map["classifier_id"])
-        language           <- map["language"]
-        name               <- map["name"]
-        url                <- map["url"]
-        status             <- (map["status"], EnumTransform())
-        statusDescription  <- map["status_description"]
-      }
+        /// Date and time (UTC) the classifier was created
+        public var created: NSDate = NSDate()
+        /// Unique identifier for this classifier
+        public var id: String?
+        /// The language used for the classifier
+        public var language: String?
+        /// User-supplied name for the classifier
+        public var name: String?
+        ///  ['Non Existent' or 'Training' or 'Failed' or 'Available' or 'Unavailable']: The state of the classifier
+        public var status: Status = Status.NonExistent
+        /// Additional detail about the status
+        public var statusDescription: String?
+        ///  Link to the classifer
+        public var url: String?
+        
+        public init?(_ map: Map) {}
+        
+        public mutating func mapping(map: Map) {
+            created            <- (map["created"], DateTransform())
+            id                 <- (map["classifier_id"])
+            language           <- map["language"]
+            name               <- map["name"]
+            url                <- map["url"]
+            status             <- (map["status"], EnumTransform())
+            statusDescription  <- map["status_description"]
+        }
     }
 }
 

@@ -20,10 +20,16 @@ import ObjectMapper
 extension NaturalLanguageClassifier {
     
     public struct Classification: Mappable {
+        
+        /// Unique identifier for this classifier
         public var id: String?
+        /// Link to the classifer
         public var url: String?
+        /// The submitted phrase
         public var text: String?
+        /// The class with the highest confidence
         public var topClass: String?
+        /// Top confidence level
         public var topConfidence: Double? {
             guard let classes = self.classes else {
                 return nil
@@ -36,6 +42,7 @@ extension NaturalLanguageClassifier {
             }
             return double
         }
+        ///  An array of up to ten class-confidence pairs sorted in descending order of confidence
         public var classes: [ClassifiedClass]?
         
         public init?(_ map: Map) {}

@@ -3,7 +3,7 @@
 
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
+The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications. For a getting started using the SDK read our [Quickstart Guide](Quickstart.md).
 
 ## Table of Contents
 * [Installation](#installation)
@@ -39,7 +39,7 @@ Once the dependency manager is installed, the next step is to download the neede
 carthage update --platform iOS
 ```
 
-For more details on using the iOS SDK in your application, please review the [Quickstart Guide](https://github.com/IBM-MIL/Watson-iOS-SDK/blob/develop/Quickstart.md).
+For more details on using the iOS SDK in your application, please review the [Quickstart Guide](Quickstart.md).
 
 **Frameworks Used:**
 

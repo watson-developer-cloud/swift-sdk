@@ -25,8 +25,6 @@ The Watson iOS SDK is a collection of services to allow developers to quickly ad
 * [License](#license)
 * [Contributing](#contributing)
 
-
-
 ## Installation
  
 The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency managagment tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
@@ -56,7 +54,15 @@ carthage update --platform iOS
 
 ## IBM Watson Services
 
-The Watson Developer Cloud offers a variety of services for building cognitive applications.
+**Getting started with Watson Developer Cloud and Bluemix**
+
+The IBM Watson™ Developer Cloud (WDC) offers a variety of services for developing cognitive applications. Each Watson service provides a Representational State Transfer (REST) Application Programming Interface (API) for interacting with the service. Some services, such as the Speech to Text service, provide additional interfaces. 
+
+IBM Bluemix™ is the cloud platform in which you deploy applications that you develop with Watson Developer Cloud services. The Watson Developer Cloud documentation provides information for developing applications with Watson services in Bluemix. You can learn more about Bluemix from the following links:
+
+The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
+IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
+
 
 
 ### Alchemy Language
@@ -158,7 +164,7 @@ To use the Dialog service, developers script conversations as they would happen 
 Instantiate the Dialog service:
 
 ```swift
-let service = Dialog(user: "yourusername", password: "yourpassword")
+let service = Dialog(username: "yourusername", password: "yourpassword")
 ```
 
 Create a Dialog application by uploading a Dialog file:
@@ -210,7 +216,7 @@ The IBM Watson™ Language Translation service provides an Application Programmi
 How to instantiate and use the Language Translation service:
 
 ```swift
-let service = LanguageTranslation(user: "yourusername", password: "yourpassword")
+let service = LanguageTranslation(username: "yourusername", password: "yourpassword")
 service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
 
 	// code here
@@ -230,7 +236,7 @@ The IBM Watson™ Natural Language Classifier service uses machine learning algo
 How to instantiate and use the Natural Language Classifier service:
 
 ```swift
-let service = NaturalLanguageClassifier(user: "yourusername", password: "yourpassword")
+let service = NaturalLanguageClassifier(username: "yourusername", password: "yourpassword")
 
 service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
 
@@ -405,6 +411,8 @@ To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*
 ## Build + Test
 
 ***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
+
+In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to comumnicate with the running Watson services.  A copy of this file is located in the project's folder under **WatsonDeveloperCloudTests**.  The **credentials.plist** file contains a key and value for each service's user name and password.  For example, Personality Insights has a key of PersonalityInsightsUsername for the user name and a key of PersonalityInsightsPassword for the password.  A user name and password can be optained from a running Watson service on Bluemix.  Please refer to the [IBM Watson Services](#ibm-watson-services) section for more information about Watson Services and Bluemix
 
 There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
 

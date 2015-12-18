@@ -19,6 +19,7 @@ import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
 
+/// The IBM Watson™ Dialog service provides a comprehensive, robust, platform for managing conversations between virtual agents and users through an application programming interface (API). These conversations are commonly referred to as dialogs.
 public class Dialog: WatsonService {
     
     // The shared WatsonGateway singleton.

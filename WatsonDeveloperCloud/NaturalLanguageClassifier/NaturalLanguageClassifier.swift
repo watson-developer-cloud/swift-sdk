@@ -18,6 +18,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
+/// The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text inputs.
 public class NaturalLanguageClassifier: WatsonService {
     
     // The shared WatsonGateway singleton.

@@ -22,7 +22,9 @@ import ObjectMapper
  */
 public struct ImageKeyWords: Mappable {
     
+    /// Transactions charged
     public var totalTransactions: Int?
+    /// Array of ImageKeyWord object
     public var imageKeyWords: [ImageKeyWord] = []
     
     public init() {

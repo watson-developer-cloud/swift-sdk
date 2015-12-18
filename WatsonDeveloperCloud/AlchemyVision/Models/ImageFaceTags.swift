@@ -22,8 +22,9 @@ import ObjectMapper
  */
 public struct ImageFaceTags : Mappable {
   
-  
+    /// Transactions charged
     public var totalTransactions: Int?
+    /// Array of ImageFace object
     public var imageFaces: [ImageFace] = []
     
     init(totalTransactions: Int, imageFaces: [ImageFace]) {

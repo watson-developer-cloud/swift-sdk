@@ -22,11 +22,17 @@ import ObjectMapper
  */
 public struct ImageFace : Mappable {
   
+    /// Approximate age range for a detected face (with an associated confidence score)
     public var age         = [String: AnyObject]()
+    /// Gender for a detected face (with an associated confidence score)
     public var gender      = [String: AnyObject]()
+    /// Height, in pixels, of a detected face
     public var height:     Int?
+    /// Coordinate of the left-most pixel for a detected face
     public var positionX:  Int?
+    /// Coordinate of the top-most pixel for a detected face
     public var positionY:  Int?
+    /// Width, in pixels, of a detected face
     public var width:      Int?
 
     public init?(_ map: Map) {}

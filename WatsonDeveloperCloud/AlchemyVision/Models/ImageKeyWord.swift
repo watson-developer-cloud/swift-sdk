@@ -22,7 +22,9 @@ import ObjectMapper
  */
 public struct ImageKeyWord: Mappable {
     
+    /// Image keyword
     public var text: String?
+    /// Confidence score for the detected image keyword 0.0 .. 1.0 (higher is better)
     public var score: Double?
     
     public init?(_ map: Map) {}

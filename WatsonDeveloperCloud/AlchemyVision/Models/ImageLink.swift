@@ -22,7 +22,9 @@ import ObjectMapper
  */
 public struct ImageLink: Mappable {
     
+    /// http url information was requested for
     public var url: String?
+    /// URL of the detected image
     public var image: String?
     
     init() {

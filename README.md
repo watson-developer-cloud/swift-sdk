@@ -401,10 +401,11 @@ The following links provide more information about the Text To Speech service:
 
 IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
 
-It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a series of *AuthenticationStrategy*. 
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a collection of classes that use the protocol *AuthenticationStrategy*. 
 
 To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
 
+You can create a new AuthenticationStrategy unique for your application by creating a new class using the *AuthenticationStrategy* protocol. The required method *refreshToken* must be implemented and this is responsible for fetching a new token from a web services and storing the internal property token inside of the class.
 
 ## Build + Test
 

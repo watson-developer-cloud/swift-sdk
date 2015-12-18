@@ -20,7 +20,9 @@ import ObjectMapper
 extension SpeechToText {
     
     public struct SpeechToTextResult: Mappable {
+        /// List of alternative transcripts received from the service
         public var alternatives: [SpeechToTextAlternative]?
+        /// If true, result for this utterance is not updated further
         public var final: Bool?
         
         public init?(_ map: Map) {}

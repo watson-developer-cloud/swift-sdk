@@ -19,4 +19,5 @@ before_script:
 #script:
 # - xcodebuild clean build  -scheme WatsonDeveloperCloud -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 
+script:
    - xcodebuild clean build  -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.1'

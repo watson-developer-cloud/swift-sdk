@@ -20,52 +20,47 @@ import XCTest
 
 class TextToSpeechTests: XCTestCase {
     
-    // Text to Speech Service
-    private var service:TextToSpeech?
-    
-    
-    private let playAudio = true
-    
-    // Phrase used for testing
+    var service: TextToSpeech!
+    let playAudio = true
+
     let testString = "All the problems of the world could be solved if men were only willing to think."
-    
     let germanString = "Alle Probleme der Welt könnten gelöst werden, wenn Männer waren nur bereit, zu denken."
-    
     let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\"><say-as interpret-as=\"letters\">Hello</say-as></speak>"
     
-    /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 20.0
+    let timeout: NSTimeInterval = 20.0
     
     override func setUp() {
-        
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                
-                    let username = dict["TextToSpeechUsername"]
-                    let password = dict["TextToSpeechPassword"]
-                    
-                    let basicAuth = BasicAuthenticationStrategy(
-                        tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
-                        serviceURL: "https://stream.watsonplatform.net/text-to-speech/api",
-                        username: username!,
-                        password: password!)
-                    
-                    service = TextToSpeech(authStrategy: basicAuth)
-                
-            } else {
-                XCTFail("Unable to extract dictionary from plist")
-            }
-        } else {
-            XCTFail("Plist file not found")
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.pathForResource("Credentials", ofType: "plist") else {
+            XCTFail("Unable to locate credentials file.")
+            return
         }
         
+        let dict = NSDictionary(contentsOfFile: url)
+        guard let credentials = dict as? Dictionary<String, String> else {
+            XCTFail("Unable to read credentials file.")
+            return
+        }
+        
+        guard let username = credentials["TextToSpeechUsername"] else {
+            XCTFail("Unable to read TextToSpeech username.")
+            return
+        }
+        
+        guard let password = credentials["TextToSpeechPassword"] else {
+            XCTFail("Unable to read TextToSpeech password.")
+            return
+        }
+        
+        if service == nil {
+            service = TextToSpeech(username: username, password: password)
+        }
     }
     
     override func tearDown() {
-        
         super.tearDown()
-        
     }
     
     /**
@@ -75,7 +70,7 @@ class TextToSpeechTests: XCTestCase {
       
         let voicesExpectation = expectationWithDescription("Get Voices")
         
-        service!.listVoices { voices, error in
+        service.listVoices { voices, error in
             
             print(voices)
             
@@ -96,7 +91,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthExpectation = expectationWithDescription("Synthesize Audio")
     
-        service!.synthesize(testString) { data, error in
+        service.synthesize(testString) { data, error in
             
                 print(error)
                 XCTAssertNil(error)
@@ -120,7 +115,7 @@ class TextToSpeechTests: XCTestCase {
         let voice = "No voice"
         let synthIncorrectExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service!.synthesize(testString, voice: voice) {
+        service.synthesize(testString, voice: voice) {
             data, error in
             
             XCTAssertNotNil(error)
@@ -143,7 +138,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthEmptyExpectation = expectationWithDescription("Synthesize Incorrect Voice Audio")
         
-        service!.synthesize("") { data, error in
+        service.synthesize("") { data, error in
             
             XCTAssertNotNil(error)
             
@@ -165,7 +160,7 @@ class TextToSpeechTests: XCTestCase {
         
         let synthPlayExpectation = expectationWithDescription("Synthesize Audio")
         
-        service!.synthesize(testString) {
+        service.synthesize(testString) {
             data, error in
             
             if let data = data {
@@ -201,7 +196,7 @@ class TextToSpeechTests: XCTestCase {
         let playExpectation = expectationWithDescription("Synthesize German Audio")
         let dieterVoice = "de-DE_DieterVoice"
         
-        service!.synthesize(germanString, voice: dieterVoice) {
+        service.synthesize(germanString, voice: dieterVoice) {
             data, error in
             
             if let data = data {
@@ -235,11 +230,8 @@ class TextToSpeechTests: XCTestCase {
     func testSynthAndPlaySSML() {
         
         let synthPlaySSMLExpectation = expectationWithDescription("Synthesize Audio")
-        
-        
-        
-        
-        service!.synthesize(ssmlString) { data, error in
+
+        service.synthesize(ssmlString) { data, error in
             
             if let data = data {
                 
@@ -265,7 +257,4 @@ class TextToSpeechTests: XCTestCase {
         
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
-
-
-    
 }

@@ -68,7 +68,9 @@ class NaturalLanguageClassifierTests: XCTestCase {
         }
         
         // instantiate the service
-        service = NaturalLanguageClassifier(username: username, password: password)
+        if service == nil {
+            service = NaturalLanguageClassifier(username: username, password: password)
+        }
     }
     
     override func tearDown() {

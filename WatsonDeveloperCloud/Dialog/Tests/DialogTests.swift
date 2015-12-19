@@ -22,7 +22,7 @@ class DialogTests: XCTestCase {
     // MARK: - Parameters and constants
     
     // the Dialog service
-    var service: Dialog?
+    var service: Dialog!
 
     // the Dialog application that will be created for testing
     let dialogName = "pizza-watsonsdk-ios"
@@ -225,7 +225,9 @@ class DialogTests: XCTestCase {
         }
         
         // instantiate the service
-        service = Dialog(username: username, password: password)
+        if service == nil {
+            service = Dialog(username: username, password: password)
+        }
     }
     
     override func tearDown() {

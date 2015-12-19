@@ -43,7 +43,7 @@ public class NaturalLanguageClassifier: WatsonService {
      
      - parameter completionHandler: Callback with [Classifier]?
      */
-    public func getClassifiers(completionHandler: ([Classifier]?, NSError?) -> ()) {
+    public func getClassifiers(completionHandler: ([Classifier]?, NSError?) -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -69,7 +69,7 @@ public class NaturalLanguageClassifier: WatsonService {
      - parameter completionHandler: Callback with Classification?
      */
     public func classify(classifierId: String, text: String,
-        completionHandler: (Classification?, NSError?) -> ()) {
+        completionHandler: (Classification?, NSError?) -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -94,7 +94,7 @@ public class NaturalLanguageClassifier: WatsonService {
      - parameter completionHandler: Callback with Classifer?
      */
     public func getClassifier(classifierId: String,
-        completionHandler: (Classifier?, NSError?) -> ()) {
+        completionHandler: (Classifier?, NSError?) -> Void) {
             
         // construct request
         let request = WatsonRequest(
@@ -117,7 +117,7 @@ public class NaturalLanguageClassifier: WatsonService {
      - parameter classifierId:      The classifer ID used to delete the classifier
      - parameter completionHandler: Bool return with true as success
      */
-    public func deleteClassifier(classifierId: String, completionHandler: NSError? -> ()) {
+    public func deleteClassifier(classifierId: String, completionHandler: NSError? -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -144,7 +144,7 @@ public class NaturalLanguageClassifier: WatsonService {
      - parameter completionHandler: Callback with Classifier?
      */
     public func createClassifier(trainerMetaURL: NSURL, trainerURL: NSURL,
-        completionHandler: (Classifier?, NSError?) -> ()) {
+        completionHandler: (Classifier?, NSError?) -> Void) {
         
         // force token to refresh
         // TODO: can remove this after its handled by WatsonGateway

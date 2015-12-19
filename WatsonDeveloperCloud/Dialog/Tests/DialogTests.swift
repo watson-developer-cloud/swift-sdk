@@ -26,12 +26,12 @@ class DialogTests: XCTestCase {
 
     // the Dialog application that will be created for testing
     let dialogName = "pizza-watsonsdk-ios"
-    var dialogID: Dialog.DialogID?
+    var dialogID: Dialog.DialogID!
     
     // the Dialog file that will be used to create the application
     let dialogFileName = "pizza_sample"
     let dialogFileType = "xml"
-    var dialogFile: NSURL? = nil
+    var dialogFile: NSURL! = nil
     
     // the initial node and response from Watson
     let initialNode = "OUTPUT(200000)"
@@ -45,8 +45,8 @@ class DialogTests: XCTestCase {
     let response2 = "What toppings are you in the mood for? (Limit 4)"
     
     // the conversation parameters
-    var conversationID: Int?
-    var clientID: Int?
+    var conversationID: Int!
+    var clientID: Int!
     let input = "I would like a medium, please."
     let response = "What toppings are you in the mood for? (Limit 4)"
     
@@ -247,7 +247,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // get existing Dialog applications
-        service!.getDialogs() { dialogs, error in
+        service.getDialogs() { dialogs, error in
             
             // verify expected response
             XCTAssertNotNil(dialogs)
@@ -257,7 +257,7 @@ class DialogTests: XCTestCase {
             let conflicts = dialogs?.filter { $0.name == self.dialogName }
             if let conflicts = conflicts {
                 conflicts.forEach() { dialog in
-                    self.service!.deleteDialog(dialog.dialogID!) { error in
+                    self.service.deleteDialog(dialog.dialogID!) { error in
                         
                         // verify expected response
                         XCTAssertNil(error)
@@ -294,7 +294,7 @@ class DialogTests: XCTestCase {
         }
         
         // create Dialog application
-        service!.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
+        service.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
             
             // verify expected response
             XCTAssertNotNil(dialogID)
@@ -314,7 +314,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // retrieve all nodes
-        service!.getContent(dialogID!) { nodes, error in
+        service.getContent(dialogID) { nodes, error in
             
             // verify expected response
             XCTAssertNotNil(nodes)
@@ -343,7 +343,7 @@ class DialogTests: XCTestCase {
         let nodes = [Dialog.Node(content: initialResponse, node: initialNode)]
         
         // update the initial node
-        service!.updateContent(dialogID!, nodes: nodes) { error in
+        service.updateContent(dialogID, nodes: nodes) { error in
             
             // verify expected response
             XCTAssertNil(error)
@@ -359,7 +359,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // list the Dialog applications associated with the service instance
-        service!.getDialogs() { dialogs, error in
+        service.getDialogs() { dialogs, error in
             
             // verify expected response
             XCTAssertNotNil(dialogs)
@@ -383,7 +383,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // download the Dialog file
-        service!.getDialogFile(dialogID!, format: format) { file, error in
+        service.getDialogFile(dialogID, format: format) { file, error in
             
             // verify expected response
             XCTAssertNotNil(file)
@@ -408,7 +408,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: dialogFile!, fileType: .WDSXML) {
+        service.updateDialog(dialogID, fileURL: dialogFile, fileType: .WDSXML) {
             error in
             
             // verify expected response
@@ -425,7 +425,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // start a new conversation
-        service!.converse(dialogID!) { response, error in
+        service.converse(dialogID) { response, error in
             
             // verify expected response
             XCTAssertNotNil(response)
@@ -449,8 +449,8 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // continue conversation
-        service!.converse(dialogID!, conversationID: conversationID!,
-            clientID: clientID!, input: input) { response, error in
+        service.converse(dialogID, conversationID: conversationID,
+            clientID: clientID, input: input) { response, error in
             
             // verify expected response
             XCTAssertNotNil(response)
@@ -472,7 +472,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // set profile variables
-        service!.updateProfile(dialogID!, clientID: clientID!, parameters: parameters) {
+        service.updateProfile(dialogID, clientID: clientID, parameters: parameters) {
             error in
             
             // verify expected response
@@ -489,7 +489,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // get all profile parameters
-        service!.getProfile(dialogID!, clientID: clientID!) { parameters, error in
+        service.getProfile(dialogID, clientID: clientID) { parameters, error in
             
             // verify expected response
             XCTAssertNotNil(parameters)
@@ -514,7 +514,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // get first profile parameter
-        service!.getProfile(dialogID!, clientID: clientID!, names: [parameterName]) {
+        service.getProfile(dialogID, clientID: clientID, names: [parameterName]) {
             parameters, error in
             
             // verify expected response
@@ -546,7 +546,7 @@ class DialogTests: XCTestCase {
         }
         
         // delete Dialog application
-        service!.deleteDialog(dialogID) { error in
+        service.deleteDialog(dialogID) { error in
             
             // verify expected response
             XCTAssertNil(error)
@@ -564,7 +564,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
 
         // get content
-        service!.getContent(invalidDialogID) { nodes, error in
+        service.getContent(invalidDialogID) { nodes, error in
             
             // verify expected response
             XCTAssertNil(nodes)
@@ -587,7 +587,7 @@ class DialogTests: XCTestCase {
         let nodes = [Dialog.Node(content: initialResponse, node: initialNode)]
         
         // update the initial node
-        service!.updateContent(invalidDialogID, nodes: nodes) { error in
+        service.updateContent(invalidDialogID, nodes: nodes) { error in
             
             // verify expected response
             XCTAssertNotNil(error)
@@ -609,7 +609,7 @@ class DialogTests: XCTestCase {
         let nodes = [Dialog.Node(content: initialNode, node: initialResponse)]
         
         // update the node
-        service!.updateContent(dialogID!, nodes: nodes) { error in
+        service.updateContent(dialogID, nodes: nodes) { error in
             
             // verify expected response
             XCTAssertNotNil(error)
@@ -634,7 +634,7 @@ class DialogTests: XCTestCase {
         }
         
         // create Dialog application
-        service!.createDialog(longDialogName, fileURL: dialogFile!) { dialogID, error in
+        service.createDialog(longDialogName, fileURL: dialogFile) { dialogID, error in
             
             // verify expected response
             XCTAssertNil(dialogID)
@@ -661,7 +661,7 @@ class DialogTests: XCTestCase {
         let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
         
         // create Dialog application
-        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+        service.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
             
             // verify expected response
             XCTAssertNil(dialogID)
@@ -698,7 +698,7 @@ class DialogTests: XCTestCase {
         }
         
         // create Dialog application
-        service!.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
+        service.createDialog(dialogName, fileURL: fileURL) { dialogID, error in
             
             // verify expected response
             XCTAssertNil(dialogID)
@@ -725,7 +725,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // delete Dialog application
-        service!.deleteDialog(invalidDialogID) { error in
+        service.deleteDialog(invalidDialogID) { error in
             
             // verify expected response
             XCTAssertNotNil(error)
@@ -744,7 +744,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // download the Dialog file
-        service!.getDialogFile(invalidDialogID) { file, error in
+        service.getDialogFile(invalidDialogID) { file, error in
             
             // verify expected response
             XCTAssertNotNil(file)
@@ -772,7 +772,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // upload the Dialog file
-        service!.updateDialog(invalidDialogID, fileURL: dialogFile!, fileType: .WDSXML) {
+        service.updateDialog(invalidDialogID, fileURL: dialogFile, fileType: .WDSXML) {
             error in
             
             // verify expected response
@@ -799,7 +799,7 @@ class DialogTests: XCTestCase {
         let fileURL = directoryURL.URLByAppendingPathComponent(pathComponent)
         
         // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .WDSJSON) { error in
+        service.updateDialog(dialogID, fileURL: fileURL, fileType: .WDSJSON) { error in
             
             // verify expected response
             XCTAssertNotNil(error)
@@ -835,7 +835,7 @@ class DialogTests: XCTestCase {
         }
         
         // upload the Dialog file
-        service!.updateDialog(dialogID!, fileURL: fileURL, fileType: .WDSJSON) { error in
+        service.updateDialog(dialogID, fileURL: fileURL, fileType: .WDSJSON) { error in
             
             // verify expected response
             XCTAssertNotNil(error)
@@ -863,7 +863,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // start a new conversation
-        service!.converse(invalidDialogID) { response, error in
+        service.converse(invalidDialogID) { response, error in
             
             // verify expected response
             XCTAssertNil(response)
@@ -883,7 +883,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // start a new conversation
-        service!.converse(dialogID!, conversationID: invalidConversationID,
+        service.converse(dialogID, conversationID: invalidConversationID,
             clientID: invalidClientID) { response, error in
                 
             // verify expected response
@@ -904,7 +904,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // start a new conversation
-        service!.converse(dialogID!, input: input) { response, error in
+        service.converse(dialogID, input: input) { response, error in
             
             // verify expected response
             XCTAssertNotNil(response)
@@ -924,7 +924,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // get all profile parameters
-        service!.getProfile(invalidDialogID, clientID: clientID!) { parameters, error in
+        service.getProfile(invalidDialogID, clientID: clientID) { parameters, error in
             
             // verify expected response
             XCTAssertNil(parameters)
@@ -944,7 +944,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // get all profile parameters
-        service!.getProfile(dialogID!, clientID: invalidClientID) { parameters, error in
+        service.getProfile(dialogID, clientID: invalidClientID) { parameters, error in
             
             // verify expected response
             XCTAssertNotNil(parameters)
@@ -964,7 +964,7 @@ class DialogTests: XCTestCase {
         let invalidNames = ["Hello", "World"]
         
         // get invalid profile parameters
-        service!.getProfile(dialogID!, clientID: clientID!, names: invalidNames) {
+        service.getProfile(dialogID, clientID: clientID, names: invalidNames) {
             parameters, error in
             
             // verify expected response
@@ -985,7 +985,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // set profile parameters
-        service!.updateProfile(invalidDialogID, clientID: clientID!,
+        service.updateProfile(invalidDialogID, clientID: clientID,
             parameters: parameters) { error in
                 
             // verify expected response
@@ -1005,7 +1005,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // set profile parameters
-        service!.updateProfile(dialogID!, clientID: invalidClientID,
+        service.updateProfile(dialogID, clientID: invalidClientID,
             parameters: parameters) { error in
                 
             // verify expected response
@@ -1025,7 +1025,7 @@ class DialogTests: XCTestCase {
         let invalidParameters = ["Hello": "World"]
         
         // update invalid profile parameters
-        service!.updateProfile(dialogID!, clientID: clientID!,
+        service.updateProfile(dialogID, clientID: clientID,
             parameters: invalidParameters) { error in
             
             // verify expected response

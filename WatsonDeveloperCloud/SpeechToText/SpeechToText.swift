@@ -203,13 +203,13 @@ public class SpeechToText: WatsonService {
      */
     public func transcribe(audioData: NSData,
         format: MediaType = .FLAC,
-        oncompletion: (SpeechToTextResponse?, NSError?) -> Void) {
+        completionHandler: (SpeechToTextResponse?, NSError?) -> Void) {
             
             
             watsonSocket.format = format
             watsonSocket.send(audioData)
             
-            self.callback = oncompletion
+            self.callback = completionHandler
         
 //            connectWebsocket()
 //        
@@ -217,7 +217,7 @@ public class SpeechToText: WatsonService {
 //            self.audioData = audioData
 //            self.format = format
 //            
-//            self.callback = oncompletion
+//            self.callback = completionHandler
             
         
     }

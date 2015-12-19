@@ -60,7 +60,7 @@ public class PersonalityInsights: WatsonService {
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        completionHandler: (Profile?, NSError?) -> ()) {
+        completionHandler: (Profile?, NSError?) -> Void) {
         
         // construct url query parameters
         var urlParams = [NSURLQueryItem]()
@@ -116,7 +116,7 @@ public class PersonalityInsights: WatsonService {
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        completionHandler: (Profile?, NSError?) -> ()) {
+        completionHandler: (Profile?, NSError?) -> Void) {
             
         // construct url query parameters
         var urlParams = [NSURLQueryItem]()

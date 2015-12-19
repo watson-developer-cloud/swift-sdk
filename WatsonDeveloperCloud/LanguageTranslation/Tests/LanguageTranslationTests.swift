@@ -30,7 +30,9 @@ class LanguageTranslationTests: XCTestCase {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
                     let username = dict["LanguageTranslationUsername"]!
                     let password = dict["LanguageTranslationPassword"]!
-                    service = LanguageTranslation(username: username, password: password)
+                    if service == nil {
+                        service = LanguageTranslation(username: username, password: password)
+                    }
             } else {
                 XCTFail("Unable to extract dictionary from plist")
             }

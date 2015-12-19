@@ -82,8 +82,9 @@ class PersonalityInsightsTests: XCTestCase {
         }
         
         // instantiate the service
-        service = PersonalityInsights(username: user, password: password)
-
+        if service == nil {
+            service = PersonalityInsights(username: user, password: password)
+        }
     }
     
     // Wait for an expectation to be fulfilled.

@@ -22,11 +22,11 @@ class PersonalityInsightsTests: XCTestCase {
     // MARK: - Parameters and Constants
     
     // the PersonalityInsights service
-    var service: PersonalityInsights?
+    var service: PersonalityInsights!
     
     // sample text
-    var mobyDickIntro: String?
-    var kennedySpeech: String?
+    var mobyDickIntro: String!
+    var kennedySpeech: String!
     
     // timeout for asynchronous completion handlers
     let timeout: NSTimeInterval = 30.0
@@ -102,7 +102,7 @@ class PersonalityInsightsTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // analyze speech
-        service!.getProfile(kennedySpeech!) { profile, error in
+        service.getProfile(kennedySpeech) { profile, error in
             
             // verify expected response
             XCTAssertNotNil(profile)
@@ -132,13 +132,13 @@ class PersonalityInsightsTests: XCTestCase {
             contentType: MediaType.Plain.rawValue,
             charset: "UTF-8",
             language: "en-us",
-            content: kennedySpeech!,
+            content: kennedySpeech,
             parentID: "",
             reply: false,
             forward: false)
         
         // analyze duplicate content items
-        service!.getProfile([contentItem, contentItem]) { profile, error in
+        service.getProfile([contentItem, contentItem]) { profile, error in
             
             // verify expected response
             XCTAssertNotNil(profile)
@@ -160,7 +160,7 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Try to analyze text that is too short (less than 100 words)."
         let expectation = expectationWithDescription(description)
         
-        service!.getProfile(mobyDickIntro!) { profile, error in
+        service.getProfile(mobyDickIntro) { profile, error in
             // verify expected response
             XCTAssertNil(profile)
             XCTAssertNotNil(error)

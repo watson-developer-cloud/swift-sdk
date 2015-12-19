@@ -62,9 +62,6 @@ class DialogTests: XCTestCase {
     // timeout for asynchronous completion handlers
     private let timeout: NSTimeInterval = 30.0
     
-    // the separator to use between sets of output
-    let separator = "----------"
-    
     // MARK: - Dialog Tests
     
     /// Test the Dialog service by executing each operation with valid parameters.

@@ -80,6 +80,11 @@ internal class WatsonGateway {
         
         var authStrategy = request.authStrategy
             
+        guard !authStrategy.isRefreshing else {
+            cachedRequests.append(cachedRequest)
+            return
+        }
+            
         guard authStrategy.token != nil else {
             cachedRequests.append(cachedRequest)
             authStrategy.isRefreshing = true
@@ -104,11 +109,6 @@ internal class WatsonGateway {
                 strongSelf.cachedRequests.removeAll()
                 cachedRequestsCopy.forEach { $0() }
             }
-            return
-        }
-            
-        guard !authStrategy.isRefreshing else {
-            cachedRequests.append(cachedRequest)
             return
         }
             

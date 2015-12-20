@@ -6,7 +6,7 @@ We don't use GitHub as a support forum. For any usage questions that are not spe
 
 # Reporting Issues
 
-If you encounter a bug with the iOS Watson SDK, please submit a detailed [issue](https://github.com/IBM-MIL/Watson-iOS-SDK/issues) so that it can be addressed quickly. We always appreciate a well-written, thorough bug report.
+If you encounter a bug with the Watson Developer Cloud iOS SDK, please submit a detailed [issue](https://github.com/IBM-MIL/Watson-iOS-SDK/issues) so that it can be addressed quickly. We always appreciate a well-written, thorough bug report.
 
 Please check that the project issues database doesn't already include that problem or suggestion before submitting an issue. If you find a match, add a quick "+1" or "I have this problem too." Doing so helps prioritize the most common problems and requests.
 

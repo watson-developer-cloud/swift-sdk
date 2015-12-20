@@ -6,7 +6,7 @@ This is a quick walkthrough to demonstrate how to create an iOS app that uses Wa
 
 Before beginning to create the iOS application, make sure you set up a BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application (it does not matter in this example since we will not be deploying any server-side code). Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. For more information about creating Bluemix applications and attaching Bluemix and Watson services read [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted).
 
-In addition, this quick guide uses Carthage to fetch the Watson iOS SDK and its dependencies. [Carthage](https://github.com/Carthage/Carthage) provides instruction for [Installing Carthage](https://github.com/Carthage/Carthage#installing-carthage).
+In addition, this quick guide uses Carthage to fetch the Watson Developer Cloud iOS SDK and its dependencies. [Carthage](https://github.com/Carthage/Carthage) provides instruction for [Installing Carthage](https://github.com/Carthage/Carthage#installing-carthage).
 
 
 ###Create a Text to Speech App
@@ -120,4 +120,4 @@ github "watson-developer-cloud/ios-sdk"
 
 You can review the different voices and languages [here](https://github.com/watson-developer-cloud/ios-sdk#text-to-speech).
 
-You can download all the source code for the Watson iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).
+You can download all the source code for the Watson Developer Cloud iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).

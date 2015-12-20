@@ -1,13 +1,13 @@
-# Watson iOS SDK
+# Watson Developer Cloud iOS SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=develop)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
+The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
 Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Watson!
 
-> *The Watson iOS SDK is currently in beta.*
+> *The Watson Developer Cloud iOS SDK is currently in beta.*
 
 ## Table of Contents
 * [Installation](#installation)
@@ -29,7 +29,7 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
 
 ## Installation
  
-The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
+The Watson Developer Cloud iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
 
 The second method of installing is using Homebrew for the download and installation of carthage with the following commands
 

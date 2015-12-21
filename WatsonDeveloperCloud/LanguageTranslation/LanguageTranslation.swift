@@ -45,7 +45,7 @@ public class LanguageTranslation: WatsonService {
                                         identifiable languages
      */
     public func getIdentifiableLanguages(
-        completionHandler: ([IdentifiableLanguage]?, NSError?) -> ()) {
+        completionHandler: ([IdentifiableLanguage]?, NSError?) -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -71,7 +71,7 @@ public class LanguageTranslation: WatsonService {
                                         confidence
      */
     public func identify(text: String,
-        completionHandler: ([IdentifiedLanguage]?, NSError?) -> ()) {
+        completionHandler: ([IdentifiedLanguage]?, NSError?) -> Void) {
             
         // construct request
         let request = WatsonRequest(
@@ -99,7 +99,7 @@ public class LanguageTranslation: WatsonService {
                                         translated strings
      */
     public func translate(text: [String], source: String, target: String,
-        completionHandler: ([String]?, NSError?) -> ()) {
+        completionHandler: ([String]?, NSError?) -> Void) {
         
         translate(TranslateRequest(text: text, source: source, target: target),
             completionHandler: completionHandler)
@@ -115,7 +115,7 @@ public class LanguageTranslation: WatsonService {
                                         translated strings
      */
     public func translate(text: [String], modelID: String,
-        completionHandler: ([String]?, NSError?) -> ()) {
+        completionHandler: ([String]?, NSError?) -> Void) {
         
         translate(TranslateRequest(text: text, modelID: modelID),
             completionHandler: completionHandler)
@@ -129,7 +129,7 @@ public class LanguageTranslation: WatsonService {
                                         translated strings.
      */
     private func translate(translateRequest: TranslateRequest,
-        completionHandler: ([String]?, NSError?) -> ()) {
+        completionHandler: ([String]?, NSError?) -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -157,7 +157,7 @@ public class LanguageTranslation: WatsonService {
      - parameter callback:     The callback method to invoke after the response is received
      */
     public func getModels(source: String? = nil, target: String? = nil,
-        defaultModel: Bool? = nil, completionHandler: ([TranslationModel]?, NSError?) -> ()) {
+        defaultModel: Bool? = nil, completionHandler: ([TranslationModel]?, NSError?) -> Void) {
 
         // construct url query parameters
         var urlParams = [NSURLQueryItem]()
@@ -194,7 +194,7 @@ public class LanguageTranslation: WatsonService {
      - parameter completionHandler: The callback method to invoke after the response is received
      */
     public func getModel(modelID: String,
-        completionHandler: (TranslationModel?, NSError?) -> ()) {
+        completionHandler: (TranslationModel?, NSError?) -> Void) {
         
         // construct request
         let request = WatsonRequest(
@@ -219,7 +219,7 @@ public class LanguageTranslation: WatsonService {
      - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
      - parameter callback:           Returns the created model
      */
-    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, completionHandler: (String?, NSError?) -> ()) {
+    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, completionHandler: (String?, NSError?) -> Void) {
         
         // force token to refresh
         // TODO: can remove this after its handled by WatsonGateway
@@ -287,7 +287,7 @@ public class LanguageTranslation: WatsonService {
      - parameter modelID:           The model identifier
      - parameter completionHandler: The callback method to invoke after the response is received, returns true if delete is successful
      */
-    public func deleteModel(modelID: String, completionHandler: NSError? -> ()) {
+    public func deleteModel(modelID: String, completionHandler: NSError? -> Void) {
         
         // construct request
         let request = WatsonRequest(

@@ -53,7 +53,7 @@ public class AlchemyVision: AlchemyService {
      - parameter inputString:       The string that contains the URL or the HTML text
      - parameter completionHandler: ImageLink object is returned in the completionHandler
      */
-    public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (ImageLink?, NSError?) ->() ) {
+    public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (ImageLink?, NSError?) -> Void) {
         
         var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
         var visionUrl = ""
@@ -91,7 +91,7 @@ public class AlchemyVision: AlchemyService {
      - parameter knowledgeGraph:    Possible values: 0 (default), 1
      - parameter callback:          Callback with ImageKeyWords through the completion handler
      */
-    public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords?, NSError?) ->() ) {
+    public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords?, NSError?) -> Void) {
         
         var endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
         var visionUrl = ""
@@ -164,7 +164,7 @@ public class AlchemyVision: AlchemyService {
      - parameter knowledgeGraph:  Possible values: 0 (default), 1
      - parameter callback:        Callback with ImageKeyWords through the completion handler
      */
-    public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) ->() ) {
+    public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) -> Void) {
         
         var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
         var visionUrl = ""

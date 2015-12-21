@@ -130,7 +130,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         entitiesParameters ep: GetEntitiesParameters = GetEntitiesParameters(),
-        completionHandler: (error: NSError, returnValue: Entities)->() ) {
+        completionHandler: (error: NSError, returnValue: Entities) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetEntities(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -205,7 +205,7 @@ public extension AlchemyLanguage {
         text: String?,
         sentimentType: alcs.SentimentType = alcs.SentimentType.Normal,
         sentimentParameters sp: GetSentimentParameters = GetSentimentParameters(),
-        completionHandler: (error: NSError, returnValue: SentimentResponse)->() ) {
+        completionHandler: (error: NSError, returnValue: SentimentResponse) -> Void) {
             
             var accessString: String!
             
@@ -293,7 +293,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         keywordsParameters kp: GetKeywordsParameters = GetKeywordsParameters(),
-        completionHandler: (error: NSError, returnValue: Keywords)->() ) {
+        completionHandler: (error: NSError, returnValue: Keywords) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetRankedKeywords(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -368,7 +368,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         conceptsParameters pd: GetRankedConceptsParameters = GetRankedConceptsParameters(),
-        completionHandler: (error: NSError, returnValue: ConceptResponse)->() ) {
+        completionHandler: (error: NSError, returnValue: ConceptResponse) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetRankedConcepts(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -449,7 +449,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         relationsParameters pd: GetRelationsParameters = GetRelationsParameters(),
-        completionHandler: (error: NSError, returnValue: SAORelations)->() ) {
+        completionHandler: (error: NSError, returnValue: SAORelations) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetRelations(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -520,7 +520,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         taxonomyParameters pd: GetRankedTaxonomyParameters = GetRankedTaxonomyParameters(),
-        completionHandler: (error: NSError, returnValue: Taxonomies)->() ) {
+        completionHandler: (error: NSError, returnValue: Taxonomies) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetRankedTaxonomy(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -576,7 +576,7 @@ public extension AlchemyLanguage {
     public func getAuthors(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
-        completionHandler: (error: NSError, returnValue: DocumentAuthors)->() ) {
+        completionHandler: (error: NSError, returnValue: DocumentAuthors) -> Void) {
             
             var parameters = commonParameters
             
@@ -644,7 +644,7 @@ public extension AlchemyLanguage {
         url: String?,
         text: String?,
         languageParameters pd: GetLanguageParameters = GetLanguageParameters(),
-        completionHandler: (error: NSError, returnValue: Language)->() ) {
+        completionHandler: (error: NSError, returnValue: Language) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetLanguage(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -723,7 +723,7 @@ public extension AlchemyLanguage {
         url: String?,
         textType: alcs.TextType = alcs.TextType.Normal,
         textParameters pd: GetTextParameters = GetTextParameters(),
-        completionHandler: (error: NSError, text: DocumentText, title: DocumentTitle)->() ) {
+        completionHandler: (error: NSError, text: DocumentText, title: DocumentTitle) -> Void) {
             
             var accessString: String!
             
@@ -794,7 +794,7 @@ public extension AlchemyLanguage {
     public func getMicroformatData(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
-        completionHandler: (error: NSError, returnValue: Microformats)->() ) {
+        completionHandler: (error: NSError, returnValue: Microformats) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetMicroformatData(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)
@@ -849,7 +849,7 @@ public extension AlchemyLanguage {
     public func getFeedLinks(requestType rt: AlchemyLanguageConstants.RequestType,
         html: String?,
         url: String?,
-        completionHandler: (error: NSError, returnValue: Feeds)->() ) {
+        completionHandler: (error: NSError, returnValue: Feeds) -> Void) {
             
             let accessString = AlchemyLanguageConstants.GetFeedLinks(fromRequestType: rt)
             let endpoint = getEndpoint(accessString)

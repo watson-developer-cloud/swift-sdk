@@ -79,8 +79,36 @@ internal class WatsonGateway {
         }
         
         var authStrategy = request.authStrategy
-        if authStrategy.isRefreshing {
+            
+        guard !authStrategy.isRefreshing else {
             cachedRequests.append(cachedRequest)
+            return
+        }
+            
+        guard authStrategy.token != nil else {
+            cachedRequests.append(cachedRequest)
+            authStrategy.isRefreshing = true
+            authStrategy.retries++
+            authStrategy.refreshToken { [weak self] error in
+                authStrategy.isRefreshing = false
+                
+                guard let strongSelf = self else {
+                    let code = -1
+                    let description = "Internal error. Unable to execute network operation."
+                    let error = NSError.createWatsonError(code, description: description)
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                guard error == nil else {
+                    completionHandler(nil, error)
+                    return
+                }
+                
+                let cachedRequestsCopy = strongSelf.cachedRequests
+                strongSelf.cachedRequests.removeAll()
+                cachedRequestsCopy.forEach { $0() }
+            }
             return
         }
             

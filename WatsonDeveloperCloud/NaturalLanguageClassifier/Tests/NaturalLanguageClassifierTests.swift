@@ -57,18 +57,20 @@ class NaturalLanguageClassifierTests: XCTestCase {
         
         // read NLC username
         guard let username = credentials["NaturalLanguageClassifierUsername"] else {
-            XCTFail("Unable to read Dialog username.")
+            XCTFail("Unable to read NaturalLanguageClassifier username.")
             return
         }
         
         // read NLC password
         guard let password = credentials["NaturalLanguageClassifierPassword"] else {
-            XCTFail("Unable to read Dialog password.")
+            XCTFail("Unable to read NaturalLanguageClassifier password.")
             return
         }
         
         // instantiate the service
-        service = NaturalLanguageClassifier(username: username, password: password)
+        if service == nil {
+            service = NaturalLanguageClassifier(username: username, password: password)
+        }
     }
     
     override func tearDown() {

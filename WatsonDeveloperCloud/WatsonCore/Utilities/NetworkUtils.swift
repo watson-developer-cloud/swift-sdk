@@ -82,7 +82,7 @@ public class NetworkUtils {
      - parameter apiKey:            The authentication string used for HTTP basic authorization.
      - parameter completionHandler: The closure called when the token request is complete.
      */
-    public static func requestAuthToken(tokenURL: String, serviceURL: String, apiKey: String? = nil, completionHandler: (token: String?, error: NSError?) -> ()) {
+    public static func requestAuthToken(tokenURL: String, serviceURL: String, apiKey: String? = nil, completionHandler: (token: String?, error: NSError?) -> Void) {
         
         Log.sharedLogger.debug("Entered requestAuthToken")
         
@@ -103,7 +103,7 @@ public class NetworkUtils {
      - parameter contentType:       This will switch the input and outout request from text or json
      - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
      */
-    public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String? = nil, completionHandler: (returnValue: CoreResponse) -> Void) {
         
         Log.sharedLogger.debug("Entered performBasicAuthRequest")
         
@@ -135,7 +135,7 @@ public class NetworkUtils {
      - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
      - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
      */
-    public static func performRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject] = [:], completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject] = [:], completionHandler: (returnValue: CoreResponse) -> Void) {
         
         Log.sharedLogger.debug("Entered performRequest")
         
@@ -156,7 +156,7 @@ public class NetworkUtils {
      - parameter parameters:        Dictionary of parameters to use as part of the HTTP query
      - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
      */
-    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLs: [String:NSURL], parameters: [String: AnyObject]=[:], apiKey: String? = nil, contentType: ContentType = ContentType.URLEncoded, accept: ContentType = ContentType.URLEncoded, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUploadMultiPart(url: String, fileURLs: [String:NSURL], parameters: [String: AnyObject]=[:], apiKey: String? = nil, contentType: ContentType = ContentType.URLEncoded, accept: ContentType = ContentType.URLEncoded, completionHandler: (returnValue: CoreResponse) -> Void) {
         
         Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart")
         
@@ -193,7 +193,7 @@ public class NetworkUtils {
      - parameter completionHandler: Returns CoreResponse which is a payload of valid AnyObject data or a NSError
      */
      // TODO: STILL IN PROGRESS
-    public static func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String? = nil, completionHandler: (returnValue: CoreResponse) -> ()) {
+    public static func performBasicAuthFileUpload(url: String, fileURL: NSURL, parameters: [String: AnyObject]=[:], apiKey: String? = nil, completionHandler: (returnValue: CoreResponse) -> Void) {
         
         // TODO: This is not optimal but I had to append the params to the url in order for this to work correctly.
         // I will get back to looking into this at some point but want to get it working

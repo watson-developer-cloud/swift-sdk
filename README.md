@@ -1,26 +1,29 @@
-# Watson iOS SDK
+# Watson Developer Cloud iOS SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=develop)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=develop)
+[![Docs](https://img.shields.io/badge/Docs-0.1-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
+[![Swift 2.1.1](https://img.shields.io/badge/Swift-2.1.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
-The Watson iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
+The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
 Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Watson!
 
-> *The Watson iOS SDK is currently in beta.*
+> *The Watson Developer Cloud iOS SDK is currently in beta.*
 
 ## Table of Contents
 * [Installation](#installation)
 
 * [IBM Watson Services](#ibm-watson-services)
-	- [Alchemy Language](#alchemy-language)
-	- [Alchemy Vision](#alchemy-vision)
-	- [Dialog](#dialog)
-	- [Language Translation](#language-translation)
-	- [Natural Language Classifier](#natural-language-classifier)
-	- [Personality Insights](#personality-insights)
-	- [Speech to Text](#speech-to-text)	
-	- [Text to Speech](#text-to-speech)
+  - [Alchemy Language](#alchemy-language)
+  - [Alchemy Vision](#alchemy-vision)
+  - [Dialog](#dialog)
+  - [Language Translation](#language-translation)
+  - [Natural Language Classifier](#natural-language-classifier)
+  - [Personality Insights](#personality-insights)
+  - [Speech to Text](#speech-to-text)
+  - [Text to Speech](#text-to-speech)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
@@ -28,8 +31,10 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
 * [Contributing](#contributing)
 
 ## Installation
- 
-The Watson iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
+
+The Watson Developer Cloud iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  The recommended version of Carthage is v0.11 or higher.  
+
+There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
 
 The second method of installing is using Homebrew for the download and installation of carthage with the following commands
 
@@ -37,7 +42,7 @@ The second method of installing is using Homebrew for the download and installat
 brew update && brew install carthage
 ```
 
-Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.
+Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.  All of the frameworks can be found on the filesystem directory at location ./Carthage/Build/iOS/
 
 ``` shell
 carthage update --platform iOS
@@ -48,11 +53,11 @@ For more details on using the iOS SDK in your application, please review the [Qu
 **Frameworks Used:**
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)
-* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper) 
+* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
 * [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
 * [Starscream](https://github.com/daltoniam/Starscream)
-* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes) 
-* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) 
+* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes)
+* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
 
 
 
@@ -60,7 +65,7 @@ For more details on using the iOS SDK in your application, please review the [Qu
 
 **Getting started with Watson Developer Cloud and Bluemix**
 
-The IBM Watson™ Developer Cloud (WDC) offers a variety of services for developing cognitive applications. Each Watson service provides a Representational State Transfer (REST) Application Programming Interface (API) for interacting with the service. Some services, such as the Speech to Text service, provide additional interfaces. 
+The IBM Watson™ Developer Cloud (WDC) offers a variety of services for developing cognitive applications. Each Watson service provides a Representational State Transfer (REST) Application Programming Interface (API) for interacting with the service. Some services, such as the Speech to Text service, provide additional interfaces.
 
 IBM Bluemix™ is the cloud platform in which you deploy applications that you develop with Watson Developer Cloud services. The Watson Developer Cloud documentation provides information for developing applications with Watson services in Bluemix. You can learn more about Bluemix from the following links:
 
@@ -108,7 +113,7 @@ let alchemyLanguageInstance = AlchemyLanguage(tokenAuthenticationStrategy: token
 
 API calls are instance methods, and model class instances are returned as part of our callback.
 
-e.g. 
+e.g.
 
 ```swift
 
@@ -147,7 +152,7 @@ let alchemyVisionInstance = AlchemyVision(apiKey: String)
 
 API calls are instance methods, and model class instances are returned as part of our callback.
 
-e.g. 
+e.g.
 
 ```swift
 serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
@@ -256,13 +261,13 @@ The following links provide more information about the Natural Language Classifi
 
 ### Personality Insights
 
-The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text. 
+The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
 
 ```swift
 let service = PersonalityInsights(username: "yourusername", password: "yourpassword")
 
 service!.getProfile("Some text here") { profile, error in
-    
+
     // code here
 }
 ```
@@ -279,7 +284,7 @@ The IBM Watson Speech to Text service uses speech recognition capabilities to co
 
 Create a SpeechToText service:
 
-```swift 
+```swift
 let stt = SpeechToText(authStrategy: strategy)
 ```
 
@@ -288,10 +293,10 @@ You can create an AVAudioRecorder with the necessary settings:
 ```swift
 
 let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
-        
+
 let session = AVAudioSession.sharedInstance()
 var settings = [String: AnyObject]()
-        
+
 settings[AVSampleRateKey] = NSNumber(float: 44100.0)
 settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
 do {
@@ -306,18 +311,18 @@ To make a call for transcription, use:
 
 ```swift
 let data = NSData(contentsOfURL: recorder.url)
-            
+
 if let data = data {
-        
+
         sttService.transcribe(data , format: .WAV, oncompletion: {
-            
+
             response, error in
-            
+
             // code here
         }
 }
 ```
-        
+
 
 
 The following links provide additional information about the IBM Speech to Text service:
@@ -340,10 +345,10 @@ service.setUsernameAndPassword(username: "yourname", password: "yourpass")
 
 To call the service to synthesize text:
 
-```swift 
+```swift
 service.synthesize("Hello World", oncompletion: {
-	data, error in 
-	
+	data, error in
+
 	if let data = data {
 	     // code here
 	}
@@ -366,14 +371,14 @@ The Watson TTS service contains support for many voices with different genders, 
 service.listVoices({
 	voices, error in
 	  // code here
-	
+
 })
 ```
 
 The following voices can be used:
 
 Voice        | Language    | Gender
------------- | ----------- | --------------- 
+------------ | ----------- | ---------------
 de-DE_BirgitVoice     | German               | Female
 de-DE_DieterVoice     | German               | Male
 en-GB_KateVoice       | English (British)    | Female
@@ -389,8 +394,8 @@ To use the voice, such as Kate's, specify the voice identifier in the synthesize
 
 ```swift
 service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
-	data, error in 
-	
+	data, error in
+
 	if let data = data {
 		// code here
 	}
@@ -407,7 +412,7 @@ The following links provide more information about the Text To Speech service:
 
 IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
 
-It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a collection of classes that use the protocol *AuthenticationStrategy*. 
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a collection of classes that use the protocol *AuthenticationStrategy*.
 
 To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
 
@@ -456,5 +461,3 @@ See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.
 [sentiment_analysis]: http://www.alchemyapi.com/products/alchemylanguage/sentiment-analysis
 [alchemy_vision]: http://www.alchemyapi.com/products/alchemyvision
 [alchemy_data_news]: http://www.alchemyapi.com/products/alchemydata-news
-
-

@@ -124,7 +124,7 @@
 		7A0F97101C232B96004C01C0 /* WatsonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967C1C232B96004C01C0 /* WatsonError.swift */; };
 		7A0F97111C232B96004C01C0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967D1C232B96004C01C0 /* Validation.swift */; };
 		7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */; };
-		7A0F97131C232B96004C01C0 /* WatsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967F1C232B96004C01C0 /* WatsonManager.swift */; };
+		7A0F97131C232B96004C01C0 /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */; };
 		7A0F97141C232B96004C01C0 /* WatsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96801C232B96004C01C0 /* WatsonRequest.swift */; };
 		7A0F97151C232B96004C01C0 /* WatsonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96811C232B96004C01C0 /* WatsonService.swift */; };
 		7A0F97161C232B9C004C01C0 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F95F01C232B96004C01C0 /* AlchemyLanguageTests.swift */; };
@@ -344,7 +344,7 @@
 		7A0F967C1C232B96004C01C0 /* WatsonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonError.swift; sourceTree = "<group>"; };
 		7A0F967D1C232B96004C01C0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
-		7A0F967F1C232B96004C01C0 /* WatsonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonManager.swift; sourceTree = "<group>"; };
+		7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
 		7A0F96801C232B96004C01C0 /* WatsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonRequest.swift; sourceTree = "<group>"; };
 		7A0F96811C232B96004C01C0 /* WatsonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonService.swift; sourceTree = "<group>"; };
 		7A0F97311C232D02004C01C0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -789,7 +789,7 @@
 				7A0F96751C232B96004C01C0 /* Utilities */,
 				7A0F967D1C232B96004C01C0 /* Validation.swift */,
 				7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */,
-				7A0F967F1C232B96004C01C0 /* WatsonManager.swift */,
+				7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */,
 				7A0F96801C232B96004C01C0 /* WatsonRequest.swift */,
 				7A0F96811C232B96004C01C0 /* WatsonService.swift */,
 			);
@@ -1043,7 +1043,7 @@
 				7A0F97041C232B96004C01C0 /* NSError.swift in Sources */,
 				7A0F96DF1C232B96004C01C0 /* SpeechToTextResult.swift in Sources */,
 				7A0F96FF1C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift in Sources */,
-				7A0F97131C232B96004C01C0 /* WatsonManager.swift in Sources */,
+				7A0F97131C232B96004C01C0 /* WatsonGateway.swift in Sources */,
 				7A0F96951C232B96004C01C0 /* Keywords.swift in Sources */,
 				7A0F96DD1C232B96004C01C0 /* SpeechToTextDelegate.swift in Sources */,
 				7A0F96A51C232B96004C01C0 /* AlchemyCombineDictionaryUtil.swift in Sources */,

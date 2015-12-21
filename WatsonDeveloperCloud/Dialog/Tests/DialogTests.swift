@@ -76,6 +76,8 @@ class DialogTests: XCTestCase {
         // create the Dialog application
         createDialogApp()
         
+        sleep(3)
+        
         // verify the content of the initial response node
         verifyInitialNode(initialResponse)
         

@@ -76,6 +76,7 @@ class DialogTests: XCTestCase {
         // create the Dialog application
         createDialogApp()
         
+        // ensure Dialog application is created before sending queries
         sleep(3)
         
         // verify the content of the initial response node

@@ -149,6 +149,10 @@ class LanguageTranslationTests: XCTestCase {
             Log.sharedLogger.error("\(error)")
             creationExpectation.fulfill()
             
+            // Add a small delay so the model is ready for delete.  This is not a normal flow of create and delete immediately
+            // so this is only a testing issue
+            sleep(3)
+            
             self.service.deleteModel(model!) { error in
                 XCTAssertNil(error)
                 deletionExpectation.fulfill()

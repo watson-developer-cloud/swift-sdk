@@ -15,7 +15,6 @@ before_install:
 - brew update
 - brew install carthage
 - openssl aes-256-cbc -K $encrypted_1ae11c268751_key -iv $encrypted_1ae11c268751_iv -in WatsonDeveloperCloudTests/Credentials_full.plist.enc -out WatsonDeveloperCloudTests/Credentials.plist -d
-- pip install codecov
 
 before_script:
     - carthage update --platform iOS

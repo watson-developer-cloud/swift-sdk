@@ -96,6 +96,58 @@ public class LanguageTranslation: WatsonService {
      - parameter source:            The language that the original text is written in
      - parameter target:            The language that the text will be translated into
      - parameter completionHandler: The callback method that is invoked with the
+     translated strings
+     */
+    public func translate(text: String, source: String, target: String,
+        completionHandler: (String?, NSError?) -> Void) {
+            
+        translate(TranslateRequest(text: [text], source: source, target: target)) {
+            text, error in
+            guard let text = text else {
+                completionHandler(nil, error)
+                return
+            }
+            var translation = text[0]
+            for i in 1..<text.count {
+                translation += " " + text[i]
+            }
+            completionHandler(translation, error)
+        }
+    }
+    
+    /**
+     Translate text using a model specified by modelID
+     
+     - parameter text:              The text to translate
+     - parameter modelID:           The ID of the model that should be used for
+     translation parameters
+     - parameter completionHandler: The callback method that is invoked with the
+     translated strings
+     */
+    public func translate(text: String, modelID: String,
+        completionHandler: (String?, NSError?) -> Void) {
+            
+        translate(TranslateRequest(text: [text], modelID: modelID)) {
+            text, error in
+            guard let text = text else {
+                completionHandler(nil, error)
+                return
+            }
+            var translation = text[0]
+            for i in 1..<text.count {
+                translation += " " + text[i]
+            }
+            completionHandler(translation, error)
+        }
+    }
+    
+    /**
+     Translate text using source and target languages
+     
+     - parameter text:              The text to translate
+     - parameter source:            The language that the original text is written in
+     - parameter target:            The language that the text will be translated into
+     - parameter completionHandler: The callback method that is invoked with the
                                         translated strings
      */
     public func translate(text: [String], source: String, target: String,

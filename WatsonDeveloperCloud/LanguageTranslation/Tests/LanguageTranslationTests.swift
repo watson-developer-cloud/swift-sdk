@@ -80,6 +80,32 @@ class LanguageTranslationTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
+    func testTranslateStringWithSourceAndTarget() {
+        let description = "Translate a single string using source and target languages."
+        let expectation = expectationWithDescription(description)
+        
+        service.translate("Hello", source: "en", target: "es") { text, error in
+            XCTAssertNotNil(text)
+            XCTAssertEqual(text!, "Hola")
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
+    func testTranslateStringWithModelID() {
+        let description = "Translate a single string using a model specified by model id."
+        let expectation = expectationWithDescription(description)
+        
+        service.translate("Hello", modelID: "en-es-conversational") { text, error in
+            XCTAssertNotNil(text)
+            XCTAssertEqual(text!, "Hola")
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
     func testTranslation() {
         let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
         let modelExpectation = expectationWithDescription("Model Translation")

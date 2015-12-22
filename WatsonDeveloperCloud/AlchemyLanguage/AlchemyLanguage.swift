@@ -47,7 +47,7 @@ public final class AlchemyLanguage: AlchemyService {
         return authStrategy.token
     }
     
-    public required init(var authStrategy: AuthenticationStrategy) {
+    public required init(authStrategy: AuthenticationStrategy) {
         
         self.authStrategy = authStrategy
         

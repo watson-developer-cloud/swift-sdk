@@ -21,7 +21,7 @@ import ObjectMapper
 public class AlchemyVision: AlchemyService {
     
     // The authentication strategy to obtain authorization tokens.
-    var authStrategy: AuthenticationStrategy
+    let authStrategy: AuthenticationStrategy
     
     // The non-expiring Alchemy API key returned by the authentication strategy.
     // TODO: this can be removed after migrating to WatsonGateway

@@ -31,7 +31,7 @@ public class TextToSpeech: WatsonService {
     let gateway = WatsonGateway.sharedInstance
     
     // The authentication strategy to obtain authorization tokens.
-    var authStrategy: AuthenticationStrategy
+    let authStrategy: AuthenticationStrategy
     
     public required init(authStrategy: AuthenticationStrategy) {
         self.authStrategy = authStrategy

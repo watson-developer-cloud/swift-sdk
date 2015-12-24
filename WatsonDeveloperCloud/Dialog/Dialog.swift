@@ -25,10 +25,10 @@ import ObjectMapper
  interface (API). These conversations are commonly referred to as dialogs.
  */
 public class Dialog: WatsonService {
-    
+
     // The shared WatsonGateway singleton.
     let gateway = WatsonGateway.sharedInstance
-    
+
     // The authentication strategy to obtain authorization tokens.
     var authStrategy: AuthenticationStrategy
     
@@ -56,16 +56,13 @@ public class Dialog: WatsonService {
      */
     public func getContent(dialogID: String,
         completionHandler: ([Node]?, NSError?) -> Void) {
-        
-        // construct request
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.content(dialogID),
             authStrategy: authStrategy,
             accept: .JSON)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             let nodes = Mapper<Node>().mapDataArray(data, keyPath: "items")
             completionHandler(nodes, error)
@@ -82,8 +79,6 @@ public class Dialog: WatsonService {
      */
     public func updateContent(dialogID: DialogID, nodes: [Node],
         completionHandler: NSError? -> Void) {
-            
-        // construct request
         let request = WatsonRequest(
             method: .PUT,
             serviceURL: Constants.serviceURL,
@@ -91,8 +86,7 @@ public class Dialog: WatsonService {
             authStrategy: authStrategy,
             contentType: .JSON,
             messageBody: Mapper().toJSONData(nodes, header: "items"))
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             completionHandler(error)
         }
@@ -105,16 +99,14 @@ public class Dialog: WatsonService {
         - completionHandler: A function invoked with the response from Watson.
      */
     public func getDialogs(completionHandler: ([DialogModel]?, NSError?) -> Void) {
-        
-        // construct request
+
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogs,
             authStrategy: authStrategy,
             accept: .JSON)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             let dialogs = Mapper<DialogModel>().mapDataArray(data, keyPath: "dialogs")
             completionHandler(dialogs, error)
@@ -141,19 +133,13 @@ public class Dialog: WatsonService {
      */
     public func createDialog(name: String, fileURL: NSURL,
         completionHandler: (DialogID?, NSError?) -> Void) {
-        
-        // force token to refresh
-        // TODO: can remove this after its handled by WatsonGateway
+        // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
-            
-            // add token to header params
-            // TODO: can remove this after its handled by WatsonGateway
             var headerParams = [String: String]()
             if let token = self.authStrategy.token {
                 headerParams["X-Watson-Authorization-Token"] = token
             }
-            
-            // construct request
+
             let request = WatsonRequest(
                 method: .POST,
                 serviceURL: Constants.serviceURL,
@@ -161,20 +147,16 @@ public class Dialog: WatsonService {
                 authStrategy: self.authStrategy,
                 accept: .JSON,
                 headerParams: headerParams)
-            
-            // execute request
+
             Alamofire.upload(request,
                 multipartFormData: { multipartFormData in
-                    // encode the name and file as form data
                     let nameData = name.dataUsingEncoding(NSUTF8StringEncoding)!
                     multipartFormData.appendBodyPart(data: nameData, name: "name")
                     multipartFormData.appendBodyPart(fileURL: fileURL, name: "file")
                 },
                 encodingCompletion: { encodingResult in
-                    // was the encoding successful?
                     switch encodingResult {
                     case .Success(let upload, _, _):
-                        // execute encoded request
                         upload.responseObject {
                             (response: Response<DialogIDModel, NSError>) in
                             let unwrapID = {
@@ -185,7 +167,6 @@ public class Dialog: WatsonService {
                                 completionHandler: unwrapID)
                         }
                     case .Failure:
-                        // construct and return error
                         let nsError = NSError(
                             domain: "com.alamofire.error",
                             code: -6008,
@@ -206,15 +187,13 @@ public class Dialog: WatsonService {
         - completionHandler: A function invoked with the response from Watson.
      */
     public func deleteDialog(dialogID: DialogID, completionHandler: NSError? -> Void) {
-        
-        // construct request
+
         let request = WatsonRequest(
             method: .DELETE,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.dialogID(dialogID),
             authStrategy: authStrategy)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             completionHandler(error)
         }
@@ -232,19 +211,13 @@ public class Dialog: WatsonService {
      */
     public func getDialogFile(dialogID: DialogID, format: MediaType? = nil,
         completionHandler: (NSURL?, NSError?) -> Void) {
-        
-        // force token to refresh
-        // TODO: can remove this after its handled by WatsonGateway
+        // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
-            
-            // add token to header params
-            // TODO: can remove this after its handled by WatsonGateway
             var headerParams = [String: String]()
             if let token = self.authStrategy.token {
                 headerParams["X-Watson-Authorization-Token"] = token
             }
-            
-            // construct request
+
             let request = WatsonRequest(
                 method: .GET,
                 serviceURL: Constants.serviceURL,
@@ -252,11 +225,9 @@ public class Dialog: WatsonService {
                 authStrategy: self.authStrategy,
                 accept: format,
                 headerParams: headerParams)
-            
-            // construct Alamofire request
+
             var fileURL: NSURL?
             let r = Alamofire.download(request) { (temporaryURL, response) in
-                // specify download destination
                 let manager = NSFileManager.defaultManager()
                 let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
                     inDomains: .UserDomainMask)[0]
@@ -264,8 +235,7 @@ public class Dialog: WatsonService {
                 fileURL = directoryURL.URLByAppendingPathComponent(pathComponent!)
                 return fileURL!
             }
-                
-            // execute request
+
             r.response { _, response, _, error in
                 var data: NSData? = nil
                 if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
@@ -290,19 +260,13 @@ public class Dialog: WatsonService {
      */
     public func updateDialog(dialogID: DialogID, fileURL: NSURL,
         fileType: MediaType, completionHandler: NSError? -> Void) {
-
-        // force token to refresh
-        // TODO: can remove this after its handled by WatsonGateway
+        // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
-        
-            // add token to header params
-            // TODO: can remove this after its handled by WatsonGateway
             var headerParams = [String: String]()
             if let token = self.authStrategy.token {
                 headerParams["X-Watson-Authorization-Token"] = token
             }
-            
-            // construct request
+
             let request = WatsonRequest(
                 method: .PUT,
                 serviceURL: Constants.serviceURL,
@@ -310,7 +274,7 @@ public class Dialog: WatsonService {
                 authStrategy: self.authStrategy,
                 contentType: fileType,
                 headerParams: headerParams)
-            
+
             // execute request
             Alamofire.upload(request, file: fileURL)
                 .responseData { response in
@@ -336,15 +300,12 @@ public class Dialog: WatsonService {
     public func getConversation(dialogID: DialogID, dateFrom: NSDate,
         dateTo: NSDate, offset: Int? = nil, limit: Int? = nil,
         completionHandler: ([Conversation]?, NSError?) -> Void) {
-        
-        // format date range as strings
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFromString = formatter.stringFromDate(dateFrom)
         let dateToString = formatter.stringFromDate(dateTo)
-            
-        // construct url query parameters
+
         var urlParams = [NSURLQueryItem]()
         urlParams.append(NSURLQueryItem(name: "date_from", value: dateFromString))
         urlParams.append(NSURLQueryItem(name: "date_to", value: dateToString))
@@ -354,8 +315,7 @@ public class Dialog: WatsonService {
         if let limit = limit {
             urlParams.append(NSURLQueryItem(name: "limit", value: "\(limit)"))
         }
-        
-        // construct request
+
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
@@ -363,8 +323,7 @@ public class Dialog: WatsonService {
             authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             let conversations = Mapper<Conversation>().mapDataArray(data, keyPath: "conversations")
             completionHandler(conversations, error)
@@ -387,8 +346,6 @@ public class Dialog: WatsonService {
     public func converse(dialogID: DialogID, conversationID: Int? = nil,
         clientID: Int? = nil, input: String? = nil,
         completionHandler: (ConversationResponse?, NSError?) -> Void) {
-            
-        // construct url query parameters
         var urlParams = [NSURLQueryItem]()
         if let conversationID = conversationID {
             let query = NSURLQueryItem(name: "conversation_id", value: "\(conversationID)")
@@ -402,8 +359,7 @@ public class Dialog: WatsonService {
             let query = NSURLQueryItem(name: "input", value: input)
             urlParams.append(query)
         }
-        
-        // construct request
+
         let request = WatsonRequest(
             method: .POST,
             serviceURL: Constants.serviceURL,
@@ -411,8 +367,7 @@ public class Dialog: WatsonService {
             authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             let conversationResponse = Mapper<ConversationResponse>().mapData(data)
             completionHandler(conversationResponse, error)
@@ -433,8 +388,6 @@ public class Dialog: WatsonService {
      */
     public func getProfile(dialogID: DialogID, clientID: Int, names: [String]? = nil,
         completionHandler: ([Parameter]?, NSError?) -> Void) {
-    
-        // construct url query parameters
         var urlParams = [NSURLQueryItem]()
         urlParams.append(NSURLQueryItem(name: "client_id", value: "\(clientID)"))
         if let names = names {
@@ -442,8 +395,7 @@ public class Dialog: WatsonService {
                 urlParams.append(NSURLQueryItem(name: "name", value: name))
             }
         }
-            
-        // construct request
+
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
@@ -451,8 +403,7 @@ public class Dialog: WatsonService {
             authStrategy: authStrategy,
             accept: .JSON,
             urlParams: urlParams)
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             let parameters = Mapper<Parameter>().mapDataArray(data, keyPath: "name_values")
             completionHandler(parameters, error)
@@ -472,19 +423,15 @@ public class Dialog: WatsonService {
      */
     public func updateProfile(dialogID: DialogID, clientID: Int?,
         parameters: [String: String], completionHandler: NSError? -> Void) {
-    
-        // construct profile (for use as messageBody)
         let profile = Profile(clientID: clientID, parameters: parameters)
-            
-        // construct request
+
         let request = WatsonRequest(
             method: .PUT,
             serviceURL: Constants.serviceURL,
             endpoint: Constants.profile(dialogID),
             authStrategy: authStrategy,
             messageBody: Mapper().toJSONData(profile))
-        
-        // execute request
+
         gateway.request(request, serviceError: DialogError()) { data, error in
             completionHandler(error)
         }

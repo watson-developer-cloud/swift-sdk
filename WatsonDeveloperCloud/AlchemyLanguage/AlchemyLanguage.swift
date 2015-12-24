@@ -46,7 +46,8 @@ public final class AlchemyLanguage: AlchemyService {
     private var _apiKey: String! {
         return authStrategy.token
     }
-    
+
+    // TODO: comment this initializer
     public required init(authStrategy: AuthenticationStrategy) {
         
         self.authStrategy = authStrategy
@@ -60,7 +61,8 @@ public final class AlchemyLanguage: AlchemyService {
         }
         
     }
-    
+
+    // TODO: comment this initializer
     public convenience required init(apiKey: String) {
         let authStrategy = APIKeyAuthenticationStrategy(apiKey: apiKey)
         self.init(authStrategy: authStrategy)

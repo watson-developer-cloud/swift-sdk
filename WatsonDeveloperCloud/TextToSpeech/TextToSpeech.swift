@@ -32,11 +32,13 @@ public class TextToSpeech: WatsonService {
     
     // The authentication strategy to obtain authorization tokens.
     let authStrategy: AuthenticationStrategy
-    
+
+    // TODO: comment this initializer
     public required init(authStrategy: AuthenticationStrategy) {
         self.authStrategy = authStrategy
     }
-    
+
+    // TODO: comment this initializer
     public convenience required init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
             serviceURL: Constants.serviceURL, username: username, password: password)

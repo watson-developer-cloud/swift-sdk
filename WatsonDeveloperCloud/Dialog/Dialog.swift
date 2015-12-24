@@ -239,7 +239,7 @@ public class Dialog: WatsonService {
             r.response { _, response, _, error in
                 var data: NSData? = nil
                 if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
-                let includeFileURL = { (error: NSError?) in completionHandler(fileURL, error) }
+                let includeFileURL = { error in completionHandler(fileURL, error) }
                 validate(response, data: data, error: error, serviceError: DialogError(),
                     completionHandler: includeFileURL)
             }
@@ -329,7 +329,8 @@ public class Dialog: WatsonService {
             urlParams: urlParams)
 
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let conversations = Mapper<Conversation>().mapDataArray(data, keyPath: "conversations")
+            let conversations = Mapper<Conversation>().mapDataArray(data,
+                keyPath: "conversations")
             completionHandler(conversations, error)
         }
     }

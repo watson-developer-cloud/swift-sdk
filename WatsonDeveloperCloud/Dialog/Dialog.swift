@@ -47,14 +47,13 @@ public class Dialog: WatsonService {
     // MARK: Content Operations
     
     /**
-     Get the content for each node associated with the Dialog application.
+     Get the content for each node associated with a Dialog application.
     
      Depending on the Dialog design, each node can either be an input/output
      pair or just a single node.
     
-     - Parameters:
-         - dialogID: The Dialog application identifier.
-         - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getContent(dialogID: String,
         completionHandler: ([Node]?, NSError?) -> Void) {
@@ -74,10 +73,9 @@ public class Dialog: WatsonService {
     /**
      Update the content for specific nodes of the Dialog application.
      
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - nodes: The specified nodes and updated content.
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter nodes: The specified nodes and updated content.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateContent(dialogID: DialogID, nodes: [Node],
         completionHandler: NSError? -> Void) {
@@ -97,8 +95,7 @@ public class Dialog: WatsonService {
     /**
      List the Dialog applications associated with the service instance.
 
-     - Parameters:
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getDialogs(completionHandler: ([DialogModel]?, NSError?) -> Void) {
 
@@ -120,18 +117,17 @@ public class Dialog: WatsonService {
      service instance. The returned Dialog application identifier can be used
      for subsequent calls to the API.
 
-     The file content type is determined by the file extension (.mct for
-     encrypted Dialog account file, .json for Watson Dialog document JSON
-     format, and .xml for Watson Dialog document XML format).
+     The file content type is determined by the file extension:
+        - .mct for encrypted Dialog account file
+        - .json for Watson Dialog document JSON format
+        - .xml for Watson Dialog document XML format
 
-     - Parameters:
-        - name: The desired name of the Dialog application instance.
-        - fileURL: The URL to a file that will be uploaded and used to create
-                the dialog application. (Must contain an extension of .mct
-                for encrypted Dialog account file, .json for Watson Dialog
-                document JSON format, or .xml for Watson Dialog document XML
-                format.)
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter name: The desired name of the Dialog application instance.
+     - parameter fileURL: The URL to a file that will be uploaded and used to create
+            the Dialog application. Must contain an extension of .mct for encrypted
+            Dialog account file, .json for Watson Dialog document JSON format, or .xml
+            for Watson Dialog document XML format.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func createDialog(name: String, fileURL: NSURL,
         completionHandler: (DialogID?, NSError?) -> Void) {
@@ -184,9 +180,8 @@ public class Dialog: WatsonService {
      Delete a Dialog application associated with the service instance. This
      permanently removes all associated data.
     
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func deleteDialog(dialogID: DialogID, completionHandler: NSError? -> Void) {
 
@@ -204,12 +199,11 @@ public class Dialog: WatsonService {
     /**
      Download the Dialog file associated with the given Dialog application.
      
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - format: The format of the file. The format can be either OctetStream
-                (.mct file), Watson Dialog document JSON format (.json file),
-                or Watson Dialog document XML format (.xml file).
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter format: The format of the file. The format can be either OctetStream
+            (.mct file), Watson Dialog document JSON format (.json file), or Watson
+            Dialog document XML format (.xml file).
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getDialogFile(dialogID: DialogID, format: MediaType? = nil,
         completionHandler: (NSURL?, NSError?) -> Void) {
@@ -251,14 +245,17 @@ public class Dialog: WatsonService {
     /**
      Update an existing Dialog application by uploading a Dialog file.
      
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - fileURL: The URL to a file that will be uploaded and used to define
-                the Dialog application's operation. (Must contain an extension
-                of .mct for encrypted Dialog account file, .json for Watson
-                Dialog document JSON format, or .xml for Watson Dialog document
-                XML format.)
-        - completionHandler: A function invoked with the response from Watson.
+     The file content type is determined by the file extension:
+        - .mct for encrypted Dialog account file
+        - .json for Watson Dialog document JSON format
+        - .xml for Watson Dialog document XML format
+     
+     - parameter dialogID: The Dialog application identifier.
+     - parameter fileURL: The URL to a file that will be uploaded and used to define
+            the Dialog application's operation. Must contain an extension of .mct for
+            encrypted Dialog account file, .json for Watson Dialog document JSON format,
+            or .xml for Watson Dialog document XML format.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateDialog(dialogID: DialogID, fileURL: NSURL,
         fileType: MediaType, completionHandler: NSError? -> Void) {
@@ -289,15 +286,14 @@ public class Dialog: WatsonService {
     // MARK: Conversation Operations
     
     /**
-     Obtain recorded conversation session history for a specified date range.
+     Obtain recorded conversation history.
      
-     - Parameters
-        - dialogID: The Dialog application identifier.
-        - dateFrom: The start date of the desired conversation session history.
-        - dateTo: The end date of the desired conversation session history.
-        - offset: The offset starting point in the conversation result list (default: 0).
-        - limit: The maximum number of conversations to retrieve (default: 10,000).
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter dateFrom: The start date of the desired conversation history.
+     - parameter dateTo: The end date of the desired conversation history.
+     - parameter offset: The offset starting point in the returned history (default: 0).
+     - parameter limit: The maximum number of conversations to retrieve (default: 10,000).
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getConversation(dialogID: DialogID, dateFrom: NSDate,
         dateTo: NSDate, offset: Int? = nil, limit: Int? = nil,
@@ -335,15 +331,14 @@ public class Dialog: WatsonService {
     /**
      Start a new conversation or obtain a response for a submitted input message.
     
-     - Parameters
-        - dialogID: The Dialog application identifier.
-        - conversationID: The conversation identifier. If not specified, then a
-                new conversation will be started.
-        - clientID: A client identifier generated by the Dialog service. If not
-                specified, then a new client identifier will be issued.
-        - input: The user input message to send for processing. This parameter
-                is optional when conversationID is not specified.
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter conversationID: The conversation identifier. If not specified, then a
+            new conversation will be started.
+     - parameter clientID: A client identifier generated by the Dialog service. If not
+            specified, then a new client identifier will be issued.
+     - parameter input: The user input message to send for processing. This parameter
+            is optional when conversationID is not specified.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func converse(dialogID: DialogID, conversationID: Int? = nil,
         clientID: Int? = nil, input: String? = nil,
@@ -381,12 +376,11 @@ public class Dialog: WatsonService {
     /**
      Get the values for a client's profile variables.
     
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - clientID: A client identifier generated by the Dialog service.
-        - names: The names of the profile variables to retrieve. If nil, then all
-                profile variables will be retrieved.
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter clientID: A client identifier generated by the Dialog service.
+     - parameter names: The names of the profile variables to retrieve. If nil, then all
+            profile variables will be retrieved.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getProfile(dialogID: DialogID, clientID: Int, names: [String]? = nil,
         completionHandler: ([Parameter]?, NSError?) -> Void) {
@@ -415,13 +409,12 @@ public class Dialog: WatsonService {
     /**
      Set the values for a client's profile variables.
     
-     - Parameters:
-        - dialogID: The Dialog application identifier.
-        - clientID: A client identifier generated by the Dialog service. If not
-                specified, then a new client identifier will be issued.
-        - parameters: A dictionary of profile variables. The profile variables
-                must already be explicitly defined in the Dialog application.
-        - completionHandler: A function invoked with the response from Watson.
+     - parameter dialogID: The Dialog application identifier.
+     - parameter clientID: A client identifier generated by the Dialog service. If not
+            specified, then a new client identifier will be issued.
+     - parameter parameters: A dictionary of profile variables. The profile variables
+            must already be explicitly defined in the Dialog application.
+     - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateProfile(dialogID: DialogID, clientID: Int?,
         parameters: [String: String], completionHandler: NSError? -> Void) {

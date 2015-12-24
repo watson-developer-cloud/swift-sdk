@@ -56,7 +56,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getContent(dialogID: String,
-        completionHandler: ([Node]?, NSError?) -> Void) {
+        completionHandler: ([Node]?, NSError?) -> Void)
+    {
         let request = WatsonRequest(
             method: .GET,
             serviceURL: Constants.serviceURL,
@@ -78,7 +79,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateContent(dialogID: DialogID, nodes: [Node],
-        completionHandler: NSError? -> Void) {
+        completionHandler: NSError? -> Void)
+    {
         let request = WatsonRequest(
             method: .PUT,
             serviceURL: Constants.serviceURL,
@@ -130,7 +132,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func createDialog(name: String, fileURL: NSURL,
-        completionHandler: (DialogID?, NSError?) -> Void) {
+        completionHandler: (DialogID?, NSError?) -> Void)
+    {
         // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
             var headerParams = [String: String]()
@@ -206,7 +209,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getDialogFile(dialogID: DialogID, format: MediaType? = nil,
-        completionHandler: (NSURL?, NSError?) -> Void) {
+        completionHandler: (NSURL?, NSError?) -> Void)
+    {
         // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
             var headerParams = [String: String]()
@@ -258,7 +262,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateDialog(dialogID: DialogID, fileURL: NSURL,
-        fileType: MediaType, completionHandler: NSError? -> Void) {
+        fileType: MediaType, completionHandler: NSError? -> Void)
+    {
         // TODO: Update this function after WatsonGateway supports uploads
         authStrategy.refreshToken() { error in
             var headerParams = [String: String]()
@@ -297,7 +302,8 @@ public class Dialog: WatsonService {
      */
     public func getConversation(dialogID: DialogID, dateFrom: NSDate,
         dateTo: NSDate, offset: Int? = nil, limit: Int? = nil,
-        completionHandler: ([Conversation]?, NSError?) -> Void) {
+        completionHandler: ([Conversation]?, NSError?) -> Void)
+    {
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -342,7 +348,8 @@ public class Dialog: WatsonService {
      */
     public func converse(dialogID: DialogID, conversationID: Int? = nil,
         clientID: Int? = nil, input: String? = nil,
-        completionHandler: (ConversationResponse?, NSError?) -> Void) {
+        completionHandler: (ConversationResponse?, NSError?) -> Void)
+    {
         var urlParams = [NSURLQueryItem]()
         if let conversationID = conversationID {
             let query = NSURLQueryItem(name: "conversation_id", value: "\(conversationID)")
@@ -383,7 +390,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func getProfile(dialogID: DialogID, clientID: Int, names: [String]? = nil,
-        completionHandler: ([Parameter]?, NSError?) -> Void) {
+        completionHandler: ([Parameter]?, NSError?) -> Void)
+    {
         var urlParams = [NSURLQueryItem]()
         urlParams.append(NSURLQueryItem(name: "client_id", value: "\(clientID)"))
         if let names = names {
@@ -417,7 +425,8 @@ public class Dialog: WatsonService {
      - parameter completionHandler: A function invoked with the response from Watson.
      */
     public func updateProfile(dialogID: DialogID, clientID: Int?,
-        parameters: [String: String], completionHandler: NSError? -> Void) {
+        parameters: [String: String], completionHandler: NSError? -> Void)
+    {
         let profile = Profile(clientID: clientID, parameters: parameters)
 
         let request = WatsonRequest(

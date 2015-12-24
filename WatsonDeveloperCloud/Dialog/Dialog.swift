@@ -353,7 +353,8 @@ public class Dialog: WatsonService {
     {
         var urlParams = [NSURLQueryItem]()
         if let conversationID = conversationID {
-            let query = NSURLQueryItem(name: "conversation_id", value: "\(conversationID)")
+            let query = NSURLQueryItem(name: "conversation_id",
+                value: "\(conversationID)")
             urlParams.append(query)
         }
         if let clientID = clientID {
@@ -410,7 +411,8 @@ public class Dialog: WatsonService {
             urlParams: urlParams)
 
         gateway.request(request, serviceError: DialogError()) { data, error in
-            let parameters = Mapper<Parameter>().mapDataArray(data, keyPath: "name_values")
+            let parameters = Mapper<Parameter>().mapDataArray(data,
+                keyPath: "name_values")
             completionHandler(parameters, error)
         }
     }

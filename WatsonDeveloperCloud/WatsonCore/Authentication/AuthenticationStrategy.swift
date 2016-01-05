@@ -21,7 +21,7 @@ import Foundation
  Watson Developer Cloud service. The `AuthenticationStrategy` is used internally to
  obtain tokens, refresh expired tokens, and maintain associated state information.
  */
-public protocol AuthenticationStrategy {
+public protocol AuthenticationStrategy: class {
     
     // The token that shall be used to authenticate with Watson.
     var token: String? { get set }
@@ -33,6 +33,6 @@ public protocol AuthenticationStrategy {
     var retries: Int { get set }
     
     // Refresh the `AuthenticationStrategy`'s token.
-    mutating func refreshToken(completionHandler: NSError? -> Void)
+    func refreshToken(completionHandler: NSError? -> Void)
     
 }

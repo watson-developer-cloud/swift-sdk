@@ -37,7 +37,7 @@ internal class WatsonSocket {
     // Starscream websocket
     var socket: WebSocket?
 
-    var authStrategy: AuthenticationStrategy!
+    let authStrategy: AuthenticationStrategy
     
     var isListening: Bool = false
     

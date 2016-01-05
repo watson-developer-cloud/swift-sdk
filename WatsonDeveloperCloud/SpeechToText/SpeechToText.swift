@@ -72,14 +72,16 @@ public class SpeechToText: WatsonService {
     
     // The authentication strategy to obtain authorization tokens.
     let authStrategy: AuthenticationStrategy
-    
+
+    // TODO: comment this initializer
     public required init(authStrategy: AuthenticationStrategy) {
         watsonSocket = WatsonSocket(authStrategy: authStrategy)
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         self.authStrategy = authStrategy
         watsonSocket.delegate = self
     }
-    
+
+    // TODO: comment this initializer
     public convenience required init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(
             tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",

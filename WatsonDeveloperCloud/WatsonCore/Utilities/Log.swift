@@ -50,7 +50,7 @@ public class Log {
             Log.consoleLogLevel = XCGLogger.LogLevel.Verbose
             Log.fileLogLevel = XCGLogger.LogLevel.Verbose
         #endif
-        
+
         #if USE_NSLOG // Set via Build Settings, under Other Swift Flags
             instance.removeLogDestination(XCGLogger.constants.baseConsoleLogDestinationIdentifier)
             instance.addLogDestination(XCGNSLogDestination(owner: instance, identifier: XCGLogger.constants.nslogDestinationIdentifier))
@@ -65,9 +65,9 @@ public class Log {
                 writeToFile: docURL,
                 fileLogLevel: Log.fileLogLevel)
         #endif
-
+        
         return instance
-        }()
+    }()
     
     
     /**

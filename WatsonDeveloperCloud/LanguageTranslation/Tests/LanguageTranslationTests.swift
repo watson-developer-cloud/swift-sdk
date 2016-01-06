@@ -171,8 +171,17 @@ class LanguageTranslationTests: XCTestCase {
         
         service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!) { model, error in
             
-            XCTAssertNotNil(model, "Expected non-nil model to be returned.")
             Log.sharedLogger.error("\(error)")
+            
+            // Model creation might not be allowed if using a Bluemix trial account.
+            let isModelAvailable = model != nil
+            guard isModelAvailable else {
+                XCTFail("Expected non-nil model to be returned. Bluemix trial accounts don't have rights to create models.")
+                creationExpectation.fulfill()
+                deletionExpectation.fulfill()
+                return
+            }
+            
             creationExpectation.fulfill()
             
             // Add a small delay so the model is ready for delete.  This is not a normal flow of create and delete immediately

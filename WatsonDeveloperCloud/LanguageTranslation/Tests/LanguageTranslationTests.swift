@@ -170,13 +170,18 @@ class LanguageTranslationTests: XCTestCase {
         XCTAssertNotNil(fileURL)
         
         service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!) { model, error in
-            
-            Log.sharedLogger.error("\(error)")
-            
-            // Model creation might not be allowed if using a Bluemix trial account.
-            let isModelAvailable = model != nil
-            guard isModelAvailable else {
-                XCTFail("Expected non-nil model to be returned. Bluemix trial accounts don't have rights to create models.")
+
+            guard let model = model else {
+                XCTFail("Expected non-nil model. Please upgrade your Language " +
+                    "Translation Service to the \"Trainable\" plan.")
+                creationExpectation.fulfill()
+                deletionExpectation.fulfill()
+                return
+            }
+
+            guard error == nil else {
+                XCTFail("Expected nil error.")
+                Log.sharedLogger.error("\(error)")
                 creationExpectation.fulfill()
                 deletionExpectation.fulfill()
                 return
@@ -188,7 +193,7 @@ class LanguageTranslationTests: XCTestCase {
             // so this is only a testing issue
             sleep(3)
             
-            self.service.deleteModel(model!) { error in
+            self.service.deleteModel(model) { error in
                 XCTAssertNil(error)
                 deletionExpectation.fulfill()
             }

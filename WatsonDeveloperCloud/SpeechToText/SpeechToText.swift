@@ -38,6 +38,42 @@ public class SpeechToText: WatsonService {
     
     public var delegate : SpeechToTextDelegate?
     
+    // options for url query
+    public var languageAndModel:String? = nil { didSet { updateSocketParams() } }
+    public var requestLoggingOptOut:Bool = false { didSet { updateSocketParams() } }
+    // options for json start message
+    public var audioFormat:MediaType = .OPUS { didSet { updateSocketParams() } }
+    public var continuousTransmission:Bool = false { didSet { updateSocketParams() } }
+    public var maximumAlternatives:Int = 1 { didSet { updateSocketParams() } }
+    public var interimResult:Bool = false { didSet { updateSocketParams() } }
+    public var wordConfidence:Bool = false { didSet { updateSocketParams() } }
+    public var timestamps:Bool = false { didSet { updateSocketParams() } }
+    public var inactivityTimeout:Int = 30 { didSet { updateSocketParams() } }
+    
+    // experimental options for json start message (not tested)
+    // public var keywords:[String]? = nil { didSet { updateSocketParams() } }
+    // public var keywordsThreshold = 1.0 { didSet { updateSocketParams() } }
+    // public var wordAlternativesThreshold:Int? = nil { didSet { updateSocketParams() } }
+    
+    func updateSocketParams() {
+        if (languageAndModel != nil) {
+            watsonSocket.urlParams["model"] = languageAndModel
+        }
+        watsonSocket.urlParams["x-watson-learning-opt-out"] = "\(requestLoggingOptOut)"
+        
+        watsonSocket.jsonParams["content-type"] = audioFormat.rawValue
+        watsonSocket.jsonParams["continuous"] = continuousTransmission
+        watsonSocket.jsonParams["max_alternatives"] = maximumAlternatives
+        watsonSocket.jsonParams["interim_results"] = interimResult
+        watsonSocket.jsonParams["word_confidence"] = wordConfidence
+        watsonSocket.jsonParams["timestamps"] = timestamps
+        watsonSocket.jsonParams["inactivity_timeout"] = inactivityTimeout
+        
+        //watsonSocket.jsonParams["keywords"] = NSArray(array:keywords)
+        //watsonSocket.jsonParams["keywords_threshold"] = keywordsThreshold
+        //watsonSocket.jsonParams["word_alternatives_threshold"] = wordAlternativesThreshold
+    }
+    
     private let opus: OpusHelper = OpusHelper()
     private let ogg: OggHelper = OggHelper()
     
@@ -79,6 +115,7 @@ public class SpeechToText: WatsonService {
         opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         self.authStrategy = authStrategy
         watsonSocket.delegate = self
+        updateSocketParams();
     }
 
     // TODO: comment this initializer
@@ -208,7 +245,8 @@ public class SpeechToText: WatsonService {
         completionHandler: (SpeechToTextResponse?, NSError?) -> Void) {
             
             
-            watsonSocket.format = format
+            //watsonSocket.format = format
+            self.audioFormat = format
             watsonSocket.send(audioData)
             
             self.callback = completionHandler

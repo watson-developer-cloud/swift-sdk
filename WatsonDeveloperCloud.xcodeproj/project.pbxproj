@@ -166,6 +166,8 @@
 		7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A34CB521C233E2100F20D0E /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34CB501C233E2100F20D0E /* AuthenticationTests.swift */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7E02280F1C3E3773003759BE /* Silent.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7E02280D1C3E36B3003759BE /* Silent.wav */; };
+		7EDCE09A1C3D14CF00575FE6 /* SpeechSample_ja.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7EDCE0981C3D133300575FE6 /* SpeechSample_ja.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +355,8 @@
 		7A0F97361C232D02004C01C0 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A34CB501C233E2100F20D0E /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		7E02280D1C3E36B3003759BE /* Silent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Silent.wav; sourceTree = "<group>"; };
+		7EDCE0981C3D133300575FE6 /* SpeechSample_ja.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample_ja.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -690,9 +694,11 @@
 		7A0F963F1C232B96004C01C0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				7E02280D1C3E36B3003759BE /* Silent.wav */,
 				7A0F96401C232B96004C01C0 /* SpeechSample.flac */,
 				7A0F96411C232B96004C01C0 /* SpeechSample.ogg */,
 				7A0F96421C232B96004C01C0 /* SpeechSample.wav */,
+				7EDCE0981C3D133300575FE6 /* SpeechSample_ja.wav */,
 				7A0F96431C232B96004C01C0 /* SpeechToTextTests.swift */,
 				7A0F96441C232B96004C01C0 /* test.raw */,
 				7A0F96451C232B96004C01C0 /* WebsocketTests.swift */,
@@ -950,6 +956,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E02280F1C3E3773003759BE /* Silent.wav in Resources */,
+				7EDCE09A1C3D14CF00575FE6 /* SpeechSample_ja.wav in Resources */,
 				7A0F972C1C232BCE004C01C0 /* test.raw in Resources */,
 				7A0F97231C232BBD004C01C0 /* training_meta.txt in Resources */,
 				7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */,

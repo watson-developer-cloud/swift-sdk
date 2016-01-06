@@ -32,6 +32,7 @@ internal class WatsonSocket {
     var audioUploadQueue: NSOperationQueue!
     
     // The format for continuous PCM based recognition requires OGG
+    @available(*, message="overwritten by SpeechToText.audioFormat")
     var format: MediaType = .OPUS
     
     // Starscream websocket
@@ -40,6 +41,12 @@ internal class WatsonSocket {
     let authStrategy: AuthenticationStrategy
     
     var isListening: Bool = false
+    
+    /// The query parameters to be encoded in the URL.
+    var urlParams: [String: String] = [:];
+    
+    /// A dictionary of parameters to be encoded in the start command
+    var jsonParams: [String: AnyObject] = [:];
     
     init(authStrategy: AuthenticationStrategy) {
     
@@ -99,8 +106,19 @@ internal class WatsonSocket {
             if let token = self.authStrategy.token {
                 
                 //let authURL = "\(self.url)?watson-token=\(token)"
-                let authURL = self.url
-                self.socket = WebSocket(url: NSURL(string: authURL)!)
+                //let authURL = self.url
+                let urlString = self.url
+                let urlComponents = NSURLComponents(string: urlString)!
+                var queryItems:[NSURLQueryItem] = [];
+                self.urlParams.forEach({ (k, v) -> () in
+                    queryItems.append(NSURLQueryItem(name: k, value: v))
+                })
+                if !queryItems.isEmpty {
+                    urlComponents.queryItems = queryItems
+                }
+                let authURL = urlComponents.URL!
+                self.socket = WebSocket(url: authURL)
+                Log.sharedLogger.info("connecting to \(authURL)")
                 
                 if let socket = self.socket {
                     
@@ -132,8 +150,15 @@ extension WatsonSocket : WebSocketDelegate {
      - parameter socket: <#socket description#>
      */
     internal func websocketDidConnect(socket: WebSocket) {
-        
-        let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
+        let dic:NSMutableDictionary = NSMutableDictionary()
+        dic.setValue("start", forKey: "action")
+        dic.setValue(self.format.rawValue, forKey: "content-type")
+        jsonParams.forEach({key, value in
+            // it can override "content-type"
+            dic.setValue(value, forKey:key)
+        })
+        let command:String = String(NSString(data: try! NSJSONSerialization.dataWithJSONObject(dic, options: NSJSONWritingOptions(rawValue: 0)), encoding:NSUTF8StringEncoding)!)
+        //let command : String = "{\"action\": \"start\", \"content-type\": \"\(self.format.rawValue)\"}"
         socket.writeString(command)
         
         Log.sharedLogger.info("Sending \(command) through socket")
@@ -152,6 +177,7 @@ extension WatsonSocket : WebSocketDelegate {
             
             /**
             *  Sometimes the WebSocket cannot be elevated on the first couple of tries.
+            *  maybe Starscream bug https://github.com/daltoniam/Starscream/pull/154
             */
             if err.code == 101 {
                 

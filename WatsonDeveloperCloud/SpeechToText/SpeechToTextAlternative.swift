@@ -28,13 +28,18 @@ extension SpeechToText {
         public var transcript: String?
         /// Confidence (probability) of the transcript, between 0 and 1
         public var confidence: Double?
+        /// timestamps
+        public var timestamps: [[AnyObject]]?
+        /// word_confidence
+        public var wordConfidence: [[AnyObject]]?
         
         public init?(_ map: Map) {}
         
         public mutating func mapping(map: Map) {
             transcript          <- map["transcript"]
             confidence          <- map["confidence"]
-            
+            timestamps          <- map["timestamps"]
+            wordConfidence      <- map["word_confidence"]
         }
     }
 }

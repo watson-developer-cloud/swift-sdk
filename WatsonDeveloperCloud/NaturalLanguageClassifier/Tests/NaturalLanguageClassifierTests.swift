@@ -172,7 +172,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             service.createClassifier(trainerMetaURL!, trainerURL: trainerURL!) {
                 classifier, error in
                 XCTAssertNotNil(classifier)
-                XCTAssertNotEqual("", classifier!.id, "Expected to get an id")
+                XCTAssertNotEqual("", classifier?.id, "Expected to get an id")
                 XCTAssertNil(error)
                 let message = "A trained classifier was not found. It has been created and " +
                               "is currently being trained. You will need to set the " +
@@ -180,7 +180,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
                               "printed below. Then wait a few minutes for training to " +
                               "complete before running the tests again.\n"
                 print(message)
-                print("** trainedClassifierID: \(classifier!.id)\n")
+                print("** trainedClassifierID: \(classifier?.id)\n")
                 XCTFail("Trained classifier not found. Set trainedClassifierID and try again.")
             }
         }
@@ -213,31 +213,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
         waitForExpectation()
     }
     
-    func createTrainedClassifier() {
-        let description = "Create and train a classifier for future tests."
-        let expectation = expectationWithDescription(description)
-        
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let trainerURL = bundle.URLForResource("weather_data_train", withExtension: "csv")
-        let trainerMetaURL = bundle.URLForResource("training_meta", withExtension: "txt")
-        
-        service.createClassifier(trainerMetaURL!, trainerURL: trainerURL!) {
-            classifier, error in
-            XCTAssertNotNil(classifier)
-            XCTAssertNotEqual("", classifier!.id, "Expected to get an id")
-            XCTAssertNil(error)
-            let message = "A trained classifier was not found. It has been created and " +
-                          "is currently being trained. You will need to set the " +
-                          "trainedClassifierID property using the classifier id " +
-                          "printed below. Then wait a few minutes for training to " +
-                          "complete before running the tests again.\n\n"
-            print(message)
-            print("trainedClassifierID: \(classifier!.id)")
-            expectation.fulfill()
-        }
-        waitForExpectation()
-    }
-    
     // please note this test expects the classifier to be available
     func classify() {
         let description = "Classify the string: `is it sunny?`"
@@ -245,8 +220,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         
         service.classify(trainedClassifierID, text: "is it sunny?") { classification, error in
             XCTAssertNotNil(classification)
-            XCTAssertEqual(classification!.id, self.trainedClassifierID)
-            XCTAssertGreaterThan(classification!.classes!.count, 1)
+            XCTAssertEqual(classification?.id, self.trainedClassifierID)
+            XCTAssertGreaterThan(classification?.classes?.count ?? Int.min, 1)
             XCTAssertNil(error)
             expectation.fulfill()
         }

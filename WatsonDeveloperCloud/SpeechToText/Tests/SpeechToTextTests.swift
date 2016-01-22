@@ -141,6 +141,54 @@ class SpeechToTextTests: XCTestCase {
             error in XCTAssertNil(error, "Timeout")
         }
     }
+
+    func testTranscriptionWithNonDefaultModel() {
+        let expectation = expectationWithDescription("Testing transcribe non default model.")
+
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.URLForResource("AnotherLanguageSample", withExtension: "wav") else {
+            XCTFail("Unable to locate AnotherLanguageSample.wav.")
+            return
+        }
+        guard let audioData = NSData(contentsOfURL: url) else {
+            XCTFail("Unable to read AnotherLanguageSample.wav.")
+            return
+        }
+
+        service.transcribe(audioData, format: .WAV, model: "pt-BR_BroadbandModel") { response, error in
+            guard let response = response else {
+                XCTFail("Expected a non-nil response.")
+                return
+            }
+
+            guard let results = response.results else {
+                XCTFail("Expected a non-nil result.")
+                return
+            }
+
+            XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+
+            guard let alternatives = results[0].alternatives else {
+                XCTFail("Must return more than zero results.")
+                return
+            }
+
+            XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+
+            guard let transcript = alternatives[0].transcript else {
+                XCTFail("Expected a non-nil transcript.")
+                return
+            }
+
+            XCTAssertEqual(transcript, "teste de reconhecimento de voz ")
+
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+    }
     
     // func testContinuousRecording() {
     //     service.startListening()

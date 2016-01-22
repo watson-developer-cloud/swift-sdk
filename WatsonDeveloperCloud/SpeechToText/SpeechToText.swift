@@ -201,27 +201,20 @@ public class SpeechToText: WatsonService {
      This function takes audio data a returns a callback with the string transcription
      
      - parameter audio:    <#audio description#>
+     - parameter format: Format of the audio file.
+     - model: Model that should be used to recognize the speech.
      - parameter callback: A function that will return the string
      */
     public func transcribe(audioData: NSData,
         format: MediaType = .FLAC,
+        model: String = "en-US_BroadbandModel",
         completionHandler: (SpeechToTextResponse?, NSError?) -> Void) {
-            
-            
-            watsonSocket.format = format
-            watsonSocket.send(audioData)
-            
-            self.callback = completionHandler
+
+        watsonSocket.format = format
+        watsonSocket.model = model
+        watsonSocket.send(audioData)
         
-//            connectWebsocket()
-//        
-//           
-//            self.audioData = audioData
-//            self.format = format
-//            
-//            self.callback = completionHandler
-            
-        
+        self.callback = completionHandler
     }
     
     /**

@@ -24,7 +24,7 @@ internal class WatsonSocket {
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
     private let serviceURL = "/speech-to-text/api"
     private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
-    private let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    private let baseWssURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
     // Set this to receive updates about the websocket activity
     var delegate: WatsonSocketDelegate?
@@ -33,6 +33,9 @@ internal class WatsonSocket {
     
     // The format for continuous PCM based recognition requires OGG
     var format: MediaType = .OPUS
+
+    // Model that should be used to recognize the speech.
+    var model: String = "en-US_BroadbandModel"
     
     // Starscream websocket
     var socket: WebSocket?
@@ -97,9 +100,8 @@ internal class WatsonSocket {
             Log.sharedLogger.info("Got a response back from the server")
             
             if let token = self.authStrategy.token {
-                
-                //let authURL = "\(self.url)?watson-token=\(token)"
-                let authURL = self.url
+
+                let authURL = self.prepareRecognizeURL(self.baseWssURL)
                 self.socket = WebSocket(url: NSURL(string: authURL)!)
                 
                 if let socket = self.socket {
@@ -118,6 +120,10 @@ internal class WatsonSocket {
 
             
         })
+    }
+
+    private func prepareRecognizeURL(baseURL: String) -> String {
+        return "\(baseURL)?model=\(self.model)"
     }
 }
 

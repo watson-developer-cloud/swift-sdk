@@ -166,6 +166,7 @@
 		7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A34CB521C233E2100F20D0E /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34CB501C233E2100F20D0E /* AuthenticationTests.swift */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		FE8BDAB51C5295450082AB1D /* AnotherLanguageSample.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE8BDAB31C5293640082AB1D /* AnotherLanguageSample.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +354,7 @@
 		7A0F97361C232D02004C01C0 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A34CB501C233E2100F20D0E /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		FE8BDAB31C5293640082AB1D /* AnotherLanguageSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AnotherLanguageSample.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -679,9 +681,9 @@
 				7A0F963C1C232B96004C01C0 /* SpeechToTextDelegate.swift */,
 				7A0F963D1C232B96004C01C0 /* SpeechToTextResponse.swift */,
 				7A0F963E1C232B96004C01C0 /* SpeechToTextResult.swift */,
-				7A0F963F1C232B96004C01C0 /* Tests */,
 				7A0F96461C232B96004C01C0 /* WatsonSocket.swift */,
 				7A0F96471C232B96004C01C0 /* WatsonSocketDelegate.swift */,
+				7A0F963F1C232B96004C01C0 /* Tests */,
 			);
 			name = SpeechToText;
 			path = WatsonDeveloperCloud/SpeechToText;
@@ -690,6 +692,7 @@
 		7A0F963F1C232B96004C01C0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FE8BDAB31C5293640082AB1D /* AnotherLanguageSample.wav */,
 				7A0F96401C232B96004C01C0 /* SpeechSample.flac */,
 				7A0F96411C232B96004C01C0 /* SpeechSample.ogg */,
 				7A0F96421C232B96004C01C0 /* SpeechSample.wav */,
@@ -959,6 +962,7 @@
 				7A0F97211C232BBD004C01C0 /* missing_training_meta.txt in Resources */,
 				7A0F97241C232BBD004C01C0 /* weather_data_train.csv in Resources */,
 				7A0F971A1C232BA5004C01C0 /* emaxfpo.jpg in Resources */,
+				FE8BDAB51C5295450082AB1D /* AnotherLanguageSample.wav in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				7A0F97291C232BCE004C01C0 /* SpeechSample.ogg in Resources */,
 				7A0F971F1C232BB5004C01C0 /* glossary.tmx in Resources */,

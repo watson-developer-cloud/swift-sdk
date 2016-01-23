@@ -25,7 +25,7 @@ class DialogTests: XCTestCase {
     var service: Dialog!
 
     // the Dialog application that will be created for testing
-    let dialogName = "pizza-watsonsdk-ios"
+    var dialogName: String!
     var dialogID: Dialog.DialogID!
     
     // the Dialog file that will be used to create the application
@@ -58,6 +58,7 @@ class DialogTests: XCTestCase {
     let invalidDialogID = "9354b734-d5b2-4fd3-bee0-e38adbcab575"
     let invalidConversationID = 177530
     let invalidClientID = 170351
+    let duplicateDialogID = "pizza-watsonsdk-ios"
     
     // timeout for asynchronous completion handlers
     private let timeout: NSTimeInterval = 30.0
@@ -147,6 +148,9 @@ class DialogTests: XCTestCase {
         
         // invoke createDialog() with an invalid file
         createDialogWithInvalidFile()
+
+        // invoke createDialog() with a dialog ID already in use by another API user.
+        createDialogWithDuplicateDialogID()
         
         // invoke deleteDialog() with an invalid Dialog ID
         deleteDialogWithInvalidDialogID()
@@ -211,6 +215,13 @@ class DialogTests: XCTestCase {
             XCTFail("Unable to read credentials file.")
             return
         }
+
+        // read Dialog ID
+        guard let dialogName = credentials["DialogID"] else {
+            XCTFail("Unable to read dialog ID.")
+            return
+        }
+        self.dialogName = dialogName
         
         // read Dialog username
         guard let username = credentials["DialogUsername"] else {
@@ -232,6 +243,17 @@ class DialogTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+    }
+
+    /// Ensure that the test will stop immediately when any of the assertions fail.
+    /// Considering that this test case depends on sequence, the execution can't continue
+    /// if one of the assertion fails. The default behavior of XCTest is to continue
+    /// execution and evaluate all assertions.
+    override func invokeTest() {
+        continueAfterFailure = false
+        defer { continueAfterFailure = true }
+
+        super.invokeTest()
     }
     
     /// Wait for an expectation to be fulfilled.
@@ -631,7 +653,7 @@ class DialogTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         // define the long name
-        var longDialogName = dialogName
+        var longDialogName: String = dialogName
         for _ in 1...100 {
             longDialogName += dialogName
         }
@@ -720,6 +742,25 @@ class DialogTests: XCTestCase {
         } catch {
             XCTFail("Unable to delete invalid Dialog file.")
         }
+    }
+
+    func createDialogWithDuplicateDialogID() {
+        let description = "Try to create a Dialog with duplicate name."
+        let expectation = expectationWithDescription(description)
+
+        // create Dialog application
+        service.createDialog(duplicateDialogID, fileURL: dialogFile) { dialogID, error in
+
+            // verify expected response
+            XCTAssertNil(dialogID)
+            XCTAssertNotNil(error)
+
+            // ensure error is as expected
+            XCTAssert(error!.code == 409)
+
+            expectation.fulfill()
+        }
+        waitForExpectation()
     }
     
     // Invoke deleteDialog() with an invalid Dialog ID

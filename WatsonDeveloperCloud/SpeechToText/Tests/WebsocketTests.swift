@@ -73,7 +73,8 @@ class WebsocketTests: XCTestCase {
         // let data = NSData()
         
         socket.delegate = SocketTestDelegate(socket: socket, disconnectExpectation: disconnectExpectation!)
-        socket.format = .FLAC
+        socket.jsonParams["content-type"] = MediaType.FLAC.rawValue;
+        //socket.format = .FLAC
         
         socket.send(audioData)
         

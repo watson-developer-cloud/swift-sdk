@@ -141,6 +141,209 @@ class SpeechToTextTests: XCTestCase {
             error in XCTAssertNil(error, "Timeout")
         }
     }
+
+    
+    func testInactivityTimeout() {
+        // it is not able to check through SpeechToText class
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.pathForResource("Credentials", ofType: "plist") else {
+            XCTFail("Unable to locate credentials file.")
+            return
+        }
+        
+        let dict = NSDictionary(contentsOfFile: url)
+        guard let credentials = dict as? Dictionary<String, String> else {
+            XCTFail("Unable to read credentials file.")
+            return
+        }
+        
+        guard let username = credentials["SpeechToTextUsername"] else {
+            XCTFail("Unable to read SpeechToText username.")
+            return
+        }
+        
+        guard let password = credentials["SpeechToTextPassword"] else {
+            XCTFail("Unable to read SpeechToText password.")
+            return
+        }
+
+        let basicAuth = BasicAuthenticationStrategy(
+            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
+            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            username: username,
+            password: password)
+        
+        let socket = WatsonSocket(authStrategy: basicAuth)
+        
+        let url2 = NSBundle(forClass: self.dynamicType)
+            .URLForResource("Silent", withExtension: "wav")
+        
+        guard let audioData = NSData(contentsOfURL: url2!) else {
+            XCTFail("Need to read file")
+            return
+        }
+        
+        let disconnectExpectation = expectationWithDescription("disconnect")
+        
+        socket.delegate = SocketTestDelegate(socket: socket, disconnectExpectation: disconnectExpectation)
+        socket.jsonParams["content-type"] = MediaType.WAV.rawValue;
+        socket.jsonParams["inactivity_timeout"] = 1
+        socket.send(audioData)
+        
+        if let ws = socket.socket {
+            XCTAssertTrue(ws.isConnected, "Web socket is not connected")
+        }
+        
+        // socket will be dicsonnected before the default timeout (30 secs)
+        waitForExpectationsWithTimeout(10) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+    }
+    class SocketTestDelegate : WatsonSocketDelegate {
+        
+        let socket: WatsonSocket!
+        var disconnectExpectation: XCTestExpectation?
+        init(socket: WatsonSocket, disconnectExpectation: XCTestExpectation)
+        {
+            self.socket = socket
+            self.disconnectExpectation = disconnectExpectation
+        }
+        func onMessageReceived(results: SpeechToText.SpeechToTextResponse) {
+        }
+        func onConnected() {
+        }
+        func onListening() {
+        }
+        func onDisconnected() {
+            disconnectExpectation?.fulfill()
+        }
+    }
+    
+
+    
+    func testLanguageAndModel() {
+        service.languageAndModel = "ja-JP_BroadbandModel"
+        service.continuousTransmission = false
+        transcribe("SpeechSample_ja", withExtension: "wav", format: .WAV, expected: ["ルノワール 展 見て きた "])
+    }
+    
+    func testMaximumAlternatives() {
+        service.languageAndModel = "ja-JP_BroadbandModel"
+        service.maximumAlternatives = 5
+        transcribe("SpeechSample_ja", withExtension: "wav", format: .WAV, expected: ["ルノワール 展 見て きた "])
+    }
+    
+    
+    func testInterimResult() {
+        service.languageAndModel = "ja-JP_BroadbandModel"
+        service.interimResult = true
+        transcribe("SpeechSample_ja", withExtension: "wav", format: .WAV, expected: ["ルノワール 展 見て きた "])
+    }
+    
+    func testContinuousTranscription() {
+        service.languageAndModel = "ja-JP_BroadbandModel"
+        service.continuousTransmission = true
+        transcribe("SpeechSample_ja", withExtension: "wav", format: .WAV, expected: ["ルノワール 展 見て きた ", "そこそこ 混んで た けど 入場 制限 は なかった ので よかった ", "近所 の 桜並木 は まだ 三分 咲き ぐらい だった "])
+    }
+    
+    func testWorkConfidenceAndTimestamps() {
+        service.languageAndModel = "ja-JP_BroadbandModel"
+        service.wordConfidence = true
+        service.timestamps = true
+        transcribe("SpeechSample_ja", withExtension: "wav", format: .WAV, expected: ["ルノワール 展 見て きた "])
+    }
+    
+    
+    func transcribe(filename: String, withExtension: String, format: MediaType, expected: [String]) {
+        let expectation = expectationWithDescription("Testing transcribe.")
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.URLForResource(filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+        guard let audioData = NSData(contentsOfURL: url) else {
+            XCTFail("Unable to read \(filename).\(withExtension).")
+            return
+        }
+        
+        service.requestLoggingOptOut = true
+
+        var count = 0
+        service.transcribe(audioData, format: format) { response, error in
+            count++
+            guard let response = response else {
+                XCTFail("Expected a non-nil response.")
+                return
+            }
+            
+            guard let results = response.results else {
+                XCTFail("Expected a non-nil result.")
+                return
+            }
+            
+            XCTAssertGreaterThan(results.count, 0, "Must return more than zero results")
+            
+            XCTAssertEqual(results.count, expected.count)
+            
+            var final:Bool = true
+            for var i = 0; i < results.count; i++ {
+            
+                guard let alternatives = results[i].alternatives else {
+                    XCTFail("Must return more than zero results.")
+                    return
+                }
+                
+                XCTAssertGreaterThan(alternatives.count, 0, "Must return more than zero results")
+                
+                if (self.service.maximumAlternatives > 1) {
+                    XCTAssertEqual(alternatives.count, self.service.maximumAlternatives, "Must return \(self.service.maximumAlternatives) results") // expect max alternatives
+                }
+            
+                guard let transcript = alternatives[0].transcript else {
+                    XCTFail("Expected a non-nil transcript.")
+                    return
+                }
+                
+                if results[i].final! {
+                    XCTAssertEqual(transcript, expected[i])
+                    
+                    if self.service.timestamps {
+                        guard let timestamp = alternatives[0].timestamps else {
+                            XCTFail("Expected a non-nil timestamps")
+                            return
+                        }
+                    
+                        XCTAssertGreaterThan(timestamp.count, 0, "Must return more than zero timestamps")
+                    }
+                    
+                    if self.service.wordConfidence {
+                        guard let wordConfidence = alternatives[0].wordConfidence else {
+                            XCTFail("Expected a non-nil wordConfidence")
+                            return
+                        }
+                    
+                        XCTAssertGreaterThan(wordConfidence.count, 0, "Must return more than zero wordConfidence")
+                    }
+                    
+                }
+                
+                final = (final && results[i].final!)
+            }
+            
+            if (final) {
+                if self.service.interimResult {
+                    XCTAssertGreaterThan(count, 1, "Must calls multiple times this callback")
+                }
+                expectation.fulfill()
+                
+            }
+        }
+        
+        waitForExpectationsWithTimeout(timeout) {
+            error in XCTAssertNil(error, "Timeout")
+        }
+    }
     
     // func testContinuousRecording() {
     //     service.startListening()

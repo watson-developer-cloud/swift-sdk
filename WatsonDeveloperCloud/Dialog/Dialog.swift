@@ -304,15 +304,14 @@ public class Dialog: WatsonService {
         dateTo: NSDate, offset: Int? = nil, limit: Int? = nil,
         completionHandler: ([Conversation]?, NSError?) -> Void)
     {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateFromString = formatter.stringFromDate(dateFrom)
-        let dateToString = formatter.stringFromDate(dateTo)
+        // The Watson Dialog Service's clock is 17 hours fast, so we correct for that here.
+        let serverTimeError: NSTimeInterval = 17 * 60 * 60 // 17 hours in seconds
+        let dateFromUnix = Int(dateFrom.timeIntervalSince1970 + serverTimeError)
+        let dateToUnix = Int(dateTo.timeIntervalSince1970 + serverTimeError)
 
         var urlParams = [NSURLQueryItem]()
-        urlParams.append(NSURLQueryItem(name: "date_from", value: dateFromString))
-        urlParams.append(NSURLQueryItem(name: "date_to", value: dateToString))
+        urlParams.append(NSURLQueryItem(name: "date_from", value: "\(dateFromUnix)"))
+        urlParams.append(NSURLQueryItem(name: "date_to", value: "\(dateToUnix)"))
         if let offset = offset {
             urlParams.append(NSURLQueryItem(name: "offset", value: "\(offset)"))
         }

@@ -475,26 +475,35 @@ class DialogTests: XCTestCase {
         let description = "Retrieving conversation history."
         let expectation = expectationWithDescription(description)
 
+        let sydneyOffset = abs(NSTimeZone(name: "Australia/Sydney")!.secondsFromGMT)
+        let localOffset = abs(NSTimeZone.localTimeZone().secondsFromGMT)
+        let serverOffset = sydneyOffset + localOffset
+        let dateFromOffset: NSTimeInterval = -120.0 + Double(serverOffset)
+        let dateToOffset: NSTimeInterval = 120 + Double(serverOffset)
+        let dateFrom = NSDate(timeIntervalSinceNow: dateFromOffset)
+        let dateTo = NSDate(timeIntervalSinceNow: dateToOffset)
+
         // get conversation history
-        service.getConversation(dialogID, dateFrom: NSDate(timeIntervalSinceNow: -120),
-            dateTo: NSDate(timeIntervalSinceNow: 120)) { conversations, error in
-                XCTAssertNotNil(conversations)
-                XCTAssertNil(error)
+        service.getConversation(dialogID, dateFrom: dateFrom, dateTo: dateTo) {
+            conversations, error in
 
-                XCTAssertEqual(conversations!.count, 1)
-                XCTAssertEqual(conversations![0].messages!.count, 3)
-                let message0 = conversations![0].messages![0]
-                let message1 = conversations![0].messages![1]
-                let message2 = conversations![0].messages![2]
+            XCTAssertNotNil(conversations)
+            XCTAssertNil(error)
 
-                XCTAssertEqual(message0.fromClient, "false")
-                XCTAssertEqual(message0.text, self.initialResponse)
-                XCTAssertEqual(message1.fromClient, "true")
-                XCTAssertEqual(message1.text, self.input)
-                XCTAssertEqual(message2.fromClient, "false")
-                XCTAssertEqual(message2.text, self.response)
+            XCTAssertEqual(conversations!.count, 1)
+            XCTAssertEqual(conversations![0].messages!.count, 3)
+            let message0 = conversations![0].messages![0]
+            let message1 = conversations![0].messages![1]
+            let message2 = conversations![0].messages![2]
 
-                expectation.fulfill()
+            XCTAssertEqual(message0.fromClient, "false")
+            XCTAssertEqual(message0.text, self.initialResponse)
+            XCTAssertEqual(message1.fromClient, "true")
+            XCTAssertEqual(message1.text, self.input)
+            XCTAssertEqual(message2.fromClient, "false")
+            XCTAssertEqual(message2.text, self.response)
+
+            expectation.fulfill()
         }
         waitForExpectation()
     }

@@ -242,6 +242,33 @@ class StreamAudioToWatson: NSObject, AVCaptureAudioDataOutputSampleBufferDelegat
         didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
         fromConnection connection: AVCaptureConnection!)
     {
-        manager.writeData(sampleBuffer) // TODO: how to convert this to NSData?
+        print("received buffer")
+
+        guard CMSampleBufferDataIsReady(sampleBuffer) else {
+            print("buffer not ready... returning")
+            return
+        }
+
+        let emptyBuffer = AudioBuffer(mNumberChannels: 0, mDataByteSize: 0, mData: nil)
+        var audioBufferList = AudioBufferList(mNumberBuffers: 1, mBuffers: emptyBuffer)
+        var blockBuffer: CMBlockBuffer?
+        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
+            sampleBuffer,
+            nil,
+            &audioBufferList,
+            sizeof(audioBufferList.dynamicType),
+            nil,
+            nil,
+            UInt32(kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment),
+            &blockBuffer)
+
+        let audioData = NSMutableData()
+        let audioBuffers = UnsafeBufferPointer<AudioBuffer>(start: &audioBufferList.mBuffers,
+            count: Int(audioBufferList.mNumberBuffers))
+        for audioBuffer in audioBuffers {
+            audioData.appendBytes(audioBuffer.mData, length: Int(audioBuffer.mDataByteSize))
+        }
+
+        manager.writeData(audioData)
     }
 }

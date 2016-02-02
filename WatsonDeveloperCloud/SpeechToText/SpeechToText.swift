@@ -151,8 +151,12 @@ public class SpeechToText: NSObject, WatsonService {
         //      c. The SpeechToText service times out (either session timeout or inactivity timeout).
         // 6. Execute the completionHandler with all final transcription results (or an error).
 
+        print("1")
+
         let urlString = Constants.websocketsURL(settings.model,
             learningOptOut: settings.learningOptOut)
+
+        print("2")
 
         guard let url = NSURL(string: urlString) else {
             let domain = Constants.errorDomain
@@ -164,6 +168,8 @@ public class SpeechToText: NSObject, WatsonService {
             return { }
         }
 
+        print("3")
+
         guard let start = Mapper().toJSONString(settings) else {
             let domain = Constants.errorDomain
             let code = -1
@@ -174,6 +180,8 @@ public class SpeechToText: NSObject, WatsonService {
             return { }
         }
 
+        print("4")
+
         guard let stop = Mapper().toJSONString(SpeechToTextStop()) else {
             let domain = Constants.errorDomain
             let code = -1
@@ -183,6 +191,8 @@ public class SpeechToText: NSObject, WatsonService {
             completionHandler(nil, error)
             return { }
         }
+
+        print("5")
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
         manager.onText = { text in
@@ -197,18 +207,26 @@ public class SpeechToText: NSObject, WatsonService {
             completionHandler(nil, error)
         }
 
+        print("6")
+
         manager.writeString(start)
+
+        print("7")
 
         session = AVCaptureSession()
         guard let session = session else {
             return { }
         }
 
+        print("8")
+
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
         if session.canAddInput(microphoneInput) {
             session.addInput(microphoneInput)
         }
+
+        print("9")
 
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
@@ -218,12 +236,18 @@ public class SpeechToText: NSObject, WatsonService {
             session.addOutput(output)
         }
 
+        print("10")
+
         session.startRunning()
+
+        print("11")
 
         let stopRecording = {
             self.session?.stopRunning()
             manager.writeString(stop)
         }
+
+        print("12")
 
         return stopRecording
     }
@@ -235,6 +259,7 @@ class StreamAudioToWatson: NSObject, AVCaptureAudioDataOutputSampleBufferDelegat
 
     init(manager: WebSocketManager) {
         self.manager = manager
+        print("initialized StreamAudioToWatson")
     }
 
     func captureOutput(

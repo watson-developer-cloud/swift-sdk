@@ -22,6 +22,7 @@ public class SpeechToText: NSObject, WatsonService {
 
     let authStrategy: AuthenticationStrategy
     private var session: AVCaptureSession?
+    private var streamer: StreamAudioToWatson?
 
     // TODO: comment this initializer
     public required init(authStrategy: AuthenticationStrategy) {
@@ -230,7 +231,7 @@ public class SpeechToText: NSObject, WatsonService {
 
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
-        let streamer = StreamAudioToWatson(manager: manager)
+        streamer = StreamAudioToWatson(manager: manager)
         output.setSampleBufferDelegate(streamer, queue: queue)
         if session.canAddOutput(output) {
             session.addOutput(output)

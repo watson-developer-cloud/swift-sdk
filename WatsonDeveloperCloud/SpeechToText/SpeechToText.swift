@@ -15,11 +15,13 @@
  **/
 
 import Foundation
+import AVFoundation
 import ObjectMapper
 
-public class SpeechToText: WatsonService {
+public class SpeechToText: NSObject, WatsonService {
 
     let authStrategy: AuthenticationStrategy
+    private var session: AVCaptureSession?
 
     // TODO: comment this initializer
     public required init(authStrategy: AuthenticationStrategy) {
@@ -97,10 +99,7 @@ public class SpeechToText: WatsonService {
             // TODO: parsed as state -> ignore
             // TODO: otherwise -> execute completionHandler with error, disconnet
         }
-        manager.onData = { data in
-            // we never expect binary data to be sent by the Speech to Text
-            // service, therefore, it is safe to silently drop it
-        }
+        manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
             completionHandler(nil, error)
@@ -111,6 +110,12 @@ public class SpeechToText: WatsonService {
         manager.writeData(audio)
         manager.writeString(stop)
     }
+
+    /**
+     StopRecording is a function that stops a microphone capture session. Microphone audio will no
+     longer be streamed to the Speech to Text service after the capture session is stopped.
+     */
+    public typealias StopRecording = Void -> Void
 
     /**
      Start the microphone and stream the recording to the SpeechToText service for a live
@@ -146,10 +151,97 @@ public class SpeechToText: WatsonService {
         //      c. The SpeechToText service times out (either session timeout or inactivity timeout).
         // 6. Execute the completionHandler with all final transcription results (or an error).
 
-        return { }
+        let urlString = Constants.websocketsURL(settings.model,
+            learningOptOut: settings.learningOptOut)
+
+        guard let url = NSURL(string: urlString) else {
+            let domain = Constants.errorDomain
+            let code = -1
+            let description = "Could not parse SpeechToText WebSockets URL."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: domain, code: code, userInfo: userInfo)
+            completionHandler(nil, error)
+            return { }
+        }
+
+        guard let start = Mapper().toJSONString(settings) else {
+            let domain = Constants.errorDomain
+            let code = -1
+            let description = "Could not serialize SpeechToTextSettings as JSON."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: domain, code: code, userInfo: userInfo)
+            completionHandler(nil, error)
+            return { }
+        }
+
+        guard let stop = Mapper().toJSONString(SpeechToTextStop()) else {
+            let domain = Constants.errorDomain
+            let code = -1
+            let description = "Could not serialize SpeechToTextStop as JSON."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: domain, code: code, userInfo: userInfo)
+            completionHandler(nil, error)
+            return { }
+        }
+
+        let manager = WebSocketManager(authStrategy: authStrategy, url: url)
+        manager.onText = { text in
+            // TODO: parsed as interim response -> execute onInterim with result
+            // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
+            // TODO: parsed as state -> ignore
+            // TODO: otherwise -> execute completionHandler with error, disconnet
+        }
+        manager.onData = { data in }
+        manager.onError = { error in
+            manager.disconnect()
+            completionHandler(nil, error)
+        }
+
+        manager.writeString(start)
+
+        session = AVCaptureSession()
+        guard let session = session else {
+            return { }
+        }
+
+        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+        if session.canAddInput(microphoneInput) {
+            session.addInput(microphoneInput)
+        }
+
+        let output = AVCaptureAudioDataOutput()
+        let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
+        let streamer = StreamAudioToWatson(manager: manager)
+        output.setSampleBufferDelegate(streamer, queue: queue)
+        if session.canAddOutput(output) {
+            session.addOutput(output)
+        }
+
+        session.startRunning()
+
+        let stopRecording = {
+            self.session?.stopRunning()
+            manager.writeString(stop)
+        }
+
+        return stopRecording
     }
 }
 
-// StopRecording is a function that can be used to forcibly stop recording the microphone and sending
-// audio to the Speech to Text service. (We use a typealias to enhance the expressiveness of our API.)
-public typealias StopRecording = Void -> Void
+class StreamAudioToWatson: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
+
+    private var manager: WebSocketManager
+
+    init(manager: WebSocketManager) {
+        self.manager = manager
+    }
+
+    func captureOutput(
+        captureOutput: AVCaptureOutput!,
+        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
+        fromConnection connection: AVCaptureConnection!)
+    {
+        manager.writeData(sampleBuffer) // TODO: how to convert this to NSData?
+    }
+}

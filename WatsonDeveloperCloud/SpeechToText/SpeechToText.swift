@@ -21,15 +21,31 @@ import ObjectMapper
 public class SpeechToText: NSObject, WatsonService {
 
     let authStrategy: AuthenticationStrategy
-    private var session: AVCaptureSession?
-    private var streamer: StreamAudioToWatson?
+    private var captureSession: AVCaptureSession?
+    private var audioStreamer: AudioStreamer?
 
-    // TODO: comment this initializer
+    /**
+     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
+    
+     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
+        with the Watson Developer Cloud's `SpeechToText` service. The `AuthenticationStrategy`
+        is used internally to obtain tokens, refresh expired tokens, and maintain information
+        about the state of authentication with the Watson Developer Cloud.
+
+     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     */
     public required init(authStrategy: AuthenticationStrategy) {
         self.authStrategy = authStrategy
     }
 
-    // TODO: comment this initializer
+    /**
+     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
+    
+     - parameter username: The username associated with your `SpeechToText` service.
+     - parameter password: The password associated with your `SpeechToText` service.
+
+     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     */
     public convenience required init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
             serviceURL: Constants.serviceURL, username: username, password: password)
@@ -37,9 +53,9 @@ public class SpeechToText: NSObject, WatsonService {
     }
 
     /**
-     Transcribe pre-recorded audio data.
+     Transcribe recorded audio data.
 
-     - parameter audio: The pre-recorded audio data.
+     - parameter audio: The recorded audio data.
      - parameter settings: Settings to configure the SpeechToText service.
      - parameter onInterim: A callback function to execute with interim transcription results from
         the SpeechToText service. This callback function will be executed exactly once for each
@@ -95,6 +111,7 @@ public class SpeechToText: NSObject, WatsonService {
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
         manager.onText = { text in
+            print(text)
             // TODO: parsed as interim response -> execute onInterim with result
             // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
             // TODO: parsed as state -> ignore
@@ -119,9 +136,10 @@ public class SpeechToText: NSObject, WatsonService {
     public typealias StopRecording = Void -> Void
 
     /**
-     Start the microphone and stream the recording to the SpeechToText service for a live
-     transcription. The microphone will stop recording after an end-of-speech event is detected
-     by SpeechToText or the stopRecording function is executed.
+     Start the microphone and perform a live transcription by streaming the microphone audio to
+     the Speech to Text service. The microphone will stop recording after an end-of-speech event
+     is detected by the Speech to Text service or the returned `StopRecording` function is
+     executed.
 
      - parameter settings: The settings used to configure the SpeechToText service.
      - parameter onInterim: A callback function to execute with interim transcription results from
@@ -132,9 +150,9 @@ public class SpeechToText: NSObject, WatsonService {
      - parameter completionHandler: A function that will be executed with all final transcription
         results from the SpeechToText service, or an error if an error occured.
 
-     - returns: A stopRecording function that can be executed to stop the microphone's recording,
-        wait for any remaining transcription results to be returned by the SpeechToText service,
-        then execute the completionHandler.
+     - returns: A `StopRecording` function that can be executed to stop streaming the microphone's
+        audio to the Speech to Text service, wait for any remaining transcription results to be
+        returned, and then execute the `completionHandler`.
      */
     public func transcribe(
         settings: SpeechToTextSettings,
@@ -214,8 +232,8 @@ public class SpeechToText: NSObject, WatsonService {
 
         print("7")
 
-        session = AVCaptureSession()
-        guard let session = session else {
+        captureSession = AVCaptureSession()
+        guard let captureSession = captureSession else {
             return { }
         }
 
@@ -223,28 +241,28 @@ public class SpeechToText: NSObject, WatsonService {
 
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-        if session.canAddInput(microphoneInput) {
-            session.addInput(microphoneInput)
+        if captureSession.canAddInput(microphoneInput) {
+            captureSession.addInput(microphoneInput)
         }
 
         print("9")
 
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
-        streamer = StreamAudioToWatson(manager: manager)
-        output.setSampleBufferDelegate(streamer, queue: queue)
-        if session.canAddOutput(output) {
-            session.addOutput(output)
+        audioStreamer = AudioStreamer(manager: manager)
+        output.setSampleBufferDelegate(audioStreamer, queue: queue)
+        if captureSession.canAddOutput(output) {
+            captureSession.addOutput(output)
         }
 
         print("10")
 
-        session.startRunning()
+        captureSession.startRunning()
 
         print("11")
 
         let stopRecording = {
-            self.session?.stopRunning()
+            self.captureSession?.stopRunning()
             manager.writeString(stop)
         }
 
@@ -254,7 +272,7 @@ public class SpeechToText: NSObject, WatsonService {
     }
 }
 
-class StreamAudioToWatson: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
+class AudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
     private var manager: WebSocketManager
 

@@ -32,6 +32,7 @@ class WebSocketManager {
     var onError: (NSError -> Void)?
 
     init(authStrategy: AuthenticationStrategy, url: NSURL, protocols: [String]? = nil) {
+        print("Initializing WebSocketManager") // TODO: debugging
         self.authStrategy = authStrategy
 
         operations.maxConcurrentOperationCount = 1
@@ -48,6 +49,7 @@ class WebSocketManager {
             print("error: \(error)") // TODO: debugging
             self.operations.suspended = true
             if self.isAuthenticationFailure(error) {
+                print("onDisconnect calling connectWithToken()") // TODO: debugging
                 self.connectWithToken()
             } else if let error = error {
                 self.onError?(error)
@@ -61,12 +63,13 @@ class WebSocketManager {
             print("received data") // TODO: debugging
             self.onData?(data)
         }
-
+        print("init calling connectWithToken()")
         connectWithToken()
     }
 
     func writeData(data: NSData) {
         if !socket.isConnected {
+            print("writeData calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
@@ -77,6 +80,7 @@ class WebSocketManager {
 
     func writeString(str: String) {
         if !socket.isConnected {
+            print("writeString calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
@@ -87,6 +91,7 @@ class WebSocketManager {
 
     func writePing(data: NSData) {
         if !socket.isConnected {
+            print("writePing calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
@@ -96,11 +101,15 @@ class WebSocketManager {
     }
 
     func disconnect(forceTimeout: NSTimeInterval? = nil) {
-        operations.waitUntilAllOperationsAreFinished()
+        if !operations.suspended {
+            operations.waitUntilAllOperationsAreFinished()
+        }
         socket.disconnect(forceTimeout: forceTimeout)
     }
 
     private func connectWithToken() {
+        print("Connecting with token.") // TODO: debugging
+        print("Retries: \(retries)") // TODO: debugging
         guard retries++ < maxRetries else {
             let domain = "WebSocketManager.swift"
             let code = -1
@@ -110,8 +119,10 @@ class WebSocketManager {
             onError?(error)
             return
         }
+        print("Passed guard statement...") // TODO: debugging
 
         if let token = authStrategy.token where retries == 0 {
+            print("Using token: \(token)") // TODO: debugging
             self.socket.headers["X-Watson-Authorization-Token"] = token
             self.socket.connect()
         } else {

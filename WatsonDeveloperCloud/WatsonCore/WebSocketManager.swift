@@ -33,7 +33,6 @@ class WebSocketManager {
     var onError: (NSError -> Void)?
 
     init(authStrategy: AuthenticationStrategy, url: NSURL, protocols: [String]? = nil) {
-        print("Initializing WebSocketManager") // TODO: debugging
         self.authStrategy = authStrategy
 
         operations.maxConcurrentOperationCount = 1
@@ -41,64 +40,51 @@ class WebSocketManager {
 
         socket = WebSocket(url: url, protocols: protocols)
         socket.onConnect = {
-            print("socket did connect") // TODO: debugging
             self.operations.suspended = false
             self.isConnecting = false
             self.retries = 0
         }
         socket.onDisconnect = { error in
-            print("socket did disconnect") // TODO: debugging
-            print("error: \(error)") // TODO: debugging
             self.operations.suspended = true
             self.isConnecting = false
             if self.isAuthenticationFailure(error) {
-                print("onDisconnect calling connectWithToken()") // TODO: debugging
                 self.connectWithToken()
             } else if let error = error {
                 self.onError?(error)
             }
         }
         socket.onText = { text in
-            print("received message: \(text)") // TODO: debugging
             self.onText?(text)
         }
         socket.onData = { data in
-            print("received data") // TODO: debugging
             self.onData?(data)
         }
-        print("init calling connectWithToken()")
         connectWithToken()
     }
 
     func writeData(data: NSData) {
         if !socket.isConnected {
-            print("writeData calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
-            print("executing writeData operation") // TODO: debugging
             self.socket.writeData(data)
         }
     }
 
     func writeString(str: String) {
         if !socket.isConnected {
-            print("writeString calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
-            print("executing writeString operation") // TODO: debugging
             self.socket.writeString(str)
         }
     }
 
     func writePing(data: NSData) {
         if !socket.isConnected {
-            print("writePing calling connectWithToken()") // TODO: debugging
             connectWithToken()
         }
         operations.addOperationWithBlock {
-            print("executing writePing operation") // TODO: debugging
             self.socket.writePing(data)
         }
     }
@@ -111,8 +97,6 @@ class WebSocketManager {
     }
 
     private func connectWithToken() {
-        print("Connecting with token.") // TODO: debugging
-        print("Retries: \(retries)") // TODO: debugging
         guard !isConnecting else {
             return
         }
@@ -126,10 +110,8 @@ class WebSocketManager {
             onError?(error)
             return
         }
-        print("Passed guard statement...") // TODO: debugging
 
         if let token = authStrategy.token where retries == 0 {
-            print("Using token: \(token)") // TODO: debugging
             self.socket.headers["X-Watson-Authorization-Token"] = token
             isConnecting = true
             self.socket.connect()

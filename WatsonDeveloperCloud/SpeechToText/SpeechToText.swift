@@ -213,6 +213,7 @@ public class SpeechToText: NSObject, WatsonService {
         manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
+            self.captureSession?.stopRunning()
             completionHandler(nil, error)
         }
 

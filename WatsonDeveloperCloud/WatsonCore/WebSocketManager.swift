@@ -111,9 +111,10 @@ class WebSocketManager {
             return
         }
 
+        self.isConnecting = true
+
         if let token = authStrategy.token where retries == 0 {
             self.socket.headers["X-Watson-Authorization-Token"] = token
-            isConnecting = true
             self.socket.connect()
         } else {
             authStrategy.refreshToken { error in
@@ -133,7 +134,6 @@ class WebSocketManager {
                     return
                 }
                 self.socket.headers["X-Watson-Authorization-Token"] = token
-                self.isConnecting = true
                 self.socket.connect()
             }
         }

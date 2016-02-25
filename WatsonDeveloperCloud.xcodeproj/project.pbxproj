@@ -744,7 +744,6 @@
 		7A0F96641C232B96004C01C0 /* WatsonCore */ = {
 			isa = PBXGroup;
 			children = (
-				7A19DC901C596B150082ED38 /* WebSocketManager.swift */,
 				7A0F96651C232B96004C01C0 /* AlchemyRequest.swift */,
 				7A0F96661C232B96004C01C0 /* AlchemyService.swift */,
 				7A0F96671C232B96004C01C0 /* Authentication */,
@@ -755,6 +754,7 @@
 				7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */,
 				7A0F96801C232B96004C01C0 /* WatsonRequest.swift */,
 				7A0F96811C232B96004C01C0 /* WatsonService.swift */,
+				7A19DC901C596B150082ED38 /* WebSocketManager.swift */,
 			);
 			name = WatsonCore;
 			path = WatsonDeveloperCloud/WatsonCore;

@@ -24,6 +24,7 @@ class WebSocketManager {
     private let authStrategy: AuthenticationStrategy
     private let operations = NSOperationQueue()
     private let socket: WebSocket
+    private var isConnecting = false
     private var retries = 0
     private var maxRetries = 1
 
@@ -42,12 +43,14 @@ class WebSocketManager {
         socket.onConnect = {
             print("socket did connect") // TODO: debugging
             self.operations.suspended = false
+            self.isConnecting = false
             self.retries = 0
         }
         socket.onDisconnect = { error in
             print("socket did disconnect") // TODO: debugging
             print("error: \(error)") // TODO: debugging
             self.operations.suspended = true
+            self.isConnecting = false
             if self.isAuthenticationFailure(error) {
                 print("onDisconnect calling connectWithToken()") // TODO: debugging
                 self.connectWithToken()
@@ -110,6 +113,10 @@ class WebSocketManager {
     private func connectWithToken() {
         print("Connecting with token.") // TODO: debugging
         print("Retries: \(retries)") // TODO: debugging
+        guard !isConnecting else {
+            return
+        }
+
         guard retries++ < maxRetries else {
             let domain = "WebSocketManager.swift"
             let code = -1
@@ -124,6 +131,7 @@ class WebSocketManager {
         if let token = authStrategy.token where retries == 0 {
             print("Using token: \(token)") // TODO: debugging
             self.socket.headers["X-Watson-Authorization-Token"] = token
+            isConnecting = true
             self.socket.connect()
         } else {
             authStrategy.refreshToken { error in
@@ -143,6 +151,7 @@ class WebSocketManager {
                     return
                 }
                 self.socket.headers["X-Watson-Authorization-Token"] = token
+                self.isConnecting = true
                 self.socket.connect()
             }
         }

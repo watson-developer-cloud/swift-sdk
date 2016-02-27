@@ -21,15 +21,16 @@ import ObjectMapper
 public class AlchemyVision: AlchemyService {
     
     // The authentication strategy to obtain authorization tokens.
-    var authStrategy: AuthenticationStrategy
+    let authStrategy: AuthenticationStrategy
     
     // The non-expiring Alchemy API key returned by the authentication strategy.
     // TODO: this can be removed after migrating to WatsonGateway
     private var _apiKey: String! {
         return authStrategy.token
     }
-    
-    public required init(var authStrategy: AuthenticationStrategy) {
+
+    // TODO: comment this initializer
+    public required init(authStrategy: AuthenticationStrategy) {
         self.authStrategy = authStrategy
         
         // refresh to obtain the API key
@@ -40,7 +41,8 @@ public class AlchemyVision: AlchemyService {
             }
         }
     }
-    
+
+    // TODO: comment this initializer
     public convenience required init(apiKey: String) {
         let authStrategy = APIKeyAuthenticationStrategy(apiKey: apiKey)
         self.init(authStrategy: authStrategy)

@@ -34,7 +34,7 @@ public class APIKeyAuthenticationStrategy: AuthenticationStrategy {
     public var retries = 0
     
     // The API key used to authenticate with a Watson Alchemy service.
-    private var apiKey: String!
+    private let apiKey: String!
     
     /**
      Authenticate with a Watson Developer Cloud service using an API key.

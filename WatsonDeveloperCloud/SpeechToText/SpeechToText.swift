@@ -22,7 +22,7 @@ public class SpeechToText: NSObject, WatsonService {
 
     let authStrategy: AuthenticationStrategy
     private var captureSession: AVCaptureSession?
-    private var audioStreamer: AudioStreamer?
+    private var audioStreamer: SpeechToTextAudioStreamer?
 
     /**
      Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
@@ -71,11 +71,6 @@ public class SpeechToText: NSObject, WatsonService {
         onInterim: ((SpeechToTextResponse?, NSError?) -> Void)? = nil,
         completionHandler: ([SpeechToTextResponse]?, NSError?) -> Void)
     {
-        // 1. Set up SpeechToText with client-specified settings.
-        // 2. Send the given audio data to the SpeechToText service.
-        // 3. Execute the onInterim function for each interim transcription result.
-        // 4. Execute the completionHandler with all final transcription results (or an error).
-
         let urlString = Constants.websocketsURL(settings.model,
             learningOptOut: settings.learningOptOut)
 
@@ -110,13 +105,7 @@ public class SpeechToText: NSObject, WatsonService {
         }
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in
-            print(text)
-            // TODO: parsed as interim response -> execute onInterim with result
-            // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
-            // TODO: parsed as state -> ignore
-            // TODO: otherwise -> execute completionHandler with error, disconnet
-        }
+        manager.onText = { text in self.parseGenericResponse(text) }
         manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
@@ -204,12 +193,7 @@ public class SpeechToText: NSObject, WatsonService {
         }
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in
-            // TODO: parsed as interim response -> execute onInterim with result
-            // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
-            // TODO: parsed as state -> ignore
-            // TODO: otherwise -> execute completionHandler with error, disconnet
-        }
+        manager.onText = { text in self.parseGenericResponse(text) }
         manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
@@ -232,7 +216,7 @@ public class SpeechToText: NSObject, WatsonService {
 
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
-        audioStreamer = AudioStreamer(manager: manager)
+        audioStreamer = SpeechToTextAudioStreamer(manager: manager)
         output.setSampleBufferDelegate(audioStreamer, queue: queue)
         if captureSession.canAddOutput(output) {
             captureSession.addOutput(output)
@@ -247,46 +231,51 @@ public class SpeechToText: NSObject, WatsonService {
 
         return stopRecording
     }
-}
 
-class AudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
-
-    private var manager: WebSocketManager
-
-    init(manager: WebSocketManager) {
-        self.manager = manager
-    }
-
-    func captureOutput(
-        captureOutput: AVCaptureOutput!,
-        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
-        fromConnection connection: AVCaptureConnection!)
-    {
-        guard CMSampleBufferDataIsReady(sampleBuffer) else {
-            print("buffer not ready... returning")
+    private func parseGenericResponse(json: String) {
+        guard let data = json.dataUsingEncoding(NSUTF8StringEncoding) else {
+            // TODO: Return an error here...
             return
         }
 
-        let emptyBuffer = AudioBuffer(mNumberChannels: 0, mDataByteSize: 0, mData: nil)
-        var audioBufferList = AudioBufferList(mNumberBuffers: 1, mBuffers: emptyBuffer)
-        var blockBuffer: CMBlockBuffer?
-        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
-            sampleBuffer,
-            nil,
-            &audioBufferList,
-            sizeof(audioBufferList.dynamicType),
-            nil,
-            nil,
-            UInt32(kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment),
-            &blockBuffer)
-
-        let audioData = NSMutableData()
-        let audioBuffers = UnsafeBufferPointer<AudioBuffer>(start: &audioBufferList.mBuffers,
-            count: Int(audioBufferList.mNumberBuffers))
-        for audioBuffer in audioBuffers {
-            audioData.appendBytes(audioBuffer.mData, length: Int(audioBuffer.mDataByteSize))
+        do {
+            let object = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            if let object = object as? NSDictionary {
+                if      object["state"]   != nil { parseStateResponse(json)   }
+                else if object["results"] != nil { parseResultsResponse(json) }
+                else if object["error"]   != nil { parseErrorResponse(json)   }
+                else                             { parseUnknownResponse(json) }
+            }
         }
+        catch {
+            parseUnserializableResponse()
+        }
+    }
 
-        manager.writeData(audioData)
+    private func parseStateResponse(json: String) {
+        return
+    }
+
+    private func parseResultsResponse(json: String) {
+        // TODO: parsed as interim response -> execute onInterim with result
+        // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
+        // print("ResultsResponse")
+        let response = Mapper<SpeechToTextResponse>().map(json)
+        print(response!.results[0].alternatives[0].transcript)
+    }
+
+    private func parseErrorResponse(json: String) {
+        // TODO: otherwise -> execute completionHandler with error, disconnet
+        // print("ErrorResponse")
+    }
+
+    private func parseUnknownResponse(json: String) {
+        // TODO: otherwise -> execute completionHandler with error, disconnet
+        // print("UnknownResponse")
+    }
+
+    private func parseUnserializableResponse() {
+        // TODO: otherwise -> execute completionHandler with error, disconnet
+        // print("UnserializableResponse")
     }
 }

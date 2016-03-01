@@ -19,26 +19,28 @@ import ObjectMapper
 
 extension Dialog {
     
-    // A Dialog conversation response
+    /// A Dialog conversation response
     public struct ConversationResponse: Mappable {
         
-        // The response from the Dialog application
+        /// The response from the Dialog application
         public var response: [String]?
         
-        // The input string that prompted the Dialog application to respond
+        /// The input string that prompted the Dialog application to respond
         public var input: String?
         
-        // The conversation identifier
+        /// The conversation identifier
         public var conversationID: Int?
         
-        // The confidence associated with the conversation response
+        /// The confidence associated with the conversation response
         public var confidence: Double?
         
-        // The client identifier
+        /// The client identifier
         public var clientID: Int?
-        
+
+        /// Used internally to initialize a `ConversationResponse` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             response       <- map["response"]
             input          <- map["input"]

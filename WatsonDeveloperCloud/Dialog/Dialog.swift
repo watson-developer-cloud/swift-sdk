@@ -43,6 +43,13 @@ public class Dialog: WatsonService {
             serviceURL: Constants.serviceURL, username: username, password: password)
         self.init(authStrategy: authStrategy)
     }
+
+    // Date formatter
+    private static var formatter: NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }
     
     // MARK: Content Operations
     
@@ -294,8 +301,10 @@ public class Dialog: WatsonService {
      Obtain recorded conversation history.
      
      - parameter dialogID: The Dialog application identifier.
-     - parameter dateFrom: The start date of the desired conversation history.
-     - parameter dateTo: The end date of the desired conversation history.
+     - parameter dateFrom: The start date of the desired conversation history. The
+        timezone should match that of the Dialog application.
+     - parameter dateTo: The end date of the desired conversation history. The
+        timezone should match that of the Dialog application.
      - parameter offset: The offset starting point in the returned history (default: 0).
      - parameter limit: The maximum number of conversations to retrieve (default: 10,000).
      - parameter completionHandler: A function invoked with the response from Watson.
@@ -304,14 +313,12 @@ public class Dialog: WatsonService {
         dateTo: NSDate, offset: Int? = nil, limit: Int? = nil,
         completionHandler: ([Conversation]?, NSError?) -> Void)
     {
-        // The Watson Dialog Service's clock is 17 hours fast, so we correct for that here.
-        let serverTimeError: NSTimeInterval = 17 * 60 * 60 // 17 hours in seconds
-        let dateFromUnix = Int(dateFrom.timeIntervalSince1970 + serverTimeError)
-        let dateToUnix = Int(dateTo.timeIntervalSince1970 + serverTimeError)
+        let dateFromString = Dialog.formatter.stringFromDate(dateFrom)
+        let dateToString = Dialog.formatter.stringFromDate(dateTo)
 
         var urlParams = [NSURLQueryItem]()
-        urlParams.append(NSURLQueryItem(name: "date_from", value: "\(dateFromUnix)"))
-        urlParams.append(NSURLQueryItem(name: "date_to", value: "\(dateToUnix)"))
+        urlParams.append(NSURLQueryItem(name: "date_from", value: dateFromString))
+        urlParams.append(NSURLQueryItem(name: "date_to", value: dateToString))
         if let offset = offset {
             urlParams.append(NSURLQueryItem(name: "offset", value: "\(offset)"))
         }

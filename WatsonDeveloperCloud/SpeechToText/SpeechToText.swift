@@ -113,7 +113,6 @@ public class SpeechToText {
         }
         
         manager.writeString(start)
-        print(start) // TODO: debugging
         manager.writeData(audio)
         manager.writeString(stop)
     }

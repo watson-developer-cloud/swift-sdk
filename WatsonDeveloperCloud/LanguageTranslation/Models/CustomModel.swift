@@ -19,14 +19,16 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    // A Language Translation custom model
+    /// A Language Translation custom model
     internal struct CustomModel: Mappable {
         
-        // The base model that this translation model was trained on
+        /// The base model that this translation model was trained on
         var modelID: String?
-        
+
+        /// Used internally to initialize a `CustomModel` from JSON.
         init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating func mapping(map: Map) {
             modelID <- map["model_id"]
         }

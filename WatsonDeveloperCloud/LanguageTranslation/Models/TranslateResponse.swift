@@ -21,9 +21,11 @@ extension LanguageTranslation {
     
     internal struct Translation: Mappable {
         var translation: String?
-        
+
+        /// Used internally to initialize a `Translation` from JSON.
         init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating func mapping(map: Map) {
             translation <- map["translation"]
         }
@@ -45,9 +47,11 @@ extension LanguageTranslation {
             }
             return nil
         }
-        
+
+        /// Used internally to initialize a `TranslateResponse` from JSON.
         init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating func mapping(map: Map) {
             wordCount      <- map["word_count"]
             characterCount <- map["character_count"]

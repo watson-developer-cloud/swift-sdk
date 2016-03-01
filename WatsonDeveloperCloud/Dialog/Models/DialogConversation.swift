@@ -19,26 +19,28 @@ import ObjectMapper
 
 extension Dialog {
     
-    // A Dialog conversation
+    /// A Dialog conversation
     public struct Conversation: Mappable {
 
-        // The nodes that were executed by the conversation
+        /// The nodes that were executed by the conversation
         var hitNodes: [HitNode]?
         
-        // The conversation identifier
+        /// The conversation identifier
         var conversationID: Int?
         
-        // The client identifier
+        /// The client identifier
         var clientID: Int?
         
-        // The messages exchanged during the conversation
+        /// The messages exchanged during the conversation
         var messages: [Message]?
         
-        // The profile variables associated with the conversation
+        /// The profile variables associated with the conversation
         var profile: [String: String]?
-        
+
+        /// Used internally to initialize a `Conversation` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             hitNodes       <- map["hit_nodes"]
             conversationID <- map["conversation_id"]
@@ -48,23 +50,25 @@ extension Dialog {
         }
     }
     
-    // A Dialog hit node
+    /// A Dialog hit node
     public struct HitNode: Mappable {
         
-        // The details of the node
+        /// The details of the node
         var details: String?
         
-        // The label of the node
+        /// The label of the node
         var label: String?
         
-        // The type of the node
+        /// The type of the node
         var type: String?
         
-        // The node identifier
+        /// The node identifier
         var nodeID: Int?
-        
+
+        /// Used internally to initialize a `HitNode` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             details <- map["details"]
             label   <- map["label"]
@@ -73,20 +77,22 @@ extension Dialog {
         }
     }
     
-    // A Dialog message
+    /// A Dialog message
     public struct Message: Mappable {
         
-        // The text of the message
+        /// The text of the message
         var text: String?
         
-        // The date and time of the message
+        /// The date and time of the message
         var dateTime: NSDate?
         
-        // The client that prompted the message to be sent
+        /// The client that prompted the message to be sent
         var fromClient: String?
-        
+
+        /// Used internally to initialize a `Message` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             text       <-  map["text"]
             dateTime   <- (map["date_time"], ISO8601DateTransform())

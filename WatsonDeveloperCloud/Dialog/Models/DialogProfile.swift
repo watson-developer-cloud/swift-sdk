@@ -19,13 +19,13 @@ import ObjectMapper
 
 extension Dialog {
     
-    // A Dialog profile
+    /// A Dialog profile
     public struct Profile: Mappable {
         
-        // The client identifier
+        /// The client identifier
         public var clientID: Int?
         
-        // The parameters of the profile
+        /// The parameters of the profile
         public var parameters: [Parameter]?
         
         public init(clientID: Int? = nil, parameters: [String: String]? = nil) {
@@ -39,31 +39,35 @@ extension Dialog {
                 self.parameters = params
             }
         }
-        
+
+        /// Used internally to initialize a `Profile` from JSON.
         public init?(_: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             clientID   <- map["client_id"]
             parameters <- map["name_values"]
         }
     }
     
-    // A Dialog parameter
+    /// A Dialog parameter
     public struct Parameter: Mappable {
         
-        // The name of the parameter
+        /// The name of the parameter
         public var name: String?
         
-        // The value of the parameter
+        /// The value of the parameter
         public var value: String?
         
         public init(name: String? = nil, value: String? = nil) {
             self.name = name
             self.value = value
         }
-        
+
+        /// Used internally to initialize a `Parameter` from JSON.
         public init?(_: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating public func mapping(map: Map) {
             value <- map["value"]
             name  <- map["name"]

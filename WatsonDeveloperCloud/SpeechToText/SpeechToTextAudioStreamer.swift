@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import AVFoundation
 
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 

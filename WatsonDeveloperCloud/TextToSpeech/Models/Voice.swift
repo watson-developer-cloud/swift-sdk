@@ -21,23 +21,25 @@ extension TextToSpeech {
 
     public struct Voice: Mappable {
         
-        // URL for addressing the voice in a synthesize call
+        /// URL for addressing the voice in a synthesize call
         public var url: String?
         
-        // Gender of the voice
+        /// Gender of the voice
         public var gender: String?
         
-        // Name of the voice
+        /// Name of the voice
         public var name: String?
         
-        // Language of the voice
+        /// Language of the voice
         public var language: String?
         
-        // Description of the voice
+        /// Description of the voice
         public var description: String?
-        
+
+        /// Used internally to initialize a `Voice` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             url         <- map["url"]
             gender      <- map["gender"]

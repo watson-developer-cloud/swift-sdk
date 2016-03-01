@@ -19,8 +19,10 @@ struct SpeechToTextStop: Mappable {
 
     init() { }
 
+    /// Used internally to initialize a `SpeechToTextStop` from JSON.
     init?(_ map: Map) { }
 
+    /// Used internally to serialize and deserialize JSON.
     mutating func mapping(map: Map) {
         action <- map["action"]
     }

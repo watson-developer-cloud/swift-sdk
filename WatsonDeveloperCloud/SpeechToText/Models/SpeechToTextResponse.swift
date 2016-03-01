@@ -33,8 +33,10 @@ extension SpeechToText {
         /// just after the most recent final result.
         public var results: [SpeechRecognitionResult]!
 
+        /// Used internally to initialize a `SpeechToTextResponse` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             resultIndex <- map["result_index"]
             results     <- map["results"]
@@ -58,8 +60,10 @@ extension SpeechToText {
         /// A list of acoustically similar alternatives for words of the input audio.
         public var wordAlternatives: [WordAlternativeResults]?
 
+        /// Used internally to initialize a `SpeechRecognitionResult` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             final            <- map["final"]
             alternatives     <- map["alternatives"]
@@ -84,8 +88,10 @@ extension SpeechToText {
         /// for the best alternative and only in results marked as final.
         public var wordConfidence: [WordConfidence]? // TODO: needs a transform from ["hello", 0.95] to WordConfidence object...
 
+        /// Used internally to initialize a `SpeechRecognitionAlternative` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             transcript     <- map["transcript"]
             confidence     <- map["confidence"]
@@ -132,8 +138,10 @@ extension SpeechToText {
         /// least as great as the specified threshold to be included in the results.
         public var confidence: Double!
 
+        /// Used internally to initialize a `KeywordResult` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             normalizedText <- map["normalized_text"]
             startTime      <- map["start_time"]
@@ -155,8 +163,10 @@ extension SpeechToText {
         /// A list of alternative word hypotheses for a word in the audio input.
         public var alternatives: [WordAlternativeResult]!
 
+        /// Used internally to initialize a `WordAlternativeResults` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             startTime    <- map["start_time"]
             endTime      <- map["end_time"]
@@ -172,8 +182,10 @@ extension SpeechToText {
         /// The alternative word hypothesis for a word in the audio input.
         public var word: String!
 
+        /// Used internally to initialize a `WordAlternativeResult` from JSON.
         public init?(_ map: Map) { }
 
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             confidence <- map["confidence"]
             word       <- map["word"]

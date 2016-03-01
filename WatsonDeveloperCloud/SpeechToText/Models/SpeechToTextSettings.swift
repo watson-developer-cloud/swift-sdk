@@ -122,8 +122,10 @@ public struct SpeechToTextSettings: Mappable {
         self.contentType = contentType
     }
 
+    /// Used internally to initialize a `SpeechToTextSettings` from JSON.
     public init?(_ map: Map) { }
 
+    /// Used internally to serialize and deserialize JSON.
     mutating public func mapping(map: Map) {
         action                    <- map["action"]
         contentTypeString         <- map["content-type"]

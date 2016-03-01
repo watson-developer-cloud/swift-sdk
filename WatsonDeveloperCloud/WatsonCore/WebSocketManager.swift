@@ -54,11 +54,9 @@ class WebSocketManager {
             }
         }
         socket.onText = { text in
-            print("Received Message: \(text)")
             self.onText?(text)
         }
         socket.onData = { data in
-            print("Received Data.")
             self.onData?(data)
         }
         connectWithToken()

@@ -185,7 +185,7 @@ public class SpeechToText {
      */
     public func transcribe(
         settings: SpeechToTextSettings,
-        onInterim: ((SpeechRecognitionResult?, NSError?) -> Void)? = nil,
+        onInterim: (([SpeechRecognitionResult]?, NSError?) -> Void)? = nil,
         completionHandler: ([SpeechRecognitionResult]?, NSError?) -> Void)
         -> StopRecording
     {
@@ -232,6 +232,8 @@ public class SpeechToText {
             return { }
         }
 
+        var speechRecognitionResults = [SpeechRecognitionResult]()
+
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
         manager.onText = { text in
             guard let response = self.parseResponse(text) else {
@@ -255,7 +257,22 @@ public class SpeechToText {
                 completionHandler(nil, error)
                 return
             case .Results(let resultsWrapper):
-                print(resultsWrapper.results[0].alternatives[0].transcript)
+                var index = resultsWrapper.resultIndex
+                if index >= speechRecognitionResults.count {
+                    resultsWrapper.results.forEach { result in
+                        speechRecognitionResults.append(result)
+                    }
+                } else {
+                    for result in resultsWrapper.results {
+                        speechRecognitionResults[index] = result
+                        index = index + 1
+                    }
+                }
+                if let onInterim = onInterim {
+                    if settings.interimResults == true {
+                        onInterim(speechRecognitionResults, nil)
+                    }
+                }
             }
         }
         manager.onData = { data in }

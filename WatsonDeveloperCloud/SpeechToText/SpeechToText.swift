@@ -68,8 +68,8 @@ public class SpeechToText {
     public func transcribe(
         audio: NSData,
         settings: SpeechToTextSettings,
-        onInterim: ((SpeechToTextResponse?, NSError?) -> Void)? = nil,
-        completionHandler: ([SpeechToTextResponse]?, NSError?) -> Void)
+        onInterim: (([SpeechRecognitionResult]?, NSError?) -> Void)? = nil,
+        completionHandler: ([SpeechRecognitionResult]?, NSError?) -> Void)
     {
         let urlString = Constants.websocketsURL(settings.model,
             learningOptOut: settings.learningOptOut)
@@ -105,7 +105,31 @@ public class SpeechToText {
         }
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in self.parseGenericResponse(text) }
+        manager.onText = { text in
+            guard let response = self.parseResponse(text) else {
+                let domain = Constants.errorDomain
+                let code = -1
+                let description = "Could not serialize SpeechToTextSettings as JSON."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: domain, code: code, userInfo: userInfo)
+                completionHandler(nil, error)
+                return
+            }
+
+            switch response {
+            case .State: return
+            case .Error(let error):
+                let domain = Constants.errorDomain
+                let code = -1
+                let description = "Watson Speech to Text service reported an error: \(error.error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: domain, code: code, userInfo: userInfo)
+                completionHandler(nil, error)
+                return
+            case .Results(let resultsWrapper):
+                print(resultsWrapper.results[0].alternatives[0].transcript)
+            }
+        }
         manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
@@ -144,8 +168,8 @@ public class SpeechToText {
      */
     public func transcribe(
         settings: SpeechToTextSettings,
-        onInterim: ((SpeechToTextResponse?, NSError?) -> Void)? = nil,
-        completionHandler: ([SpeechToTextResponse]?, NSError?) -> Void)
+        onInterim: ((SpeechRecognitionResult?, NSError?) -> Void)? = nil,
+        completionHandler: ([SpeechRecognitionResult]?, NSError?) -> Void)
         -> StopRecording
     {
         // 1. Set up SpeechToText with client-specified settings.
@@ -192,7 +216,31 @@ public class SpeechToText {
         }
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in self.parseGenericResponse(text) }
+        manager.onText = { text in
+            guard let response = self.parseResponse(text) else {
+                let domain = Constants.errorDomain
+                let code = -1
+                let description = "Could not serialize SpeechToTextSettings as JSON."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: domain, code: code, userInfo: userInfo)
+                completionHandler(nil, error)
+                return
+            }
+
+            switch response {
+            case .State: return
+            case .Error(let error):
+                let domain = Constants.errorDomain
+                let code = -1
+                let description = "Watson Speech to Text service reported an error: \(error.error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: domain, code: code, userInfo: userInfo)
+                completionHandler(nil, error)
+                return
+            case .Results(let resultsWrapper):
+                print(resultsWrapper.results[0].alternatives[0].transcript)
+            }
+        }
         manager.onData = { data in }
         manager.onError = { error in
             manager.disconnect()
@@ -229,52 +277,5 @@ public class SpeechToText {
         }
 
         return stopRecording
-    }
-
-    private func parseGenericResponse(json: String) {
-        guard let data = json.dataUsingEncoding(NSUTF8StringEncoding) else {
-            // TODO: Return an error here...
-            return
-        }
-
-        do {
-            let object = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            if let object = object as? NSDictionary {
-                if      object["state"]   != nil { parseStateResponse(json)   }
-                else if object["results"] != nil { parseResultsResponse(json) }
-                else if object["error"]   != nil { parseErrorResponse(json)   }
-                else                             { parseUnknownResponse(json) }
-            }
-        }
-        catch {
-            parseUnserializableResponse()
-        }
-    }
-
-    private func parseStateResponse(json: String) {
-        return
-    }
-
-    private func parseResultsResponse(json: String) {
-        // TODO: parsed as interim response -> execute onInterim with result
-        // TODO: parsed as final/last response -> execute completionHandler with result, disconnect
-        // print("ResultsResponse")
-        let response = Mapper<SpeechToTextResponse>().map(json)
-        print(response!.results[0].alternatives[0].transcript)
-    }
-
-    private func parseErrorResponse(json: String) {
-        // TODO: otherwise -> execute completionHandler with error, disconnet
-        // print("ErrorResponse")
-    }
-
-    private func parseUnknownResponse(json: String) {
-        // TODO: otherwise -> execute completionHandler with error, disconnet
-        // print("UnknownResponse")
-    }
-
-    private func parseUnserializableResponse() {
-        // TODO: otherwise -> execute completionHandler with error, disconnet
-        // print("UnserializableResponse")
     }
 }

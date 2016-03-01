@@ -21,16 +21,20 @@ extension NaturalLanguageClassifier {
 
     public struct ClassifiedClass: Mappable {
 
-      /// Class label
-      public var name: String?
-      /// A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
-      public var confidence: Double?
-      
-      public init?(_ map: Map) {}
-      
-      public mutating func mapping(map: Map) {
-        name        <- map["class_name"]
-        confidence  <- (map["confidence"])
-      }
+        /// Class label
+        public var name: String?
+
+        /// A decimal percentage that represents Watson's with this class classification.
+        /// (Higher values represent higher confidences.)
+        public var confidence: Double?
+
+        /// Used internally to initialize a `ClassifiedClass` from JSON.
+        public init?(_ map: Map) {}
+
+        /// Used internally to serialize and deserialize JSON.
+        public mutating func mapping(map: Map) {
+            name        <- map["class_name"]
+            confidence  <- (map["confidence"])
+        }
     }
 }

@@ -28,23 +28,32 @@ extension NaturalLanguageClassifier {
     }
     
     public struct Classifier: Mappable {
+
         /// Date and time (UTC) the classifier was created
         public var created: NSDate = NSDate()
+
         /// Unique identifier for this classifier
         public var id: String?
+
         /// The language used for the classifier
         public var language: String?
+
         /// User-supplied name for the classifier
         public var name: String?
+
         ///  ['Non Existent' or 'Training' or 'Failed' or 'Available' or 'Unavailable']: The state of the classifier
         public var status: Status = Status.NonExistent
+
         /// Additional detail about the status
         public var statusDescription: String?
+
         ///  Link to the classifer
         public var url: String?
-        
+
+        /// Used internally to initialize a `Classifier` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             created            <- (map["created"], DateTransform())
             id                 <- (map["classifier_id"])
@@ -56,18 +65,3 @@ extension NaturalLanguageClassifier {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

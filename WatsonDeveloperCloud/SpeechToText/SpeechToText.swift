@@ -18,9 +18,9 @@ import Foundation
 import AVFoundation
 import ObjectMapper
 
-public class SpeechToText: NSObject, WatsonService {
+public class SpeechToText {
 
-    let authStrategy: AuthenticationStrategy
+    private let authStrategy: AuthenticationStrategy
     private var captureSession: AVCaptureSession?
     private var audioStreamer: SpeechToTextAudioStreamer?
 

@@ -68,8 +68,7 @@ public class SpeechToText {
     public func transcribe(
         audio: NSData,
         settings: SpeechToTextSettings,
-        onInterim: (([SpeechRecognitionResult]?, NSError?) -> Void)? = nil,
-        completionHandler: ([SpeechRecognitionResult]?, NSError?) -> Void)
+        completionHandler: ([SpeechToTextResult]?, NSError?) -> Void)
     {
         let urlString = Constants.websocketsURL(settings.model,
             learningOptOut: settings.learningOptOut)
@@ -104,11 +103,11 @@ public class SpeechToText {
             return
         }
 
-        var speechRecognitionResults = [SpeechRecognitionResult]()
+        var speechRecognitionResults = [SpeechToTextResult]()
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
         manager.onText = { text in
-            guard let response = self.parseResponse(text) else {
+            guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
                 let domain = Constants.errorDomain
                 let code = -1
                 let description = "Could not serialize SpeechToTextSettings as JSON."
@@ -140,11 +139,7 @@ public class SpeechToText {
                         index = index + 1
                     }
                 }
-                if let onInterim = onInterim {
-                    if settings.interimResults == true {
-                        onInterim(speechRecognitionResults, nil)
-                    }
-                }
+                // TODO: call completion handler
             }
         }
         manager.onData = { data in }
@@ -185,8 +180,7 @@ public class SpeechToText {
      */
     public func transcribe(
         settings: SpeechToTextSettings,
-        onInterim: (([SpeechRecognitionResult]?, NSError?) -> Void)? = nil,
-        completionHandler: ([SpeechRecognitionResult]?, NSError?) -> Void)
+        completionHandler: ([SpeechToTextResult]?, NSError?) -> Void)
         -> StopRecording
     {
         // 1. Set up SpeechToText with client-specified settings.
@@ -232,11 +226,11 @@ public class SpeechToText {
             return { }
         }
 
-        var speechRecognitionResults = [SpeechRecognitionResult]()
+        var speechRecognitionResults = [SpeechToTextResult]()
 
         let manager = WebSocketManager(authStrategy: authStrategy, url: url)
         manager.onText = { text in
-            guard let response = self.parseResponse(text) else {
+            guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
                 let domain = Constants.errorDomain
                 let code = -1
                 let description = "Could not serialize SpeechToTextSettings as JSON."
@@ -268,11 +262,7 @@ public class SpeechToText {
                         index = index + 1
                     }
                 }
-                if let onInterim = onInterim {
-                    if settings.interimResults == true {
-                        onInterim(speechRecognitionResults, nil)
-                    }
-                }
+                // TODO: Call completion handler.
             }
         }
         manager.onData = { data in }

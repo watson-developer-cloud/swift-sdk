@@ -18,28 +18,26 @@ import Foundation
 import ObjectMapper
 
 /**
- `SpeechToTextSettings` captures the parameters associated with a recognition request. You can
- customize Watson Speech to Text's recognition process to suit your needs by creating and
- configuring a `SpeechToTextSettings` object.
+ The settings associated with a Speech to Text recognition request. Any `nil` parameters will
+ use a default value provided by the Watson Speech to Text service.
  
- Any `nil` parameters will use a default value provided by the Watson Speech to Text service.
- 
- Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's parameters.
+ Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's
+ parameters.
  */
 public struct SpeechToTextSettings: Mappable {
 
     /***** URL query parameters for WebSockets connection request. *****/
 
-    /// Specifies the language in which the audio is spoken and the rate at which it was sampled.
-    /// If `nil`, then the default model will be used. Visit https://ibm.biz/BdH93p for more
-    /// information about the available models.
+    /// Specifies the language in which the audio is spoken and the rate at which it was
+    /// sampled. If `nil`, then the default model will be used. Visit https://ibm.biz/BdH93p
+    /// for more information about the available models.
     public var model: String?
 
     /// By default, the Speech to Text service logs requests and their results. Logging is
     /// done only for the purpose of improving the service for future users—the logged data
     /// is not shared or made public. If you are concerned with protecting the privacy of users'
-    /// personal information or otherwise do not want your requests to be logged, you can opt out
-    /// of logging by setting this property to `true`.
+    /// personal information or otherwise do not want your requests to be logged, you can opt
+    /// out of logging by setting this property to `true`.
     public var learningOptOut: Bool?
 
     /***** JSON parameters for `start` message. *****/
@@ -62,8 +60,8 @@ public struct SpeechToTextSettings: Mappable {
         set { contentType = .WAV }
     }
 
-    /// If `true`, then the entire audio stream will be transcribed until it terminates rather than
-    /// stopping at the first half-second of non-speech. The default is `false`.
+    /// If `true`, then the entire audio stream will be transcribed until it terminates rather
+    /// than stopping at the first half-second of non-speech. The default is `false`.
     public var continuous: Bool?
 
     /// The number of seconds after which the connection is to time out due to inactivity.
@@ -75,10 +73,10 @@ public struct SpeechToTextSettings: Mappable {
     public var keywords: [String]?
 
     /// A minimum level of confidence that the service must have to report a matching keyword
-    /// in the input audio. The threshold must be a probability value between `0` and `1` inclusive.
-    /// A match must have at least the specified confidence to be returned. If you specify a valid
-    /// threshold, you must also specify at least one keyword. By default, the service does not
-    /// perform any keyword spotting.
+    /// in the input audio. The threshold must be a probability value between `0` and `1`
+    /// inclusive. A match must have at least the specified confidence to be returned. If you
+    /// specify a valid threshold, you must also specify at least one keyword. By default, the
+    /// service does not perform any keyword spotting.
     public var keywordsThreshold: Double?
 
     /// The maximum number of alternative transcriptions to receive. The default is 1.
@@ -98,8 +96,8 @@ public struct SpeechToTextSettings: Mappable {
     /// The default is `false`.
     public var wordConfidence: Bool?
 
-    /// If `true`, then per-word start and end times relative to the beginning of the audio will be
-    /// received. The default is `false`.
+    /// If `true`, then per-word start and end times relative to the beginning of the audio will
+    /// be received. The default is `false`.
     public var timestamps: Bool?
 
     /// If `true`, then profanity will be censored from the service's output, obscuring each
@@ -110,9 +108,9 @@ public struct SpeechToTextSettings: Mappable {
      Initialize a `SpeechToTextSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
 
-     - parameter contentType: The format of the audio data. Endianness is automatically detected by
-        the Speech to Text service. Visit https://ibm.biz/BdHCrB for more information about the
-        supported formats.
+     - parameter contentType: The format of the audio data. Endianness is automatically detected
+        by the Speech to Text service. Visit https://ibm.biz/BdHCrB for more information about
+        the supported formats.
      
      - returns: An initialized `SpeechToTextSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by modifying the object's

@@ -9,14 +9,13 @@
 import Foundation
 import ObjectMapper
 
-/**
- A `SpeechToTextStop` object signals the end of an audio transmission to Watson Speech to Text.
- */
+/** Signals the end of an audio transmission to Speech to Text. */
 struct SpeechToTextStop: Mappable {
 
     /// The action to perform. Must be `stop` to end the request.
     private var action = "stop"
 
+    /// Initialize a stop action.
     init() { }
 
     /// Used internally to initialize a `SpeechToTextStop` from JSON.

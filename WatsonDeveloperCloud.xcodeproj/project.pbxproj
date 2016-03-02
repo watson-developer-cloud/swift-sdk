@@ -162,11 +162,18 @@
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7A521F581C857329005EFD34 /* SpeechToTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A521F571C857329005EFD34 /* SpeechToTextState.swift */; };
 		7A521F5A1C857361005EFD34 /* SpeechToTextError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A521F591C857361005EFD34 /* SpeechToTextError.swift */; };
-		7A521F5C1C8573BC005EFD34 /* SpeechToTextResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A521F5B1C8573BC005EFD34 /* SpeechToTextResponse.swift */; };
+		7A521F5C1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A521F5B1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift */; };
 		7AA069891C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA069881C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift */; };
+		7ACB0D401C878C4C00861CCC /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D3F1C878C4C00861CCC /* SpeechToTextResult.swift */; };
+		7ACB0D421C878C8200861CCC /* SpeechToTextTranscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D411C878C8200861CCC /* SpeechToTextTranscription.swift */; };
+		7ACB0D441C878CAC00861CCC /* SpeechToTextWordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D431C878CAC00861CCC /* SpeechToTextWordTimestamp.swift */; };
+		7ACB0D461C878CEB00861CCC /* SpeechToTextWordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D451C878CEB00861CCC /* SpeechToTextWordConfidence.swift */; };
+		7ACB0D481C878D1200861CCC /* SpeechToTextKeywordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D471C878D1200861CCC /* SpeechToTextKeywordResult.swift */; };
+		7ACB0D4A1C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D491C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift */; };
+		7ACB0D4C1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D4B1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift */; };
 		7ADA48191C5AC0A8001DD473 /* SpeechToTextStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADA48181C5AC0A8001DD473 /* SpeechToTextStop.swift */; };
 		7AEAAFA91C57C85500A8D202 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAAFA81C57C85500A8D202 /* SpeechToText.swift */; };
-		7AEAAFAC1C57E57800A8D202 /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAAFAB1C57E57800A8D202 /* SpeechToTextResult.swift */; };
+		7AEAAFAC1C57E57800A8D202 /* SpeechToTextResultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAAFAB1C57E57800A8D202 /* SpeechToTextResultWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,11 +357,18 @@
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		7A521F571C857329005EFD34 /* SpeechToTextState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextState.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextState.swift; sourceTree = "<group>"; };
 		7A521F591C857361005EFD34 /* SpeechToTextError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextError.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextError.swift; sourceTree = "<group>"; };
-		7A521F5B1C8573BC005EFD34 /* SpeechToTextResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextResponse.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextResponse.swift; sourceTree = "<group>"; };
+		7A521F5B1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextGenericResponse.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextGenericResponse.swift; sourceTree = "<group>"; };
 		7AA069881C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextAudioStreamer.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextAudioStreamer.swift; sourceTree = "<group>"; };
+		7ACB0D3F1C878C4C00861CCC /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextResult.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextResult.swift; sourceTree = "<group>"; };
+		7ACB0D411C878C8200861CCC /* SpeechToTextTranscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextTranscription.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextTranscription.swift; sourceTree = "<group>"; };
+		7ACB0D431C878CAC00861CCC /* SpeechToTextWordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWordTimestamp.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextWordTimestamp.swift; sourceTree = "<group>"; };
+		7ACB0D451C878CEB00861CCC /* SpeechToTextWordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWordConfidence.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextWordConfidence.swift; sourceTree = "<group>"; };
+		7ACB0D471C878D1200861CCC /* SpeechToTextKeywordResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextKeywordResult.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextKeywordResult.swift; sourceTree = "<group>"; };
+		7ACB0D491C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWordAlternativeResults.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextWordAlternativeResults.swift; sourceTree = "<group>"; };
+		7ACB0D4B1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWordAlternativeResult.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextWordAlternativeResult.swift; sourceTree = "<group>"; };
 		7ADA48181C5AC0A8001DD473 /* SpeechToTextStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextStop.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextStop.swift; sourceTree = "<group>"; };
 		7AEAAFA81C57C85500A8D202 /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToText.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToText.swift; sourceTree = "<group>"; };
-		7AEAAFAB1C57E57800A8D202 /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextResult.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextResult.swift; sourceTree = "<group>"; };
+		7AEAAFAB1C57E57800A8D202 /* SpeechToTextResultWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextResultWrapper.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextResultWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -850,12 +864,19 @@
 		7AEAAFAA1C57C88000A8D202 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7A00FDAA1C587D310082E742 /* SpeechToTextSettings.swift */,
-				7AEAAFAB1C57E57800A8D202 /* SpeechToTextResult.swift */,
-				7A521F571C857329005EFD34 /* SpeechToTextState.swift */,
 				7A521F591C857361005EFD34 /* SpeechToTextError.swift */,
+				7A521F5B1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift */,
+				7ACB0D471C878D1200861CCC /* SpeechToTextKeywordResult.swift */,
+				7ACB0D3F1C878C4C00861CCC /* SpeechToTextResult.swift */,
+				7AEAAFAB1C57E57800A8D202 /* SpeechToTextResultWrapper.swift */,
+				7A00FDAA1C587D310082E742 /* SpeechToTextSettings.swift */,
+				7A521F571C857329005EFD34 /* SpeechToTextState.swift */,
 				7ADA48181C5AC0A8001DD473 /* SpeechToTextStop.swift */,
-				7A521F5B1C8573BC005EFD34 /* SpeechToTextResponse.swift */,
+				7ACB0D411C878C8200861CCC /* SpeechToTextTranscription.swift */,
+				7ACB0D4B1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift */,
+				7ACB0D491C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift */,
+				7ACB0D451C878CEB00861CCC /* SpeechToTextWordConfidence.swift */,
+				7ACB0D431C878CAC00861CCC /* SpeechToTextWordTimestamp.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1016,19 +1037,24 @@
 				7A0F96821C232B96004C01C0 /* AlchemyLanguage.swift in Sources */,
 				7A0F96F51C232B96004C01C0 /* OpusHelper.m in Sources */,
 				7A0F96A71C232B96004C01C0 /* AlchemyVisionConstants.swift in Sources */,
-				7A521F5C1C8573BC005EFD34 /* SpeechToTextResponse.swift in Sources */,
+				7A521F5C1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift in Sources */,
 				7A0F96911C232B96004C01C0 /* Entity.swift in Sources */,
 				7A0F968F1C232B96004C01C0 /* DocumentTitle.swift in Sources */,
 				7A0F96B81C232B96004C01C0 /* DialogModel.swift in Sources */,
 				7A0F96A61C232B96004C01C0 /* AlchemyVision.swift in Sources */,
 				7ADA48191C5AC0A8001DD473 /* SpeechToTextStop.swift in Sources */,
+				7ACB0D461C878CEB00861CCC /* SpeechToTextWordConfidence.swift in Sources */,
 				7A0F96B21C232B96004C01C0 /* Dialog.swift in Sources */,
 				7A0F97101C232B96004C01C0 /* WatsonError.swift in Sources */,
 				7A0F96AC1C232B96004C01C0 /* ImageLink.swift in Sources */,
+				7ACB0D401C878C4C00861CCC /* SpeechToTextResult.swift in Sources */,
 				7A0F96A11C232B96004C01C0 /* Taxonomy.swift in Sources */,
+				7ACB0D4A1C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift in Sources */,
 				7A0F970A1C232B96004C01C0 /* CoreResponse.swift in Sources */,
+				7ACB0D421C878C8200861CCC /* SpeechToTextTranscription.swift in Sources */,
 				7A0F969F1C232B96004C01C0 /* SentimentResponse.swift in Sources */,
 				7A0F968B1C232B96004C01C0 /* DisambiguatedLinks.swift in Sources */,
+				7ACB0D441C878CAC00861CCC /* SpeechToTextWordTimestamp.swift in Sources */,
 				7A0F97141C232B96004C01C0 /* WatsonRequest.swift in Sources */,
 				7A0F969D1C232B96004C01C0 /* SAORelations.swift in Sources */,
 				7A0F96851C232B96004C01C0 /* AlchemyGenericModel.swift in Sources */,
@@ -1046,6 +1072,7 @@
 				7A0F96C11C232B96004C01C0 /* IdentifiableLanguage.swift in Sources */,
 				7A0F97021C232B96004C01C0 /* FacebookAuthenticationStrategy.swift in Sources */,
 				7A0F96BF1C232B96004C01C0 /* LanguageTranslationError.swift in Sources */,
+				7ACB0D481C878D1200861CCC /* SpeechToTextKeywordResult.swift in Sources */,
 				7A19DC911C596B150082ED38 /* WebSocketManager.swift in Sources */,
 				7A0F96BD1C232B96004C01C0 /* LanguageTranslation.swift in Sources */,
 				7A0F96B71C232B96004C01C0 /* DialogFormat.swift in Sources */,
@@ -1067,6 +1094,7 @@
 				7A0F96CB1C232B96004C01C0 /* NaturalLanguageClassifier.swift in Sources */,
 				7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */,
 				7A0F970C1C232B96004C01C0 /* Log.swift in Sources */,
+				7ACB0D4C1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift in Sources */,
 				7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */,
 				7A0F96D71C232B96004C01C0 /* PersonalityInsightsError.swift in Sources */,
 				7A0F97151C232B96004C01C0 /* WatsonService.swift in Sources */,
@@ -1098,7 +1126,7 @@
 				7A521F5A1C857361005EFD34 /* SpeechToTextError.swift in Sources */,
 				7A0F96D41C232B96004C01C0 /* Trait.swift in Sources */,
 				7AEAAFA91C57C85500A8D202 /* SpeechToText.swift in Sources */,
-				7AEAAFAC1C57E57800A8D202 /* SpeechToTextResult.swift in Sources */,
+				7AEAAFAC1C57E57800A8D202 /* SpeechToTextResultWrapper.swift in Sources */,
 				7A0F96FD1C232B96004C01C0 /* AlchemyRequest.swift in Sources */,
 				7A0F96AA1C232B96004C01C0 /* ImageKeyWord.swift in Sources */,
 				7A0F96C91C232B96004C01C0 /* ClassifiedClass.swift in Sources */,

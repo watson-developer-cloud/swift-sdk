@@ -26,7 +26,7 @@ class WatsonWebSocket {
     private let socket: WebSocket
     private var isConnecting = false
     private var retries = 0
-    private var maxRetries = 1
+    private var maxRetries = 2
 
     var onText: (String -> Void)?
     var onData: (NSData -> Void)?
@@ -48,6 +48,7 @@ class WatsonWebSocket {
             self.operations.suspended = true
             self.isConnecting = false
             if self.isAuthenticationFailure(error) {
+                self.retries += 1
                 self.connectWithToken()
             } else if let error = error {
                 self.onError?(error)

@@ -81,8 +81,13 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
+        func failure(error: NSError) {
+            print(error)
+            XCTFail()
+        }
+
         let settings = SpeechToTextSettings(contentType: format)
-        service.transcribe(audioData, settings: settings) { results in
+        service.transcribe(audioData, settings: settings, failure: failure) { results in
             print(results)
             // TODO: verify results...
             // expectation.fulfill()

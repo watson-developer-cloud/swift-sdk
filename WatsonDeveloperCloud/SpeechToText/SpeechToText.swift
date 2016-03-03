@@ -101,6 +101,9 @@ public class SpeechToText {
         success: [SpeechToTextResult] -> Void)
         -> StopStreaming
     {
+        var settings = settings
+        settings.contentType = .L16(rate: 44100, channels: 1)
+
         guard let socket = createSocket(settings, failure: failure, success: success),
               let start = settings.toJSONString(failure),
               let stop = SpeechToTextStop().toJSONString(failure) else { return { } }
@@ -126,6 +129,9 @@ public class SpeechToText {
         success: [SpeechToTextResult] -> Void)
         -> AVCaptureAudioDataOutput?
     {
+        var settings = settings
+        settings.contentType = .L16(rate: 44100, channels: 1)
+
         guard let socket = createSocket(settings, failure: failure, success: success),
               let start = settings.toJSONString(failure) else { return nil }
 

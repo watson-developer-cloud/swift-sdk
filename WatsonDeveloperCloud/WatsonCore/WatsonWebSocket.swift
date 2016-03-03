@@ -120,15 +120,17 @@ class WatsonWebSocket {
         } else {
             authStrategy.refreshToken { error in
                 guard error == nil else {
-                    if let error = error {
-                        self.onError?(error)
-                    }
+                    self.isClosedByError = true
+                    let domain = "swift.WebSocketManager"
+                    let description = "Failed to obtain an authentication token. Check credentials."
+                    let error = createError(domain, description: description)
+                    self.onError?(error)
                     return
                 }
                 guard let token = self.authStrategy.token else {
                     self.isClosedByError = true
                     let domain = "swift.WebSocketManager"
-                    let description = "Could not obtain an authentication token."
+                    let description = "Failed to obtain an authentication token. Check credentials."
                     let error = createError(domain, description: description)
                     self.onError?(error)
                     return

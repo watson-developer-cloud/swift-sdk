@@ -18,7 +18,7 @@ import Foundation
 import ObjectMapper
 
 /** Alternative word hypotheses from Speech to Text for a word in the audio input. */
-public struct SpeechToTextWordAlternativeResult {
+public struct SpeechToTextWordAlternativeResult: Mappable {
 
     /// The confidence score of the alternative word hypothesis, between 0 and 1.
     public var confidence: Double!

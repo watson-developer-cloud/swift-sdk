@@ -18,7 +18,7 @@ import Foundation
 import ObjectMapper
 
 /** A keyword identified by Speech to Text. */
-public struct SpeechToTextKeywordResult {
+public struct SpeechToTextKeywordResult: Mappable {
 
     /// The specified keyword normalized to the spoken phrase that matched in the audio input.
     public var normalizedText: String!

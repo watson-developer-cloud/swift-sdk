@@ -18,7 +18,7 @@ import Foundation
 import ObjectMapper
 
 /** Word alternatives produced by Speech to Text. */
-public struct SpeechToTextWordAlternativeResults {
+public struct SpeechToTextWordAlternativeResults: Mappable {
 
     /// The time, in seconds, at which the word with alternative
     /// word hypotheses starts in the audio input.

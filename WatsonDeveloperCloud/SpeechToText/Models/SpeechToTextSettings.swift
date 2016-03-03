@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import ObjectMapper
 
 /**
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will
@@ -24,7 +23,7 @@ import ObjectMapper
  Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's
  parameters.
  */
-public struct SpeechToTextSettings: Mappable {
+public struct SpeechToTextSettings: WatsonRequestModel {
 
     /***** URL query parameters for WebSockets connection request. *****/
 
@@ -120,22 +119,20 @@ public struct SpeechToTextSettings: Mappable {
         self.contentType = contentType
     }
 
-    /// Used internally to initialize a `SpeechToTextSettings` from JSON.
-    public init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    mutating public func mapping(map: Map) {
-        action                    <- map["action"]
-        contentTypeString         <- map["content-type"]
-        continuous                <- map["continuous"]
-        maxAlternatives           <- map["max_alternatives"]
-        interimResults            <- map["interim_results"]
-        wordConfidence            <- map["word_confidence"]
-        timestamps                <- map["timestamps"]
-        keywords                  <- map["keywords"]
-        keywordsThreshold         <- map["keywords_threshold"]
-        wordAlternativesThreshold <- map["word_alternatives_threshold"]
-        inactivityTimeout         <- map["inactivity_timeout"]
+    func toDictionary() -> [String: AnyObject] {
+        var map = [String: AnyObject]()
+        map["action"] = action
+        map["content-type"] = contentTypeString
+        map["continuous"] = continuous
+        map["max_alternatives"] = maxAlternatives
+        map["interim_results"] = interimResults
+        map["word_confidence"] = wordConfidence
+        map["timestamps"] = timestamps
+        map["keywords"] = keywords
+        map["keywords_threshold"] = keywordsThreshold
+        map["word_alternatives_threshold"] = wordAlternativesThreshold
+        map["inactivity_timeout"] = inactivityTimeout
+        return map
     }
 }
 

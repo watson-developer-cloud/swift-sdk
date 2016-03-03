@@ -82,7 +82,8 @@ class SpeechToTextTests: XCTestCase {
         }
 
         let settings = SpeechToTextSettings(contentType: format)
-        service.transcribe(audioData, settings: settings) { responses, error in
+        service.transcribe(audioData, settings: settings) { results in
+            print(results)
             // TODO: verify results...
             // expectation.fulfill()
         }

@@ -16,7 +16,6 @@
 
 import Foundation
 import AVFoundation
-import ObjectMapper
 
 public class SpeechToText {
 
@@ -31,7 +30,6 @@ public class SpeechToText {
         with the Watson Developer Cloud's `SpeechToText` service. The `AuthenticationStrategy`
         is used internally to obtain tokens, refresh expired tokens, and maintain information
         about the state of authentication with the Watson Developer Cloud.
-
      - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
      */
     public required init(authStrategy: AuthenticationStrategy) {
@@ -43,121 +41,46 @@ public class SpeechToText {
     
      - parameter username: The username associated with your `SpeechToText` service.
      - parameter password: The password associated with your `SpeechToText` service.
-
      - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
      */
     public convenience required init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
-            serviceURL: Constants.serviceURL, username: username, password: password)
+        let authStrategy = BasicAuthenticationStrategy(
+            tokenURL: SpeechToTextConstants.tokenURL,
+            serviceURL: SpeechToTextConstants.serviceURL,
+            username: username,
+            password: password)
         self.init(authStrategy: authStrategy)
     }
 
+    
     /**
      Transcribe recorded audio data.
 
      - parameter audio: The recorded audio data.
      - parameter settings: Settings to configure the SpeechToText service.
-     - parameter onInterim: A callback function to execute with interim transcription results from
-        the SpeechToText service. This callback function will be executed exactly once for each
-        interim transcription result produced by the SpeechToText service. Note that the
-        SpeechToText `interimResults` setting must be `true` for the service to return interim
-        transcription results.
-     - parameter completionHandler: A function that will be executed with all final transcription
-        results from the SpeechToText service, or an error if an error occured.
+     - parameter failure: A function that will be executed whenever a failure occurs.
+     - parameter success: A function executed whenever a result is returned from Speech to Text.
      */
     public func transcribe(
         audio: NSData,
         settings: SpeechToTextSettings,
-        completionHandler: ([SpeechToTextResult]?, NSError?) -> Void)
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
     {
-        let urlString = Constants.websocketsURL(settings.model,
-            learningOptOut: settings.learningOptOut)
+        guard let socket = createSocket(settings, failure: failure, success: success),
+              let start = settings.toJSONString(failure),
+              let stop = SpeechToTextStop().toJSONString(failure) else { return }
 
-        guard let url = NSURL(string: urlString) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not parse SpeechToText WebSockets URL."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return
-        }
-
-        guard let start = Mapper().toJSONString(settings) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not serialize SpeechToTextSettings as JSON."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return
-        }
-
-        guard let stop = Mapper().toJSONString(SpeechToTextStop()) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not serialize SpeechToTextStop as JSON."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return
-        }
-
-        var speechRecognitionResults = [SpeechToTextResult]()
-
-        let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in
-            guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
-                let domain = Constants.errorDomain
-                let code = -1
-                let description = "Could not serialize SpeechToTextSettings as JSON."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: domain, code: code, userInfo: userInfo)
-                completionHandler(nil, error)
-                return
-            }
-
-            switch response {
-            case .State: return
-            case .Error(let error):
-                let domain = Constants.errorDomain
-                let code = -1
-                let description = "Watson Speech to Text service reported an error: \(error.error)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: domain, code: code, userInfo: userInfo)
-                completionHandler(nil, error)
-                return
-            case .Results(let resultsWrapper):
-                var index = resultsWrapper.resultIndex
-                if index >= speechRecognitionResults.count {
-                    resultsWrapper.results.forEach { result in
-                        speechRecognitionResults.append(result)
-                    }
-                } else {
-                    for result in resultsWrapper.results {
-                        speechRecognitionResults[index] = result
-                        index = index + 1
-                    }
-                }
-                // TODO: call completion handler
-            }
-        }
-        manager.onData = { data in }
-        manager.onError = { error in
-            manager.disconnect()
-            completionHandler(nil, error)
-        }
-        
-        manager.writeString(start)
-        manager.writeData(audio)
-        manager.writeString(stop)
+        socket.writeString(start)
+        socket.writeData(audio)
+        socket.writeString(stop)
     }
 
     /**
      StopRecording is a function that stops a microphone capture session. Microphone audio will no
      longer be streamed to the Speech to Text service after the capture session is stopped.
      */
-    public typealias StopRecording = Void -> Void
+    public typealias StopStreaming = Void -> Void
 
     /**
      Start the microphone and perform a live transcription by streaming the microphone audio to
@@ -166,140 +89,109 @@ public class SpeechToText {
      executed.
 
      - parameter settings: The settings used to configure the SpeechToText service.
-     - parameter onInterim: A callback function to execute with interim transcription results from
-        the SpeechToText service. This callback function will be executed exactly once for each
-        interim transcription result produced by the SpeechToText service. Note that the
-        SpeechToText `interimResults` setting must be `true` for the service to return interim
-        transcription results.
-     - parameter completionHandler: A function that will be executed with all final transcription
-        results from the SpeechToText service, or an error if an error occured.
-
+     - parameter failure: A function that will be executed whenever a failure occurs.
+     - parameter success: A function executed whenever a result is returned from Speech to Text.
      - returns: A `StopRecording` function that can be executed to stop streaming the microphone's
         audio to the Speech to Text service, wait for any remaining transcription results to be
         returned, and then execute the `completionHandler`.
      */
     public func transcribe(
         settings: SpeechToTextSettings,
-        completionHandler: ([SpeechToTextResult]?, NSError?) -> Void)
-        -> StopRecording
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+        -> StopStreaming
     {
-        // 1. Set up SpeechToText with client-specified settings.
-        // 2. Start the microphone.
-        // 3. Stream microphone audio to the SpeechToText service.
-        // 4. Execute the onInterim function for each interim transcription result.
-        // 5. Continue until:
-        //      a. The client executes the stopRecording function, or
-        //      b. The SpeechToText service detects an "end of speech" event, or
-        //      c. The SpeechToText service times out (either session timeout or inactivity timeout).
-        // 6. Execute the completionHandler with all final transcription results (or an error).
+        guard let socket = createSocket(settings, failure: failure, success: success),
+              let start = settings.toJSONString(failure),
+              let stop = SpeechToTextStop().toJSONString(failure) else { return { } }
 
-        let urlString = Constants.websocketsURL(settings.model,
-            learningOptOut: settings.learningOptOut)
-
-        guard let url = NSURL(string: urlString) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not parse SpeechToText WebSockets URL."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return { }
-        }
-
-        guard let start = Mapper().toJSONString(settings) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not serialize SpeechToTextSettings as JSON."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return { }
-        }
-
-        guard let stop = Mapper().toJSONString(SpeechToTextStop()) else {
-            let domain = Constants.errorDomain
-            let code = -1
-            let description = "Could not serialize SpeechToTextStop as JSON."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
-            completionHandler(nil, error)
-            return { }
-        }
-
-        var speechRecognitionResults = [SpeechToTextResult]()
-
-        let manager = WebSocketManager(authStrategy: authStrategy, url: url)
-        manager.onText = { text in
-            guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
-                let domain = Constants.errorDomain
-                let code = -1
-                let description = "Could not serialize SpeechToTextSettings as JSON."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: domain, code: code, userInfo: userInfo)
-                completionHandler(nil, error)
-                return
-            }
-
-            switch response {
-            case .State: return
-            case .Error(let error):
-                let domain = Constants.errorDomain
-                let code = -1
-                let description = "Watson Speech to Text service reported an error: \(error.error)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: domain, code: code, userInfo: userInfo)
-                completionHandler(nil, error)
-                return
-            case .Results(let resultsWrapper):
-                var index = resultsWrapper.resultIndex
-                if index >= speechRecognitionResults.count {
-                    resultsWrapper.results.forEach { result in
-                        speechRecognitionResults.append(result)
-                    }
-                } else {
-                    for result in resultsWrapper.results {
-                        speechRecognitionResults[index] = result
-                        index = index + 1
-                    }
-                }
-                // TODO: Call completion handler.
-            }
-        }
-        manager.onData = { data in }
-        manager.onError = { error in
-            manager.disconnect()
+        let stopStreaming = {
             self.captureSession?.stopRunning()
-            completionHandler(nil, error)
+            socket.writeString(stop)
+            socket.disconnect()
         }
 
-        manager.writeString(start)
+        socket.writeString(start)
+        guard startStreaming(socket, failure: failure) else {
+            stopStreaming()
+            return { }
+        }
 
+        return stopStreaming
+    }
+
+    // MARK: Helper Functions
+
+    private func createSocket(
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+        -> SpeechToTextWebSocket?
+    {
+        guard let url = NSURL(string: SpeechToTextConstants.websocketsURL(settings)) else {
+            if let failure = failure {
+                let description = "Could not parse Speech to Text WebSockets URL."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return nil
+        }
+
+        let socket = SpeechToTextWebSocket(
+            authStrategy: authStrategy,
+            url: url,
+            failure: failure,
+            success: success)
+
+        return socket
+    }
+
+    private func startStreaming(
+        socket: SpeechToTextWebSocket,
+        failure: (NSError -> Void)? = nil)
+        -> Bool
+    {
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
-            return { }
+            return false
         }
 
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-        if captureSession.canAddInput(microphoneInput) {
-            captureSession.addInput(microphoneInput)
+        guard let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice) else {
+            if let failure = failure {
+                let description = "Unable to access the microphone."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
+        }
+
+        guard captureSession.canAddInput(microphoneInput) else {
+            if let failure = failure {
+                let description = "Unable to add the microphone to the capture session."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
         }
 
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
-        audioStreamer = SpeechToTextAudioStreamer(manager: manager)
+        audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
         output.setSampleBufferDelegate(audioStreamer, queue: queue)
-        if captureSession.canAddOutput(output) {
-            captureSession.addOutput(output)
+
+        guard captureSession.canAddOutput(output) else {
+            if let failure = failure {
+                let description = "Unable to add streaming output to the capture session."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
         }
 
+        captureSession.addInput(microphoneInput)
+        captureSession.addOutput(output)
         captureSession.startRunning()
-
-        let stopRecording = {
-            self.captureSession?.stopRunning()
-            manager.writeString(stop)
-        }
-
-        return stopRecording
+        return true
     }
 }

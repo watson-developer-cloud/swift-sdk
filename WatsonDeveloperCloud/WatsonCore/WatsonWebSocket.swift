@@ -19,7 +19,7 @@ import Starscream
 
 // TODO: Should the writeX() functions add operation to queue if connectWithToken() fails?
 
-class WebSocketManager {
+class WatsonWebSocket {
 
     private let authStrategy: AuthenticationStrategy
     private let operations = NSOperationQueue()

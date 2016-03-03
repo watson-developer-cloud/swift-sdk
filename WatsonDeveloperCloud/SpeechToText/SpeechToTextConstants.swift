@@ -16,24 +16,21 @@
 
 import Foundation
 
-extension SpeechToText {
+struct SpeechToTextConstants {
 
-    internal struct Constants {
+    static let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    static let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    static let websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    static let domain = "com.watsonplatform.speechtotext"
 
-        static let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-        static let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-        static let websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-        static let errorDomain = "com.watsonplatform.speechtotext"
-
-        static func websocketsURL(model: String? = nil, learningOptOut: Bool? = nil) -> String {
-            var url = websocketsURL
-            if let model = model {
-                url = url + "?model=" + model
-            }
-            if learningOptOut == true {
-                url = url + "?x-watson-learning-opt-out=" + "true"
-            }
-            return url
+    static func websocketsURL(settings: SpeechToTextSettings) -> String {
+        var url = websocketsURL
+        if let model = settings.model {
+            url = url + "?model=" + model
         }
+        if settings.learningOptOut == true {
+            url = url + "?x-watson-learning-opt-out=" + "true"
+        }
+        return url
     }
 }

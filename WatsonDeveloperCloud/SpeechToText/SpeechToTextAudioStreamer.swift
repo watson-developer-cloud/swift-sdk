@@ -19,10 +19,12 @@ import AVFoundation
 
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
-    private var manager: WebSocketManager
+    private var socket: SpeechToTextWebSocket
+    private var failure: (NSError -> Void)?
 
-    init(manager: WebSocketManager) {
-        self.manager = manager
+    init(socket: SpeechToTextWebSocket, failure: (NSError -> Void)? = nil) {
+        self.socket = socket
+        self.failure = failure
     }
 
     func captureOutput(
@@ -31,13 +33,18 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         fromConnection connection: AVCaptureConnection!)
     {
         guard CMSampleBufferDataIsReady(sampleBuffer) else {
-            print("buffer not ready... returning")
+            if let failure = failure {
+                let description = "Microphone audio buffer ignored because it was not ready."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
             return
         }
 
         let emptyBuffer = AudioBuffer(mNumberChannels: 0, mDataByteSize: 0, mData: nil)
         var audioBufferList = AudioBufferList(mNumberBuffers: 1, mBuffers: emptyBuffer)
         var blockBuffer: CMBlockBuffer?
+        
         CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
             sampleBuffer,
             nil,
@@ -55,6 +62,6 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             audioData.appendBytes(audioBuffer.mData, length: Int(audioBuffer.mDataByteSize))
         }
 
-        manager.writeData(audioData)
+        socket.writeData(audioData)
     }
 }

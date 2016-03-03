@@ -18,19 +18,12 @@ import Foundation
 import ObjectMapper
 
 /** Signals the end of an audio transmission to Speech to Text. */
-struct SpeechToTextStop: Mappable {
+struct SpeechToTextStop: WatsonRequestModel {
 
     /// The action to perform. Must be `stop` to end the request.
-    private var action = "stop"
+    private let action = "stop"
 
-    /// Initialize a stop action.
-    init() { }
-
-    /// Used internally to initialize a `SpeechToTextStop` from JSON.
-    init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        action <- map["action"]
+    func toDictionary() -> [String : AnyObject] {
+        return ["action": action]
     }
 }

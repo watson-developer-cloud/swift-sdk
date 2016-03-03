@@ -70,8 +70,8 @@ class WatsonWebSocket {
         if !socket.isConnected {
             connectWithToken()
         }
-        operations.addOperationWithBlock {
-            self.socket.writeData(data)
+        if !isClosedByError {
+            operations.addOperationWithBlock { self.socket.writeData(data) }
         }
     }
 
@@ -79,8 +79,8 @@ class WatsonWebSocket {
         if !socket.isConnected {
             connectWithToken()
         }
-        operations.addOperationWithBlock {
-            self.socket.writeString(str)
+        if !isClosedByError {
+            operations.addOperationWithBlock { self.socket.writeString(str) }
         }
     }
 
@@ -88,8 +88,8 @@ class WatsonWebSocket {
         if !socket.isConnected {
             connectWithToken()
         }
-        operations.addOperationWithBlock {
-            self.socket.writePing(data)
+        if !isClosedByError {
+            operations.addOperationWithBlock { self.socket.writePing(data) }
         }
     }
 

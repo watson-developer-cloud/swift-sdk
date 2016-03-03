@@ -132,7 +132,7 @@ public class SpeechToText {
         socket.writeString(start)
 
         let output = AVCaptureAudioDataOutput()
-        let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
+        let queue = dispatch_queue_create("stt_streaming_output", DISPATCH_QUEUE_SERIAL)
         audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
         output.setSampleBufferDelegate(audioStreamer, queue: queue)
 
@@ -195,7 +195,7 @@ public class SpeechToText {
         }
 
         let output = AVCaptureAudioDataOutput()
-        let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
+        let queue = dispatch_queue_create("stt_streaming", DISPATCH_QUEUE_SERIAL)
         audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
         output.setSampleBufferDelegate(audioStreamer, queue: queue)
 

@@ -25,7 +25,7 @@ public struct SpeechToTextKeywordResult {
     /// least as great as the specified threshold to be included in the results.
     public var confidence: Double!
 
-    /// Used internally to initialize a `KeywordResult` from JSON.
+    /// Used internally to initialize a `SpeechToTextKeywordResult` from JSON.
     public init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

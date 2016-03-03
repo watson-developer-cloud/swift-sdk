@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-/** A word alternative produced by Speech to Text. */
+/** Word alternatives produced by Speech to Text. */
 public struct SpeechToTextWordAlternativeResults {
 
     /// The time, in seconds, at which the word with alternative
@@ -23,7 +23,7 @@ public struct SpeechToTextWordAlternativeResults {
     /// A list of alternative word hypotheses for a word in the audio input.
     public var alternatives: [SpeechToTextWordAlternativeResult]!
 
-    /// Used internally to initialize a `WordAlternativeResults` from JSON.
+    /// Used internally to initialize a `SpeechToTextWordAlternativeResults` from JSON.
     public init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

@@ -17,7 +17,7 @@
 import Foundation
 import ObjectMapper
 
-/** A generic Speech to Text response. */
+/** A generic response from Speech to Text. */
 enum SpeechToTextGenericResponse {
     case State(SpeechToTextState)
     case Results(SpeechToTextResultWrapper)
@@ -26,10 +26,9 @@ enum SpeechToTextGenericResponse {
     /**
      Parse a text response from the Speech to Text service.
 
-     - parameter text: A text response from the Speech to Text service that will be interpreted
-     as a JSON object.
+     - parameter text: A JSON text response from the Speech to Text service.
 
-     - returns: An object mapped from the JSON response, or nil if the response could not be parsed.
+     - returns: An object mapped from the JSON text, or nil if the response could not be parsed.
      */
     static func parseResponse(text: String) -> SpeechToTextGenericResponse? {
         guard let data = text.dataUsingEncoding(NSUTF8StringEncoding) else {

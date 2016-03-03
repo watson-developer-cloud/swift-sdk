@@ -23,7 +23,7 @@ struct SpeechToTextError: Mappable {
     /// A description of the error that occurred.
     var error: String!
 
-    /// Used internally to initialize an `Error` from JSON.
+    /// Used internally to initialize a `SpeechToTextError` from JSON.
     init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

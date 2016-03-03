@@ -26,7 +26,7 @@ public struct SpeechToTextTranscription: Mappable {
     /// for the best alternative and only in results marked as final.
     public var wordConfidence: [SpeechToTextWordConfidence]? // TODO: needs a transform from ["hello", 0.95] to WordConfidence object...
 
-    /// Used internally to initialize a `SpeechRecognitionAlternative` from JSON.
+    /// Used internally to initialize a `SpeechToTextTranscription` from JSON.
     public init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

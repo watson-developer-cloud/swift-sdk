@@ -27,7 +27,7 @@ public struct SpeechToTextResult: Mappable {
     /// A list of acoustically similar alternatives for words of the input audio.
     public var wordAlternatives: [SpeechToTextWordAlternativeResults]?
 
-    /// Used internally to initialize a `SpeechRecognitionResult` from JSON.
+    /// Used internally to initialize a `SpeechToTextResult` from JSON.
     public init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

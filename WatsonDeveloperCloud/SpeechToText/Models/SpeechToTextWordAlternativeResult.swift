@@ -18,7 +18,7 @@ public struct SpeechToTextWordAlternativeResult {
     /// The alternative word hypothesis for a word in the audio input.
     public var word: String!
 
-    /// Used internally to initialize a `WordAlternativeResult` from JSON.
+    /// Used internally to initialize a `SpeechToTextWordAlternativeResult` from JSON.
     public init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

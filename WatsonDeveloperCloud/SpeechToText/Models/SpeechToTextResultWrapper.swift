@@ -32,7 +32,7 @@ struct SpeechToTextResultWrapper: Mappable {
     /// just after the most recent final result.
     var results: [SpeechToTextResult]!
 
-    /// Used internally to initialize a `SpeechRecognitionResultWrapper` from JSON.
+    /// Used internally to initialize a `SpeechToTextResultWrapper` from JSON.
     init?(_ map: Map) { }
 
     /// Used internally to serialize and deserialize JSON.

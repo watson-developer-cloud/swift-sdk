@@ -142,7 +142,21 @@ class WatsonWebSocket {
     }
 
     private func isAuthenticationFailure(error: NSError?) -> Bool {
-        // TODO: check for 401 error code
+        print("***** Authentication failure *****") // TODO: debugging
+        guard let error = error,
+              let description = error.userInfo[NSLocalizedDescriptionKey] as? String else
+        {
+            return false
+        }
+
+        let authDomain = (error.domain == "WebSocket")
+        let authCode = (error.code == 400)
+        let authDescription = (description == "Invalid HTTP upgrade")
+
+        if authDomain && authCode && authDescription {
+            return true
+        }
+
         return false
     }
 }

@@ -102,16 +102,15 @@ class WatsonWebSocket {
             return
         }
 
-        guard retries++ < maxRetries else {
-            let domain = "WebSocketManager.swift"
-            let code = -1
+        guard retries < maxRetries else {
+            let domain = "swift.WebSocketManager"
             let description = "Invalid HTTP upgrade. Please verify your credentials."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: domain, code: code, userInfo: userInfo)
+            let error = createError(domain, description: description)
             onError?(error)
             return
         }
 
+        self.retries += 1
         self.isConnecting = true
 
         if let token = authStrategy.token where retries == 0 {
@@ -126,11 +125,9 @@ class WatsonWebSocket {
                     return
                 }
                 guard let token = self.authStrategy.token else {
-                    let domain = "WebSocketManager.swift"
-                    let code = -1
+                    let domain = "swift.WebSocketManager"
                     let description = "Could not obtain an authentication token."
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: domain, code: code, userInfo: userInfo)
+                    let error = createError(domain, description: description)
                     self.onError?(error)
                     return
                 }

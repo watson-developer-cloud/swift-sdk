@@ -25,6 +25,7 @@ class WatsonWebSocket {
     private let operations = NSOperationQueue()
     private let socket: WebSocket
     private var isConnecting = false
+    private var isClosedByError = false
     private var retries = 0
     private var maxRetries = 2
 
@@ -51,6 +52,7 @@ class WatsonWebSocket {
                 self.retries += 1
                 self.connectWithToken()
             } else if let error = error {
+                self.isClosedByError = true
                 self.onError?(error)
             }
         }
@@ -99,11 +101,12 @@ class WatsonWebSocket {
     }
 
     private func connectWithToken() {
-        guard !isConnecting else {
+        guard !isConnecting && !isClosedByError else {
             return
         }
 
         guard retries < maxRetries else {
+            isClosedByError = true
             let domain = "swift.WebSocketManager"
             let description = "Invalid HTTP upgrade. Please verify your credentials."
             let error = createError(domain, description: description)
@@ -129,6 +132,7 @@ class WatsonWebSocket {
                     return
                 }
                 guard let token = self.authStrategy.token else {
+                    self.isClosedByError = true
                     let domain = "swift.WebSocketManager"
                     let description = "Could not obtain an authentication token."
                     let error = createError(domain, description: description)
@@ -142,7 +146,6 @@ class WatsonWebSocket {
     }
 
     private func isAuthenticationFailure(error: NSError?) -> Bool {
-        print("***** Authentication failure *****") // TODO: debugging
         guard let error = error,
               let description = error.userInfo[NSLocalizedDescriptionKey] as? String else
         {

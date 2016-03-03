@@ -15,12 +15,10 @@
  **/
 
 import Foundation
-import AVFoundation
 
 public class SpeechToText {
 
     private let authStrategy: AuthenticationStrategy
-    private var captureSession: AVCaptureSession?
     private var audioStreamer: SpeechToTextAudioStreamer?
 
     /**
@@ -66,8 +64,13 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
     {
-        guard let socket = createSocket(settings, failure: failure, success: success),
-              let start = settings.toJSONString(failure),
+        guard let socket = SpeechToTextWebSocket(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else { return }
+
+        guard let start = settings.toJSONString(failure),
               let stop = SpeechToTextStop().toJSONString(failure) else { return }
 
         socket.writeString(start)
@@ -100,21 +103,20 @@ public class SpeechToText {
         success: [SpeechToTextResult] -> Void)
         -> StopStreaming
     {
-        var settings = settings
-        settings.contentType = .L16(rate: 44100, channels: 1)
+        guard let audioStreamer = SpeechToTextAudioStreamer(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else { return { } }
 
-        guard let socket = createSocket(settings, failure: failure, success: success),
-              let start = settings.toJSONString(failure),
-              let stop = SpeechToTextStop().toJSONString(failure) else { return { } }
+        self.audioStreamer = audioStreamer
 
         let stopStreaming = {
-            self.captureSession?.stopRunning()
-            socket.writeString(stop)
-            socket.disconnect()
+            self.audioStreamer?.stopStreaming()
+            self.audioStreamer = nil
         }
 
-        socket.writeString(start)
-        guard startStreaming(socket, failure: failure) else {
+        guard audioStreamer.startStreaming() else {
             stopStreaming()
             return { }
         }
@@ -122,105 +124,19 @@ public class SpeechToText {
         return stopStreaming
     }
 
-    public func createTranscriptionCaptureOutput(
+    public func createTranscriptionOutput(
         settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
         -> AVCaptureAudioDataOutput?
     {
-        var settings = settings
-        settings.contentType = .L16(rate: 44100, channels: 1)
-
-        guard let socket = createSocket(settings, failure: failure, success: success),
-              let start = settings.toJSONString(failure) else { return nil }
-
-        socket.writeString(start)
-
-        let output = AVCaptureAudioDataOutput()
-        let queue = dispatch_queue_create("stt_streaming_output", DISPATCH_QUEUE_SERIAL)
-        audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
-        output.setSampleBufferDelegate(audioStreamer, queue: queue)
-
-        return output
-    }
-
-    // MARK: Helper Functions
-
-    private func createSocket(
-        settings: SpeechToTextSettings,
-        failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
-        -> SpeechToTextWebSocket?
-    {
-        guard let url = NSURL(string: SpeechToTextConstants.websocketsURL(settings)) else {
-            if let failure = failure {
-                let description = "Could not parse Speech to Text WebSockets URL."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
-            return nil
-        }
-
-        let socket = SpeechToTextWebSocket(
+        guard let audioStreamer = SpeechToTextAudioStreamer(
             authStrategy: authStrategy,
-            url: url,
+            settings: settings,
             failure: failure,
-            success: success)
+            success: success) else { return nil }
 
-        return socket
-    }
-
-    private func startStreaming(
-        socket: SpeechToTextWebSocket,
-        failure: (NSError -> Void)? = nil)
-        -> Bool
-    {
-        captureSession = AVCaptureSession()
-        guard let captureSession = captureSession else {
-            if let failure = failure {
-                let description = "Unable to create an AVCaptureSession."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
-            return false
-        }
-
-        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        guard let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice) else {
-            if let failure = failure {
-                let description = "Unable to access the microphone."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
-            return false
-        }
-
-        guard captureSession.canAddInput(microphoneInput) else {
-            if let failure = failure {
-                let description = "Unable to add the microphone to the capture session."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
-            return false
-        }
-
-        let output = AVCaptureAudioDataOutput()
-        let queue = dispatch_queue_create("stt_streaming", DISPATCH_QUEUE_SERIAL)
-        audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
-        output.setSampleBufferDelegate(audioStreamer, queue: queue)
-
-        guard captureSession.canAddOutput(output) else {
-            if let failure = failure {
-                let description = "Unable to add streaming output to the capture session."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
-            return false
-        }
-
-        captureSession.addInput(microphoneInput)
-        captureSession.addOutput(output)
-        captureSession.startRunning()
-        return true
+        self.audioStreamer = audioStreamer
+        return audioStreamer.createTranscriptionOutput()
     }
 }

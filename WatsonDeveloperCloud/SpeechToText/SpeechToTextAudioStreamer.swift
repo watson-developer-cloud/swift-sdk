@@ -19,12 +19,90 @@ import AVFoundation
 
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
-    private var socket: SpeechToTextWebSocket
-    private var failure: (NSError -> Void)?
+    private var settings: SpeechToTextSettings
+    private let failure: (NSError -> Void)?
+    private let success: [SpeechToTextResult] -> Void
+    private var socket: SpeechToTextWebSocket?
+    private var captureSession: AVCaptureSession?
 
-    init(socket: SpeechToTextWebSocket, failure: (NSError -> Void)? = nil) {
-        self.socket = socket
+    init?(
+        authStrategy: AuthenticationStrategy,
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+    {
+        self.settings = settings
         self.failure = failure
+        self.success = success
+
+        guard let socket = SpeechToTextWebSocket(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else
+        {
+            // A bug in the Swift compiler requires us to set all properties before returning nil
+            // This bug is fixed in Swift 2.2, so we can set socket as non-optional
+            super.init()
+            return nil
+        }
+
+        self.socket = socket
+        super.init()
+    }
+
+    func startStreaming() -> Bool {
+
+        settings.contentType = .L16(rate: 44100, channels: 1)
+        guard let start = settings.toJSONString(failure) else {
+            return false
+        }
+
+        captureSession = AVCaptureSession()
+        let microphoneInput = createMicrophoneInput()
+        let transcriptionOutput = createTranscriptionOutput()
+
+        guard let captureSession = captureSession else {
+            if let failure = failure {
+                let description = "Unable to create an AVCaptureSession."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
+        }
+
+        guard captureSession.canAddInput(microphoneInput) else {
+            if let failure = failure {
+                let description = "Unable to add the microphone to the capture session."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
+        }
+
+        guard captureSession.canAddOutput(transcriptionOutput) else {
+            if let failure = failure {
+                let description = "Unable to add streaming output to the capture session."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return false
+        }
+
+        socket?.writeString(start)
+        captureSession.addInput(microphoneInput)
+        captureSession.addOutput(transcriptionOutput)
+        captureSession.startRunning()
+        return true
+    }
+
+    func stopStreaming() {
+        captureSession?.stopRunning()
+        captureSession = nil
+        if let stop = SpeechToTextStop().toJSONString(failure) {
+            socket?.writeString(stop)
+            socket?.disconnect()
+        }
     }
 
     func captureOutput(
@@ -62,6 +140,26 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             audioData.appendBytes(audioBuffer.mData, length: Int(audioBuffer.mDataByteSize))
         }
 
-        socket.writeData(audioData)
+        socket?.writeData(audioData)
+    }
+
+    private func createMicrophoneInput() -> AVCaptureDeviceInput? {
+        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        guard let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice) else {
+            if let failure = failure {
+                let description = "Unable to access the microphone."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
+            return nil
+        }
+        return microphoneInput
+    }
+
+    func createTranscriptionOutput() -> AVCaptureAudioDataOutput {
+        let output = AVCaptureAudioDataOutput()
+        let queue = dispatch_queue_create("stt_streaming", DISPATCH_QUEUE_SERIAL)
+        output.setSampleBufferDelegate(self, queue: queue)
+        return output
     }
 }

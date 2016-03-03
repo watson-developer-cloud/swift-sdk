@@ -23,12 +23,23 @@ class SpeechToTextWebSocket {
     private let failure: (NSError -> Void)?
     private let success: [SpeechToTextResult] -> Void
 
-    init(
+    init?(
         authStrategy: AuthenticationStrategy,
-        url: NSURL,
+        settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
     {
+        guard let url = NSURL(string: SpeechToTextConstants.websocketsURL(settings)) else {
+            // A bug in the Swift compiler requires us to set all properties before returning nil
+            // This bug is fixed in Swift 2.2, so we can remove this code when Xcode is updated
+            self.socket = WatsonWebSocket(authStrategy: authStrategy,
+                url: NSURL(string: "http://www.ibm.com")!)
+            self.results = []
+            self.failure = nil
+            self.success = {result in }
+            return nil
+        }
+
         self.socket = WatsonWebSocket(authStrategy: authStrategy, url: url)
         self.results = [SpeechToTextResult]()
         self.failure = failure

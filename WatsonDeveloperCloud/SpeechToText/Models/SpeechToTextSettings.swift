@@ -42,11 +42,11 @@ public struct SpeechToTextSettings: WatsonRequestModel {
     /***** JSON parameters for `start` message. *****/
 
     /// The action to perform. Must be `start` to begin the request.
-    private var action = "start"
+    private let action = "start"
 
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
     /// service. Visit https://ibm.biz/BdHCrB for more information about the supported formats.
-    public var contentType: AudioMediaType!
+    public var contentType: AudioMediaType
 
     // For internal use only.
     // This is a represention of contentType as a String for use with ObjectMapper.

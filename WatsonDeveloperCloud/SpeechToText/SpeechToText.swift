@@ -109,19 +109,13 @@ public class SpeechToText {
             failure: failure,
             success: success) else { return { } }
 
-        self.audioStreamer = audioStreamer
-
-        let stopStreaming = {
-            self.audioStreamer?.stopStreaming()
-            self.audioStreamer = nil
-        }
-
         guard audioStreamer.startStreaming() else {
-            stopStreaming()
+            audioStreamer.stopStreaming()
             return { }
         }
 
-        return stopStreaming
+        self.audioStreamer = audioStreamer
+        return audioStreamer.stopStreaming
     }
 
     public func createTranscriptionOutput(

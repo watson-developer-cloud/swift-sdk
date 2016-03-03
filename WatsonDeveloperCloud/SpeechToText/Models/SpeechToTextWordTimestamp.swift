@@ -28,5 +28,30 @@ public struct SpeechToTextWordTimestamp {
 
     /// The end time, in seconds, of the given word in the audio input.
     public var endTime: Double!
-    
+
+}
+
+public struct SpeechToTextWordTimestampTransform: TransformType {
+    public typealias Object = SpeechToTextWordTimestamp
+    public typealias JSON = [AnyObject]
+
+    public func transformFromJSON(value: AnyObject?) -> Object? {
+        guard let array = value as? [AnyObject],
+              let word = array[0] as? String,
+              let startTime = array[1] as? Double,
+              let endTime = array[2] as? Double else
+        {
+            return nil
+        }
+
+        return SpeechToTextWordTimestamp(word: word, startTime: startTime, endTime: endTime)
+    }
+
+    public func transformToJSON(value: Object?) -> JSON? {
+        guard let wordTimestamp = value else {
+            return nil
+        }
+
+        return [wordTimestamp.word, wordTimestamp.startTime, wordTimestamp.endTime]
+    }
 }

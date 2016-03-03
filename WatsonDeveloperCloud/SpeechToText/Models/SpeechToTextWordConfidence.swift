@@ -27,3 +27,27 @@ public struct SpeechToTextWordConfidence {
     public var confidence: Double!
     
 }
+
+public struct SpeechToTextWordConfidenceTransform: TransformType {
+    public typealias Object = SpeechToTextWordConfidence
+    public typealias JSON = [AnyObject]
+
+    public func transformFromJSON(value: AnyObject?) -> Object? {
+        guard let array = value as? [AnyObject],
+              let word = array[0] as? String,
+              let confidence = array[1] as? Double else
+        {
+            return nil
+        }
+
+        return SpeechToTextWordConfidence(word: word, confidence: confidence)
+    }
+
+    public func transformToJSON(value: Object?) -> JSON? {
+        guard let wordConfidence = value else {
+            return nil
+        }
+
+        return [wordConfidence.word, wordConfidence.confidence]
+    }
+}

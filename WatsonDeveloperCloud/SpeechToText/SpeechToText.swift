@@ -120,6 +120,25 @@ public class SpeechToText {
         return stopStreaming
     }
 
+    public func createTranscriptionStream(
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+        -> AVCaptureAudioDataOutput?
+    {
+        guard let socket = createSocket(settings, failure: failure, success: success),
+              let start = settings.toJSONString(failure) else { return nil }
+
+        socket.writeString(start)
+
+        let output = AVCaptureAudioDataOutput()
+        let queue = dispatch_queue_create("sample buffer_delegate", DISPATCH_QUEUE_SERIAL)
+        audioStreamer = SpeechToTextAudioStreamer(socket: socket, failure: failure)
+        output.setSampleBufferDelegate(audioStreamer, queue: queue)
+
+        return output
+    }
+
     // MARK: Helper Functions
 
     private func createSocket(

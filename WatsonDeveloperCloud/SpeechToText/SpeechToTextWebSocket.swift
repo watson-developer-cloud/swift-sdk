@@ -113,8 +113,8 @@ class SpeechToTextWebSocket {
     }
 
     private func onServiceError(error: SpeechToTextError) {
-        let error = createError(SpeechToTextConstants.domain, description: error.error)
         if let failure = failure {
+            let error = createError(SpeechToTextConstants.domain, description: error.error)
             failure(error)
         }
     }

@@ -123,7 +123,7 @@ public class SpeechToText {
         return stopStreaming
     }
 
-    public func createTranscriptionStream(
+    public func createTranscriptionCaptureOutput(
         settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)

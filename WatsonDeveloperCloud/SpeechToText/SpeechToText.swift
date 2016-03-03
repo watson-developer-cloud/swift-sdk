@@ -52,7 +52,6 @@ public class SpeechToText {
         self.init(authStrategy: authStrategy)
     }
 
-    
     /**
      Transcribe recorded audio data.
 

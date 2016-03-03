@@ -178,6 +178,11 @@ public class SpeechToText {
     {
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
+            if let failure = failure {
+                let description = "Unable to create an AVCaptureSession."
+                let error = createError(SpeechToTextConstants.domain, description: description)
+                failure(error)
+            }
             return false
         }
 

@@ -117,7 +117,7 @@ class WatsonWebSocket {
         // TODO: debugging: set token to something invalid so we can see what error is returned...
         authStrategy.token = "this-is-a-bad-token"
 
-        if let token = authStrategy.token where retries == 0 {
+        if let token = authStrategy.token where retries == 1 {
             self.socket.headers["X-Watson-Authorization-Token"] = token
             self.socket.connect()
         } else {

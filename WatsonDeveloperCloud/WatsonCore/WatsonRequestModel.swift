@@ -16,29 +16,43 @@
 
 import Foundation
 
+/**
+ An object that implements the WatsonRequestModel protocol can
+ represent itself as a dictionary, JSON Data, or JSON string.
+ */
 protocol WatsonRequestModel {
+
+    /** Represent an object as a dictionary of key-value pairs. */
     func toDictionary() -> [String: AnyObject]
 }
 
 extension WatsonRequestModel {
 
+    /**
+     Represent an object as JSON data.
+     
+     - parameter failure: A function executed if an error occurs.
+     */
     func toJSONData(failure: (NSError -> Void)?) -> NSData? {
         let map = self.toDictionary()
         let data = try? NSJSONSerialization.dataWithJSONObject(map, options: [])
 
         guard let json = data else {
-            if let failure = failure {
-                let description = "Could not serialize \(self.dynamicType)"
-                let domain = "swift.\(self.dynamicType)"
-                let error = createError(domain, description: description)
-                failure(error)
-            }
+            let description = "Could not serialize \(self.dynamicType)"
+            let domain = "swift.\(self.dynamicType)"
+            let error = createError(domain, description: description)
+            failure?(error)
             return nil
         }
 
         return json
     }
 
+    /**
+     Represent an object as a JSON string.
+     
+     - parameter failure: A function executed if an error occurs.
+     */
     func toJSONString(failure: (NSError -> Void)?) -> String? {
         guard let json = self.toJSONData(failure) else {
             return nil

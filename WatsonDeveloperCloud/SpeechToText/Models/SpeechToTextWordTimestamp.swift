@@ -20,7 +20,7 @@ import ObjectMapper
 /** The timestamp of a word in a Speech to Text transcription. */
 public struct SpeechToTextWordTimestamp {
 
-    /// A particular word from the transcript of the utterance.
+    /// A particular word from the transcription.
     public var word: String!
 
     /// The start time, in seconds, of the given word in the audio input.
@@ -31,11 +31,19 @@ public struct SpeechToTextWordTimestamp {
 
 }
 
-public struct SpeechToTextWordTimestampTransform: TransformType {
-    public typealias Object = SpeechToTextWordTimestamp
-    public typealias JSON = [AnyObject]
+/** An ObjectMapper transformation for `SpeechToTextWordTimestamp`. */
+struct SpeechToTextWordTimestampTransform: TransformType {
+    typealias Object = SpeechToTextWordTimestamp
+    typealias JSON = [AnyObject]
 
-    public func transformFromJSON(value: AnyObject?) -> Object? {
+    /**
+     Transform JSON to a `SpeechToTextWordTimestamp`.
+
+     - parameter value: The JSON object to transform.
+
+     - returns: A `SpeechToTextWordTimestamp` object.
+     */
+    func transformFromJSON(value: AnyObject?) -> Object? {
         guard let array = value as? [AnyObject],
               let word = array[0] as? String,
               let startTime = array[1] as? Double,
@@ -47,7 +55,14 @@ public struct SpeechToTextWordTimestampTransform: TransformType {
         return SpeechToTextWordTimestamp(word: word, startTime: startTime, endTime: endTime)
     }
 
-    public func transformToJSON(value: Object?) -> JSON? {
+    /**
+     Transform a `SpeechToTextWordTimestamp` to JSON.
+
+     - parameter value: The `SpeechToTextWordTimestamp` object to transform.
+
+     - returns: A JSON object.
+     */
+    func transformToJSON(value: Object?) -> JSON? {
         guard let wordTimestamp = value else {
             return nil
         }

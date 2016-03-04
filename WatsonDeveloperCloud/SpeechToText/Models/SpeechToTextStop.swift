@@ -23,6 +23,7 @@ struct SpeechToTextStop: WatsonRequestModel {
     /// The action to perform. Must be `stop` to end the request.
     private let action = "stop"
 
+    /** Represent a `SpeechToTextStop` as a dictionary of key-value pairs. */
     func toDictionary() -> [String : AnyObject] {
         return ["action": action]
     }

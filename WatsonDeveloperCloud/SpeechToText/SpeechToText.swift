@@ -25,7 +25,6 @@ import Foundation
 public class SpeechToText: WatsonService {
 
     private let authStrategy: AuthenticationStrategy
-    private var audioStreamer: SpeechToTextAudioStreamer?
 
     /** A function that, when executed, stops streaming audio to Speech to Text. */
     public typealias StopStreaming = Void -> Void
@@ -141,7 +140,6 @@ public class SpeechToText: WatsonService {
             return { }
         }
 
-        self.audioStreamer = audioStreamer
         return audioStreamer.stopStreaming
     }
 
@@ -167,7 +165,6 @@ public class SpeechToText: WatsonService {
             failure: failure,
             success: success) else { return nil }
 
-        self.audioStreamer = audioStreamer
         return audioStreamer.createTranscriptionOutput()
     }
 }

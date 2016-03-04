@@ -20,7 +20,7 @@ import AVFoundation
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
     private var settings: SpeechToTextSettings
-    private let failure: (NSError -> Void)?
+    private var failure: (NSError -> Void)?
     private let success: [SpeechToTextResult] -> Void
     private var socket: SpeechToTextWebSocket?
     private var captureSession: AVCaptureSession?
@@ -32,8 +32,15 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         success: [SpeechToTextResult] -> Void)
     {
         self.settings = settings
-        self.failure = failure
         self.success = success
+        self.failure = failure
+
+        super.init()
+
+        self.failure = { (error: NSError) in
+            self.stopStreaming()
+            failure?(error)
+        }
 
         guard let socket = SpeechToTextWebSocket(
             authStrategy: authStrategy,
@@ -43,12 +50,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         {
             // A bug in the Swift compiler requires us to set all properties before returning nil
             // This bug is fixed in Swift 2.2, so we can set socket as non-optional
-            super.init()
             return nil
         }
 
         self.socket = socket
-        super.init()
     }
 
     func startStreaming() -> Bool {

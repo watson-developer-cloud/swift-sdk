@@ -130,11 +130,6 @@ public class SpeechToText: WatsonService {
         success: [SpeechToTextResult] -> Void)
         -> StopStreaming
     {
-        let failure = { (error: NSError) in
-            self.audioStreamer?.stopStreaming()
-            failure?(error)
-        }
-
         guard let audioStreamer = SpeechToTextAudioStreamer(
             authStrategy: authStrategy,
             settings: settings,

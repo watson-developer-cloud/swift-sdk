@@ -15,13 +15,19 @@
  **/
 
 import Foundation
+import ObjectMapper
 
+/** The state of the Speech to Text service. */
+struct SpeechToTextState: Mappable {
 
-internal protocol WatsonSocketDelegate {
-    
-    func onConnected()
-    func onListening()
-    func onDisconnected()
-    func onMessageReceived(result: SpeechToText.SpeechToTextResponse)
-    
+    /// The state of the Speech to Text service.
+    var state: String!
+
+    /// Used internally to initialize a `SpeechToTextState` from JSON.
+    init?(_ map: Map) { }
+
+    /// Used internally to serialize and deserialize JSON.
+    mutating func mapping(map: Map) {
+        state <- map["state"]
+    }
 }

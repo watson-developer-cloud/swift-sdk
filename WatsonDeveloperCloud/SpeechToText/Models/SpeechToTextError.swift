@@ -15,9 +15,19 @@
  **/
 
 import Foundation
+import ObjectMapper
 
-// The `WatsonService` protocol enforces consistency among all Watson services.
-internal protocol WatsonService {
-    init(authStrategy: AuthenticationStrategy)
-    init(username: String, password: String)
+/** An error produced by the Speech to Text service. */
+struct SpeechToTextError: Mappable {
+
+    /// A description of the error that occurred.
+    var error: String!
+
+    /// Used internally to initialize a `SpeechToTextError` from JSON.
+    init?(_ map: Map) { }
+
+    /// Used internally to serialize and deserialize JSON.
+    mutating func mapping(map: Map) {
+        error <- map["error"]
+    }
 }

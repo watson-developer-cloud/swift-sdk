@@ -15,21 +15,10 @@
  **/
 
 import Foundation
-import ObjectMapper
 
-extension SpeechToText {
-    
-    public struct SpeechToTextResult: Mappable {
-        /// List of alternative transcripts received from the service
-        public var alternatives: [SpeechToTextAlternative]?
-        /// If true, result for this utterance is not updated further
-        public var final: Bool?
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            alternatives        <- map["alternatives"]
-            final               <- map["final"]
-        }
-    }
+func createError(domain: String, description: String) -> NSError {
+    let code = -1
+    let userInfo = [NSLocalizedDescriptionKey: description]
+    let error = NSError(domain: domain, code: code, userInfo: userInfo)
+    return error
 }

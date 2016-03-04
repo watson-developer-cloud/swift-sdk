@@ -16,18 +16,27 @@
 
 import Foundation
 
-public class SpeechToText {
+/**
+ The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
+ your application. It uses machine intelligence to combine information about grammar and language
+ structure to generate an accurate transcription. Transcriptions are supported for various audio
+ formats and languages.
+ */
+public class SpeechToText: WatsonService {
 
     private let authStrategy: AuthenticationStrategy
     private var audioStreamer: SpeechToTextAudioStreamer?
+
+    /** A function that, when executed, stops streaming audio to Speech to Text. */
+    public typealias StopStreaming = Void -> Void
 
     /**
      Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
     
      - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
-        with the Watson Developer Cloud's `SpeechToText` service. The `AuthenticationStrategy`
+        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
         is used internally to obtain tokens, refresh expired tokens, and maintain information
-        about the state of authentication with the Watson Developer Cloud.
+        about authentication state.
      - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
      */
     public required init(authStrategy: AuthenticationStrategy) {
@@ -51,12 +60,38 @@ public class SpeechToText {
     }
 
     /**
-     Transcribe recorded audio data.
+     Transcribe an audio file.
+    
+     - parameter file: The audio file to transcribe.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     */
+    public func transcribe(
+        file: NSURL,
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+    {
+        guard let audio = NSData(contentsOfURL: file) else {
+            let description = "Could not load audio data from \(file)."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
+            return
+        }
 
-     - parameter audio: The recorded audio data.
-     - parameter settings: Settings to configure the SpeechToText service.
-     - parameter failure: A function that will be executed whenever a failure occurs.
-     - parameter success: A function executed whenever a result is returned from Speech to Text.
+        transcribe(audio, settings: settings, failure: failure, success: success)
+    }
+
+    /**
+     Transcribe audio data.
+
+     - parameter audio: The audio data to transcribe.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
      */
     public func transcribe(
         audio: NSData,
@@ -79,23 +114,15 @@ public class SpeechToText {
     }
 
     /**
-     StopRecording is a function that stops a microphone capture session. Microphone audio will no
-     longer be streamed to the Speech to Text service after the capture session is stopped.
-     */
-    public typealias StopStreaming = Void -> Void
+     Stream audio from the microphone to the Speech to Text service. The microphone will stop
+     recording after an end-of-speech event is detected by the Speech to Text service or the
+     returned function is executed.
 
-    /**
-     Start the microphone and perform a live transcription by streaming the microphone audio to
-     the Speech to Text service. The microphone will stop recording after an end-of-speech event
-     is detected by the Speech to Text service or the returned `StopRecording` function is
-     executed.
-
-     - parameter settings: The settings used to configure the SpeechToText service.
-     - parameter failure: A function that will be executed whenever a failure occurs.
-     - parameter success: A function executed whenever a result is returned from Speech to Text.
-     - returns: A `StopRecording` function that can be executed to stop streaming the microphone's
-        audio to the Speech to Text service, wait for any remaining transcription results to be
-        returned, and then execute the `completionHandler`.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     - returns: A function that, when executed, stops streaming audio to Speech to Text.
      */
     public func transcribe(
         settings: SpeechToTextSettings,
@@ -123,6 +150,16 @@ public class SpeechToText {
         return audioStreamer.stopStreaming
     }
 
+    /**
+     Create an `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service.
+
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     - returns: An `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service
+        when set as the output of an `AVCaptureSession`.
+     */
     public func createTranscriptionOutput(
         settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,

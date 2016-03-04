@@ -48,17 +48,6 @@ public struct SpeechToTextSettings: WatsonRequestModel {
     /// service. Visit https://ibm.biz/BdHCrB for more information about the supported formats.
     public var contentType: AudioMediaType
 
-    // For internal use only.
-    // This is a represention of contentType as a String for use with ObjectMapper.
-    // Unfortunately, this approach of mapping contentType to a string restricts
-    // ObjectMapper from being able to serialize a `SpeechToTextSettings` object,
-    // but this not a requirement that we expect to ever have to fulfill.
-    // (The associated values with the L16 format complicates the use of this enum.)
-    private var contentTypeString: String! {
-        get { return contentType.toString }
-        set { contentType = .WAV }
-    }
-
     /// If `true`, then the entire audio stream will be transcribed until it terminates rather
     /// than stopping at the first half-second of non-speech. The default is `false`.
     public var continuous: Bool?
@@ -122,7 +111,7 @@ public struct SpeechToTextSettings: WatsonRequestModel {
     func toDictionary() -> [String: AnyObject] {
         var map = [String: AnyObject]()
         map["action"] = action
-        map["content-type"] = contentTypeString
+        map["content-type"] = contentType.toString
         map["continuous"] = continuous
         map["max_alternatives"] = maxAlternatives
         map["interim_results"] = interimResults

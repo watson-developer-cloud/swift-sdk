@@ -18,11 +18,6 @@ import Foundation
 
 // The `WatsonService` protocol enforces consistency among all Watson services.
 internal protocol WatsonService {
-    
-    // The authentication strategy to obtain authorization tokens.
-    var authStrategy: AuthenticationStrategy { get }
-    
     init(authStrategy: AuthenticationStrategy)
     init(username: String, password: String)
-
 }

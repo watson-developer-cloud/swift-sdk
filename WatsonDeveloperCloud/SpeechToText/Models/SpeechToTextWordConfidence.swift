@@ -20,7 +20,7 @@ import ObjectMapper
 /** The confidence of a word in a Speech to Text transcription. */
 public struct SpeechToTextWordConfidence {
 
-    /// A particular word from the transcript of the utterance.
+    /// A particular word from the transcription.
     public var word: String!
 
     /// The confidence of the given word, between 0 and 1.
@@ -28,11 +28,19 @@ public struct SpeechToTextWordConfidence {
     
 }
 
-public struct SpeechToTextWordConfidenceTransform: TransformType {
-    public typealias Object = SpeechToTextWordConfidence
-    public typealias JSON = [AnyObject]
+/** An ObjectMapper transformation for `SpeechToTextWordConfidence`. */
+struct SpeechToTextWordConfidenceTransform: TransformType {
+    typealias Object = SpeechToTextWordConfidence
+    typealias JSON = [AnyObject]
 
-    public func transformFromJSON(value: AnyObject?) -> Object? {
+    /**
+     Transform JSON to a `SpeechToTextWordConfidence`.
+
+     - parameter value: The JSON object to transform.
+     
+     - returns: A `SpeechToTextWordConfidence` object.
+     */
+    func transformFromJSON(value: AnyObject?) -> Object? {
         guard let array = value as? [AnyObject],
               let word = array[0] as? String,
               let confidence = array[1] as? Double else
@@ -43,7 +51,14 @@ public struct SpeechToTextWordConfidenceTransform: TransformType {
         return SpeechToTextWordConfidence(word: word, confidence: confidence)
     }
 
-    public func transformToJSON(value: Object?) -> JSON? {
+    /**
+     Transform a `SpeechToTextWordConfidence` to JSON.
+
+     - parameter value: The `SpeechToTextWordConfidence` object to transform.
+
+     - returns: A JSON object.
+     */
+    func transformToJSON(value: Object?) -> JSON? {
         guard let wordConfidence = value else {
             return nil
         }

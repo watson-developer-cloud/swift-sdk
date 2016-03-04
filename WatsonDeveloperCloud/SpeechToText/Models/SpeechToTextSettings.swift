@@ -70,8 +70,8 @@ public struct SpeechToTextSettings: WatsonRequestModel {
     /// The maximum number of alternative transcriptions to receive. The default is 1.
     public var maxAlternatives: Int?
 
-    /// If `true`, then interim results will be received for the transcription.
-    /// The default is `false`.
+    /// If `true`, then interim results (i.e. results that are not final) will be received
+    /// for the transcription. The default is `false`.
     public var interimResults: Bool?
 
     /// A minimum level of confidence that the service must have to report a hypothesis for a
@@ -101,13 +101,14 @@ public struct SpeechToTextSettings: WatsonRequestModel {
         the supported formats.
      
      - returns: An initialized `SpeechToTextSettings` object with the given `contentType`.
-        Configure additional parameters for the recognition request by modifying the object's
-        properties.
+        Configure additional parameters for the recognition request by directly modifying
+        the returned object's properties.
      */
     public init(contentType: AudioMediaType) {
         self.contentType = contentType
     }
 
+    /** Represent a `SpeechToTextSettings` as a dictionary of key-value pairs. */
     func toDictionary() -> [String: AnyObject] {
         var map = [String: AnyObject]()
         map["action"] = action

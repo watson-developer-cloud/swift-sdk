@@ -280,57 +280,123 @@ The following links provide more information about the Personality Insights serv
 
 ### Speech to Text
 
-The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text. The services takes audio data encoded in [Opus/OGG](https://www.opus-codec.org/), [FLAC](https://xiph.org/flac/), WAV, and Linear 16-bit PCM uncompressed formats. The service automatically downmixes to one channel during transcoding.
+The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
-Create a SpeechToText service:
+#### Recorded Audio
 
-```swift
-let stt = SpeechToText(authStrategy: strategy)
-```
-
-You can create an AVAudioRecorder with the necessary settings:
+The following example demonstrates how to use the Speech to Text service to transcribe an audio file.
 
 ```swift
+let bundle = NSBundle(forClass: self.dynamicType)
+guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else {
+	return
+}
 
-let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
-
-let session = AVAudioSession.sharedInstance()
-var settings = [String: AnyObject]()
-
-settings[AVSampleRateKey] = NSNumber(float: 44100.0)
-settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
-do {
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        recorder = try AVAudioRecorder(URL: filePath, settings: settings)
-} catch {
-        // error
+let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+let settings = SpeechToTextSettings(contentType: .WAV)
+stt.transcribe(fileURL, settings: settings) { results in
+	if let transcription = results.last?.alternatives.last?.transcript {
+   		print(transcription)
+   }
 }
 ```
 
-To make a call for transcription, use:
+This produces the following console output.
 
-```swift
-let data = NSData(contentsOfURL: recorder.url)
-
-if let data = data {
-
-        sttService.transcribe(data , format: .WAV, oncompletion: {
-
-            response, error in
-
-            // code here
-        }
-}
+```
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday
 ```
 
+#### Streaming Audio
 
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio.
+
+```swift
+let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+
+var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+settings.continuous = true
+settings.interimResults = true
+
+let stopStreaming = stt.transcribe(settings) { results in
+	if let transcription = results.last?.alternatives.last?.transcript {
+		print(transcription)
+	}
+}
+
+// Streaming will continue until either an end-of-speech event is detected by
+// the Speech to Text service or the `stopStreaming` function is executed.
+```
+
+This produces the following console output.
+
+```
+Sir 
+several 
+several torn 
+several tornadoes 
+several tornadoes to 
+several tornadoes touched 
+several tornadoes touch down a 
+several tornadoes touch down as a law 
+several tornadoes touch down as a line of 
+several tornadoes touch down as a line of some 
+several tornadoes touch down as a line of severe 
+several tornadoes touch down as a line of severe thunderstorm 
+several tornadoes touch down as a line of severe thunderstorms 
+several tornadoes touch down as a line of severe thunderstorms swept 
+several tornadoes touch down as a line of severe thunderstorms swept through car 
+several tornadoes touch down as a line of severe thunderstorms swept through cholera 
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado a 
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado and so 
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado and Sunday 
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday 
+several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday
+```
+
+#### Custom Capture Sessions
+
+Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users that would like to visualize an audio wave form, save the audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
+
+The following example demonstrates how to create an `AVCaptureSession` with an `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service.
+
+```swift
+let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+
+let captureSession = AVCaptureSession()
+guard let captureSession = captureSession else {
+	return
+}
+
+let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+if captureSession.canAddInput(microphoneInput) {
+	captureSession.addInput(microphoneInput)
+}
+
+var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+settings.continuous = true
+settings.interimResults = true
+
+let transcriptionOutput = stt.createTranscriptionOutput(settings) { results in
+	if let transcription = results.last?.alternatives.last?.transcript {
+		print(transcription)
+	}
+}
+
+if captureSession.canAddOutput(transcriptionOutput) {
+	captureSession.addOutput(transcriptionOutput)
+}
+
+captureSession.startRunning()
+```
+#### Additional Information
 
 The following links provide additional information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
 * [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
-
 
 ### Text to Speech
 

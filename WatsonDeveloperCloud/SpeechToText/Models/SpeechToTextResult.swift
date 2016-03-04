@@ -17,11 +17,11 @@
 import Foundation
 import ObjectMapper
 
-/** A recognition result from Speech to Text. */
+/** A result from a Speech to Text recognition request. */
 public struct SpeechToTextResult: Mappable {
 
-    /// If `true`, then the transcription result for this utterance is final and will not be
-    /// updated further.
+    /// If `true`, then the transcription result for this
+    /// utterance is final and will not be updated further.
     public var final: Bool!
 
     /// Alternative transcription results.

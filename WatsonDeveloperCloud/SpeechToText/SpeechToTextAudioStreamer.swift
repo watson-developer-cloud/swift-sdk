@@ -17,6 +17,7 @@
 import Foundation
 import AVFoundation
 
+/** Stream microphone audio to Speech to Text. */
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
     private var settings: SpeechToTextSettings
@@ -25,6 +26,21 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     private var socket: SpeechToTextWebSocket?
     private var captureSession: AVCaptureSession?
 
+    /**
+     Create a `SpeechToTextAudioStreamer` to stream microphone audio to Speech to Text.
+
+     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
+        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
+        is used internally to obtain tokens, refresh expired tokens, and maintain information
+        about authentication state.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     
+     - returns: A `SpeechToTextAudioStreamer` object that can stream microphone audio to
+        Speech to Text.
+    */
     init?(
         authStrategy: AuthenticationStrategy,
         settings: SpeechToTextSettings,
@@ -56,6 +72,12 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         self.socket = socket
     }
 
+    /**
+     Start streaming microphone audio to Speech to Text.
+
+     - returns: `true` if the `AVCaptureSession` could be configured to stream microphone audio
+        to the Speech to Text service; false, otherwise.
+     */
     func startStreaming() -> Bool {
 
         settings.contentType = .L16(rate: 44100, channels: 1)
@@ -64,33 +86,26 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         }
 
         captureSession = AVCaptureSession()
-        let microphoneInput = createMicrophoneInput()
-        let transcriptionOutput = createTranscriptionOutput()
-
         guard let captureSession = captureSession else {
-            if let failure = failure {
-                let description = "Unable to create an AVCaptureSession."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
+            let description = "Unable to create an AVCaptureSession."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return false
         }
 
+        let microphoneInput = createMicrophoneInput()
         guard captureSession.canAddInput(microphoneInput) else {
-            if let failure = failure {
-                let description = "Unable to add the microphone to the capture session."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
+            let description = "Unable to add the microphone as a capture session input."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return false
         }
 
+        let transcriptionOutput = createTranscriptionOutput()
         guard captureSession.canAddOutput(transcriptionOutput) else {
-            if let failure = failure {
-                let description = "Unable to add streaming output to the capture session."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
+            let description = "Unable to add transcription as a capture session output."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return false
         }
 
@@ -101,6 +116,9 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         return true
     }
 
+    /**
+     Stop streaming microphone audio to Speech to Text
+     */
     func stopStreaming() {
         captureSession?.stopRunning()
         captureSession = nil
@@ -110,17 +128,22 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         }
     }
 
+    /**
+     Send an audio sample buffer to Speech to Text.
+     
+     - parameter captureOutput: The capture output object.
+     - parameter sampleBuffer: The sample buffer that was output.
+     - parameter connection: The connection.
+     */
     func captureOutput(
         captureOutput: AVCaptureOutput!,
         didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
         fromConnection connection: AVCaptureConnection!)
     {
         guard CMSampleBufferDataIsReady(sampleBuffer) else {
-            if let failure = failure {
-                let description = "Microphone audio buffer ignored because it was not ready."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
+            let description = "Microphone audio buffer ignored because it was not ready."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return
         }
 
@@ -148,19 +171,28 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         socket?.writeData(audioData)
     }
 
-    private func createMicrophoneInput() -> AVCaptureDeviceInput? {
+    /**
+     Create a microphone input for use with an `AVCaptureSession`.
+     
+     - returns: An `AVCaptureDeviceInput` for the default audio input device, or nil if the
+        default audio input device is inaccessible.
+     */
+    func createMicrophoneInput() -> AVCaptureDeviceInput? {
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         guard let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice) else {
-            if let failure = failure {
-                let description = "Unable to access the microphone."
-                let error = createError(SpeechToTextConstants.domain, description: description)
-                failure(error)
-            }
+            let description = "Unable to access the microphone."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return nil
         }
         return microphoneInput
     }
 
+    /**
+     Create a transcription output for use with an `AVCaptureSession`.
+
+     - returns: An `AVCaptureAudioDataOutput` that streams audio data to Speech to Text.
+     */
     func createTranscriptionOutput() -> AVCaptureAudioDataOutput {
         let output = AVCaptureAudioDataOutput()
         let queue = dispatch_queue_create("stt_streaming", DISPATCH_QUEUE_SERIAL)

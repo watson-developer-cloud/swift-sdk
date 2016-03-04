@@ -17,7 +17,7 @@
 import Foundation
 import ObjectMapper
 
-/** A wrapper object that contains speech recognition results from Speech to Text. */
+/** A wrapper object that contains results from a Speech to Text recognition request. */
 struct SpeechToTextResultWrapper: Mappable {
 
     /// Index indicating change point in the results array.

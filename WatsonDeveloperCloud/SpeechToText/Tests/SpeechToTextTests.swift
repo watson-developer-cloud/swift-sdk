@@ -63,35 +63,133 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func testTranscribeWAV() {
-        transcribe("SpeechSample", withExtension: "wav", format: .WAV)
+    // MARK: - Transcribe File, Default Settings
+
+    func testTranscribeFileDefaultWAV() {
+        transcribeFileDefault("SpeechSample", withExtension: "wav", format: .WAV)
     }
 
-    func transcribe(filename: String, withExtension: String, format: AudioMediaType) {
-        let description = "Testing transcribe with pre-recorded file."
+    func testTranscribeFileDefaultOpus() {
+        transcribeFileDefault("SpeechSample", withExtension: "ogg", format: .Opus)
+    }
+
+    func testTranscribeFileDefaultFLAC() {
+        transcribeFileDefault("SpeechSample", withExtension: "flac", format: .FLAC)
+    }
+
+    func transcribeFileDefault(filename: String, withExtension: String, format: AudioMediaType) {
+        let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
 
         let bundle = NSBundle(forClass: self.dynamicType)
-        guard let url = bundle.URLForResource(filename, withExtension: withExtension) else {
+        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-        guard let audioData = NSData(contentsOfURL: url) else {
+
+        let failure = { (error: NSError) in
+            XCTFail("An error occurred: \(error)")
+        }
+
+        let settings = SpeechToTextSettings(contentType: format)
+        service.transcribe(file, settings: settings, failure: failure) { results in
+            for result in results {
+                XCTAssert(result.final == true)
+                for alternative in result.alternatives {
+                    XCTAssertGreaterThan(alternative.transcript.characters.count, 0)
+                    XCTAssertGreaterThanOrEqual(alternative.confidence!, 0.0)
+                    XCTAssertLessThanOrEqual(alternative.confidence!, 1.0)
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
+
+    // MARK: - Transcribe Data, Default Settings
+
+    func testTranscribeDataDefaultWAV() {
+        transcribeFileDefault("SpeechSample", withExtension: "wav", format: .WAV)
+    }
+
+    func testTranscribeDataDefaultOpus() {
+        transcribeFileDefault("SpeechSample", withExtension: "ogg", format: .Opus)
+    }
+
+    func testTranscribeDataDefaultFLAC() {
+        transcribeFileDefault("SpeechSample", withExtension: "flac", format: .FLAC)
+    }
+
+    func transcribeDataDefault(filename: String, withExtension: String, format: AudioMediaType) {
+        let description = "Transcribe an audio file."
+        let expectation = expectationWithDescription(description)
+
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        guard let audio = NSData(contentsOfURL: file) else {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
 
-        func failure(error: NSError) {
-            print(error)
-            XCTFail()
+        let failure = { (error: NSError) in
+            XCTFail("An error occurred: \(error)")
         }
 
         let settings = SpeechToTextSettings(contentType: format)
-        service.transcribe(audioData, settings: settings, failure: failure) { results in
-            print(results)
-            // TODO: verify results...
-            // expectation.fulfill()
+        service.transcribe(audio, settings: settings, failure: failure) { results in
+            for result in results {
+                XCTAssert(result.final == true)
+                for alternative in result.alternatives {
+                    XCTAssertGreaterThan(alternative.transcript.characters.count, 0)
+                    XCTAssertGreaterThanOrEqual(alternative.confidence!, 0.0)
+                    XCTAssertLessThanOrEqual(alternative.confidence!, 1.0)
+                }
+            }
+            expectation.fulfill()
         }
         waitForExpectation()
     }
+
+    // MARK: - Transcribe File, Custom Settings
+
+    func transcribeFileCustom(filename: String, withExtension: String, format: AudioMediaType) {
+        let description = "Transcribe an audio file."
+        let expectation = expectationWithDescription(description)
+
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        let failure = { (error: NSError) in
+            XCTFail("An error occurred: \(error)")
+        }
+
+        var settings = SpeechToTextSettings(contentType: format)
+        settings.model = "en-US_BroadbandModel"
+        settings.learningOptOut = true
+        settings.continuous = true
+        settings.inactivityTimeout = -1
+        settings.keywords = ["tornadoes"]
+        settings.keywordsThreshold = 0.75
+        settings.maxAlternatives = 3
+        settings.interimResults = true
+        settings.wordAlternativesThreshold = 0.25
+        settings.wordConfidence = true
+        settings.timestamps = true
+        settings.filterProfanity = false
+
+        service.transcribe(file, settings: settings, failure: failure) { results in
+            // TODO: verify results...
+            XCTFail("Need to implement verification.")
+            expectation.fulfill()
+        }
+    }
+
+    // TODO: Test a foreign language.
 }

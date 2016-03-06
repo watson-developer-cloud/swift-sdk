@@ -156,6 +156,10 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - Transcribe File, Custom Settings
 
+    func testTranscribeFileCustomWAV() {
+        transcribeFileCustom("SpeechSample", withExtension: "wav", format: .WAV)
+    }
+
     func transcribeFileCustom(filename: String, withExtension: String, format: AudioMediaType) {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -171,7 +175,7 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = SpeechToTextSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel"
+        settings.model = "en-US_BroadbandModel" // TODO: Add this back and fix bug.
         settings.learningOptOut = true
         settings.continuous = true
         settings.inactivityTimeout = -1
@@ -185,10 +189,106 @@ class SpeechToTextTests: XCTestCase {
         settings.filterProfanity = false
 
         service.transcribe(file, settings: settings, failure: failure) { results in
+            print(results)
+
             // TODO: verify results...
-            XCTFail("Need to implement verification.")
-            expectation.fulfill()
+            // XCTFail("Need to implement verification.")
+            // expectation.fulfill()
         }
+        waitForExpectation()
+    }
+
+    // MARK: - Validation Functions
+
+    func validateSTTResults(results: [SpeechToTextResult], settings: SpeechToTextSettings) {
+        for result in results {
+            validateSTTResult(result, settings: settings)
+        }
+    }
+
+    func validateSTTResult(result: SpeechToTextResult, settings: SpeechToTextSettings) {
+
+        XCTAssertNotNil(result.final)
+        XCTAssertNotNil(result.alternatives)
+
+        let final = result.final!
+
+        for alternative in result.alternatives {
+            validateSTTTranscription(alternative, final: final, settings: settings)
+        }
+
+        if final && settings.keywords?.count > 0 {
+            XCTAssertGreaterThanOrEqual(settings.keywordsThreshold!, 0.0)
+            XCTAssertLessThanOrEqual(settings.keywordsThreshold!, 1.0)
+            XCTAssertNotNil(result.keywordResults)
+            XCTAssertGreaterThan(result.keywordResults!.count, 0)
+            for (keyword, keywordResults) in result.keywordResults! {
+                validateSTTKeywordResult(keyword, keywordResults: keywordResults)
+            }
+        }
+
+        if final && settings.wordAlternativesThreshold != nil {
+            XCTAssertGreaterThanOrEqual(settings.wordAlternativesThreshold!, 0.0)
+            XCTAssertLessThanOrEqual(settings.wordAlternativesThreshold!, 1.0)
+            XCTAssertNotNil(result.wordAlternatives)
+            XCTAssertGreaterThan(result.wordAlternatives!.count, 0)
+            for word in result.wordAlternatives! {
+                validateSTTWordAlternativeResults(word)
+            }
+        }
+    }
+
+    func validateSTTTranscription(
+        transcription: SpeechToTextTranscription,
+        final: Bool,
+        settings: SpeechToTextSettings)
+    {
+        XCTAssertNotNil(transcription.transcript)
+        XCTAssertGreaterThan(transcription.transcript!.characters.count, 0)
+
+        if final {
+            XCTAssertNotNil(transcription.confidence)
+            XCTAssertGreaterThanOrEqual(transcription.confidence!, 0.0)
+            XCTAssertLessThanOrEqual(transcription.confidence!, 1.0)
+        } else {
+            XCTAssertNil(transcription.confidence)
+        }
+
+        if settings.timestamps == true {
+            XCTAssertNotNil(transcription.timestamps)
+            XCTAssertGreaterThan(transcription.timestamps!.count, 0)
+            for timestamp in transcription.timestamps! {
+                validateSTTWordTimestamp(timestamp)
+            }
+        } else {
+            XCTAssertNil(transcription.timestamps)
+        }
+
+        if final && settings.wordConfidence == true {
+            XCTAssertNotNil(transcription.wordConfidence)
+            for word in transcription.wordConfidence! {
+                validateSTTWordConfidence(word)
+            }
+        } else {
+            // TODO: perhaps this is empty instead of nil when wordConfidence == false?
+            XCTAssertNil(transcription.wordConfidence)
+        }
+    }
+
+    func validateSTTWordTimestamp(timestamp: SpeechToTextWordTimestamp) {
+        XCTFail("Needs to be implemented.")
+    }
+
+    func validateSTTWordConfidence(word: SpeechToTextWordConfidence) {
+        XCTFail("Needs to be implemented.")
+    }
+
+    func validateSTTKeywordResult(keyword: String, keywordResults: [SpeechToTextKeywordResult]) {
+        XCTFail("Needs to be implemented.")
+    }
+
+    func validateSTTWordAlternativeResults(word: SpeechToTextWordAlternativeResults) {
+        XCTFail("Needs to be implemented.")
     }
 
     // TODO: Test a foreign language.

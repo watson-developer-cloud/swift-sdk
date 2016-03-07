@@ -343,6 +343,18 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectation()
     }
 
+    // MARK: - Transcribe Streaming
+
+    func testTranscribeStreaming() {
+        print("")
+        print("******************************************************************************")
+        print(" WARNING: Cannot test streaming audio in simulator.")
+        print(" No audio capture devices are available. Please manually load the test")
+        print(" application for streaming audio and run it on a physical device.")
+        print("******************************************************************************")
+        print("")
+    }
+
     // MARK: - Validation Functions
 
     func validateSTTResults(results: [SpeechToTextResult], settings: SpeechToTextSettings) {

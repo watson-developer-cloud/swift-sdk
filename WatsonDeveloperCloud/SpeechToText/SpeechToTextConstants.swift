@@ -23,14 +23,23 @@ struct SpeechToTextConstants {
     static let websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     static let domain = "swift.SpeechToText"
 
-    static func websocketsURL(settings: SpeechToTextSettings) -> String {
-        var url = websocketsURL
+    static func websocketsURL(settings: SpeechToTextSettings) -> NSURL? {
+        guard let urlComponents = NSURLComponents(string: websocketsURL) else {
+            return nil
+        }
+
+        var urlParams = [NSURLQueryItem]()
         if let model = settings.model {
-            url = url + "?model=" + model
+            urlParams.append(NSURLQueryItem(name: "model", value: model))
         }
         if settings.learningOptOut == true {
-            url = url + "?x-watson-learning-opt-out=" + "true"
+            urlParams.append(NSURLQueryItem(name: "x-watson-learning-opt-out", value: "true"))
         }
+
+        guard let url = urlComponents.URL else {
+            return nil
+        }
+
         return url
     }
 }

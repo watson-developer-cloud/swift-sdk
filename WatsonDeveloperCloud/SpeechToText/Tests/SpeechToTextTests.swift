@@ -171,7 +171,7 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = SpeechToTextSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel" // TODO: Add this back and fix bug.
+        // settings.model = "en-US_BroadbandModel" // TODO: Add this back and fix bug.
         settings.learningOptOut = true
         settings.continuous = true
         settings.inactivityTimeout = -1

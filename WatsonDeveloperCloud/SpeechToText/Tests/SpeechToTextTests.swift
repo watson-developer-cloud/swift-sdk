@@ -70,8 +70,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "wav",
             format: .WAV,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeFileDefaultOpus() {
@@ -79,8 +79,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "ogg",
             format: .Opus,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeFileDefaultFLAC() {
@@ -88,15 +88,15 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "flac",
             format: .FLAC,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func transcribeFileDefault(
         filename: String,
         withExtension: String,
         format: AudioMediaType,
-        expectedTranscription: String)
+        expectedTranscript: String)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -116,7 +116,9 @@ class SpeechToTextTests: XCTestCase {
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
-            XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)
+            let transcript = results.last?.alternatives.last?.transcript
+            XCTAssertNotNil(transcript)
+            XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
         }
         waitForExpectation()
@@ -129,8 +131,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "wav",
             format: .WAV,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-            "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeFileCustomOpus() {
@@ -138,8 +140,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "ogg",
             format: .Opus,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeFileCustomFLAC() {
@@ -147,15 +149,15 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "flac",
             format: .FLAC,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func transcribeFileCustom(
         filename: String,
         withExtension: String,
         format: AudioMediaType,
-        expectedTranscription: String)
+        expectedTranscript: String)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -187,7 +189,9 @@ class SpeechToTextTests: XCTestCase {
         service.transcribe(file, settings: settings, failure: failure) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
-                XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)
+                let transcript = results.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()
             }
         }
@@ -201,8 +205,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "wav",
             format: .WAV,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeDataDefaultOpus() {
@@ -210,8 +214,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "ogg",
             format: .Opus,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeDataDefaultFLAC() {
@@ -219,15 +223,15 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "flac",
             format: .FLAC,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func transcribeDataDefault(
         filename: String,
         withExtension: String,
         format: AudioMediaType,
-        expectedTranscription: String)
+        expectedTranscript: String)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -252,7 +256,9 @@ class SpeechToTextTests: XCTestCase {
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
-            XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)
+            let transcript = results.last?.alternatives.last?.transcript
+            XCTAssertNotNil(transcript)
+            XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
         }
         waitForExpectation()
@@ -265,8 +271,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "wav",
             format: .WAV,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-            "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeDataCustomOpus() {
@@ -274,8 +280,8 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "ogg",
             format: .Opus,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-            "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func testTranscribeDataCustomFLAC() {
@@ -283,15 +289,15 @@ class SpeechToTextTests: XCTestCase {
             "SpeechSample",
             withExtension: "flac",
             format: .FLAC,
-            expectedTranscription: "several tornadoes touch down as a line of severe " +
-            "thunderstorms swept through Colorado on Sunday ")
+            expectedTranscript: "several tornadoes touch down as a line of severe " +
+                                "thunderstorms swept through Colorado on Sunday ")
     }
 
     func transcribeDataCustom(
         filename: String,
         withExtension: String,
         format: AudioMediaType,
-        expectedTranscription: String)
+        expectedTranscript: String)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -328,7 +334,9 @@ class SpeechToTextTests: XCTestCase {
         service.transcribe(audio, settings: settings, failure: failure) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
-                XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)
+                let transcript = results.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()
             }
         }

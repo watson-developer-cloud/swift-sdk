@@ -362,10 +362,10 @@ class SpeechToTextTests: XCTestCase {
             for (keyword, keywordResults) in result.keywordResults! {
                 validateSTTKeywordResults(keyword, keywordResults: keywordResults)
             }
-        } else if settings.keywords?.count > 0 && !final {
-            XCTAssertEqual(result.keywordResults!.count, 0)
         } else {
-            XCTAssertNil(result.keywordResults)
+            let isEmpty = (result.keywordResults?.count == 0)
+            let isNil = (result.keywordResults == nil)
+            XCTAssert(isEmpty || isNil)
         }
 
         if settings.wordAlternativesThreshold != nil && final {
@@ -377,10 +377,10 @@ class SpeechToTextTests: XCTestCase {
             for wordAlternatives in result.wordAlternatives! {
                 validateSTTWordAlternativeResults(wordAlternatives)
             }
-        } else if settings.wordAlternativesThreshold != nil && !final {
-            XCTAssertEqual(result.wordAlternatives!.count, 0)
         } else {
-            XCTAssertNil(result.wordAlternatives)
+            let isEmpty = (result.wordAlternatives?.count == 0)
+            let isNil = (result.keywordResults == nil)
+            XCTAssert(isEmpty || isNil)
         }
     }
 
@@ -413,7 +413,9 @@ class SpeechToTextTests: XCTestCase {
                 validateSTTWordTimestamp(timestamp)
             }
         } else {
-            XCTAssertNil(transcription.timestamps)
+            let isEmpty = (transcription.timestamps?.count == 0)
+            let isNil = (transcription.timestamps == nil)
+            XCTAssert(isEmpty || isNil)
         }
 
         if settings.wordConfidence == true && final {
@@ -422,10 +424,10 @@ class SpeechToTextTests: XCTestCase {
             for word in transcription.wordConfidence! {
                 validateSTTWordConfidence(word)
             }
-        } else if settings.wordConfidence == true && !final {
-            XCTAssertEqual(transcription.wordConfidence!.count, 0)
         } else {
-            XCTAssertNil(transcription.wordConfidence)
+            let isEmpty = (transcription.wordConfidence?.count == 0)
+            let isNil = (transcription.wordConfidence == nil)
+            XCTAssert(isEmpty || isNil)
         }
     }
 

@@ -357,8 +357,18 @@ class SpeechToTextTests: XCTestCase {
         let final = result.final!
 
         XCTAssertNotNil(result.alternatives)
+        var alternativesWithConfidence = 0
         for alternative in result.alternatives {
-            validateSTTTranscription(alternative, final: final, settings: settings)
+            if alternative.confidence != nil {
+                alternativesWithConfidence += 1
+                validateSTTTranscription(alternative, best: true, final: final, settings: settings)
+            } else {
+                validateSTTTranscription(alternative, best: false, final: final, settings: settings)
+            }
+        }
+
+        if final {
+            XCTAssertEqual(alternativesWithConfidence, 1)
         }
 
         if settings.keywords?.count > 0 && final {
@@ -394,19 +404,14 @@ class SpeechToTextTests: XCTestCase {
 
     func validateSTTTranscription(
         transcription: SpeechToTextTranscription,
+        best: Bool,
         final: Bool,
         settings: SpeechToTextSettings)
     {
         XCTAssertNotNil(transcription.transcript)
         XCTAssertGreaterThan(transcription.transcript!.characters.count, 0)
 
-        // TODO: only available for best alterantive, but this checks all...
-        // TODO: write a test that returns multiple alternatives, forcing this to fail...
-        // TODO: perhaps here I can just check that 0.0 <= confidence <= 1.0 if the confidence
-        //          is non-nil. elsewhere, I can check that exactly one alternative has confidence
-        //          set.
-
-        if final {
+        if best && final {
             XCTAssertNotNil(transcription.confidence)
             XCTAssertGreaterThanOrEqual(transcription.confidence!, 0.0)
             XCTAssertLessThanOrEqual(transcription.confidence!, 1.0)
@@ -414,7 +419,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNil(transcription.confidence)
         }
 
-        if settings.timestamps == true {
+        if settings.timestamps == true && (!final || best) {
             XCTAssertNotNil(transcription.timestamps)
             XCTAssertGreaterThan(transcription.timestamps!.count, 0)
             for timestamp in transcription.timestamps! {
@@ -426,7 +431,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssert(isEmpty || isNil)
         }
 
-        if settings.wordConfidence == true && final {
+        if settings.wordConfidence == true && final && best {
             XCTAssertNotNil(transcription.wordConfidence)
             XCTAssertGreaterThan(transcription.wordConfidence!.count, 0)
             for word in transcription.wordConfidence! {

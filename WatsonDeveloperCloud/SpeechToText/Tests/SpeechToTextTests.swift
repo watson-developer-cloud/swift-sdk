@@ -122,6 +122,78 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectation()
     }
 
+    // MARK: - Transcribe File, Custom Settings
+
+    func testTranscribeFileCustomWAV() {
+        transcribeFileCustom(
+            "SpeechSample",
+            withExtension: "wav",
+            format: .WAV,
+            expectedTranscription: "several tornadoes touch down as a line of severe " +
+            "thunderstorms swept through Colorado on Sunday ")
+    }
+
+    func testTranscribeFileCustomOpus() {
+        transcribeFileCustom(
+            "SpeechSample",
+            withExtension: "ogg",
+            format: .Opus,
+            expectedTranscription: "several tornadoes touch down as a line of severe " +
+                                   "thunderstorms swept through Colorado on Sunday ")
+    }
+
+    func testTranscribeFileCustomFLAC() {
+        transcribeFileCustom(
+            "SpeechSample",
+            withExtension: "flac",
+            format: .FLAC,
+            expectedTranscription: "several tornadoes touch down as a line of severe " +
+                                   "thunderstorms swept through Colorado on Sunday ")
+    }
+
+    func transcribeFileCustom(
+        filename: String,
+        withExtension: String,
+        format: AudioMediaType,
+        expectedTranscription: String)
+    {
+        let description = "Transcribe an audio file."
+        let expectation = expectationWithDescription(description)
+
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        let failure = { (error: NSError) in
+            XCTFail("An error occurred: \(error)")
+        }
+
+        var settings = SpeechToTextSettings(contentType: format)
+        settings.model = "en-US_BroadbandModel" // TODO: Add this back and fix bug.
+        settings.learningOptOut = true
+        settings.continuous = true
+        settings.inactivityTimeout = -1
+        settings.keywords = ["tornadoes"]
+        settings.keywordsThreshold = 0.75
+        settings.maxAlternatives = 3
+        settings.interimResults = true
+        settings.wordAlternativesThreshold = 0.25
+        settings.wordConfidence = true
+        settings.timestamps = true
+        settings.filterProfanity = false
+
+        service.transcribe(file, settings: settings, failure: failure) { results in
+            self.validateSTTResults(results, settings: settings)
+            if results.last?.final == true {
+                XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)
+                expectation.fulfill()
+            }
+        }
+        waitForExpectation()
+    }
+
     // MARK: - Transcribe Data, Default Settings
 
     func testTranscribeDataDefaultWAV() {
@@ -186,18 +258,36 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectation()
     }
 
-    // MARK: - Transcribe File, Custom Settings
+    // MARK: - Transcribe Data, Custom Settings
 
-    func testTranscribeFileCustomWAV() {
-        transcribeFileCustom(
+    func testTranscribeDataCustomWAV() {
+        transcribeDataCustom(
             "SpeechSample",
             withExtension: "wav",
             format: .WAV,
             expectedTranscription: "several tornadoes touch down as a line of severe " +
-                                   "thunderstorms swept through Colorado on Sunday ")
+            "thunderstorms swept through Colorado on Sunday ")
     }
 
-    func transcribeFileCustom(
+    func testTranscribeDataCustomOpus() {
+        transcribeDataCustom(
+            "SpeechSample",
+            withExtension: "ogg",
+            format: .Opus,
+            expectedTranscription: "several tornadoes touch down as a line of severe " +
+            "thunderstorms swept through Colorado on Sunday ")
+    }
+
+    func testTranscribeDataCustomFLAC() {
+        transcribeDataCustom(
+            "SpeechSample",
+            withExtension: "flac",
+            format: .FLAC,
+            expectedTranscription: "several tornadoes touch down as a line of severe " +
+            "thunderstorms swept through Colorado on Sunday ")
+    }
+
+    func transcribeDataCustom(
         filename: String,
         withExtension: String,
         format: AudioMediaType,
@@ -209,6 +299,11 @@ class SpeechToTextTests: XCTestCase {
         let bundle = NSBundle(forClass: self.dynamicType)
         guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        guard let audio = NSData(contentsOfURL: file) else {
+            XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
 
@@ -230,7 +325,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        service.transcribe(file, settings: settings, failure: failure) { results in
+        service.transcribe(audio, settings: settings, failure: failure) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
                 XCTAssertEqual(results.last?.alternatives.last?.transcript, expectedTranscription)

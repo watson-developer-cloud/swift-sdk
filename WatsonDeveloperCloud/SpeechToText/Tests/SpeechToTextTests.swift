@@ -486,6 +486,4 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
         XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)
     }
-
-    // TODO: Test a foreign language.
 }

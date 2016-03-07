@@ -209,32 +209,41 @@ class SpeechToTextTests: XCTestCase {
     func validateSTTResult(result: SpeechToTextResult, settings: SpeechToTextSettings) {
 
         XCTAssertNotNil(result.final)
-        XCTAssertNotNil(result.alternatives)
-
         let final = result.final!
 
+        XCTAssertNotNil(result.alternatives)
         for alternative in result.alternatives {
             validateSTTTranscription(alternative, final: final, settings: settings)
         }
 
-        if final && settings.keywords?.count > 0 {
+        if settings.keywords?.count > 0 && final {
+            XCTAssertNotNil(settings.keywordsThreshold)
             XCTAssertGreaterThanOrEqual(settings.keywordsThreshold!, 0.0)
             XCTAssertLessThanOrEqual(settings.keywordsThreshold!, 1.0)
             XCTAssertNotNil(result.keywordResults)
             XCTAssertGreaterThan(result.keywordResults!.count, 0)
             for (keyword, keywordResults) in result.keywordResults! {
-                validateSTTKeywordResult(keyword, keywordResults: keywordResults)
+                validateSTTKeywordResults(keyword, keywordResults: keywordResults)
             }
+        } else if settings.keywords?.count > 0 && !final {
+            XCTAssertEqual(result.keywordResults!.count, 0)
+        } else {
+            XCTAssertNil(result.keywordResults)
         }
 
-        if final && settings.wordAlternativesThreshold != nil {
+        if settings.wordAlternativesThreshold != nil && final {
+            XCTAssertNotNil(settings.wordAlternativesThreshold)
             XCTAssertGreaterThanOrEqual(settings.wordAlternativesThreshold!, 0.0)
             XCTAssertLessThanOrEqual(settings.wordAlternativesThreshold!, 1.0)
             XCTAssertNotNil(result.wordAlternatives)
             XCTAssertGreaterThan(result.wordAlternatives!.count, 0)
-            for word in result.wordAlternatives! {
-                validateSTTWordAlternativeResults(word)
+            for wordAlternatives in result.wordAlternatives! {
+                validateSTTWordAlternativeResults(wordAlternatives)
             }
+        } else if settings.wordAlternativesThreshold != nil && !final {
+            XCTAssertEqual(result.wordAlternatives!.count, 0)
+        } else {
+            XCTAssertNil(result.wordAlternatives)
         }
     }
 
@@ -245,6 +254,12 @@ class SpeechToTextTests: XCTestCase {
     {
         XCTAssertNotNil(transcription.transcript)
         XCTAssertGreaterThan(transcription.transcript!.characters.count, 0)
+
+        // TODO: only available for best alterantive, but this checks all...
+        // TODO: write a test that returns multiple alternatives, forcing this to fail...
+        // TODO: perhaps here I can just check that 0.0 <= confidence <= 1.0 if the confidence
+        //          is non-nil. elsewhere, I can check that exactly one alternative has confidence
+        //          set.
 
         if final {
             XCTAssertNotNil(transcription.confidence)
@@ -264,31 +279,60 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNil(transcription.timestamps)
         }
 
-        if final && settings.wordConfidence == true {
+        if settings.wordConfidence == true && final {
             XCTAssertNotNil(transcription.wordConfidence)
+            XCTAssertGreaterThan(transcription.wordConfidence!.count, 0)
             for word in transcription.wordConfidence! {
                 validateSTTWordConfidence(word)
             }
+        } else if settings.wordConfidence == true && !final {
+            XCTAssertEqual(transcription.wordConfidence!.count, 0)
         } else {
-            // TODO: perhaps this is empty instead of nil when wordConfidence == false?
             XCTAssertNil(transcription.wordConfidence)
         }
     }
 
     func validateSTTWordTimestamp(timestamp: SpeechToTextWordTimestamp) {
-        XCTFail("Needs to be implemented.")
+        XCTAssertGreaterThan(timestamp.word.characters.count, 0)
+        XCTAssertGreaterThanOrEqual(timestamp.startTime, 0.0)
+        XCTAssertGreaterThanOrEqual(timestamp.endTime, timestamp.startTime)
     }
 
     func validateSTTWordConfidence(word: SpeechToTextWordConfidence) {
-        XCTFail("Needs to be implemented.")
+        XCTAssertGreaterThan(word.word.characters.count, 0)
+        XCTAssertGreaterThanOrEqual(word.confidence, 0.0)
+        XCTAssertLessThanOrEqual(word.confidence, 1.0)
     }
 
-    func validateSTTKeywordResult(keyword: String, keywordResults: [SpeechToTextKeywordResult]) {
-        XCTFail("Needs to be implemented.")
+    func validateSTTKeywordResults(keyword: String, keywordResults: [SpeechToTextKeywordResult]) {
+        XCTAssertGreaterThan(keyword.characters.count, 0)
+        XCTAssertGreaterThan(keywordResults.count, 0)
+        for keywordResult in keywordResults {
+            validateSTTKeywordResult(keywordResult)
+        }
     }
 
-    func validateSTTWordAlternativeResults(word: SpeechToTextWordAlternativeResults) {
-        XCTFail("Needs to be implemented.")
+    func validateSTTKeywordResult(keywordResult: SpeechToTextKeywordResult) {
+        XCTAssertGreaterThan(keywordResult.normalizedText.characters.count, 0)
+        XCTAssertGreaterThanOrEqual(keywordResult.startTime, 0)
+        XCTAssertGreaterThanOrEqual(keywordResult.endTime, keywordResult.startTime)
+        XCTAssertGreaterThanOrEqual(keywordResult.confidence, 0.0)
+        XCTAssertLessThanOrEqual(keywordResult.confidence, 1.0)
+    }
+
+    func validateSTTWordAlternativeResults(wordAlternatives: SpeechToTextWordAlternativeResults) {
+        XCTAssertGreaterThanOrEqual(wordAlternatives.startTime, 0.0)
+        XCTAssertGreaterThanOrEqual(wordAlternatives.endTime, wordAlternatives.startTime)
+        XCTAssertGreaterThan(wordAlternatives.alternatives.count, 0)
+        for wordAlternative in wordAlternatives.alternatives {
+            validateSTTWordAlternativeResult(wordAlternative)
+        }
+    }
+
+    func validateSTTWordAlternativeResult(wordAlternative: SpeechToTextWordAlternativeResult) {
+        XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
+        XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
+        XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)
     }
 
     // TODO: Test a foreign language.

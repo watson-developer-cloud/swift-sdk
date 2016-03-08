@@ -150,21 +150,22 @@ public class SpeechToText: WatsonService {
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
-     - returns: An `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service
-        when set as the output of an `AVCaptureSession`.
+     - returns: A tuple with two elements. The first element is an `AVCaptureAudioDataOutput` that
+        streams audio to the Speech to Text service when set as the output of an `AVCaptureSession`.
+        The second element is a function that, when executed, stops streaming to Speech to Text.
      */
     public func createTranscriptionOutput(
         settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
-        -> AVCaptureAudioDataOutput?
+        -> (AVCaptureAudioDataOutput?, StopStreaming?)
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
             authStrategy: authStrategy,
             settings: settings,
             failure: failure,
-            success: success) else { return nil }
+            success: success) else { return (nil, nil) }
         audioStreamer.sendStartMessage()
-        return audioStreamer.createTranscriptionOutput()
+        return (audioStreamer.createTranscriptionOutput(), audioStreamer.sendStopMessage)
     }
 }

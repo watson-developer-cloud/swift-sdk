@@ -164,7 +164,7 @@ public class SpeechToText: WatsonService {
             settings: settings,
             failure: failure,
             success: success) else { return nil }
-
+        audioStreamer.sendStartMessage()
         return audioStreamer.createTranscriptionOutput()
     }
 }

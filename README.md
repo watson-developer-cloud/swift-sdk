@@ -276,7 +276,7 @@ The following links provide more information about the Personality Insights serv
 
 * [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
 * [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
-* [IBM Watson Personality Insights - Demo](https://watson-pi-demo.mybluemix.net/)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
 ### Speech to Text
 

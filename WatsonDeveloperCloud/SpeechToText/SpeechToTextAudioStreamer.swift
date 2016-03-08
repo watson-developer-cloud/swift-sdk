@@ -123,15 +123,22 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     }
 
     /**
+     Send a stop message to stop the recognition request.
+     */
+    func sendStopMessage() {
+        if let stop = SpeechToTextStop().toJSONString(failure) {
+            socket?.writeString(stop)
+            socket?.disconnect()
+        }
+    }
+
+    /**
      Stop streaming microphone audio to Speech to Text
      */
     func stopStreaming() {
         captureSession?.stopRunning()
         captureSession = nil
-        if let stop = SpeechToTextStop().toJSONString(failure) {
-            socket?.writeString(stop)
-            socket?.disconnect()
-        }
+        sendStopMessage()
     }
 
     /**

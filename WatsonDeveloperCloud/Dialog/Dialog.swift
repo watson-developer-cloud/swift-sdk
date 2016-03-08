@@ -234,7 +234,7 @@ public class Dialog: WatsonService {
                 headerParams: headerParams)
 
             var fileURL: NSURL?
-            let r = Alamofire.download(request) { (temporaryURL, response) in
+            let req = Alamofire.download(request) { (temporaryURL, response) in
                 let manager = NSFileManager.defaultManager()
                 let directoryURL = manager.URLsForDirectory(.DocumentDirectory,
                     inDomains: .UserDomainMask)[0]
@@ -243,7 +243,7 @@ public class Dialog: WatsonService {
                 return fileURL!
             }
 
-            r.response { _, response, _, error in
+            req.response { _, response, _, error in
                 var data: NSData? = nil
                 if let file = fileURL?.path { data = NSData(contentsOfFile: file) }
                 let includeFileURL = { error in completionHandler(fileURL, error) }

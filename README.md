@@ -364,9 +364,6 @@ The following example demonstrates how to create an `AVCaptureSession` with an `
 let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
 
 let captureSession = AVCaptureSession()
-guard let captureSession = captureSession else {
-	return
-}
 
 let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
 let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)

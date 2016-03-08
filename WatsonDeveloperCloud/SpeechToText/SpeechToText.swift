@@ -158,13 +158,13 @@ public class SpeechToText: WatsonService {
         settings: SpeechToTextSettings,
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
-        -> (AVCaptureAudioDataOutput?, StopStreaming?)
+        -> (AVCaptureAudioDataOutput, StopStreaming)?
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
             authStrategy: authStrategy,
             settings: settings,
             failure: failure,
-            success: success) else { return (nil, nil) }
+            success: success) else { return nil }
         audioStreamer.sendStartMessage()
         return (audioStreamer.createTranscriptionOutput(), audioStreamer.sendStopMessage)
     }

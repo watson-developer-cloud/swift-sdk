@@ -110,6 +110,7 @@ public class SpeechToText: WatsonService {
         socket.writeString(start)
         socket.writeData(audio)
         socket.writeString(stop)
+        socket.disconnect()
     }
 
     /**

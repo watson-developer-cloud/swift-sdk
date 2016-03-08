@@ -80,11 +80,6 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
      */
     func startStreaming() -> Bool {
 
-        settings.contentType = .L16(rate: 44100, channels: 1)
-        guard let start = settings.toJSONString(failure) else {
-            return false
-        }
-
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
             let description = "Unable to create an AVCaptureSession."
@@ -109,11 +104,22 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             return false
         }
 
-        socket?.writeString(start)
+        sendStartMessage()
         captureSession.addInput(microphoneInput)
         captureSession.addOutput(transcriptionOutput)
         captureSession.startRunning()
         return true
+    }
+
+    /**
+     Send a start message to initiate the recognition request.
+     */
+    func sendStartMessage() {
+        settings.contentType = .L16(rate: 44100, channels: 1)
+        guard let start = settings.toJSONString(failure) else {
+            return
+        }
+        socket?.writeString(start)
     }
 
     /**

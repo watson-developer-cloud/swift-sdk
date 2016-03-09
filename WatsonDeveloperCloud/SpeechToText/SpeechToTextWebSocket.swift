@@ -17,9 +17,8 @@
 import Foundation
 
 /** Abstracts the WebSockets connection to the Watson Speech to Text service. */
-class SpeechToTextWebSocket {
+class SpeechToTextWebSocket: WatsonWebSocket {
 
-    private let socket: WatsonWebSocket
     private var results: [SpeechToTextResult]
     private let failure: (NSError -> Void)?
     private let success: [SpeechToTextResult] -> Void
@@ -47,61 +46,25 @@ class SpeechToTextWebSocket {
         guard let url = SpeechToTextConstants.websocketsURL(settings) else {
             // A bug in the Swift compiler requires us to set all properties before returning nil
             // This bug is fixed in Swift 2.2, so we can remove this code when Xcode is updated
-            self.socket = WatsonWebSocket(authStrategy: authStrategy,
-                url: NSURL(string: "http://www.ibm.com")!)
             self.results = []
             self.failure = nil
             self.success = {result in }
+            super.init(authStrategy: authStrategy, url: NSURL(string: "http://www.ibm.com")!)
+            
+            let description = "Unable to construct a WebSockets connection to Speech to Text."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
             return nil
         }
 
-        self.socket = WatsonWebSocket(authStrategy: authStrategy, url: url)
         self.results = [SpeechToTextResult]()
         self.failure = failure
         self.success = success
+        super.init(authStrategy: authStrategy, url: url)
 
-        socket.onText = onText
-        socket.onData = onData
-        socket.onError = onSocketError
-    }
-
-    // MARK: WatsonWebSocket API Functions
-
-    /**
-     Send data to Speech to Text.
-    
-     - parameter data: The data to send.
-    */
-    func writeData(data: NSData) {
-        socket.writeData(data)
-    }
-
-    /**
-     Send text to Speech to Text.
-
-     - parameter str: The text string to send.
-     */
-    func writeString(str: String) {
-        socket.writeString(str)
-    }
-
-    /**
-     Send a ping to Speech to Text.
-
-     - parameter data: The data to send.
-     */
-    func writePing(data: NSData) {
-        socket.writePing(data)
-    }
-
-    /**
-     Disconnect from Speech to Text.
-
-     - parameter forceTimeout: The time to wait for a graceful disconnect before forcing the
-        connection to close.
-     */
-    func disconnect(forceTimeout: NSTimeInterval? = nil) {
-        socket.disconnect(forceTimeout)
+        self.onText = onText
+        self.onData = onData
+        self.onError = onSocketError
     }
 
     // MARK: WatsonWebSocket Delegate Functions

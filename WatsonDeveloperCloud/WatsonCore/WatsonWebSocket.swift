@@ -126,15 +126,25 @@ class WatsonWebSocket {
     }
 
     /**
-     Disconnect from the remote server.
+     Disconnect from the remote server after all previous operations have been completed.
+     */
+    func disconnect() {
+        connectWithToken()
+        if !isClosedByError {
+            operations.addOperationWithBlock {
+                self.socket.disconnect()
+            }
+        }
+    }
+
+    /**
+     Immediately disconnect from the remote server without waiting for outstanding operations to
+     complete.
 
      - parameter forceTimeout: The time to wait for a graceful disconnect before forcing the
         connection to close.
      */
-    func disconnect(forceTimeout: NSTimeInterval? = nil) {
-        if !operations.suspended {
-            operations.waitUntilAllOperationsAreFinished()
-        }
+    func disconnectNow(forceTimeout: NSTimeInterval? = nil) {
         socket.disconnect(forceTimeout: forceTimeout)
     }
 

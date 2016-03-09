@@ -36,5 +36,4 @@ Packages/
 .build/
 
 # Carthage
-Carthage/Checkouts
-Carthage/Build
+Carthage/

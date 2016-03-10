@@ -87,7 +87,6 @@ public class TextToSpeech: WatsonService {
             endpoint: Constants.synthesize,
             authStrategy: authStrategy,
             accept: .OPUS,
-            contentType: .JSON,
             urlParams: urlParams)
         
         // execute request

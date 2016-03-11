@@ -152,7 +152,6 @@
 		7A0F97411C232F14004C01C0 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97421C232F14004C01C0 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A19DC911C596B150082ED38 /* WatsonWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC901C596B150082ED38 /* WatsonWebSocket.swift */; };
 		7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */; };
 		7A19DC971C5980780082ED38 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */; };
 		7A19DC9C1C5983390082ED38 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7A19DC991C5983390082ED38 /* SpeechSample.flac */; };
@@ -350,7 +349,6 @@
 		7A0F97341C232D02004C01C0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7A0F97351C232D02004C01C0 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		7A0F97361C232D02004C01C0 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
-		7A19DC901C596B150082ED38 /* WatsonWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonWebSocket.swift; sourceTree = "<group>"; };
 		7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextConstants.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextTests.swift; path = WatsonDeveloperCloud/SpeechToText/Tests/SpeechToTextTests.swift; sourceTree = "<group>"; };
 		7A19DC991C5983390082ED38 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
@@ -782,7 +780,6 @@
 				7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */,
 				7A0F96801C232B96004C01C0 /* WatsonRequest.swift */,
 				7A0F96811C232B96004C01C0 /* WatsonService.swift */,
-				7A19DC901C596B150082ED38 /* WatsonWebSocket.swift */,
 				7AAD775A1C87994800983861 /* WatsonErrorHelper.swift */,
 				7AAD775C1C87A82500983861 /* WatsonRequestModel.swift */,
 			);
@@ -1084,7 +1081,6 @@
 				7A0F96BF1C232B96004C01C0 /* LanguageTranslationError.swift in Sources */,
 				7ACB0D481C878D1200861CCC /* SpeechToTextKeywordResult.swift in Sources */,
 				7AAD775D1C87A82500983861 /* WatsonRequestModel.swift in Sources */,
-				7A19DC911C596B150082ED38 /* WatsonWebSocket.swift in Sources */,
 				7A0F96BD1C232B96004C01C0 /* LanguageTranslation.swift in Sources */,
 				7A0F96B71C232B96004C01C0 /* DialogFormat.swift in Sources */,
 				7A0F968E1C232B96004C01C0 /* DocumentText.swift in Sources */,

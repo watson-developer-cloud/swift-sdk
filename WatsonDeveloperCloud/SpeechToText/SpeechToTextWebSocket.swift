@@ -66,9 +66,7 @@ class SpeechToTextWebSocket: WebSocket {
     }
 
     override func connect() {
-        operations.addOperationWithBlock {
-            self.connectWithToken()
-        }
+        connectWithToken()
     }
 
     override func disconnect(forceTimeout forceTimeout: NSTimeInterval? = nil) {

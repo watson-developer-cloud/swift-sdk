@@ -108,7 +108,7 @@ class SpeechToTextWebSocket: WebSocket {
 
         if let token = authStrategy.token where retries == 1 {
             headers["X-Watson-Authorization-Token"] = token
-            connect()
+            super.connect()
         } else {
             authStrategy.refreshToken { error in
                 guard let token = self.authStrategy.token where error == nil else {
@@ -118,7 +118,7 @@ class SpeechToTextWebSocket: WebSocket {
                     return
                 }
                 self.headers["X-Watson-Authorization-Token"] = token
-                self.connect()
+                super.connect()
             }
         }
     }

@@ -104,7 +104,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             return false
         }
 
-        sendStartMessage()
+        startRecognitionRequest()
         captureSession.addInput(microphoneInput)
         captureSession.addOutput(transcriptionOutput)
         captureSession.startRunning()
@@ -112,20 +112,20 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     }
 
     /**
-     Send a start message to initiate the recognition request.
+     Initiate the recognition request.
      */
-    func sendStartMessage() {
+    func startRecognitionRequest() {
         settings.contentType = .L16(rate: 44100, channels: 1)
-        guard let start = settings.toJSONString(failure) else {
-            return
+        if let start = settings.toJSONString(failure) {
+            socket?.connect()
+            socket?.writeString(start)
         }
-        socket?.writeString(start)
     }
 
     /**
      Send a stop message to stop the recognition request.
      */
-    func sendStopMessage() {
+    func stopRecognitionRequest() {
         if let stop = SpeechToTextStop().toJSONString(failure) {
             socket?.writeString(stop)
             socket?.disconnect()
@@ -138,7 +138,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     func stopStreaming() {
         captureSession?.stopRunning()
         captureSession = nil
-        sendStopMessage()
+        stopRecognitionRequest()
     }
 
     /**

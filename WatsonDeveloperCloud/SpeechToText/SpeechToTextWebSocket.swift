@@ -25,8 +25,16 @@ class SpeechToTextWebSocket: WebSocket {
     private let success: [SpeechToTextResult] -> Void
     private var results = [SpeechToTextResult]()
     private let operations = NSOperationQueue()
+    private var state = State.Disconnected
     private var retries = 0
     private var maxRetries = 2
+
+    enum State {
+        case Disconnected
+        case Listening
+        case StartedRequest
+        case ReceivingResults
+    }
 
     /**
      Create a `SpeechToTextWebSocket` object to communicate with Speech to Text.
@@ -84,12 +92,18 @@ class SpeechToTextWebSocket: WebSocket {
 
     override func writeData(data: NSData) {
         operations.addOperationWithBlock {
+            if self.state == .Listening {
+                self.state = .StartedRequest
+            }
             super.writeData(data)
         }
     }
 
     override func writeString(str: String) {
         operations.addOperationWithBlock {
+            if self.state == .Listening {
+                self.state = .StartedRequest
+            }
             super.writeString(str)
         }
     }
@@ -130,11 +144,13 @@ class SpeechToTextWebSocket: WebSocket {
 extension SpeechToTextWebSocket: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
+        state = .Listening
         operations.suspended = false
         retries = 0
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        state = .Disconnected
         operations.suspended = true
         if isAuthenticationFailure(error) {
             connect()
@@ -177,6 +193,10 @@ extension SpeechToTextWebSocket: WebSocketDelegate {
      - parameter state: The state of the Speech to Text recognition request.
      */
     private func didReceiveState(state: SpeechToTextState) {
+        if self.state == .ReceivingResults && state.state == "listening" {
+            self.state = .Listening
+            operations.suspended = false
+        }
         return
     }
 
@@ -187,6 +207,10 @@ extension SpeechToTextWebSocket: WebSocketDelegate {
         transcriptions along with state information to update the internal `results` array.
      */
     private func didReceiveResults(wrapper: SpeechToTextResultWrapper) {
+        if state == .StartedRequest {
+            state = .ReceivingResults
+        }
+
         var localIndex = wrapper.resultIndex
         var wrapperIndex = 0
         while localIndex < results.count {
@@ -208,6 +232,7 @@ extension SpeechToTextWebSocket: WebSocketDelegate {
      - parameter error: The error that occurred.
      */
     private func didReceiveError(error: SpeechToTextError) {
+        state = .Listening
         let error = createError(SpeechToTextConstants.domain, description: error.error)
         failure?(error)
     }

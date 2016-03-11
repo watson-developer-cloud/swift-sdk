@@ -71,6 +71,9 @@ class SpeechToTextWebSocket: WebSocket {
 
     override func disconnect(forceTimeout forceTimeout: NSTimeInterval? = nil) {
         operations.addOperationWithBlock {
+            self.operations.suspended = true
+        }
+        operations.addOperationWithBlock {
             super.disconnect(forceTimeout: forceTimeout)
         }
     }

@@ -15,13 +15,18 @@
  **/
 
 import Foundation
+import Starscream
 
 /** Abstracts the WebSockets connection to the Watson Speech to Text service. */
-class SpeechToTextWebSocket: WatsonWebSocket {
+class SpeechToTextWebSocket: WebSocket {
 
-    private var results: [SpeechToTextResult]
+    private let authStrategy: AuthenticationStrategy
     private let failure: (NSError -> Void)?
     private let success: [SpeechToTextResult] -> Void
+    private var results = [SpeechToTextResult]()
+    private let operations = NSOperationQueue()
+    private var retries = 0
+    private var maxRetries = 2
 
     /**
      Create a `SpeechToTextWebSocket` object to communicate with Speech to Text.
@@ -43,78 +48,134 @@ class SpeechToTextWebSocket: WatsonWebSocket {
         failure: (NSError -> Void)? = nil,
         success: [SpeechToTextResult] -> Void)
     {
-        guard let url = SpeechToTextConstants.websocketsURL(settings) else {
-            // A bug in the Swift compiler requires us to set all properties before returning nil
-            // This bug is fixed in Swift 2.2, so we can remove this code when Xcode is updated
-            self.results = []
-            self.failure = nil
-            self.success = {result in }
-            super.init(authStrategy: authStrategy, url: NSURL(string: "http://www.ibm.com")!)
-            
-            let description = "Unable to construct a WebSockets connection to Speech to Text."
-            let error = createError(SpeechToTextConstants.domain, description: description)
-            failure?(error)
-            return nil
-        }
-
-        self.results = [SpeechToTextResult]()
+        self.authStrategy = authStrategy
         self.failure = failure
         self.success = success
-        super.init(authStrategy: authStrategy, url: url)
 
-        self.onText = onText
-        self.onData = onData
-        self.onError = onSocketError
+        operations.maxConcurrentOperationCount = 1
+        operations.suspended = true
+
+        guard let url = SpeechToTextConstants.websocketsURL(settings) else {
+            let description = "Unable to construct a WebSockets connection to Speech to Text."
+            failure?(createError(SpeechToTextConstants.domain, description: description))
+            super.init(url: NSURL(string: "http://www.ibm.com")!)
+            return nil
+        }
+        super.init(url: url)
+        delegate = self
     }
 
-    // MARK: WatsonWebSocket Delegate Functions
+    override func connect() {
+        operations.addOperationWithBlock {
+            self.connectWithToken()
+        }
+    }
 
-    /**
-     Process a text payload from Speech to Text.
+    override func disconnect(forceTimeout forceTimeout: NSTimeInterval? = nil) {
+        operations.addOperationWithBlock {
+            super.disconnect(forceTimeout: forceTimeout)
+        }
+    }
 
-     - parameter text: The text payload from Speech to Text.
-     */
-    private func onText(text: String) {
-        guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
-            let description = "Could not serialize a generic text response to an object."
-            let error = createError(SpeechToTextConstants.domain, description: description)
-            failure?(error)
+    func disconnectNow(forceTimeout forceTimeout: NSTimeInterval? = nil) {
+        super.disconnect(forceTimeout: forceTimeout)
+    }
+
+    override func writeData(data: NSData) {
+        operations.addOperationWithBlock {
+            super.writeData(data)
+        }
+    }
+
+    override func writeString(str: String) {
+        operations.addOperationWithBlock {
+            super.writeString(str)
+        }
+    }
+
+    override func writePing(data: NSData) {
+        operations.addOperationWithBlock {
+            super.writePing(data)
+        }
+    }
+
+    private func connectWithToken() {
+        guard retries < maxRetries else {
+            let description = "Invalid HTTP upgrade. Please verify your credentials."
+            failure?(createError(SpeechToTextConstants.domain, description: description))
             return
         }
 
-        switch response {
-        case .State(let state): onState(state)
-        case .Results(let wrapper): onResults(wrapper)
-        case .Error(let error): onServiceError(error)
+        retries += 1
+
+        if let token = authStrategy.token where retries == 1 {
+            headers["X-Watson-Authorization-Token"] = token
+            connect()
+        } else {
+            authStrategy.refreshToken { error in
+                guard let token = self.authStrategy.token where error == nil else {
+                    let description = "Failed to obtain an authentication token. Check credentials."
+                    let error = createError(SpeechToTextConstants.domain, description: description)
+                    self.failure?(error)
+                    return
+                }
+                self.headers["X-Watson-Authorization-Token"] = token
+                self.connect()
+            }
+        }
+    }
+}
+
+extension SpeechToTextWebSocket: WebSocketDelegate {
+
+    func websocketDidConnect(socket: WebSocket) {
+        operations.suspended = false
+        retries = 0
+    }
+
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        operations.suspended = true
+        if isAuthenticationFailure(error) {
+            connect()
+        } else if let error = error {
+            failure?(error)
         }
     }
 
     /**
      Process a data payload from Speech to Text.
-    
+
      - parameter data: The data payload from Speech to Text.
      */
-    private func onData(data: NSData) {
+    func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         return
     }
 
     /**
-     Handle a socket error generated by the connection to Speech to Text.
+     Process a generic text payload from Speech to Text.
 
-     - parameter error: The error that occurred.
+     - parameter text: The text payload from Speech to Text.
      */
-    private func onSocketError(error: NSError) {
-        failure?(error)
-    }
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
+            let description = "Could not serialize a generic text response to an object."
+            failure?(createError(SpeechToTextConstants.domain, description: description))
+            return
+        }
 
-    // MARK: Helper Functions: Parse Generic Response
+        switch response {
+        case .State(let state): didReceiveState(state)
+        case .Results(let wrapper): didReceiveResults(wrapper)
+        case .Error(let error): didReceiveError(error)
+        }
+    }
 
     /**
      Handle a state message from Speech to Text.
 
      - parameter state: The state of the Speech to Text recognition request.
      */
-    private func onState(state: SpeechToTextState) {
+    private func didReceiveState(state: SpeechToTextState) {
         return
     }
 
@@ -124,18 +185,7 @@ class SpeechToTextWebSocket: WatsonWebSocket {
      - parameter wrapper: A `SpeechToTextResultWrapper` that encapsulates the new or updated
         transcriptions along with state information to update the internal `results` array.
      */
-    private func onResults(wrapper: SpeechToTextResultWrapper) {
-        updateResultsArray(wrapper)
-        success(results)
-    }
-
-    /**
-     Update the `results` array with new or updated transcription results from Speech to Text.
-
-     - parameter wrapper: A `SpeechToTextResultWrapper` that encapsulates the new or updated
-        transcriptions along with state information to update the internal `results` array.
-     */
-    private func updateResultsArray(wrapper: SpeechToTextResultWrapper) {
+    private func didReceiveResults(wrapper: SpeechToTextResultWrapper) {
         var localIndex = wrapper.resultIndex
         var wrapperIndex = 0
         while localIndex < results.count {
@@ -147,6 +197,8 @@ class SpeechToTextWebSocket: WatsonWebSocket {
             results.append(wrapper.results[wrapperIndex])
             wrapperIndex = wrapperIndex + 1
         }
+
+        success(results)
     }
 
     /*
@@ -154,8 +206,36 @@ class SpeechToTextWebSocket: WatsonWebSocket {
 
      - parameter error: The error that occurred.
      */
-    private func onServiceError(error: SpeechToTextError) {
+    private func didReceiveError(error: SpeechToTextError) {
         let error = createError(SpeechToTextConstants.domain, description: error.error)
         failure?(error)
+    }
+
+    /**
+     Determine if a WebSockets error is the result of an authentication failure. This is
+     particularly helpful when we want to intercept authentication failures and retry
+     the connection with an updated token before returning the error to the user.
+
+     - parameter error: A WebSockets error that may have been caused by an authentication failure.
+
+     - returns: `true` if the given error is the result of an authentication failure; false,
+     otherwise.
+     */
+    private func isAuthenticationFailure(error: NSError?) -> Bool {
+        guard let error = error else {
+            return false
+        }
+        guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
+            return false
+        }
+
+        let authDomain = (error.domain == "WebSocket")
+        let authCode = (error.code == 400)
+        let authDescription = (description == "Invalid HTTP upgrade")
+        if authDomain && authCode && authDescription {
+            return true
+        }
+        
+        return false
     }
 }

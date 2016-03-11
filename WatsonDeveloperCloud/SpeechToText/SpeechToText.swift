@@ -107,6 +107,7 @@ public class SpeechToText: WatsonService {
         guard let start = settings.toJSONString(failure),
               let stop = SpeechToTextStop().toJSONString(failure) else { return }
 
+        socket.connect()
         socket.writeString(start)
         socket.writeData(audio)
         socket.writeString(stop)
@@ -166,7 +167,7 @@ public class SpeechToText: WatsonService {
             settings: settings,
             failure: failure,
             success: success) else { return nil }
-        audioStreamer.sendStartMessage()
-        return (audioStreamer.createTranscriptionOutput(), audioStreamer.sendStopMessage)
+        audioStreamer.startRecognitionRequest()
+        return (audioStreamer.createTranscriptionOutput(), audioStreamer.stopRecognitionRequest)
     }
 }

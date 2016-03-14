@@ -70,7 +70,10 @@ class SpeechToTextWebSocket: WebSocket {
             return nil
         }
         super.init(url: url)
-        delegate = self
+        self.onConnect = websocketDidConnect
+        self.onDisconnect = websocketDidDisconnect
+        self.onData = websocketDidReceiveData
+        self.onText = websocketDidReceiveMessage
     }
 
     override func connect() {
@@ -139,17 +142,14 @@ class SpeechToTextWebSocket: WebSocket {
             }
         }
     }
-}
 
-extension SpeechToTextWebSocket: WebSocketDelegate {
-
-    func websocketDidConnect(socket: WebSocket) {
+    func websocketDidConnect() {
         state = .Listening
         operations.suspended = false
         retries = 0
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    func websocketDidDisconnect(error: NSError?) {
         state = .Disconnected
         operations.suspended = true
         if isAuthenticationFailure(error) {
@@ -164,7 +164,7 @@ extension SpeechToTextWebSocket: WebSocketDelegate {
 
      - parameter data: The data payload from Speech to Text.
      */
-    func websocketDidReceiveData(socket: WebSocket, data: NSData) {
+    func websocketDidReceiveData(data: NSData) {
         return
     }
 
@@ -173,7 +173,7 @@ extension SpeechToTextWebSocket: WebSocketDelegate {
 
      - parameter text: The text payload from Speech to Text.
      */
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    func websocketDidReceiveMessage(text: String) {
         guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
             let description = "Could not serialize a generic text response to an object."
             failure?(createError(SpeechToTextConstants.domain, description: description))

@@ -311,6 +311,8 @@ several tornadoes touch down as a line of severe thunderstorms swept through Col
 
 Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio.
 
+(Unfortunately, the microphone is not accessible from within the Simulator. To run and test streaming audio functionality, please execute your application on a physical device.)
+
 ```swift
 let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
 
@@ -356,9 +358,9 @@ several tornadoes touch down as a line of severe thunderstorms swept through Col
 
 #### Custom Capture Sessions
 
-Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users that would like to visualize an audio wave form, save the audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
+Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
 
-The following example demonstrates how to create an `AVCaptureSession` with an `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service.
+The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service.
 
 ```swift
 let stt = SpeechToText(username: "your-username-here", password: "your-password-here")

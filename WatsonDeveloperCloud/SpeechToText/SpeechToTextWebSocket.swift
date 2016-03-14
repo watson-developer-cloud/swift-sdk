@@ -76,10 +76,24 @@ class SpeechToTextWebSocket: WebSocket {
         self.onText = onText
     }
 
+    /**
+     Connect to the Speech to Text service using WebSockets.
+     
+     The `AuthenticationStrategy` provided to the `init` will be used to authenticate
+     with the Speech to Text service. If necessary, the token associated with the
+     `AuthenticationStrategy` will be refreshed.
+     */
     override func connect() {
         connectWithToken()
     }
 
+    /**
+     Disconnect from the Speech to Text service after all queued operations have completed.
+     
+     - parameter forceTimeout: The amount of time to wait (after all queued operations have
+        completed) for the WebSocket connection to gracefully disconnect. If it does not gracefully
+        disconnect within the time allotted, then the connection will be forcibly closed.
+     */
     override func disconnect(forceTimeout forceTimeout: NSTimeInterval? = nil) {
         operations.addOperationWithBlock {
             self.operations.suspended = true
@@ -89,10 +103,23 @@ class SpeechToTextWebSocket: WebSocket {
         }
     }
 
+    /**
+     Disconnect from the Speech to Text service immediately, without waiting for any queued
+     operations to complete.
+
+     - parameter forceTimeout: The amount of time to wait for the WebSocket connection to
+        gracefully disconnect. If it does not gracefully disconnect within the time allotted,
+        then the connection will be forcibly closed.
+     */
     func disconnectNow(forceTimeout forceTimeout: NSTimeInterval? = nil) {
         super.disconnect(forceTimeout: forceTimeout)
     }
 
+    /**
+     Queue an operation to write data to the Speech to Text service.
+
+     - parameter data: The data to send to the Speech to Text service.
+     */
     override func writeData(data: NSData) {
         operations.addOperationWithBlock {
             if self.state == .Listening {
@@ -102,6 +129,11 @@ class SpeechToTextWebSocket: WebSocket {
         }
     }
 
+    /**
+     Queue an operation to write a string to the Speech to Text service.
+
+     - parameter str: The string to send to the Speech to Text service.
+     */
     override func writeString(str: String) {
         operations.addOperationWithBlock {
             if self.state == .Listening {
@@ -111,12 +143,21 @@ class SpeechToTextWebSocket: WebSocket {
         }
     }
 
+    /**
+     Queue an operation to write a ping to the Speech to Text service.
+
+     - parameter data: Data to include in the ping to the Speech to Text service.
+     */
     override func writePing(data: NSData) {
         operations.addOperationWithBlock {
             super.writePing(data)
         }
     }
 
+    /**
+     Connect to the Speech to Text service using this instance's `AuthenticationStrategy`. If
+     necessary, the token is refreshed.
+     */
     private func connectWithToken() {
         guard retries < maxRetries else {
             let description = "Invalid HTTP upgrade. Please verify your credentials."
@@ -143,12 +184,25 @@ class SpeechToTextWebSocket: WebSocket {
         }
     }
 
+    /**
+     When the connection to the Speech to Text service is connected then set the state, start
+     the queue, and reset the number of connection retries.
+     */
     func onConnect() {
         state = .Listening
         operations.suspended = false
         retries = 0
     }
 
+    /**
+     When the connection to the Speech to Text service is disconnected then set the state, pause
+     the queue, and try reconnecting if this was an authentication failure.
+     
+     - parameter error: An error describing why the WebSockets connection was disconnected. If
+        this error represents an authentication failure, then we try refreshing the token and
+        reconnecting. If this error represents a successful disconnection, then it is ignored.
+        Otherwise, the error is returned to the client through this instance's `failure` function.
+     */
     func onDisconnect(error: NSError?) {
         state = .Disconnected
         operations.suspended = true

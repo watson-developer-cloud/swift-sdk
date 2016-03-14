@@ -90,7 +90,9 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
 
         let microphoneInput = createMicrophoneInput()
         guard captureSession.canAddInput(microphoneInput) else {
-            let description = "Unable to add the microphone as a capture session input."
+            let description = "Unable to add the microphone as a capture session input. " +
+                              "(Note that the microphone is only accessible on a physical device" +
+                              "--no microphone is accessible from within the simulator.)"
             let error = createError(SpeechToTextConstants.domain, description: description)
             failure?(error)
             return false

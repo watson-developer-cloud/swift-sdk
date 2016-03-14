@@ -208,6 +208,8 @@ class SpeechToTextWebSocket: WebSocket {
         operations.suspended = true
         if isAuthenticationFailure(error) {
             connect()
+        } else if isDisconnectedByServer(error) {
+            return
         } else if let error = error {
             failure?(error)
         }
@@ -316,6 +318,33 @@ class SpeechToTextWebSocket: WebSocket {
             return true
         }
         
+        return false
+    }
+
+    /**
+     Determine if a WebSockets error is the result of a successful disconnect by the server.
+
+     - parameter error: A WebSockets error that may have been caused by a successful disconnect
+        by the server.
+
+     - returns: `true` if the given error is the result of a successful disconnect by the server;
+        false, otherwise.
+     */
+    private func isDisconnectedByServer(error: NSError?) -> Bool {
+        guard let error = error else {
+            return false
+        }
+        guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
+            return false
+        }
+
+        let authDomain = (error.domain == "WebSocket")
+        let authCode = (error.code == 1000)
+        let authDescription = (description == "connection closed by server")
+        if authDomain && authCode && authDescription {
+            return true
+        }
+
         return false
     }
 }

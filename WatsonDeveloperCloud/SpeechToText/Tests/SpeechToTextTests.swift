@@ -66,37 +66,21 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe File, Default Settings
 
     func testTranscribeFileDefaultWAV() {
-        transcribeFileDefault(
-            "SpeechSample",
-            withExtension: "wav",
-            format: .WAV,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileDefault("SpeechSample", withExtension: "wav", format: .WAV)
     }
 
     func testTranscribeFileDefaultOpus() {
-        transcribeFileDefault(
-            "SpeechSample",
-            withExtension: "ogg",
-            format: .Opus,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileDefault("SpeechSample", withExtension: "ogg", format: .Opus)
     }
 
     func testTranscribeFileDefaultFLAC() {
-        transcribeFileDefault(
-            "SpeechSample",
-            withExtension: "flac",
-            format: .FLAC,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileDefault("SpeechSample", withExtension: "flac", format: .FLAC)
     }
 
     func transcribeFileDefault(
         filename: String,
         withExtension: String,
-        format: AudioMediaType,
-        expectedTranscript: String)
+        format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -127,37 +111,21 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe File, Custom Settings
 
     func testTranscribeFileCustomWAV() {
-        transcribeFileCustom(
-            "SpeechSample",
-            withExtension: "wav",
-            format: .WAV,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileCustom("SpeechSample", withExtension: "wav", format: .WAV)
     }
 
     func testTranscribeFileCustomOpus() {
-        transcribeFileCustom(
-            "SpeechSample",
-            withExtension: "ogg",
-            format: .Opus,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileCustom("SpeechSample", withExtension: "ogg", format: .Opus)
     }
 
     func testTranscribeFileCustomFLAC() {
-        transcribeFileCustom(
-            "SpeechSample",
-            withExtension: "flac",
-            format: .FLAC,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeFileCustom("SpeechSample", withExtension: "flac", format: .FLAC)
     }
 
     func transcribeFileCustom(
         filename: String,
         withExtension: String,
-        format: AudioMediaType,
-        expectedTranscript: String)
+        format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -201,37 +169,21 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe Data, Default Settings
 
     func testTranscribeDataDefaultWAV() {
-        transcribeDataDefault(
-            "SpeechSample",
-            withExtension: "wav",
-            format: .WAV,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataDefault("SpeechSample", withExtension: "wav", format: .WAV)
     }
 
     func testTranscribeDataDefaultOpus() {
-        transcribeDataDefault(
-            "SpeechSample",
-            withExtension: "ogg",
-            format: .Opus,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataDefault("SpeechSample", withExtension: "ogg", format: .Opus)
     }
 
     func testTranscribeDataDefaultFLAC() {
-        transcribeDataDefault(
-            "SpeechSample",
-            withExtension: "flac",
-            format: .FLAC,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataDefault("SpeechSample", withExtension: "flac", format: .FLAC)
     }
 
     func transcribeDataDefault(
         filename: String,
         withExtension: String,
-        format: AudioMediaType,
-        expectedTranscript: String)
+        format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)
@@ -267,37 +219,21 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe Data, Custom Settings
 
     func testTranscribeDataCustomWAV() {
-        transcribeDataCustom(
-            "SpeechSample",
-            withExtension: "wav",
-            format: .WAV,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataCustom("SpeechSample", withExtension: "wav", format: .WAV)
     }
 
     func testTranscribeDataCustomOpus() {
-        transcribeDataCustom(
-            "SpeechSample",
-            withExtension: "ogg",
-            format: .Opus,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataCustom("SpeechSample", withExtension: "ogg", format: .Opus)
     }
 
     func testTranscribeDataCustomFLAC() {
-        transcribeDataCustom(
-            "SpeechSample",
-            withExtension: "flac",
-            format: .FLAC,
-            expectedTranscript: "several tornadoes touch down as a line of severe " +
-                                "thunderstorms swept through Colorado on Sunday ")
+        transcribeDataCustom("SpeechSample", withExtension: "flac", format: .FLAC)
     }
 
     func transcribeDataCustom(
         filename: String,
         withExtension: String,
-        format: AudioMediaType,
-        expectedTranscript: String)
+        format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
         let expectation = expectationWithDescription(description)

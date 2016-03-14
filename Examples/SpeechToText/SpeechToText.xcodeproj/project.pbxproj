@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A1D818A1C8E8D4100E64242 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81831C8E8D4100E64242 /* Alamofire.framework */; };
+		7A1D818B1C8E8D4100E64242 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81841C8E8D4100E64242 /* AlamofireObjectMapper.framework */; };
+		7A1D818C1C8E8D4100E64242 /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81851C8E8D4100E64242 /* HTTPStatusCodes.framework */; };
+		7A1D818D1C8E8D4100E64242 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81861C8E8D4100E64242 /* ObjectMapper.framework */; };
+		7A1D818E1C8E8D4100E64242 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81871C8E8D4100E64242 /* Starscream.framework */; };
+		7A1D818F1C8E8D4100E64242 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81881C8E8D4100E64242 /* WatsonDeveloperCloud.framework */; };
+		7A1D81901C8E8D4100E64242 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1D81891C8E8D4100E64242 /* XCGLogger.framework */; };
+		7A1D81921C8E8EBF00E64242 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81831C8E8D4100E64242 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81931C8E8EBF00E64242 /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81841C8E8D4100E64242 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81941C8E8EBF00E64242 /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81851C8E8D4100E64242 /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81951C8E8EBF00E64242 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81861C8E8D4100E64242 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81961C8E8EBF00E64242 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81871C8E8D4100E64242 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81971C8E8EBF00E64242 /* WatsonDeveloperCloud.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81881C8E8D4100E64242 /* WatsonDeveloperCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1D81981C8E8EBF00E64242 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A1D81891C8E8D4100E64242 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A1FCD931BA9D66D0090E1EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCD921BA9D66D0090E1EB /* AppDelegate.swift */; };
+		7A1FCD951BA9D66D0090E1EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FCD941BA9D66D0090E1EB /* ViewController.swift */; };
+		7A1FCD981BA9D66D0090E1EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD961BA9D66D0090E1EB /* Main.storyboard */; };
+		7A1FCD9A1BA9D66D0090E1EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD991BA9D66D0090E1EB /* Assets.xcassets */; };
+		7A1FCD9D1BA9D66D0090E1EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1FCD9B1BA9D66D0090E1EB /* LaunchScreen.storyboard */; };
+		7AB247A41C973C1D00C089B5 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AB247A31C973C1D00C089B5 /* Credentials.plist */; };
+		7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A1D81911C8E8EB400E64242 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A1D81921C8E8EBF00E64242 /* Alamofire.framework in CopyFiles */,
+				7A1D81931C8E8EBF00E64242 /* AlamofireObjectMapper.framework in CopyFiles */,
+				7A1D81941C8E8EBF00E64242 /* HTTPStatusCodes.framework in CopyFiles */,
+				7A1D81951C8E8EBF00E64242 /* ObjectMapper.framework in CopyFiles */,
+				7A1D81961C8E8EBF00E64242 /* Starscream.framework in CopyFiles */,
+				7A1D81971C8E8EBF00E64242 /* WatsonDeveloperCloud.framework in CopyFiles */,
+				7A1D81981C8E8EBF00E64242 /* XCGLogger.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7A1D81831C8E8D4100E64242 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		7A1D81841C8E8D4100E64242 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		7A1D81851C8E8D4100E64242 /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTTPStatusCodes.framework; path = Carthage/Build/iOS/HTTPStatusCodes.framework; sourceTree = "<group>"; };
+		7A1D81861C8E8D4100E64242 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		7A1D81871C8E8D4100E64242 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		7A1D81881C8E8D4100E64242 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatsonDeveloperCloud.framework; path = Carthage/Build/iOS/WatsonDeveloperCloud.framework; sourceTree = "<group>"; };
+		7A1D81891C8E8D4100E64242 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
+		7A1FCD8F1BA9D66D0090E1EB /* SpeechToText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToText.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1FCD921BA9D66D0090E1EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7A1FCD941BA9D66D0090E1EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7A1FCD971BA9D66D0090E1EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7A1FCD991BA9D66D0090E1EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7A1FCD9C1BA9D66D0090E1EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7A1FCD9E1BA9D66D0090E1EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AB247A31C973C1D00C089B5 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A1FCD8C1BA9D66D0090E1EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1D818A1C8E8D4100E64242 /* Alamofire.framework in Frameworks */,
+				7A1D818B1C8E8D4100E64242 /* AlamofireObjectMapper.framework in Frameworks */,
+				7A1D818D1C8E8D4100E64242 /* ObjectMapper.framework in Frameworks */,
+				7A1D81901C8E8D4100E64242 /* XCGLogger.framework in Frameworks */,
+				7A1D818E1C8E8D4100E64242 /* Starscream.framework in Frameworks */,
+				7A1D818C1C8E8D4100E64242 /* HTTPStatusCodes.framework in Frameworks */,
+				7A1D818F1C8E8D4100E64242 /* WatsonDeveloperCloud.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7A1FCD861BA9D66D0090E1EB = {
+			isa = PBXGroup;
+			children = (
+				E1071B8A1C1C7BAD00E19A28 /* Frameworks */,
+				7A1FCD911BA9D66D0090E1EB /* SpeechToText */,
+				7A1FCD901BA9D66D0090E1EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7A1FCD901BA9D66D0090E1EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A1FCD8F1BA9D66D0090E1EB /* SpeechToText.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7A1FCD911BA9D66D0090E1EB /* SpeechToText */ = {
+			isa = PBXGroup;
+			children = (
+				7A1FCD921BA9D66D0090E1EB /* AppDelegate.swift */,
+				7A1FCD941BA9D66D0090E1EB /* ViewController.swift */,
+				7ADEA60B1BAC9D0C00214132 /* SpeechSample.flac */,
+				7A1FCD961BA9D66D0090E1EB /* Main.storyboard */,
+				7A1FCD991BA9D66D0090E1EB /* Assets.xcassets */,
+				7A1FCD9B1BA9D66D0090E1EB /* LaunchScreen.storyboard */,
+				7A1FCD9E1BA9D66D0090E1EB /* Info.plist */,
+				7AB247A31C973C1D00C089B5 /* Credentials.plist */,
+			);
+			path = SpeechToText;
+			sourceTree = "<group>";
+		};
+		E1071B8A1C1C7BAD00E19A28 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A1D81831C8E8D4100E64242 /* Alamofire.framework */,
+				7A1D81841C8E8D4100E64242 /* AlamofireObjectMapper.framework */,
+				7A1D81851C8E8D4100E64242 /* HTTPStatusCodes.framework */,
+				7A1D81861C8E8D4100E64242 /* ObjectMapper.framework */,
+				7A1D81871C8E8D4100E64242 /* Starscream.framework */,
+				7A1D81881C8E8D4100E64242 /* WatsonDeveloperCloud.framework */,
+				7A1D81891C8E8D4100E64242 /* XCGLogger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7A1FCD8E1BA9D66D0090E1EB /* SpeechToText */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A1FCDB71BA9D66D0090E1EB /* Build configuration list for PBXNativeTarget "SpeechToText" */;
+			buildPhases = (
+				7A1FCD8B1BA9D66D0090E1EB /* Sources */,
+				7A1FCD8C1BA9D66D0090E1EB /* Frameworks */,
+				7A1FCD8D1BA9D66D0090E1EB /* Resources */,
+				7A1D81911C8E8EB400E64242 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpeechToText;
+			productName = SpeechRecognition;
+			productReference = 7A1FCD8F1BA9D66D0090E1EB /* SpeechToText.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7A1FCD871BA9D66D0090E1EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = MIL;
+				TargetAttributes = {
+					7A1FCD8E1BA9D66D0090E1EB = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = CDXLDASP22;
+					};
+				};
+			};
+			buildConfigurationList = 7A1FCD8A1BA9D66D0090E1EB /* Build configuration list for PBXProject "SpeechToText" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7A1FCD861BA9D66D0090E1EB;
+			productRefGroup = 7A1FCD901BA9D66D0090E1EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7A1FCD8E1BA9D66D0090E1EB /* SpeechToText */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7A1FCD8D1BA9D66D0090E1EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCD9D1BA9D66D0090E1EB /* LaunchScreen.storyboard in Resources */,
+				7A1FCD9A1BA9D66D0090E1EB /* Assets.xcassets in Resources */,
+				7AB247A41C973C1D00C089B5 /* Credentials.plist in Resources */,
+				7A1FCD981BA9D66D0090E1EB /* Main.storyboard in Resources */,
+				7ADEA60C1BAC9D0C00214132 /* SpeechSample.flac in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A1FCD8B1BA9D66D0090E1EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A1FCD951BA9D66D0090E1EB /* ViewController.swift in Sources */,
+				7A1FCD931BA9D66D0090E1EB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7A1FCD961BA9D66D0090E1EB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A1FCD971BA9D66D0090E1EB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7A1FCD9B1BA9D66D0090E1EB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A1FCD9C1BA9D66D0090E1EB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7A1FCDB51BA9D66D0090E1EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7A1FCDB61BA9D66D0090E1EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7A1FCDB81BA9D66D0090E1EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SpeechToText/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToText";
+				PRODUCT_NAME = SpeechToText;
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		7A1FCDB91BA9D66D0090E1EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SpeechToText/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToText";
+				PRODUCT_NAME = SpeechToText;
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A1FCD8A1BA9D66D0090E1EB /* Build configuration list for PBXProject "SpeechToText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A1FCDB51BA9D66D0090E1EB /* Debug */,
+				7A1FCDB61BA9D66D0090E1EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A1FCDB71BA9D66D0090E1EB /* Build configuration list for PBXNativeTarget "SpeechToText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A1FCDB81BA9D66D0090E1EB /* Debug */,
+				7A1FCDB91BA9D66D0090E1EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7A1FCD871BA9D66D0090E1EB /* Project object */;
+}

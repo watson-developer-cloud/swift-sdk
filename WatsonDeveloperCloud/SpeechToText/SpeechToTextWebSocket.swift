@@ -70,10 +70,10 @@ class SpeechToTextWebSocket: WebSocket {
             return nil
         }
         super.init(url: url)
-        self.onConnect = onConnect
-        self.onDisconnect = onDisconnect
-        self.onData = onData
-        self.onText = onText
+        self.onConnect = onConnectDelegate
+        self.onDisconnect = onDisconnectDelegate
+        self.onData = onDataDelegate
+        self.onText = onTextDelegate
     }
 
     /**
@@ -188,7 +188,7 @@ class SpeechToTextWebSocket: WebSocket {
      When the connection to the Speech to Text service is connected then set the state, start
      the queue, and reset the number of connection retries.
      */
-    func onConnect() {
+    func onConnectDelegate() {
         state = .Listening
         operations.suspended = false
         retries = 0
@@ -203,7 +203,7 @@ class SpeechToTextWebSocket: WebSocket {
         reconnecting. If this error represents a successful disconnection, then it is ignored.
         Otherwise, the error is returned to the client through this instance's `failure` function.
      */
-    func onDisconnect(error: NSError?) {
+    func onDisconnectDelegate(error: NSError?) {
         state = .Disconnected
         operations.suspended = true
         if isAuthenticationFailure(error) {
@@ -218,7 +218,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter data: The data payload from Speech to Text.
      */
-    func onData(data: NSData) {
+    func onDataDelegate(data: NSData) {
         return
     }
 
@@ -227,7 +227,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter text: The text payload from Speech to Text.
      */
-    func onText(text: String) {
+    func onTextDelegate(text: String) {
         guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
             let description = "Could not serialize a generic text response to an object."
             failure?(createError(SpeechToTextConstants.domain, description: description))
@@ -235,9 +235,9 @@ class SpeechToTextWebSocket: WebSocket {
         }
 
         switch response {
-        case .State(let state): onState(state)
-        case .Results(let wrapper): onResults(wrapper)
-        case .Error(let error): onError(error)
+        case .State(let state): onStateDelegate(state)
+        case .Results(let wrapper): onResultsDelegate(wrapper)
+        case .Error(let error): onErrorDelegate(error)
         }
     }
 
@@ -246,7 +246,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter state: The state of the Speech to Text recognition request.
      */
-    private func onState(state: SpeechToTextState) {
+    private func onStateDelegate(state: SpeechToTextState) {
         if self.state == .ReceivingResults && state.state == "listening" {
             self.state = .Listening
             operations.suspended = false
@@ -260,7 +260,7 @@ class SpeechToTextWebSocket: WebSocket {
      - parameter wrapper: A `SpeechToTextResultWrapper` that encapsulates the new or updated
         transcriptions along with state information to update the internal `results` array.
      */
-    private func onResults(wrapper: SpeechToTextResultWrapper) {
+    private func onResultsDelegate(wrapper: SpeechToTextResultWrapper) {
         if state == .StartedRequest {
             state = .ReceivingResults
         }
@@ -285,7 +285,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter error: The error that occurred.
      */
-    private func onError(error: SpeechToTextError) {
+    private func onErrorDelegate(error: SpeechToTextError) {
         state = .Listening
         let error = createError(SpeechToTextConstants.domain, description: error.error)
         failure?(error)

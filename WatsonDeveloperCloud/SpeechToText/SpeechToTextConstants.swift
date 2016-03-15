@@ -35,6 +35,8 @@ struct SpeechToTextConstants {
         if settings.learningOptOut == true {
             urlParams.append(NSURLQueryItem(name: "x-watson-learning-opt-out", value: "true"))
         }
+        
+        urlComponents.queryItems = urlParams
 
         guard let url = urlComponents.URL else {
             return nil

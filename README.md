@@ -289,29 +289,24 @@ The following example demonstrates how to use the Speech to Text service to tran
 ```swift
 let bundle = NSBundle(forClass: self.dynamicType)
 guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else {
+	print("File could not be loaded.")
 	return
 }
 
 let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
 let settings = SpeechToTextSettings(contentType: .WAV)
-stt.transcribe(fileURL, settings: settings) { results in
+let failure = { (error: NSError) in print(error) }
+
+stt.transcribe(fileURL, settings: settings, failure: failure) { results in
 	if let transcription = results.last?.alternatives.last?.transcript {
    		print(transcription)
    }
 }
 ```
 
-This produces the following console output.
-
-```
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday
-```
-
 #### Streaming Audio
 
-Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio.
-
-(Unfortunately, the microphone is not accessible from within the Simulator. To run and test streaming audio functionality, please execute your application on a physical device.)
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio. (Unfortunately, the microphone is not accessible from within the Simulator. Only applications on a physical device can stream microphone audio to Speech to Text.)
 
 ```swift
 let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
@@ -320,7 +315,8 @@ var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
 settings.continuous = true
 settings.interimResults = true
 
-let stopStreaming = stt.transcribe(settings) { results in
+let failure = { (error: NSError) in print(error) }
+let stopStreaming = stt.transcribe(settings, failure: failure) { results in
 	if let transcription = results.last?.alternatives.last?.transcript {
 		print(transcription)
 	}
@@ -330,32 +326,6 @@ let stopStreaming = stt.transcribe(settings) { results in
 // the Speech to Text service or the `stopStreaming` function is executed.
 ```
 
-This produces the following console output.
-
-```
-Sir 
-several 
-several torn 
-several tornadoes 
-several tornadoes to 
-several tornadoes touched 
-several tornadoes touch down a 
-several tornadoes touch down as a law 
-several tornadoes touch down as a line of 
-several tornadoes touch down as a line of some 
-several tornadoes touch down as a line of severe 
-several tornadoes touch down as a line of severe thunderstorm 
-several tornadoes touch down as a line of severe thunderstorms 
-several tornadoes touch down as a line of severe thunderstorms swept 
-several tornadoes touch down as a line of severe thunderstorms swept through car 
-several tornadoes touch down as a line of severe thunderstorms swept through cholera 
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado a 
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado and so 
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado and Sunday 
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday 
-several tornadoes touch down as a line of severe thunderstorms swept through Colorado on Sunday
-```
-
 #### Custom Capture Sessions
 
 Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
@@ -363,31 +333,52 @@ Advanced users who want to create and manage their own `AVCaptureSession` can co
 The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service.
 
 ```swift
-let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+class ViewController: UIViewController {
+    var captureSession: AVCaptureSession?
 
-let captureSession = AVCaptureSession()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-if captureSession.canAddInput(microphoneInput) {
-	captureSession.addInput(microphoneInput)
+        let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+
+        captureSession = AVCaptureSession()
+        guard let captureSession = captureSession else {
+            return
+        }
+
+        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+        if captureSession.canAddInput(microphoneInput) {
+            captureSession.addInput(microphoneInput)
+        }
+
+        var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+        settings.continuous = true
+        settings.interimResults = true
+
+        let outputOpt = stt.createTranscriptionOutput(settings) { results in
+            if let transcription = results.last?.alternatives.last?.transcript {
+                print(transcription)
+            }
+        }
+
+        guard let output = outputOpt else {
+            return
+        }
+        let transcriptionOutput = output.0
+        let stopStreaming = output.1
+
+        if captureSession.canAddOutput(transcriptionOutput) {
+            captureSession.addOutput(transcriptionOutput)
+        }
+
+        captureSession.startRunning()
+    }
 }
 
-var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
-settings.continuous = true
-settings.interimResults = true
-
-let transcriptionOutput = stt.createTranscriptionOutput(settings) { results in
-	if let transcription = results.last?.alternatives.last?.transcript {
-		print(transcription)
-	}
-}
-
-if captureSession.canAddOutput(transcriptionOutput) {
-	captureSession.addOutput(transcriptionOutput)
-}
-
-captureSession.startRunning()
+// Streaming will continue until either an end-of-speech event is detected by
+// the Speech to Text service, the `stopStreaming` function is executed, or
+// the capture session is stopped.
 ```
 #### Additional Information
 

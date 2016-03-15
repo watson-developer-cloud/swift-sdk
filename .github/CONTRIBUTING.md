@@ -6,19 +6,7 @@ We don't use GitHub as a support forum. For any usage questions that are not spe
 
 # Reporting Issues
 
-If you encounter a bug with the Watson Developer Cloud iOS SDK, please submit a detailed [issue](https://github.com/IBM-MIL/Watson-iOS-SDK/issues) so that it can be addressed quickly. We always appreciate a well-written, thorough bug report.
-
-Please check that the project issues database doesn't already include that problem or suggestion before submitting an issue. If you find a match, add a quick "+1" or "I have this problem too." Doing so helps prioritize the most common problems and requests.
-
-When reporting issues, please include the following:
-
-* The version of Xcode you're using
-* The version of iOS you're targeting
-* The full output of any stack trace or compiler error
-* A code snippet that reproduces the described behavior, if applicable
-* Any other details that would be useful in understanding the problem.
-
-This information will help us review and fix your issue faster.
+See the [issue template](issue_template.md).
 
 # Pull Requests
 
@@ -30,7 +18,8 @@ If you want to contribute to the repository, here's a quick guide:
     * Check for unnecessary whitespace with `git diff --check` before committing.
   3. Ensure all tests pass successfully.
   4. Commit your changes.
-  5. Push to your fork and submit a pull request to the **dev** branch.
+  5. Push to your fork and submit a pull request to the **develop** branch.
+  6. See our [pull request template](pull_request_template.md)
 
 # Developer's Certificate of Origin 1.1
 

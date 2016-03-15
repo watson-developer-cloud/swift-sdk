@@ -18,7 +18,7 @@ If you want to contribute to the repository, here's a quick guide:
     * Check for unnecessary whitespace with `git diff --check` before committing.
   3. Ensure all tests pass successfully.
   4. Commit your changes.
-  5. Push to your fork and submit a pull request to the **develop** branch.
+  5. Push to your fork and submit a pull request to the **master** branch.
   6. See our [pull request template](pull_request_template.md)
 
 # Developer's Certificate of Origin 1.1

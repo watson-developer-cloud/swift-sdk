@@ -37,7 +37,6 @@ struct SpeechToTextConstants {
         }
         
         urlComponents.queryItems = urlParams
-
         guard let url = urlComponents.URL else {
             return nil
         }

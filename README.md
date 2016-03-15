@@ -356,7 +356,8 @@ class ViewController: UIViewController {
         settings.continuous = true
         settings.interimResults = true
 
-        let outputOpt = stt.createTranscriptionOutput(settings) { results in
+        let failure = { (error: NSError) in print(error) }
+        let outputOpt = stt.createTranscriptionOutput(settings, failure: failure) { results in
             if let transcription = results.last?.alternatives.last?.transcript {
                 print(transcription)
             }

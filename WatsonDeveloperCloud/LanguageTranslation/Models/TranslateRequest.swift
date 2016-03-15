@@ -19,7 +19,7 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    // A translation request
+    /// A translation request
     internal struct TranslateRequest: Mappable {
         var modelID: String?
         var source: String?
@@ -36,9 +36,11 @@ extension LanguageTranslation {
             self.source = source
             self.target = target
         }
-        
+
+        /// Used internally to initialize a `TranslateRequest` from JSON.
         init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         mutating func mapping(map: Map) {
             modelID <- map["model_id"]
             source  <- map["source"]

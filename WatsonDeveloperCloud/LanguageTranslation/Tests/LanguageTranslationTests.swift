@@ -80,6 +80,32 @@ class LanguageTranslationTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
     }
     
+    func testTranslateStringWithSourceAndTarget() {
+        let description = "Translate a single string using source and target languages."
+        let expectation = expectationWithDescription(description)
+        
+        service.translate("Hello", source: "en", target: "es") { text, error in
+            XCTAssertNotNil(text)
+            XCTAssertEqual(text!, "Hola")
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
+    func testTranslateStringWithModelID() {
+        let description = "Translate a single string using a model specified by model id."
+        let expectation = expectationWithDescription(description)
+        
+        service.translate("Hello", modelID: "en-es-conversational") { text, error in
+            XCTAssertNotNil(text)
+            XCTAssertEqual(text!, "Hola")
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
+    }
+    
     func testTranslation() {
         let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
         let modelExpectation = expectationWithDescription("Model Translation")
@@ -144,16 +170,30 @@ class LanguageTranslationTests: XCTestCase {
         XCTAssertNotNil(fileURL)
         
         service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!) { model, error in
+
+            guard let model = model else {
+                XCTFail("Expected non-nil model. Please upgrade your Language " +
+                    "Translation Service to the \"Trainable\" plan.")
+                creationExpectation.fulfill()
+                deletionExpectation.fulfill()
+                return
+            }
+
+            guard error == nil else {
+                XCTFail("Expected nil error.")
+                Log.sharedLogger.error("\(error)")
+                creationExpectation.fulfill()
+                deletionExpectation.fulfill()
+                return
+            }
             
-            XCTAssertNotNil(model, "Expected non-nil model to be returned.")
-            Log.sharedLogger.error("\(error)")
             creationExpectation.fulfill()
             
             // Add a small delay so the model is ready for delete.  This is not a normal flow of create and delete immediately
             // so this is only a testing issue
             sleep(3)
             
-            self.service.deleteModel(model!) { error in
+            self.service.deleteModel(model) { error in
                 XCTAssertNil(error)
                 deletionExpectation.fulfill()
             }

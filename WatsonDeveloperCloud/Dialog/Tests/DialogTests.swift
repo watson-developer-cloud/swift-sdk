@@ -108,7 +108,7 @@ class DialogTests: XCTestCase {
         continueConversation()
         
         // get all conversation session history
-        // getAllConversationHistory()
+        getConversationHistory()
         
         // associate profile parameters with this client
         setProfileParameters()
@@ -162,6 +162,9 @@ class DialogTests: XCTestCase {
         
         // invoke updateDialog() with an invalid file
         updateDialogWithInvalidFile()
+
+        // invoke getConversation() for a date range with no history
+        getConversationWithEmptyDateRange()
         
         // invoke converse() with an invalid Dialog ID
         startConversationInvalidDialogID()
@@ -467,7 +470,43 @@ class DialogTests: XCTestCase {
         waitForExpectation()
     }
     
-    // TODO: Get all conversation session history.
+    /// Get conversation history.
+    func getConversationHistory() {
+        let description = "Retrieving conversation history."
+        let expectation = expectationWithDescription(description)
+
+        let sydneyOffset = abs(NSTimeZone(name: "Australia/Sydney")!.secondsFromGMT)
+        let localOffset = abs(NSTimeZone.localTimeZone().secondsFromGMT)
+        let serverOffset = sydneyOffset + localOffset
+        let dateFromOffset: NSTimeInterval = -120.0 + Double(serverOffset)
+        let dateToOffset: NSTimeInterval = 120 + Double(serverOffset)
+        let dateFrom = NSDate(timeIntervalSinceNow: dateFromOffset)
+        let dateTo = NSDate(timeIntervalSinceNow: dateToOffset)
+
+        // get conversation history
+        service.getConversation(dialogID, dateFrom: dateFrom, dateTo: dateTo) {
+            conversations, error in
+
+            XCTAssertNotNil(conversations)
+            XCTAssertNil(error)
+
+            XCTAssertEqual(conversations!.count, 1)
+            XCTAssertEqual(conversations![0].messages!.count, 3)
+            let message0 = conversations![0].messages![0]
+            let message1 = conversations![0].messages![1]
+            let message2 = conversations![0].messages![2]
+
+            XCTAssertEqual(message0.fromClient, "false")
+            XCTAssertEqual(message0.text, self.initialResponse)
+            XCTAssertEqual(message1.fromClient, "true")
+            XCTAssertEqual(message1.text, self.input)
+            XCTAssertEqual(message2.fromClient, "false")
+            XCTAssertEqual(message2.text, self.response)
+
+            expectation.fulfill()
+        }
+        waitForExpectation()
+    }
     
     /// Associate profile parameters with this client.
     func setProfileParameters() {
@@ -857,8 +896,23 @@ class DialogTests: XCTestCase {
             XCTFail("Unable to delete invalid Dialog file.")
         }
     }
-    
-    // TODO: Write negative test for getConversation()
+
+    /// Invoke getConversation() for a date range with no history
+    func getConversationWithEmptyDateRange() {
+        let description = "Try to retrieve conversation history for a date range with no history."
+        let expectation = expectationWithDescription(description)
+
+        // get conversation history
+        service.getConversation(dialogID, dateFrom: NSDate(timeIntervalSinceNow: -120),
+            dateTo: NSDate(timeIntervalSinceNow: -120)) { conversations, error in
+                XCTAssertNotNil(conversations)
+                XCTAssertNil(error)
+
+                XCTAssertEqual(conversations!.count, 0)
+                expectation.fulfill()
+        }
+        waitForExpectation()
+    }
     
     // Invoke converse() with an invalid Dialog ID
     func startConversationInvalidDialogID() {

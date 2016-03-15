@@ -19,17 +19,19 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    // An identified language
+    /// An identified language
     public struct IdentifiedLanguage: Mappable {
         
-        // The language
+        /// The language
         public var language: String?
         
-        // The confidence
+        /// The confidence
         public var confidence: Double?
-        
+
+        /// Used internally to initialize an `IdentifiedLanguage` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             language    <- map["language"]
             confidence  <- map["confidence"]

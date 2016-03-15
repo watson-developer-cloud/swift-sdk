@@ -276,61 +276,118 @@ The following links provide more information about the Personality Insights serv
 
 * [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
 * [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
-* [IBM Watson Personality Insights - Demo](https://personality-insights-demo.mybluemix.net/)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
 ### Speech to Text
 
-The IBM Watson Speech to Text service uses speech recognition capabilities to convert English, Spanish, Brazilian Portuguese, Japanese, and Mandarin speech into text. The services takes audio data encoded in [Opus/OGG](https://www.opus-codec.org/), [FLAC](https://xiph.org/flac/), WAV, and Linear 16-bit PCM uncompressed formats. The service automatically downmixes to one channel during transcoding.
+The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
-Create a SpeechToText service:
+#### Recorded Audio
 
-```swift
-let stt = SpeechToText(authStrategy: strategy)
-```
-
-You can create an AVAudioRecorder with the necessary settings:
+The following example demonstrates how to use the Speech to Text service to transcribe an audio file.
 
 ```swift
+let bundle = NSBundle(forClass: self.dynamicType)
+guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else {
+	print("File could not be loaded.")
+	return
+}
 
-let filePath = NSURL(fileURLWithPath: "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/SpeechToTextRecording.wav")
+let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+let settings = SpeechToTextSettings(contentType: .WAV)
+let failure = { (error: NSError) in print(error) }
 
-let session = AVAudioSession.sharedInstance()
-var settings = [String: AnyObject]()
-
-settings[AVSampleRateKey] = NSNumber(float: 44100.0)
-settings[AVNumberOfChannelsKey] = NSNumber(int: 1)
-do {
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        recorder = try AVAudioRecorder(URL: filePath, settings: settings)
-} catch {
-        // error
+stt.transcribe(fileURL, settings: settings, failure: failure) { results in
+	if let transcription = results.last?.alternatives.last?.transcript {
+   		print(transcription)
+   }
 }
 ```
 
-To make a call for transcription, use:
+#### Streaming Audio
+
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio. (Unfortunately, the microphone is not accessible from within the Simulator. Only applications on a physical device can stream microphone audio to Speech to Text.)
 
 ```swift
-let data = NSData(contentsOfURL: recorder.url)
+let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
 
-if let data = data {
+var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+settings.continuous = true
+settings.interimResults = true
 
-        sttService.transcribe(data , format: .WAV, oncompletion: {
+let failure = { (error: NSError) in print(error) }
+let stopStreaming = stt.transcribe(settings, failure: failure) { results in
+	if let transcription = results.last?.alternatives.last?.transcript {
+		print(transcription)
+	}
+}
 
-            response, error in
+// Streaming will continue until either an end-of-speech event is detected by
+// the Speech to Text service or the `stopStreaming` function is executed.
+```
 
-            // code here
+#### Custom Capture Sessions
+
+Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
+
+The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service.
+
+```swift
+class ViewController: UIViewController {
+    var captureSession: AVCaptureSession?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+
+        captureSession = AVCaptureSession()
+        guard let captureSession = captureSession else {
+            return
         }
+
+        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+        if captureSession.canAddInput(microphoneInput) {
+            captureSession.addInput(microphoneInput)
+        }
+
+        var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+        settings.continuous = true
+        settings.interimResults = true
+
+        let failure = { (error: NSError) in print(error) }
+        let outputOpt = stt.createTranscriptionOutput(settings, failure: failure) { results in
+            if let transcription = results.last?.alternatives.last?.transcript {
+                print(transcription)
+            }
+        }
+
+        guard let output = outputOpt else {
+            return
+        }
+        let transcriptionOutput = output.0
+        let stopStreaming = output.1
+
+        if captureSession.canAddOutput(transcriptionOutput) {
+            captureSession.addOutput(transcriptionOutput)
+        }
+
+        captureSession.startRunning()
+    }
+
+    // Streaming will continue until either an end-of-speech event is detected by
+    // the Speech to Text service, the `stopStreaming` function is executed, or
+    // the capture session is stopped.
 }
 ```
-
-
+#### Additional Information
 
 The following links provide additional information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
 * [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
-
 
 ### Text to Speech
 

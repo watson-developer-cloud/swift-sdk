@@ -18,7 +18,7 @@ import Foundation
 
 extension Dialog {
     
-    // Supported Dialog file formats
+    /// Supported Dialog file formats
     public enum DialogFormat: String {
         
         case OctetStream = "application/octet-stream"

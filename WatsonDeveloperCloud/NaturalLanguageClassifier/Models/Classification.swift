@@ -23,12 +23,16 @@ extension NaturalLanguageClassifier {
         
         /// Unique identifier for this classifier
         public var id: String?
+
         /// Link to the classifer
         public var url: String?
+
         /// The submitted phrase
         public var text: String?
+
         /// The class with the highest confidence
         public var topClass: String?
+
         /// Top confidence level
         public var topConfidence: Double? {
             guard let classes = self.classes else {
@@ -42,11 +46,14 @@ extension NaturalLanguageClassifier {
             }
             return double
         }
+
         ///  An array of up to ten class-confidence pairs sorted in descending order of confidence
         public var classes: [ClassifiedClass]?
-        
+
+        /// Used internally to initialize a `Classification` from JSON.
         public init?(_ map: Map) {}
-        
+
+        /// Used internally to serialize and deserialize JSON.
         public mutating func mapping(map: Map) {
             id        <- map["classifier_id"]
             text      <- map["text"]

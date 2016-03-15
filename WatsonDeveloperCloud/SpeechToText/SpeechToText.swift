@@ -16,271 +16,158 @@
 
 import Foundation
 
-import ObjectMapper
-
 /**
-    The IBM® Speech to Text service provides an Application Programming Interface (API) that
-    enables you to add speech transcription capabilities to your applications.
-*/
+ The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
+ your application. It uses machine intelligence to combine information about grammar and language
+ structure to generate an accurate transcription. Transcriptions are supported for various audio
+ formats and languages.
+ */
 public class SpeechToText: WatsonService {
-    
-    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    private let serviceURL = "/speech-to-text/api"
-    private let serviceURLFull = "https://stream.watsonplatform.net/speech-to-text/api"
-   
-    
-    private let WATSON_AUDIO_SAMPLE_RATE = 16000
-    private let WATSON_AUDIO_FRAME_SIZE = 160
-    
-    
-    // NSOperationQueues
-    var transcriptionQueue: NSOperationQueue!
-    
-    public var delegate : SpeechToTextDelegate?
-    
-    private let opus: OpusHelper = OpusHelper()
-    private let ogg: OggHelper = OggHelper()
-    
-    private let watsonSocket: WatsonSocket
-   
-    var audioState: AudioRecorderState?
-    var audioData: NSData?
-    
-    // If set, contains the callback function after a transcription request.
-    var callback: ((SpeechToTextResponse?, NSError?) -> Void)?
-    
-    
-    struct AudioRecorderState {
-        var dataFormat: AudioStreamBasicDescription
-        var queue: AudioQueueRef
-        var buffers: [AudioQueueBufferRef]
-        var bufferByteSize: UInt32
-        var currentPacket: Int64
-        var isRunning: Bool
-        var opusEncoder: OpusHelper
-        var oggEncoder: OggHelper
-        var watsonSocket: WatsonSocket
-    }
-    
-    let NUM_BUFFERS = 3
-    let BUFFER_SIZE: UInt32 = 4096
 
+    private let authStrategy: AuthenticationStrategy
+
+    /** A function that, when executed, stops streaming audio to Speech to Text. */
+    public typealias StopStreaming = Void -> Void
+
+    /**
+     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
     
-    
-    // The shared WatsonGateway singleton.
-    let gateway = WatsonGateway.sharedInstance
-    
-    // The authentication strategy to obtain authorization tokens.
-    let authStrategy: AuthenticationStrategy
-    
+     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
+        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
+        is used internally to obtain tokens, refresh expired tokens, and maintain information
+        about authentication state.
+     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     */
     public required init(authStrategy: AuthenticationStrategy) {
-        watsonSocket = WatsonSocket(authStrategy: authStrategy)
-        opus.createEncoder(Int32(WATSON_AUDIO_SAMPLE_RATE))
         self.authStrategy = authStrategy
-        watsonSocket.delegate = self
     }
+
+    /**
+     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
     
+     - parameter username: The username associated with your `SpeechToText` service.
+     - parameter password: The password associated with your `SpeechToText` service.
+     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     */
     public convenience required init(username: String, password: String) {
         let authStrategy = BasicAuthenticationStrategy(
-            tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token",
-            serviceURL: "https://stream.watsonplatform.net/speech-to-text/api",
+            tokenURL: SpeechToTextConstants.tokenURL,
+            serviceURL: SpeechToTextConstants.serviceURL,
             username: username,
             password: password)
         self.init(authStrategy: authStrategy)
     }
-    
-    public func startListening()
-    {
-        
-        //var queue = AudioQueueRef()
-//        let buffers:[AudioQueueBufferRef] = [AudioQueueBufferRef(),
-//            AudioQueueBufferRef(),
-//            AudioQueueBufferRef()]
-        
-        // connectWebsocket()
-        
-        let format = AudioStreamBasicDescription(
-            mSampleRate: 16000,
-            mFormatID: kAudioFormatLinearPCM,
-            mFormatFlags: kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked,
-            mBytesPerPacket: 2,
-            mFramesPerPacket: 1,
-            mBytesPerFrame: 2,
-            mChannelsPerFrame: 1,
-            mBitsPerChannel: 8 * 2,
-            mReserved: 0)
-        
-        audioState = AudioRecorderState(
-            dataFormat: format,
-            queue: AudioQueueRef(),
-            buffers: [AudioQueueBufferRef(), AudioQueueBufferRef(), AudioQueueBufferRef()],
-            bufferByteSize: BUFFER_SIZE,
-            currentPacket: 0,
-            isRunning: true,
-            opusEncoder: opus,
-            oggEncoder: ogg,
-            watsonSocket: watsonSocket
-        )
-        
-        
-        if var audioState = audioState {
-        
-            AudioQueueNewInput(&audioState.dataFormat, recordCallback, &audioState,
-                nil, kCFRunLoopCommonModes, 0, &audioState.queue)
 
-            for index in 1...NUM_BUFFERS {
-                AudioQueueAllocateBuffer(audioState.queue, BUFFER_SIZE, &audioState.buffers[index-1])
-            
-                AudioQueueEnqueueBuffer(audioState.queue, audioState.buffers[index-1], 0, nil)
-
-            }
-        
-            AudioQueueStart(audioState.queue, nil)
-        
-        } else {
-            Log.sharedLogger.error("No audio state object was created.")
-        }
-        
-    }
-    
-    public func stopListening()
-    {
-        if var audioState = audioState {
-            
-            AudioQueueStop(audioState.queue, true)
-        
-            audioState.isRunning = false
-        
-            AudioQueueDispose(audioState.queue, true)
-            
-        } else {
-            Log.sharedLogger.error("Audio state not created")
-        }
-    }
-    
-    /// Callback function when the audio buffer is full
-    var recordCallback : AudioQueueInputCallback =
-    {
-        inUserData, inAQ, inBuffer, inStartTime, inNumberPacketDescriptions, inPacketDescs in
-        
-        let watsonFrameSize = 160
-        
-        let pUserData = UnsafeMutablePointer<AudioRecorderState>(inUserData)
-        let data: AudioRecorderState = pUserData.memory
-        
-        let buffer = inBuffer.memory
-        let length: Int = Int(buffer.mAudioDataByteSize)
-        
-        if length == 0 {
-            return 
-        }
-        
-        
-        let chunkSize: Int = watsonFrameSize * 2
-        var offset : Int = 0
-        
-        var ptr = UnsafeMutablePointer<UInt8>(buffer.mAudioData)
-        
-        let newData = NSData(bytesNoCopy: ptr, length: Int(buffer.mAudioDataByteSize), freeWhenDone: false)
-        
-        data.watsonSocket.send(newData)
-        // Log.sharedLogger.info("Added the audio to the queue")
-        //let o1 = AudioUploadOperation(data: newData, socket: data.socket!)
-        //data.audioUploadQueue.addOperation(o1)
-        
-        
-        // Tell the buffer it's free to accept more data
-        AudioQueueEnqueueBuffer(data.queue, inBuffer, 0, nil)
-        
-        
-    }
-    
     /**
-     This function takes audio data a returns a callback with the string transcription
-     
-     - parameter audio:    <#audio description#>
-     - parameter callback: A function that will return the string
-     */
-    public func transcribe(audioData: NSData,
-        format: MediaType = .FLAC,
-        completionHandler: (SpeechToTextResponse?, NSError?) -> Void) {
-            
-            
-            watsonSocket.format = format
-            watsonSocket.send(audioData)
-            
-            self.callback = completionHandler
-        
-//            connectWebsocket()
-//        
-//           
-//            self.audioData = audioData
-//            self.format = format
-//            
-//            self.callback = completionHandler
-            
-        
-    }
+     Transcribe an audio file.
     
-    /**
-     Description
-     
-     - parameter data: PCM data
-     
-     - returns: Opus encoded audio
+     - parameter file: The audio file to transcribe.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
      */
-    public func encodeOpus(data: NSData) -> NSData
+    public func transcribe(
+        file: NSURL,
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
     {
-        
-        let length: Int = data.length
-        let chunkSize: Int = WATSON_AUDIO_FRAME_SIZE * 2
-        var offset : Int = 0
-        
-        var ptr = UnsafeMutablePointer<UInt8>(data.bytes)
-        
-        repeat {
-            let thisChunkSize = length - offset > chunkSize ? chunkSize : length - offset
-            
-            ptr += offset
-            let chunk = NSData(bytesNoCopy: ptr, length: thisChunkSize, freeWhenDone: false)
-            
-            let compressed : NSData = opus.encode(chunk, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
-            
-            if compressed.length != 0 {
-                let newData = ogg.writePacket(compressed, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
-                
-                if newData != nil {
-                    // send to websocket
-                    Log.sharedLogger.info("Writing a chunk with \(newData.length) bytes")
-                }
-            }
-            
-            offset += thisChunkSize
-            
-        } while offset < length
-        
-        let data = opus.encode(data, frameSize: Int32(WATSON_AUDIO_FRAME_SIZE))
-        return data
+        guard let audio = NSData(contentsOfURL: file) else {
+            let description = "Could not load audio data from \(file)."
+            let error = createError(SpeechToTextConstants.domain, description: description)
+            failure?(error)
+            return
+        }
+
+        transcribe(audio, settings: settings, failure: failure, success: success)
     }
 
-}
+    /**
+     Transcribe audio data.
 
-extension SpeechToText: WatsonSocketDelegate {
-    
-    func onConnected() {}
-    func onListening() {}
-    func onDisconnected() {}
-    
-    func onMessageReceived(result: SpeechToTextResponse) {
-    
-        callback?(result, nil)
-    
+     - parameter audio: The audio data to transcribe.
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     */
+    public func transcribe(
+        audio: NSData,
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+    {
+        guard let socket = SpeechToTextWebSocket(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else { return }
+
+        guard let start = settings.toJSONString(failure),
+              let stop = SpeechToTextStop().toJSONString(failure) else { return }
+
+        socket.connect()
+        socket.writeString(start)
+        socket.writeData(audio)
+        socket.writeString(stop)
+        socket.disconnect()
     }
 
-    
+    /**
+     Stream audio from the microphone to the Speech to Text service. The microphone will stop
+     recording after an end-of-speech event is detected by the Speech to Text service or the
+     returned function is executed.
+
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     - returns: A function that, when executed, stops streaming audio to Speech to Text.
+     */
+    public func transcribe(
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+        -> StopStreaming
+    {
+        guard let audioStreamer = SpeechToTextAudioStreamer(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else { return { } }
+
+        guard audioStreamer.startStreaming() else {
+            audioStreamer.stopStreaming()
+            return { }
+        }
+
+        return audioStreamer.stopStreaming
+    }
+
+    /**
+     Create an `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service.
+
+     - parameter settings: The configuration for this transcription request.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with all transcription results whenever
+        a final or interim transcription is received.
+     - returns: A tuple with two elements. The first element is an `AVCaptureAudioDataOutput` that
+        streams audio to the Speech to Text service when set as the output of an `AVCaptureSession`.
+        The second element is a function that, when executed, stops streaming to Speech to Text.
+     */
+    public func createTranscriptionOutput(
+        settings: SpeechToTextSettings,
+        failure: (NSError -> Void)? = nil,
+        success: [SpeechToTextResult] -> Void)
+        -> (AVCaptureAudioDataOutput, StopStreaming)?
+    {
+        guard let audioStreamer = SpeechToTextAudioStreamer(
+            authStrategy: authStrategy,
+            settings: settings,
+            failure: failure,
+            success: success) else { return nil }
+        audioStreamer.startRecognitionRequest()
+        return (audioStreamer.createTranscriptionOutput(), audioStreamer.stopRecognitionRequest)
+    }
 }
-
-
-
-
-

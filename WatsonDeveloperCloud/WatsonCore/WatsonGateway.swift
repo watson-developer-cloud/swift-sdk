@@ -78,7 +78,7 @@ internal class WatsonGateway {
                 completionHandler: completionHandler)
         }
         
-        var authStrategy = request.authStrategy
+        let authStrategy = request.authStrategy
             
         guard !authStrategy.isRefreshing else {
             cachedRequests.append(cachedRequest)

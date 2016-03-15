@@ -375,11 +375,11 @@ class ViewController: UIViewController {
 
         captureSession.startRunning()
     }
-}
 
-// Streaming will continue until either an end-of-speech event is detected by
-// the Speech to Text service, the `stopStreaming` function is executed, or
-// the capture session is stopped.
+    // Streaming will continue until either an end-of-speech event is detected by
+    // the Speech to Text service, the `stopStreaming` function is executed, or
+    // the capture session is stopped.
+}
 ```
 #### Additional Information
 

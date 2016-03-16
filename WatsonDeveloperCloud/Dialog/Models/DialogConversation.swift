@@ -23,19 +23,19 @@ extension Dialog {
     public struct Conversation: Mappable {
 
         /// The nodes that were executed by the conversation
-        var hitNodes: [HitNode]?
+        public var hitNodes: [HitNode]?
         
         /// The conversation identifier
-        var conversationID: Int?
+        public var conversationID: Int?
         
         /// The client identifier
-        var clientID: Int?
+        public var clientID: Int?
         
         /// The messages exchanged during the conversation
-        var messages: [Message]?
+        public var messages: [Message]?
         
         /// The profile variables associated with the conversation
-        var profile: [String: String]?
+        public var profile: [String: String]?
 
         /// Used internally to initialize a `Conversation` from JSON.
         public init?(_ map: Map) {}
@@ -54,16 +54,16 @@ extension Dialog {
     public struct HitNode: Mappable {
         
         /// The details of the node
-        var details: String?
+        public var details: String?
         
         /// The label of the node
-        var label: String?
+        public var label: String?
         
         /// The type of the node
-        var type: String?
+        public var type: String?
         
         /// The node identifier
-        var nodeID: Int?
+        public var nodeID: Int?
 
         /// Used internally to initialize a `HitNode` from JSON.
         public init?(_ map: Map) {}
@@ -81,13 +81,13 @@ extension Dialog {
     public struct Message: Mappable {
         
         /// The text of the message
-        var text: String?
+        public var text: String?
         
         /// The date and time of the message
-        var dateTime: NSDate?
+        public var dateTime: NSDate?
         
         /// The client that prompted the message to be sent
-        var fromClient: String?
+        public var fromClient: String?
 
         /// Used internally to initialize a `Message` from JSON.
         public init?(_ map: Map) {}

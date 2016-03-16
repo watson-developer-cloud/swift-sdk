@@ -28,7 +28,7 @@ extension Dialog {
         /// The type of the node
         public var node: String?
         
-        init(content: String? = nil, node: String? = nil) {
+        public init(content: String? = nil, node: String? = nil) {
             self.content = content
             self.node = node
         }

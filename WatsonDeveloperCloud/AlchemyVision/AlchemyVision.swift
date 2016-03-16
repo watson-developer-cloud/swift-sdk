@@ -135,15 +135,12 @@ public class AlchemyVision: AlchemyService {
             }
             
             NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
-                var error:NSError?
+
                 let fileManager = NSFileManager.defaultManager()
                 do {
                     try fileManager.removeItemAtPath(urlObject.0!.path)
                 }
-                catch let catchError as NSError {
-                    error = catchError
-                    Log.sharedLogger.error("\(error)")
-                }
+                catch { }
                 
                 var imageKeywords = ImageKeyWords()
                 if case let data as Dictionary<String,AnyObject> = response.data {
@@ -208,18 +205,14 @@ public class AlchemyVision: AlchemyService {
             }
             
             NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
-                var error:NSError?
+
                 let fileManager = NSFileManager.defaultManager()
                 
                 // delete temp file from documents directory
                 do {
-                    Log.sharedLogger.error(urlObject.0!.path)
                     try fileManager.removeItemAtPath(urlObject.0!.path)
                 }
-                catch let catchError as NSError {
-                    error = catchError
-                    Log.sharedLogger.error("\(error)")
-                }
+                catch { }
                 
                 if case let data as Dictionary<String,AnyObject> = response.data {
                     let imageFaceTags = Mapper<ImageFaceTags>().map(data)

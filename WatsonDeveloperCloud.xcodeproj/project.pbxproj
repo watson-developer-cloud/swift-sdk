@@ -110,7 +110,6 @@
 		7A0F97041C232B96004C01C0 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966E1C232B96004C01C0 /* NSError.swift */; };
 		7A0F970A1C232B96004C01C0 /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96761C232B96004C01C0 /* CoreResponse.swift */; };
 		7A0F970B1C232B96004C01C0 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96771C232B96004C01C0 /* HTTPMethods.swift */; };
-		7A0F970C1C232B96004C01C0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96781C232B96004C01C0 /* Log.swift */; };
 		7A0F970D1C232B96004C01C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96791C232B96004C01C0 /* MediaType.swift */; };
 		7A0F970E1C232B96004C01C0 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */; };
 		7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967B1C232B96004C01C0 /* Transformation.swift */; };
@@ -145,13 +144,11 @@
 		7A0F97391C232D02004C01C0 /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; };
 		7A0F973A1C232D02004C01C0 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; };
 		7A0F973B1C232D02004C01C0 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; };
-		7A0F973C1C232D02004C01C0 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; };
 		7A0F973E1C232F14004C01C0 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F973F1C232F14004C01C0 /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97401C232F14004C01C0 /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97411C232F14004C01C0 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97421C232F14004C01C0 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */; };
 		7A19DC971C5980780082ED38 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */; };
 		7A19DC9C1C5983390082ED38 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7A19DC991C5983390082ED38 /* SpeechSample.flac */; };
@@ -200,7 +197,6 @@
 				7A0F97401C232F14004C01C0 /* HTTPStatusCodes.framework in CopyFiles */,
 				7A0F97411C232F14004C01C0 /* ObjectMapper.framework in CopyFiles */,
 				7A0F97421C232F14004C01C0 /* Starscream.framework in CopyFiles */,
-				7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +329,6 @@
 		7A0F966E1C232B96004C01C0 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		7A0F96761C232B96004C01C0 /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
 		7A0F96771C232B96004C01C0 /* HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
-		7A0F96781C232B96004C01C0 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		7A0F96791C232B96004C01C0 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		7A0F967B1C232B96004C01C0 /* Transformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
@@ -348,7 +343,6 @@
 		7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTTPStatusCodes.framework; path = Carthage/Build/iOS/HTTPStatusCodes.framework; sourceTree = "<group>"; };
 		7A0F97341C232D02004C01C0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7A0F97351C232D02004C01C0 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		7A0F97361C232D02004C01C0 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextConstants.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextTests.swift; path = WatsonDeveloperCloud/SpeechToText/Tests/SpeechToTextTests.swift; sourceTree = "<group>"; };
 		7A19DC991C5983390082ED38 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
@@ -381,7 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A0F973A1C232D02004C01C0 /* ObjectMapper.framework in Frameworks */,
-				7A0F973C1C232D02004C01C0 /* XCGLogger.framework in Frameworks */,
 				7A0F973B1C232D02004C01C0 /* Starscream.framework in Frameworks */,
 				7A0F96E91C232B96004C01C0 /* libopus.a in Frameworks */,
 				7A0F97371C232D02004C01C0 /* Alamofire.framework in Frameworks */,
@@ -812,7 +805,6 @@
 			children = (
 				7A0F96761C232B96004C01C0 /* CoreResponse.swift */,
 				7A0F96771C232B96004C01C0 /* HTTPMethods.swift */,
-				7A0F96781C232B96004C01C0 /* Log.swift */,
 				7A0F96791C232B96004C01C0 /* MediaType.swift */,
 				7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */,
 				7A0F967B1C232B96004C01C0 /* Transformation.swift */,
@@ -829,7 +821,6 @@
 				7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */,
 				7A0F97341C232D02004C01C0 /* ObjectMapper.framework */,
 				7A0F97351C232D02004C01C0 /* Starscream.framework */,
-				7A0F97361C232D02004C01C0 /* XCGLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1100,7 +1091,6 @@
 				7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */,
 				7A0F96CB1C232B96004C01C0 /* NaturalLanguageClassifier.swift in Sources */,
 				7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */,
-				7A0F970C1C232B96004C01C0 /* Log.swift in Sources */,
 				7ACB0D4C1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift in Sources */,
 				7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */,
 				7A0F96D71C232B96004C01C0 /* PersonalityInsightsError.swift in Sources */,

@@ -38,9 +38,6 @@ public struct ImageFace : Mappable {
     public init?(_ map: Map) {}
     
     public mutating func mapping(map: Map) {
-        
-        Log.sharedLogger.error("ERRRRRR \(map[""])")
-        
         height      <-  (map["height"], Transformation.stringToInt)
         width       <-  (map["width"], Transformation.stringToInt)
         positionX   <-  (map["positionX"], Transformation.anyObjectToInt)

@@ -55,19 +55,16 @@ public class NetworkUtils {
      - returns: The manipulated string for properly invoking the web call
      */
     private static func buildHeader(contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, apiKey: String? = nil)-> [String: String]  {
-        Log.sharedLogger.debug("Entered buildHeader")
         
         var header = Dictionary<String, String>()
         
         if let localKey = apiKey { header.updateValue(localKey as String, forKey: _httpAuthorizationHeader )}
         
         guard (header.updateValue(contentType.rawValue, forKey: _httpContentTypeHeader) == nil) else {
-            Log.sharedLogger.error("Error adding Content Type in header")
             return [:]
         }
         
         guard (header.updateValue(accept.rawValue, forKey: _httpAcceptHeader) == nil) else {
-            Log.sharedLogger.error("Error adding Accept info in header")
             return [:]
         }
         
@@ -84,12 +81,9 @@ public class NetworkUtils {
      */
     public static func requestAuthToken(tokenURL: String, serviceURL: String, apiKey: String? = nil, completionHandler: (token: String?, error: NSError?) -> Void) {
         
-        Log.sharedLogger.debug("Entered requestAuthToken")
-        
         let parameters = ["url": serviceURL]
         Alamofire.request(.GET, tokenURL, parameters: parameters, headers: buildHeader(.URLEncoded, accept: .URLEncoded, apiKey: apiKey))
             .responseString {response in
-                Log.sharedLogger.debug("Entered requestAuthToken.responseString")
                 completionHandler(token: response.result.value, error: response.result.error)
             }
     }
@@ -105,20 +99,15 @@ public class NetworkUtils {
      */
     public static func performBasicAuthRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject]? = [:], contentType: ContentType = ContentType.JSON, accept: ContentType = ContentType.JSON, encoding: ParameterEncoding = ParameterEncoding.URL, apiKey:String? = nil, completionHandler: (returnValue: CoreResponse) -> Void) {
         
-        Log.sharedLogger.debug("Entered performBasicAuthRequest")
-        
         Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: buildHeader(contentType, accept:accept, apiKey: apiKey) )
             // This will validate for return status codes between the specified ranges and fail if it falls outside of them
             .responseJSON {response in
-                Log.sharedLogger.debug("Entered performBasicAuthRequest.responseJSON")
                 if(contentType == ContentType.JSON) { completionHandler( returnValue: CoreResponse.getCoreResponse(response)) }
             }
             .responseString {response in
-                Log.sharedLogger.debug("Entered performBasicAuthRequest.responseString")
                 if(contentType == ContentType.Text) { completionHandler( returnValue: CoreResponse.getCoreResponse(response)) }
             }
             .responseData { response in
-                Log.sharedLogger.debug("Entered performBasicAuthRequest.responseData")
               if(contentType == ContentType.AUDIO_OPUS ||
                  contentType == ContentType.AUDIO_WAV ||
                  contentType == ContentType.AUDIO_FLAC) {
@@ -137,11 +126,8 @@ public class NetworkUtils {
      */
     public static func performRequest(url: String, method: HTTPMethod = HTTPMethod.GET, parameters: [String: AnyObject] = [:], completionHandler: (returnValue: CoreResponse) -> Void) {
         
-        Log.sharedLogger.debug("Entered performRequest")
-        
         Alamofire.request(method, url, parameters: parameters)
             .responseJSON { response in
-                Log.sharedLogger.debug("Entered performRequest.responseJSON")
                 completionHandler( returnValue: CoreResponse.getCoreResponse(response))
         }
     }
@@ -158,8 +144,6 @@ public class NetworkUtils {
      */
     public static func performBasicAuthFileUploadMultiPart(url: String, fileURLs: [String:NSURL], parameters: [String: AnyObject]=[:], apiKey: String? = nil, contentType: ContentType = ContentType.URLEncoded, accept: ContentType = ContentType.URLEncoded, completionHandler: (returnValue: CoreResponse) -> Void) {
         
-        Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart")
-        
         Alamofire.upload(Alamofire.Method.POST, url, headers: buildHeader(contentType, accept: accept, apiKey: apiKey),
             multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
@@ -170,15 +154,12 @@ public class NetworkUtils {
                 }
             },
             encodingCompletion: { encodingResult in
-                Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart.encodingCompletion")
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
-                        Log.sharedLogger.debug("Entered performBasicAuthFileUploadMultiPart.encodingCompletion.responseJSON")
                         completionHandler(returnValue: CoreResponse.getCoreResponse(response))
                     }
-                case .Failure(let encodingError):
-                    Log.sharedLogger.error("\(encodingError)")
+                case .Failure: break
                 }
             }
         )
@@ -202,7 +183,6 @@ public class NetworkUtils {
         
         Alamofire.upload(Alamofire.Method.POST, appendedUrl, headers: buildHeader(ContentType.URLEncoded, accept:ContentType.URLEncoded, apiKey:apiKey), file: fileURL)
             .responseJSON { response in
-                Log.sharedLogger.debug("Entered performBasicAuthFileUpload.responseJSON")
                 completionHandler( returnValue: CoreResponse.getCoreResponse(response))
         }
     }
@@ -243,9 +223,6 @@ public class NetworkUtils {
         for item in values {
             if case let value as String = item.1 {
                 newUrl = addOrUpdateQueryStringParameter(newUrl, key: item.0, value: value)
-            }
-            else {
-                Log.sharedLogger.error("error in adding value to parameter \(item) to URL string")
             }
         }
         return newUrl

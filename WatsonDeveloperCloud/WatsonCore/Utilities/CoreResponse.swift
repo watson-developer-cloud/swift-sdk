@@ -125,8 +125,6 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
         }
       } catch {
         
-        Log.sharedLogger.info("Non-JSON payload received")
-        
         // When binary data is received
         coreResponseDictionary.updateValue(data, forKey: "data")
       }
@@ -141,7 +139,6 @@ public struct CoreResponse: Mappable, CustomStringConvertible {
       coreResponseDictionary.updateValue(NSHTTPURLResponse.localizedStringForStatusCode(response.statusCode), forKey: "responseInfo")
     }
     let coreResponse = Mapper<CoreResponse>().map(coreResponseDictionary)!
-    Log.sharedLogger.debug("\(coreResponse)")
     return coreResponse
   }
 

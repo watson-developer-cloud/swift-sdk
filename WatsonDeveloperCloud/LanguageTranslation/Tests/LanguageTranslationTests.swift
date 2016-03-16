@@ -181,7 +181,6 @@ class LanguageTranslationTests: XCTestCase {
 
             guard error == nil else {
                 XCTFail("Expected nil error.")
-                Log.sharedLogger.error("\(error)")
                 creationExpectation.fulfill()
                 deletionExpectation.fulfill()
                 return

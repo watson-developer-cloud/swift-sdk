@@ -144,13 +144,11 @@
 		7A0F97391C232D02004C01C0 /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; };
 		7A0F973A1C232D02004C01C0 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; };
 		7A0F973B1C232D02004C01C0 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; };
-		7A0F973C1C232D02004C01C0 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; };
 		7A0F973E1C232F14004C01C0 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F973F1C232F14004C01C0 /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97401C232F14004C01C0 /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97411C232F14004C01C0 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A0F97421C232F14004C01C0 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97361C232D02004C01C0 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */; };
 		7A19DC971C5980780082ED38 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */; };
 		7A19DC9C1C5983390082ED38 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7A19DC991C5983390082ED38 /* SpeechSample.flac */; };
@@ -199,7 +197,6 @@
 				7A0F97401C232F14004C01C0 /* HTTPStatusCodes.framework in CopyFiles */,
 				7A0F97411C232F14004C01C0 /* ObjectMapper.framework in CopyFiles */,
 				7A0F97421C232F14004C01C0 /* Starscream.framework in CopyFiles */,
-				7A0F97431C232F14004C01C0 /* XCGLogger.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +343,6 @@
 		7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTTPStatusCodes.framework; path = Carthage/Build/iOS/HTTPStatusCodes.framework; sourceTree = "<group>"; };
 		7A0F97341C232D02004C01C0 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7A0F97351C232D02004C01C0 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		7A0F97361C232D02004C01C0 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		7A19DC921C597B260082ED38 /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextConstants.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7A19DC951C5980720082ED38 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextTests.swift; path = WatsonDeveloperCloud/SpeechToText/Tests/SpeechToTextTests.swift; sourceTree = "<group>"; };
 		7A19DC991C5983390082ED38 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
@@ -379,7 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A0F973A1C232D02004C01C0 /* ObjectMapper.framework in Frameworks */,
-				7A0F973C1C232D02004C01C0 /* XCGLogger.framework in Frameworks */,
 				7A0F973B1C232D02004C01C0 /* Starscream.framework in Frameworks */,
 				7A0F96E91C232B96004C01C0 /* libopus.a in Frameworks */,
 				7A0F97371C232D02004C01C0 /* Alamofire.framework in Frameworks */,
@@ -826,7 +821,6 @@
 				7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */,
 				7A0F97341C232D02004C01C0 /* ObjectMapper.framework */,
 				7A0F97351C232D02004C01C0 /* Starscream.framework */,
-				7A0F97361C232D02004C01C0 /* XCGLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

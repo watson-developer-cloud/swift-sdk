@@ -15,8 +15,7 @@
  **/
 
 import XCTest
-
-@testable import WatsonDeveloperCloud
+import WatsonDeveloperCloud
 
 class TextToSpeechTests: XCTestCase {
     

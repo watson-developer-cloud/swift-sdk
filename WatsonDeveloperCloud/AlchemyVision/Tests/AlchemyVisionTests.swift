@@ -15,8 +15,7 @@
  **/
 
 import XCTest
-
-@testable import WatsonDeveloperCloud
+import WatsonDeveloperCloud
 
 class AlchemyVisionTests: XCTestCase {
     private let timeout: NSTimeInterval = 120.0

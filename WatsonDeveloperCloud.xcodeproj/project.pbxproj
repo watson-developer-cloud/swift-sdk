@@ -110,7 +110,6 @@
 		7A0F97041C232B96004C01C0 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966E1C232B96004C01C0 /* NSError.swift */; };
 		7A0F970A1C232B96004C01C0 /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96761C232B96004C01C0 /* CoreResponse.swift */; };
 		7A0F970B1C232B96004C01C0 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96771C232B96004C01C0 /* HTTPMethods.swift */; };
-		7A0F970C1C232B96004C01C0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96781C232B96004C01C0 /* Log.swift */; };
 		7A0F970D1C232B96004C01C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96791C232B96004C01C0 /* MediaType.swift */; };
 		7A0F970E1C232B96004C01C0 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */; };
 		7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967B1C232B96004C01C0 /* Transformation.swift */; };
@@ -333,7 +332,6 @@
 		7A0F966E1C232B96004C01C0 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
 		7A0F96761C232B96004C01C0 /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
 		7A0F96771C232B96004C01C0 /* HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
-		7A0F96781C232B96004C01C0 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		7A0F96791C232B96004C01C0 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		7A0F967B1C232B96004C01C0 /* Transformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
@@ -812,7 +810,6 @@
 			children = (
 				7A0F96761C232B96004C01C0 /* CoreResponse.swift */,
 				7A0F96771C232B96004C01C0 /* HTTPMethods.swift */,
-				7A0F96781C232B96004C01C0 /* Log.swift */,
 				7A0F96791C232B96004C01C0 /* MediaType.swift */,
 				7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */,
 				7A0F967B1C232B96004C01C0 /* Transformation.swift */,
@@ -1100,7 +1097,6 @@
 				7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */,
 				7A0F96CB1C232B96004C01C0 /* NaturalLanguageClassifier.swift in Sources */,
 				7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */,
-				7A0F970C1C232B96004C01C0 /* Log.swift in Sources */,
 				7ACB0D4C1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift in Sources */,
 				7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */,
 				7A0F96D71C232B96004C01C0 /* PersonalityInsightsError.swift in Sources */,

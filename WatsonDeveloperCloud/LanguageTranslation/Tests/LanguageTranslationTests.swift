@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-@testable import WatsonDeveloperCloud
+import WatsonDeveloperCloud
 
 class LanguageTranslationTests: XCTestCase {
     /// Language translation service

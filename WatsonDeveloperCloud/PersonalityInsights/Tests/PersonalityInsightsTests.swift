@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-@testable import WatsonDeveloperCloud
+import WatsonDeveloperCloud
 
 class PersonalityInsightsTests: XCTestCase {
     

@@ -93,21 +93,21 @@ public extension AlchemyLanguage {
     
     public struct GetEntitiesParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var disambiguate: Int? = 1
-        var linkedData: Int? = 1
-        var coreference: Int? = 1
-        var quotations: Int? = 0
-        var sentiment: Int? = 0
-        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
-        var showSourceText: Int? = 0
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var maxRetrieve: Int? = 50
-        var baseUrl: String? = ""
-        var knowledgGraph: Int? = 0
-        var stucturedEntities: Int? = 1
+        public var disambiguate: Int? = 1
+        public var linkedData: Int? = 1
+        public var coreference: Int? = 1
+        public var quotations: Int? = 0
+        public var sentiment: Int? = 0
+        public var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        public var showSourceText: Int? = 0
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var maxRetrieve: Int? = 50
+        public var baseUrl: String? = ""
+        public var knowledgGraph: Int? = 0
+        public var stucturedEntities: Int? = 1
         
     }
     
@@ -173,14 +173,14 @@ public extension AlchemyLanguage {
     
     public struct GetSentimentParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var sentiment: Int? = 0
-        var showSourceText: Int? = 0
-        var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var targets: String? = ""           // required if targeted
+        public var sentiment: Int? = 0
+        public var showSourceText: Int? = 0
+        public var sourceText: luri.SourceText? = luri.SourceText.cleaned_or_raw
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var targets: String? = ""           // required if targeted
         
     }
     
@@ -260,17 +260,17 @@ public extension AlchemyLanguage {
     
     public struct GetKeywordsParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var sentiment: Int? = 0
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var showSourceText: Int? = 0
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var maxRetrieve: Int? = 50
-        var baseUrl: String? = ""
-        var knowledgGraph: Int? = 0
-        var keywordExtractMode: String? = luri.KeywordExtractMode.normal.rawValue
+        public var sentiment: Int? = 0
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var showSourceText: Int? = 0
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var maxRetrieve: Int? = 50
+        public var baseUrl: String? = ""
+        public var knowledgGraph: Int? = 0
+        public var keywordExtractMode: String? = luri.KeywordExtractMode.normal.rawValue
         
     }
     
@@ -336,16 +336,16 @@ public extension AlchemyLanguage {
     
     public struct GetRankedConceptsParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
 
-        var linkedData: Int? = 1
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var showSourceText: Int? = 0
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var maxRetrieve: Int? = 50
-        var baseUrl: String? = ""
-        var knowledgGraph: Int? = 0
+        public var linkedData: Int? = 1
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var showSourceText: Int? = 0
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var maxRetrieve: Int? = 50
+        public var baseUrl: String? = ""
+        public var knowledgGraph: Int? = 0
         
     }
     
@@ -411,22 +411,22 @@ public extension AlchemyLanguage {
     
     public struct GetRelationsParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var entities: Int? = 0          // extra call
-        var keywords: Int? = 0          // extra call
-        var requireEntities: Int? = 0
-        var sentimentExcludeEntities: Int? = 1
-        var disambiguate: Int? = 1
-        var linkedData: Int? = 1
-        var coreference: Int? = 1
-        var sentiment: Int? = 1         // extra call
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var showSourceText: Int? = 0
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var maxRetrieve: Int? = 50
-        var baseUrl: String? = ""
+        public var entities: Int? = 0          // extra call
+        public var keywords: Int? = 0          // extra call
+        public var requireEntities: Int? = 0
+        public var sentimentExcludeEntities: Int? = 1
+        public var disambiguate: Int? = 1
+        public var linkedData: Int? = 1
+        public var coreference: Int? = 1
+        public var sentiment: Int? = 1         // extra call
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var showSourceText: Int? = 0
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var maxRetrieve: Int? = 50
+        public var baseUrl: String? = ""
         
     }
     
@@ -492,12 +492,12 @@ public extension AlchemyLanguage {
     
     public struct GetRankedTaxonomyParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var cquery: String? = ""
-        var xpath: String? = ""
-        var baseUrl: String? = ""
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var cquery: String? = ""
+        public var xpath: String? = ""
+        public var baseUrl: String? = ""
         
     }
     
@@ -617,11 +617,11 @@ public extension AlchemyLanguage {
     
     public struct GetLanguageParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var cquery: String? = ""
-        var xpath: String? = ""
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var cquery: String? = ""
+        public var xpath: String? = ""
         
     }
     
@@ -687,13 +687,13 @@ public extension AlchemyLanguage {
     
     public struct GetTextParameters: AlchemyLanguageParameters {
         
-        init(){}
+        public init(){}
         
-        var useMetadata: Int? = 1
-        var extractLinks: Int? = 0
-        var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
-        var cquery: String? = ""
-        var xpath: String? = ""
+        public var useMetadata: Int? = 1
+        public var extractLinks: Int? = 0
+        public var sourceText: String? = luri.SourceText.cleaned_or_raw.rawValue
+        public var cquery: String? = ""
+        public var xpath: String? = ""
         
     }
     

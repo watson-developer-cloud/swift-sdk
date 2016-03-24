@@ -88,7 +88,7 @@ internal class WatsonGateway {
         guard authStrategy.token != nil else {
             cachedRequests.append(cachedRequest)
             authStrategy.isRefreshing = true
-            authStrategy.retries++
+            authStrategy.retries += 1
             authStrategy.refreshToken { [weak self] error in
                 authStrategy.isRefreshing = false
                 
@@ -150,7 +150,7 @@ internal class WatsonGateway {
                 }
                 
                 authStrategy.isRefreshing = true
-                authStrategy.retries++
+                authStrategy.retries += 1
                 authStrategy.refreshToken { error in
                     authStrategy.isRefreshing = false
                     guard error == nil else {

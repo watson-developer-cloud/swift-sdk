@@ -23,6 +23,3 @@ FOUNDATION_EXPORT double WatsonDeveloperCloudVersionNumber;
 FOUNDATION_EXPORT const unsigned char WatsonDeveloperCloudVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WatsonDeveloperCloud/PublicHeader.h>
-#import "OpusHelper.h"
-#import "OggHelper.h"
-

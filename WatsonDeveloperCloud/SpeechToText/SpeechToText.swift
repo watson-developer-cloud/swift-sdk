@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import AVFoundation
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to

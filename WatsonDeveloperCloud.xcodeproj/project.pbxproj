@@ -82,20 +82,6 @@
 		7A0F96D51C232B96004C01C0 /* PersonalityInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96321C232B96004C01C0 /* PersonalityInsights.swift */; };
 		7A0F96D61C232B96004C01C0 /* PersonalityInsightsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96331C232B96004C01C0 /* PersonalityInsightsConstants.swift */; };
 		7A0F96D71C232B96004C01C0 /* PersonalityInsightsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96341C232B96004C01C0 /* PersonalityInsightsError.swift */; };
-		7A0F96E81C232B96004C01C0 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F964B1C232B96004C01C0 /* libogg.a */; };
-		7A0F96E91C232B96004C01C0 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F964C1C232B96004C01C0 /* libopus.a */; };
-		7A0F96EA1C232B96004C01C0 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F964E1C232B96004C01C0 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A0F96EB1C232B96004C01C0 /* OggHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F964F1C232B96004C01C0 /* OggHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A0F96EC1C232B96004C01C0 /* OggHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96501C232B96004C01C0 /* OggHelper.m */; };
-		7A0F96ED1C232B96004C01C0 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96511C232B96004C01C0 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A0F96EE1C232B96004C01C0 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96531C232B96004C01C0 /* opus.h */; };
-		7A0F96EF1C232B96004C01C0 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96541C232B96004C01C0 /* opus_defines.h */; };
-		7A0F96F01C232B96004C01C0 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96551C232B96004C01C0 /* opus_header.c */; };
-		7A0F96F11C232B96004C01C0 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96561C232B96004C01C0 /* opus_header.h */; };
-		7A0F96F21C232B96004C01C0 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96571C232B96004C01C0 /* opus_multistream.h */; };
-		7A0F96F31C232B96004C01C0 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96581C232B96004C01C0 /* opus_types.h */; };
-		7A0F96F41C232B96004C01C0 /* OpusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F96591C232B96004C01C0 /* OpusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A0F96F51C232B96004C01C0 /* OpusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F965A1C232B96004C01C0 /* OpusHelper.m */; };
 		7A0F96F71C232B96004C01C0 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F965D1C232B96004C01C0 /* Voice.swift */; };
 		7A0F96FA1C232B96004C01C0 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96611C232B96004C01C0 /* TextToSpeech.swift */; };
 		7A0F96FB1C232B96004C01C0 /* TextToSpeechConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96621C232B96004C01C0 /* TextToSpeechConstants.swift */; };
@@ -137,7 +123,6 @@
 		7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F96361C232B96004C01C0 /* KennedySpeech.txt */; };
 		7A0F97261C232BC6004C01C0 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F96371C232B96004C01C0 /* MobyDickIntro.txt */; };
 		7A0F97271C232BC6004C01C0 /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96381C232B96004C01C0 /* PersonalityInsightsTests.swift */; };
-		7A0F972E1C232BD7004C01C0 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F965F1C232B96004C01C0 /* testing.opus */; };
 		7A0F972F1C232BD7004C01C0 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */; };
 		7A0F97371C232D02004C01C0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; };
 		7A0F97381C232D02004C01C0 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; };
@@ -299,22 +284,7 @@
 		7A0F96361C232B96004C01C0 /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
 		7A0F96371C232B96004C01C0 /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
 		7A0F96381C232B96004C01C0 /* PersonalityInsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsTests.swift; sourceTree = "<group>"; };
-		7A0F964B1C232B96004C01C0 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		7A0F964C1C232B96004C01C0 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
-		7A0F964E1C232B96004C01C0 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
-		7A0F964F1C232B96004C01C0 /* OggHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OggHelper.h; sourceTree = "<group>"; };
-		7A0F96501C232B96004C01C0 /* OggHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OggHelper.m; sourceTree = "<group>"; };
-		7A0F96511C232B96004C01C0 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
-		7A0F96531C232B96004C01C0 /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
-		7A0F96541C232B96004C01C0 /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
-		7A0F96551C232B96004C01C0 /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
-		7A0F96561C232B96004C01C0 /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
-		7A0F96571C232B96004C01C0 /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
-		7A0F96581C232B96004C01C0 /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
-		7A0F96591C232B96004C01C0 /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
-		7A0F965A1C232B96004C01C0 /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		7A0F965D1C232B96004C01C0 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
-		7A0F965F1C232B96004C01C0 /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = testing.opus; sourceTree = "<group>"; };
 		7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		7A0F96611C232B96004C01C0 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7A0F96621C232B96004C01C0 /* TextToSpeechConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechConstants.swift; sourceTree = "<group>"; };
@@ -376,9 +346,7 @@
 			files = (
 				7A0F973A1C232D02004C01C0 /* ObjectMapper.framework in Frameworks */,
 				7A0F973B1C232D02004C01C0 /* Starscream.framework in Frameworks */,
-				7A0F96E91C232B96004C01C0 /* libopus.a in Frameworks */,
 				7A0F97371C232D02004C01C0 /* Alamofire.framework in Frameworks */,
-				7A0F96E81C232B96004C01C0 /* libogg.a in Frameworks */,
 				7A0F97391C232D02004C01C0 /* HTTPStatusCodes.framework in Frameworks */,
 				7A0F97381C232D02004C01C0 /* AlamofireObjectMapper.framework in Frameworks */,
 			);
@@ -687,7 +655,6 @@
 		7A0F96481C232B96004C01C0 /* TextToSpeech */ = {
 			isa = PBXGroup;
 			children = (
-				7A0F96491C232B96004C01C0 /* Libraries */,
 				7A0F965B1C232B96004C01C0 /* Models */,
 				7A0F965E1C232B96004C01C0 /* Tests */,
 				7A0F96611C232B96004C01C0 /* TextToSpeech.swift */,
@@ -696,51 +663,6 @@
 			);
 			name = TextToSpeech;
 			path = WatsonDeveloperCloud/TextToSpeech;
-			sourceTree = "<group>";
-		};
-		7A0F96491C232B96004C01C0 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F964A1C232B96004C01C0 /* lib */,
-				7A0F964D1C232B96004C01C0 /* ogg */,
-				7A0F96521C232B96004C01C0 /* opus */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		7A0F964A1C232B96004C01C0 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F964B1C232B96004C01C0 /* libogg.a */,
-				7A0F964C1C232B96004C01C0 /* libopus.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		7A0F964D1C232B96004C01C0 /* ogg */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F964E1C232B96004C01C0 /* ogg.h */,
-				7A0F964F1C232B96004C01C0 /* OggHelper.h */,
-				7A0F96501C232B96004C01C0 /* OggHelper.m */,
-				7A0F96511C232B96004C01C0 /* os_types.h */,
-			);
-			path = ogg;
-			sourceTree = "<group>";
-		};
-		7A0F96521C232B96004C01C0 /* opus */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F96531C232B96004C01C0 /* opus.h */,
-				7A0F96541C232B96004C01C0 /* opus_defines.h */,
-				7A0F96551C232B96004C01C0 /* opus_header.c */,
-				7A0F96561C232B96004C01C0 /* opus_header.h */,
-				7A0F96571C232B96004C01C0 /* opus_multistream.h */,
-				7A0F96581C232B96004C01C0 /* opus_types.h */,
-				7A0F96591C232B96004C01C0 /* OpusHelper.h */,
-				7A0F965A1C232B96004C01C0 /* OpusHelper.m */,
-			);
-			path = opus;
 			sourceTree = "<group>";
 		};
 		7A0F965B1C232B96004C01C0 /* Models */ = {
@@ -754,7 +676,6 @@
 		7A0F965E1C232B96004C01C0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7A0F965F1C232B96004C01C0 /* testing.opus */,
 				7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */,
 			);
 			path = Tests;
@@ -885,15 +806,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A0F96EE1C232B96004C01C0 /* opus.h in Headers */,
-				7A0F96EA1C232B96004C01C0 /* ogg.h in Headers */,
-				7A0F96F31C232B96004C01C0 /* opus_types.h in Headers */,
-				7A0F96F11C232B96004C01C0 /* opus_header.h in Headers */,
-				7A0F96EB1C232B96004C01C0 /* OggHelper.h in Headers */,
-				7A0F96ED1C232B96004C01C0 /* os_types.h in Headers */,
-				7A0F96F21C232B96004C01C0 /* opus_multistream.h in Headers */,
-				7A0F96F41C232B96004C01C0 /* OpusHelper.h in Headers */,
-				7A0F96EF1C232B96004C01C0 /* opus_defines.h in Headers */,
 				7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -989,7 +901,6 @@
 			files = (
 				7A0F97231C232BBD004C01C0 /* training_meta.txt in Resources */,
 				7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */,
-				7A0F972E1C232BD7004C01C0 /* testing.opus in Resources */,
 				7A0F97181C232B9C004C01C0 /* sample.html in Resources */,
 				7A19DC9E1C5983390082ED38 /* SpeechSample.wav in Resources */,
 				7A0F971C1C232BA5004C01C0 /* mother-daughter.jpg in Resources */,
@@ -1032,7 +943,6 @@
 				7A0F96B31C232B96004C01C0 /* DialogConstants.swift in Sources */,
 				7A0F96D51C232B96004C01C0 /* PersonalityInsights.swift in Sources */,
 				7A0F96821C232B96004C01C0 /* AlchemyLanguage.swift in Sources */,
-				7A0F96F51C232B96004C01C0 /* OpusHelper.m in Sources */,
 				7A0F96A71C232B96004C01C0 /* AlchemyVisionConstants.swift in Sources */,
 				7A521F5C1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift in Sources */,
 				7A0F96911C232B96004C01C0 /* Entity.swift in Sources */,
@@ -1058,7 +968,6 @@
 				7A0F96851C232B96004C01C0 /* AlchemyGenericModel.swift in Sources */,
 				7A0F96B51C232B96004C01C0 /* DialogConversation.swift in Sources */,
 				7A0F96921C232B96004C01C0 /* Feed.swift in Sources */,
-				7A0F96EC1C232B96004C01C0 /* OggHelper.m in Sources */,
 				7A0F96D31C232B96004C01C0 /* Profile.swift in Sources */,
 				7A0F96AB1C232B96004C01C0 /* ImageKeyWords.swift in Sources */,
 				7A0F96831C232B96004C01C0 /* AlchemyLanguageConstants.swift in Sources */,
@@ -1115,7 +1024,6 @@
 				7A0F96D21C232B96004C01C0 /* ContentItem.swift in Sources */,
 				7A0F96B41C232B96004C01C0 /* DialogError.swift in Sources */,
 				7A0F96B61C232B96004C01C0 /* DialogConversationResponse.swift in Sources */,
-				7A0F96F01C232B96004C01C0 /* opus_header.c in Sources */,
 				7A0F96FB1C232B96004C01C0 /* TextToSpeechConstants.swift in Sources */,
 				7A0F96961C232B96004C01C0 /* KnowledgeGraph.swift in Sources */,
 				7A0F96A91C232B96004C01C0 /* ImageFaceTags.swift in Sources */,

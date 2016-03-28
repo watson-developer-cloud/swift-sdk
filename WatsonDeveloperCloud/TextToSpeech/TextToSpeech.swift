@@ -87,13 +87,21 @@ public class TextToSpeech: WatsonService {
         
         // execute request
         gateway.request(request, serviceError: TextToSpeechError()) { data, error in
-            if let data = data {
-                let wav = NSMutableData(data: data)
-                self.repairWAVHeader(wav)
-                completionHandler(wav, error)
-            } else {
+            guard let data = data else {
                 completionHandler(nil, error)
+                return
             }
+
+            let wav = NSMutableData(data: data)
+            guard TextToSpeech.isWAVFile(wav) else {
+                let description = "Returned audio is in an unexpected format."
+                let error = createError(Constants.errorDomain, description: description)
+                completionHandler(nil, error)
+                return
+            }
+
+            TextToSpeech.repairWAVHeader(wav)
+            completionHandler(wav, error)
         }
     }
 
@@ -201,7 +209,7 @@ public class TextToSpeech: WatsonService {
      - returns: A String initialized by converting the given big-endian byte buffer into
      Unicode characters using a UTF-8 encoding.
      */
-    private func dataToUTF8String(data: NSData, offset: Int, length: Int) -> String? {
+    private static func dataToUTF8String(data: NSData, offset: Int, length: Int) -> String? {
         let range = NSMakeRange(offset, length)
         let subdata = data.subdataWithRange(range)
         return String(data: subdata, encoding: NSUTF8StringEncoding)
@@ -216,7 +224,7 @@ public class TextToSpeech: WatsonService {
      - returns: An Int initialized by converting the given little-endian byte buffer into
      an unsigned 32-bit integer.
      */
-    private func dataToUInt32(data: NSData, offset: Int) -> Int {
+    private static func dataToUInt32(data: NSData, offset: Int) -> Int {
         var num: UInt32 = 0
         let length = 4
         let range = NSMakeRange(offset, length)
@@ -225,12 +233,43 @@ public class TextToSpeech: WatsonService {
     }
 
     /**
+     Returns true if the given data is a WAV-formatted audio file.
+     
+     To verify that the data is a WAV-formatted audio file, we simply check the "RIFF" chunk
+     descriptor. That is, we verify that the "ChunkID" field is "RIFF" and the "Format" is "WAVE".
+     Note that this does not require the "ChunkSize" to be valid and does not guarantee that any
+     sub-chunks are properly formatted.
+     
+     - parameter data: The byte buffer that may contain a WAV-formatted audio file.
+     
+     - returns: `true` if the given data is a WAV-formatted audio file; otherwise, false.
+     */
+    private static func isWAVFile(data: NSData) -> Bool {
+
+        // resources for WAV header format:
+        // [1] http://unusedino.de/ec64/technical/formats/wav.html
+        // [2] http://soundfile.sapp.org/doc/WaveFormat/
+
+        let riffChunkID = dataToUTF8String(data, offset: 0, length: 4)
+        guard riffChunkID == "RIFF" else {
+            return false
+        }
+
+        let riffFormat = dataToUTF8String(data, offset: 8, length: 4)
+        guard riffFormat == "WAVE" else {
+            return false
+        }
+
+        return true
+    }
+
+    /**
      Repair the WAV header for a WAV-formatted audio file produced by Watson Text to Speech.
 
      - parameter data: The WAV-formatted audio file produced by Watson Text to Speech. The
      byte data will be analyzed and repaired in-place.
      */
-    private func repairWAVHeader(data: NSMutableData) {
+    private static func repairWAVHeader(data: NSMutableData) {
 
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html

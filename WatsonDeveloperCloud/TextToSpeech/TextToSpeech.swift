@@ -287,17 +287,28 @@ public class TextToSpeech: WatsonService {
         var fieldOffset = 12
         let fieldSize = 4
         while true {
+            // prevent running off the end of the byte buffer
+            if fieldOffset + 2*fieldSize >= data.length {
+                return
+            }
+
+            // read subchunk ID
             subchunkID = dataToUTF8String(data, offset: fieldOffset, length: fieldSize)
-            subchunkSize = dataToUInt32(data, offset: fieldOffset + fieldSize)
-            if subchunkID == "data" { break }
-            fieldOffset += fieldSize + fieldSize + subchunkSize
+            fieldOffset += fieldSize
+            if subchunkID == "data" {
+                break
+            }
+
+            // read subchunk size
+            subchunkSize = dataToUInt32(data, offset: fieldOffset)
+            fieldOffset += fieldSize + subchunkSize
         }
 
         // compute data subchunk size (excludes id and size fields)
-        var dataSubchunkSize = UInt32(data.length - fieldOffset - 8)
+        var dataSubchunkSize = UInt32(data.length - fieldOffset - fieldSize)
 
         // update data subchunk size
-        let dataSubchunkSizeRange = NSMakeRange(fieldOffset + fieldSize, 4)
+        let dataSubchunkSizeRange = NSMakeRange(fieldOffset, fieldSize)
         data.replaceBytesInRange(dataSubchunkSizeRange, withBytes: &dataSubchunkSize)
     }
 }

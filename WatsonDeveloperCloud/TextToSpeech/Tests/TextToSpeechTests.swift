@@ -16,6 +16,7 @@
 
 import XCTest
 import WatsonDeveloperCloud
+import AVFoundation
 
 class TextToSpeechTests: XCTestCase {
     

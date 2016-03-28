@@ -44,12 +44,6 @@ public class TextToSpeech: WatsonService {
             serviceURL: Constants.serviceURL, username: username, password: password)
         self.init(authStrategy: authStrategy)
     }
-    
-    // Provides the Opus/Ogg decompression.
-    let opus: OpusHelper = OpusHelper()
-    
-    // Sampling rate returned from the Opus decoder is 48KHz by default.
-    private let defaultSampleRate = 48000
 
     /**
      Invokes a call to synthesize text and decompress the audio to produce a WAVE

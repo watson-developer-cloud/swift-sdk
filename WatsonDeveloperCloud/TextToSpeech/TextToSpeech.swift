@@ -238,7 +238,7 @@ public class TextToSpeech: WatsonService {
      To verify that the data is a WAV-formatted audio file, we simply check the "RIFF" chunk
      descriptor. That is, we verify that the "ChunkID" field is "RIFF" and the "Format" is "WAVE".
      Note that this does not require the "ChunkSize" to be valid and does not guarantee that any
-     sub-chunks are properly formatted.
+     sub-chunks are valid.
      
      - parameter data: The byte buffer that may contain a WAV-formatted audio file.
      

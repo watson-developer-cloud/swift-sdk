@@ -14,7 +14,6 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
 
 ## Table of Contents
 * [Installation](#installation)
-
 * [IBM Watson Services](#ibm-watson-services)
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
@@ -29,6 +28,14 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
 * [Open Source @ IBM](#open-source--ibm)
 * [License](#license)
 * [Contributing](#contributing)
+
+## Upgrading to Xcode 7.3
+
+Apple released Xcode 7.3 and Swift 2.2 on March 21, 2016. To use the Watson Developer Cloud iOS SDK with Xcode 7.3 you will have to rebuild all dependencies (including those with pre-built binaries) because there is no binary compatability between Swift 2.1 and Swift 2.2.
+
+Please use the terminal to navigate to your project directory and execute the following command: `carthage update --platform iOS --no-use-binaries`
+
+This will rebuild all dependencies (including those with pre-built binaries) using Xcode 7.3 and Swift 2.2. Be aware that you will receive many warnings related to deprecations that will occur in Swift 3. These warnings do not affect the operation of the SDK and will be addressed in future releases of our dependencies.
 
 ## Installation
 

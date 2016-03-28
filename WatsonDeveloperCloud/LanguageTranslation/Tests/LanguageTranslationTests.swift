@@ -140,7 +140,7 @@ class LanguageTranslationTests: XCTestCase {
         }
         
         service.getModels("es") { models, error in
-            XCTAssertEqual(models!.count,3,"Expected exactly 3 models to be returned")
+            XCTAssertEqual(models!.count, 4, "Expected exactly 4 models to be returned")
             sourceExpectation.fulfill()
         }
         

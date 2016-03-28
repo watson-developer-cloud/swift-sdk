@@ -137,7 +137,6 @@
 		7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F96361C232B96004C01C0 /* KennedySpeech.txt */; };
 		7A0F97261C232BC6004C01C0 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F96371C232B96004C01C0 /* MobyDickIntro.txt */; };
 		7A0F97271C232BC6004C01C0 /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96381C232B96004C01C0 /* PersonalityInsightsTests.swift */; };
-		7A0F972E1C232BD7004C01C0 /* testing.opus in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F965F1C232B96004C01C0 /* testing.opus */; };
 		7A0F972F1C232BD7004C01C0 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */; };
 		7A0F97371C232D02004C01C0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; };
 		7A0F97381C232D02004C01C0 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; };
@@ -314,7 +313,6 @@
 		7A0F96591C232B96004C01C0 /* OpusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpusHelper.h; sourceTree = "<group>"; };
 		7A0F965A1C232B96004C01C0 /* OpusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpusHelper.m; sourceTree = "<group>"; };
 		7A0F965D1C232B96004C01C0 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
-		7A0F965F1C232B96004C01C0 /* testing.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = testing.opus; sourceTree = "<group>"; };
 		7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		7A0F96611C232B96004C01C0 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7A0F96621C232B96004C01C0 /* TextToSpeechConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechConstants.swift; sourceTree = "<group>"; };
@@ -754,7 +752,6 @@
 		7A0F965E1C232B96004C01C0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7A0F965F1C232B96004C01C0 /* testing.opus */,
 				7A0F96601C232B96004C01C0 /* TextToSpeechTests.swift */,
 			);
 			path = Tests;
@@ -989,7 +986,6 @@
 			files = (
 				7A0F97231C232BBD004C01C0 /* training_meta.txt in Resources */,
 				7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */,
-				7A0F972E1C232BD7004C01C0 /* testing.opus in Resources */,
 				7A0F97181C232B9C004C01C0 /* sample.html in Resources */,
 				7A19DC9E1C5983390082ED38 /* SpeechSample.wav in Resources */,
 				7A0F971C1C232BA5004C01C0 /* mother-daughter.jpg in Resources */,

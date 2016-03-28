@@ -282,7 +282,7 @@ public class TextToSpeech: WatsonService {
         data.replaceBytesInRange(riffChunkSizeRange, withBytes: &riffChunkSize)
 
         // find data subchunk
-        var subchunkID: String? = ""
+        var subchunkID: String?
         var subchunkSize = 0
         var offset = 12
         let size = 4

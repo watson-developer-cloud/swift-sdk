@@ -120,7 +120,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter data: The data to send to the Speech to Text service.
      */
-    override func writeData(data: NSData) {
+    override func writeData(data: NSData, completion: (Void -> Void)? = nil) {
         operations.addOperationWithBlock {
             if self.state == .Listening {
                 self.state = .StartedRequest
@@ -134,7 +134,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter str: The string to send to the Speech to Text service.
      */
-    override func writeString(str: String) {
+    override func writeString(str: String, completion: (Void -> Void)? = nil) {
         operations.addOperationWithBlock {
             if self.state == .Listening {
                 self.state = .StartedRequest
@@ -148,7 +148,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter data: Data to include in the ping to the Speech to Text service.
      */
-    override func writePing(data: NSData) {
+    override func writePing(data: NSData, completion: (Void -> Void)? = nil) {
         operations.addOperationWithBlock {
             super.writePing(data)
         }

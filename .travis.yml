@@ -10,6 +10,7 @@ branches:
   only:
     - InvestigateTravisIssue
     - master
+    - Fix-Tests
 
 #xcode_scheme: WatsonCore
 before_install:

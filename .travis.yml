@@ -31,6 +31,9 @@ after_success:
 
 script:
 #   - xcodebuild clean build -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.1'
-  - xcodebuild clean build test -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|===)'
+
+  - xcodebuild clean build test -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test Case|===)'
+
+ #- xcodebuild clean build test -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|===)'
 
 # - xctool -scheme WatsonDeveloperCloud build test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES

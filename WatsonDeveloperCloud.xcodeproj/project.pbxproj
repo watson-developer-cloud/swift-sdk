@@ -86,25 +86,6 @@
 		7A0F96FA1C232B96004C01C0 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96611C232B96004C01C0 /* TextToSpeech.swift */; };
 		7A0F96FB1C232B96004C01C0 /* TextToSpeechConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96621C232B96004C01C0 /* TextToSpeechConstants.swift */; };
 		7A0F96FC1C232B96004C01C0 /* TextToSpeechError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96631C232B96004C01C0 /* TextToSpeechError.swift */; };
-		7A0F96FD1C232B96004C01C0 /* AlchemyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96651C232B96004C01C0 /* AlchemyRequest.swift */; };
-		7A0F96FE1C232B96004C01C0 /* AlchemyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96661C232B96004C01C0 /* AlchemyService.swift */; };
-		7A0F96FF1C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96681C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift */; };
-		7A0F97001C232B96004C01C0 /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96691C232B96004C01C0 /* AuthenticationStrategy.swift */; };
-		7A0F97011C232B96004C01C0 /* BasicAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966A1C232B96004C01C0 /* BasicAuthenticationStrategy.swift */; };
-		7A0F97021C232B96004C01C0 /* FacebookAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966B1C232B96004C01C0 /* FacebookAuthenticationStrategy.swift */; };
-		7A0F97031C232B96004C01C0 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966D1C232B96004C01C0 /* Mapper.swift */; };
-		7A0F97041C232B96004C01C0 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F966E1C232B96004C01C0 /* NSError.swift */; };
-		7A0F970A1C232B96004C01C0 /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96761C232B96004C01C0 /* CoreResponse.swift */; };
-		7A0F970B1C232B96004C01C0 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96771C232B96004C01C0 /* HTTPMethods.swift */; };
-		7A0F970D1C232B96004C01C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96791C232B96004C01C0 /* MediaType.swift */; };
-		7A0F970E1C232B96004C01C0 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */; };
-		7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967B1C232B96004C01C0 /* Transformation.swift */; };
-		7A0F97101C232B96004C01C0 /* WatsonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967C1C232B96004C01C0 /* WatsonError.swift */; };
-		7A0F97111C232B96004C01C0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967D1C232B96004C01C0 /* Validation.swift */; };
-		7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */; };
-		7A0F97131C232B96004C01C0 /* WatsonGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */; };
-		7A0F97141C232B96004C01C0 /* WatsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96801C232B96004C01C0 /* WatsonRequest.swift */; };
-		7A0F97151C232B96004C01C0 /* WatsonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F96811C232B96004C01C0 /* WatsonService.swift */; };
 		7A0F97161C232B9C004C01C0 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F95F01C232B96004C01C0 /* AlchemyLanguageTests.swift */; };
 		7A0F97171C232B9C004C01C0 /* biography.html in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F95F11C232B96004C01C0 /* biography.html */; };
 		7A0F97181C232B9C004C01C0 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 7A0F95F21C232B96004C01C0 /* sample.html */; };
@@ -146,8 +127,6 @@
 		7A521F5C1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A521F5B1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift */; };
 		7AA069891C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA069881C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift */; };
 		7AAD77591C87982400983861 /* SpeechToTextWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD77581C87982400983861 /* SpeechToTextWebSocket.swift */; };
-		7AAD775B1C87994800983861 /* WatsonErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD775A1C87994800983861 /* WatsonErrorHelper.swift */; };
-		7AAD775D1C87A82500983861 /* WatsonRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD775C1C87A82500983861 /* WatsonRequestModel.swift */; };
 		7ACB0D401C878C4C00861CCC /* SpeechToTextResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D3F1C878C4C00861CCC /* SpeechToTextResult.swift */; };
 		7ACB0D421C878C8200861CCC /* SpeechToTextTranscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D411C878C8200861CCC /* SpeechToTextTranscription.swift */; };
 		7ACB0D441C878CAC00861CCC /* SpeechToTextWordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACB0D431C878CAC00861CCC /* SpeechToTextWordTimestamp.swift */; };
@@ -289,25 +268,6 @@
 		7A0F96611C232B96004C01C0 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7A0F96621C232B96004C01C0 /* TextToSpeechConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechConstants.swift; sourceTree = "<group>"; };
 		7A0F96631C232B96004C01C0 /* TextToSpeechError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechError.swift; sourceTree = "<group>"; };
-		7A0F96651C232B96004C01C0 /* AlchemyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyRequest.swift; sourceTree = "<group>"; };
-		7A0F96661C232B96004C01C0 /* AlchemyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyService.swift; sourceTree = "<group>"; };
-		7A0F96681C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeyAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7A0F96691C232B96004C01C0 /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7A0F966A1C232B96004C01C0 /* BasicAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7A0F966B1C232B96004C01C0 /* FacebookAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7A0F966D1C232B96004C01C0 /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
-		7A0F966E1C232B96004C01C0 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
-		7A0F96761C232B96004C01C0 /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
-		7A0F96771C232B96004C01C0 /* HTTPMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
-		7A0F96791C232B96004C01C0 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
-		7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
-		7A0F967B1C232B96004C01C0 /* Transformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
-		7A0F967C1C232B96004C01C0 /* WatsonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonError.swift; sourceTree = "<group>"; };
-		7A0F967D1C232B96004C01C0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
-		7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
-		7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonGateway.swift; sourceTree = "<group>"; };
-		7A0F96801C232B96004C01C0 /* WatsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonRequest.swift; sourceTree = "<group>"; };
-		7A0F96811C232B96004C01C0 /* WatsonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonService.swift; sourceTree = "<group>"; };
 		7A0F97311C232D02004C01C0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTTPStatusCodes.framework; path = Carthage/Build/iOS/HTTPStatusCodes.framework; sourceTree = "<group>"; };
@@ -325,8 +285,6 @@
 		7A521F5B1C8573BC005EFD34 /* SpeechToTextGenericResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextGenericResponse.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextGenericResponse.swift; sourceTree = "<group>"; };
 		7AA069881C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextAudioStreamer.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextAudioStreamer.swift; sourceTree = "<group>"; };
 		7AAD77581C87982400983861 /* SpeechToTextWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWebSocket.swift; path = WatsonDeveloperCloud/SpeechToText/SpeechToTextWebSocket.swift; sourceTree = "<group>"; };
-		7AAD775A1C87994800983861 /* WatsonErrorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonErrorHelper.swift; sourceTree = "<group>"; };
-		7AAD775C1C87A82500983861 /* WatsonRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonRequestModel.swift; sourceTree = "<group>"; };
 		7ACB0D3F1C878C4C00861CCC /* SpeechToTextResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextResult.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextResult.swift; sourceTree = "<group>"; };
 		7ACB0D411C878C8200861CCC /* SpeechToTextTranscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextTranscription.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextTranscription.swift; sourceTree = "<group>"; };
 		7ACB0D431C878CAC00861CCC /* SpeechToTextWordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextWordTimestamp.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextWordTimestamp.swift; sourceTree = "<group>"; };
@@ -374,7 +332,6 @@
 				7A0F962D1C232B96004C01C0 /* PersonalityInsights */,
 				7AEAAFA71C57C83D00A8D202 /* SpeechToText */,
 				7A0F96481C232B96004C01C0 /* TextToSpeech */,
-				7A0F96641C232B96004C01C0 /* WatsonCore */,
 				7A0F95B51C23288E004C01C0 /* WatsonDeveloperCloud */,
 				7A0F95C11C23288E004C01C0 /* WatsonDeveloperCloudTests */,
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
@@ -681,59 +638,6 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		7A0F96641C232B96004C01C0 /* WatsonCore */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F96651C232B96004C01C0 /* AlchemyRequest.swift */,
-				7A0F96661C232B96004C01C0 /* AlchemyService.swift */,
-				7A0F96671C232B96004C01C0 /* Authentication */,
-				7A0F966C1C232B96004C01C0 /* Extensions */,
-				7A0F96751C232B96004C01C0 /* Utilities */,
-				7A0F967D1C232B96004C01C0 /* Validation.swift */,
-				7A0F967E1C232B96004C01C0 /* WatsonCoreConstants.swift */,
-				7A0F967F1C232B96004C01C0 /* WatsonGateway.swift */,
-				7A0F96801C232B96004C01C0 /* WatsonRequest.swift */,
-				7A0F96811C232B96004C01C0 /* WatsonService.swift */,
-				7AAD775A1C87994800983861 /* WatsonErrorHelper.swift */,
-				7AAD775C1C87A82500983861 /* WatsonRequestModel.swift */,
-			);
-			name = WatsonCore;
-			path = WatsonDeveloperCloud/WatsonCore;
-			sourceTree = "<group>";
-		};
-		7A0F96671C232B96004C01C0 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F96681C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift */,
-				7A0F96691C232B96004C01C0 /* AuthenticationStrategy.swift */,
-				7A0F966A1C232B96004C01C0 /* BasicAuthenticationStrategy.swift */,
-				7A0F966B1C232B96004C01C0 /* FacebookAuthenticationStrategy.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		7A0F966C1C232B96004C01C0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F966D1C232B96004C01C0 /* Mapper.swift */,
-				7A0F966E1C232B96004C01C0 /* NSError.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7A0F96751C232B96004C01C0 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				7A0F96761C232B96004C01C0 /* CoreResponse.swift */,
-				7A0F96771C232B96004C01C0 /* HTTPMethods.swift */,
-				7A0F96791C232B96004C01C0 /* MediaType.swift */,
-				7A0F967A1C232B96004C01C0 /* NetworkUtils.swift */,
-				7A0F967B1C232B96004C01C0 /* Transformation.swift */,
-				7A0F967C1C232B96004C01C0 /* WatsonError.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		7A0F97301C232CB5004C01C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,19 +829,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A0F970E1C232B96004C01C0 /* NetworkUtils.swift in Sources */,
-				7A0F96FE1C232B96004C01C0 /* AlchemyService.swift in Sources */,
 				7A0F96901C232B96004C01C0 /* Entities.swift in Sources */,
 				7A0F968D1C232B96004C01C0 /* DocumentSentiment.swift in Sources */,
 				7A0F96BE1C232B96004C01C0 /* LanguageTranslationConstants.swift in Sources */,
-				7A0F97001C232B96004C01C0 /* AuthenticationStrategy.swift in Sources */,
 				7A0F96FA1C232B96004C01C0 /* TextToSpeech.swift in Sources */,
 				7A0F968C1C232B96004C01C0 /* DocumentAuthors.swift in Sources */,
-				7A0F970B1C232B96004C01C0 /* HTTPMethods.swift in Sources */,
 				7A0F96991C232B96004C01C0 /* Microformats.swift in Sources */,
-				7A0F97031C232B96004C01C0 /* Mapper.swift in Sources */,
 				7AA069891C84DEC100B53C30 /* SpeechToTextAudioStreamer.swift in Sources */,
-				7A0F97111C232B96004C01C0 /* Validation.swift in Sources */,
 				7A0F969B1C232B96004C01C0 /* Quotation.swift in Sources */,
 				7A0F96CC1C232B96004C01C0 /* NLCConstants.swift in Sources */,
 				7A0F96B31C232B96004C01C0 /* DialogConstants.swift in Sources */,
@@ -948,22 +846,18 @@
 				7A0F96911C232B96004C01C0 /* Entity.swift in Sources */,
 				7A0F968F1C232B96004C01C0 /* DocumentTitle.swift in Sources */,
 				7A0F96B81C232B96004C01C0 /* DialogModel.swift in Sources */,
-				7AAD775B1C87994800983861 /* WatsonErrorHelper.swift in Sources */,
 				7A0F96A61C232B96004C01C0 /* AlchemyVision.swift in Sources */,
 				7ADA48191C5AC0A8001DD473 /* SpeechToTextStop.swift in Sources */,
 				7ACB0D461C878CEB00861CCC /* SpeechToTextWordConfidence.swift in Sources */,
 				7A0F96B21C232B96004C01C0 /* Dialog.swift in Sources */,
-				7A0F97101C232B96004C01C0 /* WatsonError.swift in Sources */,
 				7A0F96AC1C232B96004C01C0 /* ImageLink.swift in Sources */,
 				7ACB0D401C878C4C00861CCC /* SpeechToTextResult.swift in Sources */,
 				7A0F96A11C232B96004C01C0 /* Taxonomy.swift in Sources */,
 				7ACB0D4A1C878D3700861CCC /* SpeechToTextWordAlternativeResults.swift in Sources */,
-				7A0F970A1C232B96004C01C0 /* CoreResponse.swift in Sources */,
 				7ACB0D421C878C8200861CCC /* SpeechToTextTranscription.swift in Sources */,
 				7A0F969F1C232B96004C01C0 /* SentimentResponse.swift in Sources */,
 				7A0F968B1C232B96004C01C0 /* DisambiguatedLinks.swift in Sources */,
 				7ACB0D441C878CAC00861CCC /* SpeechToTextWordTimestamp.swift in Sources */,
-				7A0F97141C232B96004C01C0 /* WatsonRequest.swift in Sources */,
 				7A0F969D1C232B96004C01C0 /* SAORelations.swift in Sources */,
 				7A0F96851C232B96004C01C0 /* AlchemyGenericModel.swift in Sources */,
 				7A0F96B51C232B96004C01C0 /* DialogConversation.swift in Sources */,
@@ -977,10 +871,8 @@
 				7A0F96C21C232B96004C01C0 /* IdentifiedLanguage.swift in Sources */,
 				7A0F96A01C232B96004C01C0 /* Taxonomies.swift in Sources */,
 				7A0F96C11C232B96004C01C0 /* IdentifiableLanguage.swift in Sources */,
-				7A0F97021C232B96004C01C0 /* FacebookAuthenticationStrategy.swift in Sources */,
 				7A0F96BF1C232B96004C01C0 /* LanguageTranslationError.swift in Sources */,
 				7ACB0D481C878D1200861CCC /* SpeechToTextKeywordResult.swift in Sources */,
-				7AAD775D1C87A82500983861 /* WatsonRequestModel.swift in Sources */,
 				7A0F96BD1C232B96004C01C0 /* LanguageTranslation.swift in Sources */,
 				7A0F96B71C232B96004C01C0 /* DialogFormat.swift in Sources */,
 				7A0F968E1C232B96004C01C0 /* DocumentText.swift in Sources */,
@@ -989,26 +881,18 @@
 				7A0F96BA1C232B96004C01C0 /* DialogProfile.swift in Sources */,
 				7A0F96891C232B96004C01C0 /* Concept.swift in Sources */,
 				7A0F96CA1C232B96004C01C0 /* Classifier.swift in Sources */,
-				7A0F97041C232B96004C01C0 /* NSError.swift in Sources */,
 				7A521F581C857329005EFD34 /* SpeechToTextState.swift in Sources */,
-				7A0F96FF1C232B96004C01C0 /* APIKeyAuthenticationStrategy.swift in Sources */,
-				7A0F97131C232B96004C01C0 /* WatsonGateway.swift in Sources */,
 				7A0F96951C232B96004C01C0 /* Keywords.swift in Sources */,
 				7A0F96A51C232B96004C01C0 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7A0F969A1C232B96004C01C0 /* PublicationDate.swift in Sources */,
 				7A0F969E1C232B96004C01C0 /* Sentiment.swift in Sources */,
-				7A0F970F1C232B96004C01C0 /* Transformation.swift in Sources */,
 				7A0F96CB1C232B96004C01C0 /* NaturalLanguageClassifier.swift in Sources */,
-				7A0F97121C232B96004C01C0 /* WatsonCoreConstants.swift in Sources */,
 				7ACB0D4C1C878D5400861CCC /* SpeechToTextWordAlternativeResult.swift in Sources */,
 				7A19DC931C597B260082ED38 /* SpeechToTextConstants.swift in Sources */,
 				7A0F96D71C232B96004C01C0 /* PersonalityInsightsError.swift in Sources */,
-				7A0F97151C232B96004C01C0 /* WatsonService.swift in Sources */,
-				7A0F970D1C232B96004C01C0 /* MediaType.swift in Sources */,
 				7A0F96981C232B96004C01C0 /* Microformat.swift in Sources */,
 				7A0F96871C232B96004C01C0 /* Authors.swift in Sources */,
 				7A0F968A1C232B96004C01C0 /* ConceptResponse.swift in Sources */,
-				7A0F97011C232B96004C01C0 /* BasicAuthenticationStrategy.swift in Sources */,
 				7A0F96F71C232B96004C01C0 /* Voice.swift in Sources */,
 				7A00FDAB1C587D310082E742 /* SpeechToTextSettings.swift in Sources */,
 				7A0F96D61C232B96004C01C0 /* PersonalityInsightsConstants.swift in Sources */,
@@ -1033,7 +917,6 @@
 				7A0F96D41C232B96004C01C0 /* Trait.swift in Sources */,
 				7AEAAFA91C57C85500A8D202 /* SpeechToText.swift in Sources */,
 				7AEAAFAC1C57E57800A8D202 /* SpeechToTextResultWrapper.swift in Sources */,
-				7A0F96FD1C232B96004C01C0 /* AlchemyRequest.swift in Sources */,
 				7A0F96AA1C232B96004C01C0 /* ImageKeyWord.swift in Sources */,
 				7A0F96C91C232B96004C01C0 /* ClassifiedClass.swift in Sources */,
 				7A0F96971C232B96004C01C0 /* Language.swift in Sources */,

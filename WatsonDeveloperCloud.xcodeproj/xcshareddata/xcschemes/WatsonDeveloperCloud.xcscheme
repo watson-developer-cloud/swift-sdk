@@ -37,6 +37,14 @@
                BlueprintName = "WatsonDeveloperCloudTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AlchemyLanguageTests">
+               </Test>
+               <Test
+                  Identifier = "AlchemyVisionTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

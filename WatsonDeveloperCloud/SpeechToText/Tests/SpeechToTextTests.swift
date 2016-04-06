@@ -20,7 +20,7 @@ import WatsonDeveloperCloud
 class SpeechToTextTests: XCTestCase {
 
     var service: SpeechToText!
-    let timeout: NSTimeInterval = 30.0
+    let timeout: NSTimeInterval = 45.0
 
     override func setUp() {
         super.setUp()

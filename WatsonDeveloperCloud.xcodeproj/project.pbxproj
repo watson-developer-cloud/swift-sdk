@@ -10,6 +10,12 @@
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7A61176E1CB5ADC2009A4DA1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		7A61176F1CB5ADC2009A4DA1 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7A6117701CB5ADC2009A4DA1 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; };
+		7A6117721CB5ADD2009A4DA1 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A6117731CB5ADD2009A4DA1 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A6117741CB5ADD2009A4DA1 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +29,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7A0F973D1C232F0A004C01C0 /* CopyFiles */ = {
+		7A6117711CB5ADCA009A4DA1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7A6117721CB5ADD2009A4DA1 /* Alamofire.framework in CopyFiles */,
+				7A6117731CB5ADD2009A4DA1 /* Freddy.framework in CopyFiles */,
+				7A6117741CB5ADD2009A4DA1 /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +50,9 @@
 		7A0F95BD1C23288E004C01C0 /* WatsonDeveloperCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonDeveloperCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
+		7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
+		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A61176F1CB5ADC2009A4DA1 /* Freddy.framework in Frameworks */,
+				7A6117701CB5ADC2009A4DA1 /* Starscream.framework in Frameworks */,
+				7A61176E1CB5ADC2009A4DA1 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +98,9 @@
 		7A0F97301C232CB5004C01C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */,
+				7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */,
+				7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,7 +138,6 @@
 				7A0F95AF1C23288E004C01C0 /* Frameworks */,
 				7A0F95B01C23288E004C01C0 /* Headers */,
 				7A0F95B11C23288E004C01C0 /* Resources */,
-				7A0F973D1C232F0A004C01C0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -138,6 +155,7 @@
 				7A0F95B91C23288E004C01C0 /* Sources */,
 				7A0F95BA1C23288E004C01C0 /* Frameworks */,
 				7A0F95BB1C23288E004C01C0 /* Resources */,
+				7A6117711CB5ADCA009A4DA1 /* CopyFiles */,
 			);
 			buildRules = (
 			);

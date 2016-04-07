@@ -394,7 +394,7 @@
 		7A0F95CB1C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = WatsonDeveloperCloudTests/Info.plist;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -404,7 +404,7 @@
 		7A0F95CC1C23288E004C01C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = WatsonDeveloperCloudTests/Info.plist;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

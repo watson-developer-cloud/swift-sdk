@@ -28,9 +28,8 @@ public class PersonalityInsights {
     private let username: String
     private let password: String
 
-    private static let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
-    private static let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
-    private static let profileURL = serviceURL + "/profile"
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
 
     public init(username: String, password: String) {
         self.username = username
@@ -61,7 +60,7 @@ public class PersonalityInsights {
         guard let content = text.dataUsingEncoding(NSUTF8StringEncoding) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
@@ -101,7 +100,7 @@ public class PersonalityInsights {
         guard let content = html.dataUsingEncoding(NSUTF8StringEncoding) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
@@ -140,7 +139,7 @@ public class PersonalityInsights {
         guard let content = try? body.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
@@ -198,7 +197,7 @@ public class PersonalityInsights {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: PersonalityInsights.profileURL,
+            url: serviceURL + "/profile",
             acceptType: "application/json",
             contentType: contentType,
             queryParameters: queryParameters,

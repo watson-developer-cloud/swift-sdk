@@ -15,142 +15,207 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Alamofire
+import Freddy
 
 /**
  The Watson Personality Insights service uses linguistic analytics to extract a spectrum
  of cognitive and social characteristics from the text data that a person generates
  through blogs, tweets, forum posts, and more.
  */
-public class PersonalityInsights: WatsonService {
+public class PersonalityInsights {
     
-    // The shared WatsonGateway singleton.
-    let gateway = WatsonGateway.sharedInstance
-    
-    // The authentication strategy to obtain authorization tokens.
-    let authStrategy: AuthenticationStrategy
+    private let username: String
+    private let password: String
 
-    // TODO: comment this initializer
-    public required init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
+    private static let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private static let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
+    private static let profileURL = serviceURL + "/profile"
+
+    // TODO: Comment this initializer.
+    public init(username: String, password: String) {
+        self.username = username
+        self.password = password
     }
 
-    // TODO: comment this initializer
-    public convenience required init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
-            serviceURL: Constants.serviceURL, username: username, password: password)
-        self.init(authStrategy: authStrategy)
-    }
-    
+
     /**
-     Analyze input text to generate a personality profile.
-     
-     - Parameters
-        - text: The text to analyze.
-        - includeRaw: If true, a raw score for each characteristic is returned in
-                in addition to a normalized score. Raw scores are not compared with
-                a sample population. A raw sampling error for each characteristic
-                is also returned. Default: "false".
-        - language: The request language. Both English ("en") and Spanish ("es") are
-                supported.
-        - acceptLanguage: The desired language of the response. Both English ("en")
-                and Spanish ("es") are supported.
-        - completionHandler: A function invoked with the response from Watson.
+     Analyze text to generate a personality profile.
+ 
+     - parameter text: The text to analyze.
+     - parameter acceptLanguage: The desired language of the response.
+     - parameter contentLanguage: The language of the text being analyzed.
+     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+        addition to a normalized score. Raw scores are not compared with a sample population.
+        A raw sampling error for each characteristic is also returned.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        text: String,
+        text text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        completionHandler: (Profile?, NSError?) -> Void) {
-        
-        // construct url query parameters
-        var urlParams = [NSURLQueryItem]()
-        if let includeRaw = includeRaw {
-            urlParams.append(NSURLQueryItem(name: "include_raw", value: "\(includeRaw)"))
+        failure: (NSError -> Void)? = nil,
+        success: Profile -> Void)
+    {
+        guard let content = text.dataUsingEncoding(NSUTF8StringEncoding) else {
+            let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
         }
-            
-        // construct header parameters
-        var headerParams = [String: String]()
-        if let acceptLanguage = acceptLanguage {
-            headerParams["Accept-Language"] = acceptLanguage
-        }
-        if let contentLanguage = contentLanguage {
-            headerParams["Content-Language"] = contentLanguage
-        }
-            
-        // construct request
-        let request = WatsonRequest(
-            method: .POST,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.profile,
-            authStrategy: authStrategy,
-            accept: .JSON,
-            contentType: .Plain,
-            urlParams: urlParams,
-            headerParams: headerParams,
-            messageBody: text.dataUsingEncoding(NSUTF8StringEncoding))
-        
-        // execute request
-        gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
-            let profile = Mapper<Profile>().mapData(data)
-            completionHandler(profile, error)
-        }
+
+        getProfile(
+            content,
+            contentType: "text/plain",
+            acceptLanguage: acceptLanguage,
+            contentLanguage: contentLanguage,
+            includeRaw: includeRaw,
+            failure: failure,
+            success: success
+        )
     }
-    
+
     /**
-     Analyze input context items to generate a personality profile.
-     
-     - Parameters
-        - contentItems: The content items to analyze.
-        - includeRaw: If true, a raw score for each characteristic is returned in
-                in addition to a normalized score. Raw scores are not compared with
-                a sample population. A raw sampling error for each characteristic
-                is also returned. Default: "false".
-        - language: The request language. Both English ("en") and Spanish ("es") are
-                supported.
-        - acceptLanguage: The desired language of the response. Both English ("en")
-                and Spanish ("es") are supported.
-        - completionHandler: A function invoked with the response from Watson.
+     Analyze the text of a webpage to generate a personality profile.
+     The HTML tags are stripped before the text is analyzed.
+
+     - parameter html: The webpage that contains text to analyze.
+     - parameter acceptLanguage: The desired language of the response.
+     - parameter contentLanguage: The language of the text being analyzed.
+     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+        addition to a normalized score. Raw scores are not compared with a sample population.
+        A raw sampling error for each characteristic is also returned.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        contentItems: [ContentItem],
+        html html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        completionHandler: (Profile?, NSError?) -> Void) {
-            
-        // construct url query parameters
-        var urlParams = [NSURLQueryItem]()
-        if let includeRaw = includeRaw {
-            urlParams.append(NSURLQueryItem(name: "include_raw", value: "\(includeRaw)"))
+        failure: (NSError -> Void)? = nil,
+        success: Profile -> Void)
+    {
+        guard let content = html.dataUsingEncoding(NSUTF8StringEncoding) else {
+            let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
         }
-        
+
+        getProfile(
+            content,
+            contentType: "text/html",
+            acceptLanguage: acceptLanguage,
+            contentLanguage: contentLanguage,
+            includeRaw: includeRaw,
+            failure: failure,
+            success: success
+        )
+    }
+
+    /**
+     Analyze input content items to generate a personality profile.
+ 
+     - parameter contentItems: The content items to analyze.
+     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+        addition to a normalized score. Raw scores are not compared with a sample population.
+        A raw sampling error for each characteristic is also returned.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the personality profile.
+     */
+    public func getProfile(
+        contentItems contentItems: [ContentItem],
+        acceptLanguage: String? = nil,
+        contentLanguage: String? = nil,
+        includeRaw: Bool? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: Profile -> Void)
+    {
+        let items = contentItems.map { item in item.toJSON() }
+        let body = JSON.Dictionary(["contentItems": JSON.Array(items)])
+        guard let content = try? body.serialize() else {
+            let failureReason = "Content items could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: PersonalityInsights.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        getProfile(
+            content,
+            contentType: "application/json",
+            acceptLanguage: acceptLanguage,
+            contentLanguage: contentLanguage,
+            includeRaw: includeRaw,
+            failure: failure,
+            success: success
+        )
+    }
+
+
+    /**
+     Analyze content to generate a personality profile.
+ 
+     - parameter content: The content to analyze.
+     - parameter contentType: The MIME content-type of the content.
+     - parameter acceptLanguage: The desired language of the response.
+     - parameter contentLanguage: The language of the text being analyzed.
+     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+        addition to a normalized score. Raw scores are not compared with a sample population.
+        A raw sampling error for each characteristic is also returned.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the personality profile.
+     */
+    private func getProfile(
+        content: NSData?,
+        contentType: String,
+        acceptLanguage: String? = nil,
+        contentLanguage: String? = nil,
+        includeRaw: Bool? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: Profile -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        if let includeRaw = includeRaw {
+            let queryParameter = NSURLQueryItem(name: "include_raw", value: "\(includeRaw)")
+            queryParameters.append(queryParameter)
+        }
+
         // construct header parameters
-        var headerParams = [String: String]()
+        var headerParameters = [String: String]()
         if let acceptLanguage = acceptLanguage {
-            headerParams["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
         if let contentLanguage = contentLanguage {
-            headerParams["Content-Language"] = contentLanguage
+            headerParameters["Content-Language"] = contentLanguage
         }
-        
-        // construct request
-        let request = WatsonRequest(
+
+        // construct REST request
+        let request = RestRequest(
             method: .POST,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.profile,
-            authStrategy: authStrategy,
-            accept: .JSON,
-            contentType: .JSON,
-            urlParams: urlParams,
-            headerParams: headerParams,
-            messageBody: Mapper().toJSONData(contentItems, header: "contentItems"))
-        
-        // execute request
-        gateway.request(request, serviceError: PersonalityInsightsError()) { data, error in
-            let profile = Mapper<Profile>().mapData(data)
-            completionHandler(profile, error)
+            url: PersonalityInsights.profileURL,
+            acceptType: "application/json",
+            contentType: contentType,
+            queryParameters: queryParameters,
+            headerParameters: headerParameters,
+            messageBody: content
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseObject { (response: Response<Profile, NSError>) in
+                switch response.result {
+                case .Success(let profile): success(profile)
+                case .Failure(let error): failure?(error)
+                }
         }
     }
 }

@@ -18,158 +18,144 @@ import XCTest
 import WatsonDeveloperCloud
 
 class PersonalityInsightsTests: XCTestCase {
-    
-    // MARK: - Parameters and Constants
-    
-    // the PersonalityInsights service
-    var service: PersonalityInsights!
-    
-    // sample text
-    var mobyDickIntro: String!
-    var kennedySpeech: String!
-    
-    // timeout for asynchronous completion handlers
-    let timeout: NSTimeInterval = 30.0
-    
+
+    private var personalityInsights: PersonalityInsights!
+    private var mobyDickIntro: String!
+    private var kennedySpeech: String!
+    private var timeout: NSTimeInterval = 30
+
     // MARK: - Test Configuration
-    
-    // Load credentials, load sample files, and instantiate PersonalityInsights service
+
+    /** Set up for each test by loading text files and instantiating the service. */
     override func setUp() {
         super.setUp()
-        
-        // identify credentials file
+        continueAfterFailure = false
+        instantiatePersonalityInsights()
+        loadMobyDickIntro()
+        loadKennedySpeech()
+    }
+
+    /** Load "MobyDickIntro.txt". */
+    func loadMobyDickIntro() {
         let bundle = NSBundle(forClass: self.dynamicType)
-        guard let credentialsURL = bundle.pathForResource("Credentials", ofType: "plist") else {
-            XCTFail("Unable to locate credentials file.")
+        guard let file = bundle.pathForResource("MobyDickIntro", ofType: "txt") else {
+            XCTFail("Unable to locate MobyDickIntro.txt file.")
             return
         }
-        
-        // load credentials file
-        let dict = NSDictionary(contentsOfFile: credentialsURL)
-        guard let credentials = dict as? Dictionary<String, String> else {
-            XCTFail("Unable to read credentials file.")
+
+        mobyDickIntro = try? String(contentsOfFile: file)
+        guard mobyDickIntro != nil else {
+            XCTFail("Unable to read MobyDickIntro.txt file.")
             return
-        }
-        
-        // identify the sample text files
-        guard let mobyDickIntroURL = bundle.pathForResource("MobyDickIntro", ofType: "txt") else {
-            XCTFail("Unable to locate MobyDickIntro file.")
-            return
-        }
-        guard let kennedySpeechURL = bundle.pathForResource("KennedySpeech", ofType: "txt") else {
-            XCTFail("Unable to locate KennedySpeech file.")
-            return
-        }
-        
-        // load sample text files
-        do {
-            mobyDickIntro = try String(contentsOfFile: mobyDickIntroURL)
-            kennedySpeech = try String(contentsOfFile: kennedySpeechURL)
-        } catch {
-            XCTFail("Unable to read sample text files.")
-        }
-        
-        // read PersonalityInsights username
-        guard let user = credentials["PersonalityInsightsUsername"] else {
-            XCTFail("Unable to read Personality Insights username.")
-            return
-        }
-        
-        // read PersonalityInsights password
-        guard let password = credentials["PersonalityInsightsPassword"] else {
-            XCTFail("Unable to read Personality Insights password.")
-            return
-        }
-        
-        // instantiate the service
-        if service == nil {
-            service = PersonalityInsights(username: user, password: password)
         }
     }
-    
-    // Wait for an expectation to be fulfilled.
-    func waitForExpectation() {
+
+    /** Load "KennedySpeech.txt." */
+    func loadKennedySpeech() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let file = bundle.pathForResource("KennedySpeech", ofType: "txt") else {
+            XCTFail("Unable to locate KennedySpeech.txt file.")
+            return
+        }
+
+        kennedySpeech = try? String(contentsOfFile: file)
+        guard kennedySpeech != nil else {
+            XCTFail("Unable to read KennedySpeech.txt file.")
+            return
+        }
+    }
+
+    /** Instantiate Personality Insights. */
+    func instantiatePersonalityInsights() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard
+            let file = bundle.pathForResource("Credentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
+            let username = credentials["PersonalityInsightsUsername"],
+            let password = credentials["PersonalityInsightsPassword"]
+        else {
+            XCTFail("Unable to read credentials.")
+            return
+        }
+        personalityInsights = PersonalityInsights(username: username, password: password)
+    }
+
+    /** Fail false negatives. */
+    func failWithError(error: NSError) {
+        XCTFail("Positive test failed with error: \(error)")
+    }
+
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+
+    /** Wait for expectations. */
+    func waitForExpectations() {
         waitForExpectationsWithTimeout(timeout) { error in
-            XCTAssertNil(error, "Timeout.")
+            XCTAssertNil(error)
         }
     }
     
     // MARK: - Positive Tests
     
-    // Analyze the text of Kennedy's speech.
+    /** Analyze the text of Kennedy's speech. */
     func testProfile() {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = expectationWithDescription(description)
-        
-        // analyze speech
-        service.getProfile(kennedySpeech) { profile, error in
-            
-            // verify expected response
-            XCTAssertNotNil(profile)
-            XCTAssertNil(error)
-            
-            // ensure profile is as expected
-            XCTAssertNotNil(profile, "Profile should not be nil")
-            XCTAssertEqual("root", profile!.tree!.name, "Tree root should be named root")
-            
+
+        personalityInsights.getProfile(text: kennedySpeech, failure: failWithError) { profile in
+            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
             expectation.fulfill()
         }
-        waitForExpectation()
+        waitForExpectations()
     }
     
-    // Analyze a content item.
+    /** Analyze content items. */
     func testContentItem() {
-        let description = "Analyze a content item."
+        let description = "Analyze content items."
         let expectation = expectationWithDescription(description)
-        
-        // define content item
+
         let contentItem = PersonalityInsights.ContentItem(
-            ID: "245160944223793152",
+            id: "245160944223793152",
             userID: "Bob",
             sourceID: "Twitter",
             created: 1427720427,
             updated: 1427720427,
-            contentType: MediaType.Plain.rawValue,
-            charset: "UTF-8",
-            language: "en-us",
+            contentType: "text/plain",
+            language: "en",
             content: kennedySpeech,
             parentID: "",
             reply: false,
-            forward: false)
-        
-        // analyze duplicate content items
-        service.getProfile([contentItem, contentItem]) { profile, error in
-            
-            // verify expected response
-            XCTAssertNotNil(profile)
-            XCTAssertNil(error)
-            
-            // ensure profile is as expected
-            XCTAssertNotNil(profile, "Profile should not be nil")
-            XCTAssertEqual("root", profile!.tree!.name, "Tree root should be named root")
-            
+            forward: false
+        )
+
+        let contentItems = [contentItem, contentItem]
+        personalityInsights.getProfile(contentItems: contentItems, failure: failWithError) {
+            profile in
+            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
             expectation.fulfill()
         }
-        waitForExpectation()
+        waitForExpectations()
     }
-    
+
     // MARK: - Negative Tests
     
-    // Test getProfile() with text that is too short (less than 100 words).
+    /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
         let description = "Try to analyze text that is too short (less than 100 words)."
         let expectation = expectationWithDescription(description)
-        
-        service.getProfile(mobyDickIntro) { profile, error in
-            // verify expected response
-            XCTAssertNil(profile)
-            XCTAssertNotNil(error)
-            
-            // ensure error is as expected
-            XCTAssert(error!.code == 400)
-            
+
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
             expectation.fulfill()
         }
-        waitForExpectation()
+
+        personalityInsights.getProfile(
+            text: mobyDickIntro,
+            failure: failure,
+            success: failWithResult
+        )
+        waitForExpectations()
     }
 }

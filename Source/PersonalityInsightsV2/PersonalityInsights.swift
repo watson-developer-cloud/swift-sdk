@@ -32,7 +32,6 @@ public class PersonalityInsights {
     private static let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
     private static let profileURL = serviceURL + "/profile"
 
-    // TODO: Comment this initializer.
     public init(username: String, password: String) {
         self.username = username
         self.password = password

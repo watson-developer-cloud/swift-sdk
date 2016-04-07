@@ -12,6 +12,13 @@
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117501CB5988B009A4DA1 /* RestSerialization.swift */; };
+		7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117551CB598D9009A4DA1 /* ContentItem.swift */; };
+		7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117561CB598D9009A4DA1 /* Profile.swift */; };
+		7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */; };
+		7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117581CB598D9009A4DA1 /* PersonalityInsights.swift */; };
+		7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */; };
+		7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */; };
+		7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */; };
 		7A61176E1CB5ADC2009A4DA1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7A61176F1CB5ADC2009A4DA1 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7A6117701CB5ADC2009A4DA1 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; };
@@ -54,6 +61,14 @@
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
+		7A6117551CB598D9009A4DA1 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentItem.swift; sourceTree = "<group>"; };
+		7A6117561CB598D9009A4DA1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitTreeNode.swift; sourceTree = "<group>"; };
+		7A6117581CB598D9009A4DA1 /* PersonalityInsights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsights.swift; sourceTree = "<group>"; };
+		7A61175A1CB598D9009A4DA1 /* PersonalityInsightsError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsError.swift; sourceTree = "<group>"; };
+		7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
+		7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
+		7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsTests.swift; sourceTree = "<group>"; };
 		7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
@@ -84,6 +99,7 @@
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
+				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
@@ -129,6 +145,38 @@
 			);
 			name = RestKit;
 			path = Source/RestKit;
+			sourceTree = "<group>";
+		};
+		7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */ = {
+			isa = PBXGroup;
+			children = (
+				7A6117541CB598D9009A4DA1 /* Models */,
+				7A6117581CB598D9009A4DA1 /* PersonalityInsights.swift */,
+				7A61175A1CB598D9009A4DA1 /* PersonalityInsightsError.swift */,
+				7A61175B1CB598D9009A4DA1 /* Tests */,
+			);
+			name = PersonalityInsightsV2;
+			path = Source/PersonalityInsightsV2;
+			sourceTree = "<group>";
+		};
+		7A6117541CB598D9009A4DA1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A6117551CB598D9009A4DA1 /* ContentItem.swift */,
+				7A6117561CB598D9009A4DA1 /* Profile.swift */,
+				7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A61175B1CB598D9009A4DA1 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */,
+				7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */,
+				7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
+				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
+				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
+				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
+				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
+				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
+				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

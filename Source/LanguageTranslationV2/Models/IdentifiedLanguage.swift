@@ -15,26 +15,22 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 extension LanguageTranslation {
     
-    /// An identified language
-    public struct IdentifiedLanguage: Mappable {
+    /** An identified language. */
+    public struct IdentifiedLanguage: JSONDecodable {
         
-        /// The language
-        public var language: String?
+        /// The code of the identified language.
+        public let language: String
         
-        /// The confidence
-        public var confidence: Double?
+        /// The confidence score for the identified language.
+        public let confidence: Double
 
-        /// Used internally to initialize an `IdentifiedLanguage` from JSON.
-        public init?(_ map: Map) {}
-
-        /// Used internally to serialize and deserialize JSON.
-        public mutating func mapping(map: Map) {
-            language    <- map["language"]
-            confidence  <- map["confidence"]
+        public init(json: JSON) throws {
+            language = try json.string("language")
+            confidence = try json.double("confidence")
         }
     }
 }

@@ -15,22 +15,22 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 extension LanguageTranslation {
-    
-    /// A Language Translation custom model
-    internal struct CustomModel: Mappable {
+
+    /** A language that can be identified by the Language Translation service. */
+    public struct IdentifiableLanguage: JSONDecodable {
         
-        /// The base model that this translation model was trained on
-        var modelID: String?
+        /// The code of the identifiable language.
+        public let language: String
+        
+        /// The name of the identifiable language.
+        public let name: String
 
-        /// Used internally to initialize a `CustomModel` from JSON.
-        init?(_ map: Map) {}
-
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            modelID <- map["model_id"]
+        public init(json: JSON) throws {
+            language = try json.string("language")
+            name = try json.string("name")
         }
     }
 }

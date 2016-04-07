@@ -19,7 +19,7 @@ import ObjectMapper
 
 extension LanguageTranslation {
     
-    /// A translation model
+    /** A translation model that can be used to translate between a source and target language. */
     public struct TranslationModel: Mappable {
         
         /// If this model is a custom model, this returns the base model that it is trained on. For a base model, this response value is empty.

@@ -17,7 +17,7 @@
 import Foundation
 import ObjectMapper
 
-extension PersonalityInsights {
+extension PersonalityInsightsV2 {
     
     internal struct PersonalityInsightsError: WatsonError {
         var code: Int!

@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension PersonalityInsights {
+extension PersonalityInsightsV2 {
 
     /** Detailed results for a specific characteristic of the input text. */
     public struct TraitTreeNode: JSONDecodable {

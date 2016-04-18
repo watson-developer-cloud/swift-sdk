@@ -19,10 +19,10 @@ import WatsonDeveloperCloud
 
 class PersonalityInsightsTests: XCTestCase {
 
-    private var personalityInsights: PersonalityInsights!
+    private var personalityInsights: PersonalityInsightsV2!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
-    private var timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 30
 
     // MARK: - Test Configuration
 
@@ -77,7 +77,7 @@ class PersonalityInsightsTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        personalityInsights = PersonalityInsights(username: username, password: password)
+        personalityInsights = PersonalityInsightsV2(username: username, password: password)
     }
 
     /** Fail false negatives. */
@@ -116,7 +116,7 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze content items."
         let expectation = expectationWithDescription(description)
 
-        let contentItem = PersonalityInsights.ContentItem(
+        let contentItem = PersonalityInsightsV2.ContentItem(
             id: "245160944223793152",
             userID: "Bob",
             sourceID: "Twitter",

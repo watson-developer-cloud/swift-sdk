@@ -23,7 +23,7 @@ import Freddy
  of cognitive and social characteristics from the text data that a person generates
  through blogs, tweets, forum posts, and more.
  */
-public class PersonalityInsights {
+public class PersonalityInsightsV2 {
     
     private let username: String
     private let password: String

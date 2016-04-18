@@ -16,343 +16,316 @@
 
 import Foundation
 import Alamofire
-import ObjectMapper
 
-/// The IBM Watson Language Translation service translates text from one language
-/// to another and identifies the language in which text is written.
-public class LanguageTranslation: WatsonService {
-    
-    // The shared WatsonGateway singleton.
-    let gateway = WatsonGateway.sharedInstance
-    
-    // The authentication strategy to obtain authorization tokens.
-    let authStrategy: AuthenticationStrategy
+/**
+ The Watson Language Translation service provides domain-specific translation utilizing
+ Statistical Machine Translation techniques that have been perfected in our research labs
+ over the past few decades.
+ */
+public class LanguageTranslationV2 {
 
-    // TODO: comment this initializer
-    public required init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
+    private let username: String
+    private let password: String
+
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+
+    public init(username: String, password: String) {
+        self.username = username
+        self.password = password
     }
 
-    // TODO: comment this initializer
-    public convenience required init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
-            serviceURL: Constants.serviceURL, username: username, password: password)
-        self.init(authStrategy: authStrategy)
-    }
-    
-    /**
-     Retrieves the list of identifiable languages
-     
-     - parameter completionHandler: callback method that is invoked with the
-                                        identifiable languages
-     */
-    public func getIdentifiableLanguages(
-        completionHandler: ([IdentifiableLanguage]?, NSError?) -> Void) {
-        
-        // construct request
-        let request = WatsonRequest(
-            method: .GET,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.identifiableLanguages,
-            authStrategy: authStrategy,
-            accept: .JSON)
-        
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let languages = Mapper<IdentifiableLanguage>().mapDataArray(data, keyPath: "languages")
-            completionHandler(languages, error)
-        }
-    }
-    
-    /**
-     Identify the language in which text is written
-     
-     - parameter text:              the text to identify
-     - parameter completionHandler: the callback method to be invoked with an array of
-                                        identified languages in descending order of
-                                        confidence
-     */
-    public func identify(text: String,
-        completionHandler: ([IdentifiedLanguage]?, NSError?) -> Void) {
-            
-        // construct request
-        let request = WatsonRequest(
-            method: .GET,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.identify,
-            authStrategy: authStrategy,
-            accept: .JSON,
-            urlParams: [NSURLQueryItem(name: "text", value: text)])
-        
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let languages = Mapper<IdentifiedLanguage>().mapDataArray(data, keyPath: "languages")
-            completionHandler(languages, error)
-        }
-    }
-    
-    /**
-     Translate text using source and target languages
-     
-     - parameter text:              The text to translate
-     - parameter source:            The language that the original text is written in
-     - parameter target:            The language that the text will be translated into
-     - parameter completionHandler: The callback method that is invoked with the
-     translated strings
-     */
-    public func translate(text: String, source: String, target: String,
-        completionHandler: (String?, NSError?) -> Void) {
-            
-        translate(TranslateRequest(text: [text], source: source, target: target)) {
-            text, error in
-            guard let text = text else {
-                completionHandler(nil, error)
-                return
-            }
-            var translation = text[0]
-            for i in 1..<text.count {
-                translation += " " + text[i]
-            }
-            completionHandler(translation, error)
-        }
-    }
-    
-    /**
-     Translate text using a model specified by modelID
-     
-     - parameter text:              The text to translate
-     - parameter modelID:           The ID of the model that should be used for
-     translation parameters
-     - parameter completionHandler: The callback method that is invoked with the
-     translated strings
-     */
-    public func translate(text: String, modelID: String,
-        completionHandler: (String?, NSError?) -> Void) {
-            
-        translate(TranslateRequest(text: [text], modelID: modelID)) {
-            text, error in
-            guard let text = text else {
-                completionHandler(nil, error)
-                return
-            }
-            var translation = text[0]
-            for i in 1..<text.count {
-                translation += " " + text[i]
-            }
-            completionHandler(translation, error)
-        }
-    }
-    
-    /**
-     Translate text using source and target languages
-     
-     - parameter text:              The text to translate
-     - parameter source:            The language that the original text is written in
-     - parameter target:            The language that the text will be translated into
-     - parameter completionHandler: The callback method that is invoked with the
-                                        translated strings
-     */
-    public func translate(text: [String], source: String, target: String,
-        completionHandler: ([String]?, NSError?) -> Void) {
-        
-        translate(TranslateRequest(text: text, source: source, target: target),
-            completionHandler: completionHandler)
-    }
-    
-    /**
-     Translate text using a model specified by modelID
-     
-     - parameter text:              The text to translate
-     - parameter modelID:           The ID of the model that should be used for
-                                        translation parameters
-     - parameter completionHandler: The callback method that is invoked with the
-                                        translated strings
-     */
-    public func translate(text: [String], modelID: String,
-        completionHandler: ([String]?, NSError?) -> Void) {
-        
-        translate(TranslateRequest(text: text, modelID: modelID),
-            completionHandler: completionHandler)
-    }
-    
-    /**
-     Translate text given a `TranslateRequest`.
-     - parameter translateRequest: The TranslateRequest object to be used in the body
-                                        of the HTTP request.
-     - parameter completionHandler: The callback method that is invoked with the
-                                        translated strings.
-     */
-    private func translate(translateRequest: TranslateRequest,
-        completionHandler: ([String]?, NSError?) -> Void) {
-        
-        // construct request
-        let request = WatsonRequest(
-            method: .POST,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.translate,
-            authStrategy: authStrategy,
-            accept: .JSON,
-            contentType: .JSON,
-            messageBody: Mapper().toJSONData(translateRequest))
-        
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let translations = Mapper<TranslateResponse>().mapData(data)?.translationStrings
-            completionHandler(translations, error)
-        }
-    }
-    
-    /**
-     Lists available standard and custom models by source or target language
-     
-     - parameter source:       Filter models by source language.
-     - parameter target:       Filter models by target language.
-     - parameter defaultModel: Valid values are leaving it unset, 'true' and 'false'. When 'true', it filters models to return the default model or models. When 'false' it returns the non-default model or models. If not set, all models (default and non-default) return.
-     - parameter callback:     The callback method to invoke after the response is received
-     */
-    public func getModels(source: String? = nil, target: String? = nil,
-        defaultModel: Bool? = nil, completionHandler: ([TranslationModel]?, NSError?) -> Void) {
+    // MARK: - Models
 
-        // construct url query parameters
-        var urlParams = [NSURLQueryItem]()
+    /**
+     List the available standard and custom models.
+     
+     - parameter source: Specify a source to filter models by source language.
+     - parameter target: Specify a target to filter models by target language.
+     - parameter defaultModelsOnly: Specify `true` to filter models by whether they are default.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
+    public func getModels(
+        source source: String? = nil,
+        target: String? = nil,
+        defaultModelsOnly: Bool? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: [TranslationModel] -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
         if let source = source {
-            urlParams.append(NSURLQueryItem(name: "source", value: "\(source)"))
+            let queryParameter = NSURLQueryItem(name: "source", value: "\(source)")
+            queryParameters.append(queryParameter)
         }
         if let target = target {
-            urlParams.append(NSURLQueryItem(name: "target", value: "\(target)"))
+            let queryParameter = NSURLQueryItem(name: "target", value: "\(target)")
+            queryParameters.append(queryParameter)
         }
-        if let defaultModel = defaultModel {
-            urlParams.append(NSURLQueryItem(name: "default", value: "\(defaultModel)"))
+        if let defaultModelsOnly = defaultModelsOnly {
+            let queryParameter = NSURLQueryItem(name: "default", value: "\(defaultModelsOnly)")
+            queryParameters.append(queryParameter)
         }
-            
-        // construct request
-        let request = WatsonRequest(
+
+        // construct REST request
+        let request = RestRequest(
             method: .GET,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.models,
-            authStrategy: authStrategy,
-            accept: .JSON,
-            urlParams: urlParams)
-            
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let models = Mapper<TranslationModel>().mapDataArray(data, keyPath: "models")
-            completionHandler(models, error)
-        }
-    }
-    
-    /**
-     Returns information, including training status, about a specified translation model.
-     
-     - parameter modelID:           The model identifier
-     - parameter completionHandler: The callback method to invoke after the response is received
-     */
-    public func getModel(modelID: String,
-        completionHandler: (TranslationModel?, NSError?) -> Void) {
-        
-        // construct request
-        let request = WatsonRequest(
-            method: .GET,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.model(modelID),
-            authStrategy: authStrategy,
-            accept: .JSON)
-        
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            let model = Mapper<TranslationModel>().mapData(data)
-            completionHandler(model, error)
-        }
-    }
-    
-    /**
-     Uploads a TMX glossary file on top of a domain to customize a translation model.
-     
-     - parameter baseModelID:        (Required). Specifies the domain model that is used as the base for the training.
-     - parameter name:               The model name. Valid characters are letters, numbers, -, and _. No spaces.
-     - parameter forcedGlossaryPath: (Required). A TMX file with your customizations. Anything specified in this file will completely overwrite the domain data translation.
-     - parameter callback:           Returns the created model
-     */
-    public func createModel(baseModelID: String, name: String? = nil, fileKey: String, fileURL: NSURL, completionHandler: (String?, NSError?) -> Void) {
-        
-        // force token to refresh
-        // TODO: can remove this after its handled by WatsonGateway
-        authStrategy.refreshToken() { error in
-            
-            // add token to header params
-            // TODO: can remove this after its handled by WatsonGateway
-            var headerParams = [String: String]()
-            if let token = self.authStrategy.token {
-                headerParams["X-Watson-Authorization-Token"] = token
+            url: serviceURL + "/v2/models",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseArray(path: ["models"]) { (response: Response<[TranslationModel], NSError>) in
+                switch response.result {
+                case .Success(let models): success(models)
+                case .Failure(let error): failure?(error)
+                }
             }
-            
-            // construct url query parameters
-            var urlParams = [NSURLQueryItem]()
-            urlParams.append(NSURLQueryItem(name: "base_model_id", value: baseModelID))
-            if let name = name {
-                urlParams.append(NSURLQueryItem(name: "name", value: name))
-            }
-            
-            // construct request
-            let request = WatsonRequest(
-                method: .POST,
-                serviceURL: Constants.serviceURL,
-                endpoint: Constants.models,
-                authStrategy: self.authStrategy,
-                accept: .JSON,
-                headerParams: headerParams,
-                urlParams: urlParams)
-            
-            // execute request
-            Alamofire.upload(request,
-                multipartFormData: { multipartFormData in
-                    // encode files as form data
-                    multipartFormData.appendBodyPart(fileURL: fileURL, name: fileKey)
-                },
-                encodingCompletion: { encodingResult in
-                    switch encodingResult {
-                    case .Success(let upload, _, _):
-                        // execute encoded request
-                        upload.responseObject {
-                            (response: Response<CustomModel, NSError>) in
-                            let unwrapID = {
-                                (customModel: CustomModel?, error: NSError?) in
-                                completionHandler(customModel?.modelID, error) }
-                            print(response)
-                            validate(response, serviceError: LanguageTranslationError(),
-                                completionHandler: unwrapID)
+    }
+
+    public func createModel(
+        baseModelID: String,
+        name: String? = nil,
+        forcedGlossary: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: String -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: "\(baseModelID)"))
+        if let name = name {
+            let queryParameter = NSURLQueryItem(name: "name", value: "\(name)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v2/models",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: forcedGlossary, name: "forced_glossary")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.validate()
+                    upload.responseObject(path: ["model_id"]) {
+                        (response: Response<String, NSError>) in
+                        switch response.result {
+                        case .Success(let modelID): success(modelID)
+                        case .Failure(let error): failure?(error)
                         }
-                    case .Failure:
-                        // construct and return error
-                        let nsError = NSError(
-                            domain: "com.alamofire.error",
-                            code: -6008,
-                            userInfo: [NSLocalizedDescriptionKey:
-                                "Unable to encode data as multipart form."])
-                        completionHandler(nil, nsError)
                     }
-            })
-        }
+                case .Failure:
+                    let failureReason = "Forced glossary could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
     }
-    
-    /**
-     Delete a translation model
-     
-     - parameter modelID:           The model identifier
-     - parameter completionHandler: The callback method to invoke after the response is received, returns true if delete is successful
-     */
-    public func deleteModel(modelID: String, completionHandler: NSError? -> Void) {
-        
-        // construct request
-        let request = WatsonRequest(
+
+    public func deleteModel(
+        modelID: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
             method: .DELETE,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.model(modelID),
-            authStrategy: authStrategy)
-        
-        // execute request
-        gateway.request(request, serviceError: LanguageTranslationError()) { data, error in
-            completionHandler(error)
+            url: serviceURL + "/v2/models/\(modelID)",
+            acceptType: "application/json"
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success: success?()
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+
+    public func getModel(
+        modelID: String,
+        failure: (NSError -> Void)? = nil,
+        success: MonitorTraining -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v2/models/\(modelID)",
+            acceptType: "application/json"
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseObject { (response: Response<MonitorTraining, NSError>) in
+                switch response.result {
+                case .Success(let monitorTraining): success(monitorTraining)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+
+    // MARK: - Translate
+
+    public func translate(
+        text: String,
+        modelID: String,
+        failure: (NSError -> Void)? = nil,
+        success: TranslateResponse -> Void)
+    {
+        let translateRequest = TranslateRequest(text: [text], modelID: modelID)
+        translate(translateRequest, failure: failure, success: success)
+    }
+
+    public func translate(
+        text: [String],
+        modelID: String,
+        failure: (NSError -> Void)? = nil,
+        success: TranslateResponse -> Void)
+    {
+        let translateRequest = TranslateRequest(text: text, modelID: modelID)
+        translate(translateRequest, failure: failure, success: success)
+    }
+
+    public func translate(
+        text: String,
+        source: String,
+        target: String,
+        failure: (NSError -> Void)? = nil,
+        success: TranslateResponse -> Void)
+    {
+        let translateRequest = TranslateRequest(text: [text], source: source, target: target)
+        translate(translateRequest, failure: failure, success: success)
+    }
+
+    public func translate(
+        text: [String],
+        source: String,
+        target: String,
+        failure: (NSError -> Void)? = nil,
+        success: TranslateResponse -> Void)
+    {
+        let translateRequest = TranslateRequest(text: text, source: source, target: target)
+        translate(translateRequest, failure: failure, success: success)
+    }
+
+    private func translate(
+        translateRequest: TranslateRequest,
+        failure: (NSError -> Void)? = nil,
+        success: TranslateResponse -> Void)
+    {
+        // serialize translate request to JSON
+        guard let body = try? translateRequest.toJSON().serialize() else {
+            let failureReason = "Translation request could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
         }
+
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v2/translate",
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseObject { (response: Response<TranslateResponse, NSError>) in
+                switch response.result {
+                case .Success(let translateResponse): success(translateResponse)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+
+
+    // MARK: - Identify
+
+    public func getIdentifiableLanguages(
+        failure: (NSError -> Void)? = nil,
+        success: [IdentifiableLanguage] -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v2/identifiable_languages",
+            contentType: "application/json"
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseArray(path: ["languages"]) {
+                (response: Response<[IdentifiableLanguage], NSError>) in
+                switch response.result {
+                case .Success(let languages): success(languages)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+
+    public func identify(
+        text: String,
+        failure: (NSError -> Void)? = nil,
+        success: [IdentifiedLanguage] -> Void)
+    {
+        // convert text to NSData with UTF-8 encoding
+        guard let body = text.dataUsingEncoding(NSUTF8StringEncoding) else {
+            let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v2/identify",
+            acceptType: "application/json",
+            contentType: "text/plain",
+            messageBody: body
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .validate()
+            .responseArray(path: ["languages"]) {
+                (response: Response<[IdentifiedLanguage], NSError>) in
+                switch response.result {
+                case .Success(let languages): success(languages)
+                case .Failure(let error): failure?(error)
+                }
+            }
     }
 }

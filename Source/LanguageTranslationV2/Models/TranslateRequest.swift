@@ -15,37 +15,63 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension LanguageTranslation {
+extension LanguageTranslationV2 {
     
-    /// A translation request
-    internal struct TranslateRequest: Mappable {
-        var modelID: String?
-        var source: String?
-        var target: String?
-        var text: [String]?
-        
+    /** A request to translate input text from a source language to a target language. */
+    internal struct TranslateRequest: JSONEncodable {
+
+        private let modelID: String?
+        private let source: String?
+        private let target: String?
+        private let text: [String]
+
+        /**
+         Initialize a translation request with input text and a model id.
+ 
+         - parameter text: Input text in UTF-8 encoding. It is a list so that multiple
+            sentences/paragraphs can be submitted.
+         - parameter modelID: The unique modelID of the translation model being used to
+            translate text. The modelID inherently specifies source language, target
+            language and domain.
+ 
+         - returns: An initialized `TranslateRequest` that represents a translation
+            request to the Language Translation service.
+         */
         init(text: [String], modelID: String) {
-            self.text = text
             self.modelID = modelID
-        }
-        
-        init(text: [String], source: String, target: String) {
+            self.source = nil
+            self.target = nil
             self.text = text
+        }
+
+        /**
+         Initialize a translation request with input text, a source language, and a
+         target language.
+ 
+         - parameter text: Input text in UTF-8 encoding. It is a list so that multiple
+            sentences/paragraphs can be submitted.
+         - parameter source: The source language of the input text.
+         - parameter target: The target language that the input text will be translated to.
+ 
+         - returns: An initialized `TranslateRequest` that represents a translation
+            request to the Language Translation service.
+         */
+        init(text: [String], source: String, target: String) {
+            self.modelID = nil
             self.source = source
             self.target = target
+            self.text = text
         }
 
-        /// Used internally to initialize a `TranslateRequest` from JSON.
-        init?(_ map: Map) {}
-
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            modelID <- map["model_id"]
-            source  <- map["source"]
-            target  <- map["target"]
-            text    <- map["text"]
+        func toJSON() -> JSON {
+            var json = [String: JSON]()
+            if let modelID = modelID { json["model_id"] = .String(modelID) }
+            if let source = source { json["source"] = .String(source) }
+            if let target = target { json["target"] = .String(target) }
+            json["text"] = .Array(text.map { text in .String(text) })
+            return JSON.Dictionary(json)
         }
     }
 }

@@ -17,7 +17,7 @@
 import Foundation
 import ObjectMapper
 
-extension LanguageTranslation {
+extension LanguageTranslationV2 {
     
     internal struct LanguageTranslationError: WatsonError {
         var errorCode: Int!

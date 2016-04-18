@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension LanguageTranslation {
+extension LanguageTranslationV2 {
     
     /** An identified language. */
     public struct IdentifiedLanguage: JSONDecodable {
@@ -25,7 +25,7 @@ extension LanguageTranslation {
         /// The code of the identified language.
         public let language: String
         
-        /// The confidence score for the identified language.
+        /// The confidence score of the identified language.
         public let confidence: Double
 
         public init(json: JSON) throws {

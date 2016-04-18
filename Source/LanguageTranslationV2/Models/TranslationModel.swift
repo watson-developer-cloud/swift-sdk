@@ -15,57 +15,68 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension LanguageTranslation {
-    
+extension LanguageTranslationV2 {
+
     /** A translation model that can be used to translate between a source and target language. */
-    public struct TranslationModel: Mappable {
-        
-        /// If this model is a custom model, this returns the base model that it is trained on. For a base model, this response value is empty.
-        public var baseModelID: String?
-        
-        /// Whether this model can be used as a base for customization.
-        public var customizable: Bool?
-        
-        /// Whether this model is considered a default model and is used when the source and target languages are specified without the model_id.
-        public var defaultModel: Bool?
-        
+    public struct TranslationModel: JSONDecodable {
+
+        /// A globally unique string that identifies the underllying model that is used for
+        /// translation. This string contains all the information about source language,
+        /// target language, domain, and various other related configurations.
+        public let modelID: String
+
+        /// If a model is trained by a user, there might be an optional "name" parameter
+        /// attached during training to help the user identify the model.
+        public let name: String
+
+        /// Source language in two-letter language code. Use the five letter code when clarifying
+        /// between multiple supported languages. When `modelID` is used directly, it will
+        /// override the source-target language combination. Also, when a two-letter language
+        /// code is used, but no suitable default is found, it returns an error.
+        public let source: String
+
+        /// Target language in two-letter language code.
+        public let target: String
+
+        /// If this model is a custom model, this returns the base model that it is trained on.
+        /// For a base model, this response value is empty.
+        public let baseModelID: String
+
         /// The domain of the translation model.
-        public var domain: String?
-        
-        /// A globally unique string that identifies the underlying model that is used for translation. This string contains all the information about source language, target language, domain, and various other related configurations.
-        public var modelID: String?
-        
-        /// If a model is trained by a user, there might be an optional “name” parameter attached during training to help the user identify the model.
-        public var name: String?
-        
-        /// Returns the bluemix-instance-id of the instance that created the model, or an empty string, if it’s a model that is trained by IBM.
-        public var owner: String?
-        
-        /// Source language in two letter language code. Use the five letter code when clarifying between multiple supported languages. When model_id is used directly, it will override the source-target language combination. Also, when a two letter language code is used, but no suitable default is found, it returns an error.
-        public var source: String?
-        
-        /// Availability of a model.
-        public var status: String?
-        
-        /// Target language in two letter language code.
-        public var target: String?
+        public let domain: String
 
-        /// Used internally to initialize a `TranslationModel` from JSON.
-        public init?(_ map: Map) {}
+        /// Whether this model can be used as a base for customization.
+        public let customizable: Bool
 
-        /// Used internally to serialize and deserialize JSON.
-        public mutating func mapping(map: Map) {
-            baseModelID     <- map["base_model_id"]
-            customizable    <- map["customizable"]
-            defaultModel    <- map["default"]
-            domain          <- map["domain"]
-            modelID         <- map["model_id"]
-            name            <- map["name"]
-            owner           <- map["owner"]
-            status          <- map["status"]
-            target          <- map["target"]
+        /// Whether this model is considered a default model and is used when the source and
+        /// target languages are specified without the `modelID`.
+        public let defaultModel: Bool
+
+        /// Returns the Bluemix ID of the instance that created the model, or an empty
+        /// string if it is a model that is trained by IBM.
+        public let owner: String
+
+        /// Availability of model (available, training, or error).
+        public let status: TrainingStatus
+
+        public init(json: JSON) throws {
+            modelID = try json.string("model_id")
+            name = try json.string("name")
+            source = try json.string("source")
+            target = try json.string("target")
+            baseModelID = try json.string("base_model_id")
+            domain = try json.string("domain")
+            customizable = try json.bool("customizable")
+            defaultModel = try json.bool("default_model")
+            owner = try json.string("owner")
+
+            guard let status = TrainingStatus(rawValue: try json.string("status")) else {
+                let type = TrainingStatus.Available.dynamicType
+                throw JSON.Error.ValueNotConvertible(value: json, to: type)
+            }
+            self.status = status
         }
     }
 }

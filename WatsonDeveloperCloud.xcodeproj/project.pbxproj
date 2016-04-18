@@ -25,16 +25,16 @@
 		7A6117721CB5ADD2009A4DA1 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A6117731CB5ADD2009A4DA1 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A6117741CB5ADD2009A4DA1 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A61179E1CB6D3F2009A4DA1 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */; };
-		7A61179F1CB6D3F2009A4DA1 /* LanguageTranslationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117931CB6D3F2009A4DA1 /* LanguageTranslationConstants.swift */; };
-		7A6117A01CB6D3F2009A4DA1 /* LanguageTranslationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117941CB6D3F2009A4DA1 /* LanguageTranslationError.swift */; };
-		7A6117A11CB6D3F2009A4DA1 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
-		7A6117A21CB6D3F2009A4DA1 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
-		7A6117A31CB6D3F2009A4DA1 /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */; };
-		7A6117A41CB6D3F2009A4DA1 /* TranslateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */; };
-		7A6117A51CB6D3F2009A4DA1 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */; };
-		7A6117A61CB6D3F2009A4DA1 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */; };
-		7A6117A71CB6D3F2009A4DA1 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */; };
+		7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
+		7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
+		7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
+		7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */; };
+		7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */; };
+		7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */; };
+		7ADEC3EF1CBF081200A84C35 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */; };
+		7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */; };
+		7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */; };
+		7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +83,6 @@
 		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
-		7A6117931CB6D3F2009A4DA1 /* LanguageTranslationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationConstants.swift; sourceTree = "<group>"; };
 		7A6117941CB6D3F2009A4DA1 /* LanguageTranslationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationError.swift; sourceTree = "<group>"; };
 		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
@@ -92,6 +91,8 @@
 		7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
 		7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
 		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationTests.swift; sourceTree = "<group>"; };
+		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorTraining.swift; sourceTree = "<group>"; };
+		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */,
-				7A6117931CB6D3F2009A4DA1 /* LanguageTranslationConstants.swift */,
 				7A6117941CB6D3F2009A4DA1 /* LanguageTranslationError.swift */,
 				7A6117951CB6D3F2009A4DA1 /* Models */,
 				7A61179B1CB6D3F2009A4DA1 /* Tests */,
@@ -218,6 +218,8 @@
 			children = (
 				7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */,
 				7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */,
+				7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */,
+				7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */,
 				7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */,
 				7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */,
 				7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */,
@@ -327,7 +329,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A6117A61CB6D3F2009A4DA1 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +339,7 @@
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
+				7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,21 +350,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ADEC3EF1CBF081200A84C35 /* TranslationModel.swift in Sources */,
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
-				7A61179F1CB6D3F2009A4DA1 /* LanguageTranslationConstants.swift in Sources */,
+				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
-				7A6117A21CB6D3F2009A4DA1 /* IdentifiedLanguage.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
-				7A6117A51CB6D3F2009A4DA1 /* TranslationModel.swift in Sources */,
-				7A6117A41CB6D3F2009A4DA1 /* TranslateResponse.swift in Sources */,
+				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
-				7A6117A01CB6D3F2009A4DA1 /* LanguageTranslationError.swift in Sources */,
+				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
+				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
+				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
-				7A6117A31CB6D3F2009A4DA1 /* TranslateRequest.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
-				7A6117A71CB6D3F2009A4DA1 /* LanguageTranslationTests.swift in Sources */,
-				7A61179E1CB6D3F2009A4DA1 /* LanguageTranslation.swift in Sources */,
-				7A6117A11CB6D3F2009A4DA1 /* IdentifiableLanguage.swift in Sources */,
+				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
+				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
+				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

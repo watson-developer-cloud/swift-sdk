@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension LanguageTranslation {
+extension LanguageTranslationV2 {
 
     /** A language that can be identified by the Language Translation service. */
     public struct IdentifiableLanguage: JSONDecodable {

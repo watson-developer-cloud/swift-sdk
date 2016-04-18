@@ -18,224 +18,276 @@ import XCTest
 import WatsonDeveloperCloud
 
 class LanguageTranslationTests: XCTestCase {
-    /// Language translation service
-    private var service: LanguageTranslation!
-    
-    /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
-    
+
+    private var languageTranslation: LanguageTranslationV2!
+    private let timeout: NSTimeInterval = 30
+
+    // MARK: - Test Configuration
+
+    /** Set up for each test by instantiating the service. */
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                    let username = dict["LanguageTranslationUsername"]!
-                    let password = dict["LanguageTranslationPassword"]!
-                    if service == nil {
-                        service = LanguageTranslation(username: username, password: password)
-                    }
-            } else {
-                XCTFail("Unable to extract dictionary from plist")
-            }
-        } else {
-            XCTFail("Plist file not found")
+        continueAfterFailure = false
+        instantiateLanguageTranslation()
+    }
+
+    /** Instantiate Language Translation. */
+    func instantiateLanguageTranslation() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard
+            let file = bundle.pathForResource("Credentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
+            let username = credentials["LanguageTranslationUsername"],
+            let password = credentials["LanguageTranslationPassword"]
+        else {
+            XCTFail("Unable to read credentials.")
+            return
         }
+        languageTranslation = LanguageTranslationV2(username: username, password: password)
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+
+    /** Fail false negatives. */
+    func failWithError(error: NSError) {
+        XCTFail("Positive test failed with error: \(error)")
     }
-    
-    func testIdentifiableLanguages() {
-        let expectation = expectationWithDescription("Identifiable Languages")
-        
-          service.getIdentifiableLanguages({(languages:[LanguageTranslation.IdentifiableLanguage]?, error) in
-            XCTAssertNotNil(languages,"Expected non-nil array of identifiable languages to be returned")
-            XCTAssertGreaterThan(languages!.count,0,"Expected at least 1 identifiable language to be returned")
-            expectation.fulfill()
-        })
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
     }
-    
-    func testIdentify() {
-        let emptyExpectation = expectationWithDescription("Empty")
-        let validExpectation = expectationWithDescription("Valid")
-        
-        service.identify("") { languages, error in
-            XCTAssertNil(languages, "Expected empty result when passing in an empty string to identify()")
-            emptyExpectation.fulfill()
-        }
-        
-        service.identify("hola") { languages, error in
-            if let firstLanguage = languages?.first {
-                XCTAssertEqual(firstLanguage.language,"es", "Expected 'hola' to be identified as 'es' language")
-            }
-            else {
-                XCTFail("Identified languages returned empty array")
-            }
-            validExpectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
-    func testTranslateStringWithSourceAndTarget() {
-        let description = "Translate a single string using source and target languages."
-        let expectation = expectationWithDescription(description)
-        
-        service.translate("Hello", source: "en", target: "es") { text, error in
-            XCTAssertNotNil(text)
-            XCTAssertEqual(text!, "Hola")
+
+    /** Wait for expectations. */
+    func waitForExpectations() {
+        waitForExpectationsWithTimeout(timeout) { error in
             XCTAssertNil(error)
-            expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
     }
-    
-    func testTranslateStringWithModelID() {
-        let description = "Translate a single string using a model specified by model id."
+
+    // MARK: - Positive Tests
+
+    /** Get all models. */
+    func testGetModelsAll() {
+        let description = "Get all models."
         let expectation = expectationWithDescription(description)
-        
-        service.translate("Hello", modelID: "en-es-conversational") { text, error in
-            XCTAssertNotNil(text)
-            XCTAssertEqual(text!, "Hola")
-            XCTAssertNil(error)
+
+        languageTranslation.getModels(failure: failWithError) { models in
+            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(timeout) { error in XCTAssertNil(error, "Timeout") }
+        waitForExpectations()
     }
-    
-    func testTranslation() {
-        let sourceTargetExpectation = expectationWithDescription("Source and Target Translation")
-        let modelExpectation = expectationWithDescription("Model Translation")
-        
-        service.translate(["Hello","House"],source:"en",target:"es") { text, error in
-            
-            XCTAssertNotNil(text, "Expected non-empty array to be returned")
-            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to hola")
-            XCTAssertEqual(text!.last!,"Casa","Expected house to translate to casa")
-            sourceTargetExpectation.fulfill()
+
+    /** Get models, filtered by source language. */
+    func testGetModelsBySourceLanguage() {
+        let description = "Get models, filtered by source language."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.getModels(source: "es", failure: failWithError) { models in
+            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+            expectation.fulfill()
         }
-        
-        service.translate(["Hello"],modelID:"en-es") { text, error in
-            
-            XCTAssertNotNil(text, "Expected non-empty array to be returned")
-            XCTAssertEqual(text!.first!,"Hola","Expected hello to translate to Hola")
-            modelExpectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        waitForExpectations()
     }
-    
-    func testGetModels() {
-        let allExpectation = expectationWithDescription("Get All Models")
-        let sourceExpectation = expectationWithDescription("Get Models by Source")
-        let targetExpectation = expectationWithDescription("Get Models by Target")
-        let defaultModelExpectation = expectationWithDescription("Get Models by Default")
-        
-        service.getModels() { models, error in
-            XCTAssertGreaterThan(models!.count,0,"Expected at least 1 model to be returned")
-            allExpectation.fulfill()
+
+    /** Get models, filtered by target language. */
+    func testGetModelsByTargetLanguage() {
+        let description = "Get models, filtered by target language."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.getModels(target: "pt", failure: failWithError) { models in
+            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+            expectation.fulfill()
         }
-        
-        service.getModels("es") { models, error in
-            XCTAssertEqual(models!.count, 4, "Expected exactly 4 models to be returned")
-            sourceExpectation.fulfill()
-        }
-        
-        service.getModels(target:"pt") { models, error in
-            XCTAssertNotNil(models, "Expected models to be returned")
-            XCTAssertEqual(models!.count,2,"Expected exactly 2 models to be returned")
-            targetExpectation.fulfill()
-        }
-        
-        service.getModels(defaultModel:true) { models, error in
-            XCTAssertNotNil(models, "Expected models to be returned")
-            XCTAssertGreaterThanOrEqual(models!.count, 8, "Expected at least 8 models to be returned")
-            defaultModelExpectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        waitForExpectations()
     }
-    
-    func testCreateModel() {
-        let creationDescription = "Create a model."
+
+    /** Get models, filtered by default models. */
+    func testGetModelsDefault() {
+        let description = "Get models, filtered to include only default models."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.getModels(defaultModelsOnly: true, failure: failWithError) { models in
+            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Create and delete a custom model. */
+    func testCreateDeleteModel() {
+        let creationDescription = "Create a custom language model."
         let creationExpectation = expectationWithDescription(creationDescription)
-        let deletionDescription = "Delete the model."
+        let deletionDescription = "Delete the custom language model."
         let deletionExpectation = expectationWithDescription(deletionDescription)
-        
-        let fileURL = NSBundle(forClass: self.dynamicType).URLForResource("glossary", withExtension: "tmx")
-        print("URL: " + fileURL!.URLString)
-        XCTAssertNotNil(fileURL)
-        
-        service.createModel("en-es", name: "custom-english-to-spanish", fileKey: "forced_glossary", fileURL: fileURL!) { model, error in
 
-            guard let model = model else {
-                XCTFail("Expected non-nil model. Please upgrade your Language " +
-                    "Translation Service to the \"Trainable\" plan.")
-                creationExpectation.fulfill()
-                deletionExpectation.fulfill()
-                return
-            }
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let glossary = bundle.URLForResource("glossary", withExtension: "tmx") else {
+            XCTFail("Unable to read forced glossary.")
+            return
+        }
 
-            guard error == nil else {
-                XCTFail("Expected nil error.")
-                creationExpectation.fulfill()
-                deletionExpectation.fulfill()
-                return
-            }
-            
+        languageTranslation.createModel("en-es", name: "custom-english-to-spanish-model",
+            forcedGlossary: glossary, failure: failWithError)
+        {
+            modelID in
+            XCTAssertNotEqual(modelID, "")
             creationExpectation.fulfill()
-            
-            // Add a small delay so the model is ready for delete.  This is not a normal flow of create and delete immediately
-            // so this is only a testing issue
-            sleep(3)
-            
-            self.service.deleteModel(model) { error in
-                XCTAssertNil(error)
+
+            self.languageTranslation.deleteModel(modelID, failure: self.failWithError) {
                 deletionExpectation.fulfill()
             }
         }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        waitForExpectations()
     }
-    
-    func testDeleteModel() {
-        let unauthorizedDeleteExpectation = expectationWithDescription("Unauthorized expectation")
-        let missingDeleteExpectation = expectationWithDescription("Missing delete expectation")
-        
-        service.deleteModel("en-es") { error in
-            XCTAssertNotNil(error, "Expected unauthorized exception when trying to delete an IBM model")
-            unauthorizedDeleteExpectation.fulfill()
-        }
-        
-        service.deleteModel("qwerty") { error in
-            XCTAssertNotNil(error!,"Expected missing delete exception when trying to delete a nonexistent model")
-            missingDeleteExpectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
-    }
-    
+
+    /** Get a model's training status. */
     func testGetModel() {
-        let expectation1 = expectationWithDescription("Missing model")
-        let expectation2 = expectationWithDescription("Valid model")
-        
-        service.getModel("MISSING_MODEL_ID") { model, error in
-            XCTAssertNil(model,"Expected no model to be return for invalid id")
-            expectation1.fulfill()
+        let description = "Get a model's training status."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.getModel("en-es", failure: failWithError) { monitorTraining in
+            XCTAssertEqual(monitorTraining.status, LanguageTranslationV2.TrainingStatus.Available)
+            expectation.fulfill()
         }
-        
-        service.getModel("en-es") { model, error in
-            guard let model = model else {
-                XCTFail("Expected non-nil model to be returned")
-                return
-            }
-            XCTAssertEqual(model.modelID,"en-es","Expected to get en-es model")
-            expectation2.fulfill()
+        waitForExpectations()
+    }
+
+    /** Translate a text string, specifying the model by model id. */
+    func testTranslateStringWithModelID() {
+        let description = "Translate text string, specifying the model by model id."
+        let expectation = expectationWithDescription(description)
+
+        let text = "Hello"
+        let modelID = "en-es-conversational"
+        languageTranslation.translate(text, modelID: modelID, failure: failWithError) {
+            translation in
+            XCTAssertEqual(translation.wordCount, 1)
+            XCTAssertEqual(translation.characterCount, 5)
+            XCTAssertEqual(translation.translations.count, 1)
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            expectation.fulfill()
         }
-        
-        waitForExpectationsWithTimeout(timeout, handler: { error in XCTAssertNil(error, "Timeout") })
+        waitForExpectations()
+    }
+
+    /** Translate a text array, specifying the model by model id. */
+    func testTranslateArrayWithModelID() {
+        let description = "Translate text array, specifying the model by model id."
+        let expectation = expectationWithDescription(description)
+
+        let text = ["Hello"]
+        let modelID = "en-es-conversational"
+        languageTranslation.translate(text, modelID: modelID, failure: failWithError) {
+            translation in
+            XCTAssertEqual(translation.wordCount, 1)
+            XCTAssertEqual(translation.characterCount, 5)
+            XCTAssertEqual(translation.translations.count, 1)
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Translate a text string, specifying the model by source and target language. */
+    func testTranslateStringWithSourceAndTarget() {
+        let description = "Translate text string, specifying the model by source and target."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.translate("Hello", source: "en", target: "es", failure: failWithError) {
+            translation in
+            XCTAssertEqual(translation.wordCount, 1)
+            XCTAssertEqual(translation.characterCount, 5)
+            XCTAssertEqual(translation.translations.count, 1)
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Translate a text array, specifying the model by source and target language. */
+    func testTranslateArrayWithSourceAndTarget() {
+        let description = "Translate text array, specifying the model by source and target."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.translate(["Hello"], source: "en", target: "es", failure: failWithError) {
+            translation in
+            XCTAssertEqual(translation.wordCount, 1)
+            XCTAssertEqual(translation.characterCount, 5)
+            XCTAssertEqual(translation.translations.count, 1)
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Get all identifiable languages. */
+    func testGetIdentifiableLanguages() {
+        let description = "Get all identifiable languages."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.getIdentifiableLanguages(failWithError) { languages in
+            XCTAssertGreaterThan(languages.count, 0, "Expected at least 1 language to be returned.")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Identify the language of a text string. */
+    func testIdentify() {
+        let description = "Identify the language of a text string."
+        let expectation = expectationWithDescription(description)
+
+        languageTranslation.identify("Hola", failure: failWithError) { languages in
+            XCTAssertGreaterThan(languages.count, 0, "Expected at least 1 language to be returned.")
+            XCTAssertEqual(languages.first?.language, "es")
+            XCTAssertGreaterThanOrEqual(languages.first!.confidence, 0.0)
+            XCTAssertLessThanOrEqual(languages.first!.confidence, 1.0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Negative Tests
+
+    /** Try to get information about a model that doesn't exit. */
+    func testGetModelDoesntExit() {
+        let description = "Try to get information about a model that doesn't exist."
+        let expectation = expectationWithDescription(description)
+
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+
+        languageTranslation.getModel("invalid_model_id", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
+    /** Try to delete a model created by IBM. */
+    func testDeleteUnauthorized() {
+        let description = "Try to delete a model that was created by IBM."
+        let expectation = expectationWithDescription(description)
+
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+
+        languageTranslation.deleteModel("en-es", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
+    /** Try to delete a model that does not exist. */
+    func testDeleteNotFound() {
+        let description = "Try to delete a model that does not exist."
+        let expectation = expectationWithDescription(description)
+
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+
+        languageTranslation.deleteModel("qwerty", failure: failure, success: failWithResult)
+        waitForExpectations()
     }
 }

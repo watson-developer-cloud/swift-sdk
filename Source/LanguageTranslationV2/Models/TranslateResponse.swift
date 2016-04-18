@@ -15,47 +15,37 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension LanguageTranslation {
-    
-    internal struct Translation: Mappable {
-        var translation: String?
+extension LanguageTranslationV2 {
 
-        /// Used internally to initialize a `Translation` from JSON.
-        init?(_ map: Map) {}
+    /** The result of translating an input text from a source language to a target language. */
+    public struct TranslateResponse: JSONDecodable {
 
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            translation <- map["translation"]
+        /// The number of words in the complete input text.
+        public let wordCount: Int
+
+        /// The number of characters in the complete input text.
+        public let characterCount: Int
+
+        /// A list of translation output, corresponding to the list of input text.
+        public let translations: [Translation]
+
+        public init(json: JSON) throws {
+            wordCount = try json.int("word_count")
+            characterCount = try json.int("character_count")
+            translations = try json.array("translations").map { json in try json.decode() }
         }
     }
-    
-    internal struct TranslateResponse: Mappable {
-        var wordCount: Int?
-        var characterCount: Int?
-        var translations: [Translation]?
-        var translationStrings: [String]? {
-            if let translations = translations {
-                var strings = [String]()
-                for translation in translations {
-                    if let string = translation.translation {
-                        strings.append(string)
-                    }
-                }
-                return strings
-            }
-            return nil
-        }
 
-        /// Used internally to initialize a `TranslateResponse` from JSON.
-        init?(_ map: Map) {}
+    /** A translation of input text from a source language to a target language. */
+    public struct Translation: JSONDecodable {
 
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            wordCount      <- map["word_count"]
-            characterCount <- map["character_count"]
-            translations   <- map["translations"]
+        /// The translation of input text from a source language to a target language.
+        public let translation: String
+
+        public init(json: JSON) throws {
+            translation = try json.string("translation")
         }
     }
 }

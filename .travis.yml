@@ -8,9 +8,7 @@ osx_image: xcode7.3
 # whitelist
 branches:
   only:
-    - InvestigateTravisIssue
     - master
-    - Fix-Tests
 
 #xcode_scheme: WatsonCore
 before_install:
@@ -20,20 +18,9 @@ before_install:
 
 before_script:
     - carthage update --platform iOS
-# after_success:
-# - bash <(curl -s https://codecov.io/bash)
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 
-#script:
-# - xcodebuild clean build  -scheme WatsonDeveloperCloud -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
-
 script:
-#   - xcodebuild clean build -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.1'
-
   - xcodebuild clean build test -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-
- #- xcodebuild clean build test -scheme WatsonDeveloperCloud -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|===)'
-
-# - xctool -scheme WatsonDeveloperCloud build test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES

@@ -1063,7 +1063,7 @@ class AlchemyLanguageTests: XCTestCase {
                     let first = concepts.first {
 
                         XCTAssertNotNil(first.text)
-                        if let text = first.text { XCTAssertEqual(text, "Russia") }
+                        if let text = first.text { XCTAssertEqual(text, "Vladimir Putin") }
 
                         XCTAssertNotNil(first.dbpedia)
                         XCTAssertNotNil(first.freebase)
@@ -1129,7 +1129,7 @@ class AlchemyLanguageTests: XCTestCase {
                     let first = concepts.first {
                         
                         XCTAssertNotNil(first.text)
-                        if let text = first.text { XCTAssertEqual(text, "Russia") }
+                        if let text = first.text { XCTAssertEqual(text, "Vladimir Putin") }
                         
                         XCTAssertNotNil(first.dbpedia)
                         XCTAssertNotNil(first.freebase)

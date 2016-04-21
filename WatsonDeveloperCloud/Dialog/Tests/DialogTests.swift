@@ -25,7 +25,14 @@ class DialogTests: XCTestCase {
     var service: Dialog!
 
     // the Dialog application that will be created for testing
-    let dialogName = "pizza-watsonsdk-ios"
+    var dialogName: String {
+        return "pizza-iossdk-\(beginningOfDayUTC)"
+    }
+    
+    private var beginningOfDayUTC:UInt {
+        return UInt(NSCalendar.currentCalendar().startOfDayForDate(NSDate()).timeIntervalSince1970)
+    }
+    
     var dialogID: Dialog.DialogID!
     
     // the Dialog file that will be used to create the application

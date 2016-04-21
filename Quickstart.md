@@ -48,9 +48,34 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/AddedCopyFiles.png" width="600">
 
-8) Open your ViewController class and add **import WatsonDeveloperCloud** under the import of UIKit.
+9) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the watsonplatform.net server.
 
-9) Add the code below to the ***viewDidLoad*** method in the ViewController class:
+```xml
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>watsonplatform.net</key>
+			<dict>
+				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+
+```
+
+<img src="./images/plistPropertyList.png" width="600">
+
+<img src="./images/plistSource.png" width="600">
+
+10) Open your ViewController class and add **import WatsonDeveloperCloud** under the import of UIKit.
+
+11) Add the code below to the ***viewDidLoad*** method in the ViewController class:
 
 ```swift
     
@@ -86,37 +111,11 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./images/viewDidLoad.png" width="500">
 
-10) Update the initialization of `TextToSpeech` to use the credentials you obtained in the "Prerequisite" section above.
+12) Update the initialization of `TextToSpeech` to use the credentials you obtained in the "Prerequisite" section above.
 
-11) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the watsonplatform.net server.
+13) Run application in a Simulator, and you should hear speech coming from the speaker.
 
-```xml
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>watsonplatform.net</key>
-			<dict>
-				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
-
-```
-
-<img src="./images/plistPropertyList.png" width="600">
-
-<img src="./images/plistSource.png" width="600">
-
-
-12) Run application in a Simulator, and you should hear speech coming from the speaker.
-
-13) Enjoy!
+14) Enjoy!
 
 You can review the different voices and languages [here](https://github.com/watson-developer-cloud/ios-sdk#text-to-speech).
 

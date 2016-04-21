@@ -162,7 +162,7 @@ API calls are instance methods, and model class instances are returned as part o
 e.g.
 
 ```swift
-serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
+alchemyVisionInstance.recognizeFaces(VisionConstants.ImageFacesType.FILE,
     image: imageFromURL!,
     completionHandler: { imageFaceTags, error in
 
@@ -233,7 +233,7 @@ How to instantiate and use the Language Translation service:
 
 ```swift
 let service = LanguageTranslation(username: "yourusername", password: "yourpassword")
-service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
+service.getIdentifiableLanguages({(languages:[LanguageTranslation.IdentifiableLanguage]?, error) in
 
 	// code here
 })
@@ -403,20 +403,19 @@ The Text to Speech service gives your app the ability to synthesize spoken text 
 Create a TextToSpeech service:
 
 ```swift
-let service = TextToSpeech()
-service.setUsernameAndPassword(username: "yourname", password: "yourpass")
+let service = TextToSpeech(username: "your-username-here", password: "your-password-here")
 ```
 
 To call the service to synthesize text:
 
 ```swift
-service.synthesize("Hello World", oncompletion: {
-	data, error in
-
-	if let data = data {
+service.synthesize("Hello World") { 
+    data, error in
+	
+    if let data = data {
 	     // code here
 	}
-)
+}
 ```
 
 When the callback function is invoked, and the request was successful, the data object is an NSData structure containing WAVE formatted audio in 48kHz and mono-channel.

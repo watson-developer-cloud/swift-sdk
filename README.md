@@ -113,7 +113,7 @@ Instantiate an **AlchemyLanguage** object and set its api key via a **TokenAuthe
 
 ```swift
 
-let alchemyLanguage = AlchemyLanguage(apiKey: String)
+let alchemyLanguage = AlchemyLanguage(apiKey: "your-apikey-here")
 
 ```
 

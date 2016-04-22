@@ -51,7 +51,7 @@ internal class WatsonGateway {
 
             let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
             if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
-                return userAgent as String
+                return mutableUserAgent as String
             }
         }
 

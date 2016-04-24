@@ -46,6 +46,25 @@ public class NetworkUtils {
     private static let _httpContentTypeHeader = "Content-Type"
     private static let _httpAcceptHeader = "Accept"
     private static let _httpAuthorizationHeader = "Authorization"
+    private static let _httpUserAgentHeader = "User-Agent"
+    private static let _userAgent: String = {
+        let wdc = "watson-developer-cloud-ios-0.2.0"
+        if let info = NSBundle.mainBundle().infoDictionary {
+            let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
+            let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
+            let version = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
+            let os = NSProcessInfo.processInfo().operatingSystemVersionString
+            let userAgent = "\(wdc) \(executable)/\(bundle) (\(version); OS \(os))"
+            let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
+
+            let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
+            if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
+                return mutableUserAgent as String
+            }
+        }
+
+        return wdc
+    }()
     
     /**
      This helper function will manipulate the header as needed for a proper payload
@@ -65,6 +84,10 @@ public class NetworkUtils {
         }
         
         guard (header.updateValue(accept.rawValue, forKey: _httpAcceptHeader) == nil) else {
+            return [:]
+        }
+
+        guard (header.updateValue(_userAgent, forKey: _httpUserAgentHeader) == nil) else {
             return [:]
         }
         

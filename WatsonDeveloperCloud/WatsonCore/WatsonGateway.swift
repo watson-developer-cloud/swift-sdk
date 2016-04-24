@@ -37,9 +37,33 @@ internal class WatsonGateway {
     
     // The maximum number of authentication retries before returning failure.
     private let maxRetries = 1
-    
+
+    // The custom User-Agent header.
+    private static let userAgent: String = {
+        let wdc = "watson-developer-cloud-ios-0.2.0"
+        if let info = NSBundle.mainBundle().infoDictionary {
+            let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
+            let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
+            let version = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
+            let os = NSProcessInfo.processInfo().operatingSystemVersionString
+            let userAgent = "\(wdc) \(executable)/\(bundle) (\(version); OS \(os))"
+            let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
+
+            let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
+            if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
+                return mutableUserAgent as String
+            }
+        }
+
+        return wdc
+    }()
+
     // The shared NSURLSession singleton session.
-    private let session = NSURLSession.sharedSession()
+    private let session: NSURLSession = {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = ["User-Agent": WatsonGateway.userAgent]
+        return NSURLSession(configuration: configuration)
+    }()
     
     // Private init to override default init and force clients to use the singleton.
     private init() {}

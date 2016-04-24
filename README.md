@@ -113,8 +113,7 @@ Instantiate an **AlchemyLanguage** object and set its api key via a **TokenAuthe
 
 ```swift
 
-let token = TokenAuthenticationStrategy(token: <API_KEY>)
-let alchemyLanguageInstance = AlchemyLanguage(tokenAuthenticationStrategy: token)
+let alchemyLanguage = AlchemyLanguage(apiKey: "your-apikey-here")
 
 ```
 
@@ -124,7 +123,7 @@ e.g.
 
 ```swift
 
-alchemyLanguageInstance.getEntities(requestType: .URL,
+alchemyLanguage.getEntities(requestType: .URL,
   html: nil,
   url: "http://www.google.com",
   text: nil) {

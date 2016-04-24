@@ -5,6 +5,7 @@
 [![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master)
 [![Docs](https://img.shields.io/badge/Docs-0.1-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
 [![Swift 2.1.1](https://img.shields.io/badge/Swift-2.1.1-green.svg?style=flat)](https://developer.apple.com/swift/)
+[![codebeat badge](https://codebeat.co/badges/b448d695-144d-446e-8683-eb1f913cc3f3)](https://codebeat.co/projects/github-com-watson-developer-cloud-ios-sdk)
 
 The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 

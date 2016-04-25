@@ -93,7 +93,7 @@ class PersonalityInsightsTests: XCTestCase {
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectationsWithTimeout(timeout) { error in
-            XCTAssertNil(error)
+            XCTAssertNil(error, "Timeout")
         }
     }
     

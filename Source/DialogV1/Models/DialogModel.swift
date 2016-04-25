@@ -15,29 +15,22 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension Dialog {
+extension DialogV1 {
     
-    internal struct DialogError: WatsonError {
-        var error: String!
-        var code: Int!
+    /** A dialog associated with a particular service instance. */
+    public struct DialogModel: JSONDecodable {
         
-        var nsError: NSError {
-            let domain = Constants.errorDoman
-            let userInfo = [NSLocalizedDescriptionKey: self.error]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
-        }
+        /// The dialog application identifier.
+        public let dialogID: DialogID
         
-        init() {}
-        
-        init?(_ map: Map) {}
-        
-        mutating func mapping(map: Map) {
-            error <- map["error"]
-            code <- map["code"]
+        /// The name of the dialog application.
+        public let name: String
+
+        public init(json: JSON) throws {
+            dialogID = try json.string("dialog_id")
+            name = try json.string("name")
         }
     }
-    
-    
 }

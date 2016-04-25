@@ -25,6 +25,9 @@
 		7A6117721CB5ADD2009A4DA1 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A6117731CB5ADD2009A4DA1 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A6117741CB5ADD2009A4DA1 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */; };
+		7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13271CBF7C8A00101884 /* DialogTests.swift */; };
+		7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7AEB13281CBF7C8A00101884 /* pizza_sample.xml */; };
 		7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
 		7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
@@ -35,6 +38,13 @@
 		7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */; };
 		7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */; };
 		7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */; };
+		7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13201CBF7C8A00101884 /* DialogConversation.swift */; };
+		7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB131C1CBF7C8A00101884 /* Dialog.swift */; };
+		7AEB13361CBF918B00101884 /* DialogConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */; };
+		7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13221CBF7C8A00101884 /* DialogFormat.swift */; };
+		7AEB13381CBF91DB00101884 /* DialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13231CBF7C8A00101884 /* DialogModel.swift */; };
+		7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13241CBF7C8A00101884 /* DialogNode.swift */; };
+		7AEB133A1CBF91E500101884 /* DialogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13251CBF7C8A00101884 /* DialogProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +101,16 @@
 		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationTests.swift; sourceTree = "<group>"; };
 		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorTraining.swift; sourceTree = "<group>"; };
 		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
+		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
+		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		7AEB13201CBF7C8A00101884 /* DialogConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversation.swift; sourceTree = "<group>"; };
+		7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversationResponse.swift; sourceTree = "<group>"; };
+		7AEB13221CBF7C8A00101884 /* DialogFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogFormat.swift; sourceTree = "<group>"; };
+		7AEB13231CBF7C8A00101884 /* DialogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogModel.swift; sourceTree = "<group>"; };
+		7AEB13241CBF7C8A00101884 /* DialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
+		7AEB13251CBF7C8A00101884 /* DialogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogProfile.swift; sourceTree = "<group>"; };
+		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
+		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +138,7 @@
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
+				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
@@ -232,6 +253,40 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7AEB131C1CBF7C8A00101884 /* Dialog.swift */,
+				7AEB131F1CBF7C8A00101884 /* Models */,
+				7AEB13261CBF7C8A00101884 /* Tests */,
+			);
+			name = DialogV1;
+			path = Source/DialogV1;
+			sourceTree = "<group>";
+		};
+		7AEB131F1CBF7C8A00101884 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AEB13201CBF7C8A00101884 /* DialogConversation.swift */,
+				7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */,
+				7AEB13221CBF7C8A00101884 /* DialogFormat.swift */,
+				7AEB13231CBF7C8A00101884 /* DialogModel.swift */,
+				7AEB13241CBF7C8A00101884 /* DialogNode.swift */,
+				7AEB13251CBF7C8A00101884 /* DialogProfile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AEB13261CBF7C8A00101884 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AEB13271CBF7C8A00101884 /* DialogTests.swift */,
+				7AEB13281CBF7C8A00101884 /* pizza_sample.xml */,
+				7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -334,6 +389,8 @@
 			files = (
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
+				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
+				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
 				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
 				7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */,
 			);
@@ -347,18 +404,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ADEC3EF1CBF081200A84C35 /* TranslationModel.swift in Sources */,
+				7AEB13381CBF91DB00101884 /* DialogModel.swift in Sources */,
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
+				7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */,
+				7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
+				7AEB13361CBF918B00101884 /* DialogConversationResponse.swift in Sources */,
 				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
 				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
+				7AEB133A1CBF91E500101884 /* DialogProfile.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
 				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
+				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
+				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
 			);

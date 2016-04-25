@@ -15,31 +15,34 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension Dialog {
+extension DialogV1 {
     
-    /// A Dialog node
-    public struct Node: Mappable {
+    /** A dialog node. */
+    public struct Node: JSONEncodable, JSONDecodable {
         
-        /// The content associated with the node
-        public var content: String?
+        /// The node's associated content.
+        public let content: String
         
-        /// The type of the node
-        public var node: String?
-        
-        public init(content: String? = nil, node: String? = nil) {
+        /// The node's type.
+        public let node: String
+ 
+        public init(content: String, node: String) {
             self.content = content
             self.node = node
         }
 
-        /// Used internally to initialize a `Node` from JSON.
-        public init?(_ map: Map) {}
+        public init(json: JSON) throws {
+            content = try json.string("content")
+            node = try json.string("node")
+        }
 
-        /// Used internally to serialize and deserialize JSON.
-        public mutating func mapping(map: Map) {
-            content <- map["content"]
-            node    <- map["node"]
+        public func toJSON() -> JSON {
+            var json = [String: JSON]()
+            json["content"] = .String(content)
+            json["node"] = .String(node)
+            return JSON.Dictionary(json)
         }
     }
 }

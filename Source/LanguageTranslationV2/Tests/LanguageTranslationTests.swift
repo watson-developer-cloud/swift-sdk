@@ -269,7 +269,7 @@ class LanguageTranslationTests: XCTestCase {
         let expectation = expectationWithDescription(description)
 
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+            XCTAssertEqual(error.code, 404)
             expectation.fulfill()
         }
 

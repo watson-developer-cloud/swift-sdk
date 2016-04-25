@@ -75,7 +75,6 @@
 		7A6117561CB598D9009A4DA1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitTreeNode.swift; sourceTree = "<group>"; };
 		7A6117581CB598D9009A4DA1 /* PersonalityInsights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsights.swift; sourceTree = "<group>"; };
-		7A61175A1CB598D9009A4DA1 /* PersonalityInsightsError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsError.swift; sourceTree = "<group>"; };
 		7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
 		7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
 		7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsTests.swift; sourceTree = "<group>"; };
@@ -172,9 +171,8 @@
 		7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */ = {
 			isa = PBXGroup;
 			children = (
-				7A6117541CB598D9009A4DA1 /* Models */,
 				7A6117581CB598D9009A4DA1 /* PersonalityInsights.swift */,
-				7A61175A1CB598D9009A4DA1 /* PersonalityInsightsError.swift */,
+				7A6117541CB598D9009A4DA1 /* Models */,
 				7A61175B1CB598D9009A4DA1 /* Tests */,
 			);
 			name = PersonalityInsightsV2;

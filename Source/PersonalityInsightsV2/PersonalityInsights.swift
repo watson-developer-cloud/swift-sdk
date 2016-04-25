@@ -36,6 +36,21 @@ public class PersonalityInsightsV2 {
         self.password = password
     }
 
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.int("code")
+            let error = try json.string("error")
+            let help = try json.string("help")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: help
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Analyze text to generate a personality profile.
@@ -208,8 +223,8 @@ public class PersonalityInsightsV2 {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .validate()
-            .responseObject { (response: Response<Profile, NSError>) in
+            .responseObject(dataToError: dataToError) {
+                (response: Response<Profile, NSError>) in
                 switch response.result {
                 case .Success(let profile): success(profile)
                 case .Failure(let error): failure?(error)

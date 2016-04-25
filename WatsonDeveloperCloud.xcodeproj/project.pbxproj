@@ -82,7 +82,6 @@
 		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
-		7A6117941CB6D3F2009A4DA1 /* LanguageTranslationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationError.swift; sourceTree = "<group>"; };
 		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
 		7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateRequest.swift; sourceTree = "<group>"; };
@@ -203,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */,
-				7A6117941CB6D3F2009A4DA1 /* LanguageTranslationError.swift */,
 				7A6117951CB6D3F2009A4DA1 /* Models */,
 				7A61179B1CB6D3F2009A4DA1 /* Tests */,
 			);

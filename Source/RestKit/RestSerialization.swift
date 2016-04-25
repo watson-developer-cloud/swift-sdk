@@ -1,10 +1,3 @@
-//
-//  RestSerialization.swift
-//  WatsonDeveloperCloud
-//
-//  Created by Glenn Fisher on 4/6/16.
-//  Copyright © 2016 Watson Developer Cloud. All rights reserved.
-//
 
 import Foundation
 import Alamofire
@@ -16,11 +9,13 @@ extension Request {
      Creates a response serializer that returns an object of the given type initialized from
      JSON response data.
      
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
      - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
  
      - returns: An object response serializer.
      */
     internal static func ObjectSerializer<T: JSONDecodable>(
+        dataToError: ((NSData -> NSError?)?) = nil,
         path: [JSONPathType]? = nil)
         -> ResponseSerializer<T, NSError>
     {
@@ -36,6 +31,13 @@ extension Request {
                 let failureReason = "Data could not be serialized. Input data was nil."
                 let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
+            }
+
+            // fail if the data can be converted to an NSError
+            if let dataToError = dataToError {
+                if let dataError = dataToError(data) {
+                    return .Failure(dataError)
+                }
             }
 
             // serialize a `T` from the json data
@@ -68,9 +70,13 @@ extension Request {
      Creates a response serializer that returns an array of objects of the given type
      initialized from JSON response data.
 
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
+     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
+
      - returns: An object response serializer.
      */
     internal static func ArraySerializer<T: JSONDecodable>(
+        dataToError: ((NSData -> NSError?)?) = nil,
         path: [JSONPathType]? = nil)
         -> ResponseSerializer<[T], NSError>
     {
@@ -86,6 +92,13 @@ extension Request {
                 let failureReason = "Data could not be serialized. Input data was nil."
                 let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
+            }
+
+            // fail if the data can be converted to an NSError
+            if let dataToError = dataToError {
+                if let dataError = dataToError(data) {
+                    return .Failure(dataError)
+                }
             }
 
             // serialize a `[T]` from the json data
@@ -119,18 +132,20 @@ extension Request {
      Adds a handler to be called once the request has finished.
  
      - parameter queue: The queue to use.
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
      - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
      - parameter completionHandler: The code to be executed once the request has finished.
      */
     internal func responseObject<T: JSONDecodable>(
         queue queue: dispatch_queue_t? = nil,
+        dataToError: (NSData -> NSError?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: Response<T, NSError> -> Void)
         -> Self
     {
         return response(
             queue: queue,
-            responseSerializer: Request.ObjectSerializer(path),
+            responseSerializer: Request.ObjectSerializer(dataToError, path: path),
             completionHandler: completionHandler
         )
     }
@@ -139,18 +154,20 @@ extension Request {
      Adds a handler to be called once the request has finished.
 
      - parameter queue: The queue to use.
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
      - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
      - parameter completionHandler: The code to be executed once the request has finished.
      */
     internal func responseArray<T: JSONDecodable>(
         queue queue: dispatch_queue_t? = nil,
+        dataToError: (NSData -> NSError?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: Response<[T], NSError> -> Void)
         -> Self
     {
         return response(
             queue: queue,
-            responseSerializer: Request.ArraySerializer(path),
+            responseSerializer: Request.ArraySerializer(dataToError, path: path),
             completionHandler: completionHandler
         )
     }

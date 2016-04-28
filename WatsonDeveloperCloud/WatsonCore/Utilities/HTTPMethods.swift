@@ -17,6 +17,6 @@
 import Foundation
 
 // HTTP method definitions
-internal enum Method: String {
+internal enum HttpMethod: String {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }

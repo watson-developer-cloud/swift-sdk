@@ -61,7 +61,8 @@ public class NaturalLanguageClassifierV1 {
         // construct REST request
         let request = RestRequest(
             method: .GET,
-            url: serviceURL + "/v1/classifiers"
+            url: serviceURL + "/v1/classifiers",
+            acceptType: "application/json"
         )
         
         // execute REST request
@@ -76,4 +77,58 @@ public class NaturalLanguageClassifierV1 {
         }
     }
     
+    /**
+     Sends data to create and train a classifier and returns information about the new
+     classifier. When the operation is successful, the status of the classifier is set
+     to "Training". The status must be "Available" before you can use the classifier.
+     
+     - parameter trainingMetadata:
+     - parameter trainingData:      The set of questions and their "keys" used to adapt a system to a domain (the ground truth).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
+    public func createClassifier(
+        trainingMetadata: NSURL,
+        trainingData: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: ClassifierDetails -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/classifiers",
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: trainingMetadata, name: "training_metadata")
+                multipartFormData.appendBodyPart(fileURL: trainingData, name: "training_data")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: Response<ClassifierDetails, NSError>) in
+                        switch response.result {
+                        case .Success(let classifierDetails): success(classifierDetails)
+                        case .Failure(let error): failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "Files could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
+    }
+    
+    // Get classifier information
+    
+
 }

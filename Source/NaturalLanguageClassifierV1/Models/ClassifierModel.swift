@@ -22,7 +22,7 @@ extension NaturalLanguageClassifierV1 {
     public struct ClassifierModel: JSONDecodable {
         
         /// Unique identifier for this classifier
-        public let classifier_id: String
+        public let classifierId: String
         
         /// Link to the classifer
         public let url: String
@@ -38,7 +38,7 @@ extension NaturalLanguageClassifierV1 {
         
         /// Used internally to initialize a `ClassifierModel` from JSON.
         public init(json: JSON) throws {
-            classifier_id = try json.string("classifier_id")
+            classifierId = try json.string("classifier_id")
             url = try json.string("url")
             name = try json.string("name")
             language = try json.string("language")

@@ -20,6 +20,7 @@ import WatsonDeveloperCloud
 class NaturalLanguageClassifierTests: XCTestCase {
     
     private var naturalLanguageClassifier: NaturalLanguageClassifierV1!
+    private let classifierName = "iOS SDK Test Classifier"
     private let timeout: NSTimeInterval = 30
     
     // MARK: - Test Configuration
@@ -28,8 +29,10 @@ class NaturalLanguageClassifierTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateNaturalLanguageClassifier()
+        deleteStaleClassifiers()
     }
     
+    /** Instantiate Natural Langauge Classifier instance. */
     func instantiateNaturalLanguageClassifier() {
         let bundle = NSBundle(forClass: self.dynamicType)
         guard
@@ -42,6 +45,24 @@ class NaturalLanguageClassifierTests: XCTestCase {
             return
         }
         naturalLanguageClassifier = NaturalLanguageClassifierV1(username: username, password: password)
+    }
+    
+    /** Delete any stale classifiers previously created by unit tests. */
+    func deleteStaleClassifiers() {
+        let description = "Delete any stale classifiers previously created by unit tests."
+        let expectation = expectationWithDescription(description)
+        
+        naturalLanguageClassifier.getClassifiers(failWithError) { classifiers in
+            for classifier in classifiers {
+                if let name = classifier.name {
+                    if name.hasPrefix(self.classifierName) {
+                        self.naturalLanguageClassifier.deleteClassifier(classifier.classifierId)
+                    }
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
     
     /** Fail false negatives. */
@@ -61,10 +82,56 @@ class NaturalLanguageClassifierTests: XCTestCase {
         }
     }
     
+    // MARK: - Helper Functions
+    
+    /** Load a file used when creating a classifier. */
+    func loadClassifierFile(name: String, withExtension: String) -> NSURL? {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard let url = bundle.URLForResource(name, withExtension: withExtension) else {
+            return nil
+        }
+        return url
+    }
+    
+    /** Create a classifier. */
+    func createClassifier(classifierName: String) -> NaturalLanguageClassifierV1.ClassifierDetails? {
+        let description = "Create a classifier."
+        let expectation = expectationWithDescription(description)
+        var classifierDetails: NaturalLanguageClassifierV1.ClassifierDetails?
+        
+        guard let trainingMetadataURL = loadClassifierFile("training_meta", withExtension: "txt"),
+            let trainingDataURL = loadClassifierFile("weather_data_train", withExtension: "csv") else {
+                XCTFail("Failed to load files needed to create a classifier")
+                return nil
+        }
+        
+        naturalLanguageClassifier.createClassifier(trainingMetadataURL, trainingData: trainingDataURL, failure: failWithError) {
+            details in
+            
+            classifierDetails = details
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+        return classifierDetails
+    }
+    
+    /** Delete the classifier created during testing. */
+    func deleteClassifier(classifierId: String) {
+        let description = "Delete the classifier created during testing."
+        let expectation = expectationWithDescription(description)
+        
+        naturalLanguageClassifier.deleteClassifier(classifierId, failure: failWithError) {
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Positive Tests
     
+    /** List all classifiers associated with this service instance */
     func testGetClassifiers() {
-        let description = "Get all classifiers"
+        let description = "Get all classifiers."
         let expectation = expectationWithDescription(description)
         
         naturalLanguageClassifier.getClassifiers(failWithError) { classifiers in
@@ -74,4 +141,13 @@ class NaturalLanguageClassifierTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Create and delete a classifier */
+    func testCreateDelete() {
+        guard let classifier = createClassifier(classifierName) else {
+            XCTFail("Failed to create the classifier.")
+            return
+        }
+        
+        deleteClassifier(classifier.classifierId)
+    }
 }

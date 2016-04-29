@@ -502,7 +502,7 @@ This SDK is intended solely for use with an Apple iOS product and intended to be
 
 ## Contributing
 
-See [CONTRIBUTING](CONTRIBUTING.md) on how to help out.
+See [CONTRIBUTING](.github/CONTRIBUTING.md) on how to help out.
 
 [personality_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
 [language_identification]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/lidapi/

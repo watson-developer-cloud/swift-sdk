@@ -21,28 +21,28 @@ extension NaturalLanguageClassifierV1 {
     
     public struct ClassifierModel: JSONDecodable {
         
+        /// Unique identifier for this classifier
+        public let classifier_id: String
+        
+        /// Link to the classifer
+        public let url: String
+        
         /// User-supplied name for the classifier
         public let name: String?
         
         /// The language used for the classifier
         public let language: String?
         
-        ///  Link to the classifer
-        public let url: String
-        
-        /// Unique identifier for this classifier
-        public let id: String
-        
         /// Date and time (UTC) the classifier was created
         public let created: String?
         
-        /// Used internally to initialize a `Classifier` from JSON.
+        /// Used internally to initialize a `ClassifierModel` from JSON.
         public init(json: JSON) throws {
-            created = try json.string("created")
-            id = try json.string("classifier_id")
-            language = try json.string("language")
-            name = try json.string("name")
+            classifier_id = try json.string("classifier_id")
             url = try json.string("url")
+            name = try json.string("name")
+            language = try json.string("language")
+            created = try json.string("created")
         }
     }
 }

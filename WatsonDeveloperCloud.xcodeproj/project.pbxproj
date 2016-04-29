@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A248511CD1482200C63CF1 /* ClassifierDetails.swift */; };
 		12AE2BCF1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */; };
 		12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
 		12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifier.swift; path = Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
 		12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierModel.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierModel.swift; sourceTree = "<group>"; };
 		12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifierTests.swift; path = Source/NaturalLanguageClassifierV1/Tests/NaturalLanguageClassifierTests.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */,
+				12A248511CD1482200C63CF1 /* ClassifierDetails.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
 				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
 				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
+				12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */,
 				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 			);

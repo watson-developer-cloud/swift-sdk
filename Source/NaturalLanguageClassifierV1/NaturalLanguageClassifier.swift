@@ -128,7 +128,50 @@ public class NaturalLanguageClassifierV1 {
         )
     }
     
-    // Get classifier information
+    /**
+     Returns label information for the input. The status must be "Available" before
+     you can classify calls.
+     
+     - parameter classifierId:      Classifier ID to use
+     - parameter text:              Phrase to classify
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of available standard and custom models.
+     */
+    public func classify(
+        classifierId: String,
+        text: String,
+        failure: (NSError -> Void)? = nil,
+        success: Classification -> Void) {
+        
+        // construct query parameters
+        guard let body = try? ["text": text].toJSON().serialize() else {
+            let failureReason = "Classification text could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<Classification, NSError>) in
+                switch response.result {
+                case .Success(let classification): success(classification)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
     
     /**
      Deletes the classifier with the classifierId

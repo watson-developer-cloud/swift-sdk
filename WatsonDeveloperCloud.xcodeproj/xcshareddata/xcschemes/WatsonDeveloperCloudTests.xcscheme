@@ -39,7 +39,7 @@
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
             <LocationScenarioReference
-               identifier = "Mexico City, Mexico"
+               identifier = "New York, NY, USA"
                referenceType = "1">
             </LocationScenarioReference>
          </TestableReference>

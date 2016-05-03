@@ -30,6 +30,19 @@
 		4F07CEB51CD2A96000611E06 /* WhereIsThePool.opus in Resources */ = {isa = PBXBuildFile; fileRef = 4F07CE9D1CD2A96000611E06 /* WhereIsThePool.opus */; };
 		4F07CEB61CD2A96000611E06 /* WhereIsThePool.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F07CE9E1CD2A96000611E06 /* WhereIsThePool.wav */; };
 		4F07CEB81CD2A96000611E06 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F07CEA01CD2A96000611E06 /* Info.plist */; };
+		4F07CECB1CD8F07300611E06 /* ConversationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F07CECA1CD8F07300611E06 /* ConversationHelperTests.swift */; };
+		4F07CECF1CD92E2F00611E06 /* WatsonDeveloperCloud.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F07CED01CD9311D00611E06 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; };
+		4F07CED11CD9311D00611E06 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; };
+		4F07CED21CD9311D00611E06 /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; };
+		4F07CED31CD9311D00611E06 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; };
+		4F07CED41CD9311D00611E06 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; };
+		4F07CED51CD9312C00611E06 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97311C232D02004C01C0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F07CED61CD9312C00611E06 /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97321C232D02004C01C0 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F07CED71CD9312C00611E06 /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97331C232D02004C01C0 /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F07CED81CD9312C00611E06 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97341C232D02004C01C0 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F07CED91CD9312C00611E06 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A0F97351C232D02004C01C0 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4FFB45321CD939FC00FDB2EF /* WhereIsThePool.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F07CE9E1CD2A96000611E06 /* WhereIsThePool.wav */; };
 		7A00FDAB1C587D310082E742 /* SpeechToTextSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00FDAA1C587D310082E742 /* SpeechToTextSettings.swift */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
@@ -188,6 +201,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4F07CECE1CD92E2500611E06 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F07CED51CD9312C00611E06 /* Alamofire.framework in CopyFiles */,
+				4F07CED61CD9312C00611E06 /* AlamofireObjectMapper.framework in CopyFiles */,
+				4F07CED71CD9312C00611E06 /* HTTPStatusCodes.framework in CopyFiles */,
+				4F07CED81CD9312C00611E06 /* ObjectMapper.framework in CopyFiles */,
+				4F07CED91CD9312C00611E06 /* Starscream.framework in CopyFiles */,
+				4F07CECF1CD92E2F00611E06 /* WatsonDeveloperCloud.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4F07CE831CD2A96000611E06 /* ConversationBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationBuilder.swift; sourceTree = "<group>"; };
 		4F07CE841CD2A96000611E06 /* ConversationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationConstants.swift; sourceTree = "<group>"; };
@@ -211,8 +242,8 @@
 		4F07CE9C1CD2A96000611E06 /* WhereIsThePool.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhereIsThePool.flac; sourceTree = "<group>"; };
 		4F07CE9D1CD2A96000611E06 /* WhereIsThePool.opus */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhereIsThePool.opus; sourceTree = "<group>"; };
 		4F07CE9E1CD2A96000611E06 /* WhereIsThePool.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WhereIsThePool.wav; sourceTree = "<group>"; };
-		4F07CE9F1CD2A96000611E06 /* ConversationHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationHelperTests.swift; sourceTree = "<group>"; };
 		4F07CEA01CD2A96000611E06 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F07CECA1CD8F07300611E06 /* ConversationHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationHelperTests.swift; path = WatsonDeveloperCloud/ConversationHelper/ConversationHelperTests.swift; sourceTree = SOURCE_ROOT; };
 		7A00FDAA1C587D310082E742 /* SpeechToTextSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechToTextSettings.swift; path = WatsonDeveloperCloud/SpeechToText/Models/SpeechToTextSettings.swift; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatsonDeveloperCloud.h; sourceTree = "<group>"; };
@@ -381,6 +412,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F07CED01CD9311D00611E06 /* Alamofire.framework in Frameworks */,
+				4F07CED11CD9311D00611E06 /* AlamofireObjectMapper.framework in Frameworks */,
+				4F07CED21CD9311D00611E06 /* HTTPStatusCodes.framework in Frameworks */,
+				4F07CED31CD9311D00611E06 /* ObjectMapper.framework in Frameworks */,
+				4F07CED41CD9311D00611E06 /* Starscream.framework in Frameworks */,
 				7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,7 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				4F07CE9B1CD2A96000611E06 /* Audio Files */,
-				4F07CE9F1CD2A96000611E06 /* ConversationHelperTests.swift */,
+				4F07CECA1CD8F07300611E06 /* ConversationHelperTests.swift */,
 				4F07CEA01CD2A96000611E06 /* Info.plist */,
 			);
 			path = Tests;
@@ -952,6 +988,7 @@
 				7A0F95B91C23288E004C01C0 /* Sources */,
 				7A0F95BA1C23288E004C01C0 /* Frameworks */,
 				7A0F95BB1C23288E004C01C0 /* Resources */,
+				4F07CECE1CD92E2500611E06 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1016,6 +1053,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FFB45321CD939FC00FDB2EF /* WhereIsThePool.wav in Resources */,
 				7A0F97231C232BBD004C01C0 /* training_meta.txt in Resources */,
 				7A0F97251C232BC6004C01C0 /* KennedySpeech.txt in Resources */,
 				7A0F97181C232B9C004C01C0 /* sample.html in Resources */,
@@ -1188,6 +1226,7 @@
 				7A34CB521C233E2100F20D0E /* AuthenticationTests.swift in Sources */,
 				7A0F97201C232BB5004C01C0 /* LanguageTranslationTests.swift in Sources */,
 				7A0F97161C232B9C004C01C0 /* AlchemyLanguageTests.swift in Sources */,
+				4F07CECB1CD8F07300611E06 /* ConversationHelperTests.swift in Sources */,
 				7A19DC971C5980780082ED38 /* SpeechToTextTests.swift in Sources */,
 				7A0F971D1C232BAD004C01C0 /* DialogTests.swift in Sources */,
 				7A0F97271C232BC6004C01C0 /* PersonalityInsightsTests.swift in Sources */,
@@ -1351,6 +1390,10 @@
 		7A0F95CB1C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WatsonDeveloperCloudTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";
@@ -1361,6 +1404,10 @@
 		7A0F95CC1C23288E004C01C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WatsonDeveloperCloudTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";

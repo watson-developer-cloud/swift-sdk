@@ -12,7 +12,7 @@
 /************************************************************************/
 
 import XCTest
-import ConversationHelper
+import WatsonDeveloperCloud
 
 class ConversationHelperTests: XCTestCase {
     let timeout: NSTimeInterval = 30.0
@@ -24,63 +24,63 @@ class ConversationHelperTests: XCTestCase {
     let ttsPassword = "bXNBDOHvKUXE"
     let sttUser = "551a4699-afd9-4552-8ced-2eaf4ab096fb"
     let sttPassword = "MMXJ9hA0Ryfg"
-
+    
     override func setUp() {
         super.setUp()
         self.continueAfterFailure = false
     }
-
+    
     func waitForExpectations() {
         waitForExpectationsWithTimeout(timeout) { error in
             XCTAssertNil(error, "Timeout.")
         }
     }
-
+    
     func testSendText() {
         let description = "Send a text message."
         let expectation = expectationWithDescription(description)
-
+        
         let conversationBuilder = ConversationBuilder()
         conversationBuilder.dialogPath(serviceURL, workspaceId: workspaceID)
         conversationBuilder.dialogCredentials(username, password: password)
         let conversation = conversationBuilder.build()
         
         let message = "Hello?"
-
+        
         conversation.sendText(message) { response, error in
             XCTAssert(response != nil)
             XCTAssertNil(error)
-
-            /*XCTAssertNotNil(response?.intents)
-            XCTAssertGreaterThan(response!.intents!.count, 0)
-            response!.intents!.forEach { intent in
-            XCTAssertNotNil(intent.intentID)
-            XCTAssertNotNil(intent.confidence)
-            XCTAssertGreaterThanOrEqual(intent.confidence!, 0.0)
-            XCTAssertLessThanOrEqual(intent.confidence!, 1.0)
-            }
             
-            XCTAssertNotNil(response?.entities)
-            XCTAssertGreaterThan(response!.entities!.count, 0)
-            response!.entities?.forEach { entity in
-            XCTAssertNotNil(entity.entityID)
-            XCTAssertNotNil(entity.value)
-            XCTAssertNotNil(entity.location)
-            XCTAssertGreaterThan(entity.location!.count, 0)
-            }*/
+            /*XCTAssertNotNil(response?.intents)
+             XCTAssertGreaterThan(response!.intents!.count, 0)
+             response!.intents!.forEach { intent in
+             XCTAssertNotNil(intent.intentID)
+             XCTAssertNotNil(intent.confidence)
+             XCTAssertGreaterThanOrEqual(intent.confidence!, 0.0)
+             XCTAssertLessThanOrEqual(intent.confidence!, 1.0)
+             }
+             
+             XCTAssertNotNil(response?.entities)
+             XCTAssertGreaterThan(response!.entities!.count, 0)
+             response!.entities?.forEach { entity in
+             XCTAssertNotNil(entity.entityID)
+             XCTAssertNotNil(entity.value)
+             XCTAssertNotNil(entity.location)
+             XCTAssertGreaterThan(entity.location!.count, 0)
+             }*/
             
             XCTAssertNotNil(response?.output)
             let expectedResponse = "Hi, my name is Watson."
             
             var output = self.parseResponse(response!)
             XCTAssertEqual(output[0], expectedResponse)
-
+            
             /*XCTAssertNotNil(response?.tags)
-            XCTAssertGreaterThan(response!.tags!.count, 0)*/
-
+             XCTAssertGreaterThan(response!.tags!.count, 0)*/
+            
             XCTAssertNotNil(response?.context)
             XCTAssertGreaterThan(response!.context!.count, 0)
-
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -98,30 +98,30 @@ class ConversationHelperTests: XCTestCase {
         conversationBuilder.dialogPath(serviceURL, workspaceId: workspaceID)
         conversationBuilder.dialogCredentials(username, password: password)
         let conversation = conversationBuilder.build()
-
+        
         let message = "Hello?"
-
+        
         conversation.sendText(message, context: context) { response, error in
             XCTAssert(response != nil)
             XCTAssertNil(error)
             
             /*XCTAssertNotNil(response?.intents)
-            XCTAssertGreaterThan(response!.intents!.count, 0)
-            response!.intents!.forEach { intent in
-            XCTAssertNotNil(intent.intentID)
-            XCTAssertNotNil(intent.confidence)
-            XCTAssertGreaterThanOrEqual(intent.confidence!, 0.0)
-            XCTAssertLessThanOrEqual(intent.confidence!, 1.0)
-            }
-            
-            XCTAssertNotNil(response?.entities)
-            XCTAssertGreaterThan(response!.entities!.count, 0)
-            response!.entities?.forEach { entity in
-            XCTAssertNotNil(entity.entityID)
-            XCTAssertNotNil(entity.value)
-            XCTAssertNotNil(entity.location)
-            XCTAssertGreaterThan(entity.location!.count, 0)
-            }*/
+             XCTAssertGreaterThan(response!.intents!.count, 0)
+             response!.intents!.forEach { intent in
+             XCTAssertNotNil(intent.intentID)
+             XCTAssertNotNil(intent.confidence)
+             XCTAssertGreaterThanOrEqual(intent.confidence!, 0.0)
+             XCTAssertLessThanOrEqual(intent.confidence!, 1.0)
+             }
+             
+             XCTAssertNotNil(response?.entities)
+             XCTAssertGreaterThan(response!.entities!.count, 0)
+             response!.entities?.forEach { entity in
+             XCTAssertNotNil(entity.entityID)
+             XCTAssertNotNil(entity.value)
+             XCTAssertNotNil(entity.location)
+             XCTAssertGreaterThan(entity.location!.count, 0)
+             }*/
             
             XCTAssertNotNil(response?.output)
             let expectedResponse = "Hi, how are you today?"
@@ -130,7 +130,7 @@ class ConversationHelperTests: XCTestCase {
             XCTAssertEqual(output[0], expectedResponse)
             
             /*XCTAssertNotNil(response?.tags)
-            XCTAssertGreaterThan(response!.tags!.count, 0)*/
+             XCTAssertGreaterThan(response!.tags!.count, 0)*/
             
             XCTAssertGreaterThan(response!.context!.count, 0)
             
@@ -160,7 +160,7 @@ class ConversationHelperTests: XCTestCase {
         }
         waitForExpectations()
     }
-
+    
     func testTextConversation() {
         // test back-and-forth with the service
         // be sure to modify context (context/tags) between a response and subsequent request
@@ -222,7 +222,7 @@ class ConversationHelperTests: XCTestCase {
         let sttOptions = SpeechToTextOptions.init(contentType: SpeechToTextOptions.AudioType.WAV)
         
         conversation.sendVoiceDiscrete(file, settings: sttOptions, failureHandler: failure) { results in
-            let lastResult = results.lastObject as! SpeechToTextResultWrapper
+            let lastResult = results.lastObject as! ConversationSpeechToTextResultWrapper
             if lastResult.final == true {
                 XCTAssertEqual(lastResult.alternatives[0].transcript, "where is the pool ")
                 expectation.fulfill()
@@ -252,19 +252,19 @@ class ConversationHelperTests: XCTestCase {
         }
         waitForExpectations()
     }
-
+    
     func testSendTextPerformance() {
         self.measureBlock { self.testSendText() }
     }
     
     /*func testSendDiscreteVoicePerformance() {
-        self.measureBlock { self.testDiscreteVoice() }
-    }*/
+     self.measureBlock { self.testDiscreteVoice() }
+     }*/
     
     func testSynthesizePerformance() {
         self.measureBlock { self.testSynthesize() }
     }
-
+    
     func testTextConversationPerformance() {
         self.measureBlock { self.testTextConversation() }
     }

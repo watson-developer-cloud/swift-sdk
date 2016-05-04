@@ -20,7 +20,8 @@ import WatsonDeveloperCloud
 class NaturalLanguageClassifierTests: XCTestCase {
     
     private var naturalLanguageClassifier: NaturalLanguageClassifierV1!
-    private let classifierName = "iOS SDK Test Classifier"
+    private let newClassifierName = "Swift SDK Test Classifier"
+    private let trainedClassifierId = "3a84d1x62-nlc-2314"
     private let timeout: NSTimeInterval = 30
     
     // MARK: - Test Configuration
@@ -55,7 +56,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         naturalLanguageClassifier.getClassifiers(failWithError) { classifiers in
             for classifier in classifiers {
                 if let name = classifier.name {
-                    if name.hasPrefix(self.classifierName) {
+                    if name.hasPrefix(self.newClassifierName) {
                         self.naturalLanguageClassifier.deleteClassifier(classifier.classifierId)
                     }
                 }
@@ -94,13 +95,13 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
     
     /** Create a classifier. */
-    func createClassifier(classifierName: String) -> NaturalLanguageClassifierV1.ClassifierDetails? {
+    func createClassifier(trainingMetaFileName: String, trainingDataFileName: String) -> NaturalLanguageClassifierV1.ClassifierDetails? {
         let description = "Create a classifier."
         let expectation = expectationWithDescription(description)
         var classifierDetails: NaturalLanguageClassifierV1.ClassifierDetails?
         
-        guard let trainingMetadataURL = loadClassifierFile("training_meta", withExtension: "txt"),
-            let trainingDataURL = loadClassifierFile("weather_data_train", withExtension: "csv") else {
+        guard let trainingMetadataURL = loadClassifierFile(trainingMetaFileName, withExtension: "txt"),
+            let trainingDataURL = loadClassifierFile(trainingDataFileName, withExtension: "csv") else {
                 XCTFail("Failed to load files needed to create a classifier")
                 return nil
         }
@@ -127,27 +128,110 @@ class NaturalLanguageClassifierTests: XCTestCase {
         waitForExpectations()
     }
     
-    // MARK: - Positive Tests
-    
-    /** List all classifiers associated with this service instance */
-    func testGetClassifiers() {
+    /** Get all classifiers. */
+    func getAllClassifiers() -> [NaturalLanguageClassifierV1.ClassifierModel]? {
         let description = "Get all classifiers."
         let expectation = expectationWithDescription(description)
+        var classifiersList: [NaturalLanguageClassifierV1.ClassifierModel]?
         
         naturalLanguageClassifier.getClassifiers(failWithError) { classifiers in
-            XCTAssertGreaterThan(classifiers.count, 0, "Expected at least 1 classifier to be returned.")
+            classifiersList = classifiers
             expectation.fulfill()
         }
         waitForExpectations()
+        return classifiersList
     }
     
-    /** Create and delete a classifier */
-    func testCreateDelete() {
-        guard let classifier = createClassifier(classifierName) else {
-            XCTFail("Failed to create the classifier.")
+    /** Get information about a classifier. */
+    func getClassifier(classifierId: String) -> NaturalLanguageClassifierV1.ClassifierDetails? {
+        let description = "Get information about the classifier."
+        let expectation = expectationWithDescription(description)
+        var classifierDetails: NaturalLanguageClassifierV1.ClassifierDetails?
+        
+        naturalLanguageClassifier.getClassifier(classifierId, failure: failWithError) { details in
+            classifierDetails = details
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return classifierDetails
+    }
+    
+    /** Classify some text. */
+    func classifyText(text: String, classifierId: String) -> NaturalLanguageClassifierV1.Classification? {
+        let description = "Classify the given text using the classifier created for these unit tests."
+        let expectation = expectationWithDescription(description)
+        var classificationDetails: NaturalLanguageClassifierV1.Classification?
+        
+        naturalLanguageClassifier.classify(classifierId, text: text, failure: failWithError) { classification in
+            classificationDetails = classification
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return classificationDetails
+    }
+    
+    // MARK: - Positive Tests
+    
+    /** Test successfuly creating a classifier */
+    func testCreateAndDelete() {
+        
+        guard let classifier = createClassifier("training_meta", trainingDataFileName: "weather_data_train") else {
+            XCTFail("Failed to create a new classifier.")
             return
         }
         
+        XCTAssertEqual(classifier.name, newClassifierName, "Expected created classifier to be named \(newClassifierName)")
+        XCTAssertEqual(classifier.language, "en", "Expected created classifier language to be English.")
+        
         deleteClassifier(classifier.classifierId)
+    }
+    
+    /** List all classifiers associated with this service instance */
+    func testGetAllClassifiers() {
+        
+        guard let classifier = createClassifier("training_meta", trainingDataFileName: "weather_data_train") else {
+            XCTFail("Failed to create a new classifier.")
+            return
+        }
+        
+        guard let classifiers = getAllClassifiers() else {
+            XCTFail("Failed to list all classifiers.")
+            return
+        }
+        
+        XCTAssertGreaterThanOrEqual(classifiers.count, 2, "Expected there to be at least 2 classifiers.")
+        
+        deleteClassifier(classifier.classifierId)
+    }
+    
+    /** Test getting the classifier that was created for this test. */
+    func testGetClassifier() {
+        
+        guard let classifier = createClassifier("training_meta", trainingDataFileName: "weather_data_train") else {
+            XCTFail("Failed to create a new classifier.")
+            return
+        }
+        
+        guard let classifierDetails = getClassifier(classifier.classifierId) else {
+            XCTFail("Failed to get the newly created classifier.")
+            return
+        }
+        
+        XCTAssertEqual(classifierDetails.name, newClassifierName, "Expected the classifier we got to have the correct name.")
+        XCTAssertEqual(classifierDetails.url, classifier.url, "The classifier we got back should have the expected URL.")
+        
+        deleteClassifier(classifier.classifierId)
+    }
+    
+    /** Classify the given text using a trained classifier. */
+    func testClassify() {
+        
+        guard let classification = classifyText("How hot will it be today?", classifierId: trainedClassifierId) else {
+            XCTFail("Failed to classify the text.")
+            return
+        }
+        
+        XCTAssertEqual(classification.topClass, "temperature", "Expected the top class returned to be temperature.")
+        XCTAssertEqual(classification.classes.count, 2, "Expected there to be two classes returned.")
     }
 }

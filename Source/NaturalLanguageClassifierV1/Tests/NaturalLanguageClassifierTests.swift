@@ -234,4 +234,87 @@ class NaturalLanguageClassifierTests: XCTestCase {
         XCTAssertEqual(classification.topClass, "temperature", "Expected the top class returned to be temperature.")
         XCTAssertEqual(classification.classes.count, 2, "Expected there to be two classes returned.")
     }
+    
+    // MARK: - Negative Tests
+    
+    /** Create a classifier with missing metadata. */
+    func testCreateClassifierWithMissingMetadata() {
+        let description = "Create a classifier with a file that is missing metadata."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        guard let trainingMetadataURL = loadClassifierFile("missing_training_meta", withExtension: "txt"),
+            let trainingDataURL = loadClassifierFile("weather_data_train", withExtension: "csv") else {
+                XCTFail("Failed to load files needed to create a classifier")
+                return
+        }
+        
+        naturalLanguageClassifier.createClassifier(trainingMetadataURL, trainingData: trainingDataURL, failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Attempt to classify an empty string. */
+    func testClassifyEmptyString() {
+        let description = "Attempt to classify an empty string."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        naturalLanguageClassifier.classify(trainedClassifierId, text: "", failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Attempt to classify a string by using a classifier that doesn't exist. */
+    func testClassifyWithInvalidClassifier() {
+        let description = "Attempt to classify a string by using a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+        
+        naturalLanguageClassifier.classify("InvalidClassifierID", text: "How hot will it be today?", failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Attempt to delete a classifier that doesn't exist. */
+    func testDeleteInvalidClassifier() {
+        let description = "Attempt to delete a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+        
+        naturalLanguageClassifier.deleteClassifier("InvalidClassifierID", failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Try to get information about a classifier that doesn't exist. */
+    func testGetInvalidClassifier() {
+        let description = "Attempt to get information about a classifier that doesn't exist."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+        
+        naturalLanguageClassifier.getClassifier("InvalidClassifierID", failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
 }

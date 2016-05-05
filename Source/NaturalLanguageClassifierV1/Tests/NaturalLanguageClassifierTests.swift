@@ -53,7 +53,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let description = "Delete any stale classifiers previously created by unit tests."
         let expectation = expectationWithDescription(description)
         
-        naturalLanguageClassifier.getClassifiers(failWithError) { classifiers in
+        let failure = { (error: NSError) in
+            XCTFail("Failed during setup while trying to delete stale classifiers.")
+        }
+        
+        naturalLanguageClassifier.getClassifiers(failure) { classifiers in
             for classifier in classifiers {
                 if let name = classifier.name {
                     if name.hasPrefix(self.newClassifierName) {
@@ -186,6 +190,20 @@ class NaturalLanguageClassifierTests: XCTestCase {
         deleteClassifier(classifier.classifierId)
     }
     
+    /** Test that creating a classifier without providing a name is successful */
+    func testCreateAndDeleteClassifierWithoutOptionalName() {
+        
+        guard let classifier = createClassifier("training_meta_missing_name", trainingDataFileName: "weather_data_train") else {
+            XCTFail("Failed to create a new classifier.")
+            return
+        }
+        
+        XCTAssertEqual(classifier.name, nil, "Expected classifier name to be nil.")
+        XCTAssertEqual(classifier.language, "en", "Expected created classifier language to be English.")
+        
+        deleteClassifier(classifier.classifierId)
+    }
+    
     /** List all classifiers associated with this service instance */
     func testGetAllClassifiers() {
         
@@ -247,7 +265,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             expectation.fulfill()
         }
         
-        guard let trainingMetadataURL = loadClassifierFile("missing_training_meta", withExtension: "txt"),
+        guard let trainingMetadataURL = loadClassifierFile("training_meta_empty", withExtension: "txt"),
             let trainingDataURL = loadClassifierFile("weather_data_train", withExtension: "csv") else {
                 XCTFail("Failed to load files needed to create a classifier")
                 return

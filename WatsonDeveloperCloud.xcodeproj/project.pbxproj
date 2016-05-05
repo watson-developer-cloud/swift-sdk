@@ -14,7 +14,8 @@
 		12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
 		12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */; };
 		12B07D111CD791A300B20B38 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B07D101CD791A300B20B38 /* Classification.swift */; };
-		12B07D131CDA75DB00B20B38 /* missing_training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* missing_training_meta.txt */; };
+		12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */; };
+		12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
@@ -88,7 +89,8 @@
 		12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierModel.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierModel.swift; sourceTree = "<group>"; };
 		12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifierTests.swift; path = Source/NaturalLanguageClassifierV1/Tests/NaturalLanguageClassifierTests.swift; sourceTree = "<group>"; };
 		12B07D101CD791A300B20B38 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Source/NaturalLanguageClassifierV1/Models/Classification.swift; sourceTree = "<group>"; };
-		12B07D121CDA75DB00B20B38 /* missing_training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = missing_training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/missing_training_meta.txt; sourceTree = "<group>"; };
+		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_empty.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_empty.txt; sourceTree = "<group>"; };
+		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_missing_name.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_missing_name.txt; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -174,10 +176,11 @@
 		12AE2BCD1CCFB5310034CF4E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				12A248551CD3171800C63CF1 /* training_meta.txt */,
-				12A248561CD3171800C63CF1 /* weather_data_train.csv */,
 				12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */,
-				12B07D121CDA75DB00B20B38 /* missing_training_meta.txt */,
+				12A248561CD3171800C63CF1 /* weather_data_train.csv */,
+				12A248551CD3171800C63CF1 /* training_meta.txt */,
+				12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */,
+				12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -440,8 +443,9 @@
 				12A248591CD3248A00C63CF1 /* training_meta.txt in Resources */,
 				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
+				12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */,
 				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
-				12B07D131CDA75DB00B20B38 /* missing_training_meta.txt in Resources */,
+				12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */,
 				12A2485A1CD3248E00C63CF1 /* weather_data_train.csv in Resources */,
 				7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */,
 			);

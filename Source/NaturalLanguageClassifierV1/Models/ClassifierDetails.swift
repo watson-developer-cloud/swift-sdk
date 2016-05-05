@@ -45,7 +45,7 @@ extension NaturalLanguageClassifierV1 {
         /// Used internally to initialize a `ClassifierDetails` model from JSON.
         public init(json: JSON) throws {
             classifierId = try json.string("classifier_id")
-            name = try json.string("name")
+            name = try? json.string("name")
             language = try json.string("language")
             created = try json.string("created")
             url = try json.string("url")

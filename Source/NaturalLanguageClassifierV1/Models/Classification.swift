@@ -22,19 +22,19 @@ extension NaturalLanguageClassifierV1 {
     public struct Classification: JSONDecodable {
         
         /// Unique identifier for the classifier used.
-        public var classifierId: String
+        public let classifierId: String
         
         /// Link to the classifier.
-        public var url: String
+        public let url: String
         
         /// The submitted phrase.
-        public var text: String
+        public let text: String
         
         /// The class with the highest confidence.
-        public var topClass: String
+        public let topClass: String
         
         /// An array classes of up to ten className-confidence pairs that are sorted in descending order of confidence. If there are fewer than 10 classes, the sum of the confidence values is 100%.
-        public var classes: [ClassifiedClass]
+        public let classes: [ClassifiedClass]
         
         public init(json: JSON) throws {
             classifierId = try json.string("classifier_id")

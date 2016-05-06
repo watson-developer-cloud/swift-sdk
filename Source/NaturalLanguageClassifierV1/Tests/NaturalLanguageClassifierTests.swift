@@ -30,7 +30,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateNaturalLanguageClassifier()
-        deleteStaleClassifiers()
     }
     
     /** Instantiate Natural Langauge Classifier instance. */
@@ -46,28 +45,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
             return
         }
         naturalLanguageClassifier = NaturalLanguageClassifierV1(username: username, password: password)
-    }
-    
-    /** Delete any stale classifiers previously created by unit tests. */
-    func deleteStaleClassifiers() {
-        let description = "Delete any stale classifiers previously created by unit tests."
-        let expectation = expectationWithDescription(description)
-        
-        let failure = { (error: NSError) in
-            XCTFail("Failed during setup while trying to delete stale classifiers.")
-        }
-        
-        naturalLanguageClassifier.getClassifiers(failure) { classifiers in
-            for classifier in classifiers {
-                if let name = classifier.name {
-                    if name.hasPrefix(self.newClassifierName) {
-                        self.naturalLanguageClassifier.deleteClassifier(classifier.classifierId)
-                    }
-                }
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
     }
     
     /** Fail false negatives. */
@@ -174,6 +151,59 @@ class NaturalLanguageClassifierTests: XCTestCase {
         return classificationDetails
     }
     
+    /** Attempt to get the trained classifier; if it doesn't exist, created one. */
+    func lookupTrainedClassifier(classifierId: String) {
+        let description = "Ensure the given trained classifier is available."
+        let expectation = expectationWithDescription(description)
+        
+        func createTrainedClassifier() {
+            guard let trainingMetadataURL = loadClassifierFile("trained_meta", withExtension: "txt"),
+                let trainingDataURL = loadClassifierFile("weather_data_train", withExtension: "csv") else {
+                    XCTFail("Failed to load files needed to create a classifier")
+                    return
+            }
+            let failToCreate =  { (error: NSError) in
+                XCTFail("Failed to create the trained classifier.")
+            }
+            naturalLanguageClassifier.createClassifier(trainingMetadataURL, trainingData: trainingDataURL, failure: failToCreate) {
+                classifier in
+                XCTAssertNotNil(classifier)
+                XCTAssertNotEqual("", classifier.classifierId, "Expected to get an id")
+                let message = "A trained classifier was not found. It has been created and " +
+                    "is currently being trained. You will need to set the " +
+                    "trainedClassifierID property using the classifier id " +
+                    "printed below. Then wait a few minutes for training to " +
+                "complete before running the tests again.\n"
+                print(message)
+                print("** trainedClassifierID: \(classifier.classifierId)\n")
+                XCTFail("Trained classifier not found. Set trainedClassifierID and try again.")
+            }
+        }
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404, "Cannot locate the trained classifier.")
+            createTrainedClassifier()
+            expectation.fulfill()
+        }
+            
+        naturalLanguageClassifier.getClassifier(classifierId, failure: failure) { classifier in
+            if classifier.name != "Trained Classifier" {
+                let message = "The wrong classifier was provided as a trained " +
+                "classifier. The trained classifier will be recreated."
+                print(message)
+                createTrainedClassifier()
+                return
+            }
+            if classifier.status != NaturalLanguageClassifierV1.ClassifierStatus.Available {
+                XCTFail("Please wait. The given classifier is still being trained.")
+                return
+            }
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
     // MARK: - Positive Tests
     
     /** Test successfuly creating a classifier */
@@ -243,6 +273,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     /** Classify the given text using a trained classifier. */
     func testClassify() {
+        lookupTrainedClassifier(trainedClassifierId)
         
         guard let classification = classifyText("How hot will it be today?", classifierId: trainedClassifierId) else {
             XCTFail("Failed to classify the text.")

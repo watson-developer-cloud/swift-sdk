@@ -33,7 +33,9 @@ extension NaturalLanguageClassifierV1 {
         /// The class with the highest confidence.
         public let topClass: String
         
-        /// An array classes of up to ten className-confidence pairs that are sorted in descending order of confidence. If there are fewer than 10 classes, the sum of the confidence values is 100%.
+        /// An array classes of up to ten className-confidence pairs that are sorted in descending 
+        /// order of confidence. If there are fewer than 10 classes, the sum of the confidence 
+        /// values is 100%.
         public let classes: [ClassifiedClass]
         
         public init(json: JSON) throws {
@@ -47,7 +49,8 @@ extension NaturalLanguageClassifierV1 {
     
     public struct ClassifiedClass: JSONDecodable {
         
-        /// A decimal percentage that represents the confidence Watson has in this class. Higher values represent higher confidences.
+        /// A decimal percentage that represents the confidence Watson has in this class. Higher 
+        /// values represent higher confidences.
         public var confidence: Double
         
         /// Class label.

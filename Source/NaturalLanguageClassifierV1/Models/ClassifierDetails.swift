@@ -36,8 +36,9 @@ extension NaturalLanguageClassifierV1 {
         /// Link to the classifer
         public let url: String
         
-        /// The state of the classifier: [`Non Existent` or `Training` or `Failed` or `Available` or `Unavailable`]
-        public let status: String
+        /// The state of the classifier: [`Non Existent` or `Training` or `Failed` or `Available` 
+        /// or `Unavailable`]
+        public let status: ClassifierStatus
         
         /// Additional details about the status
         public let statusDescription: String
@@ -49,8 +50,20 @@ extension NaturalLanguageClassifierV1 {
             language = try json.string("language")
             created = try json.string("created")
             url = try json.string("url")
-            status = try json.string("status")
             statusDescription = try json.string("status_description")
+            
+            guard let classifierStatus = ClassifierStatus(rawValue: try json.string("status")) else {
+                throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
+            }
+            status = classifierStatus
         }
+    }
+    
+    public enum ClassifierStatus: String {
+        case Available = "Available"
+        case Failed = "Failed"
+        case NonExistent = "Non Existent"
+        case Training = "Training"
+        case Unavailable = "Unavailable"
     }
 }

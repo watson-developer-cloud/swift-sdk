@@ -48,11 +48,11 @@ public class NaturalLanguageClassifierV1 {
     }
     
     /**
-     Retrieves the list of classifiers for the service instance. Returns an empty array
-     if no classifiers are available.
+     Retrieves the list of classifiers for the service instance.
      
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
+       The array is empty if no classifiers are available.
      */
     public func getClassifiers(
         failure: (NSError -> Void)? = nil,
@@ -78,12 +78,14 @@ public class NaturalLanguageClassifierV1 {
     }
     
     /**
-     Sends data to create and train a classifier and returns information about the new
-     classifier. When the operation is successful, the status of the classifier is set
-     to "Training". The status must be "Available" before you can use the classifier.
+     Sends data to create and train a classifier. When the operation is successful, the status of 
+     the classifier is set to "Training". The status must be "Available" before you can use the 
+     classifier.
      
-     - parameter trainingMetadata:
-     - parameter trainingData:      The set of questions and their "keys" used to adapt a system to a domain (the ground truth).
+     - parameter trainingMetadata: A file that contains, in JSON form, the user-supplied name for 
+       the classifier and the language of the training data.
+     - parameter trainingData: The set of questions and their "keys" used to adapt a system to a 
+       domain (the ground truth).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
@@ -129,11 +131,11 @@ public class NaturalLanguageClassifierV1 {
     }
     
     /**
-     Returns label information for the input. The status must be "Available" before
-     you can classify calls.
+     Uses the provided classifier to assign labels to the input text. The status of the classifier 
+     must be "Available" before you can classify calls.
      
-     - parameter classifierId:      Classifier ID to use
-     - parameter text:              Phrase to classify
+     - parameter classifierId: Classifier ID to use
+     - parameter text: Phrase to classify
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
@@ -174,9 +176,9 @@ public class NaturalLanguageClassifierV1 {
     }
     
     /**
-     Deletes the classifier with the classifierId
+     Deletes the classifier with the classifierId.
      
-     - parameter classifierId:      The classifer ID used to delete the classifier
+     - parameter classifierId: The classifer ID used to delete the classifier
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
@@ -209,7 +211,7 @@ public class NaturalLanguageClassifierV1 {
     }
 
     /**
-     Returns the status and other information about a classifier
+     Provides detailed information about the classifier with the user-specified classifierId.
      
      - parameter classifierId: The classifer ID used to retrieve the classifier
      - parameter failure: A function executed if an error occurs.
@@ -228,12 +230,14 @@ public class NaturalLanguageClassifierV1 {
         )
         
         // execute REST request
-        Alamofire.request(request).authenticate(user: username, password: password).responseObject(dataToError: dataToError) {
-            (response: Response<ClassifierDetails, NSError>) in
-            switch response.result {
-            case .Success(let classifier): success(classifier)
-            case .Failure(let error): failure?(error)
-            }
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<ClassifierDetails, NSError>) in
+                switch response.result {
+                case .Success(let classifier): success(classifier)
+                case .Failure(let error): failure?(error)
+                }
         }
     }
 }

@@ -60,7 +60,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		7A6117711CB5ADCA009A4DA1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -128,6 +128,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F07CED01CD9311D00611E06 /* Alamofire.framework in Frameworks */,
+				4F07CED11CD9311D00611E06 /* AlamofireObjectMapper.framework in Frameworks */,
+				4F07CED21CD9311D00611E06 /* HTTPStatusCodes.framework in Frameworks */,
+				4F07CED31CD9311D00611E06 /* ObjectMapper.framework in Frameworks */,
+				4F07CED41CD9311D00611E06 /* Starscream.framework in Frameworks */,
 				7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +140,115 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F07CE811CD2A96000611E06 /* ConversationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4F07CE821CD2A96000611E06 /* Authentication */,
+				4F07CE831CD2A96000611E06 /* ConversationBuilder.swift */,
+				4F07CE841CD2A96000611E06 /* ConversationHelperConstants.swift */,
+				4F07CE851CD2A96000611E06 /* ConversationHelper.swift */,
+				4F07CE861CD2A96000611E06 /* ConversationSpeechToTextService.swift */,
+				4F07CE871CD2A96000611E06 /* ConversationSynthesizeService.swift */,
+				4F07CE881CD2A96000611E06 /* DialogService.swift */,
+				4F07CE891CD2A96000611E06 /* Extensions */,
+				4F07CE8A1CD2A96000611E06 /* Networking */,
+				4F07CE8F1CD2A96000611E06 /* Response Models */,
+				4F07CE991CD2A96000611E06 /* SpeechToTextOptions.swift */,
+				4F07CE9A1CD2A96000611E06 /* Tests */,
+			);
+			name = ConversationHelper;
+			path = WatsonDeveloperCloud/ConversationHelper;
+			sourceTree = "<group>";
+		};
+		4F07CE821CD2A96000611E06 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4F07CE891CD2A96000611E06 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4F07CE8A1CD2A96000611E06 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4F07CE8B1CD2A96000611E06 /* RestRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4F07CE8F1CD2A96000611E06 /* Response Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F3152B01CDB90020078782D /* ConversationHelperResponse.swift */,
+				4F2EF9881CDD736100094105 /* ConversationMessageResponse.swift */,
+				4F07CE901CD2A96000611E06 /* ConversationSpeechToTextKeywordResultWrapper.swift */,
+				4F07CE911CD2A96000611E06 /* ConversationSpeechToTextResultWrapper.swift */,
+				4F07CE921CD2A96000611E06 /* ConversationSpeechToTextTranscriptionWrapper.swift */,
+				4F07CE931CD2A96000611E06 /* ConversationSpeechToTextWordAlternativeResultsWrapper.swift */,
+				4F07CE941CD2A96000611E06 /* ConversationSpeechToTextWordAlternativeResultWrapper.swift */,
+				4F07CE951CD2A96000611E06 /* ConversationSpeechToTextWordConfidenceWrapper.swift */,
+				4F07CE961CD2A96000611E06 /* ConversationSpeechToTextWordTimestampWrapper.swift */,
+			);
+			path = "Response Models";
+			sourceTree = "<group>";
+		};
+		4F07CE9A1CD2A96000611E06 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4F07CE9B1CD2A96000611E06 /* Audio Files */,
+				4F07CECA1CD8F07300611E06 /* ConversationHelperTests.swift */,
+				4F07CEA01CD2A96000611E06 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4F07CE9B1CD2A96000611E06 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F07CE9C1CD2A96000611E06 /* WhereIsThePool.flac */,
+				4F07CE9D1CD2A96000611E06 /* WhereIsThePool.opus */,
+				4F07CE9E1CD2A96000611E06 /* WhereIsThePool.wav */,
+			);
+			path = "Audio Files";
+			sourceTree = "<group>";
+		};
+		4F3152A91CDA96600078782D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F3152AA1CDA978B0078782D /* ConversationModel.swift */,
+				4F3152AE1CDB88FF0078782D /* ConversationRequest.swift */,
+				4F3152AC1CDB88CD0078782D /* MessageRequest.swift */,
+				4F3152B21CDB90AD0078782D /* MessageResponse.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		4FB510FC1CE0D3E700D6FD00 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4FB510FD1CE0D42500D6FD00 /* ConversationTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		4FFEF3191CDA573000F391AA /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				4FFEF31A1CDA574B00F391AA /* Conversation.swift */,
+				4FFEF31C1CDA6A6200F391AA /* ConversationConstants.swift */,
+				4F3152B41CDBDB470078782D /* ConversationError.swift */,
+				4F3152A91CDA96600078782D /* Models */,
+				4FB510FC1CE0D3E700D6FD00 /* Tests */,
+			);
+			name = Conversation;
+			sourceTree = "<group>";
+		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +494,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F07CEB81CD2A96000611E06 /* Info.plist in Resources */,
+				4F07CEB51CD2A96000611E06 /* WhereIsThePool.opus in Resources */,
+				4F07CEB41CD2A96000611E06 /* WhereIsThePool.flac in Resources */,
+				4F07CEB61CD2A96000611E06 /* WhereIsThePool.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
+				4FFB45321CD939FC00FDB2EF /* WhereIsThePool.wav in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
@@ -434,6 +553,8 @@
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
+				4FB510FE1CE0D42500D6FD00 /* ConversationTests.swift in Sources */,
+				4F07CECB1CD8F07300611E06 /* ConversationHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

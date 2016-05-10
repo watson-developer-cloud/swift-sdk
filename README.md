@@ -113,8 +113,7 @@ Instantiate an **AlchemyLanguage** object and set its api key via a **TokenAuthe
 
 ```swift
 
-let token = TokenAuthenticationStrategy(token: <API_KEY>)
-let alchemyLanguageInstance = AlchemyLanguage(tokenAuthenticationStrategy: token)
+let alchemyLanguage = AlchemyLanguage(apiKey: "your-apikey-here")
 
 ```
 
@@ -124,7 +123,7 @@ e.g.
 
 ```swift
 
-alchemyLanguageInstance.getEntities(requestType: .URL,
+alchemyLanguage.getEntities(requestType: .URL,
   html: nil,
   url: "http://www.google.com",
   text: nil) {
@@ -152,7 +151,7 @@ Instantiate an **AlchemyVision** object and set its api key
 
 ```swift
 
-let alchemyVisionInstance = AlchemyVision(apiKey: String)
+let alchemyVision = AlchemyVision(apiKey: "your-apikey-here")
 
 ```
 
@@ -162,7 +161,7 @@ API calls are instance methods, and model class instances are returned as part o
 e.g.
 
 ```swift
-serviceVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
+alchemyVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
     image: imageFromURL!,
     completionHandler: { imageFaceTags, error in
 
@@ -180,14 +179,14 @@ To use the Dialog service, developers script conversations as they would happen 
 Instantiate the Dialog service:
 
 ```swift
-let service = Dialog(username: "yourusername", password: "yourpassword")
+let dialog = Dialog(username: "your-username-here", password: "your-password-here")
 ```
 
 Create a Dialog application by uploading a Dialog file:
 
 ```swift
 var dialogID: Dialog.DialogID?
-service.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
+dialog.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
 	self.dialogID = dialogID
 }
 ```
@@ -197,7 +196,7 @@ Start a conversation with the Dialog application:
 ```swift
 var conversationID: Int?
 var clientID: Int?
-service.converse(dialogID!) { response, error in
+dialog.converse(dialogID!) { response, error in
 	// save conversation parameters
 	self.conversationID = response?.conversationID
 	self.clientID = response?.clientID
@@ -210,7 +209,7 @@ service.converse(dialogID!) { response, error in
 Continue a conversation with the Dialog application:
 
 ```swift
-service.converse(dialogID!, conversationID: conversationID!,
+dialog.converse(dialogID!, conversationID: conversationID!,
 	clientID: clientID!, input: input) { response, error in
 
 	// print message from Watson
@@ -232,8 +231,8 @@ The IBM Watson™ Language Translation service provides an Application Programmi
 How to instantiate and use the Language Translation service:
 
 ```swift
-let service = LanguageTranslation(username: "yourusername", password: "yourpassword")
-service.getIdentifiableLanguages({(languages:[IdentifiableLanguage]?, error) in
+let languageTranslation = LanguageTranslation(username: "your-username-here", password: "your-password-here")
+languageTranslation.getIdentifiableLanguages({(languages:[LanguageTranslation.IdentifiableLanguage]?, error) in
 
 	// code here
 })
@@ -252,9 +251,9 @@ The IBM Watson™ Natural Language Classifier service uses machine learning algo
 How to instantiate and use the Natural Language Classifier service:
 
 ```swift
-let service = NaturalLanguageClassifier(username: "yourusername", password: "yourpassword")
+let naturalLanguageClassifier = NaturalLanguageClassifier(username: "your-username-here", password: "your-password-here")
 
-service.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
+naturalLanguageClassifier.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
 
 	// code here
 })
@@ -271,9 +270,9 @@ The following links provide more information about the Natural Language Classifi
 The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
 
 ```swift
-let service = PersonalityInsights(username: "yourusername", password: "yourpassword")
+let personalityInsights = PersonalityInsights(username: "your-username-here", password: "your-password-here")
 
-service!.getProfile("Some text here") { profile, error in
+personalityInsights.getProfile("Some text here") { profile, error in
 
     // code here
 }
@@ -300,11 +299,11 @@ guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else
 	return
 }
 
-let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
 let settings = SpeechToTextSettings(contentType: .WAV)
 let failure = { (error: NSError) in print(error) }
 
-stt.transcribe(fileURL, settings: settings, failure: failure) { results in
+speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
 	if let transcription = results.last?.alternatives.last?.transcript {
    		print(transcription)
    }
@@ -316,14 +315,14 @@ stt.transcribe(fileURL, settings: settings, failure: failure) { results in
 Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio. (Unfortunately, the microphone is not accessible from within the Simulator. Only applications on a physical device can stream microphone audio to Speech to Text.)
 
 ```swift
-let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
 
 var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
 settings.continuous = true
 settings.interimResults = true
 
 let failure = { (error: NSError) in print(error) }
-let stopStreaming = stt.transcribe(settings, failure: failure) { results in
+let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
 	if let transcription = results.last?.alternatives.last?.transcript {
 		print(transcription)
 	}
@@ -346,7 +345,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let stt = SpeechToText(username: "your-username-here", password: "your-password-here")
+        let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
 
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
@@ -364,7 +363,7 @@ class ViewController: UIViewController {
         settings.interimResults = true
 
         let failure = { (error: NSError) in print(error) }
-        let outputOpt = stt.createTranscriptionOutput(settings, failure: failure) { results in
+        let outputOpt = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
             if let transcription = results.last?.alternatives.last?.transcript {
                 print(transcription)
             }
@@ -403,20 +402,19 @@ The Text to Speech service gives your app the ability to synthesize spoken text 
 Create a TextToSpeech service:
 
 ```swift
-let service = TextToSpeech()
-service.setUsernameAndPassword(username: "yourname", password: "yourpass")
+let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
 ```
 
 To call the service to synthesize text:
 
 ```swift
-service.synthesize("Hello World", oncompletion: {
-	data, error in
-
-	if let data = data {
+textToSpeech.synthesize("Hello World") { 
+    data, error in
+	
+    if let data = data {
 	     // code here
 	}
-)
+}
 ```
 
 When the callback function is invoked, and the request was successful, the data object is an NSData structure containing WAVE formatted audio in 48kHz and mono-channel.
@@ -432,7 +430,7 @@ audioPlayer.play()
 The Watson TTS service contains support for many voices with different genders, languages, and dialects. For a complete list, see the [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) or call the service's to list the possible voices in an asynchronous callback:
 
 ```swift
-service.listVoices({
+textToSpeech.listVoices({
 	voices, error in
 	  // code here
 
@@ -457,7 +455,7 @@ it-IT_FrancescaVoice  | Italian              | Female
 To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
 
 ```swift
-service.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
+textToSpeech.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
 	data, error in
 
 	if let data = data {

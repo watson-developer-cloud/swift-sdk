@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "709C1E9D87E36564343935DBB27DC3F076453642",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D4E60E7862715E6D56C85CA2B5B77A396F16AB48" : 0,
+    "709C1E9D87E36564343935DBB27DC3F076453642" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "671E8E34-98ED-4E6E-A3FB-9DB7B2BAD6D4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D4E60E7862715E6D56C85CA2B5B77A396F16AB48" : "..\/app-squad\/wea-sdk-ios",
+    "709C1E9D87E36564343935DBB27DC3F076453642" : "ios-sdk\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "WatsonDeveloperCloud",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WatsonDeveloperCloud.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:watson-developer-cloud\/ios-sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "709C1E9D87E36564343935DBB27DC3F076453642"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.ibm.com:watson-engagement-advisor\/wea-sdk-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D4E60E7862715E6D56C85CA2B5B77A396F16AB48"
+    }
+  ]
+}

@@ -71,7 +71,7 @@ public class ConversationHelper : NSObject {
      - parameter context:           Context from a previous point in a ConversationHelper. This can be retrieved from the WEAResponse from a succesful completionHandler.
      - parameter completionHandler: Returns a WEAReponse on success and an NSError when there are issues
      */
-    public func sendText(message: String, context: NSDictionary? = nil, completionHandler: (WEAResponse?, NSError?) -> Void) {
+    public func sendText(message: String, context: NSDictionary? = nil, completionHandler: (ConversationHelperResponse?, NSError?) -> Void) {
         
         /// must be a better way to convert but this works for now
         var multiArray: [String: String]? = [:]
@@ -88,7 +88,7 @@ public class ConversationHelper : NSObject {
                 completionHandler(nil, error)
                 return
             }
-            let weaResponse = WEAResponse(dialogResponse: response!)
+            let weaResponse = ConversationHelperResponse(dialogResponse: response!)
             completionHandler(weaResponse, error)
         }
     }

@@ -1,29 +1,29 @@
 /************************************************************************/
- /*                                                                      */
- /* IBM Confidential                                                     */
- /* OCO Source Materials                                                 */
- /*                                                                      */
- /* (C) Copyright IBM Corp. 2001, 2016                                   */
- /*                                                                      */
- /* The source code for this program is not published or otherwise       */
- /* divested of its trade secrets, irrespective of what has been         */
- /* deposited with the U.S. Copyright Office.                            */
- /*                                                                      */
- /************************************************************************/
+/*                                                                      */
+/* IBM Confidential                                                     */
+/* OCO Source Materials                                                 */
+/*                                                                      */
+/* (C) Copyright IBM Corp. 2001, 2016                                   */
+/*                                                                      */
+/* The source code for this program is not published or otherwise       */
+/* divested of its trade secrets, irrespective of what has been         */
+/* deposited with the U.S. Copyright Office.                            */
+/*                                                                      */
+/************************************************************************/
 
 import Foundation
 
 /**
- An object that implements the WEARequestModel protocol can
+ An object that implements the ConversationRequest protocol can
  represent itself as a dictionary, JSON Data, or JSON string.
  */
-protocol WEARequestModel {
+protocol ConversationRequest {
     
     /** Represent an object as a dictionary of key-value pairs. */
     func toDictionary() -> [String: AnyObject]
 }
 
-extension WEARequestModel {
+extension ConversationRequest {
     
     /**
      Represent an object as JSON data.

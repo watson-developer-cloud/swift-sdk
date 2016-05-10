@@ -270,7 +270,7 @@ class ConversationHelperTests: XCTestCase {
     }
     
     // helper function to parse the output structure from the wea response
-    func parseResponse(weaResponse:WEAResponse)->[String] {
+    func parseResponse(weaResponse:ConversationHelperResponse)->[String] {
         var output:[String] = []
         var response:[String:AnyObject] = weaResponse.output!["response"] as! [String : AnyObject]
         let responses:[[String:AnyObject]] = response["responses"] as! [[String:AnyObject]]

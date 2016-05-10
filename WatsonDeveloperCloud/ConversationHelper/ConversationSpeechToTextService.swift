@@ -21,7 +21,7 @@ class ConversationSpeechToTextService {
     
     init(username: String, password: String) {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let auth = BasicAuthenticationStrategy(tokenURL: ConversationConstants.streamTokenURL, serviceURL: ConversationConstants.sttServiceURL, username: username, password: password)
+        let auth = BasicAuthenticationStrategy(tokenURL: ConversationHelperConstants.streamTokenURL, serviceURL: ConversationHelperConstants.sttServiceURL, username: username, password: password)
         self.stt = SpeechToText(username: username, password: password)
         let session = NSURLSession(configuration: config, delegate: auth, delegateQueue: nil)
         self.session = session

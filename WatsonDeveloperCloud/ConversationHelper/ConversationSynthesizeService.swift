@@ -21,7 +21,7 @@ class ConversationSynthesizeService {
     
     init(username: String, password: String) {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let auth = BasicAuthenticationStrategy(tokenURL: ConversationConstants.streamTokenURL, serviceURL: ConversationConstants.ttsServiceURL, username: username, password: password)
+        let auth = BasicAuthenticationStrategy(tokenURL: ConversationHelperConstants.streamTokenURL, serviceURL: ConversationHelperConstants.ttsServiceURL, username: username, password: password)
         self.tts = TextToSpeech(username: username, password: password)
         let session = NSURLSession(configuration: config, delegate: auth, delegateQueue: nil)
         self.session = session

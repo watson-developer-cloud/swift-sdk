@@ -11,19 +11,24 @@
 /*                                                                      */
 /************************************************************************/
 
-/**
- Constants used by the Watson Engagement Advisor service.
- */
-internal struct ConversationConstants {
+import Foundation
 
-    static let ttsServiceURL    = "https://stream.watsonplatform.net/text-to-speech/api"
-    static let sttServiceURL    = "https://stream.watsonplatform.net/speech-to-text/api"
-    static let dialogServiceURL = "https://gateway.watsonplatform.net/dialog/api/v1"
-    static let streamTokenURL   = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    static let gatewayTokenURL  = "https://gateway.watsonplatform.net/authorization/api/v1/token"
+//Struct for Messages
+public struct MessageRequest : ConversationRequest {
     
-    static func message(workspaceID: String) -> String {
-        return "/v2/workspaces/\(workspaceID)/message"
+    var input:   AnyObject!
+    var context: [String: String]?
+    
+    init(message: String, tags: [String]? = nil, context: [String: String]? = nil) {
+        self.input  = ["text" : message]
+        self.context = context
+    }
+    
+    /** Represents the Message as a dictionary */
+    func toDictionary() -> [String : AnyObject] {
+        var map        = [String: AnyObject]()
+        map["input"]   = input
+        map["context"] = context
+        return map
     }
 }
-

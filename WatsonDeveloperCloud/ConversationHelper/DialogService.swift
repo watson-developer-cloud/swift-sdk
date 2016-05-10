@@ -25,8 +25,8 @@ class DialogService {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         
         let auth = BasicAuthenticationStrategy(
-            tokenURL  : ConversationConstants.gatewayTokenURL,
-            serviceURL: ConversationConstants.dialogServiceURL,
+            tokenURL  : ConversationHelperConstants.gatewayTokenURL,
+            serviceURL: ConversationHelperConstants.dialogServiceURL,
             username  : username,
             password  : password)
         
@@ -65,16 +65,16 @@ class DialogService {
      - parameter completionHandler: A function that will be executed with the response returned
      from the Watson Engagement Advisor, or an error if an error occured.
      */
-    func sendText(message: String, tags: [String]? = nil, context: [String: String]? = nil, completionHandler: (MessageResponse?, NSError?) -> Void) {
+    func sendText(message: String, tags: [String]? = nil, context: [String: String]? = nil, completionHandler: (ConversationMessageResponse?, NSError?) -> Void) {
 
-        let messageRequest = Message(message: message, tags: tags, context: context)
+        let messageRequest = MessageRequest(message: message, tags: tags, context: context)
         let request : RestRequest
         
         if let auth = auth {
             request = RestRequest(
                 method: .POST,
                 serviceURL: serviceURL,
-                endpoint: ConversationConstants.message(workspaceID),
+                endpoint: ConversationHelperConstants.message(workspaceID),
                 accept: .JSON,
                 authStrategy: auth,
                 contentType: .JSON,
@@ -86,7 +86,7 @@ class DialogService {
             request = RestRequest(
                 method: .POST,
                 serviceURL: serviceURL,
-                endpoint: ConversationConstants.message(workspaceID),
+                endpoint: ConversationHelperConstants.message(workspaceID),
                 accept: .JSON,
                 contentType: .JSON,
                 messageBody: messageRequest.toJSONData() { error in
@@ -109,7 +109,7 @@ class DialogService {
             
             print(String(data: data!, encoding: NSUTF8StringEncoding))
             
-            let response = MessageResponse(data: data!)
+            let response = ConversationMessageResponse(data: data!)
             completionHandler(response, error)
         }
         task.resume()

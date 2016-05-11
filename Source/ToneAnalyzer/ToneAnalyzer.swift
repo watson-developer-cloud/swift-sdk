@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,8 @@ public class ToneAnalyzerV3 {
     /**
        Initializes the Watson Tone Analyzer service.
      
-       - parameter username:    The username crediental
-       - parameter password:    The password crediental
+       - parameter username:    The username credential
+       - parameter password:    The password credential
        - parameter versionDate: The release date of the version you wish to use of the service
                                 in YYYY-MM-DD format
     */

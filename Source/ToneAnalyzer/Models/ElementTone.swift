@@ -30,7 +30,6 @@ extension ToneAnalyzer {
         public var tones:[ToneCategory] = []
         
         public init(json: JSON) throws {
-            //tones = try json.array("tone_categories").map(ToneCategory.init)
             tones = try json.arrayOf("tone_categories", type: ToneCategory.self)
         }
     }

@@ -34,7 +34,6 @@ extension ToneAnalyzer {
         
         public init(json: JSON) throws {
             documentTone = try json.decode("document_tone", type: ElementTone.self)
-            //sentencesTones = try json.array("sentences_tone").map(SentenceTone.init)
             sentencesTones = try json.arrayOf("sentences_tone", type: SentenceTone.self)
             
         }

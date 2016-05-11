@@ -42,7 +42,6 @@ extension ToneAnalyzer {
         public init(json: JSON) throws {
             id = try json.string("category_id")
             name = try json.string("category_name")
-            //tones = try json.array("tones").map(ToneScore.init)
             tones = try json.arrayOf("tones", type: ToneScore.self)
         }
     }

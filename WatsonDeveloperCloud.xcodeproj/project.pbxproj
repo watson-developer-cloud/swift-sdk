@@ -205,7 +205,7 @@
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
-				B1F21DEF1CE2461800393146 /* ToneAnalyzer */,
+				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
@@ -356,14 +356,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		B1F21DEF1CE2461800393146 /* ToneAnalyzer */ = {
+		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
 			isa = PBXGroup;
 			children = (
 				B1F21DF01CE2461800393146 /* Models */,
 				B1F21DF61CE2461800393146 /* Tests */,
 				B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */,
 			);
-			name = ToneAnalyzer;
+			name = ToneAnalyzerV3;
 			path = Source/ToneAnalyzer;
 			sourceTree = "<group>";
 		};

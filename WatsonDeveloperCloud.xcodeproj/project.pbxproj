@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A248511CD1482200C63CF1 /* ClassifierDetails.swift */; };
+		12A248591CD3248A00C63CF1 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12A248551CD3171800C63CF1 /* training_meta.txt */; };
+		12A2485A1CD3248E00C63CF1 /* weather_data_train.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12A248561CD3171800C63CF1 /* weather_data_train.csv */; };
+		12AE2BCF1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */; };
+		12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
+		12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */; };
+		12B07D111CD791A300B20B38 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B07D101CD791A300B20B38 /* Classification.swift */; };
+		12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */; };
+		12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */; };
+		12B07D2D1CDD46A300B20B38 /* trained_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2C1CDD46A300B20B38 /* trained_meta.txt */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
@@ -80,6 +90,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
+		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
+		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
+		12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifier.swift; path = Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
+		12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierModel.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierModel.swift; sourceTree = "<group>"; };
+		12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifierTests.swift; path = Source/NaturalLanguageClassifierV1/Tests/NaturalLanguageClassifierTests.swift; sourceTree = "<group>"; };
+		12B07D101CD791A300B20B38 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Source/NaturalLanguageClassifierV1/Models/Classification.swift; sourceTree = "<group>"; };
+		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_empty.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_empty.txt; sourceTree = "<group>"; };
+		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_missing_name.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_missing_name.txt; sourceTree = "<group>"; };
+		12B07D2C1CDD46A300B20B38 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trained_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/trained_meta.txt; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -149,12 +169,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
+			isa = PBXGroup;
+			children = (
+				12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */,
+				12AE2BCC1CCFB5250034CF4E /* Models */,
+				12AE2BCD1CCFB5310034CF4E /* Tests */,
+			);
+			name = NaturalLanguageClassifierV1;
+			sourceTree = "<group>";
+		};
+		12AE2BCC1CCFB5250034CF4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */,
+				12A248511CD1482200C63CF1 /* ClassifierDetails.swift */,
+				12B07D101CD791A300B20B38 /* Classification.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		12AE2BCD1CCFB5310034CF4E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */,
+				12A248561CD3171800C63CF1 /* weather_data_train.csv */,
+				12A248551CD3171800C63CF1 /* training_meta.txt */,
+				12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */,
+				12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */,
+				12B07D2C1CDD46A300B20B38 /* trained_meta.txt */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
 				B1F21DEF1CE2461800393146 /* ToneAnalyzer */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
+				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
@@ -435,9 +489,14 @@
 			files = (
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
+				12A248591CD3248A00C63CF1 /* training_meta.txt in Resources */,
 				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
+				12B07D2D1CDD46A300B20B38 /* trained_meta.txt in Resources */,
+				12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */,
 				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
+				12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */,
+				12A2485A1CD3248E00C63CF1 /* weather_data_train.csv in Resources */,
 				7ADEC3F41CBF47E900A84C35 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +515,7 @@
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
 				B1F21E011CE2461800393146 /* ToneAnalyzer.swift in Sources */,
 				7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */,
+				12B07D111CD791A300B20B38 /* Classification.swift in Sources */,
 				7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
 				B1F21DFB1CE2461800393146 /* ElementTone.swift in Sources */,
@@ -470,9 +530,12 @@
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
 				B1F21DFC1CE2461800393146 /* SentenceTone.swift in Sources */,
 				7AEB133A1CBF91E500101884 /* DialogProfile.swift in Sources */,
+				12AE2BCF1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
+				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
 				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
 				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
+				12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */,
 				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 				B1F21DFD1CE2461800393146 /* ToneAnalysis.swift in Sources */,
@@ -486,6 +549,7 @@
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				B1F21E041CE25E6300393146 /* ToneAnalyzerTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
+				12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

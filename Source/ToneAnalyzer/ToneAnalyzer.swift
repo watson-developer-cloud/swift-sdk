@@ -23,7 +23,7 @@ import Freddy
  * emotional tones, social propensities, and writing styles in written communication. 
  * Then it offers suggestions to help the writer improve their intended language tones.
 **/
-public class ToneAnalyzer {
+public class ToneAnalyzerV3 {
     
     private let username: String
     private let password: String
@@ -33,6 +33,14 @@ public class ToneAnalyzer {
     private let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
     private let errorDomain = "com.watsonplatform.toneanalyzer"
     
+    /**
+       Initializes the Watson Tone Analyzer service.
+     
+       - parameter username:    The username crediental
+       - parameter password:    The password crediental
+       - parameter versionDate: The release date of the version you wish to use of the service
+                                in YYYY-MM-DD format
+    */
     public init(username: String, password: String, versionDate: String) {
         self.username = username
         self.password = password
@@ -69,13 +77,23 @@ public class ToneAnalyzer {
         failure: (NSError -> Void)? = nil,
         success: ToneAnalysis -> Void)
     {
+        // construct body
+        guard let body = try? ["text": text].toJSON().serialize() else {
+            let failureReason = "Classification text could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
         // construct request
         let request = RestRequest(
-            method: .GET,
+            method: .POST,
             url: serviceURL + "/v3/tone",
             acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body,
             queryParameters: [
-                NSURLQueryItem(name: "text", value: text),
                 NSURLQueryItem(name: "version", value: versionDate)
             ]
         )

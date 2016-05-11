@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzer {
+extension ToneAnalyzerV3 {
     
     /**
      *
@@ -27,10 +27,10 @@ extension ToneAnalyzer {
     public struct ToneAnalysis: JSONDecodable {
         
         // The tone analysis of the full document.
-        public var documentTone:ElementTone?
+        public let documentTone:ElementTone
         
         /// The sentence level tone analysis.
-        public var sentencesTones:[SentenceTone]? = []
+        public let sentencesTones:[SentenceTone]
         
         public init(json: JSON) throws {
             documentTone = try json.decode("document_tone", type: ElementTone.self)

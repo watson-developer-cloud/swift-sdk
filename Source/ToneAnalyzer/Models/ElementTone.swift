@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzer {
+extension ToneAnalyzerV3 {
     
     /**
      * This object represents the results of Tone analysis on an element; which 
@@ -27,7 +27,7 @@ extension ToneAnalyzer {
     public struct ElementTone: JSONDecodable {
         
         /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
-        public var tones:[ToneCategory] = []
+        public let tones: [ToneCategory]
         
         public init(json: JSON) throws {
             tones = try json.arrayOf("tone_categories", type: ToneCategory.self)

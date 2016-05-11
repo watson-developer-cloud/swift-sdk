@@ -20,7 +20,7 @@ import WatsonDeveloperCloud
 class ToneAnalyzerTests: XCTestCase {
 
     /// Language translation service
-    private var service: ToneAnalyzer!
+    private var service: ToneAnalyzerV3!
     
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: NSTimeInterval = 60.0
@@ -34,7 +34,7 @@ class ToneAnalyzerTests: XCTestCase {
                 let username = dict["ToneAnalyzerUsername"]!
                 let password = dict["ToneAnalyzerPassword"]!
                 if service == nil {
-                    service = ToneAnalyzer(username: username, password: password, versionDate: "2016-02-11")
+                    service = ToneAnalyzerV3(username: username, password: password, versionDate: "2016-02-11")
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")
@@ -54,23 +54,11 @@ class ToneAnalyzerTests: XCTestCase {
     func failWithError(error: NSError) {
         XCTFail("Positive test failed with error: \(error)")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     func testGetTone() {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = expectationWithDescription(description)
-        
-        /*service.getTone(toneText) { ToneAnalysisArray, error in
-            // ensure profile is as expected
-            XCTAssertNotNil(ToneAnalysisArray, "ToneAnalysisArray should not be nil")
-            expectation.fulfill()
-        }*/
+
         service.getTone(toneText, failure: failWithError) { tone in
             XCTAssertNotNil(tone, "Tone should not be nil")
             XCTAssertNotNil(tone.documentTone, "DocumentTone should not be nil")

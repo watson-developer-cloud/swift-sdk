@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzer {
+extension ToneAnalyzerV3 {
     /**
      *
      * Object representing scoring of a single Tone (of any category) on our responses. It contains the
@@ -25,11 +25,11 @@ extension ToneAnalyzer {
      */
     public struct ToneScore: JSONDecodable {
         /// Unique ID of the tone.
-        public var id = ""
+        public let id: String
         /// The name of the tone
-        public var name = ""
+        public let name: String
         /// The score of the tone.
-        public var score = 0.0
+        public let score: Double
         
         public init(json: JSON) throws {
             id = try json.string("tone_id")

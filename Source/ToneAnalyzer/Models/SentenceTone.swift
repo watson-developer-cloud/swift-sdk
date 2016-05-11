@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzer {
+extension ToneAnalyzerV3 {
     /**
      * This element contains the result of analyzing an individual sentence. 
      * It contains a list of ToneCategory objects which is the actual result, 
@@ -27,13 +27,13 @@ extension ToneAnalyzer {
      */
     public struct SentenceTone: JSONDecodable {
         /// Unique ID for each sentence.
-        public var id:Int = 0
+        public let id: Int
         /// The character number of the first character in the sentence.
-        public var inputFrom:Int = 0
+        public let inputFrom: Int
         /// The character number of the last character in the sentence.
-        public var inputTo:Int = 0
+        public let inputTo: Int
         /// Text of the sentence being analyzed.
-        public var text:String = ""
+        public let text :String
         
         
         public init(json: JSON) throws {

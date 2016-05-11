@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzer {
+extension ToneAnalyzerV3 {
     
     /**
      * Top level tone (or Tone Category) from the list of Writing Tone, 
@@ -26,17 +26,17 @@ extension ToneAnalyzer {
     public struct ToneCategory: JSONDecodable {
         
         /// The unique ID of the category.
-        public var id:String = ""
+        public let id: String
         
         /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
-        public var name:String = ""
+        public let name: String
         
         /**
           * Analysis organized by tones. The emotion tones are anger, disgust, fear, joy, and sadness.
           * The writing tones are analytical, confident, and tentative. The social tones are
           * openness, conscientiousness, extraversion, agreeableness, and neuroticism.
         **/
-        public var tones:[ToneScore] = []
+        public let tones: [ToneScore]
         
         
         public init(json: JSON) throws {

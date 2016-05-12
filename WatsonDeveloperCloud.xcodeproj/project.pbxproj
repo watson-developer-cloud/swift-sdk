@@ -364,7 +364,7 @@
 				B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */,
 			);
 			name = ToneAnalyzerV3;
-			path = Source/ToneAnalyzer;
+			path = Source/ToneAnalyzerV3;
 			sourceTree = "<group>";
 		};
 		B1F21DF01CE2461800393146 /* Models */ = {

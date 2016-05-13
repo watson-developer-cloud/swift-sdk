@@ -21,6 +21,7 @@
 		313319CA1CE4D9B2007F726F /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313319C91CE4D9B2007F726F /* Voice.swift */; };
 		313319CE1CE4E520007F726F /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313319CD1CE4E520007F726F /* TextToSpeechTests.swift */; };
 		313319D11CE4F4A2007F726F /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313319CF1CE4F21E007F726F /* Customization.swift */; };
+		3147F6971CE5243F00817EE0 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3147F6961CE5243F00817EE0 /* Pronunciation.swift */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
@@ -108,6 +109,7 @@
 		313319C91CE4D9B2007F726F /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		313319CD1CE4E520007F726F /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		313319CF1CE4F21E007F726F /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		3147F6961CE5243F00817EE0 /* Pronunciation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				313319C91CE4D9B2007F726F /* Voice.swift */,
 				313319CF1CE4F21E007F726F /* Customization.swift */,
+				3147F6961CE5243F00817EE0 /* Pronunciation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
 				B1F21DFF1CE2461800393146 /* ToneScore.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
+				3147F6971CE5243F00817EE0 /* Pronunciation.swift in Sources */,
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
 				B1F21DFC1CE2461800393146 /* SentenceTone.swift in Sources */,

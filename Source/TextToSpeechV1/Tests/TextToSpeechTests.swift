@@ -62,6 +62,55 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
+    
+    /** Gets all of the voices available from service */
+    private func getVoices() -> [TextToSpeechV1.Voice]? {
+        let description = "Get all voices."
+        let expectation = expectationWithDescription(description)
+        var voiceList: [TextToSpeechV1.Voice]?
+        
+        textToSpeech.getVoices(failWithError) { voices in
+            voiceList = voices
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+        return voiceList
+    }
+    
+    /** Get a voice by a voice name. */
+    private func getVoice(voiceName: String, customizationID: String? = nil) -> TextToSpeechV1.Voice? {
+        let description = "Get a voice."
+        let expectation = expectationWithDescription(description)
+        var voice: TextToSpeechV1.Voice?
+        
+        textToSpeech.getVoice(voiceName, customizationID: customizationID, failure: failWithError) { voiceInstance in
+            voice = voiceInstance
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return voice
+    }
+    
+    /** Get a pronunciation by a voice type name. */
+    private func getPronunciation(text:String,
+                                  voiceType: TextToSpeechV1.VoiceType? = nil,
+                                  format: TextToSpeechV1.PhonemeFormat? = nil) -> TextToSpeechV1.Pronunciation? {
+        
+        let description = "Get pronunciation."
+        let expectation = expectationWithDescription(description)
+        var pronunciation: TextToSpeechV1.Pronunciation?
+        
+        textToSpeech.getPronunciation(text, voiceType: voiceType, format: format, failure: failWithError) { pronunciationInstance in
+            pronunciation = pronunciationInstance
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return pronunciation
+    }
+    
+    // MARK: - Positive Tests
+    
     /** Get all voices. */
     func testGetVoices() {
         
@@ -93,8 +142,8 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
-    /** Test getting a voice and testing url vs name.  This will test all available voices*/
-    func testGetPronunciation() {
+    /** Test getting a pronunciation.  This will test all available voices*/
+    func testDefinedGetPronunciation() {
         
         let text = "Swift at IBM is awesome"
         
@@ -112,7 +161,7 @@ class TextToSpeechTests: XCTestCase {
             
             guard let pronunciation = getPronunciation(
                 text,
-                voiceType: TextToSpeechV1.VoiceType.Defined(voiceType),
+                voiceType: TextToSpeechV1.VoiceType.defined(voiceType),
                 format: format) else {
                     XCTFail("Failed to get a pronunciation for \(voiceType).")
                     continue
@@ -123,51 +172,41 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
+    // MARK: - Negative Tests
     
-    /** Gets all of the voices available from service */
-    private func getVoices() -> [TextToSpeechV1.Voice]? {
-        let description = "Get all voices."
-        let expectation = expectationWithDescription(description)
-        var voiceList: [TextToSpeechV1.Voice]?
+    /** Test getting a pronunciation with invalid voice type. */
+    func testUndefinedVoiceGetPronunciation() {
         
-        textToSpeech.getVoices(failWithError) { voices in
-            voiceList = voices
+        let description = "Test undefined voice in pronunciation all."
+        let expectation = expectationWithDescription(description)
+        
+        let text = "Swift at IBM is awesome"
+        
+        let format = TextToSpeechV1.PhonemeFormat.spr
+        let customVoice = TextToSpeechV1.VoiceType.custom("does_not_exist")
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
             expectation.fulfill()
         }
         
+        textToSpeech.getPronunciation(text, voiceType: customVoice, format: format, failure: failure, success: failWithResult)
         waitForExpectations()
-        return voiceList
     }
     
-    /** Get a voice by a voice name. */
-    private func getVoice(voiceName: String, customizationID: String? = nil) -> TextToSpeechV1.Voice? {
-        let description = "Get a voice."
-        let expectation = expectationWithDescription(description)
-        var voice: TextToSpeechV1.Voice?
+    /** Test getting a voice with invalid voice type. */
+    func testUndefinedVoiceGetVoice() {
         
-        textToSpeech.getVoice(voiceName, customizationID: customizationID, failure: failWithError) { voiceInstance in
-            voice = voiceInstance
+        let description = "Test undefined voice in pronunciation all."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
             expectation.fulfill()
         }
-        waitForExpectations()
-        return voice
-    }
-
-    /** Get a pronunciation by a voice type name. */
-    private func getPronunciation(text:String,
-                          voiceType: TextToSpeechV1.VoiceType? = nil,
-                          format: TextToSpeechV1.PhonemeFormat? = nil) -> TextToSpeechV1.Pronunciation? {
         
-        let description = "Get pronunciation."
-        let expectation = expectationWithDescription(description)
-        var pronunciation: TextToSpeechV1.Pronunciation?
-        
-        textToSpeech.getPronunciation(text, voiceType: voiceType, format: format, failure: failWithError) { pronunciationInstance in
-            pronunciation = pronunciationInstance
-            expectation.fulfill()
-        }
+        textToSpeech.getVoice("does_not_exist", customizationID: nil, failure: failure, success: failWithResult)
         waitForExpectations()
-        return pronunciation
     }
 }
 

@@ -32,7 +32,7 @@ public class TextToSpeechV1 {
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
     private let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
 
-    public enum DefinedVoiceType: String {
+    public enum DefinedVoiceType: String, CustomStringConvertible {
         case DE_GIRGIT      = "de-DE_BirgitVoice"
         case DE_DIETER      = "de-DE_DieterVoice"
         case GB_KATE        = "en-GB_KateVoice"
@@ -48,17 +48,39 @@ public class TextToSpeechV1 {
         case BR_Isabela     = "pt-BR_IsabelaVoice"
         
         public static let allValues = [DE_GIRGIT, DE_DIETER, GB_KATE, ES_Enrique, US_Allison, US_Lisa, US_Michael,
-                                ES_Laura, US_Sofia, FR_Renee, IT_Francesca, JP_Emi, BR_Isabela]
+                                       ES_Laura, US_Sofia, FR_Renee, IT_Francesca, JP_Emi, BR_Isabela]
+        
+        public var description : String {
+            get {
+                return self.rawValue
+            }
+        }
     }
     
     public enum VoiceType {
-        case Defined(DefinedVoiceType)
-        case Custom(String)
+        case defined(DefinedVoiceType)
+        case custom(String)
     }
     
     public enum PhonemeFormat: String {
         case ipa = "ipa"
         case spr = "spr"
+    }
+    
+    public enum AcceptFormat: String {
+     //   case ogg  = "ogg"
+        case wav  = "wav"
+     //   case flac = "flac"
+    }
+    
+    enum ResponseContentType: String {
+    //    case ogg  = "audio/ogg;codecs=opus"
+        case wave = "audio/wav"
+    //    case flac = "audio/flac"
+    }
+    
+    enum SpeechToTextError: ErrorType {
+        case noMatchingVoiceFound(String)
     }
     
     /**
@@ -195,15 +217,7 @@ public class TextToSpeechV1 {
         queryParameters.append(queryParameter)
         
         if let voiceType = voiceType {
-            
-            // get the correct voice string
-            switch voiceType {
-            case VoiceType.Defined(let definedVoice):
-                voice = definedVoice.rawValue
-            case VoiceType.Custom(let customVoice):
-                voice = customVoice
-            }
-
+            voice = getVoiceString(voiceType)
             let queryParameter = NSURLQueryItem(name: "voice", value: "\(voice)")
             queryParameters.append(queryParameter)
         }
@@ -212,7 +226,6 @@ public class TextToSpeechV1 {
             let queryParameter = NSURLQueryItem(name: "format", value: "\(format)")
             queryParameters.append(queryParameter)
         }
-        
         
         // construct REST request
         let request = RestRequest(
@@ -232,6 +245,60 @@ public class TextToSpeechV1 {
                 case .Failure(let error): failure?(error)
                 }
         }
+    }
+    
+    public func synthesize(
+        text:String,
+        accept:AcceptFormat,
+        voiceType:TextToSpeechV1.VoiceType? = nil,
+        customizationID:String? = nil,
+        format: PhonemeFormat? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: Pronunciation -> Void) {
+        
+        // voice to use in the query params
+        var voice:String
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        
+        let queryParameter = NSURLQueryItem(name: "text", value: "\(text)")
+        queryParameters.append(queryParameter)
+        
+        if let voiceType = voiceType {
+            voice = getVoiceString(voiceType)
+            let queryParameter = NSURLQueryItem(name: "voice", value: "\(voice)")
+            queryParameters.append(queryParameter)
+        }
+        
+        if let format = format {
+            let queryParameter = NSURLQueryItem(name: "format", value: "\(format)")
+            queryParameters.append(queryParameter)
+        }
+        
+        // construct query parameters
+        guard let body = try? ["text": text].toJSON().serialize() else {
+            let failureReason = "Classification text could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+    }
+    
+    private func getVoiceString(voiceType: VoiceType) -> String {
+        
+        var voice = ""
+        
+        // get the correct voice string
+        switch voiceType {
+        case VoiceType.defined(let definedVoice):
+            voice = definedVoice.description
+        case VoiceType.custom(let customVoice):
+            voice = customVoice
+        }
+        return voice
     }
 }
 

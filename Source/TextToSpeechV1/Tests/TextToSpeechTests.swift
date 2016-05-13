@@ -69,10 +69,61 @@ class TextToSpeechTests: XCTestCase {
             XCTFail("Failed to get a list of voices.")
             return
         }
-        
         XCTAssertGreaterThanOrEqual(voices.count, 5, "Expected there to be at least 5 lanugagues.")
     }
 
+    
+    /** Test getting a voice and testing url vs name.  This will test all available voices*/
+    func testGetVoice() {
+        
+        guard let voices = getVoices() else {
+            XCTFail("Failed to get a list of voices.")
+            return
+        }
+        for voiceInstance in voices {
+            guard let voice = getVoice(voiceInstance.name) else {
+                XCTFail("Failed to get a known voice \(voiceInstance.name)")
+                return
+            }
+            
+            guard voice.url.lowercaseString.rangeOfString(voice.name.lowercaseString) != nil else {
+                XCTFail("Failed to match a known voice name \(voiceInstance.name)")
+                return
+            }
+        }
+    }
+    
+    /** Test getting a voice and testing url vs name.  This will test all available voices*/
+    func testGetPronunciation() {
+        
+        let text = "Swift at IBM is awesome"
+        
+        for voiceType in TextToSpeechV1.DefinedVoiceType.allValues {
+            
+            print("Testing voice type \(voiceType)")
+            
+            let format = TextToSpeechV1.PhonemeFormat.spr
+            
+            // these voices fail on server
+            if voiceType == TextToSpeechV1.DefinedVoiceType.BR_Isabela ||
+               voiceType == TextToSpeechV1.DefinedVoiceType.IT_Francesca {
+                continue
+            }
+            
+            guard let pronunciation = getPronunciation(
+                text,
+                voiceType: TextToSpeechV1.VoiceType.Defined(voiceType),
+                format: format) else {
+                    XCTFail("Failed to get a pronunciation for \(voiceType).")
+                    continue
+            }
+            if (voiceType != TextToSpeechV1.DefinedVoiceType.JP_Emi) {
+                XCTAssertGreaterThanOrEqual(pronunciation.pronunciation.characters.count, 1, "Expected there to be at least 1 character.")
+            }
+        }
+    }
+    
+    
     /** Gets all of the voices available from service */
     private func getVoices() -> [TextToSpeechV1.Voice]? {
         let description = "Get all voices."
@@ -88,29 +139,8 @@ class TextToSpeechTests: XCTestCase {
         return voiceList
     }
     
-    /** Test getting a voice and testing url vs name.  This will test all available voices*/
-    func testGetVoice() {
-        
-        guard let voices = getVoices() else {
-            XCTFail("Failed to get a list of voices.")
-            return
-        }
-        
-        for voiceInstance in voices {
-            guard let voice = getVoice(voiceInstance.name) else {
-                XCTFail("Failed to get a known voice \(voiceInstance.name)")
-                return
-            }
-            
-            guard voice.url.lowercaseString.rangeOfString(voice.name.lowercaseString) != nil else {
-                XCTFail("Failed to match a known voice name \(voiceInstance.name)")
-                return
-            }
-        }
-    }
-    
     /** Get a voice by a voice name. */
-    func getVoice(voiceName: String, customizationID: String? = nil) -> TextToSpeechV1.Voice? {
+    private func getVoice(voiceName: String, customizationID: String? = nil) -> TextToSpeechV1.Voice? {
         let description = "Get a voice."
         let expectation = expectationWithDescription(description)
         var voice: TextToSpeechV1.Voice?
@@ -122,4 +152,23 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
         return voice
     }
+
+    /** Get a pronunciation by a voice type name. */
+    private func getPronunciation(text:String,
+                          voiceType: TextToSpeechV1.VoiceType? = nil,
+                          format: TextToSpeechV1.PhonemeFormat? = nil) -> TextToSpeechV1.Pronunciation? {
+        
+        let description = "Get pronunciation."
+        let expectation = expectationWithDescription(description)
+        var pronunciation: TextToSpeechV1.Pronunciation?
+        
+        textToSpeech.getPronunciation(text, voiceType: voiceType, format: format, failure: failWithError) { pronunciationInstance in
+            pronunciation = pronunciationInstance
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return pronunciation
+    }
 }
+
+

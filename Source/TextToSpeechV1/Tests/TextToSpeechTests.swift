@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,14 @@
 
 import XCTest
 import WatsonDeveloperCloud
+import AVFoundation
 
 class TextToSpeechTests: XCTestCase {
     
     private var textToSpeech: TextToSpeechV1!
     private let timeout: NSTimeInterval = 30
+    private let playAudio = true
+    private let text = "Swift at IBM is awesome so you should try it!"
     
     // MARK: - Test Configuration
     
@@ -109,7 +112,54 @@ class TextToSpeechTests: XCTestCase {
         return pronunciation
     }
     
+    /** Get a synthesize some text with given voice type */
+    func synthesize(text:String,
+                    accept:TextToSpeechV1.AcceptFormat,
+                    voiceType: TextToSpeechV1.VoiceType? = nil,
+                    customizationID: String? = nil,
+                    format: TextToSpeechV1.PhonemeFormat? = nil) -> NSData? {
+        
+        let description = "synthesize"
+        let expectation = expectationWithDescription(description)
+        var audioData: NSData?
+        
+        textToSpeech.synthesize(text,accept: accept,voiceType: voiceType,customizationID: customizationID, failure: failWithError ) { value in
+            audioData = value
+            expectation.fulfill()
+        }
+
+        waitForExpectations()
+        return audioData
+    }
+    
+    
     // MARK: - Positive Tests
+    
+    /** Test getting a pronunciation with invalid voice type. */
+    func testSynthisize() {
+        
+        guard let synthesized = synthesize(text,
+                                           accept: TextToSpeechV1.AcceptFormat.wav,
+                                           voiceType: TextToSpeechV1.VoiceType.defined(TextToSpeechV1.DefinedVoiceType.GB_KATE))
+            else {
+                XCTFail("Failed to get a list of voices.")
+                return
+        }
+        
+        XCTAssertNotNil(synthesized, "Should be some data present")
+        
+        do {
+            let audioPlayer = try AVAudioPlayer(data: synthesized)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            if (self.playAudio) {
+                sleep(10)
+            }
+            
+        } catch {
+            XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+        }
+    }
     
     /** Get all voices. */
     func testGetVoices() {
@@ -143,7 +193,7 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /** Test getting a pronunciation.  This will test all available voices*/
-    func testDefinedGetPronunciation() {
+    func testGetPronunciationWithDefinedVoice() {
         
         let text = "Swift at IBM is awesome"
         
@@ -175,7 +225,7 @@ class TextToSpeechTests: XCTestCase {
     // MARK: - Negative Tests
     
     /** Test getting a pronunciation with invalid voice type. */
-    func testUndefinedVoiceGetPronunciation() {
+    func testGetPronunciationWithUndefinedVoice() {
         
         let description = "Test undefined voice in pronunciation all."
         let expectation = expectationWithDescription(description)
@@ -195,7 +245,7 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /** Test getting a voice with invalid voice type. */
-    func testUndefinedVoiceGetVoice() {
+    func testGetVoiceWithUndefinedVoice() {
         
         let description = "Test undefined voice in pronunciation all."
         let expectation = expectationWithDescription(description)

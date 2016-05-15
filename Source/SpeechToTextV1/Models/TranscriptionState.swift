@@ -15,19 +15,15 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/** An error produced by the Speech to Text service. */
-struct SpeechToTextError: Mappable {
+/** The state of the Speech to Text service. */
+internal struct TranscriptionState: JSONDecodable {
 
-    /// A description of the error that occurred.
-    var error: String!
+    /// The state of the Speech to Text service.
+    internal let state: String
 
-    /// Used internally to initialize a `SpeechToTextError` from JSON.
-    init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        error <- map["error"]
+    internal init(json: JSON) throws {
+        state = try json.string("state")
     }
 }

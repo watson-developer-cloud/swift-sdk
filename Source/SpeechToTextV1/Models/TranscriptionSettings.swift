@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import Freddy
 
 /**
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will
@@ -23,7 +24,7 @@ import Foundation
  Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's
  parameters.
  */
-public struct SpeechToTextSettings: WatsonRequestModel {
+public struct TranscriptionSettings: JSONEncodable {
 
     /***** URL query parameters for WebSockets connection request. *****/
 
@@ -93,14 +94,14 @@ public struct SpeechToTextSettings: WatsonRequestModel {
     public var filterProfanity: Bool?
 
     /**
-     Initialize a `SpeechToTextSettings` object to set the parameters of a Watson Speech to
+     Initialize a `TranscriptionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
 
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. Visit https://ibm.biz/BdHCrB for more information about
         the supported formats.
      
-     - returns: An initialized `SpeechToTextSettings` object with the given `contentType`.
+     - returns: An initialized `TranscriptionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.
      */
@@ -108,21 +109,39 @@ public struct SpeechToTextSettings: WatsonRequestModel {
         self.contentType = contentType
     }
 
-    /** Represent a `SpeechToTextSettings` as a dictionary of key-value pairs. */
-    func toDictionary() -> [String: AnyObject] {
-        var map = [String: AnyObject]()
-        map["action"] = action
-        map["content-type"] = contentType.toString
-        map["continuous"] = continuous
-        map["max_alternatives"] = maxAlternatives
-        map["interim_results"] = interimResults
-        map["word_confidence"] = wordConfidence
-        map["timestamps"] = timestamps
-        map["keywords"] = keywords
-        map["keywords_threshold"] = keywordsThreshold
-        map["word_alternatives_threshold"] = wordAlternativesThreshold
-        map["inactivity_timeout"] = inactivityTimeout
-        return map
+    /** Represent a `TranscriptionSettings` as a dictionary of key-value pairs. */
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["action"] = .String(action)
+        json["content-type"] = .String(contentType.toString)
+        if let continuous = continuous {
+            json["continuous"] = .Bool(continuous)
+        }
+        if let maxAlternatives = maxAlternatives {
+            json["max_alternatives"] = .Int(maxAlternatives)
+        }
+        if let interimResults = interimResults {
+            json["interim_results"] = .Bool(interimResults)
+        }
+        if let wordConfidence = wordConfidence {
+            json["word_confidence"] = .Bool(wordConfidence)
+        }
+        if let timestamps = timestamps {
+            json["timestamps"] = .Bool(timestamps)
+        }
+        if let keywords = keywords {
+            json["keywords"] = keywords.toJSON()
+        }
+        if let keywordsThreshold = keywordsThreshold {
+            json["keywords_threshold"] = .Double(keywordsThreshold)
+        }
+        if let wordAlternativesThreshold = wordAlternativesThreshold {
+            json["word_alternatives_threshold"] = .Double(wordAlternativesThreshold)
+        }
+        if let inactivityTimeout = inactivityTimeout {
+            json["inactivity_timeout"] = .Int(inactivityTimeout)
+        }
+        return .Dictionary(json)
     }
 }
 

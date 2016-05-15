@@ -20,11 +20,12 @@ import AVFoundation
 /** Stream microphone audio to Speech to Text. */
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
 
-    private var settings: SpeechToTextSettings
+    private var settings: TranscriptionSettings
     private var failure: (NSError -> Void)?
-    private let success: [SpeechToTextResult] -> Void
+    private let success: [TranscriptionResult] -> Void
     private var socket: SpeechToTextWebSocket?
     private var captureSession: AVCaptureSession?
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
 
     /**
      Create a `SpeechToTextAudioStreamer` to stream microphone audio to Speech to Text.
@@ -42,10 +43,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         Speech to Text.
     */
     init?(
-        authStrategy: AuthenticationStrategy,
-        settings: SpeechToTextSettings,
+        restToken: RestToken,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
     {
         self.settings = settings
         self.success = success
@@ -59,7 +60,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         }
 
         guard let socket = SpeechToTextWebSocket(
-            authStrategy: authStrategy,
+            restToken: restToken,
             settings: settings,
             failure: failure,
             success: success) else
@@ -82,26 +83,29 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
 
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
-            let description = "Unable to create an AVCaptureSession."
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Unable to create an AVCaptureSession."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return false
         }
 
         let microphoneInput = createMicrophoneInput()
         guard captureSession.canAddInput(microphoneInput) else {
-            let description = "Unable to add the microphone as a capture session input. " +
-                              "(Note that the microphone is only accessible on a physical device" +
-                              "--no microphone is accessible from within the simulator.)"
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Unable to add the microphone as a capture session input. " +
+                                "(Note that the microphone is only accessible on a physical " +
+                                "device--no microphone is accessible from within the simulator.)"
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return false
         }
 
         let transcriptionOutput = createTranscriptionOutput()
         guard captureSession.canAddOutput(transcriptionOutput) else {
-            let description = "Unable to add transcription as a capture session output."
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Unable to add transcription as a capture session output."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return false
         }
@@ -118,9 +122,12 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
      */
     func startRecognitionRequest() {
         settings.contentType = .L16(rate: 44100, channels: 1)
-        if let start = settings.toJSONString(failure) {
+        do {
+            let start = try settings.toJSON().serializeString()
             socket?.connect()
             socket?.writeString(start)
+        } catch {
+            return
         }
     }
 
@@ -128,9 +135,12 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
      Send a stop message to stop the recognition request.
      */
     func stopRecognitionRequest() {
-        if let stop = SpeechToTextStop().toJSONString(failure) {
+        do {
+            let stop = try TranscriptionStop().toJSON().serializeString()
             socket?.writeString(stop)
             socket?.disconnect()
+        } catch {
+            return
         }
     }
 
@@ -156,8 +166,9 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         fromConnection connection: AVCaptureConnection!)
     {
         guard CMSampleBufferDataIsReady(sampleBuffer) else {
-            let description = "Microphone audio buffer ignored because it was not ready."
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Microphone audio buffer ignored because it was not ready."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
@@ -195,8 +206,9 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     func createMicrophoneInput() -> AVCaptureDeviceInput? {
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         guard let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice) else {
-            let description = "Unable to access the microphone."
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Unable to access the microphone."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return nil
         }

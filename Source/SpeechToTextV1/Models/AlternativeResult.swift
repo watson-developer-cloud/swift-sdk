@@ -15,19 +15,19 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/** The state of the Speech to Text service. */
-struct SpeechToTextState: Mappable {
+/** Alternative word hypotheses from Speech to Text for a word in the audio input. */
+public struct AlternativeResult: JSONDecodable {
 
-    /// The state of the Speech to Text service.
-    var state: String!
+    /// The confidence score of the alternative word hypothesis, between 0 and 1.
+    public let confidence: Double
 
-    /// Used internally to initialize a `SpeechToTextState` from JSON.
-    init?(_ map: Map) { }
+    /// The alternative word hypothesis for a word in the audio input.
+    public let word: String
 
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        state <- map["state"]
+    public init(json: JSON) throws {
+        confidence = try json.double("confidence")
+        word = try json.string("word")
     }
 }

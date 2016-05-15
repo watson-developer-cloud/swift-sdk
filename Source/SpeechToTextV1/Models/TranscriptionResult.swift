@@ -15,34 +15,32 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** A result from a Speech to Text recognition request. */
-public struct SpeechToTextResult: Mappable {
+public struct TranscriptionResult: JSONDecodable {
 
     /// If `true`, then the transcription result for this
     /// utterance is final and will not be updated further.
-    public var final: Bool!
+    public let final: Bool
 
     /// Alternative transcription results.
-    public var alternatives: [SpeechToTextTranscription]!
+    public let alternatives: [Transcription]
 
     /// A dictionary of spotted keywords and their associated matches. A keyword will have
     /// no associated matches if it was not found within the audio input or the threshold
     /// was set too high.
-    public var keywordResults: [String: [SpeechToTextKeywordResult]]?
+    public let keywordResults: [String: [KeywordResult]]?
 
     /// A list of acoustically similar alternatives for words of the input audio.
-    public var wordAlternatives: [SpeechToTextWordAlternativeResults]?
+    public let wordAlternatives: [AlternativeResults]?
 
-    /// Used internally to initialize a `SpeechToTextResult` from JSON.
-    public init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    public mutating func mapping(map: Map) {
-        final            <- map["final"]
-        alternatives     <- map["alternatives"]
-        keywordResults   <- map["keywords_result"]
-        wordAlternatives <- map["word_alternatives"]
+    public init(json: JSON) throws {
+        final = try json.bool("final")
+        alternatives = try json.arrayOf("alternatives", type: Transcription.self)
+        keywordResults = try? json.dictionary("keywords_result").map {
+            json in try json.arrayOf(type: KeywordResult.self)
+        }
+        wordAlternatives = try? json.array("word_alternatives").map(AlternativeResults.init)
     }
 }

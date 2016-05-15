@@ -15,14 +15,14 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
-struct SpeechToTextResultWrapper: Mappable {
+internal struct TranscriptionResultWrapper: JSONDecodable {
 
     /// Index indicating change point in the results array.
     /// (See description of `results` array for more information.)
-    var resultIndex: Int!
+    internal let resultIndex: Int
 
     /// The results array consists of 0 or more final results, followed by 0 or 1 interim
     /// result. The final results are guaranteed not to change, while the interim result may
@@ -30,14 +30,10 @@ struct SpeechToTextResultWrapper: Mappable {
     /// periodically sends "updates" to the result list, with the `resultIndex` set to the
     /// lowest index in the array that has changed. `resultIndex` always points to the slot
     /// just after the most recent final result.
-    var results: [SpeechToTextResult]!
+    internal let results: [TranscriptionResult]
 
-    /// Used internally to initialize a `SpeechToTextResultWrapper` from JSON.
-    init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        resultIndex <- map["result_index"]
-        results     <- map["results"]
+    internal init(json: JSON) throws {
+        resultIndex = try json.int("result_index")
+        results = try json.array("results").map(TranscriptionResult.init)
     }
 }

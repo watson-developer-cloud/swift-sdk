@@ -15,16 +15,24 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/** Signals the end of an audio transmission to Speech to Text. */
-struct SpeechToTextStop: WatsonRequestModel {
+/** The timestamp of a word in a Speech to Text transcription. */
+public struct WordTimestamp: JSONDecodable {
 
-    /// The action to perform. Must be `stop` to end the request.
-    private let action = "stop"
+    /// A particular word from the transcription.
+    public let word: String
 
-    /** Represent a `SpeechToTextStop` as a dictionary of key-value pairs. */
-    func toDictionary() -> [String : AnyObject] {
-        return ["action": action]
+    /// The start time, in seconds, of the given word in the audio input.
+    public let startTime: Double
+
+    /// The end time, in seconds, of the given word in the audio input.
+    public let endTime: Double
+
+    public init(json: JSON) throws {
+        let array = try json.array()
+        word = try array[0].string()
+        startTime = try array[1].double()
+        endTime = try array[2].double()
     }
 }

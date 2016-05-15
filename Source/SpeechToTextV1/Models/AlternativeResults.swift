@@ -15,29 +15,25 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** Word alternatives produced by Speech to Text. */
-public struct SpeechToTextWordAlternativeResults: Mappable {
+public struct AlternativeResults: JSONDecodable {
 
     /// The time, in seconds, at which the word with alternative
     /// word hypotheses starts in the audio input.
-    public var startTime: Double!
+    public let startTime: Double
 
     /// The time, in seconds, at which the word with alternative
     /// word hypotheses ends in the audio input.
-    public var endTime: Double!
+    public let endTime: Double
 
     /// A list of alternative word hypotheses for a word in the audio input.
-    public var alternatives: [SpeechToTextWordAlternativeResult]!
+    public let alternatives: [AlternativeResult]
 
-    /// Used internally to initialize a `SpeechToTextWordAlternativeResults` from JSON.
-    public init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    public mutating func mapping(map: Map) {
-        startTime    <- map["start_time"]
-        endTime      <- map["end_time"]
-        alternatives <- map["alternatives"]
+    public init(json: JSON) throws {
+        startTime = try json.double("start_time")
+        endTime = try json.double("end_time")
+        alternatives = try json.arrayOf("alternatives", type: AlternativeResult.self)
     }
 }

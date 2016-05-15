@@ -15,33 +15,29 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** A transcription alternative produced by Speech to Text. */
-public struct SpeechToTextTranscription: Mappable {
+public struct Transcription: JSONDecodable {
 
     /// A transcript of the utterance.
-    public var transcript: String!
+    public let transcript: String
 
     /// The confidence score of the transcript, between 0 and 1. Available only for the best
     /// alternative and only in results marked as final.
-    public var confidence: Double?
+    public let confidence: Double?
 
     /// Timestamps for each word of the transcript.
-    public var timestamps: [SpeechToTextWordTimestamp]?
+    public let timestamps: [WordTimestamp]?
 
     /// Confidence scores for each word of the transcript, between 0 and 1. Available only
     /// for the best alternative and only in results marked as final.
-    public var wordConfidence: [SpeechToTextWordConfidence]?
+    public let wordConfidence: [WordConfidence]?
 
-    /// Used internally to initialize a `SpeechToTextTranscription` from JSON.
-    public init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    public mutating func mapping(map: Map) {
-        transcript     <-  map["transcript"]
-        confidence     <-  map["confidence"]
-        timestamps     <- (map["timestamps"], SpeechToTextWordTimestampTransform())
-        wordConfidence <- (map["word_confidence"], SpeechToTextWordConfidenceTransform())
+    public init(json: JSON) throws {
+        transcript = try json.string("transcript")
+        confidence = try? json.double("confidence")
+        timestamps = try? json.array("timestamps").map(WordTimestamp.init)
+        wordConfidence = try? json.array("word_confidence").map(WordConfidence.init)
     }
 }

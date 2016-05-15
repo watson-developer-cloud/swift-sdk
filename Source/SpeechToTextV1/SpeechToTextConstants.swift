@@ -23,7 +23,7 @@ struct SpeechToTextConstants {
     static let websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     static let domain = "swift.SpeechToText"
 
-    static func websocketsURL(settings: SpeechToTextSettings) -> NSURL? {
+    static func websocketsURL(settings: TranscriptionSettings) -> NSURL? {
         guard let urlComponents = NSURLComponents(string: websocketsURL) else {
             return nil
         }

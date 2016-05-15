@@ -35,7 +35,7 @@ internal class RestRequest: URLRequestConvertible {
     private let messageBody: NSData?
 
     /// A representation of the request as an `NSMutableURLRequest`.
-    var URLRequest: NSMutableURLRequest {
+    internal var URLRequest: NSMutableURLRequest {
         
         // construct url with query parameters
         let urlComponents = NSURLComponents(string: self.url)!

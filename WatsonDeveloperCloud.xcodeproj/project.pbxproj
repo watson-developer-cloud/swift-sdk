@@ -56,6 +56,7 @@
 		7AEB13381CBF91DB00101884 /* DialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13231CBF7C8A00101884 /* DialogModel.swift */; };
 		7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13241CBF7C8A00101884 /* DialogNode.swift */; };
 		7AEB133A1CBF91E500101884 /* DialogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13251CBF7C8A00101884 /* DialogProfile.swift */; };
+		7AEDEC091CE8048400995788 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEDEC081CE8048400995788 /* RestToken.swift */; };
 		B1F21DFB1CE2461800393146 /* ElementTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF11CE2461800393146 /* ElementTone.swift */; };
 		B1F21DFC1CE2461800393146 /* SentenceTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF21CE2461800393146 /* SentenceTone.swift */; };
 		B1F21DFD1CE2461800393146 /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF31CE2461800393146 /* ToneAnalysis.swift */; };
@@ -140,6 +141,7 @@
 		7AEB13251CBF7C8A00101884 /* DialogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogProfile.swift; sourceTree = "<group>"; };
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
+		7AEDEC081CE8048400995788 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
 		B1F21DF11CE2461800393146 /* ElementTone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementTone.swift; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceTone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceTone.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				7A25A84C1CE90B2D007AC9F1 /* RestExtensions.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
+				7AEDEC081CE8048400995788 /* RestToken.swift */,
 			);
 			name = RestKit;
 			path = Source/RestKit;

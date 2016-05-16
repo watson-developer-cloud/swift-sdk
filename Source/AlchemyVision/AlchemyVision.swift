@@ -15,266 +15,248 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Alamofire
+import Freddy
 
-/// AlchemyVision employs deep learning innovations to understand a picture's content and context
-public class AlchemyVision: AlchemyService {
+/**
+ AlchemyVision is an API that can analyze an image and return the objects, people, and text
+ found within the image. AlchemyVision can enhance the way businesses make decisions by
+ integrating image cognition.
+ */
+public class AlchemyVision {
     
-    // The authentication strategy to obtain authorization tokens.
-    let authStrategy: AuthenticationStrategy
-    
-    // The non-expiring Alchemy API key returned by the authentication strategy.
-    // TODO: this can be removed after migrating to WatsonGateway
-    private var _apiKey: String! {
-        return authStrategy.token
+    private let apiKey: String
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let serviceURL = "http://gateway-a.watsonplatform.net/calls"
+
+    /**
+     Create an `AlchemyVision` object.
+
+     - parameter apiKey: The API key credential to use when authenticating with the service.
+     */
+    public init(apiKey: String) {
+        self.apiKey = apiKey
     }
+    
+    // TODO: dataToError
 
-    // TODO: comment this initializer
-    public required init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
-        
-        // refresh to obtain the API key
-        // TODO: this can be removed after migrating to WatsonGateway
-        authStrategy.refreshToken { error in
-            guard error != nil else {
-                return
+    // TODO: POST /image/ImageGetRankedImageFaceTags
+
+    /**
+     Perform face recognition on the primary image at a given URL. For each face detected,
+     the service returns the estimated bounding box, gender, age, and name (if a celebrity
+     is detected).
+
+     - parameter url: The URL at which to perform face recognition.
+     - knowledgeGraph: Should additional metadata be provided for detected celebrities?
+     - failure: A function executed if an error occurs.
+     - success: A function executed with information about the detected faces.
+     */
+    public func getRankedImageFaceTags(
+        url: String,
+        knowledgeGraph: Bool? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: [FaceTags] -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apiKey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        if let knowledgeGraph = knowledgeGraph {
+            if knowledgeGraph {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "1"))
+            } else {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
+
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetRankedImageFaceTags",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .responseArray { (response: Response<[FaceTags], NSError>) in
+                switch response.result {
+                case .Success(let faceTags): success(faceTags)
+                case .Failure(let error): failure?(error)
+                }
+            }
     }
 
-    // TODO: comment this initializer
-    public convenience required init(apiKey: String) {
-        let authStrategy = APIKeyAuthenticationStrategy(apiKey: apiKey)
-        self.init(authStrategy: authStrategy)
-    }
-    
     /**
-     This function will invoke the GetImage API call for both URL and for HTML depending on the parameters passed in
-     
-     - parameter inputType:         Input type for either HTML or URL
-     - parameter inputString:       The string that contains the URL or the HTML text
-     - parameter completionHandler: ImageLink object is returned in the completionHandler
-     */
-    public func getImageLink(inputType: VisionConstants.ImageLinkType, inputString: String, completionHandler: (ImageLink?, NSError?) -> Void) {
-        
-        var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
-        var visionUrl = ""
-        
-        switch(inputType) {
-        case VisionConstants.ImageLinkType.URL:
-            endPoint = VisionConstants.ImageLinkExtraction.URLGetImage.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
-            var params = buildCommonParams()
-            params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.URL.rawValue)
-            NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-                let imageLink = Mapper<ImageLink>().map(response.data)!
-                completionHandler(imageLink, response.error)
-            })
-        case VisionConstants.ImageLinkType.HTML:
-            endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.HTML.rawValue + endPoint)
-            var params = buildCommonParams()
-            params.updateValue(inputString, forKey: VisionConstants.ImageLinkType.HTML.rawValue)
-            params.updateValue(_apiKey, forKey: "apikey")
-            NetworkUtils.performBasicAuthRequest(visionUrl, method: HTTPMethod.POST, parameters: params, encoding: ParameterEncoding.URL, completionHandler: {response in
-                let imageLink = Mapper<ImageLink>().map(response.data)!
-                completionHandler(imageLink, response.error)
-            })
-        }
-    }
-    
-    /**
-     The getImageKeywords call is used to tag an image in a given web page or file. AlchemyAPI will extracting the primary image and perform image tagging.
-     
-     - parameter inputType:         Input type for either NSURL image file or URL string
-     - parameter stringURL:         The string URL to extract primary image
-     - parameter fileURL:           Image file to perform image tagging
-     - parameter forceShowAll:      Includes lower confidence tags
-     - parameter knowledgeGraph:    Possible values: 0 (default), 1
-     - parameter callback:          Callback with ImageKeyWords through the completion handler
-     */
-    public func getImageKeywords(inputType: VisionConstants.ImageKeywordType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageKeyWords?, NSError?) -> Void) {
-        
-        var endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
-        var visionUrl = ""
-        
-        switch(inputType) {
-        case VisionConstants.ImageKeywordType.URL:
-            
-            endPoint = VisionConstants.ImageTagging.URLGetRankedImageKeywords.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
-            var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-            params.updateValue(stringURL!, forKey: VisionConstants.WatsonURI.URL.rawValue)
-            NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-                var imageKeywords = ImageKeyWords()
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    imageKeywords = Mapper<ImageKeyWords>().map(data)!
-                    completionHandler(imageKeywords, response.error)
-                }
-                else {
-                    completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
-                }
-            })
-        case VisionConstants.ImageKeywordType.UIImage:
-            endPoint = VisionConstants.ImageTagging.ImageGetRankedImageKeywords.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
-            var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-            params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-            
-            guard let image = image else {
-                let error = NSError.createWatsonError(400, description: "Cannot receive image keywords without a valid input image")
-                completionHandler(nil, error)
-                return
-            }
-            
-            let urlObject = getImageURL(image)
-            
-            guard urlObject.1 == nil else {
-                completionHandler(nil, urlObject.1)
-                return
-            }
-            
-            NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
+     Identify the primary image in an HTML document.
 
-                let fileManager = NSFileManager.defaultManager()
-                do {
-                    try fileManager.removeItemAtPath(urlObject.0!.path)
-                }
-                catch { }
-                
-                var imageKeywords = ImageKeyWords()
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    imageKeywords = Mapper<ImageKeyWords>().map(data)!
-                    completionHandler(imageKeywords, response.error)
-                } else {
-                    completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
-                }
-            })
-        }
-    }
-    
-    /**
-     The recognizeFaces call is used to recognize faces in a given web page or file. AlchemyAPI will extracting the primary image and perform face recognition.
-     
-     - parameter inputType:       Input type for either NSURL image file or URL string
-     - parameter stringURL:       The string URL to perform face tagging
-     - parameter fileURL:         Image file to perform face tagging
-     - parameter forceShowAll:    Includes lower confidence tags
-     - parameter knowledgeGraph:  Possible values: 0 (default), 1
-     - parameter callback:        Callback with ImageKeyWords through the completion handler
+     - parameter html: The HTML document that shall be analyzed to identify the primary image.
+     - parameter url: The HTML document's URL, for response-tracking purposes.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the identified primary image.
      */
-    public func recognizeFaces(inputType: VisionConstants.ImageFacesType, stringURL: String? = nil, image: UIImage? = nil, forceShowAll: Bool = false, knowledgeGraph: Int8 = 0, completionHandler: (ImageFaceTags?, NSError?) -> Void) {
-        
-        var endPoint = VisionConstants.ImageLinkExtraction.HTMLGetImage.rawValue
-        var visionUrl = ""
-        
-        switch(inputType) {
-        case VisionConstants.ImageFacesType.URL:
-            endPoint = VisionConstants.FaceDetection.URLGetRankedImageFaceTags.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.URL.rawValue + endPoint)
-            
-            var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-            params.updateValue(stringURL!, forKey: VisionConstants.WatsonURI.URL.rawValue)
-            NetworkUtils.performRequest(visionUrl, method: HTTPMethod.POST, parameters: params, completionHandler: {response in
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    let imageFaceTags = Mapper<ImageFaceTags>().map(data)
-                    completionHandler(imageFaceTags, response.error)
-                } else {
-                    completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
-                }
-                
-            })
-        case VisionConstants.ImageFacesType.UIImage:
-            endPoint = VisionConstants.FaceDetection.ImageGetRankedImageFaceTags.rawValue
-            visionUrl = getEndpoint(VisionConstants.VisionPrefix.Image.rawValue + endPoint)
-            var params = buildCommonParams(forceShowAll, knowledgeGraph: knowledgeGraph)
-            params.updateValue(VisionConstants.ImagePostMode.Raw.rawValue, forKey: VisionConstants.VisionURI.ImagePostMode.rawValue)
-            
-            guard let image = image else {
-                let error = NSError.createWatsonError(404,
-                    description: "Cannot receive image keywords without a valid input image")
-                completionHandler(nil, error)
-                return
-            }
-            
-            let urlObject = getImageURL(image)
-            
-            guard urlObject.1 == nil else {
-                completionHandler(nil, urlObject.1)
-                return
-            }
-            
-            NetworkUtils.performBasicAuthFileUpload(visionUrl, fileURL: urlObject.0!.url!, parameters: params, completionHandler: {response in
+    public func getImage(
+        html: String,
+        url: String,
+        failure: (NSError -> Void)? = nil,
+        success: [ImageLink] -> Void)
+    {
+        // TODO: convert this function to use POST /html/HTMLGetImage instead.
 
-                let fileManager = NSFileManager.defaultManager()
-                
-                // delete temp file from documents directory
-                do {
-                    try fileManager.removeItemAtPath(urlObject.0!.path)
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "html", value: html))
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apiKey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/html/HTMLGetImage",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .responseArray { (response: Response<[ImageLink], NSError>) in
+                switch response.result {
+                case .Success(let imageLinks): success(imageLinks)
+                case .Failure(let error): failure?(error)
                 }
-                catch { }
-                
-                if case let data as Dictionary<String,AnyObject> = response.data {
-                    let imageFaceTags = Mapper<ImageFaceTags>().map(data)
-                    completionHandler(imageFaceTags, response.error)
-                }
-                else {
-                    completionHandler(nil, NSError.createWatsonError(400, description: "No valid data returned"))
-                }
-            })
-        }
+            }
     }
-    
+
     /**
-     Returns the ImageURL which contains an NSURL and path to the image
-     
-     - parameter image: image to create a reference
-     
-     - returns: ImageURL, NSError
+     Identify the primary image at a given URL.
+
+     - parameter url: The URL of a webpage on which the primary image shall be identified.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the identified primary image.
      */
-    private func getImageURL(image: UIImage) ->(ImageURL?,NSError?) {
-        var error:NSError?
-        
-        let data = UIImagePNGRepresentation(image);
-        
-        guard data != nil else {
-            error = NSError.createWatsonError(404,
-                description: "Error creating data object from imput image")
-            return (nil, error)
-        }
-        
-        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/" + NSUUID().UUIDString
-        
-        guard (!filePath.isEmpty) else {
-            return (nil, NSError.createWatsonError(400, description: "Error creating file path from input image"))
-        }
-        
-        data?.writeToFile(filePath, atomically: true)
-        let url = NSURL(fileURLWithPath: filePath)
-        return (ImageURL(path: filePath, url: url), nil)        
+    public func getImage(
+        url: String,
+        failure: (NSError -> Void)? = nil,
+        success: [ImageLink] -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apiKey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetImage",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .responseArray { (response: Response<[ImageLink], NSError>) in
+                switch response.result {
+                case .Success(let imageLinks): success(imageLinks)
+                case .Failure(let error): failure?(error)
+                }
+            }
     }
-    
+
+    // TODO: POST /image/ImageGetRankedImageKeywords
+
     /**
-     Constructs a dictionary of parameters used in all Alchemy Vision API calls
-     
-     - parameter forceShowAll:   Includes lower confidence tags
-     - parameter knowledgeGraph: Include knowledge graph information in the the results
-     
-     - returns: Dictionary of parameters common to all Alchemy Vision API calls
+     Tag the primary image at a given URL.
+
+     - parameter url: The URL at which to perform image tagging.
+     - parameter forceShowAll: Should lower confidence tags be included in the response?
+     - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the identified tags.
      */
-    private func buildCommonParams(forceShowAll:Bool = false, knowledgeGraph:Int8 = 0)->Dictionary<String, AnyObject> {
-        var params = Dictionary<String, AnyObject>()
-        params.updateValue(_apiKey, forKey: VisionConstants.WatsonURI.APIKey.rawValue)
-        params.updateValue(VisionConstants.OutputMode.JSON.rawValue, forKey: VisionConstants.VisionURI.OutputMode.rawValue)
-        
-        if(forceShowAll == true) {
-            params.updateValue(forceShowAll.hashValue.description, forKey: VisionConstants.VisionURI.ForceShowAll.rawValue)
+    public func getRankedImageKeywords(
+        url: String,
+        forceShowAll: Bool? = nil,
+        knowledgeGraph: Bool? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: ImageKeywords -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apiKey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        if let forceShowAll = forceShowAll {
+            if forceShowAll {
+                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "1"))
+            } else {
+                queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "0"))
+            }
         }
-        
-        if(knowledgeGraph > 0) {
-            params.updateValue(knowledgeGraph.description, forKey: VisionConstants.VisionURI.ForceShowAll.rawValue)
+        if let knowledgeGraph = knowledgeGraph {
+            if knowledgeGraph {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "1"))
+            } else {
+                queryParameters.append(NSURLQueryItem(name: "knowledgeGraph", value: "0"))
+            }
         }
-        
-        return params
+
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetRankedImageKeywords",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST request
+        Alamofire.request(request)
+            .responseObject { (response: Response<ImageKeywords, NSError>) in
+                switch response.result {
+                case .Success(let imageKeywords): success(imageKeywords)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+
+    // TODO: POST /image/ImageGetRankedImageSceneText
+
+    /**
+     Identify text in the primary image at a given URL.
+
+     - parameter url: The URL at which to perform text detection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the detected text.
+     */
+    public func getRankedImageSceneText(
+        url: String,
+        failure: (NSError -> Void)? = nil,
+        success: [SceneText] -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        queryParameters.append(NSURLQueryItem(name: "apiKey", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/url/URLGetRankedImageKeywords",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+
+        // execute REST requeset
+        Alamofire.request(request)
+            .responseArray { (response: Response<[SceneText], NSError>) in
+                switch response.result {
+                case .Success(let sceneTexts): success(sceneTexts)
+                case .Failure(let error): failure?(error)
+                }
+            }
     }
 }

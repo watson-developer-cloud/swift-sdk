@@ -15,17 +15,16 @@
  **/
 
 import Foundation
+import Freddy
 
-/**
- *  Maps the path and the url of an image
- */
-public struct ImageURL {
-    
-    let path: String
-    let url: NSURL?
-    
-    public init(path: String, url: NSURL) {
-        self.path = path
-        self.url = url
+/** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
+public struct KnowledgeGraph: JSONDecodable {
+
+    /// A hierarchy of categories for the given object.
+    public let typeHierarchy: String
+
+    /// Used internally to initialize a `KnowledgeGraph` model from JSON.
+    public init(json: JSON) throws {
+        typeHierarchy = try json.string("typeHierarchy")
     }
 }

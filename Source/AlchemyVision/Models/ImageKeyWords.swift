@@ -15,27 +15,48 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/**
- *  Contains the total transactions and the array of image keywords
- */
-public struct ImageKeyWords: Mappable {
+/** A set of keywords for an image analyzed by the Alchemy Vision service. */
+public struct ImageKeywords: JSONDecodable {
     
-    /// Transactions charged
-    public var totalTransactions: Int?
-    /// Array of ImageKeyWord object
-    public var imageKeyWords: [ImageKeyWord] = []
-    
-    public init() {
+    /// The status of the request.
+    public let status: String
 
+    /// The URL of the requested image being tagged.
+    public let url: String
+
+    /// The number of transactions charged for this request.
+    public let totalTransactions: Int
+
+    /// Keywords for the given image.
+    public let imageKeywords: [ImageKeyword]
+
+    /// Used internally to initialize an `ImageKeywords` model from JSON.
+    public init(json: JSON) throws {
+        status = try json.string("status")
+        url = try json.string("url")
+        totalTransactions = try json.int("totalTransactions")
+        imageKeywords = try json.arrayOf("imageKeywords", type: ImageKeyword.self)
     }
+}
 
-    public init?(_ map: Map) {}
+/** A keyword for the given image. */
+public struct ImageKeyword: JSONDecodable {
+
+    /// A keyword that is associated with the specified image.
+    public let text: String
+
+    /// The likelihood that this keyword corresponds to the image.
+    public let score: Double
     
-    public mutating func mapping(map: Map) {
-        imageKeyWords     <-   map["imageKeywords"]
-        totalTransactions <-  (map["totalTransactions"], Transformation.stringToInt)
+    /// Metadata derived from the Alchemy knowledge graph.
+    public let knowledgeGraph: KnowledgeGraph?
+
+    /// Used internally to initialize an `ImageKeyword` model from JSON.
+    public init(json: JSON) throws {
+        text = try json.string("text")
+        score = try json.double("score")
+        knowledgeGraph = try? json.decode("knowledgeGraph")
     }
-    
 }

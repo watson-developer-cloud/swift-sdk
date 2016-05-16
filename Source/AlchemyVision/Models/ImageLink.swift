@@ -15,26 +15,24 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/**
- *  Contains the url string and the image string
- */
-public struct ImageLink: Mappable {
-    
-    /// http url information was requested for
-    public var url: String?
-    /// URL of the detected image
-    public var image: String?
-    
-    init() {
-        
-    }
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        url    <- map["url"]
-        image   <- map["image"]
+/** The primary image link detected on a webpage by the Alchemy Vision service. */
+public struct ImageLink: JSONDecodable {
+
+    /// The status of the request.
+    public let status: String
+
+    /// The URL of the requested source.
+    public let url: String
+
+    /// The URL of the primary image.
+    public let image: String
+
+    /// Used internally to initialize an `ImageLink` model from JSON.
+    public init(json: JSON) throws {
+        status = try json.string("status")
+        url = try json.string("url")
+        image = try json.string("image")
     }
 }

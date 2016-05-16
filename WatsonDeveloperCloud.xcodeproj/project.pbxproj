@@ -34,7 +34,6 @@
 		7A4A29D21CE50F30000A7762 /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A29BD1CE50F30000A7762 /* WordTimestamp.swift */; };
 		7A4A29D31CE50F30000A7762 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A29BE1CE50F30000A7762 /* SpeechToText.swift */; };
 		7A4A29D41CE50F30000A7762 /* SpeechToTextAudioStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A29BF1CE50F30000A7762 /* SpeechToTextAudioStreamer.swift */; };
-		7A4A29D51CE50F30000A7762 /* SpeechToTextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A29C01CE50F30000A7762 /* SpeechToTextConstants.swift */; };
 		7A4A29D61CE50F30000A7762 /* SpeechToTextWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A29C11CE50F30000A7762 /* SpeechToTextWebSocket.swift */; };
 		7A4A29DB1CE50F42000A7762 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A29C41CE50F30000A7762 /* SpeechSample.flac */; };
 		7A4A29DC1CE50F42000A7762 /* SpeechSample.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A29C51CE50F30000A7762 /* SpeechSample.ogg */; };
@@ -141,7 +140,6 @@
 		7A4A29BD1CE50F30000A7762 /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		7A4A29BE1CE50F30000A7762 /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		7A4A29BF1CE50F30000A7762 /* SpeechToTextAudioStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAudioStreamer.swift; sourceTree = "<group>"; };
-		7A4A29C01CE50F30000A7762 /* SpeechToTextConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextConstants.swift; sourceTree = "<group>"; };
 		7A4A29C11CE50F30000A7762 /* SpeechToTextWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextWebSocket.swift; sourceTree = "<group>"; };
 		7A4A29C41CE50F30000A7762 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
 		7A4A29C51CE50F30000A7762 /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 				7A4A29B21CE50F30000A7762 /* Models */,
 				7A4A29BE1CE50F30000A7762 /* SpeechToText.swift */,
 				7A4A29BF1CE50F30000A7762 /* SpeechToTextAudioStreamer.swift */,
-				7A4A29C01CE50F30000A7762 /* SpeechToTextConstants.swift */,
 				7A4A29C11CE50F30000A7762 /* SpeechToTextWebSocket.swift */,
 				7A4A29C21CE50F30000A7762 /* Tests */,
 			);
@@ -635,7 +632,6 @@
 				B1F21DFF1CE2461800393146 /* ToneScore.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
 				7A4A29CE1CE50F30000A7762 /* TranscriptionSettings.swift in Sources */,
-				7A4A29D51CE50F30000A7762 /* SpeechToTextConstants.swift in Sources */,
 				7A25A84D1CE90B2D007AC9F1 /* RestExtensions.swift in Sources */,
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7A4A29D01CE50F30000A7762 /* TranscriptionStop.swift in Sources */,

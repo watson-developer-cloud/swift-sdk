@@ -29,7 +29,6 @@ public class SpeechToTextV1 {
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
     private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    private let websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
 
     /**
      Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.

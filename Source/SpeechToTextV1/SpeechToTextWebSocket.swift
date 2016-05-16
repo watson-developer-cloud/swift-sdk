@@ -30,6 +30,7 @@ class SpeechToTextWebSocket: WebSocket {
     private var retries = 0
     private let maxRetries = 2
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private static let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
 
     enum State {
         case Disconnected
@@ -65,7 +66,7 @@ class SpeechToTextWebSocket: WebSocket {
         operations.maxConcurrentOperationCount = 1
         operations.suspended = true
 
-        guard let url = SpeechToTextConstants.websocketsURL(settings) else {
+        guard let url = SpeechToTextWebSocket.websocketsURL(settings) else {
             let failureReason = "Unable to construct a WebSockets connection to Speech to Text."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -79,6 +80,32 @@ class SpeechToTextWebSocket: WebSocket {
         self.onText = onTextDelegate
     }
 
+    /** Build the URL to use when connecting to Speech to Text with Websockets.
+     
+     - parameter settings: The `TranscriptionSettings` to use for the Speech to Text session.
+     - returns: An NSURL, if it can be constructed from the given settings.
+     */
+    static func websocketsURL(settings: TranscriptionSettings) -> NSURL? {
+        guard let urlComponents = NSURLComponents(string: SpeechToTextWebSocket.url) else {
+            return nil
+        }
+        
+        var urlParams = [NSURLQueryItem]()
+        if let model = settings.model {
+            urlParams.append(NSURLQueryItem(name: "model", value: model))
+        }
+        if settings.learningOptOut == true {
+            urlParams.append(NSURLQueryItem(name: "x-watson-learning-opt-out", value: "true"))
+        }
+        
+        urlComponents.queryItems = urlParams
+        guard let url = urlComponents.URL else {
+            return nil
+        }
+        
+        return url
+    }
+    
     /**
      Connect to the Speech to Text service using WebSockets.
      

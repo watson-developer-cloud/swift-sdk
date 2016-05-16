@@ -10,6 +10,7 @@
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7A4E61EC1CE2A9CB00188C9F /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E61EA1CE2A9C600188C9F /* VisualRecognitionTests.swift */; };
 		7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117501CB5988B009A4DA1 /* RestSerialization.swift */; };
 		7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117551CB598D9009A4DA1 /* ContentItem.swift */; };
@@ -94,6 +95,7 @@
 		7A0F95BD1C23288E004C01C0 /* WatsonDeveloperCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonDeveloperCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
+		7A4E61EA1CE2A9C600188C9F /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTests.swift; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
 		7A6117551CB598D9009A4DA1 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentItem.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				7A9C02811CE1510A0018AB55 /* prez.jpg */,
 				7A9C02821CE1510A0018AB55 /* sign.jpg */,
 				7A9C02831CE1510A0018AB55 /* vegetables.zip */,
+				7A4E61EA1CE2A9C600188C9F /* VisualRecognitionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
+				7A4E61EC1CE2A9CB00188C9F /* VisualRecognitionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

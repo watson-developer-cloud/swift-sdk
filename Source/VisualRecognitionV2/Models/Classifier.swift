@@ -17,7 +17,8 @@
 import Foundation
 import Freddy
 
-public struct ClassifierVerbose: JSONDecodable {
+/** A classifier for the Visual Recognition service. */
+public struct Classifier: JSONDecodable {
     
     /// The id of the classifier.
     public let classifierID: String
@@ -37,7 +38,7 @@ public struct ClassifierVerbose: JSONDecodable {
     /// The classes of the classifier.
     public let classes: [Class]
     
-    /// Used internally to initialize a `ClassifierVerbose` model from JSON.
+    /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSON) throws {
         classifierID = try json.string("classifier_id")
         name = try json.string("name")
@@ -48,12 +49,14 @@ public struct ClassifierVerbose: JSONDecodable {
     }
 }
 
+/** The class of a classifier. */
 public struct Class: JSONDecodable {
     
-    /// The class of a classifier.
-    public let classifierClass: String
+    /// The name of the class.
+    public let name: String
     
+    /// Used internally to initialize a `Class` model from JSON.
     public init(json: JSON) throws {
-        classifierClass = try json.decode("class")
+        name = try json.decode("class")
     }
 }

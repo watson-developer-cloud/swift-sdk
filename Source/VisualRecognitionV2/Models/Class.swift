@@ -16,11 +16,23 @@
 
 import Foundation
 
-public struct PositiveExamples {
+/** A class that shall be recognized by a classifier. */
+public struct ClassWithExamples {
     
+    /// The name of the class
     internal let name: String
+    
+    /// A compressed (.zip) file of images that prominently
+    /// depict the visual subject of the given class.
     internal let examples: NSURL
     
+    /**
+     Define a class that shall be recognized by a classifier.
+
+     - parameter name: The name of the class.
+     - parameter examples: A compressed (.zip) file of images that prominently depict the visual
+            subject of the given class.
+     */
     public init(name: String, examples: NSURL) {
         self.name = name
         self.examples = examples

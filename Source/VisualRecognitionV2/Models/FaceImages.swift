@@ -17,6 +17,7 @@
 import Foundation
 import Freddy
 
+/** The results from detecting faces in one or more images. */
 public struct FaceImages: JSONDecodable {
     
     /// The number of images processed.
@@ -36,6 +37,7 @@ public struct FaceImages: JSONDecodable {
     }
 }
 
+/** An image with detected faces. */
 public struct FaceImage: JSONDecodable {
     
     /// The source URL of the image that was processed.
@@ -63,6 +65,7 @@ public struct FaceImage: JSONDecodable {
     }
 }
 
+/** A face identified in a given image. */
 public struct Face: JSONDecodable {
     
     /// The age of the identified face.
@@ -86,6 +89,7 @@ public struct Face: JSONDecodable {
     }
 }
 
+/** The age of an identified face. */
 public struct Age: JSONDecodable {
     
     /// The estimated minimum age of the identified individual.
@@ -105,6 +109,7 @@ public struct Age: JSONDecodable {
     }
 }
 
+/** The gender of an identified face. */
 public struct Gender: JSONDecodable {
     
     /// The predicted gender of the identified individual.
@@ -120,6 +125,7 @@ public struct Gender: JSONDecodable {
     }
 }
 
+/** The location of an identified face. */
 public struct FaceLocation: JSONDecodable {
     
     /// The width in pixels of the face region.
@@ -143,6 +149,7 @@ public struct FaceLocation: JSONDecodable {
     }
 }
 
+/** The identity of an identified face. */
 public struct Identity: JSONDecodable {
     
     /// The name of the identified celebrity.

@@ -17,6 +17,7 @@
 import Foundation
 import Freddy
 
+/** The results from classifying one or more images. */
 public struct ClassifiedImages: JSONDecodable {
     
     /// The number of images processed.
@@ -36,6 +37,7 @@ public struct ClassifiedImages: JSONDecodable {
     }
 }
 
+/** A classified image. */
 public struct ClassifiedImage: JSONDecodable {
     
     /// The source URL of the image that was classified.
@@ -63,6 +65,7 @@ public struct ClassifiedImage: JSONDecodable {
     }
 }
 
+/** A classifier's classifications for a given image. */
 public struct ClassifierResults: JSONDecodable {
     
     /// The name of the classifier.
@@ -82,6 +85,7 @@ public struct ClassifierResults: JSONDecodable {
     }
 }
 
+/** The classification of an image. */
 public struct Classification: JSONDecodable {
     
     /// The class identified by the classifier.

@@ -17,6 +17,7 @@
 import Foundation
 import Freddy
 
+/** The results from recognizing text in one or more images. */
 public struct WordImages: JSONDecodable {
     
     /// The number of images processed.
@@ -36,6 +37,7 @@ public struct WordImages: JSONDecodable {
     }
 }
 
+/** An image with detected words. */
 public struct WordImage: JSONDecodable {
     
     /// The source URL of the images that was processed.
@@ -67,6 +69,7 @@ public struct WordImage: JSONDecodable {
     }
 }
 
+/** A word detected in a given image. */
 public struct Word: JSONDecodable {
     
     /// The word recognized in the image.
@@ -90,6 +93,7 @@ public struct Word: JSONDecodable {
     }
 }
 
+/** The location of a detected word. */
 public struct WordLocation: JSONDecodable {
     
     /// The width in pixels of the word region.

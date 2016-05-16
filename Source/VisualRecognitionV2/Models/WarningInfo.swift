@@ -17,6 +17,7 @@
 import Foundation
 import Freddy
 
+/** Information about a warning that occurred. */
 public struct WarningInfo: JSONDecodable {
     
     /// A codified warning string (e.g. "limit_reached").

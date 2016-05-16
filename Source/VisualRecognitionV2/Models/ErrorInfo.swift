@@ -17,6 +17,7 @@
 import Foundation
 import Freddy
 
+/** Information about an error that occurred. */
 public struct ErrorInfo: JSONDecodable {
     
     /// A codified error string (e.g. "input_error").

@@ -28,13 +28,26 @@ public class VisualRecognition {
     private let apiKey: String
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
-    private let serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api/v2"
+    private let serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api/v3"
     
+    /**
+     Create a `VisualRecognition` object.
+ 
+     - parameter apiKey: The API key used to authenticate with the service.
+     - parameter version: The release date of the version of the API to use. Specify the date in
+        "YYYY-MM-DD" format.
+     */
     public init(apiKey: String, version: String) {
         self.apiKey = apiKey
         self.version = version
     }
     
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -52,18 +65,21 @@ public class VisualRecognition {
         }
     }
     
+    /**
+     Retrieve a list of user-trained classifiers.
+ 
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of classifiers.
+     */
     public func getClassifiers(
-        verbose: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: ClassifierBrief -> Void)
+        success: [Classifier] -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(NSURLQueryItem(name: "version", value: version))
-        if let verbose = verbose {
-            queryParameters.append(NSURLQueryItem(name: "true", value: "\(verbose)"))
-        }
+        queryParameters.append(NSURLQueryItem(name: "verbose", value: "true"))
         
         // construct REST request
         let request = RestRequest(
@@ -75,29 +91,46 @@ public class VisualRecognition {
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ClassifierBrief, NSError>) in
+            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
+                (response: Response<[Classifier], NSError>) in
                 switch response.result {
-                case .Success(let classifierBrief): success(classifierBrief)
+                case .Success(let classifiers): success(classifiers)
                 case .Failure(let error): failure?(error)
                 }
         }
     }
     
+    /**
+     Train a new classifier on uploaded image data.
+ 
+     To create a classifier, you must specify at least two classes—either two positive example sets,
+     or one positive example set and one negative example set.
+ 
+     - parameter name: The name of the new classifier.
+     - parameter positiveExamples: An array of classes, each with a name and a zip archive file of
+            images that prominently depict the visual subject of the class. Each class requires a
+            minimum of 10 images. If you specify multiple classes, the system will learn to classify
+            each category.
+     - parameter negativeExamples: A zip archive file of images that *do not* prominently depict the
+            visual subject of *any* of the classes being trained. Must contain a minimum of 10
+            images.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the created classifier.
+     */
     public func createClassifier(
         name: String,
-        positiveExamples: [PositiveExamples],
+        positiveExamples: [ClassWithExamples],
         negativeExamples: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
-        success: ClassifierVerbose -> Void)
+        success: Classifier -> Void)
     {
-        // ensure requisite examples were provided
+        // ensure at least two classes were specified
         let twoOrMoreClasses = (positiveExamples.count >= 2)
         let positiveAndNegative = (positiveExamples.count >= 1 && negativeExamples != nil)
         guard twoOrMoreClasses || positiveAndNegative else {
-            let failureReason = "To create a classifier, you must supply at least 2 zip files" +
-                                "—either two positive example sets or 1 positive and 1 negative" +
-                                "set."
+            let failureReason = "To create a classifier, you must specify at least two classes" +
+                                "—either two positive example sets, or one positive example set " +
+                                "and one negative example set."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -135,9 +168,9 @@ public class VisualRecognition {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<ClassifierVerbose, NSError>) in
+                        (response: Response<Classifier, NSError>) in
                         switch response.result {
-                        case .Success(let classifierVerbose): success(classifierVerbose)
+                        case .Success(let classifier): success(classifier)
                         case .Failure(let error): failure?(error)
                         }
                     }
@@ -152,6 +185,13 @@ public class VisualRecognition {
         )
     }
     
+    /**
+     Delete a custom classifier with the given classifier id.
+ 
+     - parameter classifierID: The id of the classifier to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed after the classifier has been successfully deleted.
+     */
     public func deleteClassifier(
         classifierID: String,
         failure: (NSError -> Void)? = nil,
@@ -184,10 +224,19 @@ public class VisualRecognition {
         }
     }
     
+    /**
+     Retrieve information about a specific classifier. Only user-trained classifiers may be
+     addressed.
+ 
+     - parameter classifierID: The id of the classifier to retrieve information about.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the retrieved information about the given
+            classifier.
+     */
     public func getClassifier(
         classifierID: String,
         failure: (NSError -> Void)? = nil,
-        success: ClassifierVerbose -> Void)
+        success: Classifier -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -204,16 +253,31 @@ public class VisualRecognition {
         // execute REST request
         Alamofire.request(request)
             .responseObject(dataToError: dataToError) {
-                (response: Response<ClassifierVerbose, NSError>) in
+                (response: Response<Classifier, NSError>) in
                 switch response.result {
-                case .Success(let classifierVerbose): success(classifierVerbose)
+                case .Success(let classifier): success(classifier)
                 case .Failure(let error): failure?(error)
                 }
             }
     }
     
+    /**
+     Classify images by URL. The supported image formats include .jpg, .png, and .gif.
+ 
+     - parameter urls: The URLs of the images (.jpg, .png, or .gif). Redirects are followed, so it
+            is safe to use with URL shorteners. The resolved URL is returned in the response.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
+     - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
+            of the built-in classifier.
+     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
+     - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
+            "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
+            translations are not available are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
     public func classify(
-        url url: String,
+        urls urls: [String],
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
@@ -221,55 +285,84 @@ public class VisualRecognition {
         failure: (NSError -> Void)? = nil,
         success: ClassifiedImages -> Void)
     {
-        // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        if let owners = owners {
-            let value = owners.joinWithSeparator(",")
-            queryParameters.append(NSURLQueryItem(name: "owners", value: value))
-        }
-        if let classifierIDs = classifierIDs {
-            let value = classifierIDs.joinWithSeparator(",")
-            queryParameters.append(NSURLQueryItem(name: "classifier_ids", value: value))
-        }
-        if let showLowConfidence = showLowConfidence {
-            let value = "\(showLowConfidence)"
-            queryParameters.append(NSURLQueryItem(name: "show_low_confidence", value: value))
-        }
-        
-        // construct header parameters
-        var headerParameters = [String: String]()
-        if let outputLanguage = outputLanguage {
-            headerParameters["Accept-Language"] = outputLanguage
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: .GET,
-            url: "/classify",
-            acceptType: "application/json",
-            queryParameters: queryParameters,
-            headerParameters: headerParameters
+        // write parameters to JSON file
+        let parameters = writeParameters(
+            urls: urls,
+            classifierIDs: classifierIDs,
+            owners: owners,
+            showLowConfidence: showLowConfidence
         )
         
-        // execute REST request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ClassifiedImages, NSError>) in
-                switch response.result {
-                case .Success(let classifiedImages): success(classifiedImages)
-                case .Failure(let error): failure?(error)
-                }
-            }
+        // classify images
+        classify(
+            parameters: parameters,
+            outputLanguage: outputLanguage,
+            failure: failure,
+            success: success
+        )
     }
     
-    // TODO: add convenience function that writes parameters as JSON file then calls classify?
-    // TODO: maybe also write a convenicne function that writes a JSON file?
-    
+    /**
+     Classify uploaded images. You can upload a single image or a compressed file (.zip) with
+     multiple images to be classified. The supported image formats include .jpg, .png, and .gif.
+     
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            to classify. The total number of images is limited to 100.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
+     - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
+            of the built-in classifier.
+     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
+     - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
+            "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
+            translations are not available are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
     public func classify(
         images images: NSURL,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
+        showLowConfidence: Bool? = nil,
+        outputLanguage: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: ClassifiedImages -> Void)
+    {
+        // write parameters to JSON file
+        let parameters = writeParameters(
+            classifierIDs: classifierIDs,
+            owners: owners,
+            showLowConfidence: showLowConfidence
+        )
+        
+        // classify images
+        classify(
+            images: images,
+            parameters: parameters,
+            outputLanguage: outputLanguage,
+            failure: failure,
+            success: success
+        )
+    }
+    
+    /**
+     Classify images by uploading an image file and/or specifying image URLs.
+
+     The supported image formats include .jpg, .png, and .gif. You can upload a single image or a
+     compressed file (.zip) with multiple images to be classified. You can also specify one or more
+     URLs of images to classify.
+     
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            to classify. The total number of images is limited to 100.
+     - parameter parameters: A JSON file containing optional input parameters. See the service
+            documentation for more information on the supported parameters and their formatting.
+     - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
+            "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
+            translations are not available are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+    */
+    public func classify(
+        images images: NSURL? = nil,
         parameters: NSURL? = nil,
         outputLanguage: String? = nil,
         failure: (NSError -> Void)? = nil,
@@ -298,7 +391,9 @@ public class VisualRecognition {
         // execute REST request
         Alamofire.upload(request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                if let images = images {
+                    multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                }
                 if let parameters = parameters {
                     multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
                 }
@@ -324,40 +419,54 @@ public class VisualRecognition {
         )
     }
     
+    /**
+     Detect faces in images by URL. The supported image formats include .jpg, .png, and .gif.
+ 
+     - parameter urls: The URLs of the images (.jpg, .png, or .gif). Redirects are followed, so it
+            is safe to use with URL shorteners. The resolved URL is returned in the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected faces.
+     */
     public func detectFaces(
-        url url: String,
+        urls urls: [String],
         failure: (NSError -> Void)? = nil,
         success: FaceImages -> Void)
     {
-        // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: .GET,
-            url: "/detect_faces",
-            acceptType: "application/json",
-            queryParameters: queryParameters
-        )
-        
-        // execute REST request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<FaceImages, NSError>) in
-                switch response.result {
-                case .Success(let faceImages): success(faceImages)
-                case .Failure(let error): failure?(error)
-                }
-            }
+        let parameters = writeParameters(urls: urls)
+        detectFaces(parameters: parameters, failure: failure, success: success)
     }
     
-    // TODO: add convenience function that writes parameters as JSON file then calls classify?
-    
+    /**
+     Detect faces in uploaded images. You can upload a single image or a compressed file (.zip)
+     with multiple images to be processed. The supported image formats include .jpg, .png, and
+     .gif.
+ 
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            to classify. The total number of images is limited to 100.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected faces.
+     */
     public func detectFaces(
         images images: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: FaceImages -> Void)
+    {
+        detectFaces(images: images, failure: failure, success: success)
+    }
+
+    /**
+     Detect faces in images that are uploaded and/or specified by URL. Faces are identified in
+     the provided images, along with information about them such as estimated age and gender.
+ 
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            in which to detect faces. The total number of images is limited to 100.
+     - parameter parameters: A JSON file containing optional input parameters. See the service
+            documentation for more information on the supported parameters and their formatting.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected faces.
+     */
+    public func detectFaces(
+        images images: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: FaceImages -> Void)
@@ -378,7 +487,9 @@ public class VisualRecognition {
         // execute REST request
         Alamofire.upload(request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                if let images = images {
+                    multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                }
                 if let parameters = parameters {
                     multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
                 }
@@ -404,40 +515,53 @@ public class VisualRecognition {
         )
     }
     
+    /**
+     Recognize text in images by URL. The supported image formats include .jpg, .png, and .gif.
+     
+     - parameter urls: The URLs of the images (.jpg, .png, or .gif). Redirects are followed, so it
+            is safe to use with URL shorteners. The resolved URL is returned in the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected words.
+     */
     public func recognizeText(
-        url url: String,
+        urls urls: [String],
         failure: (NSError -> Void)? = nil,
         success: WordImages -> Void)
     {
-        // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: .GET,
-            url: "/recognize_text",
-            acceptType: "application/json",
-            queryParameters: queryParameters
-        )
-        
-        // execute REST request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<WordImages, NSError>) in
-                switch response.result {
-                case .Success(let wordImages): success(wordImages)
-                case .Failure(let error): failure?(error)
-                }
-        }
+        let parameters = writeParameters(urls: urls)
+        recognizeText(parameters: parameters, failure: failure, success: success)
     }
     
-    // TODO: add convenience function that writes parameters as JSON file then calls classify?
-    
-    public func detectFaces(
+    /**
+     Recognize text in uploaded images. You can upload a single image or a compressed file (.zip)
+     with multiple images to be processed. The supported image formats include .jpg, .png, and
+     .gif.
+     
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            to classify. The total number of images is limited to 100.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected words.
+     */
+    public func recognizeText(
         images images: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: WordImages -> Void)
+    {
+        recognizeText(images: images, failure: failure, success: success)
+    }
+    
+    /**
+     Recognize text in images that are uploaded and/or specified by URL.
+     
+     - parameter images: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
+            in which to recognize text. The total number of images is limited to 100.
+     - parameter parameters: A JSON file containing optional input parameters. See the service
+            documentation for more information on the supported parameters and their formatting.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected words.
+     */
+    public func recognizeText(
+        images images: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: WordImages -> Void)
@@ -458,7 +582,9 @@ public class VisualRecognition {
         // execute REST request
         Alamofire.upload(request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                if let images = images {
+                    multipartFormData.appendBodyPart(fileURL: images, name: "images_file")
+                }
                 if let parameters = parameters {
                     multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
                 }
@@ -482,5 +608,58 @@ public class VisualRecognition {
                 }
             }
         )
+    }
+    
+    /**
+     Write service input parameters to a temporary JSON file that can be uploaded.
+     
+     - parameter urls: An array of image URLs to use.
+     - parameter classifierIDs: An array of classifier ids. "default" is the id of the built-in
+     classifier.
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
+     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
+     
+     - returns: The URL of a JSON file that includes the given parameters.
+     */
+    private func writeParameters(
+        urls urls: [String]? = nil,
+             classifierIDs: [String]? = nil,
+             owners: [String]? = nil,
+             showLowConfidence: Bool? = nil)
+        -> NSURL
+    {
+        // construct JSON dictionary
+        var json = [String: JSON]()
+        if let urls = urls {
+            let urls_json = urls.map { url in JSON.String(url) }
+            json["urls"] = JSON.Array(urls_json)
+        }
+        if let classifierIDs = classifierIDs {
+            let ids_json = classifierIDs.map { id in JSON.String(id) }
+            json["classifier_ids"] = JSON.Array(ids_json)
+        }
+        if let owners = owners {
+            let owners_json = owners.map { owner in JSON.String(owner) }
+            json["owners"] = JSON.Array(owners_json)
+        }
+        if let showLowConfidence = showLowConfidence {
+            json["show_low_confidence"] = JSON.Bool(showLowConfidence)
+        }
+        
+        // create a globally unique file name in a temporary directory
+        let suffix = "VisualRecognitionParameters.json"
+        let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
+        let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)
+        
+        // save JSON dictionary to file
+        do {
+            let data = try JSON.Dictionary(json).serialize()
+            try data.writeToURL(fileURL, options: .AtomicWrite)
+        } catch {
+            // TODO: how to catch this?
+        }
+        
+        return fileURL
     }
 }

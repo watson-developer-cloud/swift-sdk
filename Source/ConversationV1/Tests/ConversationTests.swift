@@ -17,6 +17,7 @@
 
 import XCTest
 import WatsonDeveloperCloud
+import Freddy
 
 class ConversationTests: XCTestCase {
 
@@ -24,13 +25,15 @@ class ConversationTests: XCTestCase {
 
     // the Conversation service
     var service:     Conversation!
-    var workspaceID: Conversation.WorkspaceID! = "pizza"
+    var workspaceID: Conversation.WorkspaceID! = "car_demo_1"
 
     // the initial node and response from Watson
     let initialMessage = "Hello"
-    let initialResponse = "Hi, I\'m Watson! I can help you order a pizza, " +
-    "what size would you like?"
+    let initialResponse = "Welcome to the Watson Car Demo..."
 
+    let secondMessage = "Turn on wipers"
+    let secondResponse = "Your wipers are now on"
+    
     // invalid parameters for negative tests
     let invalidWorkspaceID = "9354b734-d5b2-4fd3-bee0-e38adbcab575"
 
@@ -42,9 +45,12 @@ class ConversationTests: XCTestCase {
     /// Test the Conversation service by executing each operation with valid parameters.
     func testConversation() {
 
-        // create the Conversation application
+        // Send a test message with no history/context
         sendInitialMessageNoContext()
 
+        // Send a test message with no history/context, and then send a follow-up message
+        sendMessageWithContext()
+        
         // verify error conditions
         executeNegativeTests()
     }
@@ -106,21 +112,104 @@ class ConversationTests: XCTestCase {
         let description = "Sending first message with no context."
         let expectation = expectationWithDescription(description)
 
-        service.sendText(workspaceID, context: nil, message: initialMessage) { (response, error) in
-            XCTAssertNotNil(response)
-            XCTAssertNotNil(response!.output)
-            XCTAssertNil(error)
-
-            let output = response!.output as! [String: String]
-            XCTAssertNotNil(response!.output!["text"])
-
-            let textResponse: String = output["text"]!
-            XCTAssertNotNil(textResponse)
-            XCTAssertEqual(textResponse, self.initialResponse)
-
-            expectation.fulfill()
-        }
+        sendInitialMessage() {
+            (response) in
+                expectation.fulfill()
+            }
 
         waitForExpectation()
+    }
+    
+    /// Create the Dialog application
+    func sendMessageWithContext() {
+        let description = "Sending first message with no context."
+        let expectation = expectationWithDescription(description)
+        
+        sendInitialMessage() {
+            (response) in
+            self.sendFollowupMessage(response) {
+                (followupResponse) in
+                expectation.fulfill()
+            }
+        }
+        
+        waitForExpectation()
+    }
+    
+    private func sendInitialMessage(completion: (result: MessageResponse) -> Void) {
+        service.sendText(
+            initialMessage,
+            context: nil,
+            workspaceID: workspaceID,
+            failure: { (error) in
+                XCTAssertNil(error)
+        }) { (response) in
+            XCTAssertNotNil(response)
+            XCTAssertNotNil(response.output)
+            
+            guard let output = response.output else {
+                XCTFail("No suitable output found in response payload")
+                return
+            }
+            
+            let text = output["text"];
+            XCTAssertNotNil(text)
+            
+            do {
+                guard let outputText = try text?.string() else {
+                    XCTFail("Could not find text from response output")
+                    return
+                }
+                
+                XCTAssertEqual(outputText, self.initialResponse)
+                
+                completion(result: response)
+            }
+            catch {
+                XCTFail("Could not decode text from response output")
+            }
+        }
+    }
+    
+    private func sendFollowupMessage(lastResponse: MessageResponse, completion: (result: MessageResponse) -> Void) {
+        
+        guard let previousContext = lastResponse.context else {
+            XCTFail("No suitable context found in response")
+            return
+        }
+        
+        
+        service.sendText(
+            secondMessage,
+            context: previousContext,
+            workspaceID: workspaceID,
+            failure: { (error) in
+                XCTAssertNil(error)
+        }) { (response) in
+            XCTAssertNotNil(response)
+            XCTAssertNotNil(response.output)
+            
+            guard let output = response.output else {
+                XCTFail("No suitable output found in response payload")
+                return
+            }
+            
+            let text = output["text"];
+            XCTAssertNotNil(text)
+            
+            do {
+                guard let outputText = try text?.string() else {
+                    XCTFail("Could not find text from response output")
+                    return
+                }
+                
+                XCTAssertEqual(outputText, self.secondResponse)
+                
+                completion(result: response)
+            }
+            catch {
+                XCTFail("Could not decode text from response output")
+            }
+        }
     }
 }

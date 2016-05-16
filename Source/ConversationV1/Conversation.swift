@@ -13,47 +13,70 @@
 
 import Foundation
 import Alamofire
-import AlamofireObjectMapper
-import ObjectMapper
+import Freddy
 
-public class Conversation: WatsonService {
+public class Conversation {
     
-    // The shared WatsonGateway singleton.
-    let gateway = WatsonGateway.sharedInstance
+    /// A WorkspaceID uniquely identifies a dialog application.
+    public typealias WorkspaceID = String
     
-    // The authentication strategy to obtain authorization tokens.
-    let authStrategy: AuthenticationStrategy
+    private let username: String
+    private let password: String
     
-    // TODO: comment this initializer
-    public required init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
-    }
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let serviceURL = "https://gateway.watsonplatform.net/conversation/api"
     
     // TODO: comment this initializer
-    public convenience required init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(tokenURL: Constants.tokenURL,
-                                                       serviceURL: Constants.serviceURL, username: username, password: password)
-        self.init(authStrategy: authStrategy)
+    public init(username: String, password: String) {
+        self.username = username
+        self.password = password
     }
     
-    public func sendText(workspaceID: WorkspaceID, context: [String : String]?, message: String! = nil,
-                            completionHandler: (MessageResponse?, NSError?) -> Void) {
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.string("error")
+            let code = try json.int("code")
+            let userInfo = [NSLocalizedFailureReasonErrorKey: error]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    public func sendText(
+        message:     String! = nil,
+        context:     [String : JSON]?,
+        workspaceID: WorkspaceID,
+        failure:     (NSError -> Void)? = nil,
+        success:     MessageResponse -> Void)
+    {
         
-        let messageRequest = MessageRequest(message: message, context: context);
+        do {
+        let messageRequest = MessageRequest(message: message, context: context)
         
-        let request = WatsonRequest(
+        // construct REST request
+        let request = RestRequest(
             method: .POST,
-            serviceURL: Constants.serviceURL,
-            endpoint: Constants.message(workspaceID),
-            authStrategy: authStrategy,
-            accept: .JSON,
-            messageBody: messageRequest.toJSONData({ (error) in
-                print(error)
-            }));
-        
-        gateway.request(request, serviceError: ConversationError()) { data, error in
-            let messageResponse = Mapper<MessageResponse>().mapData(data)
-            completionHandler(messageResponse, error)
+            url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: try messageRequest.toJSON().serialize()
+        )
+            
+            // execute REST request
+            Alamofire.request(request)
+                .authenticate(user: username, password: password)
+                .responseObject(dataToError: dataToError) {
+                    (response: Response<MessageResponse, NSError>) in
+                    switch response.result {
+                    case .Success(let response): success(response)
+                    case .Failure(let error): failure?(error)
+                    }
+            }
+        }
+        catch {
+            print("Could not serialize message request")
         }
     }
 }

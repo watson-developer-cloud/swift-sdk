@@ -12,33 +12,60 @@
 /************************************************************************/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-extension Conversation {
+/** A conversation response. */
+public struct MessageResponse: JSONDecodable {
     
-    /// A Dialog conversation response
-    public struct MessageResponse: Mappable {
-        
-        /// The response from the Dialog application
-        public var tags:    [String]?
-        
-        // Context, or state, from the Conversation system
-        public var context: [String: String]?
-        
-        // Output, or response, from the system 
-        public var output:  [String: AnyObject]?
-        
-        // List of intents
-        public var intents: [AnyObject]?
-        
-        /// Used internally to initialize a `ConversationResponse` from JSON.
-        public init?(_ map: Map) {}
-        
-        /// Used internally to serialize and deserialize JSON.
-        mutating public func mapping(map: Map) {
-            tags    <- map["tags"]
-            context <- map["context"]
-            output  <- map["output"]
-        }
+    // Context, or state, from the Conversation system
+    public var context:  [String: JSON]?
+    
+    // Output, or response, from the system
+    public var output:   [String: JSON]?
+    
+    // List of intents
+    public var intents:  [Intent]?
+    
+    // List of entities
+    public var entities: [Entity]?
+    
+    public init(json: JSON) throws {
+        context  = try json.dictionary("context")
+        output   = try json.dictionary("output")
+        intents  = try json.arrayOf("intents",  type: Intent.self)
+        entities = try json.arrayOf("entities", type: Entity.self)
+    }
+}
+
+public struct Intent: JSONDecodable {
+    
+    // Classified intent for the requested input
+    public var intent:     String?
+    
+    // Confidence of this intent
+    public var confidence: Double?
+    
+    public init(json: JSON) throws {
+        intent     = try json.string("intent")
+        confidence = try json.double("confidence")
+    }
+}
+
+public struct Entity: JSONDecodable {
+
+    // Name of a detected entity
+    public var entity  : String?
+    
+    // Value of the detected entity
+    public var value   : String?
+    
+    // Location of the detected entity, with the starting and ending indices as an
+    // offset.  E.g. [21, 33]
+    public var location: [Int]?
+    
+    public init(json: JSON) throws {
+        entity   = try json.string("entity")
+        value    = try json.string("value")
+        location = try json.arrayOf("location")
     }
 }

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FA50F0D1CE253B4006E2A66 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EEE1CE253B4006E2A66 /* Conversation.swift */; };
+		4FA50F0E1CE253B4006E2A66 /* ConversationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EF01CE253B4006E2A66 /* ConversationConstants.swift */; };
+		4FA50F101CE253B4006E2A66 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EF21CE253B4006E2A66 /* ConversationModel.swift */; };
+		4FA50F121CE253B4006E2A66 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EF41CE253B4006E2A66 /* MessageRequest.swift */; };
+		4FA50F131CE253B4006E2A66 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EF51CE253B4006E2A66 /* MessageResponse.swift */; };
+		4FA50F161CE25BF3006E2A66 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA50EF71CE253B4006E2A66 /* ConversationTests.swift */; };
+		4FA50F3E1CE4DF60006E2A66 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		4FA50F3F1CE4DF60006E2A66 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		4FA50F421CE4DF79006E2A66 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
@@ -73,6 +82,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4FA50EEE1CE253B4006E2A66 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		4FA50EF01CE253B4006E2A66 /* ConversationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationConstants.swift; sourceTree = "<group>"; };
+		4FA50EF21CE253B4006E2A66 /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		4FA50EF41CE253B4006E2A66 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		4FA50EF51CE253B4006E2A66 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		4FA50EF71CE253B4006E2A66 /* ConversationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
+		4FA50F401CE4DF60006E2A66 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -128,11 +144,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F07CED01CD9311D00611E06 /* Alamofire.framework in Frameworks */,
-				4F07CED11CD9311D00611E06 /* AlamofireObjectMapper.framework in Frameworks */,
-				4F07CED21CD9311D00611E06 /* HTTPStatusCodes.framework in Frameworks */,
-				4F07CED31CD9311D00611E06 /* ObjectMapper.framework in Frameworks */,
-				4F07CED41CD9311D00611E06 /* Starscream.framework in Frameworks */,
+				4FA50F421CE4DF79006E2A66 /* Starscream.framework in Frameworks */,
+				4FA50F3E1CE4DF60006E2A66 /* Alamofire.framework in Frameworks */,
+				4FA50F3F1CE4DF60006E2A66 /* Freddy.framework in Frameworks */,
 				7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,118 +154,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F07CE811CD2A96000611E06 /* ConversationHelper */ = {
+		4FA50EED1CE253B4006E2A66 /* ConversationV1 */ = {
 			isa = PBXGroup;
 			children = (
-				4F07CE821CD2A96000611E06 /* Authentication */,
-				4F07CE831CD2A96000611E06 /* ConversationBuilder.swift */,
-				4F07CE841CD2A96000611E06 /* ConversationHelperConstants.swift */,
-				4F07CE851CD2A96000611E06 /* ConversationHelper.swift */,
-				4F07CE861CD2A96000611E06 /* ConversationSpeechToTextService.swift */,
-				4F07CE871CD2A96000611E06 /* ConversationSynthesizeService.swift */,
-				4F07CE881CD2A96000611E06 /* DialogService.swift */,
-				4F07CE891CD2A96000611E06 /* Extensions */,
-				4F07CE8A1CD2A96000611E06 /* Networking */,
-				4F07CE8F1CD2A96000611E06 /* Response Models */,
-				4F07CE991CD2A96000611E06 /* SpeechToTextOptions.swift */,
-				4F07CE9A1CD2A96000611E06 /* Tests */,
+				4FA50EEE1CE253B4006E2A66 /* Conversation.swift */,
+				4FA50EEF1CE253B4006E2A66 /* Models */,
+				4FA50EF61CE253B4006E2A66 /* Tests */,
 			);
-			name = ConversationHelper;
-			path = WatsonDeveloperCloud/ConversationHelper;
+			name = ConversationV1;
+			path = Source/ConversationV1;
 			sourceTree = "<group>";
 		};
-		4F07CE821CD2A96000611E06 /* Authentication */ = {
+		4FA50EEF1CE253B4006E2A66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4FA50EF01CE253B4006E2A66 /* ConversationConstants.swift */,
+				4FA50EF21CE253B4006E2A66 /* ConversationModel.swift */,
+				4FA50EF41CE253B4006E2A66 /* MessageRequest.swift */,
+				4FA50EF51CE253B4006E2A66 /* MessageResponse.swift */,
 			);
-			path = Authentication;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		4F07CE891CD2A96000611E06 /* Extensions */ = {
+		4FA50EF61CE253B4006E2A66 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		4F07CE8A1CD2A96000611E06 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				4F07CE8B1CD2A96000611E06 /* RestRequest.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		4F07CE8F1CD2A96000611E06 /* Response Models */ = {
-			isa = PBXGroup;
-			children = (
-				4F3152B01CDB90020078782D /* ConversationHelperResponse.swift */,
-				4F2EF9881CDD736100094105 /* ConversationMessageResponse.swift */,
-				4F07CE901CD2A96000611E06 /* ConversationSpeechToTextKeywordResultWrapper.swift */,
-				4F07CE911CD2A96000611E06 /* ConversationSpeechToTextResultWrapper.swift */,
-				4F07CE921CD2A96000611E06 /* ConversationSpeechToTextTranscriptionWrapper.swift */,
-				4F07CE931CD2A96000611E06 /* ConversationSpeechToTextWordAlternativeResultsWrapper.swift */,
-				4F07CE941CD2A96000611E06 /* ConversationSpeechToTextWordAlternativeResultWrapper.swift */,
-				4F07CE951CD2A96000611E06 /* ConversationSpeechToTextWordConfidenceWrapper.swift */,
-				4F07CE961CD2A96000611E06 /* ConversationSpeechToTextWordTimestampWrapper.swift */,
-			);
-			path = "Response Models";
-			sourceTree = "<group>";
-		};
-		4F07CE9A1CD2A96000611E06 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				4F07CE9B1CD2A96000611E06 /* Audio Files */,
-				4F07CECA1CD8F07300611E06 /* ConversationHelperTests.swift */,
-				4F07CEA01CD2A96000611E06 /* Info.plist */,
+				4FA50EF71CE253B4006E2A66 /* ConversationTests.swift */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		4F07CE9B1CD2A96000611E06 /* Audio Files */ = {
-			isa = PBXGroup;
-			children = (
-				4F07CE9C1CD2A96000611E06 /* WhereIsThePool.flac */,
-				4F07CE9D1CD2A96000611E06 /* WhereIsThePool.opus */,
-				4F07CE9E1CD2A96000611E06 /* WhereIsThePool.wav */,
-			);
-			path = "Audio Files";
-			sourceTree = "<group>";
-		};
-		4F3152A91CDA96600078782D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4F3152AA1CDA978B0078782D /* ConversationModel.swift */,
-				4F3152AE1CDB88FF0078782D /* ConversationRequest.swift */,
-				4F3152AC1CDB88CD0078782D /* MessageRequest.swift */,
-				4F3152B21CDB90AD0078782D /* MessageResponse.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		4FB510FC1CE0D3E700D6FD00 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				4FB510FD1CE0D42500D6FD00 /* ConversationTests.swift */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
-		4FFEF3191CDA573000F391AA /* Conversation */ = {
-			isa = PBXGroup;
-			children = (
-				4FFEF31A1CDA574B00F391AA /* Conversation.swift */,
-				4FFEF31C1CDA6A6200F391AA /* ConversationConstants.swift */,
-				4F3152B41CDBDB470078782D /* ConversationError.swift */,
-				4F3152A91CDA96600078782D /* Models */,
-				4FB510FC1CE0D3E700D6FD00 /* Tests */,
-			);
-			name = Conversation;
 			sourceTree = "<group>";
 		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
+				4FA50EED1CE253B4006E2A66 /* ConversationV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
@@ -274,6 +210,7 @@
 		7A0F97301C232CB5004C01C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FA50F401CE4DF60006E2A66 /* AlamofireObjectMapper.framework */,
 				7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */,
 				7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */,
 				7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */,
@@ -494,10 +431,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F07CEB81CD2A96000611E06 /* Info.plist in Resources */,
-				4F07CEB51CD2A96000611E06 /* WhereIsThePool.opus in Resources */,
-				4F07CEB41CD2A96000611E06 /* WhereIsThePool.flac in Resources */,
-				4F07CEB61CD2A96000611E06 /* WhereIsThePool.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +439,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
-				4FFB45321CD939FC00FDB2EF /* WhereIsThePool.wav in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
@@ -527,11 +459,15 @@
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
+				4FA50F121CE253B4006E2A66 /* MessageRequest.swift in Sources */,
 				7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */,
 				7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */,
+				4FA50F0D1CE253B4006E2A66 /* Conversation.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
 				7AEB13361CBF918B00101884 /* DialogConversationResponse.swift in Sources */,
 				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
+				4FA50F101CE253B4006E2A66 /* ConversationModel.swift in Sources */,
+				4FA50F0E1CE253B4006E2A66 /* ConversationConstants.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
 				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
@@ -541,6 +477,7 @@
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
 				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
 				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
+				4FA50F131CE253B4006E2A66 /* MessageResponse.swift in Sources */,
 				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 			);
@@ -550,11 +487,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA50F161CE25BF3006E2A66 /* ConversationTests.swift in Sources */,
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
-				4FB510FE1CE0D42500D6FD00 /* ConversationTests.swift in Sources */,
-				4F07CECB1CD8F07300611E06 /* ConversationHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +651,10 @@
 		7A0F95CB1C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";
@@ -725,6 +665,10 @@
 		7A0F95CC1C23288E004C01C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";

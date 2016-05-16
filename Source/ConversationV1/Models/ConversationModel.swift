@@ -12,30 +12,12 @@
 /************************************************************************/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 extension Conversation {
     
-    /// A collection of Conversation models
-    internal struct ConversationModelCollection: Mappable {
-        
-        /// The Conversation models
-        var dialogs: [ConversationModel]?
-        
-        /// Used internally to initialize a `ConversationModelCollection` from JSON.
-        init?(_ map: Map) {}
-        
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            dialogs <- map["conversations"]
-        }
-    }
-    
-    /// A WorkspaceID uniquely identifies a Conversation application
-    public typealias WorkspaceID = String
-    
     /// A Conversation model
-    public struct ConversationModel: Mappable {
+    public struct ConversationModel: JSONDecodable {
         
         /// The Conversation workspace application identifier
         public var workspaceID: WorkspaceID?
@@ -43,28 +25,9 @@ extension Conversation {
         /// The name of the Conversation application
         public var name: String?
         
-        /// Used internally to initialize a `ConversationModel` from JSON.
-        public init?(_ map: Map) {}
-        
-        /// Used internally to serialize and deserialize JSON.
-        public mutating func mapping(map: Map) {
-            workspaceID <- map["workspace_id"]
-            name        <- map["name"]
-        }
-    }
-    
-    /// A Workspace model identifier
-    internal struct WorkspaceIDModel: Mappable {
-        
-        /// The workspace identifier
-        var id: WorkspaceID?
-        
-        /// Used internally to initialize a `WorkspaceIDModel` from JSON.
-        init?(_ map: Map) {}
-        
-        /// Used internally to serialize and deserialize JSON.
-        mutating func mapping(map: Map) {
-            id <- map["workspace_id"]
+        public init(json: JSON) throws {
+            workspaceID = try json.string("workspace_id")
+            name        = try json.string("name")
         }
     }
 }

@@ -15,7 +15,6 @@ import Foundation
 // Builder for creating and customizing a Conversation object
 public class ConversationBuilder : NSObject {
     
-    private var auth: AuthenticationStrategy?
     private var serviceURL = "http://wea-orchestratorv2.mybluemix.net/conversation/"
     private var workspaceID = "defaultID"
     private var username = "defaultDialogUser"
@@ -49,14 +48,7 @@ public class ConversationBuilder : NSObject {
         self.password = password
     }
     
-    /**
-     Sets the credentials for the Dialog Service using an Auth Stragety
-     
-     - parameter auth: The Authentication Strategy for the Dialog service.
-     */
-    public func dialogAuthenticationStrategy(auth: AuthenticationStrategy) {
-        self.auth = auth
-    }
+
     
     /**
      Sets the credentials for the Text to Speech service
@@ -85,19 +77,12 @@ public class ConversationBuilder : NSObject {
      */
     public func build() -> ConversationHelper {
         
-        let dialogService: DialogService
-        
-        if let auth = auth {
-            dialogService = DialogService(serviceURL: serviceURL, workspaceID: workspaceID, authenticationStrategy: auth)
-        }
-        else {
-            dialogService = DialogService(serviceURL: serviceURL, workspaceID: workspaceID, username: username, password: password)
-        }
+        let conversationService = Conversation(username: username, password: password)
         
         let speechToTextService = ConversationSpeechToTextService(username: sttUsername, password: sttPassword)
-        let synthesizeService = ConversationSynthesizeService(username: ttsUsername, password: ttsPassword)
+        let synthesizeService   = ConversationSynthesizeService(username: ttsUsername, password: ttsPassword)
         
-        let builtConversation = ConversationHelper(dialogService: dialogService, speechToTextService: speechToTextService, synthesizeService: synthesizeService)
+        let builtConversation   = ConversationHelper(conversationService: conversationService, speechToTextService: speechToTextService, synthesizeService: synthesizeService)
         return builtConversation
     }
 }

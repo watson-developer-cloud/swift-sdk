@@ -21,46 +21,21 @@ import Foundation
  */
 
 public class ConversationHelper : NSObject {
-    /*private let serviceURL: String
-    private let workspaceID: String
-    private let session: NSURLSession*/
-    private let dialogService: DialogService
+
+    private let conversationService: Conversation
     private let synthesizeService: ConversationSynthesizeService
     private let speechToTextService: ConversationSpeechToTextService
 
-     /**
-     Configures and starts a new ConversationHelper object.
-     
-     - parameter serviceURL: The base URL of the Watson Engagement Advisor service.
-     - parameter workspaceID: The workspace identifier for the workspace to converse with.
-     - parameter username: The username to use for HTTP basic authentication.
-     - parameter password: The password to use for HTTP basic authentication.
-     
-     - returns: <#return value description#>
-     */
-    /*public init(serviceURL: String, workspaceID: String, username: String, password: String, ttsUser: String, ttsPassword: String) {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let auth = BasicAuthentication(username: username, password: password)
-        let session = NSURLSession(configuration: config, delegate: auth, delegateQueue: nil)
-        self.serviceURL = serviceURL
-        self.workspaceID = workspaceID
-        self.session = session
-        
-        dialogService = DialogService(serviceURL: serviceURL, workspaceID: workspaceID, username: username, password: password)
-        synthesizeService = SynthesizeService(username: ttsUser, password: ttsPassword)
-    }*/
-     /**
-     Configures and starts a new ConversationHelper object.
-     
-     - parameter dialogService: The base URL of the Watson Engagement Advisor service.
-     - parameter synthesizeService: The workspace identifier for the workspace to converse with.
-     
-     - returns: <#return value description#>
-     */
-    init(dialogService: DialogService, speechToTextService: ConversationSpeechToTextService, synthesizeService: ConversationSynthesizeService) {
-        self.dialogService = dialogService
+    /**
+    Configures and starts a new ConversationHelper object.
+
+    - parameter dialogService: The base URL of the Watson Engagement Advisor service.
+    - parameter synthesizeService: The workspace identifier for the workspace to converse with.
+    */
+    init(conversationService: Conversation, speechToTextService: ConversationSpeechToTextService, synthesizeService: ConversationSynthesizeService) {
+        self.conversationService = conversationService
         self.speechToTextService = speechToTextService
-        self.synthesizeService = synthesizeService
+        self.synthesizeService   = synthesizeService
     }
 
     /**
@@ -71,7 +46,7 @@ public class ConversationHelper : NSObject {
      - parameter context:           Context from a previous point in a ConversationHelper. This can be retrieved from the WEAResponse from a succesful completionHandler.
      - parameter completionHandler: Returns a WEAReponse on success and an NSError when there are issues
      */
-    public func sendText(message: String, context: NSDictionary? = nil, completionHandler: (ConversationHelperResponse?, NSError?) -> Void) {
+    public func sendText(message: String, context: NSDictionary? = nil, completionHandler: (ConversationMessageResponse?, NSError?) -> Void) {
         
         /// must be a better way to convert but this works for now
         var multiArray: [String: String]? = [:]
@@ -80,16 +55,6 @@ public class ConversationHelper : NSObject {
                 let value = context?.valueForKey(key as! String)
                 multiArray![key as! String] = value as? String
             }
-        }
-        
-        dialogService.sendText(message, context: multiArray) { response, error in
-            
-            guard error == nil else {
-                completionHandler(nil, error)
-                return
-            }
-            let weaResponse = ConversationHelperResponse(dialogResponse: response!)
-            completionHandler(weaResponse, error)
         }
     }
     

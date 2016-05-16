@@ -12,23 +12,28 @@
 /************************************************************************/
 
 import Foundation
+import Freddy
 
 //Struct for Messages
-public struct MessageRequest : ConversationRequest {
+public struct MessageRequest: JSONEncodable, JSONDecodable {
     
-    var input:   AnyObject!
-    var context: [String: String]?
+    var input:   [String: JSON]!
+    var context: [String: JSON]?
     
-    init(message: String, tags: [String]? = nil, context: [String: String]? = nil) {
-        self.input  = ["text" : message]
+    public init(message: String, tags: [String]? = nil, context: [String: JSON]? = nil) {
+        self.input  = ["text" : JSON.String(message)]
         self.context = context
     }
     
-    /** Represents the Message as a dictionary */
-    func toDictionary() -> [String : AnyObject] {
-        var map        = [String: AnyObject]()
-        map["input"]   = input
-        map["context"] = context
-        return map
+    public init(json: JSON) throws {
+        input   = try json.dictionary("input")
+        context = try? json.dictionary("context")
+    }
+    
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["input"] = .Dictionary(input)
+        if let context = context { json["context"] = .Dictionary(context) }
+        return JSON.Dictionary(json)
     }
 }

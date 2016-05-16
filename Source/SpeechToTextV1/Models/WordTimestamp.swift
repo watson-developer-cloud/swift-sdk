@@ -29,6 +29,7 @@ public struct WordTimestamp: JSONDecodable {
     /// The end time, in seconds, of the given word in the audio input.
     public let endTime: Double
 
+    /// Used internally to initialize a `WordTimestamp` from JSON.
     public init(json: JSON) throws {
         let array = try json.array()
         word = try array[0].string()

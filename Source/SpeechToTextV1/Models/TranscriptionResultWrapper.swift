@@ -32,6 +32,7 @@ internal struct TranscriptionResultWrapper: JSONDecodable {
     /// just after the most recent final result.
     internal let results: [TranscriptionResult]
 
+    /// Used internally to initialize a `TranscriptionResultWrapper` from JSON.
     internal init(json: JSON) throws {
         resultIndex = try json.int("result_index")
         results = try json.array("results").map(TranscriptionResult.init)

@@ -26,6 +26,7 @@ public struct WordConfidence: JSONDecodable {
     /// The confidence of the given word, between 0 and 1.
     public let confidence: Double
 
+    /// Used internally to initialize a `WordConfidence` from JSON.
     public init(json: JSON) throws {
         let array = try json.array()
         word = try array[0].string()

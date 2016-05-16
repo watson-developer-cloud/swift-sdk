@@ -26,6 +26,7 @@ public struct AlternativeResult: JSONDecodable {
     /// The alternative word hypothesis for a word in the audio input.
     public let word: String
 
+    /// Used internally to initialize an `AlternativeResult` from JSON.
     public init(json: JSON) throws {
         confidence = try json.double("confidence")
         word = try json.string("word")

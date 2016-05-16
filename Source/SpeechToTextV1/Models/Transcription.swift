@@ -34,6 +34,7 @@ public struct Transcription: JSONDecodable {
     /// for the best alternative and only in results marked as final.
     public let wordConfidence: [WordConfidence]?
 
+    /// Used internally to initialize a `Transcription` from JSON.
     public init(json: JSON) throws {
         transcript = try json.string("transcript")
         confidence = try? json.double("confidence")

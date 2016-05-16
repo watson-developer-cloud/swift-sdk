@@ -33,6 +33,7 @@ public struct KeywordResult: JSONDecodable {
     /// least as great as the specified threshold to be included in the results.
     public let confidence: Double
 
+    /// Used internally to initialize a `KeywordResult` from JSON.
     public init(json: JSON) throws {
         normalizedText = try json.string("normalized_text")
         startTime = try json.double("start_time")

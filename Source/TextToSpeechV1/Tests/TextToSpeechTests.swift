@@ -21,9 +21,10 @@ import AVFoundation
 class TextToSpeechTests: XCTestCase {
     
     private var textToSpeech: TextToSpeechV1!
-    private let timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 180
     private let playAudio = true
     private let text = "Swift at IBM is awesome so you should try it!"
+    private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\"><say-as interpret-as=\"letters\">Hello</say-as></speak>"
     
     // MARK: - Test Configuration
     
@@ -119,11 +120,11 @@ class TextToSpeechTests: XCTestCase {
                     customizationID: String? = nil,
                     format: TextToSpeechV1.PhonemeFormat? = nil) -> NSData? {
         
-        let description = "synthesize"
+        let description = "Synthesize"
         let expectation = expectationWithDescription(description)
         var audioData: NSData?
         
-        textToSpeech.synthesize(text,accept: accept,voiceType: voiceType,customizationID: customizationID, failure: failWithError ) { value in
+        textToSpeech.synthesize(text, accept: accept, voiceType: voiceType, customizationID: customizationID, format: format, failure: failWithError ) { value in
             audioData = value
             expectation.fulfill()
         }
@@ -135,16 +136,19 @@ class TextToSpeechTests: XCTestCase {
     
     // MARK: - Positive Tests
     
-    /** Test getting a pronunciation with invalid voice type. */
+    /** Test synthisize. */
     func testSynthisize() {
         
         guard let synthesized = synthesize(text,
                                            accept: TextToSpeechV1.AcceptFormat.wav,
-                                           voiceType: TextToSpeechV1.VoiceType.defined(TextToSpeechV1.DefinedVoiceType.GB_KATE))
-            else {
-                XCTFail("Failed to get a list of voices.")
-                return
+                                           voiceType: TextToSpeechV1.VoiceType.defined(TextToSpeechV1.DefinedVoiceType.GB_KATE),
+                                           customizationID: nil,
+                                           format: TextToSpeechV1.PhonemeFormat.spr) else {
+            
+            XCTFail("Failed to synthesize text.")
+            return
         }
+
         
         XCTAssertNotNil(synthesized, "Should be some data present")
         
@@ -158,6 +162,67 @@ class TextToSpeechTests: XCTestCase {
             
         } catch {
             XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+        }
+    }
+    
+    /** Test synthesize with SSML text */
+    func testSynthisizeSSML() {
+        
+        guard let synthesized = synthesize(ssmlString,
+                                           accept: TextToSpeechV1.AcceptFormat.wav,
+                                           voiceType: TextToSpeechV1.VoiceType.defined(TextToSpeechV1.DefinedVoiceType.US_Michael),
+                                           customizationID: nil,
+                                           format: TextToSpeechV1.PhonemeFormat.spr) else {
+                                            
+                                            XCTFail("Failed to synthesize text.")
+                                            return
+        }
+        
+        
+        XCTAssertNotNil(synthesized, "Should be some data present")
+        
+        do {
+            let audioPlayer = try AVAudioPlayer(data: synthesized)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            if (self.playAudio) {
+                sleep(10)
+            }
+            
+        } catch {
+            XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+        }
+    }
+    
+    /** Test synthesize with all language types. */
+    func testSynthisizeDifferentLanguages() {
+        
+        
+        for voice in TextToSpeechV1.DefinedVoiceType.allValues {
+            
+            guard let synthesized = synthesize(text,
+                                               accept: TextToSpeechV1.AcceptFormat.wav,
+                                               voiceType: TextToSpeechV1.VoiceType.defined(voice),
+                                               customizationID: nil,
+                                               format: TextToSpeechV1.PhonemeFormat.spr) else {
+                                                
+                                                XCTFail("Failed to synthesize text.")
+                                                return
+            }
+            
+            XCTAssertNotNil(synthesized, "Should be some data present")
+            
+            do {
+                let audioPlayer = try AVAudioPlayer(data: synthesized)
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                if (self.playAudio) {
+                    sleep(10)
+                }
+                
+            } catch {
+                XCTAssertTrue(false, "Could not initialize the AVAudioPlayer with the received data.")
+            }
         }
     }
     
@@ -198,8 +263,6 @@ class TextToSpeechTests: XCTestCase {
         let text = "Swift at IBM is awesome"
         
         for voiceType in TextToSpeechV1.DefinedVoiceType.allValues {
-            
-            print("Testing voice type \(voiceType)")
             
             let format = TextToSpeechV1.PhonemeFormat.spr
             
@@ -256,6 +319,44 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getVoice("does_not_exist", customizationID: nil, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Test synthesize with undefined voice type. */
+    func testSynthesizeWithUndefinedVoice() {
+        
+        let description = "Synthesize Undefined Voice"
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+        
+        let voiceType = TextToSpeechV1.VoiceType.custom("does_not_exit")
+        let accept = TextToSpeechV1.AcceptFormat.wav
+        let format = TextToSpeechV1.PhonemeFormat.spr
+        
+        textToSpeech.synthesize(text, accept: accept, voiceType: voiceType, format: format, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Test synthisize with invalid mime type. */
+    func testSynthisizeSSMLIncorrectMime() {
+        
+        let description = "Synthesize Incorrect Mime Type"
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 406)
+            expectation.fulfill()
+        }
+        
+        let voiceType = TextToSpeechV1.VoiceType.defined(TextToSpeechV1.DefinedVoiceType.GB_KATE)
+        let accept = TextToSpeechV1.AcceptFormat.wav
+        let format = TextToSpeechV1.PhonemeFormat.spr
+        
+        textToSpeech.synthesize(ssmlString, accept: accept, voiceType: voiceType, format: format, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

@@ -69,19 +69,15 @@ public class TextToSpeechV1 {
     
     // TODO: implement using other formats
     public enum AcceptFormat: String, CustomStringConvertible {
-        // case ogg  = "audio/ogg; codecs=opus"
+        case ogg  = "audio/ogg; codecs=opus"
         case wav  = "audio/wav"
-        // case flac = "audio/flac"
+        case flac = "audio/flac"
         public var description : String {
             get {
                 return self.rawValue
             }
         }
     }
-
-//    enum SpeechToTextError: ErrorType {
-//        case noMatchingVoiceFound(String)
-//    }
     
     /**
      Initializes the Watson Text to Speech Service.

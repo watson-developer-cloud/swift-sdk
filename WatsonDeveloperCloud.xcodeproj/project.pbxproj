@@ -17,6 +17,12 @@
 		12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */; };
 		12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */; };
 		12B07D2D1CDD46A300B20B38 /* trained_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2C1CDD46A300B20B38 /* trained_meta.txt */; };
+		4F68B25F1CEB69E700BB2A37 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68B24F1CEB69E700BB2A37 /* Conversation.swift */; };
+		4F68B2611CEB69E700BB2A37 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68B2521CEB69E700BB2A37 /* ConversationModel.swift */; };
+		4F68B2621CEB69E700BB2A37 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68B2531CEB69E700BB2A37 /* MessageRequest.swift */; };
+		4F68B2631CEB69E700BB2A37 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68B2541CEB69E700BB2A37 /* MessageResponse.swift */; };
+		4F68B26A1CEB6A1000BB2A37 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68B25E1CEB69E700BB2A37 /* ConversationTests.swift */; };
+		4F68B26B1CEB88C600BB2A37 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7A0F95B71C23288E004C01C0 /* WatsonDeveloperCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */; };
 		7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
@@ -100,6 +106,11 @@
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_empty.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_missing_name.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_missing_name.txt; sourceTree = "<group>"; };
 		12B07D2C1CDD46A300B20B38 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trained_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/trained_meta.txt; sourceTree = "<group>"; };
+		4F68B24F1CEB69E700BB2A37 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		4F68B2521CEB69E700BB2A37 /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		4F68B2531CEB69E700BB2A37 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		4F68B2541CEB69E700BB2A37 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		4F68B25E1CEB69E700BB2A37 /* ConversationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
 		7A0F95B31C23288E004C01C0 /* WatsonDeveloperCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatsonDeveloperCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -162,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F68B26B1CEB88C600BB2A37 /* Freddy.framework in Frameworks */,
 				7A0F95BE1C23288E004C01C0 /* WatsonDeveloperCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,9 +214,39 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		4F68B24E1CEB69E600BB2A37 /* ConversationV1 */ = {
+			isa = PBXGroup;
+			children = (
+				4F68B24F1CEB69E700BB2A37 /* Conversation.swift */,
+				4F68B2501CEB69E700BB2A37 /* Models */,
+				4F68B25D1CEB69E700BB2A37 /* Tests */,
+			);
+			name = ConversationV1;
+			path = Source/ConversationV1;
+			sourceTree = "<group>";
+		};
+		4F68B2501CEB69E700BB2A37 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F68B2521CEB69E700BB2A37 /* ConversationModel.swift */,
+				4F68B2531CEB69E700BB2A37 /* MessageRequest.swift */,
+				4F68B2541CEB69E700BB2A37 /* MessageResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4F68B25D1CEB69E700BB2A37 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4F68B25E1CEB69E700BB2A37 /* ConversationTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
+				4F68B24E1CEB69E600BB2A37 /* ConversationV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
@@ -512,14 +554,17 @@
 				7AEB13381CBF91DB00101884 /* DialogModel.swift in Sources */,
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
+				4F68B2631CEB69E700BB2A37 /* MessageResponse.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
 				B1F21E011CE2461800393146 /* ToneAnalyzer.swift in Sources */,
 				7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */,
 				12B07D111CD791A300B20B38 /* Classification.swift in Sources */,
+				4F68B25F1CEB69E700BB2A37 /* Conversation.swift in Sources */,
 				7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
 				B1F21DFB1CE2461800393146 /* ElementTone.swift in Sources */,
 				7AEB13361CBF918B00101884 /* DialogConversationResponse.swift in Sources */,
+				4F68B2621CEB69E700BB2A37 /* MessageRequest.swift in Sources */,
 				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
 				B1F21DFE1CE2461800393146 /* ToneCategory.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
@@ -530,6 +575,7 @@
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
 				B1F21DFC1CE2461800393146 /* SentenceTone.swift in Sources */,
 				7AEB133A1CBF91E500101884 /* DialogProfile.swift in Sources */,
+				4F68B2611CEB69E700BB2A37 /* ConversationModel.swift in Sources */,
 				12AE2BCF1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
 				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
@@ -546,6 +592,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F68B26A1CEB6A1000BB2A37 /* ConversationTests.swift in Sources */,
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				B1F21E041CE25E6300393146 /* ToneAnalyzerTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
@@ -711,6 +758,10 @@
 		7A0F95CB1C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";
@@ -721,6 +772,10 @@
 		7A0F95CC1C23288E004C01C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.WatsonDeveloperCloudTests";

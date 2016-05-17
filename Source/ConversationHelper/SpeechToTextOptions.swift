@@ -1,21 +1,24 @@
-/************************************************************************/
- /*                                                                      */
- /* IBM Confidential                                                     */
- /* OCO Source Materials                                                 */
- /*                                                                      */
- /* (C) Copyright IBM Corp. 2015, 2016                                   */
- /*                                                                      */
- /* The source code for this program is not published or otherwise       */
- /* divested of its trade secrets, irrespective of what has been         */
- /* deposited with the U.S. Copyright Office.                            */
- /*                                                                      */
- /************************************************************************/
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 
 // Class that bridges to the Watson SpeechToTextSettings class
 public class SpeechToTextOptions: NSObject {
-    
+
     /// Model used
     public var model: String = ""
     /// By default, the Speech to Text service logs requests and their results. Logging is
@@ -64,22 +67,22 @@ public class SpeechToTextOptions: NSObject {
     public var audioTypeL16Rate: Int = 48000
     // The number of channels an L16 encoded audio track has. The default is `1`.
     public var audioTypeL16Channels: Int = 1
-    
+
     public init(contentType: AudioType) {
         super.init()
         self.contentType = contentType
     }
-    
+
     public init(ContentType: AudioType, l16Rate: Int, l16Channels: Int) {
         super.init()
         self.audioTypeL16Rate = l16Rate
         self.audioTypeL16Channels = l16Channels
     }
-    
+
     public override init() {
         super.init()
     }
-    
+
     /**
      Convert settings to the SpeechToTextSettings object.
      */
@@ -105,18 +108,18 @@ public class SpeechToTextOptions: NSObject {
         if(self.maxAlternatives != 0) {
             sttSettings.maxAlternatives = self.maxAlternatives
         }
-        
+
         sttSettings.interimResults = self.intremResults
         if(self.wordAlternativesThreshold != 0.0) {
             sttSettings.wordAlternativesThreshold = self.wordAlternativesThreshold
         }
-        
+
         sttSettings.wordConfidence = self.wordConfidence
         sttSettings.timestamps = self.timestamps
         sttSettings.filterProfanity = self.filterProfanity
         return sttSettings
     }
-    
+
     /**
      Audio formats supported by the Watson Speech to Text service.
      */
@@ -126,7 +129,7 @@ public class SpeechToTextOptions: NSObject {
         case L16
         case WAV
         case Opus
-        
+
         var toString: String {
             switch self {
             case .FLAC:                        return "audio/flac"
@@ -136,7 +139,7 @@ public class SpeechToTextOptions: NSObject {
             case .Opus:                        return "audio/ogg;codecs=opus"
             }
         }
-        
+
         private var toAudioMediaType: AudioMediaType {
             switch self {
             case .FLAC:                        return AudioMediaType.FLAC

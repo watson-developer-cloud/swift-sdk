@@ -73,8 +73,30 @@ extension Request {
                     object = try json.decode()
                 }
                 return .Success(object)
+            } catch JSON.Error.IndexOutOfBounds(let index) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The index (\(index)) is out of bounds for a JSON array."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.KeyNotFound(let key) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The key (\(key)) was not found in the JSON dictionary."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.UnexpectedSubscript(let type) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The JSON is not subscriptable with type \(type)."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.ValueNotConvertible(let value, let type) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " Unexpected JSON value (\(value)) was found that is not " +
+                                    "convertible to the type \(type)."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
             } catch {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response."
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " No error information was provided during serialization."
                 let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
             }
@@ -135,8 +157,30 @@ extension Request {
                 }
                 let objects: [T] = try array.map { json in try json.decode() }
                 return .Success(objects)
+            } catch JSON.Error.IndexOutOfBounds(let index) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The index (\(index)) is out of bounds for a JSON array."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.KeyNotFound(let key) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The key (\(key)) was not found in the JSON dictionary."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.UnexpectedSubscript(let type) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " The JSON is not subscriptable with type \(type)."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            } catch JSON.Error.ValueNotConvertible(let value, let type) {
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " Unexpected JSON value (\(value)) was found that is not " +
+                                    "convertible to the type \(type)."
+                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
             } catch {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response."
+                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
+                                    " No error information was provided during serialization."
                 let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
             }

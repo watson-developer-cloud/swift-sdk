@@ -33,7 +33,7 @@ public struct FaceImages: JSONDecodable {
     public init(json: JSON) throws  {
         imagesProcessed = try json.int("images_processed")
         images = try json.arrayOf("images", type: FaceImage.self)
-        warnings = try json.arrayOf("warnings", type: WarningInfo.self)
+        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
@@ -41,26 +41,26 @@ public struct FaceImages: JSONDecodable {
 public struct FaceImage: JSONDecodable {
     
     /// The source URL of the image that was processed.
-    public let sourceURL: String
+    public let sourceURL: String?
     
     /// The resolved URL of the image that was processed.
-    public let resolvedURL: String
+    public let resolvedURL: String?
     
     /// The filename of the image that was classified.
-    public let image: String
+    public let image: String?
     
     /// Information about an error that occured while processing the given image.
-    public let error: ErrorInfo
+    public let error: ErrorInfo?
     
     /// The faces identified in the given image.
     public let faces: [Face]
     
     /// Used internally to initialize a `FaceImage` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try json.string("source_url")
-        resolvedURL = try json.string("resolved_url")
-        image = try json.string("image")
-        error = try json.decode("error")
+        sourceURL = try? json.string("source_url")
+        resolvedURL = try? json.string("resolved_url")
+        image = try? json.string("image")
+        error = try? json.decode("error")
         faces = try json.arrayOf("faces", type: Face.self)
     }
 }
@@ -159,12 +159,12 @@ public struct Identity: JSONDecodable {
     public let score: Double
     
     /// The type hierarchy of the identified celebrity.
-    public let typeHierarchy: String
+    public let typeHierarchy: String?
     
     /// Used internally to initialize an `Identity` model from JSON.
     public init(json: JSON) throws {
         name = try json.string("name")
         score = try json.double("score")
-        typeHierarchy = try json.string("type_hierarchy")
+        typeHierarchy = try? json.string("type_hierarchy")
     }
 }

@@ -33,7 +33,7 @@ public struct ClassifiedImages: JSONDecodable {
     public init(json: JSON) throws {
         imagesProcessed = try json.int("images_processed")
         images = try json.arrayOf("images", type: ClassifiedImage.self)
-        warnings = try json.arrayOf("warnings", type: WarningInfo.self)
+        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
@@ -41,26 +41,26 @@ public struct ClassifiedImages: JSONDecodable {
 public struct ClassifiedImage: JSONDecodable {
     
     /// The source URL of the image that was classified.
-    public let sourceURL: String
+    public let sourceURL: String?
     
     /// The resolved URL of the image that was classified.
-    public let resolvedURL: String
+    public let resolvedURL: String?
     
-    /// The filename of the iamge that was classified.
-    public let image: String
+    /// The filename of the image that was classified.
+    public let image: String?
     
     /// Information about an error that occurred while classifying the given image.
-    public let error: ErrorInfo
+    public let error: ErrorInfo?
     
     /// Classifications of the given image by classifier.
     public let classifiers: [ClassifierResults]
     
     /// Used internally to initialize a `ClassifierResults` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try json.string("source_url")
-        resolvedURL = try json.string("resolved_url")
-        image = try json.string("image")
-        error = try json.decode("error")
+        sourceURL = try? json.string("source_url")
+        resolvedURL = try? json.string("resolved_url")
+        image = try? json.string("image")
+        error = try? json.decode("error")
         classifiers = try json.arrayOf("classifiers", type: ClassifierResults.self)
     }
 }
@@ -95,12 +95,12 @@ public struct Classification: JSONDecodable {
     public let score: Double
     
     /// The type hierarchy of the identified class.
-    public let typeHierarchy: String
+    public let typeHierarchy: String?
     
     /// Used internally to initialize a `ClassifiedImages` model from JSON.
     public init(json: JSON) throws {
         classification = try json.string("class")
         score = try json.double("score")
-        typeHierarchy = try json.string("type_hierarchy")
+        typeHierarchy = try? json.string("type_hierarchy")
     }
 }

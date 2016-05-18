@@ -33,7 +33,7 @@ public struct WordImages: JSONDecodable {
     public init(json: JSON) throws {
         imagesProcessed = try json.int("images_processed")
         images = try json.arrayOf("images", type: WordImage.self)
-        warnings = try json.arrayOf("warnings", type: WarningInfo.self)
+        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
@@ -41,16 +41,16 @@ public struct WordImages: JSONDecodable {
 public struct WordImage: JSONDecodable {
     
     /// The source URL of the images that was processed.
-    public let sourceURL: String
+    public let sourceURL: String?
     
     /// The resolved URL of the images that was processed.
-    public let resolvedURL: String
+    public let resolvedURL: String?
     
     /// The filename of the image that was classified.
-    public let image: String
+    public let image: String?
     
     /// Information about an error that occurred while processing the given image.
-    public let error: ErrorInfo // TODO: re-do this comment across the analagous models...
+    public let error: ErrorInfo? // TODO: re-do this comment across the analagous models...
     
     /// The text recognized in the image, including recognized formatting (e.g. newlines).
     public let text: String
@@ -60,10 +60,10 @@ public struct WordImage: JSONDecodable {
     
     /// Used internally to initialize a `WordImage` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try json.string("source_url")
-        resolvedURL = try json.string("resolved_url")
-        image = try json.string("image")
-        error = try json.decode("error")
+        sourceURL = try? json.string("source_url")
+        resolvedURL = try? json.string("resolved_url")
+        image = try? json.string("image")
+        error = try? json.decode("error")
         text = try json.string("text")
         words = try json.arrayOf("words", type: Word.self)
     }

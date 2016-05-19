@@ -434,7 +434,7 @@ public class VisualRecognition {
     public func detectFaces(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
+        success: ImagesWithFaces -> Void)
     {
         let parameters = writeParameters(url: url)
         detectFaces(parameters: parameters, failure: failure, success: success)
@@ -453,7 +453,7 @@ public class VisualRecognition {
     public func detectFaces(
         image image: NSURL,
         failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
+        success: ImagesWithFaces -> Void)
     {
         detectFaces(image: image, parameters: nil, failure: failure, success: success)
     }
@@ -473,7 +473,7 @@ public class VisualRecognition {
         image image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
+        success: ImagesWithFaces -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -502,7 +502,7 @@ public class VisualRecognition {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<FaceImages, NSError>) in
+                        (response: Response<ImagesWithFaces, NSError>) in
                         switch response.result {
                         case .Success(let faceImages): success(faceImages)
                         case .Failure(let error): failure?(error)

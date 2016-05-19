@@ -110,7 +110,7 @@ public class TextToSpeech {
      - parameter success: A function executed with information about the given voice.
      */
     public func getVoice(
-        voice:String,
+        voice: SynthesisVoice,
         customizationID: String? = nil,
         failure: (NSError -> Void)? = nil,
         success: Voice -> Void)
@@ -125,7 +125,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             method: .GET,
-            url: serviceURL + "/v1/voices/\(voice)",
+            url: serviceURL + "/v1/voices/\(voice.description())",
             acceptType: "application/json",
             queryParameters: queryParameters
         )
@@ -143,7 +143,7 @@ public class TextToSpeech {
     }
     
     /**
-     Get the phonetic pronunciation for the given word.
+     Get the phonetic pronunciation for the given text.
      
      You can request the pronunciation for a specific format. You can also request the pronunciation
      for a specific voice to see the default translation of the language of that voice.
@@ -162,7 +162,7 @@ public class TextToSpeech {
     public func getPronunciation(
         text: String,
         voice: SynthesisVoice? = nil,
-        phonemeFormat: PhonemeFormat? = nil,
+        format: PhonemeFormat? = nil,
         failure: (NSError -> Void)? = nil,
         success: Pronunciation -> Void)
     {
@@ -172,8 +172,8 @@ public class TextToSpeech {
         if let voice = voice {
             queryParameters.append(NSURLQueryItem(name: "voice", value: voice.description()))
         }
-        if let phonemeFormat = phonemeFormat {
-            queryParameters.append(NSURLQueryItem(name: "format", value: phonemeFormat.rawValue))
+        if let format = format {
+            queryParameters.append(NSURLQueryItem(name: "format", value: format.rawValue))
         }
         
         // construct REST request
@@ -236,7 +236,6 @@ public class TextToSpeech {
             queryParameters: queryParameters
         )
         
-        //TODO Update with other formats instead of forcing it to go through wav sanitizer
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
@@ -381,5 +380,4 @@ public class TextToSpeech {
         let dataSubchunkSizeRange = NSMakeRange(fieldOffset, fieldSize)
         data.replaceBytesInRange(dataSubchunkSizeRange, withBytes: &dataSubchunkSize)
     }
-
 }

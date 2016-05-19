@@ -439,28 +439,14 @@ public class VisualRecognition {
         let parameters = writeParameters(url: url)
         detectFaces(parameters: parameters, failure: failure, success: success)
     }
-    
-    /**
-     Detect faces in uploaded images. You can upload a single image or a compressed file (.zip)
-     with multiple images to be processed. The supported image formats include .jpg, .png, and
-     .gif.
- 
-     - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
-            to classify. The total number of images is limited to 100.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the detected faces.
-     */
-    public func detectFaces(
-        image image: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithFaces -> Void)
-    {
-        detectFaces(image: image, parameters: nil, failure: failure, success: success)
-    }
 
     /**
-     Detect faces in images that are uploaded and/or specified by URL. Faces are identified in
-     the provided images, along with information about them such as estimated age and gender.
+     Detect faces in the provided image(s), along with information about each face such as
+     estimated age and gender.
+     
+     Images can be uploaded and/or specified by URL in a parameters file. If uploading images, you
+     can upload a single image or a compressed file (.zip) with multiple images to be processed.
+     The supported image formats include .jpg, .png, and .gif.
  
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             in which to detect faces. The total number of images is limited to 100.
@@ -537,25 +523,11 @@ public class VisualRecognition {
     }
     
     /**
-     Recognize text in uploaded images. You can upload a single image or a compressed file (.zip)
-     with multiple images to be processed. The supported image formats include .jpg, .png, and
-     .gif.
+     Recognize text in the provided image(s).
      
-     - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
-            to classify. The total number of images is limited to 100.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the detected words.
-     */
-    public func recognizeText(
-        image image: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithWords -> Void)
-    {
-        recognizeText(image: image, failure: failure, success: success)
-    }
-    
-    /**
-     Recognize text in images that are uploaded and/or specified by URL.
+     Images can be uploaded and/or specified by URL in a parameters file. If uploading images, you
+     can upload a single image or a compressed file (.zip) with multiple images to be processed.
+     The supported image formats include .jpg, .png, and .gif.
      
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             in which to recognize text. The total number of images is limited to 100.

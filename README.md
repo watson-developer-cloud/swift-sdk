@@ -23,6 +23,7 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
   - [Personality Insights](#personality-insights)
   - [Speech to Text](#speech-to-text)
   - [Text to Speech](#text-to-speech)
+  - [Tone Analyzer](#tone-analyzer)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
@@ -471,6 +472,24 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
 * [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+
+### Tone Analyzer
+
+The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+
+How to instantiate and use the Tone Analyzer service:
+
+```swift
+let username = "your-username-here"
+let password = "your-password-here"
+let versionDate = "YYYY-MM-DD" // use today's date for the most recent version
+let service = ToneAnalyzer(username: username, password: password, versionDate: versionDate)
+
+service.getTone("Text that you want to get the tone of", failure: someFunc) { responseTone in
+    print(responseTone.documentTone)
+}
+```
+
 
 ## Authentication
 

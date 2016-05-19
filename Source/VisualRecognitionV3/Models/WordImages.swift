@@ -18,27 +18,27 @@ import Foundation
 import Freddy
 
 /** The results from recognizing text in one or more images. */
-public struct WordImages: JSONDecodable {
+public struct ImagesWithWords: JSONDecodable {
     
     /// The number of images processed.
     public let imagesProcessed: Int
     
     /// The images that were processed.
-    public let images: [WordImage]
+    public let images: [ImageWithWords]
     
     /// Any warnings produced during processing.
     public let warnings: [WarningInfo]?
     
-    /// Used internally to initialize a `WordImages` model from JSON.
+    /// Used internally to initialize a `ImagesWithWords` model from JSON.
     public init(json: JSON) throws {
         imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: WordImage.self)
+        images = try json.arrayOf("images", type: ImageWithWords.self)
         warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
 /** An image with detected words. */
-public struct WordImage: JSONDecodable {
+public struct ImageWithWords: JSONDecodable {
     
     /// The source URL of the images that was processed.
     public let sourceURL: String?
@@ -58,7 +58,7 @@ public struct WordImage: JSONDecodable {
     /// The words recognized in the image.
     public let words: [Word]
     
-    /// Used internally to initialize a `WordImage` model from JSON.
+    /// Used internally to initialize a `ImageWithWords` model from JSON.
     public init(json: JSON) throws {
         sourceURL = try? json.string("source_url")
         resolvedURL = try? json.string("resolved_url")

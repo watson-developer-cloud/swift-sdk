@@ -530,7 +530,7 @@ public class VisualRecognition {
     public func recognizeText(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
+        success: ImagesWithWords -> Void)
     {
         let parameters = writeParameters(url: url)
         recognizeText(parameters: parameters, failure: failure, success: success)
@@ -549,7 +549,7 @@ public class VisualRecognition {
     public func recognizeText(
         image image: NSURL,
         failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
+        success: ImagesWithWords -> Void)
     {
         recognizeText(image: image, failure: failure, success: success)
     }
@@ -568,7 +568,7 @@ public class VisualRecognition {
         image image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
+        success: ImagesWithWords -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -598,7 +598,7 @@ public class VisualRecognition {
                 case .Success(let upload, _, _):
                     upload.responseString { response in print(response) }
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<WordImages, NSError>) in
+                        (response: Response<ImagesWithWords, NSError>) in
                         switch response.result {
                         case .Success(let wordImages): success(wordImages)
                         case .Failure(let error): failure?(error)

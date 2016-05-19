@@ -21,7 +21,7 @@ import Freddy
 public struct Class: JSONDecodable {
     
     /// The name of the class
-    internal let name: String
+    public let name: String
     
     /// A compressed (.zip) file of images that prominently
     /// depict the visual subject of the given class.

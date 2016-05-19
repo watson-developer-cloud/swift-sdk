@@ -48,15 +48,3 @@ public struct Classifier: JSONDecodable {
         classes = try json.arrayOf("classes", type: Class.self)
     }
 }
-
-/** The class of a classifier. */
-public struct Class: JSONDecodable {
-    
-    /// The name of the class.
-    public let name: String
-    
-    /// Used internally to initialize a `Class` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.decode("class")
-    }
-}

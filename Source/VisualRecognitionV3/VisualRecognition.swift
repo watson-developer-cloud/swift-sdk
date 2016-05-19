@@ -119,7 +119,7 @@ public class VisualRecognition {
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [ClassWithExamples],
+        positiveExamples: [Class],
         negativeExamples: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: Classifier -> Void)
@@ -154,9 +154,10 @@ public class VisualRecognition {
         Alamofire.upload(request,
             multipartFormData: { multipartFormData in
                 for positiveExample in positiveExamples {
-                    let examples = positiveExample.examples
                     let name = positiveExample.name + "_positive_examples"
-                    multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    if let examples = positiveExample.examples {
+                        multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    }
                 }
                 if let negativeExamples = negativeExamples {
                     let examples = negativeExamples

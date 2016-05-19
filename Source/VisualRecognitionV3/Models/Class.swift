@@ -15,16 +15,17 @@
  **/
 
 import Foundation
+import Freddy
 
-/** A class that shall be recognized by a classifier. */
-public struct ClassWithExamples {
+/** A class associated with a Visual Recognition classifier. */
+public struct Class: JSONDecodable {
     
     /// The name of the class
     internal let name: String
     
     /// A compressed (.zip) file of images that prominently
     /// depict the visual subject of the given class.
-    internal let examples: NSURL
+    internal let examples: NSURL?
     
     /**
      Define a class that shall be recognized by a classifier.
@@ -36,5 +37,11 @@ public struct ClassWithExamples {
     public init(name: String, examples: NSURL) {
         self.name = name
         self.examples = examples
+    }
+    
+    /// Used internally to initialize a `Class` model from JSON.
+    public init(json: JSON) throws {
+        name = try json.decode("class")
+        examples = nil
     }
 }

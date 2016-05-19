@@ -53,7 +53,7 @@ public class AlchemyVision {
         image image: NSURL,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [FaceTags] -> Void)
+        success: FaceTags -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -83,7 +83,7 @@ public class AlchemyVision {
         
         // execute REST request
         Alamofire.request(request)
-            .responseArray { (response: Response<[FaceTags], NSError>) in
+            .responseObject { (response: Response<FaceTags, NSError>) in
                 switch response.result {
                 case .Success(let faceTags): success(faceTags)
                 case .Failure(let error): failure?(error)
@@ -105,7 +105,7 @@ public class AlchemyVision {
         url url: String,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [FaceTags] -> Void)
+        success: FaceTags -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -131,7 +131,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseArray { (response: Response<[FaceTags], NSError>) in
+            .responseObject { (response: Response<FaceTags, NSError>) in
                 switch response.result {
                 case .Success(let faceTags): success(faceTags)
                 case .Failure(let error): failure?(error)
@@ -149,16 +149,17 @@ public class AlchemyVision {
      */
     public func getImage(
         html html: String,
-        url: String,
+        url: String? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [ImageLink] -> Void)
+        success: ImageLink -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParameters.append(NSURLQueryItem(name: "html", value: html))
-        queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        if let url = url {
+            queryParameters.append(NSURLQueryItem(name: "url", value: url))
+        }
 
         // construct REST request
         let request = RestRequest(
@@ -179,7 +180,7 @@ public class AlchemyVision {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseArray { (response: Response<[ImageLink], NSError>) in
+                    upload.responseObject { (response: Response<ImageLink, NSError>) in
                         switch response.result {
                         case .Success(let imageLinks): success(imageLinks)
                         case .Failure(let error): failure?(error)
@@ -206,7 +207,7 @@ public class AlchemyVision {
     public func getImage(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: [ImageLink] -> Void)
+        success: ImageLink -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -224,15 +225,13 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseArray { (response: Response<[ImageLink], NSError>) in
+            .responseObject { (response: Response<ImageLink, NSError>) in
                 switch response.result {
                 case .Success(let imageLinks): success(imageLinks)
                 case .Failure(let error): failure?(error)
                 }
             }
     }
-
-    // TODO: POST /image/ImageGetRankedImageKeywords
     
     /**
      Perform image tagging on an uploaded image.
@@ -356,7 +355,7 @@ public class AlchemyVision {
     public func getRankedImageSceneText(
         image image: NSURL,
         failure: (NSError -> Void)? = nil,
-        success: [SceneText] -> Void)
+        success: SceneText -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -370,7 +369,7 @@ public class AlchemyVision {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/url/URLGetRankedImageKeywords",
+            url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
             queryParameters: queryParameters,
             contentType: "application/x-www-form-urlencoded",
@@ -379,7 +378,7 @@ public class AlchemyVision {
         
         // execute REST requeset
         Alamofire.request(request)
-            .responseArray { (response: Response<[SceneText], NSError>) in
+            .responseObject { (response: Response<SceneText, NSError>) in
                 switch response.result {
                 case .Success(let sceneTexts): success(sceneTexts)
                 case .Failure(let error): failure?(error)
@@ -397,7 +396,7 @@ public class AlchemyVision {
     public func getRankedImageSceneText(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: [SceneText] -> Void)
+        success: SceneText -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -408,14 +407,14 @@ public class AlchemyVision {
         // construct REST request
         let request = RestRequest(
             method: .GET,
-            url: serviceURL + "/url/URLGetRankedImageKeywords",
+            url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
             queryParameters: queryParameters
         )
 
         // execute REST requeset
         Alamofire.request(request)
-            .responseArray { (response: Response<[SceneText], NSError>) in
+            .responseObject { (response: Response<SceneText, NSError>) in
                 switch response.result {
                 case .Success(let sceneTexts): success(sceneTexts)
                 case .Failure(let error): failure?(error)

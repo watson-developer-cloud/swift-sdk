@@ -36,7 +36,7 @@ public struct ImageKeywords: JSONDecodable {
     public init(json: JSON) throws {
         status = try json.string("status")
         url = try json.string("url")
-        totalTransactions = try json.int("totalTransactions")
+        totalTransactions = try Int(json.string("totalTransactions"))!
         imageKeywords = try json.arrayOf("imageKeywords", type: ImageKeyword.self)
     }
 }
@@ -56,7 +56,7 @@ public struct ImageKeyword: JSONDecodable {
     /// Used internally to initialize an `ImageKeyword` model from JSON.
     public init(json: JSON) throws {
         text = try json.string("text")
-        score = try json.double("score")
+        score = try Double(json.string("score"))!
         knowledgeGraph = try? json.decode("knowledgeGraph")
     }
 }

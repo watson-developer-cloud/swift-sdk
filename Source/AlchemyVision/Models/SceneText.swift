@@ -24,7 +24,7 @@ public struct SceneText: JSONDecodable {
     public let status: String
 
     /// The URL of the requested image being analyzed.
-    public let url: String
+    public let url: String?
 
     /// The number of transactions charged for this request.
     public let totalTransactions: Int
@@ -38,8 +38,8 @@ public struct SceneText: JSONDecodable {
     /// Used internally to initialize a `SceneText` model from JSON.
     public init(json: JSON) throws {
         status = try json.string("status")
-        url = try json.string("url")
-        totalTransactions = try json.int("totalTransactions")
+        url = try? json.string("url")
+        totalTransactions = try Int(json.string("totalTransactions"))!
         sceneText = try json.string("sceneText")
         sceneTextLines = try json.arrayOf("sceneTextLines", type: SceneTextLine.self)
     }

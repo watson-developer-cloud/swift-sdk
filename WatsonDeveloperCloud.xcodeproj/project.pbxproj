@@ -107,9 +107,9 @@
 		7AAA9A5C1CEE6089002C9564 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */; };
 		7AAA9A5D1CEE6089002C9564 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4A1CEE6089002C9564 /* Classifier.swift */; };
 		7AAA9A5E1CEE6089002C9564 /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */; };
-		7AAA9A5F1CEE6089002C9564 /* FaceImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4C1CEE6089002C9564 /* FaceImages.swift */; };
+		7AAA9A5F1CEE6089002C9564 /* ImagesWithFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */; };
 		7AAA9A601CEE6089002C9564 /* WarningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */; };
-		7AAA9A611CEE6089002C9564 /* WordImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4E1CEE6089002C9564 /* WordImages.swift */; };
+		7AAA9A611CEE6089002C9564 /* ImagesWithWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */; };
 		7AAA9A6A1CEE6089002C9564 /* VisualRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */; };
 		7AAA9A6B1CEE6098002C9564 /* baseball.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A511CEE6089002C9564 /* baseball.zip */; };
 		7AAA9A6C1CEE6098002C9564 /* cars.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A521CEE6089002C9564 /* cars.zip */; };
@@ -279,9 +279,9 @@
 		7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
 		7AAA9A4A1CEE6089002C9564 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
-		7AAA9A4C1CEE6089002C9564 /* FaceImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImages.swift; sourceTree = "<group>"; };
+		7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesWithFaces.swift; sourceTree = "<group>"; };
 		7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningInfo.swift; sourceTree = "<group>"; };
-		7AAA9A4E1CEE6089002C9564 /* WordImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordImages.swift; sourceTree = "<group>"; };
+		7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesWithWords.swift; sourceTree = "<group>"; };
 		7AAA9A511CEE6089002C9564 /* baseball.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = baseball.zip; sourceTree = "<group>"; };
 		7AAA9A521CEE6089002C9564 /* cars.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cars.zip; sourceTree = "<group>"; };
 		7AAA9A531CEE6089002C9564 /* trucks.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = trucks.zip; sourceTree = "<group>"; };
@@ -634,9 +634,9 @@
 				7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */,
 				7AAA9A4A1CEE6089002C9564 /* Classifier.swift */,
 				7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */,
-				7AAA9A4C1CEE6089002C9564 /* FaceImages.swift */,
+				7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */,
 				7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */,
-				7AAA9A4E1CEE6089002C9564 /* WordImages.swift */,
+				7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -924,7 +924,7 @@
 				7AA7AD2A1CED11A0009DD700 /* SAORelation.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
 				7AA7AD201CED11A0009DD700 /* Feed.swift in Sources */,
-				7AAA9A5F1CEE6089002C9564 /* FaceImages.swift in Sources */,
+				7AAA9A5F1CEE6089002C9564 /* ImagesWithFaces.swift in Sources */,
 				7AA7AD111CED11A0009DD700 /* AlchemyLanguageConstants.swift in Sources */,
 				7AAA9A2B1CEE3026002C9564 /* TranscriptionResultWrapper.swift in Sources */,
 				7AA7AD351CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift in Sources */,
@@ -942,7 +942,7 @@
 				7AA7AD2E1CED11A0009DD700 /* Taxonomies.swift in Sources */,
 				7AAA9A2A1CEE3026002C9564 /* TranscriptionResult.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
-				7AAA9A611CEE6089002C9564 /* WordImages.swift in Sources */,
+				7AAA9A611CEE6089002C9564 /* ImagesWithWords.swift in Sources */,
 				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
 				7AA7AD1A1CED11A0009DD700 /* DocumentAuthors.swift in Sources */,
 				7AAA9A261CEE3026002C9564 /* AlternativeResult.swift in Sources */,

@@ -55,6 +55,20 @@ class ToneAnalyzerTests: XCTestCase {
         XCTFail("Positive test failed with error: \(error)")
     }
     
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Wait for expectations. */
+    func waitForExpectations() {
+        waitForExpectationsWithTimeout(timeout) { error in
+            XCTAssertNil(error, "Timeout")
+        }
+    }
+    
+    // MARK: - Positive Tests
+    
     func testGetTone() {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = expectationWithDescription(description)
@@ -65,13 +79,22 @@ class ToneAnalyzerTests: XCTestCase {
             XCTAssertNotNil(tone.sentencesTones, "SentencesTone should not be nil")
             expectation.fulfill()
         }
-        waitForExpectation()
+        waitForExpectations()
     }
     
-    // Wait for an expectation to be fulfilled
-    func waitForExpectation() {
-        waitForExpectationsWithTimeout(timeout) { error in
-            XCTAssertNil(error, "Timeout.")
+    // MARK: - Negative Tests
+    
+    func testFetToneNil() {
+        let description = "Try to get the tone of an empty string"
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.localizedFailureReason,
+                           "Data could not be serialized. Failed to parse JSON response.")
+            expectation.fulfill()
         }
+        
+        service.getTone("", failure: failure, success: failWithResult)
+        waitForExpectations()
     }
 }

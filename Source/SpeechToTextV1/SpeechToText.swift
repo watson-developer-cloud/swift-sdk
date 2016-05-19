@@ -23,41 +23,30 @@ import AVFoundation
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
  */
-public class SpeechToText: WatsonService {
+public class SpeechToTextV1 {
 
-    private let authStrategy: AuthenticationStrategy
-
-    /** A function that, when executed, stops streaming audio to Speech to Text. */
-    public typealias StopStreaming = Void -> Void
-
-    /**
-     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
-    
-     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
-        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
-        is used internally to obtain tokens, refresh expired tokens, and maintain information
-        about authentication state.
-     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
-     */
-    public required init(authStrategy: AuthenticationStrategy) {
-        self.authStrategy = authStrategy
-    }
+    private let restToken: RestToken
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /**
      Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
-    
+
      - parameter username: The username associated with your `SpeechToText` service.
      - parameter password: The password associated with your `SpeechToText` service.
      - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
      */
-    public convenience required init(username: String, password: String) {
-        let authStrategy = BasicAuthenticationStrategy(
-            tokenURL: SpeechToTextConstants.tokenURL,
-            serviceURL: SpeechToTextConstants.serviceURL,
+    public init(username: String, password: String) {
+        self.restToken = RestToken(
+            tokenURL: tokenURL + "?url=" + serviceURL,
             username: username,
-            password: password)
-        self.init(authStrategy: authStrategy)
+            password: password
+        )
     }
+
+    /** A function that, when executed, stops streaming audio to Speech to Text. */
+    public typealias StopStreaming = Void -> Void
 
     /**
      Transcribe an audio file.
@@ -70,13 +59,14 @@ public class SpeechToText: WatsonService {
      */
     public func transcribe(
         file: NSURL,
-        settings: SpeechToTextSettings,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
     {
         guard let audio = NSData(contentsOfURL: file) else {
-            let description = "Could not load audio data from \(file)."
-            let error = createError(SpeechToTextConstants.domain, description: description)
+            let failureReason = "Could not load audio data from \(file)."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
@@ -95,24 +85,31 @@ public class SpeechToText: WatsonService {
      */
     public func transcribe(
         audio: NSData,
-        settings: SpeechToTextSettings,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
     {
         guard let socket = SpeechToTextWebSocket(
-            authStrategy: authStrategy,
+            restToken: restToken,
             settings: settings,
             failure: failure,
             success: success) else { return }
-
-        guard let start = settings.toJSONString(failure),
-              let stop = SpeechToTextStop().toJSONString(failure) else { return }
-
-        socket.connect()
-        socket.writeString(start)
-        socket.writeData(audio)
-        socket.writeString(stop)
-        socket.disconnect()
+        
+        do {
+            let start = try settings.toJSON().serializeString()
+            let stop = try TranscriptionStop().toJSON().serializeString()
+            socket.connect()
+            socket.writeString(start)
+            socket.writeData(audio)
+            socket.writeString(stop)
+            socket.disconnect()
+        } catch {
+            let failureReason = "Failed to serialize start and stop instructions to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
     }
 
     /**
@@ -127,13 +124,13 @@ public class SpeechToText: WatsonService {
      - returns: A function that, when executed, stops streaming audio to Speech to Text.
      */
     public func transcribe(
-        settings: SpeechToTextSettings,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
         -> StopStreaming
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
-            authStrategy: authStrategy,
+            restToken: restToken,
             settings: settings,
             failure: failure,
             success: success) else { return { } }
@@ -158,13 +155,13 @@ public class SpeechToText: WatsonService {
         The second element is a function that, when executed, stops streaming to Speech to Text.
      */
     public func createTranscriptionOutput(
-        settings: SpeechToTextSettings,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
         -> (AVCaptureAudioDataOutput, StopStreaming)?
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
-            authStrategy: authStrategy,
+            restToken: restToken,
             settings: settings,
             failure: failure,
             success: success) else { return nil }

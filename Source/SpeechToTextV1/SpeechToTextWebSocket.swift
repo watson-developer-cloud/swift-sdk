@@ -16,18 +16,21 @@
 
 import Foundation
 import Starscream
+import Freddy
 
 /** Abstracts the WebSockets connection to the Watson Speech to Text service. */
 class SpeechToTextWebSocket: WebSocket {
 
-    private let authStrategy: AuthenticationStrategy
+    private let restToken: RestToken
     private let failure: (NSError -> Void)?
-    private let success: [SpeechToTextResult] -> Void
-    private var results = [SpeechToTextResult]()
+    private let success: [TranscriptionResult] -> Void
+    private var results = [TranscriptionResult]()
     private let operations = NSOperationQueue()
     private var state = State.Disconnected
     private var retries = 0
-    private var maxRetries = 2
+    private let maxRetries = 2
+    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private static let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
 
     enum State {
         case Disconnected
@@ -51,22 +54,23 @@ class SpeechToTextWebSocket: WebSocket {
      - returns: A `SpeechToTextWebSocket` object that can communicate with Speech to Text.
      */
     init?(
-        authStrategy: AuthenticationStrategy,
-        settings: SpeechToTextSettings,
+        restToken: RestToken,
+        settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechToTextResult] -> Void)
+        success: [TranscriptionResult] -> Void)
     {
-        self.authStrategy = authStrategy
+        self.restToken = restToken
         self.failure = failure
         self.success = success
 
         operations.maxConcurrentOperationCount = 1
         operations.suspended = true
 
-        guard let url = SpeechToTextConstants.websocketsURL(settings) else {
-            let description = "Unable to construct a WebSockets connection to Speech to Text."
-            failure?(createError(SpeechToTextConstants.domain, description: description))
-            super.init(url: NSURL(string: "http://www.ibm.com")!)
+        guard let url = SpeechToTextWebSocket.websocketsURL(settings) else {
+            let failureReason = "Unable to construct a WebSockets connection to Speech to Text."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
             return nil
         }
         super.init(url: url)
@@ -76,6 +80,32 @@ class SpeechToTextWebSocket: WebSocket {
         self.onText = onTextDelegate
     }
 
+    /** Build the URL to use when connecting to Speech to Text with Websockets.
+     
+     - parameter settings: The `TranscriptionSettings` to use for the Speech to Text session.
+     - returns: An NSURL, if it can be constructed from the given settings.
+     */
+    static func websocketsURL(settings: TranscriptionSettings) -> NSURL? {
+        guard let urlComponents = NSURLComponents(string: SpeechToTextWebSocket.url) else {
+            return nil
+        }
+        
+        var urlParams = [NSURLQueryItem]()
+        if let model = settings.model {
+            urlParams.append(NSURLQueryItem(name: "model", value: model))
+        }
+        if settings.learningOptOut == true {
+            urlParams.append(NSURLQueryItem(name: "x-watson-learning-opt-out", value: "true"))
+        }
+        
+        urlComponents.queryItems = urlParams
+        guard let url = urlComponents.URL else {
+            return nil
+        }
+        
+        return url
+    }
+    
     /**
      Connect to the Speech to Text service using WebSockets.
      
@@ -160,25 +190,28 @@ class SpeechToTextWebSocket: WebSocket {
      */
     private func connectWithToken() {
         guard retries < maxRetries else {
-            let description = "Invalid HTTP upgrade. Please verify your credentials."
-            failure?(createError(SpeechToTextConstants.domain, description: description))
+            let failureReason = "Invalid HTTP upgrade. Please verify your credentials."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
             return
         }
 
         retries += 1
 
-        if let token = authStrategy.token where retries == 1 {
+        if let token = restToken.token where retries == 1 {
             headers["X-Watson-Authorization-Token"] = token
             super.connect()
         } else {
-            authStrategy.refreshToken { error in
-                guard let token = self.authStrategy.token where error == nil else {
-                    let description = "Failed to obtain an authentication token. Check credentials."
-                    let error = createError(SpeechToTextConstants.domain, description: description)
-                    self.failure?(error)
-                    return
-                }
-                self.headers["X-Watson-Authorization-Token"] = token
+            let failure = { (error: NSError) in
+                let failureReason = "Failed to obtain an authentication token. " +
+                                    "Check credentials."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                self.failure?(error)
+            }
+            restToken.refreshToken(failure) {
+                self.headers["X-Watson-Authorization-Token"] = self.restToken.token
                 super.connect()
             }
         }
@@ -230,16 +263,25 @@ class SpeechToTextWebSocket: WebSocket {
      - parameter text: The text payload from Speech to Text.
      */
     func onTextDelegate(text: String) {
-        guard let response = SpeechToTextGenericResponse.parseResponse(text) else {
-            let description = "Could not serialize a generic text response to an object."
-            failure?(createError(SpeechToTextConstants.domain, description: description))
-            return
-        }
+        do {
+            let json = try JSON(jsonString: text)
+            let state = try? json.decode(type: TranscriptionState.self)
+            let results = try? json.decode(type: TranscriptionResultWrapper.self)
+            let error = try? json.string("error")
 
-        switch response {
-        case .State(let state): onStateDelegate(state)
-        case .Results(let wrapper): onResultsDelegate(wrapper)
-        case .Error(let error): onErrorDelegate(error)
+            if let state = state {
+                onStateDelegate(state)
+            } else if let results = results {
+                onResultsDelegate(results)
+            } else if let error = error {
+                onErrorDelegate(error)
+            }
+        } catch {
+            let failureReason = "Could not serialize a generic text response to an object."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
         }
     }
 
@@ -248,7 +290,7 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter state: The state of the Speech to Text recognition request.
      */
-    private func onStateDelegate(state: SpeechToTextState) {
+    private func onStateDelegate(state: TranscriptionState) {
         if self.state == .ReceivingResults && state.state == "listening" {
             self.state = .Listening
             operations.suspended = false
@@ -259,10 +301,10 @@ class SpeechToTextWebSocket: WebSocket {
     /**
      Handle transcription results from Speech to Text.
 
-     - parameter wrapper: A `SpeechToTextResultWrapper` that encapsulates the new or updated
+     - parameter wrapper: A `TranscriptionResultWrapper` that encapsulates the new or updated
         transcriptions along with state information to update the internal `results` array.
      */
-    private func onResultsDelegate(wrapper: SpeechToTextResultWrapper) {
+    private func onResultsDelegate(wrapper: TranscriptionResultWrapper) {
         if state == .StartedRequest {
             state = .ReceivingResults
         }
@@ -287,9 +329,11 @@ class SpeechToTextWebSocket: WebSocket {
 
      - parameter error: The error that occurred.
      */
-    private func onErrorDelegate(error: SpeechToTextError) {
+    private func onErrorDelegate(error: String) {
         state = .Listening
-        let error = createError(SpeechToTextConstants.domain, description: error.error)
+        let failureReason = error
+        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        let error = NSError(domain: domain, code: 0, userInfo: userInfo)
         failure?(error)
     }
 

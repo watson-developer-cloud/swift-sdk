@@ -15,19 +15,16 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** The state of the Speech to Text service. */
-struct SpeechToTextState: Mappable {
+internal struct TranscriptionState: JSONDecodable {
 
     /// The state of the Speech to Text service.
-    var state: String!
+    internal let state: String
 
-    /// Used internally to initialize a `SpeechToTextState` from JSON.
-    init?(_ map: Map) { }
-
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        state <- map["state"]
+    /// Used internally to initialize a `TranscriptionState` from JSON.
+    internal init(json: JSON) throws {
+        state = try json.string("state")
     }
 }

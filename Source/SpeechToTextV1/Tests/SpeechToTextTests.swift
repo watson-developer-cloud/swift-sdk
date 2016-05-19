@@ -19,47 +19,44 @@ import WatsonDeveloperCloud
 
 class SpeechToTextTests: XCTestCase {
 
-    var service: SpeechToText!
-    let timeout: NSTimeInterval = 30.0
+    private var speechToText: SpeechToTextV1!
+    private let timeout: NSTimeInterval = 30.0
 
     override func setUp() {
         super.setUp()
         self.continueAfterFailure = false
-
-        // identify credentials file
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let credentialsURL = bundle.pathForResource("Credentials", ofType: "plist") else {
-            XCTFail("Unable to locate credentials file.")
-            return
-        }
-
-        // load credentials file
-        let dict = NSDictionary(contentsOfFile: credentialsURL)
-        guard let credentials = dict as? Dictionary<String, String> else {
-            XCTFail("Unable to read credentials file.")
-            return
-        }
-
-        // read SpeechToText username
-        guard let user = credentials["SpeechToTextUsername"] else {
-            XCTFail("Unable to read Speech to Text username.")
-            return
-        }
-
-        // read SpeechToText password
-        guard let password = credentials["SpeechToTextPassword"] else {
-            XCTFail("Unable to read Speech to Text password.")
-            return
-        }
-
-        // instantiate the service
-        service = SpeechToText(username: user, password: password)
+        instantiateSpeechToText()
     }
-
-    // Wait for an expectation to be fulfilled.
-    func waitForExpectation() {
+    
+    /** Instantiate Speech to Text. */
+    func instantiateSpeechToText() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard
+            let file = bundle.pathForResource("Credentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
+            let username = credentials["SpeechToTextUsername"],
+            let password = credentials["SpeechToTextPassword"]
+        else {
+            XCTFail("Unable to read credentials.")
+            return
+        }
+        speechToText = SpeechToTextV1(username: username, password: password)
+    }
+    
+    /** Fail false negatives. */
+    func failWithError(error: NSError) {
+        XCTFail("Positive test failed with error: \(error)")
+    }
+    
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Wait for expectations. */
+    func waitForExpectations() {
         waitForExpectationsWithTimeout(timeout) { error in
-            XCTAssertNil(error, "Timeout.")
+            XCTAssertNil(error, "Timeout")
         }
     }
 
@@ -91,12 +88,8 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let failure = { (error: NSError) in
-            XCTFail("An error occurred: \(error)")
-        }
-
-        let settings = SpeechToTextSettings(contentType: format)
-        service.transcribe(file, settings: settings, failure: failure) { results in
+        let settings = TranscriptionSettings(contentType: format)
+        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
@@ -105,7 +98,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
         }
-        waitForExpectation()
+        waitForExpectations()
     }
 
     // MARK: - Transcribe File, Custom Settings
@@ -136,11 +129,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let failure = { (error: NSError) in
-            XCTFail("An error occurred: \(error)")
-        }
-
-        var settings = SpeechToTextSettings(contentType: format)
+        var settings = TranscriptionSettings(contentType: format)
         settings.model = "en-US_BroadbandModel"
         settings.learningOptOut = true
         settings.continuous = true
@@ -154,7 +143,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        service.transcribe(file, settings: settings, failure: failure) { results in
+        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
                 let transcript = results.last?.alternatives.last?.transcript
@@ -163,7 +152,7 @@ class SpeechToTextTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectation()
+        waitForExpectations()
     }
 
     // MARK: - Transcribe Data, Default Settings
@@ -199,12 +188,8 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let failure = { (error: NSError) in
-            XCTFail("An error occurred: \(error)")
-        }
-
-        let settings = SpeechToTextSettings(contentType: format)
-        service.transcribe(audio, settings: settings, failure: failure) { results in
+        let settings = TranscriptionSettings(contentType: format)
+        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
@@ -213,7 +198,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
         }
-        waitForExpectation()
+        waitForExpectations()
     }
 
     // MARK: - Transcribe Data, Custom Settings
@@ -249,11 +234,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let failure = { (error: NSError) in
-            XCTFail("An error occurred: \(error)")
-        }
-
-        var settings = SpeechToTextSettings(contentType: format)
+        var settings = TranscriptionSettings(contentType: format)
         settings.model = "en-US_BroadbandModel"
         settings.learningOptOut = true
         settings.continuous = true
@@ -267,7 +248,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        service.transcribe(audio, settings: settings, failure: failure) { results in
+        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
                 let transcript = results.last?.alternatives.last?.transcript
@@ -276,7 +257,7 @@ class SpeechToTextTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectation()
+        waitForExpectations()
     }
 
     // MARK: - Transcribe Streaming
@@ -293,16 +274,16 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - Validation Functions
 
-    func validateSTTResults(results: [SpeechToTextResult], settings: SpeechToTextSettings) {
+    func validateSTTResults(results: [TranscriptionResult], settings: TranscriptionSettings) {
         for result in results {
             validateSTTResult(result, settings: settings)
         }
     }
 
-    func validateSTTResult(result: SpeechToTextResult, settings: SpeechToTextSettings) {
+    func validateSTTResult(result: TranscriptionResult, settings: TranscriptionSettings) {
 
         XCTAssertNotNil(result.final)
-        let final = result.final!
+        let final = result.final
 
         XCTAssertNotNil(result.alternatives)
         var alternativesWithConfidence = 0
@@ -351,13 +332,13 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTTranscription(
-        transcription: SpeechToTextTranscription,
+        transcription: Transcription,
         best: Bool,
         final: Bool,
-        settings: SpeechToTextSettings)
+        settings: TranscriptionSettings)
     {
         XCTAssertNotNil(transcription.transcript)
-        XCTAssertGreaterThan(transcription.transcript!.characters.count, 0)
+        XCTAssertGreaterThan(transcription.transcript.characters.count, 0)
 
         if best && final {
             XCTAssertNotNil(transcription.confidence)
@@ -392,19 +373,19 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func validateSTTWordTimestamp(timestamp: SpeechToTextWordTimestamp) {
+    func validateSTTWordTimestamp(timestamp: WordTimestamp) {
         XCTAssertGreaterThan(timestamp.word.characters.count, 0)
         XCTAssertGreaterThanOrEqual(timestamp.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(timestamp.endTime, timestamp.startTime)
     }
 
-    func validateSTTWordConfidence(word: SpeechToTextWordConfidence) {
+    func validateSTTWordConfidence(word: WordConfidence) {
         XCTAssertGreaterThan(word.word.characters.count, 0)
         XCTAssertGreaterThanOrEqual(word.confidence, 0.0)
         XCTAssertLessThanOrEqual(word.confidence, 1.0)
     }
 
-    func validateSTTKeywordResults(keyword: String, keywordResults: [SpeechToTextKeywordResult]) {
+    func validateSTTKeywordResults(keyword: String, keywordResults: [KeywordResult]) {
         XCTAssertGreaterThan(keyword.characters.count, 0)
         XCTAssertGreaterThan(keywordResults.count, 0)
         for keywordResult in keywordResults {
@@ -412,7 +393,7 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func validateSTTKeywordResult(keywordResult: SpeechToTextKeywordResult) {
+    func validateSTTKeywordResult(keywordResult: KeywordResult) {
         XCTAssertGreaterThan(keywordResult.normalizedText.characters.count, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.startTime, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.endTime, keywordResult.startTime)
@@ -420,7 +401,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertLessThanOrEqual(keywordResult.confidence, 1.0)
     }
 
-    func validateSTTWordAlternativeResults(wordAlternatives: SpeechToTextWordAlternativeResults) {
+    func validateSTTWordAlternativeResults(wordAlternatives: AlternativeResults) {
         XCTAssertGreaterThanOrEqual(wordAlternatives.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(wordAlternatives.endTime, wordAlternatives.startTime)
         XCTAssertGreaterThan(wordAlternatives.alternatives.count, 0)
@@ -429,7 +410,7 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func validateSTTWordAlternativeResult(wordAlternative: SpeechToTextWordAlternativeResult) {
+    func validateSTTWordAlternativeResult(wordAlternative: AlternativeResult) {
         XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
         XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)

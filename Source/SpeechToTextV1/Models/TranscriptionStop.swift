@@ -15,16 +15,16 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /** Signals the end of an audio transmission to Speech to Text. */
-struct SpeechToTextStop: WatsonRequestModel {
+internal struct TranscriptionStop: JSONEncodable {
 
     /// The action to perform. Must be `stop` to end the request.
     private let action = "stop"
 
-    /** Represent a `SpeechToTextStop` as a dictionary of key-value pairs. */
-    func toDictionary() -> [String : AnyObject] {
-        return ["action": action]
+    /** Serialize a `TranscriptionStop` to JSON. */
+    internal func toJSON() -> JSON {
+        return .Dictionary(["action": .String(action)])
     }
 }

@@ -15,19 +15,21 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/** An error produced by the Speech to Text service. */
-struct SpeechToTextError: Mappable {
+/** The confidence of a word in a Speech to Text transcription. */
+public struct WordConfidence: JSONDecodable {
 
-    /// A description of the error that occurred.
-    var error: String!
+    /// A particular word from the transcription.
+    public let word: String
 
-    /// Used internally to initialize a `SpeechToTextError` from JSON.
-    init?(_ map: Map) { }
+    /// The confidence of the given word, between 0 and 1.
+    public let confidence: Double
 
-    /// Used internally to serialize and deserialize JSON.
-    mutating func mapping(map: Map) {
-        error <- map["error"]
+    /// Used internally to initialize a `WordConfidence` from JSON.
+    public init(json: JSON) throws {
+        let array = try json.array()
+        word = try array[0].string()
+        confidence = try array[1].double()
     }
 }

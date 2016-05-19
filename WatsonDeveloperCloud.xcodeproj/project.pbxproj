@@ -83,6 +83,26 @@
 		7AA7AD3D1CED11A8009DD700 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7AD061CED11A0009DD700 /* sample.html */; };
 		7AA7AD3F1CED12CF009DD700 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */; };
 		7AA7AD401CED12E5009DD700 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AAA9A261CEE3026002C9564 /* AlternativeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */; };
+		7AAA9A271CEE3026002C9564 /* AlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */; };
+		7AAA9A281CEE3026002C9564 /* KeywordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A141CEE3026002C9564 /* KeywordResult.swift */; };
+		7AAA9A291CEE3026002C9564 /* Transcription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A151CEE3026002C9564 /* Transcription.swift */; };
+		7AAA9A2A1CEE3026002C9564 /* TranscriptionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A161CEE3026002C9564 /* TranscriptionResult.swift */; };
+		7AAA9A2B1CEE3026002C9564 /* TranscriptionResultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A171CEE3026002C9564 /* TranscriptionResultWrapper.swift */; };
+		7AAA9A2C1CEE3026002C9564 /* TranscriptionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A181CEE3026002C9564 /* TranscriptionSettings.swift */; };
+		7AAA9A2D1CEE3026002C9564 /* TranscriptionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A191CEE3026002C9564 /* TranscriptionState.swift */; };
+		7AAA9A2E1CEE3026002C9564 /* TranscriptionStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1A1CEE3026002C9564 /* TranscriptionStop.swift */; };
+		7AAA9A2F1CEE3026002C9564 /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */; };
+		7AAA9A301CEE3026002C9564 /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */; };
+		7AAA9A311CEE3026002C9564 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */; };
+		7AAA9A321CEE3026002C9564 /* SpeechToTextAudioStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1E1CEE3026002C9564 /* SpeechToTextAudioStreamer.swift */; };
+		7AAA9A331CEE3026002C9564 /* SpeechToTextWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1F1CEE3026002C9564 /* SpeechToTextWebSocket.swift */; };
+		7AAA9A381CEE3033002C9564 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		7AAA9A391CEE3037002C9564 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A221CEE3026002C9564 /* SpeechSample.flac */; };
+		7AAA9A3A1CEE3037002C9564 /* SpeechSample.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */; };
+		7AAA9A3B1CEE3037002C9564 /* SpeechSample.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A241CEE3026002C9564 /* SpeechSample.wav */; };
+		7AAA9A3E1CEE3059002C9564 /* RestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */; };
+		7AAA9A3F1CEE3059002C9564 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
 		7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
@@ -219,6 +239,26 @@
 		7AA7AD0E1CED11A0009DD700 /* Transformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
 		7AA7AD0F1CED11A0009DD700 /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
 		7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResult.swift; sourceTree = "<group>"; };
+		7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResults.swift; sourceTree = "<group>"; };
+		7AAA9A141CEE3026002C9564 /* KeywordResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordResult.swift; sourceTree = "<group>"; };
+		7AAA9A151CEE3026002C9564 /* Transcription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transcription.swift; sourceTree = "<group>"; };
+		7AAA9A161CEE3026002C9564 /* TranscriptionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionResult.swift; sourceTree = "<group>"; };
+		7AAA9A171CEE3026002C9564 /* TranscriptionResultWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionResultWrapper.swift; sourceTree = "<group>"; };
+		7AAA9A181CEE3026002C9564 /* TranscriptionSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionSettings.swift; sourceTree = "<group>"; };
+		7AAA9A191CEE3026002C9564 /* TranscriptionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionState.swift; sourceTree = "<group>"; };
+		7AAA9A1A1CEE3026002C9564 /* TranscriptionStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionStop.swift; sourceTree = "<group>"; };
+		7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
+		7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
+		7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
+		7AAA9A1E1CEE3026002C9564 /* SpeechToTextAudioStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextAudioStreamer.swift; sourceTree = "<group>"; };
+		7AAA9A1F1CEE3026002C9564 /* SpeechToTextWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextWebSocket.swift; sourceTree = "<group>"; };
+		7AAA9A221CEE3026002C9564 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
+		7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
+		7AAA9A241CEE3026002C9564 /* SpeechSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample.wav; sourceTree = "<group>"; };
+		7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
+		7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestExtensions.swift; sourceTree = "<group>"; };
+		7AAA9A3D1CEE3059002C9564 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* DialogConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversationResponse.swift; sourceTree = "<group>"; };
@@ -302,6 +342,7 @@
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
+				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
@@ -343,8 +384,10 @@
 		7A61174E1CB5988B009A4DA1 /* RestKit */ = {
 			isa = PBXGroup;
 			children = (
+				7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
+				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
 			);
 			name = RestKit;
 			path = Source/RestKit;
@@ -488,6 +531,56 @@
 				7AA7AD0F1CED11A0009DD700 /* WatsonCoreConstants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A111CEE3026002C9564 /* Models */,
+				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
+				7AAA9A1E1CEE3026002C9564 /* SpeechToTextAudioStreamer.swift */,
+				7AAA9A1F1CEE3026002C9564 /* SpeechToTextWebSocket.swift */,
+				7AAA9A201CEE3026002C9564 /* Tests */,
+			);
+			name = SpeechToTextV1;
+			path = Source/SpeechToTextV1;
+			sourceTree = SOURCE_ROOT;
+		};
+		7AAA9A111CEE3026002C9564 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */,
+				7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */,
+				7AAA9A141CEE3026002C9564 /* KeywordResult.swift */,
+				7AAA9A151CEE3026002C9564 /* Transcription.swift */,
+				7AAA9A161CEE3026002C9564 /* TranscriptionResult.swift */,
+				7AAA9A171CEE3026002C9564 /* TranscriptionResultWrapper.swift */,
+				7AAA9A181CEE3026002C9564 /* TranscriptionSettings.swift */,
+				7AAA9A191CEE3026002C9564 /* TranscriptionState.swift */,
+				7AAA9A1A1CEE3026002C9564 /* TranscriptionStop.swift */,
+				7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */,
+				7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AAA9A201CEE3026002C9564 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A211CEE3026002C9564 /* Audio Files */,
+				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		7AAA9A211CEE3026002C9564 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A221CEE3026002C9564 /* SpeechSample.flac */,
+				7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */,
+				7AAA9A241CEE3026002C9564 /* SpeechSample.wav */,
+			);
+			path = "Audio Files";
 			sourceTree = "<group>";
 		};
 		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
@@ -658,7 +751,10 @@
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				12A248591CD3248A00C63CF1 /* training_meta.txt in Resources */,
+				7AAA9A391CEE3037002C9564 /* SpeechSample.flac in Resources */,
+				7AAA9A3A1CEE3037002C9564 /* SpeechSample.ogg in Resources */,
 				7A7150151CC6D26E00DFEBB0 /* pizza_sample_invalid.xml in Resources */,
+				7AAA9A3B1CEE3037002C9564 /* SpeechSample.wav in Resources */,
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
 				12B07D2D1CDD46A300B20B38 /* trained_meta.txt in Resources */,
 				12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */,
@@ -683,11 +779,16 @@
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7AA7AD261CED11A0009DD700 /* Microformat.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
+				7AAA9A311CEE3026002C9564 /* SpeechToText.swift in Sources */,
 				7AA7AD2C1CED11A0009DD700 /* Sentiment.swift in Sources */,
+				7AAA9A331CEE3026002C9564 /* SpeechToTextWebSocket.swift in Sources */,
+				7AAA9A321CEE3026002C9564 /* SpeechToTextAudioStreamer.swift in Sources */,
 				7AA7AD3A1CED11A0009DD700 /* WatsonCoreConstants.swift in Sources */,
 				7AA7AD2D1CED11A0009DD700 /* SentimentResponse.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
 				7AA7AD1B1CED11A0009DD700 /* DocumentSentiment.swift in Sources */,
+				7AAA9A3E1CEE3059002C9564 /* RestExtensions.swift in Sources */,
+				7AAA9A281CEE3026002C9564 /* KeywordResult.swift in Sources */,
 				7AA7AD161CED11A0009DD700 /* CombinedResults.swift in Sources */,
 				7AA7AD281CED11A0009DD700 /* PublicationDate.swift in Sources */,
 				7AA7AD271CED11A0009DD700 /* Microformats.swift in Sources */,
@@ -698,26 +799,32 @@
 				7AA7AD1E1CED11A0009DD700 /* Entities.swift in Sources */,
 				7AEB13371CBF91C000101884 /* DialogFormat.swift in Sources */,
 				7AA7AD341CED11A0009DD700 /* AlchemyService.swift in Sources */,
+				7AAA9A2C1CEE3026002C9564 /* TranscriptionSettings.swift in Sources */,
 				7AA7AD151CED11A0009DD700 /* Authors.swift in Sources */,
 				7AA7AD231CED11A0009DD700 /* Keywords.swift in Sources */,
+				7AAA9A2E1CEE3026002C9564 /* TranscriptionStop.swift in Sources */,
 				7AA7AD141CED11A0009DD700 /* AlchemyLanguageGenericModel.swift in Sources */,
 				12B07D111CD791A300B20B38 /* Classification.swift in Sources */,
 				7AA7AD361CED11A0009DD700 /* AuthenticationStrategy.swift in Sources */,
+				7AAA9A3F1CEE3059002C9564 /* RestToken.swift in Sources */,
 				7AA7AD181CED11A0009DD700 /* ConceptResponse.swift in Sources */,
 				7AEB13351CBF8D0300101884 /* Dialog.swift in Sources */,
 				7A6117521CB5988B009A4DA1 /* RestSerialization.swift in Sources */,
 				B1F21DFB1CE2461800393146 /* ElementTone.swift in Sources */,
 				7AEB13361CBF918B00101884 /* DialogConversationResponse.swift in Sources */,
 				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
+				7AAA9A271CEE3026002C9564 /* AlternativeResults.swift in Sources */,
 				7AA7AD211CED11A0009DD700 /* Feeds.swift in Sources */,
 				B1F21DFE1CE2461800393146 /* ToneCategory.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
 				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
 				B1F21DFF1CE2461800393146 /* ToneScore.swift in Sources */,
+				7AAA9A301CEE3026002C9564 /* WordTimestamp.swift in Sources */,
 				7AA7AD2A1CED11A0009DD700 /* SAORelation.swift in Sources */,
 				7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */,
 				7AA7AD201CED11A0009DD700 /* Feed.swift in Sources */,
 				7AA7AD111CED11A0009DD700 /* AlchemyLanguageConstants.swift in Sources */,
+				7AAA9A2B1CEE3026002C9564 /* TranscriptionResultWrapper.swift in Sources */,
 				7AA7AD351CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift in Sources */,
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7AA7AD1C1CED11A0009DD700 /* DocumentText.swift in Sources */,
@@ -731,9 +838,11 @@
 				7AA7AD101CED11A0009DD700 /* AlchemyLanguage.swift in Sources */,
 				7AA7AD171CED11A0009DD700 /* Concept.swift in Sources */,
 				7AA7AD2E1CED11A0009DD700 /* Taxonomies.swift in Sources */,
+				7AAA9A2A1CEE3026002C9564 /* TranscriptionResult.swift in Sources */,
 				7A6117621CB598D9009A4DA1 /* PersonalityInsights.swift in Sources */,
 				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
 				7AA7AD1A1CED11A0009DD700 /* DocumentAuthors.swift in Sources */,
+				7AAA9A261CEE3026002C9564 /* AlternativeResult.swift in Sources */,
 				7AA7AD331CED11A0009DD700 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7AA7AD251CED11A0009DD700 /* Language.swift in Sources */,
 				7AA7AD131CED11A0009DD700 /* AlchemyGenericModel.swift in Sources */,
@@ -742,10 +851,13 @@
 				7AA7AD191CED11A0009DD700 /* DisambiguatedLinks.swift in Sources */,
 				7AA7AD241CED11A0009DD700 /* KnowledgeGraph.swift in Sources */,
 				7AA7AD371CED11A0009DD700 /* CoreResponse.swift in Sources */,
+				7AAA9A2D1CEE3026002C9564 /* TranscriptionState.swift in Sources */,
 				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
 				7AA7AD1D1CED11A0009DD700 /* DocumentTitle.swift in Sources */,
 				12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */,
+				7AAA9A2F1CEE3026002C9564 /* WordConfidence.swift in Sources */,
 				7AA7AD291CED11A0009DD700 /* Quotation.swift in Sources */,
+				7AAA9A291CEE3026002C9564 /* Transcription.swift in Sources */,
 				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 				B1F21DFD1CE2461800393146 /* ToneAnalysis.swift in Sources */,
@@ -761,6 +873,7 @@
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7AA7AD3B1CED11A8009DD700 /* AlchemyLanguageTests.swift in Sources */,
 				12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */,
+				7AAA9A381CEE3033002C9564 /* SpeechToTextTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -50,7 +50,7 @@ public struct ImageWithWords: JSONDecodable {
     public let image: String?
     
     /// Information about an error that occurred while processing the given image.
-    public let error: ErrorInfo? // TODO: re-do this comment across the analagous models...
+    public let error: ErrorInfo?
     
     /// The text recognized in the image, including recognized formatting (e.g. newlines).
     public let text: String

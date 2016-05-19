@@ -37,8 +37,6 @@ public class AlchemyVision {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
-    // TODO: dataToError
 
     /**
      Perform face recognition on an uploaded image. For each face detected, the service returns
@@ -97,9 +95,9 @@ public class AlchemyVision {
      is detected).
 
      - parameter url: The URL at which to perform face recognition.
-     - knowledgeGraph: Should additional metadata be provided for detected celebrities?
-     - failure: A function executed if an error occurs.
-     - success: A function executed with information about the detected faces.
+     - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
         url url: String,

@@ -137,7 +137,6 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageFaceTags(url: obamaURL, knowledgeGraph: true, failure: failWithError) { faceTags in
-            // verify the knowledgegraph response
             expectation.fulfill()
         }
         waitForExpectations()

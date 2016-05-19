@@ -14,17 +14,8 @@
  * limitations under the License.
  **/
 
-import Foundation
-import Freddy
-    
-/** A pronunciation of text based on the voice and phoneme. */
-public struct Pronunciation: JSONDecodable {
-    
-    /// Pronunciation of the requested text in the specified voice and format.
-    public let pronunciation: String
-    
-    /// Used internally to initialize a `Pronunciation` model from JSON.
-    public init(json: JSON) throws {
-        pronunciation = try json.string("pronunciation")
-    }
+/** The phoneme set for a pronunciation. */
+public enum PhonemeFormat: String {
+    case ipa = "ipa"
+    case spr = "spr"
 }

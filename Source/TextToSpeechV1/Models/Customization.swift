@@ -16,38 +16,42 @@
 
 import Foundation
 import Freddy
-
-extension TextToSpeechV1 {
     
-    /**
-     *  The customized values related to a particular voice object
-     */
-    public struct Customization: JSONDecodable {
-        
-        /// The GUID of the custom voice model.
-        public let customizationID:String
-        /// The name of the custom voice model.
-        public let name:String
-        /// The language of the custom voice model
-        public let language:String
-        /// GUID of the service credentials for the owner of the custom voice model.
-        public let owner:String
-        /// The UNIX timestamp that indicates when the custom voice model was created. The timestamp is a count of seconds since the UNIX Epoch of January 1, 1970 Coordinated Universal Time (UTC).
-        public let created:Int
-        /// The UNIX timestamp that indicates when the custom voice model was last modified. Equals created when a new voice model is first added but has yet to be changed.
-        public let lastModified:Int
-        /// A description of the custom voice model.
-        public let description:String
-        
-        /// Used internally to initialize a `Customization` model from JSON.
-        public init(json: JSON) throws {
-            customizationID = try json.string("customization_id")
-            name = try json.string("name")
-            language = try json.string("language")
-            owner = try json.string("owner")
-            created = try json.int("created")
-            lastModified = try json.int("last_modified")
-            description = try json.string("description")
-        }
+/** A custom voice model supported by the Text to Speech service. */
+public struct Customization: JSONDecodable {
+    
+    /// The GUID of the custom voice model.
+    public let customizationID: String
+    
+    /// The name of the custom voice model.
+    public let name: String
+    
+    /// The language of the custom voice model
+    public let language: String
+    
+    /// GUID of the service credentials for the owner of the custom voice model.
+    public let owner: String
+    
+    /// The UNIX timestamp that indicates when the custom voice model was created.
+    /// The timestamp is a count of seconds since the UNIX Epoch of January 1, 1970
+    /// Coordinated Universal Time (UTC).
+    public let created: Int
+    
+    /// The UNIX timestamp that indicates when the custom voice model was last modified.
+    /// Equals created when a new voice model is first added but has yet to be changed.
+    public let lastModified: Int
+    
+    /// A description of the custom voice model.
+    public let description: String
+    
+    /// Used internally to initialize a `Customization` model from JSON.
+    public init(json: JSON) throws {
+        customizationID = try json.string("customization_id")
+        name = try json.string("name")
+        language = try json.string("language")
+        owner = try json.string("owner")
+        created = try json.int("created")
+        lastModified = try json.int("last_modified")
+        description = try json.string("description")
     }
 }

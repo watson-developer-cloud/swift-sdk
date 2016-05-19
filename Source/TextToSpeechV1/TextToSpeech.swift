@@ -19,12 +19,12 @@ import Alamofire
 import Freddy
 
 /**
- The IBM® Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to
+ The Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to
  synthesize text into natural-sounding speech in a variety of languages, accents, and voices. The
- service supports at least one male or female voice, sometimes both, for each language. The audio is
- streamed back to the client with minimal delay.
+ service supports at least one male or female voice, sometimes both, for each language. The audio
+ is streamed back to the client with minimal delay.
 */
-public class TextToSpeechV1 {
+public class TextToSpeech {
     
     private let username: String
     private let password: String
@@ -32,66 +32,25 @@ public class TextToSpeechV1 {
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
     private let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
 
-    public enum DefinedVoiceType: String, CustomStringConvertible {
-        case DE_GIRGIT      = "de-DE_BirgitVoice"
-        case DE_DIETER      = "de-DE_DieterVoice"
-        case GB_KATE        = "en-GB_KateVoice"
-        case ES_Enrique     = "es-ES_EnriqueVoice"
-        case US_Allison     = "en-US_AllisonVoice"
-        case US_Lisa        = "en-US_LisaVoice"
-        case US_Michael     = "en-US_MichaelVoice"
-        case ES_Laura       = "es-ES_LauraVoice"
-        case US_Sofia       = "es-US_SofiaVoice"
-        case FR_Renee       = "fr-FR_ReneeVoice"
-        case IT_Francesca   = "it-IT_FrancescaVoice"
-        case JP_Emi         = "ja-JP_EmiVoice"
-        case BR_Isabela     = "pt-BR_IsabelaVoice"
-        
-        public static let allValues = [DE_GIRGIT, DE_DIETER, GB_KATE, ES_Enrique, US_Allison, US_Lisa, US_Michael,
-                                       ES_Laura, US_Sofia, FR_Renee, IT_Francesca, JP_Emi, BR_Isabela]
-        
-        public var description : String {
-            get {
-                return self.rawValue
-            }
-        }
-    }
-    
-    public enum VoiceType {
-        case defined(DefinedVoiceType)
-        case custom(String)
-    }
-    
-    public enum PhonemeFormat: String {
-        case ipa = "ipa"
-        case spr = "spr"
-    }
-    
-    // TODO: implement using other formats
-    public enum AcceptFormat: String, CustomStringConvertible {
-        case ogg  = "audio/ogg; codecs=opus"
-        case wav  = "audio/wav"
-        case flac = "audio/flac"
-        public var description : String {
-            get {
-                return self.rawValue
-            }
-        }
-    }
-    
     /**
-     Initializes the Watson Text to Speech Service.
+     Create a `TextToSpeech` object.
      
-     - parameter username:    The username credential
-     - parameter password:    The password credential
-     - parameter versionDate: The release date of the version you wish to use of the service
-     in YYYY-MM-DD format
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter versionDate: The release date of the version of the API to use. Specify the
+            date in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
     
+    /**
+     If the given data represents an error returned by the Text to Speech service, then return
+     an NSError object with information about the error that occured. Otherwise, return nil.
+ 
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -109,15 +68,15 @@ public class TextToSpeechV1 {
     }
     
     /**
-     Retrieves an array of voices that are avaialable
+     Retrieve information about all available voices.
     
     - parameter failure: A function executed if an error occurs.
-    - parameter success: A function executed with an array of available voice objects.
+    - parameter success: A function executed with the available voices.
      */
     public func getVoices(
         failure: (NSError -> Void)? = nil,
-        success: [Voice] -> Void) {
-        
+        success: [Voice] -> Void)
+    {
         // construct REST request
         let request = RestRequest(
             method: .GET,
@@ -138,25 +97,28 @@ public class TextToSpeechV1 {
     }
     
     /**
-     Lists information about the voice specified with the voice path parameter. Specify the 
-     customization_id query parameter to obtain information for that custom voice model of the 
-     specified voice. Use the /v1/voices method to see a list of all available voices.
+     Get information about the given voice.
      
-     - parameter voice: The name of the voice. Use this value as the voice identifier
-     - parameter customizationID: GUID of the custom voice
+     Specify a `customizationID` to obtain information for that custom voice model of the specified
+     voice. To see information about all available voices, use the `getVoices()` method.
+     
+     - parameter voice: The voice about which information is to be returned.
+     - parameter customizationID: The GUID of a custom voice model about which information is to
+            be returned. You must make the request with the service credentials of the model's
+            owner. Omit the parameter to see information about the voice with no customization.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a Voice object found based on input criteria.
+     - parameter success: A function executed with information about the given voice.
      */
     public func getVoice(
         voice:String,
         customizationID: String? = nil,
         failure: (NSError -> Void)? = nil,
-        success: Voice -> Void) {
-        
+        success: Voice -> Void)
+    {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         if let customizationID = customizationID {
-            let queryParameter = NSURLQueryItem(name: "customization_id", value: "\(customizationID)")
+            let queryParameter = NSURLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
         
@@ -181,46 +143,37 @@ public class TextToSpeechV1 {
     }
     
     /**
-     Returns the phonetic pronunciation for the word specified by the text query parameter. To get the 
-     pronunciation in the phoneme set for a language other than that of the default voice, use the voice 
-     query parameter. To get the pronunciation in IBM SPR format rather than the default IPA format, 
-     use the format query parameter.
+     Get the phonetic pronunciation for the given word.
      
-     - parameter text:      The word for which the pronunciation is requested
-     - parameter voiceType: Specify a voice to obtain the pronunciation for the specified word in 
-                            the language of that voice. Omit the parameter to obtain the pronunciation 
-                            in the language of the default voice. Retrieve available voices with the 
-                            GET /v1/voices method.
-     - parameter format:    Specify the phoneme set in which to return the pronunciation. Omit the 
-                            parameter to obtain the pronunciation in the default format.
-     - parameter failure:   A function executed if an error occurs.
-     - parameter success:   A function executed with a Pronunciation object found based on input criteria.
+     You can request the pronunciation for a specific format. You can also request the pronunciation
+     for a specific voice to see the default translation of the language of that voice.
+     
+     - parameter text: The word for which the pronunciation is requested
+     - parameter voice: The voice in which the pronunciation for the specified word is to be
+            returned. Specify a voice to obtain the pronunciation for the specified word in
+            the language of that voice. Omit the parameter to obtain the pronunciation in the
+            language of the default voice. Retrieve available voices with the `getVoices()` function.
+     - parameter format: Specify the phoneme set in which to return the pronunciation. Omit the
+            parameter to obtain the pronunciation in the default format.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a Pronunciation object found based on input
+            criteria.
      */
     public func getPronunciation(
-        text:String,
-        voiceType:TextToSpeechV1.VoiceType? = nil,
-        format: PhonemeFormat? = nil,
+        text: String,
+        voice: SynthesisVoice? = nil,
+        phonemeFormat: PhonemeFormat? = nil,
         failure: (NSError -> Void)? = nil,
-        success: Pronunciation -> Void) {
-        
-        // voice to use in the query params
-        var voice:String
-        
+        success: Pronunciation -> Void)
+    {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        
-        let queryParameter = NSURLQueryItem(name: "text", value: "\(text)")
-        queryParameters.append(queryParameter)
-        
-        if let voiceType = voiceType {
-            voice = getVoiceString(voiceType)
-            let queryParameter = NSURLQueryItem(name: "voice", value: "\(voice)")
-            queryParameters.append(queryParameter)
+        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        if let voice = voice {
+            queryParameters.append(NSURLQueryItem(name: "voice", value: voice.description()))
         }
-        
-        if let format = format {
-            let queryParameter = NSURLQueryItem(name: "format", value: "\(format)")
-            queryParameters.append(queryParameter)
+        if let phonemeFormat = phonemeFormat {
+            queryParameters.append(NSURLQueryItem(name: "format", value: phonemeFormat.rawValue))
         }
         
         // construct REST request
@@ -243,46 +196,43 @@ public class TextToSpeechV1 {
         }
     }
     
+    /**
+     Synthesize text to spoken audio.
+ 
+     - parameter text: The text to be synthesized. Can be plain text or a subset of SSML.
+     - parameter voice: The voice to be used for synthesis.
+     - parameter customizationID: The GUID of a custom voice model to be used for the synthesis.
+            If you specify a custom voice model, it is guaranteed to work only if it matches the
+            language of the indicated voice. You must make the request with the service credentials
+            of the model's owner. Omit the parameter to use the specified voice with no
+            customization.
+     - parameter audioFormat: The audio format in which the synthesized text should be returned.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the spoken audio.
+     */
     public func synthesize(
-        text:String,
-        accept:AcceptFormat,
-        voiceType:TextToSpeechV1.VoiceType? = nil,
-        customizationID:String? = nil,
-        format: PhonemeFormat? = nil,
+        text: String,
+        voice: SynthesisVoice? = nil,
+        customizationID: String? = nil,
+        audioFormat: AudioFormat = .WAV,
         failure: (NSError -> Void)? = nil,
-        success: NSData -> Void) {
-        
-        // voice to use in the query params
-        var voice:String
-        
+        success: NSData -> Void)
+    {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        
-        let queryParameter = NSURLQueryItem(name: "text", value: "\(text)")
-
-        queryParameters.append(queryParameter)
-        
-        if let voiceType = voiceType {
-            voice = getVoiceString(voiceType)
-            let queryParameter = NSURLQueryItem(name: "voice", value: "\(voice)")
-            queryParameters.append(queryParameter)
+        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        if let voice = voice {
+            queryParameters.append(NSURLQueryItem(name: "voice", value: voice.description()))
         }
-        
         if let customizationID = customizationID {
-            let queryParameter = NSURLQueryItem(name: "customization_id", value: "\(customizationID)")
-            queryParameters.append(queryParameter)
-        }
-        
-        if let format = format {
-            let queryParameter = NSURLQueryItem(name: "format", value: "\(format)")
-            queryParameters.append(queryParameter)
+            queryParameters.append(NSURLQueryItem(name: "customization_id", value: customizationID))
         }
 
         // construct REST request
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/synthesize",
-            acceptType: accept.description,
+            acceptType: audioFormat.rawValue,
             queryParameters: queryParameters
         )
         
@@ -296,108 +246,27 @@ public class TextToSpeechV1 {
                     switch self.dataToError(data) {
                     case .Some(let error): failure?(error)
                     case .None:
-                        let wav = NSMutableData(data: data)
-                        guard TextToSpeechV1.isWAVFile(wav) else {
-                            let failureReason = "Returned audio is in an unexpected format."
-                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                            failure?(error)
-                            return
+                        if audioFormat == .WAV {
+                            // repair the WAV header
+                            let wav = NSMutableData(data: data)
+                            guard TextToSpeech.isWAVFile(wav) else {
+                                let failureReason = "Returned audio is in an unexpected format."
+                                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                                failure?(error)
+                                return
+                            }
+                            TextToSpeech.repairWAVHeader(wav)
+                            success(wav)
+                        } else {
+                            success(data)
                         }
-                        TextToSpeechV1.repairWAVHeader(wav)
-                        success(wav)
                     }
                 case .Failure(let error):
                     failure?(error)
                 }
         }
         
-    }
-    
-    private func getVoiceString(voiceType: VoiceType) -> String {
-        
-        var voice = ""
-        
-        // get the correct voice string
-        switch voiceType {
-        case VoiceType.defined(let definedVoice):
-            voice = definedVoice.description
-        case VoiceType.custom(let customVoice):
-            voice = customVoice
-        }
-        return voice
-    }
-    
-    /**
-     This helper method converts a PCM of UInt16s produced by the Opus codec
-     to a WAVE file by prepending a WAVE header.
-     
-     - parameter data: Contains PCM (pulse coded modulation) raw data for audio
-     - returns:        WAVE formatted header prepended to the data
-     **/
-    private func addWaveHeader(data: NSData) -> NSData {
-        
-        let headerSize: Int = 44
-        let totalAudioLen: Int = data.length
-        let totalDataLen: Int = totalAudioLen + headerSize - 8
-        let longSampleRate: Int = 48000
-        let channels = 1
-        let byteRate = 16 * 11025 * channels / 8
-        
-        let byteArray = [UInt8]("RIFF".utf8)
-        let byteArray2 = [UInt8]("WAVEfmt ".utf8)
-        let byteArray3 = [UInt8]("data".utf8)
-        var header : [UInt8] = [UInt8](count: 44, repeatedValue: 0)
-        
-        header[0] = byteArray[0]
-        header[1] = byteArray[1]
-        header[2] = byteArray[2]
-        header[3] = byteArray[3]
-        header[4] = (UInt8) (totalDataLen & 0xff)
-        header[5] = (UInt8) ((totalDataLen >> 8) & 0xff)
-        header[6] = (UInt8) ((totalDataLen >> 16) & 0xff)
-        header[7] = (UInt8) ((totalDataLen >> 24) & 0xff)
-        header[8] = byteArray2[0]
-        header[9] = byteArray2[1]
-        header[10] = byteArray2[2]
-        header[11] = byteArray2[3]
-        header[12] = byteArray2[4]
-        header[13] = byteArray2[5]
-        header[14] = byteArray2[6]
-        header[15] = byteArray2[7]
-        header[16] = 16
-        header[17] = 0
-        header[18] = 0
-        header[19] = 0
-        header[20] = 1
-        header[21] = 0
-        header[22] = (UInt8) (channels)
-        header[23] = 0
-        header[24] = (UInt8) (longSampleRate & 0xff)
-        header[25] = (UInt8) ((longSampleRate >> 8) & 0xff)
-        header[26] = (UInt8) ((longSampleRate >> 16) & 0xff)
-        header[27] = (UInt8) ((longSampleRate >> 24) & 0xff)
-        header[28] = (UInt8) (byteRate & 0xff)
-        header[29] = (UInt8) (byteRate >> 8 & 0xff)
-        header[30] = (UInt8) (byteRate >> 16 & 0xff)
-        header[31] = (UInt8) (byteRate >> 24 & 0xff)
-        header[32] = (UInt8) (2 * 8 / 8)
-        header[33] = 0
-        header[34] = 16 // bits per sample
-        header[35] = 0
-        header[36] = byteArray3[0]
-        header[37] = byteArray3[1]
-        header[38] = byteArray3[2]
-        header[39] = byteArray3[3]
-        header[40] = (UInt8) (totalAudioLen & 0xff)
-        header[41] = (UInt8) (totalAudioLen >> 8 & 0xff)
-        header[42] = (UInt8) (totalAudioLen >> 16 & 0xff)
-        header[43] = (UInt8) (totalAudioLen >> 24 & 0xff)
-        
-        let newWavData = NSMutableData(bytes: header, length: 44)
-        newWavData.appendData(data)
-        
-        return newWavData
     }
     
     /**
@@ -408,7 +277,7 @@ public class TextToSpeechV1 {
      - parameter length: The length of the string (without a null-terminating character).
      
      - returns: A String initialized by converting the given big-endian byte buffer into
-     Unicode characters using a UTF-8 encoding.
+            Unicode characters using a UTF-8 encoding.
      */
     private static func dataToUTF8String(data: NSData, offset: Int, length: Int) -> String? {
         let range = NSMakeRange(offset, length)
@@ -423,7 +292,7 @@ public class TextToSpeechV1 {
      - parameter offset: The location within the byte buffer where the integer begins.
      
      - returns: An Int initialized by converting the given little-endian byte buffer into
-     an unsigned 32-bit integer.
+            an unsigned 32-bit integer.
      */
     private static func dataToUInt32(data: NSData, offset: Int) -> Int {
         var num: UInt32 = 0
@@ -468,7 +337,7 @@ public class TextToSpeechV1 {
      Repair the WAV header for a WAV-formatted audio file produced by Watson Text to Speech.
      
      - parameter data: The WAV-formatted audio file produced by Watson Text to Speech. The
-     byte data will be analyzed and repaired in-place.
+            byte data will be analyzed and repaired in-place.
      */
     private static func repairWAVHeader(data: NSMutableData) {
         

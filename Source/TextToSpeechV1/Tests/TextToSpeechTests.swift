@@ -20,11 +20,14 @@ import AVFoundation
 
 class TextToSpeechTests: XCTestCase {
     
-    private var textToSpeech: TextToSpeechV1!
-    private let timeout: NSTimeInterval = 180
+    private var textToSpeech: TextToSpeech!
+    private let timeout: NSTimeInterval = 30.0
     private let playAudio = true
     private let text = "Swift at IBM is awesome so you should try it!"
-    private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\"><say-as interpret-as=\"letters\">Hello</say-as></speak>"
+    private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
+                             "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
+    
+    public static let allSynthesisVoices: [SynthesisVoice] = [] // TODO
     
     // MARK: - Test Configuration
     
@@ -34,7 +37,7 @@ class TextToSpeechTests: XCTestCase {
         instantiateTextToSpeech()
     }
     
-    /** Instantiate Natural Langauge Classifier instance. */
+    /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
         let bundle = NSBundle(forClass: self.dynamicType)
         guard
@@ -46,7 +49,7 @@ class TextToSpeechTests: XCTestCase {
                 XCTFail("Unable to read credentials.")
                 return
         }
-        textToSpeech = TextToSpeechV1(username: username, password: password)
+        textToSpeech = TextToSpeech(username: username, password: password)
     }
     
     /** Fail false negatives. */
@@ -66,12 +69,53 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
+    /** Retrieve information about all available voices. */
+    func testGetVoices() {
+        let description = "Retrieve information about all available voices."
+        let expectation = expectationWithDescription(description)
+        
+        textToSpeech.getVoices(failWithError) { voices in
+            XCTAssertGreaterThanOrEqual(voices.count, 8)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Helper Functions
     
     /** Gets all of the voices available from service */
-    private func getVoices() -> [TextToSpeechV1.Voice]? {
+    private func getVoices() -> [Voice]? {
         let description = "Get all voices."
         let expectation = expectationWithDescription(description)
-        var voiceList: [TextToSpeechV1.Voice]?
+        var voiceList: [Voice]?
         
         textToSpeech.getVoices(failWithError) { voices in
             voiceList = voices
@@ -83,10 +127,10 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /** Get a voice by a voice name. */
-    private func getVoice(voiceName: String, customizationID: String? = nil) -> TextToSpeechV1.Voice? {
+    private func getVoice(voiceName: String, customizationID: String? = nil) -> Voice? {
         let description = "Get a voice."
         let expectation = expectationWithDescription(description)
-        var voice: TextToSpeechV1.Voice?
+        var voice: Voice?
         
         textToSpeech.getVoice(voiceName, customizationID: customizationID, failure: failWithError) { voiceInstance in
             voice = voiceInstance
@@ -99,11 +143,11 @@ class TextToSpeechTests: XCTestCase {
     /** Get a pronunciation by a voice type name. */
     private func getPronunciation(text:String,
                                   voiceType: TextToSpeechV1.VoiceType? = nil,
-                                  format: TextToSpeechV1.PhonemeFormat? = nil) -> TextToSpeechV1.Pronunciation? {
+                                  format: TextToSpeechV1.PhonemeFormat? = nil) -> Pronunciation? {
         
         let description = "Get pronunciation."
         let expectation = expectationWithDescription(description)
-        var pronunciation: TextToSpeechV1.Pronunciation?
+        var pronunciation: Pronunciation?
         
         textToSpeech.getPronunciation(text, voiceType: voiceType, format: format, failure: failWithError) { pronunciationInstance in
             pronunciation = pronunciationInstance
@@ -114,22 +158,32 @@ class TextToSpeechTests: XCTestCase {
     }
     
     /** Get a synthesize some text with given voice type */
-    func synthesize(text:String,
-                    accept:TextToSpeechV1.AcceptFormat,
-                    voiceType: TextToSpeechV1.VoiceType? = nil,
-                    customizationID: String? = nil,
-                    format: TextToSpeechV1.PhonemeFormat? = nil) -> NSData? {
-        
+    func synthesize(
+        text:String,
+        accept:TextToSpeechV1.AcceptFormat,
+        voiceType: TextToSpeechV1.VoiceType? = nil,
+        customizationID: String? = nil,
+        format: TextToSpeechV1.PhonemeFormat? = nil)
+        -> NSData?
+    {
         let description = "Synthesize"
         let expectation = expectationWithDescription(description)
         var audioData: NSData?
         
-        textToSpeech.synthesize(text, accept: accept, voiceType: voiceType, customizationID: customizationID, format: format, failure: failWithError ) { value in
+        textToSpeech.synthesize(
+            text,
+            accept: accept,
+            voiceType: voiceType,
+            customizationID: customizationID,
+            format: format,
+            failure: failWithError)
+        {
+            value in
             audioData = value
             expectation.fulfill()
         }
-
         waitForExpectations()
+        
         return audioData
     }
     

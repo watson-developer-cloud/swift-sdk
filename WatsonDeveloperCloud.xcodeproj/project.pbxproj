@@ -119,6 +119,14 @@
 		7AAA9A701CEE609C002C9564 /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A571CEE6089002C9564 /* obama.jpg */; };
 		7AAA9A711CEE609C002C9564 /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A581CEE6089002C9564 /* sign.jpg */; };
 		7AAA9A721CEE609F002C9564 /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A591CEE6089002C9564 /* VisualRecognitionTests.swift */; };
+		7AAA9A7E1CEE878D002C9564 /* AudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A751CEE878D002C9564 /* AudioFormat.swift */; };
+		7AAA9A7F1CEE878D002C9564 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A761CEE878D002C9564 /* Customization.swift */; };
+		7AAA9A801CEE878D002C9564 /* PhonemeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */; };
+		7AAA9A811CEE878D002C9564 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A781CEE878D002C9564 /* Pronunciation.swift */; };
+		7AAA9A821CEE878D002C9564 /* SynthesisVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */; };
+		7AAA9A831CEE878D002C9564 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7A1CEE878D002C9564 /* Voice.swift */; };
+		7AAA9A851CEE878D002C9564 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */; };
+		7AAA9A861CEE8798002C9564 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */; };
 		7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
 		7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
@@ -291,6 +299,14 @@
 		7AAA9A581CEE6089002C9564 /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAA9A591CEE6089002C9564 /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTests.swift; sourceTree = "<group>"; };
 		7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognition.swift; sourceTree = "<group>"; };
+		7AAA9A751CEE878D002C9564 /* AudioFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFormat.swift; sourceTree = "<group>"; };
+		7AAA9A761CEE878D002C9564 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeFormat.swift; sourceTree = "<group>"; };
+		7AAA9A781CEE878D002C9564 /* Pronunciation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
+		7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthesisVoice.swift; sourceTree = "<group>"; };
+		7AAA9A7A1CEE878D002C9564 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
+		7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
+		7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* DialogConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversationResponse.swift; sourceTree = "<group>"; };
@@ -375,6 +391,7 @@
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
+				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
@@ -672,6 +689,38 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A741CEE878D002C9564 /* Models */,
+				7AAA9A7B1CEE878D002C9564 /* Tests */,
+				7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */,
+			);
+			name = TextToSpeechV1;
+			path = Source/TextToSpeechV1;
+			sourceTree = SOURCE_ROOT;
+		};
+		7AAA9A741CEE878D002C9564 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A751CEE878D002C9564 /* AudioFormat.swift */,
+				7AAA9A761CEE878D002C9564 /* Customization.swift */,
+				7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */,
+				7AAA9A781CEE878D002C9564 /* Pronunciation.swift */,
+				7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */,
+				7AAA9A7A1CEE878D002C9564 /* Voice.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AAA9A7B1CEE878D002C9564 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,8 +924,10 @@
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7AA7AD261CED11A0009DD700 /* Microformat.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
+				7AAA9A801CEE878D002C9564 /* PhonemeFormat.swift in Sources */,
 				7AAA9A311CEE3026002C9564 /* SpeechToText.swift in Sources */,
 				7AA7AD2C1CED11A0009DD700 /* Sentiment.swift in Sources */,
+				7AAA9A7E1CEE878D002C9564 /* AudioFormat.swift in Sources */,
 				7AAA9A6A1CEE6089002C9564 /* VisualRecognition.swift in Sources */,
 				7AAA9A331CEE3026002C9564 /* SpeechToTextWebSocket.swift in Sources */,
 				7AAA9A321CEE3026002C9564 /* SpeechToTextAudioStreamer.swift in Sources */,
@@ -916,8 +967,10 @@
 				7ADEC3EC1CBF081200A84C35 /* TrainingStatus.swift in Sources */,
 				7AAA9A271CEE3026002C9564 /* AlternativeResults.swift in Sources */,
 				7AA7AD211CED11A0009DD700 /* Feeds.swift in Sources */,
+				7AAA9A7F1CEE878D002C9564 /* Customization.swift in Sources */,
 				B1F21DFE1CE2461800393146 /* ToneCategory.swift in Sources */,
 				7A6117511CB5988B009A4DA1 /* RestRequest.swift in Sources */,
+				7AAA9A821CEE878D002C9564 /* SynthesisVoice.swift in Sources */,
 				7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */,
 				B1F21DFF1CE2461800393146 /* ToneScore.swift in Sources */,
 				7AAA9A301CEE3026002C9564 /* WordTimestamp.swift in Sources */,
@@ -931,6 +984,7 @@
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7AA7AD1C1CED11A0009DD700 /* DocumentText.swift in Sources */,
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
+				7AAA9A831CEE878D002C9564 /* Voice.swift in Sources */,
 				7AA7AD221CED11A0009DD700 /* Keyword.swift in Sources */,
 				7AA7AD121CED11A0009DD700 /* AlchemyLanguageParametersProtocol.swift in Sources */,
 				B1F21DFC1CE2461800393146 /* SentenceTone.swift in Sources */,
@@ -945,6 +999,7 @@
 				7AAA9A611CEE6089002C9564 /* WordImages.swift in Sources */,
 				12AE2BD11CCFB9470034CF4E /* ClassifierModel.swift in Sources */,
 				7AA7AD1A1CED11A0009DD700 /* DocumentAuthors.swift in Sources */,
+				7AAA9A811CEE878D002C9564 /* Pronunciation.swift in Sources */,
 				7AAA9A261CEE3026002C9564 /* AlternativeResult.swift in Sources */,
 				7AA7AD331CED11A0009DD700 /* AlchemyCombineDictionaryUtil.swift in Sources */,
 				7AA7AD251CED11A0009DD700 /* Language.swift in Sources */,
@@ -952,6 +1007,7 @@
 				7AA7AD391CED11A0009DD700 /* Transformation.swift in Sources */,
 				7ADEC3EE1CBF081200A84C35 /* TranslateResponse.swift in Sources */,
 				7AA7AD191CED11A0009DD700 /* DisambiguatedLinks.swift in Sources */,
+				7AAA9A851CEE878D002C9564 /* TextToSpeech.swift in Sources */,
 				7AA7AD241CED11A0009DD700 /* KnowledgeGraph.swift in Sources */,
 				7AAA9A5E1CEE6089002C9564 /* ErrorInfo.swift in Sources */,
 				7AA7AD371CED11A0009DD700 /* CoreResponse.swift in Sources */,
@@ -974,6 +1030,7 @@
 			files = (
 				7A9F36311CC0997100AE8818 /* DialogTests.swift in Sources */,
 				B1F21E041CE25E6300393146 /* ToneAnalyzerTests.swift in Sources */,
+				7AAA9A861CEE8798002C9564 /* TextToSpeechTests.swift in Sources */,
 				7A61176A1CB5A451009A4DA1 /* PersonalityInsightsTests.swift in Sources */,
 				7AA7AD3B1CED11A8009DD700 /* AlchemyLanguageTests.swift in Sources */,
 				12AE2BD51CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift in Sources */,

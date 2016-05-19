@@ -127,7 +127,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             socket?.connect()
             socket?.writeString(start)
         } catch {
-            return
+            let failureReason = "Failed to convert `TranscriptionStart` to a JSON string."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
         }
     }
 
@@ -140,7 +143,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             socket?.writeString(stop)
             socket?.disconnect()
         } catch {
-            return
+            let failureReason = "Failed to convert `TranscriptionStop` to a JSON string."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
         }
     }
 

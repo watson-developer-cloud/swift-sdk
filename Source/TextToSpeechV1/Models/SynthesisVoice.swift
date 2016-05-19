@@ -18,13 +18,13 @@ import Foundation
 
 /** A voice to be used for synthesis. */
 public enum SynthesisVoice {
-    case DE_Girgit
+    case DE_Birgit
     case DE_Dieter
     case GB_Kate
-    case ES_Enrique
     case US_Allison
     case US_Lisa
     case US_Michael
+    case ES_Enrique
     case ES_Laura
     case US_Sofia
     case FR_Renee
@@ -36,7 +36,7 @@ public enum SynthesisVoice {
     /// Represent the voice as a `String`.
     internal func description() -> String {
         switch self {
-        case DE_Girgit: return "de-DE_BirgitVoice"
+        case DE_Birgit: return "de-DE_BirgitVoice"
         case DE_Dieter: return "de-DE_DieterVoice"
         case GB_Kate: return "en-GB_KateVoice"
         case ES_Enrique: return "es-ES_EnriqueVoice"

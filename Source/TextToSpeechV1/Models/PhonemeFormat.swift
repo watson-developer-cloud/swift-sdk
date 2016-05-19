@@ -16,6 +16,6 @@
 
 /** The phoneme set for a pronunciation. */
 public enum PhonemeFormat: String {
-    case ipa = "ipa"
-    case spr = "spr"
+    case IPA = "ipa"
+    case SPR = "spr"
 }

@@ -19,12 +19,15 @@ import Alamofire
 import Freddy
 import RestKit
 
+/// A DialogID uniquely identifies a dialog application.
+public typealias DialogID = String
+
 /**
  The Watson Dialog service provides a comprehensive, robust, platform for managing
  conversations between virtual agents and users through an application programming
  interface (API). These conversations are commonly referred to as dialogs.
  */
-public class DialogV1 {
+public class Dialog {
     
     private let username: String
     private let password: String
@@ -37,9 +40,6 @@ public class DialogV1 {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter
     }()
-
-    /// A DialogID uniquely identifies a dialog application.
-    public typealias DialogID = String
 
     public init(username: String, password: String) {
         self.username = username
@@ -413,8 +413,8 @@ public class DialogV1 {
         success: [Conversation] -> Void)
     {
         // construct date strings
-        let dateFromString = DialogV1.dateFormatter.stringFromDate(dateFrom)
-        let dateToString = DialogV1.dateFormatter.stringFromDate(dateTo)
+        let dateFromString = Dialog.dateFormatter.stringFromDate(dateFrom)
+        let dateToString = Dialog.dateFormatter.stringFromDate(dateTo)
 
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()

@@ -24,7 +24,7 @@ import RestKit
  of cognitive and social characteristics from the text data that a person generates
  through blogs, tweets, forum posts, and more.
  */
-public class PersonalityInsightsV2 {
+public class PersonalityInsights {
     
     private let username: String
     private let password: String

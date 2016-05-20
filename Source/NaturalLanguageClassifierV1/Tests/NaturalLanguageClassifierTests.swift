@@ -19,7 +19,7 @@ import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {
     
-    private var naturalLanguageClassifier: NaturalLanguageClassifierV1!
+    private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let newClassifierName = "Swift SDK Test Classifier"
     private let trainedClassifierId = "3a84d1x62-nlc-2314"
     private let timeout: NSTimeInterval = 30
@@ -44,7 +44,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        naturalLanguageClassifier = NaturalLanguageClassifierV1(username: username, password: password)
+        naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
     }
     
     /** Fail false negatives. */

@@ -20,7 +20,7 @@ import ToneAnalyzerV3
 class ToneAnalyzerTests: XCTestCase {
 
     /// Language translation service
-    private var service: ToneAnalyzerV3!
+    private var service: ToneAnalyzer!
     
     /// Timeout for an asynchronous call to return before failing the unit test
     private let timeout: NSTimeInterval = 60.0
@@ -34,7 +34,7 @@ class ToneAnalyzerTests: XCTestCase {
                 let username = dict["ToneAnalyzerUsername"]!
                 let password = dict["ToneAnalyzerPassword"]!
                 if service == nil {
-                    service = ToneAnalyzerV3(username: username, password: password, versionDate: "2016-02-11")
+                    service = ToneAnalyzer(username: username, password: password, versionDate: "2016-02-11")
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")

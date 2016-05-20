@@ -24,7 +24,7 @@ import RestKit
  Statistical Machine Translation techniques that have been perfected in our research labs
  over the past few decades.
  */
-public class LanguageTranslationV2 {
+public class LanguageTranslation {
 
     private let username: String
     private let password: String

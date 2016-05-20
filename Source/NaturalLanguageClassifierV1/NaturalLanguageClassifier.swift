@@ -19,7 +19,7 @@ import Alamofire
 import Freddy
 import RestKit
 
-public class NaturalLanguageClassifierV1 {
+public class NaturalLanguageClassifier {
     
     private let username: String
     private let password: String

@@ -19,7 +19,7 @@ import PersonalityInsightsV2
 
 class PersonalityInsightsTests: XCTestCase {
 
-    private var personalityInsights: PersonalityInsightsV2!
+    private var personalityInsights: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
     private let timeout: NSTimeInterval = 30
@@ -77,7 +77,7 @@ class PersonalityInsightsTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        personalityInsights = PersonalityInsightsV2(username: username, password: password)
+        personalityInsights = PersonalityInsights(username: username, password: password)
     }
 
     /** Fail false negatives. */

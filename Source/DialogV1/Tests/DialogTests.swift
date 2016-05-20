@@ -19,7 +19,7 @@ import DialogV1
 
 class DialogTests: XCTestCase {
 
-    private var dialog: DialogV1!
+    private var dialog: Dialog!
     private let dialogNamePrefix = "swift-sdk-unit-test-"
     private let timeout: NSTimeInterval = 30
 
@@ -45,7 +45,7 @@ class DialogTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        dialog = DialogV1(username: username, password: password)
+        dialog = Dialog(username: username, password: password)
     }
 
     /** Delete any stale dialog applications previously created by unit tests. */

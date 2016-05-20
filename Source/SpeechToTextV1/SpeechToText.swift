@@ -24,7 +24,7 @@ import RestKit
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
  */
-public class SpeechToTextV1 {
+public class SpeechToText {
 
     private let restToken: RestToken
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"

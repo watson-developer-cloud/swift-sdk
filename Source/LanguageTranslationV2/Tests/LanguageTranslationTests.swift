@@ -19,7 +19,7 @@ import LanguageTranslationV2
 
 class LanguageTranslationTests: XCTestCase {
 
-    private var languageTranslation: LanguageTranslationV2!
+    private var languageTranslation: LanguageTranslation!
     private let timeout: NSTimeInterval = 30
 
     // MARK: - Test Configuration
@@ -43,7 +43,7 @@ class LanguageTranslationTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        languageTranslation = LanguageTranslationV2(username: username, password: password)
+        languageTranslation = LanguageTranslation(username: username, password: password)
     }
 
     /** Fail false negatives. */

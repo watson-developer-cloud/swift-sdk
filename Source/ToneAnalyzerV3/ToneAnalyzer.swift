@@ -24,7 +24,7 @@ import RestKit
  * emotional tones, social propensities, and writing styles in written communication. 
  * Then it offers suggestions to help the writer improve their intended language tones.
 **/
-public class ToneAnalyzerV3 {
+public class ToneAnalyzer {
     
     private let username: String
     private let password: String

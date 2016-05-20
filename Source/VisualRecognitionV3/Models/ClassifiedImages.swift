@@ -55,7 +55,7 @@ public struct ClassifiedImage: JSONDecodable {
     /// Classifications of the given image by classifier.
     public let classifiers: [ClassifierResults]
     
-    /// Used internally to initialize a `ClassifierResults` model from JSON.
+    /// Used internally to initialize a `ClassifiedImage` model from JSON.
     public init(json: JSON) throws {
         sourceURL = try? json.string("source_url")
         resolvedURL = try? json.string("resolved_url")
@@ -97,7 +97,7 @@ public struct Classification: JSONDecodable {
     /// The type hierarchy of the identified class.
     public let typeHierarchy: String?
     
-    /// Used internally to initialize a `ClassifiedImages` model from JSON.
+    /// Used internally to initialize a `Classification` model from JSON.
     public init(json: JSON) throws {
         classification = try json.string("class")
         score = try json.double("score")

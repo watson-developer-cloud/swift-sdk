@@ -33,11 +33,13 @@ public struct Profile: JSONEncodable, JSONDecodable {
         }
     }
 
+    /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
         clientID = try? json.int("client_id")
         parameters = try json.arrayOf("name_values", type: Parameter.self)
     }
 
+    /// Used internally to serialize a `Profile` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let clientID = clientID { json["client_id"] = .Int(clientID) }
@@ -60,11 +62,13 @@ public struct Parameter: JSONEncodable, JSONDecodable {
         self.value = value
     }
 
+    /// Used internally to initialize a `Parameter` model from JSON.
     public init(json: JSON) throws {
         name = try json.string("name")
         value = try json.string("value")
     }
 
+    /// Used internally to serialize a `Parameter` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         json["name"] = .String(name)

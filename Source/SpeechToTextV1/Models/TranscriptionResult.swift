@@ -36,7 +36,7 @@ public struct TranscriptionResult: JSONDecodable {
     /// A list of acoustically similar alternatives for words of the input audio.
     public let wordAlternatives: [AlternativeResults]?
 
-    /// Used internally to initialize a `TranscriptionResult` from JSON.
+    /// Used internally to initialize a `TranscriptionResult` model from JSON.
     public init(json: JSON) throws {
         final = try json.bool("final")
         alternatives = try json.arrayOf("alternatives", type: Transcription.self)

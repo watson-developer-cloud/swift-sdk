@@ -37,7 +37,7 @@ public struct SentenceAnalysis: JSONDecodable {
     /// three categories: social tone, emotion tone, and writing tone.
     public let toneCategories: [ToneCategory]
     
-    /// Used internally to initialize a `ToneAnalysis` model from JSON.
+    /// Used internally to initialize a `SentenceAnalysis` model from JSON.
     public init(json: JSON) throws {
         sentenceID = try json.int("sentence_id")
         inputFrom = try json.int("input_from")

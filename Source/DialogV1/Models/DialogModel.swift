@@ -26,6 +26,7 @@ public struct DialogModel: JSONDecodable {
     /// The name of the dialog application.
     public let name: String
 
+    /// Used internally to initialize a `DialogModel` model from JSON.
     public init(json: JSON) throws {
         dialogID = try json.string("dialog_id")
         name = try json.string("name")

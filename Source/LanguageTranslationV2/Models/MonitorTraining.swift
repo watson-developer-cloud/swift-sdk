@@ -26,6 +26,7 @@ public struct MonitorTraining: JSONDecodable {
     /// The base model that this translation model was trained on.
     public let baseModelID: String
 
+    /// Used internally to initialize a `MonitorTraining` model from JSON.
     public init(json: JSON) throws {
         guard let status = TrainingStatus(rawValue: try json.string("status")) else {
             let type = TrainingStatus.Available.dynamicType

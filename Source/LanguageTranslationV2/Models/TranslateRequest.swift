@@ -63,6 +63,7 @@ internal struct TranslateRequest: JSONEncodable {
         self.text = text
     }
 
+    /// Used internally to serialize a `TranslateRequest` model to JSON.
     func toJSON() -> JSON {
         var json = [String: JSON]()
         if let modelID = modelID { json["model_id"] = .String(modelID) }

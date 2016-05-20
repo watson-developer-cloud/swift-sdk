@@ -29,6 +29,7 @@ public struct TranslateResponse: JSONDecodable {
     /// A list of translation output, corresponding to the list of input text.
     public let translations: [Translation]
 
+    /// Used internally to initialize a `TranslateResponse` model from JSON.
     public init(json: JSON) throws {
         wordCount = try json.int("word_count")
         characterCount = try json.int("character_count")
@@ -42,6 +43,7 @@ public struct Translation: JSONDecodable {
     /// The translation of input text from a source language to a target language.
     public let translation: String
 
+    /// Used internally to initialize a `Translation` model from JSON.
     public init(json: JSON) throws {
         translation = try json.string("translation")
     }

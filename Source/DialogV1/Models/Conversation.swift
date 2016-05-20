@@ -35,6 +35,7 @@ public struct Conversation: JSONDecodable {
     /// The profile variables associated with the conversation.
     public let profile: [String: String]
 
+    /// Used internally to initialize a `Conversation` model from JSON.
     public init(json: JSON) throws {
         hitNodes = try json.arrayOf("hit_nodes", type: HitNode.self)
         conversationID = try json.int("conversation_id")
@@ -67,6 +68,7 @@ public struct HitNode: JSONDecodable {
     /// The node identifier.
     public let nodeID: Int
 
+    /// Used internally to initialize a `HitNode` model from JSON.
     public init(json: JSON) throws {
         details = try json.string("details")
         label = try json.string("label")
@@ -87,6 +89,7 @@ public struct Message: JSONDecodable {
     /// The client that prompted the message to be sent.
     public let fromClient: String
 
+    /// Used internally to initialize a `Message` model from JSON.
     public init(json: JSON) throws {
         text = try json.string("text")
         dateTime = try json.string("date_time")

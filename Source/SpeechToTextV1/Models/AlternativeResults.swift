@@ -31,7 +31,7 @@ public struct AlternativeResults: JSONDecodable {
     /// A list of alternative word hypotheses for a word in the audio input.
     public let alternatives: [AlternativeResult]
 
-    /// Used internally to initialize an `AlternativeResults` from JSON.
+    /// Used internally to initialize an `AlternativeResults` model from JSON.
     public init(json: JSON) throws {
         startTime = try json.double("start_time")
         endTime = try json.double("end_time")

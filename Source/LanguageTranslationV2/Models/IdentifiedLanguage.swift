@@ -26,6 +26,7 @@ public struct IdentifiedLanguage: JSONDecodable {
     /// The confidence score of the identified language.
     public let confidence: Double
 
+    /// Used internally to initialize an `IdentifiedLanguage` model from JSON.
     public init(json: JSON) throws {
         language = try json.string("language")
         confidence = try json.double("confidence")

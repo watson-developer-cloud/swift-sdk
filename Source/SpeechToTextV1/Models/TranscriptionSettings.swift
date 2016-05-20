@@ -109,7 +109,7 @@ public struct TranscriptionSettings: JSONEncodable {
         self.contentType = contentType
     }
 
-    /** Represent a `TranscriptionSettings` as a dictionary of key-value pairs. */
+    /** Used internally to serialize a `TranscriptionSettings` model to JSON. */
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         json["action"] = .String(action)

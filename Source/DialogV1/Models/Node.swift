@@ -31,11 +31,13 @@ public struct Node: JSONEncodable, JSONDecodable {
         self.node = node
     }
 
+    /// Used internally to initialize a `FaceTags` model from JSON.
     public init(json: JSON) throws {
         content = try json.string("content")
         node = try json.string("node")
     }
 
+    /// Used internally to initialize a `FaceTags` model from JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         json["content"] = .String(content)

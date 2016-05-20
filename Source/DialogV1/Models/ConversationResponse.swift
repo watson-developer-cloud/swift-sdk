@@ -35,6 +35,7 @@ public struct ConversationResponse: JSONDecodable {
     /// The client identifier.
     public let clientID: Int
 
+    /// Used internally to initialize a `ConversationResponse` model from JSON.
     public init(json: JSON) throws {
         response = try json.arrayOf("response")
         input = try json.string("input")

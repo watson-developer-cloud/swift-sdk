@@ -144,12 +144,12 @@
 		7AAAF5031CEEA1B600B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5131CEEA1DA00B74848 /* DialogV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF5091CEEA1DA00B74848 /* DialogV1.framework */; };
 		7AAAF5201CEEA1E700B74848 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB131C1CBF7C8A00101884 /* Dialog.swift */; };
-		7AAAF5211CEEA1EA00B74848 /* DialogConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13201CBF7C8A00101884 /* DialogConversation.swift */; };
-		7AAAF5221CEEA1EA00B74848 /* DialogConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */; };
-		7AAAF5231CEEA1EA00B74848 /* DialogFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13221CBF7C8A00101884 /* DialogFormat.swift */; };
+		7AAAF5211CEEA1EA00B74848 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13201CBF7C8A00101884 /* Conversation.swift */; };
+		7AAAF5221CEEA1EA00B74848 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */; };
+		7AAAF5231CEEA1EA00B74848 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13221CBF7C8A00101884 /* Format.swift */; };
 		7AAAF5241CEEA1EA00B74848 /* DialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13231CBF7C8A00101884 /* DialogModel.swift */; };
-		7AAAF5251CEEA1EA00B74848 /* DialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13241CBF7C8A00101884 /* DialogNode.swift */; };
-		7AAAF5261CEEA1EA00B74848 /* DialogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13251CBF7C8A00101884 /* DialogProfile.swift */; };
+		7AAAF5251CEEA1EA00B74848 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13241CBF7C8A00101884 /* Node.swift */; };
+		7AAAF5261CEEA1EA00B74848 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13251CBF7C8A00101884 /* Profile.swift */; };
 		7AAAF5271CEEA1EF00B74848 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13271CBF7C8A00101884 /* DialogTests.swift */; };
 		7AAAF5281CEEA1EF00B74848 /* pizza_sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7AEB13281CBF7C8A00101884 /* pizza_sample.xml */; };
 		7AAAF5291CEEA1EF00B74848 /* pizza_sample_invalid.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */; };
@@ -615,12 +615,12 @@
 		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ToneAnalyzerV3.h; path = Source/SupportingFiles/ToneAnalyzerV3.h; sourceTree = "<group>"; };
 		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualRecognitionV3.h; path = Source/SupportingFiles/VisualRecognitionV3.h; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
-		7AEB13201CBF7C8A00101884 /* DialogConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversation.swift; sourceTree = "<group>"; };
-		7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversationResponse.swift; sourceTree = "<group>"; };
-		7AEB13221CBF7C8A00101884 /* DialogFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogFormat.swift; sourceTree = "<group>"; };
+		7AEB13201CBF7C8A00101884 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		7AEB13221CBF7C8A00101884 /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		7AEB13231CBF7C8A00101884 /* DialogModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogModel.swift; sourceTree = "<group>"; };
-		7AEB13241CBF7C8A00101884 /* DialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
-		7AEB13251CBF7C8A00101884 /* DialogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogProfile.swift; sourceTree = "<group>"; };
+		7AEB13241CBF7C8A00101884 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		7AEB13251CBF7C8A00101884 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
@@ -1286,12 +1286,12 @@
 		7AEB131F1CBF7C8A00101884 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7AEB13201CBF7C8A00101884 /* DialogConversation.swift */,
-				7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */,
-				7AEB13221CBF7C8A00101884 /* DialogFormat.swift */,
+				7AEB13201CBF7C8A00101884 /* Conversation.swift */,
+				7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */,
+				7AEB13221CBF7C8A00101884 /* Format.swift */,
 				7AEB13231CBF7C8A00101884 /* DialogModel.swift */,
-				7AEB13241CBF7C8A00101884 /* DialogNode.swift */,
-				7AEB13251CBF7C8A00101884 /* DialogProfile.swift */,
+				7AEB13241CBF7C8A00101884 /* Node.swift */,
+				7AEB13251CBF7C8A00101884 /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2324,12 +2324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF5221CEEA1EA00B74848 /* DialogConversationResponse.swift in Sources */,
+				7AAAF5221CEEA1EA00B74848 /* ConversationResponse.swift in Sources */,
 				7AAAF5241CEEA1EA00B74848 /* DialogModel.swift in Sources */,
-				7AAAF5211CEEA1EA00B74848 /* DialogConversation.swift in Sources */,
-				7AAAF5251CEEA1EA00B74848 /* DialogNode.swift in Sources */,
-				7AAAF5261CEEA1EA00B74848 /* DialogProfile.swift in Sources */,
-				7AAAF5231CEEA1EA00B74848 /* DialogFormat.swift in Sources */,
+				7AAAF5211CEEA1EA00B74848 /* Conversation.swift in Sources */,
+				7AAAF5251CEEA1EA00B74848 /* Node.swift in Sources */,
+				7AAAF5261CEEA1EA00B74848 /* Profile.swift in Sources */,
+				7AAAF5231CEEA1EA00B74848 /* Format.swift in Sources */,
 				7AAAF5201CEEA1E700B74848 /* Dialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

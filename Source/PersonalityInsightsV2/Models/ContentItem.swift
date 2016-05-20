@@ -85,7 +85,7 @@ public struct ContentItem: JSONEncodable {
         self.forward = forward
     }
 
-
+    /// Used internally to serialize a `ContentItem` model to JSON.
     public func toJSON() -> JSON {
         var map = [String: JSON]()
         map["content"] = .String(content)

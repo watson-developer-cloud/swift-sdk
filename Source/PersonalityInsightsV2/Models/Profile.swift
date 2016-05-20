@@ -42,6 +42,7 @@ public struct Profile: JSONDecodable {
     /// The language model that was used to process the input.
     public let processedLanguage: String
 
+    /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
         tree = try json.decode("tree")
         id = try json.string("id")

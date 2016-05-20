@@ -23,7 +23,7 @@ internal struct TranscriptionStop: JSONEncodable {
     /// The action to perform. Must be `stop` to end the request.
     private let action = "stop"
 
-    /** Serialize a `TranscriptionStop` to JSON. */
+    /** Serialize a `TranscriptionStop` model to JSON. */
     internal func toJSON() -> JSON {
         return .Dictionary(["action": .String(action)])
     }

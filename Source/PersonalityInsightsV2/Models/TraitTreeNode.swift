@@ -67,6 +67,7 @@ public struct TraitTreeNode: JSONDecodable {
     /// Recursive array of characteristics inferred from the input text.
     public let children: [TraitTreeNode]?
 
+    /// Used internally to initialize a `TraitTreeNode` model from JSON.
     public init(json: JSON) throws {
         id = try json.string("id")
         name = try json.string("name")

@@ -29,7 +29,7 @@ public struct ImagesWithWords: JSONDecodable {
     /// Any warnings produced during processing.
     public let warnings: [WarningInfo]?
     
-    /// Used internally to initialize a `ImagesWithWords` model from JSON.
+    /// Used internally to initialize an `ImagesWithWords` model from JSON.
     public init(json: JSON) throws {
         imagesProcessed = try json.int("images_processed")
         images = try json.arrayOf("images", type: ImageWithWords.self)
@@ -58,7 +58,7 @@ public struct ImageWithWords: JSONDecodable {
     /// The words recognized in the image.
     public let words: [Word]
     
-    /// Used internally to initialize a `ImageWithWords` model from JSON.
+    /// Used internally to initialize an `ImageWithWords` model from JSON.
     public init(json: JSON) throws {
         sourceURL = try? json.string("source_url")
         resolvedURL = try? json.string("resolved_url")

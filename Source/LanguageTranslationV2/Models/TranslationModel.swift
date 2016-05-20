@@ -59,6 +59,7 @@ public struct TranslationModel: JSONDecodable {
     /// Availability of model (available, training, or error).
     public let status: TrainingStatus
 
+    /// Used internally to initialize a `TranslationModel` model from JSON.
     public init(json: JSON) throws {
         modelID = try json.string("model_id")
         name = try json.string("name")

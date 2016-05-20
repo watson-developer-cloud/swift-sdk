@@ -16,7 +16,7 @@
 
 import Foundation
 import Freddy
-    
+
 public struct Classification: JSONDecodable {
     
     /// Unique identifier for the classifier used.
@@ -36,6 +36,7 @@ public struct Classification: JSONDecodable {
     /// values is 100%.
     public let classes: [ClassifiedClass]
     
+    /// Used internally to initialize a `Classification` model from JSON.
     public init(json: JSON) throws {
         classifierId = try json.string("classifier_id")
         url = try json.string("url")
@@ -54,6 +55,7 @@ public struct ClassifiedClass: JSONDecodable {
     /// Class label.
     public var className: String
     
+    /// Used internally to initialize a `ClassifiedClass` model from JSON.
     public init(json: JSON) throws {
         confidence = try json.double("confidence")
         className = try json.string("class_name")

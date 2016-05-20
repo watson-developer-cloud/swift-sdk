@@ -23,7 +23,7 @@ internal struct TranscriptionState: JSONDecodable {
     /// The state of the Speech to Text service.
     internal let state: String
 
-    /// Used internally to initialize a `TranscriptionState` from JSON.
+    /// Used internally to initialize a `TranscriptionState` model from JSON.
     internal init(json: JSON) throws {
         state = try json.string("state")
     }

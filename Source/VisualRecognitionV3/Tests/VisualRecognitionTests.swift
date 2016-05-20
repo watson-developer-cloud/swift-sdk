@@ -60,7 +60,7 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: "2015-05-10")
+        visualRecognition = VisualRecognition(apiKey: apiKey, version: "2016-05-10")
     }
     
     /** Load image files with class examples and test images. */

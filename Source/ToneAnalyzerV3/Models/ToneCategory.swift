@@ -17,29 +17,22 @@
 import Foundation
 import Freddy
     
-/**
- * Top level tone (or Tone Category) from the list of Writing Tone, 
- * Emotion Tone or Social Tone. It holds a list of scores for individual Tones.
- */
+/** The tone analysis for a particular tone category (e.g. social, emotion, or writing). */
 public struct ToneCategory: JSONDecodable {
     
-    /// The unique ID of the category.
-    public let id: String
-    
-    /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
+    /// The name of this tone category (e.g. emotion, social, or language).
     public let name: String
     
-    /**
-      * Analysis organized by tones. The emotion tones are anger, disgust, fear, joy, and sadness.
-      * The writing tones are analytical, confident, and tentative. The social tones are
-      * openness, conscientiousness, extraversion, agreeableness, and neuroticism.
-    **/
+    /// A unique number identifying this tone category, irrespective of language or localization.
+    public let categoryID: String
+    
+    /// The individual tone results within this category.
     public let tones: [ToneScore]
     
-    
+    /// Used internally to initialize a `ToneCategory` model from JSON.
     public init(json: JSON) throws {
-        id = try json.string("category_id")
         name = try json.string("category_name")
+        categoryID = try json.string("category_id")
         tones = try json.arrayOf("tones", type: ToneScore.self)
     }
 }

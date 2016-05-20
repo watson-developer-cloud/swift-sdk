@@ -17,28 +17,32 @@
 import Foundation
 import Freddy
 
-/**
- * This element contains the result of analyzing an individual sentence. 
- * It contains a list of ToneCategory objects which is the actual result, 
- * and also some metadata about the sentence: The original text (if it needs 
- * to be tracked back), and the position of the sentence in the original
- * text (as index of first and last character).
- */
-public struct SentenceTone: JSONDecodable {
-    /// Unique ID for each sentence.
-    public let id: Int
-    /// The character number of the first character in the sentence.
+/** The result of analyzing a sentence within a document. */
+public struct SentenceAnalysis: JSONDecodable {
+    
+    /// A unique number identifying this sentence within the document.
+    public let sentenceID: Int
+    
+    /// The index of the character in the document where this sentence starts.
     public let inputFrom: Int
-    /// The character number of the last character in the sentence.
+    
+    /// The index of the character in the document after the end of this sentence
+    /// (i.e. `inputTo - inputFrom` is the length of the sentence in characters).
     public let inputTo: Int
-    /// Text of the sentence being analyzed.
+    
+    /// The text of this sentence.
     public let text: String
     
+    /// The tone analysis results for this sentence, divided into
+    /// three categories: social tone, emotion tone, and writing tone.
+    public let toneCategories: [ToneCategory]
     
+    /// Used internally to initialize a `ToneAnalysis` model from JSON.
     public init(json: JSON) throws {
-        id = try json.int("sentence_id")
+        sentenceID = try json.int("sentence_id")
         inputFrom = try json.int("input_from")
         inputTo = try json.int("input_to")
         text = try json.string("text")
+        toneCategories = try json.arrayOf("tone_categories", type: ToneCategory.self)
     }
 }

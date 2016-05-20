@@ -19,35 +19,36 @@ import ToneAnalyzerV3
 
 class ToneAnalyzerTests: XCTestCase {
 
-    /// Language translation service
-    private var service: ToneAnalyzer!
+    private var toneAnalyzer: ToneAnalyzer!
+    private let timeout: NSTimeInterval = 30.0
     
-    /// Timeout for an asynchronous call to return before failing the unit test
-    private let timeout: NSTimeInterval = 60.0
+    let text = "I know the times are difficult! Our sales have been disappointing for " +
+               "the past three quarters for our data analytics product suite. We have a " +
+               "competitive data analytics product suite in the industry. But we need " +
+               "to do our job selling it! "
     
-    let toneText = "I know the times are difficult! Our sales have been disappointing for the past three quarters for our data analytics product suite. We have a competitive data analytics product suite in the industry. But we need to do our job selling it! ";
+    // MARK: - Test Configuration
     
+    /** Set up for each test by instantiating the service. */
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                let username = dict["ToneAnalyzerUsername"]!
-                let password = dict["ToneAnalyzerPassword"]!
-                if service == nil {
-                    service = ToneAnalyzer(username: username, password: password, versionDate: "2016-02-11")
-                }
-            } else {
-                XCTFail("Unable to extract dictionary from plist")
-            }
-        } else {
-            XCTFail("Plist file not found")
-        }
+        continueAfterFailure = false
+        instantiateToneAnalyzer()
     }
     
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    /** Instantiate Tone Analyzer. */
+    func instantiateToneAnalyzer() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard
+            let file = bundle.pathForResource("Credentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
+            let username = credentials["ToneAnalyzerUsername"],
+            let password = credentials["ToneAnalyzerPassword"]
+        else {
+            XCTFail("Unable to read credentials.")
+            return
+        }
+        toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
     }
     
     /** Fail false negatives. */
@@ -69,14 +70,25 @@ class ToneAnalyzerTests: XCTestCase {
     
     // MARK: - Positive Tests
     
-    func testGetTone() {
-        let description = "Analyze the text of Kennedy's speech."
+    /** Analyze the tone of the given text using the default parameters. */
+    func testGetToneWithDefaultParameters() {
+        let description = "Analyze the tone of the given text using the default parameters."
         let expectation = expectationWithDescription(description)
 
-        service.getTone(toneText, failure: failWithError) { tone in
-            XCTAssertNotNil(tone, "Tone should not be nil")
-            XCTAssertNotNil(tone.documentTone, "DocumentTone should not be nil")
-            XCTAssertNotNil(tone.sentencesTones, "SentencesTone should not be nil")
+        toneAnalyzer.getTone(text, failure: failWithError) { toneAnalysis in
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze the tone of the given text with custom parameters. */
+    func testGetToneWithCustomParameters() {
+        let description = "Analyze the tone of the given text using custom parameters."
+        let expectation = expectationWithDescription(description)
+        
+        let tones = ["emotion", "writing"]
+        toneAnalyzer.getTone(text, tones: tones, sentences: false, failure: failWithError) {
+            toneAnalysis in
             expectation.fulfill()
         }
         waitForExpectations()
@@ -84,17 +96,30 @@ class ToneAnalyzerTests: XCTestCase {
     
     // MARK: - Negative Tests
     
-    func testFetToneNil() {
-        let description = "Try to get the tone of an empty string"
+    func testGetToneEmptyString() {
+        let description = "Analyze the tone of an empty string."
         let expectation = expectationWithDescription(description)
         
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.localizedFailureReason,
-                           "Data could not be serialized. Failed to parse JSON response.")
+            XCTAssertEqual(error.code, 400)
             expectation.fulfill()
         }
         
-        service.getTone("", failure: failure, success: failWithResult)
+        toneAnalyzer.getTone("", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testGetToneInvalidParameters() {
+        let description = "Analyze the tone of the given text using invalid parameters."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let tones = ["emotion", "this-tone-is-invalid"]
+        toneAnalyzer.getTone(text, tones: tones, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

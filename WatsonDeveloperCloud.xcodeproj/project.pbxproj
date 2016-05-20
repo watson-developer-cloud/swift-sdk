@@ -40,8 +40,7 @@
 		7AAAF3F11CEE9B8900B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3F21CEE9BB300B74848 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7AAAF4021CEE9D1900B74848 /* ToneAnalyzerV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF3F81CEE9D1900B74848 /* ToneAnalyzerV3.framework */; };
-		7AAAF40F1CEE9D5300B74848 /* ElementTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF11CE2461800393146 /* ElementTone.swift */; };
-		7AAAF4101CEE9D5300B74848 /* SentenceTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF21CE2461800393146 /* SentenceTone.swift */; };
+		7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */; };
 		7AAAF4111CEE9D5300B74848 /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF31CE2461800393146 /* ToneAnalysis.swift */; };
 		7AAAF4121CEE9D5300B74848 /* ToneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF41CE2461800393146 /* ToneCategory.swift */; };
 		7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF51CE2461800393146 /* ToneScore.swift */; };
@@ -624,8 +623,7 @@
 		7AEB13251CBF7C8A00101884 /* DialogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogProfile.swift; sourceTree = "<group>"; };
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
-		B1F21DF11CE2461800393146 /* ElementTone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementTone.swift; sourceTree = "<group>"; };
-		B1F21DF21CE2461800393146 /* SentenceTone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceTone.swift; sourceTree = "<group>"; };
+		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
 		B1F21DF51CE2461800393146 /* ToneScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneScore.swift; sourceTree = "<group>"; };
@@ -1322,8 +1320,7 @@
 		B1F21DF01CE2461800393146 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B1F21DF11CE2461800393146 /* ElementTone.swift */,
-				B1F21DF21CE2461800393146 /* SentenceTone.swift */,
+				B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */,
 				B1F21DF31CE2461800393146 /* ToneAnalysis.swift */,
 				B1F21DF41CE2461800393146 /* ToneCategory.swift */,
 				B1F21DF51CE2461800393146 /* ToneScore.swift */,
@@ -2195,11 +2192,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4101CEE9D5300B74848 /* SentenceTone.swift in Sources */,
+				7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */,
 				7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */,
 				7AAAF4121CEE9D5300B74848 /* ToneCategory.swift in Sources */,
 				7AAAF4141CEE9D5600B74848 /* ToneAnalyzer.swift in Sources */,
-				7AAAF40F1CEE9D5300B74848 /* ElementTone.swift in Sources */,
 				7AAAF4111CEE9D5300B74848 /* ToneAnalysis.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,19 +17,20 @@
 import Foundation
 import Freddy
 
-/**
- *
- * Object representing scoring of a single Tone (of any category) on our responses. It contains the
- * Tone ID, a score, and optionally a list of evidences.
- */
+/** The score of a particular tone. */
 public struct ToneScore: JSONDecodable {
-    /// Unique ID of the tone.
+    
+    /// A unique number identifying this particular tone.
     public let id: String
-    /// The name of the tone
+    
+    /// The name of this particular tone.
     public let name: String
-    /// The score of the tone.
+    
+    /// The raw score of the tone, computed by the algorithms. This can be
+    /// compared to other raw scores and used to build your own normalizations.
     public let score: Double
     
+    /// Used internally to initialize a `ToneScore` model from JSON.
     public init(json: JSON) throws {
         id = try json.string("tone_id")
         name = try json.string("tone_name")

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,16 @@
  **/
 
 import Foundation
-import ObjectMapper
-
-/**
- *  The mapping of a image keyword and score
- */
-public struct ImageKeyWord: Mappable {
+import Freddy
     
-    /// Image keyword
-    public var text: String?
-    /// Confidence score for the detected image keyword 0.0 .. 1.0 (higher is better)
-    public var score: Double?
+/** A pronunciation of text based on the voice and phoneme. */
+public struct Pronunciation: JSONDecodable {
     
-    public init?(_ map: Map) {}
+    /// Pronunciation of the requested text in the specified voice and format.
+    public let pronunciation: String
     
-    public mutating func mapping(map: Map) {
-        text    <- map["text"]
-        score   <- (map["score"], Transformation.stringToDouble)
+    /// Used internally to initialize a `Pronunciation` model from JSON.
+    public init(json: JSON) throws {
+        pronunciation = try json.string("pronunciation")
     }
 }

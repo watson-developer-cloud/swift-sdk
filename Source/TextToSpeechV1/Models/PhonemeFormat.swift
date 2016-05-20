@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,8 @@
  * limitations under the License.
  **/
 
-import Foundation
-
-/**
- *  Maps the path and the url of an image
- */
-public struct ImageURL {
-    
-    let path: String
-    let url: NSURL?
-    
-    public init(path: String, url: NSURL) {
-        self.path = path
-        self.url = url
-    }
+/** The phoneme set for a pronunciation. */
+public enum PhonemeFormat: String {
+    case IPA = "ipa"
+    case SPR = "spr"
 }

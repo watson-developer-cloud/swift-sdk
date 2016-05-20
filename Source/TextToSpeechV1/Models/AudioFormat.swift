@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,10 @@
 
 import Foundation
 
-extension TextToSpeech {
-    
-    internal struct Constants {
-        
-        static let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
-        static let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-        static let errorDomain = "com.watsonplatform.texttospeech"
-        
-        static let synthesize = "/v1/synthesize"
-        static let voices = "/v1/voices"
-        
-    }
+/** Audio formats supported by the Text to Speech service. */
+public enum AudioFormat: String {
+    case OGG = "audio/ogg;codecs=opus"
+    case WAV = "audio/wav"
+    case FLAC = "audio/flac"
+    case L16 = "audio/l16"
 }

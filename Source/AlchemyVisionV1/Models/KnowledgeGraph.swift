@@ -15,26 +15,16 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/**
- *  Contains the url string and the image string
- */
-public struct ImageLink: Mappable {
-    
-    /// http url information was requested for
-    public var url: String?
-    /// URL of the detected image
-    public var image: String?
-    
-    init() {
-        
-    }
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        url    <- map["url"]
-        image   <- map["image"]
+/** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
+public struct KnowledgeGraph: JSONDecodable {
+
+    /// A hierarchy of categories for the given object.
+    public let typeHierarchy: String
+
+    /// Used internally to initialize a `KnowledgeGraph` model from JSON.
+    public init(json: JSON) throws {
+        typeHierarchy = try json.string("typeHierarchy")
     }
 }

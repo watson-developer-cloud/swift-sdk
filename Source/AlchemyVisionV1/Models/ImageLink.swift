@@ -15,27 +15,24 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/**
- *  Contains the total transactions and the array of image keywords
- */
-public struct ImageKeyWords: Mappable {
-    
-    /// Transactions charged
-    public var totalTransactions: Int?
-    /// Array of ImageKeyWord object
-    public var imageKeyWords: [ImageKeyWord] = []
-    
-    public init() {
+/** The primary image link detected on a webpage by the Alchemy Vision service. */
+public struct ImageLink: JSONDecodable {
 
+    /// The status of the request.
+    public let status: String
+
+    /// The URL of the requested source.
+    public let url: String
+
+    /// The URL of the primary image.
+    public let image: String
+
+    /// Used internally to initialize an `ImageLink` model from JSON.
+    public init(json: JSON) throws {
+        status = try json.string("status")
+        url = try json.string("url")
+        image = try json.string("image")
     }
-
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        imageKeyWords     <-   map["imageKeywords"]
-        totalTransactions <-  (map["totalTransactions"], Transformation.stringToInt)
-    }
-    
 }

@@ -395,7 +395,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -483,7 +483,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -578,7 +578,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -759,7 +759,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -847,7 +847,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -942,7 +942,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 10.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {
@@ -1044,7 +1044,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Wait for the classifier to be trained."
         let expectation2 = expectationWithDescription(description2)
         
-        let seconds = 5.0
+        let seconds = 15.0
         let delay = seconds * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue()) {

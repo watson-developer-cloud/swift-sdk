@@ -282,7 +282,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classify(
-        url url: String,
+        url: String,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
@@ -324,7 +324,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classify(
-        image image: NSURL,
+        image: NSURL,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
@@ -341,7 +341,7 @@ public class VisualRecognition {
         
         // classify images
         classify(
-            image: image,
+            image,
             parameters: parameters,
             outputLanguage: outputLanguage,
             failure: failure,
@@ -367,7 +367,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
     */
     public func classify(
-        image image: NSURL? = nil,
+        image: NSURL? = nil,
         parameters: NSURL? = nil,
         outputLanguage: String? = nil,
         failure: (NSError -> Void)? = nil,
@@ -433,7 +433,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        url url: String,
+        url: String,
         failure: (NSError -> Void)? = nil,
         success: ImagesWithFaces -> Void)
     {
@@ -457,7 +457,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        image image: NSURL? = nil,
+        image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: ImagesWithFaces -> Void)
@@ -515,7 +515,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        url url: String,
+        url: String,
         failure: (NSError -> Void)? = nil,
         success: ImagesWithWords -> Void)
     {
@@ -538,7 +538,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        image image: NSURL? = nil,
+        image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: ImagesWithWords -> Void)

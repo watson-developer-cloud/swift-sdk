@@ -290,7 +290,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify images by URL using the default classifier."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.classify(url: obamaURL, failure: failWithError) {
+        visualRecognition.classify(obamaURL, failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -327,7 +327,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         visualRecognition.classify(
-            url: obamaURL,
+            obamaURL,
             owners: ["IBM"],
             classifierIDs: ["default"],
             showLowConfidence: true,
@@ -421,7 +421,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Classify images by URL using a custom classifier."
         let expectation4 = expectationWithDescription(description4)
         
-        visualRecognition.classify(url: carURL, classifierIDs: [id], failure: failWithError) {
+        visualRecognition.classify(carURL, classifierIDs: [id], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -510,7 +510,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation4 = expectationWithDescription(description4)
         
         visualRecognition.classify(
-            url: carURL,
+            carURL,
             owners: ["me"],
             classifierIDs: [id],
             showLowConfidence: true,
@@ -605,7 +605,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation4 = expectationWithDescription(description4)
         
         visualRecognition.classify(
-            url: carURL,
+            carURL,
             classifierIDs: ["default", id],
             failure: failWithError)
         {
@@ -654,7 +654,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify uploaded images using the default classifier."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.classify(image: car, failure: failWithError) {
+        visualRecognition.classify(car, failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -691,7 +691,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         visualRecognition.classify(
-            image: car,
+            car,
             owners: ["IBM"],
             classifierIDs: ["default"],
             showLowConfidence: true,
@@ -785,7 +785,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Classify images by URL using a custom classifier."
         let expectation4 = expectationWithDescription(description4)
         
-        visualRecognition.classify(image: car, classifierIDs: [id], failure: failWithError) {
+        visualRecognition.classify(car, classifierIDs: [id], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -874,7 +874,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation4 = expectationWithDescription(description4)
         
         visualRecognition.classify(
-            image: car,
+            car,
             owners: ["me"],
             classifierIDs: [id],
             showLowConfidence: true,
@@ -969,7 +969,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation4 = expectationWithDescription(description4)
         
         visualRecognition.classify(
-            image: car,
+            car,
             classifierIDs: ["default", id],
             failure: failWithError)
         {
@@ -1070,7 +1070,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Classify images by URL using a custom classifier."
         let expectation4 = expectationWithDescription(description4)
         visualRecognition.classify(
-            image: examplesCars,
+            examplesCars,
             classifierIDs: ["default", id],
             failure: failWithError)
         {
@@ -1121,7 +1121,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces by URL."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.detectFaces(url: obamaURL, failure: failWithError) {
+        visualRecognition.detectFaces(obamaURL, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1170,7 +1170,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in an uploaded image."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.detectFaces(image: obama, failure: failWithError) {
+        visualRecognition.detectFaces(obama, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1219,7 +1219,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in uploaded images."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.detectFaces(image: faces, failure: failWithError) {
+        visualRecognition.detectFaces(faces, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1270,7 +1270,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text by URL."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.recognizeText(url: signURL, failure: failWithError) {
+        visualRecognition.recognizeText(signURL, failure: failWithError) {
             wordImages in
             
             // verify the word images object
@@ -1310,7 +1310,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text in an uploaded image."
         let expectation = expectationWithDescription(description)
         
-        visualRecognition.recognizeText(image: sign, failure: failWithError) {
+        visualRecognition.recognizeText(sign, failure: failWithError) {
             wordImages in
             
             // verify the word images object

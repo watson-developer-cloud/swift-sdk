@@ -16,83 +16,80 @@
 
 import Foundation
 import Freddy
-
-extension DialogV1 {
     
-    /** A dialog conversation. */
-    public struct Conversation: JSONDecodable {
+/** A dialog conversation. */
+public struct Conversation: JSONDecodable {
 
-        /// The nodes that were executed by the conversation.
-        public let hitNodes: [HitNode]
-        
-        /// The conversation identifier.
-        public let conversationID: Int
-        
-        /// The client identifier.
-        public let clientID: Int
-        
-        /// The messages exchanged during the conversation.
-        public let messages: [Message]
-        
-        /// The profile variables associated with the conversation.
-        public let profile: [String: String]
+    /// The nodes that were executed by the conversation.
+    public let hitNodes: [HitNode]
+    
+    /// The conversation identifier.
+    public let conversationID: Int
+    
+    /// The client identifier.
+    public let clientID: Int
+    
+    /// The messages exchanged during the conversation.
+    public let messages: [Message]
+    
+    /// The profile variables associated with the conversation.
+    public let profile: [String: String]
 
-        public init(json: JSON) throws {
-            hitNodes = try json.arrayOf("hit_nodes", type: HitNode.self)
-            conversationID = try json.int("conversation_id")
-            clientID = try json.int("client_id")
-            messages = try json.arrayOf("messages", type: Message.self)
+    public init(json: JSON) throws {
+        hitNodes = try json.arrayOf("hit_nodes", type: HitNode.self)
+        conversationID = try json.int("conversation_id")
+        clientID = try json.int("client_id")
+        messages = try json.arrayOf("messages", type: Message.self)
 
-            let profileVariables = try json.array("profile")
-            var profile = [String: String]()
-            for variable in profileVariables {
-                let name = try variable.string("name")
-                let value = try variable.string("value")
-                profile[name] = value
-            }
-            self.profile = profile
+        let profileVariables = try json.array("profile")
+        var profile = [String: String]()
+        for variable in profileVariables {
+            let name = try variable.string("name")
+            let value = try variable.string("value")
+            profile[name] = value
         }
+        self.profile = profile
     }
-    
-    /** A dialog hit node. */
-    public struct HitNode: JSONDecodable {
-        
-        /// The details of the node.
-        public let details: String
-        
-        /// The label of the node.
-        public let label: String
-        
-        /// The type of the node.
-        public let type: String
-        
-        /// The node identifier.
-        public let nodeID: Int
+}
 
-        public init(json: JSON) throws {
-            details = try json.string("details")
-            label = try json.string("label")
-            type = try json.string("type")
-            nodeID = try json.int("node_id")
-        }
-    }
+/** A dialog hit node. */
+public struct HitNode: JSONDecodable {
     
-    /** A dialog message. */
-    public struct Message: JSONDecodable {
-        
-        /// The text of the message.
-        public let text: String
-        
-        /// The date and time of the message.
-        public let dateTime: String
-        
-        /// The client that prompted the message to be sent.
-        public let fromClient: String
+    /// The details of the node.
+    public let details: String
+    
+    /// The label of the node.
+    public let label: String
+    
+    /// The type of the node.
+    public let type: String
+    
+    /// The node identifier.
+    public let nodeID: Int
 
-        public init(json: JSON) throws {
-            text = try json.string("text")
-            dateTime = try json.string("date_time")
-            fromClient = try json.string("from_client")
-        } 
+    public init(json: JSON) throws {
+        details = try json.string("details")
+        label = try json.string("label")
+        type = try json.string("type")
+        nodeID = try json.int("node_id")
     }
+}
+
+/** A dialog message. */
+public struct Message: JSONDecodable {
+    
+    /// The text of the message.
+    public let text: String
+    
+    /// The date and time of the message.
+    public let dateTime: String
+    
+    /// The client that prompted the message to be sent.
+    public let fromClient: String
+
+    public init(json: JSON) throws {
+        text = try json.string("text")
+        dateTime = try json.string("date_time")
+        fromClient = try json.string("from_client")
+    } 
 }

@@ -16,33 +16,30 @@
 
 import Foundation
 import Freddy
-
-extension DialogV1 {
     
-    /** A dialog conversation response. */
-    public struct ConversationResponse: JSONDecodable {
-        
-        /// The response from the dialog application.
-        public let response: [String]
-        
-        /// The input string that prompted the dialog application to respond.
-        public let input: String
-        
-        /// The conversation identifier.
-        public let conversationID: Int
-        
-        /// The confidence associated with the conversation response.
-        public let confidence: Double
-        
-        /// The client identifier.
-        public let clientID: Int
+/** A dialog conversation response. */
+public struct ConversationResponse: JSONDecodable {
+    
+    /// The response from the dialog application.
+    public let response: [String]
+    
+    /// The input string that prompted the dialog application to respond.
+    public let input: String
+    
+    /// The conversation identifier.
+    public let conversationID: Int
+    
+    /// The confidence associated with the conversation response.
+    public let confidence: Double
+    
+    /// The client identifier.
+    public let clientID: Int
 
-        public init(json: JSON) throws {
-            response = try json.arrayOf("response")
-            input = try json.string("input")
-            conversationID = try json.int("conversation_id")
-            confidence = try json.double("confidence")
-            clientID = try json.int("client_id")
-        }
+    public init(json: JSON) throws {
+        response = try json.arrayOf("response")
+        input = try json.string("input")
+        conversationID = try json.int("conversation_id")
+        confidence = try json.double("confidence")
+        clientID = try json.int("client_id")
     }
 }

@@ -17,35 +17,32 @@
 import Foundation
 import Freddy
 
-extension LanguageTranslationV2 {
+/** The result of translating an input text from a source language to a target language. */
+public struct TranslateResponse: JSONDecodable {
 
-    /** The result of translating an input text from a source language to a target language. */
-    public struct TranslateResponse: JSONDecodable {
+    /// The number of words in the complete input text.
+    public let wordCount: Int
 
-        /// The number of words in the complete input text.
-        public let wordCount: Int
+    /// The number of characters in the complete input text.
+    public let characterCount: Int
 
-        /// The number of characters in the complete input text.
-        public let characterCount: Int
+    /// A list of translation output, corresponding to the list of input text.
+    public let translations: [Translation]
 
-        /// A list of translation output, corresponding to the list of input text.
-        public let translations: [Translation]
-
-        public init(json: JSON) throws {
-            wordCount = try json.int("word_count")
-            characterCount = try json.int("character_count")
-            translations = try json.arrayOf("translations", type: Translation.self)
-        }
+    public init(json: JSON) throws {
+        wordCount = try json.int("word_count")
+        characterCount = try json.int("character_count")
+        translations = try json.arrayOf("translations", type: Translation.self)
     }
+}
 
-    /** A translation of input text from a source language to a target language. */
-    public struct Translation: JSONDecodable {
+/** A translation of input text from a source language to a target language. */
+public struct Translation: JSONDecodable {
 
-        /// The translation of input text from a source language to a target language.
-        public let translation: String
+    /// The translation of input text from a source language to a target language.
+    public let translation: String
 
-        public init(json: JSON) throws {
-            translation = try json.string("translation")
-        }
+    public init(json: JSON) throws {
+        translation = try json.string("translation")
     }
 }

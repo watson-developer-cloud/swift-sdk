@@ -16,33 +16,30 @@
 
 import Foundation
 import Freddy
-
-extension DialogV1 {
     
-    /** A dialog node. */
-    public struct Node: JSONEncodable, JSONDecodable {
-        
-        /// The node's associated content.
-        public let content: String
-        
-        /// The node's type.
-        public let node: String
- 
-        public init(content: String, node: String) {
-            self.content = content
-            self.node = node
-        }
+/** A dialog node. */
+public struct Node: JSONEncodable, JSONDecodable {
+    
+    /// The node's associated content.
+    public let content: String
+    
+    /// The node's type.
+    public let node: String
 
-        public init(json: JSON) throws {
-            content = try json.string("content")
-            node = try json.string("node")
-        }
+    public init(content: String, node: String) {
+        self.content = content
+        self.node = node
+    }
 
-        public func toJSON() -> JSON {
-            var json = [String: JSON]()
-            json["content"] = .String(content)
-            json["node"] = .String(node)
-            return JSON.Dictionary(json)
-        }
+    public init(json: JSON) throws {
+        content = try json.string("content")
+        node = try json.string("node")
+    }
+
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["content"] = .String(content)
+        json["node"] = .String(node)
+        return JSON.Dictionary(json)
     }
 }

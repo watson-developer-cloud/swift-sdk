@@ -16,54 +16,51 @@
 
 import Foundation
 import Freddy
-
-extension NaturalLanguageClassifierV1 {
     
-    public struct ClassifierDetails: JSONDecodable {
+public struct ClassifierDetails: JSONDecodable {
+    
+    /// Unique identifier for this classifier
+    public let classifierId: String
+    
+    /// User-supplied name for the classifier
+    public let name: String?
+    
+    /// The language used for the classifier
+    public let language: String
+    
+    /// Date and time (UTC) the classifier was created
+    public let created: String
+    
+    /// Link to the classifer
+    public let url: String
+    
+    /// The state of the classifier: [`Non Existent` or `Training` or `Failed` or `Available` 
+    /// or `Unavailable`]
+    public let status: ClassifierStatus
+    
+    /// Additional details about the status
+    public let statusDescription: String
+    
+    /// Used internally to initialize a `ClassifierDetails` model from JSON.
+    public init(json: JSON) throws {
+        classifierId = try json.string("classifier_id")
+        name = try? json.string("name")
+        language = try json.string("language")
+        created = try json.string("created")
+        url = try json.string("url")
+        statusDescription = try json.string("status_description")
         
-        /// Unique identifier for this classifier
-        public let classifierId: String
-        
-        /// User-supplied name for the classifier
-        public let name: String?
-        
-        /// The language used for the classifier
-        public let language: String
-        
-        /// Date and time (UTC) the classifier was created
-        public let created: String
-        
-        /// Link to the classifer
-        public let url: String
-        
-        /// The state of the classifier: [`Non Existent` or `Training` or `Failed` or `Available` 
-        /// or `Unavailable`]
-        public let status: ClassifierStatus
-        
-        /// Additional details about the status
-        public let statusDescription: String
-        
-        /// Used internally to initialize a `ClassifierDetails` model from JSON.
-        public init(json: JSON) throws {
-            classifierId = try json.string("classifier_id")
-            name = try? json.string("name")
-            language = try json.string("language")
-            created = try json.string("created")
-            url = try json.string("url")
-            statusDescription = try json.string("status_description")
-            
-            guard let classifierStatus = ClassifierStatus(rawValue: try json.string("status")) else {
-                throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
-            }
-            status = classifierStatus
+        guard let classifierStatus = ClassifierStatus(rawValue: try json.string("status")) else {
+            throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
         }
+        status = classifierStatus
     }
-    
-    public enum ClassifierStatus: String {
-        case Available = "Available"
-        case Failed = "Failed"
-        case NonExistent = "Non Existent"
-        case Training = "Training"
-        case Unavailable = "Unavailable"
-    }
+}
+
+public enum ClassifierStatus: String {
+    case Available = "Available"
+    case Failed = "Failed"
+    case NonExistent = "Non Existent"
+    case Training = "Training"
+    case Unavailable = "Unavailable"
 }

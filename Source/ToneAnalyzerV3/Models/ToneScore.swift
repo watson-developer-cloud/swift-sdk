@@ -17,24 +17,22 @@
 import Foundation
 import Freddy
 
-extension ToneAnalyzerV3 {
-    /**
-     *
-     * Object representing scoring of a single Tone (of any category) on our responses. It contains the
-     * Tone ID, a score, and optionally a list of evidences.
-     */
-    public struct ToneScore: JSONDecodable {
-        /// Unique ID of the tone.
-        public let id: String
-        /// The name of the tone
-        public let name: String
-        /// The score of the tone.
-        public let score: Double
-        
-        public init(json: JSON) throws {
-            id = try json.string("tone_id")
-            name = try json.string("tone_name")
-            score = try json.double("score")
-        }
+/**
+ *
+ * Object representing scoring of a single Tone (of any category) on our responses. It contains the
+ * Tone ID, a score, and optionally a list of evidences.
+ */
+public struct ToneScore: JSONDecodable {
+    /// Unique ID of the tone.
+    public let id: String
+    /// The name of the tone
+    public let name: String
+    /// The score of the tone.
+    public let score: Double
+    
+    public init(json: JSON) throws {
+        id = try json.string("tone_id")
+        name = try json.string("tone_name")
+        score = try json.double("score")
     }
 }

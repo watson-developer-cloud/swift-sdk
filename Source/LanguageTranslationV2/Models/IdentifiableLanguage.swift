@@ -17,20 +17,17 @@
 import Foundation
 import Freddy
 
-extension LanguageTranslationV2 {
+/** A language that can be identified by the Language Translation service. */
+public struct IdentifiableLanguage: JSONDecodable {
+    
+    /// The code of the identifiable language.
+    public let language: String
+    
+    /// The name of the identifiable language.
+    public let name: String
 
-    /** A language that can be identified by the Language Translation service. */
-    public struct IdentifiableLanguage: JSONDecodable {
-        
-        /// The code of the identifiable language.
-        public let language: String
-        
-        /// The name of the identifiable language.
-        public let name: String
-
-        public init(json: JSON) throws {
-            language = try json.string("language")
-            name = try json.string("name")
-        }
+    public init(json: JSON) throws {
+        language = try json.string("language")
+        name = try json.string("name")
     }
 }

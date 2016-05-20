@@ -16,33 +16,30 @@
 
 import Foundation
 import Freddy
-
-extension ToneAnalyzerV3 {
+    
+/**
+ * Top level tone (or Tone Category) from the list of Writing Tone, 
+ * Emotion Tone or Social Tone. It holds a list of scores for individual Tones.
+ */
+public struct ToneCategory: JSONDecodable {
+    
+    /// The unique ID of the category.
+    public let id: String
+    
+    /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
+    public let name: String
     
     /**
-     * Top level tone (or Tone Category) from the list of Writing Tone, 
-     * Emotion Tone or Social Tone. It holds a list of scores for individual Tones.
-     */
-    public struct ToneCategory: JSONDecodable {
-        
-        /// The unique ID of the category.
-        public let id: String
-        
-        /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
-        public let name: String
-        
-        /**
-          * Analysis organized by tones. The emotion tones are anger, disgust, fear, joy, and sadness.
-          * The writing tones are analytical, confident, and tentative. The social tones are
-          * openness, conscientiousness, extraversion, agreeableness, and neuroticism.
-        **/
-        public let tones: [ToneScore]
-        
-        
-        public init(json: JSON) throws {
-            id = try json.string("category_id")
-            name = try json.string("category_name")
-            tones = try json.arrayOf("tones", type: ToneScore.self)
-        }
+      * Analysis organized by tones. The emotion tones are anger, disgust, fear, joy, and sadness.
+      * The writing tones are analytical, confident, and tentative. The social tones are
+      * openness, conscientiousness, extraversion, agreeableness, and neuroticism.
+    **/
+    public let tones: [ToneScore]
+    
+    
+    public init(json: JSON) throws {
+        id = try json.string("category_id")
+        name = try json.string("category_name")
+        tones = try json.arrayOf("tones", type: ToneScore.self)
     }
 }

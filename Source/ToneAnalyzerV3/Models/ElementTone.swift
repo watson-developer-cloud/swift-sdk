@@ -16,21 +16,18 @@
 
 import Foundation
 import Freddy
-
-extension ToneAnalyzerV3 {
     
-    /**
-     * This object represents the results of Tone analysis on an element; which 
-     * may be a document or a sentence. Its structure is a 2-level tree, with 
-     * tone categories in the top level and the individual tones (and their scores) in leaves.
-     */
-    public struct ElementTone: JSONDecodable {
-        
-        /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
-        public let tones: [ToneCategory]
-        
-        public init(json: JSON) throws {
-            tones = try json.arrayOf("tone_categories", type: ToneCategory.self)
-        }
+/**
+ * This object represents the results of Tone analysis on an element; which 
+ * may be a document or a sentence. Its structure is a 2-level tree, with 
+ * tone categories in the top level and the individual tones (and their scores) in leaves.
+ */
+public struct ElementTone: JSONDecodable {
+    
+    /// The tone analysis categories. Possible tone categories are emotion, writing, and social.
+    public let tones: [ToneCategory]
+    
+    public init(json: JSON) throws {
+        tones = try json.arrayOf("tone_categories", type: ToneCategory.self)
     }
 }

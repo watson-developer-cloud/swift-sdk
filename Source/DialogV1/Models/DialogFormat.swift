@@ -15,13 +15,10 @@
  **/
 
 import Foundation
-
-extension DialogV1 {
     
-    /** Supported dialog file formats */
-    public enum Format: String {
-        case OctetStream = "application/octet-stream"
-        case WDSJSON = "application/wds+json"
-        case WDSXML = "application/wds+xml"
-    }
+/** Supported dialog file formats */
+public enum Format: String {
+    case OctetStream = "application/octet-stream"
+    case WDSJSON = "application/wds+json"
+    case WDSXML = "application/wds+xml"
 }

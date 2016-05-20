@@ -16,50 +16,46 @@
 
 import Foundation
 import Freddy
+    
+public struct Classification: JSONDecodable {
+    
+    /// Unique identifier for the classifier used.
+    public let classifierId: String
+    
+    /// Link to the classifier.
+    public let url: String
+    
+    /// The submitted phrase.
+    public let text: String
+    
+    /// The class with the highest confidence.
+    public let topClass: String
+    
+    /// An array classes of up to ten className-confidence pairs that are sorted in descending 
+    /// order of confidence. If there are fewer than 10 classes, the sum of the confidence 
+    /// values is 100%.
+    public let classes: [ClassifiedClass]
+    
+    public init(json: JSON) throws {
+        classifierId = try json.string("classifier_id")
+        url = try json.string("url")
+        text = try json.string("text")
+        topClass = try json.string("top_class")
+        classes = try json.arrayOf("classes", type: ClassifiedClass.self)
+    }
+}
 
-extension NaturalLanguageClassifierV1 {
+public struct ClassifiedClass: JSONDecodable {
     
-    public struct Classification: JSONDecodable {
-        
-        /// Unique identifier for the classifier used.
-        public let classifierId: String
-        
-        /// Link to the classifier.
-        public let url: String
-        
-        /// The submitted phrase.
-        public let text: String
-        
-        /// The class with the highest confidence.
-        public let topClass: String
-        
-        /// An array classes of up to ten className-confidence pairs that are sorted in descending 
-        /// order of confidence. If there are fewer than 10 classes, the sum of the confidence 
-        /// values is 100%.
-        public let classes: [ClassifiedClass]
-        
-        public init(json: JSON) throws {
-            classifierId = try json.string("classifier_id")
-            url = try json.string("url")
-            text = try json.string("text")
-            topClass = try json.string("top_class")
-            classes = try json.arrayOf("classes", type: ClassifiedClass.self)
-        }
+    /// A decimal percentage that represents the confidence Watson has in this class. Higher 
+    /// values represent higher confidences.
+    public var confidence: Double
+    
+    /// Class label.
+    public var className: String
+    
+    public init(json: JSON) throws {
+        confidence = try json.double("confidence")
+        className = try json.string("class_name")
     }
-    
-    public struct ClassifiedClass: JSONDecodable {
-        
-        /// A decimal percentage that represents the confidence Watson has in this class. Higher 
-        /// values represent higher confidences.
-        public var confidence: Double
-        
-        /// Class label.
-        public var className: String
-        
-        public init(json: JSON) throws {
-            confidence = try json.double("confidence")
-            className = try json.string("class_name")
-        }
-    }
-    
 }

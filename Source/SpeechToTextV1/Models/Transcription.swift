@@ -38,7 +38,7 @@ public struct Transcription: JSONDecodable {
     public init(json: JSON) throws {
         transcript = try json.string("transcript")
         confidence = try? json.double("confidence")
-        timestamps = try? json.array("timestamps").map(WordTimestamp.init)
-        wordConfidence = try? json.array("word_confidence").map(WordConfidence.init)
+        timestamps = try? json.arrayOf("timestamps", type: WordTimestamp.self)
+        wordConfidence = try? json.arrayOf("word_confidence", type: WordConfidence.self)
     }
 }

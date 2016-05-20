@@ -34,7 +34,7 @@ extension LanguageTranslationV2 {
         public init(json: JSON) throws {
             wordCount = try json.int("word_count")
             characterCount = try json.int("character_count")
-            translations = try json.array("translations").map { json in try json.decode() }
+            translations = try json.arrayOf("translations", type: Translation.self)
         }
     }
 

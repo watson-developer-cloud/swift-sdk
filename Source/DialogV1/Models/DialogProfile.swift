@@ -37,9 +37,7 @@ extension DialogV1 {
 
         public init(json: JSON) throws {
             clientID = try? json.int("client_id")
-            parameters = try json.array("name_values").map { 
-                parameter in try parameter.decode()
-            }
+            parameters = try json.arrayOf("name_values", type: Parameter.self)
         }
 
         public func toJSON() -> JSON {

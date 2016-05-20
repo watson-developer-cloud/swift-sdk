@@ -43,6 +43,6 @@ public struct TranscriptionResult: JSONDecodable {
         keywordResults = try? json.dictionary("keywords_result").map {
             json in try json.arrayOf(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.array("word_alternatives").map(AlternativeResults.init)
+        wordAlternatives = try? json.arrayOf("word_alternatives", type: AlternativeResults.self)
     }
 }

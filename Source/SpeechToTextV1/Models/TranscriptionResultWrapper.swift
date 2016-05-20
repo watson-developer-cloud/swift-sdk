@@ -35,6 +35,6 @@ internal struct TranscriptionResultWrapper: JSONDecodable {
     /// Used internally to initialize a `TranscriptionResultWrapper` from JSON.
     internal init(json: JSON) throws {
         resultIndex = try json.int("result_index")
-        results = try json.array("results").map(TranscriptionResult.init)
+        results = try json.arrayOf("results", type: TranscriptionResult.self)
     }
 }

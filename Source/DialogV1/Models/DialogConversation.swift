@@ -38,10 +38,10 @@ extension DialogV1 {
         public let profile: [String: String]
 
         public init(json: JSON) throws {
-            hitNodes = try json.array("hit_nodes").map { node in try node.decode() }
+            hitNodes = try json.arrayOf("hit_nodes", type: HitNode.self)
             conversationID = try json.int("conversation_id")
             clientID = try json.int("client_id")
-            messages = try json.arrayOf("messages")
+            messages = try json.arrayOf("messages", type: Message.self)
 
             let profileVariables = try json.array("profile")
             var profile = [String: String]()

@@ -185,7 +185,7 @@ public class NaturalLanguageClassifierV1 {
      */
     public func deleteClassifier(
         classifierId: String,
-        failure:(NSError -> Void)? = nil,
+        failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         
         // construct REST request

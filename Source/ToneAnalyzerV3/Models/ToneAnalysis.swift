@@ -25,10 +25,10 @@ import Freddy
 public struct ToneAnalysis: JSONDecodable {
     
     // The tone analysis of the full document.
-    public let documentTone:ElementTone
+    public let documentTone: ElementTone
     
     /// The sentence level tone analysis.
-    public let sentencesTones:[SentenceTone]
+    public let sentencesTones: [SentenceTone]
     
     public init(json: JSON) throws {
         documentTone = try json.decode("document_tone", type: ElementTone.self)

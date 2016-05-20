@@ -32,7 +32,7 @@ public struct SentenceTone: JSONDecodable {
     /// The character number of the last character in the sentence.
     public let inputTo: Int
     /// Text of the sentence being analyzed.
-    public let text :String
+    public let text: String
     
     
     public init(json: JSON) throws {

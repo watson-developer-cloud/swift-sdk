@@ -34,10 +34,10 @@ public struct Voice: JSONDecodable {
     public let language: String
     
     /// A description of the voice.
-    public let description:String
+    public let description: String
     
     /// Indicates whether the voice can be customized with a custom voice model.
-    public let customizable:Bool
+    public let customizable: Bool
     
     /// A Customization object that provides information about a specific custom voice model
     /// for the voice. Returned only when a customization_id is is specified with the call.

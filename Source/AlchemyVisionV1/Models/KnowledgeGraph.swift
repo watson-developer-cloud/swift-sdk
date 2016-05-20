@@ -15,27 +15,16 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-/**
- *  Contains the total transactions and the array of image keywords
- */
-public struct ImageKeyWords: Mappable {
-    
-    /// Transactions charged
-    public var totalTransactions: Int?
-    /// Array of ImageKeyWord object
-    public var imageKeyWords: [ImageKeyWord] = []
-    
-    public init() {
+/** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
+public struct KnowledgeGraph: JSONDecodable {
 
+    /// A hierarchy of categories for the given object.
+    public let typeHierarchy: String
+
+    /// Used internally to initialize a `KnowledgeGraph` model from JSON.
+    public init(json: JSON) throws {
+        typeHierarchy = try json.string("typeHierarchy")
     }
-
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        imageKeyWords     <-   map["imageKeywords"]
-        totalTransactions <-  (map["totalTransactions"], Transformation.stringToInt)
-    }
-    
 }

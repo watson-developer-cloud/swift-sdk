@@ -15,17 +15,24 @@
  **/
 
 import Foundation
+import Freddy
 
-/**
- *  Maps the path and the url of an image
- */
-public struct ImageURL {
-    
-    let path: String
-    let url: NSURL?
-    
-    public init(path: String, url: NSURL) {
-        self.path = path
-        self.url = url
+/** The primary image link detected on a webpage by the Alchemy Vision service. */
+public struct ImageLink: JSONDecodable {
+
+    /// The status of the request.
+    public let status: String
+
+    /// The URL of the requested source.
+    public let url: String
+
+    /// The URL of the primary image.
+    public let image: String
+
+    /// Used internally to initialize an `ImageLink` model from JSON.
+    public init(json: JSON) throws {
+        status = try json.string("status")
+        url = try json.string("url")
+        image = try json.string("image")
     }
 }

@@ -127,6 +127,17 @@
 		7AAA9A831CEE878D002C9564 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7A1CEE878D002C9564 /* Voice.swift */; };
 		7AAA9A851CEE878D002C9564 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */; };
 		7AAA9A861CEE8798002C9564 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */; };
+		7AAA9AAE1CEE8B3C002C9564 /* AlchemyVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */; };
+		7AAA9AAF1CEE8B3C002C9564 /* FaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */; };
+		7AAA9AB01CEE8B3C002C9564 /* ImageKeyWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA41CEE8B3C002C9564 /* ImageKeyWords.swift */; };
+		7AAA9AB11CEE8B3C002C9564 /* ImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA51CEE8B3C002C9564 /* ImageLink.swift */; };
+		7AAA9AB21CEE8B3C002C9564 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA61CEE8B3C002C9564 /* KnowledgeGraph.swift */; };
+		7AAA9AB31CEE8B3C002C9564 /* SceneText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA71CEE8B3C002C9564 /* SceneText.swift */; };
+		7AAA9AB91CEE8B57002C9564 /* AlchemyVisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA91CEE8B3C002C9564 /* AlchemyVisionTests.swift */; };
+		7AAA9ABA1CEE8B57002C9564 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAA1CEE8B3C002C9564 /* car.png */; };
+		7AAA9ABB1CEE8B57002C9564 /* example.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAB1CEE8B3C002C9564 /* example.html */; };
+		7AAA9ABC1CEE8B57002C9564 /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAC1CEE8B3C002C9564 /* obama.jpg */; };
+		7AAA9ABD1CEE8B57002C9564 /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAD1CEE8B3C002C9564 /* sign.jpg */; };
 		7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7ADEC3EA1CBF081200A84C35 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
 		7ADEC3EB1CBF081200A84C35 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
@@ -307,6 +318,17 @@
 		7AAA9A7A1CEE878D002C9564 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
+		7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVision.swift; sourceTree = "<group>"; };
+		7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTags.swift; sourceTree = "<group>"; };
+		7AAA9AA41CEE8B3C002C9564 /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
+		7AAA9AA51CEE8B3C002C9564 /* ImageLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLink.swift; sourceTree = "<group>"; };
+		7AAA9AA61CEE8B3C002C9564 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
+		7AAA9AA71CEE8B3C002C9564 /* SceneText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneText.swift; sourceTree = "<group>"; };
+		7AAA9AA91CEE8B3C002C9564 /* AlchemyVisionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVisionTests.swift; sourceTree = "<group>"; };
+		7AAA9AAA1CEE8B3C002C9564 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		7AAA9AAB1CEE8B3C002C9564 /* example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = example.html; sourceTree = "<group>"; };
+		7AAA9AAC1CEE8B3C002C9564 /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
+		7AAA9AAD1CEE8B3C002C9564 /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* DialogConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* DialogConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogConversationResponse.swift; sourceTree = "<group>"; };
@@ -385,13 +407,14 @@
 			isa = PBXGroup;
 			children = (
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
-				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
+				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
+				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
@@ -721,6 +744,41 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */,
+				7AAA9AA21CEE8B3C002C9564 /* Models */,
+				7AAA9AA81CEE8B3C002C9564 /* Tests */,
+			);
+			name = AlchemyVisionV1;
+			path = Source/AlchemyVisionV1;
+			sourceTree = "<group>";
+		};
+		7AAA9AA21CEE8B3C002C9564 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */,
+				7AAA9AA41CEE8B3C002C9564 /* ImageKeyWords.swift */,
+				7AAA9AA51CEE8B3C002C9564 /* ImageLink.swift */,
+				7AAA9AA61CEE8B3C002C9564 /* KnowledgeGraph.swift */,
+				7AAA9AA71CEE8B3C002C9564 /* SceneText.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AAA9AA81CEE8B3C002C9564 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AAA9AA91CEE8B3C002C9564 /* AlchemyVisionTests.swift */,
+				7AAA9AAA1CEE8B3C002C9564 /* car.png */,
+				7AAA9AAB1CEE8B3C002C9564 /* example.html */,
+				7AAA9AAC1CEE8B3C002C9564 /* obama.jpg */,
+				7AAA9AAD1CEE8B3C002C9564 /* sign.jpg */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +944,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AAA9ABA1CEE8B57002C9564 /* car.png in Resources */,
 				7A6117691CB5A44E009A4DA1 /* MobyDickIntro.txt in Resources */,
 				7A34CB531C233E2100F20D0E /* Credentials.plist in Resources */,
 				7AAA9A6C1CEE6098002C9564 /* cars.zip in Resources */,
@@ -900,11 +959,14 @@
 				7A9F36321CC0A1D500AE8818 /* pizza_sample.xml in Resources */,
 				12B07D2D1CDD46A300B20B38 /* trained_meta.txt in Resources */,
 				12B07D2B1CDBEE2100B20B38 /* training_meta_missing_name.txt in Resources */,
+				7AAA9ABB1CEE8B57002C9564 /* example.html in Resources */,
 				7AAA9A6E1CEE609C002C9564 /* car.png in Resources */,
 				7AA7AD3D1CED11A8009DD700 /* sample.html in Resources */,
+				7AAA9ABC1CEE8B57002C9564 /* obama.jpg in Resources */,
 				7A6117681CB5A44C009A4DA1 /* KennedySpeech.txt in Resources */,
 				7AAA9A701CEE609C002C9564 /* obama.jpg in Resources */,
 				12B07D131CDA75DB00B20B38 /* training_meta_empty.txt in Resources */,
+				7AAA9ABD1CEE8B57002C9564 /* sign.jpg in Resources */,
 				7AAA9A6B1CEE6098002C9564 /* baseball.zip in Resources */,
 				12A2485A1CD3248E00C63CF1 /* weather_data_train.csv in Resources */,
 				7AA7AD3C1CED11A8009DD700 /* biography.html in Resources */,
@@ -924,6 +986,7 @@
 				7A61175F1CB598D9009A4DA1 /* ContentItem.swift in Sources */,
 				7AA7AD261CED11A0009DD700 /* Microformat.swift in Sources */,
 				7ADEC3ED1CBF081200A84C35 /* TranslateRequest.swift in Sources */,
+				7AAA9AB11CEE8B3C002C9564 /* ImageLink.swift in Sources */,
 				7AAA9A801CEE878D002C9564 /* PhonemeFormat.swift in Sources */,
 				7AAA9A311CEE3026002C9564 /* SpeechToText.swift in Sources */,
 				7AA7AD2C1CED11A0009DD700 /* Sentiment.swift in Sources */,
@@ -935,6 +998,7 @@
 				7AAA9A5D1CEE6089002C9564 /* Classifier.swift in Sources */,
 				7AA7AD2D1CED11A0009DD700 /* SentimentResponse.swift in Sources */,
 				7A6117601CB598D9009A4DA1 /* Profile.swift in Sources */,
+				7AAA9AB21CEE8B3C002C9564 /* KnowledgeGraph.swift in Sources */,
 				7AAA9A5B1CEE6089002C9564 /* Class.swift in Sources */,
 				7AA7AD1B1CED11A0009DD700 /* DocumentSentiment.swift in Sources */,
 				7AAA9A3E1CEE3059002C9564 /* RestExtensions.swift in Sources */,
@@ -954,6 +1018,7 @@
 				7AA7AD151CED11A0009DD700 /* Authors.swift in Sources */,
 				7AA7AD231CED11A0009DD700 /* Keywords.swift in Sources */,
 				7AAA9A5C1CEE6089002C9564 /* ClassifiedImages.swift in Sources */,
+				7AAA9AB31CEE8B3C002C9564 /* SceneText.swift in Sources */,
 				7AAA9A2E1CEE3026002C9564 /* TranscriptionStop.swift in Sources */,
 				7AA7AD141CED11A0009DD700 /* AlchemyLanguageGenericModel.swift in Sources */,
 				12B07D111CD791A300B20B38 /* Classification.swift in Sources */,
@@ -981,6 +1046,7 @@
 				7AA7AD111CED11A0009DD700 /* AlchemyLanguageConstants.swift in Sources */,
 				7AAA9A2B1CEE3026002C9564 /* TranscriptionResultWrapper.swift in Sources */,
 				7AA7AD351CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift in Sources */,
+				7AAA9AB01CEE8B3C002C9564 /* ImageKeyWords.swift in Sources */,
 				7ADEC3E91CBF081200A84C35 /* IdentifiableLanguage.swift in Sources */,
 				7AA7AD1C1CED11A0009DD700 /* DocumentText.swift in Sources */,
 				7A6117611CB598D9009A4DA1 /* TraitTreeNode.swift in Sources */,
@@ -1015,12 +1081,14 @@
 				7AEB13391CBF91E100101884 /* DialogNode.swift in Sources */,
 				7AA7AD1D1CED11A0009DD700 /* DocumentTitle.swift in Sources */,
 				12A248521CD1482200C63CF1 /* ClassifierDetails.swift in Sources */,
+				7AAA9AAE1CEE8B3C002C9564 /* AlchemyVision.swift in Sources */,
 				7AAA9A2F1CEE3026002C9564 /* WordConfidence.swift in Sources */,
 				7AA7AD291CED11A0009DD700 /* Quotation.swift in Sources */,
 				7AAA9A291CEE3026002C9564 /* Transcription.swift in Sources */,
 				7AEB13341CBF8CC700101884 /* DialogConversation.swift in Sources */,
 				7ADEC3F01CBF081600A84C35 /* LanguageTranslation.swift in Sources */,
 				B1F21DFD1CE2461800393146 /* ToneAnalysis.swift in Sources */,
+				7AAA9AAF1CEE8B3C002C9564 /* FaceTags.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,6 +1105,7 @@
 				7AAA9A381CEE3033002C9564 /* SpeechToTextTests.swift in Sources */,
 				7ADEC3F31CBF2E0C00A84C35 /* LanguageTranslationTests.swift in Sources */,
 				7AAA9A721CEE609F002C9564 /* VisualRecognitionTests.swift in Sources */,
+				7AAA9AB91CEE8B57002C9564 /* AlchemyVisionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

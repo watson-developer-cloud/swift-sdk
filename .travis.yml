@@ -14,7 +14,7 @@ branches:
 before_install:
 - brew update
 #- brew install carthage
-- openssl aes-256-cbc -K $encrypted_47221bf562c9_key -iv $encrypted_47221bf562c9_iv -in Sources/SupportingFiles/Credentials.plist.enc -out Sources/SupportingFiles/Credentials.plist -d
+- openssl aes-256-cbc -K $encrypted_47221bf562c9_key -iv $encrypted_47221bf562c9_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
 
 before_script:
     - carthage update --platform iOS

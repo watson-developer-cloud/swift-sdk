@@ -27,11 +27,23 @@ public class NaturalLanguageClassifier {
     private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
     private let serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
     
+    /**
+     Create a `NaturalLanguageClassifier` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
     
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)

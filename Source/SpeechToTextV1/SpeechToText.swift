@@ -32,11 +32,12 @@ public class SpeechToText {
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /**
-     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
-
-     - parameter username: The username associated with your `SpeechToText` service.
-     - parameter password: The password associated with your `SpeechToText` service.
-     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     Create a `SpeechToText` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter versionDate: The release date of the version of the API to use. Specify the
+     date in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String) {
         self.restToken = RestToken(

@@ -70,11 +70,11 @@ public class LanguageTranslationV2 {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         if let source = source {
-            let queryParameter = NSURLQueryItem(name: "source", value: "\(source)")
+            let queryParameter = NSURLQueryItem(name: "source", value: source)
             queryParameters.append(queryParameter)
         }
         if let target = target {
-            let queryParameter = NSURLQueryItem(name: "target", value: "\(target)")
+            let queryParameter = NSURLQueryItem(name: "target", value: target)
             queryParameters.append(queryParameter)
         }
         if let defaultModelsOnly = defaultModelsOnly {
@@ -111,9 +111,9 @@ public class LanguageTranslationV2 {
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: "\(baseModelID)"))
+        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: baseModelID))
         if let name = name {
-            let queryParameter = NSURLQueryItem(name: "name", value: "\(name)")
+            let queryParameter = NSURLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
 

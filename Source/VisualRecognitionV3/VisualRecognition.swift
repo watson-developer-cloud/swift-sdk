@@ -569,7 +569,6 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseString { response in print(response) }
                     upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<ImagesWithWords, NSError>) in
                         switch response.result {

@@ -29,8 +29,7 @@ public class TextToSpeech {
     
     private let username: String
     private let password: String
-    
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
     private let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
 
     /**

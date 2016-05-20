@@ -31,10 +31,8 @@ public class Dialog {
     
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private let serviceURL = "https://gateway.watsonplatform.net/dialog/api"
-
     private static let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

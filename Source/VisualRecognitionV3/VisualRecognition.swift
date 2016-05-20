@@ -28,7 +28,7 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     private let serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3"
     
     /**

@@ -27,7 +27,7 @@ import RestKit
 public class SpeechToText {
 
     private let restToken: RestToken
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 

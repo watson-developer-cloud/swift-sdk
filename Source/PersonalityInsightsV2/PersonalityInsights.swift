@@ -28,8 +28,7 @@ public class PersonalityInsights {
     
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
     private let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
 
     /**

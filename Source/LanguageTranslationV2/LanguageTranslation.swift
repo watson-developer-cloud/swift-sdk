@@ -28,8 +28,7 @@ public class LanguageTranslation {
 
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslationV2"
     private let serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
 
     /**

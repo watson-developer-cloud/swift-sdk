@@ -27,7 +27,7 @@ import RestKit
 public class AlchemyVision {
     
     private let apiKey: String
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let serviceURL = "http://gateway-a.watsonplatform.net/calls"
 
     /**

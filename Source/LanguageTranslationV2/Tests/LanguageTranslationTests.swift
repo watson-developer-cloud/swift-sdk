@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import LanguageTranslationV2
 
 class LanguageTranslationTests: XCTestCase {
 
-    private var languageTranslation: LanguageTranslationV2!
+    private var languageTranslation: LanguageTranslation!
     private let timeout: NSTimeInterval = 30
 
     // MARK: - Test Configuration
@@ -43,7 +43,7 @@ class LanguageTranslationTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        languageTranslation = LanguageTranslationV2(username: username, password: password)
+        languageTranslation = LanguageTranslation(username: username, password: password)
     }
 
     /** Fail false negatives. */

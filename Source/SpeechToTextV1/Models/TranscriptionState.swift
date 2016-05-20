@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ internal struct TranscriptionState: JSONDecodable {
     /// The state of the Speech to Text service.
     internal let state: String
 
-    /// Used internally to initialize a `TranscriptionState` from JSON.
+    /// Used internally to initialize a `TranscriptionState` model from JSON.
     internal init(json: JSON) throws {
         state = try json.string("state")
     }

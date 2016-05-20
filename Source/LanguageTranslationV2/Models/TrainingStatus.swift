@@ -1,26 +1,31 @@
-//
-//  TranslationModelStatus.swift
-//  WatsonDeveloperCloud
-//
-//  Created by Glenn Fisher on 4/7/16.
-//  Copyright © 2016 Glenn R. Fisher. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 
-extension LanguageTranslationV2 {
+/** The status of a translation model. */
+public enum TrainingStatus: String {
 
-    /** The status of a translation model. */
-    public enum TrainingStatus: String {
+    /// Training has completed and this translation model is
+    /// ready for use with the Language Translation service.
+    case Available = "available"
 
-        /// Training has completed and this translation model is
-        /// ready for use with the Language Translation service.
-        case Available = "available"
+    /// Training is still in progress.
+    case Training = "training"
 
-        /// Training is still in progress.
-        case Training = "training"
-
-        /// Training did not complete because of an error.
-        case Error = "error"
-    }
+    /// Training did not complete because of an error.
+    case Error = "error"
 }

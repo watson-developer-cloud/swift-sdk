@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ internal struct TranscriptionStop: JSONEncodable {
     /// The action to perform. Must be `stop` to end the request.
     private let action = "stop"
 
-    /** Serialize a `TranscriptionStop` to JSON. */
+    /** Serialize a `TranscriptionStop` model to JSON. */
     internal func toJSON() -> JSON {
         return .Dictionary(["action": .String(action)])
     }

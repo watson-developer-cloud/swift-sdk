@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  **/
 
-import Foundation
+#import <UIKit/UIKit.h>
 
-extension DialogV1 {
-    
-    /** Supported dialog file formats */
-    public enum Format: String {
-        case OctetStream = "application/octet-stream"
-        case WDSJSON = "application/wds+json"
-        case WDSXML = "application/wds+xml"
-    }
-}
+//! Project version number for ToneAnalyzerV3.
+FOUNDATION_EXPORT double ToneAnalyzerV3VersionNumber;
+
+//! Project version string for ToneAnalyzerV3.
+FOUNDATION_EXPORT const unsigned char ToneAnalyzerV3VersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <ToneAnalyzerV3/PublicHeader.h>
+
+

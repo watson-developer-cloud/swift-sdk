@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,17 +46,5 @@ public struct Classifier: JSONDecodable {
         status = try json.string("status")
         created = try json.string("created")
         classes = try json.arrayOf("classes", type: Class.self)
-    }
-}
-
-/** The class of a classifier. */
-public struct Class: JSONDecodable {
-    
-    /// The name of the class.
-    public let name: String
-    
-    /// Used internally to initialize a `Class` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.decode("class")
     }
 }

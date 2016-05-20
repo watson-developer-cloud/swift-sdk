@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public struct AlternativeResults: JSONDecodable {
     /// A list of alternative word hypotheses for a word in the audio input.
     public let alternatives: [AlternativeResult]
 
-    /// Used internally to initialize an `AlternativeResults` from JSON.
+    /// Used internally to initialize an `AlternativeResults` model from JSON.
     public init(json: JSON) throws {
         startTime = try json.double("start_time")
         endTime = try json.double("end_time")

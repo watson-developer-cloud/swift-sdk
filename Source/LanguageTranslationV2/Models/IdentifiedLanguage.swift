@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,18 @@
 import Foundation
 import Freddy
 
-extension LanguageTranslationV2 {
+/** An identified language. */
+public struct IdentifiedLanguage: JSONDecodable {
     
-    /** An identified language. */
-    public struct IdentifiedLanguage: JSONDecodable {
-        
-        /// The code of the identified language.
-        public let language: String
-        
-        /// The confidence score of the identified language.
-        public let confidence: Double
+    /// The code of the identified language.
+    public let language: String
+    
+    /// The confidence score of the identified language.
+    public let confidence: Double
 
-        public init(json: JSON) throws {
-            language = try json.string("language")
-            confidence = try json.double("confidence")
-        }
+    /// Used internally to initialize an `IdentifiedLanguage` model from JSON.
+    public init(json: JSON) throws {
+        language = try json.string("language")
+        confidence = try json.double("confidence")
     }
 }

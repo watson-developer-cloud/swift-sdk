@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,25 +17,37 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Watson Language Translation service provides domain-specific translation utilizing
  Statistical Machine Translation techniques that have been perfected in our research labs
  over the past few decades.
  */
-public class LanguageTranslationV2 {
+public class LanguageTranslation {
 
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslationV2"
     private let serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
 
+    /**
+     Create a `LanguageTranslation` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
 
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -69,11 +81,11 @@ public class LanguageTranslationV2 {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         if let source = source {
-            let queryParameter = NSURLQueryItem(name: "source", value: "\(source)")
+            let queryParameter = NSURLQueryItem(name: "source", value: source)
             queryParameters.append(queryParameter)
         }
         if let target = target {
-            let queryParameter = NSURLQueryItem(name: "target", value: "\(target)")
+            let queryParameter = NSURLQueryItem(name: "target", value: target)
             queryParameters.append(queryParameter)
         }
         if let defaultModelsOnly = defaultModelsOnly {
@@ -110,9 +122,9 @@ public class LanguageTranslationV2 {
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: "\(baseModelID)"))
+        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: baseModelID))
         if let name = name {
-            let queryParameter = NSURLQueryItem(name: "name", value: "\(name)")
+            let queryParameter = NSURLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
 

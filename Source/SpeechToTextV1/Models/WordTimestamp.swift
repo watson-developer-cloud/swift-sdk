@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,18 @@ public struct WordTimestamp: JSONDecodable {
     /// The end time, in seconds, of the given word in the audio input.
     public let endTime: Double
 
-    /// Used internally to initialize a `WordTimestamp` from JSON.
+    /// Used internally to initialize a `WordTimestamp` model from JSON.
     public init(json: JSON) throws {
         let array = try json.array()
-        word = try array[0].string()
-        startTime = try array[1].double()
-        endTime = try array[2].double()
+        word = try array[Index.Word.rawValue].string()
+        startTime = try array[Index.StartTime.rawValue].double()
+        endTime = try array[Index.EndTime.rawValue].double()
+    }
+    
+    /// The index of each element in the JSON array.
+    private enum Index: Int {
+        case Word = 0
+        case StartTime = 1
+        case EndTime = 2
     }
 }

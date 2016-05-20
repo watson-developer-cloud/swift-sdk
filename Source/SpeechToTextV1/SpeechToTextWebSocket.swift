@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 import Foundation
 import Starscream
 import Freddy
+import RestKit
 
 /** Abstracts the WebSockets connection to the Watson Speech to Text service. */
 class SpeechToTextWebSocket: WebSocket {

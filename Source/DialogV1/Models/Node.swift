@@ -1,0 +1,47 @@
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+
+import Foundation
+import Freddy
+    
+/** A dialog node. */
+public struct Node: JSONEncodable, JSONDecodable {
+    
+    /// The node's associated content.
+    public let content: String
+    
+    /// The node's type.
+    public let node: String
+
+    public init(content: String, node: String) {
+        self.content = content
+        self.node = node
+    }
+
+    /// Used internally to initialize a `FaceTags` model from JSON.
+    public init(json: JSON) throws {
+        content = try json.string("content")
+        node = try json.string("node")
+    }
+
+    /// Used internally to initialize a `FaceTags` model from JSON.
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["content"] = .String(content)
+        json["node"] = .String(node)
+        return JSON.Dictionary(json)
+    }
+}

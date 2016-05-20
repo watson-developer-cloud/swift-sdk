@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import SpeechToTextV1
 
 class SpeechToTextTests: XCTestCase {
 
-    private var speechToText: SpeechToTextV1!
+    private var speechToText: SpeechToText!
     private let timeout: NSTimeInterval = 30.0
 
     override func setUp() {
@@ -40,7 +40,7 @@ class SpeechToTextTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        speechToText = SpeechToTextV1(username: username, password: password)
+        speechToText = SpeechToText(username: username, password: password)
     }
     
     /** Fail false negatives. */

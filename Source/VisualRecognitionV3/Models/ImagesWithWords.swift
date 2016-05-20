@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +18,27 @@ import Foundation
 import Freddy
 
 /** The results from recognizing text in one or more images. */
-public struct WordImages: JSONDecodable {
+public struct ImagesWithWords: JSONDecodable {
     
     /// The number of images processed.
     public let imagesProcessed: Int
     
     /// The images that were processed.
-    public let images: [WordImage]
+    public let images: [ImageWithWords]
     
     /// Any warnings produced during processing.
     public let warnings: [WarningInfo]?
     
-    /// Used internally to initialize a `WordImages` model from JSON.
+    /// Used internally to initialize an `ImagesWithWords` model from JSON.
     public init(json: JSON) throws {
         imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: WordImage.self)
+        images = try json.arrayOf("images", type: ImageWithWords.self)
         warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
 /** An image with detected words. */
-public struct WordImage: JSONDecodable {
+public struct ImageWithWords: JSONDecodable {
     
     /// The source URL of the images that was processed.
     public let sourceURL: String?
@@ -50,7 +50,7 @@ public struct WordImage: JSONDecodable {
     public let image: String?
     
     /// Information about an error that occurred while processing the given image.
-    public let error: ErrorInfo? // TODO: re-do this comment across the analagous models...
+    public let error: ErrorInfo?
     
     /// The text recognized in the image, including recognized formatting (e.g. newlines).
     public let text: String
@@ -58,7 +58,7 @@ public struct WordImage: JSONDecodable {
     /// The words recognized in the image.
     public let words: [Word]
     
-    /// Used internally to initialize a `WordImage` model from JSON.
+    /// Used internally to initialize an `ImageWithWords` model from JSON.
     public init(json: JSON) throws {
         sourceURL = try? json.string("source_url")
         resolvedURL = try? json.string("resolved_url")

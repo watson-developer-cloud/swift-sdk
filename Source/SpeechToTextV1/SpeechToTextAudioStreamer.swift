@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import Foundation
 import AVFoundation
+import RestKit
 
 /** Stream microphone audio to Speech to Text. */
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {
@@ -127,7 +128,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             socket?.connect()
             socket?.writeString(start)
         } catch {
-            return
+            let failureReason = "Failed to convert `TranscriptionStart` to a JSON string."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
         }
     }
 
@@ -140,7 +144,10 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             socket?.writeString(stop)
             socket?.disconnect()
         } catch {
-            return
+            let failureReason = "Failed to convert `TranscriptionStop` to a JSON string."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
         }
     }
 

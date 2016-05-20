@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ public struct Transcription: JSONDecodable {
     /// for the best alternative and only in results marked as final.
     public let wordConfidence: [WordConfidence]?
 
-    /// Used internally to initialize a `Transcription` from JSON.
+    /// Used internally to initialize a `Transcription` model from JSON.
     public init(json: JSON) throws {
         transcript = try json.string("transcript")
         confidence = try? json.double("confidence")
-        timestamps = try? json.array("timestamps").map(WordTimestamp.init)
-        wordConfidence = try? json.array("word_confidence").map(WordConfidence.init)
+        timestamps = try? json.arrayOf("timestamps", type: WordTimestamp.self)
+        wordConfidence = try? json.arrayOf("word_confidence", type: WordConfidence.self)
     }
 }

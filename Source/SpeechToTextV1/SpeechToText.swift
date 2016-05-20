@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import Foundation
 import AVFoundation
+import RestKit
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -23,19 +24,20 @@ import AVFoundation
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
  */
-public class SpeechToTextV1 {
+public class SpeechToText {
 
     private let restToken: RestToken
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
     private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /**
-     Instantiate a `SpeechToText` object that can be used to transcribe audio data to text.
-
-     - parameter username: The username associated with your `SpeechToText` service.
-     - parameter password: The password associated with your `SpeechToText` service.
-     - returns: A `SpeechToText` object that can be used to transcribe audio data to text.
+     Create a `SpeechToText` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter versionDate: The release date of the version of the API to use. Specify the
+     date in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String) {
         self.restToken = RestToken(

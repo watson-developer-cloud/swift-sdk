@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,34 +17,45 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
+
+/// A DialogID uniquely identifies a dialog application.
+public typealias DialogID = String
 
 /**
  The Watson Dialog service provides a comprehensive, robust, platform for managing
  conversations between virtual agents and users through an application programming
  interface (API). These conversations are commonly referred to as dialogs.
  */
-public class DialogV1 {
+public class Dialog {
     
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private let serviceURL = "https://gateway.watsonplatform.net/dialog/api"
-
     private static let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter
     }()
 
-    /// A DialogID uniquely identifies a dialog application.
-    public typealias DialogID = String
-
+    /**
+     Create a `Dialog` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
 
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -412,8 +423,8 @@ public class DialogV1 {
         success: [Conversation] -> Void)
     {
         // construct date strings
-        let dateFromString = DialogV1.dateFormatter.stringFromDate(dateFrom)
-        let dateToString = DialogV1.dateFormatter.stringFromDate(dateTo)
+        let dateFromString = Dialog.dateFormatter.stringFromDate(dateFrom)
+        let dateToString = Dialog.dateFormatter.stringFromDate(dateTo)
 
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()

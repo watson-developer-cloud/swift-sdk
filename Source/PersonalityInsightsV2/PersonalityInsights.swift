@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,25 +17,37 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Watson Personality Insights service uses linguistic analytics to extract a spectrum
  of cognitive and social characteristics from the text data that a person generates
  through blogs, tweets, forum posts, and more.
  */
-public class PersonalityInsightsV2 {
+public class PersonalityInsights {
     
     private let username: String
     private let password: String
-
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
     private let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
 
+    /**
+     Create a `PersonalityInsights` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
 
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)

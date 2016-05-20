@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images,
@@ -27,7 +28,7 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     private let serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3"
     
     /**
@@ -119,7 +120,7 @@ public class VisualRecognition {
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [ClassWithExamples],
+        positiveExamples: [Class],
         negativeExamples: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
         success: Classifier -> Void)
@@ -154,9 +155,10 @@ public class VisualRecognition {
         Alamofire.upload(request,
             multipartFormData: { multipartFormData in
                 for positiveExample in positiveExamples {
-                    let examples = positiveExample.examples
                     let name = positiveExample.name + "_positive_examples"
-                    multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    if let examples = positiveExample.examples {
+                        multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    }
                 }
                 if let negativeExamples = negativeExamples {
                     let examples = negativeExamples
@@ -433,33 +435,19 @@ public class VisualRecognition {
     public func detectFaces(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
+        success: ImagesWithFaces -> Void)
     {
         let parameters = writeParameters(url: url)
         detectFaces(parameters: parameters, failure: failure, success: success)
     }
-    
-    /**
-     Detect faces in uploaded images. You can upload a single image or a compressed file (.zip)
-     with multiple images to be processed. The supported image formats include .jpg, .png, and
-     .gif.
- 
-     - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
-            to classify. The total number of images is limited to 100.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the detected faces.
-     */
-    public func detectFaces(
-        image image: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
-    {
-        detectFaces(image: image, parameters: nil, failure: failure, success: success)
-    }
 
     /**
-     Detect faces in images that are uploaded and/or specified by URL. Faces are identified in
-     the provided images, along with information about them such as estimated age and gender.
+     Detect faces in the provided image(s), along with information about each face such as
+     estimated age and gender.
+     
+     Images can be uploaded and/or specified by URL in a parameters file. If uploading images, you
+     can upload a single image or a compressed file (.zip) with multiple images to be processed.
+     The supported image formats include .jpg, .png, and .gif.
  
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             in which to detect faces. The total number of images is limited to 100.
@@ -472,7 +460,7 @@ public class VisualRecognition {
         image image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
-        success: FaceImages -> Void)
+        success: ImagesWithFaces -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -501,7 +489,7 @@ public class VisualRecognition {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<FaceImages, NSError>) in
+                        (response: Response<ImagesWithFaces, NSError>) in
                         switch response.result {
                         case .Success(let faceImages): success(faceImages)
                         case .Failure(let error): failure?(error)
@@ -529,32 +517,18 @@ public class VisualRecognition {
     public func recognizeText(
         url url: String,
         failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
+        success: ImagesWithWords -> Void)
     {
         let parameters = writeParameters(url: url)
         recognizeText(parameters: parameters, failure: failure, success: success)
     }
     
     /**
-     Recognize text in uploaded images. You can upload a single image or a compressed file (.zip)
-     with multiple images to be processed. The supported image formats include .jpg, .png, and
-     .gif.
+     Recognize text in the provided image(s).
      
-     - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
-            to classify. The total number of images is limited to 100.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the detected words.
-     */
-    public func recognizeText(
-        image image: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
-    {
-        recognizeText(image: image, failure: failure, success: success)
-    }
-    
-    /**
-     Recognize text in images that are uploaded and/or specified by URL.
+     Images can be uploaded and/or specified by URL in a parameters file. If uploading images, you
+     can upload a single image or a compressed file (.zip) with multiple images to be processed.
+     The supported image formats include .jpg, .png, and .gif.
      
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             in which to recognize text. The total number of images is limited to 100.
@@ -567,7 +541,7 @@ public class VisualRecognition {
         image image: NSURL? = nil,
         parameters: NSURL? = nil,
         failure: (NSError -> Void)? = nil,
-        success: WordImages -> Void)
+        success: ImagesWithWords -> Void)
     {
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -595,9 +569,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseString { response in print(response) }
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<WordImages, NSError>) in
+                        (response: Response<ImagesWithWords, NSError>) in
                         switch response.result {
                         case .Success(let wordImages): success(wordImages)
                         case .Failure(let error): failure?(error)

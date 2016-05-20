@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import Foundation
 import Freddy
+import RestKit
 
 /** A result from a Speech to Text recognition request. */
 public struct TranscriptionResult: JSONDecodable {
@@ -35,13 +36,13 @@ public struct TranscriptionResult: JSONDecodable {
     /// A list of acoustically similar alternatives for words of the input audio.
     public let wordAlternatives: [AlternativeResults]?
 
-    /// Used internally to initialize a `TranscriptionResult` from JSON.
+    /// Used internally to initialize a `TranscriptionResult` model from JSON.
     public init(json: JSON) throws {
         final = try json.bool("final")
         alternatives = try json.arrayOf("alternatives", type: Transcription.self)
         keywordResults = try? json.dictionary("keywords_result").map {
             json in try json.arrayOf(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.array("word_alternatives").map(AlternativeResults.init)
+        wordAlternatives = try? json.arrayOf("word_alternatives", type: AlternativeResults.self)
     }
 }

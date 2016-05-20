@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 import Foundation
 import Freddy
 
-extension Dictionary {
+public extension Dictionary {
     
-    func map<OutValue>(@noescape transform: Value throws -> OutValue) rethrows -> [Key: OutValue] {
+    public func map<OutValue>(@noescape transform: Value throws -> OutValue) rethrows -> [Key: OutValue] {
         var dictionary = [Key: OutValue]()
         for (k, v) in self {
             dictionary[k] = try transform(v)
@@ -28,10 +28,10 @@ extension Dictionary {
     }
 }
 
-extension JSON {
+public extension JSON {
     
     /// An error that occurred during serialization.
-    internal enum SerializationError: ErrorType {
+    public enum SerializationError: ErrorType {
         case SerializationError
     }
     
@@ -41,7 +41,7 @@ extension JSON {
      - returns: A String containing the `JSON`.
      - throws: Errors that arise from `NSJSONSerialization`.
      */
-    internal func serializeString() throws -> Swift.String {
+    public func serializeString() throws -> Swift.String {
         let data = try self.serialize()
         guard let string = Swift.String(data: data, encoding: NSUTF8StringEncoding) else {
             throw SerializationError.SerializationError

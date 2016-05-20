@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ import Alamofire
  A `RestToken` object retrieves, stores, and refreshes an authentication token. The token is
  retrieved at a particular URL using basic authentication credentials (i.e. username and password).
  */
-internal class RestToken {
+public class RestToken {
     
-    internal var token: String?
-    internal var isRefreshing = false
-    internal var retries = 0
+    public var token: String?
+    public var isRefreshing = false
+    public var retries = 0
     
     private var tokenURL: String
     private var username: String
@@ -38,7 +38,7 @@ internal class RestToken {
      - parameter username:   The username credential used to obtain a token.
      - parameter password:   The password credential used to obtain a token.
      */
-    internal init(tokenURL: String, username: String, password: String) {
+    public init(tokenURL: String, username: String, password: String) {
         self.tokenURL = tokenURL
         self.username = username
         self.password = password
@@ -50,7 +50,7 @@ internal class RestToken {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after a new token is retrieved.
      */
-    internal func refreshToken(
+    public func refreshToken(
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil)
     {

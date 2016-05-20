@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ public struct TranscriptionSettings: JSONEncodable {
         self.contentType = contentType
     }
 
-    /** Represent a `TranscriptionSettings` as a dictionary of key-value pairs. */
+    /** Used internally to serialize a `TranscriptionSettings` model to JSON. */
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         json["action"] = .String(action)
@@ -117,17 +117,8 @@ public struct TranscriptionSettings: JSONEncodable {
         if let continuous = continuous {
             json["continuous"] = .Bool(continuous)
         }
-        if let maxAlternatives = maxAlternatives {
-            json["max_alternatives"] = .Int(maxAlternatives)
-        }
-        if let interimResults = interimResults {
-            json["interim_results"] = .Bool(interimResults)
-        }
-        if let wordConfidence = wordConfidence {
-            json["word_confidence"] = .Bool(wordConfidence)
-        }
-        if let timestamps = timestamps {
-            json["timestamps"] = .Bool(timestamps)
+        if let inactivityTimeout = inactivityTimeout {
+            json["inactivity_timeout"] = .Int(inactivityTimeout)
         }
         if let keywords = keywords {
             json["keywords"] = keywords.toJSON()
@@ -135,11 +126,23 @@ public struct TranscriptionSettings: JSONEncodable {
         if let keywordsThreshold = keywordsThreshold {
             json["keywords_threshold"] = .Double(keywordsThreshold)
         }
+        if let maxAlternatives = maxAlternatives {
+            json["max_alternatives"] = .Int(maxAlternatives)
+        }
+        if let interimResults = interimResults {
+            json["interim_results"] = .Bool(interimResults)
+        }
         if let wordAlternativesThreshold = wordAlternativesThreshold {
             json["word_alternatives_threshold"] = .Double(wordAlternativesThreshold)
         }
-        if let inactivityTimeout = inactivityTimeout {
-            json["inactivity_timeout"] = .Int(inactivityTimeout)
+        if let wordConfidence = wordConfidence {
+            json["word_confidence"] = .Bool(wordConfidence)
+        }
+        if let timestamps = timestamps {
+            json["timestamps"] = .Bool(timestamps)
+        }
+        if let filterProfanity = filterProfanity {
+            json["profanity_filter"] = .Bool(filterProfanity)
         }
         return .Dictionary(json)
     }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public struct KeywordResult: JSONDecodable {
     /// least as great as the specified threshold to be included in the results.
     public let confidence: Double
 
-    /// Used internally to initialize a `KeywordResult` from JSON.
+    /// Used internally to initialize a `KeywordResult` model from JSON.
     public init(json: JSON) throws {
         normalizedText = try json.string("normalized_text")
         startTime = try json.double("start_time")

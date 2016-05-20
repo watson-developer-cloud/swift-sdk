@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +18,27 @@ import Foundation
 import Freddy
 
 /** The results from detecting faces in one or more images. */
-public struct FaceImages: JSONDecodable {
+public struct ImagesWithFaces: JSONDecodable {
     
     /// The number of images processed.
     public let imagesProcessed: Int
     
     /// The images that were processed.
-    public let images: [FaceImage]
+    public let images: [ImageWithFaces]
     
     /// Any warnings produced during processing.
     public let warnings: [WarningInfo]?
     
-    /// Used internally to initialize a `FaceImages` model from JSON.
+    /// Used internally to initialize an `ImagesWithFaces` model from JSON.
     public init(json: JSON) throws  {
         imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: FaceImage.self)
+        images = try json.arrayOf("images", type: ImageWithFaces.self)
         warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
     }
 }
 
 /** An image with detected faces. */
-public struct FaceImage: JSONDecodable {
+public struct ImageWithFaces: JSONDecodable {
     
     /// The source URL of the image that was processed.
     public let sourceURL: String?
@@ -55,7 +55,7 @@ public struct FaceImage: JSONDecodable {
     /// The faces identified in the given image.
     public let faces: [Face]
     
-    /// Used internally to initialize a `FaceImage` model from JSON.
+    /// Used internally to initialize an `ImageWithFaces` model from JSON.
     public init(json: JSON) throws {
         sourceURL = try? json.string("source_url")
         resolvedURL = try? json.string("resolved_url")

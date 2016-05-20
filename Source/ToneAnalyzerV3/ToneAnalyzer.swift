@@ -17,63 +17,74 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
- * The IBM Watson The Tone Analyzer service uses linguistic analysis to detect 
- * emotional tones, social propensities, and writing styles in written communication. 
- * Then it offers suggestions to help the writer improve their intended language tones.
+ The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional tones,
+ social propensities, and writing styles in written communication. Then it offers suggestions
+ to help the writer improve their intended language tones.
 **/
-public class ToneAnalyzerV3 {
+public class ToneAnalyzer {
     
     private let username: String
     private let password: String
-    private let versionDate: String
-    
+    private let version: String
+    private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
     private let serviceURL = "https://gateway.watsonplatform.net/tone-analyzer-beta/api"
-    private let tokenURL = "https://gateway.watsonplatform.net/authorization/api/v1/token"
-    private let errorDomain = "com.watsonplatform.toneanalyzer"
-    
+
     /**
-       Initializes the Watson Tone Analyzer service.
-     
-       - parameter username:    The username credential
-       - parameter password:    The password credential
-       - parameter versionDate: The release date of the version you wish to use of the service
-                                in YYYY-MM-DD format
-    */
-    public init(username: String, password: String, versionDate: String) {
+     Create a `ToneAnalyzer` object.
+ 
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter version: The release date of the version of the API to use. Specify the date
+            in "YYYY-MM-DD" format.
+     */
+    public init(username: String, password: String, version: String) {
         self.username = username
         self.password = password
-        self.versionDate = versionDate
+        self.version = version
     }
     
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let description = try json.string("description")
-            let error = try json.string("error")
             let code = try json.int("code")
+            let error = try json.string("error")
+            let help = try? json.string("help")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedDescriptionKey: description
+                NSLocalizedRecoverySuggestionErrorKey: "\(help)"
             ]
-            return NSError(domain: errorDomain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
     }
 
     /**
-       Analyzes the "tone" of a piece of text. The message is analyzed from several tones (social
-       tone, emotional tone, writing tone), and for each of them various traits are derived (such as
-       conscientiousness, agreeableness, openness).
+     Analyze the tone of the given text.
      
-     - parameter text:    The text to analyze
-     - parameter failure: A function invoked when the service results in failure
-     - parameter success: A function invoked when the service results in success
+     The message is analyzed for several tones—social, emotional, and writing. For each tone,
+     various traits are derived (e.g. conscientiousness, agreeableness, and openness).
+     
+     - parameter text: The text to analyze.
+     - parameter tones: Filter the results by a specific tone. Valid values for `tones` are
+            `emotion`, `writing`, or `social`.
+     - parameter sentences: Should sentence-level tone analysis by performed?
+     - parameter failure: A function invoked if an error occurs.
+     - parameter success: A function invoked with the tone analysis.
      */
     public func getTone(
         text: String,
+        tones: [String]? = nil,
+        sentences: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: ToneAnalysis -> Void)
     {
@@ -81,9 +92,20 @@ public class ToneAnalyzerV3 {
         guard let body = try? ["text": text].toJSON().serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
+        }
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        if let tones = tones {
+            let tonesList = tones.joinWithSeparator(",")
+            queryParameters.append(NSURLQueryItem(name: "tones", value: tonesList))
+        }
+        if let sentences = sentences {
+            queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
         // construct request
@@ -92,10 +114,8 @@ public class ToneAnalyzerV3 {
             url: serviceURL + "/v3/tone",
             acceptType: "application/json",
             contentType: "application/json",
-            messageBody: body,
-            queryParameters: [
-                NSURLQueryItem(name: "version", value: versionDate)
-            ]
+            queryParameters: queryParameters,
+            messageBody: body
         )
         
         // execute request
@@ -108,7 +128,5 @@ public class ToneAnalyzerV3 {
                 case .Failure(let error): failure?(error)
                 }
             }
-        
     }
-    
 }

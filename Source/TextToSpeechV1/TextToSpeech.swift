@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to
@@ -28,8 +29,7 @@ public class TextToSpeech {
     
     private let username: String
     private let password: String
-    
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
     private let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
 
     /**
@@ -37,8 +37,6 @@ public class TextToSpeech {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter versionDate: The release date of the version of the API to use. Specify the
-            date in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String) {
         self.username = username

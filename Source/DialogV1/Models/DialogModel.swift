@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,19 @@
 
 import Foundation
 import Freddy
-
-extension DialogV1 {
     
-    /** A dialog associated with a particular service instance. */
-    public struct DialogModel: JSONDecodable {
-        
-        /// The dialog application identifier.
-        public let dialogID: DialogID
-        
-        /// The name of the dialog application.
-        public let name: String
+/** A dialog associated with a particular service instance. */
+public struct DialogModel: JSONDecodable {
+    
+    /// The dialog application identifier.
+    public let dialogID: DialogID
+    
+    /// The name of the dialog application.
+    public let name: String
 
-        public init(json: JSON) throws {
-            dialogID = try json.string("dialog_id")
-            name = try json.string("name")
-        }
+    /// Used internally to initialize a `DialogModel` model from JSON.
+    public init(json: JSON) throws {
+        dialogID = try json.string("dialog_id")
+        name = try json.string("name")
     }
 }

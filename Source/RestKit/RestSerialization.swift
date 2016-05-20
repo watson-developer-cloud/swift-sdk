@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import Foundation
 import Alamofire
 import Freddy
 
-extension Request {
+public extension Request {
 
     /**
      Creates a response serializer that returns an object of the given type initialized from
@@ -29,7 +29,7 @@ extension Request {
  
      - returns: An object response serializer.
      */
-    internal static func ObjectSerializer<T: JSONDecodable>(
+    private static func ObjectSerializer<T: JSONDecodable>(
         dataToError: ((NSData -> NSError?)?) = nil,
         path: [JSONPathType]? = nil)
         -> ResponseSerializer<T, NSError>
@@ -44,7 +44,7 @@ extension Request {
             // fail if the data is nil
             guard let data = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             }
 
@@ -76,28 +76,28 @@ extension Request {
             } catch JSON.Error.IndexOutOfBounds(let index) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The index (\(index)) is out of bounds for a JSON array."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.KeyNotFound(let key) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The key (\(key)) was not found in the JSON dictionary."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.UnexpectedSubscript(let type) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The JSON is not subscriptable with type \(type)."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.ValueNotConvertible(let value, let type) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " Unexpected JSON value (\(value)) was found that is not " +
                                     "convertible to the type \(type)."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " No error information was provided during serialization."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             }
         }
@@ -112,7 +112,7 @@ extension Request {
 
      - returns: An object response serializer.
      */
-    internal static func ArraySerializer<T: JSONDecodable>(
+    private static func ArraySerializer<T: JSONDecodable>(
         dataToError: ((NSData -> NSError?)?) = nil,
         path: [JSONPathType]? = nil)
         -> ResponseSerializer<[T], NSError>
@@ -127,7 +127,7 @@ extension Request {
             // fail if the data is nil
             guard let data = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             }
 
@@ -160,28 +160,28 @@ extension Request {
             } catch JSON.Error.IndexOutOfBounds(let index) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The index (\(index)) is out of bounds for a JSON array."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.KeyNotFound(let key) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The key (\(key)) was not found in the JSON dictionary."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.UnexpectedSubscript(let type) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " The JSON is not subscriptable with type \(type)."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch JSON.Error.ValueNotConvertible(let value, let type) {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " Unexpected JSON value (\(value)) was found that is not " +
                                     "convertible to the type \(type)."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             } catch {
                 let failureReason = "Data could not be serialized. Failed to parse JSON response." +
                                     " No error information was provided during serialization."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = serializationError(failureReason)
                 return .Failure(error)
             }
         }
@@ -195,7 +195,7 @@ extension Request {
      - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
      - parameter completionHandler: The code to be executed once the request has finished.
      */
-    internal func responseObject<T: JSONDecodable>(
+    public func responseObject<T: JSONDecodable>(
         queue queue: dispatch_queue_t? = nil,
         dataToError: (NSData -> NSError?)? = nil,
         path: [JSONPathType]? = nil,
@@ -217,7 +217,7 @@ extension Request {
      - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
      - parameter completionHandler: The code to be executed once the request has finished.
      */
-    internal func responseArray<T: JSONDecodable>(
+    public func responseArray<T: JSONDecodable>(
         queue queue: dispatch_queue_t? = nil,
         dataToError: (NSData -> NSError?)? = nil,
         path: [JSONPathType]? = nil,
@@ -229,5 +229,17 @@ extension Request {
             responseSerializer: Request.ArraySerializer(dataToError, path: path),
             completionHandler: completionHandler
         )
+    }
+    
+    /**
+     Return an `NSError` that describes a serialization error.
+ 
+     - parameter failureReason: A description of the error's cause.
+     */
+    private static func serializationError(failureReason: String) -> NSError {
+        let code = Error.Code.DataSerializationFailed.rawValue
+        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        let error = NSError(domain: Error.Domain, code: code, userInfo: userInfo)
+        return error
     }
 }

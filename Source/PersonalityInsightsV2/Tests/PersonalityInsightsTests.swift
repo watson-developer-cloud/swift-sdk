@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import PersonalityInsightsV2
 
 class PersonalityInsightsTests: XCTestCase {
 
-    private var personalityInsights: PersonalityInsightsV2!
+    private var personalityInsights: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
     private let timeout: NSTimeInterval = 30
@@ -77,7 +77,7 @@ class PersonalityInsightsTests: XCTestCase {
             XCTFail("Unable to read credentials.")
             return
         }
-        personalityInsights = PersonalityInsightsV2(username: username, password: password)
+        personalityInsights = PersonalityInsights(username: username, password: password)
     }
 
     /** Fail false negatives. */

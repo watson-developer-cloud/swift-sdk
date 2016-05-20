@@ -16,26 +16,21 @@
 
 import Foundation
 import Freddy
-
-extension ToneAnalyzerV3 {
     
-    /**
-     *
-     * Main object containing the result of running Tone Analyzer on a document. 
-     * It contains both the sentence-level and document-level results.
-     */
-    public struct ToneAnalysis: JSONDecodable {
+/** The results of performing tone analysis on a document. */
+public struct ToneAnalysis: JSONDecodable {
+    
+    /// Tone analysis results of the entire document's text. This includes three
+    /// tone categories: social tone, emotional tone, and language tone.
+    public let documentTone: [ToneCategory]
+    
+    /// Tone analysis results for each sentence contained in the document.
+    public let sentencesTones: [SentenceAnalysis]?
+    
+    /// Used internally to initialize a `ToneAnalysis` model from JSON.
+    public init(json: JSON) throws {
+        documentTone = try json.arrayOf("document_tone", "tone_categories", type: ToneCategory.self)
+        sentencesTones = try? json.arrayOf("sentences_tone", type: SentenceAnalysis.self)
         
-        // The tone analysis of the full document.
-        public let documentTone:ElementTone
-        
-        /// The sentence level tone analysis.
-        public let sentencesTones:[SentenceTone]
-        
-        public init(json: JSON) throws {
-            documentTone = try json.decode("document_tone", type: ElementTone.self)
-            sentencesTones = try json.arrayOf("sentences_tone", type: SentenceTone.self)
-            
-        }
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ public struct AlternativeResult: JSONDecodable {
     /// The alternative word hypothesis for a word in the audio input.
     public let word: String
 
-    /// Used internally to initialize an `AlternativeResult` from JSON.
+    /// Used internally to initialize an `AlternativeResult` model from JSON.
     public init(json: JSON) throws {
         confidence = try json.double("confidence")
         word = try json.string("word")

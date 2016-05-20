@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,9 @@ internal struct TranscriptionResultWrapper: JSONDecodable {
     /// just after the most recent final result.
     internal let results: [TranscriptionResult]
 
-    /// Used internally to initialize a `TranscriptionResultWrapper` from JSON.
+    /// Used internally to initialize a `TranscriptionResultWrapper` model from JSON.
     internal init(json: JSON) throws {
         resultIndex = try json.int("result_index")
-        results = try json.array("results").map(TranscriptionResult.init)
+        results = try json.arrayOf("results", type: TranscriptionResult.self)
     }
 }

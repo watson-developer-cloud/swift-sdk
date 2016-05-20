@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  AlchemyVision is an API that can analyze an image and return the objects, people, and text
@@ -26,7 +27,7 @@ import Freddy
 public class AlchemyVision {
     
     private let apiKey: String
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let serviceURL = "http://gateway-a.watsonplatform.net/calls"
 
     /**

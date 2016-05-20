@@ -122,6 +122,7 @@ public struct SpeechToTextSettings: WatsonRequestModel {
         map["keywords_threshold"] = keywordsThreshold
         map["word_alternatives_threshold"] = wordAlternativesThreshold
         map["inactivity_timeout"] = inactivityTimeout
+        map["profanity_filter"] = filterProfanity
         return map
     }
 }

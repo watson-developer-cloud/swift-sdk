@@ -17,6 +17,7 @@
 import Foundation
 import Starscream
 import Freddy
+import RestKit
 
 /** Abstracts the WebSockets connection to the Watson Speech to Text service. */
 class SpeechToTextWebSocket: WebSocket {

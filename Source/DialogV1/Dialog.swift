@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Watson Dialog service provides a comprehensive, robust, platform for managing

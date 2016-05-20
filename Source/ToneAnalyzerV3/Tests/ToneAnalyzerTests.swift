@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import ToneAnalyzerV3
 
 class ToneAnalyzerTests: XCTestCase {
 

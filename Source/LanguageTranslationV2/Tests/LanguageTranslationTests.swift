@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import LanguageTranslationV2
 
 class LanguageTranslationTests: XCTestCase {
 

@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  * The IBM Watson The Tone Analyzer service uses linguistic analysis to detect 

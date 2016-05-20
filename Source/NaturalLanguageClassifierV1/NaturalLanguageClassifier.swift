@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 public class NaturalLanguageClassifierV1 {
     

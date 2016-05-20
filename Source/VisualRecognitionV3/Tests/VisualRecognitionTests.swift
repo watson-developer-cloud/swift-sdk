@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import VisualRecognitionV3
 
 class VisualRecognitionTests: XCTestCase {
     
@@ -139,9 +139,9 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "baseball-cars-trucks"
-        let baseball = ClassWithExamples(name: "baseball", examples: examplesBaseball)
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
-        let trucks = ClassWithExamples(name: "truck", examples: examplesTrucks)
+        let baseball = Class(name: "baseball", examples: examplesBaseball)
+        let cars = Class(name: "car", examples: examplesCars)
+        let trucks = Class(name: "truck", examples: examplesTrucks)
         let classes = [baseball, cars, trucks]
         
         var classifierID: String?
@@ -192,7 +192,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -243,7 +243,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -370,7 +370,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -458,7 +458,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -553,7 +553,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -734,7 +734,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -822,7 +822,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -917,7 +917,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(
@@ -1019,7 +1019,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectationWithDescription(description1)
         
         let name = classifierPrefix + "cars-trucks"
-        let cars = ClassWithExamples(name: "car", examples: examplesCars)
+        let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
         visualRecognition.createClassifier(

@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to

@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Watson Personality Insights service uses linguistic analytics to extract a spectrum

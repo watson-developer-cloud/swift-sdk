@@ -16,6 +16,7 @@
 
 import Foundation
 import Freddy
+import RestKit
 
 /** A result from a Speech to Text recognition request. */
 public struct TranscriptionResult: JSONDecodable {

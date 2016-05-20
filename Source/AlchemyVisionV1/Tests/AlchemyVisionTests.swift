@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import AlchemyVisionV1
 
 class AlchemyVisionTests: XCTestCase {
     

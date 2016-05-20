@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import AlchemyLanguageV1
 
 class AlchemyLanguageTests: XCTestCase {
     

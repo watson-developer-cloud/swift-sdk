@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import DialogV1
 
 class DialogTests: XCTestCase {
 

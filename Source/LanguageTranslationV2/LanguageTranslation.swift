@@ -17,6 +17,7 @@
 import Foundation
 import Alamofire
 import Freddy
+import RestKit
 
 /**
  The Watson Language Translation service provides domain-specific translation utilizing

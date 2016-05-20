@@ -24,7 +24,7 @@ import Alamofire
  an HTTP request message and can also represent itself as an `NSMutableURLRequest`
  for use with `NSURLSession` or `Alamofire`.
  */
-internal class RestRequest: URLRequestConvertible {
+public class RestRequest: URLRequestConvertible {
 
     private let method: Alamofire.Method
     private let url: String
@@ -35,7 +35,7 @@ internal class RestRequest: URLRequestConvertible {
     private let messageBody: NSData?
 
     /// A representation of the request as an `NSMutableURLRequest`.
-    internal var URLRequest: NSMutableURLRequest {
+    public var URLRequest: NSMutableURLRequest {
         
         // construct url with query parameters
         let urlComponents = NSURLComponents(string: self.url)!
@@ -81,7 +81,7 @@ internal class RestRequest: URLRequestConvertible {
  
      - returns: A `RestRequest` object that represent the REST request to a remote server.
      */
-    init(
+    public init(
         method: Alamofire.Method,
         url: String,
         acceptType: String? = nil,

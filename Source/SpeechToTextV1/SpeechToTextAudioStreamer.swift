@@ -16,6 +16,7 @@
 
 import Foundation
 import AVFoundation
+import RestKit
 
 /** Stream microphone audio to Speech to Text. */
 class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate {

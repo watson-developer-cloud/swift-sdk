@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import WatsonDeveloperCloud
+import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {
     

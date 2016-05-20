@@ -19,6 +19,8 @@ import Alamofire
 import Freddy
 import RestKit
 
+/**  The IBM Watson Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text input. 
+ */
 public class NaturalLanguageClassifier {
     
     private let username: String

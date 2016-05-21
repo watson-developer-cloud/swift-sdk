@@ -24,6 +24,7 @@ Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Wat
   - [Speech to Text](#speech-to-text)
   - [Text to Speech](#text-to-speech)
   - [Tone Analyzer](#tone-analyzer)
+  - [Visual Recognition](#visual-recognition)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
 * [Open Source @ IBM](#open-source--ibm)
@@ -160,8 +161,7 @@ e.g.
 let failure = { (error: NSError) in print(error) }
 
 alchemyVision.getRankedImageFaceTags(url: url,
-                                     failure: failure)
-                                     { facetags in
+                                     failure: failure) { facetags in
 	code here
 }
 ```
@@ -436,6 +436,7 @@ audioPlayer.play()
 The Watson TTS service contains support for many voices with different genders, languages, and dialects. For a complete list, see the [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) or call the service's to list the possible voices in an asynchronous callback:
 
 ```swift
+let failure = { (error: NSError) in print(error) }
 textToSpeech.getVoices(failure) { voices in
     	  // code here
 }
@@ -454,8 +455,8 @@ textToSpeech.synthesize("Hello World", voice: SynthesisVoice.GB_Kate) { data in
 The following links provide more information about the Text To Speech service:
 
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
-* [IBM Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
-* [IBM Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+* [IBM Watson Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
+* [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
 ### Tone Analyzer
 
@@ -475,6 +476,35 @@ service.getTone("Text that you want to get the tone of", failure: failure) { res
 }
 ```
 
+The following links provide more information about the Text To Speech service:
+
+* [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html)
+* [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/)
+* [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
+
+### Visual Recognition
+
+The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+
+How to instantiate and use the Tone Analyzer service:
+
+```swift
+let apiKey = "your-apikey-here"
+let versionDate = "YYYY-MM-DD" // use today's date for the most recent version
+
+let service = VisualRecognition(apiKey: apiKey, version: versionDate)
+
+let failure = { (error: NSError) in print(error) }
+service.detectFaces(url, failure: failure) { imagesWithFaces in
+    // code here
+}
+```
+
+The following links provide more information about the Text To Speech service:
+
+* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/visual-recognition.html)
+* [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/)
+* [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)
 
 ## Authentication
 
@@ -487,7 +517,7 @@ It is not advisable in a full production app to embed the username and passwords
 
 ***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
 
-In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to comumnicate with the running Watson services.  A copy of this file is located in the project's folder under **WatsonDeveloperCloudTests**.  The **credentials.plist** file contains a key and value for each service's user name and password.  For example, Personality Insights has a key of PersonalityInsightsUsername for the user name and a key of PersonalityInsightsPassword for the password.  A user name and password can be optained from a running Watson service on Bluemix.  Please refer to the [IBM Watson Services](#ibm-watson-services) section for more information about Watson Services and Bluemix
+In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to comumnicate with the running Watson services.  A copy of this file is located in the project's folder under **Source/SupportingFiles**.  The **credentials.plist** file contains a key and value for each service's user name and password.  For example, Personality Insights has a key of PersonalityInsightsUsername for the user name and a key of PersonalityInsightsPassword for the password.  A user name and password can be optained from a running Watson service on Bluemix.  Please refer to the [IBM Watson Services](#ibm-watson-services) section for more information about Watson Services and Bluemix
 
 There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
 

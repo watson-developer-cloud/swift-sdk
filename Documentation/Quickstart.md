@@ -13,11 +13,11 @@ In addition, this quick guide uses Carthage to fetch the Watson Developer Cloud 
 
 1) Create a **"Single View App"** in Xcode and name it "WatsonSpeaks".
 
-<img src="./images/SingleViewapp.png" width="500">
+<img src="./Quickstart-Images/SingleViewapp.png" width="500">
 
 2) Fill in the fields for Product Name, Organization Name, and Organization Identifier.  
 
-<img src="./images/WatsonSpeak.png" width="500">
+<img src="./Quickstart-Images/WatsonSpeak.png" width="500">
 
 3) Create a file called "Cartfile" in the root directory of your project and put the following inside the file:
 
@@ -26,27 +26,25 @@ In addition, this quick guide uses Carthage to fetch the Watson Developer Cloud 
 github "watson-developer-cloud/ios-sdk"
 ```
 
-<img src="./images/cartfile.png" width="400">
+<img src="./Quickstart-Images/cartfile.png" width="400">
 
-4) Run `carthage update --platform iOS` from the command line at the root of the project. If you receive a compile failure for the framework AlamofireObjectMapper, run the command again.
-
-<img src="./images/runCarthage.png" width="500">
+4) Run `carthage update --platform iOS` from the command line at the root of the project. If you receive a compile then run the command again.
 
 5) Create a new Group in your Xcode project called "Frameworks".
 
-<img src="./images/NewGroup.png" width="300">
+<img src="./Quickstart-Images/NewGroup.png" width="300">
 
-6) Select all the .framework files in the `Carthage/Build/iOS/` directory of your project (Alamofire, AlamofireObjectMapper, HTTPStatusCodes, ObjectMapper, Starscream, XCGLogger). Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in Xcode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them.
+6) Select all the .framework files in the `Carthage/Build/iOS/` directory of your project (Alamofire, RestKit, Freddy, TextToSpeechV1). Drag-and-drop those files from Finder into the new "Frameworks" group inside of your project in Xcode. When the dialog appears, **make sure** you deselect the option to copy items. This will create a reference to those Framework files without copying them.
 
-<img src="./images/frameworksInGroup.png" width="400">
+<img src="./Quickstart-Images/frameworksInGroup.png" width="400">
 
 7) In Xcode, select the "WatsonSpeaks" project then select its "WatsonSpeaks" build target. In the "Build Phases" tab, add a new **Copy Files Phase** and set its destination to "Frameworks".
 
-<img src="./images/BuildPhases.png" width="600">
+<img src="./Quickstart-Images/BuildPhases.png" width="600">
 
 8) Add all of the frameworks you added to Xcode to the Copy Files Phase.
 
-<img src="./images/AddedCopyFiles.png" width="600">
+<img src="./Quickstart-Images/AddedCopyFiles.png" width="600">
 
 9) Add the following to your info.plist. In order to make network calls to Watson, we need to whitelist the URL to the watsonplatform.net server.
 
@@ -69,47 +67,47 @@ github "watson-developer-cloud/ios-sdk"
 
 ```
 
-<img src="./images/plistPropertyList.png" width="600">
+<img src="./Quickstart-Images/plistPropertyList.png" width="600">
 
-<img src="./images/plistSource.png" width="600">
+<img src="./Quickstart-Images/plistSource.png" width="600">
 
-10) Open your ViewController class and add **import WatsonDeveloperCloud** under the import of UIKit.
+10) Open your ViewController class and add the following under the import of UIKit.
 
-11) Add the code below to the ***viewDidLoad*** method in the ViewController class:
+***import TextToSpeechV1***
+***import AVFoundation***
+
+11) Replace the code over the ***viewDidLoad*** function in the ViewController class:
 
 ```swift
     
-    var player: AVAudioPlayer?    
-
+    var player: AVAudioPlayer?
+    
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         
-        let tts = TextToSpeech(username: "YOUR TTS USERNAME", password: "YOUR TTS PASSWORD")
-        tts.synthesize("All the problems of the world could be settled easily if men were only willing to think.") { 
-
-            data, error in
-
-            if let audio = data {
-
-                do {
-                    self.player = try AVAudioPlayer(data: audio)
-                    self.player!.play()
-                } catch {
-                    print("Couldn't create player.")
-                }
-
-            } else {
-                print(error)
-            }
-            
+        let tts = TextToSpeech(username: "YOUR SERVICE USERNAME", password: "YOUR SERVICE PASSWORD")
+        
+        tts.synthesize("All the problems of the world could be settled easily if men were only willing to think.",
+                       voice: SynthesisVoice.GB_Kate,
+                       audioFormat: AudioFormat.WAV,
+                       failure: { error in
+                            print("error was generated \(error)")
+                        }) { data in
+                        
+                        do {
+                            self.player = try AVAudioPlayer(data: data)
+                            self.player!.play()
+                        } catch {
+                            print("Couldn't create player.")
+                        }
+                        
         }
-
-     }
+    }
 ```
 
-<img src="./images/viewDidLoad.png" width="500">
+<img src="./Quickstart-Images/viewDidLoad.png" width="500">
 
 12) Update the initialization of `TextToSpeech` to use the credentials you obtained in the "Prerequisite" section above.
 

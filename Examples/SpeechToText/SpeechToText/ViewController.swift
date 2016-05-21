@@ -16,8 +16,7 @@
 
 import UIKit
 import AVFoundation
-
-import WatsonDeveloperCloud
+import SpeechToTextV1
 
 class ViewController: UIViewController, AVAudioRecorderDelegate {
 
@@ -188,7 +187,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
 
         // transcribe recording
-        let settings = SpeechToTextSettings(contentType: .WAV)
+        let settings = TranscriptionSettings(contentType: .WAV)
         stt.transcribe(data, settings: settings, failure: failureData) { results in
             self.showResults(results)
         }
@@ -217,7 +216,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
 
         // configure settings for streaming
-        var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
         settings.continuous = true
         settings.interimResults = true
 
@@ -276,7 +275,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         }
 
         // configure settings for streaming
-        var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
         settings.continuous = true
         settings.interimResults = true
 
@@ -346,7 +345,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         presentViewController(alert, animated: true) { }
     }
 
-    func showResults(results: [SpeechToTextResult]) {
+    func showResults(results: [TranscriptionResult]) {
         var text = ""
 
         for result in results {

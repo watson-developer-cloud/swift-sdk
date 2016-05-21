@@ -118,6 +118,6 @@ import AVFoundation
 
 14) Enjoy!
 
-You can review the different voices and languages [here](https://github.com/watson-developer-cloud/ios-sdk#text-to-speech).
+You can review the different voices and languages [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices).
 
 You can download all the source code for the Watson Developer Cloud iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).

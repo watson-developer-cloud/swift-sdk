@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master)
-[![Docs](https://img.shields.io/badge/Docs-0.1-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
-[![Swift 2.1.1](https://img.shields.io/badge/Swift-2.1.1-green.svg?style=flat)](https://developer.apple.com/swift/)
+[![Docs](https://img.shields.io/badge/Docs-0.3.0-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
+[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-green.svg?style=flat)](https://developer.apple.com/swift/)
 
 The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
@@ -61,13 +61,8 @@ For more details on using the iOS SDK in your application, please review the [Qu
 **Frameworks Used:**
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)
-* [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper)
-* [AlamofireObjectMapper](https://github.com/tristanhimmelman/AlamofireObjectMapper/releases)
+* [Freddy](https://github.com/Alamofire/Alamofire)
 * [Starscream](https://github.com/daltoniam/Starscream)
-* [HTTPStatusCodes](https://github.com/rhodgkins/SwiftHTTPStatusCodes)
-* [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)
-
-
 
 ## IBM Watson Services
 
@@ -141,8 +136,8 @@ alchemyLanguage.getEntities(requestType: .URL,
 AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
 
 ##### Links
-* AlchemyVision API docs [here](http://www.alchemyapi.com/products/alchemyla)
-* Try out the [demo](http://www.alchemyapi.com/products/alchemyVision)
+* AlchemyVision API docs [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-vision.html)
+* Try out the [demo](http://vision.alchemy.ai)
 
 ##### Requirements
 * An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
@@ -162,13 +157,13 @@ API calls are instance methods, and model class instances are returned as part o
 e.g.
 
 ```swift
-alchemyVision.recognizeFaces(VisionConstants.ImageFacesType.FILE,
-    image: imageFromURL!,
-    completionHandler: { imageFaceTags, error in
+let failure = { (error: NSError) in print(error) }
 
-	// code here
-
-})
+alchemyVision.getRankedImageFaceTags(url: url,
+                                     failure: failure)
+                                     { facetags in
+	code here
+}
 ```
 
 ### Dialog
@@ -187,8 +182,11 @@ Create a Dialog application by uploading a Dialog file:
 
 ```swift
 var dialogID: Dialog.DialogID?
-dialog.createDialog(dialogName, fileURL: dialogFile) { dialogID, error in
-	self.dialogID = dialogID
+let failure = { (error: NSError) in print(error) }
+dialog.createDialog(dialogName,
+                    fileURL: fileURL,
+                    failure: failure) { (dialogID) in
+    // code here
 }
 ```
 
@@ -197,24 +195,30 @@ Start a conversation with the Dialog application:
 ```swift
 var conversationID: Int?
 var clientID: Int?
-dialog.converse(dialogID!) { response, error in
-	// save conversation parameters
-	self.conversationID = response?.conversationID
-	self.clientID = response?.clientID
-
-	// print message from Watson
-	print(response?.response)
+let failure = { (error: NSError) in print(error) }
+dialog.converse(dialogID!,
+                failure: failure) { conversationResponse in
+    // save conversation parameters
+    self.conversationID = conversationResponse.conversationID
+    self.clientID = conversationResponse.clientID
+    
+    // print message from Watson
+    print(conversationResponse.response)
 }
 ```
 
 Continue a conversation with the Dialog application:
 
 ```swift
-dialog.converse(dialogID!, conversationID: conversationID!,
-	clientID: clientID!, input: input) { response, error in
-
-	// print message from Watson
-	print(response?.response)
+let failure = { (error: NSError) in print(error) }
+dialog.converse(dialogID!,
+                conversationID: conversationID!,
+                clientID: clientID!,
+                input: input,
+                failure: failure) { conversationResponse in
+                
+    // print message from Watson
+    print(conversationResponse.response)
 }
 ```
 
@@ -233,10 +237,10 @@ How to instantiate and use the Language Translation service:
 
 ```swift
 let languageTranslation = LanguageTranslation(username: "your-username-here", password: "your-password-here")
-languageTranslation.getIdentifiableLanguages({(languages:[LanguageTranslation.IdentifiableLanguage]?, error) in
-
-	// code here
-})
+let failure = { (error: NSError) in print(error) }
+languageTranslation.getIdentifiableLanguages(failure) { identifiableLanguage in
+    // code here
+}
 ```
 
 The following links provide more information about the Language Translation service:
@@ -253,11 +257,12 @@ How to instantiate and use the Natural Language Classifier service:
 
 ```swift
 let naturalLanguageClassifier = NaturalLanguageClassifier(username: "your-username-here", password: "your-password-here")
-
-naturalLanguageClassifier.classify(self.classifierIdInstanceId, text: "is it sunny?", completionHandler:{(classification, error) in
-
-	// code here
-})
+let failure = { (error: NSError) in print(error) }
+naturalLanguageClassifier.classify(self.classifierIdInstanceId,
+                                   text: "is it sunny?",
+                                   failure: failure) { classification in
+    // code here
+}
 ```
 
 The following links provide more information about the Natural Language Classifier service:
@@ -272,10 +277,10 @@ The IBM Watson™ Personality Insights service provides an Application Programmi
 
 ```swift
 let personalityInsights = PersonalityInsights(username: "your-username-here", password: "your-password-here")
-
-personalityInsights.getProfile("Some text here") { profile, error in
-
-    // code here
+let failure = { (error: NSError) in print(error) }
+personalityInsights.getProfile(text: "Some text here",
+                               failure: failure) { profile in
+    // code here                          
 }
 ```
 
@@ -301,13 +306,15 @@ guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else
 }
 
 let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
-let settings = SpeechToTextSettings(contentType: .WAV)
+let settings = TranscriptionSettings(contentType: .WAV)
 let failure = { (error: NSError) in print(error) }
 
-speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
-	if let transcription = results.last?.alternatives.last?.transcript {
-   		print(transcription)
-   }
+speechToText.transcribe(fileURL,
+                        settings: settings,
+                        failure: failure) { results in
+    if let transcription = results.last?.alternatives.last?.transcript {
+        print(transcription)
+    }
 }
 ```
 
@@ -318,15 +325,16 @@ Audio can also be streamed from the microphone to the Speech to Text service for
 ```swift
 let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
 
-var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
 settings.continuous = true
 settings.interimResults = true
 
 let failure = { (error: NSError) in print(error) }
-let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
-	if let transcription = results.last?.alternatives.last?.transcript {
-		print(transcription)
-	}
+let stopStreaming = speechToText.transcribe(settings,
+                                            failure: failure) { results in
+    if let transcription = results.last?.alternatives.last?.transcript {
+        print(transcription)
+    }
 }
 
 // Streaming will continue until either an end-of-speech event is detected by
@@ -342,51 +350,51 @@ The following example demonstrates how to use an `AVCaptureSession` to stream au
 ```swift
 class ViewController: UIViewController {
     var captureSession: AVCaptureSession?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
-
+        
         captureSession = AVCaptureSession()
         guard let captureSession = captureSession else {
             return
         }
-
+        
         let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
         if captureSession.canAddInput(microphoneInput) {
             captureSession.addInput(microphoneInput)
         }
-
-        var settings = SpeechToTextSettings(contentType: .L16(rate: 44100, channels: 1))
+        
+        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
         settings.continuous = true
         settings.interimResults = true
-
+        
         let failure = { (error: NSError) in print(error) }
-        let outputOpt = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
+        let outputOpt = speechToText.createTranscriptionOutput(settings,
+                                                               failure: failure) { results in
             if let transcription = results.last?.alternatives.last?.transcript {
                 print(transcription)
             }
         }
-
+        
         guard let output = outputOpt else {
             return
         }
         let transcriptionOutput = output.0
         let stopStreaming = output.1
-
+        
         if captureSession.canAddOutput(transcriptionOutput) {
             captureSession.addOutput(transcriptionOutput)
         }
-
+        
         captureSession.startRunning()
     }
-
+    
     // Streaming will continue until either an end-of-speech event is detected by
     // the Speech to Text service, the `stopStreaming` function is executed, or
     // the capture session is stopped.
-}
 ```
 #### Additional Information
 
@@ -409,12 +417,9 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 To call the service to synthesize text:
 
 ```swift
-textToSpeech.synthesize("Hello World") { 
-    data, error in
-	
-    if let data = data {
-	     // code here
-	}
+let failure = { (error: NSError) in print(error) }
+textToSpeech.synthesize("Hello World", failure: failure) { data in
+        // code here
 }
 ```
 
@@ -431,38 +436,19 @@ audioPlayer.play()
 The Watson TTS service contains support for many voices with different genders, languages, and dialects. For a complete list, see the [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) or call the service's to list the possible voices in an asynchronous callback:
 
 ```swift
-textToSpeech.listVoices({
-	voices, error in
-	  // code here
-
-})
+textToSpeech.getVoices(failure) { voices in
+    	  // code here
+}
 ```
 
-The following voices can be used:
-
-Voice        | Language    | Gender
------------- | ----------- | ---------------
-de-DE_BirgitVoice     | German               | Female
-de-DE_DieterVoice     | German               | Male
-en-GB_KateVoice       | English (British)    | Female
-en-US_AllisonVoice    | English (US)         | Female
-en-US_LisaVoice       | English (US)         | Female
-es-ES_EnriqueVoice    | Spanish (Castilian)  | Male
-es-ES_LauraVoice      | Spanish (Castilian)  | Female
-es-US_SofiaVoice      | Spanish (North American) | Female
-fr-FR_ReneeVoice      | French               | Female
-it-IT_FrancescaVoice  | Italian              | Female
+You can review the different voices and languages [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices).
 
 To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
 
 ```swift
-textToSpeech.synthesize("Hello World", voice: "en-GB_KateVoice", "oncompletion: {
-	data, error in
-
-	if let data = data {
-		// code here
-	}
-)
+textToSpeech.synthesize("Hello World", voice: SynthesisVoice.GB_Kate) { data in
+    // code here
+}
 ```
 
 The following links provide more information about the Text To Speech service:
@@ -483,7 +469,8 @@ let password = "your-password-here"
 let versionDate = "YYYY-MM-DD" // use today's date for the most recent version
 let service = ToneAnalyzer(username: username, password: password, versionDate: versionDate)
 
-service.getTone("Text that you want to get the tone of", failure: someFunc) { responseTone in
+let failure = { (error: NSError) in print(error) }
+service.getTone("Text that you want to get the tone of", failure: failure) { responseTone in
     print(responseTone.documentTone)
 }
 ```
@@ -493,11 +480,8 @@ service.getTone("Text that you want to get the tone of", failure: someFunc) { re
 
 IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
 
-It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application. Since there could be many strategies one could take to authenticate with Bluemix, we abstract the mechanism with a collection of classes that use the protocol *AuthenticationStrategy*.
+It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application.
 
-To quickly get started with the SDK, you can use a *BasicAuthenticationStrategy*  when you create a service. You can specify the username and password, and it automatically handles fetching a temporary key from the token server. If the token expires, the strategy will fetch a new one.
-
-You can create a new AuthenticationStrategy unique for your application by creating a new class using the *AuthenticationStrategy* protocol. The required method *refreshToken* must be implemented and this is responsible for fetching a new token from a web services and storing the internal property token inside of the class.
 
 ## Build + Test
 
@@ -507,7 +491,7 @@ In order to build the project and run the unit tests, a **credentials.plist** fi
 
 There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
 
-Tests can be found in the **WatsonDeveloperCloudTests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
+Tests can be found in the **ServiceName+Tests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
 
 ## Open Source @ IBM
 Find more open source projects on the [IBM Github Page](http://ibm.github.io/)

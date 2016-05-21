@@ -1,0 +1,8 @@
+Change Log
+==========
+
+## Version 0.3.0
+
+_2016-05-21_
+
+The iOS-sdk version 0.3.0 has many major changes with this new release.  The team worked diligently at removing many of the third party dependencies and fully embracing AlamoFire by implementing the rest-kit code.  **Major updates*** Added IBM Watson Tone Analyzer* Added IBM Watson Visual Recognition * Updated all of the code to use the new Rest-kit and removed NetworkUtils and WatsonGateway.  We still have one service to convert, Alchemy Language, but we anticipate that change coming in the next minor release.* Removed many dependencies and reducing the total number to three.  Alamofire, Freddy, and Starscream.* You will notice an update to the targets available and now the developer can pick and choose the services to include.The process of migrating a service to Rest-kit required a large re-implementation of the service. As part of the reimplementation, we additionally gain:* More consistent coding patterns between services.* Better documentation.* Better tests.* Reorganized project structure to support Swift Package Manager.In addition, the Rest-kit branch has a number of architectural changes that should make the SDK easier to maintain and easier to consume.  * Uses Alamofire directly instead of NetworkUtils or WatsonGateway.* Uses Freddy instead of ObjectMapper, allowing us to better express the models.* Uses separate failure and success closures to avoid unwrapping optionals and enable consistent error handling.  We debated as a team as to the correct approach and concluded this was the best approach for the granularity.  One benefit is the user does not have to unwrap a response.  It also allows for a more unified error return.

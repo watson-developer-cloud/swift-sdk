@@ -73,9 +73,12 @@ github "watson-developer-cloud/ios-sdk"
 
 10) Open your ViewController class and add the following under the import of UIKit.
 
-***import TextToSpeechV1***
-***import AVFoundation***
+```swift
+import UIKit
+import TextToSpeechV1
+import AVFoundation
 
+```
 11) Replace the code over the ***viewDidLoad*** function in the ViewController class:
 
 ```swift

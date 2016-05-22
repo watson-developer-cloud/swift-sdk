@@ -63,7 +63,7 @@ For more details on using the iOS SDK in your application, please review the [Qu
 **Frameworks Used:**
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)
-* [Freddy](https://github.com/Alamofire/Alamofire)
+* [Freddy](https://github.com/bignerdranch/Freddy)
 * [Starscream](https://github.com/daltoniam/Starscream)
 
 ## IBM Watson Services

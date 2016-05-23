@@ -17,10 +17,23 @@
 import PackageDescription
 
 let package = Package(
-  name: "ios-sdk",
+  name: "WatsonDeveloperCloud",
     dependencies: [ 
         .Package(url: "https://github.com/Alamofire/Alamofire.git", majorVersion: 3),
         .Package(url: "https://github.com/bignerdranch/Freddy.git", majorVersion: 2),
         .Package(url: "https://github.com/daltoniam/Starscream.git", majorVersion: 1)        
-    ]  
+    ],
+    targets: [
+        Target(name: "RestKit"),
+        Target(name: "AlchemyLanguageV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "AlchemyVisionV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "DialogV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "LanguageTranslationV2", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "NaturalLanguageClassifierV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "PersonalityInsightsV2", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "SpeechToTextV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "TextToSpeechV1", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "ToneAnalyzerV3", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "VisualRecognitionV3", dependencies: [.Target(name: "RestKit")])
+    ]
 )

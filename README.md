@@ -9,7 +9,7 @@
 
 The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
-Visit our [Quickstart Guide](Quickstart.md) to build your first iOS app with Watson!
+Visit our [Quickstart Guide](Documentation/Quickstart.md) to build your first iOS app with Watson!
 
 > *The Watson Developer Cloud iOS SDK is currently in beta.*
 

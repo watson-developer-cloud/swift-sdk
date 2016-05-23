@@ -66,8 +66,6 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
             failure: failure,
             success: success) else
         {
-            // A bug in the Swift compiler requires us to set all properties before returning nil
-            // This bug is fixed in Swift 2.2, so we can set socket as non-optional
             return nil
         }
 

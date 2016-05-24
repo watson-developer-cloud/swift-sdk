@@ -9,7 +9,7 @@
 
 The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
-Visit our [Quickstart Guide](Documentation/Quickstart.md) to build your first iOS app with Watson!
+Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md) to build your first iOS app with Watson!
 
 > *The Watson Developer Cloud iOS SDK is currently in beta.*
 
@@ -58,7 +58,7 @@ Once the dependency manager is installed, the next step is to download the neede
 carthage update --platform iOS
 ```
 
-For more details on using the iOS SDK in your application, please review the [Quickstart Guide](Quickstart.md).
+For more details on using the iOS SDK in your application, please review the [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md).
 
 **Frameworks Used:**
 
@@ -530,13 +530,13 @@ Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 ## License
 
 This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](LICENSE).
+available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
 
 This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
 ## Contributing
 
-See [CONTRIBUTING](.github/CONTRIBUTING.md) on how to help out.
+See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) on how to help out.
 
 [personality_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
 [language_identification]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/lidapi/

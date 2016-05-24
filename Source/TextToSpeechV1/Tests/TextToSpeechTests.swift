@@ -254,6 +254,18 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Retrieve metadata for all custom voice models. */
+    func testGetCustomizations() {
+        let description = "Get metadata of all custom voices associated with this service instance."
+        let expectation = expectationWithDescription(description)
+        
+        textToSpeech.getCustomizations(failure: failWithError) { customizations in
+            XCTAssertEqual(customizations.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Negative Tests
     
     /** Get the phonetic pronunciation of the given text using an invalid voice type. */
@@ -298,6 +310,20 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.synthesize(text, voice: voice, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Retrieve metadata for all custom voice models when passing an invalid language parameter. */
+    func testGetCustomizationsWithInvalidLanguage() {
+        let description = "Get all custom voices when passing an invalid value for language parameter."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        textToSpeech.getCustomizations("InvalidLanguage", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

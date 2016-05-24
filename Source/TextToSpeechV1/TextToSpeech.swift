@@ -266,6 +266,52 @@ public class TextToSpeech {
         
     }
     
+    // MARK: - Customizations
+    
+    /**
+     Lists metadata, such as name and description, for the custom voice models that you own.
+     
+     You can use the language query parameter to list voice models for the specified language, or
+     omit the parameter to see all voice models that you own for all languages.
+     
+     Note: This method is currently a beta release that supports US English (en-US) only.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the spoken audio.
+     */
+    public func getCustomizations(
+        language: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: [Customization] -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        if let language = language {
+            queryParameters.append(NSURLQueryItem(name: "language", value: language))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/customizations",
+            acceptType: "application/json",
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError, path: ["customizations"]) {
+                (response: Response<[Customization], NSError>) in
+                switch response.result {
+                case .Success(let customizations): success(customizations)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    // MARK: - Internal methods
+    
     /**
      Convert a big-endian byte buffer to a UTF-8 encoded string.
      

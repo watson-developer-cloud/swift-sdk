@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# jazzyParams="-c -g https://github.com/watson-developer-cloud/ios-sdk --skip-undocumented --hide-documentation-coverage"
 jazzyParams="-c -g https://github.com/watson-developer-cloud/ios-sdk --hide-documentation-coverage"
 
 rm -r ./Documentation/Service/AlchemyLanguageV1

@@ -276,8 +276,10 @@ public class TextToSpeech {
      
      Note: This method is currently a beta release that supports US English (en-US) only.
      
+     - parameter language: The language of the voice models that you want listed.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the spoken audio.
+     - parameter success: A function executed with an array of information about your custom voice 
+            models.
      */
     public func getCustomizations(
         language: String? = nil,

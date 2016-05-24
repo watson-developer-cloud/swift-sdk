@@ -18,19 +18,47 @@ import Foundation
 
 /** A voice to be used for synthesis. */
 public enum SynthesisVoice {
+    
+    /// German with a female voice (`de-DE_BirgitVoice`).
     case DE_Birgit
+    
+    /// German with a male voice (`de-DE_DieterVoice`).
     case DE_Dieter
+    
+    /// English (British dialect) with a female voice (`en-GB_KateVoice`).
     case GB_Kate
+    
+    /// English (US dialect) with a female voice (`en-US_AllisonVoice`).
     case US_Allison
+    
+    /// English (US dialect) with a female voice (`en-US_LisaVoice`).
     case US_Lisa
+    
+    // English (US dialect) with a male voice (`en-US_MichaelVoice`).
     case US_Michael
+    
+    /// Spanish (Castillian dialect) with a male voice (`es-ES_EnriqueVoice`).
     case ES_Enrique
+    
+    /// Spanish (Castillian dialect) with a female voice (`es-ES_LauraVoice`).
     case ES_Laura
+    
+    /// Spanish (North-American dialect) with a female voice (`es-US_SofiaVoice`).
     case US_Sofia
+    
+    /// French with a female voice (`fr-FR_ReneeVoice`).
     case FR_Renee
+    
+    /// Italian with a female voice (`it-IT_FrancescaVoice`).
     case IT_Francesca
+    
+    /// Japanese with a female voice (`ja-JP_EmiVoice`).
     case JP_Emi
+    
+    /// Brazilian Portuguese with a female voice (`pt-BR_IsabelaVoice`).
     case BR_Isabela
+    
+    /// A custom voice.
     case Custom(voice: String)
     
     /// Represent the voice as a `String`.

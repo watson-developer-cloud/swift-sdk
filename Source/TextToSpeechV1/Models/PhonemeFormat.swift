@@ -14,8 +14,14 @@
  * limitations under the License.
  **/
 
+import Foundation
+
 /** The phoneme set for a pronunciation. */
 public enum PhonemeFormat: String {
+    
+    /// The IPA (International Phonetic Alphabet) phoneme set.
     case IPA = "ipa"
+    
+    /// The IBM SPR (Symbolic Phonetic Representation) phoneme set.
     case SPR = "spr"
 }

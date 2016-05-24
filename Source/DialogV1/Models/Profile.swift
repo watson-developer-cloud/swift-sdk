@@ -26,6 +26,12 @@ public struct Profile: JSONEncodable, JSONDecodable {
     /// The parameters of the profile.
     public let parameters: [Parameter]
 
+    /**
+     Create a `Profile` for a client with parameters.
+
+     - parameter clientID: The client identifier associated with the profile.
+     - parameter parameters: The client's profile parameters.
+     */
     public init(clientID: Int? = nil, parameters: [String: String]) {
         self.clientID = clientID
         self.parameters = parameters.map { (name, value) in
@@ -57,6 +63,12 @@ public struct Parameter: JSONEncodable, JSONDecodable {
     /// The value of the parameter.
     public let value: String
     
+    /**
+     Create a `Parameter` for a profile with a name and value.
+ 
+     - parameter name: The name of the parameter.
+     - parameter value: The value of the parameter.
+     */
     public init(name: String, value: String) {
         self.name = name
         self.value = value

@@ -152,11 +152,20 @@ public struct TranscriptionSettings: JSONEncodable {
  Audio formats supported by the Watson Speech to Text service.
  */
 public enum AudioMediaType {
+    
+    /// FLAC audio format
     case FLAC
+    
+    /// L16 audio format with a rate and channels
     case L16(rate: Int, channels: Int)
+    
+    /// WAV audio format
     case WAV
+    
+    /// Opus audio format
     case Opus
 
+    /// A representation of the audio format as a MIME type string.
     var toString: String {
         switch self {
         case .FLAC:                        return "audio/flac"

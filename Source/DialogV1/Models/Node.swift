@@ -26,6 +26,12 @@ public struct Node: JSONEncodable, JSONDecodable {
     /// The node's type.
     public let node: String
 
+    /**
+     Create a `Node` with associated content and a type.
+ 
+     - parameter content: The node's associated content.
+     - parameter node: The node's type.
+     */
     public init(content: String, node: String) {
         self.content = content
         self.node = node

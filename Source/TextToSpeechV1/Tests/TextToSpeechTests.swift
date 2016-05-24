@@ -184,12 +184,12 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Synthesize text to spoken audio in OGG format. */
-    func testSynthesizeOGG() {
+    /** Synthesize text to spoken audio in Opus format. */
+    func testSynthesizeOpus() {
         let description = "Synthesize text to spoken audio."
         let expectation = expectationWithDescription(description)
         
-        textToSpeech.synthesize(text, audioFormat: .OGG, failure: failWithError) { data in
+        textToSpeech.synthesize(text, audioFormat: .Opus, failure: failWithError) { data in
             XCTAssertGreaterThan(data.length, 0)
             expectation.fulfill()
         }

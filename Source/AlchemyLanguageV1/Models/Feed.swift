@@ -24,12 +24,12 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Feed: JSONDecodable {
-        public let feed: String?
-        
-        public init(json: JSON) throws {
-            feed = try? json.string("feed")
-        }
+
+public struct Feed: JSONDecodable {
+    public let feed: String?
+    
+    public init(json: JSON) throws {
+        feed = try? json.string("feed")
     }
 }
+

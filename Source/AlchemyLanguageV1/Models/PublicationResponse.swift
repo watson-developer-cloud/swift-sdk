@@ -17,22 +17,29 @@
 import Foundation
 import Freddy
 
-extension AlchemyLanguageV1 {
-    public struct PublicationResponse: JSONDecodable {
-        public let totalTransactions: Int?
-        public let language: String?
-        public let url: String?
-        public let publicationDate: PublicationDate?
-        
-        public init(json: JSON) throws {
-            if let totalTransactionsString = try? json.string("totalTransactions") {
-                totalTransactions = Int(totalTransactionsString)
-            } else {
-                totalTransactions = 1
-            }
-            language = try? json.string("language")
-            url = try? json.string("url")
-            publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
+
+/**
+ 
+ **PublicationResponse**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+
+public struct PublicationResponse: JSONDecodable {
+    public let totalTransactions: Int?
+    public let language: String?
+    public let url: String?
+    public let publicationDate: PublicationDate?
+    
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
         }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
     }
 }

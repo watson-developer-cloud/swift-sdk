@@ -24,23 +24,22 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Keyword: JSONDecodable {
-        public let knowledgeGraph: KnowledgeGraph?
-        public let relevance: Double?
-        public let sentiment: Sentiment?
-        public let text: String?
-        
-        public init(json: JSON) throws {
-            knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
-            if let relevanceString = try? json.string("relevance") {
-                relevance = Double(relevanceString)
-            } else {
-                relevance = nil
-            }
-            sentiment = try? json.decode("sentiment", type: Sentiment.self)
-            text = try? json.string("text")
-        }
-    }
+
+public struct Keyword: JSONDecodable {
+    public let knowledgeGraph: KnowledgeGraph?
+    public let relevance: Double?
+    public let sentiment: Sentiment?
+    public let text: String?
     
+    public init(json: JSON) throws {
+        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
+        if let relevanceString = try? json.string("relevance") {
+            relevance = Double(relevanceString)
+        } else {
+            relevance = nil
+        }
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        text = try? json.string("text")
+    }
 }
+

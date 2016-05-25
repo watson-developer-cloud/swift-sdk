@@ -24,47 +24,15 @@ import Freddy
  DocumentAuthors returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct DocumentAuthors: JSONDecodable {
-        public let url: String
-        
-        public let authors: Authors
-        
-        public init(json: JSON) throws {
-            url = try json.string("url")
-            authors = try json.decode("authors", type: Authors.self)
-        }
+
+public struct DocumentAuthors: JSONDecodable {
+    public let url: String
+    
+    public let authors: Authors
+    
+    public init(json: JSON) throws {
+        url = try json.string("url")
+        authors = try json.decode("authors", type: Authors.self)
     }
 }
 
-/*public struct DocumentAuthors: AlchemyLanguageGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: DocumentAuthors
-    /** results, see **Authors** */
-    public var authors: Authors?
-    
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // documentAuthors
-        authors <- map["authors"]
-        
-    }
-    
-}*/

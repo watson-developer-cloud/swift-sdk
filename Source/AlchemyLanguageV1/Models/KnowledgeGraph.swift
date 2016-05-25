@@ -24,12 +24,12 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct KnowledgeGraph: JSONDecodable {
-        public let typeHierarchy: String?
-        
-        public init(json: JSON) throws {
-            typeHierarchy = try? json.string("typeHierarchy")
-        }
+
+public struct KnowledgeGraph: JSONDecodable {
+    public let typeHierarchy: String?
+    
+    public init(json: JSON) throws {
+        typeHierarchy = try? json.string("typeHierarchy")
     }
 }
+

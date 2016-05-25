@@ -24,20 +24,20 @@ import Freddy
  Child class of Taxonomies
  
  */
-extension AlchemyLanguageV1 {
-    public struct Taxonomy: JSONDecodable {
-        public let confident: String?
-        public let label: String?
-        public let score: Double?
-        
-        public init(json: JSON) throws {
-            confident = try? json.string("confident")
-            label = try? json.string("label")
-            if let scoreString = try? json.string("score") {
-                score = Double(scoreString)
-            } else {
-                score = nil
-            }
+
+public struct Taxonomy: JSONDecodable {
+    public let confident: String?
+    public let label: String?
+    public let score: Double?
+    
+    public init(json: JSON) throws {
+        confident = try? json.string("confident")
+        label = try? json.string("label")
+        if let scoreString = try? json.string("score") {
+            score = Double(scoreString)
+        } else {
+            score = nil
         }
     }
 }
+

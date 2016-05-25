@@ -24,42 +24,42 @@ import Freddy
  Returned by the AlchemyLanguage & AlchemyDataNews services.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Entity: JSONDecodable {
-        /** how often this entity is seen */
-        public let count: Int?
-        /** disambiguation information for the detected entity (sent only if disambiguation occurred) */
-        public let disambiguated: DisambiguatedLinks?
-        /** see **KnowledgeGraph** */
-        public let knowledgeGraph: KnowledgeGraph?
-        /** example usage of our keyword */
-        public let quotations: [Quotation]?
-        /** relevance to content */
-        public let relevance: Double?
-        /** sentiment concerning keyword */
-        public let sentiment: Sentiment?
-        /** surrounding text */
-        public let text: String?
-        /** Classification */
-        public let type: String?
-        
-        public init(json: JSON) throws {
-            if let countString = try? json.string("count") {
-                count = Int(countString)
-            } else {
-                count = nil
-            }
-            disambiguated = try? json.decode("disambiguated", type: DisambiguatedLinks.self)
-            knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
-            quotations = try? json.arrayOf("quotations", type: Quotation.self)
-            if let relevanceString = try? json.string("relevance") {
-                relevance = Double(relevanceString)
-            } else {
-                relevance = nil
-            }
-            sentiment = try? json.decode("sentiment", type: Sentiment.self)
-            text = try? json.string("text")
-            type = try? json.string("type")
+
+public struct Entity: JSONDecodable {
+    /** how often this entity is seen */
+    public let count: Int?
+    /** disambiguation information for the detected entity (sent only if disambiguation occurred) */
+    public let disambiguated: DisambiguatedLinks?
+    /** see **KnowledgeGraph** */
+    public let knowledgeGraph: KnowledgeGraph?
+    /** example usage of our keyword */
+    public let quotations: [Quotation]?
+    /** relevance to content */
+    public let relevance: Double?
+    /** sentiment concerning keyword */
+    public let sentiment: Sentiment?
+    /** surrounding text */
+    public let text: String?
+    /** Classification */
+    public let type: String?
+    
+    public init(json: JSON) throws {
+        if let countString = try? json.string("count") {
+            count = Int(countString)
+        } else {
+            count = nil
         }
+        disambiguated = try? json.decode("disambiguated", type: DisambiguatedLinks.self)
+        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
+        quotations = try? json.arrayOf("quotations", type: Quotation.self)
+        if let relevanceString = try? json.string("relevance") {
+            relevance = Double(relevanceString)
+        } else {
+            relevance = nil
+        }
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        text = try? json.string("text")
+        type = try? json.string("type")
     }
 }
+

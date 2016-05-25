@@ -15,34 +15,30 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
-public extension AlchemyLanguageV1 {
+
+
+/**
+ 
+ **DocumentSentiment**
+ 
+ Returned by the AlchemyLanguage service.
+ 
+ */
+public struct DocumentSentiment: JSONDecodable {
     
-    /**
-     
-     **DocumentSentiment**
-     
-     Returned by the AlchemyLanguage service.
-     
-     */
-    public struct DocumentSentiment: Mappable {
-        
-        /** inputted text */
-        public var text: String?
-
-        /** see **Sentiment** */
-        public var sentiment: Sentiment?
-        
-
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            
-            text <- map["text"]
-            sentiment <- map["sentiment"]
-            
-        }
-        
+    /** inputted text */
+    public let text: String?
+    
+    /** see **Sentiment** */
+    public let sentiment: Sentiment?
+    
+    
+    public init(json: JSON) throws {
+        text = try? json.string("text")
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
     }
+    
 }
+

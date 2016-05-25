@@ -24,15 +24,11 @@ import Freddy
  Authors returned by the AlchemyLanguage service as a property of DocumentAuthors.
  
  */
-extension AlchemyLanguageV1 {
-    
-    public struct Authors: JSONDecodable {
+public struct Authors: JSONDecodable {
         
-        public let names: [String]
+    public let names: [String]
         
-        public init(json: JSON) throws {
-            names = try json.arrayOf("names", type: Swift.String)
-        }
+    public init(json: JSON) throws {
+        names = try json.arrayOf("names", type: Swift.String)
     }
-    
 }

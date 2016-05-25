@@ -24,24 +24,24 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Keywords: JSONDecodable {
-        public let totalTransactions: Int?
-        public let language: String?
-        public let url: String?
-        public let keywords: [Keyword]?
-        public let text: String?
-        
-        public init(json: JSON) throws {
-            if let totalTransactionsString = try? json.string("totalTransactions") {
-                totalTransactions = Int(totalTransactionsString)
-            } else {
-                totalTransactions = 1
-            }
-            language = try? json.string("language")
-            url = try? json.string("url")
-            keywords = try? json.arrayOf("keywords", type: Keyword.self)
-            text = try? json.string("text")
+
+public struct Keywords: JSONDecodable {
+    public let totalTransactions: Int?
+    public let language: String?
+    public let url: String?
+    public let keywords: [Keyword]?
+    public let text: String?
+    
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
         }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        keywords = try? json.arrayOf("keywords", type: Keyword.self)
+        text = try? json.string("text")
     }
 }
+

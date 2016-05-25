@@ -24,18 +24,18 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct SAORelations: JSONDecodable {
-        public let language: String?
-        public let url: String?
-        public let text: String?
-        public let relations: [SAORelation]?
-        
-        public init(json: JSON) throws {
-            language = try? json.string("language")
-            url = try? json.string("url")
-            text = try? json.string("text")
-            relations = try? json.arrayOf("relations", type: SAORelation.self)
-        }
+
+public struct SAORelations: JSONDecodable {
+    public let language: String?
+    public let url: String?
+    public let text: String?
+    public let relations: [SAORelation]?
+    
+    public init(json: JSON) throws {
+        language = try? json.string("language")
+        url = try? json.string("url")
+        text = try? json.string("text")
+        relations = try? json.arrayOf("relations", type: SAORelation.self)
     }
 }
+

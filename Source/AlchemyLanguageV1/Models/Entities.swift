@@ -24,24 +24,24 @@ import Freddy
  Entities returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Entities: JSONDecodable {
-        public let language: String?
-        public let url: String?
-        public let totalTransactions: Int?
-        public let text: String?
-        public let entitites: [Entity]?
-        
-        public init(json: JSON) throws {
-            language = try? json.string("language")
-            url = try? json.string("url")
-            if let totalTransactionsString = try? json.string("totalTransactions") {
-                totalTransactions = Int(totalTransactionsString)
-            } else {
-                totalTransactions = nil
-            }
-            text = try? json.string("text")
-            entitites = try? json.arrayOf("entities", type: Entity.self)
+
+public struct Entities: JSONDecodable {
+    public let language: String?
+    public let url: String?
+    public let totalTransactions: Int?
+    public let text: String?
+    public let entitites: [Entity]?
+    
+    public init(json: JSON) throws {
+        language = try? json.string("language")
+        url = try? json.string("url")
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = nil
         }
+        text = try? json.string("text")
+        entitites = try? json.arrayOf("entities", type: Entity.self)
     }
 }
+

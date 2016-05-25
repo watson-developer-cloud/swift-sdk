@@ -24,24 +24,24 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Sentiment: JSONDecodable {
-        public let mixed: Int?
-        public let score: Double?
-        public let type: String?
-        
-        public init(json: JSON) throws {
-            if let mixString = try? json.string("mixed") {
-                mixed = Int(mixString)
-            } else {
-                mixed = nil
-            }
-            if let scoreString = try? json.string("score") {
-                score = Double(scoreString)
-            } else {
-                score = nil
-            }
-            type = try? json.string("type")
+
+public struct Sentiment: JSONDecodable {
+    public let mixed: Int?
+    public let score: Double?
+    public let type: String?
+    
+    public init(json: JSON) throws {
+        if let mixString = try? json.string("mixed") {
+            mixed = Int(mixString)
+        } else {
+            mixed = nil
         }
+        if let scoreString = try? json.string("score") {
+            score = Double(scoreString)
+        } else {
+            score = nil
+        }
+        type = try? json.string("type")
     }
 }
+

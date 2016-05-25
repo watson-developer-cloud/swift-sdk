@@ -16,7 +16,6 @@
 
 import Foundation
 import Freddy
-import ObjectMapper
 
 /**
  
@@ -25,22 +24,22 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Feeds: JSONDecodable {
-        public let totalTransactions: Int?
-        public let language: String?
-        public let url: String?
-        public let feeds: [Feed]?
-        
-        public init(json: JSON) throws {
-            if let totalTransactionString = try? json.string("totalTransactions") {
-                totalTransactions = Int(totalTransactionString)
-            } else {
-                totalTransactions = 1
-            }
-            language = try? json.string("language")
-            url = try? json.string("url")
-            feeds = try? json.arrayOf("feeds", type: Feed.self)
+
+public struct Feeds: JSONDecodable {
+    public let totalTransactions: Int?
+    public let language: String?
+    public let url: String?
+    public let feeds: [Feed]?
+    
+    public init(json: JSON) throws {
+        if let totalTransactionString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionString)
+        } else {
+            totalTransactions = 1
         }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        feeds = try? json.arrayOf("feeds", type: Feed.self)
     }
 }
+

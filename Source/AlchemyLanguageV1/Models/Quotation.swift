@@ -22,12 +22,12 @@ import Freddy
  **Quotation**
  
  */
-extension AlchemyLanguageV1 {
-    public struct Quotation: JSONDecodable {
-        public let quotation: String?
-        
-        public init(json: JSON) throws {
-            quotation = try? json.string("quotation")
-        }
+
+public struct Quotation: JSONDecodable {
+    public let quotation: String?
+    
+    public init(json: JSON) throws {
+        quotation = try? json.string("quotation")
     }
 }
+

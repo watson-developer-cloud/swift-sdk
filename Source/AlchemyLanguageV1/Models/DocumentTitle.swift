@@ -24,14 +24,14 @@ import Freddy
  DocumentTitle returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct DocumentTitle: JSONDecodable {
-        public let url: String?
-        public let title: String?
-        
-        public init(json: JSON) throws {
-            url = try? json.string("url")
-            title = try? json.string("title")
-        }
+
+public struct DocumentTitle: JSONDecodable {
+    public let url: String?
+    public let title: String?
+    
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        title = try? json.string("title")
     }
 }
+

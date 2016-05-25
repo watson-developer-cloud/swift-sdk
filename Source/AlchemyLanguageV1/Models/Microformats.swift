@@ -24,14 +24,13 @@ import Freddy
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct Microformats: JSONDecodable {
-        public let url: String?
-        public let microformats: [Microformat]?
-        
-        public init(json: JSON) throws {
-            url = try? json.string("url")
-            microformats = try? json.arrayOf("microformats", type: Microformat.self)
-        }
+
+public struct Microformats: JSONDecodable {
+    public let url: String?
+    public let microformats: [Microformat]?
+    
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        microformats = try? json.arrayOf("microformats", type: Microformat.self)
     }
 }

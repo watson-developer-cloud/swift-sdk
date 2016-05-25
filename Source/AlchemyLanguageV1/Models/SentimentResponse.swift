@@ -16,7 +16,6 @@
 
 import Foundation
 import Freddy
-import ObjectMapper
 
 /**
  
@@ -25,24 +24,24 @@ import ObjectMapper
  Returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct SentimentResponse: JSONDecodable {
-        public let totalTransactions: Int?
-        public let language: String?
-        public let url: String?
-        public let text: String?
-        public let docSentiment: Sentiment?
-        
-        public init(json: JSON) throws {
-            if let totalTransactionsString = try? json.string("totalTransactions") {
-                totalTransactions = Int(totalTransactionsString)
-            } else {
-                totalTransactions = 1
-            }
-            language = try? json.string("language")
-            url = try? json.string("url")
-            text = try? json.string("text")
-            docSentiment = try? json.decode("docSentiment", type: Sentiment.self)
+
+public struct SentimentResponse: JSONDecodable {
+    public let totalTransactions: Int?
+    public let language: String?
+    public let url: String?
+    public let text: String?
+    public let docSentiment: Sentiment?
+    
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
         }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        text = try? json.string("text")
+        docSentiment = try? json.decode("docSentiment", type: Sentiment.self)
     }
 }
+

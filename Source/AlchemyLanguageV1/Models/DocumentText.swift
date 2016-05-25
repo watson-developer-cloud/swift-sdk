@@ -24,16 +24,15 @@ import Freddy
  DocumentText returned by the AlchemyLanguage service.
  
  */
-extension AlchemyLanguageV1 {
-    public struct DocumentText: JSONDecodable {
-        public let url: String?
-        public let language: String?
-        public let text: String?
-        
-        public init(json: JSON) throws {
-            url = try? json.string("url")
-            language = try? json.string("language")
-            text = try? json.string("text")
-        }
+
+public struct DocumentText: JSONDecodable {
+    public let url: String?
+    public let language: String?
+    public let text: String?
+    
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        language = try? json.string("language")
+        text = try? json.string("text")
     }
 }

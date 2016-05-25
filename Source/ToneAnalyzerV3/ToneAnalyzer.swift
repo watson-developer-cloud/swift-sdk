@@ -29,8 +29,8 @@ public class ToneAnalyzer {
     private let username: String
     private let password: String
     private let version: String
+    private let serviceURL: String
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
-    private let serviceURL = "https://gateway.watsonplatform.net/tone-analyzer-beta/api"
 
     /**
      Create a `ToneAnalyzer` object.
@@ -39,11 +39,18 @@ public class ToneAnalyzer {
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
             in "YYYY-MM-DD" format.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String, version: String) {
+    public init(
+        username: String,
+        password: String,
+        version: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer-beta/api")
+    {
         self.username = username
         self.password = password
         self.version = version
+        self.serviceURL = serviceURL
     }
     
     /**

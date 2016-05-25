@@ -28,8 +28,8 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
+    private let serviceURL: String
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    private let serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3"
     
     /**
      Create a `VisualRecognition` object.
@@ -37,10 +37,16 @@ public class VisualRecognition {
      - parameter apiKey: The API key used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(apiKey: String, version: String) {
+    public init(
+        apiKey: String,
+        version: String,
+        serviceURL: String = "https://gateway-a.watsonplatform.net/visual-recognition/api")
+    {
         self.apiKey = apiKey
         self.version = version
+        self.serviceURL = serviceURL
     }
     
     /**
@@ -85,7 +91,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .GET,
-            url: serviceURL + "/classifiers",
+            url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
             queryParameters: queryParameters
         )
@@ -146,7 +152,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/classifiers",
+            url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
             queryParameters: queryParameters
         )
@@ -210,7 +216,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .DELETE,
-            url: serviceURL + "/classifiers/\(classifierID)",
+            url: serviceURL + "/v3/classifiers/\(classifierID)",
             queryParameters: queryParameters
         )
         
@@ -251,7 +257,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .GET,
-            url: serviceURL + "/classifiers/\(classifierID)",
+            url: serviceURL + "/v3/classifiers/\(classifierID)",
             queryParameters: queryParameters
         )
         
@@ -387,7 +393,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/classify",
+            url: serviceURL + "/v3/classify",
             acceptType: "application/json",
             queryParameters: queryParameters,
             headerParameters: headerParameters
@@ -470,7 +476,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/detect_faces",
+            url: serviceURL + "/v3/detect_faces",
             acceptType: "application/json",
             queryParameters: queryParameters
         )
@@ -551,7 +557,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/recognize_text",
+            url: serviceURL + "/v3/recognize_text",
             acceptType: "application/json",
             queryParameters: queryParameters
         )

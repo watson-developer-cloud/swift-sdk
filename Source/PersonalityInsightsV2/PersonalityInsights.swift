@@ -28,18 +28,24 @@ public class PersonalityInsights {
     
     private let username: String
     private let password: String
+    private let serviceURL: String
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
-    private let serviceURL = "https://gateway.watsonplatform.net/personality-insights/api/v2"
 
     /**
      Create a `PersonalityInsights` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/personality-insights/api")
+    {
         self.username = username
         self.password = password
+        self.serviceURL = serviceURL
     }
 
     /**
@@ -224,7 +230,7 @@ public class PersonalityInsights {
         // construct REST request
         let request = RestRequest(
             method: .POST,
-            url: serviceURL + "/profile",
+            url: serviceURL + "/v2/profile",
             acceptType: "application/json",
             contentType: contentType,
             queryParameters: queryParameters,

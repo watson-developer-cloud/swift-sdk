@@ -91,7 +91,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -134,7 +135,8 @@ public class Dialog {
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -184,7 +186,8 @@ public class Dialog {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -223,7 +226,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: format?.rawValue
+            acceptType: format?.rawValue,
+            userAgent: userAgent
         )
 
         // specify download destination
@@ -288,7 +292,8 @@ public class Dialog {
         // construct REST request
         let request = RestRequest(
             method: .PUT,
-            url: serviceURL + "/v1/dialogs/\(dialogID)"
+            url: serviceURL + "/v1/dialogs/\(dialogID)",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -342,7 +347,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -386,6 +392,7 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
 
@@ -449,6 +456,7 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -502,6 +510,7 @@ public class Dialog {
             method: .POST,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -550,6 +559,7 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -599,6 +609,7 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
 

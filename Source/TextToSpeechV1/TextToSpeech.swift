@@ -86,7 +86,8 @@ public class TextToSpeech {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/voices",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -132,6 +133,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/voices/\(voice.description())",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -186,6 +188,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/pronunciation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -238,6 +241,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/synthesize",
             acceptType: audioFormat.rawValue,
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         

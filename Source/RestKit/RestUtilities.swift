@@ -54,9 +54,9 @@ public extension JSON {
  Construct a user-agent string with the given prefix.
  
  - parameter prefix: The prefix of the user-agent string. This prefix will be concatenated with
-        information about the executable, bundle, version, and os.
+        information about the os version.
  
- - returns: A user-agent string with the given prefix, executable, bundle, version, and os.
+ - returns: A user-agent string with the given prefix and os version.
  */
 public func buildUserAgent(prefix: String) -> String {
     let os = NSProcessInfo.processInfo().operatingSystemVersionString

@@ -234,6 +234,7 @@ public class PersonalityInsights {
             url: serviceURL + "/v2/profile",
             acceptType: "application/json",
             contentType: contentType,
+            userAgent: userAgent,
             queryParameters: queryParameters,
             headerParameters: headerParameters,
             messageBody: content

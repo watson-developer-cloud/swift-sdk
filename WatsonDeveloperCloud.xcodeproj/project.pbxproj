@@ -237,6 +237,16 @@
 		7AAAF5BF1CEEA6C400B74848 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C01CEEA6C800B74848 /* ToneAnalyzerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C11CEEA6CB00B74848 /* VisualRecognitionV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC7C6721CF63FC600A626E9 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC7C6711CF63FC600A626E9 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC7C6791CF63FC600A626E9 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */; };
+		7AC7C6861CF6404F00A626E9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		7AC7C6871CF6404F00A626E9 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7AC7C6881CF6405700A626E9 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7AC7C68A1CF640AA00A626E9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AC7C68B1CF640AA00A626E9 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6651CF63F6800A626E9 /* Conversation.swift */; };
+		7AC7C68D1CF6410E00A626E9 /* ExampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */; };
+		7AC7C68E1CF6411100A626E9 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +326,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF5631CEEA2DF00B74848;
 			remoteInfo = AlchemyLanguageV1;
+		};
+		7AC7C67A1CF63FC600A626E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AC7C66E1CF63FC600A626E9;
+			remoteInfo = ConversationV1;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -439,6 +456,17 @@
 			files = (
 				7AAAF5AA1CEEA37E00B74848 /* ObjectMapper.framework in CopyFiles */,
 				7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C6891CF640A000A626E9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7AC7C68A1CF640AA00A626E9 /* Alamofire.framework in CopyFiles */,
+				7AC7C68B1CF640AA00A626E9 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +642,12 @@
 		7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TextToSpeechV1.h; path = Source/SupportingFiles/TextToSpeechV1.h; sourceTree = "<group>"; };
 		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ToneAnalyzerV3.h; path = Source/SupportingFiles/ToneAnalyzerV3.h; sourceTree = "<group>"; };
 		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualRecognitionV3.h; path = Source/SupportingFiles/VisualRecognitionV3.h; sourceTree = "<group>"; };
+		7AC7C6651CF63F6800A626E9 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
+		7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
+		7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AC7C6711CF63FC600A626E9 /* ConversationV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
+		7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
@@ -829,6 +863,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AC7C66B1CF63FC600A626E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC7C6861CF6404F00A626E9 /* Alamofire.framework in Frameworks */,
+				7AC7C6871CF6404F00A626E9 /* Freddy.framework in Frameworks */,
+				7AC7C6881CF6405700A626E9 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C6751CF63FC600A626E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC7C6791CF63FC600A626E9 /* ConversationV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -870,6 +922,7 @@
 			children = (
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
+				7AC7C6641CF63F6800A626E9 /* ConversationV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
@@ -910,6 +963,8 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
+				7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */,
+				7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -930,6 +985,7 @@
 			children = (
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
+				7AC7C6711CF63FC600A626E9 /* ConversationV1.h */,
 				7A34CB511C233E2100F20D0E /* Credentials.plist */,
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
@@ -1272,6 +1328,33 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		7AC7C6641CF63F6800A626E9 /* ConversationV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7AC7C6651CF63F6800A626E9 /* Conversation.swift */,
+				7AC7C6661CF63F6800A626E9 /* Models */,
+				7AC7C6681CF63F6800A626E9 /* Tests */,
+			);
+			name = ConversationV1;
+			path = Source/ConversationV1;
+			sourceTree = "<group>";
+		};
+		7AC7C6661CF63F6800A626E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7AC7C6681CF63F6800A626E9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1424,6 +1507,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C66C1CF63FC600A626E9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC7C6721CF63FC600A626E9 /* ConversationV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,6 +1928,43 @@
 			productReference = 7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7AC7C66E1CF63FC600A626E9 /* ConversationV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AC7C6801CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1" */;
+			buildPhases = (
+				7AC7C66A1CF63FC600A626E9 /* Sources */,
+				7AC7C66B1CF63FC600A626E9 /* Frameworks */,
+				7AC7C66C1CF63FC600A626E9 /* Headers */,
+				7AC7C66D1CF63FC600A626E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConversationV1;
+			productName = ConversationV1;
+			productReference = 7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7AC7C6771CF63FC600A626E9 /* ConversationV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AC7C6831CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */;
+			buildPhases = (
+				7AC7C6741CF63FC600A626E9 /* Sources */,
+				7AC7C6751CF63FC600A626E9 /* Frameworks */,
+				7AC7C6761CF63FC600A626E9 /* Resources */,
+				7AC7C6891CF640A000A626E9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AC7C67B1CF63FC600A626E9 /* PBXTargetDependency */,
+			);
+			name = ConversationV1Tests;
+			productName = ConversationV1Tests;
+			productReference = 7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1913,6 +2041,12 @@
 					7AAAF56C1CEEA2DF00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					7AC7C66E1CF63FC600A626E9 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					7AC7C6771CF63FC600A626E9 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = 7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */;
@@ -1931,6 +2065,8 @@
 				7AAAF56C1CEEA2DF00B74848 /* AlchemyLanguageV1Tests */,
 				7AAAF5351CEEA23D00B74848 /* AlchemyVisionV1 */,
 				7AAAF53E1CEEA23E00B74848 /* AlchemyVisionV1Tests */,
+				7AC7C66E1CF63FC600A626E9 /* ConversationV1 */,
+				7AC7C6771CF63FC600A626E9 /* ConversationV1Tests */,
 				7AAAF5081CEEA1DA00B74848 /* DialogV1 */,
 				7AAAF5111CEEA1DA00B74848 /* DialogV1Tests */,
 				7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */,
@@ -2141,6 +2277,20 @@
 				7AAAF59E1CEEA31500B74848 /* Credentials.plist in Resources */,
 				7AAAF59D1CEEA30000B74848 /* sample.html in Resources */,
 				7AAAF59C1CEEA30000B74848 /* biography.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C66D1CF63FC600A626E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C6761CF63FC600A626E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2418,6 +2568,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AC7C66A1CF63FC600A626E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC7C68D1CF6410E00A626E9 /* ExampleModel.swift in Sources */,
+				7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7C6741CF63FC600A626E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC7C68E1CF6411100A626E9 /* ConversationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2475,6 +2642,11 @@
 			isa = PBXTargetDependency;
 			target = 7AAAF5631CEEA2DF00B74848 /* AlchemyLanguageV1 */;
 			targetProxy = 7AAAF56F1CEEA2DF00B74848 /* PBXContainerItemProxy */;
+		};
+		7AC7C67B1CF63FC600A626E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AC7C66E1CF63FC600A626E9 /* ConversationV1 */;
+			targetProxy = 7AC7C67A1CF63FC600A626E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3324,6 +3496,74 @@
 			};
 			name = Release;
 		};
+		7AC7C6811CF63FC600A626E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7AC7C6821CF63FC600A626E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7AC7C6841CF63FC600A626E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = ConversationV1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7AC7C6851CF63FC600A626E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = ConversationV1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3533,6 +3773,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7AC7C6801CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AC7C6811CF63FC600A626E9 /* Debug */,
+				7AC7C6821CF63FC600A626E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7AC7C6831CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AC7C6841CF63FC600A626E9 /* Debug */,
+				7AC7C6851CF63FC600A626E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

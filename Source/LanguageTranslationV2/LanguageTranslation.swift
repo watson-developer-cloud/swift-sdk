@@ -29,6 +29,7 @@ public class LanguageTranslation {
     private let username: String
     private let password: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-developer-cloud-ios-0.2.0/LanguageTranslationV2")
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslationV2"
 
     /**

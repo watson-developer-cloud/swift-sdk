@@ -203,6 +203,7 @@ class SpeechToTextWebSocket: WebSocket {
 
         if let token = restToken.token where retries == 1 {
             headers["X-Watson-Authorization-Token"] = token
+            headers["User-Agent"] = userAgent
             super.connect()
         } else {
             let failure = { (error: NSError) in
@@ -214,6 +215,7 @@ class SpeechToTextWebSocket: WebSocket {
             }
             restToken.refreshToken(failure) {
                 self.headers["X-Watson-Authorization-Token"] = self.restToken.token
+                self.headers["User-Agent"] = self.userAgent
                 super.connect()
             }
         }

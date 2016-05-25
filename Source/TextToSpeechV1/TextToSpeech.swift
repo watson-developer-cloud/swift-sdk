@@ -274,8 +274,6 @@ public class TextToSpeech {
      You can use the language query parameter to list voice models for the specified language, or
      omit the parameter to see all voice models that you own for all languages.
      
-     Note: This method is currently a beta release that supports US English (en-US) only.
-     
      - parameter language: The language of the voice models that you want listed.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of information about your custom voice 
@@ -308,6 +306,95 @@ public class TextToSpeech {
                 switch response.result {
                 case .Success(let customizations): success(customizations)
                 case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Creates a new empty custom voice model that is owned by the requesting user.
+     
+     - parameter name: The name of the new custom voice model.
+     - parameter language: The language of the new custom voice model. 'en-US' is the default.
+     - parameter description: A description of the new custom voice model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a customization ID.
+     */
+    public func createCustomization(
+        name: String,
+        language: String? = nil,
+        description: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: CustomizationID -> Void)
+    {
+        // construct the body
+        var dict = ["name": name]
+        if let language = language {
+            dict["language"] = language
+        }
+        if let description = description {
+            dict["description"] = description
+        }
+        
+        guard let body = try? dict.toJSON().serialize() else {
+            let failureReason = "Custom voice model metadata could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/customizations",
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<CustomizationID, NSError>) in
+                switch response.result {
+                case .Success(let customizationID): success(customizationID)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Deletes the custom voice model with the specified customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func deleteCustomization(
+        customizationID: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .DELETE,
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
                 }
         }
     }

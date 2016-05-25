@@ -48,7 +48,7 @@ public class NetworkUtils {
     private static let _httpAuthorizationHeader = "Authorization"
     private static let _httpUserAgentHeader = "User-Agent"
     private static let _userAgent: String = {
-        let wdc = "watson-developer-cloud-ios-0.2.0"
+        let wdc = "watson-developer-cloud-ios-0.3.1"
         if let info = NSBundle.mainBundle().infoDictionary {
             let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
             let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"

@@ -28,7 +28,7 @@ public class AlchemyVision {
     
     private let apiKey: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-developer-cloud-ios-0.2.0/AlchemyVisionV1")
+    private let userAgent = buildUserAgent("watson-developer-cloud-ios-0.3.1/AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
 
     /**

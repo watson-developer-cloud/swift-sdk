@@ -48,7 +48,7 @@ public class NetworkUtils {
     private static let _httpAuthorizationHeader = "Authorization"
     private static let _httpUserAgentHeader = "User-Agent"
     private static let _userAgent: String = {
-        let wdc = "watson-developer-cloud-ios-0.3.1"
+        let wdc = "watson-apis-ios-sdk/0.3.1 AlchemyLanguageV1"
         let os = NSProcessInfo.processInfo().operatingSystemVersionString
         let userAgent = "\(wdc) (OS \(os))"
         let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString

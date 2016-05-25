@@ -105,6 +105,7 @@ public class LanguageTranslation {
             method: .GET,
             url: serviceURL + "/v2/models",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -140,6 +141,7 @@ public class LanguageTranslation {
             method: .POST,
             url: serviceURL + "/v2/models",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -179,7 +181,8 @@ public class LanguageTranslation {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v2/models/\(modelID)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -207,7 +210,8 @@ public class LanguageTranslation {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v2/models/\(modelID)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -286,6 +290,7 @@ public class LanguageTranslation {
             url: serviceURL + "/v2/translate",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
 
@@ -312,7 +317,8 @@ public class LanguageTranslation {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v2/identifiable_languages",
-            contentType: "application/json"
+            contentType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -347,6 +353,7 @@ public class LanguageTranslation {
             url: serviceURL + "/v2/identify",
             acceptType: "application/json",
             contentType: "text/plain",
+            userAgent: userAgent,
             messageBody: body
         )
 

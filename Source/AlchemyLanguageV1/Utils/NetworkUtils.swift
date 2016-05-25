@@ -49,18 +49,13 @@ public class NetworkUtils {
     private static let _httpUserAgentHeader = "User-Agent"
     private static let _userAgent: String = {
         let wdc = "watson-developer-cloud-ios-0.3.1"
-        if let info = NSBundle.mainBundle().infoDictionary {
-            let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
-            let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
-            let version = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
-            let os = NSProcessInfo.processInfo().operatingSystemVersionString
-            let userAgent = "\(wdc) \(executable)/\(bundle) (\(version); OS \(os))"
-            let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
+        let os = NSProcessInfo.processInfo().operatingSystemVersionString
+        let userAgent = "\(wdc) (OS \(os))"
+        let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
 
-            let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
-            if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
-                return mutableUserAgent as String
-            }
+        let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
+        if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
+            return mutableUserAgent as String
         }
 
         return wdc

@@ -27,24 +27,31 @@ import RestKit
 public class SpeechToText {
 
     private let restToken: RestToken
+    private let websocketsURL: String
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
-    private let serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    private let tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /**
      Create a `SpeechToText` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter versionDate: The release date of the version of the API to use. Specify the
-     date in "YYYY-MM-DD" format.
+     - parameter serviceURL: The base URL of the Speech to Text service.
+     - parameter tokenURL: The URL that shall be used to obtain a token.
+     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
+        tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
+        websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+    {
         self.restToken = RestToken(
             tokenURL: tokenURL + "?url=" + serviceURL,
             username: username,
             password: password
         )
+        self.websocketsURL = websocketsURL
     }
 
     /** A function that, when executed, stops streaming audio to Speech to Text. */
@@ -92,6 +99,7 @@ public class SpeechToText {
         success: [TranscriptionResult] -> Void)
     {
         guard let socket = SpeechToTextWebSocket(
+            websocketsURL: websocketsURL,
             restToken: restToken,
             settings: settings,
             failure: failure,
@@ -132,6 +140,7 @@ public class SpeechToText {
         -> StopStreaming
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
+            websocketsURL: websocketsURL,
             restToken: restToken,
             settings: settings,
             failure: failure,
@@ -163,6 +172,7 @@ public class SpeechToText {
         -> (AVCaptureAudioDataOutput, StopStreaming)?
     {
         guard let audioStreamer = SpeechToTextAudioStreamer(
+            websocketsURL: websocketsURL,
             restToken: restToken,
             settings: settings,
             failure: failure,

@@ -30,18 +30,24 @@ public class NaturalLanguageClassifier {
     
     private let username: String
     private let password: String
+    private let serviceURL: String
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
-    private let serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
     
     /**
      Create a `NaturalLanguageClassifier` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/natural-language-classifier/api")
+    {
         self.username = username
         self.password = password
+        self.serviceURL = serviceURL
     }
     
     /**

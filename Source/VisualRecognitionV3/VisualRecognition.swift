@@ -94,6 +94,7 @@ public class VisualRecognition {
             method: .GET,
             url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -155,6 +156,7 @@ public class VisualRecognition {
             method: .POST,
             url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -218,6 +220,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -259,6 +262,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -396,6 +400,7 @@ public class VisualRecognition {
             method: .POST,
             url: serviceURL + "/v3/classify",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             headerParameters: headerParameters
         )
@@ -479,6 +484,7 @@ public class VisualRecognition {
             method: .POST,
             url: serviceURL + "/v3/detect_faces",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -560,6 +566,7 @@ public class VisualRecognition {
             method: .POST,
             url: serviceURL + "/v3/recognize_text",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         

@@ -116,17 +116,18 @@ public class ToneAnalyzer {
             queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
-        // construct request
+        // construct REST request
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v3/tone",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: body
         )
         
-        // execute request
+        // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
             .responseObject(dataToError: dataToError) {

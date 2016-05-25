@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12393DEA1CF4F7E5009CD0A4 /* CustomizationID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12393DE91CF4F7E5009CD0A4 /* CustomizationID.swift */; };
+		12393DEC1CF62D40009CD0A4 /* CustomizationWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12393DEB1CF62D40009CD0A4 /* CustomizationWords.swift */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -447,6 +448,7 @@
 
 /* Begin PBXFileReference section */
 		12393DE91CF4F7E5009CD0A4 /* CustomizationID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationID.swift; sourceTree = "<group>"; };
+		12393DEB1CF62D40009CD0A4 /* CustomizationWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationWords.swift; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -1223,11 +1225,12 @@
 			children = (
 				7AAA9A751CEE878D002C9564 /* AudioFormat.swift */,
 				7AAA9A761CEE878D002C9564 /* Customization.swift */,
+				12393DE91CF4F7E5009CD0A4 /* CustomizationID.swift */,
+				12393DEB1CF62D40009CD0A4 /* CustomizationWords.swift */,
 				7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */,
 				7AAA9A781CEE878D002C9564 /* Pronunciation.swift */,
 				7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */,
 				7AAA9A7A1CEE878D002C9564 /* Voice.swift */,
-				12393DE91CF4F7E5009CD0A4 /* CustomizationID.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2219,6 +2222,7 @@
 				7AAAF43E1CEE9E8E00B74848 /* SynthesisVoice.swift in Sources */,
 				7AAAF43C1CEE9E8E00B74848 /* PhonemeFormat.swift in Sources */,
 				7AAAF43B1CEE9E8E00B74848 /* Customization.swift in Sources */,
+				12393DEC1CF62D40009CD0A4 /* CustomizationWords.swift in Sources */,
 				7AAAF4401CEE9E9100B74848 /* TextToSpeech.swift in Sources */,
 				7AAAF43F1CEE9E8E00B74848 /* Voice.swift in Sources */,
 				12393DEA1CF4F7E5009CD0A4 /* CustomizationID.swift in Sources */,

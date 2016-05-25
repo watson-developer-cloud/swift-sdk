@@ -346,8 +346,8 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Delete custom voice model without providing a customization ID. */
-    func testDeleteCustomizationWithoutID() {
+    /** Delete custom voice model with a bad customization ID. */
+    func testDeleteCustomizationWithBadID() {
         let description = "Delete custom voice model without providing a customization ID."
         let expectation = expectationWithDescription(description)
         
@@ -356,13 +356,13 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.deleteCustomization("", failure: failure, success: failWithResult)
+        textToSpeech.deleteCustomization("InvalidIDValue", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
-    /** Delete custom voice model with an invalid customization ID. */
-    func testDeleteCustomizationWithInvalidID() {
-        let description = "Delete custom voice model with an invalid customization ID."
+    /** Delete custom voice model with a customization ID the user does not have access to. */
+    func testDeleteCustomizationWithInaccessibleID() {
+        let description = "Delete custom voice model with a customization ID the user can't access."
         let expectation = expectationWithDescription(description)
         
         let failure = { (error: NSError) in
@@ -370,7 +370,43 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.deleteCustomization("9faad2c9-8602-4c9d-ae20-11696bd16721", failure: failure, success: failWithResult)
+        textToSpeech.deleteCustomization(
+            "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            failure: failure,
+            success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Get a custom voice model when providing a bad customization ID. */
+    func testGetCustomizationWithBadID() {
+        let description = "Get a custom voice model when providing a bad customization ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        textToSpeech.getCustomization("InvalidIDValue", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Get a custom voice model with a customization ID the user does not have access to. */
+    func testGetCustomizationWithInaccessibleID() {
+        let description = "Get a custom voice model with a customization ID the user can't access."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 401)
+            expectation.fulfill()
+        }
+        
+        textToSpeech.getCustomization(
+            "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            failure: failure,
+            success: failWithResult)
+        
         waitForExpectations()
     }
 }

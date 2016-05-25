@@ -399,6 +399,37 @@ public class TextToSpeech {
         }
     }
     
+    /**
+     Lists all information about the custom voice model with the specified customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a CustomizationWords object.
+     */
+    public func getCustomization(
+        customizationID: String,
+        failure: (NSError -> Void)? = nil,
+        success: CustomizationWords -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<CustomizationWords, NSError>) in
+                switch response.result {
+                case .Success(let customizationWords): success(customizationWords)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
     // MARK: - Internal methods
     
     /**

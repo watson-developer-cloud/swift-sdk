@@ -59,18 +59,13 @@ public extension JSON {
  - returns: A user-agent string with the given prefix, executable, bundle, version, and os.
  */
 public func buildUserAgent(prefix: String) -> String {
-    if let info = NSBundle.mainBundle().infoDictionary {
-        let executable = info[kCFBundleExecutableKey as String] as? String ?? "Unknown"
-        let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
-        let version = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
-        let os = NSProcessInfo.processInfo().operatingSystemVersionString
-        let userAgent = "\(prefix) \(executable)/\(bundle) (\(version); OS \(os))"
-        let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
-        
-        let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
-        if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
-            return mutableUserAgent as String
-        }
+    let os = NSProcessInfo.processInfo().operatingSystemVersionString
+    let userAgent = "\(prefix) (OS \(os))"
+    let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
+    
+    let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
+    if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
+        return mutableUserAgent as String
     }
     return prefix
 }

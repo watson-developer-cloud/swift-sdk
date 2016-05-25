@@ -82,6 +82,7 @@ public class AlchemyVision {
             url: serviceURL + "/image/ImageGetRankedImageFaceTags",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: data
         )
@@ -131,6 +132,7 @@ public class AlchemyVision {
             url: serviceURL + "/url/URLGetRankedImageFaceTags",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -172,6 +174,7 @@ public class AlchemyVision {
             url: serviceURL + "/html/HTMLGetImage",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -225,6 +228,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetImage",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -282,6 +286,7 @@ public class AlchemyVision {
             url: serviceURL + "/image/ImageGetRankedImageKeywords",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: data
         )
@@ -337,6 +342,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetRankedImageKeywords",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -376,8 +382,9 @@ public class AlchemyVision {
             method: .POST,
             url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
-            queryParameters: queryParameters,
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
+            queryParameters: queryParameters,
             messageBody: data
         )
         
@@ -414,6 +421,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 

@@ -30,6 +30,7 @@ public class TextToSpeech {
     private let username: String
     private let password: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 TextToSpeechV1")
     private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
 
     /**
@@ -85,7 +86,8 @@ public class TextToSpeech {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/voices",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -131,6 +133,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/voices/\(voice.description())",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -185,6 +188,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/pronunciation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -237,6 +241,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/synthesize",
             acceptType: audioFormat.rawValue,
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         

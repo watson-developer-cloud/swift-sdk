@@ -29,6 +29,7 @@ public class PersonalityInsights {
     private let username: String
     private let password: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 PersonalityInsightsV2")
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
     /**
@@ -233,6 +234,7 @@ public class PersonalityInsights {
             url: serviceURL + "/v2/profile",
             acceptType: "application/json",
             contentType: contentType,
+            userAgent: userAgent,
             queryParameters: queryParameters,
             headerParameters: headerParameters,
             messageBody: content

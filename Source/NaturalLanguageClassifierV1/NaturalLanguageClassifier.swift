@@ -31,6 +31,7 @@ public class NaturalLanguageClassifier {
     private let username: String
     private let password: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 NaturalLanguageClassifierV1")
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
     
     /**
@@ -87,7 +88,8 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/classifiers",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -124,7 +126,8 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v1/classifiers",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -185,6 +188,7 @@ public class NaturalLanguageClassifier {
             url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
         
@@ -216,7 +220,8 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/classifiers/\(classifierId)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -251,7 +256,8 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/classifiers/\(classifierId)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request

@@ -28,6 +28,7 @@ public class AlchemyVision {
     
     private let apiKey: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
 
     /**
@@ -81,6 +82,7 @@ public class AlchemyVision {
             url: serviceURL + "/image/ImageGetRankedImageFaceTags",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: data
         )
@@ -130,6 +132,7 @@ public class AlchemyVision {
             url: serviceURL + "/url/URLGetRankedImageFaceTags",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -171,6 +174,7 @@ public class AlchemyVision {
             url: serviceURL + "/html/HTMLGetImage",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -224,6 +228,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetImage",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -281,6 +286,7 @@ public class AlchemyVision {
             url: serviceURL + "/image/ImageGetRankedImageKeywords",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: data
         )
@@ -336,6 +342,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetRankedImageKeywords",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -375,8 +382,9 @@ public class AlchemyVision {
             method: .POST,
             url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
-            queryParameters: queryParameters,
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
+            queryParameters: queryParameters,
             messageBody: data
         )
         
@@ -413,6 +421,7 @@ public class AlchemyVision {
             method: .GET,
             url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 

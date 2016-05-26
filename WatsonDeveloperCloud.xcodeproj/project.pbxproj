@@ -12,7 +12,7 @@
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF3B81CEE9A1700B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3B91CEE9A1700B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF3BA1CEE9A2400B74848 /* RestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */; };
+		7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7AAAF3BC1CEE9A2400B74848 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117501CB5988B009A4DA1 /* RestSerialization.swift */; };
 		7AAAF3BD1CEE9A2400B74848 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
@@ -490,7 +490,7 @@
 		7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
 		7AAA9A241CEE3026002C9564 /* SpeechSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample.wav; sourceTree = "<group>"; };
 		7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
-		7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestExtensions.swift; sourceTree = "<group>"; };
+		7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUtilities.swift; sourceTree = "<group>"; };
 		7AAA9A3D1CEE3059002C9564 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
 		7AAA9A481CEE6089002C9564 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
@@ -928,7 +928,7 @@
 		7A61174E1CB5988B009A4DA1 /* RestKit */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */,
+				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
 				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
@@ -2109,7 +2109,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF3BA1CEE9A2400B74848 /* RestExtensions.swift in Sources */,
+				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
 				7AAAF3BD1CEE9A2400B74848 /* RestToken.swift in Sources */,
 				7AAAF3BC1CEE9A2400B74848 /* RestSerialization.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,

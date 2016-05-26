@@ -30,7 +30,8 @@ class SpeechToTextWebSocket: WebSocket {
     private var state = State.Disconnected
     private var retries = 0
     private let maxRetries = 2
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 SpeechToTextV1")
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     enum State {
         case Disconnected
@@ -202,6 +203,7 @@ class SpeechToTextWebSocket: WebSocket {
 
         if let token = restToken.token where retries == 1 {
             headers["X-Watson-Authorization-Token"] = token
+            headers["User-Agent"] = userAgent
             super.connect()
         } else {
             let failure = { (error: NSError) in
@@ -213,6 +215,7 @@ class SpeechToTextWebSocket: WebSocket {
             }
             restToken.refreshToken(failure) {
                 self.headers["X-Watson-Authorization-Token"] = self.restToken.token
+                self.headers["User-Agent"] = self.userAgent
                 super.connect()
             }
         }

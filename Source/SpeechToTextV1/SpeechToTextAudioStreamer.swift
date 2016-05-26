@@ -26,7 +26,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     private let success: [TranscriptionResult] -> Void
     private var socket: SpeechToTextWebSocket?
     private var captureSession: AVCaptureSession?
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToTextAudioStreamer` to stream microphone audio to Speech to Text.

@@ -195,7 +195,6 @@
 		7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AB53B581CF64DD900FFC9DD /* AlchemyLanguageV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */; };
 		7AB53B741CF64DE000FFC9DD /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B591CF64DE000FFC9DD /* Authors.swift */; };
 		7AB53B751CF64DE000FFC9DD /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5A1CF64DE000FFC9DD /* Concept.swift */; };
 		7AB53B761CF64DE000FFC9DD /* ConceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5B1CF64DE000FFC9DD /* ConceptResponse.swift */; };
@@ -226,6 +225,7 @@
 		7AB53B921CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */; };
 		7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B901CF64DE700FFC9DD /* testArticle.html */; };
 		7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B911CF64DE700FFC9DD /* testText.txt */; };
+		B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2325,6 +2325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */,
 				7AB53B861CF64DE000FFC9DD /* PublicationDate.swift in Sources */,
 				7AB53B8D1CF64DE000FFC9DD /* Taxonomies.swift in Sources */,
 				7AB53B8A1CF64DE000FFC9DD /* SAORelations.swift in Sources */,
@@ -2342,7 +2343,6 @@
 				7AB53B771CF64DE000FFC9DD /* DisambiguatedLinks.swift in Sources */,
 				7AB53B7F1CF64DE000FFC9DD /* Feeds.swift in Sources */,
 				7AB53B831CF64DE000FFC9DD /* Language.swift in Sources */,
-				7AB53B581CF64DD900FFC9DD /* AlchemyLanguageV1.swift in Sources */,
 				7AB53B801CF64DE000FFC9DD /* Keyword.swift in Sources */,
 				7AB53B7B1CF64DE000FFC9DD /* DocumentTitle.swift in Sources */,
 				7AB53B8E1CF64DE000FFC9DD /* Taxonomy.swift in Sources */,

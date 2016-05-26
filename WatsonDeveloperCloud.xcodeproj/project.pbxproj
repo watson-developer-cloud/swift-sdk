@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F5ABFE11CF7408F004E6331 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */; };
+		4F5ABFE21CF7408F004E6331 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */; };
+		4F5ABFE41CF74914004E6331 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		4F5ABFE71CF7649F004E6331 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -245,7 +249,6 @@
 		7AC7C68A1CF640AA00A626E9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AC7C68B1CF640AA00A626E9 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6651CF63F6800A626E9 /* Conversation.swift */; };
-		7AC7C68D1CF6410E00A626E9 /* ExampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */; };
 		7AC7C68E1CF6411100A626E9 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -483,6 +486,8 @@
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_empty.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_missing_name.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_missing_name.txt; sourceTree = "<group>"; };
 		12B07D2C1CDD46A300B20B38 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trained_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/trained_meta.txt; sourceTree = "<group>"; };
+		4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -643,7 +648,6 @@
 		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ToneAnalyzerV3.h; path = Source/SupportingFiles/ToneAnalyzerV3.h; sourceTree = "<group>"; };
 		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualRecognitionV3.h; path = Source/SupportingFiles/VisualRecognitionV3.h; sourceTree = "<group>"; };
 		7AC7C6651CF63F6800A626E9 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
 		7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
 		7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AC7C6711CF63FC600A626E9 /* ConversationV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
@@ -877,6 +881,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5ABFE71CF7649F004E6331 /* Freddy.framework in Frameworks */,
 				7AC7C6791CF63FC600A626E9 /* ConversationV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1342,7 +1347,8 @@
 		7AC7C6661CF63F6800A626E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7AC7C6671CF63F6800A626E9 /* ExampleModel.swift */,
+				4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */,
+				4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2291,6 +2297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5ABFE41CF74914004E6331 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2572,7 +2579,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AC7C68D1CF6410E00A626E9 /* ExampleModel.swift in Sources */,
+				4F5ABFE21CF7408F004E6331 /* MessageResponse.swift in Sources */,
+				4F5ABFE11CF7408F004E6331 /* MessageRequest.swift in Sources */,
 				7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3340,6 +3348,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3352,6 +3364,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3544,7 +3560,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = ConversationV1Tests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
@@ -3556,7 +3576,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = ConversationV1Tests/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
@@ -3781,6 +3805,7 @@
 				7AC7C6821CF63FC600A626E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AC7C6831CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -3789,6 +3814,7 @@
 				7AC7C6851CF63FC600A626E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

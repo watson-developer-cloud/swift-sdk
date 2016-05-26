@@ -26,9 +26,14 @@ import Freddy
  */
 
 public struct Microformat: JSONDecodable {
+    
+    /** Microformat field data */
     public let fieldData: String?
+    
+    /** Microformat field name */
     public let fieldName: String?
     
+    /// Used internally to initialize a Microformat object
     public init(json: JSON) throws {
         fieldData = try? json.string("fieldData")
         fieldName = try? json.string("fieldName")

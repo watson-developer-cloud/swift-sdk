@@ -26,12 +26,23 @@ import Freddy
  */
 
 public struct SentimentResponse: JSONDecodable {
+    
+    /** number of transactions made by the call */
     public let totalTransactions: Int?
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** document text */
     public let text: String?
+    
+    /** see **Sentiment** */
     public let docSentiment: Sentiment?
     
+    /// Used internally to initialize a SentimentResponse object
     public init(json: JSON) throws {
         if let totalTransactionsString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionsString)

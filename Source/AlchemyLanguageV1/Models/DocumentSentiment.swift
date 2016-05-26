@@ -34,7 +34,7 @@ public struct DocumentSentiment: JSONDecodable {
     /** see **Sentiment** */
     public let sentiment: Sentiment?
     
-    
+    /// Used internally to initialize a DocumentSentiment object
     public init(json: JSON) throws {
         text = try? json.string("text")
         sentiment = try? json.decode("sentiment", type: Sentiment.self)

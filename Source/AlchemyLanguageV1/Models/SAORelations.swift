@@ -26,11 +26,20 @@ import Freddy
  */
 
 public struct SAORelations: JSONDecodable {
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** document text */
     public let text: String?
+    
+    /** see **SAORelation** */
     public let relations: [SAORelation]?
     
+    /// Used internally to initialize a SAORelations object
     public init(json: JSON) throws {
         language = try? json.string("language")
         url = try? json.string("url")

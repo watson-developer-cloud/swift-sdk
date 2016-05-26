@@ -26,9 +26,14 @@ import Freddy
  */
 
 public struct PublicationDate: JSONDecodable {
+    
+    /** confidence level of the detection */
     public let confident: String?
+    
+    /** detected publication date */
     public let date: String?
     
+    /// Used internally to initialize a PublicanDate object
     public init(json: JSON) throws {
         confident = try? json.string("confident")
         date = try? json.string("date")

@@ -26,10 +26,14 @@ import Freddy
  */
 
 public struct DocumentAuthors: JSONDecodable {
+    
+    /** the url information was requested for */
     public let url: String
     
+    /** see **Authors** */
     public let authors: Authors
     
+    /// Used internally to initialize a DocumentAuthors object
     public init(json: JSON) throws {
         url = try json.string("url")
         authors = try json.decode("authors", type: Authors.self)

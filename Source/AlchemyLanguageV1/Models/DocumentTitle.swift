@@ -26,9 +26,14 @@ import Freddy
  */
 
 public struct DocumentTitle: JSONDecodable {
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** extracted title */
     public let title: String?
     
+    /// Used internally to initialize a DocumentTitle object
     public init(json: JSON) throws {
         url = try? json.string("url")
         title = try? json.string("title")

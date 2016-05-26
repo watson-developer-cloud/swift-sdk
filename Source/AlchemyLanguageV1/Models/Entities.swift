@@ -26,12 +26,23 @@ import Freddy
  */
 
 public struct Entities: JSONDecodable {
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** the number of transactions made by the call */
     public let totalTransactions: Int?
+    
+    /** the detected entity text */
     public let text: String?
+    
+    /** see **Entity** */
     public let entitites: [Entity]?
     
+    /// Used internally to initialize an Entities object
     public init(json: JSON) throws {
         language = try? json.string("language")
         url = try? json.string("url")

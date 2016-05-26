@@ -26,10 +26,17 @@ import Freddy
  */
 
 public struct Taxonomy: JSONDecodable {
+    
+    /** will be "no" if categorization doesn't meet confidence standards */
     public let confident: String?
+    
+    /** detected category */
     public let label: String?
+    
+    /** confidence score, 0.0 - 1.0 (higher is better) */
     public let score: Double?
     
+    /// Used internally to initialize a Taxonomy object
     public init(json: JSON) throws {
         confident = try? json.string("confident")
         label = try? json.string("label")

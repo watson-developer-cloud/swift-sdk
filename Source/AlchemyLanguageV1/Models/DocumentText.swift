@@ -26,10 +26,17 @@ import Freddy
  */
 
 public struct DocumentText: JSONDecodable {
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** extracted language */
     public let language: String?
+    
+    /** extracted text */
     public let text: String?
     
+    /// Used internally to initialize a DocumentText object
     public init(json: JSON) throws {
         url = try? json.string("url")
         language = try? json.string("language")

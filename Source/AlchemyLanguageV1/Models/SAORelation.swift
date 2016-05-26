@@ -31,6 +31,7 @@ public struct SAORelation: JSONDecodable {
     public let subject: Subject?
     public let object: RelationObject?
     
+    /// Used internally to initialize a SAORelation object
     public init(json: JSON) throws {
         action = try? json.decode("action", type: Action.self)
         sentence = try? json.string("sentence")
@@ -40,22 +41,30 @@ public struct SAORelation: JSONDecodable {
     
 }
 
+/**
+ An action as defined by the AlchemyLanguage service
+ */
 public struct Action: JSONDecodable {
     public let text: String?
     public let lemmatized: String?
     public let verb: Verb?
     
+    /// Used internally to initialize an Action object
     public init(json: JSON) throws {
         text = try? json.string("text")
         lemmatized = try? json.string("lemmatized")
         verb = try? json.decode("verb", type: Verb.self)
     }
     
+    /**
+     A verb as defined by the AlchemyLanguage service
+     */
     public struct Verb: JSONDecodable {
         public let text: String?
         public let tense: String?
         public let negated: Int?
         
+        /// Used internally to initalize a Verb object
         public init(json: JSON) throws {
             text = try? json.string("text")
             tense = try? json.string("tense")
@@ -68,11 +77,15 @@ public struct Action: JSONDecodable {
     }
 }
 
+/**
+ A subjet extracted by the AlchemyLanguage service
+ */
 public struct Subject: JSONDecodable {
     public let text: String?
     public let sentiment: Sentiment?
     public let entity: Entity?
     
+    /// Used internally to initialize a Subject object
     public init(json: JSON) throws {
         text = try? json.string("text")
         sentiment = try? json.decode("sentiment", type: Sentiment.self)
@@ -80,12 +93,16 @@ public struct Subject: JSONDecodable {
     }
 }
 
+/**
+ Returned by the AlchemyLanguage service
+ */
 public struct RelationObject: JSONDecodable {
     public let text: String?
     public let sentiment: Sentiment?
     public let sentimentFromSubject: Sentiment?
     public let entity: Entity?
     
+    /// Used internally to initialize a RelationObject object
     public init(json: JSON) throws {
         text = try? json.string("text")
         sentiment = try? json.decode("sentiment", type: Sentiment.self)

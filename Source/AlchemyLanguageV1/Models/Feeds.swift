@@ -26,11 +26,20 @@ import Freddy
  */
 
 public struct Feeds: JSONDecodable {
+    
+    /** the number of transactions made by the call */
     public let totalTransactions: Int?
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** see **Feed** */
     public let feeds: [Feed]?
     
+    /// Used internally to initialize a Feeds object
     public init(json: JSON) throws {
         if let totalTransactionString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionString)

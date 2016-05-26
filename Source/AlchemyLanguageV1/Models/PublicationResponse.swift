@@ -27,11 +27,20 @@ import Freddy
  */
 
 public struct PublicationResponse: JSONDecodable {
+    
+    /** the number of transactions made by the call */
     public let totalTransactions: Int?
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** see **PublicationDate** */
     public let publicationDate: PublicationDate?
     
+    /// Used internally to initialize a PublicationResponse object
     public init(json: JSON) throws {
         if let totalTransactionsString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionsString)

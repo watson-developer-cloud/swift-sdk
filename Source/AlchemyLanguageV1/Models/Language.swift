@@ -26,15 +26,32 @@ import Freddy
  */
 
 public struct Language: JSONDecodable {
+    
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requestd for */
     public let url: String?
+    
+    //** link to Ethnologue containing information on detected language */
     public let ethnologue: String?
+    
+    //** ISO-639-1 code for the detected language */
     public let iso6391: String?
+    
+    /** ISO-639-2 code for the detected language */
     public let iso6392: String?
+    
+    /** ISO-639-3 code for the detected language */
     public let iso6393: String?
+    
+    /** estimated number of persons who natively speak the detected language */
     public let nativeSpeakers: String?
+    
+    /** link to the Wikipedia page for the detected language */
     public let wikipedia: String?
     
+    /// Used internally to initialize a Language object
     public init(json: JSON) throws {
         language = try? json.string("language")
         url = try? json.string("url")

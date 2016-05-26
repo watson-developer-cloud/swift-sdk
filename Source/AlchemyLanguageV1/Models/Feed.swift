@@ -26,8 +26,10 @@ import Freddy
  */
 
 public struct Feed: JSONDecodable {
+    /** extracted feed */
     public let feed: String?
     
+    /// Used internally to initialize a Feed object
     public init(json: JSON) throws {
         feed = try? json.string("feed")
     }

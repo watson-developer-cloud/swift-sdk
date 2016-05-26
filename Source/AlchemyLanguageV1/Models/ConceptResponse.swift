@@ -27,11 +27,19 @@ import Freddy
 
 public struct ConceptResponse: JSONDecodable {
     
+    /** extracted language */
     public let language: String?
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** number of transactions made by the call */
     public let totalTransactions: Int?
+    
+    /** see **Concept** */
     public let concepts: [Concept]?
     
+    /// Used internally to initialize a ConceptResponse object
     public init(json: JSON) throws {
         language = try? json.string("language")
         url = try? json.string("url")

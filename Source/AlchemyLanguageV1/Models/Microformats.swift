@@ -26,9 +26,14 @@ import Freddy
  */
 
 public struct Microformats: JSONDecodable {
+    
+    /** the URL information was requested for */
     public let url: String?
+    
+    /** see **Microformat** */
     public let microformats: [Microformat]?
     
+    /// Used internally to initialize a Microformats object
     public init(json: JSON) throws {
         url = try? json.string("url")
         microformats = try? json.arrayOf("microformats", type: Microformat.self)

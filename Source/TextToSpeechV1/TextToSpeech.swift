@@ -282,8 +282,8 @@ public class TextToSpeech {
     public func getCustomizations(
         language: String? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [Customization] -> Void)
-    {
+        success: [Customization] -> Void) {
+        
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         if let language = language {
@@ -324,8 +324,8 @@ public class TextToSpeech {
         language: String? = nil,
         description: String? = nil,
         failure: (NSError -> Void)? = nil,
-        success: CustomizationID -> Void)
-    {
+        success: CustomizationID -> Void) {
+        
         // construct the body
         var dict = ["name": name]
         if let language = language {
@@ -429,6 +429,62 @@ public class TextToSpeech {
                 }
         }
     }
+    
+    /** 
+     Updates information for the custom voice model with the specified customizationID.
+     
+     You can update metadata of the custom voice model, such as the name and description of the 
+     voice model. You can also update or add words and translations in the model.
+     
+     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter name: An updated name for the custom voice model.
+     - parameter description: A new description for the custom voice model.
+     - parameter words: An array of Word objects to be added to or updated in the custom voice model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func updateCustomization(
+        customizationID: String,
+        name: String? = nil,
+        description: String? = nil,
+        words: [Word]? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct the body
+        let customVoiceUpdate = CustomVoiceUpdate(name: name, description: description, words: words)
+        guard let body = try? customVoiceUpdate.toJSON().serialize() else {
+            let failureReason = "Translation request could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // construct the request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+        }
+    }
+
     
     // MARK: - Internal methods
     

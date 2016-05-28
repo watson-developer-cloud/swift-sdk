@@ -402,7 +402,7 @@ public class TextToSpeech {
     /**
      Lists all information about the custom voice model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter customizationID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a CustomizationWords object.
      */
@@ -436,7 +436,7 @@ public class TextToSpeech {
      You can update metadata of the custom voice model, such as the name and description of the 
      voice model. You can also update or add words and translations in the model.
      
-     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter name: An updated name for the custom voice model.
      - parameter description: A new description for the custom voice model.
      - parameter words: An array of Word objects to be added to or updated in the custom voice model.
@@ -489,7 +489,7 @@ public class TextToSpeech {
      Lists all of the words and their translations for the custom voice model with the specified
      customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter customizationID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of Word objects.
      */
@@ -521,7 +521,7 @@ public class TextToSpeech {
      Adds one or more words and their translations to the custom voice model with the specified
      customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter words: An array of Word objects to be added to the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
@@ -546,6 +546,125 @@ public class TextToSpeech {
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Deletes the specified word from custom voice model.
+     
+     - parameter customizationID: The ID of the custom voice model to be updated.
+     - parameter word: The word to be deleted from the custom voice model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func deleteWord(
+        customizationID: String,
+        word: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct the request
+        let request = RestRequest(
+            method: .DELETE,
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)"
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Lists the translation for a single word from the custom model with the specified customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model.
+     - parameter word: The word in the custom voice model whose translation should be listed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a Translation object.
+     */
+    public func getTranslation(
+        customizationID: String,
+        word: String,
+        failure: (NSError -> Void)? = nil,
+        success: Translation -> Void) {
+        
+        // construct the request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
+            acceptType: "application/json"
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject {
+                (response: Response<Translation, NSError>) in
+                switch response.result {
+                case .Success(let translation): success(translation)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Adds a single word and its translation to the custom voice model with the specified customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model to be updated.
+     - parameter word: The new word to be added to the custom voice model.
+     - parameter word: The translation of the new word.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func addWord(
+        customizationID: String,
+        word: String,
+        translation: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct the body
+        let dict = ["translation": translation]
+        guard let body = try? dict.toJSON().serialize() else {
+            let failureReason = "Translation request could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct the request
+        let request = RestRequest(
+            method: .PUT,
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             contentType: "application/json",
             messageBody: body
         )

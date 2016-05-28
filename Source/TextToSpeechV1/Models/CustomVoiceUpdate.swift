@@ -29,7 +29,7 @@ public struct CustomVoiceUpdate: JSONEncodable {
     /// A list of words and their translations from the custom voice model.
     public let words: [Word]
     
-    init(name: String?, description: String?, words: [Word]?) {
+    init(name: String? = nil, description: String? = nil, words: [Word]? = nil) {
         self.name = name
         self.description = description
         self.words = words ?? []

@@ -484,7 +484,87 @@ public class TextToSpeech {
                 }
         }
     }
-
+    
+    /**
+     Lists all of the words and their translations for the custom voice model with the specified
+     customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with an array of Word objects.
+     */
+    public func getWords(
+        customizationID: String,
+        failure: (NSError -> Void)? = nil,
+        success: [Word] -> Void) {
+        
+        // construct the request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            acceptType: "application/json"
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError, path: ["words"]) {
+                (response: Response<[Word], NSError>) in
+                switch response.result {
+                case .Success(let words): success(words)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Adds one or more words and their translations to the custom voice model with the specified
+     customizationID.
+     
+     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter words: An array of Word objects to be added to the custom voice model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func addWords(
+        customizationID: String,
+        words: [Word],
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct the body
+        let customVoiceUpdate = CustomVoiceUpdate(words: words)
+        guard let body = try? customVoiceUpdate.toJSON().serialize() else {
+            let failureReason = "Translation request could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct the request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute the request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+        }
+    }
     
     // MARK: - Internal methods
     

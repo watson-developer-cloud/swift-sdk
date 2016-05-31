@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,28 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **DocumentTitle**
  
- DocumentTitle returned by the AlchemyLanguage service.
+ Reponse object for Title related calls
  
  */
-public struct DocumentTitle: AlchemyLanguageGenericModel, Mappable {
+
+public struct DocumentTitle: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** the URL information was requested for */
+    public let url: String?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** extracted title */
+    public let title: String?
     
-    // MARK: DocumentTitle
-    /** returned title */
-    public var title: String?
-    
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // documentTitle
-        title <- map["title"]
-        
+    /// Used internally to initialize a DocumentTitle object
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        title = try? json.string("title")
     }
-    
 }
+

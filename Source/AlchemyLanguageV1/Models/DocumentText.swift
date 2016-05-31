@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,31 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **DocumentText**
  
- DocumentText returned by the AlchemyLanguage service.
+ Response object for Text related calls
  
  */
-public struct DocumentText: AlchemyLanguageGenericModel, Mappable {
+
+public struct DocumentText: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** the URL information was requested for */
+    public let url: String?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** extracted language */
+    public let language: String?
     
-    // MARK: DocumentText
-    /** returned text */
-    public var text: String?
+    /** extracted text */
+    public let text: String?
     
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // documentText
-        text <- map["text"]
-        
+    /// Used internally to initialize a DocumentText object
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        language = try? json.string("language")
+        text = try? json.string("text")
     }
-    
 }

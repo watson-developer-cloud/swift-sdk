@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,30 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
+
+
 
 /**
  
  **DocumentSentiment**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Sentiment** related calls
  
  */
-public struct DocumentSentiment: Mappable {
+public struct DocumentSentiment: JSONDecodable {
     
     /** inputted text */
-    public var text: String?
-
+    public let text: String?
+    
     /** see **Sentiment** */
-    public var sentiment: Sentiment?
+    public let sentiment: Sentiment?
     
-
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        text <- map["text"]
-        sentiment <- map["sentiment"]
-        
+    /// Used internally to initialize a DocumentSentiment object
+    public init(json: JSON) throws {
+        text = try? json.string("text")
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
     }
     
 }
+

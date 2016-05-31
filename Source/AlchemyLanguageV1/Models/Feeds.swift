@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,40 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Feeds**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Feed** related calls
  
  */
-public struct Feeds: AlchemyLanguageGenericModel, Mappable {
 
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+public struct Feeds: JSONDecodable {
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** the number of transactions made by the call */
+    public let totalTransactions: Int?
     
-    // MARK: Feeds
-    /** results, see **Feed** */
-    public var feeds: [Feed]?
+    /** extracted language */
+    public let language: String?
     
+    /** the URL information was requested for */
+    public let url: String?
     
-    public init?(_ map: Map) {}
+    /** see **Feed** */
+    public let feeds: [Feed]?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // feeds
-        feeds <- map["feeds"]
-        
+    /// Used internally to initialize a Feeds object
+    public init(json: JSON) throws {
+        if let totalTransactionString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionString)
+        } else {
+            totalTransactions = 1
+        }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        feeds = try? json.arrayOf("feeds", type: Feed.self)
     }
-
 }
+

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,63 +15,52 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Entity**
  
- Returned by the AlchemyLanguage & AlchemyDataNews services.
+ A named entity (a person, company, organization, etc) extracted from a document by Alchemy services
  
  */
-public struct Entity: AlchemyGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: Entity
+
+public struct Entity: JSONDecodable {
     /** how often this entity is seen */
-    public var count: Int?
-
+    public let count: Int?
     /** disambiguation information for the detected entity (sent only if disambiguation occurred) */
-    public var disambiguated: DisambiguatedLinks?
-
+    public let disambiguated: DisambiguatedLinks?
     /** see **KnowledgeGraph** */
-    public var knowledgeGraph: KnowledgeGraph?
-
+    public let knowledgeGraph: KnowledgeGraph?
     /** example usage of our keyword */
-    public var quotations: [Quotation]? = []
-
+    public let quotations: [Quotation]?
     /** relevance to content */
-    public var relevance: Double?
-
+    public let relevance: Double?
     /** sentiment concerning keyword */
-    public var sentiment: Sentiment?
-
+    public let sentiment: Sentiment?
     /** surrounding text */
-    public var text: String?
-
-    /** Person, City, Country */
-    public var type: String?
+    public let text: String?
+    /** Classification */
+    public let type: String?
     
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // entity
-        count <- map["count"]
-        disambiguated <- map["disambiguated"]
-        knowledgeGraph <- map["knowledgeGraph"]
-        quotations <- map["quotations"]
-        relevance <- map["relevance"]
-        sentiment <- map["sentiment"]
-        text <- map["text"]
-        type <- map["type"]
-        
+    // Used internally to initialize an Entity object
+    public init(json: JSON) throws {
+        if let countString = try? json.string("count") {
+            count = Int(countString)
+        } else {
+            count = nil
+        }
+        disambiguated = try? json.decode("disambiguated", type: DisambiguatedLinks.self)
+        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
+        quotations = try? json.arrayOf("quotations", type: Quotation.self)
+        if let relevanceString = try? json.string("relevance") {
+            relevance = Double(relevanceString)
+        } else {
+            relevance = nil
+        }
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        text = try? json.string("text")
+        type = try? json.string("type")
     }
-    
 }
+

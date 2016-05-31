@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,28 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Microformat**
  
- Returned by the AlchemyLanguage service.
+ Semantic information extracted from a document by the AlchemyLanguage service
  
  */
-public struct Microformat: Mappable {
-    
-    /** structured microformats data (hCard, etc.) extracted from this web page */
-    public var data: String?
 
-    /** (undocumented) */
-    public var field: String?
+public struct Microformat: JSONDecodable {
     
+    /** Microformat field data */
+    public let fieldData: String?
     
-    public init?(_ map: Map) {}
+    /** Microformat field name */
+    public let fieldName: String?
     
-    public mutating func mapping(map: Map) {
-        
-        data <- map["data"]
-        field <- map["field"]
-
+    /// Used internally to initialize a Microformat object
+    public init(json: JSON) throws {
+        fieldData = try? json.string("fieldData")
+        fieldName = try? json.string("fieldName")
     }
-    
 }
+

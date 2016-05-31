@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,23 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Feed**
  
- Returned by the AlchemyLanguage service.
+ A RSS/ATOM feed link extracted from a document
  
  */
-public struct Feed: AlchemyGenericModel, Mappable {
 
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+public struct Feed: JSONDecodable {
+    /** extracted feed */
+    public let feed: String?
     
-    // MARK: Feed
-    /** a link to the feed */
-    public var feed: String?
-    
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // feed
-        feed <- map["feed"]
-        
+    /// Used internally to initialize a Feed object
+    public init(json: JSON) throws {
+        feed = try? json.string("feed")
     }
-
 }
+

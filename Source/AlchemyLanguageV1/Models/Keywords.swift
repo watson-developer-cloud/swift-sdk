@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,47 +15,44 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Keywords**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Keyword** related calls
  
  */
-public struct Keywords: AlchemyLanguageGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: Keywords
-    /** keywords response (see **Keyword**) */
-    public var keywords: [Keyword]?
 
-    /** inputted text */
-    public var text: String?
+public struct Keywords: JSONDecodable {
     
+    /** the number of transactions made by the call */
+    public let totalTransactions: Int?
     
-    public init?(_ map: Map) {}
+    /** extracted language */
+    public let language: String?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // keywords
-        keywords <- map["keywords"]
-        text <- map["text"]
-        
+    /** the URL information was requested for */
+    public let url: String?
+    
+    /** see **Keyword** */
+    public let keywords: [Keyword]?
+    
+    /** document text */
+    public let text: String?
+    
+    /// Used internally to initialize a Keywords object
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
+        }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        keywords = try? json.arrayOf("keywords", type: Keyword.self)
+        text = try? json.string("text")
     }
-    
 }
+

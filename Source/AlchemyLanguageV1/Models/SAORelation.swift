@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,141 +15,100 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **SAORelation**
  
- Returned by the AlchemyLanguage service.
+ Extracted Subject, Action, and Object parts of a sentence
  
  */
-public struct SAORelation: Mappable {
-    
-    /** how an object relates */
-    public var action: Action?
 
-    /** sentence in which it's used */
-    public var sentence: String?
-
-    /** object that acts upon another */
-    public var object: RelationObject?
-
-    /** subject of object's action */
-    public var subject: Subject?
+public struct SAORelation: JSONDecodable {
+    public let action: Action?
+    public let sentence: String?
+    public let subject: Subject?
+    public let object: RelationObject?
     
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        action <- map["action"]
-        object <- map["object"]
-        sentence <- map["sentence"]
-        subject <- map["subject"]
-        
+    /// Used internally to initialize a SAORelation object
+    public init(json: JSON) throws {
+        action = try? json.decode("action", type: Action.self)
+        sentence = try? json.string("sentence")
+        subject = try? json.decode("subject", type: Subject.self)
+        object = try? json.decode("object", type: RelationObject.self)
     }
     
 }
 
-
-// MARK: **Action**
-extension SAORelation {
+/**
+ An action as defined by the AlchemyLanguage service
+ */
+public struct Action: JSONDecodable {
+    public let text: String?
+    public let lemmatized: String?
+    public let verb: Verb?
     
-    public struct Action: Mappable {
-        
-        public var lemmatized: String?
-        public var text: String?
-        public var verb: Verb?
-        
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            
-            lemmatized <- map["lemmatized"]
-            text <- map["text"]
-            verb <- map["verb"]
-            
-        }
-        
+    /// Used internally to initialize an Action object
+    public init(json: JSON) throws {
+        text = try? json.string("text")
+        lemmatized = try? json.string("lemmatized")
+        verb = try? json.decode("verb", type: Verb.self)
     }
     
-    // MARK: Verb
-    public struct Verb: Mappable {
+    /**
+     A verb as defined by the AlchemyLanguage service
+     */
+    public struct Verb: JSONDecodable {
+        public let text: String?
+        public let tense: String?
+        public let negated: Int?
         
-        public var negated: Int?
-        public var tense: String?
-        public var text: String?
-        
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-
-            negated <- (map["negated"], Transformation.stringToInt)
-            tense <- map["tense"]
-            text <- map["text"]
-            
+        /// Used internally to initalize a Verb object
+        public init(json: JSON) throws {
+            text = try? json.string("text")
+            tense = try? json.string("tense")
+            if let negatedString = try? json.string("negated") {
+                negated = Int(negatedString)
+            } else {
+                negated = 0
+            }
         }
-        
     }
-    
 }
 
-
-// MARK: **RelationObject**
-extension SAORelation {
+/**
+ A subjet extracted by the AlchemyLanguage service
+ */
+public struct Subject: JSONDecodable {
+    public let text: String?
+    public let sentiment: Sentiment?
+    public let entity: Entity?
     
-    public struct RelationObject: Mappable {
-
-        public var entity: Entity?
-        public var keywords: Keywords?
-        public var sentiment: Sentiment?
-        public var sentimentFromSubject: Sentiment?
-        public var text: String?
-        
-        
-        public init?(_ map: Map) {}
-
-        public mutating func mapping(map: Map) {
-
-            entity <- map["entity"]
-            keywords <- map["keywords"]
-            sentiment <- map["sentiment"]
-            sentimentFromSubject <- map["sentimentFromSubject"]
-            text <- map["text"]
-
-        }
-        
+    /// Used internally to initialize a Subject object
+    public init(json: JSON) throws {
+        text = try? json.string("text")
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        entity = try? json.decode("entity", type: Entity.self)
     }
-    
 }
 
-
-// MARK: **Subject**
-extension SAORelation {
+/**
+ **Sentiment** related to the Subject-Action-Object extraction
+ */
+public struct RelationObject: JSONDecodable {
+    public let text: String?
+    public let sentiment: Sentiment?
+    public let sentimentFromSubject: Sentiment?
+    public let entity: Entity?
     
-    public struct Subject: Mappable {
-        
-        public var entity: Entity?
-        public var keywords: Keywords?
-        public var sentiment: Sentiment?
-        public var text: String?
-        
-        
-        public init?(_ map: Map) {}
-        
-        public mutating func mapping(map: Map) {
-            
-            entity <- map["entity"]
-            keywords <- map["keywords"]
-            sentiment <- map["sentiment"]
-            text <- map["text"]
-            
-        }
-        
+    /// Used internally to initialize a RelationObject object
+    public init(json: JSON) throws {
+        text = try? json.string("text")
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        sentimentFromSubject = try? json.decode("sentimentFromSubject", type: Sentiment.self)
+        entity = try? json.decode("entity", type: Entity.self)
     }
-    
 }
+
 

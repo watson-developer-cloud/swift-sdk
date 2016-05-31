@@ -15,18 +15,10 @@
  **/
 
 import Foundation
-import ObjectMapper
 
 /**
- 
- **AlchemyGenericModel**
- 
- Alchemy generic model with the number of transactions of each operation.
- 
+ Enum for determining if a query parameter should be included in the request
  */
-public protocol AlchemyGenericModel {
-    
-    /** The total transactions. */
-    var totalTransactions: Int? { get set }
-    
+public enum QueryParam: Int {
+    case Excluded = 0, Included
 }

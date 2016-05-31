@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,41 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **ConceptResponse**
  
- Returned by the AlchemyLanguage service.
+ Response object for Concept related calls
  
  */
-public struct ConceptResponse: AlchemyLanguageGenericModel, Mappable {
+
+public struct ConceptResponse: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** extracted language */
+    public let language: String?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** the URL information was requested for */
+    public let url: String?
     
-    // MARK: Concepts
-    /** returned concepts (see **Concept** class)*/
-    public var concepts: [Concept]?
+    /** number of transactions made by the call */
+    public let totalTransactions: Int?
     
+    /** see **Concept** */
+    public let concepts: [Concept]?
     
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- map[""]
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // concept
-        concepts <- map["concepts"]
-        
+    /// Used internally to initialize a ConceptResponse object
+    public init(json: JSON) throws {
+        language = try? json.string("language")
+        url = try? json.string("url")
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
+        }
+        concepts = try? json.arrayOf("concepts", type: Concept.self)
     }
-    
 }
+
+

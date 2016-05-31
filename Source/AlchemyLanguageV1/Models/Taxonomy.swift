@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,39 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Taxonomy**
  
- Child class of Taxonomies
+ Extracted topic categories. Can be up to five levels deeps.
+
+ For example:
+ /finance/personal finance/lending/credit cards
  
  */
-public struct Taxonomy: Mappable {
-    
-    /** confidence in result: 0 or 1 */
-    public var confident: Int?
 
-    /**  category of taxonomy */
-    public var label: String?
-
-    /** confidence score for detected category, 0.0 to 1.0, higher is better */
-    public var score: Double?
+public struct Taxonomy: JSONDecodable {
     
+    /** will be "no" if categorization doesn't meet confidence standards */
+    public let confident: String?
     
-    public init?(_ map: Map) {}
+    /** detected category */
+    public let label: String?
     
-    public mutating func mapping(map: Map) {
-        
-        confident <- (map["confident"], Transformation.stringToInt)
-        label <- map["label"]
-        score <- (map["score"], Transformation.stringToDouble)
-        
+    /** confidence score, 0.0 - 1.0 (higher is better) */
+    public let score: Double?
+    
+    /// Used internally to initialize a Taxonomy object
+    public init(json: JSON) throws {
+        confident = try? json.string("confident")
+        label = try? json.string("label")
+        if let scoreString = try? json.string("score") {
+            score = Double(scoreString)
+        } else {
+            score = nil
+        }
     }
-    
 }
+

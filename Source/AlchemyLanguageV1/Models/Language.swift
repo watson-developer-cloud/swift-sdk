@@ -21,7 +21,7 @@ import Freddy
  
  **Language**
  
- Returned by the AlchemyLanguage service.
+ Response object for Language related calls.
  
  */
 

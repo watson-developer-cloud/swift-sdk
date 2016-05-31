@@ -21,6 +21,8 @@ import Freddy
  
  **Quotation**
  
+ Quoted text extracted from a document
+ 
  */
 
 public struct Quotation: JSONDecodable {

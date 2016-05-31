@@ -21,7 +21,7 @@ import Freddy
  
  **SAORelation**
  
- Returned by the AlchemyLanguage service.
+ Extracted Subject, Action, and Object parts of a sentence
  
  */
 
@@ -94,7 +94,7 @@ public struct Subject: JSONDecodable {
 }
 
 /**
- Returned by the AlchemyLanguage service
+ **Sentiment** related to the Subject-Action-Object extraction
  */
 public struct RelationObject: JSONDecodable {
     public let text: String?

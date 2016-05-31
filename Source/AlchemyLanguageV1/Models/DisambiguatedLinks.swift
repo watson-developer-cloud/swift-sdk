@@ -21,7 +21,7 @@ import Freddy
  
  **DisambiguatedLinks**
  
- Returned by the AlchemyLanguage service.
+ Disambiguate detected entities
  
  */
 

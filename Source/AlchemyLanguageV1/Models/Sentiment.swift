@@ -21,7 +21,8 @@ import Freddy
  
  **Sentiment**
  
- Returned by the AlchemyLanguage service.
+ Sentiment is the attitude, opinion or feeling toward something, such as a person, organization,
+ product or location.
  
  */
 

@@ -21,7 +21,9 @@ import Freddy
  
  **Concept**
  
- Returned by the AlchemyLanguage service.
+ A tagged concept extracted from a document. The concept may or may not have been explicitly
+ mentioned. For example if an article mentions CERN and the Higgs boson, it will tag Large Hadron 
+ Collider as a concept even if the term is not mentioned explicitly in the page.
  
  */
 

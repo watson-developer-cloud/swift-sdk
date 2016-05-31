@@ -21,7 +21,7 @@ import Freddy
  
  **SentimentResponse**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Sentiment** related calls
  
  */
 

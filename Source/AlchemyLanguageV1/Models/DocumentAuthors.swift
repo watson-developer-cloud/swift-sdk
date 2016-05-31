@@ -21,7 +21,7 @@ import Freddy
  
  **DocumentAuthors**
  
- DocumentAuthors returned by the AlchemyLanguage service.
+ Response object for Author related calls
  
  */
 

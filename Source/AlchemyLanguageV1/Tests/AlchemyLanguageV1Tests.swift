@@ -124,6 +124,36 @@ class AlchemyLanguageV1Tests: XCTestCase {
         waitForExpectations()
     }
     
+    func testGetRankedConceptsHtmlWithEnum0() {
+        let description = "Get the ranked concepts of an Ars article"
+        let expectation = expectationWithDescription(description)
+        
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
+        
+        service.getRankedConceptsHtml(url!, knowledgeGraph: QueryParam.Excluded, failure: failWithError) { concepts in
+            XCTAssertNotNil(concepts, "Response should not be nil")
+            XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
+    func testGetRankedConceptsHtmlWithEnum1() {
+        let description = "Get the ranked concepts of an Ars article"
+        let expectation = expectationWithDescription(description)
+        
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
+        
+        service.getRankedConceptsHtml(url!, knowledgeGraph: QueryParam.Included, failure: failWithError) { concepts in
+            XCTAssertNotNil(concepts, "Response should not be nil")
+            XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
     func testGetRankedConceptsText() {
         let description = "Get the ranked concepts of some text"
         let expectation = expectationWithDescription(description)
@@ -559,6 +589,46 @@ class AlchemyLanguageV1Tests: XCTestCase {
         service.getFeedLinksHtml(url!, failure: failWithError) { feeds in
             XCTAssertNotNil(feeds, "Response should not be nil")
             XCTAssertNotNil(feeds.feeds, "Feeds should not be nil")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetEmotionURL() {
+        let description = "Get the emotion of an Ars article"
+        let expectation = expectationWithDescription(description)
+    
+        service.getEmotionURL(testUrl, failure: failWithError) { emotion in
+            XCTAssertNotNil(emotion, "Response should not be nil")
+            XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetEmotionHtml() {
+        let description = "Get the feeds of an Ars article"
+        let expectation = expectationWithDescription(description)
+        
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
+        
+        service.getEmotionHtml(url!, failure: failWithError) { emotion in
+            XCTAssertNotNil(emotion, "Response should not be nil")
+            XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetEmotionText() {
+        let description = "Get the feeds of an Ars article"
+        let expectation = expectationWithDescription(description)
+        
+        let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
+        
+        service.getEmotionText(url!, failure: failWithError) { emotion in
+            XCTAssertNotNil(emotion, "Response should not be nil")
+            XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()
         }
         waitForExpectations()

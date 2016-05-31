@@ -21,7 +21,7 @@ import Freddy
  
  **Entity**
  
- Returned by the AlchemyLanguage & AlchemyDataNews services.
+ A named entity (a person, company, organization, etc) extracted from a document by Alchemy services
  
  */
 

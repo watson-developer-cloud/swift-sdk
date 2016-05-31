@@ -21,7 +21,7 @@ import Freddy
  
  **Feed**
  
- Returned by the AlchemyLanguage service.
+ A RSS/ATOM feed link extracted from a document
  
  */
 

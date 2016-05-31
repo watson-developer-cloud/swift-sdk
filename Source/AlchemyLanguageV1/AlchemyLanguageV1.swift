@@ -57,14 +57,6 @@ public class AlchemyLanguageV1 {
         }
     }
     
-    private func shouldHaveField(field: Bool) -> String {
-        if(field == true) {
-           return "1"
-        } else {
-           return "0"
-        }
-    }
-    
     private func buildBody(document: NSURL, html: Bool) throws -> NSData {
         guard let docAsString = try? String(contentsOfURL: document)
             .stringByAddingPercentEncodingWithAllowedCharacters(unreservedCharacters) else {
@@ -182,11 +174,22 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedConceptsURL(
         url: String,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: ConceptResponse -> Void)
     {
-        let graph = shouldHaveField(knowledgeGraph!)
+        
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "linkedData", value: "1"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let myGraph = knowledgeGraph {
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
+                value: String(myGraph.rawValue)))
+        }
         
         // construct request
         let request = RestRequest(
@@ -194,13 +197,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetRankedConcepts",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json"),
-                NSURLQueryItem(name: "linkedData", value: "1"),
-                NSURLQueryItem(name: "knowledgeGraph", value: graph)
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -226,7 +223,7 @@ public class AlchemyLanguageV1 {
     public func getRankedConceptsHtml(
         html: NSURL,
         url: String? = nil,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: ConceptResponse -> Void)
     {
@@ -244,7 +241,7 @@ public class AlchemyLanguageV1 {
         }
         if let myGraph = knowledgeGraph {
             queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: shouldHaveField(myGraph)))
+                value: String(myGraph.rawValue)))
         }
         
         // construct request
@@ -278,7 +275,7 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedConceptsText(
         text: NSURL,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: ConceptResponse -> Void)
     {
@@ -293,7 +290,7 @@ public class AlchemyLanguageV1 {
         queryParams.append(NSURLQueryItem(name: "linkedData", value: "1"))
         if let myGraph = knowledgeGraph {
             queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: shouldHaveField(myGraph)))
+                value: String(myGraph.rawValue)))
         }
         
         // construct request
@@ -332,23 +329,46 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedNamedEntitiesURL(
         url: String,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        quotations: Bool? = false,
-        structuredEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        quotations: QueryParam? = nil,
+        structuredEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: Entities -> Void)
     {
-        let graph = shouldHaveField(knowledgeGraph!)
-        let disambiguate = shouldHaveField(disambiguateEntities!)
-        let linked = shouldHaveField(linkedData!)
-        let coref = shouldHaveField(coreference!)
-        let senti = shouldHaveField(sentiment!)
-        let quotes = shouldHaveField(quotations!)
-        let structEnts = shouldHaveField(structuredEntities!)
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let myGraph = knowledgeGraph {
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
+                value:String(myGraph.rawValue)))
+        }
+        if let disambiguate = disambiguateEntities {
+            queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
+                value: String(disambiguate.rawValue)))
+        }
+        if let linked = linkedData {
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
+        }
+        if let coref = coreference {
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+        }
+        if let quotes = quotations {
+            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
+        }
+        if let senti = sentiment {
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+        }
+        if let structEnts = structuredEntities {
+            queryParams.append(NSURLQueryItem(name: "structuredEntities",
+                value: String(structEnts.rawValue)))
+        }
         
         
         // construct request
@@ -356,18 +376,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json"),
-                NSURLQueryItem(name: "knowledgeGraph", value: graph),
-                NSURLQueryItem(name: "disambiguate", value: disambiguate),
-                NSURLQueryItem(name: "linkedData", value: linked),
-                NSURLQueryItem(name: "coreference", value: coref),
-                NSURLQueryItem(name: "quotations", value: quotes),
-                NSURLQueryItem(name: "sentiment", value: senti),
-                NSURLQueryItem(name: "structuredEntities", value: structEnts)
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -399,13 +408,13 @@ public class AlchemyLanguageV1 {
     public func getRankedNamedEntitiesHtml(
         html: NSURL,
         url: String?,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        quotations: Bool? = false,
-        structuredEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        quotations: QueryParam? = nil,
+        structuredEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: Entities -> Void)
     {
@@ -422,27 +431,27 @@ public class AlchemyLanguageV1 {
         }
         if let myGraph = knowledgeGraph {
             queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: shouldHaveField(myGraph)))
+                value:String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
             queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
-                value: shouldHaveField(disambiguate)))
+                value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: shouldHaveField(linked)))
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: shouldHaveField(coref)))
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let quotes = quotations {
-            queryParams.append(NSURLQueryItem(name: "quotations", value: shouldHaveField(quotes)))
+            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let structEnts = structuredEntities {
             queryParams.append(NSURLQueryItem(name: "structuredEntities",
-                value: shouldHaveField(structEnts)))
+                value: String(structEnts.rawValue)))
         }
         
         
@@ -482,13 +491,13 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedNamedEntitiesHtml(
         text: NSURL,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        quotations: Bool? = false,
-        structuredEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        quotations: QueryParam? = nil,
+        structuredEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: Entities -> Void)
     {
@@ -502,27 +511,27 @@ public class AlchemyLanguageV1 {
         queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
         if let myGraph = knowledgeGraph {
             queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: shouldHaveField(myGraph)))
+                value: String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
             queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
-                value: shouldHaveField(disambiguate)))
+                value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: shouldHaveField(linked)))
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: shouldHaveField(coref)))
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let quotes = quotations {
-            queryParams.append(NSURLQueryItem(name: "quotations", value: shouldHaveField(quotes)))
+            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let structEnts = structuredEntities {
             queryParams.append(NSURLQueryItem(name: "structuredEntities",
-                value: shouldHaveField(structEnts)))
+                value: String(structEnts.rawValue)))
         }
         
         
@@ -558,19 +567,32 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedKeywordsURL(
         url: String,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        sentiment: Bool? = false,
         failure: (NSError -> Void)? = nil,
         success: Keywords -> Void)
     {
-        let graph = shouldHaveField(knowledgeGraph!)
-        let senti = shouldHaveField(sentiment!)
-        let keywordExtractMode: String
-        if strictMode! == true {
-            keywordExtractMode = "strict"
-        } else {
-            keywordExtractMode = "normal"
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let graph = knowledgeGraph {
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+        }
+        if let senti = sentiment {
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+        }
+        if let keywordExtractMode = strictMode {
+            let mode: String
+            if keywordExtractMode == true {
+                mode = "strict"
+            } else {
+                mode = "normal"
+            }
+            queryParams.append(NSURLQueryItem(name: "keywordExtractMode", value: mode))
         }
         
         // construct request
@@ -578,14 +600,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json"),
-                NSURLQueryItem(name: "knowledgeGraph", value: graph),
-                NSURLQueryItem(name: "sentiment", value: senti),
-                NSURLQueryItem(name: "keywordExtractMode", value: keywordExtractMode)
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -613,9 +628,9 @@ public class AlchemyLanguageV1 {
     public func getRankedKeywordsHtml(
         html: NSURL,
         url: String? = nil,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        sentiment: Bool? = false,
         failure: (NSError -> Void)? = nil,
         success: Keywords -> Void)
     {
@@ -631,10 +646,10 @@ public class AlchemyLanguageV1 {
             queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
         }
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: shouldHaveField(graph)))
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keywordExtractMode = strictMode {
             let mode: String
@@ -678,9 +693,9 @@ public class AlchemyLanguageV1 {
      */
     public func getRankedKeywordsText(
         text: NSURL,
-        knowledgeGraph: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        sentiment: Bool? = false,
         failure: (NSError -> Void)? = nil,
         success: Keywords -> Void)
     {
@@ -693,10 +708,10 @@ public class AlchemyLanguageV1 {
         queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: shouldHaveField(graph)))
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keywordExtractMode = strictMode {
             let mode: String
@@ -843,13 +858,13 @@ public class AlchemyLanguageV1 {
     
     /**
      Extracts the Microformat Data of given content.
+     The fact URL is required here is a bug.
      
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Microformat information
      */
-    // The fact URL is required here is a bug.
     public func getMicroformatDataHtml(
         html: NSURL,
         url: String? = " ",
@@ -988,47 +1003,60 @@ public class AlchemyLanguageV1 {
      */
     public func getRelationsURL(
         url: String,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        keywords: Bool? = false,
-        entities: Bool? = false,
-        requireEntities: Bool? = false,
-        sentimentExcludeEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        keywords: QueryParam? = nil,
+        entities: QueryParam? = nil,
+        requireEntities: QueryParam? = nil,
+        sentimentExcludeEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: SAORelations -> Void)
     {
-        let graph = shouldHaveField(knowledgeGraph!)
-        let disambiguates = shouldHaveField(disambiguateEntities!)
-        let linked = shouldHaveField(linkedData!)
-        let coref = shouldHaveField(coreference!)
-        let senti = shouldHaveField(sentiment!)
-        let keyWords = shouldHaveField(keywords!)
-        let ents = shouldHaveField(entities!)
-        let requireEnts = shouldHaveField(requireEntities!)
-        let sentiExEnts = shouldHaveField(sentimentExcludeEntities!)
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let graph = knowledgeGraph {
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+        }
+        if let disEnts = disambiguateEntities {
+            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
+        }
+        if let link = linkedData {
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
+        }
+        if let coref = coreference {
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+        }
+        if let senti = sentiment {
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+        }
+        if let keyWords = keywords {
+            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
+        }
+        if let ents = entities {
+            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
+        }
+        if let reqEnts = requireEntities {
+            queryParams.append(NSURLQueryItem(name: "requireEntities",
+                value: String(reqEnts.rawValue)))
+        }
+        if let sentiExEnts = sentimentExcludeEntities {
+            queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
+                value: String(sentiExEnts.rawValue)))
+        }
         
         // construct request
         let request = RestRequest(
             method: .POST,
             url: serviceUrl + "/url/URLGetRelations",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json"),
-                NSURLQueryItem(name: "knowledgeGraph", value: graph),
-                NSURLQueryItem(name: "disambiguate", value: disambiguates),
-                NSURLQueryItem(name: "linkedData", value: linked),
-                NSURLQueryItem(name: "coreference", value: coref),
-                NSURLQueryItem(name: "sentiment", value: senti),
-                NSURLQueryItem(name: "keywords", value: keyWords),
-                NSURLQueryItem(name: "entities", value: ents),
-                NSURLQueryItem(name: "requireEntities", value: requireEnts),
-                NSURLQueryItem(name: "sentimentExcludeEntities", value: sentiExEnts)
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -1062,15 +1090,15 @@ public class AlchemyLanguageV1 {
     public func getRelationsHtml(
         html: NSURL,
         url: String? = nil,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        keywords: Bool? = false,
-        entities: Bool? = false,
-        requireEntities: Bool? = false,
-        sentimentExcludeEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        keywords: QueryParam? = nil,
+        entities: QueryParam? = nil,
+        requireEntities: QueryParam? = nil,
+        sentimentExcludeEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: SAORelations -> Void)
     {
@@ -1086,33 +1114,33 @@ public class AlchemyLanguageV1 {
             queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
         }
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: shouldHaveField(graph)))
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let disEnts = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguate", value: shouldHaveField(disEnts)))
+            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
         }
         if let link = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: shouldHaveField(link)))
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: shouldHaveField(coref)))
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keyWords = keywords {
-            queryParams.append(NSURLQueryItem(name: "keywords", value: shouldHaveField(keyWords)))
+            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
         }
         if let ents = entities {
-            queryParams.append(NSURLQueryItem(name: "entities", value: shouldHaveField(ents)))
+            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
         }
         if let reqEnts = requireEntities {
             queryParams.append(NSURLQueryItem(name: "requireEntities",
-                value: shouldHaveField(reqEnts)))
+                value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
             queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
-                value: shouldHaveField(sentiExEnts)))
+                value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
@@ -1153,15 +1181,15 @@ public class AlchemyLanguageV1 {
      */
     public func getRelationsText(
         text: NSURL,
-        knowledgeGraph: Bool? = false,
-        disambiguateEntities: Bool? = false,
-        linkedData: Bool? = false,
-        coreference: Bool? = false,
-        sentiment: Bool? = false,
-        keywords: Bool? = false,
-        entities: Bool? = false,
-        requireEntities: Bool? = false,
-        sentimentExcludeEntities: Bool? = false,
+        knowledgeGraph: QueryParam? = nil,
+        disambiguateEntities: QueryParam? = nil,
+        linkedData: QueryParam? = nil,
+        coreference: QueryParam? = nil,
+        sentiment: QueryParam? = nil,
+        keywords: QueryParam? = nil,
+        entities: QueryParam? = nil,
+        requireEntities: QueryParam? = nil,
+        sentimentExcludeEntities: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: SAORelations -> Void)
     {
@@ -1174,33 +1202,33 @@ public class AlchemyLanguageV1 {
         queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: shouldHaveField(graph)))
+            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let disEnts = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguate", value: shouldHaveField(disEnts)))
+            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
         }
         if let link = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: shouldHaveField(link)))
+            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: shouldHaveField(coref)))
+            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: shouldHaveField(senti)))
+            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keyWords = keywords {
-            queryParams.append(NSURLQueryItem(name: "keywords", value: shouldHaveField(keyWords)))
+            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
         }
         if let ents = entities {
-            queryParams.append(NSURLQueryItem(name: "entities", value: shouldHaveField(ents)))
+            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
         }
         if let reqEnts = requireEntities {
             queryParams.append(NSURLQueryItem(name: "requireEntities",
-                value: shouldHaveField(reqEnts)))
+                value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
             queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
-                value: shouldHaveField(sentiExEnts)))
+                value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
@@ -1691,26 +1719,30 @@ public class AlchemyLanguageV1 {
      */
     public func getTextURL(
         url: String,
-        useMetadata: Bool? = false,
-        extractLinks: Bool? = false,
+        useMetadata: QueryParam? = nil,
+        extractLinks: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: DocumentText -> Void)
     {
-        let metadata = shouldHaveField(useMetadata!)
-        let links = shouldHaveField(extractLinks!)
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let metadata = useMetadata {
+            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+        }
+        if let extract = extractLinks {
+            queryParams.append(NSURLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
+        }
         
         // construct request
         let request = RestRequest(
             method: .POST,
             url: serviceUrl + "/url/URLGetText",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json"),
-                NSURLQueryItem(name: "useMetadata", value: metadata),
-                NSURLQueryItem(name: "extractLinks", value: links)
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -1737,8 +1769,8 @@ public class AlchemyLanguageV1 {
     public func getTextHtml(
         html: NSURL,
         url: String? = nil,
-        useMetadata: Bool? = false,
-        extractLinks: Bool? = false,
+        useMetadata: QueryParam? = nil,
+        extractLinks: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: DocumentText -> Void)
     {
@@ -1754,10 +1786,10 @@ public class AlchemyLanguageV1 {
             queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
         }
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: shouldHaveField(metadata)))
+            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         if let extract = extractLinks {
-            queryParams.append(NSURLQueryItem(name: "extractLinks", value: shouldHaveField(extract)))
+            queryParams.append(NSURLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
         }
         
         // construct request
@@ -1789,24 +1821,26 @@ public class AlchemyLanguageV1 {
      */
     public func getTitleURL(
         url: String,
-        useMetadata: Bool? = false,
+        useMetadata: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: DocumentTitle -> Void)
     {
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
         
-        let metadata = shouldHaveField(useMetadata!)
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        if let metadata = useMetadata {
+            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+        }
         
         // construct request
         let request = RestRequest(
             method: .POST,
             url: serviceUrl + "/url/URLGetTitle",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "useMetadata", value: metadata),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            queryParameters: queryParams
         )
         
         // execute request
@@ -1831,7 +1865,7 @@ public class AlchemyLanguageV1 {
     public func getTitleHtml(
         html: NSURL,
         url: String? = nil,
-        useMetadata: Bool? = false,
+        useMetadata: QueryParam? = nil,
         failure: (NSError -> Void)? = nil,
         success: DocumentTitle -> Void)
     {
@@ -1847,7 +1881,7 @@ public class AlchemyLanguageV1 {
             queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
         }
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: shouldHaveField(metadata)))
+            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         
         // construct request
@@ -1907,13 +1941,13 @@ public class AlchemyLanguageV1 {
     
     /**
      Extracts the Feeds of given content.
+     The fact that URL is required here is a bug.
      
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Feeds information
      */
-    // Again, ther required URL parameter is a bug
     public func getFeedLinksHtml(
         html: NSURL,
         url: String? = " ",
@@ -1952,5 +1986,128 @@ public class AlchemyLanguageV1 {
         }
     }
  
+    /**
+     Extracts the Emotion of given content.
+     
+     - parameter url:          the URL of the content
+     - parameter failure:      a function executed if the call fails
+     - parameter success:      a function executed with Feed information
+     */
+    public func getEmotionURL(
+        url: String,
+        failure: (NSError -> Void)? = nil,
+        success: DocumentEmotion -> Void)
+    {
+        // construct request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceUrl + "/url/URLGetEmotion",
+            contentType: "application/x-www-form-urlencoded",
+            queryParameters: [
+                NSURLQueryItem(name: "url", value: url),
+                NSURLQueryItem(name: "apikey", value: apiKey),
+                NSURLQueryItem(name: "outputMode", value: "json")
+            ]
+        )
+        
+        // execute request
+        Alamofire.request(request)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<DocumentEmotion, NSError>) in
+                switch response.result {
+                case .Success(let emotion): success(emotion)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Extracts the Emotion of given content.
+     
+     - parameter html:    a HTML document
+     - parameter url:     a reference to where the HTML is located
+     - parameter failure: a function executed if the call fails
+     - parameter success: a function executed with Feed information
+     */
+    public func getEmotionHtml(
+        html: NSURL,
+        url: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: DocumentEmotion -> Void)
+    {
+        
+        // construct body
+        let body = try? buildBody(html, html: true)
+        
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        if let myUrl = url {
+            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+        }
+        
+        // construct request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceUrl + "/html/HTMLGetEmotion",
+            contentType: "application/x-www-form-urlencoded",
+            messageBody: body,
+            queryParameters: queryParams
+        )
+        
+        // execute request
+        Alamofire.request(request)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<DocumentEmotion, NSError>) in
+                switch response.result {
+                case .Success(let emotion): success(emotion)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
+    
+    /**
+     Extracts the Emotion of given content.
+     
+     - parameter text:    a Text document
+     - parameter failure: a function executed if the call fails
+     - parameter success: a function executed with Feed information
+     */
+    public func getEmotionText(
+        text: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: DocumentEmotion -> Void)
+    {
+        
+        // construct body
+        let body = try? buildBody(text, html: false)
+        
+        // construct query paramerters
+        var queryParams = [NSURLQueryItem]()
+        
+        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        
+        // construct request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceUrl + "/text/TextGetEmotion",
+            contentType: "application/x-www-form-urlencoded",
+            messageBody: body,
+            queryParameters: queryParams
+        )
+        
+        // execute request
+        Alamofire.request(request)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<DocumentEmotion, NSError>) in
+                switch response.result {
+                case .Success(let emotion): success(emotion)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
 
 }

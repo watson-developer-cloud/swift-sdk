@@ -21,7 +21,7 @@ import Freddy
  
  **Microformat**
  
- Returned by the AlchemyLanguage service.
+ Semantic information extracted from a document by the AlchemyLanguage service
  
  */
 

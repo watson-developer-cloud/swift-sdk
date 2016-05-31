@@ -21,7 +21,7 @@ import Freddy
  
  **Keyword**
  
- Returned by the AlchemyLanguage service.
+ Important topics extracted from a document by AlchemyLanguage
  
  */
 

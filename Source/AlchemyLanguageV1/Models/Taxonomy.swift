@@ -21,7 +21,10 @@ import Freddy
  
  **Taxonomy**
  
- Child class of Taxonomies
+ Extracted topic categories. Can be up to five levels deeps.
+
+ For example:
+ /finance/personal finance/lending/credit cards
  
  */
 

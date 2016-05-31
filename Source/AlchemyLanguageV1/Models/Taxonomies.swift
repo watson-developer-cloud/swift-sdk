@@ -21,7 +21,7 @@ import Freddy
  
  **Taxonomies**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Taxonomy** related calls
  
  */
 

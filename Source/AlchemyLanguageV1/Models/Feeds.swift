@@ -21,7 +21,7 @@ import Freddy
  
  **Feeds**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Feed** related calls
  
  */
 

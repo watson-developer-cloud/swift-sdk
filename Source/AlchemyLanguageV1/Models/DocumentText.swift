@@ -21,7 +21,7 @@ import Freddy
  
  **DocumentText**
  
- DocumentText returned by the AlchemyLanguage service.
+ Response object for Text related calls
  
  */
 

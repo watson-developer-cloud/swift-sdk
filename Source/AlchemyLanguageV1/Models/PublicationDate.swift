@@ -21,7 +21,7 @@ import Freddy
  
  **PublicationDate**
  
- Returned by the AlchemyLanguage service.
+ Date of publication extracted from a document by AlchemyLanguage
  
  */
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,30 +15,10 @@
  **/
 
 import Foundation
-import Freddy
-
-
 
 /**
- 
- **DocumentSentiment**
- 
- Response object for **Sentiment** related calls
- 
+ Enum for determining if a query parameter should be included in the request
  */
-public struct DocumentSentiment: JSONDecodable {
-    
-    /** inputted text */
-    public let text: String?
-    
-    /** see **Sentiment** */
-    public let sentiment: Sentiment?
-    
-    /// Used internally to initialize a DocumentSentiment object
-    public init(json: JSON) throws {
-        text = try? json.string("text")
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
-    }
-    
+public enum QueryParam: Int {
+    case Excluded = 0, Included
 }
-

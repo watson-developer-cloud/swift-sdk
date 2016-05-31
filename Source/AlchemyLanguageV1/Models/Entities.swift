@@ -21,7 +21,7 @@ import Freddy
  
  **Entities**
  
- Entities returned by the AlchemyLanguage service.
+ Reponse object for **Entity** related calls
  
  */
 

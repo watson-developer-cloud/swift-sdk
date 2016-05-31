@@ -21,7 +21,7 @@ import Freddy
  
  **Keywords**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Keyword** related calls
  
  */
 

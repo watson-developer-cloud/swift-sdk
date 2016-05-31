@@ -21,7 +21,7 @@ import Freddy
  
  **KnowledgeGraph**
  
- Returned by the AlchemyLanguage service.
+ The KnowledgeGraph contains info on how keys are determined
  
  */
 

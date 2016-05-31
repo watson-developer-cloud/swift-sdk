@@ -21,7 +21,7 @@ import Freddy
  
  **SAORelations**
  
- Returned by the AlchemyLanguage service.
+ Response object for **SAORelation** related calls
  
  */
 

@@ -22,7 +22,7 @@ import Freddy
  
  **PublicationResponse**
  
- Returned by the AlchemyLanguage service.
+ Response object for **PublicationDate** related calls
  
  */
 

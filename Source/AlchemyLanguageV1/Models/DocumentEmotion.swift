@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,21 @@
 import Foundation
 import Freddy
 
-
-
-/**
- 
- **DocumentSentiment**
- 
- Response object for **Sentiment** related calls
- 
- */
-public struct DocumentSentiment: JSONDecodable {
+public struct DocumentEmotion: JSONDecodable {
     
-    /** inputted text */
-    public let text: String?
+    public let url: String?
+    public let totalTransactions: Int?
+    public let language: String?
+    public let docEmotions: Emotions?
     
-    /** see **Sentiment** */
-    public let sentiment: Sentiment?
-    
-    /// Used internally to initialize a DocumentSentiment object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        url = try? json.string("url")
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = nil
+        }
+        language = try? json.string("language")
+        docEmotions = try? json.decode("docEmotions", type: Emotions.self)
     }
-    
 }
-

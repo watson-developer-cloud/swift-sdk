@@ -21,7 +21,7 @@ import Freddy
  
  **ConceptResponse**
  
- Returned by the AlchemyLanguage service.
+ Response object for Concept related calls
  
  */
 

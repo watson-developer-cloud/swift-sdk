@@ -21,7 +21,7 @@ import Freddy
  
  **DocumentTitle**
  
- DocumentTitle returned by the AlchemyLanguage service.
+ Reponse object for Title related calls
  
  */
 

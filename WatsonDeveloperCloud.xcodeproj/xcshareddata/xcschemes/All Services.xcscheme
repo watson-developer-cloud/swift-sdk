@@ -314,6 +314,34 @@
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B16399E11CFF444300A96B96"
+               BuildableName = "AlchemyDataNewsV1.framework"
+               BlueprintName = "AlchemyDataNewsV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B16399EA1CFF444300A96B96"
+               BuildableName = "AlchemyDataNewsV1Tests.xctest"
+               BlueprintName = "AlchemyDataNewsV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

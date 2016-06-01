@@ -432,7 +432,7 @@ public class TextToSpeech {
     
     /** 
      Updates information for the custom voice model with the specified customizationID.
-     
+
      You can update metadata of the custom voice model, such as the name and description of the 
      voice model. You can also update or add words and translations in the model.
      
@@ -626,7 +626,7 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<Translation, NSError>) in
                 switch response.result {
                 case .Success(let translation): success(translation)

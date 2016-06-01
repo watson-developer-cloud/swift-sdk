@@ -41,7 +41,7 @@ public struct CustomizationWords: JSONDecodable {
     public let lastModified: Int
     
     /// A description of the custom voice model.
-    public let description: String
+    public let description: String?
     
     /// A list of words and their translations from the custom voice model.
     public let words: [Word]
@@ -54,7 +54,7 @@ public struct CustomizationWords: JSONDecodable {
         owner = try json.string("owner")
         created = try json.int("created")
         lastModified = try json.int("last_modified")
-        description = try json.string("description")
+        description = try? json.string("description")
         words = try json.arrayOf("words", type: Word.self)
     }
 }

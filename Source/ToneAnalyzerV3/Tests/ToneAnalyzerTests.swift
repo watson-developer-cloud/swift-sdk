@@ -76,6 +76,8 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = expectationWithDescription(description)
 
         toneAnalyzer.getTone(text, failure: failWithError) { toneAnalysis in
+            XCTAssertNotNil(toneAnalysis.documentTone[0].tones[0].score, "Anger score should not be nil")
+            XCTAssertNotNil(toneAnalysis.sentencesTones?[0].text, "Sentence text should not be nil")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -89,6 +91,9 @@ class ToneAnalyzerTests: XCTestCase {
         let tones = ["emotion", "writing"]
         toneAnalyzer.getTone(text, tones: tones, sentences: false, failure: failWithError) {
             toneAnalysis in
+            XCTAssertNotNil(toneAnalysis.documentTone[0].tones[0].score, "Anger score should not be nil")
+            XCTAssert(toneAnalysis.documentTone[1].name == "Writing Tone", "Response should contain Writing Tone")
+            XCTAssertNil(toneAnalysis.sentencesTones)
             expectation.fulfill()
         }
         waitForExpectations()

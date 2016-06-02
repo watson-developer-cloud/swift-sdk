@@ -95,11 +95,33 @@ class ToneAnalyzerTests: XCTestCase {
                 XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
             }
             
-            if let sentTones = toneAnalysis.sentencesTones {
-                for sentence in sentTones {
-                    XCTAssertNotNil(sentence.text, "Sentence text should not be nil")
-                    XCTAssert(sentence.inputFrom != sentence.inputTo, "Sentence should have a range of characters")
-                    XCTAssertNotNil(sentence.toneCategories, "Tone categories should not be nil")
+            guard let sentenceTones = toneAnalysis.sentencesTones else {
+                XCTFail("Sentence tones should not be nil.")
+                return
+            }
+            
+            for sentence in sentenceTones {
+                XCTAssert(sentence.sentenceID >= 0)
+                XCTAssertNotEqual(sentence.text, "")
+                XCTAssert(sentence.inputFrom >= 0)
+                XCTAssert(sentence.inputTo > sentence.inputFrom)
+                
+                for emotionTone in toneAnalysis.documentTone[0].tones {
+                    XCTAssertNotNil(emotionTone.name)
+                    XCTAssertNotNil(emotionTone.id)
+                    XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
+                }
+                
+                for writingTone in toneAnalysis.documentTone[1].tones {
+                    XCTAssertNotNil(writingTone.name)
+                    XCTAssertNotNil(writingTone.id)
+                    XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
+                }
+                
+                for socialTone in toneAnalysis.documentTone[2].tones {
+                    XCTAssertNotNil(socialTone.name)
+                    XCTAssertNotNil(socialTone.id)
+                    XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
                 }
             }
             

@@ -122,7 +122,7 @@ public class LanguageTranslation {
     }
 
     /**
-     Upload a TMX glossary file on top of a domain to customize a translation model.
+     Create a custom language translation model by uploading a TMX glossary file.
      
      Depending on the size of the file, training can range from minutes for a glossary to several
      hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file

@@ -201,7 +201,6 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseString { response in print(response) }
             .responseObject { (response: Response<ImageLink, NSError>) in
                 switch response.result {
                 case.Success(let imageLinks): success(imageLinks)

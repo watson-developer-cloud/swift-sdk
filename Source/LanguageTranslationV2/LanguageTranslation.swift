@@ -121,6 +121,21 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Create a custom language translation model by uploading a TMX glossary file.
+     
+     Depending on the size of the file, training can range from minutes for a glossary to several
+     hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
+     size of all uploaded glossary and corpus files is limited to 250 MB.
+     
+     - parameter baseModelID: Specifies the domain model that is used as the base for the training.
+     - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.
+     - parameter forcedGlossary: A TMX file with your customizations. Anything that is specified in
+            this file completely overwrites the domain data translation. You can upload only one
+            glossary with a file size less than 10 MB per call.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the modelID of the created model.
+     */
     public func createModel(
         baseModelID: String,
         name: String? = nil,
@@ -172,6 +187,13 @@ public class LanguageTranslation {
         )
     }
 
+    /**
+     Delete a trained translation model.
+     
+     - parameter modelID: The translation model's identifier.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed after the given model has been deleted.
+     */
     public func deleteModel(
         modelID: String,
         failure: (NSError -> Void)? = nil,
@@ -201,6 +223,13 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Get information about the given translation model, including training status.
+     
+     - parameter modelID: The translation model's identifier.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the retrieved information about the model.
+     */
     public func getModel(
         modelID: String,
         failure: (NSError -> Void)? = nil,
@@ -228,6 +257,16 @@ public class LanguageTranslation {
 
     // MARK: - Translate
 
+    /**
+     Translate text from a source language to a target language.
+     
+     - parameter text: The text to translate.
+     - parameter modelID: The unique modelID of the translation model that shall be used to
+            translate the text. The modelID inherently specifies the source, target language, and
+            domain.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the translation.
+     */
     public func translate(
         text: String,
         modelID: String,
@@ -238,6 +277,16 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Translate text from a source language to a target language.
+     
+     - parameter text: The text to translate.
+     - parameter modelID: The unique modelID of the translation model that shall be used to
+            translate the text. The modelID inherently specifies the source, target language, and
+            domain.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the translation.
+     */
     public func translate(
         text: [String],
         modelID: String,
@@ -247,7 +296,18 @@ public class LanguageTranslation {
         let translateRequest = TranslateRequest(text: text, modelID: modelID)
         translate(translateRequest, failure: failure, success: success)
     }
-
+    
+    /**
+     Translate text from a source language to a target language.
+     
+     - parameter text: The text to translate.
+     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the translation.
+     */
     public func translate(
         text: String,
         source: String,
@@ -259,6 +319,17 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Translate text from a source language to a target language.
+     
+     - parameter text: The text to translate.
+     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the translation.
+     */
     public func translate(
         text: [String],
         source: String,
@@ -270,6 +341,14 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Process a translation request.
+ 
+     - parameter translateRequest: A `TranslateRequest` object representing the parameters of the
+            request to the Language Translation service.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the response from the service.
+     */
     private func translate(
         translateRequest: TranslateRequest,
         failure: (NSError -> Void)? = nil,
@@ -306,9 +385,14 @@ public class LanguageTranslation {
             }
     }
 
-
     // MARK: - Identify
 
+    /**
+     Get a list of all languages that can be identified.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of all languages that can be identified.
+     */
     public func getIdentifiableLanguages(
         failure: (NSError -> Void)? = nil,
         success: [IdentifiableLanguage] -> Void)
@@ -333,6 +417,13 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Identify the language of the given text.
+     
+     - parameter text: The text whose language shall be identified.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with all identified languages in the given text.
+     */
     public func identify(
         text: String,
         failure: (NSError -> Void)? = nil,

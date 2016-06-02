@@ -134,7 +134,7 @@ public class LanguageTranslation {
         this file completely overwrites the domain data translation. You can upload only one
         glossary with a file size less than 10 MB per call.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the model id for the created model.
+     - parameter success: A function executed with the modelID of the created model.
      */
     public func createModel(
         baseModelID: String,

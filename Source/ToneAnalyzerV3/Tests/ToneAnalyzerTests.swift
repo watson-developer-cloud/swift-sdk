@@ -139,24 +139,24 @@ class ToneAnalyzerTests: XCTestCase {
         toneAnalyzer.getTone(text, tones: tones, sentences: false, failure: failWithError) {
             toneAnalysis in
             
-            for toneType in toneAnalysis.documentTone {
-                XCTAssert(toneType.name != "Social Tone", "Social tone should not be included")
+            for emotionTone in toneAnalysis.documentTone[0].tones {
+                XCTAssertNotNil(emotionTone.name)
+                XCTAssertNotNil(emotionTone.id)
+                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
             }
             
-            for emotion in toneAnalysis.documentTone[0].tones {
-                XCTAssertNotNil(emotion.name, "Emotion name should not be nil")
-                XCTAssertNotNil(emotion.id, "Emotion id should not be nil")
-                XCTAssert(emotion.score <= 1.0 && emotion.score >= 0.0,
-                          "\(emotion.name) score should be within 0.0 and 1.0")
+            for writingTone in toneAnalysis.documentTone[1].tones {
+                XCTAssertNotNil(writingTone.name)
+                XCTAssertNotNil(writingTone.id)
+                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
             }
             
-            for tone in toneAnalysis.documentTone[1].tones {
-                XCTAssertNotNil(tone.name, "Tone name should not be nil")
-                XCTAssertNotNil(tone.id, "Tone id should not be nil")
-                XCTAssert(tone.score <= 1.0 && tone.score >= 0.0,
-                          "\(tone.name) score should be within 0.0 and 1.0")
+            for tone in toneAnalysis.documentTone {
+                XCTAssert(tone.name != "Social Tone", "Social tone should not be included")
             }
+            
             XCTAssertNil(toneAnalysis.sentencesTones)
+            
             expectation.fulfill()
         }
         waitForExpectations()

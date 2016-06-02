@@ -149,6 +149,30 @@ public class AlchemyVision {
     }
 
     /**
+     Identify the primary image in an HTML file.
+     
+     - parameter html: The HTML file that shall be analyzed to identify the primary image.
+     - parameter url: The HTML file's URL, for response-tracking purposes.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the identified primary image.
+     */
+    public func getImage(
+        html html: NSURL,
+        url: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: ImageLink -> Void)
+    {
+        guard let html = try? String(contentsOfURL: html) else {
+            let failureReason = "Failed to read the HTML file."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        getImage(html: html, url: url, failure: failure, success: success)
+    }
+    
+    /**
      Identify the primary image in an HTML document.
 
      - parameter html: The HTML document that shall be analyzed to identify the primary image.

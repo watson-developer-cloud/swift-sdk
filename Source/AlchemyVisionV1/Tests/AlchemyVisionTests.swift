@@ -25,7 +25,10 @@ class AlchemyVisionTests: XCTestCase {
     private var car: NSURL!
     private var obama: NSURL!
     private var sign: NSURL!
-    private var html: String!
+    private var html: NSURL!
+    
+    private var htmlContents: String!
+    private let htmlImageName = "cp_1234354872_16947v1-max-250x250.jpg"
     
     private let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
                            "Administration/People/president_official_portrait_lores.jpg"
@@ -76,8 +79,10 @@ class AlchemyVisionTests: XCTestCase {
         self.car = car
         self.obama = obama
         self.sign = sign
-        self.html = try? String(contentsOfURL: html)
-        guard self.html != nil else {
+        self.html = html
+        
+        self.htmlContents = try? String(contentsOfURL: html)
+        guard self.htmlContents != nil else {
             XCTFail("Unable to load html example as String.")
             return
         }
@@ -142,29 +147,53 @@ class AlchemyVisionTests: XCTestCase {
         waitForExpectations()
     }
     
-    func testGetImageHTML1() {
-        let description = "Identify the primary image in an HTML document."
+    func testGetImageHTMLFile1() {
+        let description = "Identify the primary image in an HTML file."
         let expectation = expectationWithDescription(description)
-        let expectedImageName = "cp_1234354872_16947v1-max-250x250.jpg"
-
+        
         alchemyVision.getImage(html: html, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, "")
-            XCTAssert(imageLinks.image.containsString(expectedImageName))
+            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
     }
     
-    func testGetImageHTML2() {
-        let description = "Identify the primary image in an HTML document."
+    func testGetImageHTMLFile2() {
+        let description = "Identify the primary image in an HTML file."
         let expectation = expectationWithDescription(description)
-        let expectedImageName = "cp_1234354872_16947v1-max-250x250.jpg"
         
         alchemyVision.getImage(html: html, url: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
-            XCTAssert(imageLinks.image.containsString(expectedImageName))
+            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetImageHTMLContents1() {
+        let description = "Identify the primary image in an HTML document."
+        let expectation = expectationWithDescription(description)
+
+        alchemyVision.getImage(html: htmlContents, failure: failWithError) { imageLinks in
+            XCTAssertEqual(imageLinks.status, "OK")
+            XCTAssertEqual(imageLinks.url, "")
+            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetImageHTMLContents2() {
+        let description = "Identify the primary image in an HTML document."
+        let expectation = expectationWithDescription(description)
+        
+        alchemyVision.getImage(html: htmlContents, url: htmlURL, failure: failWithError) { imageLinks in
+            XCTAssertEqual(imageLinks.status, "OK")
+            XCTAssertEqual(imageLinks.url, self.htmlURL)
+            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()

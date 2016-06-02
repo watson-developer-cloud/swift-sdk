@@ -34,10 +34,10 @@ class AlchemyVisionTests: XCTestCase {
                            "Administration/People/president_official_portrait_lores.jpg"
     private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/" +
                          "java-sdk/master/src/test/resources/visual_recognition/car.png"
-    private let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-                          "master/src/test/resources/visual_recognition/open.png"
-    private let htmlURL = "https://raw.githubusercontent.com/watson-developer-cloud/ios-sdk/" +
-                          "master/WatsonDeveloperCloud/AlchemyVision/Tests/example.html"
+    private let signURL = "https://cdn.rawgit.com/watson-developer-cloud/ios-sdk/master/Source/" +
+                          "AlchemyVisionV1/Tests/sign.jpg"
+    private let htmlURL = "https://cdn.rawgit.com/watson-developer-cloud/ios-sdk/master/Source" +
+                          "/AlchemyVisionV1/Tests/example.html"
     
     // MARK: - Test Configuration
     
@@ -112,6 +112,55 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageFaceTags(image: obama, failure: failWithError) { faceTags in
+            
+            // verify faceTags structure
+            XCTAssertEqual(faceTags.status, "OK")
+            XCTAssertEqual(faceTags.totalTransactions, 4)
+            XCTAssertNil(faceTags.url)
+            XCTAssertEqual(faceTags.imageFaces.count, 1)
+            let face = faceTags.imageFaces.first
+            
+            // verify face age
+            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssert(face?.age.score >= 0.0)
+            XCTAssert(face?.age.score <= 1.0)
+            
+            // verify face gender
+            XCTAssertEqual(face?.gender.gender, "MALE")
+            XCTAssert(face?.gender.score >= 0.0)
+            XCTAssert(face?.gender.score <= 1.0)
+            
+            // verify face location
+            XCTAssert(face?.height >= 0)
+            XCTAssert(face?.height <= 300)
+            XCTAssert(face?.width >= 0)
+            XCTAssert(face?.width <= 300)
+            XCTAssert(face?.positionX >= 0)
+            XCTAssert(face?.positionX <= 300)
+            XCTAssert(face?.positionY >= 0)
+            XCTAssert(face?.positionY <= 300)
+            
+            // verify face identity
+            XCTAssertEqual(face?.identity.name, "Barack Obama")
+            XCTAssert(face?.identity.score >= 0.0)
+            XCTAssert(face?.identity.score <= 1.0)
+            
+            // verify face identity knowledge graph
+            XCTAssertNil(face?.identity.knowledgeGraph)
+            
+            // verify face identity disambiguation
+            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity.disambiguated.opencyc)
+            XCTAssertNil(face?.identity.disambiguated.umbel)
+            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity.disambiguated.crunchbase)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+
             expectation.fulfill()
         }
         waitForExpectations()
@@ -122,6 +171,55 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageFaceTags(image: obama, knowledgeGraph: true, failure: failWithError) { faceTags in
+            
+            // verify faceTags structure
+            XCTAssertEqual(faceTags.status, "OK")
+            XCTAssertEqual(faceTags.totalTransactions, 5)
+            XCTAssertNil(faceTags.url)
+            XCTAssertEqual(faceTags.imageFaces.count, 1)
+            let face = faceTags.imageFaces.first
+            
+            // verify face age
+            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssert(face?.age.score >= 0.0)
+            XCTAssert(face?.age.score <= 1.0)
+            
+            // verify face gender
+            XCTAssertEqual(face?.gender.gender, "MALE")
+            XCTAssert(face?.gender.score >= 0.0)
+            XCTAssert(face?.gender.score <= 1.0)
+            
+            // verify face location
+            XCTAssert(face?.height >= 0)
+            XCTAssert(face?.height <= 300)
+            XCTAssert(face?.width >= 0)
+            XCTAssert(face?.width <= 300)
+            XCTAssert(face?.positionX >= 0)
+            XCTAssert(face?.positionX <= 300)
+            XCTAssert(face?.positionY >= 0)
+            XCTAssert(face?.positionY <= 300)
+            
+            // verify face identity
+            XCTAssertEqual(face?.identity.name, "Barack Obama")
+            XCTAssert(face?.identity.score >= 0.0)
+            XCTAssert(face?.identity.score <= 1.0)
+            
+            // verify face identity knowledge graph
+            XCTAssertEqual(face?.identity.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
+            
+            // verify face identity disambiguation
+            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity.disambiguated.opencyc)
+            XCTAssertNil(face?.identity.disambiguated.umbel)
+            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity.disambiguated.crunchbase)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -132,6 +230,55 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageFaceTags(url: obamaURL, failure: failWithError) { faceTags in
+            
+            // verify faceTags structure
+            XCTAssertEqual(faceTags.status, "OK")
+            XCTAssertEqual(faceTags.totalTransactions, 4)
+            XCTAssertEqual(faceTags.url, self.obamaURL)
+            XCTAssertEqual(faceTags.imageFaces.count, 1)
+            let face = faceTags.imageFaces.first
+            
+            // verify face age
+            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssert(face?.age.score >= 0.0)
+            XCTAssert(face?.age.score <= 1.0)
+            
+            // verify face gender
+            XCTAssertEqual(face?.gender.gender, "MALE")
+            XCTAssert(face?.gender.score >= 0.0)
+            XCTAssert(face?.gender.score <= 1.0)
+            
+            // verify face location
+            XCTAssert(face?.height >= 0)
+            XCTAssert(face?.height <= 300)
+            XCTAssert(face?.width >= 0)
+            XCTAssert(face?.width <= 300)
+            XCTAssert(face?.positionX >= 0)
+            XCTAssert(face?.positionX <= 300)
+            XCTAssert(face?.positionY >= 0)
+            XCTAssert(face?.positionY <= 300)
+            
+            // verify face identity
+            XCTAssertEqual(face?.identity.name, "Barack Obama")
+            XCTAssert(face?.identity.score >= 0.0)
+            XCTAssert(face?.identity.score <= 1.0)
+            
+            // verify face identity knowledge graph
+            XCTAssertNil(face?.identity.knowledgeGraph)
+            
+            // verify face identity disambiguation
+            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity.disambiguated.opencyc)
+            XCTAssertNil(face?.identity.disambiguated.umbel)
+            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity.disambiguated.crunchbase)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -142,6 +289,55 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageFaceTags(url: obamaURL, knowledgeGraph: true, failure: failWithError) { faceTags in
+            
+            // verify faceTags structure
+            XCTAssertEqual(faceTags.status, "OK")
+            XCTAssertEqual(faceTags.totalTransactions, 5)
+            XCTAssertEqual(faceTags.url, self.obamaURL)
+            XCTAssertEqual(faceTags.imageFaces.count, 1)
+            let face = faceTags.imageFaces.first
+            
+            // verify face age
+            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssert(face?.age.score >= 0.0)
+            XCTAssert(face?.age.score <= 1.0)
+            
+            // verify face gender
+            XCTAssertEqual(face?.gender.gender, "MALE")
+            XCTAssert(face?.gender.score >= 0.0)
+            XCTAssert(face?.gender.score <= 1.0)
+            
+            // verify face location
+            XCTAssert(face?.height >= 0)
+            XCTAssert(face?.height <= 300)
+            XCTAssert(face?.width >= 0)
+            XCTAssert(face?.width <= 300)
+            XCTAssert(face?.positionX >= 0)
+            XCTAssert(face?.positionX <= 300)
+            XCTAssert(face?.positionY >= 0)
+            XCTAssert(face?.positionY <= 300)
+            
+            // verify face identity
+            XCTAssertEqual(face?.identity.name, "Barack Obama")
+            XCTAssert(face?.identity.score >= 0.0)
+            XCTAssert(face?.identity.score <= 1.0)
+            
+            // verify face identity knowledge graph
+            XCTAssertEqual(face?.identity.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
+            
+            // verify face identity disambiguation
+            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity.disambiguated.opencyc)
+            XCTAssertNil(face?.identity.disambiguated.umbel)
+            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity.disambiguated.crunchbase)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -204,6 +400,9 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getImage(url: htmlURL, failure: failWithError) { imageLinks in
+            XCTAssertEqual(imageLinks.status, "OK")
+            XCTAssertEqual(imageLinks.url, self.htmlURL)
+            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -214,6 +413,37 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageKeywords(image: car, failure: failWithError) { imageKeywords in
+            
+            // verify imageKeywords structure
+            XCTAssertEqual(imageKeywords.status, "OK")
+            XCTAssertEqual(imageKeywords.url, "")
+            XCTAssertEqual(imageKeywords.totalTransactions, 4)
+            XCTAssertEqual(imageKeywords.imageKeywords.count, 4)
+            
+            // verify first keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[0].text, "car")
+            XCTAssert(imageKeywords.imageKeywords[0].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[0].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[0].knowledgeGraph)
+            
+            // verify second keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[1].text, "race")
+            XCTAssert(imageKeywords.imageKeywords[1].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[1].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[1].knowledgeGraph)
+            
+            // verify third keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[2].text, "racing")
+            XCTAssert(imageKeywords.imageKeywords[2].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[2].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[2].knowledgeGraph)
+            
+            // verify fourth keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[3].text, "motorsport")
+            XCTAssert(imageKeywords.imageKeywords[3].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[3].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[3].knowledgeGraph)
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -224,6 +454,37 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageKeywords(image: car, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
+            
+            // verify imageKeywords structure
+            XCTAssertEqual(imageKeywords.status, "OK")
+            XCTAssertEqual(imageKeywords.url, "")
+            XCTAssertEqual(imageKeywords.totalTransactions, 5)
+            XCTAssertEqual(imageKeywords.imageKeywords.count, 7)
+            
+            // verify first keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[0].text, "car")
+            XCTAssert(imageKeywords.imageKeywords[0].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[0].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[0].knowledgeGraph?.typeHierarchy, "/vehicles/car")
+            
+            // verify second keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[1].text, "race")
+            XCTAssert(imageKeywords.imageKeywords[1].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[1].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[1].knowledgeGraph?.typeHierarchy, "/concepts/factors/characteristics/race")
+            
+            // verify third keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[2].text, "racing")
+            XCTAssert(imageKeywords.imageKeywords[2].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[2].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[2].knowledgeGraph)
+            
+            // verify fourth keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[3].text, "motorsport")
+            XCTAssert(imageKeywords.imageKeywords[3].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[3].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[3].knowledgeGraph?.typeHierarchy, "/activities/sports/motorsport")
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -234,6 +495,37 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageKeywords(url: carURL, failure: failWithError) { imageKeywords in
+            
+            // verify imageKeywords structure
+            XCTAssertEqual(imageKeywords.status, "OK")
+            XCTAssertEqual(imageKeywords.url, self.carURL)
+            XCTAssertEqual(imageKeywords.totalTransactions, 4)
+            XCTAssertEqual(imageKeywords.imageKeywords.count, 4)
+            
+            // verify first keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[0].text, "car")
+            XCTAssert(imageKeywords.imageKeywords[0].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[0].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[0].knowledgeGraph)
+            
+            // verify second keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[1].text, "race")
+            XCTAssert(imageKeywords.imageKeywords[1].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[1].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[1].knowledgeGraph)
+            
+            // verify third keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[2].text, "racing")
+            XCTAssert(imageKeywords.imageKeywords[2].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[2].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[2].knowledgeGraph)
+            
+            // verify fourth keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[3].text, "motorsport")
+            XCTAssert(imageKeywords.imageKeywords[3].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[3].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[3].knowledgeGraph)
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -244,6 +536,37 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageKeywords(url: carURL, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
+            
+            // verify imageKeywords structure
+            XCTAssertEqual(imageKeywords.status, "OK")
+            XCTAssertEqual(imageKeywords.url, self.carURL)
+            XCTAssertEqual(imageKeywords.totalTransactions, 5)
+            XCTAssertEqual(imageKeywords.imageKeywords.count, 7)
+            
+            // verify first keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[0].text, "car")
+            XCTAssert(imageKeywords.imageKeywords[0].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[0].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[0].knowledgeGraph?.typeHierarchy, "/vehicles/car")
+            
+            // verify second keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[1].text, "race")
+            XCTAssert(imageKeywords.imageKeywords[1].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[1].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[1].knowledgeGraph?.typeHierarchy, "/concepts/factors/characteristics/race")
+            
+            // verify third keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[2].text, "racing")
+            XCTAssert(imageKeywords.imageKeywords[2].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[2].score <= 1.0)
+            XCTAssertNil(imageKeywords.imageKeywords[2].knowledgeGraph)
+            
+            // verify fourth keyword
+            XCTAssertEqual(imageKeywords.imageKeywords[3].text, "motorsport")
+            XCTAssert(imageKeywords.imageKeywords[3].score >= 0.0)
+            XCTAssert(imageKeywords.imageKeywords[3].score <= 1.0)
+            XCTAssertEqual(imageKeywords.imageKeywords[3].knowledgeGraph?.typeHierarchy, "/activities/sports/motorsport")
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -254,6 +577,41 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageSceneText(image: sign, failure: failWithError) { sceneTexts in
+            
+            // verify sceneTexts structure
+            XCTAssertEqual(sceneTexts.status, "OK")
+            XCTAssertNil(sceneTexts.url)
+            XCTAssertEqual(sceneTexts.totalTransactions, 0)
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain traffic")
+            
+            // verify first scene text line
+            let line = sceneTexts.sceneTextLines.first
+            XCTAssert(line?.confidence >= 0.0)
+            XCTAssert(line?.confidence <= 1.0)
+            XCTAssert(line?.region.height >= 0)
+            XCTAssert(line?.region.height <= 150)
+            XCTAssert(line?.region.width >= 0)
+            XCTAssert(line?.region.width <= 150)
+            XCTAssert(line?.region.x >= 0)
+            XCTAssert(line?.region.x <= 500)
+            XCTAssert(line?.region.y >= 0)
+            XCTAssert(line?.region.y <= 500)
+            XCTAssertEqual(line?.text, "notice")
+            
+            // verify first scene text line words
+            let words = line?.words.first
+            XCTAssert(words?.confidence >= 0.0)
+            XCTAssert(words?.confidence <= 1.0)
+            XCTAssert(words?.region.height >= 0)
+            XCTAssert(words?.region.height <= 150)
+            XCTAssert(words?.region.width >= 0)
+            XCTAssert(words?.region.width <= 150)
+            XCTAssert(words?.region.x >= 0)
+            XCTAssert(words?.region.x <= 500)
+            XCTAssert(words?.region.y >= 0)
+            XCTAssert(words?.region.y <= 500)
+            XCTAssertEqual(words?.text, "notice")
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -264,6 +622,41 @@ class AlchemyVisionTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         alchemyVision.getRankedImageSceneText(url: signURL, failure: failWithError) { sceneTexts in
+            
+            // verify sceneTexts structure
+            XCTAssertEqual(sceneTexts.status, "OK")
+            XCTAssertEqual(sceneTexts.url, self.signURL)
+            XCTAssertEqual(sceneTexts.totalTransactions, 0)
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain traffic")
+            
+            // verify first scene text line
+            let line = sceneTexts.sceneTextLines.first
+            XCTAssert(line?.confidence >= 0.0)
+            XCTAssert(line?.confidence <= 1.0)
+            XCTAssert(line?.region.height >= 0)
+            XCTAssert(line?.region.height <= 150)
+            XCTAssert(line?.region.width >= 0)
+            XCTAssert(line?.region.width <= 150)
+            XCTAssert(line?.region.x >= 0)
+            XCTAssert(line?.region.x <= 500)
+            XCTAssert(line?.region.y >= 0)
+            XCTAssert(line?.region.y <= 500)
+            XCTAssertEqual(line?.text, "notice")
+            
+            // verify first scene text line words
+            let words = line?.words.first
+            XCTAssert(words?.confidence >= 0.0)
+            XCTAssert(words?.confidence <= 1.0)
+            XCTAssert(words?.region.height >= 0)
+            XCTAssert(words?.region.height <= 150)
+            XCTAssert(words?.region.width >= 0)
+            XCTAssert(words?.region.width <= 150)
+            XCTAssert(words?.region.x >= 0)
+            XCTAssert(words?.region.x <= 500)
+            XCTAssert(words?.region.y >= 0)
+            XCTAssert(words?.region.y <= 500)
+            XCTAssertEqual(words?.text, "notice")
+            
             expectation.fulfill()
         }
         waitForExpectations()

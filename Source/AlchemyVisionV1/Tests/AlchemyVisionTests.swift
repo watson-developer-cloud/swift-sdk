@@ -145,9 +145,12 @@ class AlchemyVisionTests: XCTestCase {
     func testGetImageHTML1() {
         let description = "Identify the primary image in an HTML document."
         let expectation = expectationWithDescription(description)
-        
+        let expectedImageName = "cp_1234354872_16947v1-max-250x250.jpg"
+
         alchemyVision.getImage(html: html, failure: failWithError) { imageLinks in
-            XCTFail("Need to check for `content-is-empty` failure.")
+            XCTAssertEqual(imageLinks.status, "OK")
+            XCTAssertEqual(imageLinks.url, "")
+            XCTAssert(imageLinks.image.containsString(expectedImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -156,9 +159,12 @@ class AlchemyVisionTests: XCTestCase {
     func testGetImageHTML2() {
         let description = "Identify the primary image in an HTML document."
         let expectation = expectationWithDescription(description)
+        let expectedImageName = "cp_1234354872_16947v1-max-250x250.jpg"
         
         alchemyVision.getImage(html: html, url: htmlURL, failure: failWithError) { imageLinks in
-            XCTFail("Need to check for `content-is-empty` failure.")
+            XCTAssertEqual(imageLinks.status, "OK")
+            XCTAssertEqual(imageLinks.url, self.htmlURL)
+            XCTAssert(imageLinks.image.containsString(expectedImageName))
             expectation.fulfill()
         }
         waitForExpectations()

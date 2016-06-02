@@ -30,6 +30,8 @@ public class AlchemyVision {
     private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
+    private let unreservedCharacters = NSCharacterSet(charactersInString:
+        "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
 
     /**
      Create an `AlchemyVision` object.
@@ -160,6 +162,24 @@ public class AlchemyVision {
         failure: (NSError -> Void)? = nil,
         success: ImageLink -> Void)
     {
+        // encode html document
+        guard let htmlEncoded = html.stringByAddingPercentEncodingWithAllowedCharacters(unreservedCharacters) else {
+            let failureReason = "Failed to percent encode HTML document."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct body
+        guard let body = "html=\(htmlEncoded)".dataUsingEncoding(NSUTF8StringEncoding) else {
+            let failureReason = "Failed to construct body with HTML document."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
@@ -175,34 +195,19 @@ public class AlchemyVision {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            messageBody: body
         )
 
         // execute REST request
-        Alamofire.upload(request,
-            multipartFormData: { multipartFormData in
-                if let data = html.dataUsingEncoding(NSUTF8StringEncoding) {
-                    multipartFormData.appendBodyPart(data: data, name: "html")
-                }
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject { (response: Response<ImageLink, NSError>) in
-                        switch response.result {
-                        case .Success(let imageLinks): success(imageLinks)
-                        case .Failure(let error): failure?(error)
-                        }
-                    }
-                case .Failure:
-                    let failureReason = "HTML could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
+        Alamofire.request(request)
+            .responseString { response in print(response) }
+            .responseObject { (response: Response<ImageLink, NSError>) in
+                switch response.result {
+                case.Success(let imageLinks): success(imageLinks)
+                case .Failure(let error): failure?(error)
                 }
             }
-        )
     }
 
     /**

@@ -77,25 +77,22 @@ class ToneAnalyzerTests: XCTestCase {
 
         toneAnalyzer.getTone(text, failure: failWithError) { toneAnalysis in
             
-            for emotion in toneAnalysis.documentTone[0].tones {
-                XCTAssertNotNil(emotion.name, "Emotion name should not be nil")
-                XCTAssertNotNil(emotion.id, "Emotion id should not be nil")
-                XCTAssert(emotion.score <= 1.0 && emotion.score >= 0.0,
-                          "\(emotion.name) score should be within 0.0 and 1.0")
+            for emotionTone in toneAnalysis.documentTone[0].tones {
+                XCTAssertNotNil(emotionTone.name)
+                XCTAssertNotNil(emotionTone.id)
+                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
             }
             
-            for tone in toneAnalysis.documentTone[1].tones {
-                XCTAssertNotNil(tone.name, "Tone name should not be nil")
-                XCTAssertNotNil(tone.id, "Tone id should not be nil")
-                XCTAssert(tone.score <= 1.0 && tone.score >= 0.0,
-                          "\(tone.name) score should be within 0.0 and 1.0")
+            for writingTone in toneAnalysis.documentTone[1].tones {
+                XCTAssertNotNil(writingTone.name)
+                XCTAssertNotNil(writingTone.id)
+                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
             }
             
-            for personality in toneAnalysis.documentTone[2].tones {
-                XCTAssertNotNil(personality.name, "Big 5 name should not be nil")
-                XCTAssertNotNil(personality.id, "Big 5 id should not be nil")
-                XCTAssert(personality.score <= 1.0 && personality.score >= 0.0,
-                          "\(personality.name) score should be within 0.0 and 1.0")
+            for socialTone in toneAnalysis.documentTone[2].tones {
+                XCTAssertNotNil(socialTone.name)
+                XCTAssertNotNil(socialTone.id)
+                XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
             }
             
             if let sentTones = toneAnalysis.sentencesTones {

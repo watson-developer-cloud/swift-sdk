@@ -190,9 +190,9 @@ public class LanguageTranslation {
     /**
      Delete a trained translation model.
      
-     - parameter modelID: The trained translation model's identifier.
+     - parameter modelID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after given model is successfully deleted.
+     - parameter success: A function executed after the given model has been deleted.
      */
     public func deleteModel(
         modelID: String,
@@ -226,9 +226,9 @@ public class LanguageTranslation {
     /**
      Get information about the given translation model, including training status.
      
-     - parameter modelID: The model identifier.
+     - parameter modelID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the retrieved information.
+     - parameter success: A function executed with the retrieved information about the model.
      */
     public func getModel(
         modelID: String,
@@ -258,13 +258,14 @@ public class LanguageTranslation {
     // MARK: - Translate
 
     /**
-     Translate input text from the source language to the target language.
+     Translate text from a source language to a target language.
      
-     - parameter text: The input text in the source language.
-     - parameter modelID: The unique modelID of the translation model used to translate text. The
-            modelID inherently specifies source, target language, and domain.
+     - parameter text: The text to translate.
+     - parameter modelID: The unique modelID of the translation model that shall be used to
+            translate the text. The modelID inherently specifies the source, target language, and
+            domain.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the translation in the target language.
+     - parameter success: A function executed with the translation.
      */
     public func translate(
         text: String,
@@ -277,13 +278,14 @@ public class LanguageTranslation {
     }
 
     /**
-     Translate input text from the source language to the target language.
+     Translate text from a source language to a target language.
      
-     - parameter text: The input text in the source language.
-     - parameter modelID: The unique modelID of the translation model used to translate text. The
-            modelID inherently specifies source, target language, and domain.
+     - parameter text: The text to translate.
+     - parameter modelID: The unique modelID of the translation model that shall be used to
+            translate the text. The modelID inherently specifies the source, target language, and
+            domain.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the translation in the target language.
+     - parameter success: A function executed with the translation.
      */
     public func translate(
         text: [String],
@@ -296,15 +298,15 @@ public class LanguageTranslation {
     }
     
     /**
-     Translate input text from the source language to the target language.
+     Translate text from a source language to a target language.
      
-     - parameter text: The input text in the source language.
-     - parameter source:  The source language in 2 or 5 letter language code. Should use 2 letter
-            codes except when clarifying between multiple supported languages.
-     - parameter target: The target language in 2 or 5 letter language code. Should use 2 letter
-            codes except when clarifying between multiple supported languages.
+     - parameter text: The text to translate.
+     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the translation in the target language.
+     - parameter success: A function executed with the translation.
      */
     public func translate(
         text: String,
@@ -318,15 +320,15 @@ public class LanguageTranslation {
     }
 
     /**
-     Translate input text from the source language to the target language.
+     Translate text from a source language to a target language.
      
-     - parameter text: The input text in the source language.
-     - parameter source:  The source language in 2 or 5 letter language code. Should use 2 letter
-            codes except when clarifying between multiple supported languages.
-     - parameter target: The target language in 2 or 5 letter language code. Should use 2 letter
-            codes except when clarifying between multiple supported languages.
+     - parameter text: The text to translate.
+     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
+     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+            except when clarifying between multiple supported languages.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the translation in the target language.
+     - parameter success: A function executed with the translation.
      */
     public func translate(
         text: [String],
@@ -345,8 +347,7 @@ public class LanguageTranslation {
      - parameter translateRequest: A `TranslateRequest` object representing the parameters of the
             request to the Language Translation service.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the response from the Language Translation
-            service.
+     - parameter success: A function executed with the response from the service.
      */
     private func translate(
         translateRequest: TranslateRequest,
@@ -420,7 +421,7 @@ public class LanguageTranslation {
     /**
      Identify the language of the given text.
      
-     - parameter text: The input text.
+     - parameter text: The text whose language shall be identified.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with all identified languages in the given text.
      */

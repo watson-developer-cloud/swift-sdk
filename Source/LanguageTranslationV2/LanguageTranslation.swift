@@ -131,8 +131,8 @@ public class LanguageTranslation {
      - parameter baseModelID: Specifies the domain model that is used as the base for the training.
      - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.
      - parameter forcedGlossary: A TMX file with your customizations. Anything that is specified in
-        this file completely overwrites the domain data translation. You can upload only one
-        glossary with a file size less than 10 MB per call.
+            this file completely overwrites the domain data translation. You can upload only one
+            glossary with a file size less than 10 MB per call.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the modelID of the created model.
      */

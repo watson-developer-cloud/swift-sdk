@@ -475,6 +475,188 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Test adding more than one word to the custom voice model. */
+    func testAddMultipleWordsToCustomVoiceModel() {
+        let description1 = "Create new custom voice model."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var newCVMID: String?
+        textToSpeech.createCustomization("Swift SDK Test Custom Voice Model", failure: failWithError) {
+            customizationID in
+            
+            XCTAssertNotNil(customizationID)
+            XCTAssertNotEqual(customizationID.customizationID, "")
+            newCVMID = customizationID.customizationID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let customizationID = newCVMID else {
+            XCTFail("Failed to create a new custom voice model.")
+            return
+        }
+        
+        let description2 = "Add 2 words to the custom voice model."
+        let expectation2 = expectationWithDescription(description2)
+        
+        textToSpeech.addWords(
+            customizationID,
+            words: [Word(word: "IBM",
+                translation: "eye bee em"),
+                Word(word: "MIL", translation: "mill")],
+            failure: failWithError) {
+                
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Make sure there are 2 words in the custom voice model."
+        let expectation3 = expectationWithDescription(description3)
+        
+        textToSpeech.getWords(customizationID, failure: failWithError) {
+            words in
+            
+            XCTAssertEqual(words.count, 2)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        let description4 = "Delete the custom voice model."
+        let expectation4 = expectationWithDescription(description4)
+        
+        textToSpeech.deleteCustomization(customizationID) {
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test adding one word to the custom voice model. */
+    func testAddOneWordToCustomVoiceModel() {
+        let description1 = "Create new custom voice model."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var newCVMID: String?
+        textToSpeech.createCustomization("Swift SDK Test Custom Voice Model", failure: failWithError) {
+            customizationID in
+            
+            XCTAssertNotNil(customizationID)
+            XCTAssertNotEqual(customizationID.customizationID, "")
+            newCVMID = customizationID.customizationID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let customizationID = newCVMID else {
+            XCTFail("Failed to create a new custom voice model.")
+            return
+        }
+        
+        let description2 = "Add 1 word to the custom voice model."
+        let expectation2 = expectationWithDescription(description2)
+        
+        textToSpeech.addWord(
+            customizationID,
+            word: "IBM",
+            translation: "eye bee em",
+            failure: failWithError) {
+                
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Make sure there is 1 word in the custom voice model."
+        let expectation3 = expectationWithDescription(description3)
+        
+        textToSpeech.getWords(customizationID, failure: failWithError) {
+            words in
+            
+            XCTAssertEqual(words.count, 1)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        let description4 = "Get the details of the newly added word."
+        let expectation4 = expectationWithDescription(description4)
+        
+        textToSpeech.getTranslation(customizationID, word: "IBM", failure: failWithError) {
+            translation in
+            
+            XCTAssertEqual(translation.translation, "eye bee em")
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+        
+        let description5 = "Delete the custom voice model."
+        let expectation5 = expectationWithDescription(description5)
+        
+        textToSpeech.deleteCustomization(customizationID) {
+            expectation5.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test adding and deleting one word to the custom voice model. */
+    func testAddAndDeleteOneWordToCustomVoiceModel() {
+        let description1 = "Create new custom voice model."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var newCVMID: String?
+        textToSpeech.createCustomization("Swift SDK Test Custom Voice Model", failure: failWithError) {
+            customizationID in
+            
+            XCTAssertNotNil(customizationID)
+            XCTAssertNotEqual(customizationID.customizationID, "")
+            newCVMID = customizationID.customizationID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let customizationID = newCVMID else {
+            XCTFail("Failed to create a new custom voice model.")
+            return
+        }
+        
+        let description2 = "Add 1 word to the custom voice model."
+        let expectation2 = expectationWithDescription(description2)
+        
+        textToSpeech.addWord(
+            customizationID,
+            word: "IBM",
+            translation: "eye bee em",
+            failure: failWithError) {
+                
+                expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description4 = "Delete the newly added word."
+        let expectation4 = expectationWithDescription(description4)
+        
+        textToSpeech.deleteWord(customizationID, word: "IBM", failure: failWithError){
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+        
+        let description5 = "Make sure there are no words in the custom voice model."
+        let expectation5 = expectationWithDescription(description5)
+        
+        textToSpeech.getWords(customizationID, failure: failWithError) {
+            words in
+            
+            XCTAssertEqual(words.count, 0)
+            expectation5.fulfill()
+        }
+        waitForExpectations()
+        
+        let description6 = "Delete the custom voice model."
+        let expectation6 = expectationWithDescription(description6)
+        
+        textToSpeech.deleteCustomization(customizationID) {
+            expectation6.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Negative Tests
     
     /** Get the phonetic pronunciation of the given text using an invalid voice type. */

@@ -121,6 +121,20 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Uploads a TMX glossary file on top of a domain to customize a translation model.Depending on the 
+     size of the file, training can range from minutes for a glossary to several hours for a large 
+     parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded 
+     glossary and corpus files is limited to 250 MB.
+     
+     - parameter baseModelID:    (Required). Specifies the domain model that is used as the base for the training.
+     - parameter name:           The model name. Valid characters are letters, numbers, -, and _. No spaces.
+     - parameter forcedGlossary: A TMX file with your customizations. Anything that is specified in 
+                                 this file completely overwrites the domain data translation. 
+                                 You can upload only one glossary with a file size less than 10 MB per call.
+     - parameter failure:        A function executed if an error occurs.
+     - parameter success:        A function executed with the model id for the created model.
+     */
     public func createModel(
         baseModelID: String,
         name: String? = nil,
@@ -172,6 +186,13 @@ public class LanguageTranslation {
         )
     }
 
+    /**
+     Deletes trained translation models.
+     
+     - parameter modelID: (Required). The model identifier.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: No response for successful request.
+     */
     public func deleteModel(
         modelID: String,
         failure: (NSError -> Void)? = nil,
@@ -201,6 +222,13 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Returns information, including training status, about a specified translation model.
+     
+     - parameter modelID: (Required). The model identifier.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns a MonitorTraining object
+     */
     public func getModel(
         modelID: String,
         failure: (NSError -> Void)? = nil,
@@ -228,6 +256,18 @@ public class LanguageTranslation {
 
     // MARK: - Translate
 
+    /**
+     Translates input text from the source language to the target language.
+     
+     - parameter text:    (Required) Input text in UTF-8 encoding. Multiple text query parameters 
+                          indicate multiple input paragraphs, and a single string is valid input.
+     - parameter modelID: The unique model_id of the translation model used to translate text. The model_id 
+                          inherently specifies source, target language, and domain. If the model_id 
+                          is specified, there is no need for the source and target parameters, and 
+                          the values will be ignored.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns a TranslateResponse with an array of translations.
+     */
     public func translate(
         text: String,
         modelID: String,
@@ -238,6 +278,18 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Translates input text from the source language to the target language.
+     
+     - parameter text:    (Required) Input text in UTF-8 encoding. Multiple text query parameters
+                          indicate multiple input paragraphs, and a single string is valid input.
+     - parameter modelID: The unique model_id of the translation model used to translate text. The model_id
+                          inherently specifies source, target language, and domain. If the model_id
+                          is specified, there is no need for the source and target parameters, and
+                          the values will be ignored.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns a TranslateResponse with an array of translations.
+     */
     public func translate(
         text: [String],
         modelID: String,
@@ -248,6 +300,20 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Translates input text from the source language to the target language.
+     
+     - parameter text:    (Required) Input text in UTF-8 encoding. Multiple text query parameters
+                          indicate multiple input paragraphs, and a single string is valid input.
+     - parameter source:  To be used in combination with target as an alternative way to select 
+                          the model for translation. When both are set and model_id is NOT set, 
+                          the system will choose a default model with the right language pair to 
+                          translate (usually the model based on the news
+     - parameter target:  To be used in combination with source as an alternative way to select 
+                          which model is used for translation
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns a TranslateResponse with an array of translations.
+     */
     public func translate(
         text: String,
         source: String,
@@ -259,6 +325,21 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    /**
+     Translates input text from the source language to the target language.
+     
+     - parameter text:    (Required) Input text in UTF-8 encoding. Multiple text query parameters
+                          indicate multiple input paragraphs, and a single string is valid input.
+     - parameter source:  To be used in combination with target as an alternative way to select
+                          the model for translation. When both are set and model_id is NOT set,
+                          the system will choose a default model with the right language pair to
+                          translate (usually the model based on the news
+     - parameter target:  To be used in combination with source as an alternative way to select
+                          which model is used for translation
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns a TranslateResponse with an array of translations.
+     */
     public func translate(
         text: [String],
         source: String,
@@ -270,6 +351,7 @@ public class LanguageTranslation {
         translate(translateRequest, failure: failure, success: success)
     }
 
+    // Private function for all of the translates.  This will actually make the call
     private func translate(
         translateRequest: TranslateRequest,
         failure: (NSError -> Void)? = nil,
@@ -309,6 +391,12 @@ public class LanguageTranslation {
 
     // MARK: - Identify
 
+    /**
+     Return the list of languages it can detect.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns an IdentifiableLanguage object.
+     */
     public func getIdentifiableLanguages(
         failure: (NSError -> Void)? = nil,
         success: [IdentifiableLanguage] -> Void)
@@ -333,6 +421,13 @@ public class LanguageTranslation {
             }
     }
 
+    /**
+     Identify the language in which a text is written.
+     
+     - parameter text:    Input text in UTF-8 format
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function that returns an array of IdentifiedLanguage objects.
+     */
     public func identify(
         text: String,
         failure: (NSError -> Void)? = nil,

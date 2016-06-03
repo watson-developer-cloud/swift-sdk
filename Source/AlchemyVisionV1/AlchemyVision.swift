@@ -290,6 +290,7 @@ public class AlchemyVision {
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "imagePostMode", value: "raw"))
         if let forceShowAll = forceShowAll {
             if forceShowAll {
                 queryParameters.append(NSURLQueryItem(name: "forceShowAll", value: "1"))

@@ -46,6 +46,32 @@ public class AlchemyVision {
         self.apiKey = apiKey
         self.serviceURL = serviceURL
     }
+    
+    /**
+     If the given data represents an error returned by the Alchemy Vision service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.string("status")
+            let statusInfo = try json.string("statusInfo")
+            if status == "OK" {
+                return nil
+            } else {
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: status,
+                    NSLocalizedRecoverySuggestionErrorKey: statusInfo
+                ]
+                return NSError(domain: domain, code: 400, userInfo: userInfo)
+            }
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Perform face recognition on an uploaded image. For each face detected, the service returns

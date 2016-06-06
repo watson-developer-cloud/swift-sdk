@@ -271,8 +271,8 @@ public class TextToSpeech {
     /**
      Lists metadata, such as name and description, for the custom voice models that you own.
      
-     You can use the language query parameter to list voice models for the specified language, or
-     omit the parameter to see all voice models that you own for all languages.
+     You can use the language query parameter to list voice models for the specified language. If
+     you leave language as nil, this will list all custom voice models you own for all languages.
      
      - parameter language: The language of the voice models that you want listed.
      - parameter failure: A function executed if an error occurs.

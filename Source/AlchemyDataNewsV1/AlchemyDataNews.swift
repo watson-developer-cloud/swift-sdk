@@ -52,10 +52,16 @@ public class AlchemyDataNews {
         }
     }
     
-    public func getNews(failure: (NSError -> Void)? = nil, success: NewsResponse -> Void) {
+    public func getNews(query: [EnrichedUrl : String],
+                        failure: (NSError -> Void)? = nil,
+                        success: NewsResponse -> Void) {
         
         // construct query paramerters
         var queryParams = [NSURLQueryItem]()
+        
+        for (key, value) in query {
+            queryParams.append(NSURLQueryItem(name: key.rawValue, value: value))
+        }
         
         queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))

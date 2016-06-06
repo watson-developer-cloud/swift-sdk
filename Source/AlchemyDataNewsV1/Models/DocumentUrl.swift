@@ -29,6 +29,13 @@ public struct DocumentUrl: JSONDecodable {
     public let keywords: [Keyword]?
     public let concepts: [Concept]?
     public let enrichedTitle: EnrichedTitle?
+    //
+    public let image: String?
+    //public let imageKeywords: [ImageKeyword] <- this should have text and score
+    public let feeds: [Feed]?
+    public let cleanedTitle: String?
+    public let publicationDate: PublicationDate?
+    public let text: String?
     
     public init(json: JSON) throws {
         title = try? json.string("title")

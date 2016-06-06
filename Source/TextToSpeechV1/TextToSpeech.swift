@@ -447,7 +447,7 @@ public class TextToSpeech {
         customizationID: String,
         name: String? = nil,
         description: String? = nil,
-        words: [Word]? = nil,
+        words: [Word] = [],
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         

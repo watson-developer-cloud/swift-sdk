@@ -21,18 +21,18 @@ import Freddy
 public struct CustomVoiceUpdate: JSONEncodable {
     
     /// The new name for the custom voice model.
-    public let name: String?
+    private let name: String?
     
     /// The new description for the custom voice model.
-    public let description: String?
+    private let description: String?
     
     /// A list of words and their translations from the custom voice model.
-    public let words: [Word]
+    private let words: [Word]
     
-    init(name: String? = nil, description: String? = nil, words: [Word]? = nil) {
+    public init(name: String? = nil, description: String? = nil, words: [Word] = []) {
         self.name = name
         self.description = description
-        self.words = words ?? []
+        self.words = words
     }
     
     /// Used internally to serialize a `CustomVoiceUpdate` model to JSON.

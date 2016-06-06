@@ -64,7 +64,7 @@ public class AlchemyVision {
             } else {
                 let userInfo = [
                     NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedRecoverySuggestionErrorKey: statusInfo
+                    NSLocalizedDescriptionKey: statusInfo
                 ]
                 return NSError(domain: domain, code: 400, userInfo: userInfo)
             }

@@ -253,6 +253,7 @@
 		B1CCF0081CFF778500E2A4A3 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */; };
 		B1CCF00A1CFF78EF00E2A4A3 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF0091CFF78EF00E2A4A3 /* Keyword.swift */; };
 		B1CCF00C1CFF791D00E2A4A3 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF00B1CFF791D00E2A4A3 /* Concept.swift */; };
+		B1CCF00E1D008CDD00E2A4A3 /* QueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -668,6 +669,7 @@
 		B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Taxonomy.swift; path = Source/AlchemyDataNewsV1/Models/Taxonomy.swift; sourceTree = SOURCE_ROOT; };
 		B1CCF0091CFF78EF00E2A4A3 /* Keyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyword.swift; path = Source/AlchemyDataNewsV1/Models/Keyword.swift; sourceTree = SOURCE_ROOT; };
 		B1CCF00B1CFF791D00E2A4A3 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Concept.swift; path = Source/AlchemyDataNewsV1/Models/Concept.swift; sourceTree = SOURCE_ROOT; };
+		B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryParams.swift; sourceTree = SOURCE_ROOT; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1385,6 +1387,7 @@
 				B1CCF0091CFF78EF00E2A4A3 /* Keyword.swift */,
 				B1CCF0051CFF770600E2A4A3 /* SAORelation.swift */,
 				B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */,
+				B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2567,6 +2570,7 @@
 				B1CCF0081CFF778500E2A4A3 /* Taxonomy.swift in Sources */,
 				B1CCF0001CFF74B600E2A4A3 /* KnowledgeGraph.swift in Sources */,
 				B1CCF0011CFF74B600E2A4A3 /* Quotation.swift in Sources */,
+				B1CCF00E1D008CDD00E2A4A3 /* QueryParams.swift in Sources */,
 				B1CCEFF21CFF66C400E2A4A3 /* Document.swift in Sources */,
 				B1CCEFF61CFF6DA500E2A4A3 /* DocumentEnriched.swift in Sources */,
 				B1CCF0021CFF74B600E2A4A3 /* Sentiment.swift in Sources */,

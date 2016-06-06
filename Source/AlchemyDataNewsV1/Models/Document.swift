@@ -21,12 +21,12 @@ public struct Document: JSONDecodable {
     
     public let id: String?
     public let source: DocumentSource?
-    public let timestamp: Int?
+    public let timestamp: CLong?
     
     public init(json: JSON) throws {
         id = try? json.string("id")
         source = try? json.decode("source", type: DocumentSource.self)
-        timestamp = try? json.int("timestamp")
+        timestamp = try? json.decode("timestamp", type: CLong.self)
     }
     
 }

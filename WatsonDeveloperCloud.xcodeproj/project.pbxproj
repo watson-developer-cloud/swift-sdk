@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		127B19D61D0722D80010F773 /* RelationshipExtractionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */; };
+		127B19DB1D0722D80010F773 /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */; };
+		127B19E31D0723210010F773 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		127B19E41D0723300010F773 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		127B19E51D0723300010F773 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		127B19E71D0723470010F773 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		127B19E81D07234B0010F773 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		127B19EA1D0724220010F773 /* RelationshipExtractionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 127B19E91D0724220010F773 /* RelationshipExtractionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		127B19EC1D0724400010F773 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		127B19ED1D0724450010F773 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -232,6 +243,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		127B19D71D0722D80010F773 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 127B19CB1D0722D70010F773;
+			remoteInfo = RelationshipExtractionV1;
+		};
 		7AAAF3A91CEE99FC00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
@@ -312,6 +330,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		127B19E61D07233A0010F773 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				127B19E81D07234B0010F773 /* Alamofire.framework in CopyFiles */,
+				127B19E71D0723470010F773 /* Freddy.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		127B19EB1D0724350010F773 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				127B19ED1D0724450010F773 /* Freddy.framework in CopyFiles */,
+				127B19EC1D0724400010F773 /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF3B71CEE9A1200B74848 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,6 +477,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RelationshipExtractionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RelationshipExtractionV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = ../Source/RelationshipExtractionV1/Tests/RelationshipExtractionTests.swift; sourceTree = "<group>"; };
+		127B19E91D0724220010F773 /* RelationshipExtractionV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1.h; path = Source/SupportingFiles/RelationshipExtractionV1.h; sourceTree = "<group>"; };
+		127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtraction.swift; path = Source/RelationshipExtractionV1/RelationshipExtraction.swift; sourceTree = SOURCE_ROOT; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -615,6 +660,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		127B19C81D0722D70010F773 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B19E41D0723300010F773 /* Alamofire.framework in Frameworks */,
+				127B19E51D0723300010F773 /* Freddy.framework in Frameworks */,
+				127B19E31D0723210010F773 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		127B19D21D0722D70010F773 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B19D61D0722D80010F773 /* RelationshipExtractionV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39A1CEE99FC00B74848 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -816,6 +879,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		127B19CD1D0722D70010F773 /* RelationshipExtractionV1 */ = {
+			isa = PBXGroup;
+			children = (
+				127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */,
+				127B19D91D0722D80010F773 /* Tests */,
+			);
+			path = RelationshipExtractionV1;
+			sourceTree = "<group>";
+		};
+		127B19D91D0722D80010F773 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */,
+			);
+			name = Tests;
+			path = RelationshipExtractionV1Tests;
+			sourceTree = SOURCE_ROOT;
+		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +939,7 @@
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
+				127B19CD1D0722D70010F773 /* RelationshipExtractionV1 */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
@@ -894,6 +976,8 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
+				127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */,
+				127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -921,6 +1005,7 @@
 				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslationV2.h */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */,
+				127B19E91D0724220010F773 /* RelationshipExtractionV1.h */,
 				7AAAF5B21CEEA62C00B74848 /* RestKit.h */,
 				7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */,
 				7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */,
@@ -1306,6 +1391,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		127B19C91D0722D70010F773 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B19EA1D0724220010F773 /* RelationshipExtractionV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39B1CEE99FC00B74848 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1397,6 +1490,44 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 127B19DD1D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */;
+			buildPhases = (
+				127B19C71D0722D70010F773 /* Sources */,
+				127B19C81D0722D70010F773 /* Frameworks */,
+				127B19C91D0722D70010F773 /* Headers */,
+				127B19CA1D0722D70010F773 /* Resources */,
+				127B19E61D07233A0010F773 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RelationshipExtractionV1;
+			productName = RelationshipExtractionV1;
+			productReference = 127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		127B19D41D0722D70010F773 /* RelationshipExtractionV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 127B19E01D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */;
+			buildPhases = (
+				127B19D11D0722D70010F773 /* Sources */,
+				127B19D21D0722D70010F773 /* Frameworks */,
+				127B19D31D0722D70010F773 /* Resources */,
+				127B19EB1D0724350010F773 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				127B19D81D0722D80010F773 /* PBXTargetDependency */,
+			);
+			name = RelationshipExtractionV1Tests;
+			productName = RelationshipExtractionV1Tests;
+			productReference = 127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7AAAF39D1CEE99FC00B74848 /* RestKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AAAF3B31CEE99FC00B74848 /* Build configuration list for PBXNativeTarget "RestKit" */;
@@ -1814,6 +1945,12 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
+					127B19CB1D0722D70010F773 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					127B19D41D0722D70010F773 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					7AAAF39D1CEE99FC00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -1916,11 +2053,27 @@
 				7AAAF3CB1CEE9A3700B74848 /* VisualRecognitionV3Tests */,
 				7AAAF39D1CEE99FC00B74848 /* RestKit */,
 				7AAAF3A61CEE99FC00B74848 /* RestKitTests */,
+				127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */,
+				127B19D41D0722D70010F773 /* RelationshipExtractionV1Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		127B19CA1D0722D70010F773 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		127B19D31D0722D70010F773 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39C1CEE99FC00B74848 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2114,6 +2267,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		127B19C71D0722D70010F773 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		127B19D11D0722D70010F773 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				127B19DB1D0722D80010F773 /* RelationshipExtractionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF3991CEE99FC00B74848 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2379,6 +2548,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		127B19D81D0722D80010F773 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */;
+			targetProxy = 127B19D71D0722D80010F773 /* PBXContainerItemProxy */;
+		};
 		7AAAF3AA1CEE99FC00B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7AAAF39D1CEE99FC00B74848 /* RestKit */;
@@ -2437,6 +2611,77 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		127B19DE1D0722D80010F773 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		127B19DF1D0722D80010F773 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		127B19E11D0722D80010F773 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.RelationshipExtractionV1Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		127B19E21D0722D80010F773 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.RelationshipExtractionV1Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		7A0F95C51C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3291,6 +3536,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		127B19DD1D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				127B19DE1D0722D80010F773 /* Debug */,
+				127B19DF1D0722D80010F773 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		127B19E01D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				127B19E11D0722D80010F773 /* Debug */,
+				127B19E21D0722D80010F773 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

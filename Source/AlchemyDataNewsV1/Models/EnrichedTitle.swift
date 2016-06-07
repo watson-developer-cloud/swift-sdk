@@ -17,16 +17,34 @@
 import Foundation
 import Freddy
 
+/**
+ 
+ **EnrichedTitle**
+ 
+ Enriched information related to a document's title, defined by the inital query parameters
+ 
+ */
 public struct EnrichedTitle: JSONDecodable {
     
+    /** see **Entity** */
     public let entities: [Entity]?
+    
+    /** see **SAORelation** */
     public let relations: [SAORelation]?
+    
+    /** see **Taxonomy** */
     public let taxonomy: [Taxonomy]?
-    // I'm not sure the following exist, but they might
+    
+    /** see **Sentiment** */
     public let sentiment: [Sentiment]?
+    
+    /** see **Keyword** */
     public let keywords: [Keyword]?
+    
+    /** see **Concept** */
     public let concepts: [Concept]?
     
+    /// used internally to initialize an EnrichedTitle object
     public init(json: JSON) throws {
         entities = try? json.arrayOf("entities", type: Entity.self)
         relations = try? json.arrayOf("relations", type: SAORelation.self)

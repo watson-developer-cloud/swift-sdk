@@ -17,9 +17,19 @@
 import Foundation
 import Freddy
 
+/**
+ 
+ **NewsResponse**
+ 
+ Response object for AlchemyDataNews
+ 
+ */
 public struct NewsResponse: JSONDecodable {
     
+    /** number of transactions the service made */
     public let totalTransactions: Int
+    
+    /** see **NewsResult** */
     public let result: NewsResult?
     
     public init(json: JSON) throws {

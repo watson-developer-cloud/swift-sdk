@@ -17,10 +17,19 @@
 import Foundation
 import Freddy
 
+/**
+ 
+ **DocumentSource**
+ 
+ Contains source information about the document
+ 
+ */
 public struct DocumentSource: JSONDecodable {
     
+    /** see **DocumentEnriched** */
     public let enriched: DocumentEnriched?
     
+    // used internally to initialize a DocumentSource object
     public init(json: JSON) throws {
         enriched = try? json.decode("enriched", type: DocumentEnriched.self)
     }

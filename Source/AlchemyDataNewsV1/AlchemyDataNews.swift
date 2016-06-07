@@ -19,6 +19,10 @@ import Alamofire
 import Freddy
 import RestKit
 
+/**
+ The AlchemyDataNews API utilizes natural language processing technologies to query the world's
+ news and blogs like a database. 
+ */
 public class AlchemyDataNewsV1 {
     
     private let apiKey: String
@@ -52,6 +56,23 @@ public class AlchemyDataNewsV1 {
         }
     }
     
+    /**
+     Returns articles matching the query. If no query is given, simply returns a count of articles
+     matching the start/end timeframe.
+     
+     Timeframe values as numbers are assumed to be in second, however some convenience values are
+     recognized by the service. For a list of those values, visit
+     http://docs.alchemyapi.com/docs/counts
+     
+     There are several specific query parameters and 'return' fields. A list can be found at:
+     http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields
+     
+     - parameter start:   the start value for the search timeframe
+     - parameter end:     the end value for the search timefram
+     - parameter query:   key-value pairs that will build the request query
+     - parameter failure: a function executed if the call fails
+     - parameter success: a function executed with NewsResponse information
+     */
     public func getNews(
         start: String,
         end: String,

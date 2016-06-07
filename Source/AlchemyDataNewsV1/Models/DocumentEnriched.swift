@@ -17,10 +17,19 @@
 import Foundation
 import Freddy
 
+/**
+ 
+ **DocumentEnriched**
+ 
+ Contains enriched information about a document
+ 
+ */
 public struct DocumentEnriched: JSONDecodable {
     
+    /** see **DocumentUrl** */
     public let url: DocumentUrl?
     
+    /// used internally to define a DocumentEnriched object
     public init(json: JSON) throws {
         url = try? json.decode("url", type: DocumentUrl.self)
     }

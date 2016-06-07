@@ -17,13 +17,29 @@
 import Foundation
 import Freddy
 
+/**
+ 
+ **NewsResult**
+ 
+ The result of the query given to the AlchemyDataNews service
+ 
+ */
 public struct NewsResult: JSONDecodable {
     
+    /** see **Document** */
     public let docs: [Document]?
+    
+    /** a query may return multiple pages of results. Append this value with the key 'next' to
+     your query to access the next page of results */
     public let next: String?
+    
+    /** the number of documents that fit the query */
     public let count: Int?
+    
+    /** the number of articles within a defined time slice */
     public let slices: [Int]?
     
+    /// used internally to initialize NewsResult objects
     public init(json: JSON) throws {
         docs = try? json.arrayOf("docs", type: Document.self)
         next = try? json.string("next")

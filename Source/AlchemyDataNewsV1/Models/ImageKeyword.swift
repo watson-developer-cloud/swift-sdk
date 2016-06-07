@@ -19,19 +19,21 @@ import Freddy
 
 /**
  
- **Quotation**
+ **ImageKeyword**
  
- Quoted text extracted from a document
+ A set of keywords for an image analyzed by the Alchemy Vision service.
  
  */
 
 public struct ImageKeyword: JSONDecodable {
     
-    /** extracted quotation */
+    /** A keyword that is associated with the specified image. */
     public let text: String?
+    
+    /** The likelihood that this keyword corresponds to the image. */
     public let score: Double?
     
-    /// Used internally to initialize a Quotation object
+    /// Used internally to initialize an ImageKeyword object
     public init(json: JSON) throws {
         text = try? json.string("text")
         if let scoreString = try? json.string("score") {

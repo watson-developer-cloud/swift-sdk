@@ -236,7 +236,7 @@
 		B16399FD1CFF45A700A96B96 /* AlchemyDataNewsV1.h in Headers */ = {isa = PBXBuildFile; fileRef = B16399FC1CFF45A700A96B96 /* AlchemyDataNewsV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1639A0C1CFF622C00A96B96 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1639A0D1CFF622E00A96B96 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B1CCEFEC1CFF65A500E2A4A3 /* AlchemyDataNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCEFEB1CFF65A500E2A4A3 /* AlchemyDataNews.swift */; };
+		B1AAD2CD1D075F9D002DAB84 /* ImageKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2CC1D075F9D002DAB84 /* ImageKeyword.swift */; };
 		B1CCEFEE1CFF65B000E2A4A3 /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCEFED1CFF65B000E2A4A3 /* NewsResponse.swift */; };
 		B1CCEFF01CFF665800E2A4A3 /* NewsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCEFEF1CFF665800E2A4A3 /* NewsResult.swift */; };
 		B1CCEFF21CFF66C400E2A4A3 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCEFF11CFF66C400E2A4A3 /* Document.swift */; };
@@ -253,9 +253,11 @@
 		B1CCF0081CFF778500E2A4A3 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */; };
 		B1CCF00A1CFF78EF00E2A4A3 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF0091CFF78EF00E2A4A3 /* Keyword.swift */; };
 		B1CCF00C1CFF791D00E2A4A3 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF00B1CFF791D00E2A4A3 /* Concept.swift */; };
-		B1CCF00E1D008CDD00E2A4A3 /* QueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */; };
 		B1D406561D060CD900162C44 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D406551D060CD900162C44 /* Feed.swift */; };
 		B1D406581D060D4600162C44 /* PublicationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D406571D060D4600162C44 /* PublicationDate.swift */; };
+		B1D4065C1D07331B00162C44 /* AlchemyDataNewsV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D4065A1D07322100162C44 /* AlchemyDataNewsV1Tests.swift */; };
+		B1D4065D1D074A1B00162C44 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		B1E485D01D0751B80053A998 /* AlchemyDataNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CCEFEB1CFF65A500E2A4A3 /* AlchemyDataNews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -654,6 +656,7 @@
 		B16399E21CFF444300A96B96 /* AlchemyDataNewsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyDataNewsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B16399EB1CFF444300A96B96 /* AlchemyDataNewsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyDataNewsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B16399FC1CFF45A700A96B96 /* AlchemyDataNewsV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlchemyDataNewsV1.h; path = Source/SupportingFiles/AlchemyDataNewsV1.h; sourceTree = "<group>"; };
+		B1AAD2CC1D075F9D002DAB84 /* ImageKeyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageKeyword.swift; path = Source/AlchemyDataNewsV1/Models/ImageKeyword.swift; sourceTree = SOURCE_ROOT; };
 		B1CCEFEB1CFF65A500E2A4A3 /* AlchemyDataNews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlchemyDataNews.swift; path = Source/AlchemyDataNewsV1/AlchemyDataNews.swift; sourceTree = SOURCE_ROOT; };
 		B1CCEFED1CFF65B000E2A4A3 /* NewsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsResponse.swift; path = Source/AlchemyDataNewsV1/Models/NewsResponse.swift; sourceTree = SOURCE_ROOT; };
 		B1CCEFEF1CFF665800E2A4A3 /* NewsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsResult.swift; path = Source/AlchemyDataNewsV1/Models/NewsResult.swift; sourceTree = SOURCE_ROOT; };
@@ -671,9 +674,9 @@
 		B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Taxonomy.swift; path = Source/AlchemyDataNewsV1/Models/Taxonomy.swift; sourceTree = SOURCE_ROOT; };
 		B1CCF0091CFF78EF00E2A4A3 /* Keyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyword.swift; path = Source/AlchemyDataNewsV1/Models/Keyword.swift; sourceTree = SOURCE_ROOT; };
 		B1CCF00B1CFF791D00E2A4A3 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Concept.swift; path = Source/AlchemyDataNewsV1/Models/Concept.swift; sourceTree = SOURCE_ROOT; };
-		B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryParams.swift; sourceTree = SOURCE_ROOT; };
 		B1D406551D060CD900162C44 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Feed.swift; path = Source/AlchemyDataNewsV1/Models/Feed.swift; sourceTree = SOURCE_ROOT; };
 		B1D406571D060D4600162C44 /* PublicationDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicationDate.swift; path = Source/AlchemyDataNewsV1/Models/PublicationDate.swift; sourceTree = SOURCE_ROOT; };
+		B1D4065A1D07322100162C44 /* AlchemyDataNewsV1Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlchemyDataNewsV1Tests.swift; path = Source/AlchemyDataNewsV1/Tests/AlchemyDataNewsV1Tests.swift; sourceTree = SOURCE_ROOT; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1368,6 +1371,7 @@
 			children = (
 				B1CCEFEB1CFF65A500E2A4A3 /* AlchemyDataNews.swift */,
 				B1639A071CFF608D00A96B96 /* Models */,
+				B1D406591D07321600162C44 /* Tests */,
 			);
 			path = AlchemyDataNewsV1;
 			sourceTree = "<group>";
@@ -1393,9 +1397,17 @@
 				B1D406571D060D4600162C44 /* PublicationDate.swift */,
 				B1CCF0051CFF770600E2A4A3 /* SAORelation.swift */,
 				B1CCF0071CFF778500E2A4A3 /* Taxonomy.swift */,
-				B1CCF00D1D008CDD00E2A4A3 /* QueryParams.swift */,
+				B1AAD2CC1D075F9D002DAB84 /* ImageKeyword.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		B1D406591D07321600162C44 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B1D4065A1D07322100162C44 /* AlchemyDataNewsV1Tests.swift */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
@@ -2300,6 +2312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D4065D1D074A1B00162C44 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2577,13 +2590,13 @@
 				B1CCF0081CFF778500E2A4A3 /* Taxonomy.swift in Sources */,
 				B1CCF0001CFF74B600E2A4A3 /* KnowledgeGraph.swift in Sources */,
 				B1CCF0011CFF74B600E2A4A3 /* Quotation.swift in Sources */,
-				B1CCF00E1D008CDD00E2A4A3 /* QueryParams.swift in Sources */,
 				B1CCEFF21CFF66C400E2A4A3 /* Document.swift in Sources */,
 				B1CCEFF61CFF6DA500E2A4A3 /* DocumentEnriched.swift in Sources */,
 				B1CCF0021CFF74B600E2A4A3 /* Sentiment.swift in Sources */,
 				B1CCEFF81CFF6E9E00E2A4A3 /* DocumentUrl.swift in Sources */,
-				B1CCEFEC1CFF65A500E2A4A3 /* AlchemyDataNews.swift in Sources */,
+				B1AAD2CD1D075F9D002DAB84 /* ImageKeyword.swift in Sources */,
 				B1CCEFFA1CFF71F900E2A4A3 /* Entity.swift in Sources */,
+				B1E485D01D0751B80053A998 /* AlchemyDataNews.swift in Sources */,
 				B1CCEFEE1CFF65B000E2A4A3 /* NewsResponse.swift in Sources */,
 				B1CCEFF41CFF699900E2A4A3 /* DocumentSource.swift in Sources */,
 				B1CCF0061CFF770600E2A4A3 /* SAORelation.swift in Sources */,
@@ -2599,6 +2612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D4065C1D07331B00162C44 /* AlchemyDataNewsV1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3573,7 +3587,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyDataNewsV1Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3585,7 +3599,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.AlchemyDataNewsV1Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

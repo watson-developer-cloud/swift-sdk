@@ -19,7 +19,7 @@ import Alamofire
 import Freddy
 import RestKit
 
-public class AlchemyDataNews {
+public class AlchemyDataNewsV1 {
     
     private let apiKey: String
     
@@ -52,17 +52,24 @@ public class AlchemyDataNews {
         }
     }
     
-    public func getNews(query: [EnrichedUrl : String],
-                        failure: (NSError -> Void)? = nil,
-                        success: NewsResponse -> Void) {
+    public func getNews(
+        start: String,
+        end: String,
+        query: [String : String]? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: NewsResponse -> Void)
+    {
         
         // construct query paramerters
         var queryParams = [NSURLQueryItem]()
         
-        for (key, value) in query {
-            queryParams.append(NSURLQueryItem(name: key.rawValue, value: value))
+        if let queries = query {
+            for (key, value) in queries {
+                queryParams.append(NSURLQueryItem(name: key, value: value))
+            }
         }
-        
+        queryParams.append(NSURLQueryItem(name: "start", value: start))
+        queryParams.append(NSURLQueryItem(name: "end", value: end))
         queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
         

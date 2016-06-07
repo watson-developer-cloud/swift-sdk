@@ -29,9 +29,9 @@ public struct DocumentUrl: JSONDecodable {
     public let keywords: [Keyword]?
     public let concepts: [Concept]?
     public let enrichedTitle: EnrichedTitle?
-    //
+
     public let image: String?
-    //public let imageKeywords: [ImageKeyword] <- this should have text and score
+    public let imageKeywords: [ImageKeyword]
     public let feeds: [Feed]?
     public let cleanedTitle: String?
     public let publicationDate: PublicationDate?
@@ -48,6 +48,13 @@ public struct DocumentUrl: JSONDecodable {
         keywords = try? json.arrayOf("keywords", type: Keyword.self)
         concepts = try? json.arrayOf("concept", type: Concept.self)
         enrichedTitle = try? json.decode("enrichedTitle", type: EnrichedTitle.self)
+        
+        image = try? json.string("image")
+        imageKeywords = try json.arrayOf("imageKeywords", type: ImageKeyword.self)
+        feeds = try? json.arrayOf("feeds", type: Feed.self)
+        cleanedTitle = try? json.string("cleanedTitle")
+        publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
+        text = try? json.string("text")
     }
     
 }

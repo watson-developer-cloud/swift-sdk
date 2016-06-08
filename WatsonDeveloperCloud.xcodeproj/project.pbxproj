@@ -18,6 +18,10 @@
 		127B19EC1D0724400010F773 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		127B19ED1D0724450010F773 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */; };
+		127B19F21D0774450010F773 /* Doc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F11D0774450010F773 /* Doc.swift */; };
+		127B19F41D08723A0010F773 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F31D08723A0010F773 /* Entities.swift */; };
+		127B19F61D0873DE0010F773 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F51D0873DE0010F773 /* Sentence.swift */; };
+		127B19F81D08A7920010F773 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F71D08A7920010F773 /* Mention.swift */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -482,6 +486,10 @@
 		127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = ../Source/RelationshipExtractionV1/Tests/RelationshipExtractionTests.swift; sourceTree = "<group>"; };
 		127B19E91D0724220010F773 /* RelationshipExtractionV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1.h; path = Source/SupportingFiles/RelationshipExtractionV1.h; sourceTree = "<group>"; };
 		127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtraction.swift; path = Source/RelationshipExtractionV1/RelationshipExtraction.swift; sourceTree = SOURCE_ROOT; };
+		127B19F11D0774450010F773 /* Doc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Doc.swift; path = Source/RelationshipExtractionV1/Models/Doc.swift; sourceTree = SOURCE_ROOT; };
+		127B19F31D08723A0010F773 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entities.swift; path = Source/RelationshipExtractionV1/Models/Entities.swift; sourceTree = SOURCE_ROOT; };
+		127B19F51D0873DE0010F773 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sentence.swift; path = Source/RelationshipExtractionV1/Models/Sentence.swift; sourceTree = SOURCE_ROOT; };
+		127B19F71D08A7920010F773 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mention.swift; path = Source/RelationshipExtractionV1/Models/Mention.swift; sourceTree = SOURCE_ROOT; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -883,6 +891,7 @@
 			isa = PBXGroup;
 			children = (
 				127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */,
+				127B19F01D0774230010F773 /* Models */,
 				127B19D91D0722D80010F773 /* Tests */,
 			);
 			path = RelationshipExtractionV1;
@@ -896,6 +905,17 @@
 			name = Tests;
 			path = RelationshipExtractionV1Tests;
 			sourceTree = SOURCE_ROOT;
+		};
+		127B19F01D0774230010F773 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				127B19F11D0774450010F773 /* Doc.swift */,
+				127B19F31D08723A0010F773 /* Entities.swift */,
+				127B19F71D08A7920010F773 /* Mention.swift */,
+				127B19F51D0873DE0010F773 /* Sentence.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
 		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
 			isa = PBXGroup;
@@ -2271,7 +2291,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				127B19F41D08723A0010F773 /* Entities.swift in Sources */,
+				127B19F81D08A7920010F773 /* Mention.swift in Sources */,
+				127B19F21D0774450010F773 /* Doc.swift in Sources */,
 				127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */,
+				127B19F61D0873DE0010F773 /* Sentence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2665,7 +2689,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.RelationshipExtractionV1Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2677,7 +2701,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mil.RelationshipExtractionV1Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

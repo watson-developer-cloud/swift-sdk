@@ -15,3 +15,63 @@
  **/
 
 import Foundation
+import Alamofire
+import Freddy
+import RestKit
+
+/**
+ The Watson Relationship Extraction service is able to parse sentences into their various components 
+ and detect relationships between the components. Relationship Extraction models are domain-specific
+ and work best with in-domain input. The service can currently analyze news articles and, based on 
+ statistical modeling, the service will perform linguistic analysis of the input text, find spans of 
+ text that refers to entities, cluster them together to form entities, and extract the relationships 
+ between the entities.
+ */
+public class RelationshipExtraction {
+    private let username: String
+    private let password: String
+    private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 RelationshipExtractionV1")
+    private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1"
+    
+    /**
+     Create a `RelationshipExtraction` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
+     */
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/relationship-extraction-beta/api")
+    {
+        self.username = username
+        self.password = password
+        self.serviceURL = serviceURL
+    }
+    
+    /**
+     If the given data represents an error returned by the Relationship Extraction service, then 
+     return an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.int("error_code")
+            let error = try json.string("error_message")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    public func getRelationships(language: String, text: String, failure: (NSError -> Void)? = nil, success: Doc -> Void) {
+        
+    }
+}

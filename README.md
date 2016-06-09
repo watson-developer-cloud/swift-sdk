@@ -13,6 +13,8 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
 
 > *The Watson Developer Cloud iOS SDK is currently in beta.*
 
+THIS IS SOME TEXT IM ADDING FOR TEST PURPOSES
+
 ## Table of Contents
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)

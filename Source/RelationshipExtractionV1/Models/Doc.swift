@@ -17,21 +17,25 @@
 import Foundation
 import Freddy
 
-public struct Doc: JSONDecodable {
+public struct Document: JSONDecodable {
     
     public let id: String
     public let text: String
     public let sentences: [Sentence]
     public let mentions: [Mention]
-    public let entities: Entities
+    public let entities: [Entity]
     public let relations: Relations
-    private let sgml_char_info: String?
-    private let sgml_sent_info: String?
+    private let sgmlCharInfo: String?
+    private let sgmlSentInfo: String?
     
     public init(json: JSON) throws {
         id = try json.string("id")
         text = try json.string("text")
         sentences = try json.arrayOf("sents", "sent", type: Sentence.self)
         mentions = try json.arrayOf("mentions", "mention", type: Mention.self)
+        entities = try json.arrayOf("entities", "entity", type: Entity.self)
+        relations = try json.decode("relations")
+        sgmlCharInfo = try json.string("sgml_char_info")
+        sgmlSentInfo = try json.string("sgml_sent_info")
     }
 }

@@ -71,7 +71,35 @@ public class RelationshipExtraction {
         }
     }
     
-    public func getRelationships(language: String, text: String, failure: (NSError -> Void)? = nil, success: Doc -> Void) {
+    public func getRelationships(
+        language: String,
+        text: String,
+        failure: (NSError -> Void)? = nil,
+        success: Document -> Void) {
         
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        queryParameters.append(NSURLQueryItem(name: "sid", value: language))
+        queryParameters.append(NSURLQueryItem(name: "rt", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/sire/0",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError, path: ["doc"]) {
+                (response: Response<Document, NSError>) in
+                switch response.result {
+                case .Success(let document): success(document)
+                case .Failure(let error): failure?(error)
+                }
+        }
     }
 }

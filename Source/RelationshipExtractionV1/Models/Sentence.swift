@@ -55,7 +55,7 @@ public struct Token: JSONDecodable {
     public let end: Int
     public let lemma: String
     public let text: String
-    public let tid: Int
+    public let tokenID: Int
     public let type: Int
     
     public init(json: JSON) throws {
@@ -64,7 +64,7 @@ public struct Token: JSONDecodable {
         end = try json.int("end")
         lemma = try json.string("lemma")
         text = try json.string("text")
-        tid = try json.int("tid")
+        tokenID = try json.int("tid")
         type = try json.int("type")
     }
 }

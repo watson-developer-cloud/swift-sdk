@@ -892,8 +892,8 @@
 		127B19CD1D0722D70010F773 /* RelationshipExtractionV1 */ = {
 			isa = PBXGroup;
 			children = (
-				127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */,
 				127B19F01D0774230010F773 /* Models */,
+				127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */,
 				127B19D91D0722D80010F773 /* Tests */,
 			);
 			path = RelationshipExtractionV1;
@@ -3571,6 +3571,7 @@
 				127B19DF1D0722D80010F773 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		127B19E01D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -3579,6 +3580,7 @@
 				127B19E21D0722D80010F773 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */ = {
 			isa = XCConfigurationList;

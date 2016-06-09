@@ -20,10 +20,65 @@ import Freddy
 public struct Relations: JSONDecodable {
     public let relations: [Relation]
     public let version: String
+    
+    public init(json: JSON) throws {
+        relations = try json.arrayOf("relations", "relation", type: Relation.self)
+        version = try json.string("version")
+    }
 }
 
 public struct Relation: JSONDecodable {
     public let relationID: String
     public let type: String
     public let subtype: String
+    public let relationEntityArgument: RelationEntityArgument
+    public let relatedMentions: RelatedMentions
+    
+    public init(json: JSON) throws {
+        relationID = try json.string("rid")
+        type = try json.string("type")
+        subtype = try json.string("subtype")
+        relationEntityArgument = try json.decode("rel_entity_arg")
+        relatedMentions = try json.decode("relmentions")
+    }
+}
+
+public struct RelationEntityArgument: JSONDecodable {
+    public let entityID: String
+    public let argumentNumber: Int
+    
+    public init(json: JSON) throws {
+        entityID = try json.string("eid")
+        argumentNumber = try json.int("argnum")
+    }
+}
+
+public struct RelatedMentions: JSONDecodable {
+    public let relatedMentionID: String
+    public let score: Double
+    public let relatedMentionClass: String
+    public let modality: String
+    public let tense: String
+    public let relatedMentionArgument: RelatedMentionArgument
+    
+    public init(json: JSON) throws {
+        relatedMentionID = try json.string("rmid")
+        score = try json.double("score")
+        relatedMentionClass = try json.string("class")
+        modality = try json.string("modality")
+        tense = try json.string("tense")
+        relatedMentionArgument = try json.decode("rel_mention_arg")
+    }
+}
+
+public struct RelatedMentionArgument: JSONDecodable {
+    public let mentionID: String
+    public let argumentNumber: Int
+    public let text: String
+    
+    public init(json: JSON) throws {
+        mentionID = try json.string("mid")
+        argumentNumber = try json.int("argnum")
+        text = try json.string("text")
+    }
 }

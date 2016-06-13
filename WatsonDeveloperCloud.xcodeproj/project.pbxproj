@@ -926,18 +926,18 @@
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
+				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
+				7A0F97301C232CB5004C01C0 /* Frameworks */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
+				7A0F95B41C23288E004C01C0 /* Products */,
+				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
+				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
 				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
-				7A61174E1CB5988B009A4DA1 /* RestKit */,
-				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
-				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
-				7A0F97301C232CB5004C01C0 /* Frameworks */,
-				7A0F95B41C23288E004C01C0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};

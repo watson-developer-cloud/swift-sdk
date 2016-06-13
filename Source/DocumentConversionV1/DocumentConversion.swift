@@ -133,11 +133,10 @@ public class DocumentConversionV1 {
                         } else if let error = self.dataToError(response.data!) {
                             failure?(error)
                             return
-                        }  /*else if let error = {
-                            
-                        }*/ else {
+                        }  else {
                             switch response.result {
-                            case .Success( _): success(String(data: response.data!, encoding: NSUTF8StringEncoding)!)
+                            case .Success( _): success(
+                                String(data: response.data!, encoding: NSUTF8StringEncoding)!)
                             case .Failure(let error): failure?(error)
                             }
                         }

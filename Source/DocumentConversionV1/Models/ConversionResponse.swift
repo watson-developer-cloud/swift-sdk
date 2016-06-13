@@ -41,6 +41,7 @@ public struct ConversationResponse: JSONDecodable {
     /** see **AnswerUnits**/
     public let answerUnits: [AnswerUnits]?
     
+    /** used inernally to initialize ConversationResponse objects */
     public init(json: JSON) throws {
         sourceDocId = try? json.string("source_document_id")
         timestamp = try? json.string("timestamp")

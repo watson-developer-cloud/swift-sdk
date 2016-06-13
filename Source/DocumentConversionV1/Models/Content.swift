@@ -32,6 +32,7 @@ public struct Content: JSONDecodable {
     /** The text of the Answer Unit */
     public let text: String?
     
+    /** used internally to initialize Content objects */
     public init(json: JSON) throws {
         mediaType = try? json.string("media_type")
         text = try? json.string("text")

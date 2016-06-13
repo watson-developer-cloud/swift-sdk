@@ -45,6 +45,7 @@ public struct AnswerUnits: JSONDecodable {
     /** see **Content** */
     public let content: [Content]?
     
+    /** used internally to initialize AnswerUnits objects */
     public init(json: JSON) throws {
         id = try? json.string("id")
         type = try? json.string("type")

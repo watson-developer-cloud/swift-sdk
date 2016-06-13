@@ -32,6 +32,7 @@ public struct ConversionMetadata: JSONDecodable {
     /** Value of the extracted metadata */
     public let content: String
     
+    /** used interally to initialize ConversationMetadata objects */
     public init(json: JSON) throws {
         name = try json.string("name")
         content = try json.string("content")

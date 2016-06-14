@@ -79,7 +79,7 @@ public class RelationshipExtraction {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        queryParameters.append(NSURLQueryItem(name: "txt", value: text))
         queryParameters.append(NSURLQueryItem(name: "sid", value: language))
         queryParameters.append(NSURLQueryItem(name: "rt", value: "json"))
         

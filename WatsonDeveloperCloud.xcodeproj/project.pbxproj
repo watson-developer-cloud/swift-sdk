@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1268B4F01D0F148C003D787A /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		1268B4F61D0F1562003D787A /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */; };
 		127B19D61D0722D80010F773 /* RelationshipExtractionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */; };
-		127B19DB1D0722D80010F773 /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */; };
 		127B19E31D0723210010F773 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		127B19E41D0723300010F773 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		127B19E51D0723300010F773 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -482,9 +483,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = Source/RelationshipExtractionV1/Tests/RelationshipExtractionTests.swift; sourceTree = SOURCE_ROOT; };
 		127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RelationshipExtractionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RelationshipExtractionV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = ../Source/RelationshipExtractionV1/Tests/RelationshipExtractionTests.swift; sourceTree = "<group>"; };
 		127B19E91D0724220010F773 /* RelationshipExtractionV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1.h; path = Source/SupportingFiles/RelationshipExtractionV1.h; sourceTree = "<group>"; };
 		127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtraction.swift; path = Source/RelationshipExtractionV1/RelationshipExtraction.swift; sourceTree = SOURCE_ROOT; };
 		127B19F11D0774450010F773 /* Doc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Doc.swift; path = Source/RelationshipExtractionV1/Models/Doc.swift; sourceTree = SOURCE_ROOT; };
@@ -902,7 +903,7 @@
 		127B19D91D0722D80010F773 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				127B19DA1D0722D80010F773 /* RelationshipExtractionTests.swift */,
+				1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */,
 			);
 			name = Tests;
 			path = RelationshipExtractionV1Tests;
@@ -2094,6 +2095,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1268B4F01D0F148C003D787A /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2307,7 +2309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				127B19DB1D0722D80010F773 /* RelationshipExtractionTests.swift in Sources */,
+				1268B4F61D0F1562003D787A /* RelationshipExtractionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2690,11 +2692,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -2702,6 +2706,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

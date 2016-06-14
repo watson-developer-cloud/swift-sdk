@@ -19,26 +19,67 @@ import RelationshipExtractionV1
 
 class RelationshipExtractionTests: XCTestCase {
     
+    private var relationshipExtraction: RelationshipExtraction!
+    private let timeout: NSTimeInterval = 30.0
+    
+    // MARK: - Test Configuration
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        continueAfterFailure = false
+        instantiateRelationshipExtraction()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    /** Instantiate Text to Speech instance. */
+    func instantiateRelationshipExtraction() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        guard
+            let file = bundle.pathForResource("Credentials", ofType: "plist"),
+            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
+            let username = credentials["RelationshipExtractionUsername"],
+            let password = credentials["RelationshipExtractionPassword"]
+            else {
+                XCTFail("Unable to read credentials.")
+                return
+        }
+        relationshipExtraction = RelationshipExtraction(username: username, password: password)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    /** Fail false negatives. */
+    func failWithError(error: NSError) {
+        XCTFail("Positive test failed with error: \(error)")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Wait for expectations. */
+    func waitForExpectations() {
+        waitForExpectationsWithTimeout(timeout) { error in
+            XCTAssertNil(error, "Timeout")
         }
     }
     
+    // MARK: - Positive Tests
+    
+    func testGetRelationships() {
+        let description = "Test the getRelationships method."
+        let expectation = expectationWithDescription(description)
+        
+        relationshipExtraction.getRelationships(
+            "ie-en-news",
+            text: "The president’s trip was designed to reward Milwaukee for its success in signing " +
+                "up people for coverage. It won a competition called the Healthy Communities " +
+                "Challenge that involved 20 cities.",
+            failure: failWithError) { document in
+            
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: - Negative Tests
 }

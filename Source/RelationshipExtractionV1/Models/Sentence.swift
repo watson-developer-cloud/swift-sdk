@@ -34,7 +34,7 @@ public struct Sentence: JSONDecodable {
         text = try json.string("text")
         parse = try json.decode("parse")
         dependencyParse = try json.string("dependency_parse")
-        usdDependencyParse = try json.string("usdDependencyParse")
+        usdDependencyParse = try json.string("usd_dependency_parse")
         tokens = try json.arrayOf("tokens", "token", type: Token.self)
     }
 }

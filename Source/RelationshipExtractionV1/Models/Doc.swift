@@ -25,8 +25,6 @@ public struct Document: JSONDecodable {
     public let mentions: [Mention]
     public let entities: [Entity]
     public let relations: Relations
-    private let sgmlCharInfo: String?
-    private let sgmlSentInfo: String?
     
     public init(json: JSON) throws {
         id = try json.string("id")
@@ -35,7 +33,5 @@ public struct Document: JSONDecodable {
         mentions = try json.arrayOf("mentions", "mention", type: Mention.self)
         entities = try json.arrayOf("entities", "entity", type: Entity.self)
         relations = try json.decode("relations")
-        sgmlCharInfo = try json.string("sgml_char_info")
-        sgmlSentInfo = try json.string("sgml_sent_info")
     }
 }

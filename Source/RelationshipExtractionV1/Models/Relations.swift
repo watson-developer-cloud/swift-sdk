@@ -22,7 +22,7 @@ public struct Relations: JSONDecodable {
     public let version: String
     
     public init(json: JSON) throws {
-        relations = try json.arrayOf("relations", "relation", type: Relation.self)
+        relations = try json.arrayOf("relation", type: Relation.self)
         version = try json.string("version")
     }
 }
@@ -31,15 +31,15 @@ public struct Relation: JSONDecodable {
     public let relationID: String
     public let type: String
     public let subtype: String
-    public let relationEntityArgument: RelationEntityArgument
-    public let relatedMentions: RelatedMentions
+    public let relationEntityArgument: [RelationEntityArgument]
+    public let relatedMentions: [RelatedMentions]
     
     public init(json: JSON) throws {
         relationID = try json.string("rid")
         type = try json.string("type")
         subtype = try json.string("subtype")
-        relationEntityArgument = try json.decode("rel_entity_arg")
-        relatedMentions = try json.decode("relmentions")
+        relationEntityArgument = try json.arrayOf("rel_entity_arg", type: RelationEntityArgument.self)
+        relatedMentions = try json.arrayOf("relmentions", "relmention", type: RelatedMentions.self)
     }
 }
 
@@ -59,7 +59,7 @@ public struct RelatedMentions: JSONDecodable {
     public let relatedMentionClass: String
     public let modality: String
     public let tense: String
-    public let relatedMentionArgument: RelatedMentionArgument
+    public let relatedMentionArgument: [RelatedMentionArgument]
     
     public init(json: JSON) throws {
         relatedMentionID = try json.string("rmid")
@@ -67,7 +67,7 @@ public struct RelatedMentions: JSONDecodable {
         relatedMentionClass = try json.string("class")
         modality = try json.string("modality")
         tense = try json.string("tense")
-        relatedMentionArgument = try json.decode("rel_mention_arg")
+        relatedMentionArgument = try json.arrayOf("rel_mention_arg", type: RelatedMentionArgument.self)
     }
 }
 

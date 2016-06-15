@@ -17,15 +17,28 @@
 import Foundation
 import Freddy
 
+/** An analysis of the input text, produced by the Relationship Extraction service. */
 public struct Document: JSONDecodable {
     
+    /// An optional identifier for the input text.
     public let id: String
+    
+    /// The input text that was analyzed.
     public let text: String
+    
+    /// An analysis of each sentence in the input text.
     public let sentences: [Sentence]
+    
+    /// A list of items of interest referred to in the input text.
     public let mentions: [Mention]
+    
+    /// A list of uniquely identified entities and their descriptions.
     public let entities: [Entity]
+    
+    /// The relationships that exist between different entities in the input text.
     public let relations: Relations
     
+    /// Used internally to initialize a `Document` model from JSON.
     public init(json: JSON) throws {
         id = try json.string("id")
         text = try json.string("text")

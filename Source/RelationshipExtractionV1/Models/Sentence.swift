@@ -17,55 +17,72 @@
 import Foundation
 import Freddy
 
+/** Contains the analysis of an input sentence. Produced by the Relationship Extraction service. */
 public struct Sentence: JSONDecodable {
-    public let sid: Int
+    
+    /// The numeric identifier of the sentence.
+    public let sentenceID: Int
+    
+    /// The index of the first token in the sentence.
     public let begin: Int
+    
+    /// The index of the last token in the sentence.
     public let end: Int
+    
+    /// The complete text of the analyzed sentence.
     public let text: String
-    public let parse: Parse
+    
+    /// The serialized constituent parse tree for the sentence. See the following link for more
+    /// information: http://en.wikipedia.org/wiki/Parse_tree
+    public let parse: String
+    
+    /// The dependency parse tree for the sentence. See the following link for more information:
+    /// http://www.cis.upenn.edu/~treebank/
     public let dependencyParse: String
+    
+    /// The universal Stanford dependency parse tree for the sentence. See the following link for
+    /// more information: http://nlp.stanford.edu/software/stanford-dependencies.shtml
     public let usdDependencyParse: String
+    
+    /// A list of Token objects for each token in the sentence. Tokens are the individual words and
+    /// punctuation in the sentence.
     public let tokens: [Token]
     
+    /// Used internally to initialize a `Sentence` model from JSON.
     public init(json: JSON) throws {
-        sid = try json.int("sid")
+        sentenceID = try json.int("sid")
         begin = try json.int("begin")
         end = try json.int("end")
         text = try json.string("text")
-        parse = try json.decode("parse")
+        parse = try json.string("parse", "text")
         dependencyParse = try json.string("dependency_parse")
         usdDependencyParse = try json.string("usd_dependency_parse")
         tokens = try json.arrayOf("tokens", "token", type: Token.self)
     }
 }
 
-public struct Parse: JSONDecodable {
-    public let score: Double
-    public let text: String
-    
-    public init(json: JSON) throws {
-        score = try json.double("score")
-        text = try json.string("text")
-    }
-}
-
+/** A Token object provides more information about a specific token (word or punctuation) in the
+ sentence. */
 public struct Token: JSONDecodable {
-    public let pos: String
-    public let begin: Int
-    public let end: Int
-    public let lemma: String
-    public let text: String
-    public let tokenID: Int
-    public let type: Int
     
+    /// The beginning character offset of the token among all tokens of the input text.
+    public let begin: Int
+    
+    /// The ending character offset of the token among all tokens of the input text.
+    public let end: Int
+    
+    /// The token to which this object pertains.
+    public let text: String
+    
+    /// The numeric identifier of the token.
+    public let tokenID: Int
+    
+    /// Used internally to initialize a `Token` model from JSON.
     public init(json: JSON) throws {
-        pos = try json.string("POS")
         begin = try json.int("begin")
         end = try json.int("end")
-        lemma = try json.string("lemma")
         text = try json.string("text")
         tokenID = try json.int("tid")
-        type = try json.int("type")
     }
 }
 

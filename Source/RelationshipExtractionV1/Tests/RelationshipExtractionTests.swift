@@ -64,6 +64,7 @@ class RelationshipExtractionTests: XCTestCase {
     
     // MARK: - Positive Tests
     
+    /** Analyze a piece of text for the relationships between all entities. */
     func testGetRelationships() {
         let description = "Test the getRelationships method."
         let expectation = expectationWithDescription(description)
@@ -75,11 +76,54 @@ class RelationshipExtractionTests: XCTestCase {
                 "Challenge that involved 20 cities.",
             failure: failWithError) { document in
             
-            
+            XCTAssertEqual(document.entities.count, 7)
+            XCTAssertEqual(document.mentions.count, 7)
+            XCTAssertEqual(document.relations.relations.count, 1)
+            XCTAssertEqual(document.sentences.count, 2)
             expectation.fulfill()
         }
         waitForExpectations()
     }
     
     // MARK: - Negative Tests
+    
+    /** Test getting relationships when passing an empty string as the text. */
+    func testGetRelationshipsEmptyText() {
+        let description = "Test getRelationships() when passing an empty string as the text."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        relationshipExtraction.getRelationships(
+            "ie-en-news",
+            text: "",
+            failure: failure,
+            success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Test getting relationships when passing an invalid language. */
+    func testGetRelationshipsWithInvalidLanguage() {
+        let description = "Test getRelationships() when passing an empty string as the text."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        relationshipExtraction.getRelationships(
+            "INVALIDLANGUAGE",
+            text: "The president’s trip was designed to reward Milwaukee for its success in signing " +
+                "up people for coverage. It won a competition called the Healthy Communities " +
+                "Challenge that involved 20 cities.",
+            failure: failure,
+            success: failWithResult)
+        
+        waitForExpectations()
+    }
 }

@@ -61,7 +61,7 @@ public struct Entity: JSONDecodable {
         entityClass = eClass
         
         guard let entityLevel = EntityLevel(rawValue: try json.string("level")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Entitylevel.self)
+            throw JSON.Error.ValueNotConvertible(value: json, to: EntityLevel.self)
         }
         level = entityLevel
     }

@@ -71,6 +71,16 @@ public class RelationshipExtraction {
         }
     }
     
+    /**
+     Analyzes a piece of text and extracts the different entities, along with the relationships that 
+     exist between those entities.
+     
+     - parameter language: Identifier for the language of the text. For example, "ie-en-news" for 
+            English, and "ie-es-news" for Spanish.
+     - parameter text: The text to be analyzed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a Document object.
+     */
     public func getRelationships(
         language: String,
         text: String,

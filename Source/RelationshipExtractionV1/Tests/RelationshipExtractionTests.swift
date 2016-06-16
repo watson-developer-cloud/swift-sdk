@@ -30,7 +30,7 @@ class RelationshipExtractionTests: XCTestCase {
         instantiateRelationshipExtraction()
     }
     
-    /** Instantiate Text to Speech instance. */
+    /** Instantiate Relationship Extraction instance. */
     func instantiateRelationshipExtraction() {
         let bundle = NSBundle(forClass: self.dynamicType)
         guard

@@ -45,6 +45,6 @@ public struct Document: JSONDecodable {
         sentences = try json.arrayOf("sents", "sent", type: Sentence.self)
         mentions = try json.arrayOf("mentions", "mention", type: Mention.self)
         entities = try json.arrayOf("entities", "entity", type: Entity.self)
-        relations = try json.decode("relations")
+        relations = try json.decode("relations", type: Relations.self)
     }
 }

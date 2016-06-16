@@ -110,10 +110,10 @@ public struct RelatedMentions: JSONDecodable {
         }
         relatedMentionClass = rMClass
         
-        guard let modal = Modality(rawValue: try json.string("modality")) else {
+        guard let tempModality = Modality(rawValue: try json.string("modality")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: Modality.self)
         }
-        modality = modal
+        modality = tempModality
         
         guard let tempTense = Tense(rawValue: try json.string("tense")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: Tense.self)

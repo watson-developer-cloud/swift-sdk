@@ -17,55 +17,57 @@
 import Foundation
 import Freddy
 
-/** A conversation response. */
+/** A response from the Conversation service. */
 public struct MessageResponse: JSONDecodable {
     
-    // List of intents - what Watson thinks the "intent", or meaning,
-    // is to the text that was given to it.
-    public let intents:  [Intent]?
+    /// The intents, or meanings, that Watson believes are
+    /// associated with the input text based on the training data.
+    public let intents: [Intent]?
     
-    // List of entities - Specific named items that show up in the text
-    // that was given to Watson, and their locations.
+    /// The entities, or specific named items,
+    /// that were found in the input text.
     public let entities: [Entity]?
     
-    /// Used internally to initialize a MessageResponse model from JSON.
+    /// Used internally to initialize a `MessageResponse` model from JSON.
     public init(json: JSON) throws {
-        intents  = try? json.arrayOf("intents",  type: Intent.self)
+        intents = try? json.arrayOf("intents",  type: Intent.self)
         entities = try? json.arrayOf("entities", type: Entity.self)
     }
 }
 
+/** An intent, or meaning, that Watson believes is associated with some input text. */
 public struct Intent: JSONDecodable {
     
-    // Classified intent for the requested input
-    public let intent:     String
+    /// A particular intent that Watson believes is associated with the input text.
+    public let intent: String
     
-    // Confidence of this intent
+    /// The confidence score of the intent, between 0 and 1.
     public let confidence: Double
     
-    /// Used internally to initialize an Intent model from JSON.
+    /// Used internally to initialize an `Intent` model from JSON.
     public init(json: JSON) throws {
-        intent     = try json.string("intent")
+        intent = try json.string("intent")
         confidence = try json.double("confidence")
     }
 }
 
+/** An entity, or specific named item, that was found in the input text. */
 public struct Entity: JSONDecodable {
 
-    // Name of a detected entity
-    public let entity  : String
+    /// The name of the detected entity.
+    public let entity: String
     
-    // Value of the detected entity
-    public let value   : String
+    /// The value of the detected entity.
+    public let value: String
     
-    // Location of the detected entity, with the starting and ending indices as an
-    // offset.  E.g. [21, 33]
+    /// The location of the detected entity, with the starting
+    /// and ending indices as an offset.  E.g. [21, 33]
     public let location: [Int]
     
-    /// Used internally to initialize an Entity model from JSON.
+    /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
-        entity   = try json.string("entity")
-        value    = try json.string("value")
+        entity = try json.string("entity")
+        value = try json.string("value")
         location = try json.arrayOf("location")
     }
 }

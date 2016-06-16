@@ -19,26 +19,50 @@ import Alamofire
 import Freddy
 import RestKit
 
+/// A Workspace is a container for all the artifacts that define the behavior of your service.
+public typealias WorkspaceID = String
+
 /**
- This is an example to test the new target within our Xcode project.
+ With the IBM Watson™ Conversation service you can create cognitive agents–virtual agents that
+ combine machine learning, natural language understanding, and integrated dialog scripting tools
+ to provide outstanding customer engagements.
  */
 public class Conversation {
-
-    /// A WorkspaceID uniquely identifies a Workspace in your Conversation application.
-    public typealias WorkspaceID = String
     
     private let username: String
     private let password: String
+    private let version: String
+    private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 ConversationV1")
+    private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
-    private let serviceURL = "https://gateway.watsonplatform.net/conversation-experimental/api"
-    
-    
-    public init(username: String, password: String) {
+    /**
+     Create a `Conversation` object.
+ 
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter version: The release date of the version of the API to use. Specify the date
+            in "YYYY-MM-DD" format.
+     - parameter serviceURL: The base URL to use when contacting the service.
+     */
+    public init(
+        username: String,
+        password: String,
+        version: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/conversation-experimental/api")
+    {
         self.username = username
         self.password = password
+        self.version = version
+        self.serviceURL = serviceURL
     }
     
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -52,30 +76,34 @@ public class Conversation {
     }
     
     /**
-     Start a new conversation or obtain a response for a submitted input message.
+     Get a response to a user's input.
      
-     - parameter message:     The user input message to send for processing.
-     - parameter context:     A dictionary that holds state, or context, for the conversation.
-     - parameter workspaceID: The conversation identifier. This is necessary.
-     - parameter failure:     A function executed if an error occurs.
-     - parameter success:     A function executed with the conversation application's response.
+     - parameter workspaceID: The unique identifier of the workspace to use.
+     - parameter message: The user's input message.
+     - parameter context: The context, or state, associated with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the conversation service's response.
      */
-    public func sendText(
+    public func message(
         workspaceID: WorkspaceID,
-        message:     String!,
-        context:     [String : JSON]? = nil,
-        failure:     (NSError -> Void)? = nil,
-        success:     MessageResponse -> Void)
+        message: String,
+        context: JSON? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: MessageResponse -> Void)
     {
-        
+        // construct body
         let messageRequest = MessageRequest(message: message, context: context)
         guard let body = try? messageRequest.toJSON().serialize() else {
-            let failureReason = "Profile could not be serialized to JSON."
+            let failureReason = "MessageRequest could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
@@ -83,6 +111,8 @@ public class Conversation {
             url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
+            queryParameters: queryParameters,
             messageBody: body
         )
         
@@ -92,8 +122,8 @@ public class Conversation {
             .responseObject(dataToError: dataToError) {
                 (response: Response<MessageResponse, NSError>) in
                 switch response.result {
-                    case .Success(let response): success(response)
-                    case .Failure(let error): failure?(error)
+                case .Success(let response): success(response)
+                case .Failure(let error): failure?(error)
                 }
             }
     }

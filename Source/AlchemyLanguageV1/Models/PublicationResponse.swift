@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2015
+ * Copyright IBM Corporation 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,19 @@
 import Foundation
 import Freddy
 
+
 /**
  
- **SAORelations**
+ **PublicationResponse**
  
- Response object for **SAORelation** related calls
+ Response object for **PublicationDate** related calls
  
  */
 
-public struct SAORelations: JSONDecodable {
+public struct PublicationResponse: JSONDecodable {
+    
+    /** the number of transactions made by the call */
+    public let totalTransactions: Int?
     
     /** extracted language */
     public let language: String?
@@ -33,18 +37,18 @@ public struct SAORelations: JSONDecodable {
     /** the URL information was requested for */
     public let url: String?
     
-    /** document text */
-    public let text: String?
+    /** see **PublicationDate** */
+    public let publicationDate: PublicationDate?
     
-    /** see **SAORelation** */
-    public let relations: [SAORelation]?
-    
-    /// Used internally to initialize a SAORelations object
+    /// Used internally to initialize a PublicationResponse object
     public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
+        }
         language = try? json.string("language")
         url = try? json.string("url")
-        text = try? json.string("text")
-        relations = try? json.arrayOf("relations", type: SAORelation.self)
+        publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
     }
 }
-

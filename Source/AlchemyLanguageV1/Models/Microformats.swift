@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,27 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Keywords**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Microformat** related calls
  
  */
-public struct Microformats: AlchemyLanguageGenericModel, Mappable {
+
+public struct Microformats: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** the URL information was requested for */
+    public let url: String?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** see **Microformat** */
+    public let microformats: [Microformat]?
     
-    // MARK: Keywords
-    /** results (see **Microformat**) */
-    public var microformats: [Microformat]?
-    
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // keywords
-        microformats <- map["microformats"]
-        
+    /// Used internally to initialize a Microformats object
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        microformats = try? json.arrayOf("microformats", type: Microformat.self)
     }
-    
 }

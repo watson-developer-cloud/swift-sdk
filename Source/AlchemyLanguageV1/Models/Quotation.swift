@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,24 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Quotation**
  
+ Quoted text extracted from a document
+ 
  */
-public struct Quotation: Mappable {
 
-	/** contained quote */
-    public var quotation: String!
+public struct Quotation: JSONDecodable {
     
+    /** extracted quotation */
+    public let quotation: String?
     
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        quotation <- map["quotation"]
-        
+    /// Used internally to initialize a Quotation object
+    public init(json: JSON) throws {
+        quotation = try? json.string("quotation")
     }
-    
 }
+

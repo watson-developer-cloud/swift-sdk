@@ -76,6 +76,55 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = expectationWithDescription(description)
 
         toneAnalyzer.getTone(text, failure: failWithError) { toneAnalysis in
+            
+            for emotionTone in toneAnalysis.documentTone[0].tones {
+                XCTAssertNotNil(emotionTone.name)
+                XCTAssertNotNil(emotionTone.id)
+                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
+            }
+            
+            for writingTone in toneAnalysis.documentTone[1].tones {
+                XCTAssertNotNil(writingTone.name)
+                XCTAssertNotNil(writingTone.id)
+                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
+            }
+            
+            for socialTone in toneAnalysis.documentTone[2].tones {
+                XCTAssertNotNil(socialTone.name)
+                XCTAssertNotNil(socialTone.id)
+                XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
+            }
+            
+            guard let sentenceTones = toneAnalysis.sentencesTones else {
+                XCTFail("Sentence tones should not be nil.")
+                return
+            }
+            
+            for sentence in sentenceTones {
+                XCTAssert(sentence.sentenceID >= 0)
+                XCTAssertNotEqual(sentence.text, "")
+                XCTAssert(sentence.inputFrom >= 0)
+                XCTAssert(sentence.inputTo > sentence.inputFrom)
+                
+                for emotionTone in toneAnalysis.documentTone[0].tones {
+                    XCTAssertNotNil(emotionTone.name)
+                    XCTAssertNotNil(emotionTone.id)
+                    XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
+                }
+                
+                for writingTone in toneAnalysis.documentTone[1].tones {
+                    XCTAssertNotNil(writingTone.name)
+                    XCTAssertNotNil(writingTone.id)
+                    XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
+                }
+                
+                for socialTone in toneAnalysis.documentTone[2].tones {
+                    XCTAssertNotNil(socialTone.name)
+                    XCTAssertNotNil(socialTone.id)
+                    XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
+                }
+            }
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -89,6 +138,25 @@ class ToneAnalyzerTests: XCTestCase {
         let tones = ["emotion", "writing"]
         toneAnalyzer.getTone(text, tones: tones, sentences: false, failure: failWithError) {
             toneAnalysis in
+            
+            for emotionTone in toneAnalysis.documentTone[0].tones {
+                XCTAssertNotNil(emotionTone.name)
+                XCTAssertNotNil(emotionTone.id)
+                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
+            }
+            
+            for writingTone in toneAnalysis.documentTone[1].tones {
+                XCTAssertNotNil(writingTone.name)
+                XCTAssertNotNil(writingTone.id)
+                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
+            }
+            
+            for tone in toneAnalysis.documentTone {
+                XCTAssert(tone.name != "Social Tone", "Social tone should not be included")
+            }
+            
+            XCTAssertNil(toneAnalysis.sentencesTones)
+            
             expectation.fulfill()
         }
         waitForExpectations()

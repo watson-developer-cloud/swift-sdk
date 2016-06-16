@@ -49,3 +49,23 @@ public extension JSON {
         return string
     }
 }
+
+/**
+ Construct a user-agent string with the given prefix.
+ 
+ - parameter prefix: The prefix of the user-agent string. This prefix will be concatenated with
+        information about the os version.
+ 
+ - returns: A user-agent string with the given prefix and os version.
+ */
+public func buildUserAgent(prefix: String) -> String {
+    let os = NSProcessInfo.processInfo().operatingSystemVersionString
+    let userAgent = "\(prefix) (OS \(os))"
+    let mutableUserAgent = NSMutableString(string: userAgent) as CFMutableString
+    
+    let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
+    if CFStringTransform(mutableUserAgent, UnsafeMutablePointer<CFRange>(nil), transform, false) {
+        return mutableUserAgent as String
+    }
+    return prefix
+}

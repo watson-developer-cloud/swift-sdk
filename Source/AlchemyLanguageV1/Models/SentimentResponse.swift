@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,56 +15,44 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **SentimentResponse**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Sentiment** related calls
  
  */
-public struct SentimentResponse: AlchemyLanguageGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: DocSentiment
-    /** response when normal sentimented call is used */
-    public var docSentiment: Sentiment?                     // Normal
 
-    /** response when targeted sentimented call is used */
-    public var sentimentResults: [DocumentSentiment]?       // Targeted
-
-    /** (undocumented) */
-    public var usage: String?
-
-    /** warnings about incorrect usage or failures in detection */
-    public var warningMessage: String?
-
+public struct SentimentResponse: JSONDecodable {
     
-    public init?(_ map: Map) {}
+    /** number of transactions made by the call */
+    public let totalTransactions: Int?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // sentiment - alchemyLanguage sometimes returns as "docSentiment," sometimes as "sentiment"
-        docSentiment <- map["docSentiment"]
-        sentimentResults <- map["results"]
-
-        usage <- map["usage"]
-        warningMessage <- map["warningMessage"]
-        
+    /** extracted language */
+    public let language: String?
+    
+    /** the URL information was requested for */
+    public let url: String?
+    
+    /** document text */
+    public let text: String?
+    
+    /** see **Sentiment** */
+    public let docSentiment: Sentiment?
+    
+    /// Used internally to initialize a SentimentResponse object
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
+        }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        text = try? json.string("text")
+        docSentiment = try? json.decode("docSentiment", type: Sentiment.self)
     }
-    
 }
+

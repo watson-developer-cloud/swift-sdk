@@ -30,6 +30,7 @@ public class ToneAnalyzer {
     private let password: String
     private let version: String
     private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
     /**
@@ -115,17 +116,18 @@ public class ToneAnalyzer {
             queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
-        // construct request
+        // construct REST request
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v3/tone",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters,
             messageBody: body
         )
         
-        // execute request
+        // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
             .responseObject(dataToError: dataToError) {

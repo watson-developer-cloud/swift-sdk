@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,28 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **DocumentAuthors**
  
- DocumentAuthors returned by the AlchemyLanguage service.
+ Response object for Author related calls
  
  */
-public struct DocumentAuthors: AlchemyLanguageGenericModel, Mappable {
+
+public struct DocumentAuthors: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** the url information was requested for */
+    public let url: String
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** see **Authors** */
+    public let authors: Authors
     
-    // MARK: DocumentAuthors
-    /** results, see **Authors** */
-    public var authors: Authors?
-    
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // documentAuthors
-        authors <- map["authors"]
-        
+    /// Used internally to initialize a DocumentAuthors object
+    public init(json: JSON) throws {
+        url = try json.string("url")
+        authors = try json.decode("authors", type: Authors.self)
     }
-    
 }
+

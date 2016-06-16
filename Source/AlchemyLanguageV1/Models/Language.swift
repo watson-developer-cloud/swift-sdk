@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,63 +15,52 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Language**
  
- Returned by the AlchemyLanguage service.
+ Response object for Language related calls.
  
  */
-public struct Language: AlchemyLanguageGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
-    
-    // MARK: Keyword
-    /** link to Ethnologue containing information on the detected language */
-    public var ethnologue: String?
 
-    /** ISO-639-1 code for the detected language */
-    public var iso6391: String?
-
+public struct Language: JSONDecodable {
+    
+    /** extracted language */
+    public let language: String?
+    
+    /** the URL information was requestd for */
+    public let url: String?
+    
+    //** link to Ethnologue containing information on detected language */
+    public let ethnologue: String?
+    
+    //** ISO-639-1 code for the detected language */
+    public let iso6391: String?
+    
     /** ISO-639-2 code for the detected language */
-    public var iso6392: String?
-
+    public let iso6392: String?
+    
     /** ISO-639-3 code for the detected language */
-    public var iso6393: String?
-
-    /** how many people speak this language */
-    public var nativeSpeakers: String?
-
-    /** a useful wiki on this language */
-    public var wikipedia: String?
+    public let iso6393: String?
     
+    /** estimated number of persons who natively speak the detected language */
+    public let nativeSpeakers: String?
     
-    public init?(_ map: Map) {}
+    /** link to the Wikipedia page for the detected language */
+    public let wikipedia: String?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // keyword
-        ethnologue <- map["ethnologue"]
-        iso6391 <- map["iso-639-1"]
-        iso6392 <- map["iso-639-2"]
-        iso6393 <- map["iso-639-3"]
-        nativeSpeakers <- map["native-speakers"]
-        wikipedia <- map["wikipedia"]
-        
+    /// Used internally to initialize a Language object
+    public init(json: JSON) throws {
+        language = try? json.string("language")
+        url = try? json.string("url")
+        ethnologue = try? json.string("ethnologue")
+        iso6391 = try? json.string("iso-639-1")
+        iso6392 = try? json.string("iso-639-2")
+        iso6393 = try? json.string("iso-639-3")
+        nativeSpeakers = try? json.string("native-speakers")
+        wikipedia = try? json.string("wikipedia")
     }
-    
 }
+

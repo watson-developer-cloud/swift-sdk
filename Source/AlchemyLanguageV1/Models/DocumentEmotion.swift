@@ -15,8 +15,23 @@
  **/
 
 import Foundation
+import Freddy
 
-public class WatsonCoreConstants {
-    public static let defaultErrorDomain = "WatsonErrorDomain"
-    public static let descriptionKey = "localizedDescription"
+public struct DocumentEmotion: JSONDecodable {
+    
+    public let url: String?
+    public let totalTransactions: Int?
+    public let language: String?
+    public let docEmotions: Emotions?
+    
+    public init(json: JSON) throws {
+        url = try? json.string("url")
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = nil
+        }
+        language = try? json.string("language")
+        docEmotions = try? json.decode("docEmotions", type: Emotions.self)
+    }
 }

@@ -7,16 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F5ABFE11CF7408F004E6331 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */; };
-		4F5ABFE21CF7408F004E6331 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */; };
-		4F5ABFE41CF74914004E6331 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
-		4F5ABFE71CF7649F004E6331 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF3B81CEE9A1700B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3B91CEE9A1700B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF3BA1CEE9A2400B74848 /* RestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */; };
+		7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7AAAF3BC1CEE9A2400B74848 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117501CB5988B009A4DA1 /* RestSerialization.swift */; };
 		7AAAF3BD1CEE9A2400B74848 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
@@ -182,53 +178,8 @@
 		7AAAF55D1CEEA2A600B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF55E1CEEA2A600B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF56E1CEEA2DF00B74848 /* AlchemyLanguageV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */; };
-		7AAAF57B1CEEA2F400B74848 /* AlchemyLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE21CED11A0009DD700 /* AlchemyLanguage.swift */; };
-		7AAAF57C1CEEA2F400B74848 /* AlchemyLanguageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE31CED11A0009DD700 /* AlchemyLanguageConstants.swift */; };
-		7AAAF57D1CEEA2F400B74848 /* AlchemyLanguageParametersProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE41CED11A0009DD700 /* AlchemyLanguageParametersProtocol.swift */; };
-		7AAAF57E1CEEA2FB00B74848 /* AlchemyGenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE61CED11A0009DD700 /* AlchemyGenericModel.swift */; };
-		7AAAF57F1CEEA2FB00B74848 /* AlchemyLanguageGenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE71CED11A0009DD700 /* AlchemyLanguageGenericModel.swift */; };
-		7AAAF5801CEEA2FB00B74848 /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE81CED11A0009DD700 /* Authors.swift */; };
-		7AAAF5811CEEA2FB00B74848 /* CombinedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACE91CED11A0009DD700 /* CombinedResults.swift */; };
-		7AAAF5821CEEA2FB00B74848 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACEA1CED11A0009DD700 /* Concept.swift */; };
-		7AAAF5831CEEA2FB00B74848 /* ConceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACEB1CED11A0009DD700 /* ConceptResponse.swift */; };
-		7AAAF5841CEEA2FB00B74848 /* DisambiguatedLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACEC1CED11A0009DD700 /* DisambiguatedLinks.swift */; };
-		7AAAF5851CEEA2FB00B74848 /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACED1CED11A0009DD700 /* DocumentAuthors.swift */; };
-		7AAAF5861CEEA2FB00B74848 /* DocumentSentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACEE1CED11A0009DD700 /* DocumentSentiment.swift */; };
-		7AAAF5871CEEA2FB00B74848 /* DocumentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACEF1CED11A0009DD700 /* DocumentText.swift */; };
-		7AAAF5881CEEA2FB00B74848 /* DocumentTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF01CED11A0009DD700 /* DocumentTitle.swift */; };
-		7AAAF5891CEEA2FB00B74848 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF11CED11A0009DD700 /* Entities.swift */; };
-		7AAAF58A1CEEA2FB00B74848 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF21CED11A0009DD700 /* Entity.swift */; };
-		7AAAF58B1CEEA2FB00B74848 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF31CED11A0009DD700 /* Feed.swift */; };
-		7AAAF58C1CEEA2FB00B74848 /* Feeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF41CED11A0009DD700 /* Feeds.swift */; };
-		7AAAF58D1CEEA2FB00B74848 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF51CED11A0009DD700 /* Keyword.swift */; };
-		7AAAF58E1CEEA2FB00B74848 /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF61CED11A0009DD700 /* Keywords.swift */; };
-		7AAAF58F1CEEA2FB00B74848 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF71CED11A0009DD700 /* KnowledgeGraph.swift */; };
-		7AAAF5901CEEA2FB00B74848 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF81CED11A0009DD700 /* Language.swift */; };
-		7AAAF5911CEEA2FB00B74848 /* Microformat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACF91CED11A0009DD700 /* Microformat.swift */; };
-		7AAAF5921CEEA2FB00B74848 /* Microformats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFA1CED11A0009DD700 /* Microformats.swift */; };
-		7AAAF5931CEEA2FB00B74848 /* PublicationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFB1CED11A0009DD700 /* PublicationDate.swift */; };
-		7AAAF5941CEEA2FB00B74848 /* Quotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFC1CED11A0009DD700 /* Quotation.swift */; };
-		7AAAF5951CEEA2FB00B74848 /* SAORelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFD1CED11A0009DD700 /* SAORelation.swift */; };
-		7AAAF5961CEEA2FB00B74848 /* SAORelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFE1CED11A0009DD700 /* SAORelations.swift */; };
-		7AAAF5971CEEA2FB00B74848 /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7ACFF1CED11A0009DD700 /* Sentiment.swift */; };
-		7AAAF5981CEEA2FB00B74848 /* SentimentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD001CED11A0009DD700 /* SentimentResponse.swift */; };
-		7AAAF5991CEEA2FB00B74848 /* Taxonomies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD011CED11A0009DD700 /* Taxonomies.swift */; };
-		7AAAF59A1CEEA2FB00B74848 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD021CED11A0009DD700 /* Taxonomy.swift */; };
-		7AAAF59B1CEEA30000B74848 /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD041CED11A0009DD700 /* AlchemyLanguageTests.swift */; };
-		7AAAF59C1CEEA30000B74848 /* biography.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7AD051CED11A0009DD700 /* biography.html */; };
-		7AAAF59D1CEEA30000B74848 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7AD061CED11A0009DD700 /* sample.html */; };
 		7AAAF59E1CEEA31500B74848 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
-		7AAAF59F1CEEA32A00B74848 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */; };
-		7AAAF5A01CEEA33B00B74848 /* AlchemyCombineDictionaryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD081CED11A0009DD700 /* AlchemyCombineDictionaryUtil.swift */; };
-		7AAAF5A11CEEA33B00B74848 /* AlchemyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD091CED11A0009DD700 /* AlchemyService.swift */; };
-		7AAAF5A21CEEA33B00B74848 /* APIKeyAuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0A1CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift */; };
-		7AAAF5A31CEEA33B00B74848 /* AuthenticationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0B1CED11A0009DD700 /* AuthenticationStrategy.swift */; };
-		7AAAF5A41CEEA33B00B74848 /* CoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0C1CED11A0009DD700 /* CoreResponse.swift */; };
-		7AAAF5A51CEEA33B00B74848 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0D1CED11A0009DD700 /* NetworkUtils.swift */; };
-		7AAAF5A61CEEA33B00B74848 /* Transformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0E1CED11A0009DD700 /* Transformation.swift */; };
-		7AAAF5A71CEEA33B00B74848 /* WatsonCoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7AD0F1CED11A0009DD700 /* WatsonCoreConstants.swift */; };
 		7AAAF5A81CEEA35600B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF5AA1CEEA37E00B74848 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5B81CEEA69B00B74848 /* AlchemyVisionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -241,15 +192,43 @@
 		7AAAF5BF1CEEA6C400B74848 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C01CEEA6C800B74848 /* ToneAnalyzerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C11CEEA6CB00B74848 /* VisualRecognitionV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC7C6721CF63FC600A626E9 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC7C6711CF63FC600A626E9 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC7C6791CF63FC600A626E9 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */; };
-		7AC7C6861CF6404F00A626E9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AC7C6871CF6404F00A626E9 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
-		7AC7C6881CF6405700A626E9 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AC7C68A1CF640AA00A626E9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AC7C68B1CF640AA00A626E9 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6651CF63F6800A626E9 /* Conversation.swift */; };
-		7AC7C68E1CF6411100A626E9 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */; };
+		7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AB53B741CF64DE000FFC9DD /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B591CF64DE000FFC9DD /* Authors.swift */; };
+		7AB53B751CF64DE000FFC9DD /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5A1CF64DE000FFC9DD /* Concept.swift */; };
+		7AB53B761CF64DE000FFC9DD /* ConceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5B1CF64DE000FFC9DD /* ConceptResponse.swift */; };
+		7AB53B771CF64DE000FFC9DD /* DisambiguatedLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5C1CF64DE000FFC9DD /* DisambiguatedLinks.swift */; };
+		7AB53B781CF64DE000FFC9DD /* DocumentAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5D1CF64DE000FFC9DD /* DocumentAuthors.swift */; };
+		7AB53B791CF64DE000FFC9DD /* DocumentSentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5E1CF64DE000FFC9DD /* DocumentSentiment.swift */; };
+		7AB53B7A1CF64DE000FFC9DD /* DocumentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5F1CF64DE000FFC9DD /* DocumentText.swift */; };
+		7AB53B7B1CF64DE000FFC9DD /* DocumentTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B601CF64DE000FFC9DD /* DocumentTitle.swift */; };
+		7AB53B7C1CF64DE000FFC9DD /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B611CF64DE000FFC9DD /* Entities.swift */; };
+		7AB53B7D1CF64DE000FFC9DD /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B621CF64DE000FFC9DD /* Entity.swift */; };
+		7AB53B7E1CF64DE000FFC9DD /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B631CF64DE000FFC9DD /* Feed.swift */; };
+		7AB53B7F1CF64DE000FFC9DD /* Feeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B641CF64DE000FFC9DD /* Feeds.swift */; };
+		7AB53B801CF64DE000FFC9DD /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B651CF64DE000FFC9DD /* Keyword.swift */; };
+		7AB53B811CF64DE000FFC9DD /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B661CF64DE000FFC9DD /* Keywords.swift */; };
+		7AB53B821CF64DE000FFC9DD /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B671CF64DE000FFC9DD /* KnowledgeGraph.swift */; };
+		7AB53B831CF64DE000FFC9DD /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B681CF64DE000FFC9DD /* Language.swift */; };
+		7AB53B841CF64DE000FFC9DD /* Microformat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B691CF64DE000FFC9DD /* Microformat.swift */; };
+		7AB53B851CF64DE000FFC9DD /* Microformats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6A1CF64DE000FFC9DD /* Microformats.swift */; };
+		7AB53B861CF64DE000FFC9DD /* PublicationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6B1CF64DE000FFC9DD /* PublicationDate.swift */; };
+		7AB53B871CF64DE000FFC9DD /* PublicationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6C1CF64DE000FFC9DD /* PublicationResponse.swift */; };
+		7AB53B881CF64DE000FFC9DD /* Quotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6D1CF64DE000FFC9DD /* Quotation.swift */; };
+		7AB53B891CF64DE000FFC9DD /* SAORelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6E1CF64DE000FFC9DD /* SAORelation.swift */; };
+		7AB53B8A1CF64DE000FFC9DD /* SAORelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B6F1CF64DE000FFC9DD /* SAORelations.swift */; };
+		7AB53B8B1CF64DE000FFC9DD /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B701CF64DE000FFC9DD /* Sentiment.swift */; };
+		7AB53B8C1CF64DE000FFC9DD /* SentimentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B711CF64DE000FFC9DD /* SentimentResponse.swift */; };
+		7AB53B8D1CF64DE000FFC9DD /* Taxonomies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B721CF64DE000FFC9DD /* Taxonomies.swift */; };
+		7AB53B8E1CF64DE000FFC9DD /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B731CF64DE000FFC9DD /* Taxonomy.swift */; };
+		7AB53B921CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */; };
+		7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B901CF64DE700FFC9DD /* testArticle.html */; };
+		7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B911CF64DE700FFC9DD /* testText.txt */; };
+		B104CA921CFDE0BE00083E87 /* QueryParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = B104CA911CFDE0BE00083E87 /* QueryParam.swift */; };
+		B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */; };
+		B11545EF1CF77B0400A31024 /* DocumentEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */; };
+		B11545F11CF77D1F00A31024 /* Emotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11545F01CF77D1F00A31024 /* Emotions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,13 +308,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF5631CEEA2DF00B74848;
 			remoteInfo = AlchemyLanguageV1;
-		};
-		7AC7C67A1CF63FC600A626E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7AC7C66E1CF63FC600A626E9;
-			remoteInfo = ConversationV1;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -457,19 +429,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF5AA1CEEA37E00B74848 /* ObjectMapper.framework in CopyFiles */,
 				7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C6891CF640A000A626E9 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7AC7C68A1CF640AA00A626E9 /* Alamofire.framework in CopyFiles */,
-				7AC7C68B1CF640AA00A626E9 /* Freddy.framework in CopyFiles */,
+				7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +447,6 @@
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_empty.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta_missing_name.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta_missing_name.txt; sourceTree = "<group>"; };
 		12B07D2C1CDD46A300B20B38 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trained_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/trained_meta.txt; sourceTree = "<group>"; };
-		4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
-		4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -515,49 +474,6 @@
 		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorTraining.swift; sourceTree = "<group>"; };
 		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
 		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
-		7AA7ACE21CED11A0009DD700 /* AlchemyLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguage.swift; sourceTree = "<group>"; };
-		7AA7ACE31CED11A0009DD700 /* AlchemyLanguageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageConstants.swift; sourceTree = "<group>"; };
-		7AA7ACE41CED11A0009DD700 /* AlchemyLanguageParametersProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageParametersProtocol.swift; sourceTree = "<group>"; };
-		7AA7ACE61CED11A0009DD700 /* AlchemyGenericModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyGenericModel.swift; sourceTree = "<group>"; };
-		7AA7ACE71CED11A0009DD700 /* AlchemyLanguageGenericModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageGenericModel.swift; sourceTree = "<group>"; };
-		7AA7ACE81CED11A0009DD700 /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
-		7AA7ACE91CED11A0009DD700 /* CombinedResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedResults.swift; sourceTree = "<group>"; };
-		7AA7ACEA1CED11A0009DD700 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
-		7AA7ACEB1CED11A0009DD700 /* ConceptResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptResponse.swift; sourceTree = "<group>"; };
-		7AA7ACEC1CED11A0009DD700 /* DisambiguatedLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguatedLinks.swift; sourceTree = "<group>"; };
-		7AA7ACED1CED11A0009DD700 /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
-		7AA7ACEE1CED11A0009DD700 /* DocumentSentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSentiment.swift; sourceTree = "<group>"; };
-		7AA7ACEF1CED11A0009DD700 /* DocumentText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentText.swift; sourceTree = "<group>"; };
-		7AA7ACF01CED11A0009DD700 /* DocumentTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTitle.swift; sourceTree = "<group>"; };
-		7AA7ACF11CED11A0009DD700 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
-		7AA7ACF21CED11A0009DD700 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		7AA7ACF31CED11A0009DD700 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		7AA7ACF41CED11A0009DD700 /* Feeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feeds.swift; sourceTree = "<group>"; };
-		7AA7ACF51CED11A0009DD700 /* Keyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
-		7AA7ACF61CED11A0009DD700 /* Keywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
-		7AA7ACF71CED11A0009DD700 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
-		7AA7ACF81CED11A0009DD700 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		7AA7ACF91CED11A0009DD700 /* Microformat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microformat.swift; sourceTree = "<group>"; };
-		7AA7ACFA1CED11A0009DD700 /* Microformats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microformats.swift; sourceTree = "<group>"; };
-		7AA7ACFB1CED11A0009DD700 /* PublicationDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationDate.swift; sourceTree = "<group>"; };
-		7AA7ACFC1CED11A0009DD700 /* Quotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quotation.swift; sourceTree = "<group>"; };
-		7AA7ACFD1CED11A0009DD700 /* SAORelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelation.swift; sourceTree = "<group>"; };
-		7AA7ACFE1CED11A0009DD700 /* SAORelations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelations.swift; sourceTree = "<group>"; };
-		7AA7ACFF1CED11A0009DD700 /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
-		7AA7AD001CED11A0009DD700 /* SentimentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResponse.swift; sourceTree = "<group>"; };
-		7AA7AD011CED11A0009DD700 /* Taxonomies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomies.swift; sourceTree = "<group>"; };
-		7AA7AD021CED11A0009DD700 /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
-		7AA7AD041CED11A0009DD700 /* AlchemyLanguageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageTests.swift; sourceTree = "<group>"; };
-		7AA7AD051CED11A0009DD700 /* biography.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = biography.html; sourceTree = "<group>"; };
-		7AA7AD061CED11A0009DD700 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
-		7AA7AD081CED11A0009DD700 /* AlchemyCombineDictionaryUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyCombineDictionaryUtil.swift; sourceTree = "<group>"; };
-		7AA7AD091CED11A0009DD700 /* AlchemyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyService.swift; sourceTree = "<group>"; };
-		7AA7AD0A1CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeyAuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7AA7AD0B1CED11A0009DD700 /* AuthenticationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationStrategy.swift; sourceTree = "<group>"; };
-		7AA7AD0C1CED11A0009DD700 /* CoreResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreResponse.swift; sourceTree = "<group>"; };
-		7AA7AD0D1CED11A0009DD700 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
-		7AA7AD0E1CED11A0009DD700 /* Transformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformation.swift; sourceTree = "<group>"; };
-		7AA7AD0F1CED11A0009DD700 /* WatsonCoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonCoreConstants.swift; sourceTree = "<group>"; };
 		7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResult.swift; sourceTree = "<group>"; };
 		7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResults.swift; sourceTree = "<group>"; };
@@ -577,7 +493,7 @@
 		7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.ogg; sourceTree = "<group>"; };
 		7AAA9A241CEE3026002C9564 /* SpeechSample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SpeechSample.wav; sourceTree = "<group>"; };
 		7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
-		7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestExtensions.swift; sourceTree = "<group>"; };
+		7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUtilities.swift; sourceTree = "<group>"; };
 		7AAA9A3D1CEE3059002C9564 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
 		7AAA9A481CEE6089002C9564 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
@@ -647,11 +563,37 @@
 		7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TextToSpeechV1.h; path = Source/SupportingFiles/TextToSpeechV1.h; sourceTree = "<group>"; };
 		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ToneAnalyzerV3.h; path = Source/SupportingFiles/ToneAnalyzerV3.h; sourceTree = "<group>"; };
 		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualRecognitionV3.h; path = Source/SupportingFiles/VisualRecognitionV3.h; sourceTree = "<group>"; };
-		7AC7C6651CF63F6800A626E9 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
-		7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AC7C6711CF63FC600A626E9 /* ConversationV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
-		7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageV1.swift; sourceTree = "<group>"; };
+		7AB53B591CF64DE000FFC9DD /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
+		7AB53B5A1CF64DE000FFC9DD /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
+		7AB53B5B1CF64DE000FFC9DD /* ConceptResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptResponse.swift; sourceTree = "<group>"; };
+		7AB53B5C1CF64DE000FFC9DD /* DisambiguatedLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguatedLinks.swift; sourceTree = "<group>"; };
+		7AB53B5D1CF64DE000FFC9DD /* DocumentAuthors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAuthors.swift; sourceTree = "<group>"; };
+		7AB53B5E1CF64DE000FFC9DD /* DocumentSentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSentiment.swift; sourceTree = "<group>"; };
+		7AB53B5F1CF64DE000FFC9DD /* DocumentText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentText.swift; sourceTree = "<group>"; };
+		7AB53B601CF64DE000FFC9DD /* DocumentTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTitle.swift; sourceTree = "<group>"; };
+		7AB53B611CF64DE000FFC9DD /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		7AB53B621CF64DE000FFC9DD /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		7AB53B631CF64DE000FFC9DD /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		7AB53B641CF64DE000FFC9DD /* Feeds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feeds.swift; sourceTree = "<group>"; };
+		7AB53B651CF64DE000FFC9DD /* Keyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		7AB53B661CF64DE000FFC9DD /* Keywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
+		7AB53B671CF64DE000FFC9DD /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
+		7AB53B681CF64DE000FFC9DD /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		7AB53B691CF64DE000FFC9DD /* Microformat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microformat.swift; sourceTree = "<group>"; };
+		7AB53B6A1CF64DE000FFC9DD /* Microformats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microformats.swift; sourceTree = "<group>"; };
+		7AB53B6B1CF64DE000FFC9DD /* PublicationDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationDate.swift; sourceTree = "<group>"; };
+		7AB53B6C1CF64DE000FFC9DD /* PublicationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationResponse.swift; sourceTree = "<group>"; };
+		7AB53B6D1CF64DE000FFC9DD /* Quotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quotation.swift; sourceTree = "<group>"; };
+		7AB53B6E1CF64DE000FFC9DD /* SAORelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelation.swift; sourceTree = "<group>"; };
+		7AB53B6F1CF64DE000FFC9DD /* SAORelations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelations.swift; sourceTree = "<group>"; };
+		7AB53B701CF64DE000FFC9DD /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
+		7AB53B711CF64DE000FFC9DD /* SentimentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResponse.swift; sourceTree = "<group>"; };
+		7AB53B721CF64DE000FFC9DD /* Taxonomies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomies.swift; sourceTree = "<group>"; };
+		7AB53B731CF64DE000FFC9DD /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageV1Tests.swift; sourceTree = "<group>"; };
+		7AB53B901CF64DE700FFC9DD /* testArticle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testArticle.html; sourceTree = "<group>"; };
+		7AB53B911CF64DE700FFC9DD /* testText.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testText.txt; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
@@ -661,6 +603,9 @@
 		7AEB13251CBF7C8A00101884 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
+		B104CA911CFDE0BE00083E87 /* QueryParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParam.swift; path = Models/QueryParam.swift; sourceTree = "<group>"; };
+		B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentEmotion.swift; sourceTree = "<group>"; };
+		B11545F01CF77D1F00A31024 /* Emotions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emotions.swift; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -854,8 +799,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF59F1CEEA32A00B74848 /* ObjectMapper.framework in Frameworks */,
 				7AAAF5A81CEEA35600B74848 /* Alamofire.framework in Frameworks */,
+				7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */,
+				7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,25 +810,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF56E1CEEA2DF00B74848 /* AlchemyLanguageV1.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C66B1CF63FC600A626E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AC7C6861CF6404F00A626E9 /* Alamofire.framework in Frameworks */,
-				7AC7C6871CF6404F00A626E9 /* Freddy.framework in Frameworks */,
-				7AC7C6881CF6405700A626E9 /* RestKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C6751CF63FC600A626E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F5ABFE71CF7649F004E6331 /* Freddy.framework in Frameworks */,
-				7AC7C6791CF63FC600A626E9 /* ConversationV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +854,6 @@
 			children = (
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
-				7AC7C6641CF63F6800A626E9 /* ConversationV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
@@ -968,8 +894,6 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
-				7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */,
-				7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -990,7 +914,6 @@
 			children = (
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
-				7AC7C6711CF63FC600A626E9 /* ConversationV1.h */,
 				7A34CB511C233E2100F20D0E /* Credentials.plist */,
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
@@ -1011,7 +934,7 @@
 		7A61174E1CB5988B009A4DA1 /* RestKit */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A3C1CEE3059002C9564 /* RestExtensions.swift */,
+				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
 				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
@@ -1088,12 +1011,10 @@
 		7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */ = {
 			isa = PBXGroup;
 			children = (
-				7AA7ACE21CED11A0009DD700 /* AlchemyLanguage.swift */,
-				7AA7ACE31CED11A0009DD700 /* AlchemyLanguageConstants.swift */,
-				7AA7ACE41CED11A0009DD700 /* AlchemyLanguageParametersProtocol.swift */,
+				7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */,
+				B104CA911CFDE0BE00083E87 /* QueryParam.swift */,
 				7AA7ACE51CED11A0009DD700 /* Models */,
 				7AA7AD031CED11A0009DD700 /* Tests */,
-				7AA7AD071CED11A0009DD700 /* Utils */,
 			);
 			name = AlchemyLanguageV1;
 			path = Source/AlchemyLanguageV1;
@@ -1102,35 +1023,35 @@
 		7AA7ACE51CED11A0009DD700 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7AA7ACE61CED11A0009DD700 /* AlchemyGenericModel.swift */,
-				7AA7ACE71CED11A0009DD700 /* AlchemyLanguageGenericModel.swift */,
-				7AA7ACE81CED11A0009DD700 /* Authors.swift */,
-				7AA7ACE91CED11A0009DD700 /* CombinedResults.swift */,
-				7AA7ACEA1CED11A0009DD700 /* Concept.swift */,
-				7AA7ACEB1CED11A0009DD700 /* ConceptResponse.swift */,
-				7AA7ACEC1CED11A0009DD700 /* DisambiguatedLinks.swift */,
-				7AA7ACED1CED11A0009DD700 /* DocumentAuthors.swift */,
-				7AA7ACEE1CED11A0009DD700 /* DocumentSentiment.swift */,
-				7AA7ACEF1CED11A0009DD700 /* DocumentText.swift */,
-				7AA7ACF01CED11A0009DD700 /* DocumentTitle.swift */,
-				7AA7ACF11CED11A0009DD700 /* Entities.swift */,
-				7AA7ACF21CED11A0009DD700 /* Entity.swift */,
-				7AA7ACF31CED11A0009DD700 /* Feed.swift */,
-				7AA7ACF41CED11A0009DD700 /* Feeds.swift */,
-				7AA7ACF51CED11A0009DD700 /* Keyword.swift */,
-				7AA7ACF61CED11A0009DD700 /* Keywords.swift */,
-				7AA7ACF71CED11A0009DD700 /* KnowledgeGraph.swift */,
-				7AA7ACF81CED11A0009DD700 /* Language.swift */,
-				7AA7ACF91CED11A0009DD700 /* Microformat.swift */,
-				7AA7ACFA1CED11A0009DD700 /* Microformats.swift */,
-				7AA7ACFB1CED11A0009DD700 /* PublicationDate.swift */,
-				7AA7ACFC1CED11A0009DD700 /* Quotation.swift */,
-				7AA7ACFD1CED11A0009DD700 /* SAORelation.swift */,
-				7AA7ACFE1CED11A0009DD700 /* SAORelations.swift */,
-				7AA7ACFF1CED11A0009DD700 /* Sentiment.swift */,
-				7AA7AD001CED11A0009DD700 /* SentimentResponse.swift */,
-				7AA7AD011CED11A0009DD700 /* Taxonomies.swift */,
-				7AA7AD021CED11A0009DD700 /* Taxonomy.swift */,
+				7AB53B591CF64DE000FFC9DD /* Authors.swift */,
+				7AB53B5A1CF64DE000FFC9DD /* Concept.swift */,
+				7AB53B5B1CF64DE000FFC9DD /* ConceptResponse.swift */,
+				7AB53B5C1CF64DE000FFC9DD /* DisambiguatedLinks.swift */,
+				7AB53B5D1CF64DE000FFC9DD /* DocumentAuthors.swift */,
+				B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */,
+				7AB53B5E1CF64DE000FFC9DD /* DocumentSentiment.swift */,
+				7AB53B5F1CF64DE000FFC9DD /* DocumentText.swift */,
+				7AB53B601CF64DE000FFC9DD /* DocumentTitle.swift */,
+				B11545F01CF77D1F00A31024 /* Emotions.swift */,
+				7AB53B611CF64DE000FFC9DD /* Entities.swift */,
+				7AB53B621CF64DE000FFC9DD /* Entity.swift */,
+				7AB53B631CF64DE000FFC9DD /* Feed.swift */,
+				7AB53B641CF64DE000FFC9DD /* Feeds.swift */,
+				7AB53B651CF64DE000FFC9DD /* Keyword.swift */,
+				7AB53B661CF64DE000FFC9DD /* Keywords.swift */,
+				7AB53B671CF64DE000FFC9DD /* KnowledgeGraph.swift */,
+				7AB53B681CF64DE000FFC9DD /* Language.swift */,
+				7AB53B691CF64DE000FFC9DD /* Microformat.swift */,
+				7AB53B6A1CF64DE000FFC9DD /* Microformats.swift */,
+				7AB53B6B1CF64DE000FFC9DD /* PublicationDate.swift */,
+				7AB53B6C1CF64DE000FFC9DD /* PublicationResponse.swift */,
+				7AB53B6D1CF64DE000FFC9DD /* Quotation.swift */,
+				7AB53B6E1CF64DE000FFC9DD /* SAORelation.swift */,
+				7AB53B6F1CF64DE000FFC9DD /* SAORelations.swift */,
+				7AB53B701CF64DE000FFC9DD /* Sentiment.swift */,
+				7AB53B711CF64DE000FFC9DD /* SentimentResponse.swift */,
+				7AB53B721CF64DE000FFC9DD /* Taxonomies.swift */,
+				7AB53B731CF64DE000FFC9DD /* Taxonomy.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1138,26 +1059,11 @@
 		7AA7AD031CED11A0009DD700 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7AA7AD041CED11A0009DD700 /* AlchemyLanguageTests.swift */,
-				7AA7AD051CED11A0009DD700 /* biography.html */,
-				7AA7AD061CED11A0009DD700 /* sample.html */,
+				7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */,
+				7AB53B901CF64DE700FFC9DD /* testArticle.html */,
+				7AB53B911CF64DE700FFC9DD /* testText.txt */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		7AA7AD071CED11A0009DD700 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				7AA7AD081CED11A0009DD700 /* AlchemyCombineDictionaryUtil.swift */,
-				7AA7AD091CED11A0009DD700 /* AlchemyService.swift */,
-				7AA7AD0A1CED11A0009DD700 /* APIKeyAuthenticationStrategy.swift */,
-				7AA7AD0B1CED11A0009DD700 /* AuthenticationStrategy.swift */,
-				7AA7AD0C1CED11A0009DD700 /* CoreResponse.swift */,
-				7AA7AD0D1CED11A0009DD700 /* NetworkUtils.swift */,
-				7AA7AD0E1CED11A0009DD700 /* Transformation.swift */,
-				7AA7AD0F1CED11A0009DD700 /* WatsonCoreConstants.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */ = {
@@ -1333,34 +1239,6 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		7AC7C6641CF63F6800A626E9 /* ConversationV1 */ = {
-			isa = PBXGroup;
-			children = (
-				7AC7C6651CF63F6800A626E9 /* Conversation.swift */,
-				7AC7C6661CF63F6800A626E9 /* Models */,
-				7AC7C6681CF63F6800A626E9 /* Tests */,
-			);
-			name = ConversationV1;
-			path = Source/ConversationV1;
-			sourceTree = "<group>";
-		};
-		7AC7C6661CF63F6800A626E9 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4F5ABFDE1CF7408F004E6331 /* MessageRequest.swift */,
-				4F5ABFDF1CF7408F004E6331 /* MessageResponse.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		7AC7C6681CF63F6800A626E9 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7AC7C6691CF63F6800A626E9 /* ConversationTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		7AEB131B1CBF7C8A00101884 /* DialogV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1513,14 +1391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C66C1CF63FC600A626E9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AC7C6721CF63FC600A626E9 /* ConversationV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1934,43 +1804,6 @@
 			productReference = 7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7AC7C66E1CF63FC600A626E9 /* ConversationV1 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7AC7C6801CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1" */;
-			buildPhases = (
-				7AC7C66A1CF63FC600A626E9 /* Sources */,
-				7AC7C66B1CF63FC600A626E9 /* Frameworks */,
-				7AC7C66C1CF63FC600A626E9 /* Headers */,
-				7AC7C66D1CF63FC600A626E9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ConversationV1;
-			productName = ConversationV1;
-			productReference = 7AC7C66F1CF63FC600A626E9 /* ConversationV1.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7AC7C6771CF63FC600A626E9 /* ConversationV1Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7AC7C6831CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */;
-			buildPhases = (
-				7AC7C6741CF63FC600A626E9 /* Sources */,
-				7AC7C6751CF63FC600A626E9 /* Frameworks */,
-				7AC7C6761CF63FC600A626E9 /* Resources */,
-				7AC7C6891CF640A000A626E9 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7AC7C67B1CF63FC600A626E9 /* PBXTargetDependency */,
-			);
-			name = ConversationV1Tests;
-			productName = ConversationV1Tests;
-			productReference = 7AC7C6781CF63FC600A626E9 /* ConversationV1Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2047,12 +1880,6 @@
 					7AAAF56C1CEEA2DF00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
-					7AC7C66E1CF63FC600A626E9 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
-					7AC7C6771CF63FC600A626E9 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
 				};
 			};
 			buildConfigurationList = 7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */;
@@ -2071,8 +1898,6 @@
 				7AAAF56C1CEEA2DF00B74848 /* AlchemyLanguageV1Tests */,
 				7AAAF5351CEEA23D00B74848 /* AlchemyVisionV1 */,
 				7AAAF53E1CEEA23E00B74848 /* AlchemyVisionV1Tests */,
-				7AC7C66E1CF63FC600A626E9 /* ConversationV1 */,
-				7AC7C6771CF63FC600A626E9 /* ConversationV1Tests */,
 				7AAAF5081CEEA1DA00B74848 /* DialogV1 */,
 				7AAAF5111CEEA1DA00B74848 /* DialogV1Tests */,
 				7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */,
@@ -2281,23 +2106,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF59E1CEEA31500B74848 /* Credentials.plist in Resources */,
-				7AAAF59D1CEEA30000B74848 /* sample.html in Resources */,
-				7AAAF59C1CEEA30000B74848 /* biography.html in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C66D1CF63FC600A626E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C6761CF63FC600A626E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F5ABFE41CF74914004E6331 /* Credentials.plist in Resources */,
+				7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */,
+				7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2308,7 +2118,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF3BA1CEE9A2400B74848 /* RestExtensions.swift in Sources */,
+				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
 				7AAAF3BD1CEE9A2400B74848 /* RestToken.swift in Sources */,
 				7AAAF3BC1CEE9A2400B74848 /* RestSerialization.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,
@@ -2524,46 +2334,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF5891CEEA2FB00B74848 /* Entities.swift in Sources */,
-				7AAAF5861CEEA2FB00B74848 /* DocumentSentiment.swift in Sources */,
-				7AAAF5851CEEA2FB00B74848 /* DocumentAuthors.swift in Sources */,
-				7AAAF5921CEEA2FB00B74848 /* Microformats.swift in Sources */,
-				7AAAF5941CEEA2FB00B74848 /* Quotation.swift in Sources */,
-				7AAAF57B1CEEA2F400B74848 /* AlchemyLanguage.swift in Sources */,
-				7AAAF58A1CEEA2FB00B74848 /* Entity.swift in Sources */,
-				7AAAF5881CEEA2FB00B74848 /* DocumentTitle.swift in Sources */,
-				7AAAF59A1CEEA2FB00B74848 /* Taxonomy.swift in Sources */,
-				7AAAF5981CEEA2FB00B74848 /* SentimentResponse.swift in Sources */,
-				7AAAF5841CEEA2FB00B74848 /* DisambiguatedLinks.swift in Sources */,
-				7AAAF5961CEEA2FB00B74848 /* SAORelations.swift in Sources */,
-				7AAAF5A51CEEA33B00B74848 /* NetworkUtils.swift in Sources */,
-				7AAAF57E1CEEA2FB00B74848 /* AlchemyGenericModel.swift in Sources */,
-				7AAAF5A71CEEA33B00B74848 /* WatsonCoreConstants.swift in Sources */,
-				7AAAF58B1CEEA2FB00B74848 /* Feed.swift in Sources */,
-				7AAAF5A31CEEA33B00B74848 /* AuthenticationStrategy.swift in Sources */,
-				7AAAF57C1CEEA2F400B74848 /* AlchemyLanguageConstants.swift in Sources */,
-				7AAAF57F1CEEA2FB00B74848 /* AlchemyLanguageGenericModel.swift in Sources */,
-				7AAAF5991CEEA2FB00B74848 /* Taxonomies.swift in Sources */,
-				7AAAF5A21CEEA33B00B74848 /* APIKeyAuthenticationStrategy.swift in Sources */,
-				7AAAF5871CEEA2FB00B74848 /* DocumentText.swift in Sources */,
-				7AAAF5821CEEA2FB00B74848 /* Concept.swift in Sources */,
-				7AAAF58E1CEEA2FB00B74848 /* Keywords.swift in Sources */,
-				7AAAF5931CEEA2FB00B74848 /* PublicationDate.swift in Sources */,
-				7AAAF5971CEEA2FB00B74848 /* Sentiment.swift in Sources */,
-				7AAAF5911CEEA2FB00B74848 /* Microformat.swift in Sources */,
-				7AAAF5A01CEEA33B00B74848 /* AlchemyCombineDictionaryUtil.swift in Sources */,
-				7AAAF5801CEEA2FB00B74848 /* Authors.swift in Sources */,
-				7AAAF5A41CEEA33B00B74848 /* CoreResponse.swift in Sources */,
-				7AAAF5831CEEA2FB00B74848 /* ConceptResponse.swift in Sources */,
-				7AAAF5811CEEA2FB00B74848 /* CombinedResults.swift in Sources */,
-				7AAAF57D1CEEA2F400B74848 /* AlchemyLanguageParametersProtocol.swift in Sources */,
-				7AAAF5A61CEEA33B00B74848 /* Transformation.swift in Sources */,
-				7AAAF5951CEEA2FB00B74848 /* SAORelation.swift in Sources */,
-				7AAAF5A11CEEA33B00B74848 /* AlchemyService.swift in Sources */,
-				7AAAF58C1CEEA2FB00B74848 /* Feeds.swift in Sources */,
-				7AAAF58F1CEEA2FB00B74848 /* KnowledgeGraph.swift in Sources */,
-				7AAAF58D1CEEA2FB00B74848 /* Keyword.swift in Sources */,
-				7AAAF5901CEEA2FB00B74848 /* Language.swift in Sources */,
+				B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */,
+				7AB53B861CF64DE000FFC9DD /* PublicationDate.swift in Sources */,
+				7AB53B8D1CF64DE000FFC9DD /* Taxonomies.swift in Sources */,
+				7AB53B8A1CF64DE000FFC9DD /* SAORelations.swift in Sources */,
+				7AB53B891CF64DE000FFC9DD /* SAORelation.swift in Sources */,
+				7AB53B7C1CF64DE000FFC9DD /* Entities.swift in Sources */,
+				7AB53B881CF64DE000FFC9DD /* Quotation.swift in Sources */,
+				7AB53B821CF64DE000FFC9DD /* KnowledgeGraph.swift in Sources */,
+				7AB53B7E1CF64DE000FFC9DD /* Feed.swift in Sources */,
+				7AB53B841CF64DE000FFC9DD /* Microformat.swift in Sources */,
+				B104CA921CFDE0BE00083E87 /* QueryParam.swift in Sources */,
+				7AB53B8C1CF64DE000FFC9DD /* SentimentResponse.swift in Sources */,
+				7AB53B741CF64DE000FFC9DD /* Authors.swift in Sources */,
+				7AB53B811CF64DE000FFC9DD /* Keywords.swift in Sources */,
+				B11545F11CF77D1F00A31024 /* Emotions.swift in Sources */,
+				7AB53B7A1CF64DE000FFC9DD /* DocumentText.swift in Sources */,
+				7AB53B871CF64DE000FFC9DD /* PublicationResponse.swift in Sources */,
+				B11545EF1CF77B0400A31024 /* DocumentEmotion.swift in Sources */,
+				7AB53B771CF64DE000FFC9DD /* DisambiguatedLinks.swift in Sources */,
+				7AB53B7F1CF64DE000FFC9DD /* Feeds.swift in Sources */,
+				7AB53B831CF64DE000FFC9DD /* Language.swift in Sources */,
+				7AB53B801CF64DE000FFC9DD /* Keyword.swift in Sources */,
+				7AB53B7B1CF64DE000FFC9DD /* DocumentTitle.swift in Sources */,
+				7AB53B8E1CF64DE000FFC9DD /* Taxonomy.swift in Sources */,
+				7AB53B781CF64DE000FFC9DD /* DocumentAuthors.swift in Sources */,
+				7AB53B7D1CF64DE000FFC9DD /* Entity.swift in Sources */,
+				7AB53B8B1CF64DE000FFC9DD /* Sentiment.swift in Sources */,
+				7AB53B751CF64DE000FFC9DD /* Concept.swift in Sources */,
+				7AB53B791CF64DE000FFC9DD /* DocumentSentiment.swift in Sources */,
+				7AB53B761CF64DE000FFC9DD /* ConceptResponse.swift in Sources */,
+				7AB53B851CF64DE000FFC9DD /* Microformats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2571,25 +2372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF59B1CEEA30000B74848 /* AlchemyLanguageTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C66A1CF63FC600A626E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F5ABFE21CF7408F004E6331 /* MessageResponse.swift in Sources */,
-				4F5ABFE11CF7408F004E6331 /* MessageRequest.swift in Sources */,
-				7AC7C68C1CF6410A00A626E9 /* Conversation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AC7C6741CF63FC600A626E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AC7C68E1CF6411100A626E9 /* ConversationTests.swift in Sources */,
+				7AB53B921CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2650,11 +2433,6 @@
 			isa = PBXTargetDependency;
 			target = 7AAAF5631CEEA2DF00B74848 /* AlchemyLanguageV1 */;
 			targetProxy = 7AAAF56F1CEEA2DF00B74848 /* PBXContainerItemProxy */;
-		};
-		7AC7C67B1CF63FC600A626E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7AC7C66E1CF63FC600A626E9 /* ConversationV1 */;
-			targetProxy = 7AC7C67A1CF63FC600A626E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3348,10 +3126,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3364,10 +3138,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3448,6 +3218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3463,6 +3234,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyLanguageV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -3470,6 +3242,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3492,11 +3265,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyLanguageV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -3504,86 +3279,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyLanguageV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		7AC7C6811CF63FC600A626E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		7AC7C6821CF63FC600A626E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		7AC7C6841CF63FC600A626E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		7AC7C6851CF63FC600A626E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -3794,24 +3494,6 @@
 			buildConfigurations = (
 				7AAAF5791CEEA2DF00B74848 /* Debug */,
 				7AAAF57A1CEEA2DF00B74848 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7AC7C6801CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7AC7C6811CF63FC600A626E9 /* Debug */,
-				7AC7C6821CF63FC600A626E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7AC7C6831CF63FC600A626E9 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7AC7C6841CF63FC600A626E9 /* Debug */,
-				7AC7C6851CF63FC600A626E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

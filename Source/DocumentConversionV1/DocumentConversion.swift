@@ -29,20 +29,25 @@ public class DocumentConversionV1 {
     
     private let username: String
     private let password: String
-    private let serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
-    private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
-    
+    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 DocumentConversionV1")
+    private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
     /**
      Create a `DocumentConversion` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/document-conversion/api")
+    {
         self.username = username
         self.password = password
+        self.serviceURL = serviceURL
     }
     
     /**
@@ -93,12 +98,10 @@ public class DocumentConversionV1 {
         failure: (NSError -> Void)? = nil,
         success: String -> Void)
     {
-        
         // construct REST request
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v1/convert_document",
-
             userAgent: userAgent,
             queryParameters: [NSURLQueryItem(name: "version", value: version)]
         )

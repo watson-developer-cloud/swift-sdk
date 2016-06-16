@@ -243,7 +243,6 @@
 		B1AAD2FE1D087E8D002DAB84 /* ConversionMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FD1D087E8D002DAB84 /* ConversionMetadata.swift */; };
 		B1AAD3001D0880AE002DAB84 /* AnswerUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FF1D0880AE002DAB84 /* AnswerUnits.swift */; };
 		B1AAD3021D0881BC002DAB84 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD3011D0881BC002DAB84 /* Content.swift */; };
-		B1AAD3071D08C5B2002DAB84 /* polygonArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD3031D08C536002DAB84 /* polygonArticle.html */; };
 		B1AAD30A1D09BCE3002DAB84 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		B1AAD3111D09FEF2002DAB84 /* testConfigAU.json in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD30B1D09FEAC002DAB84 /* testConfigAU.json */; };
 		B1AAD3121D09FEF6002DAB84 /* testConfigHtml.json in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */; };
@@ -655,7 +654,6 @@
 		B1AAD2FD1D087E8D002DAB84 /* ConversionMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversionMetadata.swift; path = Source/DocumentConversionV1/Models/ConversionMetadata.swift; sourceTree = SOURCE_ROOT; };
 		B1AAD2FF1D0880AE002DAB84 /* AnswerUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerUnits.swift; path = Source/DocumentConversionV1/Models/AnswerUnits.swift; sourceTree = SOURCE_ROOT; };
 		B1AAD3011D0881BC002DAB84 /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Content.swift; path = Source/DocumentConversionV1/Models/Content.swift; sourceTree = SOURCE_ROOT; };
-		B1AAD3031D08C536002DAB84 /* polygonArticle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = polygonArticle.html; path = Source/DocumentConversionV1/DocumentConversionV1Tests/polygonArticle.html; sourceTree = SOURCE_ROOT; };
 		B1AAD30B1D09FEAC002DAB84 /* testConfigAU.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testConfigAU.json; path = Source/DocumentConversionV1/DocumentConversionV1Tests/testConfigAU.json; sourceTree = SOURCE_ROOT; };
 		B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testConfigHtml.json; path = Source/DocumentConversionV1/DocumentConversionV1Tests/testConfigHtml.json; sourceTree = SOURCE_ROOT; };
 		B1AAD30D1D09FEAC002DAB84 /* testConfigText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testConfigText.json; path = Source/DocumentConversionV1/DocumentConversionV1Tests/testConfigText.json; sourceTree = SOURCE_ROOT; };
@@ -1368,7 +1366,6 @@
 				B1AAD30B1D09FEAC002DAB84 /* testConfigAU.json */,
 				B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */,
 				B1AAD30D1D09FEAC002DAB84 /* testConfigText.json */,
-				B1AAD3031D08C536002DAB84 /* polygonArticle.html */,
 				B1AAD2F31D086AAE002DAB84 /* DocumentConversionV1Tests.swift */,
 			);
 			name = Tests;
@@ -2295,7 +2292,6 @@
 				B1AAD30A1D09BCE3002DAB84 /* Credentials.plist in Resources */,
 				B1C4DFD21D134E37004CC4B0 /* arsArticle.html in Resources */,
 				B1AAD3121D09FEF6002DAB84 /* testConfigHtml.json in Resources */,
-				B1AAD3071D08C5B2002DAB84 /* polygonArticle.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

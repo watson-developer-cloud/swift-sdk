@@ -30,8 +30,8 @@ class SpeechToTextWebSocket: WebSocket {
     private var state = State.Disconnected
     private var retries = 0
     private let maxRetries = 2
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
-    private static let url = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 SpeechToTextV1")
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     enum State {
         case Disconnected
@@ -43,10 +43,10 @@ class SpeechToTextWebSocket: WebSocket {
     /**
      Create a `SpeechToTextWebSocket` object to communicate with Speech to Text.
 
-     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
-        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
-        is used internally to obtain tokens, refresh expired tokens, and maintain information
-        about authentication state.
+     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
+     - parameter restToken: A `RestToken` that defines how to authenticate with the Speech to
+        Text service. The `RestToken` is used internally to obtain tokens, refresh expired tokens,
+        and maintain information about authentication state.
      - parameter settings: The configuration for this transcription request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
@@ -55,6 +55,7 @@ class SpeechToTextWebSocket: WebSocket {
      - returns: A `SpeechToTextWebSocket` object that can communicate with Speech to Text.
      */
     init?(
+        websocketsURL: String,
         restToken: RestToken,
         settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
@@ -67,7 +68,7 @@ class SpeechToTextWebSocket: WebSocket {
         operations.maxConcurrentOperationCount = 1
         operations.suspended = true
 
-        guard let url = SpeechToTextWebSocket.websocketsURL(settings) else {
+        guard let url = SpeechToTextWebSocket.websocketsURL(websocketsURL, settings: settings) else {
             let failureReason = "Unable to construct a WebSockets connection to Speech to Text."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -83,11 +84,12 @@ class SpeechToTextWebSocket: WebSocket {
 
     /** Build the URL to use when connecting to Speech to Text with Websockets.
      
+     - parameter url: The base URL that shall be used to stream audio for transcription.
      - parameter settings: The `TranscriptionSettings` to use for the Speech to Text session.
      - returns: An NSURL, if it can be constructed from the given settings.
      */
-    static func websocketsURL(settings: TranscriptionSettings) -> NSURL? {
-        guard let urlComponents = NSURLComponents(string: SpeechToTextWebSocket.url) else {
+    private static func websocketsURL(url: String, settings: TranscriptionSettings) -> NSURL? {
+        guard let urlComponents = NSURLComponents(string: url) else {
             return nil
         }
         
@@ -110,9 +112,8 @@ class SpeechToTextWebSocket: WebSocket {
     /**
      Connect to the Speech to Text service using WebSockets.
      
-     The `AuthenticationStrategy` provided to the `init` will be used to authenticate
-     with the Speech to Text service. If necessary, the token associated with the
-     `AuthenticationStrategy` will be refreshed.
+     The `RestToken` provided to the `init` will be used to authenticate with the Speech to Text
+     service. If necessary, the token associated with the `RestToken` will be refreshed.
      */
     override func connect() {
         connectWithToken()
@@ -186,8 +187,8 @@ class SpeechToTextWebSocket: WebSocket {
     }
 
     /**
-     Connect to the Speech to Text service using this instance's `AuthenticationStrategy`. If
-     necessary, the token is refreshed.
+     Connect to the Speech to Text service using this instance's `RestToken`. If necessary, the
+     token is refreshed.
      */
     private func connectWithToken() {
         guard retries < maxRetries else {
@@ -202,6 +203,7 @@ class SpeechToTextWebSocket: WebSocket {
 
         if let token = restToken.token where retries == 1 {
             headers["X-Watson-Authorization-Token"] = token
+            headers["User-Agent"] = userAgent
             super.connect()
         } else {
             let failure = { (error: NSError) in
@@ -213,6 +215,7 @@ class SpeechToTextWebSocket: WebSocket {
             }
             restToken.refreshToken(failure) {
                 self.headers["X-Watson-Authorization-Token"] = self.restToken.token
+                self.headers["User-Agent"] = self.userAgent
                 super.connect()
             }
         }

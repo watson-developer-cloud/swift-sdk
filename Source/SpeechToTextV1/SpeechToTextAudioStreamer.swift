@@ -26,15 +26,15 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
     private let success: [TranscriptionResult] -> Void
     private var socket: SpeechToTextWebSocket?
     private var captureSession: AVCaptureSession?
-    private let domain = "com.ibm.watson.developer-cloud.WatsonDeveloperCloud"
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToTextAudioStreamer` to stream microphone audio to Speech to Text.
 
-     - parameter authStrategy: An `AuthenticationStrategy` that defines how to authenticate
-        with the Watson Developer Cloud's Speech to Text service. The `AuthenticationStrategy`
-        is used internally to obtain tokens, refresh expired tokens, and maintain information
-        about authentication state.
+     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
+     - parameter restToken: A `RestToken` that defines how to authenticate with the Speech to
+        Text service. The `RestToken` is used internally to obtain tokens, refresh expired tokens,
+        and maintain information about authentication state.
      - parameter settings: The configuration for this transcription request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
@@ -44,6 +44,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         Speech to Text.
     */
     init?(
+        websocketsURL: String,
         restToken: RestToken,
         settings: TranscriptionSettings,
         failure: (NSError -> Void)? = nil,
@@ -61,6 +62,7 @@ class SpeechToTextAudioStreamer: NSObject, AVCaptureAudioDataOutputSampleBufferD
         }
 
         guard let socket = SpeechToTextWebSocket(
+            websocketsURL: websocketsURL,
             restToken: restToken,
             settings: settings,
             failure: failure,

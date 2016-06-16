@@ -31,8 +31,9 @@ public class Dialog {
     
     private let username: String
     private let password: String
+    private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
-    private let serviceURL = "https://gateway.watsonplatform.net/dialog/api"
     private static let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -44,10 +45,16 @@ public class Dialog {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://gateway.watsonplatform.net/dialog/api")
+    {
         self.username = username
         self.password = password
+        self.serviceURL = serviceURL
     }
 
     /**
@@ -84,7 +91,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -127,7 +135,8 @@ public class Dialog {
         let request = RestRequest(
             method: .POST,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -177,7 +186,8 @@ public class Dialog {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -216,7 +226,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: format?.rawValue
+            acceptType: format?.rawValue,
+            userAgent: userAgent
         )
 
         // specify download destination
@@ -281,7 +292,8 @@ public class Dialog {
         // construct REST request
         let request = RestRequest(
             method: .PUT,
-            url: serviceURL + "/v1/dialogs/\(dialogID)"
+            url: serviceURL + "/v1/dialogs/\(dialogID)",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -335,7 +347,8 @@ public class Dialog {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
 
         // execute REST request
@@ -379,6 +392,7 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
 
@@ -442,6 +456,7 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -495,6 +510,7 @@ public class Dialog {
             method: .POST,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -543,6 +559,7 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
 
@@ -592,6 +609,7 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
             acceptType: "application/json",
             contentType: "application/json",
+            userAgent: userAgent,
             messageBody: body
         )
 

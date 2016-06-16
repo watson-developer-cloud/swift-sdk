@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,41 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Sentiment**
  
- Returned by the AlchemyLanguage service.
+ Sentiment is the attitude, opinion or feeling toward something, such as a person, organization,
+ product or location.
  
  */
-public struct Sentiment: Mappable {
-    
-    /** is a mix of positive, neutral, and/or negative sentiments detected */
-    public var mixed: Int?
 
-    /** strength of prevalent sentiment, 0.0 to 1.0 */
-    public var score: Double?
-
-    /** "positive", "neutral", or "negative" */
-    public var type: String?
+public struct Sentiment: JSONDecodable {
     
+    /** whether sentiment is mixed (both positive and negative) (1 == mixed) */
+    public let mixed: Int?
     
-    public init?(_ map: Map) {}
+    /** sentiment strength (0.0 == neutral) */
+    public let score: Double?
     
-    public mutating func mapping(map: Map) {
-        
-        mixed <- (map["mixed"], Transformation.stringToInt)
-        score <- (map["score"], Transformation.stringToDouble)
-        type <- map["type"]
-        
+    /** sentiment polarity - "positive", "negative", "neutral" */
+    public let type: String?
+    
+    /// Used internally to initialize a Sentiment object
+    public init(json: JSON) throws {
+        if let mixString = try? json.string("mixed") {
+            mixed = Int(mixString)
+        } else {
+            mixed = nil
+        }
+        if let scoreString = try? json.string("score") {
+            score = Double(scoreString)
+        } else {
+            score = nil
+        }
+        type = try? json.string("type")
     }
-    
 }
+

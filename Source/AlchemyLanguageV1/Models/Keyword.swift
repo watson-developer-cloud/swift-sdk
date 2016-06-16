@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,39 +15,40 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Keyword**
  
- Returned by the AlchemyLanguage service.
+ Important topics extracted from a document by AlchemyLanguage
  
  */
-public struct Keyword: Mappable {
 
-    /** The path through the knowledge graph to the appropriate keyword */
-    public var knowledgeGraph: KnowledgeGraph?
-
-    /** relevance to inputted content */
-    public var relevance: Double?
-
-    /** sentiment concerning content */
-    public var sentiment: Sentiment?
-
-    /** related text */
-    public var text: String?
+public struct Keyword: JSONDecodable {
     
+    /** see **KnowledgeGraph** */
+    public let knowledgeGraph: KnowledgeGraph?
     
-    public init?(_ map: Map) {}
+    /** relevance score for detected keyword */
+    public let relevance: Double?
     
-    public mutating func mapping(map: Map) {
-        
-        knowledgeGraph <- map["knowledgeGraph"]
-        relevance <- (map["relevance"], Transformation.stringToDouble)
-        sentiment <- map["sentiment"]
-        text <- map["text"]
-        
+    /** see **Sentiment** */
+    public let sentiment: Sentiment?
+    
+    /** the detected keyword text */
+    public let text: String?
+    
+    /// Used internally to initialize a Keyword object
+    public init(json: JSON) throws {
+        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
+        if let relevanceString = try? json.string("relevance") {
+            relevance = Double(relevanceString)
+        } else {
+            relevance = nil
+        }
+        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        text = try? json.string("text")
     }
-    
 }
+

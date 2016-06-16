@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,44 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Entities**
  
- Entities returned by the AlchemyLanguage service.
+ Reponse object for **Entity** related calls
  
  */
-public struct Entities: AlchemyLanguageGenericModel, Mappable {
+
+public struct Entities: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** extracted language */
+    public let language: String?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** the URL information was requested for */
+    public let url: String?
     
-    // MARK: Entities
-    public var entities: [Entity]? = []
+    /** the number of transactions made by the call */
+    public let totalTransactions: Int?
     
+    /** the detected entity text */
+    public let text: String?
     
-    public init?(_ map: Map) {}
+    /** see **Entity** */
+    public let entitites: [Entity]?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // entities
-        /** result, see **Entity** */
-        entities <- map["entities"]
-        
+    /// Used internally to initialize an Entities object
+    public init(json: JSON) throws {
+        language = try? json.string("language")
+        url = try? json.string("url")
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = nil
+        }
+        text = try? json.string("text")
+        entitites = try? json.arrayOf("entities", type: Entity.self)
     }
-    
 }
+

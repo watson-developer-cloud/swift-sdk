@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,24 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **KnowledgeGraph**
  
- Returned by the AlchemyLanguage service.
+ The KnowledgeGraph contains info on how keys are determined
  
  */
-public struct KnowledgeGraph: AlchemyGenericModel, Mappable {
 
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+public struct KnowledgeGraph: JSONDecodable {
     
-    // MARK: KnowledgeGraph
-    /** The path through the knowledge graph to the appropriate keyword */
-    public var typeHierarchy: String?
+    /** the path along the graph to the key */
+    public let typeHierarchy: String?
     
-    
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // knowledgeGraph
-        typeHierarchy <- map["typeHierarchy"]
-        
+    /// Used internally to initialize a KnowledgeGraph object
+    public init(json: JSON) throws {
+        typeHierarchy = try? json.string("typeHierarchy")
     }
-    
 }
+

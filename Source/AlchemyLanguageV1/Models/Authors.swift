@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,22 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Authors**
  
- Authors returned by the AlchemyLanguage service as a property of DocumentAuthors.
+ Authors extracted from a document by the AlchemyLanguage service.
  
  */
-public struct Authors: Mappable {
+public struct Authors: JSONDecodable {
     
-    // MARK: Authors
-    /** "yes" / "no" about results*/
-    public var confident: String?
-
-    /** author names*/
-    public var names: [String]?
+    /** Names of the extracted authors */
+    public let names: [String]
     
-    public init?(_ map: Map) {}
-    
-    public mutating func mapping(map: Map) {
-        
-        confident <- map["confident"]
-        names <- map["names"]
-        
+    /// Used internally to initialize a Authors object
+    public init(json: JSON) throws {
+        names = try json.arrayOf("names", type: Swift.String)
     }
-    
 }

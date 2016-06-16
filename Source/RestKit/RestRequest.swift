@@ -30,6 +30,7 @@ public class RestRequest: URLRequestConvertible {
     private let url: String
     private let acceptType: String?
     private let contentType: String?
+    private let userAgent: String?
     private let queryParameters: [NSURLQueryItem]?
     private let headerParameters: [String: String]?
     private let messageBody: NSData?
@@ -58,6 +59,11 @@ public class RestRequest: URLRequestConvertible {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
         
+        // set the request's user agent
+        if let userAgent = userAgent {
+            request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        }
+        
         // set the request's header parameters
         if let headerParameters = headerParameters {
             for (key, value) in headerParameters {
@@ -75,6 +81,7 @@ public class RestRequest: URLRequestConvertible {
      - parameter url: The url of the request.
      - parameter acceptType: The acceptable media type of the response's message body.
      - parameter contentType: The media type of the request's message body.
+     - parameter userAgent: A custom user-agent string that should be used for the request.
      - parameter queryParameters: The parameters to encode in the url's query string.
      - parameter headerParameters: The parameters to encode in the request's HTTP header.
      - parameter messageBody: The data to be included in the message body.
@@ -86,6 +93,7 @@ public class RestRequest: URLRequestConvertible {
         url: String,
         acceptType: String? = nil,
         contentType: String? = nil,
+        userAgent: String? = nil,
         queryParameters: [NSURLQueryItem]? = nil,
         headerParameters: [String: String]? = nil,
         messageBody: NSData? = nil)
@@ -94,6 +102,7 @@ public class RestRequest: URLRequestConvertible {
         self.url = url
         self.acceptType = acceptType
         self.contentType = contentType
+        self.userAgent = userAgent
         self.queryParameters = queryParameters
         self.headerParameters = headerParameters
         self.messageBody = messageBody

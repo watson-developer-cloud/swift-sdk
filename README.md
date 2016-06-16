@@ -4,12 +4,12 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master)
 [![Docs](https://img.shields.io/badge/Docs-0.3.0-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-green.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/ios-sdk)
 
 The Watson Developer Cloud iOS SDK is a collection of services to allow developers to quickly add Watson Cognitive Computing services to their Swift iOS applications.
 
-Visit our [Quickstart Guide](Documentation/Quickstart.md) to build your first iOS app with Watson!
+Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md) to build your first iOS app with Watson!
 
 > *The Watson Developer Cloud iOS SDK is currently in beta.*
 
@@ -58,7 +58,7 @@ Once the dependency manager is installed, the next step is to download the neede
 carthage update --platform iOS
 ```
 
-For more details on using the iOS SDK in your application, please review the [Quickstart Guide](Quickstart.md).
+For more details on using the iOS SDK in your application, please review the [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md).
 
 **Frameworks Used:**
 
@@ -485,9 +485,9 @@ The following links provide more information about the Text To Speech service:
 
 ### Visual Recognition
 
-The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+The Visual Recognition service helps you to understand the contents of images. Submit an image, and the service returns scores for relevant classifiers representing things. It can even detect objects, texts or faces.
 
-How to instantiate and use the Tone Analyzer service:
+Here is an example how to use the service to detect faces in an Image:
 
 ```swift
 let apiKey = "your-apikey-here"
@@ -530,13 +530,13 @@ Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 ## License
 
 This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](LICENSE).
+available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
 
 This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
 ## Contributing
 
-See [CONTRIBUTING](.github/CONTRIBUTING.md) on how to help out.
+See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) on how to help out.
 
 [personality_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
 [language_identification]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/lidapi/

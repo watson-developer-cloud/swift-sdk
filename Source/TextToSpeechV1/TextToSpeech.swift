@@ -29,18 +29,25 @@ public class TextToSpeech {
     
     private let username: String
     private let password: String
+    private let serviceURL: String
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 TextToSpeechV1")
     private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
-    private let serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
 
     /**
      Create a `TextToSpeech` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(username: String, password: String) {
+    public init(
+        username: String,
+        password: String,
+        serviceURL: String = "https://stream.watsonplatform.net/text-to-speech/api")
+    {
         self.username = username
         self.password = password
+        self.serviceURL = serviceURL
     }
     
     /**
@@ -79,7 +86,8 @@ public class TextToSpeech {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/voices",
-            acceptType: "application/json"
+            acceptType: "application/json",
+            userAgent: userAgent
         )
         
         // execute REST request
@@ -125,6 +133,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/voices/\(voice.description())",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -179,6 +188,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/pronunciation",
             acceptType: "application/json",
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         
@@ -231,6 +241,7 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/synthesize",
             acceptType: audioFormat.rawValue,
+            userAgent: userAgent,
             queryParameters: queryParameters
         )
         

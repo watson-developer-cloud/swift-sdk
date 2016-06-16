@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,43 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **Taxonomies**
  
- Returned by the AlchemyLanguage service.
+ Response object for **Taxonomy** related calls
  
  */
-public struct Taxonomies: AlchemyLanguageGenericModel, Mappable {
+
+public struct Taxonomies: JSONDecodable {
     
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
+    /** number of transactions made by the call */
+    public let totalTransactions: Int?
     
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
+    /** extracted language */
+    public let language: String?
     
-    // MARK: Taxonomies
-    /** results here (see **Taxonomy**) */
-    public var taxonomy: [Taxonomy]?
+    /** the URL information was requested for */
+    public let url: String?
     
+    /** document text */
+    public let text: String?
     
-    public init?(_ map: Map) {}
+    /** see **Taxonomy** */
+    public let taxonomy: [Taxonomy]?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // taxonomies
-        taxonomy <- map["taxonomy"]
-        
+    /// Used internally to initialize a Taxonomies object
+    public init(json: JSON) throws {
+        if let totalTransactionsString = try? json.string("totalTransactions") {
+            totalTransactions = Int(totalTransactionsString)
+        } else {
+            totalTransactions = 1
+        }
+        language = try? json.string("language")
+        url = try? json.string("url")
+        text = try? json.string("text")
+        taxonomy = try? json.arrayOf("taxonomy", type: Taxonomy.self)
     }
-    
 }

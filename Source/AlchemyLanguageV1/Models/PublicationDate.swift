@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,47 +15,28 @@
  **/
 
 import Foundation
-import ObjectMapper
+import Freddy
 
 /**
  
  **PublicationDate**
  
- Returned by the AlchemyLanguage service.
+ Date of publication extracted from a document by AlchemyLanguage
  
  */
-public struct PublicationDate: AlchemyLanguageGenericModel, Mappable {
-    
-    // MARK: AlchemyGenericModel
-    public var totalTransactions: Int?
-    
-    // MARK: AlchemyLanguageGenericModel
-    public var language: String?
-    public var url: String?
 
-    // MARK: PublicationDate
-    /** are we confident in our result */
-    public var confident: Bool?
-
-    /** date of publication */
-    public var date: NSDate?
+public struct PublicationDate: JSONDecodable {
     
+    /** confidence level of the detection */
+    public let confident: String?
     
-    public init?(_ map: Map) {}
+    /** detected publication date */
+    public let date: String?
     
-    public mutating func mapping(map: Map) {
-        
-        // alchemyGenericModel
-        totalTransactions <- (map["totalTransactions"], Transformation.stringToInt)
-        
-        // alchemyLanguageGenericModel
-        language <- map["language"]
-        url <- map["url"]
-        
-        // publicationDate
-        confident <- map["confident"]
-        date <- map["date"]
-        
+    /// Used internally to initialize a PublicanDate object
+    public init(json: JSON) throws {
+        confident = try? json.string("confident")
+        date = try? json.string("date")
     }
-
 }
+

@@ -20,6 +20,7 @@ import DocumentConversionV1
 class DocumentConversionV1Tests: XCTestCase {
     
     private var service: DocumentConversionV1!
+    private var badService: DocumentConversionV1!
     private let timeout: NSTimeInterval = 120.0
     
     private var testDocument: NSURL!
@@ -38,7 +39,10 @@ class DocumentConversionV1Tests: XCTestCase {
                 let username = dict["DocumentConversionUsername"]!
                 let password = dict["DocumentConversionPassword"]!
                 if service == nil {
-                    service = DocumentConversionV1(username: username, password: password)
+                    service = DocumentConversionV1(username: username, password: password, version: "2015-12-15")
+                }
+                if badService == nil {
+                    badService = DocumentConversionV1(username: username, password: password, version: "BEES!!!")
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")
@@ -47,7 +51,7 @@ class DocumentConversionV1Tests: XCTestCase {
             XCTFail("Plist file not found")
         }
         
-        if let htmlUrl = bundle.URLForResource("polygonArticle", withExtension: "html") {
+        if let htmlUrl = bundle.URLForResource("arsArticle", withExtension: "html") {
             testDocument = htmlUrl
         } else {
             XCTFail("Test article not found")
@@ -101,7 +105,7 @@ class DocumentConversionV1Tests: XCTestCase {
         let description = "Convert a document to only its text pieces"
         let expectation = expectationWithDescription(description)
         
-        service.convertDocument(textConfig, document: testDocument, version: "2015-12-15", failure: failWithError) { text in
+        service.convertDocument(textConfig, document: testDocument, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             expectation.fulfill()
         }
@@ -112,9 +116,25 @@ class DocumentConversionV1Tests: XCTestCase {
         let description = "Convert a document to html"
         let expectation = expectationWithDescription(description)
         
-        service.convertDocument(htmlConfig, document: testDocument, version: "2015-12-15", failure: failWithError) { text in
+        service.convertDocument(htmlConfig, document: testDocument, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testConvertToTextCreateConfig() {
+        let description = "Convert a document to only its text pieces"
+        let expectation = expectationWithDescription(description)
+        
+        do{
+            try service.convertDocument(service.writeConfig(ReturnType.Text), document: testDocument,
+                failure: failWithError) { text in
+                    XCTAssertNotNil(text, "Response should not be nil")
+                    expectation.fulfill()
+            }
+        } catch {
+            XCTFail("Could not write config file")
         }
         waitForExpectations()
     }
@@ -123,7 +143,7 @@ class DocumentConversionV1Tests: XCTestCase {
         let description = "Convert a document to an answer unit object"
         let expectation = expectationWithDescription(description)
         
-        service.convertDocument(answerUnitsConfig, document: testDocument, version: "2015-12-15", failure: failWithError) {
+        service.convertDocument(answerUnitsConfig, document: testDocument, failure: failWithError) {
             text in
             do {
                 let responseObject = try self.service.deserializeAnswerUnits(text)
@@ -166,7 +186,7 @@ class DocumentConversionV1Tests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.convertDocument(answerUnitsConfig, document: testDocument, version: "BEES!",
+        badService.convertDocument(answerUnitsConfig, document: testDocument,
                                 failure: failure, success: failWithResult)
         waitForExpectations()
     }
@@ -181,7 +201,7 @@ class DocumentConversionV1Tests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.convertDocument(answerUnitsConfig, document: testPng, version: "2015-12-15",
+        service.convertDocument(answerUnitsConfig, document: testPng,
                                 failure: failure, success: failWithResult)
         waitForExpectations()
     }

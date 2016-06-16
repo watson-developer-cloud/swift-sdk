@@ -30,6 +30,7 @@ public class DocumentConversionV1 {
     private let username: String
     private let password: String
     private let serviceURL: String
+    private let version: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
@@ -43,11 +44,13 @@ public class DocumentConversionV1 {
     public init(
         username: String,
         password: String,
+        version: String,
         serviceURL: String = "https://gateway.watsonplatform.net/document-conversion/api")
     {
         self.username = username
         self.password = password
         self.serviceURL = serviceURL
+        self.version = version
     }
     
     /**
@@ -93,7 +96,6 @@ public class DocumentConversionV1 {
     public func convertDocument(
         config: NSURL,
         document: NSURL,
-        version: String,
         fileType: FileType? = nil,
         failure: (NSError -> Void)? = nil,
         success: String -> Void)
@@ -138,7 +140,7 @@ public class DocumentConversionV1 {
                             return
                         }  else {
                             switch response.result {
-                            case .Success( _): success(
+                            case .Success(_): success(
                                 String(data: response.data!, encoding: NSUTF8StringEncoding)!)
                             case .Failure(let error): failure?(error)
                             }
@@ -174,4 +176,47 @@ public class DocumentConversionV1 {
         }
     }
     
+    /**
+     Write service config parameters to a temporary JSON file that can be uploaded. This creates the
+     most basic configuration file possible. For information on creating your own, with greater
+     functionality, see: 
+     http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/customizing.shtml
+     
+     - parameter type: The return type of the service you wish to recieve.
+     
+     - returns: The URL of a JSON file that includes the given parameters.
+     */
+    public func writeConfig(type: ReturnType) throws -> NSURL {
+        // construct JSON dictionary
+        var json = [String: JSON]()
+        json["conversion_target"] = JSON.String(type.rawValue)
+        
+        // create a globally unique file name in a temporary directory
+        let suffix = "DocumentConversionConfiguration.json"
+        let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
+        let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)
+        
+        // save JSON dictionary to file
+        do {
+            let data = try JSON.Dictionary(json).serialize()
+            try data.writeToURL(fileURL, options: .AtomicWrite)
+        } catch {
+            let message = "Unable to create config file"
+            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            throw NSError(domain: domain, code: 0, userInfo: userInfo)
+        }
+        
+        return fileURL
+    }
+    
+}
+
+/**
+ Enum for supported return types from the DocumentConversion service
+ */
+public enum ReturnType: String {
+    case AnswerUnits = "ANSWER_UNITS"
+    case HTML = "NORMALIZED_HTML"
+    case Text = "NORMALIZED_TEXT"
 }

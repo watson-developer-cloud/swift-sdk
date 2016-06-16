@@ -249,6 +249,7 @@
 		B1AAD3121D09FEF6002DAB84 /* testConfigHtml.json in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */; };
 		B1AAD3131D09FEF9002DAB84 /* testConfigText.json in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD30D1D09FEAC002DAB84 /* testConfigText.json */; };
 		B1AAD3161D0F13FA002DAB84 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD3141D0F13F5002DAB84 /* car.png */; };
+		B1C4DFD21D134E37004CC4B0 /* arsArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = B1C4DFCF1D134DB4004CC4B0 /* arsArticle.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -659,6 +660,7 @@
 		B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testConfigHtml.json; path = Source/DocumentConversionV1/DocumentConversionV1Tests/testConfigHtml.json; sourceTree = SOURCE_ROOT; };
 		B1AAD30D1D09FEAC002DAB84 /* testConfigText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testConfigText.json; path = Source/DocumentConversionV1/DocumentConversionV1Tests/testConfigText.json; sourceTree = SOURCE_ROOT; };
 		B1AAD3141D0F13F5002DAB84 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = car.png; path = Source/DocumentConversionV1/DocumentConversionV1Tests/car.png; sourceTree = SOURCE_ROOT; };
+		B1C4DFCF1D134DB4004CC4B0 /* arsArticle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = arsArticle.html; path = Source/DocumentConversionV1/DocumentConversionV1Tests/arsArticle.html; sourceTree = SOURCE_ROOT; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1361,6 +1363,7 @@
 		B1AAD2E01D08656B002DAB84 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				B1C4DFCF1D134DB4004CC4B0 /* arsArticle.html */,
 				B1AAD3141D0F13F5002DAB84 /* car.png */,
 				B1AAD30B1D09FEAC002DAB84 /* testConfigAU.json */,
 				B1AAD30C1D09FEAC002DAB84 /* testConfigHtml.json */,
@@ -2290,6 +2293,7 @@
 				B1AAD3111D09FEF2002DAB84 /* testConfigAU.json in Resources */,
 				B1AAD3131D09FEF9002DAB84 /* testConfigText.json in Resources */,
 				B1AAD30A1D09BCE3002DAB84 /* Credentials.plist in Resources */,
+				B1C4DFD21D134E37004CC4B0 /* arsArticle.html in Resources */,
 				B1AAD3121D09FEF6002DAB84 /* testConfigHtml.json in Resources */,
 				B1AAD3071D08C5B2002DAB84 /* polygonArticle.html in Resources */,
 			);

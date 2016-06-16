@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AC7C66E1CF63FC600A626E9"
+               BlueprintIdentifier = "7A219F051D1350670003D934"
                BuildableName = "ConversationV1.framework"
                BlueprintName = "ConversationV1"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -84,7 +84,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AC7C6771CF63FC600A626E9"
+               BlueprintIdentifier = "7A219F0E1D1350670003D934"
                BuildableName = "ConversationV1Tests.xctest"
                BlueprintName = "ConversationV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">

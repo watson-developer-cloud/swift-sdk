@@ -2,7 +2,7 @@
 
 This is a quick walkthrough to demonstrate how to create an iOS app that uses Watson's Text To Speech service to speak in English.
 
-###Prerequisite 
+###Prerequisite
 
 Before beginning to create the iOS application, make sure you set up a BlueMix application and create a Text To Speech service. First, sign up for a Bluemix account. Next, create a new Bluemix application, it can either be Node JS or Liberty application (it does not matter in this example since we will not be deploying any server-side code). Next, setup an instance of the Watson Text to Speech service for that application. When a service gets bound to a Bluemix application, new credentials are automatically generated for making calls to the service. These credentials will be used as part of this getting started guide, and can be found once the service is started by clicking on the “Show Credentials” link on the service. For more information about creating Bluemix applications and attaching Bluemix and Watson services read [Bluemix getting started](https://developer.ibm.com/bluemix/#gettingstarted).
 
@@ -61,10 +61,11 @@ github "watson-developer-cloud/ios-sdk"
 				<true/>
 				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
 			</dict>
 		</dict>
 	</dict>
-
 ```
 
 <img src="./Quickstart-Images/plistPropertyList.png" width="600">
@@ -82,30 +83,30 @@ import AVFoundation
 11) Replace the code over the ***viewDidLoad*** function in the ViewController class:
 
 ```swift
-    
+
     var player: AVAudioPlayer?
-    
+
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
+
         let tts = TextToSpeech(username: "YOUR SERVICE USERNAME", password: "YOUR SERVICE PASSWORD")
-        
+
         tts.synthesize("All the problems of the world could be settled easily if men were only willing to think.",
                        voice: SynthesisVoice.GB_Kate,
                        audioFormat: AudioFormat.WAV,
                        failure: { error in
                             print("error was generated \(error)")
                         }) { data in
-                        
+
                         do {
                             self.player = try AVAudioPlayer(data: data)
                             self.player!.play()
                         } catch {
                             print("Couldn't create player.")
                         }
-                        
+
         }
     }
 ```

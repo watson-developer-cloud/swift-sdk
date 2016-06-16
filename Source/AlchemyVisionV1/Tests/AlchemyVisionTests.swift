@@ -661,4 +661,76 @@ class AlchemyVisionTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    // MARK: - Negative Tests
+    
+    func testGetRankedImageFaceTagsWithInvalidURL() {
+        let description = "Perform face recognition at an invalid URL."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let url = "this-url-is-invalid"
+        alchemyVision.getRankedImageFaceTags(url: url, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testGetImageWithInvalidHTML() {
+        let description = "Identify the primary image in an invalid HTML document."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let html = "this-html-is-invalid"
+        alchemyVision.getImage(html: html, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testGetImageWithInvalidURL() {
+        let description = "Identify the primary image at an invalid URL."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let url = "this-url-is-invalid"
+        alchemyVision.getImage(url: url, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testGetRankedImageKeywordsWithInvalidURL() {
+        let description = "Perform image tagging on the primary image at an invalid URL."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let url = "this-url-is-invalid"
+        alchemyVision.getRankedImageKeywords(url: url, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testGetRankedImageSceneTextWithInvalidURL() {
+        let description = "Identify text in the primary image at an invalid URL."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        let url = "this-url-is-invalid"
+        alchemyVision.getRankedImageSceneText(url: url, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
 }

@@ -22,9 +22,9 @@ class AlchemyVisionTests: XCTestCase {
     private var alchemyVision: AlchemyVision!
     private let timeout: NSTimeInterval = 30.0
 
-    private var car: NSURL!
-    private var obama: NSURL!
-    private var sign: NSURL!
+    private var car: NSData!
+    private var obama: NSData!
+    private var sign: NSData!
     private var html: NSURL!
     
     private var htmlContents: String!
@@ -67,9 +67,9 @@ class AlchemyVisionTests: XCTestCase {
     func loadResources() {
         let bundle = NSBundle(forClass: self.dynamicType)
         guard
-            let car = bundle.URLForResource("car", withExtension: "png"),
-            let obama = bundle.URLForResource("obama", withExtension: "jpg"),
-            let sign = bundle.URLForResource("sign", withExtension: "jpg"),
+            let car = NSData(contentsOfURL: bundle.URLForResource("car", withExtension: "png")!),
+            let obama = NSData(contentsOfURL: bundle.URLForResource("obama", withExtension: "jpg")!),
+            let sign = NSData(contentsOfURL: bundle.URLForResource("sign", withExtension: "jpg")!),
             let html = bundle.URLForResource("example", withExtension: "html")
         else {
             XCTFail("Unable to locate testing resources.")
@@ -110,7 +110,7 @@ class AlchemyVisionTests: XCTestCase {
     func testGetRankedImageFaceTagsImage1() {
         let description = "Perform face recognition on an uploaded image."
         let expectation = expectationWithDescription(description)
-        
+
         alchemyVision.getRankedImageFaceTags(image: obama, failure: failWithError) { faceTags in
             
             // verify faceTags structure
@@ -169,7 +169,7 @@ class AlchemyVisionTests: XCTestCase {
     func testGetRankedImageFaceTagsImage2() {
         let description = "Perform face recognition on an uploaded image."
         let expectation = expectationWithDescription(description)
-        
+
         alchemyVision.getRankedImageFaceTags(image: obama, knowledgeGraph: true, failure: failWithError) { faceTags in
             
             // verify faceTags structure
@@ -411,7 +411,7 @@ class AlchemyVisionTests: XCTestCase {
     func testGetRankedImageKeywordsImage1() {
         let description = "Perform image tagging on an uploaded image."
         let expectation = expectationWithDescription(description)
-        
+
         alchemyVision.getRankedImageKeywords(image: car, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
@@ -452,7 +452,7 @@ class AlchemyVisionTests: XCTestCase {
     func testGetRankedImageKeywordsImage2() {
         let description = "Perform image tagging on an uploaded image."
         let expectation = expectationWithDescription(description)
-        
+
         alchemyVision.getRankedImageKeywords(image: car, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
@@ -575,7 +575,7 @@ class AlchemyVisionTests: XCTestCase {
     func testGetRankedImageSceneTextImage() {
         let description = "Identify text in an uploaded image."
         let expectation = expectationWithDescription(description)
-        
+
         alchemyVision.getRankedImageSceneText(image: sign, failure: failWithError) { sceneTexts in
             
             // verify sceneTexts structure

@@ -51,7 +51,7 @@ public class AlchemyVision {
      Perform face recognition on an uploaded image. For each face detected, the service returns
      the estimated bounding box, gender, age, and name (if a celebrity is detected).
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform face recognition.
+     - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the detected faces.
@@ -270,7 +270,7 @@ public class AlchemyVision {
     /**
      Perform image tagging on an uploaded image.
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform face recognition.
+     - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter forceShowAll: Should lower confidence tags be included in the response?
      - parameter knowledgeGraph: Should hierarchical metadata be provided for each tag?
      - parameter failure: A function executed if an error occurs.
@@ -382,7 +382,7 @@ public class AlchemyVision {
     /**
      Identify text in an uploaded image.
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform text detection.
+     - parameter image: The data representation of the image file on which to perform text detection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the detected text.
      */

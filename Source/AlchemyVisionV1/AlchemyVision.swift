@@ -57,7 +57,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        image image: NSURL,
+        image imageData: NSData,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: FaceTags -> Void)
@@ -75,9 +75,6 @@ public class AlchemyVision {
             }
         }
         
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -86,7 +83,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST request
@@ -280,7 +277,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        image image: NSURL,
+        image imageData: NSData,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
@@ -306,9 +303,6 @@ public class AlchemyVision {
             }
         }
         
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -317,7 +311,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST request
@@ -393,7 +387,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        image image: NSURL,
+        image imageData: NSData,
         failure: (NSError -> Void)? = nil,
         success: SceneText -> Void)
     {
@@ -402,10 +396,7 @@ public class AlchemyVision {
         queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(NSURLQueryItem(name: "imagePostMode", value: "raw"))
-        
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
+
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -414,7 +405,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST requeset

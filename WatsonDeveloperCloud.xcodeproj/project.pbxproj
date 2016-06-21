@@ -7,6 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		124C2DF91D19E29100D9F602 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */; };
+		124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E081D19E2FA00D9F602 /* AudioFormat.swift */; };
+		124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E091D19E2FA00D9F602 /* Customization.swift */; };
+		124C2E181D19E2FA00D9F602 /* CustomizationID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0A1D19E2FA00D9F602 /* CustomizationID.swift */; };
+		124C2E191D19E2FA00D9F602 /* CustomizationWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0B1D19E2FA00D9F602 /* CustomizationWords.swift */; };
+		124C2E1A1D19E2FA00D9F602 /* CustomVoiceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0C1D19E2FA00D9F602 /* CustomVoiceUpdate.swift */; };
+		124C2E1B1D19E2FA00D9F602 /* PhonemeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0D1D19E2FA00D9F602 /* PhonemeFormat.swift */; };
+		124C2E1C1D19E2FA00D9F602 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0E1D19E2FA00D9F602 /* Pronunciation.swift */; };
+		124C2E1D1D19E2FA00D9F602 /* SynthesisVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E0F1D19E2FA00D9F602 /* SynthesisVoice.swift */; };
+		124C2E1E1D19E2FA00D9F602 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E101D19E2FA00D9F602 /* Translation.swift */; };
+		124C2E1F1D19E2FA00D9F602 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E111D19E2FA00D9F602 /* Voice.swift */; };
+		124C2E201D19E2FA00D9F602 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E121D19E2FA00D9F602 /* Word.swift */; };
+		124C2E221D19E2FA00D9F602 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */; };
+		124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */; };
+		124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		124C2E251D19E32300D9F602 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		124C2E261D19E34200D9F602 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		124C2E271D19E34200D9F602 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1.framework */; };
 		7A219F241D1350CC0003D934 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F1E1D1350CC0003D934 /* Conversation.swift */; };
@@ -91,21 +112,6 @@
 		7AAAF4191CEE9DAC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF41C1CEE9E0700B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF41D1CEE9E1800B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF42D1CEE9E8600B74848 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4231CEE9E8600B74848 /* TextToSpeechV1.framework */; };
-		7AAAF43A1CEE9E8E00B74848 /* AudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A751CEE878D002C9564 /* AudioFormat.swift */; };
-		7AAAF43B1CEE9E8E00B74848 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A761CEE878D002C9564 /* Customization.swift */; };
-		7AAAF43C1CEE9E8E00B74848 /* PhonemeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */; };
-		7AAAF43D1CEE9E8E00B74848 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A781CEE878D002C9564 /* Pronunciation.swift */; };
-		7AAAF43E1CEE9E8E00B74848 /* SynthesisVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */; };
-		7AAAF43F1CEE9E8E00B74848 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7A1CEE878D002C9564 /* Voice.swift */; };
-		7AAAF4401CEE9E9100B74848 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */; };
-		7AAAF4411CEE9E9500B74848 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */; };
-		7AAAF4421CEE9E9F00B74848 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
-		7AAAF4431CEE9EAF00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4441CEE9EAF00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
-		7AAAF4451CEE9EAF00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF4471CEE9EEE00B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF4481CEE9EEE00B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4581CEE9F8800B74848 /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF44E1CEE9F8800B74848 /* SpeechToTextV1.framework */; };
 		7AAAF4651CEE9FB300B74848 /* AlternativeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */; };
 		7AAAF4661CEE9FB300B74848 /* AlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */; };
@@ -228,7 +234,6 @@
 		7AAAF5BC1CEEA6B700B74848 /* PersonalityInsightsV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5BD1CEEA6BC00B74848 /* RestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B21CEEA62C00B74848 /* RestKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5BE1CEEA6C000B74848 /* SpeechToTextV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AAAF5BF1CEEA6C400B74848 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C01CEEA6C800B74848 /* ToneAnalyzerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C11CEEA6CB00B74848 /* VisualRecognitionV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -318,6 +323,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		124C2DFA1D19E29100D9F602 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 124C2DEE1D19E29000D9F602;
+			remoteInfo = TextToSpeechV1;
+		};
 		7A219F111D1350670003D934 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
@@ -359,13 +371,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF3F71CEE9D1900B74848;
 			remoteInfo = ToneAnalyzerV3;
-		};
-		7AAAF42E1CEE9E8600B74848 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7AAAF4221CEE9E8600B74848;
-			remoteInfo = TextToSpeechV1;
 		};
 		7AAAF4591CEE9F8800B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -433,6 +438,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		124C2E291D19E3AE00D9F602 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */,
+				124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A219F2F1D1351380003D934 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -496,17 +512,6 @@
 			files = (
 				7AAAF41C1CEE9E0700B74848 /* Alamofire.framework in CopyFiles */,
 				7AAAF41D1CEE9E1800B74848 /* Freddy.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4461CEE9EE700B74848 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7AAAF4471CEE9EEE00B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF4481CEE9EEE00B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +618,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeechV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		124C2E081D19E2FA00D9F602 /* AudioFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFormat.swift; sourceTree = "<group>"; };
+		124C2E091D19E2FA00D9F602 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		124C2E0A1D19E2FA00D9F602 /* CustomizationID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationID.swift; sourceTree = "<group>"; };
+		124C2E0B1D19E2FA00D9F602 /* CustomizationWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationWords.swift; sourceTree = "<group>"; };
+		124C2E0C1D19E2FA00D9F602 /* CustomVoiceUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVoiceUpdate.swift; sourceTree = "<group>"; };
+		124C2E0D1D19E2FA00D9F602 /* PhonemeFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeFormat.swift; sourceTree = "<group>"; };
+		124C2E0E1D19E2FA00D9F602 /* Pronunciation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
+		124C2E0F1D19E2FA00D9F602 /* SynthesisVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthesisVoice.swift; sourceTree = "<group>"; };
+		124C2E101D19E2FA00D9F602 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		124C2E111D19E2FA00D9F602 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
+		124C2E121D19E2FA00D9F602 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
+		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -711,14 +731,6 @@
 		7AAA9A581CEE6089002C9564 /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAA9A591CEE6089002C9564 /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTests.swift; sourceTree = "<group>"; };
 		7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognition.swift; sourceTree = "<group>"; };
-		7AAA9A751CEE878D002C9564 /* AudioFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFormat.swift; sourceTree = "<group>"; };
-		7AAA9A761CEE878D002C9564 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
-		7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeFormat.swift; sourceTree = "<group>"; };
-		7AAA9A781CEE878D002C9564 /* Pronunciation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
-		7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynthesisVoice.swift; sourceTree = "<group>"; };
-		7AAA9A7A1CEE878D002C9564 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
-		7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
-		7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVision.swift; sourceTree = "<group>"; };
 		7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTags.swift; sourceTree = "<group>"; };
 		7AAA9AA41CEE8B3C002C9564 /* ImageKeyWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyWords.swift; sourceTree = "<group>"; };
@@ -736,8 +748,6 @@
 		7AAAF3CC1CEE9A3700B74848 /* VisualRecognitionV3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisualRecognitionV3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF3F81CEE9D1900B74848 /* ToneAnalyzerV3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ToneAnalyzerV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4011CEE9D1900B74848 /* ToneAnalyzerV3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToneAnalyzerV3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AAAF4231CEE9E8600B74848 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeechV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AAAF42C1CEE9E8600B74848 /* TextToSpeechV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF44E1CEE9F8800B74848 /* SpeechToTextV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpeechToTextV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4571CEE9F8800B74848 /* SpeechToTextV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechToTextV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4851CEEA07900B74848 /* PersonalityInsightsV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PersonalityInsightsV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -853,6 +863,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		124C2DEB1D19E29000D9F602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2E261D19E34200D9F602 /* Alamofire.framework in Frameworks */,
+				124C2E271D19E34200D9F602 /* Freddy.framework in Frameworks */,
+				124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		124C2DF51D19E29100D9F602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2DF91D19E29100D9F602 /* TextToSpeechV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A219F021D1350670003D934 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -957,24 +985,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF4021CEE9D1900B74848 /* ToneAnalyzerV3.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF41F1CEE9E8600B74848 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF4431CEE9EAF00B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4441CEE9EAF00B74848 /* Freddy.framework in Frameworks */,
-				7AAAF4451CEE9EAF00B74848 /* RestKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4291CEE9E8600B74848 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF42D1CEE9E8600B74848 /* TextToSpeechV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1153,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
+			isa = PBXGroup;
+			children = (
+				124C2E071D19E2FA00D9F602 /* Models */,
+				124C2E131D19E2FA00D9F602 /* Tests */,
+				124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */,
+			);
+			name = TextToSpeechV1;
+			path = Source/TextToSpeechV1;
+			sourceTree = "<group>";
+		};
+		124C2E071D19E2FA00D9F602 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				124C2E081D19E2FA00D9F602 /* AudioFormat.swift */,
+				124C2E091D19E2FA00D9F602 /* Customization.swift */,
+				124C2E0A1D19E2FA00D9F602 /* CustomizationID.swift */,
+				124C2E0B1D19E2FA00D9F602 /* CustomizationWords.swift */,
+				124C2E0C1D19E2FA00D9F602 /* CustomVoiceUpdate.swift */,
+				124C2E0D1D19E2FA00D9F602 /* PhonemeFormat.swift */,
+				124C2E0E1D19E2FA00D9F602 /* Pronunciation.swift */,
+				124C2E0F1D19E2FA00D9F602 /* SynthesisVoice.swift */,
+				124C2E101D19E2FA00D9F602 /* Translation.swift */,
+				124C2E111D19E2FA00D9F602 /* Voice.swift */,
+				124C2E121D19E2FA00D9F602 /* Word.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		124C2E131D19E2FA00D9F602 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1194,10 +1241,10 @@
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
-				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7A987D2C1D19D47D003626B2 /* TradeoffAnalyticsV1 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
+				124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1210,8 +1257,6 @@
 				7AAAF3CC1CEE9A3700B74848 /* VisualRecognitionV3Tests.xctest */,
 				7AAAF3F81CEE9D1900B74848 /* ToneAnalyzerV3.framework */,
 				7AAAF4011CEE9D1900B74848 /* ToneAnalyzerV3Tests.xctest */,
-				7AAAF4231CEE9E8600B74848 /* TextToSpeechV1.framework */,
-				7AAAF42C1CEE9E8600B74848 /* TextToSpeechV1Tests.xctest */,
 				7AAAF44E1CEE9F8800B74848 /* SpeechToTextV1.framework */,
 				7AAAF4571CEE9F8800B74848 /* SpeechToTextV1Tests.xctest */,
 				7AAAF4851CEEA07900B74848 /* PersonalityInsightsV2.framework */,
@@ -1236,6 +1281,8 @@
 				7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */,
 				7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */,
 				7A987D541D19D887003626B2 /* RelationshipExtractionV1Tests.xctest */,
+				124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */,
+				124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1605,38 +1652,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */ = {
-			isa = PBXGroup;
-			children = (
-				7AAA9A741CEE878D002C9564 /* Models */,
-				7AAA9A7B1CEE878D002C9564 /* Tests */,
-				7AAA9A7D1CEE878D002C9564 /* TextToSpeech.swift */,
-			);
-			name = TextToSpeechV1;
-			path = Source/TextToSpeechV1;
-			sourceTree = SOURCE_ROOT;
-		};
-		7AAA9A741CEE878D002C9564 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				7AAA9A751CEE878D002C9564 /* AudioFormat.swift */,
-				7AAA9A761CEE878D002C9564 /* Customization.swift */,
-				7AAA9A771CEE878D002C9564 /* PhonemeFormat.swift */,
-				7AAA9A781CEE878D002C9564 /* Pronunciation.swift */,
-				7AAA9A791CEE878D002C9564 /* SynthesisVoice.swift */,
-				7AAA9A7A1CEE878D002C9564 /* Voice.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		7AAA9A7B1CEE878D002C9564 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7AAA9A7C1CEE878D002C9564 /* TextToSpeechTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1820,6 +1835,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		124C2DEC1D19E29000D9F602 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A219F031D1350670003D934 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1864,14 +1887,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF5C01CEEA6C800B74848 /* ToneAnalyzerV3.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4201CEE9E8600B74848 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF5BF1CEEA6C400B74848 /* TextToSpeechV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1949,6 +1964,43 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 124C2E001D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */;
+			buildPhases = (
+				124C2DEA1D19E29000D9F602 /* Sources */,
+				124C2DEB1D19E29000D9F602 /* Frameworks */,
+				124C2DEC1D19E29000D9F602 /* Headers */,
+				124C2DED1D19E29000D9F602 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TextToSpeechV1;
+			productName = TextToSpeechV1;
+			productReference = 124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		124C2DF71D19E29100D9F602 /* TextToSpeechV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 124C2E031D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1Tests" */;
+			buildPhases = (
+				124C2DF41D19E29100D9F602 /* Sources */,
+				124C2DF51D19E29100D9F602 /* Frameworks */,
+				124C2DF61D19E29100D9F602 /* Resources */,
+				124C2E291D19E3AE00D9F602 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				124C2DFB1D19E29100D9F602 /* PBXTargetDependency */,
+			);
+			name = TextToSpeechV1Tests;
+			productName = TextToSpeechV1Tests;
+			productReference = 124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7A219F051D1350670003D934 /* ConversationV1 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1" */;
@@ -2169,43 +2221,6 @@
 			name = ToneAnalyzerV3Tests;
 			productName = ToneAnalyzerV3Tests;
 			productReference = 7AAAF4011CEE9D1900B74848 /* ToneAnalyzerV3Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		7AAAF4221CEE9E8600B74848 /* TextToSpeechV1 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7AAAF4341CEE9E8600B74848 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */;
-			buildPhases = (
-				7AAAF41E1CEE9E8600B74848 /* Sources */,
-				7AAAF41F1CEE9E8600B74848 /* Frameworks */,
-				7AAAF4201CEE9E8600B74848 /* Headers */,
-				7AAAF4211CEE9E8600B74848 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TextToSpeechV1;
-			productName = TextToSpeechV1;
-			productReference = 7AAAF4231CEE9E8600B74848 /* TextToSpeechV1.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7AAAF42B1CEE9E8600B74848 /* TextToSpeechV1Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7AAAF4371CEE9E8600B74848 /* Build configuration list for PBXNativeTarget "TextToSpeechV1Tests" */;
-			buildPhases = (
-				7AAAF4281CEE9E8600B74848 /* Sources */,
-				7AAAF4291CEE9E8600B74848 /* Frameworks */,
-				7AAAF42A1CEE9E8600B74848 /* Resources */,
-				7AAAF4461CEE9EE700B74848 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7AAAF42F1CEE9E8600B74848 /* PBXTargetDependency */,
-			);
-			name = TextToSpeechV1Tests;
-			productName = TextToSpeechV1Tests;
-			productReference = 7AAAF42C1CEE9E8600B74848 /* TextToSpeechV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7AAAF44D1CEE9F8800B74848 /* SpeechToTextV1 */ = {
@@ -2551,6 +2566,12 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
+					124C2DEE1D19E29000D9F602 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					124C2DF71D19E29100D9F602 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					7A219F051D1350670003D934 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = CDXLDASP22;
@@ -2591,12 +2612,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					7AAAF4001CEE9D1900B74848 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
-					7AAAF4221CEE9E8600B74848 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
-					7AAAF42B1CEE9E8600B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					7AAAF44D1CEE9F8800B74848 = {
@@ -2687,8 +2702,6 @@
 				7A987D531D19D887003626B2 /* RelationshipExtractionV1Tests */,
 				7AAAF44D1CEE9F8800B74848 /* SpeechToTextV1 */,
 				7AAAF4561CEE9F8800B74848 /* SpeechToTextV1Tests */,
-				7AAAF4221CEE9E8600B74848 /* TextToSpeechV1 */,
-				7AAAF42B1CEE9E8600B74848 /* TextToSpeechV1Tests */,
 				7AAAF3F71CEE9D1900B74848 /* ToneAnalyzerV3 */,
 				7AAAF4001CEE9D1900B74848 /* ToneAnalyzerV3Tests */,
 				7A987D131D19D424003626B2 /* TradeoffAnalyticsV1 */,
@@ -2699,11 +2712,28 @@
 				7AAAF3A61CEE99FC00B74848 /* RestKitTests */,
 				B1AAD2D21D08656B002DAB84 /* DocumentConversionV1 */,
 				B1AAD2DB1D08656B002DAB84 /* DocumentConversionV1Tests */,
+				124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */,
+				124C2DF71D19E29100D9F602 /* TextToSpeechV1Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		124C2DED1D19E29000D9F602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		124C2DF61D19E29100D9F602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2E251D19E32300D9F602 /* Credentials.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A219F041D1350670003D934 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2797,21 +2827,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF4161CEE9D6E00B74848 /* Credentials.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4211CEE9E8600B74848 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF42A1CEE9E8600B74848 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF4421CEE9E9F00B74848 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2977,6 +2992,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		124C2DEA1D19E29000D9F602 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2E1C1D19E2FA00D9F602 /* Pronunciation.swift in Sources */,
+				124C2E1A1D19E2FA00D9F602 /* CustomVoiceUpdate.swift in Sources */,
+				124C2E1E1D19E2FA00D9F602 /* Translation.swift in Sources */,
+				124C2E1B1D19E2FA00D9F602 /* PhonemeFormat.swift in Sources */,
+				124C2E181D19E2FA00D9F602 /* CustomizationID.swift in Sources */,
+				124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */,
+				124C2E201D19E2FA00D9F602 /* Word.swift in Sources */,
+				124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */,
+				124C2E191D19E2FA00D9F602 /* CustomizationWords.swift in Sources */,
+				124C2E1F1D19E2FA00D9F602 /* Voice.swift in Sources */,
+				124C2E221D19E2FA00D9F602 /* TextToSpeech.swift in Sources */,
+				124C2E1D1D19E2FA00D9F602 /* SynthesisVoice.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		124C2DF41D19E29100D9F602 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A219F011D1350670003D934 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3093,28 +3135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF4151CEE9D5A00B74848 /* ToneAnalyzerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF41E1CEE9E8600B74848 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF43A1CEE9E8E00B74848 /* AudioFormat.swift in Sources */,
-				7AAAF43E1CEE9E8E00B74848 /* SynthesisVoice.swift in Sources */,
-				7AAAF43C1CEE9E8E00B74848 /* PhonemeFormat.swift in Sources */,
-				7AAAF43B1CEE9E8E00B74848 /* Customization.swift in Sources */,
-				7AAAF4401CEE9E9100B74848 /* TextToSpeech.swift in Sources */,
-				7AAAF43F1CEE9E8E00B74848 /* Voice.swift in Sources */,
-				7AAAF43D1CEE9E8E00B74848 /* Pronunciation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4281CEE9E8600B74848 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7AAAF4411CEE9E9500B74848 /* TextToSpeechTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3356,6 +3376,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		124C2DFB1D19E29100D9F602 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */;
+			targetProxy = 124C2DFA1D19E29100D9F602 /* PBXContainerItemProxy */;
+		};
 		7A219F121D1350670003D934 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7A219F051D1350670003D934 /* ConversationV1 */;
@@ -3385,11 +3410,6 @@
 			isa = PBXTargetDependency;
 			target = 7AAAF3F71CEE9D1900B74848 /* ToneAnalyzerV3 */;
 			targetProxy = 7AAAF4031CEE9D1900B74848 /* PBXContainerItemProxy */;
-		};
-		7AAAF42F1CEE9E8600B74848 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7AAAF4221CEE9E8600B74848 /* TextToSpeechV1 */;
-			targetProxy = 7AAAF42E1CEE9E8600B74848 /* PBXContainerItemProxy */;
 		};
 		7AAAF45A1CEE9F8800B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3439,6 +3459,74 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		124C2E011D19E29100D9F602 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		124C2E021D19E29100D9F602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		124C2E041D19E29100D9F602 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		124C2E051D19E29100D9F602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		7A0F95C51C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3940,74 +4028,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ToneAnalyzerV3Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		7AAAF4351CEE9E8600B74848 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		7AAAF4361CEE9E8600B74848 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		7AAAF4381CEE9E8600B74848 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		7AAAF4391CEE9E8600B74848 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4636,6 +4656,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		124C2E001D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				124C2E011D19E29100D9F602 /* Debug */,
+				124C2E021D19E29100D9F602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		124C2E031D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				124C2E041D19E29100D9F602 /* Debug */,
+				124C2E051D19E29100D9F602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4749,24 +4785,6 @@
 			buildConfigurations = (
 				7AAAF40D1CEE9D1900B74848 /* Debug */,
 				7AAAF40E1CEE9D1900B74848 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7AAAF4341CEE9E8600B74848 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7AAAF4351CEE9E8600B74848 /* Debug */,
-				7AAAF4361CEE9E8600B74848 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7AAAF4371CEE9E8600B74848 /* Build configuration list for PBXNativeTarget "TextToSpeechV1Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7AAAF4381CEE9E8600B74848 /* Debug */,
-				7AAAF4391CEE9E8600B74848 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

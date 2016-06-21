@@ -16,10 +16,9 @@
 
 import Foundation
 import Freddy
-    
+
 /** A custom voice model supported by the Text to Speech service. */
-public struct Customization: JSONDecodable {
-    
+public struct CustomizationWords: JSONDecodable {
     /// The GUID of the custom voice model.
     public let customizationID: String
     
@@ -44,7 +43,10 @@ public struct Customization: JSONDecodable {
     /// A description of the custom voice model.
     public let description: String?
     
-    /// Used internally to initialize a `Customization` model from JSON.
+    /// A list of words and their translations from the custom voice model.
+    public let words: [Word]
+    
+    /// Used internally to initialize a `CustomizationWords` model from JSON.
     public init(json: JSON) throws {
         customizationID = try json.string("customization_id")
         name = try json.string("name")
@@ -53,5 +55,6 @@ public struct Customization: JSONDecodable {
         created = try json.int("created")
         lastModified = try json.int("last_modified")
         description = try? json.string("description")
+        words = try json.arrayOf("words", type: Word.self)
     }
 }

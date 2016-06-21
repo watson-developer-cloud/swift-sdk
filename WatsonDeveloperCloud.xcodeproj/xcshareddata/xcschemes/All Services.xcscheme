@@ -70,6 +70,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F051D1350670003D934"
+               BuildableName = "ConversationV1.framework"
+               BlueprintName = "ConversationV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F0E1D1350670003D934"
+               BuildableName = "ConversationV1Tests.xctest"
+               BlueprintName = "ConversationV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF5081CEEA1DA00B74848"
                BuildableName = "DialogV1.framework"
                BlueprintName = "DialogV1"
@@ -182,6 +210,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D4A1D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1.framework"
+               BlueprintName = "RelationshipExtractionV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D531D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1Tests.xctest"
+               BlueprintName = "RelationshipExtractionV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
                BuildableName = "RestKit.framework"
                BlueprintName = "RestKit"
@@ -238,34 +294,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AAAF4221CEE9E8600B74848"
-               BuildableName = "TextToSpeechV1.framework"
-               BlueprintName = "TextToSpeechV1"
-               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AAAF42B1CEE9E8600B74848"
-               BuildableName = "TextToSpeechV1Tests.xctest"
-               BlueprintName = "TextToSpeechV1Tests"
-               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF3F71CEE9D1900B74848"
                BuildableName = "ToneAnalyzerV3.framework"
                BlueprintName = "ToneAnalyzerV3"
@@ -294,6 +322,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D131D19D424003626B2"
+               BuildableName = "TradeoffAnalyticsV1.framework"
+               BlueprintName = "TradeoffAnalyticsV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D1C1D19D424003626B2"
+               BuildableName = "TradeoffAnalyticsV1Tests.xctest"
+               BlueprintName = "TradeoffAnalyticsV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF3C21CEE9A3700B74848"
                BuildableName = "VisualRecognitionV3.framework"
                BlueprintName = "VisualRecognitionV3"
@@ -311,6 +367,34 @@
                BlueprintIdentifier = "7AAAF3CB1CEE9A3700B74848"
                BuildableName = "VisualRecognitionV3Tests.xctest"
                BlueprintName = "VisualRecognitionV3Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "124C2DEE1D19E29000D9F602"
+               BuildableName = "TextToSpeechV1.framework"
+               BlueprintName = "TextToSpeechV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "124C2DF71D19E29100D9F602"
+               BuildableName = "TextToSpeechV1Tests.xctest"
+               BlueprintName = "TextToSpeechV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -406,16 +490,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AAAF42B1CEE9E8600B74848"
-               BuildableName = "TextToSpeechV1Tests.xctest"
-               BlueprintName = "TextToSpeechV1Tests"
-               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF4001CEE9D1900B74848"
                BuildableName = "ToneAnalyzerV3Tests.xctest"
                BlueprintName = "ToneAnalyzerV3Tests"
@@ -429,6 +503,36 @@
                BlueprintIdentifier = "7AAAF3CB1CEE9A3700B74848"
                BuildableName = "VisualRecognitionV3Tests.xctest"
                BlueprintName = "VisualRecognitionV3Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D1C1D19D424003626B2"
+               BuildableName = "TradeoffAnalyticsV1Tests.xctest"
+               BlueprintName = "TradeoffAnalyticsV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D531D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1Tests.xctest"
+               BlueprintName = "RelationshipExtractionV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "124C2DF71D19E29100D9F602"
+               BuildableName = "TextToSpeechV1Tests.xctest"
+               BlueprintName = "TextToSpeechV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "124C2DEE1D19E29000D9F602"
-               BuildableName = "TextToSpeechV1.framework"
-               BlueprintName = "TextToSpeechV1"
-               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "124C2DF71D19E29100D9F602"
-               BuildableName = "TextToSpeechV1Tests.xctest"
-               BlueprintName = "TextToSpeechV1Tests"
+               BlueprintIdentifier = "7A2DFAE61D0633D3008A6FB7"
+               BuildableName = "TradeoffAnalyticsV1.framework"
+               BlueprintName = "TradeoffAnalyticsV1"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "124C2DF71D19E29100D9F602"
-               BuildableName = "TextToSpeechV1Tests.xctest"
-               BlueprintName = "TextToSpeechV1Tests"
+               BlueprintIdentifier = "7A2DFAEF1D0633D4008A6FB7"
+               BuildableName = "TradeoffAnalyticsV1Tests.xctest"
+               BlueprintName = "TradeoffAnalyticsV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "124C2DEE1D19E29000D9F602"
-            BuildableName = "TextToSpeechV1.framework"
-            BlueprintName = "TextToSpeechV1"
+            BlueprintIdentifier = "7A2DFAE61D0633D3008A6FB7"
+            BuildableName = "TradeoffAnalyticsV1.framework"
+            BlueprintName = "TradeoffAnalyticsV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "124C2DEE1D19E29000D9F602"
-            BuildableName = "TextToSpeechV1.framework"
-            BlueprintName = "TextToSpeechV1"
+            BlueprintIdentifier = "7A2DFAE61D0633D3008A6FB7"
+            BuildableName = "TradeoffAnalyticsV1.framework"
+            BlueprintName = "TradeoffAnalyticsV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "124C2DEE1D19E29000D9F602"
-            BuildableName = "TextToSpeechV1.framework"
-            BlueprintName = "TextToSpeechV1"
+            BlueprintIdentifier = "7A2DFAE61D0633D3008A6FB7"
+            BuildableName = "TradeoffAnalyticsV1.framework"
+            BlueprintName = "TradeoffAnalyticsV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

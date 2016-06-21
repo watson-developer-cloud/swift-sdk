@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A2DFAF11D0633D4008A6FB7 /* TradeoffAnalyticsV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A2DFAE71D0633D3008A6FB7 /* TradeoffAnalyticsV1.framework */; };
+		7A2DFB011D063710008A6FB7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		7A2DFB021D063710008A6FB7 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7A2DFB031D063751008A6FB7 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7A2DFB051D06384F008A6FB7 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A2DFB061D06384F008A6FB7 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A2DFB071D06384F008A6FB7 /* RestKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A2DFB091D063DB7008A6FB7 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DFB081D063DB7008A6FB7 /* Problem.swift */; };
+		7A2DFB0B1D063DE4008A6FB7 /* TradeoffAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DFB0A1D063DE4008A6FB7 /* TradeoffAnalytics.swift */; };
+		7A2DFB0D1D063DF3008A6FB7 /* TradeoffAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DFB0C1D063DF3008A6FB7 /* TradeoffAnalyticsTests.swift */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -192,6 +202,8 @@
 		7AAAF5BF1CEEA6C400B74848 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C01CEEA6C800B74848 /* ToneAnalyzerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5C11CEEA6CB00B74848 /* VisualRecognitionV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AAB71721D06C20D002BAEAE /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB71711D06C20D002BAEAE /* Resolution.swift */; };
+		7AAB71741D06C219002BAEAE /* Dilemma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB71731D06C219002BAEAE /* Dilemma.swift */; };
 		7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -225,6 +237,8 @@
 		7AB53B921CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */; };
 		7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B901CF64DE700FFC9DD /* testArticle.html */; };
 		7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B911CF64DE700FFC9DD /* testText.txt */; };
+		7AC71E3D1D1206D5000D7021 /* TradeoffAnalyticsV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC71E3C1D1206D5000D7021 /* TradeoffAnalyticsV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC71E3E1D1228A5000D7021 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		B104CA921CFDE0BE00083E87 /* QueryParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = B104CA911CFDE0BE00083E87 /* QueryParam.swift */; };
 		B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */; };
 		B11545EF1CF77B0400A31024 /* DocumentEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */; };
@@ -232,6 +246,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7A2DFAF21D0633D4008A6FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A2DFAE61D0633D3008A6FB7;
+			remoteInfo = TradeoffAnalyticsV1;
+		};
 		7AAAF3A91CEE99FC00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
@@ -312,6 +333,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7A2DFB041D063806008A6FB7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A2DFB051D06384F008A6FB7 /* Alamofire.framework in CopyFiles */,
+				7A2DFB061D06384F008A6FB7 /* Freddy.framework in CopyFiles */,
+				7A2DFB071D06384F008A6FB7 /* RestKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF3B71CEE9A1200B74848 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,6 +483,11 @@
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
+		7A2DFAE71D0633D3008A6FB7 /* TradeoffAnalyticsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TradeoffAnalyticsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A2DFAF01D0633D4008A6FB7 /* TradeoffAnalyticsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeoffAnalyticsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A2DFB081D063DB7008A6FB7 /* Problem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Problem.swift; sourceTree = "<group>"; };
+		7A2DFB0A1D063DE4008A6FB7 /* TradeoffAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeoffAnalytics.swift; sourceTree = "<group>"; };
+		7A2DFB0C1D063DF3008A6FB7 /* TradeoffAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeoffAnalyticsTests.swift; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
@@ -563,6 +601,8 @@
 		7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TextToSpeechV1.h; path = Source/SupportingFiles/TextToSpeechV1.h; sourceTree = "<group>"; };
 		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ToneAnalyzerV3.h; path = Source/SupportingFiles/ToneAnalyzerV3.h; sourceTree = "<group>"; };
 		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualRecognitionV3.h; path = Source/SupportingFiles/VisualRecognitionV3.h; sourceTree = "<group>"; };
+		7AAB71711D06C20D002BAEAE /* Resolution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
+		7AAB71731D06C219002BAEAE /* Dilemma.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dilemma.swift; sourceTree = "<group>"; };
 		7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageV1.swift; sourceTree = "<group>"; };
 		7AB53B591CF64DE000FFC9DD /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
 		7AB53B5A1CF64DE000FFC9DD /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
@@ -594,6 +634,7 @@
 		7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageV1Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyLanguageV1Tests.swift; sourceTree = "<group>"; };
 		7AB53B901CF64DE700FFC9DD /* testArticle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testArticle.html; sourceTree = "<group>"; };
 		7AB53B911CF64DE700FFC9DD /* testText.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testText.txt; sourceTree = "<group>"; };
+		7AC71E3C1D1206D5000D7021 /* TradeoffAnalyticsV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TradeoffAnalyticsV1.h; path = Source/SupportingFiles/TradeoffAnalyticsV1.h; sourceTree = "<group>"; };
 		7AEB131C1CBF7C8A00101884 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		7AEB13201CBF7C8A00101884 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7AEB13211CBF7C8A00101884 /* ConversationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
@@ -615,6 +656,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7A2DFAE31D0633D3008A6FB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A2DFB011D063710008A6FB7 /* Alamofire.framework in Frameworks */,
+				7A2DFB021D063710008A6FB7 /* Freddy.framework in Frameworks */,
+				7A2DFB031D063751008A6FB7 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A2DFAED1D0633D4008A6FB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A2DFAF11D0633D4008A6FB7 /* TradeoffAnalyticsV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39A1CEE99FC00B74848 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -861,6 +920,7 @@
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7AAA9A731CEE878D002C9564 /* TextToSpeechV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
+				7A2DFAFE1D0635DC008A6FB7 /* TradeoffAnalyticsV1 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
@@ -894,6 +954,8 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
+				7A2DFAE71D0633D3008A6FB7 /* TradeoffAnalyticsV1.framework */,
+				7A2DFAF01D0633D4008A6FB7 /* TradeoffAnalyticsV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -907,6 +969,35 @@
 				7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7A2DFAFE1D0635DC008A6FB7 /* TradeoffAnalyticsV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7A2DFAFF1D0635DC008A6FB7 /* Models */,
+				7A2DFB001D0635DC008A6FB7 /* Tests */,
+				7A2DFB0A1D063DE4008A6FB7 /* TradeoffAnalytics.swift */,
+			);
+			name = TradeoffAnalyticsV1;
+			path = Source/TradeoffAnalyticsV1;
+			sourceTree = "<group>";
+		};
+		7A2DFAFF1D0635DC008A6FB7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB71731D06C219002BAEAE /* Dilemma.swift */,
+				7A2DFB081D063DB7008A6FB7 /* Problem.swift */,
+				7AAB71711D06C20D002BAEAE /* Resolution.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A2DFB001D0635DC008A6FB7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7A2DFB0C1D063DF3008A6FB7 /* TradeoffAnalyticsTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		7A6117231CB596E0009A4DA1 /* SupportingFiles */ = {
@@ -925,6 +1016,7 @@
 				7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */,
 				7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */,
 				7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */,
+				7AC71E3C1D1206D5000D7021 /* TradeoffAnalyticsV1.h */,
 				7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */,
 				7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */,
 			);
@@ -1306,6 +1398,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		7A2DFAE41D0633D3008A6FB7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC71E3D1D1206D5000D7021 /* TradeoffAnalyticsV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39B1CEE99FC00B74848 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1397,6 +1497,43 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7A2DFAE61D0633D3008A6FB7 /* TradeoffAnalyticsV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A2DFAF81D0633D4008A6FB7 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1" */;
+			buildPhases = (
+				7A2DFAE21D0633D3008A6FB7 /* Sources */,
+				7A2DFAE31D0633D3008A6FB7 /* Frameworks */,
+				7A2DFAE41D0633D3008A6FB7 /* Headers */,
+				7A2DFAE51D0633D3008A6FB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TradeoffAnalyticsV1;
+			productName = TradeoffAnalyticsV1;
+			productReference = 7A2DFAE71D0633D3008A6FB7 /* TradeoffAnalyticsV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7A2DFAEF1D0633D4008A6FB7 /* TradeoffAnalyticsV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A2DFAFB1D0633D4008A6FB7 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1Tests" */;
+			buildPhases = (
+				7A2DFAEC1D0633D4008A6FB7 /* Sources */,
+				7A2DFAED1D0633D4008A6FB7 /* Frameworks */,
+				7A2DFAEE1D0633D4008A6FB7 /* Resources */,
+				7A2DFB041D063806008A6FB7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A2DFAF31D0633D4008A6FB7 /* PBXTargetDependency */,
+			);
+			name = TradeoffAnalyticsV1Tests;
+			productName = TradeoffAnalyticsV1Tests;
+			productReference = 7A2DFAF01D0633D4008A6FB7 /* TradeoffAnalyticsV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7AAAF39D1CEE99FC00B74848 /* RestKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AAAF3B31CEE99FC00B74848 /* Build configuration list for PBXNativeTarget "RestKit" */;
@@ -1814,6 +1951,12 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
+					7A2DFAE61D0633D3008A6FB7 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					7A2DFAEF1D0633D4008A6FB7 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					7AAAF39D1CEE99FC00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -1912,6 +2055,8 @@
 				7AAAF42B1CEE9E8600B74848 /* TextToSpeechV1Tests */,
 				7AAAF3F71CEE9D1900B74848 /* ToneAnalyzerV3 */,
 				7AAAF4001CEE9D1900B74848 /* ToneAnalyzerV3Tests */,
+				7A2DFAE61D0633D3008A6FB7 /* TradeoffAnalyticsV1 */,
+				7A2DFAEF1D0633D4008A6FB7 /* TradeoffAnalyticsV1Tests */,
 				7AAAF3C21CEE9A3700B74848 /* VisualRecognitionV3 */,
 				7AAAF3CB1CEE9A3700B74848 /* VisualRecognitionV3Tests */,
 				7AAAF39D1CEE99FC00B74848 /* RestKit */,
@@ -1921,6 +2066,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7A2DFAE51D0633D3008A6FB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A2DFAEE1D0633D4008A6FB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC71E3E1D1228A5000D7021 /* Credentials.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39C1CEE99FC00B74848 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2114,6 +2274,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7A2DFAE21D0633D3008A6FB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AAB71721D06C20D002BAEAE /* Resolution.swift in Sources */,
+				7AAB71741D06C219002BAEAE /* Dilemma.swift in Sources */,
+				7A2DFB091D063DB7008A6FB7 /* Problem.swift in Sources */,
+				7A2DFB0B1D063DE4008A6FB7 /* TradeoffAnalytics.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A2DFAEC1D0633D4008A6FB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A2DFB0D1D063DF3008A6FB7 /* TradeoffAnalyticsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF3991CEE99FC00B74848 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2379,6 +2558,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7A2DFAF31D0633D4008A6FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A2DFAE61D0633D3008A6FB7 /* TradeoffAnalyticsV1 */;
+			targetProxy = 7A2DFAF21D0633D4008A6FB7 /* PBXContainerItemProxy */;
+		};
 		7AAAF3AA1CEE99FC00B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7AAAF39D1CEE99FC00B74848 /* RestKit */;
@@ -2523,6 +2707,80 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7A2DFAF91D0633D4008A6FB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7A2DFAFA1D0633D4008A6FB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7A2DFAFC1D0633D4008A6FB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7A2DFAFD1D0633D4008A6FB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -3296,6 +3554,24 @@
 			buildConfigurations = (
 				7A0F95C51C23288E004C01C0 /* Debug */,
 				7A0F95C61C23288E004C01C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A2DFAF81D0633D4008A6FB7 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A2DFAF91D0633D4008A6FB7 /* Debug */,
+				7A2DFAFA1D0633D4008A6FB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A2DFAFB1D0633D4008A6FB7 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A2DFAFC1D0633D4008A6FB7 /* Debug */,
+				7A2DFAFD1D0633D4008A6FB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

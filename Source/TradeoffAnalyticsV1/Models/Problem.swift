@@ -343,13 +343,9 @@ public enum Range: JSONEncodable, JSONDecodable {
     /// column. Valid only for `DateTime` columns.
     case DateRange(low: NSDate, high: NSDate)
     
-    /// High and low `Int` values that define the range of a
-    /// `Numeric` column. Valid only for `Numeric` columns.
-    case IntRange(low: Int, high: Int)
-    
     /// High and low `Double` values that define the range of a
     /// `Numeric` column. Valid only for `Numeric` columns.
-    case DoubleRange(low: Double, high: Double)
+    case NumericRange(low: Double, high: Double)
     
     /// An array of valid values that define the range of possible values
     /// for a `Categorical` column. Valid only for `Categorical` columns.
@@ -370,11 +366,7 @@ public enum Range: JSONEncodable, JSONDecodable {
             json["low"] = .String(Range.dateFormatter.stringFromDate(low))
             json["high"] = .String(Range.dateFormatter.stringFromDate(high))
             return .Dictionary(json)
-        case .IntRange(let low, let high):
-            json["low"] = .Int(low)
-            json["high"] = .Int(high)
-            return .Dictionary(json)
-        case .DoubleRange(let low, let high):
+        case .NumericRange(let low, let high):
             json["low"] = .Double(low)
             json["high"] = .Double(high)
             return .Dictionary(json)
@@ -395,15 +387,9 @@ public enum Range: JSONEncodable, JSONDecodable {
             }
         }
         
-        // try to parse as `Range.IntRange`
-        if let low = try? json.int("low"), high = try? json.int("high") {
-            self = .IntRange(low: low, high: high)
-            return
-        }
-        
-        // try to parse as `Range.DoubleRange`
+        // try to parse as `Range.NumericRange`
         if let low = try? json.double("low"), high = try? json.double("high") {
-            self = .DoubleRange(low: low, high: high)
+            self = .NumericRange(low: low, high: high)
             return
         }
         

@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-
+/** A custom voice model used by the Text to Speech service. */
 public struct CustomVoiceUpdate: JSONEncodable {
     
     /// The new name for the custom voice model.
@@ -29,6 +29,7 @@ public struct CustomVoiceUpdate: JSONEncodable {
     /// A list of words and their translations from the custom voice model.
     private let words: [Word]
     
+    /// Used to initialize a `CustomVoiceUpdate` model.
     public init(name: String? = nil, description: String? = nil, words: [Word] = []) {
         self.name = name
         self.description = description

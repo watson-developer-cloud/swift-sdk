@@ -660,7 +660,7 @@ public class TextToSpeech {
      
      - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter word: The new word to be added to the custom voice model.
-     - parameter word: The translation of the new word.
+     - parameter translation: The translation of the new word.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */

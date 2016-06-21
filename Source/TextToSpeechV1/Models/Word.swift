@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-
+/** A model used by the Text To Speech service, containing a word and its translation. */
 public struct Word: JSONEncodable, JSONDecodable {
     /// A word from the custom voice model.
     public let word: String
@@ -25,6 +25,7 @@ public struct Word: JSONEncodable, JSONDecodable {
     /// The phonetic or sounds-like translation for the word.
     public let translation: String
     
+    /// Used to initialize a `Word` model.
     public init(word: String, translation: String) {
         self.word = word
         self.translation = translation

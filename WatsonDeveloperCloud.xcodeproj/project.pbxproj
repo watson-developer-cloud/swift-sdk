@@ -268,6 +268,33 @@
 		B11545ED1CF76D5100A31024 /* AlchemyLanguageV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B571CF64DD900FFC9DD /* AlchemyLanguageV1.swift */; };
 		B11545EF1CF77B0400A31024 /* DocumentEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */; };
 		B11545F11CF77D1F00A31024 /* Emotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11545F01CF77D1F00A31024 /* Emotions.swift */; };
+		B1A8E5061D19CEDB00678412 /* AlchemyDataNewsV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A8E4FC1D19CEDA00678412 /* AlchemyDataNewsV1.framework */; };
+		B1A8E5411D19DB9A00678412 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		B1A8E5421D19DB9A00678412 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		B1A8E5461D19DCD800678412 /* AlchemyDataNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5151D19D02700678412 /* AlchemyDataNews.swift */; };
+		B1A8E5471D19DCDF00678412 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5171D19D02700678412 /* Concept.swift */; };
+		B1A8E5481D19DCDF00678412 /* DisambiguatedLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5181D19D02700678412 /* DisambiguatedLinks.swift */; };
+		B1A8E5491D19DCDF00678412 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5191D19D02700678412 /* Document.swift */; };
+		B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51A1D19D02700678412 /* DocumentEnriched.swift */; };
+		B1A8E54B1D19DCDF00678412 /* DocumentSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51B1D19D02700678412 /* DocumentSource.swift */; };
+		B1A8E54C1D19DCDF00678412 /* DocumentUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51C1D19D02700678412 /* DocumentUrl.swift */; };
+		B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51D1D19D02700678412 /* EnrichedTitle.swift */; };
+		B1A8E54E1D19DCDF00678412 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51E1D19D02700678412 /* Entity.swift */; };
+		B1A8E54F1D19DCDF00678412 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E51F1D19D02700678412 /* Feed.swift */; };
+		B1A8E5501D19DCDF00678412 /* ImageKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5201D19D02700678412 /* ImageKeyword.swift */; };
+		B1A8E5511D19DCDF00678412 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5211D19D02700678412 /* Keyword.swift */; };
+		B1A8E5521D19DCDF00678412 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5221D19D02700678412 /* KnowledgeGraph.swift */; };
+		B1A8E5531D19DCDF00678412 /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5231D19D02700678412 /* NewsResponse.swift */; };
+		B1A8E5541D19DCDF00678412 /* NewsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5241D19D02700678412 /* NewsResult.swift */; };
+		B1A8E5551D19DCDF00678412 /* PublicationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5251D19D02700678412 /* PublicationDate.swift */; };
+		B1A8E5561D19DCDF00678412 /* Quotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5261D19D02700678412 /* Quotation.swift */; };
+		B1A8E5571D19DCDF00678412 /* SAORelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5271D19D02700678412 /* SAORelation.swift */; };
+		B1A8E5581D19DCDF00678412 /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5281D19D02700678412 /* Sentiment.swift */; };
+		B1A8E5591D19DCDF00678412 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E5291D19D02700678412 /* Taxonomy.swift */; };
+		B1A8E55A1D19DCE600678412 /* AlchemyDataNewsV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E52B1D19D02700678412 /* AlchemyDataNewsV1Tests.swift */; };
+		B1A8E55C1D19DD8100678412 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1A8E55D1D19DD8100678412 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1A8E55E1D19DF1000678412 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		B1AAD2DD1D08656B002DAB84 /* DocumentConversionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */; };
 		B1AAD2EA1D0865DA002DAB84 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		B1AAD2EB1D0865F5002DAB84 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
@@ -388,6 +415,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF5631CEEA2DF00B74848;
 			remoteInfo = AlchemyLanguageV1;
+		};
+		B1A8E5071D19CEDB00678412 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1A8E4FB1D19CEDA00678412;
+			remoteInfo = AlchemyDataNewsV1;
 		};
 		B1AAD2DE1D08656B002DAB84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -551,6 +585,17 @@
 			files = (
 				7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */,
 				7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E55B1D19DD7200678412 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B1A8E55C1D19DD8100678412 /* Alamofire.framework in CopyFiles */,
+				B1A8E55D1D19DD8100678412 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +806,29 @@
 		B104CA911CFDE0BE00083E87 /* QueryParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParam.swift; path = Models/QueryParam.swift; sourceTree = "<group>"; };
 		B11545EE1CF77B0400A31024 /* DocumentEmotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentEmotion.swift; sourceTree = "<group>"; };
 		B11545F01CF77D1F00A31024 /* Emotions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emotions.swift; sourceTree = "<group>"; };
+		B1A8E4FC1D19CEDA00678412 /* AlchemyDataNewsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyDataNewsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1A8E5051D19CEDB00678412 /* AlchemyDataNewsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlchemyDataNewsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1A8E5151D19D02700678412 /* AlchemyDataNews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyDataNews.swift; sourceTree = "<group>"; };
+		B1A8E5171D19D02700678412 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
+		B1A8E5181D19D02700678412 /* DisambiguatedLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguatedLinks.swift; sourceTree = "<group>"; };
+		B1A8E5191D19D02700678412 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		B1A8E51A1D19D02700678412 /* DocumentEnriched.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentEnriched.swift; sourceTree = "<group>"; };
+		B1A8E51B1D19D02700678412 /* DocumentSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSource.swift; sourceTree = "<group>"; };
+		B1A8E51C1D19D02700678412 /* DocumentUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUrl.swift; sourceTree = "<group>"; };
+		B1A8E51D1D19D02700678412 /* EnrichedTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTitle.swift; sourceTree = "<group>"; };
+		B1A8E51E1D19D02700678412 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		B1A8E51F1D19D02700678412 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		B1A8E5201D19D02700678412 /* ImageKeyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKeyword.swift; sourceTree = "<group>"; };
+		B1A8E5211D19D02700678412 /* Keyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		B1A8E5221D19D02700678412 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
+		B1A8E5231D19D02700678412 /* NewsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		B1A8E5241D19D02700678412 /* NewsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsResult.swift; sourceTree = "<group>"; };
+		B1A8E5251D19D02700678412 /* PublicationDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationDate.swift; sourceTree = "<group>"; };
+		B1A8E5261D19D02700678412 /* Quotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quotation.swift; sourceTree = "<group>"; };
+		B1A8E5271D19D02700678412 /* SAORelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAORelation.swift; sourceTree = "<group>"; };
+		B1A8E5281D19D02700678412 /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
+		B1A8E5291D19D02700678412 /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		B1A8E52B1D19D02700678412 /* AlchemyDataNewsV1Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyDataNewsV1Tests.swift; sourceTree = "<group>"; };
 		B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DocumentConversionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1AAD2DC1D08656B002DAB84 /* DocumentConversionV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DocumentConversionV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1AAD2ED1D086640002DAB84 /* DocumentConversionV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DocumentConversionV1.h; path = Source/SupportingFiles/DocumentConversionV1.h; sourceTree = "<group>"; };
@@ -1037,6 +1105,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1A8E4F81D19CEDA00678412 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1A8E5411D19DB9A00678412 /* Alamofire.framework in Frameworks */,
+				B1A8E5421D19DB9A00678412 /* Freddy.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E5021D19CEDB00678412 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1A8E5061D19CEDB00678412 /* AlchemyDataNewsV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1AAD2CF1D08656B002DAB84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1094,6 +1179,7 @@
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
+				B1A8E5141D19D02700678412 /* AlchemyDataNewsV1 */,
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
 				7A219F1D1D1350CC0003D934 /* ConversationV1 */,
@@ -1144,6 +1230,8 @@
 				7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */,
 				B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */,
 				B1AAD2DC1D08656B002DAB84 /* DocumentConversionV1Tests.xctest */,
+				B1A8E4FC1D19CEDA00678412 /* AlchemyDataNewsV1.framework */,
+				B1A8E5051D19CEDB00678412 /* AlchemyDataNewsV1Tests.xctest */,
 				7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */,
 				7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */,
 				7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */,
@@ -1618,6 +1706,51 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		B1A8E5141D19D02700678412 /* AlchemyDataNewsV1 */ = {
+			isa = PBXGroup;
+			children = (
+				B1A8E5151D19D02700678412 /* AlchemyDataNews.swift */,
+				B1A8E5161D19D02700678412 /* Models */,
+				B1A8E52A1D19D02700678412 /* Tests */,
+			);
+			name = AlchemyDataNewsV1;
+			path = Source/AlchemyDataNewsV1;
+			sourceTree = "<group>";
+		};
+		B1A8E5161D19D02700678412 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1A8E5171D19D02700678412 /* Concept.swift */,
+				B1A8E5181D19D02700678412 /* DisambiguatedLinks.swift */,
+				B1A8E5191D19D02700678412 /* Document.swift */,
+				B1A8E51A1D19D02700678412 /* DocumentEnriched.swift */,
+				B1A8E51B1D19D02700678412 /* DocumentSource.swift */,
+				B1A8E51C1D19D02700678412 /* DocumentUrl.swift */,
+				B1A8E51D1D19D02700678412 /* EnrichedTitle.swift */,
+				B1A8E51E1D19D02700678412 /* Entity.swift */,
+				B1A8E51F1D19D02700678412 /* Feed.swift */,
+				B1A8E5201D19D02700678412 /* ImageKeyword.swift */,
+				B1A8E5211D19D02700678412 /* Keyword.swift */,
+				B1A8E5221D19D02700678412 /* KnowledgeGraph.swift */,
+				B1A8E5231D19D02700678412 /* NewsResponse.swift */,
+				B1A8E5241D19D02700678412 /* NewsResult.swift */,
+				B1A8E5251D19D02700678412 /* PublicationDate.swift */,
+				B1A8E5261D19D02700678412 /* Quotation.swift */,
+				B1A8E5271D19D02700678412 /* SAORelation.swift */,
+				B1A8E5281D19D02700678412 /* Sentiment.swift */,
+				B1A8E5291D19D02700678412 /* Taxonomy.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B1A8E52A1D19D02700678412 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B1A8E52B1D19D02700678412 /* AlchemyDataNewsV1Tests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1795,6 +1928,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E4F91D19CEDA00678412 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2327,6 +2467,43 @@
 			productReference = 7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B1A8E4FB1D19CEDA00678412 /* AlchemyDataNewsV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1A8E5111D19CEDB00678412 /* Build configuration list for PBXNativeTarget "AlchemyDataNewsV1" */;
+			buildPhases = (
+				B1A8E4F71D19CEDA00678412 /* Sources */,
+				B1A8E4F81D19CEDA00678412 /* Frameworks */,
+				B1A8E4F91D19CEDA00678412 /* Headers */,
+				B1A8E4FA1D19CEDA00678412 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlchemyDataNewsV1;
+			productName = AlchemyDataNewsV1;
+			productReference = B1A8E4FC1D19CEDA00678412 /* AlchemyDataNewsV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B1A8E5041D19CEDB00678412 /* AlchemyDataNewsV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1A8E5121D19CEDB00678412 /* Build configuration list for PBXNativeTarget "AlchemyDataNewsV1Tests" */;
+			buildPhases = (
+				B1A8E5011D19CEDB00678412 /* Sources */,
+				B1A8E5021D19CEDB00678412 /* Frameworks */,
+				B1A8E5031D19CEDB00678412 /* Resources */,
+				B1A8E55B1D19DD7200678412 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1A8E5081D19CEDB00678412 /* PBXTargetDependency */,
+			);
+			name = AlchemyDataNewsV1Tests;
+			productName = AlchemyDataNewsV1Tests;
+			productReference = B1A8E5051D19CEDB00678412 /* AlchemyDataNewsV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B1AAD2D21D08656B002DAB84 /* DocumentConversionV1 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1AAD2E81D08656B002DAB84 /* Build configuration list for PBXNativeTarget "DocumentConversionV1" */;
@@ -2464,6 +2641,12 @@
 					7AAAF56C1CEEA2DF00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					B1A8E4FB1D19CEDA00678412 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					B1A8E5041D19CEDB00678412 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					B1AAD2D21D08656B002DAB84 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -2484,6 +2667,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				B1A8E4FB1D19CEDA00678412 /* AlchemyDataNewsV1 */,
+				B1A8E5041D19CEDB00678412 /* AlchemyDataNewsV1Tests */,
 				7AAAF5631CEEA2DF00B74848 /* AlchemyLanguageV1 */,
 				7AAAF56C1CEEA2DF00B74848 /* AlchemyLanguageV1Tests */,
 				7AAAF5351CEEA23D00B74848 /* AlchemyVisionV1 */,
@@ -2751,6 +2936,21 @@
 				7AAAF59E1CEEA31500B74848 /* Credentials.plist in Resources */,
 				7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */,
 				7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E4FA1D19CEDA00678412 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E5031D19CEDB00678412 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1A8E55E1D19DF1000678412 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3097,6 +3297,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1A8E4F71D19CEDA00678412 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1A8E5491D19DCDF00678412 /* Document.swift in Sources */,
+				B1A8E5511D19DCDF00678412 /* Keyword.swift in Sources */,
+				B1A8E5541D19DCDF00678412 /* NewsResult.swift in Sources */,
+				B1A8E54F1D19DCDF00678412 /* Feed.swift in Sources */,
+				B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */,
+				B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */,
+				B1A8E54C1D19DCDF00678412 /* DocumentUrl.swift in Sources */,
+				B1A8E5521D19DCDF00678412 /* KnowledgeGraph.swift in Sources */,
+				B1A8E5551D19DCDF00678412 /* PublicationDate.swift in Sources */,
+				B1A8E5531D19DCDF00678412 /* NewsResponse.swift in Sources */,
+				B1A8E5481D19DCDF00678412 /* DisambiguatedLinks.swift in Sources */,
+				B1A8E54E1D19DCDF00678412 /* Entity.swift in Sources */,
+				B1A8E5581D19DCDF00678412 /* Sentiment.swift in Sources */,
+				B1A8E5471D19DCDF00678412 /* Concept.swift in Sources */,
+				B1A8E5571D19DCDF00678412 /* SAORelation.swift in Sources */,
+				B1A8E5461D19DCD800678412 /* AlchemyDataNews.swift in Sources */,
+				B1A8E5591D19DCDF00678412 /* Taxonomy.swift in Sources */,
+				B1A8E54B1D19DCDF00678412 /* DocumentSource.swift in Sources */,
+				B1A8E5561D19DCDF00678412 /* Quotation.swift in Sources */,
+				B1A8E5501D19DCDF00678412 /* ImageKeyword.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1A8E5011D19CEDB00678412 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1A8E55A1D19DCE600678412 /* AlchemyDataNewsV1Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1AAD2CE1D08656B002DAB84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3190,6 +3425,11 @@
 			isa = PBXTargetDependency;
 			target = 7AAAF5631CEEA2DF00B74848 /* AlchemyLanguageV1 */;
 			targetProxy = 7AAAF56F1CEEA2DF00B74848 /* PBXContainerItemProxy */;
+		};
+		B1A8E5081D19CEDB00678412 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1A8E4FB1D19CEDA00678412 /* AlchemyDataNewsV1 */;
+			targetProxy = B1A8E5071D19CEDB00678412 /* PBXContainerItemProxy */;
 		};
 		B1AAD2DF1D08656B002DAB84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4254,6 +4494,74 @@
 			};
 			name = Release;
 		};
+		B1A8E50D1D19CEDB00678412 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B1A8E50E1D19CEDB00678412 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B1A8E50F1D19CEDB00678412 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B1A8E5101D19CEDB00678412 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.AlchemyDataNewsV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B1AAD2E41D08656B002DAB84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4588,6 +4896,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B1A8E5111D19CEDB00678412 /* Build configuration list for PBXNativeTarget "AlchemyDataNewsV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1A8E50D1D19CEDB00678412 /* Debug */,
+				B1A8E50E1D19CEDB00678412 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B1A8E5121D19CEDB00678412 /* Build configuration list for PBXNativeTarget "AlchemyDataNewsV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1A8E50F1D19CEDB00678412 /* Debug */,
+				B1A8E5101D19CEDB00678412 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		B1AAD2E81D08656B002DAB84 /* Build configuration list for PBXNativeTarget "DocumentConversionV1" */ = {
 			isa = XCConfigurationList;

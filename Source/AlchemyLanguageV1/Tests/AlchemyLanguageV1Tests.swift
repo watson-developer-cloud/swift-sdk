@@ -73,7 +73,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the author of an Ars article"
         let expectation = expectationWithDescription(description)
 
-        service.getAuthorsURL(testUrl, failure: failWithError) { authors in
+        service.getAuthors(forUrl: testUrl, failure: failWithError) { authors in
             XCTAssertNotNil(authors, "Response should not be nil")
             XCTAssertNotNil(authors.authors, "Authors should not be nil")
             expectation.fulfill()
@@ -87,7 +87,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getAuthorsHtml(url!, failure: failWithError) { authors in
+        service.getAuthors(forHtml: url!, failure: failWithError) { authors in
             XCTAssertNotNil(authors, "Response should not be nil")
             XCTAssertNotNil(authors.authors, "Authors should not be nil")
             expectation.fulfill()
@@ -101,7 +101,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = expectationWithDescription(description)
         
-        service.getRankedConceptsURL(testUrl, failure: failWithError) { concepts in
+        service.getRankedConcepts(forUrl: testUrl, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Reponse should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -115,7 +115,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRankedConceptsHtml(url!, failure: failWithError) { concepts in
+        service.getRankedConcepts(forHtml: url!, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -130,7 +130,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRankedConceptsHtml(url!, knowledgeGraph: QueryParam.Excluded, failure: failWithError) { concepts in
+        service.getRankedConcepts(forHtml: url!, knowledgeGraph: QueryParam.Excluded, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -145,7 +145,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRankedConceptsHtml(url!, knowledgeGraph: QueryParam.Included, failure: failWithError) { concepts in
+        service.getRankedConcepts(forHtml: url!, knowledgeGraph: QueryParam.Included, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -160,7 +160,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getRankedConceptsText(url!, failure: failWithError) { concepts in
+        service.getRankedConcepts(forText: url!, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -173,7 +173,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the entities of an Ars article"
         let expectation = expectationWithDescription(description)
         
-        service.getRankedNamedEntitiesURL(testUrl, failure: failWithError) { entities in
+        service.getRankedNamedEntities(forUrl: testUrl, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -187,7 +187,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRankedNamedEntitiesHtml(url!, failure: failWithError) { entities in
+        service.getRankedNamedEntities(forHtml: url!, url: nil, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -202,7 +202,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getRankedNamedEntitiesHtml(url!, failure: failWithError) { entities in
+        service.getRankedNamedEntities(forText: url!, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -214,7 +214,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetRankedKeywordsURL() {
         let description = "Get the keywords of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getRankedKeywordsURL(testUrl, failure: failWithError) { keywords in
+        service.getRankedKeywords(forUrl: testUrl, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -228,7 +228,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
 
-        service.getRankedKeywordsHtml(url!, failure: failWithError) { keywords in
+        service.getRankedKeywords(forHtml: url!, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -242,7 +242,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getRankedKeywordsText(url!, failure: failWithError) { keywords in
+        service.getRankedKeywords(forText: url!, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -253,7 +253,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetLanguageURL() {
         let description = "Get the language of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getLanguageURL(testUrl, failure: failWithError) { language in
+        service.getLanguage(forUrl: testUrl, failure: failWithError) { language in
             XCTAssertNotNil(language, "Response should not be nil")
             XCTAssertNotNil(language.language, "Language should not be nil")
             expectation.fulfill()
@@ -267,7 +267,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getLanguageText(url!, failure: failWithError) { language in
+        service.getLanguage(forText: url!, failure: failWithError) { language in
             XCTAssertNotNil(language, "Response should not be nil")
             XCTAssertNotNil(language.language, "Language should not be nil")
             expectation.fulfill()
@@ -278,7 +278,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetMicroformatsURL() {
         let description = "Get the microformats of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getMicroformatDataURL(testUrl, failure: failWithError) { microformats in
+        service.getMicroformatData(forUrl: testUrl, failure: failWithError) { microformats in
             XCTAssertNotNil(microformats, "Response should not be nil")
             XCTAssertNotNil(microformats.microformats, "Microformats should not be nil")
             expectation.fulfill()
@@ -292,7 +292,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getMicroformatDataHtml(url!, failure: failWithError) { microformats in
+        service.getMicroformatData(forHtml: url!, failure: failWithError) { microformats in
             XCTAssertNotNil(microformats, "Response should not be nil")
             XCTAssertNotNil(microformats.microformats, "Microformats should not be nil")
             expectation.fulfill()
@@ -303,7 +303,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetPubDateURL() {
         let description = "Get the publication date of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getPubDateURL(testUrl, failure: failWithError) { pubDate in
+        service.getPubDate(forUrl: testUrl, failure: failWithError) { pubDate in
             XCTAssertNotNil(pubDate, "Response should not be nil")
             XCTAssertNotNil(pubDate.publicationDate, "Publication date should not be nil")
             expectation.fulfill()
@@ -317,7 +317,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getPubDateHtml(url!, failure: failWithError) { pubDate in
+        service.getPubDate(forHtml: url!, failure: failWithError) { pubDate in
             XCTAssertNotNil(pubDate, "Response should not be nil")
             XCTAssertNotNil(pubDate.publicationDate, "Publication date should not be nil")
             expectation.fulfill()
@@ -328,7 +328,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetRelationsURL() {
         let description = "Get the Subject-Action-Object relations of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getRelationsURL(testUrl, failure: failWithError) { relations in
+        service.getRelations(forUrl: testUrl, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -342,7 +342,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRelationsHtml(url!, failure: failWithError) { relations in
+        service.getRelations(forHtml: url!, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -356,7 +356,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getRelationsText(url!, failure: failWithError) { relations in
+        service.getRelations(forText: url!, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -367,7 +367,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetTextSentimentURL() {
         let description = "Get the sentiment of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getTextSentimentURL(testUrl, failure: failWithError) { sentiment in
+        service.getTextSentiment(forUrl: testUrl, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Sentiment should not be nil")
             expectation.fulfill()
@@ -381,7 +381,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getTextSentimentHtml(url!, failure: failWithError) { sentiment in
+        service.getTextSentiment(forHtml: url!, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -396,7 +396,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getTextSentimentText(url!, failure: failWithError) { sentiment in
+        service.getTextSentiment(forText: url!, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -409,7 +409,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the sentiment of a phrase in an Ars article"
         let expectation = expectationWithDescription(description)
         let phrase = "Developers who want to offer Instant Apps will have to modularize their apps"
-        service.getTargetedSentimentURL(phrase, url: testUrl, failure: failWithError) { sentiment in
+        service.getTargetedSentiment(forUrl: testUrl, target: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Sentiment should not be nil")
             expectation.fulfill()
@@ -424,7 +424,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let phrase = "the Yangshao people brewed a mixed beer with specialized tools and knowledge of temperature control"
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getTargetedSentimentText(url!, target: phrase, failure: failWithError) { sentiment in
+        service.getTargetedSentiment(forText: url!, target: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -440,7 +440,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let phrase = "Square Enix announced that the Romancing SaGa 2 remake was heading stateside in April"
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getTargetedSentimentText(url!, target: phrase, failure: failWithError) { sentiment in
+        service.getTargetedSentiment(forText: url!, target: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -452,7 +452,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetRankedTaxonomyURL() {
         let description = "Get the taxonomies of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getRankedTaxonomyURL(testUrl, failure: failWithError) { taxonomies in
+        service.getRankedTaxonomy(forUrl: testUrl, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -466,7 +466,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRankedTaxonomyHtml(url!, failure: failWithError) { taxonomies in
+        service.getRankedTaxonomy(forHtml: url!, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -481,7 +481,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getRankedTaxonomyText(url!, failure: failWithError) { taxonomies in
+        service.getRankedTaxonomy(forText: url!, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -493,7 +493,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetRawTextURL() {
         let description = "Get the raw text of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getRawTextURL(testUrl, failure: failWithError) { rawText in
+        service.getRawText(forUrl: testUrl, failure: failWithError) { rawText in
             XCTAssertNotNil(rawText, "Response should not be nil")
             XCTAssertNotNil(rawText.text, "Response should not be nil")
             expectation.fulfill()
@@ -507,7 +507,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getRawTextHtml(url!, failure: failWithError) { text in
+        service.getRawText(forHtml: url!, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -519,7 +519,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetTextURL() {
         let description = "Get the text of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getTextURL(testUrl, failure: failWithError) { text in
+        service.getText(forUrl: testUrl, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -533,7 +533,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getTextHtml(url!, failure: failWithError) { text in
+        service.getText(forHtml: url!, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -545,7 +545,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     func testGetTitleURL() {
         let description = "Get the title of an Ars article"
         let expectation = expectationWithDescription(description)
-        service.getTitleURL(testUrl, failure: failWithError) { title in
+        service.getTitle(forUrl: testUrl, failure: failWithError) { title in
             XCTAssertNotNil(title, "Response should not be nil")
             XCTAssertNotNil(title.title, "Title should not be nil")
             expectation.fulfill()
@@ -559,7 +559,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getTitleHtml(url!, failure: failWithError) { title in
+        service.getTitle(forHtml: url!, failure: failWithError) { title in
             XCTAssertNotNil(title, "Response should not be nil")
             XCTAssertNotNil(title.title, "Title should not be nil")
             expectation.fulfill()
@@ -572,7 +572,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = expectationWithDescription(description)
         
-        service.getFeedLinksURL(testUrl, failure: failWithError) { feeds in
+        service.getFeedLinks(forUrl: testUrl, failure: failWithError) { feeds in
             XCTAssertNotNil(feeds, "Response should not be nil")
             XCTAssertNotNil(feeds.feeds, "Feeds should not be nil")
             expectation.fulfill()
@@ -586,7 +586,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getFeedLinksHtml(url!, failure: failWithError) { feeds in
+        service.getFeedLinks(forHtml: url!, failure: failWithError) { feeds in
             XCTAssertNotNil(feeds, "Response should not be nil")
             XCTAssertNotNil(feeds.feeds, "Feeds should not be nil")
             expectation.fulfill()
@@ -598,7 +598,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         let description = "Get the emotion of an Ars article"
         let expectation = expectationWithDescription(description)
     
-        service.getEmotionURL(testUrl, failure: failWithError) { emotion in
+        service.getEmotion(forUrl: testUrl, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()
@@ -612,7 +612,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testArticle", withExtension: "html")
         
-        service.getEmotionHtml(url!, failure: failWithError) { emotion in
+        service.getEmotion(forHtml: url!, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()
@@ -626,7 +626,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
         
         let url = NSBundle(forClass: self.dynamicType).URLForResource("testText", withExtension: "txt")
         
-        service.getEmotionText(url!, failure: failWithError) { emotion in
+        service.getEmotion(forText: url!, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()
@@ -645,7 +645,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.getFeedLinksURL("DOGS", failure: failure, success: failWithResult)
+        service.getFeedLinks(forUrl: "DOGS", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

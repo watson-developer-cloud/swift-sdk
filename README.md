@@ -485,9 +485,9 @@ The following links provide more information about the Text To Speech service:
 
 ### Visual Recognition
 
-The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+The Visual Recognition service helps you to understand the contents of images. Submit an image, and the service returns scores for relevant classifiers representing things. It can even detect objects, texts or faces.
 
-How to instantiate and use the Tone Analyzer service:
+Here is an example how to use the service to detect faces in an Image:
 
 ```swift
 let apiKey = "your-apikey-here"

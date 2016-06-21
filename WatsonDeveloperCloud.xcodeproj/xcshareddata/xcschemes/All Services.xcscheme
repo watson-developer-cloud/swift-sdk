@@ -70,6 +70,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F051D1350670003D934"
+               BuildableName = "ConversationV1.framework"
+               BlueprintName = "ConversationV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F0E1D1350670003D934"
+               BuildableName = "ConversationV1Tests.xctest"
+               BlueprintName = "ConversationV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF5081CEEA1DA00B74848"
                BuildableName = "DialogV1.framework"
                BlueprintName = "DialogV1"
@@ -294,7 +322,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A2DFAE61D0633D3008A6FB7"
+               BlueprintIdentifier = "7A987D131D19D424003626B2"
                BuildableName = "TradeoffAnalyticsV1.framework"
                BlueprintName = "TradeoffAnalyticsV1"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -308,7 +336,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A2DFAEF1D0633D4008A6FB7"
+               BlueprintIdentifier = "7A987D1C1D19D424003626B2"
                BuildableName = "TradeoffAnalyticsV1Tests.xctest"
                BlueprintName = "TradeoffAnalyticsV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -457,6 +485,16 @@
                BlueprintIdentifier = "7AAAF3CB1CEE9A3700B74848"
                BuildableName = "VisualRecognitionV3Tests.xctest"
                BlueprintName = "VisualRecognitionV3Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D1C1D19D424003626B2"
+               BuildableName = "TradeoffAnalyticsV1Tests.xctest"
+               BlueprintName = "TradeoffAnalyticsV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

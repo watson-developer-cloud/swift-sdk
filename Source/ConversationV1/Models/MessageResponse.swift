@@ -28,10 +28,14 @@ public struct MessageResponse: JSONDecodable {
     /// that were found in the input text.
     public let entities: [Entity]?
     
+    /// The context of the conversation.
+    public let context: JSON?
+    
     /// Used internally to initialize a `MessageResponse` model from JSON.
     public init(json: JSON) throws {
         intents = try? json.arrayOf("intents",  type: Intent.self)
         entities = try? json.arrayOf("entities", type: Entity.self)
+        context = json["context"]
     }
 }
 

@@ -29,10 +29,7 @@ public class AlchemyDataNewsV1 {
     
     private let serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     private let errorDomain = "com.watsonplatform.alchemyDataNews"
-    
-    let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        "1234567890-._~")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 AlchemyDataNewsV1")
     
     /**
      Initilizes the AlchemyDataNews service
@@ -100,6 +97,7 @@ public class AlchemyDataNewsV1 {
             url: serviceUrl + "/data/GetNews",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -108,7 +106,7 @@ public class AlchemyDataNewsV1 {
             .responseObject(dataToError: dataToError) {
                 (response: Response<NewsResponse, NSError>) in
                 switch response.result {
-                case .Success(let authors): success(authors)
+                case .Success(let newsResponse): success(newsResponse)
                 case .Failure(let error): failure?(error)
                 }
         }

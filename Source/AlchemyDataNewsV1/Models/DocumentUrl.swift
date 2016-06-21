@@ -60,7 +60,7 @@ public struct DocumentUrl: JSONDecodable {
     public let image: String?
     
     /** see **ImageKeyword** */
-    public let imageKeywords: [ImageKeyword]
+    public let imageKeywords: [ImageKeyword]?
     
     /** see **Feed** */
     public let feeds: [Feed]?
@@ -89,7 +89,7 @@ public struct DocumentUrl: JSONDecodable {
         enrichedTitle = try? json.decode("enrichedTitle", type: EnrichedTitle.self)
         
         image = try? json.string("image")
-        imageKeywords = try json.arrayOf("imageKeywords", type: ImageKeyword.self)
+        imageKeywords = try? json.arrayOf("imageKeywords", type: ImageKeyword.self)
         feeds = try? json.arrayOf("feeds", type: Feed.self)
         cleanedTitle = try? json.string("cleanedTitle")
         publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)

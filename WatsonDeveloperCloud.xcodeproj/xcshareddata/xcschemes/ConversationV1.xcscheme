@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1A8E4FB1D19CEDA00678412"
-               BuildableName = "AlchemyDataNewsV1.framework"
-               BlueprintName = "AlchemyDataNewsV1"
+               BlueprintIdentifier = "7AC7C66E1CF63FC600A626E9"
+               BuildableName = "ConversationV1.framework"
+               BlueprintName = "ConversationV1"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1A8E5041D19CEDB00678412"
-               BuildableName = "AlchemyDataNewsV1Tests.xctest"
-               BlueprintName = "AlchemyDataNewsV1Tests"
+               BlueprintIdentifier = "7AC7C6771CF63FC600A626E9"
+               BuildableName = "ConversationV1Tests.xctest"
+               BlueprintName = "ConversationV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1A8E4FB1D19CEDA00678412"
-            BuildableName = "AlchemyDataNewsV1.framework"
-            BlueprintName = "AlchemyDataNewsV1"
+            BlueprintIdentifier = "7AC7C66E1CF63FC600A626E9"
+            BuildableName = "ConversationV1.framework"
+            BlueprintName = "ConversationV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1A8E4FB1D19CEDA00678412"
-            BuildableName = "AlchemyDataNewsV1.framework"
-            BlueprintName = "AlchemyDataNewsV1"
+            BlueprintIdentifier = "7AC7C66E1CF63FC600A626E9"
+            BuildableName = "ConversationV1.framework"
+            BlueprintName = "ConversationV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1A8E4FB1D19CEDA00678412"
-            BuildableName = "AlchemyDataNewsV1.framework"
-            BlueprintName = "AlchemyDataNewsV1"
+            BlueprintIdentifier = "7AC7C66E1CF63FC600A626E9"
+            BuildableName = "ConversationV1.framework"
+            BlueprintName = "ConversationV1"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

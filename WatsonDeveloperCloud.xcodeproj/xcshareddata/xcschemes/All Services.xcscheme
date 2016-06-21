@@ -70,6 +70,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F051D1350670003D934"
+               BuildableName = "ConversationV1.framework"
+               BlueprintName = "ConversationV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A219F0E1D1350670003D934"
+               BuildableName = "ConversationV1Tests.xctest"
+               BlueprintName = "ConversationV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF5081CEEA1DA00B74848"
                BuildableName = "DialogV1.framework"
                BlueprintName = "DialogV1"
@@ -322,7 +350,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B16399E11CFF444300A96B96"
+               BlueprintIdentifier = "B1A8E4FB1D19CEDA00678412"
                BuildableName = "AlchemyDataNewsV1.framework"
                BlueprintName = "AlchemyDataNewsV1"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -336,7 +364,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B16399EA1CFF444300A96B96"
+               BlueprintIdentifier = "B1A8E5041D19CEDB00678412"
                BuildableName = "AlchemyDataNewsV1Tests.xctest"
                BlueprintName = "AlchemyDataNewsV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">

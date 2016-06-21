@@ -92,6 +92,8 @@ class RelationshipExtractionTests: XCTestCase {
                 XCTAssertNotNil(entity.mentions.first?.text)
                 XCTAssertNotNil(entity.subtype)
                 XCTAssertNotNil(entity.type)
+                XCTAssertNotNil(entity.generic)
+                XCTAssertNotNil(entity.score)
             }
                 
             XCTAssertEqual(document.mentions.count, 7)
@@ -107,6 +109,9 @@ class RelationshipExtractionTests: XCTestCase {
                 XCTAssertNotNil(mention.entityType)
                 XCTAssertNotNil(mention.mentionClass)
                 XCTAssertNotNil(mention.text)
+                XCTAssertNotNil(mention.metonymy)
+                XCTAssertNotNil(mention.score)
+                XCTAssertNotNil(mention.corefScore)
             }
                 
             XCTAssertNotNil(document.relations.version)
@@ -125,6 +130,7 @@ class RelationshipExtractionTests: XCTestCase {
                 XCTAssertNotNil(relation.relatedMentions)
                 for relMen in relation.relatedMentions {
                     XCTAssertNotNil(relMen.relatedMentionID)
+                    XCTAssertNotNil(relMen.score)
                     XCTAssertNotNil(relMen.relatedMentionClass)
                     XCTAssertNotNil(relMen.modality)
                     XCTAssertNotNil(relMen.tense)

@@ -52,19 +52,8 @@ public struct Mention: JSONDecodable {
     /// The role the entity holds within this mention.
     public let entityRole: String
     
-    /// Indicates whether this mention is a substitution used to refer to another entity.
-    public let metonymy: Bool
-    
     /// The class of this mention.
     public let mentionClass: MentionClass
-    
-    /// The confidence level for the accuracy of the mention annotation, on a range from 0 to 1.
-    public let score: Double
-    
-    /// The confidence level for the accuracy of a mention that coreferences, or refers to, another
-    /// mention, on a range from 0 to 1. Mentions that don't refer to other mentions will always
-    /// have a corefScore of 1.
-    public let corefScore: Double
     
     /// The specific text for this mention.
     public let text: String
@@ -79,9 +68,6 @@ public struct Mention: JSONDecodable {
         entityID = try json.string("eid")
         entityType = try json.string("etype")
         entityRole = try json.string("role")
-        metonymy = try json.bool("metonymy")
-        score = try json.double("score")
-        corefScore = try json.double("corefScore")
         text = try json.string("text")
         
         guard let mentionType = MentionType(rawValue: try json.string("mtype")) else {

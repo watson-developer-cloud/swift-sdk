@@ -83,10 +83,6 @@ public struct RelatedMentions: JSONDecodable {
     /// The alphanumeric identifier of the relation mention.
     public let relatedMentionID: String
     
-    /// A level of confidence of the accuracy of the relation mention annotation, on a scale from 
-    /// 0 to 1.
-    public let score: Double
-    
     /// The specificity of the relation mention.
     public let relatedMentionClass: RelatedMentionClass
     
@@ -102,7 +98,6 @@ public struct RelatedMentions: JSONDecodable {
     /// Used internally to initialize a `RelatedMentions` model from JSON.
     public init(json: JSON) throws {
         relatedMentionID = try json.string("rmid")
-        score = try json.double("score")
         relatedMentionArgument = try json.arrayOf("rel_mention_arg", type: RelatedMentionArgument.self)
         
         guard let rMClass = RelatedMentionClass(rawValue: try json.string("class")) else {

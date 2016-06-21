@@ -28,9 +28,6 @@ public struct Entity: JSONDecodable {
     /// refer to the 'entityRole' attribute of specific mentions to this entity.
     public let type: String
     
-    /// Currently a placeholder for future enhancements.
-    public let generic: Bool
-    
     /// The class of the entity. Should be the same as the `mentionClass` of its primary mention.
     public let entityClass: EntityClass
     
@@ -40,9 +37,6 @@ public struct Entity: JSONDecodable {
     /// Context-free subtype of the entity.
     public let subtype: String
     
-    /// An internal confidence level for the accuracy of the entity annotation, ranging from 0 to 1.
-    public let score: Double
-    
     /// A list of mentions that reference this entity.
     public let mentions: [ReferencingMentions]
     
@@ -50,9 +44,7 @@ public struct Entity: JSONDecodable {
     public init(json: JSON) throws {
         entityID = try json.string("eid")
         type = try json.string("type")
-        generic = try json.bool("generic")
         subtype = try json.string("subtype")
-        score = try json.double("score")
         mentions = try json.arrayOf("mentref", type: ReferencingMentions.self)
         
         guard let eClass = EntityClass(rawValue: try json.string("class")) else {

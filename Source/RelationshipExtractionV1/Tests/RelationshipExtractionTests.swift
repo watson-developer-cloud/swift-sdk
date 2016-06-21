@@ -22,6 +22,10 @@ class RelationshipExtractionTests: XCTestCase {
     private var relationshipExtraction: RelationshipExtraction!
     private let timeout: NSTimeInterval = 30.0
     
+    private let text = "The president’s trip was designed to reward Milwaukee for its success " +
+        "in signing up people for coverage. It won a competition called the Healthy " +
+        "Communities Challenge that involved 20 cities."
+    
     // MARK: - Test Configuration
     
     override func setUp() {
@@ -71,15 +75,88 @@ class RelationshipExtractionTests: XCTestCase {
         
         relationshipExtraction.getRelationships(
             "ie-en-news",
-            text: "The president’s trip was designed to reward Milwaukee for its success in signing " +
-                "up people for coverage. It won a competition called the Healthy Communities " +
-                "Challenge that involved 20 cities.",
+            text: text,
             failure: failWithError) { document in
+                
+            XCTAssertNotNil(document.id)
+            XCTAssertNotNil(document.text)
+            XCTAssertEqual(document.text, self.text)
             
             XCTAssertEqual(document.entities.count, 7)
+            for entity in document.entities {
+                XCTAssertNotNil(entity.entityClass)
+                XCTAssertNotNil(entity.entityID)
+                XCTAssertNotNil(entity.level)
+                XCTAssertNotNil(entity.mentions)
+                XCTAssertNotNil(entity.mentions.first?.mentionID)
+                XCTAssertNotNil(entity.mentions.first?.text)
+                XCTAssertNotNil(entity.subtype)
+                XCTAssertNotNil(entity.type)
+            }
+                
             XCTAssertEqual(document.mentions.count, 7)
+            for mention in document.mentions {
+                XCTAssertNotNil(mention.mentionID)
+                XCTAssertNotNil(mention.type)
+                XCTAssertNotNil(mention.begin)
+                XCTAssertNotNil(mention.end)
+                XCTAssertNotNil(mention.headBegin)
+                XCTAssertNotNil(mention.headEnd)
+                XCTAssertNotNil(mention.entityID)
+                XCTAssertNotNil(mention.entityRole)
+                XCTAssertNotNil(mention.entityType)
+                XCTAssertNotNil(mention.mentionClass)
+                XCTAssertNotNil(mention.text)
+            }
+                
+            XCTAssertNotNil(document.relations.version)
             XCTAssertEqual(document.relations.relations.count, 1)
+            if let relation = document.relations.relations.first {
+                XCTAssertNotNil(relation.relationID)
+                XCTAssertNotNil(relation.type)
+                XCTAssertNotNil(relation.subtype)
+                
+                XCTAssertNotNil(relation.relationEntityArgument)
+                for relEntArg in relation.relationEntityArgument {
+                    XCTAssertNotNil(relEntArg.entityID)
+                    XCTAssertNotNil(relEntArg.argumentNumber)
+                }
+                
+                XCTAssertNotNil(relation.relatedMentions)
+                for relMen in relation.relatedMentions {
+                    XCTAssertNotNil(relMen.relatedMentionID)
+                    XCTAssertNotNil(relMen.relatedMentionClass)
+                    XCTAssertNotNil(relMen.modality)
+                    XCTAssertNotNil(relMen.tense)
+                    
+                    XCTAssertNotNil(relMen.relatedMentionArgument)
+                    for relMenArg in relMen.relatedMentionArgument {
+                        XCTAssertNotNil(relMenArg.mentionID)
+                        XCTAssertNotNil(relMenArg.argumentNumber)
+                        XCTAssertNotNil(relMenArg.text)
+                    }
+                }
+            }
+                
             XCTAssertEqual(document.sentences.count, 2)
+            for sentence in document.sentences {
+                XCTAssertNotNil(sentence.sentenceID)
+                XCTAssertNotNil(sentence.begin)
+                XCTAssertNotNil(sentence.end)
+                XCTAssertNotNil(sentence.text)
+                XCTAssertNotNil(sentence.parse)
+                XCTAssertNotNil(sentence.dependencyParse)
+                XCTAssertNotNil(sentence.usdDependencyParse)
+                
+                XCTAssertNotNil(sentence.tokens)
+                for token in sentence.tokens {
+                    XCTAssertNotNil(token.tokenID)
+                    XCTAssertNotNil(token.begin)
+                    XCTAssertNotNil(token.end)
+                    XCTAssertNotNil(token.text)
+                }
+            }
+                
             expectation.fulfill()
         }
         waitForExpectations()
@@ -118,9 +195,7 @@ class RelationshipExtractionTests: XCTestCase {
         
         relationshipExtraction.getRelationships(
             "INVALIDLANGUAGE",
-            text: "The president’s trip was designed to reward Milwaukee for its success in signing " +
-                "up people for coverage. It won a competition called the Healthy Communities " +
-                "Challenge that involved 20 cities.",
+            text: text,
             failure: failure,
             success: failWithResult)
         

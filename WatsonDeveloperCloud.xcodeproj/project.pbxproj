@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1.framework */; };
 		7A219F241D1350CC0003D934 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F1E1D1350CC0003D934 /* Conversation.swift */; };
 		7A219F261D1350CC0003D934 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F201D1350CC0003D934 /* MessageRequest.swift */; };
@@ -2073,6 +2074,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3553,6 +3555,7 @@
 				7A219F181D1350680003D934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -3561,6 +3564,7 @@
 				7A219F1A1D1350680003D934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AAAF3B31CEE99FC00B74848 /* Build configuration list for PBXNativeTarget "RestKit" */ = {
 			isa = XCConfigurationList;

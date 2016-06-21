@@ -7,23 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1268B4F01D0F148C003D787A /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
-		1268B4F61D0F1562003D787A /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */; };
-		127B19D61D0722D80010F773 /* RelationshipExtractionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */; };
-		127B19E31D0723210010F773 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		127B19E41D0723300010F773 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		127B19E51D0723300010F773 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
-		127B19E71D0723470010F773 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		127B19E81D07234B0010F773 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		127B19EA1D0724220010F773 /* RelationshipExtractionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 127B19E91D0724220010F773 /* RelationshipExtractionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		127B19EC1D0724400010F773 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		127B19ED1D0724450010F773 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */; };
-		127B19F21D0774450010F773 /* Doc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F11D0774450010F773 /* Doc.swift */; };
-		127B19F41D08723A0010F773 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F31D08723A0010F773 /* Entity.swift */; };
-		127B19F61D0873DE0010F773 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F51D0873DE0010F773 /* Sentence.swift */; };
-		127B19F81D08A7920010F773 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F71D08A7920010F773 /* Mention.swift */; };
-		127B19FA1D08BED40010F773 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B19F91D08BED40010F773 /* Relations.swift */; };
+		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1.framework */; };
+		7A219F241D1350CC0003D934 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F1E1D1350CC0003D934 /* Conversation.swift */; };
+		7A219F261D1350CC0003D934 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F201D1350CC0003D934 /* MessageRequest.swift */; };
+		7A219F281D1350CC0003D934 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F211D1350CC0003D934 /* MessageResponse.swift */; };
+		7A219F2B1D1350CC0003D934 /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F231D1350CC0003D934 /* ConversationTests.swift */; };
+		7A219F2C1D13510A0003D934 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		7A219F2D1D13510A0003D934 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7A219F2E1D1351100003D934 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7A219F301D1351450003D934 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A219F311D1351450003D934 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A219F331D1351DB0003D934 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A219F321D1351DB0003D934 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -269,12 +264,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		127B19D71D0722D80010F773 /* PBXContainerItemProxy */ = {
+		7A219F111D1350670003D934 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 127B19CB1D0722D70010F773;
-			remoteInfo = RelationshipExtractionV1;
+			remoteGlobalIDString = 7A219F051D1350670003D934;
+			remoteInfo = ConversationV1;
 		};
 		7AAAF3A91CEE99FC00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -363,25 +358,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		127B19E61D07233A0010F773 /* CopyFiles */ = {
+		7A219F2F1D1351380003D934 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				127B19E81D07234B0010F773 /* Alamofire.framework in CopyFiles */,
-				127B19E71D0723470010F773 /* Freddy.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		127B19EB1D0724350010F773 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				127B19ED1D0724450010F773 /* Freddy.framework in CopyFiles */,
-				127B19EC1D0724400010F773 /* Alamofire.framework in CopyFiles */,
+				7A219F301D1351450003D934 /* Alamofire.framework in CopyFiles */,
+				7A219F311D1351450003D934 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,16 +505,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = Source/RelationshipExtractionV1/Tests/RelationshipExtractionTests.swift; sourceTree = SOURCE_ROOT; };
-		127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RelationshipExtractionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RelationshipExtractionV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		127B19E91D0724220010F773 /* RelationshipExtractionV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1.h; path = Source/SupportingFiles/RelationshipExtractionV1.h; sourceTree = "<group>"; };
-		127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtraction.swift; path = Source/RelationshipExtractionV1/RelationshipExtraction.swift; sourceTree = SOURCE_ROOT; };
-		127B19F11D0774450010F773 /* Doc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Doc.swift; path = Source/RelationshipExtractionV1/Models/Doc.swift; sourceTree = SOURCE_ROOT; };
-		127B19F31D08723A0010F773 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entity.swift; path = Source/RelationshipExtractionV1/Models/Entity.swift; sourceTree = SOURCE_ROOT; };
-		127B19F51D0873DE0010F773 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sentence.swift; path = Source/RelationshipExtractionV1/Models/Sentence.swift; sourceTree = SOURCE_ROOT; };
-		127B19F71D08A7920010F773 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mention.swift; path = Source/RelationshipExtractionV1/Models/Mention.swift; sourceTree = SOURCE_ROOT; };
-		127B19F91D08BED40010F773 /* Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Relations.swift; path = Source/RelationshipExtractionV1/Models/Relations.swift; sourceTree = SOURCE_ROOT; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -544,6 +518,13 @@
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
+		7A219F061D1350670003D934 /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A219F1E1D1350CC0003D934 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		7A219F201D1350CC0003D934 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		7A219F211D1350CC0003D934 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		7A219F231D1350CC0003D934 /* ConversationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
+		7A219F321D1351DB0003D934 /* ConversationV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
@@ -724,21 +705,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		127B19C81D0722D70010F773 /* Frameworks */ = {
+		7A219F021D1350670003D934 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				127B19E41D0723300010F773 /* Alamofire.framework in Frameworks */,
-				127B19E51D0723300010F773 /* Freddy.framework in Frameworks */,
-				127B19E31D0723210010F773 /* RestKit.framework in Frameworks */,
+				7A219F2C1D13510A0003D934 /* Alamofire.framework in Frameworks */,
+				7A219F2D1D13510A0003D934 /* Freddy.framework in Frameworks */,
+				7A219F2E1D1351100003D934 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		127B19D21D0722D70010F773 /* Frameworks */ = {
+		7A219F0C1D1350670003D934 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				127B19D61D0722D80010F773 /* RelationshipExtractionV1.framework in Frameworks */,
+				7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,37 +942,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		127B19CD1D0722D70010F773 /* RelationshipExtractionV1 */ = {
-			isa = PBXGroup;
-			children = (
-				127B19F01D0774230010F773 /* Models */,
-				127B19EE1D0728A60010F773 /* RelationshipExtraction.swift */,
-				127B19D91D0722D80010F773 /* Tests */,
-			);
-			path = RelationshipExtractionV1;
-			sourceTree = "<group>";
-		};
-		127B19D91D0722D80010F773 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				1268B4F51D0F1562003D787A /* RelationshipExtractionTests.swift */,
-			);
-			name = Tests;
-			path = RelationshipExtractionV1Tests;
-			sourceTree = SOURCE_ROOT;
-		};
-		127B19F01D0774230010F773 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				127B19F11D0774450010F773 /* Doc.swift */,
-				127B19F31D08723A0010F773 /* Entity.swift */,
-				127B19F71D08A7920010F773 /* Mention.swift */,
-				127B19F91D08BED40010F773 /* Relations.swift */,
-				127B19F51D0873DE0010F773 /* Sentence.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1030,13 +980,13 @@
 			children = (
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
+				7A219F1D1D1350CC0003D934 /* ConversationV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
-				127B19CD1D0722D70010F773 /* RelationshipExtractionV1 */,
 				7A0F95B41C23288E004C01C0 /* Products */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
@@ -1072,8 +1022,8 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
-				127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */,
-				127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */,
+				7A219F061D1350670003D934 /* ConversationV1.framework */,
+				7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */,
 				B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */,
 				B1AAD2DC1D08656B002DAB84 /* DocumentConversionV1Tests.xctest */,
 			);
@@ -1091,6 +1041,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A219F1D1D1350CC0003D934 /* ConversationV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7A219F1E1D1350CC0003D934 /* Conversation.swift */,
+				7A219F1F1D1350CC0003D934 /* Models */,
+				7A219F221D1350CC0003D934 /* Tests */,
+			);
+			name = ConversationV1;
+			path = Source/ConversationV1;
+			sourceTree = "<group>";
+		};
+		7A219F1F1D1350CC0003D934 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A219F201D1350CC0003D934 /* MessageRequest.swift */,
+				7A219F211D1350CC0003D934 /* MessageResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A219F221D1350CC0003D934 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7A219F231D1350CC0003D934 /* ConversationTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		7A6117231CB596E0009A4DA1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1098,13 +1076,13 @@
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
 				7A34CB511C233E2100F20D0E /* Credentials.plist */,
+				7A219F321D1351DB0003D934 /* ConversationV1.h */,
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
 				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslationV2.h */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */,
-				127B19E91D0724220010F773 /* RelationshipExtractionV1.h */,
 				7AAAF5B21CEEA62C00B74848 /* RestKit.h */,
 				7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */,
 				7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */,
@@ -1526,11 +1504,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		127B19C91D0722D70010F773 /* Headers */ = {
+		7A219F031D1350670003D934 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				127B19EA1D0724220010F773 /* RelationshipExtractionV1.h in Headers */,
+				7A219F331D1351DB0003D934 /* ConversationV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1633,42 +1611,41 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */ = {
+		7A219F051D1350670003D934 /* ConversationV1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 127B19DD1D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */;
+			buildConfigurationList = 7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1" */;
 			buildPhases = (
-				127B19C71D0722D70010F773 /* Sources */,
-				127B19C81D0722D70010F773 /* Frameworks */,
-				127B19C91D0722D70010F773 /* Headers */,
-				127B19CA1D0722D70010F773 /* Resources */,
-				127B19E61D07233A0010F773 /* CopyFiles */,
+				7A219F011D1350670003D934 /* Sources */,
+				7A219F021D1350670003D934 /* Frameworks */,
+				7A219F031D1350670003D934 /* Headers */,
+				7A219F041D1350670003D934 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = RelationshipExtractionV1;
-			productName = RelationshipExtractionV1;
-			productReference = 127B19CC1D0722D70010F773 /* RelationshipExtractionV1.framework */;
+			name = ConversationV1;
+			productName = ConversationV1;
+			productReference = 7A219F061D1350670003D934 /* ConversationV1.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		127B19D41D0722D70010F773 /* RelationshipExtractionV1Tests */ = {
+		7A219F0E1D1350670003D934 /* ConversationV1Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 127B19E01D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */;
+			buildConfigurationList = 7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */;
 			buildPhases = (
-				127B19D11D0722D70010F773 /* Sources */,
-				127B19D21D0722D70010F773 /* Frameworks */,
-				127B19D31D0722D70010F773 /* Resources */,
-				127B19EB1D0724350010F773 /* CopyFiles */,
+				7A219F0B1D1350670003D934 /* Sources */,
+				7A219F0C1D1350670003D934 /* Frameworks */,
+				7A219F0D1D1350670003D934 /* Resources */,
+				7A219F2F1D1351380003D934 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				127B19D81D0722D80010F773 /* PBXTargetDependency */,
+				7A219F121D1350670003D934 /* PBXTargetDependency */,
 			);
-			name = RelationshipExtractionV1Tests;
-			productName = RelationshipExtractionV1Tests;
-			productReference = 127B19D51D0722D70010F773 /* RelationshipExtractionV1Tests.xctest */;
+			name = ConversationV1Tests;
+			productName = ConversationV1Tests;
+			productReference = 7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7AAAF39D1CEE99FC00B74848 /* RestKit */ = {
@@ -2125,11 +2102,13 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
-					127B19CB1D0722D70010F773 = {
+					7A219F051D1350670003D934 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = CDXLDASP22;
 					};
-					127B19D41D0722D70010F773 = {
+					7A219F0E1D1350670003D934 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = CDXLDASP22;
 					};
 					7AAAF39D1CEE99FC00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2221,6 +2200,8 @@
 				7AAAF56C1CEEA2DF00B74848 /* AlchemyLanguageV1Tests */,
 				7AAAF5351CEEA23D00B74848 /* AlchemyVisionV1 */,
 				7AAAF53E1CEEA23E00B74848 /* AlchemyVisionV1Tests */,
+				7A219F051D1350670003D934 /* ConversationV1 */,
+				7A219F0E1D1350670003D934 /* ConversationV1Tests */,
 				7AAAF5081CEEA1DA00B74848 /* DialogV1 */,
 				7AAAF5111CEEA1DA00B74848 /* DialogV1Tests */,
 				7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */,
@@ -2239,8 +2220,6 @@
 				7AAAF3CB1CEE9A3700B74848 /* VisualRecognitionV3Tests */,
 				7AAAF39D1CEE99FC00B74848 /* RestKit */,
 				7AAAF3A61CEE99FC00B74848 /* RestKitTests */,
-				127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */,
-				127B19D41D0722D70010F773 /* RelationshipExtractionV1Tests */,
 				B1AAD2D21D08656B002DAB84 /* DocumentConversionV1 */,
 				B1AAD2DB1D08656B002DAB84 /* DocumentConversionV1Tests */,
 			);
@@ -2248,18 +2227,18 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		127B19CA1D0722D70010F773 /* Resources */ = {
+		7A219F041D1350670003D934 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		127B19D31D0722D70010F773 /* Resources */ = {
+		7A219F0D1D1350670003D934 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1268B4F01D0F148C003D787A /* Credentials.plist in Resources */,
+				7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2476,24 +2455,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		127B19C71D0722D70010F773 /* Sources */ = {
+		7A219F011D1350670003D934 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				127B19F41D08723A0010F773 /* Entity.swift in Sources */,
-				127B19FA1D08BED40010F773 /* Relations.swift in Sources */,
-				127B19F81D08A7920010F773 /* Mention.swift in Sources */,
-				127B19F21D0774450010F773 /* Doc.swift in Sources */,
-				127B19EF1D0728A60010F773 /* RelationshipExtraction.swift in Sources */,
-				127B19F61D0873DE0010F773 /* Sentence.swift in Sources */,
+				7A219F241D1350CC0003D934 /* Conversation.swift in Sources */,
+				7A219F281D1350CC0003D934 /* MessageResponse.swift in Sources */,
+				7A219F261D1350CC0003D934 /* MessageRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		127B19D11D0722D70010F773 /* Sources */ = {
+		7A219F0B1D1350670003D934 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1268B4F61D0F1562003D787A /* RelationshipExtractionTests.swift in Sources */,
+				7A219F2B1D1350CC0003D934 /* ConversationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2783,10 +2759,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		127B19D81D0722D80010F773 /* PBXTargetDependency */ = {
+		7A219F121D1350670003D934 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 127B19CB1D0722D70010F773 /* RelationshipExtractionV1 */;
-			targetProxy = 127B19D71D0722D80010F773 /* PBXContainerItemProxy */;
+			target = 7A219F051D1350670003D934 /* ConversationV1 */;
+			targetProxy = 7A219F111D1350670003D934 /* PBXContainerItemProxy */;
 		};
 		7AAAF3AA1CEE99FC00B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2851,80 +2827,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		127B19DE1D0722D80010F773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		127B19DF1D0722D80010F773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		127B19E11D0722D80010F773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		127B19E21D0722D80010F773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		7A0F95C51C23288E004C01C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3011,6 +2913,74 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7A219F171D1350680003D934 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7A219F181D1350680003D934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7A219F191D1350680003D934 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7A219F1A1D1350680003D934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -3850,29 +3820,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		127B19DD1D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				127B19DE1D0722D80010F773 /* Debug */,
-				127B19DF1D0722D80010F773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		127B19E01D0722D80010F773 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				127B19E11D0722D80010F773 /* Debug */,
-				127B19E21D0722D80010F773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		7A0F95AD1C23288E004C01C0 /* Build configuration list for PBXProject "WatsonDeveloperCloud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A0F95C51C23288E004C01C0 /* Debug */,
 				7A0F95C61C23288E004C01C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A219F171D1350680003D934 /* Debug */,
+				7A219F181D1350680003D934 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A219F191D1350680003D934 /* Debug */,
+				7A219F1A1D1350680003D934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

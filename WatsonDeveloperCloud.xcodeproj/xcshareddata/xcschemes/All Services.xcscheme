@@ -210,6 +210,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D4A1D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1.framework"
+               BlueprintName = "RelationshipExtractionV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D531D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1Tests.xctest"
+               BlueprintName = "RelationshipExtractionV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
                BuildableName = "RestKit.framework"
                BlueprintName = "RestKit"
@@ -495,6 +523,16 @@
                BlueprintIdentifier = "7A987D1C1D19D424003626B2"
                BuildableName = "TradeoffAnalyticsV1Tests.xctest"
                BlueprintName = "TradeoffAnalyticsV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7A987D531D19D887003626B2"
+               BuildableName = "RelationshipExtractionV1Tests.xctest"
+               BlueprintName = "RelationshipExtractionV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

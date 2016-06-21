@@ -32,6 +32,20 @@
 		7A987D3F1D19D4DD003626B2 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7A987D441D19D536003626B2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A987D451D19D536003626B2 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A987D551D19D887003626B2 /* RelationshipExtractionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */; };
+		7A987D6C1D19D923003626B2 /* Doc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D641D19D923003626B2 /* Doc.swift */; };
+		7A987D6D1D19D923003626B2 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D651D19D923003626B2 /* Entity.swift */; };
+		7A987D6E1D19D923003626B2 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D661D19D923003626B2 /* Mention.swift */; };
+		7A987D6F1D19D923003626B2 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D671D19D923003626B2 /* Relations.swift */; };
+		7A987D701D19D923003626B2 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D681D19D923003626B2 /* Sentence.swift */; };
+		7A987D711D19D923003626B2 /* RelationshipExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D691D19D923003626B2 /* RelationshipExtraction.swift */; };
+		7A987D731D19D92F003626B2 /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */; };
+		7A987D741D19D984003626B2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
+		7A987D751D19D984003626B2 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		7A987D761D19D98A003626B2 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7A987D781D19D9DA003626B2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A987D791D19D9DA003626B2 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A987D7A1D19DB13003626B2 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -291,6 +305,13 @@
 			remoteGlobalIDString = 7A987D131D19D424003626B2;
 			remoteInfo = TradeoffAnalyticsV1;
 		};
+		7A987D561D19D887003626B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A987D4A1D19D887003626B2;
+			remoteInfo = RelationshipExtractionV1;
+		};
 		7AAAF3A91CEE99FC00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
@@ -397,6 +418,17 @@
 			files = (
 				7A987D441D19D536003626B2 /* Alamofire.framework in CopyFiles */,
 				7A987D451D19D536003626B2 /* Freddy.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D771D19D9C6003626B2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A987D781D19D9DA003626B2 /* Alamofire.framework in CopyFiles */,
+				7A987D791D19D9DA003626B2 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +620,15 @@
 		7A987D321D19D47D003626B2 /* TradeoffAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeoffAnalyticsTests.swift; sourceTree = "<group>"; };
 		7A987D331D19D47D003626B2 /* TradeoffAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeoffAnalytics.swift; sourceTree = "<group>"; };
 		7A987D3A1D19D4A4003626B2 /* TradeoffAnalyticsV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TradeoffAnalyticsV1.h; path = Source/SupportingFiles/TradeoffAnalyticsV1.h; sourceTree = "<group>"; };
+		7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RelationshipExtractionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A987D541D19D887003626B2 /* RelationshipExtractionV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RelationshipExtractionV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A987D641D19D923003626B2 /* Doc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Doc.swift; sourceTree = "<group>"; };
+		7A987D651D19D923003626B2 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		7A987D661D19D923003626B2 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
+		7A987D671D19D923003626B2 /* Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
+		7A987D681D19D923003626B2 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		7A987D691D19D923003626B2 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipExtraction.swift; sourceTree = "<group>"; };
+		7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipExtractionTests.swift; sourceTree = "<group>"; };
 		7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResult.swift; sourceTree = "<group>"; };
 		7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResults.swift; sourceTree = "<group>"; };
@@ -777,6 +818,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A987D1E1D19D424003626B2 /* TradeoffAnalyticsV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D471D19D887003626B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A987D741D19D984003626B2 /* Alamofire.framework in Frameworks */,
+				7A987D751D19D984003626B2 /* Freddy.framework in Frameworks */,
+				7A987D761D19D98A003626B2 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D511D19D887003626B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A987D551D19D887003626B2 /* RelationshipExtractionV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,6 +1104,7 @@
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A0F95B41C23288E004C01C0 /* Products */,
+				7A987D621D19D923003626B2 /* RelationshipExtractionV1 */,
 				7A61174E1CB5988B009A4DA1 /* RestKit */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
 				7A6117231CB596E0009A4DA1 /* SupportingFiles */,
@@ -1086,6 +1146,8 @@
 				B1AAD2DC1D08656B002DAB84 /* DocumentConversionV1Tests.xctest */,
 				7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */,
 				7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */,
+				7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */,
+				7A987D541D19D887003626B2 /* RelationshipExtractionV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1256,6 +1318,37 @@
 			isa = PBXGroup;
 			children = (
 				7A987D321D19D47D003626B2 /* TradeoffAnalyticsTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		7A987D621D19D923003626B2 /* RelationshipExtractionV1 */ = {
+			isa = PBXGroup;
+			children = (
+				7A987D631D19D923003626B2 /* Models */,
+				7A987D691D19D923003626B2 /* RelationshipExtraction.swift */,
+				7A987D6A1D19D923003626B2 /* Tests */,
+			);
+			name = RelationshipExtractionV1;
+			path = Source/RelationshipExtractionV1;
+			sourceTree = "<group>";
+		};
+		7A987D631D19D923003626B2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A987D641D19D923003626B2 /* Doc.swift */,
+				7A987D651D19D923003626B2 /* Entity.swift */,
+				7A987D661D19D923003626B2 /* Mention.swift */,
+				7A987D671D19D923003626B2 /* Relations.swift */,
+				7A987D681D19D923003626B2 /* Sentence.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A987D6A1D19D923003626B2 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1610,6 +1703,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A987D481D19D887003626B2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF39B1CEE99FC00B74848 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1781,6 +1881,43 @@
 			name = TradeoffAnalyticsV1Tests;
 			productName = TradeoffAnalyticsV1Tests;
 			productReference = 7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7A987D4A1D19D887003626B2 /* RelationshipExtractionV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A987D601D19D887003626B2 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */;
+			buildPhases = (
+				7A987D461D19D887003626B2 /* Sources */,
+				7A987D471D19D887003626B2 /* Frameworks */,
+				7A987D481D19D887003626B2 /* Headers */,
+				7A987D491D19D887003626B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RelationshipExtractionV1;
+			productName = RelationshipExtractionV1;
+			productReference = 7A987D4B1D19D887003626B2 /* RelationshipExtractionV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7A987D531D19D887003626B2 /* RelationshipExtractionV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A987D611D19D887003626B2 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */;
+			buildPhases = (
+				7A987D501D19D887003626B2 /* Sources */,
+				7A987D511D19D887003626B2 /* Frameworks */,
+				7A987D521D19D887003626B2 /* Resources */,
+				7A987D771D19D9C6003626B2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A987D571D19D887003626B2 /* PBXTargetDependency */,
+			);
+			name = RelationshipExtractionV1Tests;
+			productName = RelationshipExtractionV1Tests;
+			productReference = 7A987D541D19D887003626B2 /* RelationshipExtractionV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7AAAF39D1CEE99FC00B74848 /* RestKit */ = {
@@ -2253,6 +2390,14 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = CDXLDASP22;
 					};
+					7A987D4A1D19D887003626B2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = CDXLDASP22;
+					};
+					7A987D531D19D887003626B2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = CDXLDASP22;
+					};
 					7AAAF39D1CEE99FC00B74848 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -2353,6 +2498,8 @@
 				7AAAF4B71CEEA10700B74848 /* NaturalLanguageClassifierV1Tests */,
 				7AAAF4841CEEA07900B74848 /* PersonalityInsightsV2 */,
 				7AAAF48D1CEEA07900B74848 /* PersonalityInsightsV2Tests */,
+				7A987D4A1D19D887003626B2 /* RelationshipExtractionV1 */,
+				7A987D531D19D887003626B2 /* RelationshipExtractionV1Tests */,
 				7AAAF44D1CEE9F8800B74848 /* SpeechToTextV1 */,
 				7AAAF4561CEE9F8800B74848 /* SpeechToTextV1Tests */,
 				7AAAF4221CEE9E8600B74848 /* TextToSpeechV1 */,
@@ -2399,6 +2546,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A987D3C1D19D4B2003626B2 /* Credentials.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D491D19D887003626B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D521D19D887003626B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A987D7A1D19DB13003626B2 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2649,6 +2811,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A987D391D19D488003626B2 /* TradeoffAnalyticsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D461D19D887003626B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A987D6D1D19D923003626B2 /* Entity.swift in Sources */,
+				7A987D6E1D19D923003626B2 /* Mention.swift in Sources */,
+				7A987D711D19D923003626B2 /* RelationshipExtraction.swift in Sources */,
+				7A987D701D19D923003626B2 /* Sentence.swift in Sources */,
+				7A987D6C1D19D923003626B2 /* Doc.swift in Sources */,
+				7A987D6F1D19D923003626B2 /* Relations.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A987D501D19D887003626B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A987D731D19D92F003626B2 /* RelationshipExtractionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2948,6 +3131,11 @@
 			target = 7A987D131D19D424003626B2 /* TradeoffAnalyticsV1 */;
 			targetProxy = 7A987D1F1D19D424003626B2 /* PBXContainerItemProxy */;
 		};
+		7A987D571D19D887003626B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A987D4A1D19D887003626B2 /* RelationshipExtractionV1 */;
+			targetProxy = 7A987D561D19D887003626B2 /* PBXContainerItemProxy */;
+		};
 		7AAAF3AA1CEE99FC00B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7AAAF39D1CEE99FC00B74848 /* RestKit */;
@@ -3232,6 +3420,74 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7A987D5C1D19D887003626B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7A987D5D1D19D887003626B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7A987D5E1D19D887003626B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7A987D5F1D19D887003626B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4106,6 +4362,7 @@
 				7A987D261D19D424003626B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A987D2A1D19D424003626B2 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -4114,6 +4371,25 @@
 				7A987D281D19D424003626B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A987D601D19D887003626B2 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A987D5C1D19D887003626B2 /* Debug */,
+				7A987D5D1D19D887003626B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A987D611D19D887003626B2 /* Build configuration list for PBXNativeTarget "RelationshipExtractionV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A987D5E1D19D887003626B2 /* Debug */,
+				7A987D5F1D19D887003626B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AAAF3B31CEE99FC00B74848 /* Build configuration list for PBXNativeTarget "RestKit" */ = {
 			isa = XCConfigurationList;

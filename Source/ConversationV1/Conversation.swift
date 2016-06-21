@@ -67,7 +67,7 @@ public class Conversation {
         do {
             let json = try JSON(data: data)
             let error = try json.string("error")
-            let code = try json.int("code")
+            let code = (try? json.int("code")) ?? 400
             let userInfo = [NSLocalizedFailureReasonErrorKey: error]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

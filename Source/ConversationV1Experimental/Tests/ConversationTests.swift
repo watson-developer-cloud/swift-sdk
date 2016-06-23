@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import ConversationV1
+import ConversationV1Experimental
 
 class ConversationTests: XCTestCase {
     

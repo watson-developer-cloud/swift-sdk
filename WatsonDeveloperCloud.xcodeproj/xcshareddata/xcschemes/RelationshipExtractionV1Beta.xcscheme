@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A987D4A1D19D887003626B2"
-               BuildableName = "RelationshipExtractionV1.framework"
-               BlueprintName = "RelationshipExtractionV1"
+               BuildableName = "RelationshipExtractionV1Beta.framework"
+               BlueprintName = "RelationshipExtractionV1Beta"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A987D531D19D887003626B2"
-               BuildableName = "RelationshipExtractionV1Tests.xctest"
-               BlueprintName = "RelationshipExtractionV1Tests"
+               BuildableName = "RelationshipExtractionV1BetaTests.xctest"
+               BlueprintName = "RelationshipExtractionV1BetaTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A987D4A1D19D887003626B2"
-            BuildableName = "RelationshipExtractionV1.framework"
-            BlueprintName = "RelationshipExtractionV1"
+            BuildableName = "RelationshipExtractionV1Beta.framework"
+            BlueprintName = "RelationshipExtractionV1Beta"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -69,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A987D4A1D19D887003626B2"
-            BuildableName = "RelationshipExtractionV1.framework"
-            BlueprintName = "RelationshipExtractionV1"
+            BuildableName = "RelationshipExtractionV1Beta.framework"
+            BlueprintName = "RelationshipExtractionV1Beta"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -87,8 +87,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A987D4A1D19D887003626B2"
-            BuildableName = "RelationshipExtractionV1.framework"
-            BlueprintName = "RelationshipExtractionV1"
+            BuildableName = "RelationshipExtractionV1Beta.framework"
+            BlueprintName = "RelationshipExtractionV1Beta"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

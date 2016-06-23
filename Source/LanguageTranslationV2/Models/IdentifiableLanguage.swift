@@ -17,7 +17,7 @@
 import Foundation
 import Freddy
 
-/** A language that can be identified by the Language Translation service. */
+/** A language that can be identified by the Language Translator service. */
 public struct IdentifiableLanguage: JSONDecodable {
     
     /// The code of the identifiable language.

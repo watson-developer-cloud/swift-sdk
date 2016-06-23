@@ -20,20 +20,20 @@ import Freddy
 import RestKit
 
 /**
- The Watson Language Translation service provides domain-specific translation utilizing
+ The Watson Language Translator service provides domain-specific translation utilizing
  Statistical Machine Translation techniques that have been perfected in our research labs
  over the past few decades.
  */
-public class LanguageTranslation {
+public class LanguageTranslator {
 
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 LanguageTranslationV2")
-    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslationV2"
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 LanguageTranslatorV2")
+    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
-     Create a `LanguageTranslation` object.
+     Create a `LanguageTranslator` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.

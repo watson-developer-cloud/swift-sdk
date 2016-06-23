@@ -20,7 +20,7 @@ import Foundation
 public enum TrainingStatus: String {
 
     /// Training has completed and this translation model is
-    /// ready for use with the Language Translation service.
+    /// ready for use with the Language Translator service.
     case Available = "available"
     
     /// Training has just started.

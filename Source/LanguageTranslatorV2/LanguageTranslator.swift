@@ -122,7 +122,7 @@ public class LanguageTranslator {
     }
 
     /**
-     Create a custom language translation model by uploading a TMX glossary file.
+     Create a custom language translator model by uploading a TMX glossary file.
      
      Depending on the size of the file, training can range from minutes for a glossary to several
      hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
@@ -345,7 +345,7 @@ public class LanguageTranslator {
      Process a translation request.
  
      - parameter translateRequest: A `TranslateRequest` object representing the parameters of the
-            request to the Language Translation service.
+            request to the Language Translator service.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the response from the service.
      */

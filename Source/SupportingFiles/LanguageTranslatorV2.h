@@ -22,6 +22,6 @@ FOUNDATION_EXPORT double LanguageTranslatorV2VersionNumber;
 //! Project version string for LanguageTranslatorV2.
 FOUNDATION_EXPORT const unsigned char LanguageTranslatorV2VersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <LanguageTranslationV2/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <LanguageTranslatorV2/PublicHeader.h>
 
 

@@ -398,7 +398,7 @@
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF4DB1CEEA16100B74848;
-			remoteInfo = LanguageTranslationV2;
+			remoteInfo = LanguageTranslatorV2;
 		};
 		7AAAF5141CEEA1DA00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -666,16 +666,16 @@
 		7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslator.swift; sourceTree = "<group>"; };
-		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
-		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
-		7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateRequest.swift; sourceTree = "<group>"; };
-		7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateResponse.swift; sourceTree = "<group>"; };
-		7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
-		7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
-		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorTests.swift; sourceTree = "<group>"; };
-		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorTraining.swift; sourceTree = "<group>"; };
-		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
+		7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslator.swift; path = ../LanguageTranslatorV2/LanguageTranslator.swift; sourceTree = "<group>"; };
+		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiableLanguage.swift; sourceTree = "<group>"; };
+		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiedLanguage.swift; sourceTree = "<group>"; };
+		7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslateRequest.swift; path = ../../LanguageTranslatorV2/Models/TranslateRequest.swift; sourceTree = "<group>"; };
+		7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslateResponse.swift; path = ../../LanguageTranslatorV2/Models/TranslateResponse.swift; sourceTree = "<group>"; };
+		7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationModel.swift; path = ../../LanguageTranslatorV2/Models/TranslationModel.swift; sourceTree = "<group>"; };
+		7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = glossary.tmx; path = ../../LanguageTranslatorV2/Tests/glossary.tmx; sourceTree = "<group>"; };
+		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslatorTests.swift; path = ../../LanguageTranslatorV2/Tests/LanguageTranslatorTests.swift; sourceTree = "<group>"; };
+		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonitorTraining.swift; path = ../../LanguageTranslatorV2/Models/MonitorTraining.swift; sourceTree = "<group>"; };
+		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingStatus.swift; path = ../../LanguageTranslatorV2/Models/TrainingStatus.swift; sourceTree = "<group>"; };
 		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
 		7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TradeoffAnalyticsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeoffAnalyticsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1402,7 +1402,7 @@
 				7A61179B1CB6D3F2009A4DA1 /* Tests */,
 			);
 			name = LanguageTranslatorV2;
-			path = Source/LanguageTranslationV2;
+			path = Source/LanguageTranslatorV2;
 			sourceTree = "<group>";
 		};
 		7A6117951CB6D3F2009A4DA1 /* Models */ = {
@@ -2348,7 +2348,7 @@
 			dependencies = (
 			);
 			name = LanguageTranslatorV2;
-			productName = LanguageTranslationV2;
+			productName = LanguageTranslatorV2;
 			productReference = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -2367,7 +2367,7 @@
 				7AAAF4E81CEEA16100B74848 /* PBXTargetDependency */,
 			);
 			name = LanguageTranslatorV2Tests;
-			productName = LanguageTranslationV2Tests;
+			productName = LanguageTranslatorV2Tests;
 			productReference = 7AAAF4E51CEEA16100B74848 /* LanguageTranslatorV2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -4287,7 +4287,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -4299,7 +4299,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

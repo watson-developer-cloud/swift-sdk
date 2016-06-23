@@ -20,20 +20,20 @@ import Freddy
 import RestKit
 
 /**
- The Watson Language Translation service provides domain-specific translation utilizing
+ The Watson Language Translator service provides domain-specific translation utilizing
  Statistical Machine Translation techniques that have been perfected in our research labs
  over the past few decades.
  */
-public class LanguageTranslation {
+public class LanguageTranslator {
 
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 LanguageTranslationV2")
-    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslationV2"
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 LanguageTranslatorV2")
+    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
-     Create a `LanguageTranslation` object.
+     Create a `LanguageTranslator` object.
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
@@ -122,7 +122,7 @@ public class LanguageTranslation {
     }
 
     /**
-     Create a custom language translation model by uploading a TMX glossary file.
+     Create a custom language translator model by uploading a TMX glossary file.
      
      Depending on the size of the file, training can range from minutes for a glossary to several
      hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
@@ -345,7 +345,7 @@ public class LanguageTranslation {
      Process a translation request.
  
      - parameter translateRequest: A `TranslateRequest` object representing the parameters of the
-            request to the Language Translation service.
+            request to the Language Translator service.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the response from the service.
      */

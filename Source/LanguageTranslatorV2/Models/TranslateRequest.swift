@@ -35,7 +35,7 @@ internal struct TranslateRequest: JSONEncodable {
         language and domain.
 
      - returns: An initialized `TranslateRequest` that represents a translation
-        request to the Language Translation service.
+        request to the Language Translator service.
      */
     init(text: [String], modelID: String) {
         self.modelID = modelID
@@ -54,7 +54,7 @@ internal struct TranslateRequest: JSONEncodable {
      - parameter target: The target language that the input text will be translated to.
 
      - returns: An initialized `TranslateRequest` that represents a translation
-        request to the Language Translation service.
+        request to the Language Translator service.
      */
     init(text: [String], source: String, target: String) {
         self.modelID = nil

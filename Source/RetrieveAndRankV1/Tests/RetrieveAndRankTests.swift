@@ -64,6 +64,19 @@ class RetrieveAndRankTests: XCTestCase {
     
     // MARK: - Positive Tests
     
+    /** List all of the Solr clusters associated with this service instance. */
+    func testGetSolrClusters() {
+        let description = "Get all of the Solr clusters associated with this instance."
+        let expectation = expectationWithDescription(description)
+        
+        retrieveAndRank.getSolrClusters(failWithError) { clusters in
+            
+            XCTAssertEqual(clusters.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Negative Tests
 
 }

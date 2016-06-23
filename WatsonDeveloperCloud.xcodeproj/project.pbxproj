@@ -17,6 +17,7 @@
 		123B47331D1B3D63007D0B22 /* RetrieveAndRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47321D1B3D63007D0B22 /* RetrieveAndRank.swift */; };
 		123B47351D1B3D88007D0B22 /* RetrieveAndRankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */; };
 		123B47361D1C2D4B007D0B22 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		123B47381D1C6822007D0B22 /* SolrCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47371D1C6821007D0B22 /* SolrCluster.swift */; };
 		124C2DF91D19E29100D9F602 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */; };
 		124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E081D19E2FA00D9F602 /* AudioFormat.swift */; };
 		124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E091D19E2FA00D9F602 /* Customization.swift */; };
@@ -651,6 +652,7 @@
 		123B471B1D1B3ABA007D0B22 /* RetrieveAndRankV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RetrieveAndRankV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		123B47321D1B3D63007D0B22 /* RetrieveAndRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrieveAndRank.swift; sourceTree = "<group>"; };
 		123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrieveAndRankTests.swift; sourceTree = "<group>"; };
+		123B47371D1C6821007D0B22 /* SolrCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolrCluster.swift; sourceTree = "<group>"; };
 		124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeechV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		124C2E081D19E2FA00D9F602 /* AudioFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFormat.swift; sourceTree = "<group>"; };
@@ -1218,6 +1220,7 @@
 		123B47301D1B3D24007D0B22 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				123B47371D1C6821007D0B22 /* SolrCluster.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3145,6 +3148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				123B47381D1C6822007D0B22 /* SolrCluster.swift in Sources */,
 				123B47331D1B3D63007D0B22 /* RetrieveAndRank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

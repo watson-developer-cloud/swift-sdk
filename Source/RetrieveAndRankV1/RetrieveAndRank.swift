@@ -20,7 +20,9 @@ import Freddy
 import RestKit
 
 /**
- 
+ The IBM Watson Retrieve and Rank service combines two information retrieval components into a 
+ single service. The service uses Apache Solr in conjunction with a machine learning algorithm to
+ provide users with more relevant search results by automatically re-ranking them.
  */
 public class RetrieveAndRank {
     private let username: String
@@ -67,5 +69,36 @@ public class RetrieveAndRank {
             return nil
         }
     }
-
+    
+    // MARK: - Solr clusters
+    
+    /**
+     Retrieves the list of Solr clusters available for this Retrieve and Rank instance.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with an array of Solr cluster objects.
+     */
+    public func getSolrClusters(
+        failure: (NSError -> Void)? = nil,
+        success: [SolrCluster] -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError, path: ["clusters"]) {
+                (response: Response<[SolrCluster], NSError>) in
+                switch response.result {
+                case .Success(let clusters): success(clusters)
+                case .Failure(let error): failure?(error)
+                }
+        }
+    }
 }

@@ -17,10 +17,10 @@
 import XCTest
 import DocumentConversionV1
 
-class DocumentConversionV1Tests: XCTestCase {
+class DocumentConversionTests: XCTestCase {
     
-    private var service: DocumentConversionV1!
-    private var badService: DocumentConversionV1!
+    private var service: DocumentConversion!
+    private var badService: DocumentConversion!
     private let timeout: NSTimeInterval = 5.0
     
     private var testDocument: NSURL!
@@ -39,10 +39,10 @@ class DocumentConversionV1Tests: XCTestCase {
                 let username = dict["DocumentConversionUsername"]!
                 let password = dict["DocumentConversionPassword"]!
                 if service == nil {
-                    service = DocumentConversionV1(username: username, password: password, version: "2015-12-15")
+                    service = DocumentConversion(username: username, password: password, version: "2015-12-15")
                 }
                 if badService == nil {
-                    badService = DocumentConversionV1(username: username, password: password, version: "BEES!!!")
+                    badService = DocumentConversion(username: username, password: password, version: "BEES!!!")
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")

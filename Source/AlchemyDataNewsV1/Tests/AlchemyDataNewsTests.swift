@@ -16,9 +16,9 @@
 import XCTest
 import AlchemyDataNewsV1
 
-class AlchemyDataNewsV1Tests: XCTestCase {
+class AlchemyDataNewsTests: XCTestCase {
     
-    private var service: AlchemyDataNewsV1!
+    private var service: AlchemyDataNews!
 
     private let timeout: NSTimeInterval = 5.0
     
@@ -28,7 +28,7 @@ class AlchemyDataNewsV1Tests: XCTestCase {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
                 let apikey = dict["AlchemyAPIKey"]!
                 if service == nil {
-                    service = AlchemyDataNewsV1(apiKey: apikey)
+                    service = AlchemyDataNews(apiKey: apikey)
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")

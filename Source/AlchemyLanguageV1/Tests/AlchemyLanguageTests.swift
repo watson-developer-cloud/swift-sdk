@@ -17,9 +17,9 @@
 import XCTest
 import AlchemyLanguageV1
 
-class AlchemyLanguageV1Tests: XCTestCase {
+class AlchemyLanguageTests: XCTestCase {
     
-    private var service: AlchemyLanguageV1!
+    private var service: AlchemyLanguage!
     
     private let timeout: NSTimeInterval = 5.0
     
@@ -30,7 +30,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
             if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
                 let apikey = dict["AlchemyAPIKey"]!
                 if service == nil {
-                    service = AlchemyLanguageV1(apiKey: apikey)
+                    service = AlchemyLanguage(apiKey: apikey)
                 }
             } else {
                 XCTFail("Unable to extract dictionary from plist")

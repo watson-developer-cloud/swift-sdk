@@ -30,6 +30,7 @@ public class AlchemyLanguageV1 {
     
     private let serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.0 AlchemyDataNewsV1")
  
     let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -99,6 +100,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetAuthors",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -149,6 +151,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetAuthors",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -197,6 +200,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetRankedConcepts",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -249,6 +253,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedConcepts",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -298,6 +303,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedConcepts",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -376,6 +382,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -460,6 +467,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -540,6 +548,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -600,6 +609,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -666,6 +676,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -728,6 +739,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -761,6 +773,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetLanguage",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -805,6 +818,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetLanguage",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -838,6 +852,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetMicroformatData",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -888,6 +903,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetMicroformatData",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -921,6 +937,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetPubDate",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -970,6 +987,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetPubDate",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1056,6 +1074,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRelations",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -1148,6 +1167,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRelations",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1236,6 +1256,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRelations",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1269,6 +1290,7 @@ public class AlchemyLanguageV1 {
             url: serviceUrl + "/url/URLGetTextSentiment",
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -1318,6 +1340,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTextSentiment",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1359,6 +1382,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetTextSentiment",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1393,6 +1417,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetTargetedSentiment",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "target", value: target),
                 NSURLQueryItem(name: "url", value: url),
@@ -1446,6 +1471,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTargetedSentiment",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1490,6 +1516,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetTargetedSentiment",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1522,6 +1549,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRankedTaxonomy",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -1571,6 +1599,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedTaxonomy",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1612,6 +1641,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedTaxonomy",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1644,6 +1674,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetRawText",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -1693,6 +1724,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRawText",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1742,6 +1774,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetText",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -1797,6 +1830,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetText",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1840,6 +1874,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetTitle",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams
         )
         
@@ -1889,6 +1924,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTitle",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -1921,6 +1957,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetFeedLinks",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -1971,6 +2008,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetFeedLinks",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -2003,6 +2041,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/url/URLGetEmotion",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: [
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
@@ -2053,6 +2092,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetEmotion",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )
@@ -2095,6 +2135,7 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetEmotion",
             contentType: "application/x-www-form-urlencoded",
+            userAgent: userAgent,
             queryParameters: queryParams,
             messageBody: body
         )

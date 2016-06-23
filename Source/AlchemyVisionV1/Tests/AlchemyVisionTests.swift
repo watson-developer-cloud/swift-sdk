@@ -20,7 +20,7 @@ import AlchemyVisionV1
 class AlchemyVisionTests: XCTestCase {
     
     private var alchemyVision: AlchemyVision!
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: NSTimeInterval = 10.0
 
     private var car: NSData!
     private var obama: NSData!

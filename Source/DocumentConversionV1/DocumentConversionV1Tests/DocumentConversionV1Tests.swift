@@ -21,7 +21,7 @@ class DocumentConversionV1Tests: XCTestCase {
     
     private var service: DocumentConversionV1!
     private var badService: DocumentConversionV1!
-    private let timeout: NSTimeInterval = 120.0
+    private let timeout: NSTimeInterval = 5.0
     
     private var testDocument: NSURL!
     private var testPng: NSURL!

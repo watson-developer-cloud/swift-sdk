@@ -20,7 +20,7 @@ import LanguageTranslationV2
 class LanguageTranslationTests: XCTestCase {
 
     private var languageTranslation: LanguageTranslation!
-    private let timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 5.0
 
     // MARK: - Test Configuration
 

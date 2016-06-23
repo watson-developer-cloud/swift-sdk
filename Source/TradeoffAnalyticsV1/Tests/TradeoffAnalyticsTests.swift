@@ -20,7 +20,7 @@ import TradeoffAnalyticsV1
 class TradeoffAnalyticsTests: XCTestCase {
 
     private var tradeoffAnalytics: TradeoffAnalytics!
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: NSTimeInterval = 5.0
     
     // MARK: - Test Configuration
     

@@ -20,7 +20,7 @@ import SpeechToTextV1
 class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: NSTimeInterval = 10.0
 
     override func setUp() {
         super.setUp()

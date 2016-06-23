@@ -21,7 +21,7 @@ class AlchemyLanguageV1Tests: XCTestCase {
     
     private var service: AlchemyLanguageV1!
     
-    private let timeout: NSTimeInterval = 120.0
+    private let timeout: NSTimeInterval = 5.0
     
     let testUrl = "http://arstechnica.com/gadgets/2016/05/android-instant-apps-will-blur-the-lines-between-apps-and-mobile-sites/"
     

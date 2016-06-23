@@ -20,7 +20,7 @@ class AlchemyDataNewsV1Tests: XCTestCase {
     
     private var service: AlchemyDataNewsV1!
 
-    private let timeout: NSTimeInterval = 120.0
+    private let timeout: NSTimeInterval = 5.0
     
     override func setUp() {
         super.setUp()

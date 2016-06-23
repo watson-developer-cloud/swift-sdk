@@ -16,12 +16,12 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for RelationshipExtractionV1.
-FOUNDATION_EXPORT double RelationshipExtractionV1VersionNumber;
+//! Project version number for RelationshipExtractionV1Beta.
+FOUNDATION_EXPORT double RelationshipExtractionV1BetaVersionNumber;
 
-//! Project version string for RelationshipExtractionV1.
-FOUNDATION_EXPORT const unsigned char RelationshipExtractionV1VersionString[];
+//! Project version string for RelationshipExtractionV1Beta.
+FOUNDATION_EXPORT const unsigned char RelationshipExtractionV1BetaVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <RelationshipExtractionV1/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <RelationshipExtractionV1Beta/PublicHeader.h>
 
 

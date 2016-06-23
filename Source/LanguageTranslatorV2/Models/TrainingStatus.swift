@@ -15,20 +15,23 @@
  **/
 
 import Foundation
-import Freddy
 
-/** A language that can be identified by the Language Translation service. */
-public struct IdentifiableLanguage: JSONDecodable {
-    
-    /// The code of the identifiable language.
-    public let language: String
-    
-    /// The name of the identifiable language.
-    public let name: String
+/** The status of a translation model. */
+public enum TrainingStatus: String {
 
-    /// Used internally to initialize an `IdentifiableLanguage` model from JSON.
-    public init(json: JSON) throws {
-        language = try json.string("language")
-        name = try json.string("name")
-    }
+    /// Training has completed and this translation model is
+    /// ready for use with the Language Translator service.
+    case Available = "available"
+    
+    /// Training has just started.
+    case Starting = "starting"
+
+    /// Training is still in progress.
+    case Training = "training"
+    
+    /// Training has been uploaded.
+    case Uploaded = "uploaded"
+
+    /// Training did not complete because of an error.
+    case Error = "error"
 }

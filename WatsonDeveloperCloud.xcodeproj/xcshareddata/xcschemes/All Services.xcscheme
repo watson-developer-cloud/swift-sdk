@@ -183,8 +183,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF4DB1CEEA16100B74848"
-               BuildableName = "LanguageTranslationV2.framework"
-               BlueprintName = "LanguageTranslationV2"
+               BuildableName = "LanguageTranslatorV2.framework"
+               BlueprintName = "LanguageTranslatorV2"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -197,8 +197,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF4E41CEEA16100B74848"
-               BuildableName = "LanguageTranslationV2Tests.xctest"
-               BlueprintName = "LanguageTranslationV2Tests"
+               BuildableName = "LanguageTranslatorV2Tests.xctest"
+               BlueprintName = "LanguageTranslatorV2Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -497,8 +497,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AAAF4E41CEEA16100B74848"
-               BuildableName = "LanguageTranslationV2Tests.xctest"
-               BlueprintName = "LanguageTranslationV2Tests"
+               BuildableName = "LanguageTranslatorV2Tests.xctest"
+               BlueprintName = "LanguageTranslatorV2Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -19,7 +19,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
   - [Dialog](#dialog)
-  - [Language Translation](#language-translation)
+  - [Language Translator](#language-translator)
   - [Natural Language Classifier](#natural-language-classifier)
   - [Personality Insights](#personality-insights)
   - [Speech to Text](#speech-to-text)
@@ -230,25 +230,25 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
-### Language Translation
+### Language Translator
 
-The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+The IBM Watson™ Language Translator service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
-How to instantiate and use the Language Translation service:
+How to instantiate and use the Language Translator service:
 
 ```swift
-let languageTranslation = LanguageTranslation(username: "your-username-here", password: "your-password-here")
+let languageTranslator = LanguageTranslator(username: "your-username-here", password: "your-password-here")
 let failure = { (error: NSError) in print(error) }
-languageTranslation.getIdentifiableLanguages(failure) { identifiableLanguage in
+languageTranslator.getIdentifiableLanguages(failure) { identifiableLanguage in
     // code here
 }
 ```
 
-The following links provide more information about the Language Translation service:
+The following links provide more information about the Language Translator service:
 
-* [IBM Watson Language Translation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
-* [IBM Watson Language Translation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
-* [IBM Watson Language Translation - Demo](https://language-translation-demo.mybluemix.net/)
+* [IBM Watson Language Translator - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
+* [IBM Watson Language Translator - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
+* [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
 
 ### Natural Language Classifier
 
@@ -540,7 +540,7 @@ See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master
 [machine_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/mtapi/
 [document_conversion]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/
 [relationship_extraction]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/sireapi/
-[language_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
+[language_translator]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
 [visual_recognition]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/
 [tradeoff_analytics]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/
 [text_to_speech]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/

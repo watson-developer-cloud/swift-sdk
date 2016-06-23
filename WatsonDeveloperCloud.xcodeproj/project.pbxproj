@@ -171,7 +171,7 @@
 		7AAAF4D31CEEA13600B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF4D51CEEA14000B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4D61CEEA14000B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF4E61CEEA16100B74848 /* LanguageTranslationV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslationV2.framework */; };
+		7AAAF4E61CEEA16100B74848 /* LanguageTranslatorV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */; };
 		7AAAF4F31CEEA17400B74848 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7AAAF4F41CEEA17400B74848 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
 		7AAAF4F51CEEA17400B74848 /* MonitorTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */; };
@@ -179,9 +179,9 @@
 		7AAAF4F71CEEA17400B74848 /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */; };
 		7AAAF4F81CEEA17400B74848 /* TranslateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */; };
 		7AAAF4F91CEEA17400B74848 /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */; };
-		7AAAF4FA1CEEA17600B74848 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */; };
+		7AAAF4FA1CEEA17600B74848 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */; };
 		7AAAF4FB1CEEA17C00B74848 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */; };
-		7AAAF4FC1CEEA17C00B74848 /* LanguageTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */; };
+		7AAAF4FC1CEEA17C00B74848 /* LanguageTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */; };
 		7AAAF4FD1CEEA18B00B74848 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7AAAF4FE1CEEA1AB00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF4FF1CEEA1AB00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -230,7 +230,7 @@
 		7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5B81CEEA69B00B74848 /* AlchemyVisionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5B91CEEA6AB00B74848 /* DialogV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AAAF5BA1CEEA6AF00B74848 /* LanguageTranslationV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AF1CEEA62C00B74848 /* LanguageTranslationV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AAAF5BA1CEEA6AF00B74848 /* LanguageTranslatorV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AF1CEEA62C00B74848 /* LanguageTranslatorV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5BB1CEEA6B400B74848 /* NaturalLanguageClassifierV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5BC1CEEA6B700B74848 /* PersonalityInsightsV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5BD1CEEA6BC00B74848 /* RestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B21CEEA62C00B74848 /* RestKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -399,7 +399,7 @@
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7AAAF4DB1CEEA16100B74848;
-			remoteInfo = LanguageTranslationV2;
+			remoteInfo = LanguageTranslatorV2;
 		};
 		7AAAF5141CEEA1DA00B74848 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -667,16 +667,16 @@
 		7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
 		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
-		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
-		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiedLanguage.swift; sourceTree = "<group>"; };
-		7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateRequest.swift; sourceTree = "<group>"; };
-		7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateResponse.swift; sourceTree = "<group>"; };
-		7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModel.swift; sourceTree = "<group>"; };
-		7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
-		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslationTests.swift; sourceTree = "<group>"; };
-		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorTraining.swift; sourceTree = "<group>"; };
-		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingStatus.swift; sourceTree = "<group>"; };
+		7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslator.swift; path = ../LanguageTranslatorV2/LanguageTranslator.swift; sourceTree = "<group>"; };
+		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiableLanguage.swift; sourceTree = "<group>"; };
+		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiedLanguage.swift; sourceTree = "<group>"; };
+		7A6117981CB6D3F2009A4DA1 /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslateRequest.swift; path = ../../LanguageTranslatorV2/Models/TranslateRequest.swift; sourceTree = "<group>"; };
+		7A6117991CB6D3F2009A4DA1 /* TranslateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslateResponse.swift; path = ../../LanguageTranslatorV2/Models/TranslateResponse.swift; sourceTree = "<group>"; };
+		7A61179A1CB6D3F2009A4DA1 /* TranslationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationModel.swift; path = ../../LanguageTranslatorV2/Models/TranslationModel.swift; sourceTree = "<group>"; };
+		7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = glossary.tmx; path = ../../LanguageTranslatorV2/Tests/glossary.tmx; sourceTree = "<group>"; };
+		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslatorTests.swift; path = ../../LanguageTranslatorV2/Tests/LanguageTranslatorTests.swift; sourceTree = "<group>"; };
+		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonitorTraining.swift; path = ../../LanguageTranslatorV2/Models/MonitorTraining.swift; sourceTree = "<group>"; };
+		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingStatus.swift; path = ../../LanguageTranslatorV2/Models/TrainingStatus.swift; sourceTree = "<group>"; };
 		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
 		7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TradeoffAnalyticsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeoffAnalyticsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -755,8 +755,8 @@
 		7AAAF48E1CEEA07900B74848 /* PersonalityInsightsV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalityInsightsV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4AF1CEEA10600B74848 /* NaturalLanguageClassifierV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NaturalLanguageClassifierV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4B81CEEA10700B74848 /* NaturalLanguageClassifierV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaturalLanguageClassifierV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AAAF4DC1CEEA16100B74848 /* LanguageTranslationV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslationV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AAAF4E51CEEA16100B74848 /* LanguageTranslationV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTranslationV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslatorV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AAAF4E51CEEA16100B74848 /* LanguageTranslatorV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTranslatorV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF5091CEEA1DA00B74848 /* DialogV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DialogV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF5121CEEA1DA00B74848 /* DialogV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialogV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF5361CEEA23D00B74848 /* AlchemyVisionV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlchemyVisionV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -766,7 +766,7 @@
 		7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AlchemyLanguageV1.h; path = Source/SupportingFiles/AlchemyLanguageV1.h; sourceTree = "<group>"; };
 		7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AlchemyVisionV1.h; path = Source/SupportingFiles/AlchemyVisionV1.h; sourceTree = "<group>"; };
 		7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DialogV1.h; path = Source/SupportingFiles/DialogV1.h; sourceTree = "<group>"; };
-		7AAAF5AF1CEEA62C00B74848 /* LanguageTranslationV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LanguageTranslationV2.h; path = Source/SupportingFiles/LanguageTranslationV2.h; sourceTree = "<group>"; };
+		7AAAF5AF1CEEA62C00B74848 /* LanguageTranslatorV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LanguageTranslatorV2.h; path = Source/SupportingFiles/LanguageTranslatorV2.h; sourceTree = "<group>"; };
 		7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NaturalLanguageClassifierV1.h; path = Source/SupportingFiles/NaturalLanguageClassifierV1.h; sourceTree = "<group>"; };
 		7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PersonalityInsightsV2.h; path = Source/SupportingFiles/PersonalityInsightsV2.h; sourceTree = "<group>"; };
 		7AAAF5B21CEEA62C00B74848 /* RestKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RestKit.h; path = Source/SupportingFiles/RestKit.h; sourceTree = "<group>"; };
@@ -1058,7 +1058,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4E61CEEA16100B74848 /* LanguageTranslationV2.framework in Frameworks */,
+				7AAAF4E61CEEA16100B74848 /* LanguageTranslatorV2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,7 +1234,7 @@
 				7A219F1D1D1350CC0003D934 /* ConversationV1 */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
-				7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */,
+				7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A987D621D19D923003626B2 /* RelationshipExtractionV1 */,
@@ -1265,8 +1265,8 @@
 				7AAAF48E1CEEA07900B74848 /* PersonalityInsightsV2Tests.xctest */,
 				7AAAF4AF1CEEA10600B74848 /* NaturalLanguageClassifierV1.framework */,
 				7AAAF4B81CEEA10700B74848 /* NaturalLanguageClassifierV1Tests.xctest */,
-				7AAAF4DC1CEEA16100B74848 /* LanguageTranslationV2.framework */,
-				7AAAF4E51CEEA16100B74848 /* LanguageTranslationV2Tests.xctest */,
+				7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */,
+				7AAAF4E51CEEA16100B74848 /* LanguageTranslatorV2Tests.xctest */,
 				7AAAF5091CEEA1DA00B74848 /* DialogV1.framework */,
 				7AAAF5121CEEA1DA00B74848 /* DialogV1Tests.xctest */,
 				7AAAF5361CEEA23D00B74848 /* AlchemyVisionV1.framework */,
@@ -1339,7 +1339,7 @@
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
-				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslationV2.h */,
+				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslatorV2.h */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */,
 				7AAAF5B21CEEA62C00B74848 /* RestKit.h */,
@@ -1396,15 +1396,15 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		7A6117911CB6D3F2009A4DA1 /* LanguageTranslationV2 */ = {
+		7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */ = {
 			isa = PBXGroup;
 			children = (
-				7A6117921CB6D3F2009A4DA1 /* LanguageTranslation.swift */,
+				7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */,
 				7A6117951CB6D3F2009A4DA1 /* Models */,
 				7A61179B1CB6D3F2009A4DA1 /* Tests */,
 			);
-			name = LanguageTranslationV2;
-			path = Source/LanguageTranslationV2;
+			name = LanguageTranslatorV2;
+			path = Source/LanguageTranslatorV2;
 			sourceTree = "<group>";
 		};
 		7A6117951CB6D3F2009A4DA1 /* Models */ = {
@@ -1425,7 +1425,7 @@
 			isa = PBXGroup;
 			children = (
 				7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */,
-				7A61179D1CB6D3F2009A4DA1 /* LanguageTranslationTests.swift */,
+				7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1920,7 +1920,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF5BA1CEEA6AF00B74848 /* LanguageTranslationV2.h in Headers */,
+				7AAAF5BA1CEEA6AF00B74848 /* LanguageTranslatorV2.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2336,9 +2336,9 @@
 			productReference = 7AAAF4B81CEEA10700B74848 /* NaturalLanguageClassifierV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */ = {
+		7AAAF4DB1CEEA16100B74848 /* LanguageTranslatorV2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7AAAF4ED1CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslationV2" */;
+			buildConfigurationList = 7AAAF4ED1CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslatorV2" */;
 			buildPhases = (
 				7AAAF4D71CEEA16100B74848 /* Sources */,
 				7AAAF4D81CEEA16100B74848 /* Frameworks */,
@@ -2349,14 +2349,14 @@
 			);
 			dependencies = (
 			);
-			name = LanguageTranslationV2;
-			productName = LanguageTranslationV2;
-			productReference = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslationV2.framework */;
+			name = LanguageTranslatorV2;
+			productName = LanguageTranslatorV2;
+			productReference = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7AAAF4E41CEEA16100B74848 /* LanguageTranslationV2Tests */ = {
+		7AAAF4E41CEEA16100B74848 /* LanguageTranslatorV2Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7AAAF4F01CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslationV2Tests" */;
+			buildConfigurationList = 7AAAF4F01CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslatorV2Tests" */;
 			buildPhases = (
 				7AAAF4E11CEEA16100B74848 /* Sources */,
 				7AAAF4E21CEEA16100B74848 /* Frameworks */,
@@ -2368,9 +2368,9 @@
 			dependencies = (
 				7AAAF4E81CEEA16100B74848 /* PBXTargetDependency */,
 			);
-			name = LanguageTranslationV2Tests;
-			productName = LanguageTranslationV2Tests;
-			productReference = 7AAAF4E51CEEA16100B74848 /* LanguageTranslationV2Tests.xctest */;
+			name = LanguageTranslatorV2Tests;
+			productName = LanguageTranslatorV2Tests;
+			productReference = 7AAAF4E51CEEA16100B74848 /* LanguageTranslatorV2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7AAAF5081CEEA1DA00B74848 /* DialogV1 */ = {
@@ -2696,8 +2696,8 @@
 				7AAAF5111CEEA1DA00B74848 /* DialogV1Tests */,
 				B1AAD2D21D08656B002DAB84 /* DocumentConversionV1 */,
 				B1AAD2DB1D08656B002DAB84 /* DocumentConversionV1Tests */,
-				7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */,
-				7AAAF4E41CEEA16100B74848 /* LanguageTranslationV2Tests */,
+				7AAAF4DB1CEEA16100B74848 /* LanguageTranslatorV2 */,
+				7AAAF4E41CEEA16100B74848 /* LanguageTranslatorV2Tests */,
 				7AAAF4AE1CEEA10600B74848 /* NaturalLanguageClassifierV1 */,
 				7AAAF4B71CEEA10700B74848 /* NaturalLanguageClassifierV1Tests */,
 				7AAAF4841CEEA07900B74848 /* PersonalityInsightsV2 */,
@@ -3218,7 +3218,7 @@
 				7AAAF4F61CEEA17400B74848 /* TrainingStatus.swift in Sources */,
 				7AAAF4F91CEEA17400B74848 /* TranslationModel.swift in Sources */,
 				7AAAF4F81CEEA17400B74848 /* TranslateResponse.swift in Sources */,
-				7AAAF4FA1CEEA17600B74848 /* LanguageTranslation.swift in Sources */,
+				7AAAF4FA1CEEA17600B74848 /* LanguageTranslator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3226,7 +3226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4FC1CEEA17C00B74848 /* LanguageTranslationTests.swift in Sources */,
+				7AAAF4FC1CEEA17C00B74848 /* LanguageTranslatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3430,7 +3430,7 @@
 		};
 		7AAAF4E81CEEA16100B74848 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7AAAF4DB1CEEA16100B74848 /* LanguageTranslationV2 */;
+			target = 7AAAF4DB1CEEA16100B74848 /* LanguageTranslatorV2 */;
 			targetProxy = 7AAAF4E71CEEA16100B74848 /* PBXContainerItemProxy */;
 		};
 		7AAAF5151CEEA1DA00B74848 /* PBXTargetDependency */ = {
@@ -4254,7 +4254,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -4276,7 +4276,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -4289,7 +4289,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -4301,7 +4301,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslationV2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4847,7 +4847,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7AAAF4ED1CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslationV2" */ = {
+		7AAAF4ED1CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslatorV2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7AAAF4EE1CEEA16100B74848 /* Debug */,
@@ -4856,7 +4856,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7AAAF4F01CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslationV2Tests" */ = {
+		7AAAF4F01CEEA16100B74848 /* Build configuration list for PBXNativeTarget "LanguageTranslatorV2Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7AAAF4F11CEEA16100B74848 /* Debug */,

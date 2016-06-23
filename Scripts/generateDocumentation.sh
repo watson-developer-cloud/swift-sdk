@@ -5,7 +5,7 @@ jazzyParams="-c -g https://github.com/watson-developer-cloud/ios-sdk --hide-docu
 rm -r ./Documentation/Service/AlchemyLanguageV1
 rm -r ./Documentation/Service/AlchemyVisionV1
 rm -r ./Documentation/Service/DialogV1 
-rm -r ./Documentation/Service/LanguageTranslationV2
+rm -r ./Documentation/Service/LanguageTranslatorV2
 rm -r ./Documentation/Service/NaturalLanguageClassifierV1
 rm -r ./Documentation/Service/PersonalityInsightsV2 
 rm -r ./Documentation/Service/VisualRecognitionV3
@@ -19,8 +19,8 @@ jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,AlchemyVisionV1' $jazz
 mv ./docs ./Documentation/Service/AlchemyVisionV1
 jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,DialogV1' $jazzyParams --exclude ./WatsonDeveloperCloud/WatsonCore/Utilities/AlchemyService.swift,./WatsonDeveloperCloud/AlchemyVision/AlchemyVisionConstants.swift
 mv ./docs ./Documentation/Service/DialogV1 
-jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,LanguageTranslationV2' $jazzyParams
-mv ./docs ./Documentation/Service/LanguageTranslationV2 
+jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,LanguageTranslatorV2' $jazzyParams
+mv ./docs ./Documentation/Service/LanguageTranslatorV2 
 jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,NaturalLanguageClassifierV1' $jazzyParams
 mv ./docs ./Documentation/Service/NaturalLanguageClassifierV1 
 jazzy -x '-project,WatsonDeveloperCloud.xcodeproj,-scheme,PersonalityInsightsV2' $jazzyParams

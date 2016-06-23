@@ -29,6 +29,7 @@ class LanguageTranslationTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateLanguageTranslation()
+        deleteStaleCustomModels()
     }
 
     /** Instantiate Language Translation. */
@@ -44,6 +45,21 @@ class LanguageTranslationTests: XCTestCase {
             return
         }
         languageTranslation = LanguageTranslation(username: username, password: password)
+    }
+    
+    /** Delete any stale custom models that were previously created by unit tests. */
+    func deleteStaleCustomModels() {
+        let description = "Delete any stale custom models previously created by unit tests."
+        let expectation = expectationWithDescription(description)
+        languageTranslation.getModels(defaultModelsOnly: false, failure: failWithError) { models in
+            for model in models {
+                if model.baseModelID != "" {
+                    self.languageTranslation.deleteModel(model.modelID)
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
 
     /** Fail false negatives. */

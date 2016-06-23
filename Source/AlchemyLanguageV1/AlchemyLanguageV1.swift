@@ -149,8 +149,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetAuthors",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -249,8 +249,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedConcepts",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -298,8 +298,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedConcepts",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -460,8 +460,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -540,8 +540,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -666,8 +666,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -728,8 +728,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -805,8 +805,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetLanguage",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -888,8 +888,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetMicroformatData",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -970,8 +970,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetPubDate",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1148,8 +1148,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRelations",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1236,8 +1236,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRelations",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1318,8 +1318,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTextSentiment",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1359,8 +1359,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetTextSentiment",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1446,8 +1446,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTargetedSentiment",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1490,8 +1490,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetTargetedSentiment",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1571,8 +1571,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRankedTaxonomy",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1612,8 +1612,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetRankedTaxonomy",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1693,8 +1693,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetRawText",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1797,8 +1797,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetText",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1889,8 +1889,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetTitle",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -1971,8 +1971,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetFeedLinks",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -2053,8 +2053,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/html/HTMLGetEmotion",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request
@@ -2095,8 +2095,8 @@ public class AlchemyLanguageV1 {
             method: .POST,
             url: serviceUrl + "/text/TextGetEmotion",
             contentType: "application/x-www-form-urlencoded",
-            messageBody: body,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            messageBody: body
         )
         
         // execute request

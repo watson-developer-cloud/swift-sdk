@@ -29,7 +29,7 @@
 		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
-		7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1.framework */; };
+		7A219F101D1350670003D934 /* ConversationV1Experimental.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1Experimental.framework */; };
 		7A219F241D1350CC0003D934 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F1E1D1350CC0003D934 /* Conversation.swift */; };
 		7A219F261D1350CC0003D934 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F201D1350CC0003D934 /* MessageRequest.swift */; };
 		7A219F281D1350CC0003D934 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F211D1350CC0003D934 /* MessageResponse.swift */; };
@@ -39,7 +39,7 @@
 		7A219F2E1D1351100003D934 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7A219F301D1351450003D934 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A219F311D1351450003D934 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A219F331D1351DB0003D934 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A219F321D1351DB0003D934 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A219F331D1351DB0003D934 /* ConversationV1Experimental.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A517AC51D1C84E1004FD758 /* RelationshipExtractionV1Beta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A7D71151D1B017500ABBA13 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7A987D1E1D19D424003626B2 /* TradeoffAnalyticsV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */; };
@@ -337,7 +337,7 @@
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7A219F051D1350670003D934;
-			remoteInfo = ConversationV1;
+			remoteInfo = ConversationV1Experimental;
 		};
 		7A987D1F1D19D424003626B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -648,13 +648,13 @@
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
-		7A219F061D1350670003D934 /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A219F1E1D1350CC0003D934 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		7A219F201D1350CC0003D934 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
-		7A219F211D1350CC0003D934 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
-		7A219F231D1350CC0003D934 /* ConversationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
-		7A219F321D1351DB0003D934 /* ConversationV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
+		7A219F061D1350670003D934 /* ConversationV1Experimental.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1Experimental.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A219F0F1D1350670003D934 /* ConversationV1ExperimentalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1ExperimentalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A219F1E1D1350CC0003D934 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = ../ConversationV1Experimental/Conversation.swift; sourceTree = "<group>"; };
+		7A219F201D1350CC0003D934 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageRequest.swift; path = ../../ConversationV1Experimental/Models/MessageRequest.swift; sourceTree = "<group>"; };
+		7A219F211D1350CC0003D934 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageResponse.swift; path = ../../ConversationV1Experimental/Models/MessageResponse.swift; sourceTree = "<group>"; };
+		7A219F231D1350CC0003D934 /* ConversationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationTests.swift; path = ../../ConversationV1Experimental/Tests/ConversationTests.swift; sourceTree = "<group>"; };
+		7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1Experimental.h; path = Source/SupportingFiles/ConversationV1Experimental.h; sourceTree = "<group>"; };
 		7A34CB511C233E2100F20D0E /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Credentials.plist; path = Source/SupportingFiles/Credentials.plist; sourceTree = "<group>"; };
 		7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1Beta.h; path = Source/SupportingFiles/RelationshipExtractionV1Beta.h; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
@@ -898,7 +898,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */,
+				7A219F101D1350670003D934 /* ConversationV1Experimental.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,7 +1233,7 @@
 				B1A8E5141D19D02700678412 /* AlchemyDataNewsV1 */,
 				7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */,
 				7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */,
-				7A219F1D1D1350CC0003D934 /* ConversationV1 */,
+				7A219F1D1D1350CC0003D934 /* ConversationV1Experimental */,
 				7AEB131B1CBF7C8A00101884 /* DialogV1 */,
 				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */,
@@ -1275,8 +1275,8 @@
 				7AAAF53F1CEEA23E00B74848 /* AlchemyVisionV1Tests.xctest */,
 				7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */,
 				7AAAF56D1CEEA2DF00B74848 /* AlchemyLanguageV1Tests.xctest */,
-				7A219F061D1350670003D934 /* ConversationV1.framework */,
-				7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */,
+				7A219F061D1350670003D934 /* ConversationV1Experimental.framework */,
+				7A219F0F1D1350670003D934 /* ConversationV1ExperimentalTests.xctest */,
 				B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */,
 				B1AAD2DC1D08656B002DAB84 /* DocumentConversionV1Tests.xctest */,
 				B1A8E4FC1D19CEDA00678412 /* AlchemyDataNewsV1.framework */,
@@ -1302,15 +1302,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7A219F1D1D1350CC0003D934 /* ConversationV1 */ = {
+		7A219F1D1D1350CC0003D934 /* ConversationV1Experimental */ = {
 			isa = PBXGroup;
 			children = (
 				7A219F1E1D1350CC0003D934 /* Conversation.swift */,
 				7A219F1F1D1350CC0003D934 /* Models */,
 				7A219F221D1350CC0003D934 /* Tests */,
 			);
-			name = ConversationV1;
-			path = Source/ConversationV1;
+			name = ConversationV1Experimental;
+			path = Source/ConversationV1Experimental;
 			sourceTree = "<group>";
 		};
 		7A219F1F1D1350CC0003D934 /* Models */ = {
@@ -1337,7 +1337,7 @@
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
 				7A34CB511C233E2100F20D0E /* Credentials.plist */,
-				7A219F321D1351DB0003D934 /* ConversationV1.h */,
+				7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */,
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
@@ -1852,7 +1852,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A219F331D1351DB0003D934 /* ConversationV1.h in Headers */,
+				7A219F331D1351DB0003D934 /* ConversationV1Experimental.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2007,9 +2007,9 @@
 			productReference = 124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7A219F051D1350670003D934 /* ConversationV1 */ = {
+		7A219F051D1350670003D934 /* ConversationV1Experimental */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1" */;
+			buildConfigurationList = 7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Experimental" */;
 			buildPhases = (
 				7A219F011D1350670003D934 /* Sources */,
 				7A219F021D1350670003D934 /* Frameworks */,
@@ -2020,14 +2020,14 @@
 			);
 			dependencies = (
 			);
-			name = ConversationV1;
-			productName = ConversationV1;
-			productReference = 7A219F061D1350670003D934 /* ConversationV1.framework */;
+			name = ConversationV1Experimental;
+			productName = ConversationV1Experimental;
+			productReference = 7A219F061D1350670003D934 /* ConversationV1Experimental.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7A219F0E1D1350670003D934 /* ConversationV1Tests */ = {
+		7A219F0E1D1350670003D934 /* ConversationV1ExperimentalTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */;
+			buildConfigurationList = 7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1ExperimentalTests" */;
 			buildPhases = (
 				7A219F0B1D1350670003D934 /* Sources */,
 				7A219F0C1D1350670003D934 /* Frameworks */,
@@ -2039,9 +2039,9 @@
 			dependencies = (
 				7A219F121D1350670003D934 /* PBXTargetDependency */,
 			);
-			name = ConversationV1Tests;
-			productName = ConversationV1Tests;
-			productReference = 7A219F0F1D1350670003D934 /* ConversationV1Tests.xctest */;
+			name = ConversationV1ExperimentalTests;
+			productName = ConversationV1ExperimentalTests;
+			productReference = 7A219F0F1D1350670003D934 /* ConversationV1ExperimentalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7A987D131D19D424003626B2 /* TradeoffAnalyticsV1 */ = {
@@ -2694,8 +2694,8 @@
 				7AAAF56C1CEEA2DF00B74848 /* AlchemyLanguageV1Tests */,
 				7AAAF5351CEEA23D00B74848 /* AlchemyVisionV1 */,
 				7AAAF53E1CEEA23E00B74848 /* AlchemyVisionV1Tests */,
-				7A219F051D1350670003D934 /* ConversationV1 */,
-				7A219F0E1D1350670003D934 /* ConversationV1Tests */,
+				7A219F051D1350670003D934 /* ConversationV1Experimental */,
+				7A219F0E1D1350670003D934 /* ConversationV1ExperimentalTests */,
 				7AAAF5081CEEA1DA00B74848 /* DialogV1 */,
 				7AAAF5111CEEA1DA00B74848 /* DialogV1Tests */,
 				B1AAD2D21D08656B002DAB84 /* DocumentConversionV1 */,
@@ -3389,7 +3389,7 @@
 		};
 		7A219F121D1350670003D934 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7A219F051D1350670003D934 /* ConversationV1 */;
+			target = 7A219F051D1350670003D934 /* ConversationV1Experimental */;
 			targetProxy = 7A219F111D1350670003D934 /* PBXContainerItemProxy */;
 		};
 		7A987D201D19D424003626B2 /* PBXTargetDependency */ = {
@@ -3638,7 +3638,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Experimental";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3660,7 +3660,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Experimental";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3673,7 +3673,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1ExperimentalTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3685,7 +3685,7 @@
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1ExperimentalTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4689,7 +4689,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1" */ = {
+		7A219F1B1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Experimental" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A219F171D1350680003D934 /* Debug */,
@@ -4698,7 +4698,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
+		7A219F1C1D1350680003D934 /* Build configuration list for PBXNativeTarget "ConversationV1ExperimentalTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A219F191D1350680003D934 /* Debug */,

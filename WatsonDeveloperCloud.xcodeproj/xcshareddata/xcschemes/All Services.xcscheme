@@ -99,8 +99,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A219F051D1350670003D934"
-               BuildableName = "ConversationV1.framework"
-               BlueprintName = "ConversationV1"
+               BuildableName = "ConversationV1Experimental.framework"
+               BlueprintName = "ConversationV1Experimental"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -113,8 +113,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A219F0E1D1350670003D934"
-               BuildableName = "ConversationV1Tests.xctest"
-               BlueprintName = "ConversationV1Tests"
+               BuildableName = "ConversationV1ExperimentalTests.xctest"
+               BlueprintName = "ConversationV1ExperimentalTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -607,8 +607,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A219F0E1D1350670003D934"
-               BuildableName = "ConversationV1Tests.xctest"
-               BlueprintName = "ConversationV1Tests"
+               BuildableName = "ConversationV1ExperimentalTests.xctest"
+               BlueprintName = "ConversationV1ExperimentalTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

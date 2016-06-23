@@ -426,6 +426,34 @@
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "123B47111D1B3ABA007D0B22"
+               BuildableName = "RetrieveAndRankV1.framework"
+               BlueprintName = "RetrieveAndRankV1"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "123B471A1D1B3ABA007D0B22"
+               BuildableName = "RetrieveAndRankV1Tests.xctest"
+               BlueprintName = "RetrieveAndRankV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -561,6 +589,16 @@
                BlueprintIdentifier = "124C2DF71D19E29100D9F602"
                BuildableName = "TextToSpeechV1Tests.xctest"
                BlueprintName = "TextToSpeechV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "123B471A1D1B3ABA007D0B22"
+               BuildableName = "RetrieveAndRankV1Tests.xctest"
+               BlueprintName = "RetrieveAndRankV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>

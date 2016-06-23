@@ -21,7 +21,7 @@ import AVFoundation
 class TextToSpeechTests: XCTestCase {
     
     private var textToSpeech: TextToSpeech!
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: NSTimeInterval = 5.0
     private let playAudio = true
     private let text = "Swift at IBM is awesome. You should try it!"
     private let germanText = "Erst denken, dann handeln."

@@ -20,7 +20,7 @@ import LanguageTranslatorV2
 class LanguageTranslatorTests: XCTestCase {
 
     private var languageTranslator: LanguageTranslator!
-    private let timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -29,6 +29,7 @@ class LanguageTranslatorTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateLanguageTranslator()
+        deleteStaleCustomModels()
     }
 
     /** Instantiate Language Translator. */
@@ -44,6 +45,21 @@ class LanguageTranslatorTests: XCTestCase {
             return
         }
         languageTranslator = LanguageTranslator(username: username, password: password)
+    }
+    
+    /** Delete any stale custom models that were previously created by unit tests. */
+    func deleteStaleCustomModels() {
+        let description = "Delete any stale custom models previously created by unit tests."
+        let expectation = expectationWithDescription(description)
+        languageTranslator.getModels(defaultModelsOnly: false, failure: failWithError) { models in
+            for model in models {
+                if model.baseModelID != "" {
+                    self.languageTranslator.deleteModel(model.modelID)
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
 
     /** Fail false negatives. */

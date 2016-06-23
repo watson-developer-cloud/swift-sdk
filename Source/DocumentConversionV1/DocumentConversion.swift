@@ -25,7 +25,7 @@ import RestKit
  JSON-formatted Answer units that can be used with other Watson services, like the
  Watson Retrieve and Rank Service.
  */
-public class DocumentConversionV1 {
+public class DocumentConversion {
     
     private let username: String
     private let password: String

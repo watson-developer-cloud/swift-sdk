@@ -22,7 +22,7 @@ class PersonalityInsightsTests: XCTestCase {
     private var personalityInsights: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
-    private let timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 5.0
 
     // MARK: - Test Configuration
 

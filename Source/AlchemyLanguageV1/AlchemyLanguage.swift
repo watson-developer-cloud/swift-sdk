@@ -24,7 +24,7 @@ import RestKit
  high-level semantic information about your content.
  */
 
-public class AlchemyLanguageV1 {
+public class AlchemyLanguage {
     
     private let apiKey: String
     

@@ -23,7 +23,7 @@ import RestKit
  The AlchemyDataNews API utilizes natural language processing technologies to query the world's
  news and blogs like a database. 
  */
-public class AlchemyDataNewsV1 {
+public class AlchemyDataNews {
     
     private let apiKey: String
     

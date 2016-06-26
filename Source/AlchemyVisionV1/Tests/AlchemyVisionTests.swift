@@ -140,26 +140,26 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssert(face?.positionY >= 0)
             XCTAssert(face?.positionY <= 300)
             
-            // verify face identity
-            XCTAssertEqual(face?.identity.name, "Barack Obama")
-            XCTAssert(face?.identity.score >= 0.0)
-            XCTAssert(face?.identity.score <= 1.0)
+            // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
+            XCTAssertEqual(face?.identity!.name, "Barack Obama")
+            XCTAssert(face?.identity!.score >= 0.0)
+            XCTAssert(face?.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
-            XCTAssertNil(face?.identity.knowledgeGraph)
+            XCTAssertNil(face?.identity!.knowledgeGraph)
             
             // verify face identity disambiguation
-            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
-            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
-            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
-            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
-            XCTAssertNil(face?.identity.disambiguated.opencyc)
-            XCTAssertNil(face?.identity.disambiguated.umbel)
-            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
-            XCTAssertNil(face?.identity.disambiguated.crunchbase)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            XCTAssertEqual(face?.identity!.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity!.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity!.disambiguated.opencyc)
+            XCTAssertNil(face?.identity!.disambiguated.umbel)
+            XCTAssertEqual(face?.identity!.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity!.disambiguated.crunchbase)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("President") == true)
 
             expectation.fulfill()
         }
@@ -199,26 +199,26 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssert(face?.positionY >= 0)
             XCTAssert(face?.positionY <= 300)
             
-            // verify face identity
-            XCTAssertEqual(face?.identity.name, "Barack Obama")
-            XCTAssert(face?.identity.score >= 0.0)
-            XCTAssert(face?.identity.score <= 1.0)
+            // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
+            XCTAssertEqual(face?.identity!.name, "Barack Obama")
+            XCTAssert(face?.identity!.score >= 0.0)
+            XCTAssert(face?.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
-            XCTAssertEqual(face?.identity.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
+            XCTAssertEqual(face?.identity!.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
             
             // verify face identity disambiguation
-            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
-            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
-            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
-            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
-            XCTAssertNil(face?.identity.disambiguated.opencyc)
-            XCTAssertNil(face?.identity.disambiguated.umbel)
-            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
-            XCTAssertNil(face?.identity.disambiguated.crunchbase)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            XCTAssertEqual(face?.identity!.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity!.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity!.disambiguated.opencyc)
+            XCTAssertNil(face?.identity!.disambiguated.umbel)
+            XCTAssertEqual(face?.identity!.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity!.disambiguated.crunchbase)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("President") == true)
             
             expectation.fulfill()
         }
@@ -259,25 +259,25 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssert(face?.positionY <= 300)
             
             // verify face identity
-            XCTAssertEqual(face?.identity.name, "Barack Obama")
-            XCTAssert(face?.identity.score >= 0.0)
-            XCTAssert(face?.identity.score <= 1.0)
+            XCTAssertEqual(face?.identity!.name, "Barack Obama")
+            XCTAssert(face?.identity!.score >= 0.0)
+            XCTAssert(face?.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
-            XCTAssertNil(face?.identity.knowledgeGraph)
+            XCTAssertNil(face?.identity!.knowledgeGraph)
             
             // verify face identity disambiguation
-            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
-            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
-            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
-            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
-            XCTAssertNil(face?.identity.disambiguated.opencyc)
-            XCTAssertNil(face?.identity.disambiguated.umbel)
-            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
-            XCTAssertNil(face?.identity.disambiguated.crunchbase)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            XCTAssertEqual(face?.identity!.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity!.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity!.disambiguated.opencyc)
+            XCTAssertNil(face?.identity!.disambiguated.umbel)
+            XCTAssertEqual(face?.identity!.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity!.disambiguated.crunchbase)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("President") == true)
             
             expectation.fulfill()
         }
@@ -317,26 +317,26 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssert(face?.positionY >= 0)
             XCTAssert(face?.positionY <= 300)
             
-            // verify face identity
-            XCTAssertEqual(face?.identity.name, "Barack Obama")
-            XCTAssert(face?.identity.score >= 0.0)
-            XCTAssert(face?.identity.score <= 1.0)
+            // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
+            XCTAssertEqual(face?.identity!.name, "Barack Obama")
+            XCTAssert(face?.identity!.score >= 0.0)
+            XCTAssert(face?.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
-            XCTAssertEqual(face?.identity.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
+            XCTAssertEqual(face?.identity!.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
             
             // verify face identity disambiguation
-            XCTAssertEqual(face?.identity.disambiguated.name, "Barack Obama")
-            XCTAssertEqual(face?.identity.disambiguated.website, "http://www.whitehouse.gov/")
-            XCTAssertEqual(face?.identity.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
-            XCTAssertEqual(face?.identity.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
-            XCTAssertNil(face?.identity.disambiguated.opencyc)
-            XCTAssertNil(face?.identity.disambiguated.umbel)
-            XCTAssertEqual(face?.identity.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
-            XCTAssertNil(face?.identity.disambiguated.crunchbase)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Person") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("Politician") == true)
-            XCTAssert(face?.identity.disambiguated.subType?.contains("President") == true)
+            XCTAssertEqual(face?.identity!.disambiguated.name, "Barack Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.website, "http://www.whitehouse.gov/")
+            XCTAssertEqual(face?.identity!.disambiguated.dbpedia, "http://dbpedia.org/resource/Barack_Obama")
+            XCTAssertEqual(face?.identity!.disambiguated.yago, "http://yago-knowledge.org/resource/Barack_Obama")
+            XCTAssertNil(face?.identity!.disambiguated.opencyc)
+            XCTAssertNil(face?.identity!.disambiguated.umbel)
+            XCTAssertEqual(face?.identity!.disambiguated.freebase, "http://rdf.freebase.com/ns/m.02mjmr")
+            XCTAssertNil(face?.identity!.disambiguated.crunchbase)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Person") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("Politician") == true)
+            XCTAssert(face?.identity!.disambiguated.subType?.contains("President") == true)
             
             expectation.fulfill()
         }

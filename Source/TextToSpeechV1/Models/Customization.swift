@@ -42,7 +42,7 @@ public struct Customization: JSONDecodable {
     public let lastModified: Int
     
     /// A description of the custom voice model.
-    public let description: String
+    public let description: String?
     
     /// Used internally to initialize a `Customization` model from JSON.
     public init(json: JSON) throws {
@@ -52,6 +52,6 @@ public struct Customization: JSONDecodable {
         owner = try json.string("owner")
         created = try json.int("created")
         lastModified = try json.int("last_modified")
-        description = try json.string("description")
+        description = try? json.string("description")
     }
 }

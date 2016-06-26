@@ -19,7 +19,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
   - [Dialog](#dialog)
-  - [Language Translation](#language-translation)
+  - [Language Translator](#language-translator)
   - [Natural Language Classifier](#natural-language-classifier)
   - [Personality Insights](#personality-insights)
   - [Speech to Text](#speech-to-text)
@@ -230,25 +230,25 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
-### Language Translation
+### Language Translator
 
-The IBM Watson™ Language Translation service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+The IBM Watson™ Language Translator service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
-How to instantiate and use the Language Translation service:
+How to instantiate and use the Language Translator service:
 
 ```swift
-let languageTranslation = LanguageTranslation(username: "your-username-here", password: "your-password-here")
+let languageTranslator = LanguageTranslator(username: "your-username-here", password: "your-password-here")
 let failure = { (error: NSError) in print(error) }
-languageTranslation.getIdentifiableLanguages(failure) { identifiableLanguage in
+languageTranslator.getIdentifiableLanguages(failure) { identifiableLanguage in
     // code here
 }
 ```
 
-The following links provide more information about the Language Translation service:
+The following links provide more information about the Language Translator service:
 
-* [IBM Watson Language Translation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
-* [IBM Watson Language Translation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
-* [IBM Watson Language Translation - Demo](https://language-translation-demo.mybluemix.net/)
+* [IBM Watson Language Translator - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
+* [IBM Watson Language Translator - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
+* [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
 
 ### Natural Language Classifier
 
@@ -485,9 +485,9 @@ The following links provide more information about the Text To Speech service:
 
 ### Visual Recognition
 
-The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+The Visual Recognition service helps you to understand the contents of images. Submit an image, and the service returns scores for relevant classifiers representing things. It can even detect objects, texts or faces.
 
-How to instantiate and use the Tone Analyzer service:
+Here is an example how to use the service to detect faces in an Image:
 
 ```swift
 let apiKey = "your-apikey-here"
@@ -509,10 +509,7 @@ The following links provide more information about the Text To Speech service:
 
 ## Authentication
 
-IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential. For the services that have username and password credentials, a web service is used to grant a temporary Watson token to the client that can be used for subsequent calls.
-
-It is not advisable in a full production app to embed the username and passwords in your application, since the application could be decompiled to extract those credentials. Instead, these credentials should remain on a deployed server, and should handle fetching the Watson token on behalf of the mobile application.
-
+IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential.
 
 ## Build + Test
 
@@ -543,7 +540,7 @@ See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master
 [machine_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/mtapi/
 [document_conversion]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/
 [relationship_extraction]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/sireapi/
-[language_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
+[language_translator]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
 [visual_recognition]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/
 [tradeoff_analytics]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/
 [text_to_speech]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/

@@ -28,7 +28,7 @@ public class AlchemyVision {
     
     private let apiKey: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 AlchemyVisionV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = NSCharacterSet(charactersInString:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
@@ -46,18 +46,44 @@ public class AlchemyVision {
         self.apiKey = apiKey
         self.serviceURL = serviceURL
     }
+    
+    /**
+     If the given data represents an error returned by the Alchemy Vision service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.string("status")
+            let statusInfo = try json.string("statusInfo")
+            if status == "OK" {
+                return nil
+            } else {
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: status,
+                    NSLocalizedDescriptionKey: statusInfo
+                ]
+                return NSError(domain: domain, code: 400, userInfo: userInfo)
+            }
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Perform face recognition on an uploaded image. For each face detected, the service returns
      the estimated bounding box, gender, age, and name (if a celebrity is detected).
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform face recognition.
+     - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        image image: NSURL,
+        image imageData: NSData,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: FaceTags -> Void)
@@ -75,9 +101,6 @@ public class AlchemyVision {
             }
         }
         
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -86,12 +109,12 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<FaceTags, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<FaceTags, NSError>) in
                 switch response.result {
                 case .Success(let faceTags): success(faceTags)
                 case .Failure(let error): failure?(error)
@@ -140,7 +163,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<FaceTags, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<FaceTags, NSError>) in
                 switch response.result {
                 case .Success(let faceTags): success(faceTags)
                 case .Failure(let error): failure?(error)
@@ -225,7 +248,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<ImageLink, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<ImageLink, NSError>) in
                 switch response.result {
                 case.Success(let imageLinks): success(imageLinks)
                 case .Failure(let error): failure?(error)
@@ -262,7 +285,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<ImageLink, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<ImageLink, NSError>) in
                 switch response.result {
                 case .Success(let imageLinks): success(imageLinks)
                 case .Failure(let error): failure?(error)
@@ -273,14 +296,14 @@ public class AlchemyVision {
     /**
      Perform image tagging on an uploaded image.
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform face recognition.
+     - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter forceShowAll: Should lower confidence tags be included in the response?
      - parameter knowledgeGraph: Should hierarchical metadata be provided for each tag?
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        image image: NSURL,
+        image imageData: NSData,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: (NSError -> Void)? = nil,
@@ -306,9 +329,6 @@ public class AlchemyVision {
             }
         }
         
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -317,12 +337,12 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<ImageKeywords, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<ImageKeywords, NSError>) in
                 switch response.result {
                 case .Success(let imageKeywords): success(imageKeywords)
                 case .Failure(let error): failure?(error)
@@ -377,7 +397,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject { (response: Response<ImageKeywords, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<ImageKeywords, NSError>) in
                 switch response.result {
                 case .Success(let imageKeywords): success(imageKeywords)
                 case .Failure(let error): failure?(error)
@@ -388,12 +408,12 @@ public class AlchemyVision {
     /**
      Identify text in an uploaded image.
  
-     - parameter image: The image file (.jpg, .png, or .gif) on which to perform text detection.
+     - parameter image: The data representation of the image file on which to perform text detection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        image image: NSURL,
+        image imageData: NSData,
         failure: (NSError -> Void)? = nil,
         success: SceneText -> Void)
     {
@@ -402,10 +422,7 @@ public class AlchemyVision {
         queryParameters.append(NSURLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(NSURLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(NSURLQueryItem(name: "imagePostMode", value: "raw"))
-        
-        // load image data
-        let data = NSData(contentsOfURL: image)
-        
+
         // construct REST request
         let request = RestRequest(
             method: .POST,
@@ -414,12 +431,12 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
-            messageBody: data
+            messageBody: imageData
         )
         
         // execute REST requeset
         Alamofire.request(request)
-            .responseObject { (response: Response<SceneText, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<SceneText, NSError>) in
                 switch response.result {
                 case .Success(let sceneTexts): success(sceneTexts)
                 case .Failure(let error): failure?(error)
@@ -456,7 +473,7 @@ public class AlchemyVision {
 
         // execute REST requeset
         Alamofire.request(request)
-            .responseObject { (response: Response<SceneText, NSError>) in
+            .responseObject(dataToError: dataToError) { (response: Response<SceneText, NSError>) in
                 switch response.result {
                 case .Success(let sceneTexts): success(sceneTexts)
                 case .Failure(let error): failure?(error)

@@ -21,7 +21,7 @@ class DialogTests: XCTestCase {
 
     private var dialog: Dialog!
     private let dialogNamePrefix = "swift-sdk-unit-test-"
-    private let timeout: NSTimeInterval = 30
+    private let timeout: NSTimeInterval = 15.0
 
     // MARK: - Test Configuration
 

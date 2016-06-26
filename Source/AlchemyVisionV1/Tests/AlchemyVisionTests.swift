@@ -25,6 +25,7 @@ class AlchemyVisionTests: XCTestCase {
     private var car: NSData!
     private var obama: NSData!
     private var sign: NSData!
+    private var thomas: NSData!
     private var html: NSURL!
     
     private var htmlContents: String!
@@ -70,6 +71,7 @@ class AlchemyVisionTests: XCTestCase {
             let car = NSData(contentsOfURL: bundle.URLForResource("car", withExtension: "png")!),
             let obama = NSData(contentsOfURL: bundle.URLForResource("obama", withExtension: "jpg")!),
             let sign = NSData(contentsOfURL: bundle.URLForResource("sign", withExtension: "jpg")!),
+            let thomas = NSData(contentsOfURL: bundle.URLForResource("thomas", withExtension: "png")!),
             let html = bundle.URLForResource("example", withExtension: "html")
         else {
             XCTFail("Unable to locate testing resources.")
@@ -79,6 +81,7 @@ class AlchemyVisionTests: XCTestCase {
         self.car = car
         self.obama = obama
         self.sign = sign
+        self.thomas = thomas
         self.html = html
         
         self.htmlContents = try? String(contentsOfURL: html)
@@ -220,6 +223,28 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssert(face?.identity!.disambiguated.subType?.contains("Politician") == true)
             XCTAssert(face?.identity!.disambiguated.subType?.contains("President") == true)
             
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+
+    func testGetRankedImageFaceTagsImageWithoutIdentity() {
+        let description = "Perform face recognition on an uploaded image with no Celebrity Identity."
+        let expectation = expectationWithDescription(description)
+
+        alchemyVision.getRankedImageFaceTags(image: thomas, failure: failWithError) { faceTags in
+
+            // verify faceTags structure
+            XCTAssertEqual(faceTags.status, "OK")
+            XCTAssertEqual(faceTags.totalTransactions, 4)
+            XCTAssertNil(faceTags.url)
+            XCTAssertEqual(faceTags.imageFaces.count, 1)
+            let face = faceTags.imageFaces.first
+
+            // verify face identity (We know Thomas is a not a celebrity right now -> No Identitiy)
+            XCTAssert(face?.identity == nil)
+
             expectation.fulfill()
         }
         waitForExpectations()

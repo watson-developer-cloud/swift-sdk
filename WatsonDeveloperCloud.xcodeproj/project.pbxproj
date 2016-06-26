@@ -322,6 +322,7 @@
 		B1AAD3131D09FEF9002DAB84 /* testConfigText.json in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD30D1D09FEAC002DAB84 /* testConfigText.json */; };
 		B1AAD3161D0F13FA002DAB84 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD3141D0F13F5002DAB84 /* car.png */; };
 		B1C4DFD21D134E37004CC4B0 /* arsArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = B1C4DFCF1D134DB4004CC4B0 /* arsArticle.html */; };
+		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -863,6 +864,7 @@
 		B1F21DF51CE2461800393146 /* ToneScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneScore.swift; sourceTree = "<group>"; };
 		B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerTests.swift; sourceTree = "<group>"; };
 		B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzer.swift; sourceTree = "<group>"; };
+		BE1733901D1FE557003E8966 /* thomas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thomas.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1688,6 +1690,7 @@
 				7AAA9AAB1CEE8B3C002C9564 /* example.html */,
 				7AAA9AAC1CEE8B3C002C9564 /* obama.jpg */,
 				7AAA9AAD1CEE8B3C002C9564 /* sign.jpg */,
+				BE1733901D1FE557003E8966 /* thomas.png */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2936,6 +2939,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF5571CEEA26400B74848 /* sign.jpg in Resources */,
+				BE1733921D1FE60C003E8966 /* thomas.png in Resources */,
 				7AAAF5541CEEA26400B74848 /* car.png in Resources */,
 				7AAAF5581CEEA28200B74848 /* Credentials.plist in Resources */,
 				7AAAF5561CEEA26400B74848 /* obama.jpg in Resources */,

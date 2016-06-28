@@ -34,7 +34,7 @@ public enum SynthesisVoice {
     /// English (US dialect) with a female voice (`en-US_LisaVoice`).
     case US_Lisa
     
-    // English (US dialect) with a male voice (`en-US_MichaelVoice`).
+    /// English (US dialect) with a male voice (`en-US_MichaelVoice`).
     case US_Michael
     
     /// Spanish (Castillian dialect) with a male voice (`es-ES_EnriqueVoice`).

@@ -77,7 +77,7 @@ public struct RelationEntityArgument: JSONDecodable {
     }
 }
 
-/* The mentions that refer to this specific relation. */
+/** The mentions that refer to this specific relation. */
 public struct RelatedMentions: JSONDecodable {
     
     /// The alphanumeric identifier of the relation mention.

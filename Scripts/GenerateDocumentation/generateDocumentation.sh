@@ -76,15 +76,28 @@ cp -r Scripts/GenerateDocumentation/resources/* gh-pages/
 rm gh-pages/index-prefix gh-pages/index-postfix
 
 ################################################################################
-# Collect information on undocumented objects
+# Collect undocumented.json files
 ################################################################################
 
 touch gh-pages/undocumented.json
-for service in ${services[@]}; do
-  echo -n "{\"${service}\":" >> gh-pages/undocumented.json
-  cat gh-pages/services/${service}/undocumented.json >> gh-pages/undocumented.json
-  echo "}" >> gh-pages/undocumented.json
-done
+echo "[" >> gh-pages/undocumented.json
+
+declare -a undocumenteds
+undocumenteds=($(ls -r gh-pages/services/*/undocumented.json))
+
+if [ ${#undocumenteds[@]} -gt 0 ]; then
+  echo -e -n "\t" >> gh-pages/undocumented.json
+  cat "${undocumenteds[0]}" >> gh-pages/undocumented.json
+  unset undocumenteds[0]
+  for f in "${undocumenteds[@]}"; do
+    echo "," >> gh-pages/undocumented.json
+    echo -e -n "\t" >> gh-pages/undocumented.json
+    cat "$f" >> gh-pages/undocumented.json
+  done
+fi
+
+echo "" >> gh-pages/undocumented.json
+echo "]" >> gh-pages/undocumented.json
 
 ################################################################################
 # Print message about copying contents to gh-pages branch

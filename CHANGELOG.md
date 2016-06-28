@@ -32,7 +32,6 @@ This release also includes a number of minor changes and bug fixes:
 - Text to Speech: Change `AudioFormat.OGG` case to `AudioFormat.Opus`
 - Text to Speech: Add missing documentation.
 - Tone Analyzer: Improve tests.
-
 - Readme: Fix bugs.
 - Quickstart Guide: Fix bugs.
 - Swift Package Manager: Add `Package.swift` file.

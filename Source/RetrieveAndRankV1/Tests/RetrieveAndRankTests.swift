@@ -78,5 +78,54 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     // MARK: - Negative Tests
-
+    
+    /** */
+    func testCreateSolrClusterWithInvalidSize() {
+        let description = "Delete a Solr cluster when passing an invalid Solr cluster ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.createSolrCluster("iOS SDK test cluster", size: "100", failure: failure, success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+    /** Attempt to delete a Solr cluster by passing an invalid Solr cluster ID. */
+    func testDeleteSolrClusterWithBadID() {
+        let description = "Delete a Solr cluster when passing an invalid Solr cluster ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.deleteSolrCluster(
+            "123123123123123",
+            failure: failure,
+            success: failWithResult)
+        
+        waitForExpectations()
+    }
+    
+//    func testDeleteSolrClusterWithInaccessibleID() {
+//        let description = "delete invalid"
+//        let expectation = expectationWithDescription(description)
+//        
+//        let failure = { (error: NSError) in
+//            XCTAssertEqual(error.code, 403)
+//            expectation.fulfill()
+//        }
+//        
+//        retrieveAndRank.deleteSolrCluster(
+//            "sc19cac12e_3587_4510_820d_87945c51a3f9",
+//            failure: failure,
+//            success: failWithResult)
+//        
+//        waitForExpectations()
+//    }
 }

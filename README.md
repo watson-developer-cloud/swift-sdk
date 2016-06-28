@@ -16,9 +16,11 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
 ## Table of Contents
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
+  - [Alchemy Data News](#alchemy-data-news)
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
   - [Dialog](#dialog)
+  - [Document Conversion](#document-conversion)
   - [Language Translator](#language-translator)
   - [Natural Language Classifier](#natural-language-classifier)
   - [Personality Insights](#personality-insights)
@@ -77,7 +79,42 @@ IBM Bluemix™ is the cloud platform in which you deploy applications that you d
 The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
 IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
 
+### Alchemy Data News
 
+The AlchemyData News API uses natural language processing technologies to query the world's news and blogs like a database.
+
+#### Links
+
+* Check out the documentation [here](http://docs.alchemyapi.com/?cm_mc_uid=79800282175114412235629&cm_mc_sid_50200000=1467038618)
+* Try out the [demo](https://watson-api-explorer.mybluemix.net/apis/alchemy-data-news-v1)
+
+#### Requirements
+
+* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+
+#### Usage
+
+Instantiate an **AlchemyDataNews** object and set its api key.
+
+```swift
+
+let alchemyDataNews = AlchemyDataNews(apiKey: "your-apikey-here")
+
+```
+
+API calls are instance methods, and model class instances are returned as part of our callback.
+
+e.g.
+
+```swift
+
+let failure = { (error: NSError) in print(error) }
+
+alchemyDataNews.getNews("now-1d", end: "now", failure: failure) { news in
+    // code here
+}
+
+```
 
 ### Alchemy Language
 
@@ -107,7 +144,7 @@ The AlchemyLanguage API utilizes sophisticated natural language processing techn
 
 ##### Usage
 
-Instantiate an **AlchemyLanguage** object and set its api key via a **TokenAuthenticationStrategy**
+Instantiate an **AlchemyLanguage** object and set its api key
 
 ```swift
 
@@ -229,6 +266,37 @@ The following links provide additional information about the IBM Watson Dialog S
 * [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
+
+### Document Conversion
+
+The IBM Watson™ Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
+
+#### Usage
+
+Instantiate a **DocumentConversion** object and set the username, password, and version.
+
+```swift
+
+let documentConversion = DocumentConversion(username: "your-username", password: "your-password", version: "2015-12-15")
+
+```
+
+Convert a document with the service:
+
+```swift
+
+let failure = { (error: NSError) in print(error) }
+
+documentConversion.convertDocument(documentConversion.writeConfig(ReturnType.Text), document: yourDocument, failure: failure) { text in
+    // print converted document
+    print(text)
+}
+
+```
+
+### Links
+* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/index.shtml)
+* [IBM Watson Document Conversion - Demo](https://watson-api-explorer.mybluemix.net/apis/document-conversion-v1)
 
 ### Language Translator
 

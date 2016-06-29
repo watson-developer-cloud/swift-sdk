@@ -585,6 +585,10 @@ The IBM Watson Tradeoff Analytics service helps people make better choices when 
 The following example defines a problem then uses Tradeoff Analytics to identify optimal solutions:
 
 ```swift
+let username = "your-username-here"
+let password = "your-password-here"
+let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password)
+
 // define columns
 let price = Column(
     key: "price",

@@ -213,7 +213,12 @@ With the IBM Watson Conversation service you can create cognitive agents--virtua
 The following example shows how to send a message to the Conversation service and receive a response:
 
 ```swift
-let conversation = Conversation(username: "your-username-here", password: "your-password-here", version: "version-date-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let conversation = Conversation(username: username, password: password, version: version)
+
+
 let workspace = "your-workspace-id-here"
 let message = "your-message-here"
 let failure = { (error: NSError) in print(error) }

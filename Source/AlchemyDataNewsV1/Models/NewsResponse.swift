@@ -32,6 +32,7 @@ public struct NewsResponse: JSONDecodable {
     /** see **NewsResult** */
     public let result: NewsResult?
     
+    /// Used internally to initialize a NewsResponse object
     public init(json: JSON) throws {
         totalTransactions = try Int(json.string("totalTransactions"))!
         result = try? json.decode("result", type: NewsResult.self)

@@ -17,13 +17,22 @@
 import Foundation
 import Freddy
 
+/** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {
     
+    /// content URL
     public let url: String?
+    
+    /// total number of transactions made by the request
     public let totalTransactions: Int?
+    
+    /// language of the analyzed document
     public let language: String?
+    
+    /// see **Emotions**
     public let docEmotions: Emotions?
     
+    /// used internally to initialize a DocumentEmotion object
     public init(json: JSON) throws {
         url = try? json.string("url")
         if let totalTransactionsString = try? json.string("totalTransactions") {

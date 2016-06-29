@@ -33,10 +33,10 @@ public struct Language: JSONDecodable {
     /** the URL information was requestd for */
     public let url: String?
     
-    //** link to Ethnologue containing information on detected language */
+    /** link to Ethnologue containing information on detected language */
     public let ethnologue: String?
     
-    //** ISO-639-1 code for the detected language */
+    /** ISO-639-1 code for the detected language */
     public let iso6391: String?
     
     /** ISO-639-2 code for the detected language */

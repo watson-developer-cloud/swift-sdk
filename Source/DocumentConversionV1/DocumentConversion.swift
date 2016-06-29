@@ -216,7 +216,13 @@ public class DocumentConversion {
  Enum for supported return types from the DocumentConversion service
  */
 public enum ReturnType: String {
+    
+    /// Constant for AnswerUnits
     case AnswerUnits = "ANSWER_UNITS"
+    
+    /// Constant for HTML
     case HTML = "NORMALIZED_HTML"
+    
+    /// Constant for Text
     case Text = "NORMALIZED_TEXT"
 }

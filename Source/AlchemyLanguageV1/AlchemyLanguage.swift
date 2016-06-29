@@ -32,7 +32,7 @@ public class AlchemyLanguage {
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.0 AlchemyLanguageV1")
  
-    let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
+    private let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
         "1234567890-._~")
     

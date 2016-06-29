@@ -26,9 +26,17 @@ import Freddy
  */
 
 public struct SAORelation: JSONDecodable {
+    
+    /// see Action
     public let action: Action?
+    
+    /// an extracted Sentence
     public let sentence: String?
+    
+    /// see Subject
     public let subject: Subject?
+    
+    /// see RelationObject
     public let object: RelationObject?
     
     /// Used internally to initialize a SAORelation object
@@ -45,8 +53,14 @@ public struct SAORelation: JSONDecodable {
  An action as defined by the AlchemyLanguage service
  */
 public struct Action: JSONDecodable {
+    
+    /// text the action was extracted from
     public let text: String?
+    
+    /// the base or dictionary form of the word
     public let lemmatized: String?
+    
+    /// see Verb
     public let verb: Verb?
     
     /// Used internally to initialize an Action object
@@ -60,8 +74,14 @@ public struct Action: JSONDecodable {
      A verb as defined by the AlchemyLanguage service
      */
     public struct Verb: JSONDecodable {
+        
+        /// text the verb was extracted from
         public let text: String?
+        
+        /// the tense of the verb
         public let tense: String?
+        
+        /// was the verb negated
         public let negated: Int?
         
         /// Used internally to initalize a Verb object
@@ -81,8 +101,14 @@ public struct Action: JSONDecodable {
  A subjet extracted by the AlchemyLanguage service
  */
 public struct Subject: JSONDecodable {
+    
+    /// text the subject was extracted from
     public let text: String?
+    
+    /// see **Sentiment**
     public let sentiment: Sentiment?
+    
+    /// see **Entity**
     public let entity: Entity?
     
     /// Used internally to initialize a Subject object
@@ -97,9 +123,17 @@ public struct Subject: JSONDecodable {
  **Sentiment** related to the Subject-Action-Object extraction
  */
 public struct RelationObject: JSONDecodable {
+    
+    /// text the relation object was extracted from
     public let text: String?
+    
+    /// see **Sentiment**
     public let sentiment: Sentiment?
+    
+    /// see **Sentiment**
     public let sentimentFromSubject: Sentiment?
+    
+    /// see **Entity**
     public let entity: Entity?
     
     /// Used internally to initialize a RelationObject object

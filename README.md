@@ -16,7 +16,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
 ## Table of Contents
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
-  - [AlchemyData News](#alchemy-data-news)
+  - [AlchemyData News](#alchemydata-news)
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
   - [Conversation](#conversation)

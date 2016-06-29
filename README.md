@@ -19,6 +19,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
   - [Alchemy Data News](#alchemy-data-news)
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
+  - [Conversation](#conversation)
   - [Dialog](#dialog)
   - [Document Conversion](#document-conversion)
   - [Language Translator](#language-translator)
@@ -204,6 +205,26 @@ alchemyVision.getRankedImageFaceTags(url: url,
 	code here
 }
 ```
+
+### Conversation
+
+With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
+
+The following example shows how to send a message to the Conversation service and receive a response:
+
+```swift
+let conversation = Conversation(username: "your-username-here", password: "your-password-here", version: "version-date-here")
+let workspace = "your-workspace-id-here"
+let message = "your-message-here"
+let failure = { (error: NSError) in print(error) }
+conversation.message(workspace, message: message, failure: failure) { response in
+    print(response)
+}
+```
+
+* [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
+* [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
+
 
 ### Dialog
 

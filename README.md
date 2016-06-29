@@ -556,7 +556,7 @@ The following links provide more information about the Text To Speech service:
 
 The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.
 
-The following example demonstrates how to define a problem then uses Tradeoff Analytics to identify the optimal options:
+The following example defines a problem then uses Tradeoff Analytics to identify optimal solutions:
 
 ```swift
 // define columns
@@ -610,7 +610,7 @@ let problem = Problem(
     subject: "Phone"
 )
 
-// define failure closure
+// define failure function
 let failure = { (error: NSError) in print(error) }
 
 // identify optimal options

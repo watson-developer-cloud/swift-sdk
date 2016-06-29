@@ -27,6 +27,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
   - [Speech to Text](#speech-to-text)
   - [Text to Speech](#text-to-speech)
   - [Tone Analyzer](#tone-analyzer)
+  - [Tradoff Analytics](#tradeoff-analytics)
   - [Visual Recognition](#visual-recognition)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
@@ -550,6 +551,80 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html)
 * [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
+
+### Tradeoff Analytics
+
+The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.
+
+The following example demonstrates how to define a problem then uses Tradeoff Analytics to identify the optimal options:
+
+```swift
+// define columns
+let price = Column(
+    key: "price",
+    type: .Numeric,
+    goal: .Minimize,
+    isObjective: true
+)
+let ram = Column(
+    key: "ram",
+    type: .Numeric,
+    goal: .Maximize,
+    isObjective: true
+)
+let screen = Column(
+    key: "screen",
+    type: .Numeric,
+    goal: .Maximize,
+    isObjective: true
+)
+let os = Column(
+    key: "os",
+    type: .Categorical,
+    isObjective: true,
+    range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
+    preference: ["android", "ios"]
+)
+
+// define options
+let galaxy = Option(
+    key: "galaxy",
+    values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
+    name: "Galaxy S4"
+)
+let iphone = Option(
+    key: "iphone",
+    values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
+    name: "iPhone 5"
+)
+let optimus = Option(
+    key: "optimus",
+    values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
+    name: "LG Optimus G"
+)
+
+// define problem
+let problem = Problem(
+    columns: [price, ram, screen, os],
+    options: [galaxy, iphone, optimus],
+    subject: "Phone"
+)
+
+// define failure closure
+let failure = { (error: NSError) in print(error) }
+
+// identify optimal options
+tradeoffAnalytics.getDilemma(problem, failure: failure) {
+    dilemma in
+    print(dilemma.solutions)
+}
+```
+
+The following links provide more information about the Tradeoff Analytics service:
+
+* [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html)
+* [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/)
+* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
 
 ### Visual Recognition
 

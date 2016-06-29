@@ -16,7 +16,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
 ## Table of Contents
 * [Installation](#installation)
 * [IBM Watson Services](#ibm-watson-services)
-  - [Alchemy Data News](#alchemy-data-news)
+  - [AlchemyData News](#alchemy-data-news)
   - [Alchemy Language](#alchemy-language)
   - [Alchemy Vision](#alchemy-vision)
   - [Conversation](#conversation)
@@ -28,7 +28,7 @@ Visit our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/b
   - [Speech to Text](#speech-to-text)
   - [Text to Speech](#text-to-speech)
   - [Tone Analyzer](#tone-analyzer)
-  - [Tradoff Analytics](#tradeoff-analytics)
+  - [Tradeoff Analytics](#tradeoff-analytics)
   - [Visual Recognition](#visual-recognition)
 * [Authentication](#authentication)
 * [Building and Testing](#build--test)
@@ -81,7 +81,7 @@ IBM Bluemix™ is the cloud platform in which you deploy applications that you d
 The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
 IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
 
-### Alchemy Data News
+### AlchemyData News
 
 The AlchemyData News API uses natural language processing technologies to query the world's news and blogs like a database.
 

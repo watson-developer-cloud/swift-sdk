@@ -77,13 +77,13 @@ public class RetrieveAndRank {
         }
     }
     
-    // MARK: - Solr clusters
+    // MARK: - Solr Clusters
     
     /**
      Retrieves the list of Solr clusters available for this Retrieve and Rank instance.
      
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with an array of SolrCluster objects.
+     - parameter success: A function executed with an array of `SolrCluster` objects.
      */
     public func getSolrClusters(
         failure: (NSError -> Void)? = nil,
@@ -109,14 +109,15 @@ public class RetrieveAndRank {
             }
     }
     
-    /** Creates a new Solr cluster. The Solr cluster will have an initial status of "Not Available" 
+    /**
+     Creates a new Solr cluster. The Solr cluster will have an initial status of "Not Available"
      and can't be used until the status becomes "Ready".
      
      - parameter name: The name for the new Solr cluster.
      - parameter size: The size of the Solr cluster to create. This can range from 1 to 7. You can 
             create one small free cluster for testing by keeping this value empty.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a SolrCluster object.
+     - parameter success: A function executed with a `SolrCluster` object.
      */
     public func createSolrCluster(
         name: String,
@@ -151,7 +152,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString {response in print(response)}
             .responseObject(dataToError: dataToError) {
                 (response: Response<SolrCluster, NSError>) in
                 switch response.result {
@@ -161,7 +161,8 @@ public class RetrieveAndRank {
             }
     }
     
-    /** Stops and deletes a Solr cluster.
+    /**
+     Stops and deletes a Solr cluster.
      
      - parameter solrClusterID: The ID of the Solr cluster to delete.
      - parameter failure: A function executed if an error occurs.
@@ -182,7 +183,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString {response in print(response)}
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -195,4 +195,70 @@ public class RetrieveAndRank {
                 }
             }
     }
+    
+    /**
+     Gets the status and other information about a specific cluster.
+     
+     - parameter solrClusterID: The ID of the cluster that you want more information about.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a `SolrCluster` object.
+     */
+    public func getSolrCluster(
+        solrClusterID: String,
+        failure: (NSError -> Void)? = nil,
+        success: SolrCluster -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<SolrCluster, NSError>) in
+                switch response.result {
+                case .Success(let cluster): success(cluster)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Gets all configurations for the specific cluster.
+     
+     - parameter solrClusterID: The ID of the cluster that you want the configurations of.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with an array of `SolrConfig` objects.
+     */
+    public func getSolrConfigurations(
+        solrClusterID: String,
+        failure: (NSError -> Void)? = nil,
+        success: [SolrConfig] -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError) {
+                (response: Response<[SolrConfig], NSError>) in
+                switch response.result {
+                case .Success(let config): success(config)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
+    
 }

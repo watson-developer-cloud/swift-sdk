@@ -62,6 +62,35 @@ class RetrieveAndRankTests: XCTestCase {
         }
     }
     
+    // MARK: - Helper Functions
+    
+    /** Create a new Solr cluster. */
+    private func createSolrCluster(clusterName: String, size: String? = nil) -> SolrCluster? {
+        let description = "Create a new Solr Cluster."
+        let expectation = expectationWithDescription(description)
+        
+        var solrCluster: SolrCluster?
+        retrieveAndRank.createSolrCluster(clusterName, size: size, failure: failWithError) {
+            cluster in
+            
+            solrCluster = cluster
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        return solrCluster
+    }
+    
+    /** Delete a Solr cluster. */
+    private func deleteSolrCluster(clusterID: String) {
+        let description = "Delete the Solr Cluster with the given ID."
+        let expectation = expectationWithDescription(description)
+        
+        retrieveAndRank.deleteSolrCluster(clusterID, failure: failWithError) {
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Positive Tests
     
     /** List all of the Solr clusters associated with this service instance. */
@@ -77,9 +106,23 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Create and then delete a new Solr cluster. */
+    func testCreateAndDeleteSolrCluster() {
+        guard let solrCluster = createSolrCluster("swift-sdk-unit-test-solr-cluster") else {
+            XCTFail("Failed to create the Solr cluster.")
+            return
+        }
+        XCTAssertEqual(solrCluster.solrClusterName, "swift-sdk-unit-test-solr-cluster")
+        XCTAssertNotNil(solrCluster.solrClusterID)
+        XCTAssertNotNil(solrCluster.solrClusterSize)
+        XCTAssertNotNil(solrCluster.solrClusterStatus)
+        
+        deleteSolrCluster(solrCluster.solrClusterID)
+    }
+    
     // MARK: - Negative Tests
     
-    /** */
+    /** Create a Solr cluster with an invalid size. */
     func testCreateSolrClusterWithInvalidSize() {
         let description = "Delete a Solr cluster when passing an invalid Solr cluster ID."
         let expectation = expectationWithDescription(description)
@@ -89,7 +132,11 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.createSolrCluster("iOS SDK test cluster", size: "100", failure: failure, success: failWithResult)
+        retrieveAndRank.createSolrCluster(
+            "swift-sdk-unit-test-solr-cluster",
+            size: "100",
+            failure: failure,
+            success: failWithResult)
         
         waitForExpectations()
     }
@@ -105,7 +152,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.deleteSolrCluster(
-            "123123123123123",
+            "abcde-12345-fghij-67890",
             failure: failure,
             success: failWithResult)
         

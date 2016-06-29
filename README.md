@@ -210,7 +210,7 @@ alchemyVision.getRankedImageFaceTags(url: url,
 
 With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-The following example shows how to send a message to the Conversation service and receive a response:
+The following example shows how to send a message to the Conversation service and print the response:
 
 ```swift
 let username = "your-username-here"

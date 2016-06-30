@@ -155,7 +155,7 @@ alchemyDataNews.getNews(start, end: end, query: query, failure: failure) { news 
 
 Use the [Count and TimeSlice Queries](http://docs.alchemyapi.com/docs/counts) and [API Fields](http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields) documentation to refine your query.
 
-The following links provide additional information about the IBM AlchemyData News service:
+The following links provide more information about the IBM AlchemyData News service:
 
 * [IBM AlchemyData News - Service Page](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html)
 * [IBM AlchemyData News - Documentation](http://docs.alchemyapi.com/)
@@ -192,7 +192,7 @@ alchemyLanguage.getTextSentiment(forURL: url, failure: failure) { sentiment in
 }
 ```
 
-The following links provide additional information about the IBM AlchemyLanguage service:
+The following links provide more information about the IBM AlchemyLanguage service:
 
 * [IBM AlchemyLanguage - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-language.html)
 * [IBM AlchemyLanguage - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/alchemylanguage/)
@@ -280,7 +280,7 @@ dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!,
 }
 ```
 
-The following links provide additional information about the IBM Watson Dialog service:
+The following links provide more information about the IBM Watson Dialog service:
 
 * [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
 * [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
@@ -311,7 +311,7 @@ documentConversion.convertDocument(config, document: document, failure: failure)
 }
 ```
 
-The following links provide additional information about the IBM Document Conversion service:
+The following links provide more information about the IBM Document Conversion service:
 
 * [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/index.shtml)
 * [IBM Watson Document Conversion - Demo](https://watson-api-explorer.mybluemix.net/apis/document-conversion-v1)
@@ -367,6 +367,8 @@ The following links provide more information about the Natural Language Classifi
 ## Personality Insights
 
 The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
+
+The following example demonstrates how to use the Personality Insights service:
 
 ```swift
 let username = "your-username-here"
@@ -505,9 +507,10 @@ class ViewController: UIViewController {
 // the Speech to Text service, the `stopStreaming` function is executed, or
 // the capture session is stopped.
 ```
+
 #### Additional Information
 
-The following links provide additional information about the IBM Speech to Text service:
+The following links provide more information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
 * [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
@@ -515,53 +518,41 @@ The following links provide additional information about the IBM Speech to Text 
 
 ## Text to Speech
 
-The Text to Speech service gives your app the ability to synthesize spoken text in a variety of voices.
+The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.
 
-Create a TextToSpeech service:
-
-```swift
-let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
-```
-
-To call the service to synthesize text:
+The following example demonstrates how to use the Text to Speech service:
 
 ```swift
+let username = "your-username-here"
+let password = "your-password-here"
+let textToSpeech = TextToSpeech(username: username, password: password)
+
+let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
-textToSpeech.synthesize("Hello World", failure: failure) { data in
-        // code here
+textToSpeech.synthesize(text, failure: failure) { data in
+  let audioPlayer = try AVAudioPlayer(data: data)
+  audioPlayer.prepareToPlay()
+  audioPlayer.play()
 }
 ```
 
-When the callback function is invoked, and the request was successful, the data object is an NSData structure containing WAVE formatted audio in 48kHz and mono-channel.
-
-If you wish to play the audio through the device's speakers, create an AVAudioPlayer with that NSData object:
-
-``` swift
-let audioPlayer = try AVAudioPlayer(data: data)
-audioPlayer.prepareToPlay()
-audioPlayer.play()
-```
-
-The Watson TTS service contains support for many voices with different genders, languages, and dialects. For a complete list, see the [documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) or call the service's to list the possible voices in an asynchronous callback:
+The Text to Speech service supports a number of [voices](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
 
 ```swift
+let username = "your-username-here"
+let password = "your-password-here"
+let textToSpeech = TextToSpeech(username: username, password: password)
+
+let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
-textToSpeech.getVoices(failure) { voices in
-    	  // code here
+textToSpeech.synthesize(text, voice: SynthesisVoice.GB_Kate, failure: failure) { data in
+  let audioPlayer = try AVAudioPlayer(data: data)
+  audioPlayer.prepareToPlay()
+  audioPlayer.play()
 }
 ```
 
-You can review the different voices and languages [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices).
-
-To use the voice, such as Kate's, specify the voice identifier in the synthesize method:
-
-```swift
-textToSpeech.synthesize("Hello World", voice: SynthesisVoice.GB_Kate) { data in
-    // code here
-}
-```
-
-The following links provide more information about the Text To Speech service:
+The following links provide more information about the IBM Text To Speech service:
 
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
 * [IBM Watson Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
@@ -569,23 +560,26 @@ The following links provide more information about the Text To Speech service:
 
 ## Tone Analyzer
 
-The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
+The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
 
-How to instantiate and use the Tone Analyzer service:
+Emotions identified include things like anger, fear, joy, sadness, and disgust. Identified social tendencies include things from the Big Five personality traits used by some psychologists. These include openness, conscientiousness, extraversion, agreeableness, and emotional range. Identified writing styles include confident, analytical, and tentative.
+
+The following example demonstrates how to use the Tone Analyzer service:
 
 ```swift
 let username = "your-username-here"
 let password = "your-password-here"
-let versionDate = "YYYY-MM-DD" // use today's date for the most recent version
-let service = ToneAnalyzer(username: username, password: password, versionDate: versionDate)
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
 
+let text = "your-input-text"
 let failure = { (error: NSError) in print(error) }
-service.getTone("Text that you want to get the tone of", failure: failure) { responseTone in
-    print(responseTone.documentTone)
+toneAnalyzer.getTone(text, failure: failure) { tones in
+  print(tones)
 }
 ```
 
-The following links provide more information about the Text To Speech service:
+The following links provide more information about the IBM Watson Tone Analyzer service:
 
 * [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html)
 * [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/)
@@ -595,7 +589,7 @@ The following links provide more information about the Text To Speech service:
 
 The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.
 
-The following example defines a problem then uses Tradeoff Analytics to identify optimal solutions:
+The following example demonstrates how to use the Tradeoff Analytics service:
 
 ```swift
 let username = "your-username-here"
@@ -663,7 +657,7 @@ tradeoffAnalytics.getDilemma(problem, failure: failure) {
 }
 ```
 
-The following links provide more information about the Tradeoff Analytics service:
+The following links provide more information about the IBM Watson Tradeoff Analytics service:
 
 * [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html)
 * [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/)
@@ -671,23 +665,25 @@ The following links provide more information about the Tradeoff Analytics servic
 
 ## Visual Recognition
 
-The Visual Recognition service helps you to understand the contents of images. Submit an image, and the service returns scores for relevant classifiers representing things. It can even detect objects, texts or faces.
+The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.
+
+The following example demonstrates how to use the Visual Recognition service:
 
 Here is an example how to use the service to detect faces in an Image:
 
 ```swift
 let apiKey = "your-apikey-here"
-let versionDate = "YYYY-MM-DD" // use today's date for the most recent version
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
 
-let service = VisualRecognition(apiKey: apiKey, version: versionDate)
-
+let url = "your-image-url"
 let failure = { (error: NSError) in print(error) }
-service.detectFaces(url, failure: failure) { imagesWithFaces in
-    // code here
+visualRecognition.classify(url, failure: failure) { classifiedImages in
+  print(classifiedImages)
 }
 ```
 
-The following links provide more information about the Text To Speech service:
+The following links provide more information about the IBM Watson Visual Recognition service:
 
 * [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/visual-recognition.html)
 * [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/)

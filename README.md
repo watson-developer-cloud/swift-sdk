@@ -152,7 +152,7 @@ alchemyDataNews.getNews(start, end: end, query: query, failure: failure) { news 
 }
 ```
 
-Use the [Count and TimeSlice Queries](http://docs.alchemyapi.com/docs/counts) and [API Fields](http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields) documentation to refine your query.
+Refine your query by referring to the [Count and TimeSlice Queries](http://docs.alchemyapi.com/docs/counts) and [API Fields](http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields) documentation.
 
 The following links provide more information about the IBM AlchemyData News service:
 
@@ -209,12 +209,11 @@ let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let conversation = Conversation(username: username, password: password, version: version)
 
-
 let workspace = "your-workspace-id-here"
 let message = "your-message-here"
 let failure = { (error: NSError) in print(error) }
 conversation.message(workspace, message: message, failure: failure) { response in
-        print(response)
+    print(response)
 }
 ```
 
@@ -227,7 +226,7 @@ The IBM Watson Dialog service provides a comprehensive and robust platform for m
 
 To use the Dialog service, developers script conversations as they would happen in the real world, upload them to a Dialog application, and enable back-and-forth conversations with a user.
 
-The following example demonstrates how to instantiate the Dialog class:
+The following example demonstrates how to instantiate a `Dialog` object:
 
 ```swift
 let username = "your-username-here"
@@ -241,11 +240,13 @@ The following example demonstrates how to create a dialog application:
 // store dialog id to access application
 var dialogID: DialogID?
 
+// load dialog file
 guard let fileURL = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
     print("Failed to locate dialog file.")
     return
 }
 
+// create dialog application
 let name = "your-dialog-name"
 let failure = { (error: NSError) in print(error) }
 dialog.createDialog(dialogName, fileURL: fileURL, failure: failure) { dialogID in
@@ -263,9 +264,9 @@ var clientID: Int?
 
 let failure = { (error: NSError) in print(error) }
 dialog.converse(dialogID!, failure: failure) { response in
-        self.conversationID = response.conversationID
-        self.clientID = response.clientID
-        print(response.response)
+    self.conversationID = response.conversationID
+    self.clientID = response.clientID
+    print(response.response)
 }
 ```
 
@@ -275,14 +276,13 @@ The following example demonstrates how to continue a conversation with a dialog 
 let input = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!, input: input, failure: failure) { response in
-        print(conversationResponse.response)
+    print(conversationResponse.response)
 }
 ```
 
 The following links provide more information about the IBM Watson Dialog service:
 
 * [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
-* [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
@@ -290,7 +290,7 @@ The following links provide more information about the IBM Watson Dialog service
 
 The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
 
-The following example demonstrates how to convert a document:
+The following example demonstrates how to convert a document with the Document Conversation service:
 
 ```swift
 let username = "your-username-here"
@@ -298,11 +298,13 @@ let password = "your-password-here"
 let version = "2015-12-15"
 let documentConversion = DocumentConversion(username: username, password: password, version: version)
 
+// load document
 guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
     print("Failed to locate dialog file.")
     return
 }
 
+// convert document
 let config = documentConversion.writeConfig(ReturnType.Text)
 let failure = { (error: NSError) in print(error) }
 documentConversion.convertDocument(config, document: document, failure: failure) { text in
@@ -312,8 +314,9 @@ documentConversion.convertDocument(config, document: document, failure: failure)
 
 The following links provide more information about the IBM Document Conversion service:
 
-* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/index.shtml)
-* [IBM Watson Document Conversion - Demo](https://watson-api-explorer.mybluemix.net/apis/document-conversion-v1)
+* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
+* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
+* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
 
 ## Language Translator
 
@@ -400,14 +403,15 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
+// load audio file
 guard let fileURL = NSBundle.mainBundle().URLForResource("your-audio-filename", withExtension: "wav") else {
     print("Audio file could not be loaded.")
     return
 }
 
+// transcribe audio file
 let settings = TranscriptionSettings(contentType: .WAV)
 let failure = { (error: NSError) in print(error) }
-
 speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
     print(results.last?.alternatives.last?.transcript)
 }
@@ -415,9 +419,7 @@ speechToText.transcribe(fileURL, settings: settings, failure: failure) { results
 
 #### Streaming Audio
 
-Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions.
-
-(Please note that the microphone is inaccessible when testing applications with the iOS Simulator. Only applications on a physical device can access the microphone to stream audio to Speech to Text.)
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. (Please note that the microphone is inaccessible when testing applications with the iOS Simulator. Only applications on a physical device can access the microphone to stream audio to Speech to Text.)
 
 The following example demonstrates how to use the Speech to Text service with streaming audio:
 
@@ -426,10 +428,12 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
+// define transcription settings
 var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
 settings.continuous = true
 settings.interimResults = true
 
+// start streaming audio and print transcripts
 let failure = { (error: NSError) in print(error) }
 let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
     print(results.last?.alternatives.last?.transcript)
@@ -443,7 +447,7 @@ let stopStreaming = speechToText.transcribe(settings, failure: failure) { result
 
 Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
 
-The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service.
+The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service:
 
 ```swift
 class ViewController: UIViewController {
@@ -597,62 +601,61 @@ let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password
 
 // define columns
 let price = Column(
-        key: "price",
-        type: .Numeric,
-        goal: .Minimize,
-        isObjective: true
+    key: "price",
+    type: .Numeric,
+    goal: .Minimize,
+    isObjective: true
 )
 let ram = Column(
-        key: "ram",
-        type: .Numeric,
-        goal: .Maximize,
-        isObjective: true
+    key: "ram",
+    type: .Numeric,
+    goal: .Maximize,
+    isObjective: true
 )
 let screen = Column(
-        key: "screen",
-        type: .Numeric,
-        goal: .Maximize,
-        isObjective: true
+    key: "screen",
+    type: .Numeric,
+    goal: .Maximize,
+    isObjective: true
 )
 let os = Column(
-        key: "os",
-        type: .Categorical,
-        isObjective: true,
-        range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
-        preference: ["android", "ios"]
+    key: "os",
+    type: .Categorical,
+    isObjective: true,
+    range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
+    preference: ["android", "ios"]
 )
 
 // define options
 let galaxy = Option(
-        key: "galaxy",
-        values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
-        name: "Galaxy S4"
+    key: "galaxy",
+    values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
+    name: "Galaxy S4"
 )
 let iphone = Option(
-        key: "iphone",
-        values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
-        name: "iPhone 5"
+    key: "iphone",
+    values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
+    name: "iPhone 5"
 )
 let optimus = Option(
-        key: "optimus",
-        values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
-        name: "LG Optimus G"
+    key: "optimus",
+    values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
+    name: "LG Optimus G"
 )
 
 // define problem
 let problem = Problem(
-        columns: [price, ram, screen, os],
-        options: [galaxy, iphone, optimus],
-        subject: "Phone"
+    columns: [price, ram, screen, os],
+    options: [galaxy, iphone, optimus],
+    subject: "Phone"
 )
 
 // define failure function
 let failure = { (error: NSError) in print(error) }
 
 // identify optimal options
-tradeoffAnalytics.getDilemma(problem, failure: failure) {
-        dilemma in
-        print(dilemma.solutions)
+tradeoffAnalytics.getDilemma(problem, failure: failure) { dilemma in
+    print(dilemma.solutions)
 }
 ```
 
@@ -668,7 +671,7 @@ The IBM Watson Visual Recognition service uses deep learning algorithms to analy
 
 The following example demonstrates how to use the Visual Recognition service:
 
-Here is an example how to use the service to detect faces in an Image:
+The following example demonstrates how to use the Visual Recognition service to detect faces in an image:
 
 ```swift
 let apiKey = "your-apikey-here"

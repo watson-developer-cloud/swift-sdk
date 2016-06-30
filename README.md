@@ -118,6 +118,8 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
+See [Getting Started](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+
 ## Contributing
 
 We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.

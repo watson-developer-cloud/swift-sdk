@@ -441,4 +441,85 @@ public class RetrieveAndRank {
                 }
             }
     }
+    
+    /**
+     Deletes a Solr collection.
+     
+     - parameter solrClusterID: The ID of the cluster to delete this collection from.
+     - parameter name: The name of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func deleteSolrCollection(
+        solrClusterID: String,
+        name: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "action", value: "DELETE"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "name", value: name))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Lists the names of the Solr collections associated in this Solr cluster.
+     
+     - parameter solrClusterID: The ID of the cluster whose collections you want.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with an array of collection names.
+     */
+    public func getSolrCollections(
+        solrClusterID: String,
+        failure: (NSError -> Void)? = nil,
+        success: [String] -> Void) {
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "action", value: "LIST"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError) {
+                (response: Response<[String], NSError>) in
+                switch response.result {
+                case .Success(let collections): success(collections)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
 }

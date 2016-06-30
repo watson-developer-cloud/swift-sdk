@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.4.1
+
+_2016-06-30_
+
+This is a minor update to add documentation.
+
 ## Version 0.4.0
 
 _2016-06-27_

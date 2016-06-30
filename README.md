@@ -63,13 +63,17 @@ To use the Watson Developer Cloud iOS SDK in your application, specify it in you
 github "watson-developer-cloud/ios-sdk"
 ```
 
-Then run `carthage update --platform iOS` to build the dependencies and frameworks. Finally, drag-and-drop the built frameworks into your Xcode project.
+Then run the following command to build the dependencies and frameworks:
+
+```bash
+$ carthage update --platform iOS
+```
+
+Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.
 
 ### App Transport Security
 
-App Transport Security was introduced with iOS 9 to enforce secure Internet connections. The IBM Bluemix team is in the process of upgrading the platform to the latest security standards required by App Transport Security.
-
-Please add the following exception to your application's `Info.plist` to securely connect to IBM Bluemix and the Watson services:
+App Transport Security was introduced with iOS 9 to enforce secure Internet connections. To securely connect to IBM Watson services, please add the following exception to your application's `Info.plist` file.
 
 ```xml
 <key>NSAppTransportSecurity</key>
@@ -93,18 +97,18 @@ Please add the following exception to your application's `Info.plist` to securel
 
 ## Service Instances
 
-The [IBM Watson Developer Cloud](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
+[IBM Watson Developer Cloud](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
 
 Follow these steps to create a service instance and obtain its credentials:
 
 1. Log in to Bluemix at [https://bluemix.net](https://bluemix.net).
 2. Create a service instance:
-    a. From the Dashboard, select "Use Services or APIs".
-    b. Select the service you want to use.
-    c. Click "Create".
+    1. From the Dashboard, select "Use Services or APIs".
+    2. Select the service you want to use.
+    3. Click "Create".
 3. Copy your service credentials:
-    a. Click "Service Credentials" on the left side of the page.
-    b. Copy the service's `username` and `password` (or `api_key` for Alchemy).
+    1. Click "Service Credentials" on the left side of the page.
+    2. Copy the service's `username` and `password` (or `api_key` for Alchemy).
 
 You will need to provide these service credentials in your mobile application. For example:
 

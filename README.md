@@ -446,52 +446,64 @@ The following example demonstrates how to use an `AVCaptureSession` to stream au
 
 ```swift
 class ViewController: UIViewController {
-    var captureSession: AVCaptureSession?
+  
+  // the capture session must not fall out of scope while in use
+  var captureSession: AVCaptureSession?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
-        
-        captureSession = AVCaptureSession()
-        guard let captureSession = captureSession else {
-            return
-        }
-        
-        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-        if captureSession.canAddInput(microphoneInput) {
-            captureSession.addInput(microphoneInput)
-        }
-        
-        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
-        settings.continuous = true
-        settings.interimResults = true
-        
-        let failure = { (error: NSError) in print(error) }
-        let outputOpt = speechToText.createTranscriptionOutput(settings,
-                                                               failure: failure) { results in
-            if let transcription = results.last?.alternatives.last?.transcript {
-                print(transcription)
-            }
-        }
-        
-        guard let output = outputOpt else {
-            return
-        }
-        let transcriptionOutput = output.0
-        let stopStreaming = output.1
-        
-        if captureSession.canAddOutput(transcriptionOutput) {
-            captureSession.addOutput(transcriptionOutput)
-        }
-        
-        captureSession.startRunning()
+    // create capture session
+    captureSession = AVCaptureSession()
+    guard let captureSession = captureSession else {
+      return
     }
     
-    // Streaming will continue until either an end-of-speech event is detected by
-    // the Speech to Text service, the `stopStreaming` function is executed, or
-    // the capture session is stopped.
+    // set microphone as a capture session input
+    let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+    let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+    if captureSession.canAddInput(microphoneInput) {
+      captureSession.addInput(microphoneInput)
+    }
+
+    // create Speech to Text object
+    let username = "your-username-here"
+    let password = "your-password-here"
+    let speechToText = SpeechToText(username: username, password: password)
+    
+    // define transcription settings
+    var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
+    settings.continuous = true
+    settings.interimResults = true
+    
+    // create output for capture session
+    let failure = { (error: NSError) in print(error) }
+    let output = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
+      if let transcription = results.last?.alternatives.last?.transcript {
+        print(transcription)
+      }
+    }
+
+    if let output = output {
+      let transcriptionOutput = output.0
+      let stopStreaming = output.1
+
+      // set Speech to Text as a capture session output
+      if captureSession.canAddOutput(transcriptionOutput) {
+        captureSession.addOutput(transcriptionOutput)
+      }
+
+      // add any custom capture session outputs here
+
+      // start capture session to stream audio
+      captureSession.startRunning()
+    }
+  }
+}
+  
+// Streaming will continue until either an end-of-speech event is detected by
+// the Speech to Text service, the `stopStreaming` function is executed, or
+// the capture session is stopped.
 ```
 #### Additional Information
 

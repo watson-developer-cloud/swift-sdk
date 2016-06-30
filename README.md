@@ -77,22 +77,22 @@ App Transport Security was introduced with iOS 9 to enforce secure Internet conn
 
 ```xml
 <key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
     <dict>
-        <key>NSExceptionDomains</key>
+        <key>watsonplatform.net</key>
         <dict>
-            <key>watsonplatform.net</key>
-            <dict>
-                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSTemporaryExceptionMinimumTLSVersion</key>
-                <string>TLSv1.0</string>
-            </dict>
+            <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+            <false/>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <key>NSTemporaryExceptionMinimumTLSVersion</key>
+            <string>TLSv1.0</string>
         </dict>
     </dict>
+</dict>
 ```
 
 ## Service Instances
@@ -120,7 +120,7 @@ Note that service credentials are different from your Bluemix username and passw
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) on how to help out.
+We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.
 
 ## License
 
@@ -142,13 +142,13 @@ let alchemyDataNews = AlchemyDataNews(apiKey: apiKey)
 let start = "now-1d" // yesterday
 let end = "now" // today
 let query = [
-  "q.enriched.url.title": "O[IBM^Apple]",
-  "return": "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
+    "q.enriched.url.title": "O[IBM^Apple]",
+    "return": "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
 ]
 let failure = { (error: NSError) in print(error) }
 
 alchemyDataNews.getNews(start, end: end, query: query, failure: failure) { news in
-  print(news)
+    print(news)
 }
 ```
 
@@ -187,7 +187,7 @@ let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
 let url = "https://github.com/watson-developer-cloud/ios-sdk"
 let failure = { (error: NSError) in print(error) }
 alchemyLanguage.getTextSentiment(forURL: url, failure: failure) { sentiment in
-  print(sentiment)
+    print(sentiment)
 }
 ```
 
@@ -214,7 +214,7 @@ let workspace = "your-workspace-id-here"
 let message = "your-message-here"
 let failure = { (error: NSError) in print(error) }
 conversation.message(workspace, message: message, failure: failure) { response in
-    print(response)
+        print(response)
 }
 ```
 
@@ -242,15 +242,15 @@ The following example demonstrates how to create a dialog application:
 var dialogID: DialogID?
 
 guard let fileURL = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-  print("Failed to locate dialog file.")
-  return
+    print("Failed to locate dialog file.")
+    return
 }
 
 let name = "your-dialog-name"
 let failure = { (error: NSError) in print(error) }
 dialog.createDialog(dialogName, fileURL: fileURL, failure: failure) { dialogID in
-  self.dialogID = dialogID
-  print(dialogID)
+    self.dialogID = dialogID
+    print(dialogID)
 }
 ```
 
@@ -263,9 +263,9 @@ var clientID: Int?
 
 let failure = { (error: NSError) in print(error) }
 dialog.converse(dialogID!, failure: failure) { response in
-    self.conversationID = response.conversationID
-    self.clientID = response.clientID
-    print(response.response)
+        self.conversationID = response.conversationID
+        self.clientID = response.clientID
+        print(response.response)
 }
 ```
 
@@ -275,7 +275,7 @@ The following example demonstrates how to continue a conversation with a dialog 
 let input = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!, input: input, failure: failure) { response in
-    print(conversationResponse.response)
+        print(conversationResponse.response)
 }
 ```
 
@@ -299,14 +299,14 @@ let version = "2015-12-15"
 let documentConversion = DocumentConversion(username: username, password: password, version: version)
 
 guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-  print("Failed to locate dialog file.")
-  return
+    print("Failed to locate dialog file.")
+    return
 }
 
 let config = documentConversion.writeConfig(ReturnType.Text)
 let failure = { (error: NSError) in print(error) }
 documentConversion.convertDocument(config, document: document, failure: failure) { text in
-  print(text)
+    print(text)
 }
 ```
 
@@ -328,7 +328,7 @@ let languageTranslator = LanguageTranslator(username: username, password: passwo
 
 let failure = { (error: NSError) in print(error) }
 languageTranslator.translate("Hello", source: "en", target: "es", failure: failure) { translation in
-  print(translation)
+    print(translation)
 }
 ```
 
@@ -353,7 +353,7 @@ let classifierID = "your-trained-classifier-id"
 let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 naturalLanguageClassifier.classify(classifierID, text: text, failure: failure) { classification in
-  print(classification)
+    print(classification)
 }
 ```
 
@@ -377,7 +377,7 @@ let personalityInsights = PersonalityInsights(username: username, password: pass
 let text = "your-input-text"
 let failure = { (error: NSError) in print(error) }
 personalityInsights.getProfile(text: text, failure: failure) { profile in
-  print(profile)                      
+    print(profile)                      
 }
 ```
 
@@ -401,15 +401,15 @@ let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
 guard let fileURL = NSBundle.mainBundle().URLForResource("your-audio-filename", withExtension: "wav") else {
-	print("Audio file could not be loaded.")
-	return
+    print("Audio file could not be loaded.")
+    return
 }
 
 let settings = TranscriptionSettings(contentType: .WAV)
 let failure = { (error: NSError) in print(error) }
 
 speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
-  print(results.last?.alternatives.last?.transcript)
+    print(results.last?.alternatives.last?.transcript)
 }
 ```
 
@@ -432,7 +432,7 @@ settings.interimResults = true
 
 let failure = { (error: NSError) in print(error) }
 let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
-  print(results.last?.alternatives.last?.transcript)
+    print(results.last?.alternatives.last?.transcript)
 }
 
 // Streaming will continue until either an end-of-speech event is detected by
@@ -447,61 +447,61 @@ The following example demonstrates how to use an `AVCaptureSession` to stream au
 
 ```swift
 class ViewController: UIViewController {
-  
-  // the capture session must not fall out of scope while in use
-  var captureSession: AVCaptureSession?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    // create capture session
-    captureSession = AVCaptureSession()
-    guard let captureSession = captureSession else {
-      return
-    }
+    // the capture session must not fall out of scope while in use
+    var captureSession: AVCaptureSession?
     
-    // set microphone as a capture session input
-    let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-    let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-    if captureSession.canAddInput(microphoneInput) {
-      captureSession.addInput(microphoneInput)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // create capture session
+        captureSession = AVCaptureSession()
+        guard let captureSession = captureSession else {
+            return
+        }
+        
+        // set microphone as a capture session input
+        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
+        if captureSession.canAddInput(microphoneInput) {
+            captureSession.addInput(microphoneInput)
+        }
+
+        // create Speech to Text object
+        let username = "your-username-here"
+        let password = "your-password-here"
+        let speechToText = SpeechToText(username: username, password: password)
+        
+        // define transcription settings
+        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
+        settings.continuous = true
+        settings.interimResults = true
+        
+        // create output for capture session
+        let failure = { (error: NSError) in print(error) }
+        let output = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
+            if let transcription = results.last?.alternatives.last?.transcript {
+                print(transcription)
+            }
+        }
+
+        if let output = output {
+            let transcriptionOutput = output.0
+            let stopStreaming = output.1
+
+            // set Speech to Text as a capture session output
+            if captureSession.canAddOutput(transcriptionOutput) {
+                captureSession.addOutput(transcriptionOutput)
+            }
+
+            // add any custom capture session outputs here
+
+            // start capture session to stream audio
+            captureSession.startRunning()
+        }
     }
-
-    // create Speech to Text object
-    let username = "your-username-here"
-    let password = "your-password-here"
-    let speechToText = SpeechToText(username: username, password: password)
-    
-    // define transcription settings
-    var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
-    settings.continuous = true
-    settings.interimResults = true
-    
-    // create output for capture session
-    let failure = { (error: NSError) in print(error) }
-    let output = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
-      if let transcription = results.last?.alternatives.last?.transcript {
-        print(transcription)
-      }
-    }
-
-    if let output = output {
-      let transcriptionOutput = output.0
-      let stopStreaming = output.1
-
-      // set Speech to Text as a capture session output
-      if captureSession.canAddOutput(transcriptionOutput) {
-        captureSession.addOutput(transcriptionOutput)
-      }
-
-      // add any custom capture session outputs here
-
-      // start capture session to stream audio
-      captureSession.startRunning()
-    }
-  }
 }
-  
+    
 // Streaming will continue until either an end-of-speech event is detected by
 // the Speech to Text service, the `stopStreaming` function is executed, or
 // the capture session is stopped.
@@ -529,9 +529,9 @@ let textToSpeech = TextToSpeech(username: username, password: password)
 let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 textToSpeech.synthesize(text, failure: failure) { data in
-  let audioPlayer = try AVAudioPlayer(data: data)
-  audioPlayer.prepareToPlay()
-  audioPlayer.play()
+    let audioPlayer = try AVAudioPlayer(data: data)
+    audioPlayer.prepareToPlay()
+    audioPlayer.play()
 }
 ```
 
@@ -545,9 +545,9 @@ let textToSpeech = TextToSpeech(username: username, password: password)
 let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 textToSpeech.synthesize(text, voice: SynthesisVoice.GB_Kate, failure: failure) { data in
-  let audioPlayer = try AVAudioPlayer(data: data)
-  audioPlayer.prepareToPlay()
-  audioPlayer.play()
+    let audioPlayer = try AVAudioPlayer(data: data)
+    audioPlayer.prepareToPlay()
+    audioPlayer.play()
 }
 ```
 
@@ -574,7 +574,7 @@ let toneAnalyzer = ToneAnalyzer(username: username, password: password, version:
 let text = "your-input-text"
 let failure = { (error: NSError) in print(error) }
 toneAnalyzer.getTone(text, failure: failure) { tones in
-  print(tones)
+    print(tones)
 }
 ```
 
@@ -597,53 +597,53 @@ let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password
 
 // define columns
 let price = Column(
-    key: "price",
-    type: .Numeric,
-    goal: .Minimize,
-    isObjective: true
+        key: "price",
+        type: .Numeric,
+        goal: .Minimize,
+        isObjective: true
 )
 let ram = Column(
-    key: "ram",
-    type: .Numeric,
-    goal: .Maximize,
-    isObjective: true
+        key: "ram",
+        type: .Numeric,
+        goal: .Maximize,
+        isObjective: true
 )
 let screen = Column(
-    key: "screen",
-    type: .Numeric,
-    goal: .Maximize,
-    isObjective: true
+        key: "screen",
+        type: .Numeric,
+        goal: .Maximize,
+        isObjective: true
 )
 let os = Column(
-    key: "os",
-    type: .Categorical,
-    isObjective: true,
-    range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
-    preference: ["android", "ios"]
+        key: "os",
+        type: .Categorical,
+        isObjective: true,
+        range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
+        preference: ["android", "ios"]
 )
 
 // define options
 let galaxy = Option(
-    key: "galaxy",
-    values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
-    name: "Galaxy S4"
+        key: "galaxy",
+        values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
+        name: "Galaxy S4"
 )
 let iphone = Option(
-    key: "iphone",
-    values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
-    name: "iPhone 5"
+        key: "iphone",
+        values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
+        name: "iPhone 5"
 )
 let optimus = Option(
-    key: "optimus",
-    values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
-    name: "LG Optimus G"
+        key: "optimus",
+        values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
+        name: "LG Optimus G"
 )
 
 // define problem
 let problem = Problem(
-    columns: [price, ram, screen, os],
-    options: [galaxy, iphone, optimus],
-    subject: "Phone"
+        columns: [price, ram, screen, os],
+        options: [galaxy, iphone, optimus],
+        subject: "Phone"
 )
 
 // define failure function
@@ -651,8 +651,8 @@ let failure = { (error: NSError) in print(error) }
 
 // identify optimal options
 tradeoffAnalytics.getDilemma(problem, failure: failure) {
-    dilemma in
-    print(dilemma.solutions)
+        dilemma in
+        print(dilemma.solutions)
 }
 ```
 
@@ -678,7 +678,7 @@ let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
 let url = "your-image-url"
 let failure = { (error: NSError) in print(error) }
 visualRecognition.classify(url, failure: failure) { classifiedImages in
-  print(classifiedImages)
+    print(classifiedImages)
 }
 ```
 

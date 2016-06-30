@@ -138,6 +138,8 @@ AlchemyData News provides news and blog content enriched with natural language p
 The following example demonstrates how to use the AlchemyData News service:
 
 ```swift
+import AlchemyDataNewsV1
+
 let apiKey = "your-apikey-here"
 let alchemyDataNews = AlchemyDataNews(apiKey: apiKey)
 
@@ -183,6 +185,8 @@ AlchemyLanguage has a number of features, including:
 The following example demonstrates how to use the AlchemyLanguage service:
 
 ```swift
+import AlchemyLanguageV1
+
 let apiKey = "your-apikey-here"
 let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
 
@@ -206,6 +210,8 @@ With the IBM Watson Conversation service you can create cognitive agents--virtua
 The following example shows how to send a message to the Conversation service and print the response:
 
 ```swift
+import ConversationV1Experimental
+
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
@@ -222,6 +228,40 @@ conversation.message(workspace, message: message, failure: failure) { response i
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
 
+## Document Conversion
+
+The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
+
+The following example demonstrates how to convert a document with the Document Conversation service:
+
+```swift
+import DocumentConversionV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "2015-12-15"
+let documentConversion = DocumentConversion(username: username, password: password, version: version)
+
+// load document
+guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
+    print("Failed to locate dialog file.")
+    return
+}
+
+// convert document
+let config = documentConversion.writeConfig(ReturnType.Text)
+let failure = { (error: NSError) in print(error) }
+documentConversion.convertDocument(config, document: document, failure: failure) { text in
+    print(text)
+}
+```
+
+The following links provide more information about the IBM Document Conversion service:
+
+* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
+* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
+* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
+
 ## Dialog
 
 The IBM Watson Dialog service provides a comprehensive and robust platform for managing conversations between virtual agents and users through an application programming interface (API). Developers automate branching conversations that use natural language to automatically respond to user questions, cross-sell and up-sell, walk users through processes or applications, or even hand-hold users through difficult tasks.
@@ -231,6 +271,8 @@ To use the Dialog service, developers script conversations as they would happen 
 The following example demonstrates how to instantiate a `Dialog` object:
 
 ```swift
+import DialogV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let dialog = Dialog(username: username, password: password)
@@ -288,38 +330,6 @@ The following links provide more information about the IBM Watson Dialog service
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
-## Document Conversion
-
-The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
-
-The following example demonstrates how to convert a document with the Document Conversation service:
-
-```swift
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "2015-12-15"
-let documentConversion = DocumentConversion(username: username, password: password, version: version)
-
-// load document
-guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-    print("Failed to locate dialog file.")
-    return
-}
-
-// convert document
-let config = documentConversion.writeConfig(ReturnType.Text)
-let failure = { (error: NSError) in print(error) }
-documentConversion.convertDocument(config, document: document, failure: failure) { text in
-    print(text)
-}
-```
-
-The following links provide more information about the IBM Document Conversion service:
-
-* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
-* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
-* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
-
 ## Language Translator
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
@@ -327,6 +337,8 @@ The IBM Watson Language Translator service lets you select a domain, customize i
 The following example demonstrates how to use the Language Translator service:
 
 ```swift
+import LanguageTranslatorV2
+
 let username = "your-username-here"
 let password = "your-password-here"
 let languageTranslator = LanguageTranslator(username: username, password: password)
@@ -350,6 +362,8 @@ The IBM Watson Natural Language Classifier service enables developers without a 
 The following example demonstrates how to use the Natural Language Classifier service:
 
 ```swift
+import NaturalLanguageClassifierV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
@@ -375,6 +389,8 @@ The IBM Watson Personality Insights service enables applications to derive insig
 The following example demonstrates how to use the Personality Insights service:
 
 ```swift
+import PersonalityInsightsV2
+
 let username = "your-username-here"
 let password = "your-password-here"
 let personalityInsights = PersonalityInsights(username: username, password: password)
@@ -401,6 +417,8 @@ The IBM Watson Speech to Text service enables you to add speech transcription ca
 The following example demonstrates how to use the Speech to Text service to transcribe an audio file.
 
 ```swift
+import SpeechToTextV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
@@ -426,6 +444,8 @@ Audio can also be streamed from the microphone to the Speech to Text service for
 The following example demonstrates how to use the Speech to Text service with streaming audio:
 
 ```swift
+import SpeechToTextV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
@@ -452,6 +472,8 @@ Advanced users who want to create and manage their own `AVCaptureSession` can co
 The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service:
 
 ```swift
+import SpeechToTextV1
+
 class ViewController: UIViewController {
     
     // the capture session must not fall out of scope while in use
@@ -528,6 +550,8 @@ The IBM Watson Text to Speech service synthesizes natural-sounding speech from i
 The following example demonstrates how to use the Text to Speech service:
 
 ```swift
+import TextToSpeechV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
@@ -544,6 +568,8 @@ textToSpeech.synthesize(text, failure: failure) { data in
 The Text to Speech service supports a number of [voices](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
 
 ```swift
+import TextToSpeechV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
@@ -572,6 +598,8 @@ Emotions identified include things like anger, fear, joy, sadness, and disgust. 
 The following example demonstrates how to use the Tone Analyzer service:
 
 ```swift
+import ToneAnalyzerV3
+
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
@@ -597,6 +625,8 @@ The IBM Watson Tradeoff Analytics service helps people make better choices when 
 The following example demonstrates how to use the Tradeoff Analytics service:
 
 ```swift
+import TradeoffAnalyticsV1
+
 let username = "your-username-here"
 let password = "your-password-here"
 let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password)
@@ -676,6 +706,8 @@ The following example demonstrates how to use the Visual Recognition service:
 The following example demonstrates how to use the Visual Recognition service to detect faces in an image:
 
 ```swift
+import VisualRecognitionV3
+
 let apiKey = "your-apikey-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		123A09211D230BA300A8DA56 /* SolrConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123A09201D230BA300A8DA56 /* SolrConfig.swift */; };
+		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
+		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
 		123B47151D1B3ABA007D0B22 /* RetrieveAndRankV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 123B47141D1B3ABA007D0B22 /* RetrieveAndRankV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		123B471C1D1B3ABA007D0B22 /* RetrieveAndRankV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123B47121D1B3ABA007D0B22 /* RetrieveAndRankV1.framework */; };
 		123B472A1D1B3C41007D0B22 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -650,6 +652,8 @@
 
 /* Begin PBXFileReference section */
 		123A09201D230BA300A8DA56 /* SolrConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolrConfig.swift; sourceTree = "<group>"; };
+		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
+		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
 		123B47121D1B3ABA007D0B22 /* RetrieveAndRankV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RetrieveAndRankV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		123B47141D1B3ABA007D0B22 /* RetrieveAndRankV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RetrieveAndRankV1.h; path = Source/SupportingFiles/RetrieveAndRankV1.h; sourceTree = "<group>"; };
 		123B471B1D1B3ABA007D0B22 /* RetrieveAndRankV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RetrieveAndRankV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1234,6 +1238,8 @@
 		123B47311D1B3D24007D0B22 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				123A09241D2579BF00A8DA56 /* cranfield_data.json */,
+				123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */,
 				123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */,
 			);
 			path = Tests;
@@ -2873,6 +2879,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */,
+				123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */,
 				123B47361D1C2D4B007D0B22 /* Credentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

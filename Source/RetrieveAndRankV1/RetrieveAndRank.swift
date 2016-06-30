@@ -260,5 +260,185 @@ public class RetrieveAndRank {
             }
     }
     
+    /**
+     Delete this specific configuration from the specified cluster.
+     
+     - parameter solrClusterID: The ID of the cluster that you want to delete the configuration of.
+     - parameter configName: The name of the configuration you want to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func deleteSolrConfiguration(
+        solrClusterID: String,
+        configName: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .DELETE,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+            }
+    }
     
+    /**
+     Gets a configuration .zip file with the given name from the specified cluster.
+     
+     - parameter solrClusterID: The ID of the cluster that you want the configuration of.
+     - parameter configName: The name of the configuration you want.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func getSolrConfiguration(
+        solrClusterID: String,
+        configName: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .response { request, response, data, error in
+                print(request)
+                print(response)
+                print(data)
+                print(error)
+        }
+//            .responseData { response in
+//                switch response.result {
+//                case .Success(let data):
+//                    switch self.dataToError(data) {
+//                    case .Some(let error): failure?(error)
+//                    case .None: success?()
+//                    }
+//                case .Failure(let error):
+//                    failure?(error)
+//                }
+//            }
+    }
+    
+    /**
+     Uploads a configuration .zip file set with the given name to the specified cluster.
+     
+     - parameter solrClusterID: The ID of the cluster whose configuration you want to update.
+     - parameter configName: The name of the configuration you want to update.
+     - parameter zipFile: The zip file configuration set that you would like to upload.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func uploadSolrConfigurationZip(
+        solrClusterID: String,
+        configName: String,
+        zipFile: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
+            contentType: "application/zip",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: zipFile, name: "configZip")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.responseData { response in
+                        switch response.result {
+                        case .Success(let data):
+                            switch self.dataToError(data) {
+                            case .Some(let error): failure?(error)
+                            case .None: success?()
+                            }
+                        case .Failure(let error):
+                            failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "File could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
+    }
+    
+    /**
+     Creates a new Solr collection.
+     
+     - parameter solrClusterID: The ID of the cluster to add this collection to.
+     - parameter name: The name of the collection.
+     - parameter configName: The name of the configuration to use.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func createSolrCollection(
+        solrClusterID: String,
+        name: String,
+        configName: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "action", value: "CREATE"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "name", value: name))
+        queryParameters.append(NSURLQueryItem(name: "collection.configName", value: configName))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+            }
+    }
 }

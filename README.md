@@ -228,40 +228,6 @@ conversation.message(workspace, message: message, failure: failure) { response i
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
 
-## Document Conversion
-
-The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
-
-The following example demonstrates how to convert a document with the Document Conversation service:
-
-```swift
-import DocumentConversionV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "2015-12-15"
-let documentConversion = DocumentConversion(username: username, password: password, version: version)
-
-// load document
-guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-    print("Failed to locate dialog file.")
-    return
-}
-
-// convert document
-let config = documentConversion.writeConfig(ReturnType.Text)
-let failure = { (error: NSError) in print(error) }
-documentConversion.convertDocument(config, document: document, failure: failure) { text in
-    print(text)
-}
-```
-
-The following links provide more information about the IBM Document Conversion service:
-
-* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
-* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
-* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
-
 ## Dialog
 
 The IBM Watson Dialog service provides a comprehensive and robust platform for managing conversations between virtual agents and users through an application programming interface (API). Developers automate branching conversations that use natural language to automatically respond to user questions, cross-sell and up-sell, walk users through processes or applications, or even hand-hold users through difficult tasks.
@@ -329,6 +295,40 @@ The following links provide more information about the IBM Watson Dialog service
 * [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
+
+## Document Conversion
+
+The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
+
+The following example demonstrates how to convert a document with the Document Conversation service:
+
+```swift
+import DocumentConversionV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "2015-12-15"
+let documentConversion = DocumentConversion(username: username, password: password, version: version)
+
+// load document
+guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
+    print("Failed to locate dialog file.")
+    return
+}
+
+// convert document
+let config = documentConversion.writeConfig(ReturnType.Text)
+let failure = { (error: NSError) in print(error) }
+documentConversion.convertDocument(config, document: document, failure: failure) { text in
+    print(text)
+}
+```
+
+The following links provide more information about the IBM Document Conversion service:
+
+* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
+* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
+* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
 
 ## Language Translator
 

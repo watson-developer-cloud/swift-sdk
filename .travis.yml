@@ -4,8 +4,8 @@ branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_f4bc5743289d_key -iv $encrypted_f4bc5743289d_iv
-  -in Credentials.plist.enc -out Credentials.plist -d
+- openssl aes-256-cbc -K $encrypted_04b48cd88949_key -iv $encrypted_04b48cd88949_iv
+  -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
 before_script:
 - carthage update --platform iOS
 after_success:

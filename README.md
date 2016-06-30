@@ -13,200 +13,192 @@ The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build 
 
 Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md) to build your first Watson-powered app!
 
-## Table of Contents
+## Contents
+
+### General
+
+* [Requirements](#requirements)
 * [Installation](#installation)
-* [IBM Watson Services](#ibm-watson-services)
-  - [AlchemyData News](#alchemydata-news)
-  - [Alchemy Language](#alchemy-language)
-  - [Alchemy Vision](#alchemy-vision)
-  - [Conversation](#conversation)
-  - [Dialog](#dialog)
-  - [Document Conversion](#document-conversion)
-  - [Language Translator](#language-translator)
-  - [Natural Language Classifier](#natural-language-classifier)
-  - [Personality Insights](#personality-insights)
-  - [Speech to Text](#speech-to-text)
-  - [Text to Speech](#text-to-speech)
-  - [Tone Analyzer](#tone-analyzer)
-  - [Tradeoff Analytics](#tradeoff-analytics)
-  - [Visual Recognition](#visual-recognition)
-* [Authentication](#authentication)
-* [Building and Testing](#build--test)
-* [Open Source @ IBM](#open-source--ibm)
-* [License](#license)
+* [Service Instances](#service-instances)
 * [Contributing](#contributing)
+* [License](#license)
 
-## Upgrading to Xcode 7.3
+### Services
 
-Apple released Xcode 7.3 and Swift 2.2 on March 21, 2016. To use the Watson Developer Cloud iOS SDK with Xcode 7.3 you will have to rebuild all dependencies (including those with pre-built binaries) because there is no binary compatability between Swift 2.1 and Swift 2.2.
+* [AlchemyData News](#alchemydata-news)
+* [AlchemyLanguage](#alchemylanguage)
+* [Alchemy Vision](#alchemy-vision)
+* [Conversation](#conversation)
+* [Dialog](#dialog)
+* [Document Conversion](#document-conversion)
+* [Language Translator](#language-translator)
+* [Natural Language Classifier](#natural-language-classifier)
+* [Personality Insights](#personality-insights)
+* [Speech to Text](#speech-to-text)
+* [Text to Speech](#text-to-speech)
+* [Tone Analyzer](#tone-analyzer)
+* [Tradeoff Analytics](#tradeoff-analytics)
+* [Visual Recognition](#visual-recognition)
 
-Please use the terminal to navigate to your project directory and execute the following command: `carthage update --platform iOS --no-use-binaries`
+---
 
-This will rebuild all dependencies (including those with pre-built binaries) using Xcode 7.3 and Swift 2.2. Be aware that you will receive many warnings related to deprecations that will occur in Swift 3. These warnings do not affect the operation of the SDK and will be addressed in future releases of our dependencies.
+## Requirements
+
+- iOS 9.0+
+- Xcode 7.3+
 
 ## Installation
 
-The Watson Developer Cloud iOS SDK requires third-party dependencies such as ObjectMapper and Alamofire.  The dependency management tool Carthage is used to help manage those frameworks.  The recommended version of Carthage is v0.11 or higher.  
+### Dependency Management
 
-There are two main methods to install Carthage.  The first method is to download and run the Carthage.pkg installer.  You can locate the latest release [here.](https://github.com/Carthage/Carthage/releases)
+The Watson Developer Cloud iOS SDK uses [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build binary frameworks.
 
-The second method of installing is using Homebrew for the download and installation of carthage with the following commands
+You can install Carthage with [Homebrew](http://brew.sh/):
 
-```shell
-brew update && brew install carthage
+```bash
+$ brew update
+$ brew install carthage
 ```
 
-Once the dependency manager is installed, the next step is to download the needed frameworks for the SDK to the project path.  Make sure you are in the root of the project directory and run the following command.  All of the frameworks can be found on the filesystem directory at location ./Carthage/Build/iOS/
+To use the Watson Developer Cloud iOS SDK in your application, specify it in your `Cartfile`:
 
-``` shell
-carthage update --platform iOS
+```
+github "watson-developer-cloud/ios-sdk"
 ```
 
-For more details on using the iOS SDK in your application, please review the [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md).
+Then run `carthage update --platform iOS` to build the dependencies and frameworks. Finally, drag-and-drop the built frameworks into your Xcode project.
 
-**Frameworks Used:**
+### App Transport Security
 
-* [Alamofire](https://github.com/Alamofire/Alamofire)
-* [Freddy](https://github.com/bignerdranch/Freddy)
-* [Starscream](https://github.com/daltoniam/Starscream)
+App Transport Security was introduced with iOS 9 to enforce secure Internet connections. The IBM Bluemix team is in the process of upgrading the platform to the latest security standards required by App Transport Security.
 
-## IBM Watson Services
+Please add the following exception to your application's `Info.plist` to securely connect to IBM Bluemix and the Watson services:
 
-**Getting started with Watson Developer Cloud and Bluemix**
+```xml
+<key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>watsonplatform.net</key>
+            <dict>
+                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+            </dict>
+        </dict>
+    </dict>
+```
 
-The IBM Watson™ Developer Cloud (WDC) offers a variety of services for developing cognitive applications. Each Watson service provides a Representational State Transfer (REST) Application Programming Interface (API) for interacting with the service. Some services, such as the Speech to Text service, provide additional interfaces.
+## Service Instances and Credentials
 
-IBM Bluemix™ is the cloud platform in which you deploy applications that you develop with Watson Developer Cloud services. The Watson Developer Cloud documentation provides information for developing applications with Watson services in Bluemix. You can learn more about Bluemix from the following links:
+The [IBM Watson Developer Cloud](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
 
-The IBM Bluemix documentation, specifically the pages [What is Bluemix](https://www.ng.bluemix.net/docs/)? and the [Bluemix overview](https://www.ng.bluemix.net/docs/overview/index.html).
-IBM developerWorks, specifically the [IBM Bluemix section of IBM developerWorks](https://www.ibm.com/developerworks/cloud/bluemix/) and the article that provides [An introduction to the application lifecycle on IBM Bluemix](http://www.ibm.com/developerworks/cloud/library/cl-intro-codename-bluemix-video/index.html?ca=dat).
+Follow these steps to create a service instance and obtain its credentials:
 
-### AlchemyData News
+1. Log in to Bluemix at [https://bluemix.net](https://bluemix.net).
+2. Create a service instance:
+    a. From the Dashboard, select "Use Services or APIs".
+    b. Select the service you want to use.
+    c. Click "Create".
+3. Copy your service credentials:
+    a. Click "Service Credentials" on the left side of the page.
+    b. Copy the service's `username` and `password` (or `api_key` for Alchemy).
 
-The AlchemyData News API uses natural language processing technologies to query the world's news and blogs like a database.
-
-#### Links
-
-* Check out the documentation [here](http://docs.alchemyapi.com/?cm_mc_uid=79800282175114412235629&cm_mc_sid_50200000=1467038618)
-* Try out the [demo](https://watson-api-explorer.mybluemix.net/apis/alchemy-data-news-v1)
-
-#### Requirements
-
-* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
-
-#### Usage
-
-Instantiate an **AlchemyDataNews** object and set its api key.
+You will need to provide these service credentials in your mobile application. For example:
 
 ```swift
-
-let alchemyDataNews = AlchemyDataNews(apiKey: "your-apikey-here")
-
+let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
 ```
 
-API calls are instance methods, and model class instances are returned as part of our callback.
+Note that service credentials are different from your Bluemix username and password.
 
-e.g.
+## Contributing
+
+See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) on how to help out.
+
+## License
+
+This library is licensed under Apache 2.0. Full license text is
+available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
+
+This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
+
+---
+
+## AlchemyData News
+
+AlchemyData News provides news and blog content enriched with natural language processing to allow for highly targeted search and trend analysis. Now you can query the world's news sources and blogs like a database.
+
+The following example demonstrates how to use the AlchemyData News service:
 
 ```swift
+let apiKey = "your-apikey-here"
+let alchemyDataNews = AlchemyDataNews(apiKey: apiKey)
 
+let start = "now-1d" // yesterday
+let end = "now" // today
+let query = [
+  "q.enriched.url.title": "O[IBM^Apple]",
+  "return": "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
+]
 let failure = { (error: NSError) in print(error) }
 
-alchemyDataNews.getNews("now-1d", end: "now", failure: failure) { news in
-    // code here
-}
-
-```
-
-### Alchemy Language
-
-The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide high-level semantic information about your content.
-
-
-##### AlchemyLanguage Features
-
-* Entity Extraction
-* Sentiment Analysis
-* Keyword Extraction
-* Concept Tagging
-* Relation Extraction
-* Taxonomy Classification
-* Author Extraction
-* Language Detection
-* Text Extraction
-* Microformats Parsing
-* Feed Detection
-
-
-##### Requirements
-
-* Review the original AlchemyLanguage API [here](http://www.alchemyapi.com/products/alchemylanguage)
-* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
-
-
-##### Usage
-
-Instantiate an **AlchemyLanguage** object and set its api key
-
-```swift
-
-let alchemyLanguage = AlchemyLanguage(apiKey: "your-apikey-here")
-
-```
-
-API calls are instance methods, and model class instances are returned as part of our callback.
-
-e.g.
-
-```swift
-
-alchemyLanguage.getEntities(requestType: .URL,
-  html: nil,
-  url: "http://www.google.com",
-  text: nil) {
-
-    (error, entities) in
-
-    // returned data is inside "entities" in this case
-    // code here
-
+alchemyDataNews.getNews(start, end: end, query: query, failure: failure) { news in
+  print(news)
 }
 ```
-### Alchemy Vision
 
-AlchemyVision is an API that can analyze an image and return the objects, people, and text found within the image. AlchemyVision can enhance the way businesses make decisions by integrating image cognition.
+Use the [Count and TimeSlice Queries](http://docs.alchemyapi.com/docs/counts) and [API Fields](http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields) documentation to refine your query.
 
-##### Links
-* AlchemyVision API docs [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-vision.html)
-* Try out the [demo](http://vision.alchemy.ai)
+The following links provide additional information about the IBM AlchemyData News service:
 
-##### Requirements
-* An Alchemy [API Key](http://www.alchemyapi.com/api/register.html)
+* [IBM AlchemyData News - Service Page](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html)
+* [IBM AlchemyData News - Documentation](http://docs.alchemyapi.com/)
+* [IBM AlchemyData News - Demo](http://querybuilder.alchemyapi.com/builder)
 
-##### Usage
-Instantiate an **AlchemyVision** object and set its api key
+## AlchemyLanguage
+
+AlchemyLanguage is a collection of text analysis functions that derive semantic information from your content. You can input text, HTML, or a public URL and leverage sophisticated natural language processing techniques to get a quick high-level understanding of your content and obtain detailed insights such as directional sentiment from entity to object.
+
+AlchemyLanguage has a number of features, including:
+
+- Entity Extraction
+- Sentiment Analysis
+- Keyword Extraction
+- Concept Tagging
+- Relation Extraction
+- Taxonomy Classification
+- Author Extraction
+- Language Detection
+- Text Extraction
+- Microformats Parsing
+- Feed Detection
+
+The following example demonstrates how to use the AlchemyLanguage service:
 
 ```swift
+let apiKey = "your-apikey-here"
+let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
 
-let alchemyVision = AlchemyVision(apiKey: "your-apikey-here")
-
-```
-
-
-API calls are instance methods, and model class instances are returned as part of our callback.
-
-e.g.
-
-```swift
+let url = "https://github.com/watson-developer-cloud/ios-sdk"
 let failure = { (error: NSError) in print(error) }
-
-alchemyVision.getRankedImageFaceTags(url: url,
-                                     failure: failure) { facetags in
-	code here
+alchemyLanguage.getTextSentiment(forURL: url, failure: failure) { sentiment in
+  print(sentiment)
 }
 ```
 
-### Conversation
+The following links provide additional information about the IBM AlchemyLanguage service:
+
+* [IBM AlchemyLanguage - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-language.html)
+* [IBM AlchemyLanguage - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/alchemylanguage/)
+* [IBM AlchemyLanguage - Demo](https://alchemy-language-demo.mybluemix.net/)
+
+## Conversation
 
 With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
@@ -230,134 +222,139 @@ conversation.message(workspace, message: message, failure: failure) { response i
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
 
-
-### Dialog
+## Dialog
 
 The IBM Watson Dialog service provides a comprehensive and robust platform for managing conversations between virtual agents and users through an application programming interface (API). Developers automate branching conversations that use natural language to automatically respond to user questions, cross-sell and up-sell, walk users through processes or applications, or even hand-hold users through difficult tasks.
 
 To use the Dialog service, developers script conversations as they would happen in the real world, upload them to a Dialog application, and enable back-and-forth conversations with a user.
 
-Instantiate the Dialog service:
+The following example demonstrates how to instantiate the Dialog class:
 
 ```swift
-let dialog = Dialog(username: "your-username-here", password: "your-password-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let dialog = Dialog(username: username, password: password)
 ```
 
-Create a Dialog application by uploading a Dialog file:
+The following example demonstrates how to create a dialog application:
 
 ```swift
-var dialogID: Dialog.DialogID?
+// store dialog id to access application
+var dialogID: DialogID?
+
+guard let fileURL = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
+  print("Failed to locate dialog file.")
+  return
+}
+
+let name = "your-dialog-name"
 let failure = { (error: NSError) in print(error) }
-dialog.createDialog(dialogName,
-                    fileURL: fileURL,
-                    failure: failure) { (dialogID) in
-    // code here
+dialog.createDialog(dialogName, fileURL: fileURL, failure: failure) { dialogID in
+  self.dialogID = dialogID
+  print(dialogID)
 }
 ```
 
-Start a conversation with the Dialog application:
+The following example demonstrates how to start a conversation with a dialog application:
 
 ```swift
+// store ids to continue conversation
 var conversationID: Int?
 var clientID: Int?
+
 let failure = { (error: NSError) in print(error) }
-dialog.converse(dialogID!,
-                failure: failure) { conversationResponse in
-    // save conversation parameters
-    self.conversationID = conversationResponse.conversationID
-    self.clientID = conversationResponse.clientID
-    
-    // print message from Watson
-    print(conversationResponse.response)
+dialog.converse(dialogID!, failure: failure) { response in
+    self.conversationID = response.conversationID
+    self.clientID = response.clientID
+    print(response.response)
 }
 ```
 
-Continue a conversation with the Dialog application:
+The following example demonstrates how to continue a conversation with a dialog application:
 
 ```swift
+let input = "your-text-here"
 let failure = { (error: NSError) in print(error) }
-dialog.converse(dialogID!,
-                conversationID: conversationID!,
-                clientID: clientID!,
-                input: input,
-                failure: failure) { conversationResponse in
-                
-    // print message from Watson
+dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!, input: input, failure: failure) { response in
     print(conversationResponse.response)
 }
 ```
 
-The following links provide additional information about the IBM Watson Dialog Service:
+The following links provide additional information about the IBM Watson Dialog service:
 
 * [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
 * [IBM Watson Dialog - Video](https://www.youtube.com/watch?v=Rn64SpnSq9I)
 * [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
-### Document Conversion
+## Document Conversion
 
-The IBM Watson™ Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
+The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
 
-#### Usage
-
-Instantiate a **DocumentConversion** object and set the username, password, and version.
+The following example demonstrates how to convert a document:
 
 ```swift
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "2015-12-15"
+let documentConversion = DocumentConversion(username: username, password: password, version: version)
 
-let documentConversion = DocumentConversion(username: "your-username", password: "your-password", version: "2015-12-15")
-
-```
-
-Convert a document with the service:
-
-```swift
-
-let failure = { (error: NSError) in print(error) }
-
-documentConversion.convertDocument(documentConversion.writeConfig(ReturnType.Text), document: yourDocument, failure: failure) { text in
-    // print converted document
-    print(text)
+guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
+  print("Failed to locate dialog file.")
+  return
 }
 
+let config = documentConversion.writeConfig(ReturnType.Text)
+let failure = { (error: NSError) in print(error) }
+documentConversion.convertDocument(config, document: document, failure: failure) { text in
+  print(text)
+}
 ```
 
-### Links
+The following links provide additional information about the IBM Document Conversion service:
+
 * [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/index.shtml)
 * [IBM Watson Document Conversion - Demo](https://watson-api-explorer.mybluemix.net/apis/document-conversion-v1)
 
-### Language Translator
+## Language Translator
 
-The IBM Watson™ Language Translator service provides an Application Programming Interface (API) that lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
-How to instantiate and use the Language Translator service:
+The following example demonstrates how to use the Language Translator service:
 
 ```swift
-let languageTranslator = LanguageTranslator(username: "your-username-here", password: "your-password-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let languageTranslator = LanguageTranslator(username: username, password: password)
+
 let failure = { (error: NSError) in print(error) }
-languageTranslator.getIdentifiableLanguages(failure) { identifiableLanguage in
-    // code here
+languageTranslator.translate("Hello", source: "en", target: "es", failure: failure) { translation in
+  print(translation)
 }
 ```
 
-The following links provide more information about the Language Translator service:
+The following links provide more information about the IBM Watson Language Translator service:
 
 * [IBM Watson Language Translator - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
 * [IBM Watson Language Translator - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
 * [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
 
-### Natural Language Classifier
+## Natural Language Classifier
 
-The IBM Watson™ Natural Language Classifier service uses machine learning algorithms to return the top matching predefined classes for short text inputs.
+The IBM Watson Natural Language Classifier service enables developers without a background in machine learning or statistical algorithms to create natural language interfaces for their applications. The service interprets the intent behind text and returns a corresponding classification with associated confidence levels. The return value can then be used to trigger a corresponding action, such as redirecting the request or answering a question.
 
-How to instantiate and use the Natural Language Classifier service:
+The following example demonstrates how to use the Natural Language Classifier service:
 
 ```swift
-let naturalLanguageClassifier = NaturalLanguageClassifier(username: "your-username-here", password: "your-password-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+
+let classifierID = "your-trained-classifier-id"
+let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
-naturalLanguageClassifier.classify(self.classifierIdInstanceId,
-                                   text: "is it sunny?",
-                                   failure: failure) { classification in
-    // code here
+naturalLanguageClassifier.classify(classifierID, text: text, failure: failure) { classification in
+  print(classification)
 }
 ```
 
@@ -367,16 +364,19 @@ The following links provide more information about the Natural Language Classifi
 * [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
-### Personality Insights
+## Personality Insights
 
-The IBM Watson™ Personality Insights service provides an Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
+The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
 
 ```swift
-let personalityInsights = PersonalityInsights(username: "your-username-here", password: "your-password-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let personalityInsights = PersonalityInsights(username: username, password: password)
+
+let text = "your-input-text"
 let failure = { (error: NSError) in print(error) }
-personalityInsights.getProfile(text: "Some text here",
-                               failure: failure) { profile in
-    // code here                          
+personalityInsights.getProfile(text: text, failure: failure) { profile in
+  print(profile)                      
 }
 ```
 
@@ -386,7 +386,7 @@ The following links provide more information about the Personality Insights serv
 * [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
-### Speech to Text
+## Speech to Text
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
@@ -395,42 +395,43 @@ The IBM Watson Speech to Text service enables you to add speech transcription ca
 The following example demonstrates how to use the Speech to Text service to transcribe an audio file.
 
 ```swift
-let bundle = NSBundle(forClass: self.dynamicType)
-guard let fileURL = bundle.URLForResource("filename", withExtension: "wav") else {
-	print("File could not be loaded.")
+let username = "your-username-here"
+let password = "your-password-here"
+let speechToText = SpeechToText(username: username, password: password)
+
+guard let fileURL = NSBundle.mainBundle().URLForResource("your-audio-filename", withExtension: "wav") else {
+	print("Audio file could not be loaded.")
 	return
 }
 
-let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
 let settings = TranscriptionSettings(contentType: .WAV)
 let failure = { (error: NSError) in print(error) }
 
-speechToText.transcribe(fileURL,
-                        settings: settings,
-                        failure: failure) { results in
-    if let transcription = results.last?.alternatives.last?.transcript {
-        print(transcription)
-    }
+speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
+  print(results.last?.alternatives.last?.transcript)
 }
 ```
 
 #### Streaming Audio
 
-Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service with streaming audio. (Unfortunately, the microphone is not accessible from within the Simulator. Only applications on a physical device can stream microphone audio to Speech to Text.)
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions.
+
+(Please note that the microphone is inaccessible when testing applications with the iOS Simulator. Only applications on a physical device can access the microphone to stream audio to Speech to Text.)
+
+The following example demonstrates how to use the Speech to Text service with streaming audio:
 
 ```swift
-let speechToText = SpeechToText(username: "your-username-here", password: "your-password-here")
+let username = "your-username-here"
+let password = "your-password-here"
+let speechToText = SpeechToText(username: username, password: password)
 
 var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
 settings.continuous = true
 settings.interimResults = true
 
 let failure = { (error: NSError) in print(error) }
-let stopStreaming = speechToText.transcribe(settings,
-                                            failure: failure) { results in
-    if let transcription = results.last?.alternatives.last?.transcript {
-        print(transcription)
-    }
+let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
+  print(results.last?.alternatives.last?.transcript)
 }
 
 // Streaming will continue until either an end-of-speech event is detected by
@@ -500,7 +501,7 @@ The following links provide additional information about the IBM Speech to Text 
 * [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
 
-### Text to Speech
+## Text to Speech
 
 The Text to Speech service gives your app the ability to synthesize spoken text in a variety of voices.
 
@@ -554,7 +555,7 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
 * [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
-### Tone Analyzer
+## Tone Analyzer
 
 The Tone Analyzer service uses linguistic analysis to detect three types of tones from text: emotion, social tendencies, and language style.
 
@@ -578,7 +579,7 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
 
-### Tradeoff Analytics
+## Tradeoff Analytics
 
 The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.
 
@@ -656,7 +657,7 @@ The following links provide more information about the Tradeoff Analytics servic
 * [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/)
 * [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
 
-### Visual Recognition
+## Visual Recognition
 
 The Visual Recognition service helps you to understand the contents of images. Submit an image, and the service returns scores for relevant classifiers representing things. It can even detect objects, texts or faces.
 
@@ -679,51 +680,3 @@ The following links provide more information about the Text To Speech service:
 * [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/visual-recognition.html)
 * [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/)
 * [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)
-
-## Authentication
-
-IBM Watson Services are hosted in the Bluemix platform. Before you can use each service in the SDK, the service must first be created in Bluemix, bound to an Application, and you must have the credentials that Bluemix generates for that service. Alchemy services use a single API key, and all the other Watson services use a username and password credential.
-
-## Build + Test
-
-***XCode*** is used to build the project for testing and deployment.  Select Product->Build For->Testing to build the project in XCode's menu.  
-
-In order to build the project and run the unit tests, a **credentials.plist** file needs to be populated with proper credentials in order to comumnicate with the running Watson services.  A copy of this file is located in the project's folder under **Source/SupportingFiles**.  The **credentials.plist** file contains a key and value for each service's user name and password.  For example, Personality Insights has a key of PersonalityInsightsUsername for the user name and a key of PersonalityInsightsPassword for the password.  A user name and password can be optained from a running Watson service on Bluemix.  Please refer to the [IBM Watson Services](#ibm-watson-services) section for more information about Watson Services and Bluemix
-
-There are many tests already in place, positive and negative, that can be displayed when selecting the Test Navigator in XCode.  Right click on the test you want to run and select Test in the context menu to run that specific test.  You can also select a full node and right-click to run all of the tests in that node or service.  
-
-Tests can be found in the **ServiceName+Tests** target, as well as in each individual service’s directory. All of them can be run through Xcode’s testing interface using [XCTest](https://developer.apple.com/library/ios/recipes/xcode_help-test_navigator/RunningTests/RunningTests.html#//apple_ref/doc/uid/TP40013329-CH4-SW1). Travis CI will also execute tests for pull requests and pushes to the repository.
-
-## Open Source @ IBM
-Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
-
-## License
-
-This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
-
-This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
-
-## Contributing
-
-See [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) on how to help out.
-
-[personality_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
-[language_identification]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/lidapi/
-[machine_translation]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/mtapi/
-[document_conversion]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/
-[relationship_extraction]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/sireapi/
-[language_translator]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/
-[visual_recognition]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/
-[tradeoff_analytics]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/
-[text_to_speech]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/
-[speech_to_text]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/
-[tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/
-[dialog]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/
-[concept-insights]: https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/concept-insights/
-[visual_insights]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-insights/
-
-[alchemy_language]: http://www.alchemyapi.com/products/alchemylanguage
-[sentiment_analysis]: http://www.alchemyapi.com/products/alchemylanguage/sentiment-analysis
-[alchemy_vision]: http://www.alchemyapi.com/products/alchemyvision
-[alchemy_data_news]: http://www.alchemyapi.com/products/alchemydata-news

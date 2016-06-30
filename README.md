@@ -27,7 +27,6 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
-* [Alchemy Vision](#alchemy-vision)
 * [Conversation](#conversation)
 * [Dialog](#dialog)
 * [Document Conversion](#document-conversion)
@@ -39,8 +38,6 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Tone Analyzer](#tone-analyzer)
 * [Tradeoff Analytics](#tradeoff-analytics)
 * [Visual Recognition](#visual-recognition)
-
----
 
 ## Requirements
 
@@ -94,7 +91,7 @@ Please add the following exception to your application's `Info.plist` to securel
     </dict>
 ```
 
-## Service Instances and Credentials
+## Service Instances
 
 The [IBM Watson Developer Cloud](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
 
@@ -127,8 +124,6 @@ This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
 
 This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
-
----
 
 ## AlchemyData News
 

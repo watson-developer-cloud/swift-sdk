@@ -31,7 +31,7 @@ public class RelationshipExtraction {
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.0 RelationshipExtractionV1Beta")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.1 RelationshipExtractionV1Beta")
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
     
     /**

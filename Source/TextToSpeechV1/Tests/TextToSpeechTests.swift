@@ -689,6 +689,21 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Synthesize an empty string. */
+    func testSynthesizeEmptyString() {
+        let description = "Synthesize an empty string."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            print(error)
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        textToSpeech.synthesize("", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
     /** Synthesize text to spoken audio using an invalid voice. */
     func testSynthesizeWithInvalidVoice() {
         let description = "Synthesize text to spoken audio using an invalid voice."

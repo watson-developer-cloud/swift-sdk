@@ -1,26 +1,13 @@
 language: objective-c
-
 osx_image: xcode7.3
-#xcode_project: WatsonDeveloperCloud.xcodeproj
-#xcode_scheme: WatsonDeveloperCloud
-#xcode_sdk: iphonesimulator9.2
-
-# whitelist
 branches:
   only:
-    - master
-
-#xcode_scheme: WatsonCore
+  - master
 before_install:
-- brew update
-#- brew install carthage
-- openssl aes-256-cbc -K $encrypted_47221bf562c9_key -iv $encrypted_47221bf562c9_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
-
+- openssl aes-256-cbc -K $encrypted_04b48cd88949_key -iv $encrypted_04b48cd88949_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
 before_script:
-    - carthage update --platform iOS
-
+- carthage update --platform iOS
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
 script:
-  - xcodebuild clean build test -scheme 'All Services' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'All Services' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'

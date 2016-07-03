@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.4.2
+
+_2016-07-02_
+
+This update fixes issue #363 by modifying the RelationshipExtractionV1Beta scheme to avoid building/profiling/archiving/analyzing the RelationshipExtractionV1BetaTests target.
+
 ## Version 0.4.1
 
 _2016-06-30_

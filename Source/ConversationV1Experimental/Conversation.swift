@@ -33,7 +33,7 @@ public class Conversation {
     private let password: String
     private let version: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.1 ConversationV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 ConversationV1")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
     /**

@@ -698,7 +698,6 @@
 		7A987D681D19D923003626B2 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sentence.swift; path = ../../RelationshipExtractionV1Beta/Models/Sentence.swift; sourceTree = "<group>"; };
 		7A987D691D19D923003626B2 /* RelationshipExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtraction.swift; path = ../RelationshipExtractionV1Beta/RelationshipExtraction.swift; sourceTree = "<group>"; };
 		7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RelationshipExtractionTests.swift; path = ../../RelationshipExtractionV1Beta/Tests/RelationshipExtractionTests.swift; sourceTree = "<group>"; };
-		7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		7AAA9A121CEE3026002C9564 /* AlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResult.swift; sourceTree = "<group>"; };
 		7AAA9A131CEE3026002C9564 /* AlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternativeResults.swift; sourceTree = "<group>"; };
 		7AAA9A141CEE3026002C9564 /* KeywordResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordResult.swift; sourceTree = "<group>"; };
@@ -1298,7 +1297,6 @@
 			children = (
 				7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */,
 				7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */,
-				7AA7AD3E1CED12CF009DD700 /* ObjectMapper.framework */,
 				7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */,
 			);
 			name = Frameworks;

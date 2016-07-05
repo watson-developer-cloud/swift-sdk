@@ -10,4 +10,19 @@ before_script:
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 script:
-- xcodebuild clean build test -scheme 'All Services' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'AlchemyDataNewsV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'AlchemyLanguageV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'AlchemyVisionV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'ConversationV1Experimental' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'DialogV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'DocumentConversionV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'LanguageTranslatorV2' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'NaturalLanguageClassifierV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'PersonalityInsightsV2' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'RelationshipExtractionV1Beta' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'RestKit' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'SpeechToTextV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'TextToSpeechV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'ToneAnalyzerV3' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'TradeoffAnalyticsV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+- xcodebuild clean build test -scheme 'VisualRecognitionV3' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'

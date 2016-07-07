@@ -736,4 +736,71 @@ public class RetrieveAndRank {
             }
         )
     }
+    
+    /**
+     Delete a ranker.
+     
+     - parameter rankerID: The ranker to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func deleteRanker(
+        rankerID: String,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .DELETE,
+            url: serviceURL + "/v1/rankers/\(rankerID)",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
+                    }
+                case .Failure(let error):
+                    failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Get status and information about a specific ranker.
+     
+     - parameter rankerID: The unique identifier for the ranker you want more information about.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a `RankerDetails` object.
+     */
+    public func getRanker(
+        rankerID: String,
+        failure: (NSError -> Void)? = nil,
+        success: RankerDetails -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/rankers/\(rankerID)",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<RankerDetails, NSError>) in
+                switch response.result {
+                case .Success(let details): success(details)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
 }

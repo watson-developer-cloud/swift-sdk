@@ -305,28 +305,28 @@ public class RetrieveAndRank {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
-    public func getSolrConfiguration(
-        solrClusterID: String,
-        configName: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
-        
-        // construct REST request
-        let request = RestRequest(
-            method: .GET,
-            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
-            userAgent: userAgent
-        )
-        
-        // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .response { request, response, data, error in
-                print(request)
-                print(response)
-                print(data)
-                print(error)
-        }
+//    public func getSolrConfiguration(
+//        solrClusterID: String,
+//        configName: String,
+//        failure: (NSError -> Void)? = nil,
+//        success: (Void -> Void)? = nil) {
+//        
+//        // construct REST request
+//        let request = RestRequest(
+//            method: .GET,
+//            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
+//            userAgent: userAgent
+//        )
+//        
+//        // execute REST request
+//        Alamofire.request(request)
+//            .authenticate(user: username, password: password)
+//            .response { request, response, data, error in
+//                print(request)
+//                print(response)
+//                print(data)
+//                print(error)
+//        }
 //            .responseData { response in
 //                switch response.result {
 //                case .Success(let data):
@@ -338,7 +338,7 @@ public class RetrieveAndRank {
 //                    failure?(error)
 //                }
 //            }
-    }
+//    }
     
     /**
      Uploads a configuration .zip file set with the given name to the specified cluster.
@@ -521,5 +521,219 @@ public class RetrieveAndRank {
                 case .Failure(let error): failure?(error)
                 }
             }
+    }
+    
+    /**
+     Update a collection by adding content to it. This indexes the documents and allows us to 
+     search the newly uploaded data later. For more information about the accepted file types and
+     howto structure the content files, refer to this link: 
+     https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations
+     
+     - parameter solrClusterID: The ID of the cluster this collection points to.
+     - parameter collectionName: The name of the collection you would like to update.
+     - parameter contentType: The media type of the content that is being uploaded.
+     - parameter contentFile: The file that is being uploaded, that contains the content to be 
+            added to the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+    public func updateSolrCollection(
+        solrClusterID: String,
+        collectionName: String,
+        contentType: String,
+        contentFile: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: (Void -> Void)? = nil) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/update",
+            contentType: contentType,
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: contentFile, name: "contentFile")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.responseData { response in
+                        switch response.result {
+                        case .Success(let data):
+                            switch self.dataToError(data) {
+                            case .Some(let error): failure?(error)
+                            case .None: success?()
+                        }
+                        case .Failure(let error):
+                            failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "File could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
+    }
+    
+    /**
+     Use the given query to search this specific collection within a given cluster. This command
+     doesn't rank the values; to retrieve and rank, use the `retrieveAndRank()` call.
+     
+     - parameter solrClusterID: The ID of the Solr cluster.
+     - parameter collectionName: The name of the collection in the cluster.
+     - parameter query: The query. Refer to the following link for more information on how to 
+            structure the query string: 
+            https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
+     - parameter returnFields: The fields that should be returned. These fields should correspond
+            to the fields within the content that has been uploaded to the collection. This
+            parameter should be a comma-separated list of fields.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed if no error occurs.
+     */
+//    public func retrieve(
+//        solrClusterID: String,
+//        collectionName: String,
+//        query: String,
+//        returnFields: String,
+//        failure: (NSError -> Void)? = nil,
+//        success: (Void -> Void)? = nil) {
+//        
+//        // construct query parameters
+//        var queryParameters = [NSURLQueryItem]()
+//        queryParameters.append(NSURLQueryItem(name: "q", value: query))
+//        queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
+//        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+//        
+//        // construct REST request
+//        let request = RestRequest(
+//            method: .GET,
+//            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/select",
+//            userAgent: userAgent,
+//            queryParameters: queryParameters
+//        )
+//        
+//        // execute REST request
+//        Alamofire.request(request)
+//            .authenticate(user: username, password: password)
+//        
+//    }
+    
+    // MARK: - Rankers
+    
+    /**
+     Retrieves the list of rankers available for this Retrieve and Rank instance.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with an array of `Ranker` objects.
+     */
+    public func getRankers(
+        failure: (NSError -> Void)? = nil,
+        success: [Ranker] -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/rankers",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError, path: ["rankers"]) {
+                (response: Response<[Ranker], NSError>) in
+                switch response.result {
+                case .Success(let rankers): success(rankers)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Creates and trains a new ranker. The status of the ranker will be set to `Training` until
+     the ranker is ready. You need to wait until the status is `Available` before using.
+     
+     - parameter trainingDataFile: The training data content that will be used to train this ranker.
+     - parameter name: An optional name for the ranker.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a `Ranker` object.
+     */
+//    public func createRanker(
+//        trainingDataFile: NSURL,
+//        name: String? = nil,
+//        failure: (NSError -> Void)? = nil,
+//        success: (Void -> Void)? = nil) {
+//        
+//        // construct body
+//        let json = ["name": name]
+//        guard let body = try? json.toJSON().serialize() else {
+//            let failureReason = "Profile could not be serialized to JSON."
+//            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+//            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+//            failure?(error)
+//            return
+//        }
+//    }
+    
+    /**
+     Identifies the top answer from the list of provided results to rank, and provides up to 10 
+     other answers listed in order from highest to lowest ranked score.
+     
+     - parameter rankerID: The ID of the ranker to use.
+     - parameter resultsFile: A CSV file containing the search results that you want ranked. The 
+            first column header must be labeled `answer_id`. The other column headers should 
+            match the names of the features in the `trainingDataFile` used to train the ranker.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a `RankedAnswer` object.
+     */
+    public func rankResults(
+        rankerID: String,
+        resultsFile: NSURL,
+        failure: (NSError -> Void)? = nil,
+        success: RankedAnswer -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/rankers/\(rankerID)/rank",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: resultsFile, name: "resultsFile")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: Response<RankedAnswer, NSError>) in
+                        switch response.result {
+                        case .Success(let answer): success(answer)
+                        case .Failure(let error): failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "File could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
     }
 }

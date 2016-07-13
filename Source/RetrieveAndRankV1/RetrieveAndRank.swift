@@ -303,42 +303,57 @@ public class RetrieveAndRank {
      - parameter solrClusterID: The ID of the cluster that you want the configuration of.
      - parameter configName: The name of the configuration you want.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed if no error occurs.
+     - parameter success: A function executed with the URL of the downloaded configuration file.
      */
-//    public func getSolrConfiguration(
-//        solrClusterID: String,
-//        configName: String,
-//        failure: (NSError -> Void)? = nil,
-//        success: (Void -> Void)? = nil) {
-//        
-//        // construct REST request
-//        let request = RestRequest(
-//            method: .GET,
-//            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
-//            userAgent: userAgent
-//        )
-//        
-//        // execute REST request
-//        Alamofire.request(request)
-//            .authenticate(user: username, password: password)
-//            .response { request, response, data, error in
-//                print(request)
-//                print(response)
-//                print(data)
-//                print(error)
-//        }
-//            .responseData { response in
-//                switch response.result {
-//                case .Success(let data):
-//                    switch self.dataToError(data) {
-//                    case .Some(let error): failure?(error)
-//                    case .None: success?()
-//                    }
-//                case .Failure(let error):
-//                    failure?(error)
-//                }
-//            }
-//    }
+    public func getSolrConfiguration(
+        solrClusterID: String,
+        configName: String,
+        failure: (NSError -> Void)? = nil,
+        success: NSURL -> Void) {
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
+            userAgent: userAgent
+        )
+        
+        // specify download destination
+        let destination = Alamofire.Request.suggestedDownloadDestination(
+            directory: .DocumentDirectory,
+            domain: .UserDomainMask
+        )
+        
+        // execute REST request
+        Alamofire.download(request, destination: destination)
+            .authenticate(user: username, password: password)
+            .response { _, response, data, error in
+                guard error == nil else {
+                    failure?(error!)
+                    return
+                }
+                
+                guard let response = response else {
+                    let failureReason = "Did not receive response."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+                
+                if let data = data {
+                    if let error = self.dataToError(data) {
+                        failure?(error)
+                        return
+                    }
+                }
+                
+                let temporaryURL = NSURL(string: "")!
+                let fileURL = destination(temporaryURL, response)
+                success(fileURL)
+            }
+
+    }
     
     /**
      Uploads a configuration .zip file set with the given name to the specified cluster.

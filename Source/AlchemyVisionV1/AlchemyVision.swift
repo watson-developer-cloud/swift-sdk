@@ -24,6 +24,7 @@ import RestKit
  found within the image. AlchemyVision can enhance the way businesses make decisions by
  integrating image cognition.
  */
+@available(*, deprecated, message="Its functionality became a part of the IBM Watson Visual Recognition service.")
 public class AlchemyVision {
     
     private let apiKey: String

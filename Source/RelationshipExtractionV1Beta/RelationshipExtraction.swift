@@ -27,6 +27,7 @@ import RestKit
  text that refers to entities, cluster them together to form entities, and extract the relationships 
  between the entities.
  */
+@available(*, deprecated, message="Relationship Extraction will be deprecated on July 27th 2016. If you want to continue using Relationship Extraction models, you can now access them with AlchemyLanguage. See the migration guide for details.")
 public class RelationshipExtraction {
     private let username: String
     private let password: String

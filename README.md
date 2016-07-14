@@ -41,7 +41,7 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 
 ## Requirements
 
-- iOS 9.0+
+- iOS 8.0+
 - Xcode 7.3+
 
 ## Installation

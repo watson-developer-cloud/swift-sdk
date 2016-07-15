@@ -13,6 +13,7 @@ The following tasks should be completed before publishing a release. Track the p
 #### Tests and Verification
 
 - [ ] Run all tests to verify correctness. Fix any errors.
+- [ ] Verify that all necessary changes to `.travis.yml` have been made.
 
 #### Documentation
 
@@ -25,4 +26,5 @@ The following tasks should be completed before publishing a release. Track the p
 #### Publish Release
 
 - [ ] Use Github to create a tag/release.
+- [ ] Ensure that Carthage successfully builds each service's framework.
 - [ ] Celebrate the team's hard work! :)

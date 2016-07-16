@@ -10,7 +10,6 @@
 		121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F968F1D2D8A9600E295B0 /* Ranker.swift */; };
 		121F96921D2EAD1600E295B0 /* RankedAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96911D2EAD1600E295B0 /* RankedAnswer.swift */; };
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
-		123A09211D230BA300A8DA56 /* SolrConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123A09201D230BA300A8DA56 /* SolrConfig.swift */; };
 		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
 		123B47151D1B3ABA007D0B22 /* RetrieveAndRankV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 123B47141D1B3ABA007D0B22 /* RetrieveAndRankV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -657,7 +656,6 @@
 		121F968F1D2D8A9600E295B0 /* Ranker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranker.swift; sourceTree = "<group>"; };
 		121F96911D2EAD1600E295B0 /* RankedAnswer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankedAnswer.swift; sourceTree = "<group>"; };
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
-		123A09201D230BA300A8DA56 /* SolrConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolrConfig.swift; sourceTree = "<group>"; };
 		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
 		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
 		123B47121D1B3ABA007D0B22 /* RetrieveAndRankV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RetrieveAndRankV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1236,7 +1234,6 @@
 			children = (
 				123B47371D1C6821007D0B22 /* SolrCluster.swift */,
 				12D91A4F1D217EB600CC0D87 /* SolrClusterStatus.swift */,
-				123A09201D230BA300A8DA56 /* SolrConfig.swift */,
 				121F968F1D2D8A9600E295B0 /* Ranker.swift */,
 				121F96911D2EAD1600E295B0 /* RankedAnswer.swift */,
 				121F96931D2EF66400E295B0 /* RankerDetails.swift */,
@@ -3173,7 +3170,6 @@
 			files = (
 				121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */,
 				12D91A511D217EBE00CC0D87 /* SolrClusterStatus.swift in Sources */,
-				123A09211D230BA300A8DA56 /* SolrConfig.swift in Sources */,
 				121F96921D2EAD1600E295B0 /* RankedAnswer.swift in Sources */,
 				123B47381D1C6822007D0B22 /* SolrCluster.swift in Sources */,
 				121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */,

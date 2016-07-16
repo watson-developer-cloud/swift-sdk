@@ -238,7 +238,7 @@ public class RetrieveAndRank {
     public func getSolrConfigurations(
         solrClusterID: String,
         failure: (NSError -> Void)? = nil,
-        success: [SolrConfig] -> Void) {
+        success: [String] -> Void) {
         
         // construct REST request
         let request = RestRequest(
@@ -251,8 +251,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError) {
-                (response: Response<[SolrConfig], NSError>) in
+            .responseArray(dataToError: dataToError, path: ["solr_configs"]) {
+                (response: Response<[String], NSError>) in
                 switch response.result {
                 case .Success(let config): success(config)
                 case .Failure(let error): failure?(error)

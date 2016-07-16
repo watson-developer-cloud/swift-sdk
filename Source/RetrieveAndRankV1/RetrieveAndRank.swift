@@ -380,34 +380,19 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        Alamofire.upload(request,
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: zipFile, name: "configZip")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseData { response in
-                        switch response.result {
-                        case .Success(let data):
-                            switch self.dataToError(data) {
-                            case .Some(let error): failure?(error)
-                            case .None: success?()
-                            }
-                        case .Failure(let error):
-                            failure?(error)
-                        }
+        Alamofire.upload(request, file: zipFile)
+            .authenticate(user: self.username, password: self.password)
+            .responseData { response in
+                switch response.result {
+                case .Success(let data):
+                    switch self.dataToError(data) {
+                    case .Some(let error): failure?(error)
+                    case .None: success?()
                     }
-                case .Failure:
-                    let failureReason = "File could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                case .Failure(let error):
                     failure?(error)
-                    return
                 }
             }
-        )
     }
     
     /**

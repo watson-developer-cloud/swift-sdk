@@ -57,20 +57,22 @@ public class RetrieveAndRank {
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let code = try json.int("code")
             
             if let msg = try? json.string("msg") {
+                let code = try json.int("code")
                 let userInfo = [NSLocalizedFailureReasonErrorKey: msg]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else {
                 let error = try json.string("error")
                 let description = try json.string("description")
+                let code = try json.int("code")
                 let userInfo = [
                     NSLocalizedFailureReasonErrorKey: error,
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             }
+            
             
         } catch {
             return nil
@@ -152,6 +154,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
+//            .responseString{response in print(response)}
             .responseObject(dataToError: dataToError) {
                 (response: Response<SolrCluster, NSError>) in
                 switch response.result {
@@ -183,6 +186,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
+            .responseString{response in print(response)}
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -364,7 +368,7 @@ public class RetrieveAndRank {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
-    public func uploadSolrConfigurationZip(
+    public func createSolrConfiguration(
         solrClusterID: String,
         configName: String,
         zipFile: NSURL,
@@ -429,6 +433,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
+            .responseString { response in print(response) }
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -473,6 +478,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
+            .responseString { response in print(response) }
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -487,7 +493,7 @@ public class RetrieveAndRank {
     }
     
     /**
-     Lists the names of the Solr collections associated in this Solr cluster.
+     Lists the names of the collections in this Solr cluster.
      
      - parameter solrClusterID: The ID of the cluster whose collections you want.
      - parameter failure: A function executed if an error occurs.
@@ -514,7 +520,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError) {
+            .responseString{ response in print(response) }
+            .responseArray(dataToError: dataToError, path: ["collections"]) {
                 (response: Response<[String], NSError>) in
                 switch response.result {
                 case .Success(let collections): success(collections)
@@ -554,14 +561,16 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
+            request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: contentFile, name: "contentFile")
+                multipartFormData.appendBodyPart(fileURL: contentFile, name: "body")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
+                    upload.responseString { response in print(response) }
                     upload.responseData { response in
                         switch response.result {
                         case .Success(let data):
@@ -605,7 +614,7 @@ public class RetrieveAndRank {
 //        query: String,
 //        returnFields: String,
 //        failure: (NSError -> Void)? = nil,
-//        success: (Void -> Void)? = nil) {
+//        success: RetrieveResponse -> Void) {
 //        
 //        // construct query parameters
 //        var queryParameters = [NSURLQueryItem]()
@@ -624,7 +633,13 @@ public class RetrieveAndRank {
 //        // execute REST request
 //        Alamofire.request(request)
 //            .authenticate(user: username, password: password)
-//        
+//            .responseObject(dataToError: dataToError, path: ["response"]) {
+//                (response: Response<RetrieveResponse, NSError>) in
+//                switch response.result {
+//                case .Success(let response): success(response)
+//                case .Failure(let error): failure?(error)
+//                }
+//            }
 //    }
     
     // MARK: - Rankers
@@ -668,22 +683,64 @@ public class RetrieveAndRank {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `Ranker` object.
      */
-//    public func createRanker(
-//        trainingDataFile: NSURL,
-//        name: String? = nil,
-//        failure: (NSError -> Void)? = nil,
-//        success: (Void -> Void)? = nil) {
-//        
-//        // construct body
-//        let json = ["name": name]
-//        guard let body = try? json.toJSON().serialize() else {
-//            let failureReason = "Profile could not be serialized to JSON."
-//            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-//            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-//            failure?(error)
-//            return
-//        }
-//    }
+    public func createRanker(
+        trainingDataFile: NSURL,
+        name: String? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: RankerDetails -> Void) {
+        
+        // construct body
+        var json = [String: String]()
+        if let name = name {
+            json["name"] = name
+        } else {
+            json["name"] = ""
+        }
+        guard let trainingMetadata = try? json.toJSON().serialize() else {
+            let failureReason = "Profile could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v1/rankers",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.upload(
+            request,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(fileURL: trainingDataFile, name: "training_data")
+                multipartFormData.appendBodyPart(data: trainingMetadata, name: "training_metadata")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.authenticate(user: self.username, password: self.password)
+                    upload.responseString { response in print(response) }
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: Response<RankerDetails, NSError>) in
+                        switch response.result {
+                        case .Success(let ranker): success(ranker)
+                        case .Failure(let error): failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "File could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
+    }
     
     /**
      Identifies the top answer from the list of provided results to rank, and provides up to 10 
@@ -711,7 +768,8 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
+            request,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: resultsFile, name: "resultsFile")
             },

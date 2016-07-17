@@ -266,8 +266,9 @@ public class Dialog {
         }
         
         // specify download destination
+        let destinationURL = downloads.URLByAppendingPathComponent(filename)
         let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
-            return downloads.URLByAppendingPathComponent(filename)
+            return destinationURL
         }
 
         // execute REST request
@@ -278,7 +279,7 @@ public class Dialog {
                     failure?(error!)
                     return
                 }
-
+                
                 guard let response = response else {
                     let failureReason = "Did not receive response."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -286,17 +287,24 @@ public class Dialog {
                     failure?(error)
                     return
                 }
-
+                
                 if let data = data {
                     if let error = self.dataToError(data) {
                         failure?(error)
                         return
                     }
                 }
-
-                let temporaryURL = NSURL(string: "")!
-                let fileURL = destination(temporaryURL, response)
-                success(fileURL)
+                
+                let statusCode = response.statusCode
+                if statusCode != 200 {
+                    let failureReason = "Status code was not acceptable: \(statusCode)."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+                
+                success(destinationURL)
             }
     }
 

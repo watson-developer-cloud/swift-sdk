@@ -229,12 +229,46 @@ public class Dialog {
             acceptType: format?.rawValue,
             userAgent: userAgent
         )
-
+        
+        // determine file extension
+        var filetype = ".mct"
+        if let format = format {
+            switch format {
+            case .OctetStream: filetype = ".mct"
+            case .WDSJSON: filetype = ".json"
+            case .WDSXML: filetype = ".xml"
+            }
+        }
+        
+        // locate downloads directory
+        let fileManager = NSFileManager.defaultManager()
+        let directories = fileManager.URLsForDirectory(.DownloadsDirectory, inDomains: .UserDomainMask)
+        guard let downloads = directories.first else {
+            let failureReason = "Cannot locate documents directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct unique filename
+        var filename = "dialog-" + dialogID + filetype
+        var isUnique = false
+        var duplicates = 0
+        while !isUnique {
+            let filePath = downloads.URLByAppendingPathComponent(filename).path!
+            if fileManager.fileExistsAtPath(filePath) {
+                duplicates += 1
+                filename = "dialog-" + dialogID + "-\(duplicates)" + filetype
+            } else {
+                isUnique = true
+            }
+        }
+        
         // specify download destination
-        let destination = Alamofire.Request.suggestedDownloadDestination(
-            directory: .DocumentDirectory,
-            domain: .UserDomainMask
-        )
+        let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
+            return downloads.URLByAppendingPathComponent(filename)
+        }
 
         // execute REST request
         Alamofire.download(request, destination: destination)

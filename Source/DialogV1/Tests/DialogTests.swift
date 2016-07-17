@@ -200,16 +200,28 @@ class DialogTests: XCTestCase {
     func getDialogFile(format: DialogV1.Format? = nil) {
         let description = "Download the dialog file associated with the test application."
         let expectation = expectationWithDescription(description)
-
+        
         dialog.getDialogFile(dialogID!, format: format, failure: failWithError) { file in
-            guard let path = file.path else {
-                XCTFail("Dialog file does not exist at the given path.")
-                return
-            }
-            XCTAssertTrue(NSFileManager().fileExistsAtPath(path))
+            let fileManager = NSFileManager.defaultManager()
+            XCTAssertTrue(fileManager.fileExistsAtPath(file.path!))
+            XCTAssertTrue(self.verifyFiletype(format, url: file))
+            try! fileManager.removeItemAtURL(file)
             expectation.fulfill()
         }
         waitForExpectations()
+    }
+    
+    /** Verify the filetype (extension) of a downloaded dialog file. */
+    func verifyFiletype(format: DialogV1.Format?, url: NSURL) -> Bool {
+        var filetype = ".mct"
+        if let format = format {
+            switch format {
+            case .OctetStream: filetype = ".mct"
+            case .WDSJSON: filetype = ".json"
+            case .WDSXML: filetype = ".xml"
+            }
+        }
+        return url.path!.hasSuffix(filetype)
     }
 
     /** Download the dialog file associated with the test application. */

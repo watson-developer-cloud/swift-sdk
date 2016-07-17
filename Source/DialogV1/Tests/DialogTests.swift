@@ -744,7 +744,7 @@ class DialogTests: XCTestCase {
 
         let invalidID = "this-id-does-not-exist"
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 516)
+            XCTAssertEqual(error.code, 404)
             expectation.fulfill()
         }
 

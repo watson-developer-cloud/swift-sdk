@@ -46,7 +46,7 @@ public class ToneAnalyzer {
         username: String,
         password: String,
         version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer-beta/api")
+        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer/api")
     {
         self.username = username
         self.password = password

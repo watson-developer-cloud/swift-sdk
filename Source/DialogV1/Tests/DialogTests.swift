@@ -65,9 +65,10 @@ class DialogTests: XCTestCase {
                     self.dialogID = dialog.dialogID
                     self.dialogName = dialog.name
                     expectation.fulfill()
-                    break
+                    return
                 }
             }
+            expectation.fulfill()
         }
         waitForExpectations()
         

@@ -22,7 +22,8 @@ class VisualRecognitionTests: XCTestCase {
     private var visualRecognition: VisualRecognition!
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
     private var classifierID: String?
-    private let timeout: NSTimeInterval = 60.0
+    private let timeout: NSTimeInterval = 10.0
+    private let timeoutLong: NSTimeInterval = 45.0
     
     private var examplesBaseball: NSURL!
     private var examplesCars: NSURL!
@@ -916,7 +917,7 @@ class VisualRecognitionTests: XCTestCase {
     }
     
     /** Recognize text in an uploaded image. */
-    func testRecognizeTextByImage1() {
+    func testRecognizeTextByImage() {
         let description = "Recognize text in an uploaded image."
         let expectation = expectationWithDescription(description)
         
@@ -966,6 +967,8 @@ class VisualRecognitionTests: XCTestCase {
             
             expectation.fulfill()
         }
-        waitForExpectations()
+        waitForExpectationsWithTimeout(timeoutLong) { error in
+            XCTAssertNil(error, "Timeout")
+        }
     }
 }

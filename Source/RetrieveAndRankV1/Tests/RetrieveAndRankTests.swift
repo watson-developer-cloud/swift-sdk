@@ -302,6 +302,44 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Test the retrieve portion only of the retrieve and rank service. */
+    func testRetrieve() {
+        let description = "Test the retrieve portion of retrieve and rank."
+        let expectation = expectationWithDescription(description)
+        
+        retrieveAndRank.retrieve(trainedClusterID, collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
+            response in
+            
+            XCTAssertNotNil(response.numFound)
+            XCTAssertNotNil(response.start)
+            XCTAssertEqual(response.numFound, 181)
+            XCTAssertEqual(response.start, 0)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test retrieving and ranking. */
+    func testRetrieveAndRank() {
+        let description = "Test retrieve and rank."
+        let expectation = expectationWithDescription(description)
+        
+        retrieveAndRank.retrieveAndRank(trainedClusterID, collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
+            response in
+            
+            XCTAssertNotNil(response.numFound)
+            XCTAssertNotNil(response.start)
+            XCTAssertNotNil(response.maxScore)
+            XCTAssertEqual(response.numFound, 181)
+            XCTAssertEqual(response.start, 0)
+            XCTAssertEqual(response.maxScore, 10)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     /** List all rankers associated with this Retrieve and Rank service instance. */
     func testGetRankers() {
         let description = "Get all rankers associated with this service instance."
@@ -587,6 +625,34 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.updateSolrCollection("invalid_cluster_id", collectionName: "failed-collection", contentType: "application/json", contentFile: collectionFile, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Retrieve using an invalid Solr cluster ID. */
+    func testRetrieveWithInvalidClusterID() {
+        let description = "Retrieve using an invalid cluster ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.retrieve("invalid_cluster_id", collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Retrieve and rank using an invalid Solr cluster ID. */
+    func testRetrieveAndRankWithInvalidClusterID() {
+        let description = "Retrieve and rank using an invalid cluster ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.retrieveAndRank("invalid_cluster_id", collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

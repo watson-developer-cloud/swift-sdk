@@ -606,41 +606,95 @@ public class RetrieveAndRank {
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list of fields.
      - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a `RetrieveResponse` object.
+     */
+    public func retrieve(
+        solrClusterID: String,
+        collectionName: String,
+        query: String,
+        returnFields: String,
+        failure: (NSError -> Void)? = nil,
+        success: RetrieveResponse -> Void) {
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "q", value: query))
+        queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/select",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseString { response in print(response) }
+            .responseObject(dataToError: dataToError, path: ["response"]) {
+                (response: Response<RetrieveResponse, NSError>) in
+                switch response.result {
+                case .Success(let response): success(response)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Retrieves the results and then returns them in ranked order.
+     
+     - parameter solrClusterID: The ID of the Solr cluster.
+     - parameter collectionName: The name of the collection in the cluster.
+     - parameter rankerID: The ID of the ranker.
+     - parameter query: The query. Refer to the following link for more information on how to
+     structure the query string:
+     https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
+     - parameter returnFields: The fields that should be returned. These fields should correspond
+     to the fields within the content that has been uploaded to the collection. This
+     parameter should be a comma-separated list of fields.
+     - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
-//    public func retrieve(
-//        solrClusterID: String,
-//        collectionName: String,
-//        query: String,
-//        returnFields: String,
-//        failure: (NSError -> Void)? = nil,
-//        success: RetrieveResponse -> Void) {
-//        
-//        // construct query parameters
-//        var queryParameters = [NSURLQueryItem]()
-//        queryParameters.append(NSURLQueryItem(name: "q", value: query))
-//        queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
-//        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
-//        
-//        // construct REST request
-//        let request = RestRequest(
-//            method: .GET,
-//            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/select",
-//            userAgent: userAgent,
-//            queryParameters: queryParameters
-//        )
-//        
-//        // execute REST request
-//        Alamofire.request(request)
-//            .authenticate(user: username, password: password)
-//            .responseObject(dataToError: dataToError, path: ["response"]) {
-//                (response: Response<RetrieveResponse, NSError>) in
-//                switch response.result {
-//                case .Success(let response): success(response)
-//                case .Failure(let error): failure?(error)
-//                }
-//            }
-//    }
+    public func retrieveAndRank(
+        solrClusterID: String,
+        collectionName: String,
+        rankerID: String,
+        query: String,
+        returnFields: String,
+        failure: (NSError -> Void)? = nil,
+        success: RetrieveAndRankResponse -> Void) {
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "q", value: query))
+        queryParameters.append(NSURLQueryItem(name: "ranker_id", value: rankerID))
+        queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/fcselect",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseString { response in print(response) }
+            .responseObject(dataToError: dataToError, path: ["response"]) {
+                (response: Response<RetrieveAndRankResponse, NSError>) in
+                switch response.result {
+                case .Success(let response): success(response)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
     
     // MARK: - Rankers
     

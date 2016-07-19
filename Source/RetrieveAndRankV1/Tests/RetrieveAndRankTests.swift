@@ -302,12 +302,12 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Test the retrieve portion only of the retrieve and rank service. */
-    func testRetrieve() {
-        let description = "Test the retrieve portion of retrieve and rank."
+    /** Test the search portion only of the retrieve and rank service. */
+    func testSearch() {
+        let description = "Test the search portion of retrieve and rank."
         let expectation = expectationWithDescription(description)
         
-        retrieveAndRank.retrieve(trainedClusterID, collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
+        retrieveAndRank.search(trainedClusterID, collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
             response in
             
             XCTAssertNotNil(response.numFound)
@@ -320,12 +320,12 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Test retrieving and ranking. */
-    func testRetrieveAndRank() {
-        let description = "Test retrieve and rank."
+    /** Test search and rank. */
+    func testSearchAndRank() {
+        let description = "Test search and rank."
         let expectation = expectationWithDescription(description)
         
-        retrieveAndRank.retrieveAndRank(trainedClusterID, collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
+        retrieveAndRank.searchAndRank(trainedClusterID, collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, title, author", failure: failWithError) {
             response in
             
             XCTAssertNotNil(response.numFound)
@@ -628,9 +628,9 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Retrieve using an invalid Solr cluster ID. */
-    func testRetrieveWithInvalidClusterID() {
-        let description = "Retrieve using an invalid cluster ID."
+    /** Search using an invalid Solr cluster ID. */
+    func testSearchWithInvalidClusterID() {
+        let description = "Search using an invalid cluster ID."
         let expectation = expectationWithDescription(description)
         
         let failure = { (error: NSError) in
@@ -638,13 +638,13 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.retrieve("invalid_cluster_id", collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
+        retrieveAndRank.search("invalid_cluster_id", collectionName: trainedCollectionName, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
-    /** Retrieve and rank using an invalid Solr cluster ID. */
-    func testRetrieveAndRankWithInvalidClusterID() {
-        let description = "Retrieve and rank using an invalid cluster ID."
+    /** Search and rank using an invalid Solr cluster ID. */
+    func testSearchAndRankWithInvalidClusterID() {
+        let description = "Search and rank using an invalid cluster ID."
         let expectation = expectationWithDescription(description)
         
         let failure = { (error: NSError) in
@@ -652,7 +652,7 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.retrieveAndRank("invalid_cluster_id", collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
+        retrieveAndRank.searchAndRank("invalid_cluster_id", collectionName: trainedCollectionName, rankerID: trainedRankerID, query: "aerodynamics", returnFields: "id, author", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

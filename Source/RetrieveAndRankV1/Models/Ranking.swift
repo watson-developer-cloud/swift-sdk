@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 /** Search results returned by the Retrieve and Rank service, ordered by their ranking. */
-public struct RankedAnswer: JSONDecodable {
+public struct Ranking: JSONDecodable {
     
     /// The unique ID of the ranker used.
     public let rankerID: String
@@ -35,7 +35,7 @@ public struct RankedAnswer: JSONDecodable {
     /// An array of up to 10 answers, sorted in descending order of ranking score.
     public let answers: [Answer]
     
-    /// Used internally to initialize a `RankedAnswer` model from JSON.
+    /// Used internally to initialize a `Ranking` model from JSON.
     public init(json: JSON) throws {
         rankerID = try json.string("ranker_id")
         name = try json.string("name")
@@ -46,7 +46,7 @@ public struct RankedAnswer: JSONDecodable {
 }
 
 /** An answer and its associated ranking score. */
-public struct Answer: JSONDecodable {
+public struct RankedAnswer: JSONDecodable {
     
     /// The unique identifier of the answer in the collection.
     public let answerID: String
@@ -59,7 +59,7 @@ public struct Answer: JSONDecodable {
     /// represents a higher confidence.
     public let confidence: Int
     
-    /// Used internally to initialize an `Answer` model from JSON.
+    /// Used internally to initialize an `RankedAnswer` model from JSON.
     public init(json: JSON) throws {
         answerID = try json.string("answer_id")
         score = try json.int("score")

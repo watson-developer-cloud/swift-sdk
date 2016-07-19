@@ -595,7 +595,7 @@ public class RetrieveAndRank {
     
     /**
      Use the given query to search this specific collection within a given cluster. This command
-     doesn't rank the values; to retrieve and rank, use the `retrieveAndRank()` call.
+     doesn't rank the values; to search and rank, use the `searchAndRank()` call.
      
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
@@ -606,15 +606,15 @@ public class RetrieveAndRank {
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list of fields.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a `RetrieveResponse` object.
+     - parameter success: A function executed with a `SearchResponse` object.
      */
-    public func retrieve(
+    public func search(
         solrClusterID: String,
         collectionName: String,
         query: String,
         returnFields: String,
         failure: (NSError -> Void)? = nil,
-        success: RetrieveResponse -> Void) {
+        success: SearchResponse -> Void) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -635,7 +635,7 @@ public class RetrieveAndRank {
             .authenticate(user: username, password: password)
             .responseString { response in print(response) }
             .responseObject(dataToError: dataToError, path: ["response"]) {
-                (response: Response<RetrieveResponse, NSError>) in
+                (response: Response<SearchResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)
                 case .Failure(let error): failure?(error)
@@ -644,7 +644,7 @@ public class RetrieveAndRank {
     }
     
     /**
-     Retrieves the results and then returns them in ranked order.
+     Searches the results and then returns them in ranked order.
      
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
@@ -656,16 +656,16 @@ public class RetrieveAndRank {
      to the fields within the content that has been uploaded to the collection. This
      parameter should be a comma-separated list of fields.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed if no error occurs.
+     - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
-    public func retrieveAndRank(
+    public func searchAndRank(
         solrClusterID: String,
         collectionName: String,
         rankerID: String,
         query: String,
         returnFields: String,
         failure: (NSError -> Void)? = nil,
-        success: RetrieveAndRankResponse -> Void) {
+        success: SearchAndRankResponse -> Void) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
@@ -687,7 +687,7 @@ public class RetrieveAndRank {
             .authenticate(user: username, password: password)
             .responseString { response in print(response) }
             .responseObject(dataToError: dataToError, path: ["response"]) {
-                (response: Response<RetrieveAndRankResponse, NSError>) in
+                (response: Response<SearchAndRankResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)
                 case .Failure(let error): failure?(error)
@@ -805,13 +805,13 @@ public class RetrieveAndRank {
             first column header must be labeled `answer_id`. The other column headers should 
             match the names of the features in the `trainingDataFile` used to train the ranker.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a `RankedAnswer` object.
+     - parameter success: A function executed with a `Ranking` object.
      */
     public func rankResults(
         rankerID: String,
         resultsFile: NSURL,
         failure: (NSError -> Void)? = nil,
-        success: RankedAnswer -> Void) {
+        success: Ranking -> Void) {
         
         // construct REST request
         let request = RestRequest(
@@ -832,9 +832,9 @@ public class RetrieveAndRank {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
                     upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<RankedAnswer, NSError>) in
+                        (response: Response<Ranking, NSError>) in
                         switch response.result {
-                        case .Success(let answer): success(answer)
+                        case .Success(let ranking): success(ranking)
                         case .Failure(let error): failure?(error)
                         }
                     }

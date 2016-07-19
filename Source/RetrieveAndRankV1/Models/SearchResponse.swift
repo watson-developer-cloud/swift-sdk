@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 // TODO: comment this model
-public struct RetrieveResponse: JSONDecodable {
+public struct SearchResponse: JSONDecodable {
     public let numFound: Int
     public let start: Int
     public let docs: [JSON]

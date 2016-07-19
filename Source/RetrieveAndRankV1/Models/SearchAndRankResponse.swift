@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 // TODO: comment this model
-public struct RetrieveAndRankResponse: JSONDecodable {
+public struct SearchAndRankResponse: JSONDecodable {
     public let numFound: Int
     public let start: Int
     public let maxScore: Int

@@ -17,12 +17,20 @@
 import Foundation
 import Freddy
 
-// TODO: comment this model
+/** The response received when searching a specific query within the Solr cluster and collection. */
 public struct SearchResponse: JSONDecodable {
+    
+    /// The number of results found.
     public let numFound: Int
+    
+    /// The index the given results start from.
     public let start: Int
+    
+    /// A list of possible answers whose structure depends on the list of fields the user
+    /// requested to be returned.
     public let docs: [JSON]
     
+    /// Used internally to initialize a `SearchResponse` model from JSON.
     public init(json: JSON) throws {
         numFound = try json.int("numFound")
         start = try json.int("start")

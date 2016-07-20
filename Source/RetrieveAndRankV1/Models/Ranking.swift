@@ -33,7 +33,7 @@ public struct Ranking: JSONDecodable {
     public let topAnswer: String
     
     /// An array of up to 10 answers, sorted in descending order of ranking score.
-    public let answers: [Answer]
+    public let answers: [RankedAnswer]
     
     /// Used internally to initialize a `Ranking` model from JSON.
     public init(json: JSON) throws {
@@ -41,7 +41,7 @@ public struct Ranking: JSONDecodable {
         name = try json.string("name")
         url = try json.string("url")
         topAnswer = try json.string("top_answer")
-        answers = try json.arrayOf("answers", type: Answer.self)
+        answers = try json.arrayOf("answers", type: RankedAnswer.self)
     }
 }
 

@@ -22,6 +22,7 @@ class RetrieveAndRankTests: XCTestCase {
     private var retrieveAndRank: RetrieveAndRank!
     private let timeout: NSTimeInterval = 30.0
     private let trainedClusterID = "sc36a81e8a_bc3e_4c51_9998_7fc5148d11cb"
+    private let trainedClusterName = "trained-swift-sdk-solr-cluster"
     private let trainedConfigurationName = "trained-swift-sdk-config"
     private let trainedCollectionName = "trained-swift-sdk-collection"
     private let trainedRankerID = "3b140ax14-rank-10407"
@@ -33,6 +34,8 @@ class RetrieveAndRankTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateRetrieveAndRank()
+        confirmTrainedClusterExists(trainedClusterID)
+        confirmTrainedRankerExists(trainedRankerID)
     }
     
     /** Instantiate Retrieve and Rank instance. */
@@ -126,6 +129,114 @@ class RetrieveAndRankTests: XCTestCase {
         return rankerDetails
     }
     
+    /** Attempt to get the trained cluster; if it doesn't exist, create one. */
+    func confirmTrainedClusterExists(clusterID: String) {
+        let description = "Ensure the given trained cluster is available."
+        let expectation = expectationWithDescription(description)
+        
+        func createTrainedCluster() {
+            let failToCreate =  { (error: NSError) in
+                XCTFail("Failed to create the trained cluster.")
+            }
+            retrieveAndRank.createSolrCluster(trainedClusterName, failure: failToCreate) {
+                cluster in
+                
+                XCTAssertNotNil(cluster)
+                XCTAssertNotEqual("", cluster.solrClusterID, "Expected to get an id.")
+                let message = "A trained cluster was not found. It has been created and " +
+                    "is currently being trained. You will need to set the " +
+                    "trainedClusterID property using the cluster id " +
+                    "printed below. Then wait a few minutes for training to " +
+                    "complete before running the tests again.\n"
+                print(message)
+                print("** trainedClusterID: \(cluster.solrClusterID)\n")
+                XCTFail("Trained cluster not found. Set trainedClusterID and try again.")
+            }
+        }
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400, "Cannot locate the trained cluster.")
+            createTrainedCluster()
+            expectation.fulfill()
+        }
+
+        retrieveAndRank.getSolrCluster(clusterID, failure: failure) {
+            cluster in
+            
+            if cluster.solrClusterName != self.trainedClusterName {
+                let message = "The wrong cluster was provided as a trained " +
+                    "cluster. The trained cluster will be recreated."
+                print(message)
+                createTrainedCluster()
+                return
+            }
+            if cluster.solrClusterStatus != SolrClusterStatus.Ready {
+                XCTFail(" Please wait. The given cluster is still being trained.")
+                return
+            }
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
+    /** Attempt to get the trained ranker; if it doesn't exist, create one. */
+    func confirmTrainedRankerExists(rankerID: String) {
+        let description = "Ensure the given trained ranker is available."
+        let expectation = expectationWithDescription(description)
+        
+        func createTrainedRanker() {
+            let failToCreate =  { (error: NSError) in
+                XCTFail("Failed to create the trained ranker.")
+            }
+
+            guard let trainingDataFile = loadFile("trainingdata", withExtension: "txt") else {
+                XCTFail("Failed to load files needed to create the ranker.")
+                return
+            }
+            retrieveAndRank.createRanker(trainingDataFile, name: trainedRankerName, failure: failToCreate) {
+                ranker in
+
+                XCTAssertNotNil(ranker)
+                XCTAssertNotEqual("", ranker.rankerID, "Expected to get an id.")
+                let message = "A trained ranker was not found. It has been created and " +
+                    "is currently being trained. You will need to set the " +
+                    "trainedRankerID property using the ranker id " +
+                    "printed below. Then wait a few minutes for training to " +
+                    "complete before running the tests again.\n"
+                print(message)
+                print("** trainedRankerID: \(ranker.rankerID)\n")
+                XCTFail("Trained ranker not found. Set trainedRankerID and try again.")
+            }
+        }
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 400, "Cannot locate the trained ranker.")
+            createTrainedRanker()
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.getRanker(rankerID, failure: failure) {
+            ranker in
+
+            if ranker.name != self.trainedRankerName {
+                let message = "The wrong ranker was provided as a trained " +
+                    "cluster. The trained cluster will be recreated."
+                print(message)
+                createTrainedRanker()
+                return
+            }
+            if ranker.status != RankerStatus.Available {
+                XCTFail("Please wait. The given ranker is still being trained.")
+                return
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
     /** Load files needed for the following unit tests. */
     private func loadFile(name: String, withExtension: String) -> NSURL? {
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -144,7 +255,7 @@ class RetrieveAndRankTests: XCTestCase {
         
         retrieveAndRank.getSolrClusters(failWithError) { clusters in
             
-            XCTAssertEqual(clusters.count, 1)
+            XCTAssertGreaterThanOrEqual(clusters.count, 1)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -152,18 +263,22 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and then delete a new Solr cluster. */
     func testCreateAndDeleteSolrCluster() {
-        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster") else {
+        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: "1") else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
-        XCTAssertEqual(solrCluster.solrClusterName, "temp-swift-sdk-solr-cluster")
+        XCTAssertNotNil(solrCluster.solrClusterName)
         XCTAssertNotNil(solrCluster.solrClusterID)
         XCTAssertNotNil(solrCluster.solrClusterSize)
         XCTAssertNotNil(solrCluster.solrClusterStatus)
+        XCTAssertEqual(solrCluster.solrClusterName, "temp-swift-sdk-solr-cluster")
+        XCTAssertEqual(solrCluster.solrClusterSize, "1")
+        XCTAssertEqual(solrCluster.solrClusterStatus, SolrClusterStatus.NotAvailable)
         
         deleteSolrCluster(solrCluster.solrClusterID)
     }
     
+    /** Get detailed information about a specific Solr cluster. */
     func testGetSolrCluster() {
         guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: "1") else {
             XCTFail("Failed to create the Solr cluster.")
@@ -190,10 +305,10 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         retrieveAndRank.getSolrConfigurations(trainedClusterID, failure: failWithError) {
-            clusters in
+            configurations in
             
-            XCTAssertEqual(clusters.count, 1)
-            XCTAssertEqual(clusters.first, self.trainedConfigurationName)
+            XCTAssertGreaterThanOrEqual(configurations.count, 1)
+            XCTAssertEqual(configurations.first, self.trainedConfigurationName)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -246,7 +361,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.getSolrCollections(trainedClusterID, failure: failWithError) {
             collections in
             
-            XCTAssertEqual(collections.count, 1)
+            XCTAssertGreaterThanOrEqual(collections.count, 1)
             XCTAssertEqual(collections.first, self.trainedCollectionName)
             expectation.fulfill()
         }
@@ -348,7 +463,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.getRankers(failWithError) {
             rankers in
             
-            XCTAssertEqual(rankers.count, 1)
+            XCTAssertGreaterThanOrEqual(rankers.count, 1)
             XCTAssertNotNil(rankers.first)
             XCTAssertNotNil(rankers.first?.rankerID)
             XCTAssertNotNil(rankers.first?.name)

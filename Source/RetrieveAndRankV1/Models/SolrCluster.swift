@@ -44,3 +44,13 @@ public struct SolrCluster: JSONDecodable {
         solrClusterStatus = status
     }
 }
+
+/** An enum describing the current state of the cluster. */
+public enum SolrClusterStatus: String {
+    
+    /// The cluster is ready.
+    case Ready = "READY"
+    
+    /// The cluster is not available.
+    case NotAvailable = "NOT_AVAILABLE"
+}

@@ -38,7 +38,7 @@ public struct RankerDetails: JSONDecodable {
     /// Additional details about the status of this ranker.
     public let statusDescription: String
     
-    /// Used internally to initialize a `Ranker` model from JSON.
+    /// Used internally to initialize a `RankerDetails` model from JSON.
     public init(json: JSON) throws {
         rankerID = try json.string("ranker_id")
         url = try json.string("url")
@@ -56,9 +56,18 @@ public struct RankerDetails: JSONDecodable {
 /** An enum describing the state of the ranker. */
 public enum RankerStatus: String {
     
+    /// Non Existent
     case NonExistent = "Non_Existent"
+    
+    /// Still training
     case Training = "Training"
+    
+    /// Training has failed
     case Failed = "Failed"
+    
+    /// Ranker is available
     case Available = "Available"
+    
+    /// Ranker is unavailable
     case Unavailable = "Unavailable"
 }

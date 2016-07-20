@@ -604,7 +604,7 @@ public class RetrieveAndRank {
             https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
-            parameter should be a comma-separated list of fields.
+            parameter should be a comma-separated list.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchResponse` object.
      */
@@ -650,11 +650,11 @@ public class RetrieveAndRank {
      - parameter collectionName: The name of the collection in the cluster.
      - parameter rankerID: The ID of the ranker.
      - parameter query: The query. Refer to the following link for more information on how to
-     structure the query string:
-     https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
+            structure the query string:
+            https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
      - parameter returnFields: The fields that should be returned. These fields should correspond
-     to the fields within the content that has been uploaded to the collection. This
-     parameter should be a comma-separated list of fields.
+            to the fields within the content that has been uploaded to the collection. This
+            parameter should be a comma-separated list.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */

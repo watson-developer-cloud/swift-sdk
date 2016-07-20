@@ -35,11 +35,11 @@ public struct Customization: JSONDecodable {
     /// The UNIX timestamp that indicates when the custom voice model was created.
     /// The timestamp is a count of seconds since the UNIX Epoch of January 1, 1970
     /// Coordinated Universal Time (UTC).
-    public let created: Int
+    public let created: Int? // TODO: change to `Int` after service bug is fixed
     
     /// The UNIX timestamp that indicates when the custom voice model was last modified.
     /// Equals created when a new voice model is first added but has yet to be changed.
-    public let lastModified: Int
+    public let lastModified: Int? // TODO: change to `Int` after service bug is fixed
     
     /// A description of the custom voice model.
     public let description: String?
@@ -50,8 +50,8 @@ public struct Customization: JSONDecodable {
         name = try json.string("name")
         language = try json.string("language")
         owner = try json.string("owner")
-        created = try json.int("created")
-        lastModified = try json.int("last_modified")
+        created = try? json.int("created")
+        lastModified = try? json.int("last_modified")
         description = try? json.string("description")
     }
 }

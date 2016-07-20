@@ -223,7 +223,7 @@ class RetrieveAndRankTests: XCTestCase {
 
             if ranker.name != self.trainedRankerName {
                 let message = "The wrong ranker was provided as a trained " +
-                    "cluster. The trained cluster will be recreated."
+                    "ranker. The trained ranker will be recreated."
                 print(message)
                 createTrainedRanker()
                 return
@@ -613,23 +613,6 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
-//    func testDeleteSolrClusterWithInaccessibleID() {
-//        let description = "delete invalid"
-//        let expectation = expectationWithDescription(description)
-//
-//        let failure = { (error: NSError) in
-//            XCTAssertEqual(error.code, 403)
-//            expectation.fulfill()
-//        }
-//
-//        retrieveAndRank.deleteSolrCluster(
-//            "sc19cac12e_3587_4510_820d_87945c51a3f9",
-//            failure: failure,
-//            success: failWithResult)
-//
-//        waitForExpectations()
-//    }
-    
     /** Get information about a Solr cluster when passing an invalid ID. */
     func testGetSolrClusterWithInvalidID() {
         let description = "Get cluster with invalid ID."
@@ -662,23 +645,23 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
-//    /** Get all configurations when passing an inaccessible Solr cluster ID. */
-//    func testGetConfigurationsWithInaccessibleSolrClusterID() {
-//        let description = "Get all configurations when passing an inaccessible Solr cluster ID."
-//        let expectation = expectationWithDescription(description)
-//        
-//        let failure = { (error: NSError) in
-//            XCTAssertEqual(error.code, 403)
-//            expectation.fulfill()
-//        }
-//        
-//        retrieveAndRank.getSolrConfigurations(
-//            "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
-//            failure: failure,
-//            success: failWithResult)
-//    
-//        waitForExpectations()
-//    }
+    /** Get all configurations when passing an inaccessible Solr cluster ID. */
+    func testGetConfigurationsWithInaccessibleSolrClusterID() {
+        let description = "Get all configurations when passing an inaccessible Solr cluster ID."
+        let expectation = expectationWithDescription(description)
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, -6004)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.getSolrConfigurations(
+            "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
+            failure: failure,
+            success: failWithResult)
+    
+        waitForExpectations()
+    }
     
     /** Create a Solr configuration when passing an invalid Solr cluster ID. */
     func testCreateSolrConfigurationWithBadSolrClusterID() {
@@ -745,24 +728,7 @@ class RetrieveAndRankTests: XCTestCase {
         
         waitForExpectations()
     }
-    
-//    /** Get a Solr configuration that does not exist. */
-//    func testGetNonExistingSolrConfiguration() {
-//        let description = "Get a Solr configuration that does not exist."
-//        let expectation = expectationWithDescription(description)
-//        
-//        let failure = { (error: NSError) in
-//            XCTAssertEqual(error.code, 404)
-//            expectation.fulfill()
-//        }
-//        retrieveAndRank.getSolrConfiguration(
-//            trainedClusterID,
-//            configName: "example-configuration",
-//            failure: failure,
-//            success: failWithResult)
-//    
-//        waitForExpectations()
-//    }
+
     
     /** Get the collections of a nonexistent Solr cluster. */
     func testGetCollectionsOfNonExistentCluster() {

@@ -23,7 +23,7 @@ class DialogTests: XCTestCase {
     private let prefix = "swift-sdk-unit-test-"
     private var dialogID: DialogID?
     private var dialogName: String?
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: NSTimeInterval = 10.0
 
     // MARK: - Test Configuration
 
@@ -347,21 +347,7 @@ class DialogTests: XCTestCase {
             conversations in
             XCTAssertGreaterThanOrEqual(conversations.count, 1)
             XCTAssertEqual(conversations.last?.messages.count, 3)
-
-            let message0 = conversations.first?.messages[0]
-            XCTAssertEqual(message0?.fromClient, "false")
-            XCTAssertEqual(message0?.text, response1)
-
-            let message1 = conversations.first?.messages[1]
-            XCTAssertEqual(message1?.fromClient, "true")
-            XCTAssertEqual(message1?.text, "large")
-
-            let message2 = conversations.first?.messages[2]
-            XCTAssertEqual(message2?.fromClient, "false")
-            XCTAssertEqual(message2?.text, response2)
-
-            XCTAssertEqual(conversations.first?.profile["size"], "Large")
-
+            XCTAssertEqual(conversations.last?.profile["size"], "Large")
             expectation3.fulfill()
         }
         waitForExpectations()

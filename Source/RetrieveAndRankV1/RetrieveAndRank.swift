@@ -154,7 +154,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-//            .responseString{response in print(response)}
             .responseObject(dataToError: dataToError) {
                 (response: Response<SolrCluster, NSError>) in
                 switch response.result {
@@ -186,7 +185,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString{response in print(response)}
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -405,6 +403,8 @@ public class RetrieveAndRank {
      - parameter solrClusterID: The ID of the cluster to add this collection to.
      - parameter name: The name of the collection.
      - parameter configName: The name of the configuration to use.
+     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid 
+            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
@@ -412,13 +412,14 @@ public class RetrieveAndRank {
         solrClusterID: String,
         name: String,
         configName: String,
+        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "CREATE"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         queryParameters.append(NSURLQueryItem(name: "name", value: name))
         queryParameters.append(NSURLQueryItem(name: "collection.configName", value: configName))
         
@@ -433,7 +434,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString { response in print(response) }
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -452,19 +452,22 @@ public class RetrieveAndRank {
      
      - parameter solrClusterID: The ID of the cluster to delete this collection from.
      - parameter name: The name of the collection.
+     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
+            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteSolrCollection(
         solrClusterID: String,
         name: String,
+        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "DELETE"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         queryParameters.append(NSURLQueryItem(name: "name", value: name))
         
         // construct REST request
@@ -478,7 +481,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString { response in print(response) }
             .responseData { response in
                 switch response.result {
                 case .Success(let data):
@@ -496,18 +498,21 @@ public class RetrieveAndRank {
      Lists the names of the collections in this Solr cluster.
      
      - parameter solrClusterID: The ID of the cluster whose collections you want.
+     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
+            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of collection names.
      */
     public func getSolrCollections(
         solrClusterID: String,
+        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: [String] -> Void) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "LIST"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         
         // construct REST request
         let request = RestRequest(
@@ -520,7 +525,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString{ response in print(response) }
             .responseArray(dataToError: dataToError, path: ["collections"]) {
                 (response: Response<[String], NSError>) in
                 switch response.result {
@@ -570,7 +574,6 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseString { response in print(response) }
                     upload.responseData { response in
                         switch response.result {
                         case .Success(let data):
@@ -605,6 +608,8 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
+     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
+            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchResponse` object.
      */
@@ -613,6 +618,7 @@ public class RetrieveAndRank {
         collectionName: String,
         query: String,
         returnFields: String,
+        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: SearchResponse -> Void) {
         
@@ -620,7 +626,7 @@ public class RetrieveAndRank {
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "q", value: query))
         queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         
         // construct REST request
         let request = RestRequest(
@@ -633,7 +639,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString { response in print(response) }
             .responseObject(dataToError: dataToError, path: ["response"]) {
                 (response: Response<SearchResponse, NSError>) in
                 switch response.result {
@@ -655,6 +660,8 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
+     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
+            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
@@ -664,6 +671,7 @@ public class RetrieveAndRank {
         rankerID: String,
         query: String,
         returnFields: String,
+        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: SearchAndRankResponse -> Void) {
         
@@ -672,7 +680,7 @@ public class RetrieveAndRank {
         queryParameters.append(NSURLQueryItem(name: "q", value: query))
         queryParameters.append(NSURLQueryItem(name: "ranker_id", value: rankerID))
         queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         
         // construct REST request
         let request = RestRequest(
@@ -685,7 +693,6 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseString { response in print(response) }
             .responseObject(dataToError: dataToError, path: ["response"]) {
                 (response: Response<SearchAndRankResponse, NSError>) in
                 switch response.result {
@@ -777,7 +784,6 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseString { response in print(response) }
                     upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<RankerDetails, NSError>) in
                         switch response.result {

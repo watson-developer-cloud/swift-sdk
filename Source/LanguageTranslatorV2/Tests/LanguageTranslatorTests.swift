@@ -278,32 +278,4 @@ class LanguageTranslatorTests: XCTestCase {
         languageTranslator.getModel("invalid_model_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
-
-    /** Try to delete a model created by IBM. */
-    func testDeleteUnauthorized() {
-        let description = "Try to delete a model that was created by IBM."
-        let expectation = expectationWithDescription(description)
-
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
-            expectation.fulfill()
-        }
-
-        languageTranslator.deleteModel("en-es", failure: failure, success: failWithResult)
-        waitForExpectations()
-    }
-
-    /** Try to delete a model that does not exist. */
-    func testDeleteNotFound() {
-        let description = "Try to delete a model that does not exist."
-        let expectation = expectationWithDescription(description)
-
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
-            expectation.fulfill()
-        }
-
-        languageTranslator.deleteModel("qwerty", failure: failure, success: failWithResult)
-        waitForExpectations()
-    }
 }

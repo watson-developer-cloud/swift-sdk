@@ -2,27 +2,51 @@ language: objective-c
 osx_image: xcode7.3
 branches:
   only:
-  - master
+    - master
+env:
+  global:
+    - IOS_SDK="iphonesimulator9.3"
+    - IOS8_DESTINATION="OS=8.4,name=iPhone 6"
+    - IOS9_DESTINATION="OS=9.3,name=iPhone 6"
 before_install:
-- openssl aes-256-cbc -K $encrypted_04b48cd88949_key -iv $encrypted_04b48cd88949_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
+  - openssl aes-256-cbc -K $encrypted_5cd05c057710_key -iv $encrypted_5cd05c057710_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
 before_script:
-- carthage update --platform iOS
+  - carthage update --platform iOS
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
 script:
-- xcodebuild clean build test -scheme 'AlchemyDataNewsV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'AlchemyLanguageV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'AlchemyVisionV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'ConversationV1Experimental' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'DialogV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'DocumentConversionV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'LanguageTranslatorV2' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'NaturalLanguageClassifierV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'PersonalityInsightsV2' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'RelationshipExtractionV1Beta' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'RestKit' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'SpeechToTextV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'TextToSpeechV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'ToneAnalyzerV3' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'TradeoffAnalyticsV1' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
-- xcodebuild clean build test -scheme 'VisualRecognitionV3' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' -enableCodeCoverage YES | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|CompileSwift|Test|Build|===)'
+  # build and test for iOS 9
+  - xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" | xcpretty
+  - xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ConversationV1Experimental" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+
+  # build and test for iOS 8
+  - xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" | xcpretty
+  - xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ConversationV1Experimental" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty

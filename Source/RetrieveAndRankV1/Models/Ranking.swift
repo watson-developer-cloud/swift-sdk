@@ -53,16 +53,16 @@ public struct RankedAnswer: JSONDecodable {
     
     /// The rank of this answer, compared to other answers. A higher value represents a higher
     /// relevance. The highest score is the sum of the number of potential answers.
-    public let score: Int
+    public let score: Double
     
     /// A decimal percentage from 0 to 1, describing the preference for this answer. A higher value
     /// represents a higher confidence.
-    public let confidence: Int
+    public let confidence: Double
     
     /// Used internally to initialize an `RankedAnswer` model from JSON.
     public init(json: JSON) throws {
         answerID = try json.string("answer_id")
-        score = try json.int("score")
-        confidence = try json.int("confidence")
+        score = try json.double("score")
+        confidence = try json.double("confidence")
     }
 }

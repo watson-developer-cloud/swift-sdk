@@ -21,6 +21,39 @@ import Freddy
  returned in ranked order. */
 public struct SearchAndRankResponse: JSONDecodable {
     
+    /// A header containing information about the response.
+    public let header: SearchAndRankResponseHeader
+    
+    /// An object containing the results of the Search and Rank request.
+    public let body: SearchAndRankResponseBody
+    
+    /// Used internally to initialize a `SearchAndRankResponse` model from JSON.
+    public init(json: JSON) throws {
+        header = try json.decode("responseHeader", type: SearchAndRankResponseHeader.self)
+        body = try json.decode("response", type: SearchAndRankResponseBody.self)
+    }
+}
+
+/** An object returned with a Search and Rank request, returning more information about the
+ request. */
+public struct SearchAndRankResponseHeader: JSONDecodable {
+    
+    /// The status.
+    public let status: Int
+    
+    /// The query time.
+    public let qTime: Int
+    
+    /// Used internally to initialize a `SearchResponseHeader` model from JSON.
+    public init(json: JSON) throws {
+        status = try json.int("status")
+        qTime = try json.int("QTime")
+    }
+}
+
+/** Contains the results of the Search and Rank request. */
+public struct SearchAndRankResponseBody: JSONDecodable {
+    
     /// The number of results found.
     public let numFound: Int
     
@@ -28,17 +61,17 @@ public struct SearchAndRankResponse: JSONDecodable {
     public let start: Int
     
     /// The highest ranking score out of the potential answers.
-    public let maxScore: Int
+    public let maxScore: Double
     
     /// A list of possible answers whose structure depends on the list of fields the user
     /// requested to be returned.
     public let docs: [JSON]
     
-    /// Used internally to initialize a `SearchAndRankResponse` model from JSON.
+    /// Used internally to initialize a `SearchAndRankResponseBody` model from JSON.
     public init(json: JSON) throws {
         numFound = try json.int("numFound")
         start = try json.int("start")
-        maxScore = try json.int("maxScore")
+        maxScore = try json.double("maxScore")
         docs = try json.array("docs")
     }
 }

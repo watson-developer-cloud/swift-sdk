@@ -71,9 +71,7 @@ public class RetrieveAndRank {
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
-            }
-            
-            
+            } 
         } catch {
             return nil
         }
@@ -123,14 +121,14 @@ public class RetrieveAndRank {
      */
     public func createSolrCluster(
         name: String,
-        size: String? = nil,
+        size: Int? = nil,
         failure: (NSError -> Void)? = nil,
         success: SolrCluster -> Void) {
         
         // construct body
         var json = ["cluster_name": name]
         if let size = size {
-            json["cluster_size"] = size
+            json["cluster_size"] = String(size)
         }
         
         guard let body = try? json.toJSON().serialize() else {
@@ -537,7 +535,7 @@ public class RetrieveAndRank {
     /**
      Update a collection by adding content to it. This indexes the documents and allows us to 
      search the newly uploaded data later. For more information about the accepted file types and
-     howto structure the content files, refer to this link: 
+     how to structure the content files, refer to this link:
      https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations
      
      - parameter solrClusterID: The ID of the cluster this collection points to.
@@ -639,7 +637,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError, path: ["response"]) {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<SearchResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)
@@ -693,7 +691,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError, path: ["response"]) {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<SearchAndRankResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)

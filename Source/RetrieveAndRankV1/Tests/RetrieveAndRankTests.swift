@@ -73,7 +73,7 @@ class RetrieveAndRankTests: XCTestCase {
     // MARK: - Helper Functions
     
     /** Create a new Solr cluster. */
-    private func createSolrCluster(clusterName: String, size: String? = nil) -> SolrCluster? {
+    private func createSolrCluster(clusterName: String, size: Int? = nil) -> SolrCluster? {
         let description = "Create a new Solr Cluster."
         let expectation = expectationWithDescription(description)
         
@@ -265,7 +265,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and then delete a new Solr cluster. */
     func testCreateAndDeleteSolrCluster() {
-        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: "1") else {
+        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
@@ -274,7 +274,7 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertNotNil(solrCluster.solrClusterSize)
         XCTAssertNotNil(solrCluster.solrClusterStatus)
         XCTAssertEqual(solrCluster.solrClusterName, "temp-swift-sdk-solr-cluster")
-        XCTAssertEqual(solrCluster.solrClusterSize, "1")
+        XCTAssertEqual(solrCluster.solrClusterSize, 1)
         XCTAssertEqual(solrCluster.solrClusterStatus, SolrClusterStatus.NotAvailable)
         
         deleteSolrCluster(solrCluster.solrClusterID)
@@ -282,7 +282,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Get detailed information about a specific Solr cluster. */
     func testGetSolrCluster() {
-        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: "1") else {
+        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
@@ -296,7 +296,7 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertNotNil(solrClusterDetails.solrClusterSize)
         XCTAssertNotNil(solrClusterDetails.solrClusterStatus)
         XCTAssertEqual(solrClusterDetails.solrClusterName, "temp-swift-sdk-solr-cluster")
-        XCTAssertEqual(solrClusterDetails.solrClusterSize, "1")
+        XCTAssertEqual(solrClusterDetails.solrClusterSize, 1)
         
         deleteSolrCluster(solrCluster.solrClusterID)
     }
@@ -470,10 +470,18 @@ class RetrieveAndRankTests: XCTestCase {
             writerType: "json",
             failure: failWithError) { response in
             
-            XCTAssertNotNil(response.numFound)
-            XCTAssertNotNil(response.start)
-            XCTAssertEqual(response.numFound, 181)
-            XCTAssertEqual(response.start, 0)
+            XCTAssertNotNil(response.header)
+            XCTAssertNotNil(response.header.status)
+            XCTAssertNotNil(response.header.qTime)
+            XCTAssertNotNil(response.header.params)
+            XCTAssertNotNil(response.header.params.query)
+            XCTAssertNotNil(response.header.params.returnFields)
+            XCTAssertNotNil(response.header.params.writerType)
+                
+            XCTAssertNotNil(response.body)
+            XCTAssertNotNil(response.body.start)
+            XCTAssertNotNil(response.body.numFound)
+            XCTAssertNotNil(response.body.docs)
             
             expectation.fulfill()
         }
@@ -494,12 +502,15 @@ class RetrieveAndRankTests: XCTestCase {
             writerType: "json",
             failure: failWithError) { response in
             
-            XCTAssertNotNil(response.numFound)
-            XCTAssertNotNil(response.start)
-            XCTAssertNotNil(response.maxScore)
-            XCTAssertEqual(response.numFound, 181)
-            XCTAssertEqual(response.start, 0)
-            XCTAssertEqual(response.maxScore, 10)
+            XCTAssertNotNil(response.header)
+            XCTAssertNotNil(response.header.status)
+            XCTAssertNotNil(response.header.qTime)
+            
+            XCTAssertNotNil(response.body)
+            XCTAssertNotNil(response.body.start)
+            XCTAssertNotNil(response.body.numFound)
+            XCTAssertNotNil(response.body.maxScore)
+            XCTAssertNotNil(response.body.docs)
             
             expectation.fulfill()
         }
@@ -588,7 +599,7 @@ class RetrieveAndRankTests: XCTestCase {
         
         retrieveAndRank.createSolrCluster(
             "swift-sdk-solr-cluster",
-            size: "100",
+            size: 100,
             failure: failure,
             success: failWithResult)
         

@@ -29,7 +29,7 @@ public struct Ranker: JSONDecodable {
     /// The user-supplied name for this ranker.
     public let name: String
     
-    /// The date and time, in Coordinated Universal Time, that the ranker was created.
+    /// The date and time, in UTC, that the ranker was created.
     public let created: String
     
     /// Used internally to initialize a `Ranker` model from JSON.

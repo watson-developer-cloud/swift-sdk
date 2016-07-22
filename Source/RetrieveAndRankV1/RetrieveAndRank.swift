@@ -28,7 +28,7 @@ public class RetrieveAndRank {
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 RetrieveAndRankV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 RetrieveAndRankV1")
     private let domain = "com.ibm.watson.developer-cloud.RetrieveAndRankV1"
     
     /**
@@ -233,7 +233,8 @@ public class RetrieveAndRank {
      
      - parameter solrClusterID: The ID of the cluster that you want the configurations of.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with an array of `SolrConfig` objects.
+     - parameter success: A function executed with a string array listing the names of all the 
+            configurations associated with this Solr cluster.
      */
     public func getSolrConfigurations(
         solrClusterID: String,
@@ -356,7 +357,10 @@ public class RetrieveAndRank {
     }
     
     /**
-     Uploads a configuration .zip file set with the given name to the specified cluster.
+     Uploads a configuration .zip file set with the given name to the specified cluster. 
+     
+     Note: in order for your service instance to work with this SDK, you must make sure to define 
+     the writer type in your solrconfig.xml file to be "json".
      
      - parameter solrClusterID: The ID of the cluster whose configuration you want to update.
      - parameter configName: The name of the configuration you want to update.
@@ -364,7 +368,7 @@ public class RetrieveAndRank {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
-    public func createSolrConfiguration(
+    public func uploadSolrConfiguration(
         solrClusterID: String,
         configName: String,
         zipFile: NSURL,
@@ -401,8 +405,6 @@ public class RetrieveAndRank {
      - parameter solrClusterID: The ID of the cluster to add this collection to.
      - parameter name: The name of the collection.
      - parameter configName: The name of the configuration to use.
-     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid 
-            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
@@ -410,14 +412,12 @@ public class RetrieveAndRank {
         solrClusterID: String,
         name: String,
         configName: String,
-        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "CREATE"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         queryParameters.append(NSURLQueryItem(name: "name", value: name))
         queryParameters.append(NSURLQueryItem(name: "collection.configName", value: configName))
         
@@ -450,22 +450,18 @@ public class RetrieveAndRank {
      
      - parameter solrClusterID: The ID of the cluster to delete this collection from.
      - parameter name: The name of the collection.
-     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
-            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteSolrCollection(
         solrClusterID: String,
         name: String,
-        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: (Void -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "DELETE"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
         queryParameters.append(NSURLQueryItem(name: "name", value: name))
         
         // construct REST request
@@ -495,22 +491,22 @@ public class RetrieveAndRank {
     /**
      Lists the names of the collections in this Solr cluster.
      
+     Note: For the SDK to work properly, you must define the writer type as "json" within the
+     configuration solrconfig.xml file.
+     
      - parameter solrClusterID: The ID of the cluster whose collections you want.
-     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
-            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of collection names.
      */
     public func getSolrCollections(
         solrClusterID: String,
-        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: [String] -> Void) {
         
         // construct query parameters
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "action", value: "LIST"))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
         
         // construct REST request
         let request = RestRequest(
@@ -598,6 +594,9 @@ public class RetrieveAndRank {
      Use the given query to search this specific collection within a given cluster. This command
      doesn't rank the values; to search and rank, use the `searchAndRank()` call.
      
+     Note: For the SDK to work properly, you must define the writer type as "json" within the
+     configuration solrconfig.xml file.
+     
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
      - parameter query: The query. Refer to the following link for more information on how to 
@@ -606,8 +605,6 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
-     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
-            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchResponse` object.
      */
@@ -616,7 +613,6 @@ public class RetrieveAndRank {
         collectionName: String,
         query: String,
         returnFields: String,
-        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: SearchResponse -> Void) {
         
@@ -624,7 +620,7 @@ public class RetrieveAndRank {
         var queryParameters = [NSURLQueryItem]()
         queryParameters.append(NSURLQueryItem(name: "q", value: query))
         queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
         
         // construct REST request
         let request = RestRequest(
@@ -649,6 +645,9 @@ public class RetrieveAndRank {
     /**
      Searches the results and then returns them in ranked order.
      
+     Note: For the SDK to work properly, you must define the writer type as "json" within the
+     configuration solrconfig.xml file.
+     
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
      - parameter rankerID: The ID of the ranker.
@@ -658,8 +657,6 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
-     - parameter writerType: Specifies the QueryResponseWriter to use to process the request. Valid
-            values are declared in the solrconfig.xml file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
@@ -669,7 +666,6 @@ public class RetrieveAndRank {
         rankerID: String,
         query: String,
         returnFields: String,
-        writerType: String,
         failure: (NSError -> Void)? = nil,
         success: SearchAndRankResponse -> Void) {
         
@@ -678,7 +674,7 @@ public class RetrieveAndRank {
         queryParameters.append(NSURLQueryItem(name: "q", value: query))
         queryParameters.append(NSURLQueryItem(name: "ranker_id", value: rankerID))
         queryParameters.append(NSURLQueryItem(name: "fl", value: returnFields))
-        queryParameters.append(NSURLQueryItem(name: "wt", value: writerType))
+        queryParameters.append(NSURLQueryItem(name: "wt", value: "json"))
         
         // construct REST request
         let request = RestRequest(
@@ -699,7 +695,6 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
     
     // MARK: - Rankers
     

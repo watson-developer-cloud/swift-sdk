@@ -325,7 +325,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTFail("Failed to load config file needed to create the configuration.")
             return
         }
-        retrieveAndRank.createSolrConfiguration(
+        retrieveAndRank.uploadSolrConfiguration(
             trainedClusterID,
             configName: "temp-swift-sdk-config",
             zipFile: configFile,
@@ -371,7 +371,6 @@ class RetrieveAndRankTests: XCTestCase {
         
         retrieveAndRank.getSolrCollections(
             trainedClusterID,
-            writerType: "json",
             failure: failWithError) { collections in
             
             XCTAssertEqual(collections.count, 1)
@@ -390,7 +389,6 @@ class RetrieveAndRankTests: XCTestCase {
             trainedClusterID,
             name: "temp-swift-sdk-collection",
             configName: trainedConfigurationName,
-            writerType: "json",
             failure: failWithError) {
             
             expectation.fulfill()
@@ -402,7 +400,6 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.deleteSolrCollection(
             trainedClusterID,
             name: "temp-swift-sdk-collection",
-            writerType: "json",
             failure: failWithError) {
             
             expectation2.fulfill()
@@ -419,7 +416,6 @@ class RetrieveAndRankTests: XCTestCase {
             trainedClusterID,
             name: "temp-swift-sdk-collection",
             configName: trainedConfigurationName,
-            writerType: "json",
             failure: failWithError) {
             
             expectation.fulfill()
@@ -449,7 +445,6 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.deleteSolrCollection(
             trainedClusterID,
             name: "temp-swift-sdk-collection",
-            writerType: "json",
             failure: failWithError) {
             
             expectation3.fulfill()
@@ -688,7 +683,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTFail("Failed to load config file needed to upload to the cluster.")
             return
         }
-        retrieveAndRank.createSolrConfiguration(
+        retrieveAndRank.uploadSolrConfiguration(
             "some_invalid_ID",
             configName: "temp-swift-sdk-config",
             zipFile: configFile,
@@ -712,7 +707,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTFail("Failed to load config file needed to upload to the cluster.")
             return
         }
-        retrieveAndRank.createSolrConfiguration(
+        retrieveAndRank.uploadSolrConfiguration(
             trainedClusterID,
             configName: trainedConfigurationName,
             zipFile: configFile,
@@ -753,7 +748,6 @@ class RetrieveAndRankTests: XCTestCase {
         
         retrieveAndRank.getSolrCollections(
             "invalid_cluster_ID",
-            writerType: "json",
             failure: failure,
             success: failWithResult)
         
@@ -774,7 +768,6 @@ class RetrieveAndRankTests: XCTestCase {
             "invalid_cluster_id",
             name: "failed-collection",
             configName: "config-name",
-            writerType: "json",
             failure: failure,
             success: failWithResult)
         
@@ -794,7 +787,6 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.deleteSolrCollection(
             "invalid_cluster_id",
             name: "failed-collection",
-            writerType: "json",
             failure: failure,
             success: failWithResult)
         

@@ -80,10 +80,10 @@ class AlchemyDataNewsTests: XCTestCase {
         service.getNews("now-1d", end: "now", query: queryDict, failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNil(news.result?.count, "Count should not return")
-            XCTAssertNotNil(news.result?.docs![0].id, "Document ID should not be nil")
-            XCTAssertNotNil(news.result?.docs![0].source?.enriched?.url?.title, "Title should not be nil")
-            XCTAssertNotNil(news.result?.docs![0].source?.enriched?.url?.entities![0].text, "Entity text should not be nil")
-            XCTAssertNotNil(news.result?.docs![0].source?.enriched?.url?.entities![0].type, "Entity type should not be nil")
+            XCTAssertNotNil(news.result?.docs?[0].id, "Document ID should not be nil")
+            XCTAssertNotNil(news.result?.docs?[0].source?.enriched?.url?.title, "Title should not be nil")
+            XCTAssertNotNil(news.result?.docs?[0].source?.enriched?.url?.entities![0].text, "Entity text should not be nil")
+            XCTAssertNotNil(news.result?.docs?[0].source?.enriched?.url?.entities![0].type, "Entity type should not be nil")
             expectation.fulfill()
         }
         waitForExpectations()

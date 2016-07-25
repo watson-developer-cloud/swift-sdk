@@ -319,11 +319,36 @@ public class RetrieveAndRank {
             userAgent: userAgent
         )
         
+        // locate downloads directory
+        let fileManager = NSFileManager.defaultManager()
+        let directories = fileManager.URLsForDirectory(.DownloadsDirectory, inDomains: .UserDomainMask)
+        guard let downloads = directories.first else {
+            let failureReason = "Cannot locate documents directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct unique filename
+        var filename = configName + ".zip"
+        var isUnique = false
+        var duplicates = 0
+        while !isUnique {
+            let filePath = downloads.URLByAppendingPathComponent(filename).path!
+            if fileManager.fileExistsAtPath(filePath) {
+                duplicates += 1
+                filename = configName + "-\(duplicates)" + ".zip"
+            } else {
+                isUnique = true
+            }
+        }
+        
         // specify download destination
-        let destination = Alamofire.Request.suggestedDownloadDestination(
-            directory: .DocumentDirectory,
-            domain: .UserDomainMask
-        )
+        let destinationURL = downloads.URLByAppendingPathComponent(filename)
+        let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
+            return destinationURL
+        }
         
         // execute REST request
         Alamofire.download(request, destination: destination)
@@ -349,9 +374,16 @@ public class RetrieveAndRank {
                     }
                 }
                 
-                let temporaryURL = NSURL(string: "")!
-                let fileURL = destination(temporaryURL, response)
-                success(fileURL)
+                let statusCode = response.statusCode
+                if statusCode != 200 {
+                    let failureReason = "Status code was not acceptable: \(statusCode)."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+                
+                success(destinationURL)
             }
 
     }

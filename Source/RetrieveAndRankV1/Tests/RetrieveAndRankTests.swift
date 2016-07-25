@@ -462,7 +462,6 @@ class RetrieveAndRankTests: XCTestCase {
             collectionName: trainedCollectionName,
             query: "aerodynamics",
             returnFields: "id, title, author",
-            writerType: "json",
             failure: failWithError) { response in
             
             XCTAssertNotNil(response.header)
@@ -494,7 +493,6 @@ class RetrieveAndRankTests: XCTestCase {
             rankerID: trainedRankerID,
             query: "aerodynamics",
             returnFields: "id, title, author",
-            writerType: "json",
             failure: failWithError) { response in
             
             XCTAssertNotNil(response.header)
@@ -833,7 +831,6 @@ class RetrieveAndRankTests: XCTestCase {
             collectionName: trainedCollectionName,
             query: "aerodynamics",
             returnFields: "id, author",
-            writerType: "json",
             failure: failure,
             success: failWithResult)
         
@@ -856,7 +853,6 @@ class RetrieveAndRankTests: XCTestCase {
             rankerID: trainedRankerID,
             query: "aerodynamics",
             returnFields: "id, author",
-            writerType: "json",
             failure: failure,
             success: failWithResult)
         

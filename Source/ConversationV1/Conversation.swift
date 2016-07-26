@@ -79,7 +79,7 @@ public class Conversation {
      Start a new conversation or get a response to a user's input.
      
      - parameter workspaceID: The unique identifier of the workspace to use.
-     - parameter message: The user's input message.
+     - parameter text: The user's input message.
      - parameter context: The context, or state, associated with this request.
         Use a `nil` context to start a new conversation.
      - parameter failure: A function executed if an error occurs.

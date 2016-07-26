@@ -29,6 +29,7 @@
 		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A219F101D1350670003D934 /* ConversationV1Experimental.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1Experimental.framework */; };
 		7A219F241D1350CC0003D934 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F1E1D1350CC0003D934 /* Conversation.swift */; };
 		7A219F261D1350CC0003D934 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A219F201D1350CC0003D934 /* MessageRequest.swift */; };
@@ -680,6 +681,7 @@
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
+		7A1F486A1D47AF7E00971377 /* ConversationV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
 		7A219F061D1350670003D934 /* ConversationV1Experimental.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1Experimental.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A219F0F1D1350670003D934 /* ConversationV1ExperimentalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1ExperimentalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A219F1E1D1350CC0003D934 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = ../ConversationV1Experimental/Conversation.swift; sourceTree = "<group>"; };
@@ -1398,6 +1400,7 @@
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
 				7A34CB511C233E2100F20D0E /* Credentials.plist */,
+				7A1F486A1D47AF7E00971377 /* ConversationV1.h */,
 				7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */,
 				7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
@@ -2049,6 +2052,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5186,6 +5190,7 @@
 				7AB445371D3E647A00E8748A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AB445381D3E647A00E8748A /* Build configuration list for PBXNativeTarget "ConversationV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -5194,6 +5199,7 @@
 				7AB4453A1D3E647A00E8748A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B1A8E5111D19CEDB00678412 /* Build configuration list for PBXNativeTarget "AlchemyDataNewsV1" */ = {
 			isa = XCConfigurationList;

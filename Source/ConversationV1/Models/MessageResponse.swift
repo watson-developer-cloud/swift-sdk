@@ -116,7 +116,7 @@ public struct OutputData: JSONDecodable {
     /// useful for debugging and for visualizing the path taken through the node tree.
     public let nodesVisited: [String]
     
-    /// Used internally to initialize a `OutputData` model from JSON.
+    /// Used internally to initialize an `OutputData` model from JSON.
     public init(json: JSON) throws {
         logMessages = try json.arrayOf("log_messages", type: LogMessageResponse.self)
         text = try json.arrayOf("text", type: Swift.String)

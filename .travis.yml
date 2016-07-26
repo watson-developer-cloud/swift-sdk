@@ -20,6 +20,7 @@ script:
   - xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "ConversationV1Experimental" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS9_DESTINATION" -enableCodeCoverage "YES" | xcpretty
@@ -38,6 +39,7 @@ script:
   - xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "ConversationV1Experimental" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty
   - xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS8_DESTINATION" -enableCodeCoverage "YES" | xcpretty

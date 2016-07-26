@@ -207,23 +207,37 @@ The following links provide more information about the IBM AlchemyLanguage servi
 
 With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-The following example shows how to send a message to the Conversation service and print the response:
+The following example shows how to start a conversation with the Conversation service:
 
 ```swift
-import ConversationV1Experimental
+import ConversationV1
 
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let conversation = Conversation(username: username, password: password, version: version)
 
-let workspace = "your-workspace-id-here"
-let message = "your-message-here"
+let workspaceID = "your-workspace-id-here"
 let failure = { (error: NSError) in print(error) }
-conversation.message(workspace, message: message, failure: failure) { response in
-    print(response)
+var context: Context? // save context to continue conversation
+conversation.message(workspaceID, failure: failure) { response in
+    print(response.output.text)
+    context = response.context
 }
 ```
+
+The following example shows how to continue an existing conversation with the Conversation service:
+
+```swift
+let text = "Turn on the radio."
+let failure = { (error: NSError) in print(error) }
+conversation.message(workspaceID, text: text, context: context, failure: failure) { response in
+    print(response.output.text)
+    context = response.context
+}
+```
+
+The following links provide more information about the IBM Conversation service:
 
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)

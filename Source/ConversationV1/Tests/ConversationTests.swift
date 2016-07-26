@@ -74,7 +74,9 @@ class ConversationTests: XCTestCase {
         let nodes1 = ["node_1_1467221909631"]
         
         var context: Context?
-        conversation.message(workspaceID, failure: failWithError) { response in
+        conversation.message(workspaceID, failure: failWithError) {
+            response in
+            
             // verify input
             XCTAssertNil(response.input.text)
             

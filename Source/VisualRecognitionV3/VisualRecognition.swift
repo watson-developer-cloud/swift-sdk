@@ -29,7 +29,7 @@ public class VisualRecognition {
     private let apiKey: String
     private let version: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 VisualRecognitionV3")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 VisualRecognitionV3")
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
     /**

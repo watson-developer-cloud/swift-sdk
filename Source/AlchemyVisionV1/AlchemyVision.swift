@@ -29,7 +29,7 @@ public class AlchemyVision {
     
     private let apiKey: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 AlchemyVisionV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = NSCharacterSet(charactersInString:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")

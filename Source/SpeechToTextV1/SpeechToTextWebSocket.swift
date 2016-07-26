@@ -30,7 +30,7 @@ class SpeechToTextWebSocket: WebSocket {
     private var state = State.Disconnected
     private var retries = 0
     private let maxRetries = 2
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 SpeechToTextV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     enum State {

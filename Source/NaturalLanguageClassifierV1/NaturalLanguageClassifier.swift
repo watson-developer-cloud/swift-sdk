@@ -31,7 +31,7 @@ public class NaturalLanguageClassifier {
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 NaturalLanguageClassifierV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 NaturalLanguageClassifierV1")
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
     
     /**

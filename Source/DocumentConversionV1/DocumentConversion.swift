@@ -31,7 +31,7 @@ public class DocumentConversion {
     private let password: String
     private let serviceURL: String
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 DocumentConversionV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
     /**

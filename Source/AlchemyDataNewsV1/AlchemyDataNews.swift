@@ -29,7 +29,7 @@ public class AlchemyDataNews {
     
     private let serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     private let errorDomain = "com.watsonplatform.alchemyDataNews"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.4.2 AlchemyDataNewsV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 AlchemyDataNewsV1")
     
     /**
      Initilizes the AlchemyDataNews service

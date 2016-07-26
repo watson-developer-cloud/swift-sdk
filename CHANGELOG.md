@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+## Version 0.5.0
+
+_2016-07-26_
+
+This update adds the ConversationV1 service, along with the following minor updates:
+
+- All Services: Add support for iOS 8+
+- All Services: Update tests to improve consistency
+- Travis: Update CI to build and test with both iOS 8 and iOS 9
+- Alchemy Language: Change `forUrl` parameter to `forURL`
+- Alchemy Vision: Deprecated in favor of Visual Recognition
+- Relationship Extraction: Deprecated in favor of Alchemy Language
+- Text To Speech: Add test for empty string
+- Tone Analyzer: Update to the general availability URL
+
+Note that the Alchemy Vision and Relationship Extraction services remain in the SDK. You can continue to use these services in your applications, but they will result in a deprecation build warning.
+
 ## Version 0.4.2
 
 _2016-07-02_

@@ -73,6 +73,9 @@ public struct RequestParameters: JSONDecodable {
     }
 }
 
+/** A named alias for the document results returned by a search function. */
+public typealias Document = NSDictionary
+
 /** Contains the results of the Search request. */
 public struct SearchResponseBody: JSONDecodable {
     
@@ -84,12 +87,18 @@ public struct SearchResponseBody: JSONDecodable {
     
     /// A list of possible answers whose structure depends on the list of fields the user
     /// requested to be returned.
-    public let docs: [JSON]
+    public var docs: [Document]
     
     /// Used internally to initialize a `SearchResponseBody` model from JSON.
     public init(json: JSON) throws {
         numFound = try json.int("numFound")
         start = try json.int("start")
-        docs = try json.array("docs")
+        docs = []
+        
+        let freddyDocsArray = try json.array("docs")
+        for freddyDoc in freddyDocsArray {
+            let doc = try NSJSONSerialization.JSONObjectWithData(freddyDoc.serialize(), options: NSJSONReadingOptions.AllowFragments) as! Document
+            docs.append(doc)
+        }
     }
 }

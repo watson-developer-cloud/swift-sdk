@@ -25,7 +25,7 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedClusterName = "trained-swift-sdk-solr-cluster"
     private let trainedConfigurationName = "trained-swift-sdk-config"
     private let trainedCollectionName = "trained-swift-sdk-collection"
-    private let trainedRankerID = "3b140ax14-rank-10407"
+    private let trainedRankerID = "1ba90fx17-rank-281"
     private let trainedRankerName = "trained-swift-sdk-ranker"
     
     // MARK: - Test Configuration
@@ -157,7 +157,6 @@ class RetrieveAndRankTests: XCTestCase {
         let failure = { (error: NSError) in
             XCTAssertEqual(error.code, 400, "Cannot locate the trained cluster.")
             createTrainedCluster()
-            expectation.fulfill()
         }
 
         retrieveAndRank.getSolrCluster(clusterID, failure: failure) {
@@ -190,10 +189,11 @@ class RetrieveAndRankTests: XCTestCase {
                 XCTFail("Failed to create the trained ranker.")
             }
 
-            guard let trainingDataFile = loadFile("trainingdata", withExtension: "txt") else {
+            guard let trainingDataFile = loadFile("ranker_train", withExtension: "csv") else {
                 XCTFail("Failed to load files needed to create the ranker.")
                 return
             }
+            
             retrieveAndRank.createRanker(
                 trainingDataFile,
                 name: trainedRankerName,
@@ -213,9 +213,8 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400, "Cannot locate the trained ranker.")
+            XCTAssertEqual(error.code, 404, "Cannot locate the trained ranker.")
             createTrainedRanker()
-            expectation.fulfill()
         }
         
         retrieveAndRank.getRanker(rankerID, failure: failure) {
@@ -536,7 +535,7 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Get the ranker specified by this ID."
         let expectation = expectationWithDescription(description)
         
-        retrieveAndRank.getRanker(trainedRankerID, failure: failWithError) {
+        retrieveAndRank.getRanker("1ba90dx16-rank-218", failure: failWithError) {
             ranker in
         
             XCTAssertNotNil(ranker)
@@ -573,6 +572,23 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Delete the newly created ranker."
         let expectation = expectationWithDescription(description)
         retrieveAndRank.deleteRanker(ranker.rankerID, failure: failWithError) {
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Pass in a csv file with answers, and use the trained ranker to rerank those results. */
+    func testRanker() {
+        guard let answerFile = loadFile("ranker_test", withExtension: "csv") else {
+            XCTFail("Failed to load test data needed to test the ranker.")
+            return
+        }
+        
+        let description = "Use the trained ranker to rerank the given answer results."
+        let expectation = expectationWithDescription(description)
+        retrieveAndRank.rankResults(trainedRankerID, resultsFile: answerFile, failure: failWithError) {
+            results in
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -884,6 +900,25 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.getRanker("invalid_ranker_id", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Re-rank the results of the file when passing an invalid ranker ID. */
+    func testRankWithInvalidRankerID() {
+        let description = "Try re-ranking a list of answers with an invalid ranker ID."
+        let expectation = expectationWithDescription(description)
+        
+        guard let answerFile = loadFile("ranker_test", withExtension: "csv") else {
+            XCTFail("Failed to load test data needed to test the ranker.")
+            return
+        }
+        
+        let failure = { (error: NSError) in
+            XCTAssertEqual(error.code, 404)
+            expectation.fulfill()
+        }
+        
+        retrieveAndRank.rankResults("invalid_ranker_id", resultsFile: answerFile, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

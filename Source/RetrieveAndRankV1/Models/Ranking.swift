@@ -24,7 +24,7 @@ public struct Ranking: JSONDecodable {
     public let rankerID: String
     
     /// The name of the ranker.
-    public let name: String
+    public let name: String?
     
     /// The link to the ranker.
     public let url: String
@@ -38,7 +38,7 @@ public struct Ranking: JSONDecodable {
     /// Used internally to initialize a `Ranking` model from JSON.
     public init(json: JSON) throws {
         rankerID = try json.string("ranker_id")
-        name = try json.string("name")
+        name = try? json.string("name")
         url = try json.string("url")
         topAnswer = try json.string("top_answer")
         answers = try json.arrayOf("answers", type: RankedAnswer.self)

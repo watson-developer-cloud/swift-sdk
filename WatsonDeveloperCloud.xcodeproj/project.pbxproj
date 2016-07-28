@@ -10,7 +10,6 @@
 		121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F968F1D2D8A9600E295B0 /* Ranker.swift */; };
 		121F96921D2EAD1600E295B0 /* Ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96911D2EAD1600E295B0 /* Ranking.swift */; };
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
-		122819741D3A26F60060C745 /* trainingdata.txt in Resources */ = {isa = PBXBuildFile; fileRef = 122819731D3A26F60060C745 /* trainingdata.txt */; };
 		122819761D3D2C910060C745 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122819751D3D2C910060C745 /* SearchResponse.swift */; };
 		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
@@ -47,6 +46,8 @@
 		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		12740EFD1D40060200F7DCCE /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		12740F041D494E0E00F7DCCE /* ranker_train.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12740F001D494B0400F7DCCE /* ranker_train.csv */; };
+		12740F051D494E1100F7DCCE /* ranker_test.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12740F011D494B0400F7DCCE /* ranker_test.csv */; };
 		12DEF7BD1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */; };
 		7A1C62581D18773E00B721E9 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
 		7A219F101D1350670003D934 /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A219F061D1350670003D934 /* ConversationV1.framework */; };
@@ -659,7 +660,6 @@
 		121F968F1D2D8A9600E295B0 /* Ranker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranker.swift; sourceTree = "<group>"; };
 		121F96911D2EAD1600E295B0 /* Ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranking.swift; sourceTree = "<group>"; };
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
-		122819731D3A26F60060C745 /* trainingdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trainingdata.txt; sourceTree = "<group>"; };
 		122819751D3D2C910060C745 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
 		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
@@ -684,6 +684,8 @@
 		124C2E121D19E2FA00D9F602 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
+		12740F001D494B0400F7DCCE /* ranker_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ranker_train.csv; sourceTree = "<group>"; };
+		12740F011D494B0400F7DCCE /* ranker_test.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ranker_test.csv; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = training_meta.txt; path = Source/NaturalLanguageClassifierV1/Tests/training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = weather_data_train.csv; path = Source/NaturalLanguageClassifierV1/Tests/weather_data_train.csv; sourceTree = "<group>"; };
@@ -1254,7 +1256,8 @@
 				123A09241D2579BF00A8DA56 /* cranfield_data.json */,
 				123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */,
 				123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */,
-				122819731D3A26F60060C745 /* trainingdata.txt */,
+				12740F001D494B0400F7DCCE /* ranker_train.csv */,
+				12740F011D494B0400F7DCCE /* ranker_test.csv */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2893,10 +2896,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				122819741D3A26F60060C745 /* trainingdata.txt in Resources */,
 				123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */,
 				123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */,
+				12740F041D494E0E00F7DCCE /* ranker_train.csv in Resources */,
 				123B47361D1C2D4B007D0B22 /* Credentials.plist in Resources */,
+				12740F051D494E1100F7DCCE /* ranker_test.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

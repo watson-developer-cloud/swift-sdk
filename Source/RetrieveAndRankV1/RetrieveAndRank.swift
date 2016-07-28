@@ -569,8 +569,8 @@ public class RetrieveAndRank {
      - parameter solrClusterID: The ID of the cluster this collection points to.
      - parameter collectionName: The name of the collection you would like to update.
      - parameter contentType: The media type of the content that is being uploaded.
-     - parameter contentFile: The file that is being uploaded, that contains the content to be 
-            added to the collection.
+     - parameter contentFile: The content to be added to the collection. Accepted file types are 
+            listed in the link above.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
@@ -783,7 +783,7 @@ public class RetrieveAndRank {
             json["name"] = ""
         }
         guard let trainingMetadata = try? json.toJSON().serialize() else {
-            let failureReason = "Profile could not be serialized to JSON."
+            let failureReason = "Ranker metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -828,19 +828,21 @@ public class RetrieveAndRank {
     }
     
     /**
-     Identifies the top answer from the list of provided results to rank, and provides up to 10 
-     other answers listed in order from highest to lowest ranked score.
+     Identifies the top answer from the list of provided results to rank, and provides the
+     number of answers requested, listed in order from descending ranked score.
      
      - parameter rankerID: The ID of the ranker to use.
      - parameter resultsFile: A CSV file containing the search results that you want ranked. The 
             first column header must be labeled `answer_id`. The other column headers should 
             match the names of the features in the `trainingDataFile` used to train the ranker.
+     - parameter numberOfResults: The number of answers needed. The default number given is 10.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `Ranking` object.
      */
     public func rankResults(
         rankerID: String,
         resultsFile: NSURL,
+        numberOfResults: Int? = nil,
         failure: (NSError -> Void)? = nil,
         success: Ranking -> Void) {
         
@@ -852,11 +854,25 @@ public class RetrieveAndRank {
             userAgent: userAgent
         )
         
+        // construct answerMetadata object
+        var json = ["answers": 10]
+        if let numberOfResults = numberOfResults {
+            json = ["answers": numberOfResults]
+        }
+        guard let answerMetadata = try? json.toJSON().serialize() else {
+            let failureReason = "Answer metadata could not be serialized to JSON."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
         // execute REST request
         Alamofire.upload(
             request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: resultsFile, name: "resultsFile")
+                multipartFormData.appendBodyPart(fileURL: resultsFile, name: "answer_data")
+                multipartFormData.appendBodyPart(data: answerMetadata, name: "answer_metadata")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {

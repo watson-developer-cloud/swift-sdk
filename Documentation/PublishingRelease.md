@@ -14,6 +14,7 @@ The following tasks should be completed before publishing a release. Track the p
 
 - [ ] Run all tests to verify correctness. Fix any errors.
 - [ ] Verify that all necessary changes to `.travis.yml` have been made.
+- [ ] If changes were made to Speech to Text then test continuous streaming support on a physical device.
 
 #### Documentation
 

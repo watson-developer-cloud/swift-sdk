@@ -42,7 +42,7 @@ github "watson-developer-cloud/ios-sdk"
 
 <img src="./Quickstart-Images/BuildPhases.png" width="600">
 
-8) Add all of the frameworks you added to Xcode to the Copy Files Phase.
+8) Add all of the frameworks you added to Xcode to the Copy Files Phase.  Ensure you change the Destination to "Frameworks"
 
 <img src="./Quickstart-Images/AddedCopyFiles.png" width="600">
 
@@ -119,6 +119,6 @@ import AVFoundation
 
 14) Enjoy!
 
-You can review the different voices and languages [here](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices).
+You can review the different voices and languages [here](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices).
 
 You can download all the source code for the Watson Developer Cloud iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).

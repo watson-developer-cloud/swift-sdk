@@ -23,7 +23,7 @@ import RestKit
 public typealias WorkspaceID = String
 
 /**
- With the IBM Watson™ Conversation service you can create cognitive agents–virtual agents that
+ With the IBM Watson Conversation service you can create cognitive agents–virtual agents that
  combine machine learning, natural language understanding, and integrated dialog scripting tools
  to provide outstanding customer engagements.
  */
@@ -33,7 +33,7 @@ public class Conversation {
     private let password: String
     private let version: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 ConversationV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 ConversationV1")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
     /**
@@ -49,7 +49,7 @@ public class Conversation {
         username: String,
         password: String,
         version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/conversation-experimental/api")
+        serviceURL: String = "https://gateway.watsonplatform.net/conversation/api")
     {
         self.username = username
         self.password = password
@@ -76,23 +76,24 @@ public class Conversation {
     }
     
     /**
-     Get a response to a user's input.
+     Start a new conversation or get a response to a user's input.
      
      - parameter workspaceID: The unique identifier of the workspace to use.
-     - parameter message: The user's input message.
+     - parameter text: The user's input message.
      - parameter context: The context, or state, associated with this request.
+        Use a `nil` context to start a new conversation.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
         workspaceID: WorkspaceID,
-        message: String,
-        context: JSON? = nil,
+        text: String? = nil,
+        context: Context? = nil,
         failure: (NSError -> Void)? = nil,
         success: MessageResponse -> Void)
     {
         // construct body
-        let messageRequest = MessageRequest(message: message, context: context)
+        let messageRequest = MessageRequest(text: text, context: context)
         guard let body = try? messageRequest.toJSON().serialize() else {
             let failureReason = "MessageRequest could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

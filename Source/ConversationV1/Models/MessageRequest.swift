@@ -20,26 +20,37 @@ import Freddy
 /** A request formatted for the Conversation service. */
 internal struct MessageRequest: JSONEncodable {
     
-    private let text: String
-    private let context: JSON?
+    private let input: InputData
+    private let context: Context?
     
     /**
-     Create a `MessageRequest` with a message and context.
+     Create a `MessageRequest` with input and context.
      
-     - parameter message: The user's input message.
+     - parameter input: An input object that includes the input text.
      - parameter context: The context, or state, associated with this request.
      */
-    init(message: String, context: JSON? = nil) {
-        self.text = message
+    init(input: InputData, context: Context? = nil) {
+        self.input = input
         self.context = context
+    }
+    
+    /**
+     Create a `MessageRequest` with text and context.
+     
+     - parameter text: The user's input text.
+     - parameter context: The context, or state, associated with this request.
+     */
+    init(text: String? = nil, context: Context? = nil) {
+        let input = InputData(text: text)
+        self.init(input: input, context: context)
     }
     
     /// Used internally to serialize a `MessageRequest` model to JSON.
     func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["input"] = .Dictionary(["text": .String(text)])
+        json["input"] = input.toJSON()
         if let context = context {
-            json["context"] = context
+            json["context"] = context.toJSON()
         }
         return JSON.Dictionary(json)
     }

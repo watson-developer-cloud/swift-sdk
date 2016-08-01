@@ -24,11 +24,12 @@ import RestKit
  found within the image. AlchemyVision can enhance the way businesses make decisions by
  integrating image cognition.
  */
+@available(*, deprecated, message="Its functionality became a part of the IBM Watson Visual Recognition service.")
 public class AlchemyVision {
     
     private let apiKey: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.3.1 AlchemyVisionV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.5.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = NSCharacterSet(charactersInString:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")

@@ -20,7 +20,8 @@ import ConversationV1
 class ConversationTests: XCTestCase {
     
     private var conversation: Conversation!
-    private let timeout: NSTimeInterval = 30.0
+    private let workspaceID = "8d869397-411b-4f0a-864d-a2ba419bb249"
+    private let timeout: NSTimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -43,7 +44,7 @@ class ConversationTests: XCTestCase {
                 XCTFail("Unable to read credentials.")
                 return
         }
-        conversation = Conversation(username: username, password: password, version: "2016-06-16")
+        conversation = Conversation(username: username, password: password, version: "2016-07-19")
     }
 
     /** Fail false negatives. */
@@ -66,29 +67,82 @@ class ConversationTests: XCTestCase {
     // MARK: - Positive Tests
     
     func testMessage() {
-        let description = "Send a message and verify the response."
-        let expectation = expectationWithDescription(description)
+        let description1 = "Start a conversation."
+        let expectation1 = expectationWithDescription(description1)
         
-        let workspace = "9c507471-ab3f-4011-9ceb-4e730b650b02"
-        let message = "Turn the wipers on."
-        conversation.message(workspace, message: message, failure: failWithError) { response in
-            // verify intents
-            guard let intents = response.intents else {
-                XCTFail("No suitable intents object found in response payload")
-                return
-            }
-            XCTAssertFalse(intents.isEmpty)
+        let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?"]
+        let nodes1 = ["node_1_1467221909631"]
+        
+        var context: Context?
+        conversation.message(workspaceID, failure: failWithError) {
+            response in
             
-            // verify first intent
-            let topIntent = intents.first
-            XCTAssertEqual(topIntent?.intent, "turn_on")
-            XCTAssert(topIntent?.confidence >= 0.0)
-            XCTAssert(topIntent?.confidence <= 1.0)
+            // verify input
+            XCTAssertNil(response.input.text)
+            
+            // verify context
+            XCTAssertNotNil(response.context.conversationID)
+            XCTAssertNotEqual(response.context.conversationID, "")
+            XCTAssertNotNil(response.context.system)
+            XCTAssertEqual(response.context.system!.dialogStack, ["root"])
+            XCTAssertEqual(response.context.system!.dialogTurnCounter, 1)
+            XCTAssertEqual(response.context.system!.dialogRequestCounter, 1)
             
             // verify entities
-            XCTAssert(response.entities?.isEmpty == true)
+            XCTAssertTrue(response.entities.isEmpty)
             
-            expectation.fulfill()
+            // verify intents
+            XCTAssertTrue(response.intents.isEmpty)
+            
+            // verify output
+            XCTAssertTrue(response.output.logMessages.isEmpty)
+            XCTAssertEqual(response.output.text, response1)
+            XCTAssertEqual(response.output.nodesVisited, nodes1)
+            
+            context = response.context
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Continue a conversation."
+        let expectation2 = expectationWithDescription(description2)
+        
+        let text = "Turn on the radio."
+        let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
+        let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
+        
+        conversation.message(workspaceID, text: text, context: context, failure: failWithError) {
+            response in
+            
+            // verify input
+            XCTAssertEqual(response.input.text, text)
+            
+            // verify context
+            XCTAssertEqual(response.context.conversationID, context!.conversationID)
+            XCTAssertNotNil(response.context.system)
+            XCTAssertEqual(response.context.system!.dialogStack, ["node_1_1467994455318"])
+            XCTAssertEqual(response.context.system!.dialogTurnCounter, 2)
+            XCTAssertEqual(response.context.system!.dialogRequestCounter, 2)
+            
+            // verify entities
+            XCTAssertEqual(response.entities.count, 1)
+            XCTAssertEqual(response.entities[0].entity, "appliance")
+            XCTAssertEqual(response.entities[0].location.startIndex, 12)
+            XCTAssertEqual(response.entities[0].location.endIndex, 17)
+            XCTAssertEqual(response.entities[0].value, "music")
+            
+            // verify intents
+            XCTAssertEqual(response.intents.count, 1)
+            XCTAssertEqual(response.intents[0].intent, "turn_on")
+            XCTAssertGreaterThan(response.intents[0].confidence, 0.90)
+            XCTAssertLessThan(response.intents[0].confidence, 1.00)
+            
+            // verify output
+            XCTAssertTrue(response.output.logMessages.isEmpty)
+            XCTAssertEqual(response.output.text, response2)
+            XCTAssertEqual(response.output.nodesVisited, nodes2)
+            
+            expectation2.fulfill()
         }
         waitForExpectations()
     }
@@ -96,17 +150,29 @@ class ConversationTests: XCTestCase {
     // MARK: - Negative Tests
 
     func testMessageInvalidWorkspace() {
-        let description = "Send a message to an invalid workspace."
+        let description = "Start a conversation with an invalid workspace."
         let expectation = expectationWithDescription(description)
         
         let workspaceID = "this-id-is-invalid"
-        let message = "Turn the wipers on."
         let failure = { (error: NSError) in
             XCTAssertEqual(error.code, 400)
             expectation.fulfill()
         }
         
-        conversation.message(workspaceID, message: message, failure: failure, success: failWithResult)
+        conversation.message(workspaceID, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    func testMessageInvalidConversationID() {
+        let description = "Continue a conversation with an invalid conversation id."
+        let expectation = expectationWithDescription(description)
+        
+        let text = "Turn on the radio."
+        let context = Context(conversationID: "this-id-is-invalid")
+        conversation.message(workspaceID, text: text, context: context, failure: failWithError) {
+            response in
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

@@ -62,8 +62,8 @@ public struct ImageFace: JSONDecodable {
     /// The age of the detected face.
     public let age: Age
 
-    /// The identity of the detected face.
-    public let identity: Identity
+    /// The identity of the detected face, if the face is identified as a known celebrity.
+    public let identity: Identity?
 
     /// Used internally to initialize an `ImageFace` model from JSON.
     public init(json: JSON) throws {
@@ -73,7 +73,7 @@ public struct ImageFace: JSONDecodable {
         height = try Int(json.string("height"))!
         gender = try json.decode("gender")
         age = try json.decode("age")
-        identity = try json.decode("identity")
+        identity = try? json.decode("identity")
     }
 }
 
@@ -112,7 +112,7 @@ public struct Age: JSONDecodable {
 /** The identity of a detected face. */
 public struct Identity: JSONDecodable {
 
-    /// The name of the detected face, if the face is identified as a known celebrity.
+    /// The name of the detected celebrity face.
     public let name: String
 
     /// The likelihood that this name corresponds to the detected face.

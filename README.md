@@ -97,7 +97,7 @@ App Transport Security was introduced with iOS 9 to enforce secure Internet conn
 
 ## Service Instances
 
-[IBM Watson Developer Cloud](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
+[IBM Watson Developer Cloud](https://www.ibm.com/watson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/watson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
 
 Follow these steps to create a service instance and obtain its credentials:
 
@@ -118,7 +118,7 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
-See [Getting Started](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Contributing
 
@@ -160,7 +160,7 @@ Refine your query by referring to the [Count and TimeSlice Queries](http://docs.
 
 The following links provide more information about the IBM AlchemyData News service:
 
-* [IBM AlchemyData News - Service Page](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-data-news.html)
+* [IBM AlchemyData News - Service Page](https://www.ibm.com/watson/developercloud/alchemy-data-news.html)
 * [IBM AlchemyData News - Documentation](http://docs.alchemyapi.com/)
 * [IBM AlchemyData News - Demo](http://querybuilder.alchemyapi.com/builder)
 
@@ -199,8 +199,8 @@ alchemyLanguage.getTextSentiment(forURL: url, failure: failure) { sentiment in
 
 The following links provide more information about the IBM AlchemyLanguage service:
 
-* [IBM AlchemyLanguage - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-language.html)
-* [IBM AlchemyLanguage - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/alchemylanguage/)
+* [IBM AlchemyLanguage - Service Page](http://www.ibm.com/watson/developercloud/alchemy-language.html)
+* [IBM AlchemyLanguage - Documentation](http://www.ibm.com/watson/developercloud/doc/alchemylanguage/)
 * [IBM AlchemyLanguage - Demo](https://alchemy-language-demo.mybluemix.net/)
 
 ## Conversation
@@ -239,8 +239,8 @@ conversation.message(workspaceID, text: text, context: context, failure: failure
 
 The following links provide more information about the IBM Conversation service:
 
-* [IBM Watson Conversation - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/conversation.html)
-* [IBM Watson Conversation - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/conversation/overview.shtml)
+* [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)
+* [IBM Watson Conversation - Documentation](http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml)
 
 ## Dialog
 
@@ -306,8 +306,8 @@ dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!,
 
 The following links provide more information about the IBM Watson Dialog service:
 
-* [IBM Watson Dialog - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/dialog.html)
-* [IBM Watson Dialog - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/dialog/)
+* [IBM Watson Dialog - Service Page](http://www.ibm.com/watson/developercloud/dialog.html)
+* [IBM Watson Dialog - Documentation](http://www.ibm.com/watson/developercloud/doc/dialog/)
 * [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
 ## Document Conversion
@@ -340,8 +340,8 @@ documentConversion.convertDocument(config, document: document, failure: failure)
 
 The following links provide more information about the IBM Document Conversion service:
 
-* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/document-conversion.html)
-* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/)
+* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/watson/developercloud/document-conversion.html)
+* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/watson/developercloud/doc/document-conversion/)
 * [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
 
 ## Language Translator
@@ -365,8 +365,8 @@ languageTranslator.translate("Hello", source: "en", target: "es", failure: failu
 
 The following links provide more information about the IBM Watson Language Translator service:
 
-* [IBM Watson Language Translator - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-translation.html)
-* [IBM Watson Language Translator - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/language-translation/)
+* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translation.html)
+* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translation/)
 * [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
 
 ## Natural Language Classifier
@@ -392,8 +392,8 @@ naturalLanguageClassifier.classify(classifierID, text: text, failure: failure) {
 
 The following links provide more information about the Natural Language Classifier service:
 
-* [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/nl-classifier.html)
-* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier)
+* [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/watson/developercloud/nl-classifier.html)
+* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/nl-classifier)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
 ## Personality Insights
@@ -418,8 +418,8 @@ personalityInsights.getProfile(text: text, failure: failure) { profile in
 
 The following links provide more information about the Personality Insights service:
 
-* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html)
-* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights)
+* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
+* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
 ## Speech to Text
@@ -553,8 +553,8 @@ class ViewController: UIViewController {
 
 The following links provide more information about the IBM Speech to Text service:
 
-* [IBM Watson Speech to Text - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/speech-to-text.html)
-* [IBM Watson Speech to Text - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/)
+* [IBM Watson Speech to Text - Service Page](http://www.ibm.com/watson/developercloud/speech-to-text.html)
+* [IBM Watson Speech to Text - Documentation](http://www.ibm.com/watson/developercloud/doc/speech-to-text/)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
 
 ## Text to Speech
@@ -579,7 +579,7 @@ textToSpeech.synthesize(text, failure: failure) { data in
 }
 ```
 
-The Text to Speech service supports a number of [voices](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
+The Text to Speech service supports a number of [voices](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
 
 ```swift
 import TextToSpeechV1
@@ -599,8 +599,8 @@ textToSpeech.synthesize(text, voice: SynthesisVoice.GB_Kate, failure: failure) {
 
 The following links provide more information about the IBM Text To Speech service:
 
-* [IBM Watson Text To Speech - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html)
-* [IBM Watson Text To Speech - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/)
+* [IBM Watson Text To Speech - Service Page](http://www.ibm.com/watson/developercloud/text-to-speech.html)
+* [IBM Watson Text To Speech - Documentation](http://www.ibm.com/watson/developercloud/doc/text-to-speech/)
 * [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
 ## Tone Analyzer
@@ -628,8 +628,8 @@ toneAnalyzer.getTone(text, failure: failure) { tones in
 
 The following links provide more information about the IBM Watson Tone Analyzer service:
 
-* [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html)
-* [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/)
+* [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/watson/developercloud/tone-analyzer.html)
+* [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/watson/developercloud/doc/tone-analyzer/)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
 
 ## Tradeoff Analytics
@@ -707,8 +707,8 @@ tradeoffAnalytics.getDilemma(problem, failure: failure) { dilemma in
 
 The following links provide more information about the IBM Watson Tradeoff Analytics service:
 
-* [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html)
-* [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tradeoff-analytics/)
+* [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/watson/developercloud/tradeoff-analytics.html)
+* [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/watson/developercloud/doc/tradeoff-analytics/)
 * [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
 
 ## Visual Recognition
@@ -735,6 +735,6 @@ visualRecognition.classify(url, failure: failure) { classifiedImages in
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 
-* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/visual-recognition.html)
-* [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/visual-recognition/)
+* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
+* [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/watson/developercloud/doc/visual-recognition/)
 * [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)

@@ -85,7 +85,7 @@ public class DocumentConversion {
      
      - parameter config:   Configuration file for the Document Conversion service. Information on
                            config files can be found here:
-     http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/customizing.shtml
+     http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
      - parameter document: The document you want to convert
      - parameter version:  The date of the version of Document Service you want to use.
      - parameter fileType: Explicit type of the file you are converting, if the service cannot
@@ -180,7 +180,7 @@ public class DocumentConversion {
      Write service config parameters to a temporary JSON file that can be uploaded. This creates the
      most basic configuration file possible. For information on creating your own, with greater
      functionality, see: 
-     http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/document-conversion/customizing.shtml
+     http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
      
      - parameter type: The return type of the service you wish to recieve.
      

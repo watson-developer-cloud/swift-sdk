@@ -91,6 +91,8 @@
 		7A987D781D19D9DA003626B2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A987D791D19D9DA003626B2 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A987D7A1D19DB13003626B2 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A34CB511C233E2100F20D0E /* Credentials.plist */; };
+		7A9EE3BF1D4FD91400FA2932 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A9EE3C01D4FD91900FA2932 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF3B51CEE9A0700B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF3B61CEE9A0700B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
@@ -175,8 +177,6 @@
 		7AAAF4A41CEEA0AE00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
 		7AAAF4A51CEEA0AE00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF4A61CEEA0AE00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF4A81CEEA0B800B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF4A91CEEA0B800B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4B91CEEA10700B74848 /* NaturalLanguageClassifierV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4AF1CEEA10600B74848 /* NaturalLanguageClassifierV1.framework */; };
 		7AAAF4C61CEEA11700B74848 /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
 		7AAAF4C71CEEA11700B74848 /* ClassifierDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A248511CD1482200C63CF1 /* ClassifierDetails.swift */; };
@@ -545,6 +545,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A9EE3BE1D4FD90400FA2932 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A9EE3C01D4FD91900FA2932 /* Freddy.framework in CopyFiles */,
+				7A9EE3BF1D4FD91400FA2932 /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AAAF3B71CEE9A1200B74848 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,17 +598,6 @@
 				7AAAF47C1CEE9FDF00B74848 /* Alamofire.framework in CopyFiles */,
 				7AAAF47D1CEE9FDF00B74848 /* Freddy.framework in CopyFiles */,
 				7AAAF47F1CEEA05400B74848 /* Starscream.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF4A71CEEA0B200B74848 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7AAAF4A81CEEA0B800B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF4A91CEEA0B800B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2536,7 +2536,6 @@
 				7AAAF4811CEEA07900B74848 /* Frameworks */,
 				7AAAF4821CEEA07900B74848 /* Headers */,
 				7AAAF4831CEEA07900B74848 /* Resources */,
-				7AAAF4A71CEEA0B200B74848 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2554,6 +2553,7 @@
 				7AAAF48A1CEEA07900B74848 /* Sources */,
 				7AAAF48B1CEEA07900B74848 /* Frameworks */,
 				7AAAF48C1CEEA07900B74848 /* Resources */,
+				7A9EE3BE1D4FD90400FA2932 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2885,7 +2885,6 @@
 					};
 					7A219F051D1350670003D934 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CDXLDASP22;
 					};
 					7A219F0E1D1350670003D934 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2893,7 +2892,6 @@
 					};
 					7A987D131D19D424003626B2 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CDXLDASP22;
 					};
 					7A987D1C1D19D424003626B2 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2901,7 +2899,6 @@
 					};
 					7A987D4A1D19D887003626B2 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CDXLDASP22;
 					};
 					7A987D531D19D887003626B2 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2969,7 +2966,6 @@
 					};
 					7AB445231D3E647A00E8748A = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CDXLDASP22;
 					};
 					7AB4452C1D3E647A00E8748A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3884,7 +3880,7 @@
 				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RetrieveAndRankV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3908,7 +3904,7 @@
 				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RetrieveAndRankV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4112,6 +4108,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4134,6 +4131,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4180,6 +4178,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4202,6 +4201,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4248,6 +4248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4270,6 +4271,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -5010,6 +5012,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -5032,6 +5035,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

@@ -474,7 +474,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTAssertNotNil(response.body)
             XCTAssertNotNil(response.body.start)
             XCTAssertNotNil(response.body.numFound)
-            XCTAssertNotNil(response.body.docs)
+            XCTAssertNotNil(response.body.documents)
             
             expectation.fulfill()
         }
@@ -502,7 +502,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTAssertNotNil(response.body.start)
             XCTAssertNotNil(response.body.numFound)
             XCTAssertNotNil(response.body.maxScore)
-            XCTAssertNotNil(response.body.docs)
+            XCTAssertNotNil(response.body.documents)
             
             expectation.fulfill()
         }

@@ -27,7 +27,7 @@ public struct SolrCluster: JSONDecodable {
     public let solrClusterName: String
     
     /// The size of the cluster. Ranges from 1 to 7.
-    public let solrClusterSize: Int?
+    public let solrClusterSize: Int
     
     /// The state of the cluster.
     public let solrClusterStatus: SolrClusterStatus
@@ -36,10 +36,14 @@ public struct SolrCluster: JSONDecodable {
     public init(json: JSON) throws {
         solrClusterID = try json.string("solr_cluster_id")
         solrClusterName = try json.string("cluster_name")
-        solrClusterSize = try Int(json.string("cluster_size"))
+        
+        guard let size = try Int(json.string("cluster_size")) else {
+            throw JSON.Error.ValueNotConvertible(value: json, to: SolrCluster.self)
+        }
+        solrClusterSize = size
         
         guard let status = SolrClusterStatus(rawValue: try json.string("solr_cluster_status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: SolrClusterStatus.self)
+            throw JSON.Error.ValueNotConvertible(value: json, to: SolrCluster.self)
         }
         solrClusterStatus = status
     }

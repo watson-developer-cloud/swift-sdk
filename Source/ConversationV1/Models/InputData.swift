@@ -28,11 +28,11 @@ public struct InputData: JSONEncodable, JSONDecodable {
  
      - parameter text: The user's input text.
      */
-    internal init(text: String? = nil) {
+    public init(text: String?) {
         self.text = text
     }
     
-    /// Used internally to serialize an `InputData` model from JSON.
+    /// Used internally to initialize an `InputData` model from JSON.
     public init(json: JSON) throws {
         text = try? json.string("text")
     }

@@ -92,8 +92,43 @@ public class Conversation {
         failure: (NSError -> Void)? = nil,
         success: MessageResponse -> Void)
     {
+        let input = InputData(text: text)
+        message(workspaceID, input: input, context: context, failure: failure, success: success)
+    }
+    
+    /**
+     Start a new conversation or get a response to a user's input.
+     
+     - parameter workspaceID: The unique identifier of the workspace to use.
+     - parameter input: An input object that includes the input text.
+     - parameter context: The context, or state, associated with this request.
+     - parameter entities: An array of terms that shall be identified as entities
+     - parameter intents: An array of terms that shall be identified as intents.
+     - parameter output: An output object that includes the response to the user,
+        the nodes that were hit, and messages from the log.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the conversation service's response.
+     */
+    public func message(
+        workspaceID: WorkspaceID,
+        input: InputData,
+        context: Context? = nil,
+        entities: [Entity]? = nil,
+        intents: [Intent]? = nil,
+        output: OutputData? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: MessageResponse -> Void)
+    {
+        // construct message request
+        let messageRequest = MessageRequest(
+            input: input,
+            context: context,
+            entities: entities,
+            intents: intents,
+            output: output
+        )
+        
         // construct body
-        let messageRequest = MessageRequest(text: text, context: context)
         guard let body = try? messageRequest.toJSON().serialize() else {
             let failureReason = "MessageRequest could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

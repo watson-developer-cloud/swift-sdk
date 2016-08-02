@@ -842,7 +842,6 @@ public class RetrieveAndRank {
     public func rankResults(
         rankerID: String,
         resultsFile: NSURL,
-        numberOfResults: Int? = nil,
         failure: (NSError -> Void)? = nil,
         success: Ranking -> Void) {
         
@@ -854,25 +853,11 @@ public class RetrieveAndRank {
             userAgent: userAgent
         )
         
-        // construct answerMetadata object
-        var json = ["answers": 10]
-        if let numberOfResults = numberOfResults {
-            json = ["answers": numberOfResults]
-        }
-        guard let answerMetadata = try? json.toJSON().serialize() else {
-            let failureReason = "Answer metadata could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
-        
         // execute REST request
         Alamofire.upload(
             request,
             multipartFormData: { multipartFormData in
                 multipartFormData.appendBodyPart(fileURL: resultsFile, name: "answer_data")
-                multipartFormData.appendBodyPart(data: answerMetadata, name: "answer_metadata")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {

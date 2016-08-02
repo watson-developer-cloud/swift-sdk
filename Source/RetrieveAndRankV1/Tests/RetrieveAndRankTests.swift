@@ -535,7 +535,7 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Get the ranker specified by this ID."
         let expectation = expectationWithDescription(description)
         
-        retrieveAndRank.getRanker("1ba90dx16-rank-218", failure: failWithError) {
+        retrieveAndRank.getRanker(trainedRankerID, failure: failWithError) {
             ranker in
         
             XCTAssertNotNil(ranker)
@@ -554,7 +554,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and delete a new ranker. */
     func testCreateAndDeleteRanker() {
-        guard let rankerFile = loadFile("trainingdata", withExtension: "txt") else {
+        guard let rankerFile = loadFile("ranker_train", withExtension: "csv") else {
             XCTFail("Failed to load training data needed to create the ranker.")
             return
         }

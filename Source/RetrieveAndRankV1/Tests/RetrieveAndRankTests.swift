@@ -25,7 +25,7 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedClusterName = "trained-swift-sdk-solr-cluster"
     private let trainedConfigurationName = "trained-swift-sdk-config"
     private let trainedCollectionName = "trained-swift-sdk-collection"
-    private let trainedRankerID = "1ba90fx17-rank-281"
+    private let trainedRankerID = "1ba90dx16-rank-674"
     private let trainedRankerName = "trained-swift-sdk-ranker"
     
     // MARK: - Test Configuration
@@ -189,7 +189,7 @@ class RetrieveAndRankTests: XCTestCase {
                 XCTFail("Failed to create the trained ranker.")
             }
 
-            guard let trainingDataFile = loadFile("ranker_train", withExtension: "csv") else {
+            guard let trainingDataFile = loadFile("ranker_train_data", withExtension: "csv") else {
                 XCTFail("Failed to load files needed to create the ranker.")
                 return
             }
@@ -554,7 +554,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and delete a new ranker. */
     func testCreateAndDeleteRanker() {
-        guard let rankerFile = loadFile("ranker_train", withExtension: "csv") else {
+        guard let rankerFile = loadFile("ranker_train_data", withExtension: "csv") else {
             XCTFail("Failed to load training data needed to create the ranker.")
             return
         }
@@ -579,7 +579,7 @@ class RetrieveAndRankTests: XCTestCase {
 
     /** Pass in a csv file with answers, and use the trained ranker to rerank those results. */
     func testRanker() {
-        guard let answerFile = loadFile("ranker_test", withExtension: "csv") else {
+        guard let answerFile = loadFile("ranker_test_data", withExtension: "csv") else {
             XCTFail("Failed to load test data needed to test the ranker.")
             return
         }
@@ -589,6 +589,13 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.rankResults(trainedRankerID, resultsFile: answerFile, failure: failWithError) {
             results in
             
+            XCTAssertEqual(results.topAnswer, "aid_11")
+            XCTAssertNotNil(results.answers)
+            for answer in results.answers {
+                XCTAssertNotNil(answer.answerID)
+                XCTAssertNotNil(answer.confidence)
+                XCTAssertNotNil(answer.score)
+            }
             expectation.fulfill()
         }
         waitForExpectations()
@@ -908,7 +915,7 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Try re-ranking a list of answers with an invalid ranker ID."
         let expectation = expectationWithDescription(description)
         
-        guard let answerFile = loadFile("ranker_test", withExtension: "csv") else {
+        guard let answerFile = loadFile("ranker_test_data", withExtension: "csv") else {
             XCTFail("Failed to load test data needed to test the ranker.")
             return
         }

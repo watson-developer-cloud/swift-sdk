@@ -278,6 +278,91 @@ public class VisualRecognition {
     }
     
     /**
+     Update an existing classifier by adding new classes or by adding new images to existing 
+     classes. At least one compressed file must be passed in.
+     
+     - parameter classifierID: The ID of the classifier you want to update.
+     - parameter positiveExamples: An array of classes, each with a name and a zip archive file of
+        images that prominently depict the visual subject of the class. Each class requires a
+        minimum of 10 images. If you specify multiple classes, the system will learn to classify
+        each category.
+     - parameter negativeExamples: A zip archive file of images that *do not* prominently depict the
+        visual subject of *any* of the classes being trained. Must contain a minimum of 10
+        images.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the updated classifier.
+     */
+    public func updateClassifier(
+        classifierID: String,
+        positiveExamples: [Class]? = nil,
+        negativeExamples: NSURL? = nil,
+        failure: (NSError -> Void)? = nil,
+        success: Classifier -> Void)
+    {
+        // ensure there is at least one compressed file
+        guard (positiveExamples != nil) || (negativeExamples != nil) else {
+            let failureReason = "To update a classifier, you must provide at least one " +
+                "compressed file of either positive or negative examples."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
+        // construct query parameters
+        var queryParameters = [NSURLQueryItem]()
+        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: .POST,
+            url: serviceURL + "/v3/classifiers/\(classifierID)",
+            acceptType: "application/json",
+            userAgent: userAgent,
+            queryParameters: queryParameters
+        )
+        
+        // execute REST request
+        Alamofire.upload(request,
+            multipartFormData: { multipartFormData in
+                if let positiveExamples = positiveExamples {
+                    for positiveExample in positiveExamples {
+                        let name = positiveExample.name + "_positive_examples"
+                        if let examples = positiveExample.examples {
+                            multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                        }
+                    }                    
+                }
+                if let negativeExamples = negativeExamples {
+                    let examples = negativeExamples
+                    let name = "negative_examples"
+                    multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                }
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: Response<Classifier, NSError>) in
+                        switch response.result {
+                        case .Success(let classifier): success(classifier)
+                        case .Failure(let error): failure?(error)
+                        }
+                    }
+                case .Failure:
+                    let failureReason = "Provided file(s) could not be encoded as form data."
+                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
+        )
+
+    }
+    
+    /**
      Classify images by URL. The supported image formats include .jpg, .png, and .gif.
  
      - parameter url: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it

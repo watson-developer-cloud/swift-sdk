@@ -283,14 +283,14 @@ public class VisualRecognition {
      
      - parameter classifierID: The ID of the classifier you want to update.
      - parameter positiveExamples: An array of classes, each with a name and a zip archive file of
-     images that prominently depict the visual subject of the class. Each class requires a
-     minimum of 10 images. If you specify multiple classes, the system will learn to classify
-     each category.
+        images that prominently depict the visual subject of the class. Each class requires a
+        minimum of 10 images. If you specify multiple classes, the system will learn to classify
+        each category.
      - parameter negativeExamples: A zip archive file of images that *do not* prominently depict the
-     visual subject of *any* of the classes being trained. Must contain a minimum of 10
-     images.
+        visual subject of *any* of the classes being trained. Must contain a minimum of 10
+        images.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the created classifier.
+     - parameter success: A function executed with information about the updated classifier.
      */
     public func updateClassifier(
         classifierID: String,

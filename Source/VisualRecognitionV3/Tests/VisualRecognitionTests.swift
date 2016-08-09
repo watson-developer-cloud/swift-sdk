@@ -271,6 +271,20 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Update the trained classifier. */
+    func testUpdateClassifier() {
+        let description = "Update the trained classifier."
+        let expectation = expectationWithDescription(description)
+        
+        let car = Class(name: "car", examples: examplesCars)
+        visualRecognition.updateClassifier(classifierID!, positiveExamples: [car], negativeExamples: examplesTrucks, failure: failWithError) {
+            classifier in
+            XCTAssertEqual(classifier.name, self.classifierName)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     /** Update the classifier with a positive example. */
     func testUpdateClassifierWithPositiveExample() {
         let description1 = "Train a new classifier with positive examples."

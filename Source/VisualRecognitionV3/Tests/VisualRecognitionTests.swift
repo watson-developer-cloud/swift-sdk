@@ -271,6 +271,217 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Update the classifier with a positive example. */
+    func testUpdateClassifierWithPositiveExample() {
+        let description1 = "Train a new classifier with positive examples."
+        let expectation1 = expectationWithDescription(description1)
+        
+        let name = "swift-sdk-unit-test-positive-update"
+        let cars = Class(name: "car", examples: examplesCars)
+        let trucks = Class(name: "truck", examples: examplesTrucks)
+        
+        var classifierID: String?
+        visualRecognition.createClassifier(
+            name,
+            positiveExamples: [cars],
+            negativeExamples: examplesBaseball,
+            failure: failWithError) { classifier in
+                XCTAssertEqual(classifier.name, name)
+                XCTAssertEqual(classifier.classes.count, 1)
+                classifierID = classifier.classifierID
+                expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        var trained = false
+        var tries = 0
+        while(!trained) {
+            tries += 1
+            let description = "Get the new classifier."
+            let expectation = expectationWithDescription(description)
+            visualRecognition.getClassifier(classifierID!, failure: failWithError) {
+                classifier in
+                
+                if classifier.status == "ready" {
+                    trained = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                let description = "Delete the new classifier."
+                let expectation = expectationWithDescription(description)
+                
+                visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+                    expectation.fulfill()
+                }
+                waitForExpectations()
+                
+                XCTFail("Could not train a new classifier. Try again later.")
+            }
+            
+            sleep(5)
+        }
+        
+        let description2 = "Update the classifier with a positive example."
+        let expectation2 = expectationWithDescription(description2)
+        
+        visualRecognition.updateClassifier(
+            classifierID!,
+            positiveExamples: [trucks],
+            failure: failWithError) { classifier in
+                XCTAssertEqual(classifier.name, name)
+                expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        trained = false
+        tries = 0
+        while(!trained) {
+            tries += 1
+            let description = "Get the updated classifier and make sure there are 2 classes."
+            let expectation = expectationWithDescription(description)
+            visualRecognition.getClassifier(classifierID!, failure: failWithError) {
+                classifier in
+                
+                if classifier.status == "ready" {
+                    XCTAssertEqual(classifier.classes.count, 2)
+                    trained = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                let description = "Delete the new classifier."
+                let expectation = expectationWithDescription(description)
+                
+                visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+                    expectation.fulfill()
+                }
+                waitForExpectations()
+                
+                XCTFail("Could not update the classifier. Try again later.")
+            }
+            
+            sleep(5)
+        }
+        
+        let description4 = "Delete the custom classifier."
+        let expectation4 = expectationWithDescription(description4)
+        
+        visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Update the classifier with a negative example. */
+    func testUpdateClassifierWithNegativeExample() {
+        let description1 = "Train a new classifier with positive examples."
+        let expectation1 = expectationWithDescription(description1)
+        
+        let name = "swift-sdk-unit-test-negative-update"
+        let cars = Class(name: "car", examples: examplesCars)
+        let classes = [cars]
+        
+        var classifierID: String?
+        visualRecognition.createClassifier(
+            name,
+            positiveExamples: classes,
+            negativeExamples: examplesTrucks,
+            failure: failWithError) { classifier in
+                XCTAssertEqual(classifier.name, name)
+                XCTAssertEqual(classifier.classes.count, 1)
+                classifierID = classifier.classifierID
+                expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        var trained = false
+        var tries = 0
+        while(!trained) {
+            tries += 1
+            let description = "Get the new classifier."
+            let expectation = expectationWithDescription(description)
+            visualRecognition.getClassifier(classifierID!, failure: failWithError) {
+                classifier in
+                
+                if classifier.status == "ready" {
+                    trained = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                let description = "Delete the new classifier."
+                let expectation = expectationWithDescription(description)
+                
+                visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+                    expectation.fulfill()
+                }
+                waitForExpectations()
+                
+                XCTFail("Could not train a new classifier. Try again later.")
+            }
+            
+            sleep(5)
+        }
+        
+        let description2 = "Update the classifier with a negative example."
+        let expectation2 = expectationWithDescription(description2)
+        visualRecognition.updateClassifier(
+            classifierID!,
+            negativeExamples: examplesBaseball,
+            failure: failWithError) { classifier in
+                XCTAssertEqual(classifier.name, name)
+                expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        trained = false
+        tries = 0
+        while(!trained) {
+            tries += 1
+            let description = "Get the updated classifier and make sure there is 1 class."
+            let expectation = expectationWithDescription(description)
+            visualRecognition.getClassifier(classifierID!, failure: failWithError) {
+                classifier in
+                
+                if classifier.status == "ready" {
+                    XCTAssertEqual(classifier.classes.count, 1)
+                    trained = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                let description = "Delete the new classifier."
+                let expectation = expectationWithDescription(description)
+                
+                visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+                    expectation.fulfill()
+                }
+                waitForExpectations()
+                
+                XCTFail("Could not update the classifier. Try again later.")
+            }
+            
+            sleep(5)
+        }
+        
+        let description4 = "Delete the custom classifier."
+        let expectation4 = expectationWithDescription(description4)
+        
+        visualRecognition.deleteClassifier(classifierID!, failure: failWithError) {
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     /** Classify an image by URL using the default classifier and all default parameters. */
     func testClassifyByURL1() {
         let description = "Classify an image by URL using the default classifier."

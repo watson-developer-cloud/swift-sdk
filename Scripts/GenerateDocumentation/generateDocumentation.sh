@@ -16,6 +16,7 @@ services=(
   NaturalLanguageClassifierV1
   PersonalityInsightsV2
   RelationshipExtractionV1Beta
+  RetrieveAndRankV1
   SpeechToTextV1
   TextToSpeechV1
   ToneAnalyzerV3

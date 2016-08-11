@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.6.0
+
+_2016-08-11_
+
+This update adds the Retrieve and Rank service. It also adds re-training functionality to Visual Recognition and includes several minor documentation updates.
+
 ## Version 0.5.0
 
 _2016-07-26_

@@ -33,6 +33,7 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
 * [Personality Insights](#personality-insights)
+* [Retrieve and Rank](#retrieve-and-rank)
 * [Speech to Text](#speech-to-text)
 * [Text to Speech](#text-to-speech)
 * [Tone Analyzer](#tone-analyzer)
@@ -421,6 +422,121 @@ The following links provide more information about the Personality Insights serv
 * [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
 * [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
+
+## Retrieve and Rank
+
+The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.
+
+The following example demonstrates how to instantiate a `Retrieve and Rank` object.
+
+```swift
+import RetrieveAndRankV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let retrieveAndRank = RetrieveAndRank(username: username, password: password)
+```
+
+The following example demonstrates how to create a Solr Cluster, configuration, and collection.
+
+```swift
+let failure = { (error: NSError) in print(error) }
+
+// Create and store the Solr Cluster so you can access it later.
+var cluster: SolrCluster?
+retrieveAndRank.createSolrCluster("your-cluster-name-here", failure: failure) { solrCluster in
+    cluster = solrCluster
+}
+
+// Load the configuration file.
+guard let configFile = NSBundle.mainBundle().URLForResource("your-config-filename", withExtension: "zip") else {
+    print("Failed to locate configuration file.")
+    return
+}
+let configurationName = "your-config-name-here"
+// Create the configuration. Make sure the Solr Cluster status is READY first.
+retrieveAndRank.uploadSolrConfiguration(
+    cluster.solrClusterID,
+    configName: configurationName,
+    zipFile: configFile,
+    failure: failure)
+
+// Create and store your Solr collection name.
+let collectionName = "your-collection-name-here"
+retrieveAndRank.createSolrCollection(
+    cluster.solrClusterID,
+    name: collectionName,
+    configName: configurationName,
+    failure)
+
+// Load the documents you want to add to your collection.
+guard let collectionFile = NSBundle.mainBundle().URLForResource("your-collection-filename", withExtension: "json") else {
+    print("Failed to locate collection file.")
+    return
+}
+// Upload the documents to your collection.
+retrieveAndRank.updateSolrCollection(
+    cluster.solrClusterID,
+    collectionName: collectionName,
+    contentType: "application/json",
+    contentFile: collectionFile,
+    failure: failure)
+```
+
+The following example demonstrates how to use the Retrieve and Rank service to retrieve answers without ranking them.
+
+```swift
+retrieveAndRank.search(
+    cluster.solrClusterID,
+    collectionName: collectionName,
+    query: "your-query-here",
+    returnFields: "your-return-fields-here",
+    failure: failure) { response in
+        
+    print(response)
+}
+```
+
+The following example demonstrates how to create and train a Ranker.
+
+``` swift
+// Load the ranker training data file.
+guard let rankerTrainingFile = NSBundle.mainBundle().URLForResource("your-ranker-training-data-filename", withExtension: "json") else {
+    print("Failed to locate collection file.")
+    return
+}
+
+// Create and store the ranker.
+var ranker = RankerDetails?
+retrieveAndRank.createRanker(
+    rankerTrainingFile,
+    name: "your-ranker-name-here",
+    failure: failure) { rankerDetails in
+    
+    ranker = rankerDetails
+}
+```
+
+The following example demonstrates how to use the service to retrieve and rank the results.
+
+```swift
+retrieveAndRank.searchAndRank(
+    cluster.solrClusterID,
+    collectionName: collectionName,
+    rankerID: ranker.rankerID,
+    query: "your-query-here",
+    returnFields: "your-return-fields-here",
+    failure: failure) { response in
+        
+    print(response)
+}
+```
+
+The following links provide more information about the Retrieve and Rank service:
+
+* [IBM Watson Retrieve and Rank - Service Page](http://www.ibm.com/watson/developercloud/retrieve-rank.html)
+* [IBM Watson Retrieve and Rank - Documentation](http://www.ibm.com/watson/developercloud/doc/retrieve-rank/)
+* [IBM Watson Retrieve and Rank - Demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/)
 
 ## Speech to Text
 

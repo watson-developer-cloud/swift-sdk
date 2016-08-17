@@ -27,6 +27,7 @@ public typealias DialogID = String
  conversations between virtual agents and users through an application programming
  interface (API). These conversations are commonly referred to as dialogs.
  */
+@available(*, deprecated, message="The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
 public class Dialog {
     
     private let username: String

@@ -127,15 +127,15 @@ class ConversationTests: XCTestCase {
             // verify entities
             XCTAssertEqual(response.entities.count, 1)
             XCTAssertEqual(response.entities[0].entity, "appliance")
-            XCTAssertEqual(response.entities[0].location.startIndex, 12)
-            XCTAssertEqual(response.entities[0].location.endIndex, 17)
+            XCTAssertEqual(response.entities[0].location?.startIndex, 12)
+            XCTAssertEqual(response.entities[0].location?.endIndex, 17)
             XCTAssertEqual(response.entities[0].value, "music")
             
             // verify intents
             XCTAssertEqual(response.intents.count, 1)
             XCTAssertEqual(response.intents[0].intent, "turn_on")
-            XCTAssertGreaterThan(response.intents[0].confidence, 0.90)
-            XCTAssertLessThan(response.intents[0].confidence, 1.00)
+            XCTAssert(response.intents[0].confidence >= 0.90)
+            XCTAssert(response.intents[0].confidence <= 1.00)
             
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
@@ -143,6 +143,133 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(response.output.nodesVisited, nodes2)
             
             expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testMessageAllFields1() {
+        let description1 = "Start a conversation."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var context: Context?
+        var entities: [Entity]?
+        var intents: [Intent]?
+        var output: OutputData?
+        
+        conversation.message(workspaceID, failure: failWithError) {
+            response in
+            context = response.context
+            entities = response.entities
+            intents = response.intents
+            output = response.output
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Continue a conversation."
+        let expectation2 = expectationWithDescription(description2)
+        
+        let input2 = InputData(text: "Turn on the radio.")
+        conversation.message(workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+            response in
+            
+            // verify objects are non-nil
+            XCTAssertNotNil(entities)
+            XCTAssertNotNil(intents)
+            XCTAssertNotNil(output)
+            
+            // verify intents are equal
+            for i in 0..<response.intents.count {
+                let intent1 = intents![i]
+                let intent2 = response.intents[i]
+                XCTAssertEqual(intent1.intent, intent2.intent)
+                if intent1.confidence != nil && intent2.confidence != nil {
+                    XCTAssertEqualWithAccuracy(intent1.confidence!, intent2.confidence!, accuracy: 10E-5)
+                } else {
+                    XCTAssertEqual(intent1.confidence, intent2.confidence)
+                }
+            }
+            
+            // verify entities are equal
+            for i in 0..<response.entities.count {
+                let entity1 = entities![i]
+                let entity2 = response.entities[i]
+                XCTAssertEqual(entity1.entity, entity2.entity)
+                XCTAssertEqual(entity1.location?.startIndex, entity2.location?.startIndex)
+                XCTAssertEqual(entity1.location?.endIndex, entity2.location?.endIndex)
+                XCTAssertEqual(entity1.value, entity2.value)
+            }
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testMessageAllFields2() {
+        let description1 = "Start a conversation."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var context: Context?
+        var entities: [Entity]?
+        var intents: [Intent]?
+        var output: OutputData?
+        
+        conversation.message(workspaceID, failure: failWithError) {
+            response in
+            context = response.context
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Continue a conversation."
+        let expectation2 = expectationWithDescription(description2)
+        
+        let text2 = "Turn on the radio."
+        conversation.message(workspaceID, text: text2, context: context, failure: failWithError) {
+            response in
+            context = response.context
+            entities = response.entities
+            intents = response.intents
+            output = response.output
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Continue a conversation with non-empty intents and entities."
+        let expectation3 = expectationWithDescription(description3)
+        
+        let input3 = InputData(text: "Rock music.")
+        conversation.message(workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+            response in
+            
+            // verify objects are non-nil
+            XCTAssertNotNil(entities)
+            XCTAssertNotNil(intents)
+            XCTAssertNotNil(output)
+            
+            // verify intents are equal
+            for i in 0..<response.intents.count {
+                let intent1 = intents![i]
+                let intent2 = response.intents[i]
+                XCTAssertEqual(intent1.intent, intent2.intent)
+                if intent1.confidence != nil && intent2.confidence != nil {
+                    XCTAssertEqualWithAccuracy(intent1.confidence!, intent2.confidence!, accuracy: 10E-5)
+                } else {
+                    XCTAssertEqual(intent1.confidence, intent2.confidence)
+                }
+            }
+            
+            // verify entities are equal
+            for i in 0..<response.entities.count {
+                let entity1 = entities![i]
+                let entity2 = response.entities[i]
+                XCTAssertEqual(entity1.entity, entity2.entity)
+                XCTAssertEqual(entity1.location?.startIndex, entity2.location?.startIndex)
+                XCTAssertEqual(entity1.location?.endIndex, entity2.location?.endIndex)
+                XCTAssertEqual(entity1.value, entity2.value)
+            }
+            
+            expectation3.fulfill()
         }
         waitForExpectations()
     }

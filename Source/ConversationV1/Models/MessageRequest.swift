@@ -22,27 +22,32 @@ internal struct MessageRequest: JSONEncodable {
     
     private let input: InputData
     private let context: Context?
+    private let entities: [Entity]?
+    private let intents: [Intent]?
+    private let output: OutputData?
     
     /**
-     Create a `MessageRequest` with input and context.
+     Create a `MessageRequest`.
      
      - parameter input: An input object that includes the input text.
      - parameter context: The context, or state, associated with this request.
+     - parameter entities: An array of terms that shall be identified as entities
+     - parameter intents: An array of terms that shall be identified as intents.
+     - parameter output: An output object that includes the response to the user,
+        the nodes that were hit, and messages from the log.
      */
-    init(input: InputData, context: Context? = nil) {
+    init(
+        input: InputData,
+        context: Context? = nil,
+        entities: [Entity]? = nil,
+        intents: [Intent]? = nil,
+        output: OutputData? = nil)
+    {
         self.input = input
         self.context = context
-    }
-    
-    /**
-     Create a `MessageRequest` with text and context.
-     
-     - parameter text: The user's input text.
-     - parameter context: The context, or state, associated with this request.
-     */
-    init(text: String? = nil, context: Context? = nil) {
-        let input = InputData(text: text)
-        self.init(input: input, context: context)
+        self.entities = entities
+        self.intents = intents
+        self.output = output
     }
     
     /// Used internally to serialize a `MessageRequest` model to JSON.
@@ -51,6 +56,15 @@ internal struct MessageRequest: JSONEncodable {
         json["input"] = input.toJSON()
         if let context = context {
             json["context"] = context.toJSON()
+        }
+        if let entities = entities {
+            json["entities"] = .Array(entities.map {$0.toJSON()})
+        }
+        if let intents = intents {
+            json["intents"] = .Array(intents.map {$0.toJSON()})
+        }
+        if let output = output {
+            json["output"] = output.toJSON()
         }
         return JSON.Dictionary(json)
     }

@@ -94,7 +94,7 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     /// Used internally to serialize a `SystemResponse` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["dialogStack"] = .Array(dialogStack.map { .String($0) })
+        json["dialog_stack"] = .Array(dialogStack.map { .String($0) })
         json["dialog_turn_counter"] = .Int(dialogTurnCounter)
         json["dialog_request_counter"] = .Int(dialogRequestCounter)
         return JSON.Dictionary(json)

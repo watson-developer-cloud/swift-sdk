@@ -25,6 +25,7 @@ class TextToSpeechTests: XCTestCase {
     private let playAudio = true
     private let text = "Swift at IBM is awesome. You should try it!"
     private let germanText = "Erst denken, dann handeln."
+    private let japaneseText = "こんにちは"
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
                              "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
     private let allVoices: [SynthesisVoice] = [
@@ -184,6 +185,29 @@ class TextToSpeechTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         textToSpeech.synthesize(germanText, voice: .DE_Dieter, audioFormat: .WAV, failure: failWithError) {
+            data in
+            XCTAssertGreaterThan(data.length, 0)
+            do {
+                let audioPlayer = try AVAudioPlayer(data: data)
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                if self.playAudio {
+                    sleep(2)
+                }
+            } catch {
+                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Synthesize text to spoken audio using the Emi voice. */
+    func testSynthesizeEmi() {
+        let description = "Synthesize text to spoken audio."
+        let expectation = expectationWithDescription(description)
+        
+        textToSpeech.synthesize(japaneseText, voice: .JP_Emi, audioFormat: .WAV, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.length, 0)
             do {

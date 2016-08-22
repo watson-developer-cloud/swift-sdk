@@ -29,7 +29,8 @@ public struct TranscriptionSettings: JSONEncodable {
     /***** URL query parameters for WebSockets connection request. *****/
 
     /// Specifies the language in which the audio is spoken and the rate at which it was
-    /// sampled. If `nil`, then the default model will be used. Visit https://ibm.biz/BdH93p
+    /// sampled. If `nil`, then the default model will be used. Visit
+    /// https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models
     /// for more information about the available models.
     public var model: String?
 

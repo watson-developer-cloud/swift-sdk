@@ -119,6 +119,9 @@ import AVFoundation
 
 14) Enjoy!
 
+Find the source code for this project
+[here](https://github.com/IBM-MIL/ios-sdk-watson-speaks/tree/quickstart).
+
 You can review the different voices and languages [here](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices).
 
 You can download all the source code for the Watson Developer Cloud iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).

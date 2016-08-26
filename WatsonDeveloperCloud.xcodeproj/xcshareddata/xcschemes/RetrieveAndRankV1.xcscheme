@@ -37,6 +37,20 @@
                BlueprintName = "RetrieveAndRankV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RetrieveAndRankTests/testCreateAndDeleteRanker()">
+               </Test>
+               <Test
+                  Identifier = "RetrieveAndRankTests/testCreateAndDeleteSolrCluster()">
+               </Test>
+               <Test
+                  Identifier = "RetrieveAndRankTests/testCreateAndDeleteSolrCollection()">
+               </Test>
+               <Test
+                  Identifier = "RetrieveAndRankTests/testCreateAndDeleteSolrConfiguration()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

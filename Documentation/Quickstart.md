@@ -125,3 +125,28 @@ Find the source code for this project
 You can review the different voices and languages [here](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices).
 
 You can download all the source code for the Watson Developer Cloud iOS SDK [here](https://github.com/watson-developer-cloud/ios-sdk).
+
+###Create a Text to Speech app with UI
+
+Fork the project
+[here](https://github.com/IBM-MIL/ios-sdk-watson-speaks/tree/master).
+
+Additions to the quick start app:
+
+1) Separated all SDK calls into the ```ToSpeech.swift``` file:
+	1. Uses SDK's ```synthesize``` function call to synthesize text to speech.
+	2. Uses SDK's ```getVoices``` function call to get all the available voices for people to select from and use.
+	3. Loads asynchronous fall and notifies the ViewController with NSNotificationCenter.
+2) ViewController now manages the app's UI actions:
+	1. Defines a table to display all the voices for users to select from and use.
+	2. Allows users to choose which voice they would like to use in order to convert the text to speech.
+	3. Adds a text field to allow users to input any text they'd like to output as audio.
+	4. Adds user error handling to alert users to select a voice, or that the text field is empty.
+	5. Adds a button
+3) Main.storyboard uses Auto Layout to format the UI
+4) UIViewExtensions adds the ability to make rounded corners, define border widths and colors for any objects.
+
+Things to note:
+
+1) All voices are loaded as an option to use. Foreign voice selections (i.e. 'ja-JP_Emi') are expecting the text input to be in Japanese; however, using English in the text field and selecting that voice will produce an audio that pronounces English with a Japanese accent.
+2) Default voice for options not included in the ```pressedSpeakButton``` switch cases is Kate's British voice.

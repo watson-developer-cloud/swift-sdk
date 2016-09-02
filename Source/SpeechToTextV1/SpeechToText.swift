@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import AVFoundation
-import RestKit
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -26,8 +24,12 @@ import RestKit
  */
 public class SpeechToText {
 
-    private let restToken: RestToken
+    private let username: String
+    private let password: String
+    private let serviceURL: String
+    private let tokenURL: String
     private let websocketsURL: String
+    private var microphoneSession: SpeechToTextSession?
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -46,29 +48,29 @@ public class SpeechToText {
         tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
         websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
     {
-        self.restToken = RestToken(
-            tokenURL: tokenURL + "?url=" + serviceURL,
-            username: username,
-            password: password
-        )
+        self.username = username
+        self.password = password
+        self.serviceURL = serviceURL
+        self.tokenURL = tokenURL
         self.websocketsURL = websocketsURL
     }
-
-    /** A function that, when executed, stops streaming audio to Speech to Text. */
-    public typealias StopStreaming = Void -> Void
 
     /**
      Transcribe an audio file.
     
      - parameter file: The audio file to transcribe.
-     - parameter settings: The configuration for this transcription request.
+     - parameter settings: The configuration to use for this recognition request.
+     - parameter model: 
+     - parameter learningOptOut:
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
      */
-    public func transcribe(
+    public func recognize(
         file: NSURL,
         settings: TranscriptionSettings,
+        model: String? = nil,
+        learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: [TranscriptionResult] -> Void)
     {
@@ -80,104 +82,122 @@ public class SpeechToText {
             return
         }
 
-        transcribe(audio, settings: settings, failure: failure, success: success)
+        recognize(
+            audio,
+            settings: settings,
+            model: model,
+            learningOptOut: learningOptOut,
+            failure: failure,
+            success: success
+        )
     }
 
     /**
      Transcribe audio data.
 
      - parameter audio: The audio data to transcribe.
-     - parameter settings: The configuration for this transcription request.
+     - parameter settings: The configuration to use for this recognition request.
+     - parameter model: 
+     - parameter learningOptOut:
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
      */
-    public func transcribe(
+    public func recognize(
         audio: NSData,
         settings: TranscriptionSettings,
+        model: String? = nil,
+        learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: [TranscriptionResult] -> Void)
     {
-        guard let socket = SpeechToTextWebSocket(
-            websocketsURL: websocketsURL,
-            restToken: restToken,
-            settings: settings,
-            failure: failure,
-            success: success) else { return }
+        let session = SpeechToTextSession(
+            username: username,
+            password: password,
+            model: model,
+            learningOptOut: learningOptOut,
+            serviceURL: serviceURL,
+            tokenURL: tokenURL,
+            websocketsURL: websocketsURL
+        )
         
-        do {
-            let start = try settings.toJSON().serializeString()
-            let stop = try TranscriptionStop().toJSON().serializeString()
-            socket.connect()
-            socket.writeString(start)
-            socket.writeData(audio)
-            socket.writeString(stop)
-            socket.disconnect()
-        } catch {
-            let failureReason = "Failed to serialize start and stop instructions to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
+        session.onResults = success
+        session.onError = failure
+        
+        session.connect()
+        session.startRequest(settings)
+        session.recognize(audio)
+        session.stopRequest()
+        session.disconnect()
     }
 
     /**
      Stream audio from the microphone to the Speech to Text service. The microphone will stop
      recording after an end-of-speech event is detected by the Speech to Text service or the
      returned function is executed.
+     
+     Stop streaming with the `stopMicrophone` function.
 
      - parameter settings: The configuration for this transcription request.
+     - parameter model: 
+     - parameter learningOptOut:
+     - parameter compress:
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
-     - returns: A function that, when executed, stops streaming audio to Speech to Text.
      */
-    public func transcribe(
+    public func recognize(
         settings: TranscriptionSettings,
+        model: String? = nil,
+        learningOptOut: Bool? = nil,
+        compress: Bool = true,
         failure: (NSError -> Void)? = nil,
         success: [TranscriptionResult] -> Void)
-        -> StopStreaming
+        -> RecognitionRequest
     {
-        guard let audioStreamer = SpeechToTextAudioStreamer(
-            websocketsURL: websocketsURL,
-            restToken: restToken,
-            settings: settings,
-            failure: failure,
-            success: success) else { return { } }
-
-        guard audioStreamer.startStreaming() else {
-            audioStreamer.stopStreaming()
-            return { }
-        }
-
-        return audioStreamer.stopStreaming
+        let session = SpeechToTextSession(
+            username: username,
+            password: password,
+            model: model,
+            learningOptOut: learningOptOut,
+            serviceURL: serviceURL,
+            tokenURL: tokenURL,
+            websocketsURL: websocketsURL
+        )
+        
+        session.onResults = success
+        session.onError = failure
+        
+        session.connect()
+        session.startRequest(settings)
+        session.startMicrophone(compress)
+        
+        return RecognitionRequest(session: session)
     }
+}
 
-    /**
-     Create an `AVCaptureAudioDataOutput` that streams audio to the Speech to Text service.
+public class RecognitionRequest {
 
-     - parameter settings: The configuration for this transcription request.
-     - parameter failure: A function executed whenever an error occurs.
-     - parameter success: A function executed with all transcription results whenever
-        a final or interim transcription is received.
-     - returns: A tuple with two elements. The first element is an `AVCaptureAudioDataOutput` that
-        streams audio to the Speech to Text service when set as the output of an `AVCaptureSession`.
-        The second element is a function that, when executed, stops streaming to Speech to Text.
-     */
-    public func createTranscriptionOutput(
-        settings: TranscriptionSettings,
-        failure: (NSError -> Void)? = nil,
-        success: [TranscriptionResult] -> Void)
-        -> (AVCaptureAudioDataOutput, StopStreaming)?
-    {
-        guard let audioStreamer = SpeechToTextAudioStreamer(
-            websocketsURL: websocketsURL,
-            restToken: restToken,
-            settings: settings,
-            failure: failure,
-            success: success) else { return nil }
-        audioStreamer.startRecognitionRequest()
-        return (audioStreamer.createTranscriptionOutput(), audioStreamer.stopRecognitionRequest)
+    /// The results of the recognition request.
+    public var results: [TranscriptionResult] { return session.results }
+    
+    private let session: SpeechToTextSession
+    
+    private init(session: SpeechToTextSession) {
+        self.session = session
+    }
+    
+    public func cancel() {
+        session.stopMicrophone()
+        session.stopRequest()
+        session.disconnect()
+    }
+    
+    public func finish() {
+        session.stopMicrophone()
+        session.stopRequest()
+        session.onListening = {
+            self.session.disconnect()
+        }
     }
 }

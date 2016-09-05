@@ -25,24 +25,28 @@ import Foundation
 public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
-    public var results: [TranscriptionResult] { return socket.results }
+    public var results: [TranscriptionResult] {
+        get { return socket.results }
+    }
     
-    /// The state of the WebSocket connection to the service.
-    public var state: SpeechToTextState { return socket.state }
+    /// The state of the session.
+    public var state: SpeechToTextState {
+        get { return socket.state }
+    }
     
-    /// Invoked when the WebSocket connects to the Speech to Text service.
+    /// Invoked when the session connects to the Speech to Text service.
     public var onConnect: (Void -> Void)? {
         get { return socket.onConnect }
         set { socket.onConnect = newValue }
     }
     
-    /// Invoked when the Speech to Text service transitions to the listening state.
+    /// Invoked when the session transitions to the listening state.
     public var onListening: (Void -> Void)? {
         get { return socket.onListening }
         set { socket.onListening = newValue }
     }
     
-    /// Invoked when transcription results are received from the Speech to Text service.
+    /// Invoked when transcription results are received for a recognition request.
     public var onResults: ([TranscriptionResult] -> Void)? {
         get { return socket.onResults }
         set { socket.onResults = newValue }
@@ -54,7 +58,7 @@ public class SpeechToTextSession {
         set { socket.onError = newValue }
     }
     
-    /// Invoked when the WebSocket disconnects from the Speech to Text service.
+    /// Invoked when the session disconnects from the Speech to Text service.
     public var onDisconnect: (Void -> Void)? {
         get { return socket.onDisconnect }
         set { socket.onDisconnect = newValue }
@@ -71,8 +75,9 @@ public class SpeechToTextSession {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter model: 
-     - parameter learningOptOut:
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+        https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter serviceURL: The base URL of the Speech to Text service.
      - parameter tokenURL: The URL that shall be used to obtain a token.
      - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
@@ -100,21 +105,31 @@ public class SpeechToTextSession {
         
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
-            opusRate: 16000,
+            opusRate: Int32(recorder.format.mSampleRate),
             application: .VOIP
         )
     }
     
+    /**
+     Connect to the Speech to Text service.
+     
+     If set, the `onConnect()` callback will be invoked after the session connects to the service.
+     */
     public func connect() {
         socket.connect()
     }
     
+    /**
+     Start a recognition request.
+ 
+     - parameter settings: The configuration to use for this recognition request.
+     */
     public func startRequest(settings: TranscriptionSettings) {
-        socket.startRequest(settings)
+        socket.writeStart(settings)
     }
     
     /**
-     Transcribe an audio file.
+     Send an audio file to transcribe.
      
      - parameter file: The audio file to transcribe.
      */
@@ -130,7 +145,7 @@ public class SpeechToTextSession {
     }
     
     /**
-     Transcribe audio data.
+     Send audio data to transcribe.
      
      - parameter audio: The audio data to transcribe.
      */
@@ -138,10 +153,23 @@ public class SpeechToTextSession {
         socket.writeAudio(audio)
     }
     
-    public func requestMicrophonePermission() {
-        // TODO: implement this function and wrap it in SpeechToText
-    }
-    
+    /**
+     Start streaming microphone audio data to transcribe.
+     
+     By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
+     To disable Opus compression and send linear PCM data instead, set `compress` to `false`.
+     
+     If compression is enabled, the recognitions request's `contentType` setting should be set to
+     `AudioMediaType.Opus`. If compression is disabled, then the `contentType` settings should be
+     set to `AudioMediaType.L16(rate: 16000, channels: 1)`.
+     
+     This function may cause the system to automatically prompt the user for permission
+     to access the microphone. See `AVAudioSession.requestRecordPermission(_:)` if you
+     would rather explicitly ask for the user's permission before invoking this function.
+     
+     - parameter compress: Should microphone audio be compressed to Opus before being sent to
+        the Speech to Text service? (Opus compression reduces latency and bandwidth.)
+     */
     public func startMicrophone(compress: Bool = true) {
         print("starting microphone")
         self.compress = compress
@@ -167,6 +195,9 @@ public class SpeechToTextSession {
         recorder.startRecording()
     }
     
+    /**
+     Stop streaming microphone audio data to transcribe.
+     */
     public func stopMicrophone() {
         print("stopping microphone")
         recorder.stopRecording()
@@ -176,15 +207,35 @@ public class SpeechToTextSession {
         }
     }
     
+    /**
+     Stop the recognition request.
+     */
     public func stopRequest() {
-        socket.stopRequest()
+        socket.writeStop()
     }
     
+    /**
+     Send a message to prevent the service from automatically disconnecting due to inactivity.
+ 
+     As described in the service documentation, the Speech to Text service terminates the session
+     and closes the connection if the inactivity or session timeout is reached. The inactivity
+     timeout occurs if audio is being sent by the client but the service detects no speech. The
+     inactivity timeout is 30 seconds by default, but can be configured by specifying a value for
+     the `inactivityTimeout` setting. The session timeout occurs if the service receives no data
+     from the client or sends no interim results for 30 seconds. You cannot change the length of
+     this timeout; however, you can extend the session by sending a message. This function sends
+     a `no-op` message to touch the session and reset the session timeout in order to keep the
+     connection alive.
+     */
     public func keepAlive() {
         socket.writeNop()
     }
-
-    public func disconnect(forceTimeout: NSTimeInterval? = nil) {
+    
+    /**
+     Wait for any queued recognition requests to complete then disconnect from the service.
+     */
+    public func disconnect() {
+        socket.waitForResults()
         socket.disconnect()
     }
 }

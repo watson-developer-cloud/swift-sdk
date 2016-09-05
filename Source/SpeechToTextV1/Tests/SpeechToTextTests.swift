@@ -89,7 +89,7 @@ class SpeechToTextTests: XCTestCase {
         }
 
         let settings = TranscriptionSettings(contentType: format)
-        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
@@ -143,7 +143,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
                 let transcript = results.last?.alternatives.last?.transcript
@@ -189,7 +189,7 @@ class SpeechToTextTests: XCTestCase {
         }
 
         let settings = TranscriptionSettings(contentType: format)
-        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
             XCTAssert(results.last?.final == true)
@@ -248,7 +248,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             if results.last?.final == true {
                 let transcript = results.last?.alternatives.last?.transcript

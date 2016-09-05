@@ -27,18 +27,15 @@ public enum SpeechToTextState {
     /// receive audio data for transcription.
     case Listening
     
-    /// A recognition request is being processed. The Speech to Text service is receiving
-    /// audio data and transcribing it to text.
+    /// Audio data for the recognition request was sent to the Speech to Text service. The
+    /// service is processing the audio data. (No transcription results have yet been received.)
+    case SentAudio
+    
+    /// A recognition request is being processed. The Speech to Text service is receiving audio
+    /// data and transcribing it to text. (At least one transcription result has been received.)
     case Transcribing
     
     /// The session is disconnected from the Speech to Text service.
     case Disconnected
     
 }
-
-//public enum SpeechToTextSessionState {
-//    case Connected // Connected to socket. Waiting for a recognition request to be initiated.
-//    case Listening // Recognition request initiated. Waiting to receive audio data.
-//    case Transcribing // Processing request. Audio data was received and is being transcribed.
-//    case Disconnected // Disconnected.
-//}

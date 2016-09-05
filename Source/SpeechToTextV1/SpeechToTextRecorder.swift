@@ -24,6 +24,7 @@ internal class SpeechToTextRecorder {
     
     internal var onAudio: (NSData -> Void)?                          // callback to handle pcm buffer
     private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
+    
     private var queue: AudioQueueRef = nil                           // opaque reference to an audio queue
     private var buffers = [AudioQueueBufferRef]()                    // array of audio queue buffers
     private var bufferSize: UInt32 = 0                               // capacity of each buffer, in bytes
@@ -61,7 +62,7 @@ internal class SpeechToTextRecorder {
         print("enqueue status: \(enqueueStatus)")
     }
     
-    internal func startRecording() {
+    internal init() {
         // define audio format
         var formatFlags = AudioFormatFlags()
         formatFlags |= kLinearPCMFormatFlagIsSignedInteger
@@ -77,7 +78,9 @@ internal class SpeechToTextRecorder {
             mBitsPerChannel: 16,
             mReserved: 0
         )
-        
+    }
+    
+    private func prepareToRecord() {
         // create recording queue
         let opaque = Unmanaged<SpeechToTextRecorder>.passUnretained(self).toOpaque()
         let pointer = UnsafeMutablePointer<Void>(opaque)
@@ -99,8 +102,10 @@ internal class SpeechToTextRecorder {
             let enqueueStatus = AudioQueueEnqueueBuffer(queue, buffers[i], 0, nil)
             print("enqueue status: \(enqueueStatus)")
         }
-        
-        // start recording
+    }
+    
+    internal func startRecording() {
+        prepareToRecord()
         isRecording = true
         AudioQueueStart(queue, nil)
     }

@@ -85,7 +85,7 @@ internal class SpeechToTextEncoder {
     }
     
     deinit {
-        ogg_stream_destroy(&stream)
+        // ogg_stream_destroy(&stream)
         opus_encoder_destroy(encoder)
     }
     

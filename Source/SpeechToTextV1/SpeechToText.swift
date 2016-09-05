@@ -29,7 +29,6 @@ public class SpeechToText {
     private let serviceURL: String
     private let tokenURL: String
     private let websocketsURL: String
-    private var microphoneSession: SpeechToTextSession?
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -56,12 +55,13 @@ public class SpeechToText {
     }
 
     /**
-     Transcribe an audio file.
+     Perform speech recognition for an audio file.
     
      - parameter file: The audio file to transcribe.
      - parameter settings: The configuration to use for this recognition request.
-     - parameter model: 
-     - parameter learningOptOut:
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+        https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
@@ -93,12 +93,13 @@ public class SpeechToText {
     }
 
     /**
-     Transcribe audio data.
+     Perform speech recognition for audio data.
 
      - parameter audio: The audio data to transcribe.
      - parameter settings: The configuration to use for this recognition request.
-     - parameter model: 
-     - parameter learningOptOut:
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+        https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
@@ -132,16 +133,23 @@ public class SpeechToText {
     }
 
     /**
-     Stream audio from the microphone to the Speech to Text service. The microphone will stop
-     recording after an end-of-speech event is detected by the Speech to Text service or the
-     returned function is executed.
+     Perform speech recognition for microphone audio.
      
-     Stop streaming with the `stopMicrophone` function.
+     If the user granted permission to use the microphone, then microphone audio will be streamed
+     to the Speech to Text service. The microphone will automatically stop when the recognition
+     request ends (by an end-of-speech event, for example). You can manually stop the microphone
+     by invoking the `cancel()` or `finish()` methods of the returned `RecognitionRequest`.
+     
+     Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
+     parameter. With compression enabled, the `settings` should specify a `contentType` of
+     `AudioMediaType.Opus`. With compression disabled, the `settings` should specify `contentType`
+     of `AudioMediaType.L16(rate: 16000, channels: 1)`.
 
      - parameter settings: The configuration for this transcription request.
-     - parameter model: 
-     - parameter learningOptOut:
-     - parameter compress:
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+        https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter compress: Should microphone audio be compressed to Opus format?
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
@@ -153,8 +161,11 @@ public class SpeechToText {
         compress: Bool = true,
         failure: (NSError -> Void)? = nil,
         success: [TranscriptionResult] -> Void)
-        -> RecognitionRequest
+        -> MicrophoneRecognitionRequest
     {
+        var settings = settings
+        settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
+        
         let session = SpeechToTextSession(
             username: username,
             password: password,
@@ -172,32 +183,33 @@ public class SpeechToText {
         session.startRequest(settings)
         session.startMicrophone(compress)
         
-        return RecognitionRequest(session: session)
+        return MicrophoneRecognitionRequest(session: session)
     }
 }
 
-public class RecognitionRequest {
+/** A speech recognition request that streams microphone audio to the Speech to Text service. */
+public class MicrophoneRecognitionRequest {
 
     /// The results of the recognition request.
     public var results: [TranscriptionResult] { return session.results }
     
+    /// The session associated with this recognition request.
     private let session: SpeechToTextSession
     
+    /**
+     Create a `MicrophoneRecognitionRequest` object.
+     */
     private init(session: SpeechToTextSession) {
         self.session = session
     }
     
-    public func cancel() {
-        session.stopMicrophone()
-        session.stopRequest()
-        session.disconnect()
-    }
-    
+    /**
+     Finish the recognition request by stopping the microphone, waiting for all in-flight
+     microphone audio to be transcribed, then disconnecting from the Speech to Text service.
+     */
     public func finish() {
         session.stopMicrophone()
         session.stopRequest()
-        session.onListening = {
-            self.session.disconnect()
-        }
+        session.disconnect()
     }
 }

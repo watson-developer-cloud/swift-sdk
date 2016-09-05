@@ -96,7 +96,7 @@ internal class SpeechToTextSocket {
         socket.connect()
     }
     
-    internal func startRequest(settings: TranscriptionSettings) {
+    internal func writeStart(settings: TranscriptionSettings) {
         print("queueing start message")
         guard let start = try? settings.toJSON().serializeString() else {
             return
@@ -104,8 +104,10 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing start")
             self.socket.writeString(start)
-            self.state = .Listening
-            self.onListening?()
+            if self.state != .Disconnected {
+                self.state = .Listening
+                self.onListening?()
+            }
         }
     }
     
@@ -114,10 +116,13 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing audio")
             self.socket.writeData(audio)
+            if self.state == .Listening {
+                self.state = .SentAudio
+            }
         }
     }
     
-    internal func stopRequest() {
+    internal func writeStop() {
         print("queueing stop message")
         guard let stop = try? TranscriptionStop().toJSON().serializeString() else {
             return
@@ -133,6 +138,25 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing stop")
             self.socket.writeString(nop)
+        }
+    }
+    
+    internal func waitForResults() {
+        print("queueing wait for results")
+        queue.addOperationWithBlock {
+            print("waiting for results")
+            switch self.state {
+            case .Connected: return // no results to wait for
+            case .Listening: return // no results to wait for
+            case .Disconnected: return // no results to wait for
+            default:
+                self.queue.suspended = true
+                let onListeningCache = self.onListening
+                self.onListening = {
+                    self.onListening = onListeningCache
+                    self.queue.suspended = false
+                }
+            }
         }
     }
     
@@ -160,7 +184,7 @@ internal class SpeechToTextSocket {
     }
 
     private func onStateMessage(state: TranscriptionState) {
-        if state.state == "listening" && self.state != .Listening {
+        if state.state == "listening" && self.state == .Transcribing {
             self.state = .Listening
             onListening?()
         }

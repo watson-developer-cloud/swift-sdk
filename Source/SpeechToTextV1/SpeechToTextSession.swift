@@ -131,9 +131,9 @@ public class SpeechToTextSession {
     /**
      Send an audio file to transcribe.
      
-     - parameter file: The audio file to transcribe.
+     - parameter audio: The audio file to transcribe.
      */
-    public func recognize(file: NSURL) {
+    public func recognize(audio: NSURL) {
         guard let audio = NSData(contentsOfURL: file) else {
             let failureReason = "Could not load audio data from \(file)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

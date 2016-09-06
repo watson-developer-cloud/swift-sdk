@@ -57,7 +57,7 @@ public class SpeechToText {
     /**
      Perform speech recognition for an audio file.
     
-     - parameter file: The audio file to transcribe.
+     - parameter audio: The audio file to transcribe.
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
@@ -67,7 +67,7 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        file: NSURL,
+        audio: NSURL,
         settings: TranscriptionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,

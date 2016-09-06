@@ -41,8 +41,8 @@ internal class SpeechToTextSocket {
     internal init(
         username: String,
         password: String,
-        model: String?,
-        learningOptOut: Bool?,
+        model: String? = nil,
+        learningOptOut: Bool? = nil,
         serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
         tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
         websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")

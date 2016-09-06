@@ -104,6 +104,7 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing start")
             self.socket.writeString(start)
+            self.results = [TranscriptionResult]()
             if self.state != .Disconnected {
                 self.state = .Listening
                 self.onListening?()

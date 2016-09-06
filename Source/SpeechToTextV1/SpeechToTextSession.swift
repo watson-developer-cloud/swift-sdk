@@ -134,14 +134,14 @@ public class SpeechToTextSession {
      - parameter audio: The audio file to transcribe.
      */
     public func recognize(audio: NSURL) {
-        guard let audio = NSData(contentsOfURL: file) else {
-            let failureReason = "Could not load audio data from \(file)."
+        guard let data = NSData(contentsOfURL: audio) else {
+            let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             onError?(error)
             return
         }
-        recognize(audio)
+        recognize(data)
     }
     
     /**

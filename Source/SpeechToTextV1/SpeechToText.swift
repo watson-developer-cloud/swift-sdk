@@ -74,8 +74,8 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: [TranscriptionResult] -> Void)
     {
-        guard let audio = NSData(contentsOfURL: file) else {
-            let failureReason = "Could not load audio data from \(file)."
+        guard let data = NSData(contentsOfURL: audio) else {
+            let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -83,7 +83,7 @@ public class SpeechToText {
         }
 
         recognize(
-            audio,
+            data,
             settings: settings,
             model: model,
             learningOptOut: learningOptOut,

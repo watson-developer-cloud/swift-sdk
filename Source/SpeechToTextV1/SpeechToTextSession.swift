@@ -46,6 +46,13 @@ public class SpeechToTextSession {
         set { socket.onListening = newValue }
     }
     
+    /// Invoked when a recording audio queue has finished filling an audio queue buffer.
+    /// The audio data is recorded in 16-bit mono PCM format with a sample rate of 16 kHz.
+    public var onMicrophoneData: (NSData -> Void)? {
+        get { return recorder.onAudioClient }
+        set { recorder.onAudioClient = newValue }
+    }
+    
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: ([TranscriptionResult] -> Void)? {
         get { return socket.onResults }

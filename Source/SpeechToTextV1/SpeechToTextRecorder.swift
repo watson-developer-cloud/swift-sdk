@@ -23,6 +23,7 @@ internal class SpeechToTextRecorder {
     // See the guide for more information about audio queues and recording.
     
     internal var onAudio: (NSData -> Void)?                          // callback to handle pcm buffer
+    internal var onAudioClient: (NSData -> Void)?                    // callback for client to handle pcm buffer
     private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
     
     private var queue: AudioQueueRef = nil                           // opaque reference to an audio queue
@@ -50,6 +51,7 @@ internal class SpeechToTextRecorder {
         // execute callback with audio data
         let pcm = NSData(bytes: buffer.mAudioData, length: Int(buffer.mAudioDataByteSize))
         audioRecorder.onAudio?(pcm)
+        audioRecorder.onAudioClient?(pcm)
         print("handled audio")
         
         // return early if recording is stopped

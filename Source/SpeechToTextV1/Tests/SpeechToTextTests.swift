@@ -90,10 +90,10 @@ class SpeechToTextTests: XCTestCase {
 
         let settings = RecognitionSettings(contentType: format)
         speechToText.recognize(file, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            XCTAssertEqual(results.count, 1)
-            XCTAssert(results.last?.final == true)
-            let transcript = results.last?.alternatives.last?.transcript
+            self.validateSTTResults(results.results, settings: settings)
+            XCTAssertEqual(results.results.count, 1)
+            XCTAssert(results.results.last?.final == true)
+            let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
@@ -144,9 +144,9 @@ class SpeechToTextTests: XCTestCase {
         settings.filterProfanity = false
 
         speechToText.recognize(file, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            if results.last?.final == true {
-                let transcript = results.last?.alternatives.last?.transcript
+            self.validateSTTResults(results.results, settings: settings)
+            if results.results.last?.final == true {
+                let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()
@@ -190,10 +190,10 @@ class SpeechToTextTests: XCTestCase {
 
         let settings = RecognitionSettings(contentType: format)
         speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            XCTAssertEqual(results.count, 1)
-            XCTAssert(results.last?.final == true)
-            let transcript = results.last?.alternatives.last?.transcript
+            self.validateSTTResults(results.results, settings: settings)
+            XCTAssertEqual(results.results.count, 1)
+            XCTAssert(results.results.last?.final == true)
+            let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
@@ -249,9 +249,9 @@ class SpeechToTextTests: XCTestCase {
         settings.filterProfanity = false
 
         speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            if results.last?.final == true {
-                let transcript = results.last?.alternatives.last?.transcript
+            self.validateSTTResults(results.results, settings: settings)
+            if results.results.last?.final == true {
+                let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()

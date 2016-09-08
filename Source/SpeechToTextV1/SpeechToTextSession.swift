@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import AVFoundation
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -173,28 +174,37 @@ public class SpeechToTextSession {
     public func startMicrophone(compress: Bool = true) {
         print("starting microphone")
         self.compress = compress
-        
-        let onAudioPCM = { (pcm: NSData) in
-            guard pcm.length > 0 else { return }
-            self.socket.writeAudio(pcm)
-            self.onMicrophoneData?(pcm)
+        AVAudioSession.sharedInstance().requestRecordPermission() { granted in
+            guard granted else {
+                let failureReason = "Permission was not granted to access the microphone."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                self.onError?(error)
+                return
+            }
+            
+            let onAudioPCM = { (pcm: NSData) in
+                guard pcm.length > 0 else { return }
+                self.socket.writeAudio(pcm)
+                self.onMicrophoneData?(pcm)
+            }
+            
+            let onAudioOpus = { (pcm: NSData) in
+                guard pcm.length > 0 else { return }
+                try! self.encoder.encode(pcm)
+                let opus = self.encoder.bitstream(true)
+                self.socket.writeAudio(opus)
+                self.onMicrophoneData?(opus)
+            }
+            
+            if compress {
+                self.recorder.onAudio = onAudioOpus
+            } else {
+                self.recorder.onAudio = onAudioPCM
+            }
+            
+            self.recorder.startRecording()
         }
-        
-        let onAudioOpus = { (pcm: NSData) in
-            guard pcm.length > 0 else { return }
-            try! self.encoder.encode(pcm)
-            let opus = self.encoder.bitstream(true)
-            self.socket.writeAudio(opus)
-            self.onMicrophoneData?(opus)
-        }
-        
-        if compress {
-            recorder.onAudio = onAudioOpus
-        } else {
-            recorder.onAudio = onAudioPCM
-        }
-        
-        recorder.startRecording()
     }
     
     /**

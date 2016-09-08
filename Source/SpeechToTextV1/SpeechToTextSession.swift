@@ -35,12 +35,6 @@ public class SpeechToTextSession {
         set { socket.onConnect = newValue }
     }
     
-    /// Invoked when the session transitions to the listening state.
-    public var onListening: (Void -> Void)? {
-        get { return socket.onListening }
-        set { socket.onListening = newValue }
-    }
-    
     /// Invoked with microphone audio when the recording audio queue has filled a buffer.
     /// If microphone audio is being compressed, then the audio data is in Opus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.

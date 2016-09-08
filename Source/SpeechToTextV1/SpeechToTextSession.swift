@@ -46,12 +46,10 @@ public class SpeechToTextSession {
         set { socket.onListening = newValue }
     }
     
-    /// Invoked when a recording audio queue has finished filling an audio queue buffer.
-    /// The audio data is recorded in 16-bit mono PCM format with a sample rate of 16 kHz.
-    public var onMicrophoneData: (NSData -> Void)? {
-        get { return recorder.onAudioClient }
-        set { recorder.onAudioClient = newValue }
-    }
+    /// Invoked with microphone audio when the recording audio queue has filled a buffer.
+    /// If microphone audio is being compressed, then the audio data is in Opus format.
+    /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
+    public var onMicrophoneData: (NSData -> Void)?
     
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: ([TranscriptionResult] -> Void)? {
@@ -184,6 +182,7 @@ public class SpeechToTextSession {
         let onAudioPCM = { (pcm: NSData) in
             guard pcm.length > 0 else { return }
             self.socket.writeAudio(pcm)
+            self.onMicrophoneData?(pcm)
         }
         
         let onAudioOpus = { (pcm: NSData) in
@@ -191,6 +190,7 @@ public class SpeechToTextSession {
             try! self.encoder.encode(pcm)
             let opus = self.encoder.bitstream(true)
             self.socket.writeAudio(opus)
+            self.onMicrophoneData?(opus)
         }
         
         if compress {

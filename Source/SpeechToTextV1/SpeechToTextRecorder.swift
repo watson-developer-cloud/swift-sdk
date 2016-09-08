@@ -125,14 +125,18 @@ internal class SpeechToTextRecorder {
     }
  
     internal func startRecording() {
+        guard !isRecording else { return }
         prepareToRecord()
         isRecording = true
         AudioQueueStart(queue, nil)
     }
  
     internal func stopRecording() {
+        guard isRecording else { return }
         isRecording = false
+        powerTimer?.invalidate()
         AudioQueueStop(queue, true)
+        AudioQueueDispose(queue, false)
     }
  
     private func deriveBufferSize(seconds: Float64) -> UInt32 {

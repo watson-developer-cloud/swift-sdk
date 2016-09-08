@@ -51,6 +51,12 @@ public class SpeechToTextSession {
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
     public var onMicrophoneData: (NSData -> Void)?
     
+    /// Invoked every 0.125s when recording with the average dB power of the microphone.
+    public var onPower: (Float32 -> Void)? {
+        get { return recorder.onPower }
+        set { recorder.onPower = newValue }
+    }
+    
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: ([TranscriptionResult] -> Void)? {
         get { return socket.onResults }

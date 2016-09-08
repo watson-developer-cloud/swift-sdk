@@ -88,7 +88,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let settings = TranscriptionSettings(contentType: format)
+        let settings = RecognitionSettings(contentType: format)
         speechToText.recognize(file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
@@ -129,7 +129,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        var settings = TranscriptionSettings(contentType: format)
+        var settings = RecognitionSettings(contentType: format)
         settings.model = "en-US_BroadbandModel"
         settings.learningOptOut = true
         settings.continuous = true
@@ -188,7 +188,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let settings = TranscriptionSettings(contentType: format)
+        let settings = RecognitionSettings(contentType: format)
         speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results, settings: settings)
             XCTAssertEqual(results.count, 1)
@@ -234,7 +234,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        var settings = TranscriptionSettings(contentType: format)
+        var settings = RecognitionSettings(contentType: format)
         settings.model = "en-US_BroadbandModel"
         settings.learningOptOut = true
         settings.continuous = true
@@ -274,13 +274,13 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - Validation Functions
 
-    func validateSTTResults(results: [TranscriptionResult], settings: TranscriptionSettings) {
+    func validateSTTResults(results: [SpeechRecognitionResult], settings: RecognitionSettings) {
         for result in results {
             validateSTTResult(result, settings: settings)
         }
     }
 
-    func validateSTTResult(result: TranscriptionResult, settings: TranscriptionSettings) {
+    func validateSTTResult(result: SpeechRecognitionResult, settings: RecognitionSettings) {
 
         XCTAssertNotNil(result.final)
         let final = result.final
@@ -332,10 +332,10 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTTranscription(
-        transcription: Transcription,
+        transcription: SpeechRecognitionAlternative,
         best: Bool,
         final: Bool,
-        settings: TranscriptionSettings)
+        settings: RecognitionSettings)
     {
         XCTAssertNotNil(transcription.transcript)
         XCTAssertGreaterThan(transcription.transcript.characters.count, 0)
@@ -401,7 +401,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertLessThanOrEqual(keywordResult.confidence, 1.0)
     }
 
-    func validateSTTWordAlternativeResults(wordAlternatives: AlternativeResults) {
+    func validateSTTWordAlternativeResults(wordAlternatives: WordAlternativeResults) {
         XCTAssertGreaterThanOrEqual(wordAlternatives.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(wordAlternatives.endTime, wordAlternatives.startTime)
         XCTAssertGreaterThan(wordAlternatives.alternatives.count, 0)
@@ -410,7 +410,7 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func validateSTTWordAlternativeResult(wordAlternative: AlternativeResult) {
+    func validateSTTWordAlternativeResult(wordAlternative: WordAlternativeResult) {
         XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
         XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)

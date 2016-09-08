@@ -24,7 +24,7 @@ import Freddy
  Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's
  parameters.
  */
-public struct TranscriptionSettings: JSONEncodable {
+public struct RecognitionSettings: JSONEncodable {
 
     /***** URL query parameters for WebSockets connection request. *****/
 
@@ -95,14 +95,14 @@ public struct TranscriptionSettings: JSONEncodable {
     public var filterProfanity: Bool?
 
     /**
-     Initialize a `TranscriptionSettings` object to set the parameters of a Watson Speech to
+     Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
 
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. Visit https://ibm.biz/BdHCrB for more information about
         the supported formats.
      
-     - returns: An initialized `TranscriptionSettings` object with the given `contentType`.
+     - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.
      */
@@ -110,7 +110,7 @@ public struct TranscriptionSettings: JSONEncodable {
         self.contentType = contentType
     }
 
-    /** Used internally to serialize a `TranscriptionSettings` model to JSON. */
+    /** Used internally to serialize a `RecognitionSettings` model to JSON. */
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         json["action"] = .String(action)

@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 /** A transcription alternative produced by Speech to Text. */
-public struct Transcription: JSONDecodable {
+public struct SpeechRecognitionAlternative: JSONDecodable {
 
     /// A transcript of the utterance.
     public let transcript: String
@@ -34,7 +34,7 @@ public struct Transcription: JSONDecodable {
     /// for the best alternative and only in results marked as final.
     public let wordConfidence: [WordConfidence]?
 
-    /// Used internally to initialize a `Transcription` model from JSON.
+    /// Used internally to initialize a `SpeechRecognitionAlternative` model from JSON.
     public init(json: JSON) throws {
         transcript = try json.string("transcript")
         confidence = try? json.double("confidence")

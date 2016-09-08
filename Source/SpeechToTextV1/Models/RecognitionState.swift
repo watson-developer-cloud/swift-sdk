@@ -18,12 +18,12 @@ import Foundation
 import Freddy
 
 /** The state of the Speech to Text service. */
-internal struct TranscriptionState: JSONDecodable {
+internal struct RecognitionState: JSONDecodable {
 
     /// The state of the Speech to Text service.
     internal let state: String
 
-    /// Used internally to initialize a `TranscriptionState` model from JSON.
+    /// Used internally to initialize a `RecognitionState` model from JSON.
     internal init(json: JSON) throws {
         state = try json.string("state")
     }

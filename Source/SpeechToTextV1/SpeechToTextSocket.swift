@@ -21,12 +21,12 @@ import RestKit
 
 internal class SpeechToTextSocket {
     
-    private(set) internal var results = [TranscriptionResult]()
+    private(set) internal var results = [SpeechRecognitionResult]()
     private(set) internal var state: SpeechToTextState = .Disconnected
     
     internal var onConnect: (Void -> Void)? = nil
     internal var onListening: (Void -> Void)? = nil
-    internal var onResults: ([TranscriptionResult] -> Void)? = nil
+    internal var onResults: ([SpeechRecognitionResult] -> Void)? = nil
     internal var onError: (NSError -> Void)? = nil
     internal var onDisconnect: (Void -> Void)? = nil
     
@@ -96,7 +96,7 @@ internal class SpeechToTextSocket {
         socket.connect()
     }
     
-    internal func writeStart(settings: TranscriptionSettings) {
+    internal func writeStart(settings: RecognitionSettings) {
         print("queueing start message")
         guard let start = try? settings.toJSON().serializeString() else {
             return
@@ -104,7 +104,7 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing start")
             self.socket.writeString(start)
-            self.results = [TranscriptionResult]()
+            self.results = [SpeechRecognitionResult]()
             if self.state != .Disconnected {
                 self.state = .Listening
                 self.onListening?()
@@ -125,7 +125,7 @@ internal class SpeechToTextSocket {
     
     internal func writeStop() {
         print("queueing stop message")
-        guard let stop = try? TranscriptionStop().toJSON().serializeString() else {
+        guard let stop = try? RecognitionStop().toJSON().serializeString() else {
             return
         }
         queue.addOperationWithBlock {
@@ -184,14 +184,14 @@ internal class SpeechToTextSocket {
         return urlComponents?.URL
     }
 
-    private func onStateMessage(state: TranscriptionState) {
+    private func onStateMessage(state: RecognitionState) {
         if state.state == "listening" && self.state == .Transcribing {
             self.state = .Listening
             onListening?()
         }
     }
     
-    private func onResultsMessage(wrapper: TranscriptionResultWrapper) {
+    private func onResultsMessage(wrapper: SpeechRecognitionEvent) {
         state = .Transcribing
         var resultsIndex = wrapper.resultIndex
         var wrapperIndex = 0
@@ -251,7 +251,7 @@ extension SpeechToTextSocket: WebSocketDelegate {
         state = .Connected
         tokenRefreshes = 0
         queue.suspended = false
-        results = [TranscriptionResult]()
+        results = [SpeechRecognitionResult]()
         onConnect?()
     }
     
@@ -264,10 +264,10 @@ extension SpeechToTextSocket: WebSocketDelegate {
         guard let json = try? JSON(jsonString: text) else {
             return
         }
-        if let state = try? json.decode(type: TranscriptionState.self) {
+        if let state = try? json.decode(type: RecognitionState.self) {
             onStateMessage(state)
         }
-        if let results = try? json.decode(type: TranscriptionResultWrapper.self) {
+        if let results = try? json.decode(type: SpeechRecognitionEvent.self) {
             onResultsMessage(results)
         }
         if let error = try? json.string("error") {

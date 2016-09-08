@@ -26,7 +26,7 @@ import AVFoundation
 public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
-    public var results: [TranscriptionResult] {
+    public var results: [SpeechRecognitionResult] {
         get { return socket.results }
     }
     
@@ -48,7 +48,7 @@ public class SpeechToTextSession {
     }
     
     /// Invoked when transcription results are received for a recognition request.
-    public var onResults: ([TranscriptionResult] -> Void)? {
+    public var onResults: ([SpeechRecognitionResult] -> Void)? {
         get { return socket.onResults }
         set { socket.onResults = newValue }
     }
@@ -125,7 +125,7 @@ public class SpeechToTextSession {
  
      - parameter settings: The configuration to use for this recognition request.
      */
-    public func startRequest(settings: TranscriptionSettings) {
+    public func startRequest(settings: RecognitionSettings) {
         socket.writeStart(settings)
     }
     

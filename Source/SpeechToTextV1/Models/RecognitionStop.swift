@@ -17,18 +17,14 @@
 import Foundation
 import Freddy
 
-/** Alternative word hypotheses from Speech to Text for a word in the audio input. */
-public struct AlternativeResult: JSONDecodable {
+/** Signals the end of an audio transmission to Speech to Text. */
+internal struct RecognitionStop: JSONEncodable {
 
-    /// The confidence score of the alternative word hypothesis, between 0 and 1.
-    public let confidence: Double
+    /// The action to perform. Must be `stop` to end the request.
+    private let action = "stop"
 
-    /// The alternative word hypothesis for a word in the audio input.
-    public let word: String
-
-    /// Used internally to initialize an `AlternativeResult` model from JSON.
-    public init(json: JSON) throws {
-        confidence = try json.double("confidence")
-        word = try json.string("word")
+    /** Serialize a `RecognitionStop` model to JSON. */
+    internal func toJSON() -> JSON {
+        return .Dictionary(["action": .String(action)])
     }
 }

@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
-internal struct TranscriptionResultWrapper: JSONDecodable {
+internal struct SpeechRecognitionEvent: JSONDecodable {
 
     /// Index indicating change point in the results array.
     /// (See description of `results` array for more information.)
@@ -30,11 +30,11 @@ internal struct TranscriptionResultWrapper: JSONDecodable {
     /// periodically sends "updates" to the result list, with the `resultIndex` set to the
     /// lowest index in the array that has changed. `resultIndex` always points to the slot
     /// just after the most recent final result.
-    internal let results: [TranscriptionResult]
+    internal let results: [SpeechRecognitionResult]
 
-    /// Used internally to initialize a `TranscriptionResultWrapper` model from JSON.
+    /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
     internal init(json: JSON) throws {
         resultIndex = try json.int("result_index")
-        results = try json.arrayOf("results", type: TranscriptionResult.self)
+        results = try json.arrayOf("results", type: SpeechRecognitionResult.self)
     }
 }

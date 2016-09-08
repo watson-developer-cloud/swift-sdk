@@ -68,11 +68,11 @@ public class SpeechToText {
      */
     public func recognize(
         audio: NSURL,
-        settings: TranscriptionSettings,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [TranscriptionResult] -> Void)
+        success: [SpeechRecognitionResult] -> Void)
     {
         guard let data = NSData(contentsOfURL: audio) else {
             let failureReason = "Could not load audio data from \(audio)."
@@ -106,11 +106,11 @@ public class SpeechToText {
      */
     public func recognize(
         audio: NSData,
-        settings: TranscriptionSettings,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [TranscriptionResult] -> Void)
+        success: [SpeechRecognitionResult] -> Void)
     {
         let session = SpeechToTextSession(
             username: username,
@@ -155,12 +155,12 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        settings: TranscriptionSettings,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         failure: (NSError -> Void)? = nil,
-        success: [TranscriptionResult] -> Void)
+        success: [SpeechRecognitionResult] -> Void)
         -> MicrophoneRecognitionRequest
     {
         var settings = settings
@@ -191,7 +191,7 @@ public class SpeechToText {
 public class MicrophoneRecognitionRequest {
 
     /// The results of the recognition request.
-    public var results: [TranscriptionResult] { return session.results }
+    public var results: [SpeechRecognitionResult] { return session.results }
     
     /// The session associated with this recognition request.
     private let session: SpeechToTextSession

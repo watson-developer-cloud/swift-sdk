@@ -18,7 +18,7 @@ import Foundation
 import Freddy
 
 /** Word alternatives produced by Speech to Text. */
-public struct AlternativeResults: JSONDecodable {
+public struct WordAlternativeResults: JSONDecodable {
 
     /// The time, in seconds, at which the word with alternative
     /// word hypotheses starts in the audio input.
@@ -29,12 +29,12 @@ public struct AlternativeResults: JSONDecodable {
     public let endTime: Double
 
     /// A list of alternative word hypotheses for a word in the audio input.
-    public let alternatives: [AlternativeResult]
+    public let alternatives: [WordAlternativeResult]
 
-    /// Used internally to initialize an `AlternativeResults` model from JSON.
+    /// Used internally to initialize an `WordAlternativeResults` model from JSON.
     public init(json: JSON) throws {
         startTime = try json.double("start_time")
         endTime = try json.double("end_time")
-        alternatives = try json.arrayOf("alternatives", type: AlternativeResult.self)
+        alternatives = try json.arrayOf("alternatives", type: WordAlternativeResult.self)
     }
 }

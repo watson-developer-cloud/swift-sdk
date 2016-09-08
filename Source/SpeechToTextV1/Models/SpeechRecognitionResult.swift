@@ -19,14 +19,14 @@ import Freddy
 import RestKit
 
 /** A result from a Speech to Text recognition request. */
-public struct TranscriptionResult: JSONDecodable {
+public struct SpeechRecognitionResult: JSONDecodable {
 
     /// If `true`, then the transcription result for this
     /// utterance is final and will not be updated further.
     public let final: Bool
 
     /// Alternative transcription results.
-    public let alternatives: [Transcription]
+    public let alternatives: [SpeechRecognitionAlternative]
 
     /// A dictionary of spotted keywords and their associated matches. A keyword will have
     /// no associated matches if it was not found within the audio input or the threshold
@@ -34,15 +34,15 @@ public struct TranscriptionResult: JSONDecodable {
     public let keywordResults: [String: [KeywordResult]]?
 
     /// A list of acoustically similar alternatives for words of the input audio.
-    public let wordAlternatives: [AlternativeResults]?
+    public let wordAlternatives: [WordAlternativeResults]?
 
-    /// Used internally to initialize a `TranscriptionResult` model from JSON.
+    /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
     public init(json: JSON) throws {
         final = try json.bool("final")
-        alternatives = try json.arrayOf("alternatives", type: Transcription.self)
+        alternatives = try json.arrayOf("alternatives", type: SpeechRecognitionAlternative.self)
         keywordResults = try? json.dictionary("keywords_result").map {
             json in try json.arrayOf(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.arrayOf("word_alternatives", type: AlternativeResults.self)
+        wordAlternatives = try? json.arrayOf("word_alternatives", type: WordAlternativeResults.self)
     }
 }

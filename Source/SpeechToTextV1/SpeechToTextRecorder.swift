@@ -121,6 +121,7 @@ internal class SpeechToTextRecorder {
             userInfo: nil,
             repeats: true
         )
+        NSRunLoop.currentRunLoop().addTimer(powerTimer!, forMode: NSRunLoopCommonModes)
     }
  
     internal func startRecording() {

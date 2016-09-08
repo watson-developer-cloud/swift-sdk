@@ -542,9 +542,11 @@ The following links provide more information about the Retrieve and Rank service
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
+The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session with the Speech to Text service.
+
 #### Recorded Audio
 
-The following example demonstrates how to use the Speech to Text service to transcribe an audio file.
+The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.
 
 ```swift
 import SpeechToTextV1
@@ -553,25 +555,29 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
-// load audio file
-guard let fileURL = NSBundle.mainBundle().URLForResource("your-audio-filename", withExtension: "wav") else {
-    print("Audio file could not be loaded.")
-    return
-}
+// load file
+let audio = NSBundle.mainBundle().URLForResource("filename", withExtension: "wav")!
 
-// transcribe audio file
-let settings = TranscriptionSettings(contentType: .WAV)
+// define recognition settings
+var settings = RecognitionSettings(contentType: .WAV)
+settings.interimResults = true
+
+// define failure function
 let failure = { (error: NSError) in print(error) }
-speechToText.transcribe(fileURL, settings: settings, failure: failure) { results in
-    print(results.last?.alternatives.last?.transcript)
+
+// execute recognition request
+speechToText.recognize(audio, settings: settings, failure: failure) { results in
+    var transcript = ""
+    for result in results {
+        transcript += result.bestTranscript!
+    }
+    print(transcript)
 }
 ```
 
 #### Streaming Audio
 
-Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. (Please note that the microphone is inaccessible when testing applications with the iOS Simulator. Only applications on a physical device can access the microphone to stream audio to Speech to Text.)
-
-The following example demonstrates how to use the Speech to Text service with streaming audio:
+Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe streaming audio:
 
 ```swift
 import SpeechToTextV1
@@ -580,89 +586,62 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
-// define transcription settings
-var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
+// define recognition settings
+var settings = RecognitionSettings(contentType: .Opus)
 settings.continuous = true
 settings.interimResults = true
 
-// start streaming audio and print transcripts
+// define failure function
 let failure = { (error: NSError) in print(error) }
-let stopStreaming = speechToText.transcribe(settings, failure: failure) { results in
-    print(results.last?.alternatives.last?.transcript)
+
+// start streaming microphone data
+let request = speechToText.recognize(settings, failure: failure) { results in
+    var transcript = ""
+    for result in results {
+        transcript += result.bestTranscript ?? ""
+    }
+    print(transcript)
 }
 
-// Streaming will continue until either an end-of-speech event is detected by
-// the Speech to Text service or the `stopStreaming` function is executed.
+// stop streaming microphone data
+request.finish()
 ```
 
-#### Custom Capture Sessions
+#### Advanced Features
 
-Advanced users who want to create and manage their own `AVCaptureSession` can construct an `AVCaptureAudioDataOutput` to stream audio to the Speech to Text service. This is particularly useful for users who would like to visualize an audio waveform, save audio to disk, or otherwise access the microphone audio data while simultaneously streaming to the Speech to Text service.
-
-The following example demonstrates how to use an `AVCaptureSession` to stream audio to the Speech to Text service:
+The `SpeechToTextSession` class exposes more control over the WebSockets session with the Speech to Text service, along with several advanced features.
 
 ```swift
 import SpeechToTextV1
 
-class ViewController: UIViewController {
-    
-    // the capture session must not fall out of scope while in use
-    var captureSession: AVCaptureSession?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // create capture session
-        captureSession = AVCaptureSession()
-        guard let captureSession = captureSession else {
-            return
-        }
-        
-        // set microphone as a capture session input
-        let microphoneDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        let microphoneInput = try? AVCaptureDeviceInput(device: microphoneDevice)
-        if captureSession.canAddInput(microphoneInput) {
-            captureSession.addInput(microphoneInput)
-        }
+let username = "your-username-here"
+let password = "your-password-here"
+let speechToTextSession = SpeechToTextSession(username: username, password: password)
 
-        // create Speech to Text object
-        let username = "your-username-here"
-        let password = "your-password-here"
-        let speechToText = SpeechToText(username: username, password: password)
-        
-        // define transcription settings
-        var settings = TranscriptionSettings(contentType: .L16(rate: 44100, channels: 1))
-        settings.continuous = true
-        settings.interimResults = true
-        
-        // create output for capture session
-        let failure = { (error: NSError) in print(error) }
-        let output = speechToText.createTranscriptionOutput(settings, failure: failure) { results in
-            if let transcription = results.last?.alternatives.last?.transcript {
-                print(transcription)
-            }
-        }
-
-        if let output = output {
-            let transcriptionOutput = output.0
-            let stopStreaming = output.1
-
-            // set Speech to Text as a capture session output
-            if captureSession.canAddOutput(transcriptionOutput) {
-                captureSession.addOutput(transcriptionOutput)
-            }
-
-            // add any custom capture session outputs here
-
-            // start capture session to stream audio
-            captureSession.startRunning()
-        }
+speechToTextSession.onConnect = { print("connected") }
+speechToTextSession.onDisconnect = { print("disconnected") }
+speechToTextSession.onError = { error in print(error) }
+speechToTextSession.onPower = { decibels in print(decibels) }
+speechToTextSession.onMicrophoneData = { data in print("received data") }
+speechToTextSession.onResults = { results in
+    var transcript = ""
+    for result in results {
+        transcript += result.bestTranscript ?? ""
     }
+    self.textView.text = transcript
 }
-    
-// Streaming will continue until either an end-of-speech event is detected by
-// the Speech to Text service, the `stopStreaming` function is executed, or
-// the capture session is stopped.
+
+var settings = RecognitionSettings(contentType: .Opus)
+settings.interimResults = true
+settings.continuous = true
+
+speechToTextSession.connect()
+speechToTextSession.startRequest(settings)
+speechToTextSession.startMicrophone()
+
+speechToTextSession.stopMicrophone()
+speechToTextSession.stopRequest()
+speechToTextSession.disconnect()
 ```
 
 #### Additional Information

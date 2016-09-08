@@ -43,8 +43,8 @@ public class SpeechToTextSession {
     
     /// Invoked every 0.025s when recording with the average dB power of the microphone.
     public var onPower: (Float32 -> Void)? {
-        get { return recorder?.onPower }
-        set { recorder?.onPower = newValue }
+        get { return recorder.onPower }
+        set { recorder.onPower = newValue }
     }
     
     /// Invoked when transcription results are received for a recognition request.
@@ -66,8 +66,8 @@ public class SpeechToTextSession {
     }
     
     private let socket: SpeechToTextSocket
-    private var recorder: SpeechToTextRecorder?
-    private var encoder: SpeechToTextEncoder?
+    private var recorder: SpeechToTextRecorder
+    private var encoder: SpeechToTextEncoder
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     
@@ -100,6 +100,13 @@ public class SpeechToTextSession {
             serviceURL: serviceURL,
             tokenURL: tokenURL,
             websocketsURL: websocketsURL
+        )
+        
+        recorder = SpeechToTextRecorder()
+        encoder = try! SpeechToTextEncoder(
+            format: recorder.format,
+            opusRate: Int32(recorder.format.mSampleRate),
+            application: .VOIP
         )
     }
     
@@ -167,10 +174,10 @@ public class SpeechToTextSession {
         print("starting microphone")
         self.compress = compress
         
-        recorder = SpeechToTextRecorder()
+        // reset encoder
         encoder = try! SpeechToTextEncoder(
-            format: recorder!.format,
-            opusRate: Int32(recorder!.format.mSampleRate),
+            format: recorder.format,
+            opusRate: Int32(recorder.format.mSampleRate),
             application: .VOIP
         )
         
@@ -183,9 +190,6 @@ public class SpeechToTextSession {
                 return
             }
             
-            guard let recorder = self.recorder else { return }
-            guard let encoder = self.encoder else { return }
-            
             let onAudioPCM = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
                 self.socket.writeAudio(pcm)
@@ -194,19 +198,19 @@ public class SpeechToTextSession {
             
             let onAudioOpus = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
-                try! encoder.encode(pcm)
-                let opus = encoder.bitstream(true)
+                try! self.encoder.encode(pcm)
+                let opus = self.encoder.bitstream(true)
                 self.socket.writeAudio(opus)
                 self.onMicrophoneData?(opus)
             }
             
             if compress {
-                recorder.onAudio = onAudioOpus
+                self.recorder.onAudio = onAudioOpus
             } else {
-                recorder.onAudio = onAudioPCM
+                self.recorder.onAudio = onAudioPCM
             }
             
-            recorder.startRecording()
+            self.recorder.startRecording()
         }
     }
     
@@ -215,8 +219,6 @@ public class SpeechToTextSession {
      */
     public func stopMicrophone() {
         print("stopping microphone")
-        guard let recorder = self.recorder else { return }
-        guard let encoder = self.encoder else { return }
         recorder.stopRecording()
         if compress {
             let opus = try! encoder.endstream()

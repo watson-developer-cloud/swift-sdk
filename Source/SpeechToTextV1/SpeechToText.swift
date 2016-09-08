@@ -72,7 +72,7 @@ public class SpeechToText {
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechRecognitionResult] -> Void)
+        success: SpeechRecognitionResults -> Void)
     {
         guard let data = NSData(contentsOfURL: audio) else {
             let failureReason = "Could not load audio data from \(audio)."
@@ -110,7 +110,7 @@ public class SpeechToText {
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechRecognitionResult] -> Void)
+        success: SpeechRecognitionResults -> Void)
     {
         let session = SpeechToTextSession(
             username: username,
@@ -160,7 +160,7 @@ public class SpeechToText {
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         failure: (NSError -> Void)? = nil,
-        success: [SpeechRecognitionResult] -> Void)
+        success: SpeechRecognitionResults -> Void)
         -> MicrophoneRecognitionRequest
     {
         var settings = settings
@@ -191,7 +191,7 @@ public class SpeechToText {
 public class MicrophoneRecognitionRequest {
 
     /// The results of the recognition request.
-    public var results: [SpeechRecognitionResult] { return session.results }
+    public var results: SpeechRecognitionResults { return session.results }
     
     /// The session associated with this recognition request.
     private let session: SpeechToTextSession

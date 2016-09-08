@@ -26,7 +26,7 @@ import AVFoundation
 public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
-    public var results: [SpeechRecognitionResult] {
+    public var results: SpeechRecognitionResults {
         get { return socket.results }
     }
     
@@ -48,7 +48,7 @@ public class SpeechToTextSession {
     }
     
     /// Invoked when transcription results are received for a recognition request.
-    public var onResults: ([SpeechRecognitionResult] -> Void)? {
+    public var onResults: (SpeechRecognitionResults -> Void)? {
         get { return socket.onResults }
         set { socket.onResults = newValue }
     }

@@ -21,12 +21,12 @@ import RestKit
 
 internal class SpeechToTextSocket {
     
-    private(set) internal var results = [SpeechRecognitionResult]()
+    private(set) internal var results = SpeechRecognitionResults()
     private(set) internal var state: SpeechToTextState = .Disconnected
     
     internal var onConnect: (Void -> Void)? = nil
     internal var onListening: (Void -> Void)? = nil
-    internal var onResults: ([SpeechRecognitionResult] -> Void)? = nil
+    internal var onResults: (SpeechRecognitionResults -> Void)? = nil
     internal var onError: (NSError -> Void)? = nil
     internal var onDisconnect: (Void -> Void)? = nil
     
@@ -104,7 +104,7 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("writing start")
             self.socket.writeString(start)
-            self.results = [SpeechRecognitionResult]()
+            self.results = SpeechRecognitionResults()
             if self.state != .Disconnected {
                 self.state = .Listening
                 self.onListening?()
@@ -193,17 +193,7 @@ internal class SpeechToTextSocket {
     
     private func onResultsMessage(wrapper: SpeechRecognitionEvent) {
         state = .Transcribing
-        var resultsIndex = wrapper.resultIndex
-        var wrapperIndex = 0
-        while resultsIndex < results.count && wrapperIndex < wrapper.results.count {
-            results[resultsIndex] = wrapper.results[wrapperIndex]
-            resultsIndex += 1
-            wrapperIndex += 1
-        }
-        while wrapperIndex < wrapper.results.count {
-            results.append(wrapper.results[wrapperIndex])
-            wrapperIndex += 1
-        }
+        results.addResults(wrapper)
         onResults?(results)
     }
     
@@ -251,7 +241,7 @@ extension SpeechToTextSocket: WebSocketDelegate {
         state = .Connected
         tokenRefreshes = 0
         queue.suspended = false
-        results = [SpeechRecognitionResult]()
+        results = SpeechRecognitionResults()
         onConnect?()
     }
     

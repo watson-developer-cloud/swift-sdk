@@ -64,6 +64,7 @@
 		7A219F331D1351DB0003D934 /* ConversationV1Experimental.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A517AC51D1C84E1004FD758 /* RelationshipExtractionV1Beta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A7D71151D1B017500ABBA13 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A818EB81D81B470008C9720 /* SpeechRecognitionResults.swift */; };
 		7A987D1E1D19D424003626B2 /* TradeoffAnalyticsV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */; };
 		7A987D341D19D47D003626B2 /* Dilemma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D2E1D19D47D003626B2 /* Dilemma.swift */; };
 		7A987D351D19D47D003626B2 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D2F1D19D47D003626B2 /* Problem.swift */; };
@@ -776,6 +777,7 @@
 		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonitorTraining.swift; path = ../../LanguageTranslatorV2/Models/MonitorTraining.swift; sourceTree = "<group>"; };
 		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingStatus.swift; path = ../../LanguageTranslatorV2/Models/TrainingStatus.swift; sourceTree = "<group>"; };
 		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
+		7A818EB81D81B470008C9720 /* SpeechRecognitionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionResults.swift; sourceTree = "<group>"; };
 		7A987D141D19D424003626B2 /* TradeoffAnalyticsV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TradeoffAnalyticsV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A987D1D1D19D424003626B2 /* TradeoffAnalyticsV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeoffAnalyticsV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A987D2E1D19D47D003626B2 /* Dilemma.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dilemma.swift; sourceTree = "<group>"; };
@@ -1824,6 +1826,7 @@
 				7AAA9A151CEE3026002C9564 /* SpeechRecognitionAlternative.swift */,
 				7AAA9A171CEE3026002C9564 /* SpeechRecognitionEvent.swift */,
 				7AAA9A161CEE3026002C9564 /* SpeechRecognitionResult.swift */,
+				7A818EB81D81B470008C9720 /* SpeechRecognitionResults.swift */,
 				7AAA9A121CEE3026002C9564 /* WordAlternativeResult.swift */,
 				7AAA9A131CEE3026002C9564 /* WordAlternativeResults.swift */,
 				7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */,
@@ -3598,6 +3601,7 @@
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
 				7AAAF4671CEE9FB300B74848 /* KeywordResult.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
+				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
 				7AAAF4661CEE9FB300B74848 /* WordAlternativeResults.swift in Sources */,
 				7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */,
 				7AAAF46A1CEE9FB300B74848 /* SpeechRecognitionEvent.swift in Sources */,

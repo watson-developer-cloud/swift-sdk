@@ -35,7 +35,6 @@ internal class SpeechToTextRecorder {
     
     private let callback: AudioQueueInputCallback = {
         userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
-        print("callback")
         
         // dereference pointers
         let unmanagedAudioRecorder = Unmanaged<SpeechToTextRecorder>.fromOpaque(COpaquePointer(userData))
@@ -52,7 +51,6 @@ internal class SpeechToTextRecorder {
         // execute callback with audio data
         let pcm = NSData(bytes: buffer.mAudioData, length: Int(buffer.mAudioDataByteSize))
         audioRecorder.onAudio?(pcm)
-        print("handled audio")
         
         // return early if recording is stopped
         guard audioRecorder.isRecording else {
@@ -60,8 +58,7 @@ internal class SpeechToTextRecorder {
         }
         
         // enqueue buffer
-        let enqueueStatus = AudioQueueEnqueueBuffer(audioRecorder.queue, bufferRef, 0, nil)
-        print("enqueue status: \(enqueueStatus)")
+        AudioQueueEnqueueBuffer(audioRecorder.queue, bufferRef, 0, nil)
     }
     
     internal init() {
@@ -86,32 +83,26 @@ internal class SpeechToTextRecorder {
         // create recording queue
         let opaque = Unmanaged<SpeechToTextRecorder>.passUnretained(self).toOpaque()
         let pointer = UnsafeMutablePointer<Void>(opaque)
-        let queueStatus = AudioQueueNewInput(&format, callback, pointer, nil, nil, 0, &queue)
-        print("queue status: \(queueStatus)")
+        AudioQueueNewInput(&format, callback, pointer, nil, nil, 0, &queue)
         
         // update audio format
         var formatSize = UInt32(strideof(format.dynamicType))
-        let propertyStatus = AudioQueueGetProperty(queue, kAudioQueueProperty_StreamDescription, &format, &formatSize)
-        print("property status: \(propertyStatus)")
+        AudioQueueGetProperty(queue, kAudioQueueProperty_StreamDescription, &format, &formatSize)
         
         // allocate and enqueue buffers
         let numBuffers = 5
         bufferSize = deriveBufferSize(0.5)
         buffers = Array<AudioQueueBufferRef>(count: numBuffers, repeatedValue: nil)
         for i in 0..<numBuffers {
-            let allocateStatus = AudioQueueAllocateBuffer(queue, bufferSize, &buffers[i])
-            print("allocate status: \(allocateStatus)")
-            let enqueueStatus = AudioQueueEnqueueBuffer(queue, buffers[i], 0, nil)
-            print("enqueue status: \(enqueueStatus)")
+            AudioQueueAllocateBuffer(queue, bufferSize, &buffers[i])
+            AudioQueueEnqueueBuffer(queue, buffers[i], 0, nil)
         }
         
         // enable metering
         var metering: UInt32 = 1
         let meteringSize = UInt32(strideof(metering.dynamicType))
         let meteringProperty = kAudioQueueProperty_EnableLevelMetering
-        let meteringStatus = AudioQueueSetProperty(queue, meteringProperty, &metering, meteringSize)
-        guard meteringStatus == 0 else { return }
-        print("metering status: \(meteringStatus)")
+        AudioQueueSetProperty(queue, meteringProperty, &metering, meteringSize)
         
         // set metering timer to invoke callback
         powerTimer = NSTimer(

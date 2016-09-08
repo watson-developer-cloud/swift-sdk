@@ -29,11 +29,6 @@ public class SpeechToTextSession {
         get { return socket.results }
     }
     
-    /// The state of the session.
-    public var state: SpeechToTextState {
-        get { return socket.state }
-    }
-    
     /// Invoked when the session connects to the Speech to Text service.
     public var onConnect: (Void -> Void)? {
         get { return socket.onConnect }

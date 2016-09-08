@@ -115,7 +115,7 @@ internal class SpeechToTextRecorder {
         
         // set metering timer to invoke callback
         powerTimer = NSTimer(
-            timeInterval: 0.125,
+            timeInterval: 0.025,
             target: self,
             selector: #selector(samplePower),
             userInfo: nil,

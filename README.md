@@ -558,7 +558,7 @@ let speechToText = SpeechToText(username: username, password: password)
 // load file
 let audio = NSBundle.mainBundle().URLForResource("filename", withExtension: "wav")!
 
-// define recognition settings
+// define recognition request settings
 var settings = RecognitionSettings(contentType: .WAV)
 settings.interimResults = true
 
@@ -567,11 +567,7 @@ let failure = { (error: NSError) in print(error) }
 
 // execute recognition request
 speechToText.recognize(audio, settings: settings, failure: failure) { results in
-    var transcript = ""
-    for result in results {
-        transcript += result.bestTranscript!
-    }
-    print(transcript)
+    print(results.bestTranscript)
 }
 ```
 
@@ -585,31 +581,40 @@ import SpeechToTextV1
 let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
+var request: MicrophoneRecognitionRequest?
 
-// define recognition settings
-var settings = RecognitionSettings(contentType: .Opus)
-settings.continuous = true
-settings.interimResults = true
+func startStreaming() {
+    // define recognition request settings
+    var settings = RecognitionSettings(contentType: .Opus)
+    settings.continuous = true
+    settings.interimResults = true
 
-// define failure function
-let failure = { (error: NSError) in print(error) }
+    // define failure function
+    let failure = { (error: NSError) in print(error) }
 
-// start streaming microphone data
-let request = speechToText.recognize(settings, failure: failure) { results in
-    var transcript = ""
-    for result in results {
-        transcript += result.bestTranscript ?? ""
+    // start streaming microphone data
+    let request = speechToText.recognize(settings, failure: failure) { results in
+        print(results.bestTranscript)
     }
-    print(transcript)
 }
 
-// stop streaming microphone data
-request.finish()
+func stopStreaming() {
+    request?.finish()
+}
 ```
 
 #### Advanced Features
 
 The `SpeechToTextSession` class exposes more control over the WebSockets session with the Speech to Text service, along with several advanced features.
+
+In particular, there are several (optional) callbacks that can be used to learn about the state of the session and access data associated with the microphone:
+
+- `onConnect`: Invoked when the session connects to the Speech to Text service.
+- `onMicrophoneData`: Invoked with microphone audio when the recording audio queue has filled a buffer. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.
+- `onPower`: Invoked every 0.025s when recording with the average dB power of the microphone.
+- `onResults`: Invoked when transcription results are received for a recognition request.
+- `onError`: Invoked when an error or warning occurs.
+- `onDisconnect`: Invoked when the session disconnects from the Speech to Text service.
 
 ```swift
 import SpeechToTextV1
@@ -618,30 +623,33 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToTextSession = SpeechToTextSession(username: username, password: password)
 
-speechToTextSession.onConnect = { print("connected") }
-speechToTextSession.onDisconnect = { print("disconnected") }
-speechToTextSession.onError = { error in print(error) }
-speechToTextSession.onPower = { decibels in print(decibels) }
-speechToTextSession.onMicrophoneData = { data in print("received data") }
-speechToTextSession.onResults = { results in
-    var transcript = ""
-    for result in results {
-        transcript += result.bestTranscript ?? ""
+func startStreaming() {
+    // define callbacks
+    speechToTextSession.onConnect = { print("connected") }
+    speechToTextSession.onDisconnect = { print("disconnected") }
+    speechToTextSession.onError = { error in print(error) }
+    speechToTextSession.onPower = { decibels in print(decibels) }
+    speechToTextSession.onMicrophoneData = { data in print("received data") }
+    speechToTextSession.onResults = { results in
+        print(results.bestTranscript)
     }
-    self.textView.text = transcript
+
+    // define recognition request settings
+    var settings = RecognitionSettings(contentType: .Opus)
+    settings.interimResults = true
+    settings.continuous = true
+
+    // start streaming microphone audio for transcription
+    speechToTextSession.connect()
+    speechToTextSession.startRequest(settings)
+    speechToTextSession.startMicrophone()
 }
 
-var settings = RecognitionSettings(contentType: .Opus)
-settings.interimResults = true
-settings.continuous = true
-
-speechToTextSession.connect()
-speechToTextSession.startRequest(settings)
-speechToTextSession.startMicrophone()
-
-speechToTextSession.stopMicrophone()
-speechToTextSession.stopRequest()
-speechToTextSession.disconnect()
+func stopStreaming() {
+    speechToTextSession.stopMicrophone()
+    speechToTextSession.stopRequest()
+    speechToTextSession.disconnect()
+}
 ```
 
 #### Additional Information

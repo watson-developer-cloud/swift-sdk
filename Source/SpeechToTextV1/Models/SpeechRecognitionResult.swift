@@ -25,6 +25,19 @@ public struct SpeechRecognitionResult: JSONDecodable {
     /// utterance is final and will not be updated further.
     public let final: Bool
 
+    /// The transcription with the greatest confidence.
+    public var bestTranscript: String? {
+        var transcript: String? = nil
+        var confidence: Double? = nil
+        for alternative in alternatives {
+            if alternative.confidence > confidence {
+                transcript = alternative.transcript
+                confidence = alternative.confidence
+            }
+        }
+        return transcript
+    }
+    
     /// Alternative transcription results.
     public let alternatives: [SpeechRecognitionAlternative]
 

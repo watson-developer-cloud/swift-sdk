@@ -25,3 +25,4 @@ FOUNDATION_EXPORT const unsigned char SpeechToTextV1VersionString[];
 // Import ogg and opus headers to access C code from Swift
 #import "ogg.h"
 #import "opus.h"
+#import "opus_multistream.h"

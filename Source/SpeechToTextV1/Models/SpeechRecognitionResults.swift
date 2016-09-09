@@ -19,27 +19,21 @@ import Foundation
 /** The results of a Speech to Text recognition request. */
 public struct SpeechRecognitionResults {
     
+    /// All recognition results from a recognition request.
     public var results = [SpeechRecognitionResult]()
-    
-    public func bestTranscript(combine: ((String, String) -> String)? = nil) -> String {
-        // construct array of transcript strings
+ 
+    /// A concatenation of the transcripts with the greatest confidence.
+    public var bestTranscript: String {
         var transcripts = [String]()
         for result in results {
             if let transcript = result.alternatives.first?.transcript {
                 transcripts.append(transcript)
             }
         }
-        
-        // combine transcript strings for best transcript
-        var bestTranscript = ""
-        if let combine = combine {
-            bestTranscript = transcripts.reduce("", combine: combine)
-        } else {
-            bestTranscript = transcripts.reduce("") { $0 + " " + $1 }
-        }
-        return bestTranscript
+        return transcripts.reduce("") { $0 + " " + $1 }
     }
     
+    /// Add the updates specified by a `SpeechRecognitionEvent`.
     mutating internal func addResults(wrapper: SpeechRecognitionEvent) {
         var resultsIndex = wrapper.resultIndex
         var wrapperIndex = 0

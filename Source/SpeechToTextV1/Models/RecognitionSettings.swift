@@ -26,23 +26,6 @@ import Freddy
  */
 public struct RecognitionSettings: JSONEncodable {
 
-    /***** URL query parameters for WebSockets connection request. *****/
-
-    /// Specifies the language in which the audio is spoken and the rate at which it was
-    /// sampled. If `nil`, then the default model will be used. Visit
-    /// https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models
-    /// for more information about the available models.
-    public var model: String?
-
-    /// By default, the Speech to Text service logs requests and their results. Logging is
-    /// done only for the purpose of improving the service for future users—the logged data
-    /// is not shared or made public. If you are concerned with protecting the privacy of users'
-    /// personal information or otherwise do not want your requests to be logged, you can opt
-    /// out of logging by setting this property to `true`.
-    public var learningOptOut: Bool?
-
-    /***** JSON parameters for `start` message. *****/
-
     /// The action to perform. Must be `start` to begin the request.
     private let action = "start"
 

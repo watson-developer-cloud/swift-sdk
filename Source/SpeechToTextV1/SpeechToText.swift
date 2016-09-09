@@ -24,6 +24,11 @@ import RestKit
  your application. It uses machine intelligence to combine information about grammar and language
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
+ 
+ This class makes it easy to recognize audio with the Speech to Text service. Internally, many
+ of the functions make use of the `SpeechToTextSession` class, but this class provides a simpler
+ interface by minimizing customizability. If you find that you require more control of the session
+ or microphone, consider using the `SpeechToTextSession` class instead.
  */
 public class SpeechToText {
 
@@ -217,21 +222,32 @@ public class SpeechToText {
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
      
-     If the user granted permission to use the microphone, then microphone audio will be streamed
-     to the Speech to Text service. The microphone will automatically stop when the recognition
-     request ends (by an end-of-speech event, for example). Alternatively, you can manually stop
-     the microphone by invoking the `stopRecognizeMicrophone()` method.
+     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
+     
+     - If `false`, then the service ends the recognition request at the first end-of-speech
+     incident (denoted by a half-second of non-speech or when the stream terminates). This
+     will coincide with a `final` transcription result. So the `success` callback should
+     be configured to stop the microphone when a final transcription result is received.
+     
+     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
+     your application may have a button to start/stop the request, or you may stream the
+     microphone for the duration of a long press on a UI element.
      
      Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
      `AudioMediaType.Opus`. With compression disabled, the `settings` should specify `contentType`
      of `AudioMediaType.L16(rate: 16000, channels: 1)`.
+     
+     This function may cause the system to automatically prompt the user for permission
+     to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
+     would prefer to ask for the user's permission in advance.
 
      - parameter settings: The configuration for this transcription request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter compress: Should microphone audio be compressed to Opus format?
+        (Opus compression reduces latency and bandwidth.)
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.

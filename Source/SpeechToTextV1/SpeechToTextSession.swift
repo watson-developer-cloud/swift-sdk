@@ -22,6 +22,10 @@ import AVFoundation
  your application. It uses machine intelligence to combine information about grammar and language
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
+ 
+ This class enables fine-tuned control of a WebSockets session with the Speech to Text service.
+ Although it is a more complex interface than the `SpeechToText` class, it provides more control
+ and customizability of the session.
  */
 public class SpeechToTextSession {
     
@@ -156,6 +160,17 @@ public class SpeechToTextSession {
     /**
      Start streaming microphone audio data to transcribe.
      
+     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
+     
+     - If `false`, then the service ends the recognition request at the first end-of-speech
+     incident (denoted by a half-second of non-speech or when the stream terminates). This
+     will coincide with a `final` transcription result. So the `success` callback should
+     be configured to stop the microphone when a final transcription result is received.
+     
+     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
+     your application may have a button to start/stop the request, or you may stream the
+     microphone for the duration of a long press on a UI element.
+     
      By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
      To disable Opus compression and send linear PCM data instead, set `compress` to `false`.
      
@@ -164,11 +179,11 @@ public class SpeechToTextSession {
      set to `AudioMediaType.L16(rate: 16000, channels: 1)`.
      
      This function may cause the system to automatically prompt the user for permission
-     to access the microphone. See `AVAudioSession.requestRecordPermission(_:)` if you
-     would rather explicitly ask for the user's permission before invoking this function.
+     to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
+     would rather prefer to ask for the user's permission in advance.
      
-     - parameter compress: Should microphone audio be compressed to Opus before being sent to
-        the Speech to Text service? (Opus compression reduces latency and bandwidth.)
+     - parameter compress: Should microphone audio be compressed to Opus format?
+        (Opus compression reduces latency and bandwidth.)
      */
     public func startMicrophone(compress: Bool = true) {
         print("starting microphone")

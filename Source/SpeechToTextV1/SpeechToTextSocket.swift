@@ -67,9 +67,12 @@ internal class SpeechToTextSocket {
         print("connecting")
         
         // ensure the socket is not already connected
-        guard state == .Disconnected else {
+        guard state == .Disconnected || state == .Connecting else {
             return
         }
+        
+        // update state
+        state = .Connecting
         
         // restrict the number of retries
         guard tokenRefreshes <= maxTokenRefreshes else {
@@ -97,10 +100,9 @@ internal class SpeechToTextSocket {
     }
     
     internal func writeStart(settings: RecognitionSettings) {
+        guard state != .Disconnected else { return }
+        guard let start = try? settings.toJSON().serializeString() else { return }
         print("queueing start message")
-        guard let start = try? settings.toJSON().serializeString() else {
-            return
-        }
         queue.addOperationWithBlock {
             print("writing start")
             self.socket.writeString(start)
@@ -113,6 +115,7 @@ internal class SpeechToTextSocket {
     }
     
     internal func writeAudio(audio: NSData) {
+        guard state != .Disconnected else { return }
         print("queueing audio write")
         queue.addOperationWithBlock {
             print("writing audio")
@@ -124,10 +127,9 @@ internal class SpeechToTextSocket {
     }
     
     internal func writeStop() {
+        guard state != .Disconnected else { return }
+        guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
         print("queueing stop message")
-        guard let stop = try? RecognitionStop().toJSON().serializeString() else {
-            return
-        }
         queue.addOperationWithBlock {
             print("writing stop")
             self.socket.writeString(stop)
@@ -135,6 +137,7 @@ internal class SpeechToTextSocket {
     }
     
     internal func writeNop() {
+        guard state != .Disconnected else { return }
         let nop = "{\"action\": \"no-op\"}"
         queue.addOperationWithBlock {
             print("writing stop")
@@ -147,10 +150,9 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("waiting for results")
             switch self.state {
-            case .Connected: return // no results to wait for
-            case .Listening: return // no results to wait for
-            case .Disconnected: return // no results to wait for
-            default:
+            case .Connecting, .Connected, .Listening, .Disconnected:
+                return // no results to wait for
+            case .SentAudio, .Transcribing:
                 self.queue.suspended = true
                 let onListeningCache = self.onListening
                 self.onListening = {

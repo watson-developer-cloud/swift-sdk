@@ -40,7 +40,7 @@ public class SpeechToTextSession {
         set { socket.onConnect = newValue }
     }
     
-    /// Invoked with microphone audio when the recording audio queue has filled a buffer.
+    /// Invoked with microphone audio when a recording audio queue buffer has been filled.
     /// If microphone audio is being compressed, then the audio data is in Opus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
     public var onMicrophoneData: (NSData -> Void)?

@@ -29,6 +29,7 @@ public class SpeechToText {
     private let serviceURL: String
     private let tokenURL: String
     private let websocketsURL: String
+    private var microphoneSession: SpeechToTextSession?
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -133,12 +134,13 @@ public class SpeechToText {
     }
 
     /**
-     Perform speech recognition for microphone audio.
+     Perform speech recognition for microphone audio. To stop the microphone, invoke
+     `stopRecognizeMicrophone()`.
      
      If the user granted permission to use the microphone, then microphone audio will be streamed
      to the Speech to Text service. The microphone will automatically stop when the recognition
-     request ends (by an end-of-speech event, for example). You can manually stop the microphone
-     by invoking the `cancel()` or `finish()` methods of the returned `RecognitionRequest`.
+     request ends (by an end-of-speech event, for example). Alternatively, you can manually stop
+     the microphone by invoking the `stopRecognizeMicrophone()` method.
      
      Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
@@ -154,14 +156,13 @@ public class SpeechToText {
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
      */
-    public func recognize(
+    public func recognizeMicrophone(
         settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
-        -> MicrophoneRecognitionRequest
     {
         var settings = settings
         settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
@@ -183,33 +184,20 @@ public class SpeechToText {
         session.startRequest(settings)
         session.startMicrophone(compress)
         
-        return MicrophoneRecognitionRequest(session: session)
-    }
-}
-
-/** A speech recognition request that streams microphone audio to the Speech to Text service. */
-public class MicrophoneRecognitionRequest {
-
-    /// The results of the recognition request.
-    public var results: SpeechRecognitionResults { return session.results }
-    
-    /// The session associated with this recognition request.
-    private let session: SpeechToTextSession
-    
-    /**
-     Create a `MicrophoneRecognitionRequest` object.
-     */
-    private init(session: SpeechToTextSession) {
-        self.session = session
+        microphoneSession = session
     }
     
     /**
-     Finish the recognition request by stopping the microphone, waiting for all in-flight
-     microphone audio to be transcribed, then disconnecting from the Speech to Text service.
+     Stop performing speech recognition for microphone audio.
+ 
+     When invoked, this function will
+        1. Stop recording audio from the microphone.
+        2. Send a stop message to stop the current recognition request.
+        3. Wait to receive all recognition results then disconnect from the service.
      */
-    public func finish() {
-        session.stopMicrophone()
-        session.stopRequest()
-        session.disconnect()
+    public func stopRecognizeMicrophone() {
+        microphoneSession?.stopMicrophone()
+        microphoneSession?.stopRequest()
+        microphoneSession?.disconnect()
     }
 }

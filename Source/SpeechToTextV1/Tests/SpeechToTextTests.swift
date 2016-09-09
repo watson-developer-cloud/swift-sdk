@@ -59,6 +59,34 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNil(error, "Timeout")
         }
     }
+    
+    // MARK: - Models
+    
+    func testModels() {
+        let description1 = "Get information about all models."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var allModels = [Model]()
+        speechToText.getModels(failWithError) { models in
+            allModels = models
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        for model in allModels {
+            let description2 = "Get information about a particular model."
+            let expectation2 = expectationWithDescription(description2)
+            speechToText.getModel(model.name) { newModel in
+                XCTAssertEqual(model.name, newModel.name)
+                XCTAssertEqual(model.rate, newModel.rate)
+                XCTAssertEqual(model.language, newModel.language)
+                XCTAssertEqual(model.url, newModel.url)
+                XCTAssertEqual(model.description, newModel.description)
+                expectation2.fulfill()
+            }
+            waitForExpectations()
+        }
+    }
 
     // MARK: - Transcribe File, Default Settings
 

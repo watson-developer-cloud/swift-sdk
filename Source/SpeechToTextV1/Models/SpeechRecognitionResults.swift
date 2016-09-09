@@ -21,21 +21,21 @@ public struct SpeechRecognitionResults {
     
     public var results = [SpeechRecognitionResult]()
     
-    public var bestTranscript: String? {
-        var bestTranscript = ""
+    public func bestTranscript(combine: ((String, String) -> String)? = nil) -> String {
+        // construct array of transcript strings
+        var transcripts = [String]()
         for result in results {
-            if !result.final {
-                // non-final results have only one alternative
-                assert(result.alternatives.count <= 1) // TODO: debugging
-                bestTranscript += result.alternatives.first?.transcript ?? ""
-            } else {
-                // final results report a confidence for the top alternative
-                for alternative in result.alternatives {
-                    if (alternative.confidence != nil) {
-                        bestTranscript += alternative.transcript
-                    }
-                }
+            if let transcript = result.alternatives.first?.transcript {
+                transcripts.append(transcript)
             }
+        }
+        
+        // combine transcript strings for best transcript
+        var bestTranscript = ""
+        if let combine = combine {
+            bestTranscript = transcripts.reduce("", combine: combine)
+        } else {
+            bestTranscript = transcripts.reduce("") { $0 + " " + $1 }
         }
         return bestTranscript
     }

@@ -15,6 +15,9 @@
  **/
 
 import Foundation
+import Alamofire
+import Freddy
+import RestKit
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -30,6 +33,7 @@ public class SpeechToText {
     private let tokenURL: String
     private let websocketsURL: String
     private var microphoneSession: SpeechToTextSession?
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.6.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -53,6 +57,82 @@ public class SpeechToText {
         self.serviceURL = serviceURL
         self.tokenURL = tokenURL
         self.websocketsURL = websocketsURL
+    }
+    
+    /**
+     If the given data represents an error returned by the Speech to Text service, then return
+     an NSError object with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.string("error")
+            let code = try json.int("code")
+            let description = try json.string("code_description")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: description
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    /**
+     Retrieve a list of models available for use with the service.
+     
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of models.
+     */
+    public func getModels(failure: (NSError -> Void)? = nil, success: [Model] -> Void) {
+        // construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/models",
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseArray(dataToError: dataToError, path: ["models"]) {
+                (response: Response<[Model], NSError>) in
+                switch response.result {
+                case .Success(let models): success(models)
+                case .Failure(let error): failure?(error)
+                }
+            }
+    }
+    
+    /**
+     Retrieve information about a particular model that is available for use with the service.
+ 
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the model.
+    */
+    public func getModel(modelID: String, failure: (NSError -> Void)? = nil, success: Model -> Void) {
+        //construct REST request
+        let request = RestRequest(
+            method: .GET,
+            url: serviceURL + "/v1/models/" + modelID,
+            acceptType: "application/json",
+            userAgent: userAgent
+        )
+        
+        // execute REST request
+        Alamofire.request(request)
+            .authenticate(user: username, password: password)
+            .responseObject(dataToError: dataToError) {
+                (response: Response<Model, NSError>) in
+                switch response.result {
+                case .Success(let model): success(model)
+                case .Failure(let error): failure?(error)
+                }
+            }
     }
 
     /**

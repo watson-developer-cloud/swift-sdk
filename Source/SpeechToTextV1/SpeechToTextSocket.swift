@@ -166,6 +166,7 @@ internal class SpeechToTextSocket {
         queue.addOperationWithBlock {
             print("disconnecting")
             self.queue.suspended = true
+            self.queue.cancelAllOperations()
             self.socket.disconnect(forceTimeout: forceTimeout)
         }
     }

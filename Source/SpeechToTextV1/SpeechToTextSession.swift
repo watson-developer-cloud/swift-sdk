@@ -42,9 +42,9 @@ public class SpeechToTextSession {
     public var onMicrophoneData: (NSData -> Void)?
     
     /// Invoked every 0.025s when recording with the average dB power of the microphone.
-    public var onPower: (Float32 -> Void)? {
-        get { return recorder.onPower }
-        set { recorder.onPower = newValue }
+    public var onPowerData: (Float32 -> Void)? {
+        get { return recorder.onPowerData }
+        set { recorder.onPowerData = newValue }
     }
     
     /// Invoked when transcription results are received for a recognition request.
@@ -190,13 +190,13 @@ public class SpeechToTextSession {
                 return
             }
             
-            let onAudioPCM = { (pcm: NSData) in
+            let onMicrophoneDataPCM = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
                 self.socket.writeAudio(pcm)
                 self.onMicrophoneData?(pcm)
             }
             
-            let onAudioOpus = { (pcm: NSData) in
+            let onMicrophoneDataOpus = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
                 try! self.encoder.encode(pcm)
                 let opus = self.encoder.bitstream(true)
@@ -205,9 +205,9 @@ public class SpeechToTextSession {
             }
             
             if compress {
-                self.recorder.onAudio = onAudioOpus
+                self.recorder.onMicrophoneData = onMicrophoneDataOpus
             } else {
-                self.recorder.onAudio = onAudioPCM
+                self.recorder.onMicrophoneData = onMicrophoneDataPCM
             }
             
             self.recorder.startRecording()

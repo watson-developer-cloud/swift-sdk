@@ -22,8 +22,8 @@ internal class SpeechToTextRecorder {
     // This implementation closely follows Apple's "Audio Queue Services Programming Guide".
     // See the guide for more information about audio queues and recording.
     
-    internal var onAudio: (NSData -> Void)?                          // callback to handle pcm buffer
-    internal var onPower: (Float32 -> Void)?                         // callback for average dB power
+    internal var onMicrophoneData: (NSData -> Void)?                 // callback to handle pcm buffer
+    internal var onPowerData: (Float32 -> Void)?                     // callback for average dB power
     private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
     
     private var queue: AudioQueueRef = nil                           // opaque reference to an audio queue
@@ -50,7 +50,7 @@ internal class SpeechToTextRecorder {
         
         // execute callback with audio data
         let pcm = NSData(bytes: buffer.mAudioData, length: Int(buffer.mAudioDataByteSize))
-        audioRecorder.onAudio?(pcm)
+        audioRecorder.onMicrophoneData?(pcm)
         
         // return early if recording is stopped
         guard audioRecorder.isRecording else {
@@ -155,6 +155,6 @@ internal class SpeechToTextRecorder {
         let meteringProperty = kAudioQueueProperty_CurrentLevelMeterDB
         let meterStatus = AudioQueueGetProperty(queue, meteringProperty, &meters, &metersSize)
         guard meterStatus == 0 else { return }
-        onPower?(meters[0].mAveragePower)
+        onPowerData?(meters[0].mAveragePower)
     }
 }

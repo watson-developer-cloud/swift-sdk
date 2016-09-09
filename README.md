@@ -542,9 +542,45 @@ The following links provide more information about the Retrieve and Rank service
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
-The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session with the Speech to Text service.
+The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session.
 
-#### Recorded Audio
+#### Recognition Request Settings
+
+The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml#WSstart).
+
+The following example demonstrates how to define a recognition request that transcribes Opus-formatted audio data with interim results until the stream terminates:
+
+```swift
+var settings = RecognitionSettings(contentType: .WAV)
+settings.interimResults = true
+settings.continuous = true
+```
+
+See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://www.ibm.com/watson/developercloud/doc/speech-to-text/details.shtml) for more information about the available settings.
+
+#### Microphone Audio and Compression
+
+The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
+
+Knowing when to stop the microphone depends upon the recognition request's `continuous` setting:
+     
+- If `false`, then the service ends the recognition request at the first end-of-speech incident (denoted by a half-second of non-speech or when the stream terminates). This will coincide with a `final` transcription result. So the `success` or `onResults` callback should be configured to stop the microphone when a final transcription result is received.
+
+- If `true`, then the microphone will typically be stopped by user-feedback. For example, your application may have a button to start/stop the request, or you may stream the microphone for the duration of a long press on a UI element.
+
+To reduce latency and bandwidth, the microphone audio is compressed to Opus format by default. To disable compression, set the `compress` parameter to `false`.
+
+It's important to specify the correct audio format for recognition requests that use the microphone:
+
+```swift
+// compressed microphone audio uses the Opus format
+let settings = RecognitionSettings(contentType: .Opus)
+
+// uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz
+let settings = RecognitionSettings(contentType: .L16(rate: 16000, channels: 1))
+```
+
+#### Transcribe Recorded Audio
 
 The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.
 
@@ -555,25 +591,18 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
-// load file
 let audio = NSBundle.mainBundle().URLForResource("filename", withExtension: "wav")!
-
-// define recognition request settings
 var settings = RecognitionSettings(contentType: .WAV)
 settings.interimResults = true
-
-// define failure function
 let failure = { (error: NSError) in print(error) }
-
-// execute recognition request
 speechToText.recognize(audio, settings: settings, failure: failure) { results in
     print(results.bestTranscript)
 }
 ```
 
-#### Streaming Audio
+#### Transcribe Microphone Audio
 
-Audio can also be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe streaming audio:
+Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:
 
 ```swift
 import SpeechToTextV1
@@ -581,40 +610,46 @@ import SpeechToTextV1
 let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
-var request: MicrophoneRecognitionRequest?
 
 func startStreaming() {
-    // define recognition request settings
     var settings = RecognitionSettings(contentType: .Opus)
     settings.continuous = true
     settings.interimResults = true
-
-    // define failure function
     let failure = { (error: NSError) in print(error) }
-
-    // start streaming microphone data
-    let request = speechToText.recognize(settings, failure: failure) { results in
+    let request = speechToText.recognizeMicrophone(settings, failure: failure) { results in
         print(results.bestTranscript)
     }
 }
 
 func stopStreaming() {
-    request?.finish()
+    speechToText.stopRecognizeMicrophone()
 }
 ```
 
-#### Advanced Features
+#### Session Management and Advanced Features
 
-The `SpeechToTextSession` class exposes more control over the WebSockets session with the Speech to Text service, along with several advanced features.
+Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
 
-In particular, there are several (optional) callbacks that can be used to learn about the state of the session and access data associated with the microphone:
+The following steps describe how to execute a recognition request with `SpeechToTextSession`:
+
+1. Connect: Invoke `connect()` to connect to the service.
+2. Start Recognition Request: Invoke `startRequest(settings:)` to start a recognition request.
+3. Send Audio: Invoke `recognize(audio:)` or `startMicrophone(compress:)`/`stopMicrophone()` to send audio to the service.
+4. Stop Recognition Request: Invoke `stopRequest()` to end the recognition request. The service will automatically stop the request if the `continuous` setting is not set to `true`. If the recognition request is already stopped, then sending a stop message will have no effect.
+5. Disconnect: Invoke `disconnect()` to wait for any remaining results to be received and then disconnect from the service.
+
+All text and data messages sent by `SpeechToTextSession` are queued, with the exception of `connect()` which immediately connects to the server. The queue ensures that the messages are sent in-order and also buffers messages while waiting for a connection to be established. This behavior is generally transparent.
+
+A `SpeechToTextSession` also provides several (optional) callbacks. The callbacks can be used to learn about the state of the session or access microphone data.
 
 - `onConnect`: Invoked when the session connects to the Speech to Text service.
-- `onMicrophoneData`: Invoked with microphone audio when the recording audio queue has filled a buffer. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.
-- `onPower`: Invoked every 0.025s when recording with the average dB power of the microphone.
+- `onMicrophoneData`: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.
+- `onPowerData`: Invoked every 0.025s when recording with the average dB power of the microphone.
 - `onResults`: Invoked when transcription results are received for a recognition request.
 - `onError`: Invoked when an error or warning occurs.
 - `onDisconnect`: Invoked when the session disconnects from the Speech to Text service.
+
+The following example demonstrates how to use `SpeechToTextSession` to transcribe microphone audio:
 
 ```swift
 import SpeechToTextV1
@@ -630,9 +665,7 @@ func startStreaming() {
     speechToTextSession.onError = { error in print(error) }
     speechToTextSession.onPower = { decibels in print(decibels) }
     speechToTextSession.onMicrophoneData = { data in print("received data") }
-    speechToTextSession.onResults = { results in
-        print(results.bestTranscript)
-    }
+    speechToTextSession.onResults = { results in print(results.bestTranscript) }
 
     // define recognition request settings
     var settings = RecognitionSettings(contentType: .Opus)

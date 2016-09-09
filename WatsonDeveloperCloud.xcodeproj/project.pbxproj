@@ -312,6 +312,12 @@
 		7AB53B921CF64DE700FFC9DD /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageTests.swift */; };
 		7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B901CF64DE700FFC9DD /* testArticle.html */; };
 		7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B911CF64DE700FFC9DD /* testText.txt */; };
+		7AC97FC21D8308440046124C /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8141D79B76100507725 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC97FC41D8308690046124C /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8181D79B76100507725 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC97FC51D8308690046124C /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8191D79B76100507725 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
@@ -2199,7 +2205,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AC97FC41D8308690046124C /* opus.h in Headers */,
+				7AC97FC21D8308440046124C /* ogg.h in Headers */,
+				7AC97FC51D8308690046124C /* opus_defines.h in Headers */,
+				7AC97FC71D8308690046124C /* opus_types.h in Headers */,
 				7AAAF5BE1CEEA6C000B74848 /* SpeechToTextV1.h in Headers */,
+				7AC97FC81D830A020046124C /* os_types.h in Headers */,
+				7AC97FC61D8308690046124C /* opus_multistream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4639,7 +4651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Source/SpeechToTextV1/Dependencies/ogg $(SRCROOT)/Source/SpeechToTextV1/Dependencies/opus";
+				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -4666,7 +4678,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Source/SpeechToTextV1/Dependencies/ogg $(SRCROOT)/Source/SpeechToTextV1/Dependencies/opus";
+				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Release;
 		};

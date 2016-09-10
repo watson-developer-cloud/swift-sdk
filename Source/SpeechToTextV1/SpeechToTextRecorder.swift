@@ -25,6 +25,7 @@ internal class SpeechToTextRecorder {
     
     internal var onMicrophoneData: (NSData -> Void)?                 // callback to handle pcm buffer
     internal var onPowerData: (Float32 -> Void)?                     // callback for average dB power
+    internal let session = AVAudioSession.sharedInstance()           // session for configuration / permission
     private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
     
     private var queue: AudioQueueRef = nil                           // opaque reference to an audio queue
@@ -116,14 +117,16 @@ internal class SpeechToTextRecorder {
         NSRunLoop.currentRunLoop().addTimer(powerTimer!, forMode: NSRunLoopCommonModes)
     }
  
-    internal func startRecording() {
+    internal func startRecording() throws {
         guard !isRecording else { return }
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
+        try session.setActive(true)
         self.prepareToRecord()
         self.isRecording = true
         AudioQueueStart(self.queue, nil)
     }
  
-    internal func stopRecording() {
+    internal func stopRecording() throws {
         guard isRecording else { return }
         isRecording = false
         powerTimer?.invalidate()

@@ -72,7 +72,6 @@ public class SpeechToTextSession {
     private let socket: SpeechToTextSocket
     private var recorder: SpeechToTextRecorder
     private var encoder: SpeechToTextEncoder
-    private let session: AVAudioSession
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     
@@ -113,10 +112,6 @@ public class SpeechToTextSession {
             opusRate: Int32(recorder.format.mSampleRate),
             application: .VOIP
         )
-        
-        session = AVAudioSession()
-        do { try session.setCategory(AVAudioSessionCategoryPlayAndRecord) }
-        catch { return }
     }
     
     /**
@@ -200,19 +195,8 @@ public class SpeechToTextSession {
             application: .VOIP
         )
         
-        // activate audio session
-        do {
-            try session.setActive(true) }
-        catch {
-            let failureReason = "Failed to set AVAudioSession active."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            self.onError?(error)
-            return
-        }
-        
         // request recording permission
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+        recorder.session.requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -245,7 +229,15 @@ public class SpeechToTextSession {
             }
             
             // start recording
-            self.recorder.startRecording()
+            do {
+                try self.recorder.startRecording()
+            } catch {
+                let failureReason = "Failed to start recording."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                self.onError?(error)
+                return
+            }
         }
     }
     
@@ -253,20 +245,19 @@ public class SpeechToTextSession {
      Stop streaming microphone audio data to transcribe.
      */
     public func stopMicrophone() {
-        recorder.stopRecording()
-        if compress {
-            let opus = try! encoder.endstream()
-            self.socket.writeAudio(opus)
-        }
-        
         do {
-            try session.setActive(false) }
-        catch {
-            let failureReason = "Failed to set AVAudioSession inactive."
+            try recorder.stopRecording()
+        } catch {
+            let failureReason = "Failed to stop recording."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             self.onError?(error)
             return
+        }
+        
+        if compress {
+            let opus = try! encoder.endstream()
+            self.socket.writeAudio(opus)
         }
     }
     

@@ -196,7 +196,8 @@ public class SpeechToTextSession {
             application: .VOIP
         )
         
-        AVAudioSession.sharedInstance().requestRecordPermission() { granted in
+        // request recording permission
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -205,12 +206,14 @@ public class SpeechToTextSession {
                 return
             }
             
+            // callback if uncompressed
             let onMicrophoneDataPCM = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
                 self.socket.writeAudio(pcm)
                 self.onMicrophoneData?(pcm)
             }
             
+            // callback if compressed
             let onMicrophoneDataOpus = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
                 try! self.encoder.encode(pcm)
@@ -219,12 +222,14 @@ public class SpeechToTextSession {
                 self.onMicrophoneData?(opus)
             }
             
+            // set callback
             if compress {
                 self.recorder.onMicrophoneData = onMicrophoneDataOpus
             } else {
                 self.recorder.onMicrophoneData = onMicrophoneDataPCM
             }
             
+            // start recording
             self.recorder.startRecording()
         }
     }

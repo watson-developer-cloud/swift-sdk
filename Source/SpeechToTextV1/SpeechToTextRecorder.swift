@@ -33,7 +33,6 @@ internal class SpeechToTextRecorder {
     private var currentPacket: Int64 = 0                             // current packet index
     private var isRecording = false                                  // state of recording
     private var powerTimer: NSTimer?                                 // timer to invoke metering callback
-    private var session = AVAudioSession.sharedInstance()            // audio session for recording permission
     
     private let callback: AudioQueueInputCallback = {
         userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
@@ -119,14 +118,6 @@ internal class SpeechToTextRecorder {
  
     internal func startRecording() {
         guard !isRecording else { return }
-        
-        do {
-            try session.setCategory(AVAudioSessionCategoryRecord)
-            try session.setActive(true)
-        } catch {
-            return
-        }
-        
         self.prepareToRecord()
         self.isRecording = true
         AudioQueueStart(self.queue, nil)

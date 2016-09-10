@@ -72,6 +72,7 @@ public class SpeechToTextSession {
     private let socket: SpeechToTextSocket
     private var recorder: SpeechToTextRecorder
     private var encoder: SpeechToTextEncoder
+    private let session: AVAudioSession
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     
@@ -112,6 +113,10 @@ public class SpeechToTextSession {
             opusRate: Int32(recorder.format.mSampleRate),
             application: .VOIP
         )
+        
+        session = AVAudioSession()
+        do { try session.setCategory(AVAudioSessionCategoryPlayAndRecord) }
+        catch { return }
     }
     
     /**
@@ -196,6 +201,17 @@ public class SpeechToTextSession {
             application: .VOIP
         )
         
+        // activate audio session
+        do {
+            try session.setActive(true) }
+        catch {
+            let failureReason = "Failed to set AVAudioSession active."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            self.onError?(error)
+            return
+        }
+        
         // request recording permission
         AVAudioSession.sharedInstance().requestRecordPermission { granted in
             guard granted else {
@@ -243,6 +259,16 @@ public class SpeechToTextSession {
         if compress {
             let opus = try! encoder.endstream()
             self.socket.writeAudio(opus)
+        }
+        
+        do {
+            try session.setActive(false) }
+        catch {
+            let failureReason = "Failed to set AVAudioSession inactive."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            self.onError?(error)
+            return
         }
     }
     

@@ -318,7 +318,6 @@
 		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AD512751D84714D00267A91 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8121D79B76100507725 /* config_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
@@ -2212,7 +2211,6 @@
 				7AC97FC71D8308690046124C /* opus_types.h in Headers */,
 				7AAAF5BE1CEEA6C000B74848 /* SpeechToTextV1.h in Headers */,
 				7AC97FC81D830A020046124C /* os_types.h in Headers */,
-				7AD512751D84714D00267A91 /* config_types.h in Headers */,
 				7AC97FC61D8308690046124C /* opus_multistream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

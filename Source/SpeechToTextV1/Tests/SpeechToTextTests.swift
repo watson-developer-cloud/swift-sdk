@@ -158,8 +158,6 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = RecognitionSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel"
-        settings.learningOptOut = true
         settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
@@ -171,7 +169,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.recognize(file, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results.results, settings: settings)
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
@@ -263,8 +261,6 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = RecognitionSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel"
-        settings.learningOptOut = true
         settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
@@ -276,7 +272,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results.results, settings: settings)
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript

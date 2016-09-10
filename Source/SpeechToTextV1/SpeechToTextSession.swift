@@ -191,7 +191,6 @@ public class SpeechToTextSession {
         (Opus compression reduces latency and bandwidth.)
      */
     public func startMicrophone(compress: Bool = true) {
-        print("starting microphone")
         self.compress = compress
         
         // reset encoder
@@ -254,7 +253,6 @@ public class SpeechToTextSession {
      Stop streaming microphone audio data to transcribe.
      */
     public func stopMicrophone() {
-        print("stopping microphone")
         recorder.stopRecording()
         if compress {
             let opus = try! encoder.endstream()

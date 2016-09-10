@@ -64,8 +64,6 @@ internal class SpeechToTextSocket {
     }
     
     internal func connect() {
-        print("connecting")
-        
         // ensure the socket is not already connected
         guard state == .Disconnected || state == .Connecting else {
             return
@@ -85,7 +83,6 @@ internal class SpeechToTextSocket {
         
         // refresh token, if necessary
         guard let token = restToken.token else {
-            print("refreshing token")
             restToken.refreshToken(onError) {
                 self.tokenRefreshes += 1
                 self.connect()
@@ -102,9 +99,7 @@ internal class SpeechToTextSocket {
     internal func writeStart(settings: RecognitionSettings) {
         guard state != .Disconnected else { return }
         guard let start = try? settings.toJSON().serializeString() else { return }
-        print("queueing start message")
         queue.addOperationWithBlock {
-            print("writing start")
             self.socket.writeString(start)
             self.results = SpeechRecognitionResults()
             if self.state != .Disconnected {
@@ -116,9 +111,7 @@ internal class SpeechToTextSocket {
     
     internal func writeAudio(audio: NSData) {
         guard state != .Disconnected else { return }
-        print("queueing audio write")
         queue.addOperationWithBlock {
-            print("writing audio")
             self.socket.writeData(audio)
             if self.state == .Listening {
                 self.state = .SentAudio
@@ -129,9 +122,7 @@ internal class SpeechToTextSocket {
     internal func writeStop() {
         guard state != .Disconnected else { return }
         guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
-        print("queueing stop message")
         queue.addOperationWithBlock {
-            print("writing stop")
             self.socket.writeString(stop)
         }
     }
@@ -140,15 +131,12 @@ internal class SpeechToTextSocket {
         guard state != .Disconnected else { return }
         let nop = "{\"action\": \"no-op\"}"
         queue.addOperationWithBlock {
-            print("writing stop")
             self.socket.writeString(nop)
         }
     }
     
     internal func waitForResults() {
-        print("queueing wait for results")
         queue.addOperationWithBlock {
-            print("waiting for results")
             switch self.state {
             case .Connecting, .Connected, .Listening, .Disconnected:
                 return // no results to wait for
@@ -164,9 +152,7 @@ internal class SpeechToTextSocket {
     }
     
     internal func disconnect(forceTimeout: NSTimeInterval? = nil) {
-        print("queueing disconnect")
         queue.addOperationWithBlock {
-            print("disconnecting")
             self.queue.suspended = true
             self.queue.cancelAllOperations()
             self.socket.disconnect(forceTimeout: forceTimeout)
@@ -240,7 +226,6 @@ internal class SpeechToTextSocket {
 extension SpeechToTextSocket: WebSocketDelegate {
     
     internal func websocketDidConnect(socket: WebSocket) {
-        print("did connect")
         state = .Connected
         tokenRefreshes = 0
         queue.suspended = false
@@ -253,7 +238,6 @@ extension SpeechToTextSocket: WebSocketDelegate {
     }
     
     internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("did receive message: \(text)")
         guard let json = try? JSON(jsonString: text) else {
             return
         }
@@ -269,7 +253,6 @@ extension SpeechToTextSocket: WebSocketDelegate {
     }
     
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("did disconnect: \(error)")
         state = .Disconnected
         guard let error = error else {
             onDisconnect?()

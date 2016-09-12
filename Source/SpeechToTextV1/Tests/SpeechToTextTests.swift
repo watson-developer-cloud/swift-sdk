@@ -59,6 +59,34 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNil(error, "Timeout")
         }
     }
+    
+    // MARK: - Models
+    
+    func testModels() {
+        let description1 = "Get information about all models."
+        let expectation1 = expectationWithDescription(description1)
+        
+        var allModels = [Model]()
+        speechToText.getModels(failWithError) { models in
+            allModels = models
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        for model in allModels {
+            let description2 = "Get information about a particular model."
+            let expectation2 = expectationWithDescription(description2)
+            speechToText.getModel(model.name) { newModel in
+                XCTAssertEqual(model.name, newModel.name)
+                XCTAssertEqual(model.rate, newModel.rate)
+                XCTAssertEqual(model.language, newModel.language)
+                XCTAssertEqual(model.url, newModel.url)
+                XCTAssertEqual(model.description, newModel.description)
+                expectation2.fulfill()
+            }
+            waitForExpectations()
+        }
+    }
 
     // MARK: - Transcribe File, Default Settings
 
@@ -88,12 +116,12 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let settings = TranscriptionSettings(contentType: format)
-        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            XCTAssertEqual(results.count, 1)
-            XCTAssert(results.last?.final == true)
-            let transcript = results.last?.alternatives.last?.transcript
+        let settings = RecognitionSettings(contentType: format)
+        speechToText.recognize(file, settings: settings, failure: failWithError) { results in
+            self.validateSTTResults(results.results, settings: settings)
+            XCTAssertEqual(results.results.count, 1)
+            XCTAssert(results.results.last?.final == true)
+            let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
@@ -129,9 +157,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        var settings = TranscriptionSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel"
-        settings.learningOptOut = true
+        var settings = RecognitionSettings(contentType: format)
         settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
@@ -143,10 +169,10 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.transcribe(file, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            if results.last?.final == true {
-                let transcript = results.last?.alternatives.last?.transcript
+        speechToText.recognize(file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            self.validateSTTResults(results.results, settings: settings)
+            if results.results.last?.final == true {
+                let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()
@@ -188,12 +214,12 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        let settings = TranscriptionSettings(contentType: format)
-        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            XCTAssertEqual(results.count, 1)
-            XCTAssert(results.last?.final == true)
-            let transcript = results.last?.alternatives.last?.transcript
+        let settings = RecognitionSettings(contentType: format)
+        speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
+            self.validateSTTResults(results.results, settings: settings)
+            XCTAssertEqual(results.results.count, 1)
+            XCTAssert(results.results.last?.final == true)
+            let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.characters.count, 0)
             expectation.fulfill()
@@ -234,9 +260,7 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
-        var settings = TranscriptionSettings(contentType: format)
-        settings.model = "en-US_BroadbandModel"
-        settings.learningOptOut = true
+        var settings = RecognitionSettings(contentType: format)
         settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
@@ -248,10 +272,10 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.transcribe(audio, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results, settings: settings)
-            if results.last?.final == true {
-                let transcript = results.last?.alternatives.last?.transcript
+        speechToText.recognize(audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            self.validateSTTResults(results.results, settings: settings)
+            if results.results.last?.final == true {
+                let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.characters.count, 0)
                 expectation.fulfill()
@@ -274,13 +298,13 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - Validation Functions
 
-    func validateSTTResults(results: [TranscriptionResult], settings: TranscriptionSettings) {
+    func validateSTTResults(results: [SpeechRecognitionResult], settings: RecognitionSettings) {
         for result in results {
             validateSTTResult(result, settings: settings)
         }
     }
 
-    func validateSTTResult(result: TranscriptionResult, settings: TranscriptionSettings) {
+    func validateSTTResult(result: SpeechRecognitionResult, settings: RecognitionSettings) {
 
         XCTAssertNotNil(result.final)
         let final = result.final
@@ -332,10 +356,10 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTTranscription(
-        transcription: Transcription,
+        transcription: SpeechRecognitionAlternative,
         best: Bool,
         final: Bool,
-        settings: TranscriptionSettings)
+        settings: RecognitionSettings)
     {
         XCTAssertNotNil(transcription.transcript)
         XCTAssertGreaterThan(transcription.transcript.characters.count, 0)
@@ -401,7 +425,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertLessThanOrEqual(keywordResult.confidence, 1.0)
     }
 
-    func validateSTTWordAlternativeResults(wordAlternatives: AlternativeResults) {
+    func validateSTTWordAlternativeResults(wordAlternatives: WordAlternativeResults) {
         XCTAssertGreaterThanOrEqual(wordAlternatives.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(wordAlternatives.endTime, wordAlternatives.startTime)
         XCTAssertGreaterThan(wordAlternatives.alternatives.count, 0)
@@ -410,7 +434,7 @@ class SpeechToTextTests: XCTestCase {
         }
     }
 
-    func validateSTTWordAlternativeResult(wordAlternative: AlternativeResult) {
+    func validateSTTWordAlternativeResult(wordAlternative: WordAlternativeResult) {
         XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
         XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)

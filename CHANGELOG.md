@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.7.0
+
+_2016_09_11
+
+This update adds a new implementation for Speech to Text. The implementation includes a better, redesigned API. It also includes two separate classes, SpeechToText and SpeechToTextSession for simple and advanced usage, respectively. In particular, SpeechToTextSession exposes more control over the WebSockets session and microphone, including access to raw data and the decibel power level.
+
 ## Version 0.6.0
 
 _2016-08-11_

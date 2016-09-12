@@ -30,7 +30,7 @@ public class AlchemyLanguage {
     
     private let serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.6.0 AlchemyLanguageV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 AlchemyLanguageV1")
  
     private let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +

@@ -33,7 +33,7 @@ public class Dialog {
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.6.0 DialogV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()

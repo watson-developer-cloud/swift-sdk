@@ -30,7 +30,7 @@ public class ToneAnalyzer {
     private let password: String
     private let version: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.6.0 ToneAnalyzerV3")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
     /**

@@ -1,3 +1,8 @@
-github "Alamofire/Alamofire" ~> 3.0
-github "bignerdranch/Freddy" ~> 2.0
-github "daltoniam/Starscream" ~> 1.0
+# Alamofire includes Swift 2.3 support in v3.5.0
+github "Alamofire/Alamofire" ~> 3.5.0
+
+# Freddy includes Swift 2.3 support in `master` but not yet in a release
+github "bignerdranch/Freddy" "df68c72fc51e6da3d9f83726054087ea113c78f9"
+
+# Starscream has Swift 2.3 support in `swift-23` branch
+github "daltoniam/Starscream" "32fb0aa87e72f0945867201d92215081f57bf35a"

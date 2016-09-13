@@ -257,7 +257,7 @@ public class Dialog {
         var isUnique = false
         var duplicates = 0
         while !isUnique {
-            let filePath = downloads.URLByAppendingPathComponent(filename).path!
+            let filePath = downloads.URLByAppendingPathComponent(filename)!.path!
             if fileManager.fileExistsAtPath(filePath) {
                 duplicates += 1
                 filename = "dialog-" + dialogID + "-\(duplicates)" + filetype
@@ -267,7 +267,7 @@ public class Dialog {
         }
         
         // specify download destination
-        let destinationURL = downloads.URLByAppendingPathComponent(filename)
+        let destinationURL = downloads.URLByAppendingPathComponent(filename)!
         let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
             return destinationURL
         }

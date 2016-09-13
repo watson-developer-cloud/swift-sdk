@@ -725,7 +725,7 @@ public class VisualRecognition {
         let suffix = "VisualRecognitionParameters.json"
         let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)
+        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)!
         
         // save JSON dictionary to file
         do {

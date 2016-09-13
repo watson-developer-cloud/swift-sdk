@@ -29,7 +29,7 @@ public class ToneAnalyzer {
     private let username: String
     private let password: String
     private let version: String
-    private let serviceURL: String
+    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
@@ -45,13 +45,11 @@ public class ToneAnalyzer {
     public init(
         username: String,
         password: String,
-        version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/tone-analyzer/api")
+        version: String)
     {
         self.username = username
         self.password = password
         self.version = version
-        self.serviceURL = serviceURL
     }
     
     /**

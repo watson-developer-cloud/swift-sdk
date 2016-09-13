@@ -28,7 +28,7 @@ import RestKit
 public class AlchemyVision {
     
     private let apiKey: String
-    private let serviceURL: String
+    public var serviceURL = "http://gateway-a.watsonplatform.net/calls"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = NSCharacterSet(charactersInString:
@@ -40,12 +40,9 @@ public class AlchemyVision {
      - parameter apiKey: The API key credential to use when authenticating with the service.
      - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        apiKey: String,
-        serviceURL: String = "http://gateway-a.watsonplatform.net/calls")
+    public init(apiKey: String)
     {
         self.apiKey = apiKey
-        self.serviceURL = serviceURL
     }
     
     /**

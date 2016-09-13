@@ -31,7 +31,7 @@ import RestKit
 public class RelationshipExtraction {
     private let username: String
     private let password: String
-    private let serviceURL: String
+    public var serviceURL = "https://gateway.watsonplatform.net/relationship-extraction-beta/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 RelationshipExtractionV1Beta")
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
     
@@ -44,12 +44,10 @@ public class RelationshipExtraction {
      */
     public init(
         username: String,
-        password: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/relationship-extraction-beta/api")
+        password: String)
     {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
     
     /**

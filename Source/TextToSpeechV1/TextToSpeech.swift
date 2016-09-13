@@ -29,7 +29,7 @@ public class TextToSpeech {
     
     private let username: String
     private let password: String
-    private let serviceURL: String
+    public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 TextToSpeechV1")
     private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
 
@@ -42,12 +42,10 @@ public class TextToSpeech {
      */
     public init(
         username: String,
-        password: String,
-        serviceURL: String = "https://stream.watsonplatform.net/text-to-speech/api")
+        password: String)
     {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
     
     /**

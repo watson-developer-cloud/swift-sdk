@@ -34,7 +34,7 @@ public class SpeechToText {
 
     private let username: String
     private let password: String
-    private let serviceURL: String
+    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
     private let tokenURL: String
     private let websocketsURL: String
     private var microphoneSession: SpeechToTextSession?
@@ -53,13 +53,11 @@ public class SpeechToText {
     public init(
         username: String,
         password: String,
-        serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
         tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
         websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
     {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
         self.tokenURL = tokenURL
         self.websocketsURL = websocketsURL
     }

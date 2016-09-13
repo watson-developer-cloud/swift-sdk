@@ -28,7 +28,7 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
-    private let serviceURL: String
+    public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 VisualRecognitionV3")
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
@@ -42,12 +42,10 @@ public class VisualRecognition {
      */
     public init(
         apiKey: String,
-        version: String,
-        serviceURL: String = "https://gateway-a.watsonplatform.net/visual-recognition/api")
+        version: String)
     {
         self.apiKey = apiKey
         self.version = version
-        self.serviceURL = serviceURL
     }
     
     /**

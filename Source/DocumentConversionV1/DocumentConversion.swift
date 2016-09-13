@@ -29,7 +29,7 @@ public class DocumentConversion {
     
     private let username: String
     private let password: String
-    private let serviceURL: String
+    public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
     private let version: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
@@ -44,12 +44,10 @@ public class DocumentConversion {
     public init(
         username: String,
         password: String,
-        version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/document-conversion/api")
+        version: String)
     {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
         self.version = version
     }
     

@@ -29,7 +29,7 @@ public class TradeoffAnalytics {
     
     private let username: String
     private let password: String
-    private let serviceURL: String
+    public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 TradeoffAnalyticsV1")
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
@@ -42,12 +42,10 @@ public class TradeoffAnalytics {
      */
     public init(
         username: String,
-        password: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/tradeoff-analytics/api")
+        password: String)
     {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
 
     /**

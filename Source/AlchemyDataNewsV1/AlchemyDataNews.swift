@@ -32,7 +32,7 @@ public class AlchemyDataNews {
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 AlchemyDataNewsV1")
     
     /**
-     Initilizes the AlchemyDataNews service
+     Initializes the AlchemyDataNews service
      */
     public init(apiKey: String) {
         self.apiKey = apiKey

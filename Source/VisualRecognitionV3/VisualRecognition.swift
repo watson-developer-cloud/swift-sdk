@@ -28,6 +28,7 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
+    /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 VisualRecognitionV3")
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
@@ -38,7 +39,6 @@ public class VisualRecognition {
      - parameter apiKey: The API key used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
     public init(
         apiKey: String,

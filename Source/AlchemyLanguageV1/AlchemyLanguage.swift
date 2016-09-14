@@ -37,7 +37,7 @@ public class AlchemyLanguage {
         "1234567890-._~")
     
     /**
-     Initilizes the AlchemyLanguage service
+     Initializes the AlchemyLanguage service
      */
     public init(apiKey: String) {
         self.apiKey = apiKey

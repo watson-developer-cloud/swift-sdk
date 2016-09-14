@@ -32,6 +32,7 @@ public class Dialog {
     
     private let username: String
     private let password: String
+    /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
@@ -46,7 +47,6 @@ public class Dialog {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
     public init(
         username: String,

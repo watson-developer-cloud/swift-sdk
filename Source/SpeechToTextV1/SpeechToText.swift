@@ -34,9 +34,12 @@ public class SpeechToText {
 
     private let username: String
     private let password: String
+    /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    private let tokenURL: String
-    private let websocketsURL: String
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     private var microphoneSession: SpeechToTextSession?
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
@@ -46,20 +49,13 @@ public class SpeechToText {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL of the Speech to Text service.
-     - parameter tokenURL: The URL that shall be used to obtain a token.
-     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
      */
     public init(
         username: String,
-        password: String,
-        tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
-        websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        password: String)
     {
         self.username = username
         self.password = password
-        self.tokenURL = tokenURL
-        self.websocketsURL = websocketsURL
     }
     
     /**
@@ -200,11 +196,11 @@ public class SpeechToText {
             username: username,
             password: password,
             model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
+            learningOptOut: learningOptOut
         )
+        session.serviceURL = serviceURL
+        session.tokenURL = tokenURL
+        session.websocketsURL = websocketsURL
         
         session.onResults = success
         session.onError = failure
@@ -265,11 +261,11 @@ public class SpeechToText {
             username: username,
             password: password,
             model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
+            learningOptOut: learningOptOut
         )
+        session.serviceURL = serviceURL
+        session.tokenURL = tokenURL
+        session.websocketsURL = websocketsURL
         
         session.onResults = success
         session.onError = failure

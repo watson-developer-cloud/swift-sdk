@@ -32,6 +32,7 @@ public class Conversation {
     private let username: String
     private let password: String
     private let version: String
+    /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/conversation-experimental/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 ConversationV1Experimental")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1Experimental"
@@ -43,7 +44,6 @@ public class Conversation {
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
             in "YYYY-MM-DD" format.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
     public init(
         username: String,

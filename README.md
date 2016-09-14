@@ -20,6 +20,7 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Service Instances](#service-instances)
+* [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -121,6 +122,14 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 Note that service credentials are different from your Bluemix username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+
+## Xcode 7 Compatibility
+
+As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Unfortunately, Swift 2.3 is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
+
+To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
+
+`github "watson-developer-cloud/ios-sdk" ~> 0.7.0`
 
 ## Contributing
 

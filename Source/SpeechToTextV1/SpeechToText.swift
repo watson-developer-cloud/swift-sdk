@@ -38,7 +38,7 @@ public class SpeechToText {
     private let tokenURL: String
     private let websocketsURL: String
     private var microphoneSession: SpeechToTextSession?
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 SpeechToTextV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**

@@ -28,7 +28,7 @@ public class RetrieveAndRank {
     private let username: String
     private let password: String
     private let serviceURL: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 RetrieveAndRankV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 RetrieveAndRankV1")
     private let domain = "com.ibm.watson.developer-cloud.RetrieveAndRankV1"
     
     /**

@@ -1,9 +1,15 @@
 Change Log
 ==========
 
+## Version 0.8.0
+
+_2016_09_14_
+
+This update adds support for Xcode 8 and Swift 2.3+.
+
 ## Version 0.7.0
 
-_2016_09_11
+_2016_09_11_
 
 This update adds a new implementation for Speech to Text. The implementation includes a better, redesigned API. It also includes two separate classes, SpeechToText and SpeechToTextSession for simple and advanced usage, respectively. In particular, SpeechToTextSession exposes more control over the WebSockets session and microphone, including access to raw data and the decibel power level.
 

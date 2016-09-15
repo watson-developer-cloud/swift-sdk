@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.8.0
+
+_2016_09_14_
+
+This update adds support for Xcode 8 and Swift 2.3+.
+
 ## Version 0.7.1
 
 _2016-09-30_

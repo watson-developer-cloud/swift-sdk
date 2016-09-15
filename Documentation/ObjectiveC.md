@@ -1,6 +1,10 @@
-Here are the steps I followed:
+# Watson Developer Cloud iOS SDK: Objective-C Compatability
 
-Create Objective-C application.
+The Watson Developer Cloud iOS SDK is written in Swift and we strive to write "Swifty" code that follows the community's conventions and best practices. Unfortunately, that means our framework does not automatically bridge to Objective-C. We recommend writing a custom bridge in Swift to consume the iOS SDK in an Objective-C application. The following steps describe how to build a Swift bridge to consume the Watson Developer Cloud iOS SDK in an Objective-C application.
+
+## Create Application and Load Dependencies
+
+Create an Objective-C application.
 
 <img width="1410" alt="screen shot 2016-09-10 at 11 51 19 pm" src="https://cloud.githubusercontent.com/assets/1957636/18415277/06699246-77b2-11e6-880e-9b533bed5b7f.png">
 
@@ -45,6 +49,8 @@ Add an App Transport Security exception to `Info.plist`.
 <img width="456" alt="screen shot 2016-09-11 at 12 22 54 am" src="https://cloud.githubusercontent.com/assets/1957636/18415393/1b2c54c6-77b6-11e6-9821-c0a1ea633aa4.png">
 
 <img width="892" alt="screen shot 2016-09-11 at 12 23 11 am" src="https://cloud.githubusercontent.com/assets/1957636/18415396/1df60da0-77b6-11e6-95cd-971aab361fb5.png">
+
+## Bridge Objective-C to Swift
 
 Create a `WatsonBridge.swift` file. Allow Xcode to build an Objective-C bridging header when prompted.
 

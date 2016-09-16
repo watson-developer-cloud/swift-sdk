@@ -53,16 +53,9 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let apiKey = credentials["VisualRecognitionAPIKey"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: "2016-05-10")
+        let apiKey = Credentials.VisualRecognitionAPIKey
+        let version = "2016-05-10"
+        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
     }
     
     /** Load image files with class examples and test images. */

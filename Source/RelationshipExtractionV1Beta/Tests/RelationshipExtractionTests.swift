@@ -36,16 +36,8 @@ class RelationshipExtractionTests: XCTestCase {
     
     /** Instantiate Relationship Extraction instance. */
     func instantiateRelationshipExtraction() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["RelationshipExtractionUsername"],
-            let password = credentials["RelationshipExtractionPassword"]
-            else {
-                XCTFail("Unable to read credentials.")
-                return
-        }
+        let username = Credentials.RelationshipExtractionUsername
+        let password = Credentials.RelationshipExtractionPassword
         relationshipExtraction = RelationshipExtraction(username: username, password: password)
     }
     

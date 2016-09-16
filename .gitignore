@@ -1,7 +1,5 @@
 # Custom
-Credentials.plist
-docs/
-Credentials_full.plist
+Credentials.swift
 
 # Build generated
 build/

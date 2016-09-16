@@ -52,15 +52,7 @@ class AlchemyVisionTests: XCTestCase {
     
     /** Instantiate Alchemy Vision. */
     func instantiateAlchemyVision() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let apiKey = credentials["AlchemyAPIKey"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let apiKey = Credentials.AlchemyAPIKey
         alchemyVision = AlchemyVision(apiKey: apiKey)
     }
     

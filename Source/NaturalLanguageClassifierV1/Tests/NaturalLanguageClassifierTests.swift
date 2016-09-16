@@ -34,16 +34,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     /** Instantiate Natural Langauge Classifier instance. */
     func instantiateNaturalLanguageClassifier() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["NaturalLanguageClassifierUsername"],
-            let password = credentials["NaturalLanguageClassifierPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let username = Credentials.NaturalLanguageClassifierUsername
+        let password = Credentials.NaturalLanguageClassifierPassword
         naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
     }
     

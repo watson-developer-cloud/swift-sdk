@@ -18,24 +18,12 @@ import AlchemyDataNewsV1
 
 class AlchemyDataNewsTests: XCTestCase {
     
-    private var service: AlchemyDataNews!
-
+    private var alchemyDataNews: AlchemyDataNews!
     private let timeout: NSTimeInterval = 5.0
     
     override func setUp() {
         super.setUp()
-        if let url = NSBundle(forClass: self.dynamicType).pathForResource("Credentials", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: url) as? Dictionary<String, String> {
-                let apikey = dict["AlchemyAPIKey"]!
-                if service == nil {
-                    service = AlchemyDataNews(apiKey: apikey)
-                }
-            } else {
-                XCTFail("Unable to extract dictionary from plist")
-            }
-        } else {
-            XCTFail("Plist file not found")
-        }
+        alchemyDataNews = AlchemyDataNews(apiKey: Credentials.AlchemyAPIKey)
     }
     
     /** Fail false negatives. */
@@ -61,7 +49,7 @@ class AlchemyDataNewsTests: XCTestCase {
         let description = "Get the volume of articles within a timeframe"
         let expectation = expectationWithDescription(description)
         
-        service.getNews("now-1d", end: "now", failure: failWithError) { news in
+        alchemyDataNews.getNews("now-1d", end: "now", failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNotNil(news.result!.count, "Count should not be nil")
             expectation.fulfill()
@@ -77,7 +65,7 @@ class AlchemyDataNewsTests: XCTestCase {
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
         
-        service.getNews("now-1d", end: "now", query: queryDict, failure: failWithError) { news in
+        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNil(news.result?.count, "Count should not return")
             XCTAssertNotNil(news.result?.docs?[0].id, "Document ID should not be nil")
@@ -105,7 +93,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -123,7 +111,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -137,7 +125,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        service.getNews("now", end: "now-1d", failure: failure, success: failWithResult)
+        alchemyDataNews.getNews("now", end: "now-1d", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

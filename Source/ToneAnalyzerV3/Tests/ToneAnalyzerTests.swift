@@ -38,16 +38,8 @@ class ToneAnalyzerTests: XCTestCase {
     
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["ToneAnalyzerUsername"],
-            let password = credentials["ToneAnalyzerPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let username = Credentials.ToneAnalyzerUsername
+        let password = Credentials.ToneAnalyzerPassword
         toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
     }
     

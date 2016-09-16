@@ -30,16 +30,8 @@ class SpeechToTextTests: XCTestCase {
     
     /** Instantiate Speech to Text. */
     func instantiateSpeechToText() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["SpeechToTextUsername"],
-            let password = credentials["SpeechToTextPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let username = Credentials.SpeechToTextUsername
+        let password = Credentials.SpeechToTextPassword
         speechToText = SpeechToText(username: username, password: password)
     }
     

@@ -34,16 +34,8 @@ class LanguageTranslatorTests: XCTestCase {
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["LanguageTranslatorUsername"],
-            let password = credentials["LanguageTranslatorPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let username = Credentials.LanguageTranslatorUsername
+        let password = Credentials.LanguageTranslatorPassword
         languageTranslator = LanguageTranslator(username: username, password: password)
     }
     

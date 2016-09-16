@@ -37,16 +37,8 @@ class DialogTests: XCTestCase {
 
     /** Instantiate Dialog. */
     func instantiateDialog() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["DialogUsername"],
-            let password = credentials["DialogPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
+        let username = Credentials.DialogUsername
+        let password = Credentials.DialogPassword
         dialog = Dialog(username: username, password: password)
     }
 

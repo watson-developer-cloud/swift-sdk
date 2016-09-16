@@ -35,6 +35,13 @@ class PersonalityInsightsTests: XCTestCase {
         loadKennedySpeech()
     }
 
+    /** Instantiate Personality Insights. */
+    func instantiatePersonalityInsights() {
+        let username = Credentials.PersonalityInsightsUsername
+        let password = Credentials.PersonalityInsightsPassword
+        personalityInsights = PersonalityInsights(username: username, password: password)
+    }
+    
     /** Load "MobyDickIntro.txt". */
     func loadMobyDickIntro() {
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -63,21 +70,6 @@ class PersonalityInsightsTests: XCTestCase {
             XCTFail("Unable to read KennedySpeech.txt file.")
             return
         }
-    }
-
-    /** Instantiate Personality Insights. */
-    func instantiatePersonalityInsights() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["PersonalityInsightsUsername"],
-            let password = credentials["PersonalityInsightsPassword"]
-        else {
-            XCTFail("Unable to read credentials.")
-            return
-        }
-        personalityInsights = PersonalityInsights(username: username, password: password)
     }
 
     /** Fail false negatives. */

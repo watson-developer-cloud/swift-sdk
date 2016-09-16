@@ -40,16 +40,8 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Instantiate Retrieve and Rank instance. */
     func instantiateRetrieveAndRank() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["RetrieveAndRankUsername"],
-            let password = credentials["RetrieveAndRankPassword"]
-            else {
-                XCTFail("Unable to read credentials.")
-                return
-        }
+        let username = Credentials.RetrieveAndRankUsername
+        let password = Credentials.RetrieveAndRankPassword
         retrieveAndRank = RetrieveAndRank(username: username, password: password)
     }
     

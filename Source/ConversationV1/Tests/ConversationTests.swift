@@ -34,17 +34,10 @@ class ConversationTests: XCTestCase {
 
     /** Instantiate Conversation. */
     func instantiateConversation() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let file = bundle.pathForResource("Credentials", ofType: "plist"),
-            let credentials = NSDictionary(contentsOfFile: file) as? [String: String],
-            let username = credentials["ConversationUsername"],
-            let password = credentials["ConversationPassword"]
-            else {
-                XCTFail("Unable to read credentials.")
-                return
-        }
-        conversation = Conversation(username: username, password: password, version: "2016-07-19")
+        let username = Credentials.ConversationUsername
+        let password = Credentials.ConversationPassword
+        let version = "2016-07-19"
+        conversation = Conversation(username: username, password: password, version: version)
     }
 
     /** Fail false negatives. */

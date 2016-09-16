@@ -128,7 +128,7 @@ public class SpeechToTextSession {
      
      If set, the `onConnect()` callback will be invoked after the session connects to the service.
      */
-    public func connect() { 
+    public func connect() {
         socket.connect()
     }
     

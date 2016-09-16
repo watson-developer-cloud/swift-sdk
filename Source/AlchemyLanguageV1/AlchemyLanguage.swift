@@ -38,7 +38,9 @@ public class AlchemyLanguage {
         "1234567890-._~")
     
     /**
-     Initializes the AlchemyLanguage service
+     Create an `AlchemyLanguage` object.
+     
+     - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
         self.apiKey = apiKey

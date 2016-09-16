@@ -42,11 +42,7 @@ public class DocumentConversion {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
-    public init(
-        username: String,
-        password: String,
-        version: String)
-    {
+    public init(username: String, password: String, version: String) {
         self.username = username
         self.password = password
         self.version = version

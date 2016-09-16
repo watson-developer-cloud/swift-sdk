@@ -41,8 +41,7 @@ public class AlchemyVision {
 
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
-    public init(apiKey: String)
-    {
+    public init(apiKey: String) {
         self.apiKey = apiKey
     }
     

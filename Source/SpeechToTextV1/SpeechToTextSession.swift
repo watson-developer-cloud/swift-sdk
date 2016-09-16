@@ -109,12 +109,7 @@ public class SpeechToTextSession {
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public init(
-        username: String,
-        password: String,
-        model: String? = nil,
-        learningOptOut: Bool? = nil)
-    {
+    public init(username: String, password: String, model: String? = nil, learningOptOut: Bool? = nil) {
         self.username = username
         self.password = password
         self.model = model

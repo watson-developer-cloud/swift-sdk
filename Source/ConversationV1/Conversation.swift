@@ -46,11 +46,7 @@ public class Conversation {
      - parameter version: The release date of the version of the API to use. Specify the date
             in "YYYY-MM-DD" format.
      */
-    public init(
-        username: String,
-        password: String,
-        version: String)
-    {
+    public init(username: String, password: String, version: String) {
         self.username = username
         self.password = password
         self.version = version

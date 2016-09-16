@@ -49,10 +49,7 @@ public class Dialog {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
-    public init(
-        username: String,
-        password: String)
-    {
+    public init(username: String, password: String) {
         self.username = username
         self.password = password
     }

@@ -41,10 +41,7 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
      */
-    public init(
-        apiKey: String,
-        version: String)
-    {
+    public init(apiKey: String, version: String) {
         self.apiKey = apiKey
         self.version = version
     }

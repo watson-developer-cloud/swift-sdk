@@ -29,6 +29,15 @@ import AVFoundation
  */
 public class SpeechToTextSession {
     
+    /// The base URL of the Speech to Text service.
+    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
         get { return socket.results ?? SpeechRecognitionResults() }
@@ -86,12 +95,6 @@ public class SpeechToTextSession {
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     
-    /// The base URL of the Speech to Text service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     private let username: String
     private let password: String
     private let model: String?

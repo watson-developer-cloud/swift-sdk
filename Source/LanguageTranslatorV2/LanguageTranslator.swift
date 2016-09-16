@@ -26,10 +26,11 @@ import RestKit
  */
 public class LanguageTranslator {
 
-    private let username: String
-    private let password: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+    
+    private let username: String
+    private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 LanguageTranslatorV2")
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 

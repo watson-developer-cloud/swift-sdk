@@ -26,10 +26,11 @@ import RestKit
  */
 public class VisualRecognition {
     
-    private let apiKey: String
-    private let version: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
+    
+    private let apiKey: String
+    private let version: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 VisualRecognitionV3")
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     

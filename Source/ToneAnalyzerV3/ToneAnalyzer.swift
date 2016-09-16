@@ -26,11 +26,12 @@ import RestKit
 **/
 public class ToneAnalyzer {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
+    
     private let username: String
     private let password: String
     private let version: String
-    /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 

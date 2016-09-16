@@ -32,14 +32,17 @@ import RestKit
  */
 public class SpeechToText {
 
-    private let username: String
-    private let password: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    
     /// The URL that shall be used to obtain a token.
     public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    
+    private let username: String
+    private let password: String
     private var microphoneSession: SpeechToTextSession?
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"

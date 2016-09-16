@@ -25,9 +25,10 @@ import RestKit
  */
 public class AlchemyDataNews {
     
-    private let apiKey: String
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
+    
+    private let apiKey: String
     private let errorDomain = "com.watsonplatform.alchemyDataNews"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyDataNewsV1")
     

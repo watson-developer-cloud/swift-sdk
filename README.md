@@ -10,7 +10,11 @@
 
 The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build Watson-powered applications. With the iOS SDK you can leverage the power of Watson's advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.
 
-Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md) to build your first Watson-powered app!
+There are many resources to help you build your first cognitive application with the iOS SDK:
+- Read the [Readme](README.md)
+- Follow the [QuickStart Guide](Documentation/Quickstart.md)
+- Review a [Sample Application](#sample-applications)
+- Browse the [Documentation](http://watson-developer-cloud.github.io/ios-sdk/)
 
 ## Contents
 

@@ -29,7 +29,7 @@ Add a "Copy Frameworks" build phase with the frameworks and dependencies you'd l
 
 <img width="692" alt="screen shot 2016-09-11 at 12 13 04 am" src="https://cloud.githubusercontent.com/assets/1957636/18415356/882803c4-77b4-11e6-912c-0a4d9745340c.png">
 
-Add an App Transport Security exception to `Info.plist`.
+Add the following App Transport Security exception to `Info.plist`.
 
 ```
 <key>NSAppTransportSecurity</key>

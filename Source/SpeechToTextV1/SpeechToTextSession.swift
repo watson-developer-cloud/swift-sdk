@@ -31,13 +31,13 @@ public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
-        get { return socket?.results ?? SpeechRecognitionResults() }
+        get { return socket.results ?? SpeechRecognitionResults() }
     }
     
     /// Invoked when the session connects to the Speech to Text service.
     public var onConnect: (Void -> Void)? {
-        get { return socket?.onConnect }
-        set { socket?.onConnect = newValue }
+        get { return socket.onConnect }
+        set { socket.onConnect = newValue }
     }
     
     /// Invoked with microphone audio when a recording audio queue buffer has been filled.
@@ -53,23 +53,34 @@ public class SpeechToTextSession {
     
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: (SpeechRecognitionResults -> Void)? {
-        get { return socket?.onResults }
-        set { socket?.onResults = newValue }
+        get { return socket.onResults }
+        set { socket.onResults = newValue }
     }
     
     /// Invoked when an error or warning occurs.
     public var onError: (NSError -> Void)? {
-        get { return socket?.onError }
-        set { socket?.onError = newValue }
+        get { return socket.onError }
+        set { socket.onError = newValue }
     }
     
     /// Invoked when the session disconnects from the Speech to Text service.
     public var onDisconnect: (Void -> Void)? {
-        get { return socket?.onDisconnect }
-        set { socket?.onDisconnect = newValue }
+        get { return socket.onDisconnect }
+        set { socket.onDisconnect = newValue }
     }
     
-    private var socket: SpeechToTextSocket?
+    private lazy var socket: SpeechToTextSocket = {
+        SpeechToTextSocket(
+            username: self.username,
+            password: self.password,
+            model: self.model,
+            learningOptOut: self.learningOptOut,
+            serviceURL: self.serviceURL,
+            tokenURL: self.tokenURL,
+            websocketsURL: self.websocketsURL
+        )
+    }()
+    
     private var recorder: SpeechToTextRecorder
     private var encoder: SpeechToTextEncoder
     private var compress: Bool = true
@@ -119,18 +130,8 @@ public class SpeechToTextSession {
      
      If set, the `onConnect()` callback will be invoked after the session connects to the service.
      */
-    public func connect() {
-        socket = SpeechToTextSocket(
-            username: username,
-            password: password,
-            model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
-        )
-        
-        socket?.connect()
+    public func connect() { 
+        socket.connect()
     }
     
     /**
@@ -139,7 +140,7 @@ public class SpeechToTextSession {
      - parameter settings: The configuration to use for this recognition request.
      */
     public func startRequest(settings: RecognitionSettings) {
-        socket?.writeStart(settings)
+        socket.writeStart(settings)
     }
     
     /**
@@ -164,7 +165,7 @@ public class SpeechToTextSession {
      - parameter audio: The audio data to transcribe.
      */
     public func recognize(audio: NSData) {
-        socket?.writeAudio(audio)
+        socket.writeAudio(audio)
     }
     
     /**
@@ -218,7 +219,7 @@ public class SpeechToTextSession {
             // callback if uncompressed
             let onMicrophoneDataPCM = { (pcm: NSData) in
                 guard pcm.length > 0 else { return }
-                self.socket?.writeAudio(pcm)
+                self.socket.writeAudio(pcm)
                 self.onMicrophoneData?(pcm)
             }
             
@@ -227,7 +228,7 @@ public class SpeechToTextSession {
                 guard pcm.length > 0 else { return }
                 try! self.encoder.encode(pcm)
                 let opus = self.encoder.bitstream(true)
-                self.socket?.writeAudio(opus)
+                self.socket.writeAudio(opus)
                 self.onMicrophoneData?(opus)
             }
             
@@ -267,7 +268,7 @@ public class SpeechToTextSession {
         
         if compress {
             let opus = try! encoder.endstream()
-            self.socket?.writeAudio(opus)
+            self.socket.writeAudio(opus)
         }
     }
     
@@ -275,7 +276,7 @@ public class SpeechToTextSession {
      Stop the recognition request.
      */
     public func stopRequest() {
-        socket?.writeStop()
+        socket.writeStop()
     }
     
     /**
@@ -292,14 +293,14 @@ public class SpeechToTextSession {
      connection alive.
      */
     public func keepAlive() {
-        socket?.writeNop()
+        socket.writeNop()
     }
     
     /**
      Wait for any queued recognition requests to complete then disconnect from the service.
      */
     public func disconnect() {
-        socket?.waitForResults()
-        socket?.disconnect()
+        socket.waitForResults()
+        socket.disconnect()
     }
 }

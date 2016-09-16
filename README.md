@@ -20,6 +20,7 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Installation](#installation)
 * [Service Instances](#service-instances)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
+* [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -129,6 +130,10 @@ As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Unfortunately, 
 To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
 
 `github "watson-developer-cloud/ios-sdk" ~> 0.7.0`
+
+## Objective-C Compatibility
+
+Please see [this tutorial](Documentation/ObjectiveC.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
 
 ## Contributing
 

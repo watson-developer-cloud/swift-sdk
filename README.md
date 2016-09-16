@@ -19,6 +19,7 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Service Instances](#service-instances)
+* [Sample Applications](#sample-applications)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)
@@ -122,6 +123,12 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 Note that service credentials are different from your Bluemix username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+
+## Sample Applications
+
+* [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
+* [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
+* [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 
 ## Xcode 7 Compatibility
 

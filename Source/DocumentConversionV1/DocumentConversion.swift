@@ -32,7 +32,7 @@ public class DocumentConversion {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 DocumentConversionV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
     /**
@@ -193,7 +193,7 @@ public class DocumentConversion {
         let suffix = "DocumentConversionConfiguration.json"
         let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)
+        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)!
         
         // save JSON dictionary to file
         do {

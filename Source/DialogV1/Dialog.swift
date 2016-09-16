@@ -34,7 +34,7 @@ public class Dialog {
     private let password: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 DialogV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
@@ -255,7 +255,7 @@ public class Dialog {
         var isUnique = false
         var duplicates = 0
         while !isUnique {
-            let filePath = downloads.URLByAppendingPathComponent(filename).path!
+            let filePath = downloads.URLByAppendingPathComponent(filename)!.path!
             if fileManager.fileExistsAtPath(filePath) {
                 duplicates += 1
                 filename = "dialog-" + dialogID + "-\(duplicates)" + filetype
@@ -265,7 +265,7 @@ public class Dialog {
         }
         
         // specify download destination
-        let destinationURL = downloads.URLByAppendingPathComponent(filename)
+        let destinationURL = downloads.URLByAppendingPathComponent(filename)!
         let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
             return destinationURL
         }

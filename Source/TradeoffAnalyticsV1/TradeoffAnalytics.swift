@@ -31,7 +31,7 @@ public class TradeoffAnalytics {
     private let password: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 TradeoffAnalyticsV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TradeoffAnalyticsV1")
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
     /**

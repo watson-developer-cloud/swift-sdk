@@ -33,7 +33,7 @@ public class RelationshipExtraction {
     private let password: String
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/relationship-extraction-beta/api"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 RelationshipExtractionV1Beta")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 RelationshipExtractionV1Beta")
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
     
     /**

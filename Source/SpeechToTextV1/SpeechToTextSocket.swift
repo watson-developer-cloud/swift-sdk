@@ -35,7 +35,7 @@ internal class SpeechToTextSocket {
     private let restToken: RestToken
     private var tokenRefreshes = 0
     private let maxTokenRefreshes = 1
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 SpeechToTextV1")
+    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
     
     internal init(

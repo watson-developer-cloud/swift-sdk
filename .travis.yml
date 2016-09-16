@@ -9,7 +9,7 @@ env:
     - IOS8_DESTINATION="OS=8.4,name=iPhone 6"
     - IOS9_DESTINATION="OS=9.3,name=iPhone 6"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_5cd05c057710_key -iv $encrypted_5cd05c057710_iv -in Source/SupportingFiles/Credentials.plist.enc -out Source/SupportingFiles/Credentials.plist -d
+  - openssl aes-256-cbc -K $encrypted_5cd05c057710_key -iv $encrypted_5cd05c057710_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
 before_script:
   - carthage update --platform iOS
 after_success:

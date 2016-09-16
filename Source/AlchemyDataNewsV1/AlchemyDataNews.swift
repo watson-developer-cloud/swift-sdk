@@ -33,7 +33,9 @@ public class AlchemyDataNews {
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyDataNewsV1")
     
     /**
-     Initializes the AlchemyDataNews service
+     Create an `AlchemyDataNews` object.
+     
+     - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
         self.apiKey = apiKey

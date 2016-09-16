@@ -192,19 +192,24 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
     {
+        // create session
         let session = SpeechToTextSession(
             username: username,
             password: password,
             model: model,
             learningOptOut: learningOptOut
         )
+        
+        // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
         
+        // set callbacks
         session.onResults = success
         session.onError = failure
         
+        // execute recognition request
         session.connect()
         session.startRequest(settings)
         session.recognize(audio)
@@ -254,26 +259,33 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
     {
+        // validate settings
         var settings = settings
         settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
         
+        // create session
         let session = SpeechToTextSession(
             username: username,
             password: password,
             model: model,
             learningOptOut: learningOptOut
         )
+        
+        // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
         
+        // set callbacks
         session.onResults = success
         session.onError = failure
         
+        // start recognition request
         session.connect()
         session.startRequest(settings)
         session.startMicrophone(compress)
         
+        // store session
         microphoneSession = session
     }
     

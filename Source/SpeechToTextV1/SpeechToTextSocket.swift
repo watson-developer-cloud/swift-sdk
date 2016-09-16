@@ -41,11 +41,11 @@ internal class SpeechToTextSocket {
     internal init(
         username: String,
         password: String,
-        model: String? = nil,
-        learningOptOut: Bool? = nil,
-        serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
-        tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
-        websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        model: String?,
+        learningOptOut: Bool?,
+        serviceURL: String,
+        tokenURL: String,
+        websocketsURL: String)
     {
         // initialize authentication token
         let tokenURL = tokenURL + "?url=" + serviceURL

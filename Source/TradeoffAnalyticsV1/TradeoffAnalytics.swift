@@ -27,9 +27,11 @@ import RestKit
  */
 public class TradeoffAnalytics {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
+    
     private let username: String
     private let password: String
-    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TradeoffAnalyticsV1")
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
@@ -38,16 +40,10 @@ public class TradeoffAnalytics {
  
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        username: String,
-        password: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/tradeoff-analytics/api")
-    {
+    public init(username: String, password: String) {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
 
     /**

@@ -32,11 +32,17 @@ import RestKit
  */
 public class SpeechToText {
 
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    
     private let username: String
     private let password: String
-    private let serviceURL: String
-    private let tokenURL: String
-    private let websocketsURL: String
     private var microphoneSession: SpeechToTextSession?
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
@@ -46,22 +52,10 @@ public class SpeechToText {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL of the Speech to Text service.
-     - parameter tokenURL: The URL that shall be used to obtain a token.
-     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
      */
-    public init(
-        username: String,
-        password: String,
-        serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
-        tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
-        websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
-    {
+    public init(username: String, password: String) {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
-        self.tokenURL = tokenURL
-        self.websocketsURL = websocketsURL
     }
     
     /**
@@ -198,19 +192,24 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
     {
+        // create session
         let session = SpeechToTextSession(
             username: username,
             password: password,
             model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
+            learningOptOut: learningOptOut
         )
         
+        // set urls
+        session.serviceURL = serviceURL
+        session.tokenURL = tokenURL
+        session.websocketsURL = websocketsURL
+        
+        // set callbacks
         session.onResults = success
         session.onError = failure
         
+        // execute recognition request
         session.connect()
         session.startRequest(settings)
         session.recognize(audio)
@@ -260,26 +259,33 @@ public class SpeechToText {
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
     {
+        // validate settings
         var settings = settings
         settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
         
+        // create session
         let session = SpeechToTextSession(
             username: username,
             password: password,
             model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
+            learningOptOut: learningOptOut
         )
         
+        // set urls
+        session.serviceURL = serviceURL
+        session.tokenURL = tokenURL
+        session.websocketsURL = websocketsURL
+        
+        // set callbacks
         session.onResults = success
         session.onError = failure
         
+        // start recognition request
         session.connect()
         session.startRequest(settings)
         session.startMicrophone(compress)
         
+        // store session
         microphoneSession = session
     }
     

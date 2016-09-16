@@ -29,9 +29,18 @@ import AVFoundation
  */
 public class SpeechToTextSession {
     
+    /// The base URL of the Speech to Text service.
+    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
-        get { return socket.results }
+        get { return socket.results ?? SpeechRecognitionResults() }
     }
     
     /// Invoked when the session connects to the Speech to Text service.
@@ -69,11 +78,27 @@ public class SpeechToTextSession {
         set { socket.onDisconnect = newValue }
     }
     
-    private let socket: SpeechToTextSocket
+    private lazy var socket: SpeechToTextSocket = {
+        SpeechToTextSocket(
+            username: self.username,
+            password: self.password,
+            model: self.model,
+            learningOptOut: self.learningOptOut,
+            serviceURL: self.serviceURL,
+            tokenURL: self.tokenURL,
+            websocketsURL: self.websocketsURL
+        )
+    }()
+    
     private var recorder: SpeechToTextRecorder
     private var encoder: SpeechToTextEncoder
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    
+    private let username: String
+    private let password: String
+    private let model: String?
+    private let learningOptOut: Bool?
     
     /**
      Create a `SpeechToTextSession` object.
@@ -83,28 +108,12 @@ public class SpeechToTextSession {
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter serviceURL: The base URL of the Speech to Text service.
-     - parameter tokenURL: The URL that shall be used to obtain a token.
-     - parameter websocketsURL: The URL that shall be used to stream audio for transcription.
      */
-    public init(
-        username: String,
-        password: String,
-        model: String? = nil,
-        learningOptOut: Bool? = nil,
-        serviceURL: String = "https://stream.watsonplatform.net/speech-to-text/api",
-        tokenURL: String = "https://stream.watsonplatform.net/authorization/api/v1/token",
-        websocketsURL: String = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
-    {
-        socket = SpeechToTextSocket(
-            username: username,
-            password: password,
-            model: model,
-            learningOptOut: learningOptOut,
-            serviceURL: serviceURL,
-            tokenURL: tokenURL,
-            websocketsURL: websocketsURL
-        )
+    public init(username: String, password: String, model: String? = nil, learningOptOut: Bool? = nil) {
+        self.username = username
+        self.password = password
+        self.model = model
+        self.learningOptOut = learningOptOut
         
         recorder = SpeechToTextRecorder()
         encoder = try! SpeechToTextEncoder(

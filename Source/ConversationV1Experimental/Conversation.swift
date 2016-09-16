@@ -29,10 +29,12 @@ public typealias WorkspaceID = String
  */
 public class Conversation {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/conversation-experimental/api"
+    
     private let username: String
     private let password: String
     private let version: String
-    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ConversationV1Experimental")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1Experimental"
     
@@ -43,18 +45,11 @@ public class Conversation {
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
             in "YYYY-MM-DD" format.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        username: String,
-        password: String,
-        version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/conversation-experimental/api")
-    {
+    public init(username: String, password: String, version: String) {
         self.username = username
         self.password = password
         self.version = version
-        self.serviceURL = serviceURL
     }
     
     /**

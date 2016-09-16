@@ -27,8 +27,10 @@ import RestKit
 @available(*, deprecated, message="Its functionality became a part of the IBM Watson Visual Recognition service.")
 public class AlchemyVision {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "http://gateway-a.watsonplatform.net/calls"
+    
     private let apiKey: String
-    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = NSCharacterSet(charactersInString:
@@ -38,14 +40,9 @@ public class AlchemyVision {
      Create an `AlchemyVision` object.
 
      - parameter apiKey: The API key credential to use when authenticating with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        apiKey: String,
-        serviceURL: String = "http://gateway-a.watsonplatform.net/calls")
-    {
+    public init(apiKey: String) {
         self.apiKey = apiKey
-        self.serviceURL = serviceURL
     }
     
     /**

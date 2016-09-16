@@ -26,9 +26,11 @@ import RestKit
  */
 public class PersonalityInsights {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+    
     private let username: String
     private let password: String
-    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 PersonalityInsightsV2")
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
@@ -37,16 +39,10 @@ public class PersonalityInsights {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        username: String,
-        password: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/personality-insights/api")
-    {
+    public init(username: String, password: String) {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
 
     /**

@@ -26,9 +26,10 @@ import RestKit
 
 public class AlchemyLanguage {
     
-    private let apiKey: String
+    /// The base URL to use when contacting the service.
+    public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     
-    private let serviceUrl = "https://gateway-a.watsonplatform.net/calls"
+    private let apiKey: String
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyLanguageV1")
  
@@ -37,7 +38,9 @@ public class AlchemyLanguage {
         "1234567890-._~")
     
     /**
-     Initilizes the AlchemyLanguage service
+     Create an `AlchemyLanguage` object.
+     
+     - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
         self.apiKey = apiKey

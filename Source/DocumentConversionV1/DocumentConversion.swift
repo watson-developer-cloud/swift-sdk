@@ -27,9 +27,11 @@ import RestKit
  */
 public class DocumentConversion {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
+    
     private let username: String
     private let password: String
-    private let serviceURL: String
     private let version: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
@@ -39,17 +41,10 @@ public class DocumentConversion {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        username: String,
-        password: String,
-        version: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/document-conversion/api")
-    {
+    public init(username: String, password: String, version: String) {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
         self.version = version
     }
     

@@ -30,9 +30,11 @@ public typealias DialogID = String
 @available(*, deprecated, message="The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
 public class Dialog {
     
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
+    
     private let username: String
     private let password: String
-    private let serviceURL: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: NSDateFormatter = {
@@ -46,16 +48,10 @@ public class Dialog {
      
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
-     - parameter serviceURL: The base URL to use when contacting the service.
      */
-    public init(
-        username: String,
-        password: String,
-        serviceURL: String = "https://gateway.watsonplatform.net/dialog/api")
-    {
+    public init(username: String, password: String) {
         self.username = username
         self.password = password
-        self.serviceURL = serviceURL
     }
 
     /**

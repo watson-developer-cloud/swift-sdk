@@ -24,6 +24,7 @@ There are many resources to help you build your first cognitive application with
 * [Installation](#installation)
 * [Service Instances](#service-instances)
 * [Sample Applications](#sample-applications)
+* [Xcode 8 Compatibility](#xcode-8-compatibility)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)
@@ -133,6 +134,10 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_star
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
+
+## Xcode 8 Compatibility
+
+As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Since new Xcode 8 projects default to Swift 3.0, compatability with the iOS SDK requires you to [change your project settings](https://thatthinginswift.com/swift-2-xcode-8/) to specify Swift 2.3.
 
 ## Xcode 7 Compatibility
 

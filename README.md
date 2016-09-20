@@ -693,7 +693,7 @@ func startStreaming() {
     speechToTextSession.onConnect = { print("connected") }
     speechToTextSession.onDisconnect = { print("disconnected") }
     speechToTextSession.onError = { error in print(error) }
-    speechToTextSession.onPower = { decibels in print(decibels) }
+    speechToTextSession.onPowerData = { decibels in print(decibels) }
     speechToTextSession.onMicrophoneData = { data in print("received data") }
     speechToTextSession.onResults = { results in print(results.bestTranscript) }
 

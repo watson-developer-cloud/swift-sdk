@@ -97,7 +97,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["clusters"]) {
+            .responseArray(path: ["clusters"]) {
                 (response: Response<[SolrCluster], NSError>) in
                 switch response.result {
                 case .Success(let clusters): success(clusters)
@@ -149,7 +149,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<SolrCluster, NSError>) in
                 switch response.result {
                 case .Success(let cluster): success(cluster)
@@ -216,7 +216,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<SolrCluster, NSError>) in
                 switch response.result {
                 case .Success(let cluster): success(cluster)
@@ -249,7 +249,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["solr_configs"]) {
+            .responseArray(path: ["solr_configs"]) {
                 (response: Response<[String], NSError>) in
                 switch response.result {
                 case .Success(let config): success(config)
@@ -548,7 +548,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["collections"]) {
+            .responseArray(path: ["collections"]) {
                 (response: Response<[String], NSError>) in
                 switch response.result {
                 case .Success(let collections): success(collections)
@@ -662,7 +662,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<SearchResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)
@@ -716,7 +716,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<SearchAndRankResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)
@@ -748,7 +748,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["rankers"]) {
+            .responseArray(path: ["rankers"]) {
                 (response: Response<[Ranker], NSError>) in
                 switch response.result {
                 case .Success(let rankers): success(rankers)
@@ -806,7 +806,7 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(dataToError: self.dataToError) {
+                    upload.responseObject() {
                         (response: Response<RankerDetails, NSError>) in
                         switch response.result {
                         case .Success(let ranker): success(ranker)
@@ -860,7 +860,7 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(dataToError: self.dataToError) {
+                    upload.responseObject() {
                         (response: Response<Ranking, NSError>) in
                         switch response.result {
                         case .Success(let ranking): success(ranking)
@@ -936,7 +936,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<RankerDetails, NSError>) in
                 switch response.result {
                 case .Success(let details): success(details)

@@ -382,21 +382,29 @@ public class VisualRecognition {
         failure: (NSError -> Void)? = nil,
         success: ClassifiedImages -> Void)
     {
-        // write parameters to JSON file
-        let parameters = writeParameters(
-            url: url,
-            classifierIDs: classifierIDs,
-            owners: owners,
-            showLowConfidence: showLowConfidence
-        )
-        
-        // classify images
-        classify(
-            parameters: parameters,
-            outputLanguage: outputLanguage,
-            failure: failure,
-            success: success
-        )
+        do {
+            // write parameters to JSON file
+            let parameters = try writeParameters(
+                url: url,
+                classifierIDs: classifierIDs,
+                owners: owners,
+                showLowConfidence: showLowConfidence
+            )
+            
+            // classify images
+            classify(
+                parameters: parameters,
+                outputLanguage: outputLanguage,
+                failure: failure,
+                success: success
+            )
+        } catch {
+            let failureReason = "Failed to write JSON parameters file."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
     }
     
     /**
@@ -424,21 +432,32 @@ public class VisualRecognition {
         failure: (NSError -> Void)? = nil,
         success: ClassifiedImages -> Void)
     {
-        // write parameters to JSON file
-        let parameters = writeParameters(
-            classifierIDs: classifierIDs,
-            owners: owners,
-            showLowConfidence: showLowConfidence
-        )
         
-        // classify images
-        classify(
-            image,
-            parameters: parameters,
-            outputLanguage: outputLanguage,
-            failure: failure,
-            success: success
-        )
+        do {
+            // write parameters to JSON file
+            let parameters = try writeParameters(
+                classifierIDs: classifierIDs,
+                owners: owners,
+                showLowConfidence: showLowConfidence
+            )
+            
+            print(try! String(contentsOfURL: parameters))
+            
+            // classify images
+            classify(
+                image,
+                parameters: parameters,
+                outputLanguage: outputLanguage,
+                failure: failure,
+                success: success
+            )
+        } catch {
+            let failureReason = "Failed to write JSON parameters file."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
     }
     
     /**
@@ -530,8 +549,16 @@ public class VisualRecognition {
         failure: (NSError -> Void)? = nil,
         success: ImagesWithFaces -> Void)
     {
-        let parameters = writeParameters(url: url)
-        detectFaces(parameters: parameters, failure: failure, success: success)
+        do {
+            let parameters = try writeParameters(url: url)
+            detectFaces(parameters: parameters, failure: failure, success: success)
+        } catch {
+            let failureReason = "Failed to write JSON parameters file."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
     }
 
     /**
@@ -613,8 +640,16 @@ public class VisualRecognition {
         failure: (NSError -> Void)? = nil,
         success: ImagesWithWords -> Void)
     {
-        let parameters = writeParameters(url: url)
-        recognizeText(parameters: parameters, failure: failure, success: success)
+        do {
+            let parameters = try writeParameters(url: url)
+            recognizeText(parameters: parameters, failure: failure, success: success)
+        } catch {
+            let failureReason = "Failed to write JSON parameters file."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
     }
     
     /**
@@ -697,7 +732,7 @@ public class VisualRecognition {
         url url: String? = nil,
         classifierIDs: [String]? = nil,
         owners: [String]? = nil,
-        showLowConfidence: Bool? = nil)
+        showLowConfidence: Bool? = nil) throws
         -> NSURL
     {
         // construct JSON dictionary
@@ -724,12 +759,8 @@ public class VisualRecognition {
         let fileURL = directoryURL.URLByAppendingPathComponent(fileName)!
         
         // save JSON dictionary to file
-        do {
-            let data = try JSON.Dictionary(json).serialize()
-            try data.writeToURL(fileURL, options: .AtomicWrite)
-        } catch {
-            // TODO: how to catch this?
-        }
+        let data = try JSON.Dictionary(json).serialize()
+        try data.writeToURL(fileURL, options: .AtomicWrite)
         
         return fileURL
     }

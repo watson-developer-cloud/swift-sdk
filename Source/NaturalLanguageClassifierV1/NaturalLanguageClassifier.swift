@@ -91,7 +91,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
+            .responseArray(path: ["classifiers"]) {
                 (response: Response<[ClassifierModel], NSError>) in
                 switch response.result {
                 case .Success(let classifiers): success(classifiers)
@@ -136,8 +136,7 @@ public class NaturalLanguageClassifier {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<ClassifierDetails, NSError>) in
+                    upload.responseObject() { (response: Response<ClassifierDetails, NSError>) in
                         switch response.result {
                         case .Success(let classifierDetails): success(classifierDetails)
                         case .Failure(let error): failure?(error)
@@ -191,7 +190,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<Classification, NSError>) in
                 switch response.result {
                 case .Success(let classification): success(classification)
@@ -259,7 +258,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<ClassifierDetails, NSError>) in
                 switch response.result {
                 case .Success(let classifier): success(classifier)

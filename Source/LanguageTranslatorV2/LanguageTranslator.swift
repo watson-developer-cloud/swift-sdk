@@ -29,6 +29,9 @@ public class LanguageTranslator {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 LanguageTranslatorV2")
@@ -102,7 +105,8 @@ public class LanguageTranslator {
             url: serviceURL + "/v2/models",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -153,7 +157,8 @@ public class LanguageTranslator {
             url: serviceURL + "/v2/models",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -200,7 +205,8 @@ public class LanguageTranslator {
             method: .DELETE,
             url: serviceURL + "/v2/models/\(modelID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -236,7 +242,8 @@ public class LanguageTranslator {
             method: .GET,
             url: serviceURL + "/v2/models/\(modelID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -366,6 +373,7 @@ public class LanguageTranslator {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
 
@@ -398,7 +406,8 @@ public class LanguageTranslator {
             method: .GET,
             url: serviceURL + "/v2/identifiable_languages",
             contentType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -441,6 +450,7 @@ public class LanguageTranslator {
             acceptType: "application/json",
             contentType: "text/plain",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
 

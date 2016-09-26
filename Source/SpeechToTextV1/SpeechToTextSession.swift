@@ -38,6 +38,9 @@ public class SpeechToTextSession {
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
         get { return socket.results ?? SpeechRecognitionResults() }
@@ -86,7 +89,8 @@ public class SpeechToTextSession {
             learningOptOut: self.learningOptOut,
             serviceURL: self.serviceURL,
             tokenURL: self.tokenURL,
-            websocketsURL: self.websocketsURL
+            websocketsURL: self.websocketsURL,
+            defaultHeaders: self.defaultHeaders
         )
     }()
     

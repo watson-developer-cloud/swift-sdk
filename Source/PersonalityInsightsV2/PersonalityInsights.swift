@@ -29,6 +29,9 @@ public class PersonalityInsights {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 PersonalityInsightsV2")
@@ -194,7 +197,7 @@ public class PersonalityInsights {
         }
 
         // construct header parameters
-        var headerParameters = [String: String]()
+        var headerParameters = defaultHeaders
         if let acceptLanguage = acceptLanguage {
             headerParameters["Accept-Language"] = acceptLanguage
         }

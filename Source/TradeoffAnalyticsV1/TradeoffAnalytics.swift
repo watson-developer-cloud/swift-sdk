@@ -30,6 +30,9 @@ public class TradeoffAnalytics {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TradeoffAnalyticsV1")
@@ -89,6 +92,7 @@ public class TradeoffAnalytics {
             contentType: "application/json",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         

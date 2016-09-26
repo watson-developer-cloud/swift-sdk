@@ -18,33 +18,45 @@ import Foundation
 import Alamofire
 import Freddy
 
-public extension Request {
+public extension DataRequest {
 
-    /**
-     Creates a response serializer that returns an object of the given type initialized from
-     JSON response data.
-     
-     - parameter dataToError: A function that interprets an error model to produce an NSError.
-     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
- 
-     - returns: An object response serializer.
-     */
-    private static func ObjectSerializer<T: JSONDecodable>(
-        path: [JSONPathType]? = nil)
-        -> ResponseSerializer<T, NSError>
+    public func responseObject<T: JSONDecodable>(
+        queue: DispatchQueue? = nil,
+        path: [JSONPathType]? = nil,
+        completionHandler: @escaping (DataResponse<T>) -> Void)
+        -> Self
     {
-        return ResponseSerializer { request, response, data, error in
-
+        return response(
+            queue: queue,
+            responseSerializer: DataRequest.objectResponseSerializer(path: path),
+            completionHandler: completionHandler
+        )
+    }
+    
+    public func responseArray<T: JSONDecodable>(
+        queue: DispatchQueue? = nil,
+        path: [JSONPathType]? = nil,
+        completionHandler: @escaping (DataResponse<[T]>) -> Void)
+        -> Self
+    {
+        return response(
+            queue: queue,
+            responseSerializer: DataRequest.arrayResponseSerializer(path: path),
+            completionHandler: completionHandler
+        )
+    }
+    
+    private static func objectResponseSerializer<T: JSONDecodable>(path: [JSONPathType]? = nil)
+        -> DataResponseSerializer<T>
+    {
+        return DataResponseSerializer { request, response, data, error in
+            
             // fail if an error was already produced
-            guard error == nil else {
-                return .Failure(error!)
-            }
+            guard error == nil else { return .failure(error!) }
 
             // fail if the data is nil
             guard let data = data else {
-                let failureReason = "Data could not be serialized. Input data was nil."
-                let error = serializationError(failureReason, data: nil)
-                return .Failure(error)
+                return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
 
             // serialize a `T` from the json data
@@ -54,72 +66,38 @@ public extension Request {
                 if let path = path {
                     switch path.count {
                     case 0: object = try json.decode()
-                    case 1: object = try json.decode(path[0])
-                    case 2: object = try json.decode(path[0], path[1])
-                    case 3: object = try json.decode(path[0], path[1], path[2])
-                    case 4: object = try json.decode(path[0], path[1], path[2], path[3])
-                    case 5: object = try json.decode(path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSON.Error.KeyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    case 1: object = try json.decode(at: path[0])
+                    case 2: object = try json.decode(at: path[0], path[1])
+                    case 3: object = try json.decode(at: path[0], path[1], path[2])
+                    case 4: object = try json.decode(at: path[0], path[1], path[2], path[3])
+                    case 5: object = try json.decode(at: path[0], path[1], path[2], path[3], path[4])
+                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
                     }
                 } else {
                     object = try json.decode()
                 }
-                return .Success(object)
-            } catch JSON.Error.IndexOutOfBounds(let index) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The index (\(index)) is out of bounds for a JSON array."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.KeyNotFound(let key) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The key (\(key)) was not found in the JSON dictionary."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.UnexpectedSubscript(let type) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The JSON is not subscriptable with type \(type)."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.ValueNotConvertible(let value, let type) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " Unexpected JSON value (\(value)) was found that is not " +
-                                    "convertible to the type \(type)."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
+                return .success(object)
             } catch {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " No error information was provided during serialization."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
+                if let json = String(data: data, encoding: .utf8) {
+                    print("JSON Serialization Failed. Could not parse the following data.")
+                    print(json)
+                }
+                return .failure(AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
             }
         }
     }
 
-    /**
-     Creates a response serializer that returns an array of objects of the given type
-     initialized from JSON response data.
-
-     - parameter dataToError: A function that interprets an error model to produce an NSError.
-     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
-
-     - returns: An object response serializer.
-     */
-    private static func ArraySerializer<T: JSONDecodable>(
-        path: [JSONPathType]? = nil)
-        -> ResponseSerializer<[T], NSError>
+    private static func arrayResponseSerializer<T: JSONDecodable>(path: [JSONPathType]? = nil)
+        -> DataResponseSerializer<[T]>
     {
-        return ResponseSerializer { request, response, data, error in
+        return DataResponseSerializer { request, response, data, error in
 
             // fail if an error was already produced
-            guard error == nil else {
-                return .Failure(error!)
-            }
+            guard error == nil else { return .failure(error!) }
 
             // fail if the data is nil
             guard let data = data else {
-                let failureReason = "Data could not be serialized. Input data was nil."
-                let error = serializationError(failureReason, data: nil)
-                return .Failure(error)
+                return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
             // serialize a `[T]` from the json data
@@ -128,103 +106,26 @@ public extension Request {
                 var array: [JSON]
                 if let path = path {
                     switch path.count {
-                    case 0: array = try json.array()
-                    case 1: array = try json.array(path[0])
-                    case 2: array = try json.array(path[0], path[1])
-                    case 3: array = try json.array(path[0], path[1], path[2])
-                    case 4: array = try json.array(path[0], path[1], path[2], path[3])
-                    case 5: array = try json.array(path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSON.Error.KeyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    case 0: array = try json.getArray()
+                    case 1: array = try json.getArray(at: path[0])
+                    case 2: array = try json.getArray(at: path[0], path[1])
+                    case 3: array = try json.getArray(at: path[0], path[1], path[2])
+                    case 4: array = try json.getArray(at: path[0], path[1], path[2], path[3])
+                    case 5: array = try json.getArray(at: path[0], path[1], path[2], path[3], path[4])
+                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
                     }
                 } else {
-                    array = try json.array()
+                    array = try json.getArray()
                 }
                 let objects: [T] = try array.map { json in try json.decode() }
-                return .Success(objects)
-            } catch JSON.Error.IndexOutOfBounds(let index) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The index (\(index)) is out of bounds for a JSON array."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.KeyNotFound(let key) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The key (\(key)) was not found in the JSON dictionary."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.UnexpectedSubscript(let type) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " The JSON is not subscriptable with type \(type)."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
-            } catch JSON.Error.ValueNotConvertible(let value, let type) {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " Unexpected JSON value (\(value)) was found that is not " +
-                                    "convertible to the type \(type)."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
+                return .success(objects)
             } catch {
-                let failureReason = "Data could not be serialized. Failed to parse JSON response." +
-                                    " No error information was provided during serialization."
-                let error = serializationError(failureReason, data: data)
-                return .Failure(error)
+                if let json = String(data: data, encoding: .utf8) {
+                    print("JSON Serialization Failed. Could not parse the following data.")
+                    print(json)
+                }
+                return .failure(AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
             }
         }
-    }
-
-    /**
-     Adds a handler to be called once the request has finished.
- 
-     - parameter queue: The queue to use.
-     - parameter dataToError: A function that interprets an error model to produce an NSError.
-     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
-     - parameter completionHandler: The code to be executed once the request has finished.
-     */
-    public func responseObject<T: JSONDecodable>(
-        queue queue: dispatch_queue_t? = nil,
-        path: [JSONPathType]? = nil,
-        completionHandler: Response<T, NSError> -> Void)
-        -> Self
-    {
-        return response(
-            queue: queue,
-            responseSerializer: Request.ObjectSerializer(path),
-            completionHandler: completionHandler
-        )
-    }
-
-    /**
-     Adds a handler to be called once the request has finished.
-
-     - parameter queue: The queue to use.
-     - parameter dataToError: A function that interprets an error model to produce an NSError.
-     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
-     - parameter completionHandler: The code to be executed once the request has finished.
-     */
-    public func responseArray<T: JSONDecodable>(
-        queue queue: dispatch_queue_t? = nil,
-        path: [JSONPathType]? = nil,
-        completionHandler: Response<[T], NSError> -> Void)
-        -> Self
-    {
-        return response(
-            queue: queue,
-            responseSerializer: Request.ArraySerializer(path),
-            completionHandler: completionHandler
-        )
-    }
-    
-    /**
-     Return an `NSError` that describes a serialization error.
- 
-     - parameter failureReason: A description of the error's cause.
-     */
-    private static func serializationError(failureReason: String, data: NSData?) -> NSError {
-        let code = Error.Code.DataSerializationFailed.rawValue
-        var userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-        if let data = data, let json = String(data: data, encoding: NSUTF8StringEncoding) {
-            userInfo["JSON"] = json
-        }
-        let error = NSError(domain: Error.Domain, code: code, userInfo: userInfo)
-        return error
     }
 }

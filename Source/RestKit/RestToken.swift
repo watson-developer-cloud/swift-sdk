@@ -51,18 +51,18 @@ public class RestToken {
      - parameter success: A function executed after a new token is retrieved.
      */
     public func refreshToken(
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
-        Alamofire.request(.GET, tokenURL)
+        Alamofire.request(tokenURL)
             .authenticate(user: username, password: password)
             .validate()
             .responseString { response in
                 switch response.result {
-                case .Success(let token):
+                case .success(let token):
                     self.token = token
                     success?()
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
             }

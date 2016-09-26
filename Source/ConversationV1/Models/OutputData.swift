@@ -47,18 +47,18 @@ public struct OutputData: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize an `OutputData` model from JSON.
     public init(json: JSON) throws {
-        logMessages = try json.arrayOf("log_messages", type: LogMessageResponse.self)
-        text = try json.arrayOf("text", type: Swift.String)
-        nodesVisited = try json.arrayOf("nodes_visited", type: Swift.String)
+        logMessages = try json.decodedArray(at: "log_messages", type: LogMessageResponse.self)
+        text = try json.decodedArray(at: "text", type: Swift.String)
+        nodesVisited = try json.decodedArray(at: "nodes_visited", type: Swift.String)
     }
     
     /// Used internally to serialize an `OutputData` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["log_messages"] = .Array(logMessages.map { $0.toJSON() })
-        json["text"] = .Array(text.map { .String($0) })
-        json["nodes_visited"] = .Array(nodesVisited.map { .String($0) })
-        return JSON.Dictionary(json)
+        json["log_messages"] = .array(logMessages.map { $0.toJSON() })
+        json["text"] = .array(text.map { .string($0) })
+        json["nodes_visited"] = .array(nodesVisited.map { .string($0) })
+        return .dictionary(json)
     }
 }
 
@@ -84,19 +84,19 @@ public struct LogMessageResponse: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `LogMessageResponse` model from JSON.
     public init(json: JSON) throws {
-        level = try? json.string("level")
-        message = try? json.string("msg")
+        level = try? json.getString(at: "level")
+        message = try? json.getString(at: "msg")
     }
     
     /// Used internally to serialize a `LogMessageResponse` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let level = level {
-            json["level"] = .String(level)
+            json["level"] = .string(level)
         }
         if let message = message {
-            json["msg"] = .String(message)
+            json["msg"] = .string(message)
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }

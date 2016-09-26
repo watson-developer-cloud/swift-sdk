@@ -38,7 +38,6 @@ public class Conversation {
     private let username: String
     private let password: String
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ConversationV1")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
     /**
@@ -69,11 +68,11 @@ public class Conversation {
         workspaceID: WorkspaceID,
         text: String? = nil,
         context: Context? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: MessageResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MessageResponse) -> Void)
     {
         let input = InputData(text: text)
-        message(workspaceID, input: input, context: context, failure: failure, success: success)
+        message(workspaceID: workspaceID, input: input, context: context, failure: failure, success: success)
     }
     
     /**
@@ -96,8 +95,8 @@ public class Conversation {
         entities: [Entity]? = nil,
         intents: [Intent]? = nil,
         output: OutputData? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: MessageResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MessageResponse) -> Void)
     {
         // construct message request
         let messageRequest = MessageRequest(
@@ -118,29 +117,27 @@ public class Conversation {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
             queryParameters: queryParameters,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<MessageResponse, NSError>) in
+            .responseObject() { (response: DataResponse<MessageResponse>) in
                 switch response.result {
-                case .Success(let response): success(response)
-                case .Failure(let error): failure?(error)
+                case .success(let response): success(response)
+                case .failure(let error): failure?(error)
                 }
             }
     }

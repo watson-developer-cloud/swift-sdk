@@ -31,8 +31,8 @@ public struct ToneCategory: JSONDecodable {
     
     /// Used internally to initialize a `ToneCategory` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("category_name")
-        categoryID = try json.string("category_id")
-        tones = try json.arrayOf("tones", type: ToneScore.self)
+        name = try json.getString(at: "category_name")
+        categoryID = try json.getString(at: "category_id")
+        tones = try json.decodedArray(at: "tones", type: ToneScore.self)
     }
 }

@@ -32,8 +32,8 @@ public struct ToneScore: JSONDecodable {
     
     /// Used internally to initialize a `ToneScore` model from JSON.
     public init(json: JSON) throws {
-        id = try json.string("tone_id")
-        name = try json.string("tone_name")
-        score = try json.double("score")
+        id = try json.getString(at: "tone_id")
+        name = try json.getString(at: "tone_name")
+        score = try json.getDouble(at: "score")
     }
 }

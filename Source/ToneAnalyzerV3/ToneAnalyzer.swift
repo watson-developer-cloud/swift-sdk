@@ -35,7 +35,6 @@ public class ToneAnalyzer {
     private let username: String
     private let password: String
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
     /**
@@ -69,8 +68,8 @@ public class ToneAnalyzer {
         text: String,
         tones: [String]? = nil,
         sentences: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ToneAnalysis -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
     {
         // construct body
         guard let body = try? ["text": text].toJSON().serialize() else {
@@ -82,36 +81,34 @@ public class ToneAnalyzer {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let tones = tones {
-            let tonesList = tones.joinWithSeparator(",")
-            queryParameters.append(NSURLQueryItem(name: "tones", value: tonesList))
+            let tonesList = tones.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "tones", value: tonesList))
         }
         if let sentences = sentences {
-            queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
+            queryParameters.append(URLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/tone",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
             queryParameters: queryParameters,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<ToneAnalysis, NSError>) in
+            .responseObject() { (response: DataResponse<ToneAnalysis>) in
                 switch response.result {
-                case .Success(let toneAnalysis): success(toneAnalysis)
-                case .Failure(let error): failure?(error)
+                case .success(let toneAnalysis): success(toneAnalysis)
+                case .failure(let error): failure?(error)
                 }
             }
     }

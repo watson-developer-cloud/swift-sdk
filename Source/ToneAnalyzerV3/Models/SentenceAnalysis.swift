@@ -39,10 +39,10 @@ public struct SentenceAnalysis: JSONDecodable {
     
     /// Used internally to initialize a `SentenceAnalysis` model from JSON.
     public init(json: JSON) throws {
-        sentenceID = try json.int("sentence_id")
-        inputFrom = try json.int("input_from")
-        inputTo = try json.int("input_to")
-        text = try json.string("text")
-        toneCategories = try json.arrayOf("tone_categories", type: ToneCategory.self)
+        sentenceID = try json.getInt(at: "sentence_id")
+        inputFrom = try json.getInt(at: "input_from")
+        inputTo = try json.getInt(at: "input_to")
+        text = try json.getString(at: "text")
+        toneCategories = try json.decodedArray(at: "tone_categories", type: ToneCategory.self)
     }
 }

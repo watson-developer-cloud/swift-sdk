@@ -37,9 +37,9 @@ public struct Document: JSONDecodable {
     
     /// used internally to initialize a Document object
     public init(json: JSON) throws {
-        id = try? json.string("id")
-        source = try? json.decode("source", type: DocumentSource.self)
-        timestamp = try? json.decode("timestamp", type: CLong.self)
+        id = try? json.getString(at: "id")
+        source = try? json.decode(at: "source", type: DocumentSource.self)
+        timestamp = try? json.decode(at: "timestamp", type: CLong.self)
     }
     
 }

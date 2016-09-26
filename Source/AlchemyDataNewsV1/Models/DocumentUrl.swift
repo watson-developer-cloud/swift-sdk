@@ -77,23 +77,23 @@ public struct DocumentUrl: JSONDecodable {
     
     /// used internally to initialize a DocumentUrl object
     public init(json: JSON) throws {
-        title = try? json.string("title")
-        url = try? json.string("url")
-        author = try? json.string("author")
-        entities = try? json.arrayOf("entities", type: Entity.self)
-        relations = try? json.arrayOf("relations", type: SAORelation.self)
-        taxonomy = try? json.arrayOf("taxonomy", type: Taxonomy.self)
-        sentiment = try? json.arrayOf("sentiment", type: Sentiment.self)
-        keywords = try? json.arrayOf("keywords", type: Keyword.self)
-        concepts = try? json.arrayOf("concept", type: Concept.self)
-        enrichedTitle = try? json.decode("enrichedTitle", type: EnrichedTitle.self)
+        title = try? json.getString(at: "title")
+        url = try? json.getString(at: "url")
+        author = try? json.getString(at: "author")
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
+        taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
+        sentiment = try? json.decodedArray(at: "sentiment", type: Sentiment.self)
+        keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        concepts = try? json.decodedArray(at: "concept", type: Concept.self)
+        enrichedTitle = try? json.decode(at: "enrichedTitle", type: EnrichedTitle.self)
         
-        image = try? json.string("image")
-        imageKeywords = try? json.arrayOf("imageKeywords", type: ImageKeyword.self)
-        feeds = try? json.arrayOf("feeds", type: Feed.self)
-        cleanedTitle = try? json.string("cleanedTitle")
-        publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
-        text = try? json.string("text")
+        image = try? json.getString(at: "image")
+        imageKeywords = try? json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)
+        feeds = try? json.decodedArray(at: "feeds", type: Feed.self)
+        cleanedTitle = try? json.getString(at: "cleanedTitle")
+        publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
+        text = try? json.getString(at: "text")
     }
     
 }

@@ -33,7 +33,6 @@ public class AlchemyDataNews {
     
     private let apiKey: String
     private let errorDomain = "com.watsonplatform.alchemyDataNews"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyDataNewsV1")
     
     /**
      Create an `AlchemyDataNews` object.
@@ -65,41 +64,39 @@ public class AlchemyDataNews {
         start: String,
         end: String,
         query: [String : String]? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: NewsResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (NewsResponse) -> Void)
     {
         
         // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        var queryParams = [URLQueryItem]()
         
         if let queries = query {
             for (key, value) in queries {
-                queryParams.append(NSURLQueryItem(name: key, value: value))
+                queryParams.append(URLQueryItem(name: key, value: value))
             }
         }
-        queryParams.append(NSURLQueryItem(name: "start", value: start))
-        queryParams.append(NSURLQueryItem(name: "end", value: end))
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "start", value: start))
+        queryParams.append(URLQueryItem(name: "end", value: end))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceUrl + "/data/GetNews",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
-            headerParameters: defaultHeaders
+            queryParameters: queryParams
         )
         
         // execute request
         Alamofire.request(request)
-            .responseObject() {
-                (response: Response<NewsResponse, NSError>) in
+            .responseObject() { (response: DataResponse<NewsResponse>) in
                 switch response.result {
-                case .Success(let newsResponse): success(newsResponse)
-                case .Failure(let error): failure?(error)
+                case .success(let newsResponse): success(newsResponse)
+                case .failure(let error): failure?(error)
                 }
         }
     }

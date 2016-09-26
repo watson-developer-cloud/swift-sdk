@@ -19,7 +19,7 @@ import AlchemyDataNewsV1
 class AlchemyDataNewsTests: XCTestCase {
     
     private var alchemyDataNews: AlchemyDataNews!
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
     
     override func setUp() {
         super.setUp()
@@ -27,7 +27,7 @@ class AlchemyDataNewsTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -38,7 +38,7 @@ class AlchemyDataNewsTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -47,9 +47,9 @@ class AlchemyDataNewsTests: XCTestCase {
     
     func testGetNews() {
         let description = "Get the volume of articles within a timeframe"
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        alchemyDataNews.getNews("now-1d", end: "now", failure: failWithError) { news in
+        alchemyDataNews.getNews(start: "now-1d", end: "now", failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNotNil(news.result!.count, "Count should not be nil")
             expectation.fulfill()
@@ -59,13 +59,13 @@ class AlchemyDataNewsTests: XCTestCase {
     
     func testGetNewsWithQuery() {
         let description = "Get articles with IBM in the title and assorted values"
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         var queryDict = [String: String]()
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
         
-        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failWithError) { news in
+        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNil(news.result?.count, "Count should not return")
             XCTAssertNotNil(news.result?.docs?[0].id, "Document ID should not be nil")
@@ -80,52 +80,46 @@ class AlchemyDataNewsTests: XCTestCase {
     // Negative Unit Tests
     
     func testGetNewsWithInvalidQuery() {
-        let description = "Use an invalid retrun key"
-        let expectation = expectationWithDescription(description)
+        let description = "Use an invalid return key"
+        let expectation = self.expectation(description: description)
         
         var queryDict = [String: String]()
         queryDict["q.enriched.url.apple"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title"
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
-            XCTAssertEqual(error.localizedDescription, "Invalid field = 'enriched.url.apple'")
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     func testGetNewsWithInvalidReturnQuery() {
-        let description = "Use an invalid retrun key"
-        let expectation = expectationWithDescription(description)
+        let description = "Use an invalid return key"
+        let expectation = self.expectation(description: description)
         
         var queryDict = [String: String]()
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.hotdog"
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
-            XCTAssertEqual(error.localizedDescription, "Invalid field = 'enriched.url.hotdog'")
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews("now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     func testGetNewsInvalidTimeframe() {
         let description = "Get the volume of articles within a timeframe"
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
-            XCTAssertEqual(error.localizedDescription, "Invalid timestamp range")
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews("now", end: "now-1d", failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(start: "now", end: "now-1d", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

@@ -46,12 +46,12 @@ public struct EnrichedTitle: JSONDecodable {
     
     /// used internally to initialize an EnrichedTitle object
     public init(json: JSON) throws {
-        entities = try? json.arrayOf("entities", type: Entity.self)
-        relations = try? json.arrayOf("relations", type: SAORelation.self)
-        taxonomy = try? json.arrayOf("taxonomy", type: Taxonomy.self)
-        sentiment = try? json.arrayOf("sentiment", type: Sentiment.self)
-        keywords = try? json.arrayOf("keywords", type: Keyword.self)
-        concepts = try? json.arrayOf("concept", type: Concept.self)
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
+        taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
+        sentiment = try? json.decodedArray(at: "sentiment", type: Sentiment.self)
+        keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        concepts = try? json.decodedArray(at: "concept", type: Concept.self)
     }
     
 }

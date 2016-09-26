@@ -39,17 +39,17 @@ public struct Sentiment: JSONDecodable {
     
     /// Used internally to initialize a Sentiment object
     public init(json: JSON) throws {
-        if let mixString = try? json.string("mixed") {
+        if let mixString = try? json.getString(at: "mixed") {
             mixed = Int(mixString)
         } else {
             mixed = nil
         }
-        if let scoreString = try? json.string("score") {
+        if let scoreString = try? json.getString(at: "score") {
             score = Double(scoreString)
         } else {
             score = nil
         }
-        type = try? json.string("type")
+        type = try? json.getString(at: "type")
     }
 }
 

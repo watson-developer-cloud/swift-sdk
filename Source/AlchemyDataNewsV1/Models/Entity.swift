@@ -45,22 +45,22 @@ public struct Entity: JSONDecodable {
     
     /// Used internally to initialize an Entity object
     public init(json: JSON) throws {
-        if let countString = try? json.string("count") {
+        if let countString = try? json.getString(at: "count") {
             count = Int(countString)
         } else {
             count = nil
         }
-        disambiguated = try? json.decode("disambiguated", type: DisambiguatedLinks.self)
-        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
-        quotations = try? json.arrayOf("quotations", type: Quotation.self)
-        if let relevanceString = try? json.string("relevance") {
+        disambiguated = try? json.decode(at: "disambiguated", type: DisambiguatedLinks.self)
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
+        quotations = try? json.decodedArray(at: "quotations", type: Quotation.self)
+        if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
-        text = try? json.string("text")
-        type = try? json.string("type")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        text = try? json.getString(at: "text")
+        type = try? json.getString(at: "type")
     }
 }
 

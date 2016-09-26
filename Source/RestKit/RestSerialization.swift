@@ -20,6 +20,7 @@ import Freddy
 
 public extension DataRequest {
 
+    @discardableResult
     public func responseObject<T: JSONDecodable>(
         queue: DispatchQueue? = nil,
         path: [JSONPathType]? = nil,
@@ -33,6 +34,7 @@ public extension DataRequest {
         )
     }
     
+    @discardableResult
     public func responseArray<T: JSONDecodable>(
         queue: DispatchQueue? = nil,
         path: [JSONPathType]? = nil,

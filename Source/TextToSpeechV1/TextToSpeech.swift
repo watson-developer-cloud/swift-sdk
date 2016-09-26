@@ -89,7 +89,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["voices"]) {
+            .responseArray(path: ["voices"]) {
                 (response: Response<[Voice], NSError>) in
                 switch response.result {
                 case .Success(let voices): success(voices)
@@ -136,7 +136,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<Voice, NSError>) in
                 switch response.result {
                 case .Success(let voice): success(voice)
@@ -191,7 +191,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<Pronunciation, NSError>) in
                 switch response.result {
                 case .Success(let voice): success(voice)
@@ -310,7 +310,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["customizations"]) {
+            .responseArray(path: ["customizations"]) {
                 (response: Response<[Customization], NSError>) in
                 switch response.result {
                 case .Success(let customizations): success(customizations)
@@ -365,7 +365,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<CustomizationID, NSError>) in
                 switch response.result {
                 case .Success(let customizationID): success(customizationID)
@@ -433,7 +433,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<CustomizationWords, NSError>) in
                 switch response.result {
                 case .Success(let customizationWords): success(customizationWords)
@@ -522,7 +522,7 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["words"]) {
+            .responseArray(path: ["words"]) {
                 (response: Response<[Word], NSError>) in
                 switch response.result {
                 case .Success(let words): success(words)
@@ -643,7 +643,7 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<Translation, NSError>) in
                 switch response.result {
                 case .Success(let translation): success(translation)

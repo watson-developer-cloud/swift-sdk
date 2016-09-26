@@ -108,7 +108,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["models"]) {
+            .responseArray(path: ["models"]) {
                 (response: Response<[TranslationModel], NSError>) in
                 switch response.result {
                 case .Success(let models): success(models)
@@ -165,7 +165,7 @@ public class LanguageTranslator {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(dataToError: self.dataToError, path: ["model_id"]) {
+                    upload.responseObject(path: ["model_id"]) {
                         (response: Response<String, NSError>) in
                         switch response.result {
                         case .Success(let modelID): success(modelID)
@@ -242,7 +242,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<MonitorTraining, NSError>) in
                 switch response.result {
                 case .Success(let monitorTraining): success(monitorTraining)
@@ -372,7 +372,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<TranslateResponse, NSError>) in
                 switch response.result {
                 case .Success(let translateResponse): success(translateResponse)
@@ -404,7 +404,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["languages"]) {
+            .responseArray(path: ["languages"]) {
                 (response: Response<[IdentifiableLanguage], NSError>) in
                 switch response.result {
                 case .Success(let languages): success(languages)
@@ -447,7 +447,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["languages"]) {
+            .responseArray(path: ["languages"]) {
                 (response: Response<[IdentifiedLanguage], NSError>) in
                 switch response.result {
                 case .Success(let languages): success(languages)

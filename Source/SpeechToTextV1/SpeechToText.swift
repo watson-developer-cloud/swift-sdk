@@ -98,7 +98,7 @@ public class SpeechToText {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["models"]) {
+            .responseArray(path: ["models"]) {
                 (response: Response<[Model], NSError>) in
                 switch response.result {
                 case .Success(let models): success(models)
@@ -125,7 +125,7 @@ public class SpeechToText {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
+            .responseObject() {
                 (response: Response<Model, NSError>) in
                 switch response.result {
                 case .Success(let model): success(model)

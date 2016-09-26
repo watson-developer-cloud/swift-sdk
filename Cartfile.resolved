@@ -1,3 +1,3 @@
-github "Alamofire/Alamofire" "3.5.0"
-github "bignerdranch/Freddy" "df68c72fc51e6da3d9f83726054087ea113c78f9"
-github "daltoniam/Starscream" "32fb0aa87e72f0945867201d92215081f57bf35a"
+github "Alamofire/Alamofire" "4.0.1"
+github "bignerdranch/Freddy" "3.0.1"
+github "daltoniam/Starscream" "2.0.0"

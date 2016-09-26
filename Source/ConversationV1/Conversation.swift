@@ -32,6 +32,9 @@ public class Conversation {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/conversation/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let version: String
@@ -144,6 +147,7 @@ public class Conversation {
             contentType: "application/json",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         

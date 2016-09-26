@@ -33,6 +33,9 @@ public class RelationshipExtraction {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/relationship-extraction-beta/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 RelationshipExtractionV1Beta")
@@ -96,7 +99,8 @@ public class RelationshipExtraction {
             method: .POST,
             url: serviceURL + "/v1/sire/0",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request

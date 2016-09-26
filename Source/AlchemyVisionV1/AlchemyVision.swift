@@ -30,6 +30,9 @@ public class AlchemyVision {
     /// The base URL to use when contacting the service.
     public var serviceURL = "http://gateway-a.watsonplatform.net/calls"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let apiKey: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyVisionV1")
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
@@ -107,6 +110,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: imageData
         )
         
@@ -156,7 +160,8 @@ public class AlchemyVision {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -241,6 +246,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
 
@@ -278,7 +284,8 @@ public class AlchemyVision {
             url: serviceURL + "/url/URLGetImage",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -335,6 +342,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: imageData
         )
         
@@ -390,7 +398,8 @@ public class AlchemyVision {
             url: serviceURL + "/url/URLGetRankedImageKeywords",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -429,6 +438,7 @@ public class AlchemyVision {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParameters,
+            headerParameters: defaultHeaders,
             messageBody: imageData
         )
         
@@ -466,7 +476,8 @@ public class AlchemyVision {
             url: serviceURL + "/url/URLGetRankedImageSceneText",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST requeset

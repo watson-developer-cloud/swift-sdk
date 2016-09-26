@@ -29,6 +29,9 @@ public class AlchemyLanguage {
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let apiKey: String
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyLanguageV1")
@@ -108,7 +111,9 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
+            
         )
         
         // execute request
@@ -156,6 +161,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -204,7 +210,8 @@ public class AlchemyLanguage {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -258,6 +265,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -308,6 +316,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -386,7 +395,8 @@ public class AlchemyLanguage {
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -472,6 +482,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -553,6 +564,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -613,7 +625,8 @@ public class AlchemyLanguage {
             url: serviceUrl + "/url/URLGetRankedKeywords",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -681,6 +694,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -744,6 +758,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -781,7 +796,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -823,6 +839,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -860,7 +877,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -908,6 +926,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -945,7 +964,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -992,6 +1012,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1078,7 +1099,8 @@ public class AlchemyLanguage {
             url: serviceUrl + "/url/URLGetRelations",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1172,6 +1194,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1261,6 +1284,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1298,7 +1322,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1345,6 +1370,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1387,6 +1413,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1426,7 +1453,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1476,6 +1504,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1521,6 +1550,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1557,7 +1587,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1604,6 +1635,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1646,6 +1678,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1682,7 +1715,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1729,6 +1763,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1778,7 +1813,8 @@ public class AlchemyLanguage {
             url: serviceUrl + "/url/URLGetText",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1835,6 +1871,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1878,7 +1915,8 @@ public class AlchemyLanguage {
             url: serviceUrl + "/url/URLGetTitle",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -1929,6 +1967,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -1965,7 +2004,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -2013,6 +2053,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -2049,7 +2090,8 @@ public class AlchemyLanguage {
                 NSURLQueryItem(name: "url", value: url),
                 NSURLQueryItem(name: "apikey", value: apiKey),
                 NSURLQueryItem(name: "outputMode", value: "json")
-            ]
+            ],
+            headerParameters: defaultHeaders
         )
         
         // execute request
@@ -2097,6 +2139,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -2140,6 +2183,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
             queryParameters: queryParams,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -2153,5 +2197,4 @@ public class AlchemyLanguage {
                 }
         }
     }
-
 }

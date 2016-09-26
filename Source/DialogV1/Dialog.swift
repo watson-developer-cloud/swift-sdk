@@ -33,6 +33,9 @@ public class Dialog {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DialogV1")
@@ -89,7 +92,8 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -133,7 +137,8 @@ public class Dialog {
             method: .POST,
             url: serviceURL + "/v1/dialogs",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -184,7 +189,8 @@ public class Dialog {
             method: .DELETE,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -224,7 +230,8 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
             acceptType: format?.rawValue,
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // determine file extension
@@ -332,7 +339,8 @@ public class Dialog {
         let request = RestRequest(
             method: .PUT,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -387,7 +395,8 @@ public class Dialog {
             method: .GET,
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -432,6 +441,7 @@ public class Dialog {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
 
@@ -496,7 +506,8 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -550,7 +561,8 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -599,7 +611,8 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
 
         // execute REST request
@@ -649,6 +662,7 @@ public class Dialog {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
 

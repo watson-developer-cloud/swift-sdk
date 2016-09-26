@@ -28,6 +28,9 @@ public class AlchemyDataNews {
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let apiKey: String
     private let errorDomain = "com.watsonplatform.alchemyDataNews"
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyDataNewsV1")
@@ -101,7 +104,8 @@ public class AlchemyDataNews {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             userAgent: userAgent,
-            queryParameters: queryParams
+            queryParameters: queryParams,
+            headerParameters: defaultHeaders
         )
         
         // execute request

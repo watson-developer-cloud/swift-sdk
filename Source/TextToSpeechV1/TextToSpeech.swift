@@ -30,6 +30,9 @@ public class TextToSpeech {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TextToSpeechV1")
@@ -83,7 +86,8 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/voices",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -130,7 +134,8 @@ public class TextToSpeech {
             url: serviceURL + "/v1/voices/\(voice.description())",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -185,7 +190,8 @@ public class TextToSpeech {
             url: serviceURL + "/v1/pronunciation",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -238,7 +244,8 @@ public class TextToSpeech {
             url: serviceURL + "/v1/synthesize",
             acceptType: audioFormat.rawValue,
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -303,7 +310,8 @@ public class TextToSpeech {
             url: serviceURL + "/v1/customizations",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -358,6 +366,7 @@ public class TextToSpeech {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -390,7 +399,8 @@ public class TextToSpeech {
             method: .DELETE,
             url: serviceURL + "/v1/customizations/\(customizationID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -426,7 +436,8 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/customizations/\(customizationID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -478,6 +489,7 @@ public class TextToSpeech {
             url: serviceURL + "/v1/customizations/\(customizationID)",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -515,7 +527,8 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute the request
@@ -561,6 +574,7 @@ public class TextToSpeech {
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -598,7 +612,8 @@ public class TextToSpeech {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute the request
@@ -636,7 +651,8 @@ public class TextToSpeech {
             method: .GET,
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute the request
@@ -683,6 +699,7 @@ public class TextToSpeech {
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         

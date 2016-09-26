@@ -29,6 +29,9 @@ public class VisualRecognition {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let apiKey: String
     private let version: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 VisualRecognitionV3")
@@ -91,7 +94,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -153,7 +157,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/classifiers",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -217,7 +222,8 @@ public class VisualRecognition {
             method: .DELETE,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -259,7 +265,8 @@ public class VisualRecognition {
             method: .GET,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -316,7 +323,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -471,7 +479,7 @@ public class VisualRecognition {
         queryParameters.append(NSURLQueryItem(name: "version", value: version))
         
         // construct header parameters
-        var headerParameters = [String: String]()
+        var headerParameters = defaultHeaders
         if let outputLanguage = outputLanguage {
             headerParameters["Accept-Language"] = outputLanguage
         }
@@ -566,7 +574,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/detect_faces",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -648,7 +657,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/recognize_text",
             acceptType: "application/json",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request

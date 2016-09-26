@@ -40,11 +40,11 @@ public struct Classifier: JSONDecodable {
     
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSON) throws {
-        classifierID = try json.string("classifier_id")
-        name = try json.string("name")
-        owner = try json.string("owner")
-        status = try json.string("status")
-        created = try json.string("created")
-        classes = try json.arrayOf("classes", type: Class.self)
+        classifierID = try json.getString(at: "classifier_id")
+        name = try json.getString(at: "name")
+        owner = try json.getString(at: "owner")
+        status = try json.getString(at: "status")
+        created = try json.getString(at: "created")
+        classes = try json.decodedArray(at: "classes", type: Class.self)
     }
 }

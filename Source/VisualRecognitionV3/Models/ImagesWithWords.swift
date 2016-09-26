@@ -31,9 +31,9 @@ public struct ImagesWithWords: JSONDecodable {
     
     /// Used internally to initialize an `ImagesWithWords` model from JSON.
     public init(json: JSON) throws {
-        imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: ImageWithWords.self)
-        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
+        images = try json.decodedArray(at: "images", type: ImageWithWords.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
@@ -60,12 +60,12 @@ public struct ImageWithWords: JSONDecodable {
     
     /// Used internally to initialize an `ImageWithWords` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try? json.string("source_url")
-        resolvedURL = try? json.string("resolved_url")
-        image = try? json.string("image")
-        error = try? json.decode("error")
-        text = try json.string("text")
-        words = try json.arrayOf("words", type: Word.self)
+        sourceURL = try? json.getString(at: "source_url")
+        resolvedURL = try? json.getString(at: "resolved_url")
+        image = try? json.getString(at: "image")
+        error = try? json.decode(at: "error")
+        text = try json.getString(at: "text")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }
 
@@ -86,10 +86,10 @@ public struct Word: JSONDecodable {
     
     /// Used internally to initialize a `Word` model from JSON.
     public init(json: JSON) throws {
-        word = try json.string("word")
-        location = try json.decode("location")
-        score = try json.double("score")
-        lineNumber = try json.int("line_number")
+        word = try json.getString(at: "word")
+        location = try json.decode(at: "location")
+        score = try json.getDouble(at: "score")
+        lineNumber = try json.getInt(at: "line_number")
     }
 }
 
@@ -110,9 +110,9 @@ public struct WordLocation: JSONDecodable {
     
     /// Used internally to initialize a `WordLocation` model from JSON.
     public init(json: JSON) throws {
-        width = try json.int("width")
-        height = try json.int("height")
-        left = try json.int("left")
-        top = try json.int("top")
+        width = try json.getInt(at: "width")
+        height = try json.getInt(at: "height")
+        left = try json.getInt(at: "left")
+        top = try json.getInt(at: "top")
     }
 }

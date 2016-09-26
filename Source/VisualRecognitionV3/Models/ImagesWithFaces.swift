@@ -31,9 +31,9 @@ public struct ImagesWithFaces: JSONDecodable {
     
     /// Used internally to initialize an `ImagesWithFaces` model from JSON.
     public init(json: JSON) throws  {
-        imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: ImageWithFaces.self)
-        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
+        images = try json.decodedArray(at: "images", type: ImageWithFaces.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
@@ -57,11 +57,11 @@ public struct ImageWithFaces: JSONDecodable {
     
     /// Used internally to initialize an `ImageWithFaces` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try? json.string("source_url")
-        resolvedURL = try? json.string("resolved_url")
-        image = try? json.string("image")
-        error = try? json.decode("error")
-        faces = try json.arrayOf("faces", type: Face.self)
+        sourceURL = try? json.getString(at: "source_url")
+        resolvedURL = try? json.getString(at: "resolved_url")
+        image = try? json.getString(at: "image")
+        error = try? json.decode(at: "error")
+        faces = try json.decodedArray(at: "faces", type: Face.self)
     }
 }
 
@@ -82,10 +82,10 @@ public struct Face: JSONDecodable {
     
     /// Used internally to initialize a `Face` model from JSON.
     public init(json: JSON) throws {
-        age = try json.decode("age")
-        gender = try json.decode("gender")
-        location = try json.decode("face_location")
-        identity = try? json.decode("identity")
+        age = try json.decode(at: "age")
+        gender = try json.decode(at: "gender")
+        location = try json.decode(at: "face_location")
+        identity = try? json.decode(at: "identity")
     }
 }
 
@@ -103,9 +103,9 @@ public struct Age: JSONDecodable {
     
     /// Used internally to initialize an `Age` model from JSON.
     public init(json: JSON) throws {
-        min = try json.int("min")
-        max = try json.int("max")
-        score = try json.double("score")
+        min = try json.getInt(at: "min")
+        max = try json.getInt(at: "max")
+        score = try json.getDouble(at: "score")
     }
 }
 
@@ -120,8 +120,8 @@ public struct Gender: JSONDecodable {
     
     /// Used internally to initialize a `Gender` model from JSON.
     public init(json: JSON) throws {
-        gender = try json.string("gender")
-        score = try json.double("score")
+        gender = try json.getString(at: "gender")
+        score = try json.getDouble(at: "score")
     }
 }
 
@@ -142,10 +142,10 @@ public struct FaceLocation: JSONDecodable {
     
     /// Used internally to initialize a `FaceLocation` model from JSON.
     public init(json: JSON) throws {
-        width = try json.int("width")
-        height = try json.int("height")
-        left = try json.int("left")
-        top = try json.int("top")
+        width = try json.getInt(at: "width")
+        height = try json.getInt(at: "height")
+        left = try json.getInt(at: "left")
+        top = try json.getInt(at: "top")
     }
 }
 
@@ -163,8 +163,8 @@ public struct Identity: JSONDecodable {
     
     /// Used internally to initialize an `Identity` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        score = try json.double("score")
-        typeHierarchy = try? json.string("type_hierarchy")
+        name = try json.getString(at: "name")
+        score = try json.getDouble(at: "score")
+        typeHierarchy = try? json.getString(at: "type_hierarchy")
     }
 }

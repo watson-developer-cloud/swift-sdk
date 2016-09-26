@@ -31,9 +31,9 @@ public struct ClassifiedImages: JSONDecodable {
     
     /// Used internally to initialize a `ClassifiedImages` model from JSON.
     public init(json: JSON) throws {
-        imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: ClassifiedImage.self)
-        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
+        images = try json.decodedArray(at: "images", type: ClassifiedImage.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
@@ -57,11 +57,11 @@ public struct ClassifiedImage: JSONDecodable {
     
     /// Used internally to initialize a `ClassifiedImage` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try? json.string("source_url")
-        resolvedURL = try? json.string("resolved_url")
-        image = try? json.string("image")
-        error = try? json.decode("error")
-        classifiers = try json.arrayOf("classifiers", type: ClassifierResults.self)
+        sourceURL = try? json.getString(at: "source_url")
+        resolvedURL = try? json.getString(at: "resolved_url")
+        image = try? json.getString(at: "image")
+        error = try? json.decode(at: "error")
+        classifiers = try json.decodedArray(at: "classifiers", type: ClassifierResults.self)
     }
 }
 
@@ -79,9 +79,9 @@ public struct ClassifierResults: JSONDecodable {
     
     /// Used internally to initialize a `ClassifierResults` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        classifierID = try json.string("classifier_id")
-        classes = try json.arrayOf("classes", type: Classification.self)
+        name = try json.getString(at: "name")
+        classifierID = try json.getString(at: "classifier_id")
+        classes = try json.decodedArray(at: "classes", type: Classification.self)
     }
 }
 
@@ -99,8 +99,8 @@ public struct Classification: JSONDecodable {
     
     /// Used internally to initialize a `Classification` model from JSON.
     public init(json: JSON) throws {
-        classification = try json.string("class")
-        score = try json.double("score")
-        typeHierarchy = try? json.string("type_hierarchy")
+        classification = try json.getString(at: "class")
+        score = try json.getDouble(at: "score")
+        typeHierarchy = try? json.getString(at: "type_hierarchy")
     }
 }

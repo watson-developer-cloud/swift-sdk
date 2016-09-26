@@ -41,14 +41,14 @@ public struct Keyword: JSONDecodable {
     
     /// Used internally to initialize a Keyword object
     public init(json: JSON) throws {
-        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
-        if let relevanceString = try? json.string("relevance") {
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
+        if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
-        text = try? json.string("text")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        text = try? json.getString(at: "text")
     }
 }
 

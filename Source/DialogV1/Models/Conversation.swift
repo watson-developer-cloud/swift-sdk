@@ -37,10 +37,10 @@ public struct Conversation: JSONDecodable {
 
     /// Used internally to initialize a `Conversation` model from JSON.
     public init(json: JSON) throws {
-        hitNodes = try json.arrayOf("hit_nodes", type: HitNode.self)
-        conversationID = try json.int("conversation_id")
-        clientID = try json.int("client_id")
-        messages = try json.arrayOf("messages", type: Message.self)
+        hitNodes = try json.decodedArray(at: "hit_nodes", type: HitNode.self)
+        conversationID = try json.getInt(at: "conversation_id")
+        clientID = try json.getInt(at: "client_id")
+        messages = try json.decodedArray(at: "messages", type: Message.self)
 
         let profileVariables = try json.array("profile")
         var profile = [String: String]()
@@ -70,10 +70,10 @@ public struct HitNode: JSONDecodable {
 
     /// Used internally to initialize a `HitNode` model from JSON.
     public init(json: JSON) throws {
-        details = try json.string("details")
-        label = try json.string("label")
-        type = try json.string("type")
-        nodeID = try json.int("node_id")
+        details = try json.getString(at: "details")
+        label = try json.getString(at: "label")
+        type = try json.getString(at: "type")
+        nodeID = try json.getInt(at: "node_id")
     }
 }
 
@@ -91,8 +91,8 @@ public struct Message: JSONDecodable {
 
     /// Used internally to initialize a `Message` model from JSON.
     public init(json: JSON) throws {
-        text = try json.string("text")
-        dateTime = try json.string("date_time")
-        fromClient = try json.string("from_client")
+        text = try json.getString(at: "text")
+        dateTime = try json.getString(at: "date_time")
+        fromClient = try json.getString(at: "from_client")
     } 
 }

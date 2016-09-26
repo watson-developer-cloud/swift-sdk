@@ -39,19 +39,19 @@ public struct Intent: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize an `Intent` model from JSON.
     public init(json: JSON) throws {
-        intent = try? json.string("intent")
-        confidence = try? json.double("confidence")
+        intent = try? json.getString(at: "intent")
+        confidence = try? json.getDouble(at: "confidence")
     }
     
     /// Used internally to serialize an `Intent` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let intent = intent {
-            json["intent"] = .String(intent)
+            json["intent"] = .string(intent)
         }
         if let confidence = confidence {
-            json["confidence"] = .Double(confidence)
+            json["confidence"] = .double(confidence)
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }

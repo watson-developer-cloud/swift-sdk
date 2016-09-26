@@ -33,8 +33,8 @@ public struct WordAlternativeResults: JSONDecodable {
 
     /// Used internally to initialize an `WordAlternativeResults` model from JSON.
     public init(json: JSON) throws {
-        startTime = try json.double("start_time")
-        endTime = try json.double("end_time")
-        alternatives = try json.arrayOf("alternatives", type: WordAlternativeResult.self)
+        startTime = try json.getDouble(at: "start_time")
+        endTime = try json.getDouble(at: "end_time")
+        alternatives = try json.decodedArray(at: "alternatives", type: WordAlternativeResult.self)
     }
 }

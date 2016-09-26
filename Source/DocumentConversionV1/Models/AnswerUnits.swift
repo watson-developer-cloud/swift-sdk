@@ -47,12 +47,12 @@ public struct AnswerUnits: JSONDecodable {
     
     /** used internally to initialize AnswerUnits objects */
     public init(json: JSON) throws {
-        id = try? json.string("id")
-        type = try? json.string("type")
-        parentId = try? json.string("parent_id")
-        title = try? json.string("title")
-        direction = try? json.string("direction")
-        content = try? json.arrayOf("content", type: Content.self)
+        id = try? json.getString(at: "id")
+        type = try? json.getString(at: "type")
+        parentId = try? json.getString(at: "parent_id")
+        title = try? json.getString(at: "title")
+        direction = try? json.getString(at: "direction")
+        content = try? json.decodedArray(at: "content", type: Content.self)
     }
     
 }

@@ -31,8 +31,8 @@ public struct ImageLink: JSONDecodable {
 
     /// Used internally to initialize an `ImageLink` model from JSON.
     public init(json: JSON) throws {
-        status = try json.string("status")
-        url = try json.string("url")
-        image = try json.string("image")
+        status = try json.getString(at: "status")
+        url = try json.getString(at: "url")
+        image = try json.getString(at: "image")
     }
 }

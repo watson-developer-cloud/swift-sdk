@@ -25,6 +25,6 @@ public struct CustomizationID: JSONDecodable {
     
     /// Used internally to initialize a `CustomizationID` model from JSON.
     public init(json: JSON) throws {
-        customizationID = try json.string("customization_id")
+        customizationID = try json.getString(at: "customization_id")
     }
 }

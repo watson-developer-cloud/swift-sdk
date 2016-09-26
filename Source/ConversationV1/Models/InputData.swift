@@ -34,15 +34,15 @@ public struct InputData: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize an `InputData` model from JSON.
     public init(json: JSON) throws {
-        text = try? json.string("text")
+        text = try? json.getString(at: "text")
     }
     
     /// Used internally to serialize an `InputData` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let text = text {
-            json["text"] = .String(text)
+            json["text"] = .string(text)
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }

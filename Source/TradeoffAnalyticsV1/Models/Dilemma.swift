@@ -28,7 +28,7 @@ public struct Dilemma: JSONDecodable {
     
     /// Used internally to initialize a `Dilemma` model from JSON.
     public init(json: JSON) throws {
-        problem = try json.decode("problem")
-        resolution = try json.decode("resolution")
+        problem = try json.decode(at: "problem")
+        resolution = try json.decode(at: "resolution")
     }
 }

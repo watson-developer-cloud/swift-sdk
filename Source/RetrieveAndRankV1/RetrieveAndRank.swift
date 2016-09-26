@@ -58,14 +58,14 @@ public class RetrieveAndRank {
         do {
             let json = try JSON(data: data)
             
-            if let msg = try? json.string("msg") {
-                let code = try json.int("code")
+            if let msg = try? json.getString(at: "msg") {
+                let code = try json.getInt(at: "code")
                 let userInfo = [NSLocalizedFailureReasonErrorKey: msg]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else {
-                let error = try json.string("error")
-                let description = try json.string("description")
-                let code = try json.int("code")
+                let error = try json.getString(at: "error")
+                let description = try json.getString(at: "description")
+                let code = try json.getInt(at: "code")
                 let userInfo = [
                     NSLocalizedFailureReasonErrorKey: error,
                     NSLocalizedRecoverySuggestionErrorKey: description

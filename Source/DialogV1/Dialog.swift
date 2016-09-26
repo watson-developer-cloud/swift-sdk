@@ -66,8 +66,8 @@ public class Dialog {
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = try json.int("code")
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
             let userInfo = [NSLocalizedFailureReasonErrorKey: error]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

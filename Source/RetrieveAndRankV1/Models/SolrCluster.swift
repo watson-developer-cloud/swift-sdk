@@ -34,11 +34,11 @@ public struct SolrCluster: JSONDecodable {
     
     /// Used internally to initialize a `SolrCluster` model from JSON.
     public init(json: JSON) throws {
-        solrClusterID = try json.string("solr_cluster_id")
-        solrClusterName = try json.string("cluster_name")
-        solrClusterSize = try Int(json.string("cluster_size"))
+        solrClusterID = try json.getString(at: "solr_cluster_id")
+        solrClusterName = try json.getString(at: "cluster_name")
+        solrClusterSize = try Int(json.getString(at: "cluster_size"))
         
-        guard let status = SolrClusterStatus(rawValue: try json.string("solr_cluster_status")) else {
+        guard let status = SolrClusterStatus(rawValue: try json.getString(at: "solr_cluster_status")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: SolrCluster.self)
         }
         solrClusterStatus = status

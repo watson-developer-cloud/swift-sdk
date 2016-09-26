@@ -44,15 +44,15 @@ public struct Keywords: JSONDecodable {
     
     /// Used internally to initialize a Keywords object
     public init(json: JSON) throws {
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = 1
         }
-        language = try? json.string("language")
-        url = try? json.string("url")
-        keywords = try? json.arrayOf("keywords", type: Keyword.self)
-        text = try? json.string("text")
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        text = try? json.getString(at: "text")
     }
 }
 

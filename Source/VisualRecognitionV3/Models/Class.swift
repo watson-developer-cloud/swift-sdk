@@ -25,7 +25,7 @@ public struct Class: JSONDecodable {
     
     /// A compressed (.zip) file of images that prominently
     /// depict the visual subject of the given class.
-    internal let examples: NSURL?
+    internal let examples: URL?
     
     /**
      Define a class that shall be recognized by a classifier.
@@ -34,14 +34,14 @@ public struct Class: JSONDecodable {
      - parameter examples: A compressed (.zip) file of images that prominently depict the visual
             subject of the given class.
      */
-    public init(name: String, examples: NSURL) {
+    public init(name: String, examples: URL) {
         self.name = name
         self.examples = examples
     }
     
     /// Used internally to initialize a `Class` model from JSON.
     public init(json: JSON) throws {
-        name = try json.decode("class")
+        name = try json.decode(at: "class")
         examples = nil
     }
 }

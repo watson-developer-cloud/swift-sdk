@@ -26,27 +26,27 @@ public struct Emotions: JSONDecodable {
     
     /// Used internally to initialize a Emotions object
     public init(json: JSON) throws {
-        if let angerString = try? json.string("anger") {
+        if let angerString = try? json.getString(at: "anger") {
             anger = Double(angerString)
         } else {
             anger = nil
         }
-        if let disgustString = try? json.string("disgust") {
+        if let disgustString = try? json.getString(at: "disgust") {
             disgust = Double(disgustString)
         } else {
             disgust = nil
         }
-        if let fearString = try? json.string("fear") {
+        if let fearString = try? json.getString(at: "fear") {
             fear = Double(fearString)
         } else {
             fear = nil
         }
-        if let joyString = try? json.string("joy") {
+        if let joyString = try? json.getString(at: "joy") {
             joy = Double(joyString)
         } else {
             joy = nil
         }
-        if let sadnessString = try? json.string("sadness") {
+        if let sadnessString = try? json.getString(at: "sadness") {
             sadness = Double(sadnessString)
         } else {
             sadness = nil

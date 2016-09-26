@@ -37,10 +37,10 @@ public struct ClassifierModel: JSONDecodable {
     
     /// Used internally to initialize a `ClassifierModel` from JSON.
     public init(json: JSON) throws {
-        classifierId = try json.string("classifier_id")
-        url = try json.string("url")
-        name = try? json.string("name")
-        language = try json.string("language")
-        created = try json.string("created")
+        classifierId = try json.getString(at: "classifier_id")
+        url = try json.getString(at: "url")
+        name = try? json.getString(at: "name")
+        language = try json.getString(at: "language")
+        created = try json.getString(at: "created")
     }
 }

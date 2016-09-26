@@ -253,7 +253,7 @@ extension SpeechToTextSocket: WebSocketDelegate {
         if let results = try? json.decode(type: SpeechRecognitionEvent.self) {
             onResultsMessage(results)
         }
-        if let error = try? json.string("error") {
+        if let error = try? json.getString(at: "error") {
             onErrorMessage(error)
         }
     }

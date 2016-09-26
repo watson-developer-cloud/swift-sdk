@@ -36,8 +36,8 @@ public struct DocumentSentiment: JSONDecodable {
     
     /// Used internally to initialize a DocumentSentiment object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
+        text = try? json.getString(at: "text")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
     }
     
 }

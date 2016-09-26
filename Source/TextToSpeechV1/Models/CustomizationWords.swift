@@ -48,13 +48,13 @@ public struct CustomizationWords: JSONDecodable {
     
     /// Used internally to initialize a `CustomizationWords` model from JSON.
     public init(json: JSON) throws {
-        customizationID = try json.string("customization_id")
-        name = try json.string("name")
-        language = try json.string("language")
-        owner = try json.string("owner")
-        created = try? json.int("created")
-        lastModified = try? json.int("last_modified")
-        description = try? json.string("description")
-        words = try json.arrayOf("words", type: Word.self)
+        customizationID = try json.getString(at: "customization_id")
+        name = try json.getString(at: "name")
+        language = try json.getString(at: "language")
+        owner = try json.getString(at: "owner")
+        created = try? json.getInt(at: "created")
+        lastModified = try? json.getInt(at: "last_modified")
+        description = try? json.getString(at: "description")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }

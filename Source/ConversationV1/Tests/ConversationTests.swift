@@ -21,7 +21,7 @@ class ConversationTests: XCTestCase {
     
     private var conversation: Conversation!
     private let workspaceID = "8d869397-411b-4f0a-864d-a2ba419bb249"
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -41,7 +41,7 @@ class ConversationTests: XCTestCase {
     }
 
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
 
@@ -52,7 +52,7 @@ class ConversationTests: XCTestCase {
 
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -61,13 +61,13 @@ class ConversationTests: XCTestCase {
     
     func testMessage() {
         let description1 = "Start a conversation."
-        let expectation1 = expectationWithDescription(description1)
+        let expectation1 = self.expectation(description: description1)
         
         let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?"]
         let nodes1 = ["node_1_1467221909631"]
         
         var context: Context?
-        conversation.message(workspaceID, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, failure: failWithError) {
             response in
             
             // verify input
@@ -98,13 +98,13 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Continue a conversation."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = self.expectation(description: description2)
         
         let text = "Turn on the radio."
         let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
         let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
         
-        conversation.message(workspaceID, text: text, context: context, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, text: text, context: context, failure: failWithError) {
             response in
             
             // verify input
@@ -127,8 +127,8 @@ class ConversationTests: XCTestCase {
             // verify intents
             XCTAssertEqual(response.intents.count, 1)
             XCTAssertEqual(response.intents[0].intent, "turn_on")
-            XCTAssert(response.intents[0].confidence >= 0.90)
-            XCTAssert(response.intents[0].confidence <= 1.00)
+            XCTAssert(response.intents[0].confidence! >= 0.90)
+            XCTAssert(response.intents[0].confidence! <= 1.00)
             
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
@@ -142,14 +142,14 @@ class ConversationTests: XCTestCase {
     
     func testMessageAllFields1() {
         let description1 = "Start a conversation."
-        let expectation1 = expectationWithDescription(description1)
+        let expectation1 = expectation(description: description1)
         
         var context: Context?
         var entities: [Entity]?
         var intents: [Intent]?
         var output: OutputData?
         
-        conversation.message(workspaceID, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -160,10 +160,10 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Continue a conversation."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = expectation(description: description2)
         
         let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -200,14 +200,14 @@ class ConversationTests: XCTestCase {
     
     func testMessageAllFields2() {
         let description1 = "Start a conversation."
-        let expectation1 = expectationWithDescription(description1)
+        let expectation1 = expectation(description: description1)
         
         var context: Context?
         var entities: [Entity]?
         var intents: [Intent]?
         var output: OutputData?
         
-        conversation.message(workspaceID, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, failure: failWithError) {
             response in
             context = response.context
             expectation1.fulfill()
@@ -215,10 +215,10 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Continue a conversation."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = expectation(description: description2)
         
         let text2 = "Turn on the radio."
-        conversation.message(workspaceID, text: text2, context: context, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, text: text2, context: context, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -229,10 +229,10 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
         
         let description3 = "Continue a conversation with non-empty intents and entities."
-        let expectation3 = expectationWithDescription(description3)
+        let expectation3 = expectation(description: description3)
         
         let input3 = InputData(text: "Rock music.")
-        conversation.message(workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -271,25 +271,24 @@ class ConversationTests: XCTestCase {
 
     func testMessageInvalidWorkspace() {
         let description = "Start a conversation with an invalid workspace."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         let workspaceID = "this-id-is-invalid"
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        conversation.message(workspaceID, failure: failure, success: failWithResult)
+        conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     func testMessageInvalidConversationID() {
         let description = "Continue a conversation with an invalid conversation id."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         let text = "Turn on the radio."
         let context = Context(conversationID: "this-id-is-invalid")
-        conversation.message(workspaceID, text: text, context: context, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, text: text, context: context, failure: failWithError) {
             response in
             expectation.fulfill()
         }

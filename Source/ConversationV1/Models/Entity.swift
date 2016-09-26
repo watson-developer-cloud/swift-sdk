@@ -44,24 +44,24 @@ public struct Entity: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
-        entity = try? json.string("entity")
-        location = try? json.decode("location")
-        value = try? json.string("value")
+        entity = try? json.getString(at: "entity")
+        location = try? json.decode(at: "location")
+        value = try? json.getString(at: "value")
     }
     
     /// Used internally to serialize an `Entity` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let entity = entity {
-            json["entity"] = .String(entity)
+            json["entity"] = .string(entity)
         }
         if let location = location {
             json["location"] = location.toJSON()
         }
         if let value = value {
-            json["value"] = .String(value)
+            json["value"] = .string(value)
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }
 
@@ -91,14 +91,14 @@ public struct EntityLocation: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize an `EntityLocation` model from JSON.
     public init(json: JSON) throws {
-        let indices = try json.arrayOf(type: Swift.Int)
+        let indices = try json.decodedArray(type: Swift.Int)
         startIndex = indices[0]
         endIndex = indices[1]
     }
     
     /// Used internally to serialize an `EntityLocation` model to JSON.
     public func toJSON() -> JSON {
-        let json = [JSON.Int(startIndex), JSON.Int(endIndex)]
-        return JSON.Array(json)
+        let json = [JSON.int(startIndex), JSON.int(endIndex)]
+        return .array(json)
     }
 }

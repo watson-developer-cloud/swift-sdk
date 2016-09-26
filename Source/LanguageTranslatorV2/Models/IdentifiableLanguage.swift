@@ -28,7 +28,7 @@ public struct IdentifiableLanguage: JSONDecodable {
 
     /// Used internally to initialize an `IdentifiableLanguage` model from JSON.
     public init(json: JSON) throws {
-        language = try json.string("language")
-        name = try json.string("name")
+        language = try json.getString(at: "language")
+        name = try json.getString(at: "name")
     }
 }

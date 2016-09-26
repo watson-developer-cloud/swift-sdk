@@ -39,20 +39,20 @@ public struct Context: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `Context` model from JSON.
     public init(json: JSON) throws {
-        conversationID = try? json.string("conversation_id")
-        system = try? json.decode("system", type: SystemResponse.self)
+        conversationID = try? json.getString(at: "conversation_id")
+        system = try? json.decode(at: "system", type: SystemResponse.self)
     }
     
     /// Used internally to serialize a `Context` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let conversationID = conversationID {
-            json["conversation_id"] = .String(conversationID)
+            json["conversation_id"] = .string(conversationID)
         }
         if let system = system {
             json["system"] = system.toJSON()
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }
 
@@ -86,17 +86,17 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `SystemResponse` model from JSON.
     public init(json: JSON) throws {
-        dialogStack = try json.arrayOf("dialog_stack", type: Swift.String)
-        dialogTurnCounter = try json.int("dialog_turn_counter")
-        dialogRequestCounter = try json.int("dialog_request_counter")
+        dialogStack = try json.decodedArray(at: "dialog_stack", type: Swift.String)
+        dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
+        dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
     }
     
     /// Used internally to serialize a `SystemResponse` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["dialog_stack"] = .Array(dialogStack.map { .String($0) })
-        json["dialog_turn_counter"] = .Int(dialogTurnCounter)
-        json["dialog_request_counter"] = .Int(dialogRequestCounter)
-        return JSON.Dictionary(json)
+        json["dialog_stack"] = .array(dialogStack.map { .string($0) })
+        json["dialog_turn_counter"] = .int(dialogTurnCounter)
+        json["dialog_request_counter"] = .int(dialogRequestCounter)
+        return .dictionary(json)
     }
 }

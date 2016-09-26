@@ -52,10 +52,10 @@ public struct SpeechRecognitionResult: JSONDecodable {
     /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
     public init(json: JSON) throws {
         final = try json.bool("final")
-        alternatives = try json.arrayOf("alternatives", type: SpeechRecognitionAlternative.self)
+        alternatives = try json.decodedArray(at: "alternatives", type: SpeechRecognitionAlternative.self)
         keywordResults = try? json.dictionary("keywords_result").map {
             json in try json.arrayOf(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.arrayOf("word_alternatives", type: WordAlternativeResults.self)
+        wordAlternatives = try? json.decodedArray(at: "word_alternatives", type: WordAlternativeResults.self)
     }
 }

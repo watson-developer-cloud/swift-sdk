@@ -28,11 +28,11 @@ public struct MonitorTraining: JSONDecodable {
 
     /// Used internally to initialize a `MonitorTraining` model from JSON.
     public init(json: JSON) throws {
-        guard let status = TrainingStatus(rawValue: try json.string("status")) else {
+        guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
             let type = TrainingStatus.Available.dynamicType
             throw JSON.Error.ValueNotConvertible(value: json, to: type)
         }
         self.status = status
-        self.baseModelID = try json.string("base_model_id")
+        self.baseModelID = try json.getString(at: "base_model_id")
     }
 }

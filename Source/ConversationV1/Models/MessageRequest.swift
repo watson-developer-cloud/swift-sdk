@@ -58,14 +58,14 @@ internal struct MessageRequest: JSONEncodable {
             json["context"] = context.toJSON()
         }
         if let entities = entities {
-            json["entities"] = .Array(entities.map {$0.toJSON()})
+            json["entities"] = .array(entities.map {$0.toJSON()})
         }
         if let intents = intents {
-            json["intents"] = .Array(intents.map {$0.toJSON()})
+            json["intents"] = .array(intents.map {$0.toJSON()})
         }
         if let output = output {
             json["output"] = output.toJSON()
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
 }

@@ -25,6 +25,6 @@ public struct Pronunciation: JSONDecodable {
     
     /// Used internally to initialize a `Pronunciation` model from JSON.
     public init(json: JSON) throws {
-        pronunciation = try json.string("pronunciation")
+        pronunciation = try json.getString(at: "pronunciation")
     }
 }

@@ -28,7 +28,7 @@ public struct WordAlternativeResult: JSONDecodable {
 
     /// Used internally to initialize an `WordAlternativeResult` model from JSON.
     public init(json: JSON) throws {
-        confidence = try json.double("confidence")
-        word = try json.string("word")
+        confidence = try json.getDouble(at: "confidence")
+        word = try json.getString(at: "word")
     }
 }

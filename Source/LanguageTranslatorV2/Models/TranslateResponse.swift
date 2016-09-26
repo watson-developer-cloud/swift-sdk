@@ -31,9 +31,9 @@ public struct TranslateResponse: JSONDecodable {
 
     /// Used internally to initialize a `TranslateResponse` model from JSON.
     public init(json: JSON) throws {
-        wordCount = try json.int("word_count")
-        characterCount = try json.int("character_count")
-        translations = try json.arrayOf("translations", type: Translation.self)
+        wordCount = try json.getInt(at: "word_count")
+        characterCount = try json.getInt(at: "character_count")
+        translations = try json.decodedArray(at: "translations", type: Translation.self)
     }
 }
 
@@ -45,6 +45,6 @@ public struct Translation: JSONDecodable {
 
     /// Used internally to initialize a `Translation` model from JSON.
     public init(json: JSON) throws {
-        translation = try json.string("translation")
+        translation = try json.getString(at: "translation")
     }
 }

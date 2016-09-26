@@ -34,7 +34,6 @@ public class VisualRecognition {
     
     private let apiKey: String
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 VisualRecognitionV3")
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
     /**
@@ -55,13 +54,13 @@ public class VisualRecognition {
 
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let imagesProcessed = try json.int("images_processed")
-            let code = try json.int("error", "code")
-            let error = try json.string("error", "error_id")
-            let description = try json.string("error", "description")
+            let imagesProcessed = try json.getInt(at: "images_processed")
+            let code = try json.getInt(at: "error", "code")
+            let error = try json.getString(at: "error", "error_id")
+            let description = try json.getString(at: "error", "description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
@@ -79,32 +78,30 @@ public class VisualRecognition {
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
-        failure: (NSError -> Void)? = nil,
-        success: [Classifier] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Classifier]) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
-        queryParameters.append(NSURLQueryItem(name: "verbose", value: "true"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v3/classifiers",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseArray(path: ["classifiers"]) {
-                (response: Response<[Classifier], NSError>) in
+            .responseArray(path: ["classifiers"]) { (response: DataResponse<[Classifier]>) in
                 switch response.result {
-                case .Success(let classifiers): success(classifiers)
-                case .Failure(let error): failure?(error)
+                case .success(let classifiers): success(classifiers)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -129,9 +126,9 @@ public class VisualRecognition {
     public func createClassifier(
         name: String,
         positiveExamples: [Class],
-        negativeExamples: NSURL? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Classifier -> Void)
+        negativeExamples: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifier) -> Void)
     {
         // ensure at least two classes were specified
         let twoOrMoreClasses = (positiveExamples.count >= 2)
@@ -147,49 +144,48 @@ public class VisualRecognition {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/classifiers",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
                 for positiveExample in positiveExamples {
                     let name = positiveExample.name + "_positive_examples"
                     if let examples = positiveExample.examples {
-                        multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                        multipartFormData.append(examples, withName: name)
                     }
                 }
                 if let negativeExamples = negativeExamples {
                     let examples = negativeExamples
                     let name = "negative_examples"
-                    multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    multipartFormData.append(examples, withName: name)
                 }
-                if let name = name.dataUsingEncoding(NSUTF8StringEncoding) {
-                    multipartFormData.appendBodyPart(data: name, name: "name")
+                if let name = name.data(using: String.Encoding.utf8) {
+                    multipartFormData.append(name, withName: "name")
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject() {
-                        (response: Response<Classifier, NSError>) in
+                case .success(let upload, _, _):
+                    upload.responseObject() { (response: DataResponse<Classifier>) in
                         switch response.result {
-                        case .Success(let classifier): success(classifier)
-                        case .Failure(let error): failure?(error)
+                        case .success(let classifier): success(classifier)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "Provided file(s) could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -209,33 +205,32 @@ public class VisualRecognition {
      */
     public func deleteClassifier(
         classifierID: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .DELETE,
+            method: .delete,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -252,30 +247,28 @@ public class VisualRecognition {
      */
     public func getClassifier(
         classifierID: String,
-        failure: (NSError -> Void)? = nil,
-        success: Classifier -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifier) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() {
-                (response: Response<Classifier, NSError>) in
+            .responseObject() { (response: DataResponse<Classifier>) in
                 switch response.result {
-                case .Success(let classifier): success(classifier)
-                case .Failure(let error): failure?(error)
+                case .success(let classifier): success(classifier)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -298,9 +291,9 @@ public class VisualRecognition {
     public func updateClassifier(
         classifierID: String,
         positiveExamples: [Class]? = nil,
-        negativeExamples: NSURL? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Classifier -> Void)
+        negativeExamples: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifier) -> Void)
     {
         // ensure there is at least one compressed file
         guard (positiveExamples != nil) || (negativeExamples != nil) else {
@@ -313,48 +306,47 @@ public class VisualRecognition {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let positiveExamples = positiveExamples {
                     for positiveExample in positiveExamples {
                         let name = positiveExample.name + "_positive_examples"
                         if let examples = positiveExample.examples {
-                            multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                            multipartFormData.append(examples, withName: name)
                         }
                     }                    
                 }
                 if let negativeExamples = negativeExamples {
                     let examples = negativeExamples
                     let name = "negative_examples"
-                    multipartFormData.appendBodyPart(fileURL: examples, name: name)
+                    multipartFormData.append(examples, withName: name)
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject() {
-                        (response: Response<Classifier, NSError>) in
+                case .success(let upload, _, _):
+                    upload.responseObject() { (response: DataResponse<Classifier>) in
                         switch response.result {
-                        case .Success(let classifier): success(classifier)
-                        case .Failure(let error): failure?(error)
+                        case .success(let classifier): success(classifier)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "Provided file(s) could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -363,7 +355,6 @@ public class VisualRecognition {
                 }
             }
         )
-
     }
     
     /**
@@ -387,8 +378,8 @@ public class VisualRecognition {
         classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ClassifiedImages -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
     {
         // write parameters to JSON file
         let parameters = writeParameters(
@@ -424,13 +415,13 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classify(
-        image: NSURL,
+        image: URL,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ClassifiedImages -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
     {
         // write parameters to JSON file
         let parameters = writeParameters(
@@ -441,7 +432,7 @@ public class VisualRecognition {
         
         // classify images
         classify(
-            image,
+            image: image,
             parameters: parameters,
             outputLanguage: outputLanguage,
             failure: failure,
@@ -467,16 +458,16 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
     */
     public func classify(
-        image: NSURL? = nil,
-        parameters: NSURL? = nil,
+        image: URL? = nil,
+        parameters: URL? = nil,
         outputLanguage: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ClassifiedImages -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -486,35 +477,34 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/classify",
+            headerParameters: headerParameters,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: headerParameters
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let image = image {
-                    multipartFormData.appendBodyPart(fileURL: image, name: "images_file")
+                    multipartFormData.append(image, withName: "images_file")
                 }
                 if let parameters = parameters {
-                    multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
+                    multipartFormData.append(parameters, withName: "parameters")
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject() {
-                        (response: Response<ClassifiedImages, NSError>) in
+                case .success(let upload, _, _):
+                    upload.responseObject() { (response: DataResponse<ClassifiedImages>) in
                         switch response.result {
-                        case .Success(let classifiedImages): success(classifiedImages)
-                        case .Failure(let error): failure?(error)
+                        case .success(let classifiedImages): success(classifiedImages)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "File(s) could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -535,8 +525,8 @@ public class VisualRecognition {
      */
     public func detectFaces(
         url: String,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithFaces -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ImagesWithFaces) -> Void)
     {
         let parameters = writeParameters(url: url)
         detectFaces(parameters: parameters, failure: failure, success: success)
@@ -558,47 +548,46 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        image: NSURL? = nil,
-        parameters: NSURL? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithFaces -> Void)
+        image: URL? = nil,
+        parameters: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ImagesWithFaces) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/detect_faces",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let image = image {
-                    multipartFormData.appendBodyPart(fileURL: image, name: "images_file")
+                    multipartFormData.append(image, withName: "images_file")
                 }
                 if let parameters = parameters {
-                    multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
+                    multipartFormData.append(parameters, withName: "parameters")
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject() {
-                        (response: Response<ImagesWithFaces, NSError>) in
+                case .success(let upload, _, _):
+                    upload.responseObject() { (response: DataResponse<ImagesWithFaces>) in
                         switch response.result {
-                        case .Success(let faceImages): success(faceImages)
-                        case .Failure(let error): failure?(error)
+                        case .success(let faceImages): success(faceImages)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "File(s) could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -619,8 +608,8 @@ public class VisualRecognition {
      */
     public func recognizeText(
         url: String,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithWords -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ImagesWithWords) -> Void)
     {
         let parameters = writeParameters(url: url)
         recognizeText(parameters: parameters, failure: failure, success: success)
@@ -641,47 +630,46 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        image: NSURL? = nil,
-        parameters: NSURL? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ImagesWithWords -> Void)
+        image: URL? = nil,
+        parameters: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ImagesWithWords) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v3/recognize_text",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
                 if let image = image {
-                    multipartFormData.appendBodyPart(fileURL: image, name: "images_file")
+                    multipartFormData.append(image, withName: "images_file")
                 }
                 if let parameters = parameters {
-                    multipartFormData.appendBodyPart(fileURL: parameters, name: "parameters")
+                    multipartFormData.append(parameters, withName: "parameters")
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseObject() {
-                        (response: Response<ImagesWithWords, NSError>) in
+                case .success(let upload, _, _):
+                    upload.responseObject() { (response: DataResponse<ImagesWithWords>) in
                         switch response.result {
-                        case .Success(let wordImages): success(wordImages)
-                        case .Failure(let error): failure?(error)
+                        case .success(let wordImages): success(wordImages)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "File(s) could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -704,39 +692,39 @@ public class VisualRecognition {
      - returns: The URL of a JSON file that includes the given parameters.
      */
     private func writeParameters(
-        url url: String? = nil,
+        url: String? = nil,
         classifierIDs: [String]? = nil,
         owners: [String]? = nil,
         showLowConfidence: Bool? = nil)
-        -> NSURL
+        -> URL
     {
         // construct JSON dictionary
         var json = [String: JSON]()
         if let url = url {
-            json["url"] = JSON.String(url)
+            json["url"] = JSON.string(url)
         }
         if let classifierIDs = classifierIDs {
-            let ids_json = classifierIDs.map { id in JSON.String(id) }
-            json["classifier_ids"] = JSON.Array(ids_json)
+            let ids_json = classifierIDs.map { id in JSON.string(id) }
+            json["classifier_ids"] = JSON.array(ids_json)
         }
         if let owners = owners {
-            let owners_json = owners.map { owner in JSON.String(owner) }
-            json["owners"] = JSON.Array(owners_json)
+            let owners_json = owners.map { owner in JSON.string(owner) }
+            json["owners"] = JSON.array(owners_json)
         }
         if let showLowConfidence = showLowConfidence {
-            json["show_low_confidence"] = JSON.Bool(showLowConfidence)
+            json["show_low_confidence"] = JSON.bool(showLowConfidence)
         }
         
         // create a globally unique file name in a temporary directory
         let suffix = "VisualRecognitionParameters.json"
-        let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
+        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)!
+        let fileURL = directoryURL.appendingPathComponent(fileName)!
         
         // save JSON dictionary to file
         do {
-            let data = try JSON.Dictionary(json).serialize()
-            try data.writeToURL(fileURL, options: .AtomicWrite)
+            let data = try JSON.dictionary(json).serialize()
+            try data.write(to: fileURL, options: .atomicWrite)
         } catch {
             // TODO: how to catch this?
         }

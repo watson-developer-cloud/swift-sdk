@@ -107,22 +107,22 @@ public struct DisambiguatedLinks: JSONDecodable {
     
     /// Used internally to initialize a DisambiguatedLinks object
     public init(json: JSON) throws {
-        language = try? json.string("language")
-        url = try? json.string("url")
-        census = try? json.string("census")
-        ciaFactbook = try? json.string("ciaFactbook")
-        crunchbase = try? json.string("crunchbase")
-        dbpedia = try? json.string("dbpedia")
-        freebase = try? json.string("freebase")
-        geo = try? json.string("geo")
-        geonames = try? json.string("geonames")
-        musicBrainz = try? json.string("musicBrainz")
-        name = try? json.string("name")
-        opencyc = try? json.string("opencyc")
-        subType = try? json.arrayOf("subType", type: Swift.String)
-        umbel = try? json.string("umbel")
-        website = try? json.string("website")
-        yago = try? json.string("yago")
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        census = try? json.getString(at: "census")
+        ciaFactbook = try? json.getString(at: "ciaFactbook")
+        crunchbase = try? json.getString(at: "crunchbase")
+        dbpedia = try? json.getString(at: "dbpedia")
+        freebase = try? json.getString(at: "freebase")
+        geo = try? json.getString(at: "geo")
+        geonames = try? json.getString(at: "geonames")
+        musicBrainz = try? json.getString(at: "musicBrainz")
+        name = try? json.getString(at: "name")
+        opencyc = try? json.getString(at: "opencyc")
+        subType = try? json.decodedArray(at: "subType", type: Swift.String)
+        umbel = try? json.getString(at: "umbel")
+        website = try? json.getString(at: "website")
+        yago = try? json.getString(at: "yago")
     }
 }
 

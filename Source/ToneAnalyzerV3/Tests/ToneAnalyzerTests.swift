@@ -20,7 +20,7 @@ import ToneAnalyzerV3
 class ToneAnalyzerTests: XCTestCase {
 
     private var toneAnalyzer: ToneAnalyzer!
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
     
     let text = "I know the times are difficult! Our sales have been disappointing for " +
                "the past three quarters for our data analytics product suite. We have a " +
@@ -44,7 +44,7 @@ class ToneAnalyzerTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -55,7 +55,7 @@ class ToneAnalyzerTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -65,9 +65,9 @@ class ToneAnalyzerTests: XCTestCase {
     /** Analyze the tone of the given text using the default parameters. */
     func testGetToneWithDefaultParameters() {
         let description = "Analyze the tone of the given text using the default parameters."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        toneAnalyzer.getTone(text, failure: failWithError) { toneAnalysis in
+        toneAnalyzer.getTone(text: text, failure: failWithError) { toneAnalysis in
             
             for emotionTone in toneAnalysis.documentTone[0].tones {
                 XCTAssertNotNil(emotionTone.name)
@@ -125,10 +125,10 @@ class ToneAnalyzerTests: XCTestCase {
     /** Analyze the tone of the given text with custom parameters. */
     func testGetToneWithCustomParameters() {
         let description = "Analyze the tone of the given text using custom parameters."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         let tones = ["emotion", "writing"]
-        toneAnalyzer.getTone(text, tones: tones, sentences: false, failure: failWithError) {
+        toneAnalyzer.getTone(text: text, tones: tones, sentences: false, failure: failWithError) {
             toneAnalysis in
             
             for emotionTone in toneAnalysis.documentTone[0].tones {
@@ -158,28 +158,26 @@ class ToneAnalyzerTests: XCTestCase {
     
     func testGetToneEmptyString() {
         let description = "Analyze the tone of an empty string."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        toneAnalyzer.getTone("", failure: failure, success: failWithResult)
+        toneAnalyzer.getTone(text: "", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     func testGetToneInvalidParameters() {
         let description = "Analyze the tone of the given text using invalid parameters."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         let tones = ["emotion", "this-tone-is-invalid"]
-        toneAnalyzer.getTone(text, tones: tones, failure: failure, success: failWithResult)
+        toneAnalyzer.getTone(text: text, tones: tones, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

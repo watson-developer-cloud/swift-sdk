@@ -40,10 +40,10 @@ public struct MessageResponse: JSONDecodable {
     
     /// Used internally to initialize a `MessageResponse` model from JSON.
     public init(json: JSON) throws {
-        input = try json.decode("input")
-        context = try json.decode("context")
-        entities = try json.arrayOf("entities", type: Entity.self)
-        intents = try json.arrayOf("intents",  type: Intent.self)
-        output = try json.decode("output")
+        input = try json.decode(at: "input")
+        context = try json.decode(at: "context")
+        entities = try json.decodedArray(at: "entities", type: Entity.self)
+        intents = try json.decodedArray(at: "intents",  type: Intent.self)
+        output = try json.decode(at: "output")
     }
 }

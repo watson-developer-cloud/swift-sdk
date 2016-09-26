@@ -69,13 +69,13 @@ public struct TraitTreeNode: JSONDecodable {
 
     /// Used internally to initialize a `TraitTreeNode` model from JSON.
     public init(json: JSON) throws {
-        id = try json.string("id")
-        name = try json.string("name")
-        category = try? json.string("category")
-        percentage = try? json.double("percentage")
-        samplingError = try? json.double("sampling_error")
-        rawScore = try? json.double("raw_score")
-        rawSamplingError = try? json.double("raw_sampling_error")
-        children = try? json.arrayOf("children")
+        id = try json.getString(at: "id")
+        name = try json.getString(at: "name")
+        category = try? json.getString(at: "category")
+        percentage = try? json.getDouble(at: "percentage")
+        samplingError = try? json.getDouble(at: "sampling_error")
+        rawScore = try? json.getDouble(at: "raw_score")
+        rawSamplingError = try? json.getDouble(at: "raw_sampling_error")
+        children = try? json.decodedArray(at: "children")
     }
 }

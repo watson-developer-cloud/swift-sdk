@@ -29,8 +29,8 @@ public struct Resolution: JSONDecodable {
     
     /// Used internally to initialize a `Resolution` model from JSON.
     public init(json: JSON) throws {
-        map = try? json.decode("map")
-        solutions = try json.arrayOf("solutions", type: Solution.self)
+        map = try? json.decode(at: "map")
+        solutions = try json.decodedArray(at: "solutions", type: Solution.self)
     }
 }
 
@@ -49,8 +49,8 @@ public struct Map: JSONDecodable {
     
     /// Used internally to initialize a `Map` model from JSON.
     public init(json: JSON) throws {
-        anchors = try json.arrayOf("anchors", type: Anchor.self)
-        nodes = try json.arrayOf("nodes", type: MapNode.self)
+        anchors = try json.decodedArray(at: "anchors", type: Anchor.self)
+        nodes = try json.decodedArray(at: "nodes", type: MapNode.self)
     }
 }
 
@@ -65,8 +65,8 @@ public struct Anchor: JSONDecodable {
     
     /// Used internally to initialize an `Anchor` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        position = try json.decode("position")
+        name = try json.getString(at: "name")
+        position = try json.decode(at: "position")
     }
 }
 
@@ -81,8 +81,8 @@ public struct MapNode: JSONDecodable {
     
     /// Used internally to initialize a `MapNode` model from JSON.
     public init(json: JSON) throws {
-        coordinates = try json.decode("coordinates")
-        solutionRefs = try json.arrayOf("solution_refs", type: String.self)
+        coordinates = try json.decode(at: "coordinates")
+        solutionRefs = try json.decodedArray(at: "solution_refs", type: String.self)
     }
 }
 
@@ -97,8 +97,8 @@ public struct MapNodeCoordinates: JSONDecodable {
     
     /// Used internally to initialize a `MapNodeCoordinates` model from JSON.
     public init(json: JSON) throws {
-        x = try json.double("x")
-        y = try json.double("y")
+        x = try json.getDouble(at: "x")
+        y = try json.getDouble(at: "y")
     }
 }
 
@@ -124,12 +124,12 @@ public struct Solution: JSONDecodable {
     
     /// Used internally to initialize a `Solution` model from JSON.
     public init(json: JSON) throws {
-        shadowMe = try? json.arrayOf("shadow_me", type: String.self)
-        shadows = try? json.arrayOf("shadows", type: String.self)
-        solutionRef = try json.string("solution_ref")
-        statusCause = try? json.decode("status_cause")
+        shadowMe = try? json.decodedArray(at: "shadow_me", type: String.self)
+        shadows = try? json.decodedArray(at: "shadows", type: String.self)
+        solutionRef = try json.getString(at: "solution_ref")
+        statusCause = try? json.decode(at: "status_cause")
         
-        guard let status = SolutionStatus(rawValue: try json.decode("status")) else {
+        guard let status = SolutionStatus(rawValue: try json.decode(at: "status")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: Solution.self)
         }
         self.status = status
@@ -171,12 +171,12 @@ public struct StatusCause: JSONDecodable {
     
     /// Used internally to initialize a `StatusCause` model from JSON.
     public init(json: JSON) throws {
-        guard let errorCode = TradeoffAnalyticsError(rawValue: try json.string("error_code")) else {
+        guard let errorCode = TradeoffAnalyticsError(rawValue: try json.getString(at: "error_code")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: StatusCause.self)
         }
         self.errorCode = errorCode
-        message = try json.string("message")
-        tokens = try json.arrayOf("tokens", type: String.self)
+        message = try json.getString(at: "message")
+        tokens = try json.decodedArray(at: "tokens", type: String.self)
     }
 }
 

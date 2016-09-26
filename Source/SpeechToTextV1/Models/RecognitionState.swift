@@ -25,6 +25,6 @@ internal struct RecognitionState: JSONDecodable {
 
     /// Used internally to initialize a `RecognitionState` model from JSON.
     internal init(json: JSON) throws {
-        state = try json.string("state")
+        state = try json.getString(at: "state")
     }
 }

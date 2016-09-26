@@ -28,8 +28,8 @@ public struct Relations: JSONDecodable {
     
     /// Used internally to initialize a `Relations` model from JSON.
     public init(json: JSON) throws {
-        relations = try json.arrayOf("relation", type: Relation.self)
-        version = try json.string("version")
+        relations = try json.decodedArray(at: "relation", type: Relation.self)
+        version = try json.getString(at: "version")
     }
 }
 
@@ -53,11 +53,11 @@ public struct Relation: JSONDecodable {
     
     /// Used internally to initialize a `Relation` model from JSON.
     public init(json: JSON) throws {
-        relationID = try json.string("rid")
-        type = try json.string("type")
-        subtype = try json.string("subtype")
-        relationEntityArgument = try json.arrayOf("rel_entity_arg", type: RelationEntityArgument.self)
-        relatedMentions = try json.arrayOf("relmentions", "relmention", type: RelatedMentions.self)
+        relationID = try json.getString(at: "rid")
+        type = try json.getString(at: "type")
+        subtype = try json.getString(at: "subtype")
+        relationEntityArgument = try json.decodedArray(at: "rel_entity_arg", type: RelationEntityArgument.self)
+        relatedMentions = try json.decodedArray(at: "relmentions", "relmention", type: RelatedMentions.self)
     }
 }
 
@@ -72,8 +72,8 @@ public struct RelationEntityArgument: JSONDecodable {
     
     /// Used internally to initialize a `RelationEntityArgument` model from JSON.
     public init(json: JSON) throws {
-        entityID = try json.string("eid")
-        argumentNumber = try json.int("argnum")
+        entityID = try json.getString(at: "eid")
+        argumentNumber = try json.getInt(at: "argnum")
     }
 }
 
@@ -101,21 +101,21 @@ public struct RelatedMentions: JSONDecodable {
     
     /// Used internally to initialize a `RelatedMentions` model from JSON.
     public init(json: JSON) throws {
-        relatedMentionID = try json.string("rmid")
-        score = try json.double("score")
-        relatedMentionArgument = try json.arrayOf("rel_mention_arg", type: RelatedMentionArgument.self)
+        relatedMentionID = try json.getString(at: "rmid")
+        score = try json.getDouble(at: "score")
+        relatedMentionArgument = try json.decodedArray(at: "rel_mention_arg", type: RelatedMentionArgument.self)
         
-        guard let rMClass = RelatedMentionClass(rawValue: try json.string("class")) else {
+        guard let rMClass = RelatedMentionClass(rawValue: try json.getString(at: "class")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: RelatedMentionClass.self)
         }
         relatedMentionClass = rMClass
         
-        guard let tempModality = Modality(rawValue: try json.string("modality")) else {
+        guard let tempModality = Modality(rawValue: try json.getString(at: "modality")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: Modality.self)
         }
         modality = tempModality
         
-        guard let tempTense = Tense(rawValue: try json.string("tense")) else {
+        guard let tempTense = Tense(rawValue: try json.getString(at: "tense")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: Tense.self)
         }
         tense = tempTense
@@ -136,9 +136,9 @@ public struct RelatedMentionArgument: JSONDecodable {
     
     /// Used internally to initialize a `RelatedMentionArgument` model from JSON.
     public init(json: JSON) throws {
-        mentionID = try json.string("mid")
-        argumentNumber = try json.int("argnum")
-        text = try json.string("text")
+        mentionID = try json.getString(at: "mid")
+        argumentNumber = try json.getInt(at: "argnum")
+        text = try json.getString(at: "text")
     }
 }
 

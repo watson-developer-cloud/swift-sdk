@@ -44,15 +44,15 @@ public struct Entities: JSONDecodable {
     
     /// Used internally to initialize an Entities object
     public init(json: JSON) throws {
-        language = try? json.string("language")
-        url = try? json.string("url")
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = nil
         }
-        text = try? json.string("text")
-        entitites = try? json.arrayOf("entities", type: Entity.self)
+        text = try? json.getString(at: "text")
+        entitites = try? json.decodedArray(at: "entities", type: Entity.self)
     }
 }
 

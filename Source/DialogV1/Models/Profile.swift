@@ -41,8 +41,8 @@ public struct Profile: JSONEncodable, JSONDecodable {
 
     /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
-        clientID = try? json.int("client_id")
-        parameters = try json.arrayOf("name_values", type: Parameter.self)
+        clientID = try? json.getInt(at: "client_id")
+        parameters = try json.decodedArray(at: "name_values", type: Parameter.self)
     }
 
     /// Used internally to serialize a `Profile` model to JSON.
@@ -76,8 +76,8 @@ public struct Parameter: JSONEncodable, JSONDecodable {
 
     /// Used internally to initialize a `Parameter` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        value = try json.string("value")
+        name = try json.getString(at: "name")
+        value = try json.getString(at: "value")
     }
 
     /// Used internally to serialize a `Parameter` model to JSON.

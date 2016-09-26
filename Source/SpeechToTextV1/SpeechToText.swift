@@ -70,9 +70,9 @@ public class SpeechToText {
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = try json.int("code")
-            let description = try json.string("code_description")
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try json.getString(at: "code_description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: description

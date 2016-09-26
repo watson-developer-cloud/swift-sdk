@@ -35,7 +35,7 @@ public struct Microformats: JSONDecodable {
     
     /// Used internally to initialize a Microformats object
     public init(json: JSON) throws {
-        url = try? json.string("url")
-        microformats = try? json.arrayOf("microformats", type: Microformat.self)
+        url = try? json.getString(at: "url")
+        microformats = try? json.decodedArray(at: "microformats", type: Microformat.self)
     }
 }

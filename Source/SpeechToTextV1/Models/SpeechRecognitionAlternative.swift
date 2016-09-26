@@ -36,9 +36,9 @@ public struct SpeechRecognitionAlternative: JSONDecodable {
 
     /// Used internally to initialize a `SpeechRecognitionAlternative` model from JSON.
     public init(json: JSON) throws {
-        transcript = try json.string("transcript")
-        confidence = try? json.double("confidence")
-        timestamps = try? json.arrayOf("timestamps", type: WordTimestamp.self)
-        wordConfidence = try? json.arrayOf("word_confidence", type: WordConfidence.self)
+        transcript = try json.getString(at: "transcript")
+        confidence = try? json.getDouble(at: "confidence")
+        timestamps = try? json.decodedArray(at: "timestamps", type: WordTimestamp.self)
+        wordConfidence = try? json.decodedArray(at: "word_confidence", type: WordConfidence.self)
     }
 }

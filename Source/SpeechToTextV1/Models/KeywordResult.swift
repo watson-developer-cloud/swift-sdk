@@ -35,9 +35,9 @@ public struct KeywordResult: JSONDecodable {
 
     /// Used internally to initialize a `KeywordResult` model from JSON.
     public init(json: JSON) throws {
-        normalizedText = try json.string("normalized_text")
-        startTime = try json.double("start_time")
-        endTime = try json.double("end_time")
-        confidence = try json.double("confidence")
+        normalizedText = try json.getString(at: "normalized_text")
+        startTime = try json.getDouble(at: "start_time")
+        endTime = try json.getDouble(at: "end_time")
+        confidence = try json.getDouble(at: "confidence")
     }
 }

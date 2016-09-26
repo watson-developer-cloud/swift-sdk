@@ -58,9 +58,9 @@ public struct Problem: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `Problem` model from JSON.
     public init(json: JSON) throws {
-        columns = try json.arrayOf("columns", type: Column.self)
-        options = try json.arrayOf("options", type: Option.self)
-        subject = try json.string("subject")
+        columns = try json.decodedArray(at: "columns", type: Column.self)
+        options = try json.decodedArray(at: "options", type: Option.self)
+        subject = try json.getString(at: "subject")
     }
 }
 
@@ -245,26 +245,26 @@ public struct Column: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `Column` model from JSON.
     public init(json: JSON) throws {
-        key = try json.string("key")
-        if let typeString = try? json.string("type") {
+        key = try json.getString(at: "key")
+        if let typeString = try? json.getString(at: "type") {
             type = ColumnType(rawValue: typeString)
         } else {
             type = nil
         }
-        if let goalString = try? json.string("goal") {
+        if let goalString = try? json.getString(at: "goal") {
             goal = Goal(rawValue: goalString)
         } else {
             goal = nil
         }
         isObjective = try? json.bool("is_objective")
-        range = try? json.decode("range")
-        preference = try? json.arrayOf("preference", type: String.self)
-        significantGain = try? json.double("significant_gain")
-        significantLoss = try? json.double("significant_loss")
-        insignificantLoss = try? json.double("insignificant_loss")
-        format = try? json.string("format")
-        fullName = try? json.string("full_name")
-        description = try? json.string("description")
+        range = try? json.decode(at: "range")
+        preference = try? json.decodedArray(at: "preference", type: String.self)
+        significantGain = try? json.getDouble(at: "significant_gain")
+        significantLoss = try? json.getDouble(at: "significant_loss")
+        insignificantLoss = try? json.getDouble(at: "insignificant_loss")
+        format = try? json.getString(at: "format")
+        fullName = try? json.getString(at: "full_name")
+        description = try? json.getString(at: "description")
     }
 }
 
@@ -378,7 +378,7 @@ public enum Range: JSONEncodable, JSONDecodable {
     /// Used internally to initialize a `Range` model from JSON.
     public init(json: JSON) throws {
         // try to parse as `Range.DateRange`
-        if let low = try? json.string("low"), high = try? json.string("high") {
+        if let low = try? json.getString(at: "low"), high = try? json.getString(at: "high") {
             let lowDate = Range.dateFormatter.dateFromString(low)
             let highDate = Range.dateFormatter.dateFromString(high)
             if let lowDate = lowDate, highDate = highDate {
@@ -388,7 +388,7 @@ public enum Range: JSONEncodable, JSONDecodable {
         }
         
         // try to parse as `Range.NumericRange`
-        if let low = try? json.double("low"), high = try? json.double("high") {
+        if let low = try? json.getDouble(at: "low"), high = try? json.getDouble(at: "high") {
             self = .NumericRange(low: low, high: high)
             return
         }
@@ -482,12 +482,12 @@ public struct Option: JSONEncodable, JSONDecodable {
 
     /// Used internally to initialize an `Option` model from JSON.
     public init(json: JSON) throws {
-        key = try json.string("key")
+        key = try json.getString(at: "key")
         values = try json.dictionary("values").map {
             json in try json.decode()
         }
-        name = try? json.string("name")
-        descriptionHTML = try? json.string("description_html")
+        name = try? json.getString(at: "name")
+        descriptionHTML = try? json.getString(at: "description_html")
         appData = json["app_data"]
     }
 }

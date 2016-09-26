@@ -41,10 +41,10 @@ public struct NewsResult: JSONDecodable {
     
     /// used internally to initialize NewsResult objects
     public init(json: JSON) throws {
-        docs = try? json.arrayOf("docs", type: Document.self)
-        next = try? json.string("next")
-        count = try? json.int("count")
-        slices = try? json.arrayOf("slices", type: Int.self)
+        docs = try? json.decodedArray(at: "docs", type: Document.self)
+        next = try? json.getString(at: "next")
+        count = try? json.getInt(at: "count")
+        slices = try? json.decodedArray(at: "slices", type: Int.self)
     }
     
 }

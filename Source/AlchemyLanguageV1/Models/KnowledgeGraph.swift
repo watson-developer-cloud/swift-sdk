@@ -32,7 +32,7 @@ public struct KnowledgeGraph: JSONDecodable {
     
     /// Used internally to initialize a KnowledgeGraph object
     public init(json: JSON) throws {
-        typeHierarchy = try? json.string("typeHierarchy")
+        typeHierarchy = try? json.getString(at: "typeHierarchy")
     }
 }
 

@@ -34,10 +34,10 @@ public struct ImageKeywords: JSONDecodable {
 
     /// Used internally to initialize an `ImageKeywords` model from JSON.
     public init(json: JSON) throws {
-        status = try json.string("status")
-        url = try json.string("url")
-        totalTransactions = try Int(json.string("totalTransactions"))!
-        imageKeywords = try json.arrayOf("imageKeywords", type: ImageKeyword.self)
+        status = try json.getString(at: "status")
+        url = try json.getString(at: "url")
+        totalTransactions = try Int(json.getString(at: "totalTransactions"))!
+        imageKeywords = try json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)
     }
 }
 
@@ -55,8 +55,8 @@ public struct ImageKeyword: JSONDecodable {
 
     /// Used internally to initialize an `ImageKeyword` model from JSON.
     public init(json: JSON) throws {
-        text = try json.string("text")
-        score = try Double(json.string("score"))!
-        knowledgeGraph = try? json.decode("knowledgeGraph")
+        text = try json.getString(at: "text")
+        score = try Double(json.getString(at: "score"))!
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph")
     }
 }

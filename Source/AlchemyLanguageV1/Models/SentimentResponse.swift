@@ -44,15 +44,15 @@ public struct SentimentResponse: JSONDecodable {
     
     /// Used internally to initialize a SentimentResponse object
     public init(json: JSON) throws {
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = 1
         }
-        language = try? json.string("language")
-        url = try? json.string("url")
-        text = try? json.string("text")
-        docSentiment = try? json.decode("docSentiment", type: Sentiment.self)
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        text = try? json.getString(at: "text")
+        docSentiment = try? json.decode(at: "docSentiment", type: Sentiment.self)
     }
 }
 

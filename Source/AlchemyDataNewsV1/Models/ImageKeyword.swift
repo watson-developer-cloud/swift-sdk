@@ -35,8 +35,8 @@ public struct ImageKeyword: JSONDecodable {
     
     /// Used internally to initialize an ImageKeyword object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        if let scoreString = try? json.string("score") {
+        text = try? json.getString(at: "text")
+        if let scoreString = try? json.getString(at: "score") {
             score = Double(scoreString)
         } else {
             score = nil

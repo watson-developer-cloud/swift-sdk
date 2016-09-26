@@ -46,12 +46,12 @@ public struct Customization: JSONDecodable {
     
     /// Used internally to initialize a `Customization` model from JSON.
     public init(json: JSON) throws {
-        customizationID = try json.string("customization_id")
-        name = try json.string("name")
-        language = try json.string("language")
-        owner = try json.string("owner")
-        created = try? json.int("created")
-        lastModified = try? json.int("last_modified")
-        description = try? json.string("description")
+        customizationID = try json.getString(at: "customization_id")
+        name = try json.getString(at: "name")
+        language = try json.getString(at: "language")
+        owner = try json.getString(at: "owner")
+        created = try? json.getInt(at: "created")
+        lastModified = try? json.getInt(at: "last_modified")
+        description = try? json.getString(at: "description")
     }
 }

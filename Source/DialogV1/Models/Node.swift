@@ -39,8 +39,8 @@ public struct Node: JSONEncodable, JSONDecodable {
 
     /// Used internally to initialize a `FaceTags` model from JSON.
     public init(json: JSON) throws {
-        content = try json.string("content")
-        node = try json.string("node")
+        content = try json.getString(at: "content")
+        node = try json.getString(at: "node")
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.

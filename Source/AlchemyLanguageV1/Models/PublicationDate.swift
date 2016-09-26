@@ -35,8 +35,8 @@ public struct PublicationDate: JSONDecodable {
     
     /// Used internally to initialize a PublicanDate object
     public init(json: JSON) throws {
-        confident = try? json.string("confident")
-        date = try? json.string("date")
+        confident = try? json.getString(at: "confident")
+        date = try? json.getString(at: "date")
     }
 }
 

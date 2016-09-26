@@ -45,12 +45,12 @@ public struct Voice: JSONDecodable {
     
     /// Used internally to initialize a `Voice` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        gender = try json.string("gender")
-        language = try json.string("language")
-        url = try json.string("url")
-        description = try json.string("description")
+        name = try json.getString(at: "name")
+        gender = try json.getString(at: "gender")
+        language = try json.getString(at: "language")
+        url = try json.getString(at: "url")
+        description = try json.getString(at: "description")
         customizable = try json.bool("customizable")
-        customization = try? json.decode("customization")
+        customization = try? json.decode(at: "customization")
     }
 }

@@ -41,10 +41,10 @@ public struct SAORelation: JSONDecodable {
     
     /// Used internally to initialize a SAORelation object
     public init(json: JSON) throws {
-        action = try? json.decode("action", type: Action.self)
-        sentence = try? json.string("sentence")
-        subject = try? json.decode("subject", type: Subject.self)
-        object = try? json.decode("object", type: RelationObject.self)
+        action = try? json.decode(at: "action", type: Action.self)
+        sentence = try? json.getString(at: "sentence")
+        subject = try? json.decode(at: "subject", type: Subject.self)
+        object = try? json.decode(at: "object", type: RelationObject.self)
     }
     
 }
@@ -65,9 +65,9 @@ public struct Action: JSONDecodable {
     
     /// Used internally to initialize an Action object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        lemmatized = try? json.string("lemmatized")
-        verb = try? json.decode("verb", type: Verb.self)
+        text = try? json.getString(at: "text")
+        lemmatized = try? json.getString(at: "lemmatized")
+        verb = try? json.decode(at: "verb", type: Verb.self)
     }
     
     /**
@@ -86,9 +86,9 @@ public struct Action: JSONDecodable {
         
         /// Used internally to initalize a Verb object
         public init(json: JSON) throws {
-            text = try? json.string("text")
-            tense = try? json.string("tense")
-            if let negatedString = try? json.string("negated") {
+            text = try? json.getString(at: "text")
+            tense = try? json.getString(at: "tense")
+            if let negatedString = try? json.getString(at: "negated") {
                 negated = Int(negatedString)
             } else {
                 negated = 0
@@ -113,9 +113,9 @@ public struct Subject: JSONDecodable {
     
     /// Used internally to initialize a Subject object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
-        entity = try? json.decode("entity", type: Entity.self)
+        text = try? json.getString(at: "text")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        entity = try? json.decode(at: "entity", type: Entity.self)
     }
 }
 
@@ -138,10 +138,10 @@ public struct RelationObject: JSONDecodable {
     
     /// Used internally to initialize a RelationObject object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        sentiment = try? json.decode("sentiment", type: Sentiment.self)
-        sentimentFromSubject = try? json.decode("sentimentFromSubject", type: Sentiment.self)
-        entity = try? json.decode("entity", type: Entity.self)
+        text = try? json.getString(at: "text")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        sentimentFromSubject = try? json.decode(at: "sentimentFromSubject", type: Sentiment.self)
+        entity = try? json.decode(at: "entity", type: Entity.self)
     }
 }
 

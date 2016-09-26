@@ -44,11 +44,11 @@ public struct Profile: JSONDecodable {
 
     /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
-        tree = try json.decode("tree")
-        id = try json.string("id")
-        source = try json.string("source")
-        wordCount = try json.int("word_count")
-        wordCountMessage = try? json.string("word_count_message")
-        processedLanguage = try json.string("processed_lang")
+        tree = try json.decode(at: "tree")
+        id = try json.getString(at: "id")
+        source = try json.getString(at: "source")
+        wordCount = try json.getInt(at: "word_count")
+        wordCountMessage = try? json.getString(at: "word_count_message")
+        processedLanguage = try json.getString(at: "processed_lang")
     }
 }

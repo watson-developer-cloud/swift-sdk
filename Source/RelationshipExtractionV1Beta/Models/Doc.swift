@@ -40,11 +40,11 @@ public struct Document: JSONDecodable {
     
     /// Used internally to initialize a `Document` model from JSON.
     public init(json: JSON) throws {
-        id = try json.string("id")
-        text = try json.string("text")
-        sentences = try json.arrayOf("sents", "sent", type: Sentence.self)
-        mentions = try json.arrayOf("mentions", "mention", type: Mention.self)
-        entities = try json.arrayOf("entities", "entity", type: Entity.self)
-        relations = try json.decode("relations", type: Relations.self)
+        id = try json.getString(at: "id")
+        text = try json.getString(at: "text")
+        sentences = try json.decodedArray(at: "sents", "sent", type: Sentence.self)
+        mentions = try json.decodedArray(at: "mentions", "mention", type: Mention.self)
+        entities = try json.decodedArray(at: "entities", "entity", type: Entity.self)
+        relations = try json.decode(at: "relations", type: Relations.self)
     }
 }

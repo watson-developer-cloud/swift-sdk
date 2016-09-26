@@ -43,14 +43,14 @@ public struct ClassifierDetails: JSONDecodable {
     
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
     public init(json: JSON) throws {
-        classifierId = try json.string("classifier_id")
-        name = try? json.string("name")
-        language = try json.string("language")
-        created = try json.string("created")
-        url = try json.string("url")
-        statusDescription = try json.string("status_description")
+        classifierId = try json.getString(at: "classifier_id")
+        name = try? json.getString(at: "name")
+        language = try json.getString(at: "language")
+        created = try json.getString(at: "created")
+        url = try json.getString(at: "url")
+        statusDescription = try json.getString(at: "status_description")
         
-        guard let classifierStatus = ClassifierStatus(rawValue: try json.string("status")) else {
+        guard let classifierStatus = ClassifierStatus(rawValue: try json.getString(at: "status")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
         }
         status = classifierStatus

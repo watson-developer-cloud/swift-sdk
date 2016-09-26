@@ -35,8 +35,8 @@ public struct DocumentTitle: JSONDecodable {
     
     /// Used internally to initialize a DocumentTitle object
     public init(json: JSON) throws {
-        url = try? json.string("url")
-        title = try? json.string("title")
+        url = try? json.getString(at: "url")
+        title = try? json.getString(at: "title")
     }
 }
 

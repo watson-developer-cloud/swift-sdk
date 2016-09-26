@@ -39,11 +39,11 @@ public struct Classification: JSONDecodable {
     
     /// Used internally to initialize a `Classification` model from JSON.
     public init(json: JSON) throws {
-        classifierId = try json.string("classifier_id")
-        url = try json.string("url")
-        text = try json.string("text")
-        topClass = try json.string("top_class")
-        classes = try json.arrayOf("classes", type: ClassifiedClass.self)
+        classifierId = try json.getString(at: "classifier_id")
+        url = try json.getString(at: "url")
+        text = try json.getString(at: "text")
+        topClass = try json.getString(at: "top_class")
+        classes = try json.decodedArray(at: "classes", type: ClassifiedClass.self)
     }
 }
 
@@ -59,7 +59,7 @@ public struct ClassifiedClass: JSONDecodable {
     
     /// Used internally to initialize a `ClassifiedClass` model from JSON.
     public init(json: JSON) throws {
-        confidence = try json.double("confidence")
-        className = try json.string("class_name")
+        confidence = try json.getDouble(at: "confidence")
+        className = try json.getString(at: "class_name")
     }
 }

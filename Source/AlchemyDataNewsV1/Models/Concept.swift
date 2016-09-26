@@ -111,23 +111,23 @@ public struct Concept: JSONDecodable {
     
     /// Used internally to initialize a Concept object
     public init(json: JSON) throws {
-        text = try? json.string("text")
-        if let relevanceString = try? json.string("relevance") {
+        text = try? json.getString(at: "text")
+        if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        knowledgeGraph = try? json.decode("knowledgeGraph", type: KnowledgeGraph.self)
-        website = try? json.string("website")
-        geo = try? json.string("geo")
-        dbpedia = try? json.string("dbpedia")
-        yago = try? json.string("yago")
-        opencyc = try? json.string("opencyc")
-        freebase = try? json.string("freebase")
-        ciaFactbook = try? json.string("ciaFactbook")
-        census = try? json.string("census")
-        geonames = try? json.string("geonames")
-        musicBrainz = try? json.string("musicBrainz")
-        crunchbase = try? json.string("crunchbase")
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
+        website = try? json.getString(at: "website")
+        geo = try? json.getString(at: "geo")
+        dbpedia = try? json.getString(at: "dbpedia")
+        yago = try? json.getString(at: "yago")
+        opencyc = try? json.getString(at: "opencyc")
+        freebase = try? json.getString(at: "freebase")
+        ciaFactbook = try? json.getString(at: "ciaFactbook")
+        census = try? json.getString(at: "census")
+        geonames = try? json.getString(at: "geonames")
+        musicBrainz = try? json.getString(at: "musicBrainz")
+        crunchbase = try? json.getString(at: "crunchbase")
     }
 }

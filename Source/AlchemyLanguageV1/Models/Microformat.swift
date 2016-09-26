@@ -35,8 +35,8 @@ public struct Microformat: JSONDecodable {
     
     /// Used internally to initialize a Microformat object
     public init(json: JSON) throws {
-        fieldData = try? json.string("fieldData")
-        fieldName = try? json.string("fieldName")
+        fieldData = try? json.getString(at: "fieldData")
+        fieldName = try? json.getString(at: "fieldName")
     }
 }
 

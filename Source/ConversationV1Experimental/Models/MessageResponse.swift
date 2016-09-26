@@ -33,8 +33,8 @@ public struct MessageResponse: JSONDecodable {
     
     /// Used internally to initialize a `MessageResponse` model from JSON.
     public init(json: JSON) throws {
-        intents = try? json.arrayOf("intents",  type: Intent.self)
-        entities = try? json.arrayOf("entities", type: Entity.self)
+        intents = try? json.decodedArray(at: "intents",  type: Intent.self)
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
         context = json["context"]
     }
 }
@@ -50,8 +50,8 @@ public struct Intent: JSONDecodable {
     
     /// Used internally to initialize an `Intent` model from JSON.
     public init(json: JSON) throws {
-        intent = try json.string("intent")
-        confidence = try json.double("confidence")
+        intent = try json.getString(at: "intent")
+        confidence = try json.getDouble(at: "confidence")
     }
 }
 
@@ -70,8 +70,8 @@ public struct Entity: JSONDecodable {
     
     /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
-        entity = try json.string("entity")
-        value = try json.string("value")
-        location = try json.arrayOf("location")
+        entity = try json.getString(at: "entity")
+        value = try json.getString(at: "value")
+        location = try json.decodedArray(at: "location")
     }
 }

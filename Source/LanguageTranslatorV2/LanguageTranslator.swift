@@ -57,8 +57,8 @@ public class LanguageTranslator {
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let code = try json.int("error_code")
-            let message = try json.string("error_message")
+            let code = try json.getInt(at: "error_code")
+            let message = try json.getString(at: "error_message")
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

@@ -41,9 +41,9 @@ public struct Taxonomy: JSONDecodable {
     
     /// Used internally to initialize a Taxonomy object
     public init(json: JSON) throws {
-        confident = try? json.string("confident")
-        label = try? json.string("label")
-        if let scoreString = try? json.string("score") {
+        confident = try? json.getString(at: "confident")
+        label = try? json.getString(at: "label")
+        if let scoreString = try? json.getString(at: "score") {
             score = Double(scoreString)
         } else {
             score = nil

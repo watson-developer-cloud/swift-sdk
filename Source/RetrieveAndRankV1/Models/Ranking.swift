@@ -37,11 +37,11 @@ public struct Ranking: JSONDecodable {
     
     /// Used internally to initialize a `Ranking` model from JSON.
     public init(json: JSON) throws {
-        rankerID = try json.string("ranker_id")
-        name = try? json.string("name")
-        url = try json.string("url")
-        topAnswer = try json.string("top_answer")
-        answers = try json.arrayOf("answers", type: RankedAnswer.self)
+        rankerID = try json.getString(at: "ranker_id")
+        name = try? json.getString(at: "name")
+        url = try json.getString(at: "url")
+        topAnswer = try json.getString(at: "top_answer")
+        answers = try json.decodedArray(at: "answers", type: RankedAnswer.self)
     }
 }
 
@@ -61,8 +61,8 @@ public struct RankedAnswer: JSONDecodable {
     
     /// Used internally to initialize an `RankedAnswer` model from JSON.
     public init(json: JSON) throws {
-        answerID = try json.string("answer_id")
-        score = try json.double("score")
-        confidence = try json.double("confidence")
+        answerID = try json.getString(at: "answer_id")
+        score = try json.getDouble(at: "score")
+        confidence = try json.getDouble(at: "confidence")
     }
 }

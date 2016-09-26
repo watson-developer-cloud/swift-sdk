@@ -38,10 +38,10 @@ public struct Model: JSONDecodable {
     
     /// Used internally to initialize a `Model` from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        rate = try json.int("rate")
-        language = try json.string("language")
-        url = try json.string("url")
-        description = try json.string("description")
+        name = try json.getString(at: "name")
+        rate = try json.getInt(at: "rate")
+        language = try json.getString(at: "language")
+        url = try json.getString(at: "url")
+        description = try json.getString(at: "description")
     }
 }

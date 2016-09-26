@@ -59,9 +59,9 @@ public class NaturalLanguageClassifier {
     private func dataToError(data: NSData) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = try json.int("code")
-            let description = try json.string("description")
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try json.getString(at: "description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: description

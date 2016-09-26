@@ -50,14 +50,14 @@ public struct Sentence: JSONDecodable {
     
     /// Used internally to initialize a `Sentence` model from JSON.
     public init(json: JSON) throws {
-        sentenceID = try json.int("sid")
-        begin = try json.int("begin")
-        end = try json.int("end")
-        text = try json.string("text")
-        parse = try json.string("parse", "text")
-        dependencyParse = try json.string("dependency_parse")
-        usdDependencyParse = try json.string("usd_dependency_parse")
-        tokens = try json.arrayOf("tokens", "token", type: Token.self)
+        sentenceID = try json.getInt(at: "sid")
+        begin = try json.getInt(at: "begin")
+        end = try json.getInt(at: "end")
+        text = try json.getString(at: "text")
+        parse = try json.getString(at: "parse", "text")
+        dependencyParse = try json.getString(at: "dependency_parse")
+        usdDependencyParse = try json.getString(at: "usd_dependency_parse")
+        tokens = try json.decodedArray(at: "tokens", "token", type: Token.self)
     }
 }
 
@@ -79,10 +79,10 @@ public struct Token: JSONDecodable {
     
     /// Used internally to initialize a `Token` model from JSON.
     public init(json: JSON) throws {
-        begin = try json.int("begin")
-        end = try json.int("end")
-        text = try json.string("text")
-        tokenID = try json.int("tid")
+        begin = try json.getInt(at: "begin")
+        end = try json.getInt(at: "end")
+        text = try json.getString(at: "text")
+        tokenID = try json.getInt(at: "tid")
     }
 }
 

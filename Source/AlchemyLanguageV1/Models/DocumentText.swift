@@ -38,8 +38,8 @@ public struct DocumentText: JSONDecodable {
     
     /// Used internally to initialize a DocumentText object
     public init(json: JSON) throws {
-        url = try? json.string("url")
-        language = try? json.string("language")
-        text = try? json.string("text")
+        url = try? json.getString(at: "url")
+        language = try? json.getString(at: "language")
+        text = try? json.getString(at: "text")
     }
 }

@@ -61,17 +61,17 @@ public struct TranslationModel: JSONDecodable {
 
     /// Used internally to initialize a `TranslationModel` model from JSON.
     public init(json: JSON) throws {
-        modelID = try json.string("model_id")
-        name = try json.string("name")
-        source = try json.string("source")
-        target = try json.string("target")
-        baseModelID = try json.string("base_model_id")
-        domain = try json.string("domain")
+        modelID = try json.getString(at: "model_id")
+        name = try json.getString(at: "name")
+        source = try json.getString(at: "source")
+        target = try json.getString(at: "target")
+        baseModelID = try json.getString(at: "base_model_id")
+        domain = try json.getString(at: "domain")
         customizable = try json.bool("customizable")
         defaultModel = try json.bool("default_model")
-        owner = try json.string("owner")
+        owner = try json.getString(at: "owner")
 
-        guard let status = TrainingStatus(rawValue: try json.string("status")) else {
+        guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
             let type = TrainingStatus.Available.dynamicType
             throw JSON.Error.ValueNotConvertible(value: json, to: type)
         }

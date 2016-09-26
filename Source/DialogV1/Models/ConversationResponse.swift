@@ -37,10 +37,10 @@ public struct ConversationResponse: JSONDecodable {
 
     /// Used internally to initialize a `ConversationResponse` model from JSON.
     public init(json: JSON) throws {
-        response = try json.arrayOf("response")
-        input = try json.string("input")
-        conversationID = try json.int("conversation_id")
-        confidence = try json.double("confidence")
-        clientID = try json.int("client_id")
+        response = try json.decodedArray(at: "response")
+        input = try json.getString(at: "input")
+        conversationID = try json.getInt(at: "conversation_id")
+        confidence = try json.getDouble(at: "confidence")
+        clientID = try json.getInt(at: "client_id")
     }
 }

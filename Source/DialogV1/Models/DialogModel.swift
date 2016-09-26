@@ -28,7 +28,7 @@ public struct DialogModel: JSONDecodable {
 
     /// Used internally to initialize a `DialogModel` model from JSON.
     public init(json: JSON) throws {
-        dialogID = try json.string("dialog_id")
-        name = try json.string("name")
+        dialogID = try json.getString(at: "dialog_id")
+        name = try json.getString(at: "name")
     }
 }

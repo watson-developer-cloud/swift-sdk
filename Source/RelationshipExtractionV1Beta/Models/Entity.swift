@@ -48,19 +48,19 @@ public struct Entity: JSONDecodable {
     
     /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
-        entityID = try json.string("eid")
-        type = try json.string("type")
+        entityID = try json.getString(at: "eid")
+        type = try json.getString(at: "type")
         generic = try json.bool("generic")
-        subtype = try json.string("subtype")
-        score = try json.double("score")
-        mentions = try json.arrayOf("mentref", type: ReferencingMentions.self)
+        subtype = try json.getString(at: "subtype")
+        score = try json.getDouble(at: "score")
+        mentions = try json.decodedArray(at: "mentref", type: ReferencingMentions.self)
         
-        guard let eClass = EntityClass(rawValue: try json.string("class")) else {
+        guard let eClass = EntityClass(rawValue: try json.getString(at: "class")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: EntityClass.self)
         }
         entityClass = eClass
         
-        guard let entityLevel = EntityLevel(rawValue: try json.string("level")) else {
+        guard let entityLevel = EntityLevel(rawValue: try json.getString(at: "level")) else {
             throw JSON.Error.ValueNotConvertible(value: json, to: EntityLevel.self)
         }
         level = entityLevel
@@ -78,8 +78,8 @@ public struct ReferencingMentions: JSONDecodable {
     
     /// Used internally to initialize a `ReferencingMentions` model from JSON.
     public init(json: JSON) throws {
-        mentionID = try json.string("mid")
-        text = try json.string("text")
+        mentionID = try json.getString(at: "mid")
+        text = try json.getString(at: "text")
     }
 }
 

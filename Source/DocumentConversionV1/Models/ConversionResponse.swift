@@ -43,11 +43,11 @@ public struct ConversationResponse: JSONDecodable {
     
     /** used inernally to initialize ConversationResponse objects */
     public init(json: JSON) throws {
-        sourceDocId = try? json.string("source_document_id")
-        timestamp = try? json.string("timestamp")
-        detectedMediaType = try? json.string("media_type_detected")
-        metadata = try? json.arrayOf("metadata", type: ConversionMetadata.self)
-        answerUnits = try? json.arrayOf("answer_units", type: AnswerUnits.self)
+        sourceDocId = try? json.getString(at: "source_document_id")
+        timestamp = try? json.getString(at: "timestamp")
+        detectedMediaType = try? json.getString(at: "media_type_detected")
+        metadata = try? json.decodedArray(at: "metadata", type: ConversionMetadata.self)
+        answerUnits = try? json.decodedArray(at: "answer_units", type: AnswerUnits.self)
     }
     
 }

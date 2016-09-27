@@ -51,7 +51,7 @@ public struct ClassifierDetails: JSONDecodable {
         statusDescription = try json.getString(at: "status_description")
         
         guard let classifierStatus = ClassifierStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: ClassifierStatus.self)
         }
         status = classifierStatus
     }

@@ -50,7 +50,7 @@ public struct Voice: JSONDecodable {
         language = try json.getString(at: "language")
         url = try json.getString(at: "url")
         description = try json.getString(at: "description")
-        customizable = try json.bool("customizable")
+        customizable = try json.getBool(at: "customizable")
         customization = try? json.decode(at: "customization")
     }
 }

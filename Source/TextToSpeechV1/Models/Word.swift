@@ -19,6 +19,7 @@ import Freddy
 
 /** A model used by the Text To Speech service, containing a word and its translation. */
 public struct Word: JSONEncodable, JSONDecodable {
+    
     /// A word from the custom voice model.
     public let word: String
     
@@ -39,8 +40,8 @@ public struct Word: JSONEncodable, JSONDecodable {
     
     /// Used internally to serialize a `Word` model to JSON.
     public func toJSON() -> JSON {
-        return .Dictionary([
-            "word": .String(word),
-            "translation": .String(translation)])
+        return .dictionary([
+            "word": .string(word),
+            "translation": .string(translation)])
     }
 }

@@ -20,64 +20,64 @@ import Foundation
 public enum SynthesisVoice {
     
     /// German with a female voice (`de-DE_BirgitVoice`).
-    case DE_Birgit
+    case de_Birgit
     
     /// German with a male voice (`de-DE_DieterVoice`).
-    case DE_Dieter
+    case de_Dieter
     
     /// English (British dialect) with a female voice (`en-GB_KateVoice`).
-    case GB_Kate
+    case gb_Kate
     
     /// English (US dialect) with a female voice (`en-US_AllisonVoice`).
-    case US_Allison
+    case us_Allison
     
     /// English (US dialect) with a female voice (`en-US_LisaVoice`).
-    case US_Lisa
+    case us_Lisa
     
     /// English (US dialect) with a male voice (`en-US_MichaelVoice`).
-    case US_Michael
+    case us_Michael
     
     /// Spanish (Castillian dialect) with a male voice (`es-ES_EnriqueVoice`).
-    case ES_Enrique
+    case es_Enrique
     
     /// Spanish (Castillian dialect) with a female voice (`es-ES_LauraVoice`).
-    case ES_Laura
+    case es_Laura
     
     /// Spanish (North-American dialect) with a female voice (`es-US_SofiaVoice`).
-    case US_Sofia
+    case us_Sofia
     
     /// French with a female voice (`fr-FR_ReneeVoice`).
-    case FR_Renee
+    case fr_Renee
     
     /// Italian with a female voice (`it-IT_FrancescaVoice`).
-    case IT_Francesca
+    case it_Francesca
     
     /// Japanese with a female voice (`ja-JP_EmiVoice`).
-    case JP_Emi
+    case jp_Emi
     
     /// Brazilian Portuguese with a female voice (`pt-BR_IsabelaVoice`).
-    case BR_Isabela
+    case br_Isabela
     
     /// A custom voice.
-    case Custom(voice: String)
+    case custom(voice: String)
     
     /// Represent the voice as a `String`.
     internal func description() -> String {
         switch self {
-        case DE_Birgit: return "de-DE_BirgitVoice"
-        case DE_Dieter: return "de-DE_DieterVoice"
-        case GB_Kate: return "en-GB_KateVoice"
-        case ES_Enrique: return "es-ES_EnriqueVoice"
-        case US_Allison: return "en-US_AllisonVoice"
-        case US_Lisa: return "en-US_LisaVoice"
-        case US_Michael: return "en-US_MichaelVoice"
-        case ES_Laura: return "es-ES_LauraVoice"
-        case US_Sofia: return "es-US_SofiaVoice"
-        case FR_Renee: return "fr-FR_ReneeVoice"
-        case IT_Francesca: return "it-IT_FrancescaVoice"
-        case JP_Emi: return "ja-JP_EmiVoice"
-        case BR_Isabela: return "pt-BR_IsabelaVoice"
-        case Custom(let voice): return voice
+        case .de_Birgit: return "de-DE_BirgitVoice"
+        case .de_Dieter: return "de-DE_DieterVoice"
+        case .gb_Kate: return "en-GB_KateVoice"
+        case .es_Enrique: return "es-ES_EnriqueVoice"
+        case .us_Allison: return "en-US_AllisonVoice"
+        case .us_Lisa: return "en-US_LisaVoice"
+        case .us_Michael: return "en-US_MichaelVoice"
+        case .es_Laura: return "es-ES_LauraVoice"
+        case .us_Sofia: return "es-US_SofiaVoice"
+        case .fr_Renee: return "fr-FR_ReneeVoice"
+        case .it_Francesca: return "it-IT_FrancescaVoice"
+        case .jp_Emi: return "ja-JP_EmiVoice"
+        case .br_Isabela: return "pt-BR_IsabelaVoice"
+        case .custom(let voice): return voice
         }
     }
 }

@@ -35,7 +35,6 @@ public class TextToSpeech {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TextToSpeechV1")
     private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
 
     /**
@@ -55,7 +54,7 @@ public class TextToSpeech {
  
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
@@ -78,26 +77,24 @@ public class TextToSpeech {
     - parameter success: A function executed with the available voices.
      */
     public func getVoices(
-        failure: (NSError -> Void)? = nil,
-        success: [Voice] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Voice]) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/voices",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["voices"]) {
-                (response: Response<[Voice], NSError>) in
+            .responseArray(path: ["voices"]) { (response: DataResponse<[Voice]>) in
                 switch response.result {
-                case .Success(let voices): success(voices)
-                case .Failure(let error): failure?(error)
+                case .success(let voices): success(voices)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -118,34 +115,31 @@ public class TextToSpeech {
     public func getVoice(
         voice: SynthesisVoice,
         customizationID: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Voice -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Voice) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let customizationID = customizationID {
-            let queryParameter = NSURLQueryItem(name: "customization_id", value: customizationID)
-            queryParameters.append(queryParameter)
+            queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/voices/\(voice.description())",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Voice, NSError>) in
+            .responseObject() { (response: DataResponse<Voice>) in
                 switch response.result {
-                case .Success(let voice): success(voice)
-                case .Failure(let error): failure?(error)
+                case .success(let voice): success(voice)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -171,37 +165,35 @@ public class TextToSpeech {
         text: String,
         voice: SynthesisVoice? = nil,
         format: PhonemeFormat? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Pronunciation -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Pronunciation) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "text", value: text))
         if let voice = voice {
-            queryParameters.append(NSURLQueryItem(name: "voice", value: voice.description()))
+            queryParameters.append(URLQueryItem(name: "voice", value: voice.description()))
         }
         if let format = format {
-            queryParameters.append(NSURLQueryItem(name: "format", value: format.rawValue))
+            queryParameters.append(URLQueryItem(name: "format", value: format.rawValue))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/pronunciation",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Pronunciation, NSError>) in
+            .responseObject() { (response: DataResponse<Pronunciation>) in
                 switch response.result {
-                case .Success(let voice): success(voice)
-                case .Failure(let error): failure?(error)
+                case .success(let voice): success(voice)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -224,28 +216,27 @@ public class TextToSpeech {
         text: String,
         voice: SynthesisVoice? = nil,
         customizationID: String? = nil,
-        audioFormat: AudioFormat = .WAV,
-        failure: (NSError -> Void)? = nil,
-        success: NSData -> Void)
+        audioFormat: AudioFormat = .wav,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Data) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "text", value: text))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "text", value: text))
         if let voice = voice {
-            queryParameters.append(NSURLQueryItem(name: "voice", value: voice.description()))
+            queryParameters.append(URLQueryItem(name: "voice", value: voice.description()))
         }
         if let customizationID = customizationID {
-            queryParameters.append(NSURLQueryItem(name: "customization_id", value: customizationID))
+            queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/synthesize",
+            headerParameters: defaultHeaders,
             acceptType: audioFormat.rawValue,
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
@@ -253,27 +244,27 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None:
-                        if audioFormat == .WAV {
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none:
+                        if audioFormat == .wav {
                             // repair the WAV header
                             let wav = NSMutableData(data: data)
-                            guard TextToSpeech.isWAVFile(wav) else {
+                            guard TextToSpeech.isWAVFile(data: wav) else {
                                 let failureReason = "Returned audio is in an unexpected format."
                                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                                 failure?(error)
                                 return
                             }
-                            TextToSpeech.repairWAVHeader(wav)
-                            success(wav)
+                            TextToSpeech.repairWAVHeader(data: wav)
+                            success(wav as Data)
                         } else {
                             success(data)
                         }
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -295,33 +286,31 @@ public class TextToSpeech {
      */
     public func getCustomizations(
         language: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: [Customization] -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Customization]) -> Void) {
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let language = language {
-            queryParameters.append(NSURLQueryItem(name: "language", value: language))
+            queryParameters.append(URLQueryItem(name: "language", value: language))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/customizations",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["customizations"]) {
-                (response: Response<[Customization], NSError>) in
+            .responseArray(path: ["customizations"]) { (response: DataResponse<[Customization]>) in
                 switch response.result {
-                case .Success(let customizations): success(customizations)
-                case .Failure(let error): failure?(error)
+                case .success(let customizations): success(customizations)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -339,8 +328,8 @@ public class TextToSpeech {
         name: String,
         language: String? = nil,
         description: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: CustomizationID -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CustomizationID) -> Void) {
         
         // construct the body
         var dict = ["name": name]
@@ -361,23 +350,21 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/customizations",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<CustomizationID, NSError>) in
+            .responseObject() { (response: DataResponse<CustomizationID>) in
                 switch response.result {
-                case .Success(let customizationID): success(customizationID)
-                case .Failure(let error): failure?(error)
+                case .success(let customizationID): success(customizationID)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -391,16 +378,15 @@ public class TextToSpeech {
      */
     public func deleteCustomization(
         customizationID: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
-            method: .DELETE,
+            method: .delete,
             url: serviceURL + "/v1/customizations/\(customizationID)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
@@ -408,12 +394,12 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -428,26 +414,24 @@ public class TextToSpeech {
      */
     public func getCustomization(
         customizationID: String,
-        failure: (NSError -> Void)? = nil,
-        success: CustomizationWords -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CustomizationWords) -> Void) {
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/customizations/\(customizationID)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<CustomizationWords, NSError>) in
+            .responseObject() { (response: DataResponse<CustomizationWords>) in
                 switch response.result {
-                case .Success(let customizationWords): success(customizationWords)
-                case .Failure(let error): failure?(error)
+                case .success(let customizationWords): success(customizationWords)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -470,8 +454,8 @@ public class TextToSpeech {
         name: String? = nil,
         description: String? = nil,
         words: [Word] = [],
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(name: name, description: description, words: words)
@@ -485,11 +469,10 @@ public class TextToSpeech {
 
         // construct the request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/customizations/\(customizationID)",
-            contentType: "application/json",
-            userAgent: userAgent,
             headerParameters: defaultHeaders,
+            contentType: "application/json",
             messageBody: body
         )
         
@@ -498,12 +481,12 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -519,26 +502,24 @@ public class TextToSpeech {
      */
     public func getWords(
         customizationID: String,
-        failure: (NSError -> Void)? = nil,
-        success: [Word] -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Word]) -> Void) {
         
         // construct the request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["words"]) {
-                (response: Response<[Word], NSError>) in
+            .responseArray(path: ["words"]) { (response: DataResponse<[Word]>) in
                 switch response.result {
-                case .Success(let words): success(words)
-                case .Failure(let error): failure?(error)
+                case .success(let words): success(words)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -555,8 +536,8 @@ public class TextToSpeech {
     public func addWords(
         customizationID: String,
         words: [Word],
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(words: words)
@@ -570,11 +551,10 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
-            contentType: "application/json",
-            userAgent: userAgent,
             headerParameters: defaultHeaders,
+            contentType: "application/json",
             messageBody: body
         )
         
@@ -583,12 +563,12 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -605,14 +585,13 @@ public class TextToSpeech {
     public func deleteWord(
         customizationID: String,
         word: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct the request
         let request = RestRequest(
-            method: .DELETE,
+            method: .delete,
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
-            userAgent: userAgent,
             headerParameters: defaultHeaders
         )
         
@@ -621,12 +600,12 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -643,26 +622,24 @@ public class TextToSpeech {
     public func getTranslation(
         customizationID: String,
         word: String,
-        failure: (NSError -> Void)? = nil,
-        success: Translation -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Translation) -> Void) {
         
         // construct the request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Translation, NSError>) in
+            .responseObject() { (response: DataResponse<Translation>) in
                 switch response.result {
-                case .Success(let translation): success(translation)
-                case .Failure(let error): failure?(error)
+                case .success(let translation): success(translation)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -680,8 +657,8 @@ public class TextToSpeech {
         customizationID: String,
         word: String,
         translation: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct the body
         let dict = ["translation": translation]
@@ -695,11 +672,10 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .PUT,
+            method: .put,
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
-            contentType: "application/json",
-            userAgent: userAgent,
             headerParameters: defaultHeaders,
+            contentType: "application/json",
             messageBody: body
         )
         
@@ -708,12 +684,12 @@ public class TextToSpeech {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -733,8 +709,8 @@ public class TextToSpeech {
      */
     private static func dataToUTF8String(data: NSData, offset: Int, length: Int) -> String? {
         let range = NSMakeRange(offset, length)
-        let subdata = data.subdataWithRange(range)
-        return String(data: subdata, encoding: NSUTF8StringEncoding)
+        let subdata = data.subdata(with: range)
+        return String(data: subdata, encoding: String.Encoding.utf8)
     }
     
     /**
@@ -772,12 +748,12 @@ public class TextToSpeech {
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
         
-        let riffChunkID = dataToUTF8String(data, offset: 0, length: 4)
+        let riffChunkID = dataToUTF8String(data: data, offset: 0, length: 4)
         guard riffChunkID == "RIFF" else {
             return false
         }
         
-        let riffFormat = dataToUTF8String(data, offset: 8, length: 4)
+        let riffFormat = dataToUTF8String(data: data, offset: 8, length: 4)
         guard riffFormat == "WAVE" else {
             return false
         }
@@ -801,7 +777,7 @@ public class TextToSpeech {
         let fileLength = data.length
         var riffChunkSize = UInt32(fileLength - 8)
         let riffChunkSizeRange = NSMakeRange(4, 4)
-        data.replaceBytesInRange(riffChunkSizeRange, withBytes: &riffChunkSize)
+        data.replaceBytes(in: riffChunkSizeRange, withBytes: &riffChunkSize)
         
         // find data subchunk
         var subchunkID: String?
@@ -815,14 +791,14 @@ public class TextToSpeech {
             }
             
             // read subchunk ID
-            subchunkID = dataToUTF8String(data, offset: fieldOffset, length: fieldSize)
+            subchunkID = dataToUTF8String(data: data, offset: fieldOffset, length: fieldSize)
             fieldOffset += fieldSize
             if subchunkID == "data" {
                 break
             }
             
             // read subchunk size
-            subchunkSize = dataToUInt32(data, offset: fieldOffset)
+            subchunkSize = dataToUInt32(data: data, offset: fieldOffset)
             fieldOffset += fieldSize + subchunkSize
         }
         
@@ -831,6 +807,6 @@ public class TextToSpeech {
         
         // update data subchunk size
         let dataSubchunkSizeRange = NSMakeRange(fieldOffset, fieldSize)
-        data.replaceBytesInRange(dataSubchunkSizeRange, withBytes: &dataSubchunkSize)
+        data.replaceBytes(in: dataSubchunkSizeRange, withBytes: &dataSubchunkSize)
     }
 }

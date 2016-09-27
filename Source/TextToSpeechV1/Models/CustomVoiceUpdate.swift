@@ -40,13 +40,13 @@ public struct CustomVoiceUpdate: JSONEncodable {
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         if let name = name {
-            json["name"] = .String(name)
+            json["name"] = .string(name)
         }
         if let description = description {
-            json["description"] = .String(description)
+            json["description"] = .string(description)
         }
-        json["words"] = .Array(words.map { word in word.toJSON() })
+        json["words"] = .array(words.map { word in word.toJSON() })
         
-        return .Dictionary(json)
+        return .dictionary(json)
     }
 }

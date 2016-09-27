@@ -22,7 +22,7 @@ class PersonalityInsightsTests: XCTestCase {
     private var personalityInsights: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -44,8 +44,8 @@ class PersonalityInsightsTests: XCTestCase {
     
     /** Load "MobyDickIntro.txt". */
     func loadMobyDickIntro() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.pathForResource("MobyDickIntro", ofType: "txt") else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.path(forResource: "MobyDickIntro", ofType: "txt") else {
             XCTFail("Unable to locate MobyDickIntro.txt file.")
             return
         }
@@ -59,8 +59,8 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Load "KennedySpeech.txt." */
     func loadKennedySpeech() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.pathForResource("KennedySpeech", ofType: "txt") else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.path(forResource: "KennedySpeech", ofType: "txt") else {
             XCTFail("Unable to locate KennedySpeech.txt file.")
             return
         }
@@ -73,7 +73,7 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
 
@@ -84,7 +84,7 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -94,7 +94,7 @@ class PersonalityInsightsTests: XCTestCase {
     /** Analyze the text of Kennedy's speech. */
     func testProfile() {
         let description = "Analyze the text of Kennedy's speech."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         personalityInsights.getProfile(text: kennedySpeech, failure: failWithError) { profile in
             XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
@@ -106,7 +106,7 @@ class PersonalityInsightsTests: XCTestCase {
     /** Analyze content items. */
     func testContentItem() {
         let description = "Analyze content items."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         let contentItem = PersonalityInsightsV2.ContentItem(
             id: "245160944223793152",
@@ -136,10 +136,9 @@ class PersonalityInsightsTests: XCTestCase {
     /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
         let description = "Try to analyze text that is too short (less than 100 words)."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
 

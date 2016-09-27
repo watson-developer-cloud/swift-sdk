@@ -34,7 +34,6 @@ public class PersonalityInsights {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 PersonalityInsightsV2")
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
     /**
@@ -61,14 +60,14 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        text text: String,
+        text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
-        guard let content = text.dataUsingEncoding(NSUTF8StringEncoding) else {
+        guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -77,7 +76,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content,
+            content: content,
             contentType: "text/plain",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -101,14 +100,14 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        html html: String,
+        html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
-        guard let content = html.dataUsingEncoding(NSUTF8StringEncoding) else {
+        guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -117,7 +116,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content,
+            content: content,
             contentType: "text/html",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -138,15 +137,15 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        contentItems contentItems: [ContentItem],
+        contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
         let items = contentItems.map { item in item.toJSON() }
-        let body = JSON.Dictionary(["contentItems": JSON.Array(items)])
+        let body = JSON.dictionary(["contentItems": JSON.array(items)])
         guard let content = try? body.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -156,7 +155,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content,
+            content: content,
             contentType: "application/json",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -181,18 +180,18 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     private func getProfile(
-        content: NSData?,
+        content: Data?,
         contentType: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let includeRaw = includeRaw {
-            let queryParameter = NSURLQueryItem(name: "include_raw", value: "\(includeRaw)")
+            let queryParameter = URLQueryItem(name: "include_raw", value: "\(includeRaw)")
             queryParameters.append(queryParameter)
         }
 
@@ -207,24 +206,22 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v2/profile",
+            headerParameters: headerParameters,
             acceptType: "application/json",
             contentType: contentType,
-            userAgent: userAgent,
             queryParameters: queryParameters,
-            headerParameters: headerParameters,
             messageBody: content
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Profile, NSError>) in
+            .responseObject() { (response: DataResponse<Profile>) in
                 switch response.result {
-                case .Success(let profile): success(profile)
-                case .Failure(let error): failure?(error)
+                case .success(let profile): success(profile)
+                case .failure(let error): failure?(error)
                 }
         }
     }

@@ -106,17 +106,17 @@ public struct RelatedMentions: JSONDecodable {
         relatedMentionArgument = try json.decodedArray(at: "rel_mention_arg", type: RelatedMentionArgument.self)
         
         guard let rMClass = RelatedMentionClass(rawValue: try json.getString(at: "class")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: RelatedMentionClass.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: RelatedMentionClass.self)
         }
         relatedMentionClass = rMClass
         
         guard let tempModality = Modality(rawValue: try json.getString(at: "modality")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Modality.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Modality.self)
         }
         modality = tempModality
         
         guard let tempTense = Tense(rawValue: try json.getString(at: "tense")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Tense.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Tense.self)
         }
         tense = tempTense
     }

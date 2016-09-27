@@ -79,18 +79,18 @@ public struct Mention: JSONDecodable {
         entityID = try json.getString(at: "eid")
         entityType = try json.getString(at: "etype")
         entityRole = try json.getString(at: "role")
-        metonymy = try json.bool("metonymy")
+        metonymy = try json.getBool(at: "metonymy")
         score = try json.getDouble(at: "score")
         corefScore = try json.getDouble(at: "corefScore")
         text = try json.getString(at: "text")
         
         guard let mentionType = MentionType(rawValue: try json.getString(at: "mtype")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: MentionType.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: MentionType.self)
         }
         type = mentionType
         
         guard let mClass = MentionClass(rawValue: try json.getString(at: "class")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: MentionClass.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: MentionClass.self)
         }
         mentionClass = mClass
     }

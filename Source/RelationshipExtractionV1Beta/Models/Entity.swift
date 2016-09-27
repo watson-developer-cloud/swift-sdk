@@ -50,18 +50,18 @@ public struct Entity: JSONDecodable {
     public init(json: JSON) throws {
         entityID = try json.getString(at: "eid")
         type = try json.getString(at: "type")
-        generic = try json.bool("generic")
+        generic = try json.getBool(at: "generic")
         subtype = try json.getString(at: "subtype")
         score = try json.getDouble(at: "score")
         mentions = try json.decodedArray(at: "mentref", type: ReferencingMentions.self)
         
         guard let eClass = EntityClass(rawValue: try json.getString(at: "class")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: EntityClass.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: EntityClass.self)
         }
         entityClass = eClass
         
         guard let entityLevel = EntityLevel(rawValue: try json.getString(at: "level")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: EntityLevel.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: EntityLevel.self)
         }
         level = entityLevel
     }

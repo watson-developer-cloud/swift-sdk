@@ -20,7 +20,7 @@ import RelationshipExtractionV1Beta
 class RelationshipExtractionTests: XCTestCase {
     
     private var relationshipExtraction: RelationshipExtraction!
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
     
     private let text = "The president’s trip was designed to reward Milwaukee for its success " +
         "in signing up people for coverage. It won a competition called the Healthy " +
@@ -42,7 +42,7 @@ class RelationshipExtractionTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -53,7 +53,7 @@ class RelationshipExtractionTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -63,10 +63,10 @@ class RelationshipExtractionTests: XCTestCase {
     /** Analyze a piece of text for the relationships between all entities. */
     func testGetRelationships() {
         let description = "Test the getRelationships method."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         relationshipExtraction.getRelationships(
-            "ie-en-news",
+            language: "ie-en-news",
             text: text,
             failure: failWithError) { document in
                 
@@ -165,15 +165,14 @@ class RelationshipExtractionTests: XCTestCase {
     /** Test getting relationships when passing an empty string as the text. */
     func testGetRelationshipsEmptyText() {
         let description = "Test getRelationships() when passing an empty string as the text."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         relationshipExtraction.getRelationships(
-            "ie-en-news",
+            language: "ie-en-news",
             text: "",
             failure: failure,
             success: failWithResult)
@@ -184,15 +183,14 @@ class RelationshipExtractionTests: XCTestCase {
     /** Test getting relationships when passing an invalid language. */
     func testGetRelationshipsWithInvalidLanguage() {
         let description = "Test getRelationships() when passing an empty string as the text."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         relationshipExtraction.getRelationships(
-            "INVALIDLANGUAGE",
+            language: "INVALIDLANGUAGE",
             text: text,
             failure: failure,
             success: failWithResult)

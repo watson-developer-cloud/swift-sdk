@@ -27,7 +27,7 @@ import RestKit
  text that refers to entities, cluster them together to form entities, and extract the relationships 
  between the entities.
  */
-@available(*, deprecated, message="Relationship Extraction will be deprecated on July 27th 2016. If you want to continue using Relationship Extraction models, you can now access them with AlchemyLanguage. See the migration guide for details.")
+@available(*, deprecated, message: "Relationship Extraction will be deprecated on July 27th 2016. If you want to continue using Relationship Extraction models, you can now access them with AlchemyLanguage. See the migration guide for details.")
 public class RelationshipExtraction {
     
     /// The base URL to use when contacting the service.
@@ -38,7 +38,6 @@ public class RelationshipExtraction {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 RelationshipExtractionV1Beta")
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
     
     /**
@@ -65,32 +64,30 @@ public class RelationshipExtraction {
     public func getRelationships(
         language: String,
         text: String,
-        failure: (NSError -> Void)? = nil,
-        success: Document -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Document) -> Void) {
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "txt", value: text))
-        queryParameters.append(NSURLQueryItem(name: "sid", value: language))
-        queryParameters.append(NSURLQueryItem(name: "rt", value: "json"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "txt", value: text))
+        queryParameters.append(URLQueryItem(name: "sid", value: language))
+        queryParameters.append(URLQueryItem(name: "rt", value: "json"))
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/sire/0",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            queryParameters: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(path: ["doc"]) {
-                (response: Response<Document, NSError>) in
+            .responseObject(path: ["doc"]) { (response: DataResponse<Document>) in
                 switch response.result {
-                case .Success(let document): success(document)
-                case .Failure(let error): failure?(error)
+                case .success(let document): success(document)
+                case .failure(let error): failure?(error)
                 }
         }
     }

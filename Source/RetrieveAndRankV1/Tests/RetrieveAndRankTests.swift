@@ -20,7 +20,7 @@ import RetrieveAndRankV1
 class RetrieveAndRankTests: XCTestCase {
     
     private var retrieveAndRank: RetrieveAndRank!
-    private let timeout: NSTimeInterval = 30.0
+    private let timeout: TimeInterval = 30.0
     private let trainedClusterID = "sc36a81e8a_bc3e_4c51_9998_7fc5148d11cb"
     private let trainedClusterName = "trained-swift-sdk-solr-cluster"
     private let trainedConfigurationName = "trained-swift-sdk-config"
@@ -34,8 +34,8 @@ class RetrieveAndRankTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateRetrieveAndRank()
-        confirmTrainedClusterExists(trainedClusterID)
-        confirmTrainedRankerExists(trainedRankerID)
+        confirmTrainedClusterExists(clusterID: trainedClusterID)
+        confirmTrainedRankerExists(rankerID: trainedRankerID)
     }
     
     /** Instantiate Retrieve and Rank instance. */
@@ -46,7 +46,7 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -57,7 +57,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -67,10 +67,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create a new Solr cluster. */
     private func createSolrCluster(clusterName: String, size: Int? = nil) -> SolrCluster? {
         let description = "Create a new Solr Cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         var solrCluster: SolrCluster?
-        retrieveAndRank.createSolrCluster(clusterName, size: size, failure: failWithError) {
+        retrieveAndRank.createSolrCluster(name: clusterName, size: size, failure: failWithError) {
             cluster in
             
             solrCluster = cluster
@@ -83,9 +83,9 @@ class RetrieveAndRankTests: XCTestCase {
     /** Delete a Solr cluster. */
     private func deleteSolrCluster(clusterID: String) {
         let description = "Delete the Solr Cluster with the given ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        retrieveAndRank.deleteSolrCluster(clusterID, failure: failWithError) {
+        retrieveAndRank.deleteSolrCluster(solrClusterID: clusterID, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -94,10 +94,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get the Solr cluster with the specified ID. */
     private func getSolrCluster(clusterID: String) -> SolrCluster? {
         let description = "Get the Solr cluster with the given ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         var solrCluster: SolrCluster?
-        retrieveAndRank.getSolrCluster(clusterID, failure: failWithError) { cluster in
+        retrieveAndRank.getSolrCluster(solrClusterID: clusterID, failure: failWithError) { cluster in
             solrCluster = cluster
             expectation.fulfill()
         }
@@ -106,12 +106,12 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     /** Create a new Ranker. */
-    private func createRanker(trainingDataFile: NSURL, rankerName: String? = nil) -> RankerDetails? {
+    private func createRanker(trainingDataFile: URL, rankerName: String? = nil) -> RankerDetails? {
         let description = "Create a new ranker."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         var rankerDetails: RankerDetails?
-        retrieveAndRank.createRanker(trainingDataFile, name: rankerName, failure: failWithError) {
+        retrieveAndRank.createRanker(trainingDataFile: trainingDataFile, name: rankerName, failure: failWithError) {
             ranker in
             
             rankerDetails = ranker
@@ -124,13 +124,13 @@ class RetrieveAndRankTests: XCTestCase {
     /** Attempt to get the trained cluster; if it doesn't exist, create one. */
     func confirmTrainedClusterExists(clusterID: String) {
         let description = "Ensure the given trained cluster is available."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         func createTrainedCluster() {
-            let failToCreate =  { (error: NSError) in
+            let failToCreate =  { (error: Error) in
                 XCTFail("Failed to create the trained cluster.")
             }
-            retrieveAndRank.createSolrCluster(trainedClusterName, failure: failToCreate) {
+            retrieveAndRank.createSolrCluster(name: trainedClusterName, failure: failToCreate) {
                 cluster in
                 
                 XCTAssertNotNil(cluster)
@@ -146,12 +146,11 @@ class RetrieveAndRankTests: XCTestCase {
             }
         }
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400, "Cannot locate the trained cluster.")
+        let failure = { (error: Error) in
             createTrainedCluster()
         }
 
-        retrieveAndRank.getSolrCluster(clusterID, failure: failure) {
+        retrieveAndRank.getSolrCluster(solrClusterID: clusterID, failure: failure) {
             cluster in
             
             if cluster.solrClusterName != self.trainedClusterName {
@@ -174,20 +173,20 @@ class RetrieveAndRankTests: XCTestCase {
     /** Attempt to get the trained ranker; if it doesn't exist, create one. */
     func confirmTrainedRankerExists(rankerID: String) {
         let description = "Ensure the given trained ranker is available."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         func createTrainedRanker() {
-            let failToCreate =  { (error: NSError) in
+            let failToCreate =  { (error: Error) in
                 XCTFail("Failed to create the trained ranker.")
             }
 
-            guard let trainingDataFile = loadFile("ranker_train_data", withExtension: "csv") else {
+            guard let trainingDataFile = loadFile(name: "ranker_train_data", withExtension: "csv") else {
                 XCTFail("Failed to load files needed to create the ranker.")
                 return
             }
             
             retrieveAndRank.createRanker(
-                trainingDataFile,
+                trainingDataFile: trainingDataFile,
                 name: trainedRankerName,
                 failure: failToCreate) { ranker in
 
@@ -204,12 +203,11 @@ class RetrieveAndRankTests: XCTestCase {
             }
         }
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404, "Cannot locate the trained ranker.")
+        let failure = { (error: Error) in
             createTrainedRanker()
         }
         
-        retrieveAndRank.getRanker(rankerID, failure: failure) {
+        retrieveAndRank.getRanker(rankerID: rankerID, failure: failure) {
             ranker in
 
             if ranker.name != self.trainedRankerName {
@@ -231,9 +229,9 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     /** Load files needed for the following unit tests. */
-    private func loadFile(name: String, withExtension: String) -> NSURL? {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let url = bundle.URLForResource(name, withExtension: withExtension) else {
+    private func loadFile(name: String, withExtension: String) -> URL? {
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
             return nil
         }
         return url
@@ -244,9 +242,9 @@ class RetrieveAndRankTests: XCTestCase {
     /** List all of the Solr clusters associated with this service instance. */
     func testGetSolrClusters() {
         let description = "Get all of the Solr clusters associated with this instance."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getSolrClusters(failWithError) { clusters in
+        retrieveAndRank.getSolrClusters(failure: failWithError) { clusters in
             
             XCTAssertEqual(clusters.count, 1)
             expectation.fulfill()
@@ -256,7 +254,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and then delete a new Solr cluster. */
     func testCreateAndDeleteSolrCluster() {
-        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: 1) else {
+        guard let solrCluster = createSolrCluster(clusterName: "temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
@@ -268,17 +266,17 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertEqual(solrCluster.solrClusterSize, 1)
         XCTAssertEqual(solrCluster.solrClusterStatus, SolrClusterStatus.NotAvailable)
         
-        deleteSolrCluster(solrCluster.solrClusterID)
+        deleteSolrCluster(clusterID: solrCluster.solrClusterID)
     }
     
     /** Get detailed information about a specific Solr cluster. */
     func testGetSolrCluster() {
-        guard let solrCluster = createSolrCluster("temp-swift-sdk-solr-cluster", size: 1) else {
+        guard let solrCluster = createSolrCluster(clusterName: "temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
         
-        guard let solrClusterDetails = getSolrCluster(solrCluster.solrClusterID) else {
+        guard let solrClusterDetails = getSolrCluster(clusterID: solrCluster.solrClusterID) else {
             XCTFail("Failed to get the newly created Solr cluster.")
             return
         }
@@ -289,15 +287,15 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertEqual(solrClusterDetails.solrClusterName, "temp-swift-sdk-solr-cluster")
         XCTAssertEqual(solrClusterDetails.solrClusterSize, 1)
         
-        deleteSolrCluster(solrCluster.solrClusterID)
+        deleteSolrCluster(clusterID: solrCluster.solrClusterID)
     }
     
     /** List all Solr configurations associated with the trained Solr cluster. */
     func testListAllSolrConfigurations() {
         let description = "Get all configurations associated with the trained cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getSolrConfigurations(trainedClusterID, failure: failWithError) {
+        retrieveAndRank.getSolrConfigurations(solrClusterID: trainedClusterID, failure: failWithError) {
             configurations in
             
             XCTAssertEqual(configurations.count, 1)
@@ -310,14 +308,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create and delete a new Solr configuration. */
     func testCreateAndDeleteSolrConfiguration() {
         let description = "Upload configuration zip file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        guard let configFile = loadFile("cranfield_solr_config", withExtension: "zip") else {
+        guard let configFile = loadFile(name: "cranfield_solr_config", withExtension: "zip") else {
             XCTFail("Failed to load config file needed to create the configuration.")
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             configName: "temp-swift-sdk-config",
             zipFile: configFile,
             failure: failWithError) { response in
@@ -327,10 +325,10 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Delete newly created configuration."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = self.expectation(description: description2)
         
         retrieveAndRank.deleteSolrConfiguration(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             configName: "temp-swift-sdk-config",
             failure: failWithError) {
                 
@@ -342,10 +340,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get a specific configuration. */
     func testGetSolrConfiguration() {
         let description = "Get the trained configuration in the trained Solr cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.getSolrConfiguration(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             configName: trainedConfigurationName,
             failure: failWithError) { url in
             
@@ -358,10 +356,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** List all Solr collections associated with the trained cluster. */
     func testGetSolrCollections() {
         let description = "Get all Solr collections associated with the trained cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.getSolrCollections(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             failure: failWithError) { collections in
             
             XCTAssertEqual(collections.count, 1)
@@ -374,10 +372,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create and delete a Solr collections. */
     func testCreateAndDeleteSolrCollection() {
         let description = "Create a Solr collection."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.createSolrCollection(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             name: "temp-swift-sdk-collection",
             configName: trainedConfigurationName,
             failure: failWithError) {
@@ -387,9 +385,9 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Delete the newly created Solr collection."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = self.expectation(description: description2)
         retrieveAndRank.deleteSolrCollection(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             name: "temp-swift-sdk-collection",
             failure: failWithError) {
             
@@ -401,10 +399,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Add documents to the Solr collection. */
     func testUpdateSolrCollection() {
         let description = "Create a Solr collection."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.createSolrCollection(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             name: "temp-swift-sdk-collection",
             configName: trainedConfigurationName,
             failure: failWithError) {
@@ -414,14 +412,14 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
         
         let description2 = "Update a Solr collection."
-        let expectation2 = expectationWithDescription(description2)
+        let expectation2 = self.expectation(description: description2)
         
-        guard let collectionFile = loadFile("cranfield_data", withExtension: "json") else {
+        guard let collectionFile = loadFile(name: "cranfield_data", withExtension: "json") else {
             XCTFail("Failed to load json file needed to upload to the collection.")
             return
         }
         retrieveAndRank.updateSolrCollection(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             collectionName: "temp-swift-sdk-collection",
             contentType: "application/json",
             contentFile: collectionFile,
@@ -432,9 +430,9 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
         
         let description3 = "Delete the newly created Solr collection."
-        let expectation3 = expectationWithDescription(description3)
+        let expectation3 = self.expectation(description: description3)
         retrieveAndRank.deleteSolrCollection(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             name: "temp-swift-sdk-collection",
             failure: failWithError) {
             
@@ -446,10 +444,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Test the search portion only of the retrieve and rank service. */
     func testSearch() {
         let description = "Test the search portion of retrieve and rank."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.search(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             collectionName: trainedCollectionName,
             query: "aerodynamics",
             returnFields: "id, title, author",
@@ -476,10 +474,10 @@ class RetrieveAndRankTests: XCTestCase {
     /** Test search and rank. */
     func testSearchAndRank() {
         let description = "Test search and rank."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         retrieveAndRank.searchAndRank(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             collectionName: trainedCollectionName,
             rankerID: trainedRankerID,
             query: "aerodynamics",
@@ -504,9 +502,9 @@ class RetrieveAndRankTests: XCTestCase {
     /** List all rankers associated with this Retrieve and Rank service instance. */
     func testGetRankers() {
         let description = "Get all rankers associated with this service instance."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getRankers(failWithError) {
+        retrieveAndRank.getRankers(failure: failWithError) {
             rankers in
             
             XCTAssertEqual(rankers.count, 1)
@@ -525,9 +523,9 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get detailed information about a specific ranker. */
     func testGetRankerWithSpecificID() {
         let description = "Get the ranker specified by this ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getRanker(trainedRankerID, failure: failWithError) {
+        retrieveAndRank.getRanker(rankerID: trainedRankerID, failure: failWithError) {
             ranker in
         
             XCTAssertNotNil(ranker)
@@ -546,11 +544,11 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and delete a new ranker. */
     func testCreateAndDeleteRanker() {
-        guard let rankerFile = loadFile("ranker_train_data", withExtension: "csv") else {
+        guard let rankerFile = loadFile(name: "ranker_train_data", withExtension: "csv") else {
             XCTFail("Failed to load training data needed to create the ranker.")
             return
         }
-        guard let ranker = createRanker(rankerFile, rankerName: "temp-swift-sdk-ranker") else {
+        guard let ranker = createRanker(trainingDataFile: rankerFile, rankerName: "temp-swift-sdk-ranker") else {
             XCTFail("Failed to create the ranker.")
             return
         }
@@ -562,8 +560,8 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertNotNil(ranker.statusDescription)
         
         let description = "Delete the newly created ranker."
-        let expectation = expectationWithDescription(description)
-        retrieveAndRank.deleteRanker(ranker.rankerID, failure: failWithError) {
+        let expectation = self.expectation(description: description)
+        retrieveAndRank.deleteRanker(rankerID: ranker.rankerID, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -571,14 +569,14 @@ class RetrieveAndRankTests: XCTestCase {
 
     /** Pass in a csv file with answers, and use the trained ranker to rerank those results. */
     func testRanker() {
-        guard let answerFile = loadFile("ranker_test_data", withExtension: "csv") else {
+        guard let answerFile = loadFile(name: "ranker_test_data", withExtension: "csv") else {
             XCTFail("Failed to load test data needed to test the ranker.")
             return
         }
         
         let description = "Use the trained ranker to rerank the given answer results."
-        let expectation = expectationWithDescription(description)
-        retrieveAndRank.rankResults(trainedRankerID, resultsFile: answerFile, failure: failWithError) {
+        let expectation = self.expectation(description: description)
+        retrieveAndRank.rankResults(rankerID: trainedRankerID, resultsFile: answerFile, failure: failWithError) {
             results in
             
             XCTAssertEqual(results.topAnswer, "aid_11")
@@ -598,15 +596,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create a Solr cluster with an invalid size. */
     func testCreateSolrClusterWithInvalidSize() {
         let description = "Delete a Solr cluster when passing an invalid Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.createSolrCluster(
-            "swift-sdk-solr-cluster",
+            name: "swift-sdk-solr-cluster",
             size: 100,
             failure: failure,
             success: failWithResult)
@@ -617,15 +614,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Attempt to delete a Solr cluster by passing an invalid Solr cluster ID. */
     func testDeleteSolrClusterWithBadID() {
         let description = "Delete a Solr cluster when passing an invalid Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.deleteSolrCluster(
-            "abcde-12345-fghij-67890",
+            solrClusterID: "abcde-12345-fghij-67890",
             failure: failure,
             success: failWithResult)
         
@@ -635,29 +631,27 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get information about a Solr cluster when passing an invalid ID. */
     func testGetSolrClusterWithInvalidID() {
         let description = "Get cluster with invalid ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        retrieveAndRank.getSolrCluster("some_invalid_ID", failure: failure, success: failWithResult)
+        retrieveAndRank.getSolrCluster(solrClusterID: "some_invalid_ID", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     /** Get all configurations when passing an invalid Solr cluster ID. */
     func testGetConfigurationsWithInvalidSolrClusterID() {
         let description = "Get all configurations when passing an invalid Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.getSolrConfigurations(
-            "some_invalid_ID",
+            solrClusterID: "some_invalid_ID",
             failure: failure,
             success: failWithResult)
         
@@ -667,15 +661,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get all configurations when passing an inaccessible Solr cluster ID. */
     func testGetConfigurationsWithInaccessibleSolrClusterID() {
         let description = "Get all configurations when passing an inaccessible Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, -6004)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.getSolrConfigurations(
-            "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
+            solrClusterID: "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
             failure: failure,
             success: failWithResult)
     
@@ -685,19 +678,18 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create a Solr configuration when passing an invalid Solr cluster ID. */
     func testCreateSolrConfigurationWithBadSolrClusterID() {
         let description = "Create a Solr configuration when passing an invalid Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        guard let configFile = loadFile("cranfield_solr_config", withExtension: "zip") else {
+        guard let configFile = loadFile(name: "cranfield_solr_config", withExtension: "zip") else {
             XCTFail("Failed to load config file needed to upload to the cluster.")
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            "some_invalid_ID",
+            solrClusterID: "some_invalid_ID",
             configName: "temp-swift-sdk-config",
             zipFile: configFile,
             failure: failure,
@@ -709,19 +701,18 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create a Solr configuration with the same name as an existing configuration. */
     func testCreateSolrConfigurationWithDuplicateName() {
         let description = "Create a Solr configuration with an already existing name."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 409)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        guard let configFile = loadFile("cranfield_solr_config", withExtension: "zip") else {
+        guard let configFile = loadFile(name: "cranfield_solr_config", withExtension: "zip") else {
             XCTFail("Failed to load config file needed to upload to the cluster.")
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            trainedClusterID,
+            solrClusterID: trainedClusterID,
             configName: trainedConfigurationName,
             zipFile: configFile,
             failure: failure,
@@ -733,14 +724,13 @@ class RetrieveAndRankTests: XCTestCase {
     /** Delete a Solr configuration when passing an invalid Solr cluster ID. */
     func testDeleteSolrConfigurationWithInvalidClusterID() {
         let description = "Delete a Solr configuration when passing an invalid Solr cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         retrieveAndRank.deleteSolrConfiguration(
-            "invalid_cluster_ID",
+            solrClusterID: "invalid_cluster_ID",
             configName: "someConfiguration",
             failure: failure,
             success: failWithResult)
@@ -752,15 +742,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get the collections of a nonexistent Solr cluster. */
     func testGetCollectionsOfNonExistentCluster() {
         let description = "Get all Solr collections of a nonexistent Solr cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.getSolrCollections(
-            "invalid_cluster_ID",
+            solrClusterID: "invalid_cluster_ID",
             failure: failure,
             success: failWithResult)
         
@@ -770,15 +759,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Create a collection within a nonexistent Solr cluster. */
     func testCreateCollectionInNonExistentCluster() {
         let description = "Create a Solr collection within a nonexistent Solr cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.createSolrCollection(
-            "invalid_cluster_id",
+            solrClusterID: "invalid_cluster_id",
             name: "failed-collection",
             configName: "config-name",
             failure: failure,
@@ -790,15 +778,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Delete a collection within a nonexistent Solr cluster. */
     func testDeleteCollectionInNonExistentCluster() {
         let description = "Delete a Solr collection within a nonexistent Solr cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.deleteSolrCollection(
-            "invalid_cluster_id",
+            solrClusterID: "invalid_cluster_id",
             name: "failed-collection",
             failure: failure,
             success: failWithResult)
@@ -809,19 +796,18 @@ class RetrieveAndRankTests: XCTestCase {
     /** Attempt to update a collection within a nonexistent Solr cluster. */
     func testUpdateCollectionWithinNonExistentCluster() {
         let description = "Update a Solr collection within a nonexistent Solr cluster."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        guard let collectionFile = loadFile("cranfield_data", withExtension: "json") else {
+        guard let collectionFile = loadFile(name: "cranfield_data", withExtension: "json") else {
             XCTFail("Failed to load json file needed to upload to the collection.")
             return
         }
         retrieveAndRank.updateSolrCollection(
-            "invalid_cluster_id",
+            solrClusterID: "invalid_cluster_id",
             collectionName: "failed-collection",
             contentType: "application/json",
             contentFile: collectionFile,
@@ -834,15 +820,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Search using an invalid Solr cluster ID. */
     func testSearchWithInvalidClusterID() {
         let description = "Search using an invalid cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.search(
-            "invalid_cluster_id",
+            solrClusterID: "invalid_cluster_id",
             collectionName: trainedCollectionName,
             query: "aerodynamics",
             returnFields: "id, author",
@@ -855,15 +840,14 @@ class RetrieveAndRankTests: XCTestCase {
     /** Search and rank using an invalid Solr cluster ID. */
     func testSearchAndRankWithInvalidClusterID() {
         let description = "Search and rank using an invalid cluster ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
         retrieveAndRank.searchAndRank(
-            "invalid_cluster_id",
+            solrClusterID: "invalid_cluster_id",
             collectionName: trainedCollectionName,
             rankerID: trainedRankerID,
             query: "aerodynamics",
@@ -877,47 +861,44 @@ class RetrieveAndRankTests: XCTestCase {
     /** Get detailed information about a ranker that does not exist. */
     func testGetDetailsOfNonExistentRanker() {
         let description = "Get detailed information about a ranker that does not exist."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        retrieveAndRank.getRanker("invalid_ranker_id", failure: failure, success: failWithResult)
+        retrieveAndRank.getRanker(rankerID: "invalid_ranker_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     /** Delete a ranker that doesn't exist. */
     func testDeleteNonExistentRanker() {
         let description = "Delete a ranker that does not exist."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        retrieveAndRank.getRanker("invalid_ranker_id", failure: failure, success: failWithResult)
+        retrieveAndRank.getRanker(rankerID: "invalid_ranker_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
     /** Re-rank the results of the file when passing an invalid ranker ID. */
     func testRankWithInvalidRankerID() {
         let description = "Try re-ranking a list of answers with an invalid ranker ID."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        guard let answerFile = loadFile("ranker_test_data", withExtension: "csv") else {
+        guard let answerFile = loadFile(name: "ranker_test_data", withExtension: "csv") else {
             XCTFail("Failed to load test data needed to test the ranker.")
             return
         }
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        retrieveAndRank.rankResults("invalid_ranker_id", resultsFile: answerFile, failure: failure, success: failWithResult)
+        retrieveAndRank.rankResults(rankerID: "invalid_ranker_id", resultsFile: answerFile, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

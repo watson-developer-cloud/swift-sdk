@@ -47,7 +47,7 @@ public struct RankerDetails: JSONDecodable {
         statusDescription = try json.getString(at: "status_description")
         
         guard let rankerStatus = RankerStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: RankerStatus.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: RankerStatus.self)
         }
         status = rankerStatus
     }

@@ -74,9 +74,9 @@ public struct SearchAndRankResponseBody: JSONDecodable {
         maxScore = try json.getDouble(at: "maxScore")
         
         var docs = [Document]()
-        let docsJSON = try json.array("docs")
+        let docsJSON = try json.getArray(at: "docs")
         for docJSON in docsJSON {
-            let doc = try NSJSONSerialization.JSONObjectWithData(docJSON.serialize(), options: NSJSONReadingOptions.AllowFragments) as! Document
+            let doc = try JSONSerialization.jsonObject(with: docJSON.serialize(), options: JSONSerialization.ReadingOptions.allowFragments) as! Document
             docs.append(doc)
         }
         documents = docs

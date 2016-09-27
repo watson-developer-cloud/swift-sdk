@@ -39,7 +39,7 @@ public struct SolrCluster: JSONDecodable {
         solrClusterSize = try Int(json.getString(at: "cluster_size"))
         
         guard let status = SolrClusterStatus(rawValue: try json.getString(at: "solr_cluster_status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: SolrCluster.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: SolrCluster.self)
         }
         solrClusterStatus = status
     }

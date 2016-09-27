@@ -95,9 +95,9 @@ public struct SearchResponseBody: JSONDecodable {
         start = try json.getInt(at: "start")
         
         var docs = [Document]()
-        let docsJSON = try json.array("docs")
+        let docsJSON = try json.getArray(at: "docs")
         for docJSON in docsJSON {
-            let doc = try NSJSONSerialization.JSONObjectWithData(docJSON.serialize(), options: NSJSONReadingOptions.AllowFragments) as! Document
+            let doc = try JSONSerialization.jsonObject(with: docJSON.serialize(), options: JSONSerialization.ReadingOptions.allowFragments) as! Document
             docs.append(doc)
         }
         documents = docs

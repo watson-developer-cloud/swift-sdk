@@ -27,7 +27,7 @@ public typealias DialogID = String
  conversations between virtual agents and users through an application programming
  interface (API). These conversations are commonly referred to as dialogs.
  */
-@available(*, deprecated, message="The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
+@available(*, deprecated, message: "The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
 public class Dialog {
     
     /// The base URL to use when contacting the service.
@@ -38,10 +38,9 @@ public class Dialog {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DialogV1")
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
-    private static let dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    private static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter
     }()
@@ -63,7 +62,7 @@ public class Dialog {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
@@ -84,26 +83,24 @@ public class Dialog {
      - parameter success: A function executed with the list of dialog applications.
      */
     public func getDialogs(
-        failure: (NSError -> Void)? = nil,
-        success: [DialogModel] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([DialogModel]) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["dialogs"]) {
-                (response: Response<[DialogModel], NSError>) in
+            .responseArray(path: ["dialogs"]) { (response: DataResponse<[DialogModel]>) in
                 switch response.result {
-                case .Success(let dialogs): success(dialogs)
-                case .Failure(let error): failure?(error)
+                case .success(let dialogs): success(dialogs)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -128,38 +125,38 @@ public class Dialog {
      */
     public func createDialog(
         name: String,
-        fileURL: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: DialogID -> Void)
+        fileURL: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DialogID) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/dialogs",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
-                let nameData = name.dataUsingEncoding(NSUTF8StringEncoding)!
-                multipartFormData.appendBodyPart(data: nameData, name: "name")
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "file")
+                let nameData = name.data(using: String.Encoding.utf8)!
+                multipartFormData.append(nameData, withName: "name")
+                multipartFormData.append(fileURL, withName: "file")
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
+                case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
                     upload.responseObject(path: ["dialog_id"]) {
-                        (response: Response<DialogID, NSError>) in
+                        (response: DataResponse<DialogID>) in
                         switch response.result {
-                        case .Success(let dialogID): success(dialogID)
-                        case .Failure(let error): failure?(error)
+                        case .success(let dialogID): success(dialogID)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "File could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -181,16 +178,15 @@ public class Dialog {
      */
     public func deleteDialog(
         dialogID: DialogID,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
-            method: .DELETE,
+            method: .delete,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
@@ -198,12 +194,12 @@ public class Dialog {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
             }
@@ -222,16 +218,15 @@ public class Dialog {
     public func getDialogFile(
         dialogID: DialogID,
         format: Format? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: NSURL -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (URL) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            acceptType: format?.rawValue,
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: format?.rawValue
         )
         
         // determine file extension
@@ -245,8 +240,8 @@ public class Dialog {
         }
         
         // locate downloads directory
-        let fileManager = NSFileManager.defaultManager()
-        let directories = fileManager.URLsForDirectory(.DownloadsDirectory, inDomains: .UserDomainMask)
+        let fileManager = FileManager.default
+        let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
         guard let downloads = directories.first else {
             let failureReason = "Cannot locate documents directory."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -260,8 +255,8 @@ public class Dialog {
         var isUnique = false
         var duplicates = 0
         while !isUnique {
-            let filePath = downloads.URLByAppendingPathComponent(filename)!.path!
-            if fileManager.fileExistsAtPath(filePath) {
+            let filePath = downloads.appendingPathComponent(filename).path
+            if fileManager.fileExists(atPath: filePath) {
                 duplicates += 1
                 filename = "dialog-" + dialogID + "-\(duplicates)" + filetype
             } else {
@@ -270,21 +265,21 @@ public class Dialog {
         }
         
         // specify download destination
-        let destinationURL = downloads.URLByAppendingPathComponent(filename)!
-        let destination: Request.DownloadFileDestination = { temporaryURL, response -> NSURL in
-            return destinationURL
+        let destinationURL = downloads.appendingPathComponent(filename)
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            return (destinationURL, [])
         }
 
         // execute REST request
-        Alamofire.download(request, destination: destination)
+        Alamofire.download(request, to: destination)
             .authenticate(user: username, password: password)
-            .response { _, response, data, error in
-                guard error == nil else {
-                    failure?(error!)
+            .response { response in
+                guard response.error == nil else {
+                    failure?(response.error!)
                     return
                 }
                 
-                guard let response = response else {
+                guard let statusCode = response.response?.statusCode else {
                     let failureReason = "Did not receive response."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -292,14 +287,6 @@ public class Dialog {
                     return
                 }
                 
-                if let data = data {
-                    if let error = self.dataToError(data) {
-                        failure?(error)
-                        return
-                    }
-                }
-                
-                let statusCode = response.statusCode
                 if statusCode != 200 {
                     let failureReason = "Status code was not acceptable: \(statusCode)."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -331,40 +318,39 @@ public class Dialog {
      */
     public func updateDialog(
         dialogID: DialogID,
-        fileURL: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        fileURL: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
-            method: .PUT,
+            method: .put,
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            userAgent: userAgent,
             headerParameters: defaultHeaders
         )
 
         // execute REST request
         Alamofire.upload(
-            request,
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: fileURL, name: "file")
+                multipartFormData.append(fileURL, withName: "file")
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
+                case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
                     upload.responseData { response in
                             switch response.result {
-                            case .Success(let data):
-                                switch self.dataToError(data) {
-                                case .Some(let error): failure?(error)
-                                case .None: success?()
+                            case .success(let data):
+                                switch self.dataToError(data: data) {
+                                case .some(let error): failure?(error)
+                                case .none: success?()
                                 }
-                            case .Failure(let error):
+                            case .failure(let error):
                                 failure?(error)
                             }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "File could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -387,26 +373,24 @@ public class Dialog {
      */
     public func getContent(
         dialogID: DialogID,
-        failure: (NSError -> Void)? = nil,
-        success: [Node] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Node]) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["items"]) {
-                (response: Response<[Node], NSError>) in
+            .responseArray(path: ["items"]) { (response: DataResponse<[Node]>) in
                 switch response.result {
-                case .Success(let nodes): success(nodes)
-                case .Failure(let error): failure?(error)
+                case .success(let nodes): success(nodes)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -422,11 +406,11 @@ public class Dialog {
     public func updateContent(
         dialogID: DialogID,
         nodes: [Node],
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // serialize nodes to JSON
-        guard let body = try? JSON.Dictionary(["items": nodes.toJSON()]).serialize() else {
+        guard let body = try? JSON.dictionary(["items": nodes.toJSON()]).serialize() else {
             let failureReason = "Nodes could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -436,12 +420,11 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .PUT,
+            method: .put,
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
 
@@ -450,12 +433,12 @@ public class Dialog {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -478,46 +461,44 @@ public class Dialog {
      */
     public func getConversationHistory(
         dialogID: DialogID,
-        dateFrom: NSDate,
-        dateTo: NSDate,
+        dateFrom: Date,
+        dateTo: Date,
         offset: Int? = nil,
         limit: Int? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: [Conversation] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Conversation]) -> Void)
     {
         // construct date strings
-        let dateFromString = Dialog.dateFormatter.stringFromDate(dateFrom)
-        let dateToString = Dialog.dateFormatter.stringFromDate(dateTo)
+        let dateFromString = Dialog.dateFormatter.string(from: dateFrom)
+        let dateToString = Dialog.dateFormatter.string(from: dateTo)
 
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "date_from", value: dateFromString))
-        queryParameters.append(NSURLQueryItem(name: "date_to", value: dateToString))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "date_from", value: dateFromString))
+        queryParameters.append(URLQueryItem(name: "date_to", value: dateToString))
         if let offset = offset {
-            queryParameters.append(NSURLQueryItem(name: "offset", value: "\(offset)"))
+            queryParameters.append(URLQueryItem(name: "offset", value: "\(offset)"))
         }
         if let limit = limit {
-            queryParameters.append(NSURLQueryItem(name: "limit", value: "\(limit)"))
+            queryParameters.append(URLQueryItem(name: "limit", value: "\(limit)"))
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["conversations"]) {
-                (response: Response<[Conversation], NSError>) in
+            .responseArray(path: ["conversations"]) { (response: DataResponse<[Conversation]>) in
                 switch response.result {
-                case .Success(let conversations): success(conversations)
-                case .Failure(let error): failure?(error)
+                case .success(let conversations): success(conversations)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -540,39 +521,37 @@ public class Dialog {
         conversationID: Int? = nil,
         clientID: Int? = nil,
         input: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ConversationResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ConversationResponse) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let conversationID = conversationID {
-            queryParameters.append(NSURLQueryItem(name: "conversation_id", value: "\(conversationID)"))
+            queryParameters.append(URLQueryItem(name: "conversation_id", value: "\(conversationID)"))
         }
         if let clientID = clientID {
-            queryParameters.append(NSURLQueryItem(name: "client_id", value: "\(clientID)"))
+            queryParameters.append(URLQueryItem(name: "client_id", value: "\(clientID)"))
         }
         if let input = input {
-            queryParameters.append(NSURLQueryItem(name: "input", value: input))
+            queryParameters.append(URLQueryItem(name: "input", value: input))
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<ConversationResponse, NSError>) in
+            .responseObject() { (response: DataResponse<ConversationResponse>) in
                 switch response.result {
-                case .Success(let response): success(response)
-                case .Failure(let error): failure?(error)
+                case .success(let response): success(response)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -593,36 +572,34 @@ public class Dialog {
         dialogID: DialogID,
         clientID: Int,
         names: [String]? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Profile -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "client_id", value: "\(clientID)"))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "client_id", value: "\(clientID)"))
         if let names = names {
             for name in names {
-                queryParameters.append(NSURLQueryItem(name: "name", value: name))
+                queryParameters.append(URLQueryItem(name: "name", value: name))
             }
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Profile, NSError>) in
+            .responseObject() { (response: DataResponse<Profile>) in
                 switch response.result {
-                case .Success(let profile): success(profile)
-                case .Failure(let error): failure?(error)
+                case .success(let profile): success(profile)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -642,8 +619,8 @@ public class Dialog {
         dialogID: DialogID,
         clientID: Int? = nil,
         parameters: [String: String],
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // serialize the profile to JSON
         let profile = Profile(clientID: clientID, parameters: parameters)
@@ -657,12 +634,11 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .PUT,
+            method: .put,
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
 
@@ -671,12 +647,12 @@ public class Dialog {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }

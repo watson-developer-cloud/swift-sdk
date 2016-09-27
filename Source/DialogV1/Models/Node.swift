@@ -46,8 +46,8 @@ public struct Node: JSONEncodable, JSONDecodable {
     /// Used internally to initialize a `FaceTags` model from JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["content"] = .String(content)
-        json["node"] = .String(node)
-        return JSON.Dictionary(json)
+        json["content"] = .string(content)
+        json["node"] = .string(node)
+        return .dictionary(json)
     }
 }

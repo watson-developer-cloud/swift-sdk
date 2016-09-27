@@ -42,11 +42,11 @@ public struct Conversation: JSONDecodable {
         clientID = try json.getInt(at: "client_id")
         messages = try json.decodedArray(at: "messages", type: Message.self)
 
-        let profileVariables = try json.array("profile")
+        let profileVariables = try json.getArray(at: "profile")
         var profile = [String: String]()
         for variable in profileVariables {
-            let name = try variable.string("name")
-            let value = try variable.string("value")
+            let name = try variable.getString(at: "name")
+            let value = try variable.getString(at: "value")
             profile[name] = value
         }
         self.profile = profile

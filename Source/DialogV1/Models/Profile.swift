@@ -48,9 +48,9 @@ public struct Profile: JSONEncodable, JSONDecodable {
     /// Used internally to serialize a `Profile` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        if let clientID = clientID { json["client_id"] = .Int(clientID) }
-        json["parameters"] = .Array(parameters.map { parameter in parameter.toJSON() })
-        return JSON.Dictionary(json)
+        if let clientID = clientID { json["client_id"] = .int(clientID) }
+        json["parameters"] = .array(parameters.map { parameter in parameter.toJSON() })
+        return .dictionary(json)
     }
 }
 
@@ -83,8 +83,8 @@ public struct Parameter: JSONEncodable, JSONDecodable {
     /// Used internally to serialize a `Parameter` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["name"] = .String(name)
-        json["value"] = .String(value)
-        return JSON.Dictionary(json)
+        json["name"] = .string(name)
+        json["value"] = .string(value)
+        return .dictionary(json)
     }
 }

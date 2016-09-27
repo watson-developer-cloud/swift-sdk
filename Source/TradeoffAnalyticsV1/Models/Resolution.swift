@@ -130,7 +130,7 @@ public struct Solution: JSONDecodable {
         statusCause = try? json.decode(at: "status_cause")
         
         guard let status = SolutionStatus(rawValue: try json.decode(at: "status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Solution.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Solution.self)
         }
         self.status = status
     }
@@ -140,20 +140,20 @@ public struct Solution: JSONDecodable {
 public enum SolutionStatus: String {
     
     /// `Front` indicates that the option is included among the top options for the problem.
-    case Front = "FRONT"
+    case front = "FRONT"
     
     /// `Excluded` indicates that another option is strictly better than the option.
-    case Excluded = "EXCLUDED"
+    case excluded = "EXCLUDED"
     
     /// `Incomplete` indicates that either the option's specification does not include a value
     /// for one of the columns or its value for one of the columns lies outside the range specified
     /// for the column. Only a column whose `isObjective` property is set to `true` can generate
     /// this status.
-    case Incomplete = "INCOMPLETE"
+    case incomplete = "INCOMPLETE"
     
     /// `DoesNotMeetPreference` indicates that the option specifies a value for a `Categorical`
     /// column that is not included in the column's preference.
-    case DoesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
+    case doesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
 }
 
 /// Additional information about the cause of an option's status.
@@ -172,7 +172,7 @@ public struct StatusCause: JSONDecodable {
     /// Used internally to initialize a `StatusCause` model from JSON.
     public init(json: JSON) throws {
         guard let errorCode = TradeoffAnalyticsError(rawValue: try json.getString(at: "error_code")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: StatusCause.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: StatusCause.self)
         }
         self.errorCode = errorCode
         message = try json.getString(at: "message")
@@ -185,13 +185,13 @@ public enum TradeoffAnalyticsError: String {
     
     /// Indicates that a column for which the `isObjective` property is `true` is absent from
     /// the option's specification.
-    case MissingObjectiveValue = "MISSING_OBJECTIVE_VALUE"
+    case missingObjectiveValue = "MISSING_OBJECTIVE_VALUE"
     
     /// Indicates that the option's specifications defines a value that is outside of the range
     /// specified for an objective.
-    case RangeMismatch = "RANGE_MISMATCH"
+    case rangeMismatch = "RANGE_MISMATCH"
     
     /// Indicates that a `Categorical` column value for the option is not in the preference
     /// for that column.
-    case DoesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
+    case doesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
 }

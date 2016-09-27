@@ -20,7 +20,7 @@ import TradeoffAnalyticsV1
 class TradeoffAnalyticsTests: XCTestCase {
 
     private var tradeoffAnalytics: TradeoffAnalytics!
-    private let timeout: NSTimeInterval = 5.0
+    private let timeout: TimeInterval = 5.0
     
     // MARK: - Test Configuration
     
@@ -39,7 +39,7 @@ class TradeoffAnalyticsTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -50,7 +50,7 @@ class TradeoffAnalyticsTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -59,50 +59,50 @@ class TradeoffAnalyticsTests: XCTestCase {
     
     func testGetDilemma1() {
         let description = "Create and resolve a sample problem."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         // define columns
         let price = Column(
             key: "price",
-            type: .Numeric,
-            goal: .Minimize,
+            type: .numeric,
+            goal: .minimize,
             isObjective: true
         )
         let ram = Column(
             key: "ram",
-            type: .Numeric,
-            goal: .Maximize,
+            type: .numeric,
+            goal: .maximize,
             isObjective: true
         )
         let screen = Column(
             key: "screen",
-            type: .Numeric,
-            goal: .Maximize,
+            type: .numeric,
+            goal: .maximize,
             isObjective: true
         )
         let os = Column(
             key: "os",
-            type: .Categorical,
-            goal: .Minimize,
+            type: .categorical,
+            goal: .minimize,
             isObjective: true,
-            range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
+            range: Range.categoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
             preference: ["android", "ios"]
         )
         
         // define options
         let galaxy = Option(
             key: "galaxy",
-            values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
+            values: ["price": .int(50), "ram": .int(45), "screen": .int(5), "os": .string("android")],
             name: "Galaxy S4"
         )
         let iphone = Option(
             key: "iphone",
-            values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
+            values: ["price": .int(99), "ram": .int(40), "screen": .int(4), "os": .string("ios")],
             name: "iPhone 5"
         )
         let optimus = Option(
             key: "optimus",
-            values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
+            values: ["price": .int(10), "ram": .int(300), "screen": .int(5), "os": .string("android")],
             name: "LG Optimus G"
         )
 
@@ -113,7 +113,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             subject: "Phone"
         )
         
-        tradeoffAnalytics.getDilemma(problem, failure: failWithError) {
+        tradeoffAnalytics.getDilemma(problem: problem, failure: failWithError) {
             dilemma in
             
             // verify problem
@@ -123,22 +123,22 @@ class TradeoffAnalyticsTests: XCTestCase {
             
             // verify problem columns
             let columns = dilemma.problem.columns
-            XCTAssertEqual(columns[0].type, ColumnType.Numeric)
+            XCTAssertEqual(columns[0].type, ColumnType.numeric)
             XCTAssertEqual(columns[0].key, "price")
-            XCTAssertEqual(columns[0].goal, Goal.Minimize)
+            XCTAssertEqual(columns[0].goal, Goal.minimize)
             XCTAssertEqual(columns[0].isObjective, true)
-            XCTAssertEqual(columns[1].type, ColumnType.Numeric)
+            XCTAssertEqual(columns[1].type, ColumnType.numeric)
             XCTAssertEqual(columns[1].key, "ram")
-            XCTAssertEqual(columns[1].goal, Goal.Maximize)
+            XCTAssertEqual(columns[1].goal, Goal.maximize)
             XCTAssertEqual(columns[1].isObjective, true)
-            XCTAssertEqual(columns[2].type, ColumnType.Numeric)
+            XCTAssertEqual(columns[2].type, ColumnType.numeric)
             XCTAssertEqual(columns[2].key, "screen")
-            XCTAssertEqual(columns[2].goal, Goal.Maximize)
+            XCTAssertEqual(columns[2].goal, Goal.maximize)
             XCTAssertEqual(columns[2].isObjective, true)
-            XCTAssertEqual(columns[3].type, ColumnType.Categorical)
+            XCTAssertEqual(columns[3].type, ColumnType.categorical)
             XCTAssertEqual(columns[3].key, "os")
             XCTAssertNotNil(columns[3].range)
-            XCTAssertEqual(columns[3].goal, Goal.Minimize)
+            XCTAssertEqual(columns[3].goal, Goal.minimize)
             XCTAssertNotNil(columns[3].preference)
             XCTAssertEqual(columns[3].isObjective, true)
 
@@ -168,17 +168,17 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNil(solutions[0].shadowMe)
             XCTAssertNil(solutions[0].shadows)
             XCTAssertEqual(solutions[0].solutionRef, "galaxy")
-            XCTAssertEqual(solutions[0].status, SolutionStatus.Excluded)
+            XCTAssertEqual(solutions[0].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[0].statusCause)
             XCTAssertNil(solutions[1].shadowMe)
             XCTAssertNil(solutions[1].shadows)
             XCTAssertEqual(solutions[1].solutionRef, "iphone")
-            XCTAssertEqual(solutions[1].status, SolutionStatus.Excluded)
+            XCTAssertEqual(solutions[1].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[1].statusCause)
             XCTAssertNil(solutions[2].shadowMe)
             XCTAssertNil(solutions[2].shadows)
             XCTAssertEqual(solutions[2].solutionRef, "optimus")
-            XCTAssertEqual(solutions[2].status, SolutionStatus.Front)
+            XCTAssertEqual(solutions[2].status, SolutionStatus.front)
             XCTAssertNil(solutions[2].statusCause)
             
             expectation.fulfill()
@@ -188,34 +188,34 @@ class TradeoffAnalyticsTests: XCTestCase {
     
     func testGetDilemma2() {
         let description = "Create and resolve a sample problem."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         // define columns
         let categorical = Column(
             key: "categorical",
-            type: .Categorical,
+            type: .categorical,
             isObjective: true,
-            range: .CategoricalRange(categories: ["cat1", "cat2", "cat3"]),
+            range: .categoricalRange(categories: ["cat1", "cat2", "cat3"]),
             preference: ["cat1", "cat2"],
             fullName: "Categorical Column",
             description: "This column tests the categorical column type."
         )
         let date = Column(
             key: "date",
-            type: .DateTime,
-            goal: .Maximize,
+            type: .dateTime,
+            goal: .maximize,
             isObjective: true,
-            range: .DateRange(low: NSDate(timeIntervalSinceNow: -360), high: NSDate()),
+            range: .dateRange(low: Date(timeIntervalSinceNow: -360), high: Date()),
             format: "date:'MMM dd, yyyy'",
             fullName: "DateTime Column",
             description: "This column tests the date/time column type."
         )
         let numericInt = Column(
             key: "numeric-int",
-            type: .Numeric,
-            goal: .Minimize,
+            type: .numeric,
+            goal: .minimize,
             isObjective: true,
-            range: .NumericRange(low: 0, high: 100),
+            range: .numericRange(low: 0, high: 100),
             significantGain: 0.7,
             significantLoss: 0.3,
             insignificantLoss: 0.5,
@@ -225,10 +225,10 @@ class TradeoffAnalyticsTests: XCTestCase {
         )
         let numericDouble = Column(
             key: "numeric-double",
-            type: .Numeric,
-            goal: .Minimize,
+            type: .numeric,
+            goal: .minimize,
             isObjective: true,
-            range: .NumericRange(low: 0.0, high: 1.0),
+            range: .numericRange(low: 0.0, high: 1.0),
             significantGain: 0.7,
             significantLoss: 0.3,
             insignificantLoss: 0.5,
@@ -238,7 +238,7 @@ class TradeoffAnalyticsTests: XCTestCase {
         )
         let text = Column(
             key: "text",
-            type: .Text,
+            type: .text,
             isObjective: false,
             fullName: "Text Column",
             description: "This column tests the text column type."
@@ -248,11 +248,11 @@ class TradeoffAnalyticsTests: XCTestCase {
         let option1 = Option(
             key: "option1",
             values: [
-                "categorical": .String("cat1"),
-                "date": .NSDate(NSDate()),
-                "numeric-int": .Int(0),
-                "numeric-double": .Double(0.0),
-                "text": .String("This option should be preferred.")
+                "categorical": .string("cat1"),
+                "date": .date(Date()),
+                "numeric-int": .int(0),
+                "numeric-double": .double(0.0),
+                "text": .string("This option should be preferred.")
             ],
             name: "Option 1",
             descriptionHTML: "<b>Option</b> 1"
@@ -260,11 +260,11 @@ class TradeoffAnalyticsTests: XCTestCase {
         let option2 = Option(
             key: "option2",
             values: [
-                "categorical": .String("cat1"),
-                "date": .NSDate(NSDate()),
-                "numeric-int": .Int(100),
-                "numeric-double": .Double(1.0),
-                "text": .String("This option should be a shadow.")
+                "categorical": .string("cat1"),
+                "date": .date(Date()),
+                "numeric-int": .int(100),
+                "numeric-double": .double(1.0),
+                "text": .string("This option should be a shadow.")
             ],
             name: "Option 2",
             descriptionHTML: "<b>Option</b> 1"
@@ -272,11 +272,11 @@ class TradeoffAnalyticsTests: XCTestCase {
         let option3 = Option(
             key: "option3",
             values: [
-                "categorical": .String("cat3"),
-                "date": .NSDate(NSDate(timeIntervalSinceNow: -60)),
-                "numeric-int": .Int(100),
-                "numeric-double": .Double(1.0),
-                "text": .String("This option should not meet preference.")
+                "categorical": .string("cat3"),
+                "date": .date(Date(timeIntervalSinceNow: -60)),
+                "numeric-int": .int(100),
+                "numeric-double": .double(1.0),
+                "text": .string("This option should not meet preference.")
             ],
             name: "Option 3",
             descriptionHTML: "<b>Option</b> 1"
@@ -284,11 +284,11 @@ class TradeoffAnalyticsTests: XCTestCase {
         let option4 = Option(
             key: "option4",
             values: [
-                "categorical": .String("cate3"),
-                "date": .NSDate(NSDate(timeIntervalSinceNow: -60)),
-                "numeric-int": .Int(100),
-                "numeric-double": .Double(1.0),
-                "text": .String("This option should be incomplete.")
+                "categorical": .string("cate3"),
+                "date": .date(Date(timeIntervalSinceNow: -60)),
+                "numeric-int": .int(100),
+                "numeric-double": .double(1.0),
+                "text": .string("This option should be incomplete.")
             ],
             name: "Option 4",
             descriptionHTML: "<b>Option</b> 1"
@@ -301,7 +301,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             subject: "TestProblem"
         )
         
-        tradeoffAnalytics.getDilemma(problem, failure: failWithError) {
+        tradeoffAnalytics.getDilemma(problem: problem, failure: failWithError) {
             dilemma in
             
             // verify problem
@@ -311,54 +311,54 @@ class TradeoffAnalyticsTests: XCTestCase {
             
             // verify problem columns
             let columns = dilemma.problem.columns
-            XCTAssertEqual(columns[0].type, ColumnType.Categorical)
+            XCTAssertEqual(columns[0].type, ColumnType.categorical)
             XCTAssertEqual(columns[0].key, "categorical")
             XCTAssertEqual(columns[0].fullName, "Categorical Column")
             XCTAssertNotNil(columns[0].range)
             XCTAssertNotNil(columns[0].description)
-            XCTAssertEqual(columns[0].goal, Goal.Maximize)
+            XCTAssertEqual(columns[0].goal, Goal.maximize)
             XCTAssertNotNil(columns[0].preference)
             XCTAssert(columns[0].isObjective == true)
-            XCTAssertEqual(columns[1].type, ColumnType.DateTime)
+            XCTAssertEqual(columns[1].type, ColumnType.dateTime)
             XCTAssertEqual(columns[1].key, "date")
             XCTAssertEqual(columns[1].fullName, "DateTime Column")
             XCTAssertNotNil(columns[1].range)
             XCTAssertNotNil(columns[1].description)
-            XCTAssertEqual(columns[1].goal, Goal.Maximize)
+            XCTAssertEqual(columns[1].goal, Goal.maximize)
             XCTAssert(columns[1].isObjective == true)
-            XCTAssertEqual(columns[2].type, ColumnType.Numeric)
+            XCTAssertEqual(columns[2].type, ColumnType.numeric)
             XCTAssertEqual(columns[2].key, "numeric-int")
             XCTAssertEqual(columns[2].fullName, "Numeric Int Column")
             XCTAssertNotNil(columns[2].range)
             XCTAssertNotNil(columns[2].format)
             XCTAssertNotNil(columns[2].description)
-            XCTAssertEqual(columns[2].goal, Goal.Minimize)
+            XCTAssertEqual(columns[2].goal, Goal.minimize)
             XCTAssert(columns[2].isObjective == true)
-            XCTAssert(columns[2].insignificantLoss >= 0.0)
-            XCTAssert(columns[2].insignificantLoss <= 1.0)
-            XCTAssert(columns[2].significantGain >= 0.0)
-            XCTAssert(columns[2].significantGain <= 1.0)
-            XCTAssert(columns[2].significantLoss >= 0.0)
-            XCTAssert(columns[2].significantLoss <= 1.0)
-            XCTAssertEqual(columns[3].type, ColumnType.Numeric)
+            XCTAssert(columns[2].insignificantLoss! >= 0.0)
+            XCTAssert(columns[2].insignificantLoss! <= 1.0)
+            XCTAssert(columns[2].significantGain! >= 0.0)
+            XCTAssert(columns[2].significantGain! <= 1.0)
+            XCTAssert(columns[2].significantLoss! >= 0.0)
+            XCTAssert(columns[2].significantLoss! <= 1.0)
+            XCTAssertEqual(columns[3].type, ColumnType.numeric)
             XCTAssertEqual(columns[3].key, "numeric-double")
             XCTAssertEqual(columns[3].fullName, "Numeric Double Column")
             XCTAssertNotNil(columns[3].range)
             XCTAssertNotNil(columns[3].format)
             XCTAssertNotNil(columns[3].description)
-            XCTAssertEqual(columns[3].goal, Goal.Minimize)
+            XCTAssertEqual(columns[3].goal, Goal.minimize)
             XCTAssert(columns[3].isObjective == true)
-            XCTAssert(columns[3].insignificantLoss >= 0.0)
-            XCTAssert(columns[3].insignificantLoss <= 1.0)
-            XCTAssert(columns[3].significantGain >= 0.0)
-            XCTAssert(columns[3].significantGain <= 1.0)
-            XCTAssert(columns[3].significantLoss >= 0.0)
-            XCTAssert(columns[3].significantLoss <= 1.0)
-            XCTAssertEqual(columns[4].type, ColumnType.Text)
+            XCTAssert(columns[3].insignificantLoss! >= 0.0)
+            XCTAssert(columns[3].insignificantLoss! <= 1.0)
+            XCTAssert(columns[3].significantGain! >= 0.0)
+            XCTAssert(columns[3].significantGain! <= 1.0)
+            XCTAssert(columns[3].significantLoss! >= 0.0)
+            XCTAssert(columns[3].significantLoss! <= 1.0)
+            XCTAssertEqual(columns[4].type, ColumnType.text)
             XCTAssertEqual(columns[4].key, "text")
             XCTAssertEqual(columns[4].fullName, "Text Column")
             XCTAssertNotNil(columns[4].description)
-            XCTAssertEqual(columns[4].goal, Goal.Maximize)
+            XCTAssertEqual(columns[4].goal, Goal.maximize)
             XCTAssert(columns[4].isObjective == false)
             
             // verify problem options
@@ -401,22 +401,22 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNil(solutions[0].shadowMe)
             XCTAssertNil(solutions[0].shadows)
             XCTAssertEqual(solutions[0].solutionRef, "option1")
-            XCTAssertEqual(solutions[0].status, SolutionStatus.Front)
+            XCTAssertEqual(solutions[0].status, SolutionStatus.front)
             XCTAssertNil(solutions[0].statusCause)
             XCTAssertNil(solutions[1].shadowMe)
             XCTAssertNil(solutions[1].shadows)
             XCTAssertEqual(solutions[1].solutionRef, "option2")
-            XCTAssertEqual(solutions[1].status, SolutionStatus.Excluded)
+            XCTAssertEqual(solutions[1].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[1].statusCause)
             XCTAssertNil(solutions[2].shadowMe)
             XCTAssertNil(solutions[2].shadows)
             XCTAssertEqual(solutions[2].solutionRef, "option3")
-            XCTAssertEqual(solutions[2].status, SolutionStatus.DoesNotMeetPreference)
+            XCTAssertEqual(solutions[2].status, SolutionStatus.doesNotMeetPreference)
             XCTAssertNotNil(solutions[2].statusCause)
             XCTAssertNil(solutions[3].shadowMe)
             XCTAssertNil(solutions[3].shadows)
             XCTAssertEqual(solutions[3].solutionRef, "option4")
-            XCTAssertEqual(solutions[3].status, SolutionStatus.Incomplete)
+            XCTAssertEqual(solutions[3].status, SolutionStatus.incomplete)
             XCTAssertNotNil(solutions[3].statusCause)
             
             expectation.fulfill()
@@ -429,7 +429,7 @@ class TradeoffAnalyticsTests: XCTestCase {
     
     func testGetDilemmaMalformedProblem() {
         let description = "Try to resolve a malformed problem."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         let problem = Problem(
             columns: [],
@@ -437,12 +437,11 @@ class TradeoffAnalyticsTests: XCTestCase {
             subject: "TestProblem"
         )
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, -6003)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
-        tradeoffAnalytics.getDilemma(problem, failure: failure, success: failWithResult)
+        tradeoffAnalytics.getDilemma(problem: problem, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

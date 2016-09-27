@@ -35,7 +35,6 @@ public class TradeoffAnalytics {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TradeoffAnalyticsV1")
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
     /**
@@ -66,8 +65,8 @@ public class TradeoffAnalytics {
     public func getDilemma(
         problem: Problem,
         generateVisualization: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Dilemma -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Dilemma) -> Void)
     {
         // construct body
         guard let body = try? problem.toJSON().serialize() else {
@@ -79,20 +78,19 @@ public class TradeoffAnalytics {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let generateVisualization = generateVisualization {
-            queryParameters.append(NSURLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
+            queryParameters.append(URLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/dilemmas",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
             queryParameters: queryParameters,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -100,11 +98,10 @@ public class TradeoffAnalytics {
         Alamofire.request(request)
             .authenticate(user: username, password: password)
             .validate()
-            .responseObject() {
-                (response: Response<Dilemma, NSError>) in
+            .responseObject() { (response: DataResponse<Dilemma>) in
                 switch response.result {
-                case .Success(let dilemma): success(dilemma)
-                case .Failure(let error): failure?(error)
+                case .success(let dilemma): success(dilemma)
+                case .failure(let error): failure?(error)
                 }
             }
     }

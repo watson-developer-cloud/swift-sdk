@@ -50,10 +50,10 @@ public struct Problem: JSONEncodable, JSONDecodable {
     /// Used internally to serialize a `Problem` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["columns"] = .Array(columns.map { column in column.toJSON() })
-        json["options"] = .Array(options.map { option in option.toJSON() })
-        json["subject"] = .String(subject)
-        return JSON.Dictionary(json)
+        json["columns"] = .array(columns.map { column in column.toJSON() })
+        json["options"] = .array(options.map { option in option.toJSON() })
+        json["subject"] = .string(subject)
+        return .dictionary(json)
     }
     
     /// Used internally to initialize a `Problem` model from JSON.
@@ -212,35 +212,35 @@ public struct Column: JSONEncodable, JSONDecodable {
     /// Used internally to serialize a `Column` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["key"] = .String(key)
+        json["key"] = .string(key)
         json["type"] = type?.toJSON()
         json["goal"] = goal?.toJSON()
         if let isObjective = isObjective {
-            json["is_objective"] = .Bool(isObjective)
+            json["is_objective"] = .bool(isObjective)
         }
         json["range"] = range?.toJSON()
         if let preference = preference {
-            json["preference"] = .Array(preference.map { .String($0) })
+            json["preference"] = .array(preference.map { .string($0) })
         }
         if let significantGain = significantGain {
-            json["significant_gain"] = .Double(significantGain)
+            json["significant_gain"] = .double(significantGain)
         }
         if let significantLoss = significantLoss {
-            json["significant_loss"] = .Double(significantLoss)
+            json["significant_loss"] = .double(significantLoss)
         }
         if let insignificantLoss = insignificantLoss {
-            json["insignificant_loss"] = .Double(insignificantLoss)
+            json["insignificant_loss"] = .double(insignificantLoss)
         }
         if let format = format {
-            json["format"] = .String(format)
+            json["format"] = .string(format)
         }
         if let fullName = fullName {
-            json["full_name"] = .String(fullName)
+            json["full_name"] = .string(fullName)
         }
         if let description = description {
-            json["description"] = .String(description)
+            json["description"] = .string(description)
         }
-        return JSON.Dictionary(json)
+        return .dictionary(json)
     }
     
     /// Used internally to initialize a `Column` model from JSON.
@@ -256,7 +256,7 @@ public struct Column: JSONEncodable, JSONDecodable {
         } else {
             goal = nil
         }
-        isObjective = try? json.bool("is_objective")
+        isObjective = try? json.getBool(at: "is_objective")
         range = try? json.decode(at: "range")
         preference = try? json.decodedArray(at: "preference", type: String.self)
         significantGain = try? json.getDouble(at: "significant_gain")
@@ -272,56 +272,56 @@ public struct Column: JSONEncodable, JSONDecodable {
 public enum ColumnType: String {
     
     /// A categorical objective.
-    case Categorical = "categorical"
+    case categorical = "categorical"
     
     /// A date and time objective.
-    case DateTime = "datetime"
+    case dateTime = "datetime"
     
     /// A numeric objective.
-    case Numeric = "numeric"
+    case numeric = "numeric"
     
     /// A text objective.
-    case Text = "text"
+    case text = "text"
 }
 
 /// The value of a particular option.
 public enum OptionValue: JSONEncodable, JSONDecodable {
     
     /// An `Int` value for an option.
-    case Int(Swift.Int)
+    case int(Swift.Int)
     
     /// A `Double` value for an option.
-    case Double(Swift.Double)
+    case double(Swift.Double)
     
     /// An `NSDate` value for an option.
-    case NSDate(Foundation.NSDate)
+    case date(Foundation.Date)
     
     /// A `String` value for an option.
-    case String(Swift.String)
+    case string(Swift.String)
     
     /// Used internally to serialize an `OptionValue` model to JSON.
     public func toJSON() -> JSON {
         switch self {
-        case Int(let x): return .Int(x)
-        case Double(let x): return .Double(x)
-        case NSDate(let x): return .String(Range.dateFormatter.stringFromDate(x))
-        case String(let x): return .String(x)
+        case .int(let x): return .int(x)
+        case .double(let x): return .double(x)
+        case .date(let x): return .string(Range.dateFormatter.string(from: x))
+        case .string(let x): return .string(x)
         }
     }
     
     /// Used internally to initialize an `OptionValue` model from JSON.
     public init(json: JSON) throws {
-        if let int = try? json.int() {
-            self = .Int(int)
-        } else if let double = try? json.double() {
-            self = .Double(double)
-        } else if let dateString = try? json.string(), let date = Range.dateFormatter.dateFromString(dateString) {
-            self = .NSDate(date)
-        } else if let string = try? json.string() {
-            self = .String(string)
+        if let int = try? json.getInt() {
+            self = .int(int)
+        } else if let double = try? json.getDouble() {
+            self = .double(double)
+        } else if let dateString = try? json.getString(), let date = Range.dateFormatter.date(from: dateString) {
+            self = .date(date)
+        } else if let string = try? json.getString() {
+            self = .string(string)
         } else {
-            self = String("Error: JSON could not be converted to `OptionValue`.")
-            throw JSON.Error.ValueNotConvertible(value: json, to: OptionValue.self)
+            self = .string("Error: JSON could not be converted to `OptionValue`.")
+            throw JSON.Error.valueNotConvertible(value: json, to: OptionValue.self)
         }
     }
 }
@@ -330,10 +330,10 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
 public enum Goal: String {
     
     /// Minimize the given column.
-    case Minimize = "min"
+    case minimize = "min"
     
     /// Maximize the given column.
-    case Maximize = "max"
+    case maximize = "max"
 }
 
 /// A range of valid values for a column.
@@ -341,19 +341,19 @@ public enum Range: JSONEncodable, JSONDecodable {
     
     /// High and low values that define the range of a `DateTime`
     /// column. Valid only for `DateTime` columns.
-    case DateRange(low: NSDate, high: NSDate)
+    case dateRange(low: Date, high: Date)
     
     /// High and low `Double` values that define the range of a
     /// `Numeric` column. Valid only for `Numeric` columns.
-    case NumericRange(low: Double, high: Double)
+    case numericRange(low: Double, high: Double)
     
     /// An array of valid values that define the range of possible values
     /// for a `Categorical` column. Valid only for `Categorical` columns.
-    case CategoricalRange(categories: [String])
+    case categoricalRange(categories: [String])
     
     /// A date formatter to convert between `NSDate` and `String`.
-    private static let dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    fileprivate static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return dateFormatter
     }()
@@ -362,44 +362,44 @@ public enum Range: JSONEncodable, JSONDecodable {
     public func toJSON() -> JSON {
         var json = [String: JSON]()
         switch self {
-        case .DateRange(let low, let high):
-            json["low"] = .String(Range.dateFormatter.stringFromDate(low))
-            json["high"] = .String(Range.dateFormatter.stringFromDate(high))
-            return .Dictionary(json)
-        case .NumericRange(let low, let high):
-            json["low"] = .Double(low)
-            json["high"] = .Double(high)
-            return .Dictionary(json)
-        case .CategoricalRange(let categories):
-            return .Array(categories.map { .String($0) })
+        case .dateRange(let low, let high):
+            json["low"] = .string(Range.dateFormatter.string(from: low))
+            json["high"] = .string(Range.dateFormatter.string(from: high))
+            return .dictionary(json)
+        case .numericRange(let low, let high):
+            json["low"] = .double(low)
+            json["high"] = .double(high)
+            return .dictionary(json)
+        case .categoricalRange(let categories):
+            return .array(categories.map { .string($0) })
         }
     }
     
     /// Used internally to initialize a `Range` model from JSON.
     public init(json: JSON) throws {
         // try to parse as `Range.DateRange`
-        if let low = try? json.getString(at: "low"), high = try? json.getString(at: "high") {
-            let lowDate = Range.dateFormatter.dateFromString(low)
-            let highDate = Range.dateFormatter.dateFromString(high)
-            if let lowDate = lowDate, highDate = highDate {
-                self = .DateRange(low: lowDate, high: highDate)
+        if let low = try? json.getString(at: "low"), let high = try? json.getString(at: "high") {
+            let lowDate = Range.dateFormatter.date(from: low)
+            let highDate = Range.dateFormatter.date(from: high)
+            if let lowDate = lowDate, let highDate = highDate {
+                self = .dateRange(low: lowDate, high: highDate)
                 return
             }
         }
         
         // try to parse as `Range.NumericRange`
-        if let low = try? json.getDouble(at: "low"), high = try? json.getDouble(at: "high") {
-            self = .NumericRange(low: low, high: high)
+        if let low = try? json.getDouble(at: "low"), let high = try? json.getDouble(at: "high") {
+            self = .numericRange(low: low, high: high)
             return
         }
         
         // try to parse as `Range.CategoricalRange`
-        if let categories = try? json.arrayOf(type: String.self) {
-            self = .CategoricalRange(categories: categories)
+        if let categories = try? json.decodedArray(type: String.self) {
+            self = .categoricalRange(categories: categories)
             return
         }
         
-        throw JSON.Error.ValueNotConvertible(value: json, to: Range.self)
+        throw JSON.Error.valueNotConvertible(value: json, to: Range.self)
     }
 }
 
@@ -466,24 +466,24 @@ public struct Option: JSONEncodable, JSONDecodable {
     /// Used internally to serialize an `Option` model to JSON.
     public func toJSON() -> JSON {
         var json = [String: JSON]()
-        json["key"] = .String(key)
-        json["values"] = .Dictionary(values.map { $0.toJSON() })
+        json["key"] = .string(key)
+        json["values"] = .dictionary(values.map { $0.toJSON() })
         if let name = name {
-            json["name"] = .String(name)
+            json["name"] = .string(name)
         }
         if let descriptionHTML = descriptionHTML {
-            json["description_html"] = .String(descriptionHTML)
+            json["description_html"] = .string(descriptionHTML)
         }
         if let appData = appData {
             json["app_data"] = appData
         }
-        return .Dictionary(json)
+        return .dictionary(json)
     }
 
     /// Used internally to initialize an `Option` model from JSON.
     public init(json: JSON) throws {
         key = try json.getString(at: "key")
-        values = try json.dictionary("values").map {
+        values = try json.getDictionary(at: "values").map {
             json in try json.decode()
         }
         name = try? json.getString(at: "name")

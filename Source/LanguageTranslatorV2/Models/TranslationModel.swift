@@ -67,13 +67,13 @@ public struct TranslationModel: JSONDecodable {
         target = try json.getString(at: "target")
         baseModelID = try json.getString(at: "base_model_id")
         domain = try json.getString(at: "domain")
-        customizable = try json.bool("customizable")
-        defaultModel = try json.bool("default_model")
+        customizable = try json.getBool(at: "customizable")
+        defaultModel = try json.getBool(at: "default_model")
         owner = try json.getString(at: "owner")
 
         guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
-            let type = TrainingStatus.Available.dynamicType
-            throw JSON.Error.ValueNotConvertible(value: json, to: type)
+            let type = type(of: TrainingStatus.available)
+            throw JSON.Error.valueNotConvertible(value: json, to: type)
         }
         self.status = status
     }

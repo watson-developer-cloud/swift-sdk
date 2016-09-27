@@ -66,10 +66,10 @@ internal struct TranslateRequest: JSONEncodable {
     /// Used internally to serialize a `TranslateRequest` model to JSON.
     func toJSON() -> JSON {
         var json = [String: JSON]()
-        if let modelID = modelID { json["model_id"] = .String(modelID) }
-        if let source = source { json["source"] = .String(source) }
-        if let target = target { json["target"] = .String(target) }
-        json["text"] = .Array(text.map { text in .String(text) })
-        return JSON.Dictionary(json)
+        if let modelID = modelID { json["model_id"] = .string(modelID) }
+        if let source = source { json["source"] = .string(source) }
+        if let target = target { json["target"] = .string(target) }
+        json["text"] = .array(text.map { text in .string(text) })
+        return .dictionary(json)
     }
 }

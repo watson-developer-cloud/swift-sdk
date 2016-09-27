@@ -34,7 +34,6 @@ public class LanguageTranslator {
     
     private let username: String
     private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 LanguageTranslatorV2")
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
@@ -54,7 +53,7 @@ public class LanguageTranslator {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> Error? {
         do {
             let json = try JSON(data: data)
             let code = try json.getInt(at: "error_code")
@@ -78,45 +77,43 @@ public class LanguageTranslator {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getModels(
-        source source: String? = nil,
+        source: String? = nil,
         target: String? = nil,
         defaultModelsOnly: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: [TranslationModel] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([TranslationModel]) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let source = source {
-            let queryParameter = NSURLQueryItem(name: "source", value: source)
+            let queryParameter = URLQueryItem(name: "source", value: source)
             queryParameters.append(queryParameter)
         }
         if let target = target {
-            let queryParameter = NSURLQueryItem(name: "target", value: target)
+            let queryParameter = URLQueryItem(name: "target", value: target)
             queryParameters.append(queryParameter)
         }
         if let defaultModelsOnly = defaultModelsOnly {
-            let queryParameter = NSURLQueryItem(name: "default", value: "\(defaultModelsOnly)")
+            let queryParameter = URLQueryItem(name: "default", value: "\(defaultModelsOnly)")
             queryParameters.append(queryParameter)
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v2/models",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["models"]) {
-                (response: Response<[TranslationModel], NSError>) in
+            .responseArray(path: ["models"]) { (response: DataResponse<[TranslationModel]>) in
                 switch response.result {
-                case .Success(let models): success(models)
-                case .Failure(let error): failure?(error)
+                case .success(let models): success(models)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -139,45 +136,44 @@ public class LanguageTranslator {
     public func createModel(
         baseModelID: String,
         name: String? = nil,
-        forcedGlossary: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: String -> Void)
+        forcedGlossary: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (String) -> Void)
     {
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "base_model_id", value: baseModelID))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))
         if let name = name {
-            let queryParameter = NSURLQueryItem(name: "name", value: name)
+            let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
 
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v2/models",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders
+            queryParameters: queryParameters
         )
 
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: forcedGlossary, name: "forced_glossary")
+                multipartFormData.append(forcedGlossary, withName: "forced_glossary")
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
+                case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(path: ["model_id"]) {
-                        (response: Response<String, NSError>) in
+                    upload.responseObject(path: ["model_id"]) { (response: DataResponse<String>) in
                         switch response.result {
-                        case .Success(let modelID): success(modelID)
-                        case .Failure(let error): failure?(error)
+                        case .success(let modelID): success(modelID)
+                        case .failure(let error): failure?(error)
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "Forced glossary could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -197,16 +193,15 @@ public class LanguageTranslator {
      */
     public func deleteModel(
         modelID: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil)
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
-            method: .DELETE,
+            method: .delete,
             url: serviceURL + "/v2/models/\(modelID)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
@@ -214,12 +209,12 @@ public class LanguageTranslator {
             .authenticate(user: username, password: password)
             .responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
             }
@@ -234,26 +229,24 @@ public class LanguageTranslator {
      */
     public func getModel(
         modelID: String,
-        failure: (NSError -> Void)? = nil,
-        success: MonitorTraining -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MonitorTraining) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v2/models/\(modelID)",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<MonitorTraining, NSError>) in
+            .responseObject() { (response: DataResponse<MonitorTraining>) in
                 switch response.result {
-                case .Success(let monitorTraining): success(monitorTraining)
-                case .Failure(let error): failure?(error)
+                case .success(let monitorTraining): success(monitorTraining)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -273,11 +266,11 @@ public class LanguageTranslator {
     public func translate(
         text: String,
         modelID: String,
-        failure: (NSError -> Void)? = nil,
-        success: TranslateResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslateResponse) -> Void)
     {
         let translateRequest = TranslateRequest(text: [text], modelID: modelID)
-        translate(translateRequest, failure: failure, success: success)
+        translate(translateRequest: translateRequest, failure: failure, success: success)
     }
 
     /**
@@ -293,11 +286,11 @@ public class LanguageTranslator {
     public func translate(
         text: [String],
         modelID: String,
-        failure: (NSError -> Void)? = nil,
-        success: TranslateResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslateResponse) -> Void)
     {
         let translateRequest = TranslateRequest(text: text, modelID: modelID)
-        translate(translateRequest, failure: failure, success: success)
+        translate(translateRequest: translateRequest, failure: failure, success: success)
     }
     
     /**
@@ -315,11 +308,11 @@ public class LanguageTranslator {
         text: String,
         source: String,
         target: String,
-        failure: (NSError -> Void)? = nil,
-        success: TranslateResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslateResponse) -> Void)
     {
         let translateRequest = TranslateRequest(text: [text], source: source, target: target)
-        translate(translateRequest, failure: failure, success: success)
+        translate(translateRequest: translateRequest, failure: failure, success: success)
     }
 
     /**
@@ -337,11 +330,11 @@ public class LanguageTranslator {
         text: [String],
         source: String,
         target: String,
-        failure: (NSError -> Void)? = nil,
-        success: TranslateResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslateResponse) -> Void)
     {
         let translateRequest = TranslateRequest(text: text, source: source, target: target)
-        translate(translateRequest, failure: failure, success: success)
+        translate(translateRequest: translateRequest, failure: failure, success: success)
     }
 
     /**
@@ -354,8 +347,8 @@ public class LanguageTranslator {
      */
     private func translate(
         translateRequest: TranslateRequest,
-        failure: (NSError -> Void)? = nil,
-        success: TranslateResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslateResponse) -> Void)
     {
         // serialize translate request to JSON
         guard let body = try? translateRequest.toJSON().serialize() else {
@@ -368,23 +361,21 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v2/translate",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<TranslateResponse, NSError>) in
+            .responseObject() { (response: DataResponse<TranslateResponse>) in
                 switch response.result {
-                case .Success(let translateResponse): success(translateResponse)
-                case .Failure(let error): failure?(error)
+                case .success(let translateResponse): success(translateResponse)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -398,26 +389,24 @@ public class LanguageTranslator {
      - parameter success: A function executed with the list of all languages that can be identified.
      */
     public func getIdentifiableLanguages(
-        failure: (NSError -> Void)? = nil,
-        success: [IdentifiableLanguage] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([IdentifiableLanguage]) -> Void)
     {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v2/identifiable_languages",
-            contentType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            contentType: "application/json"
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) {
-                (response: Response<[IdentifiableLanguage], NSError>) in
+            .responseArray(path: ["languages"]) { (response: DataResponse<[IdentifiableLanguage]>) in
                 switch response.result {
-                case .Success(let languages): success(languages)
-                case .Failure(let error): failure?(error)
+                case .success(let languages): success(languages)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -431,11 +420,11 @@ public class LanguageTranslator {
      */
     public func identify(
         text: String,
-        failure: (NSError -> Void)? = nil,
-        success: [IdentifiedLanguage] -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([IdentifiedLanguage]) -> Void)
     {
         // convert text to NSData with UTF-8 encoding
-        guard let body = text.dataUsingEncoding(NSUTF8StringEncoding) else {
+        guard let body = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -445,23 +434,21 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v2/identify",
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "text/plain",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders,
             messageBody: body
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) {
-                (response: Response<[IdentifiedLanguage], NSError>) in
+            .responseArray(path: ["languages"]) { (response: DataResponse<[IdentifiedLanguage]>) in
                 switch response.result {
-                case .Success(let languages): success(languages)
-                case .Failure(let error): failure?(error)
+                case .success(let languages): success(languages)
+                case .failure(let error): failure?(error)
                 }
             }
     }

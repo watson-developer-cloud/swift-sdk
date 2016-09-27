@@ -20,13 +20,13 @@ import AlchemyVisionV1
 class AlchemyVisionTests: XCTestCase {
     
     private var alchemyVision: AlchemyVision!
-    private let timeout: NSTimeInterval = 10.0
+    private let timeout: TimeInterval = 10.0
 
-    private var car: NSData!
-    private var obama: NSData!
-    private var sign: NSData!
-    private var thomas: NSData!
-    private var html: NSURL!
+    private var car: Data!
+    private var obama: Data!
+    private var sign: Data!
+    private var thomas: Data!
+    private var html: URL!
     
     private var htmlContents: String!
     private let htmlImageName = "cp_1234354872_16947v1-max-250x250.jpg"
@@ -58,25 +58,26 @@ class AlchemyVisionTests: XCTestCase {
     
     /** Load image files with class examples and test images. */
     func loadResources() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard
-            let car = NSData(contentsOfURL: bundle.URLForResource("car", withExtension: "png")!),
-            let obama = NSData(contentsOfURL: bundle.URLForResource("obama", withExtension: "jpg")!),
-            let sign = NSData(contentsOfURL: bundle.URLForResource("sign", withExtension: "jpg")!),
-            let thomas = NSData(contentsOfURL: bundle.URLForResource("thomas", withExtension: "png")!),
-            let html = bundle.URLForResource("example", withExtension: "html")
-        else {
+        let bundle = Bundle(for: type(of: self))
+        do {
+            let car = try Data(contentsOf: bundle.url(forResource: "car", withExtension: "png")!)
+            let obama = try Data(contentsOf: bundle.url(forResource: "obama", withExtension: "jpg")!)
+            let sign = try Data(contentsOf: bundle.url(forResource: "sign", withExtension: "jpg")!)
+            let thomas = try Data(contentsOf: bundle.url(forResource: "thomas", withExtension: "png")!)
+            let html = bundle.url(forResource: "example", withExtension: "html")
+            
+            self.car = car
+            self.obama = obama
+            self.sign = sign
+            self.thomas = thomas
+            self.html = html
+        }
+        catch {
             XCTFail("Unable to locate testing resources.")
             return
         }
         
-        self.car = car
-        self.obama = obama
-        self.sign = sign
-        self.thomas = thomas
-        self.html = html
-        
-        self.htmlContents = try? String(contentsOfURL: html)
+        self.htmlContents = try? String(contentsOf: html)
         guard self.htmlContents != nil else {
             XCTFail("Unable to load html example as String.")
             return
@@ -84,7 +85,7 @@ class AlchemyVisionTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -95,7 +96,7 @@ class AlchemyVisionTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -104,7 +105,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageFaceTagsImage1() {
         let description = "Perform face recognition on an uploaded image."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageFaceTags(image: obama, failure: failWithError) { faceTags in
             
@@ -117,28 +118,28 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify face age
             XCTAssertEqual(face?.age.ageRange, "55-64")
-            XCTAssert(face?.age.score >= 0.0)
-            XCTAssert(face?.age.score <= 1.0)
+            XCTAssert(face!.age.score >= 0.0)
+            XCTAssert(face!.age.score <= 1.0)
             
             // verify face gender
             XCTAssertEqual(face?.gender.gender, "MALE")
-            XCTAssert(face?.gender.score >= 0.0)
-            XCTAssert(face?.gender.score <= 1.0)
+            XCTAssert(face!.gender.score >= 0.0)
+            XCTAssert(face!.gender.score <= 1.0)
             
             // verify face location
-            XCTAssert(face?.height >= 0)
-            XCTAssert(face?.height <= 300)
-            XCTAssert(face?.width >= 0)
-            XCTAssert(face?.width <= 300)
-            XCTAssert(face?.positionX >= 0)
-            XCTAssert(face?.positionX <= 300)
-            XCTAssert(face?.positionY >= 0)
-            XCTAssert(face?.positionY <= 300)
+            XCTAssert(face!.height >= 0)
+            XCTAssert(face!.height <= 300)
+            XCTAssert(face!.width >= 0)
+            XCTAssert(face!.width <= 300)
+            XCTAssert(face!.positionX >= 0)
+            XCTAssert(face!.positionX <= 300)
+            XCTAssert(face!.positionY >= 0)
+            XCTAssert(face!.positionY <= 300)
             
             // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
-            XCTAssertEqual(face?.identity!.name, "Barack Obama")
-            XCTAssert(face?.identity!.score >= 0.0)
-            XCTAssert(face?.identity!.score <= 1.0)
+            XCTAssertEqual(face!.identity!.name, "Barack Obama")
+            XCTAssert(face!.identity!.score >= 0.0)
+            XCTAssert(face!.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
             XCTAssertNil(face?.identity!.knowledgeGraph)
@@ -163,7 +164,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageFaceTagsImage2() {
         let description = "Perform face recognition on an uploaded image."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageFaceTags(image: obama, knowledgeGraph: true, failure: failWithError) { faceTags in
             
@@ -176,28 +177,28 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify face age
             XCTAssertEqual(face?.age.ageRange, "55-64")
-            XCTAssert(face?.age.score >= 0.0)
-            XCTAssert(face?.age.score <= 1.0)
+            XCTAssert(face!.age.score >= 0.0)
+            XCTAssert(face!.age.score <= 1.0)
             
             // verify face gender
             XCTAssertEqual(face?.gender.gender, "MALE")
-            XCTAssert(face?.gender.score >= 0.0)
-            XCTAssert(face?.gender.score <= 1.0)
+            XCTAssert(face!.gender.score >= 0.0)
+            XCTAssert(face!.gender.score <= 1.0)
             
             // verify face location
-            XCTAssert(face?.height >= 0)
-            XCTAssert(face?.height <= 300)
-            XCTAssert(face?.width >= 0)
-            XCTAssert(face?.width <= 300)
-            XCTAssert(face?.positionX >= 0)
-            XCTAssert(face?.positionX <= 300)
-            XCTAssert(face?.positionY >= 0)
-            XCTAssert(face?.positionY <= 300)
+            XCTAssert(face!.height >= 0)
+            XCTAssert(face!.height <= 300)
+            XCTAssert(face!.width >= 0)
+            XCTAssert(face!.width <= 300)
+            XCTAssert(face!.positionX >= 0)
+            XCTAssert(face!.positionX <= 300)
+            XCTAssert(face!.positionY >= 0)
+            XCTAssert(face!.positionY <= 300)
             
             // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
             XCTAssertEqual(face?.identity!.name, "Barack Obama")
-            XCTAssert(face?.identity!.score >= 0.0)
-            XCTAssert(face?.identity!.score <= 1.0)
+            XCTAssert(face!.identity!.score >= 0.0)
+            XCTAssert(face!.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
             XCTAssertEqual(face?.identity!.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
@@ -223,7 +224,7 @@ class AlchemyVisionTests: XCTestCase {
 
     func testGetRankedImageFaceTagsImageWithoutIdentity() {
         let description = "Perform face recognition on an uploaded image with no Celebrity Identity."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageFaceTags(image: thomas, failure: failWithError) { faceTags in
 
@@ -244,7 +245,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageFaceTagsURL1() {
         let description = "Perform face recognition on the image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getRankedImageFaceTags(url: obamaURL, failure: failWithError) { faceTags in
             
@@ -257,28 +258,28 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify face age
             XCTAssertEqual(face?.age.ageRange, "55-64")
-            XCTAssert(face?.age.score >= 0.0)
-            XCTAssert(face?.age.score <= 1.0)
+            XCTAssert(face!.age.score >= 0.0)
+            XCTAssert(face!.age.score <= 1.0)
             
             // verify face gender
             XCTAssertEqual(face?.gender.gender, "MALE")
-            XCTAssert(face?.gender.score >= 0.0)
-            XCTAssert(face?.gender.score <= 1.0)
+            XCTAssert(face!.gender.score >= 0.0)
+            XCTAssert(face!.gender.score <= 1.0)
             
             // verify face location
-            XCTAssert(face?.height >= 0)
-            XCTAssert(face?.height <= 300)
-            XCTAssert(face?.width >= 0)
-            XCTAssert(face?.width <= 300)
-            XCTAssert(face?.positionX >= 0)
-            XCTAssert(face?.positionX <= 300)
-            XCTAssert(face?.positionY >= 0)
-            XCTAssert(face?.positionY <= 300)
+            XCTAssert(face!.height >= 0)
+            XCTAssert(face!.height <= 300)
+            XCTAssert(face!.width >= 0)
+            XCTAssert(face!.width <= 300)
+            XCTAssert(face!.positionX >= 0)
+            XCTAssert(face!.positionX <= 300)
+            XCTAssert(face!.positionY >= 0)
+            XCTAssert(face!.positionY <= 300)
             
             // verify face identity
             XCTAssertEqual(face?.identity!.name, "Barack Obama")
-            XCTAssert(face?.identity!.score >= 0.0)
-            XCTAssert(face?.identity!.score <= 1.0)
+            XCTAssert(face!.identity!.score >= 0.0)
+            XCTAssert(face!.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
             XCTAssertNil(face?.identity!.knowledgeGraph)
@@ -303,7 +304,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageFaceTagsURL2() {
         let description = "Perform face recognition on the image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getRankedImageFaceTags(url: obamaURL, knowledgeGraph: true, failure: failWithError) { faceTags in
             
@@ -316,28 +317,28 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify face age
             XCTAssertEqual(face?.age.ageRange, "55-64")
-            XCTAssert(face?.age.score >= 0.0)
-            XCTAssert(face?.age.score <= 1.0)
+            XCTAssert(face!.age.score >= 0.0)
+            XCTAssert(face!.age.score <= 1.0)
             
             // verify face gender
             XCTAssertEqual(face?.gender.gender, "MALE")
-            XCTAssert(face?.gender.score >= 0.0)
-            XCTAssert(face?.gender.score <= 1.0)
+            XCTAssert(face!.gender.score >= 0.0)
+            XCTAssert(face!.gender.score <= 1.0)
             
             // verify face location
-            XCTAssert(face?.height >= 0)
-            XCTAssert(face?.height <= 300)
-            XCTAssert(face?.width >= 0)
-            XCTAssert(face?.width <= 300)
-            XCTAssert(face?.positionX >= 0)
-            XCTAssert(face?.positionX <= 300)
-            XCTAssert(face?.positionY >= 0)
-            XCTAssert(face?.positionY <= 300)
+            XCTAssert(face!.height >= 0)
+            XCTAssert(face!.height <= 300)
+            XCTAssert(face!.width >= 0)
+            XCTAssert(face!.width <= 300)
+            XCTAssert(face!.positionX >= 0)
+            XCTAssert(face!.positionX <= 300)
+            XCTAssert(face!.positionY >= 0)
+            XCTAssert(face!.positionY <= 300)
             
             // verify face identity (We know Obama is a celebrity and we should get an Identity -> Fore Unwrap)
             XCTAssertEqual(face?.identity!.name, "Barack Obama")
-            XCTAssert(face?.identity!.score >= 0.0)
-            XCTAssert(face?.identity!.score <= 1.0)
+            XCTAssert(face!.identity!.score >= 0.0)
+            XCTAssert(face!.identity!.score <= 1.0)
             
             // verify face identity knowledge graph
             XCTAssertEqual(face?.identity!.knowledgeGraph?.typeHierarchy, "/people/politicians/democrats/barack obama")
@@ -362,12 +363,12 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageHTMLFile1() {
         let description = "Identify the primary image in an HTML file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getImage(html: html, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, "")
-            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            XCTAssert(imageLinks.image.contains(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -375,12 +376,12 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageHTMLFile2() {
         let description = "Identify the primary image in an HTML file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getImage(html: html, url: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
-            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            XCTAssert(imageLinks.image.contains(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -388,12 +389,12 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageHTMLContents1() {
         let description = "Identify the primary image in an HTML document."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getImage(html: htmlContents, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, "")
-            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            XCTAssert(imageLinks.image.contains(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -401,12 +402,12 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageHTMLContents2() {
         let description = "Identify the primary image in an HTML document."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getImage(html: htmlContents, url: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
-            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            XCTAssert(imageLinks.image.contains(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -414,12 +415,12 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageURL() {
         let description = "Identify the primary image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getImage(url: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
-            XCTAssert(imageLinks.image.containsString(self.htmlImageName))
+            XCTAssert(imageLinks.image.contains(self.htmlImageName))
             expectation.fulfill()
         }
         waitForExpectations()
@@ -427,7 +428,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageKeywordsImage1() {
         let description = "Perform image tagging on an uploaded image."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageKeywords(image: car, failure: failWithError) { imageKeywords in
             
@@ -468,7 +469,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageKeywordsImage2() {
         let description = "Perform image tagging on an uploaded image."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageKeywords(image: car, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
             
@@ -509,7 +510,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageKeywordsURL1() {
         let description = "Perform image tagging on the primary image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getRankedImageKeywords(url: carURL, failure: failWithError) { imageKeywords in
             
@@ -550,7 +551,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageKeywordsURL2() {
         let description = "Perform image tagging on the primary image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getRankedImageKeywords(url: carURL, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
             
@@ -591,7 +592,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageSceneTextImage() {
         let description = "Identify text in an uploaded image."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
         alchemyVision.getRankedImageSceneText(image: sign, failure: failWithError) { sceneTexts in
             
@@ -603,30 +604,30 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first
-            XCTAssert(line?.confidence >= 0.0)
-            XCTAssert(line?.confidence <= 1.0)
-            XCTAssert(line?.region.height >= 0)
-            XCTAssert(line?.region.height <= 150)
-            XCTAssert(line?.region.width >= 0)
-            XCTAssert(line?.region.width <= 150)
-            XCTAssert(line?.region.x >= 0)
-            XCTAssert(line?.region.x <= 500)
-            XCTAssert(line?.region.y >= 0)
-            XCTAssert(line?.region.y <= 500)
+            XCTAssert(line!.confidence >= 0.0)
+            XCTAssert(line!.confidence <= 1.0)
+            XCTAssert(line!.region.height >= 0)
+            XCTAssert(line!.region.height <= 150)
+            XCTAssert(line!.region.width >= 0)
+            XCTAssert(line!.region.width <= 150)
+            XCTAssert(line!.region.x >= 0)
+            XCTAssert(line!.region.x <= 500)
+            XCTAssert(line!.region.y >= 0)
+            XCTAssert(line!.region.y <= 500)
             XCTAssertEqual(line?.text, "notice")
             
             // verify first scene text line words
             let words = line?.words.first
-            XCTAssert(words?.confidence >= 0.0)
-            XCTAssert(words?.confidence <= 1.0)
-            XCTAssert(words?.region.height >= 0)
-            XCTAssert(words?.region.height <= 150)
-            XCTAssert(words?.region.width >= 0)
-            XCTAssert(words?.region.width <= 150)
-            XCTAssert(words?.region.x >= 0)
-            XCTAssert(words?.region.x <= 500)
-            XCTAssert(words?.region.y >= 0)
-            XCTAssert(words?.region.y <= 500)
+            XCTAssert(words!.confidence >= 0.0)
+            XCTAssert(words!.confidence <= 1.0)
+            XCTAssert(words!.region.height >= 0)
+            XCTAssert(words!.region.height <= 150)
+            XCTAssert(words!.region.width >= 0)
+            XCTAssert(words!.region.width <= 150)
+            XCTAssert(words!.region.x >= 0)
+            XCTAssert(words!.region.x <= 500)
+            XCTAssert(words!.region.y >= 0)
+            XCTAssert(words!.region.y <= 500)
             XCTAssertEqual(words?.text, "notice")
             
             expectation.fulfill()
@@ -636,7 +637,7 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageSceneTextURL() {
         let description = "Identify text in the primary image at a given URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
         alchemyVision.getRankedImageSceneText(url: signURL, failure: failWithError) { sceneTexts in
             
@@ -648,30 +649,30 @@ class AlchemyVisionTests: XCTestCase {
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first
-            XCTAssert(line?.confidence >= 0.0)
-            XCTAssert(line?.confidence <= 1.0)
-            XCTAssert(line?.region.height >= 0)
-            XCTAssert(line?.region.height <= 150)
-            XCTAssert(line?.region.width >= 0)
-            XCTAssert(line?.region.width <= 150)
-            XCTAssert(line?.region.x >= 0)
-            XCTAssert(line?.region.x <= 500)
-            XCTAssert(line?.region.y >= 0)
-            XCTAssert(line?.region.y <= 500)
+            XCTAssert(line!.confidence >= 0.0)
+            XCTAssert(line!.confidence <= 1.0)
+            XCTAssert(line!.region.height >= 0)
+            XCTAssert(line!.region.height <= 150)
+            XCTAssert(line!.region.width >= 0)
+            XCTAssert(line!.region.width <= 150)
+            XCTAssert(line!.region.x >= 0)
+            XCTAssert(line!.region.x <= 500)
+            XCTAssert(line!.region.y >= 0)
+            XCTAssert(line!.region.y <= 500)
             XCTAssertEqual(line?.text, "notice")
             
             // verify first scene text line words
             let words = line?.words.first
-            XCTAssert(words?.confidence >= 0.0)
-            XCTAssert(words?.confidence <= 1.0)
-            XCTAssert(words?.region.height >= 0)
-            XCTAssert(words?.region.height <= 150)
-            XCTAssert(words?.region.width >= 0)
-            XCTAssert(words?.region.width <= 150)
-            XCTAssert(words?.region.x >= 0)
-            XCTAssert(words?.region.x <= 500)
-            XCTAssert(words?.region.y >= 0)
-            XCTAssert(words?.region.y <= 500)
+            XCTAssert(words!.confidence >= 0.0)
+            XCTAssert(words!.confidence <= 1.0)
+            XCTAssert(words!.region.height >= 0)
+            XCTAssert(words!.region.height <= 150)
+            XCTAssert(words!.region.width >= 0)
+            XCTAssert(words!.region.width <= 150)
+            XCTAssert(words!.region.x >= 0)
+            XCTAssert(words!.region.x <= 500)
+            XCTAssert(words!.region.y >= 0)
+            XCTAssert(words!.region.y <= 500)
             XCTAssertEqual(words?.text, "notice")
             
             expectation.fulfill()
@@ -683,10 +684,9 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageFaceTagsWithInvalidURL() {
         let description = "Perform face recognition at an invalid URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
@@ -697,10 +697,9 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageWithInvalidHTML() {
         let description = "Identify the primary image in an invalid HTML document."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
@@ -711,10 +710,9 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetImageWithInvalidURL() {
         let description = "Identify the primary image at an invalid URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
@@ -725,10 +723,9 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageKeywordsWithInvalidURL() {
         let description = "Perform image tagging on the primary image at an invalid URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         
@@ -739,10 +736,9 @@ class AlchemyVisionTests: XCTestCase {
     
     func testGetRankedImageSceneTextWithInvalidURL() {
         let description = "Identify text in the primary image at an invalid URL."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
         
-        let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+        let failure = { (error: Error) in
             expectation.fulfill()
         }
         

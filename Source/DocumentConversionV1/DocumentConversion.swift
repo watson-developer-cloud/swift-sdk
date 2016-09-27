@@ -36,7 +36,6 @@ public class DocumentConversion {
     private let username: String
     private let password: String
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 DocumentConversionV1")
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
     /**
@@ -57,7 +56,7 @@ public class DocumentConversion {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
             if let errCode = try? json.getInt(at: "code") {
@@ -92,38 +91,39 @@ public class DocumentConversion {
      - parameter success:  A function executed with the response String
      */
     public func convertDocument(
-        config: NSURL,
-        document: NSURL,
+        config: URL,
+        document: URL,
         fileType: FileType? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: String -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (String) -> Void)
     {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: .post,
             url: serviceURL + "/v1/convert_document",
-            userAgent: userAgent,
-            queryParameters: [NSURLQueryItem(name: "version", value: version)],
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            queryParameters: queryParameters
         )
         
         // execute REST request
-        Alamofire.upload(request,
+        Alamofire.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: config, name: "config")
-                multipartFormData.appendBodyPart(fileURL: document, name: "file")
-                if let type = fileType {
-                    multipartFormData.appendBodyPart(
-                        data: type.rawValue.dataUsingEncoding(NSUTF8StringEncoding)!,
-                        name: "type")
+                multipartFormData.append(config, withName: "config")
+                multipartFormData.append(document, withName: "file")
+                if let type = fileType?.rawValue.data(using: String.Encoding.utf8) {
+                    multipartFormData.append(type, withName: "type")
                 }
             },
+            with: request,
             encodingCompletion: { encodingResult in
                 switch encodingResult {
-                case .Success(let upload, _, _):
+                case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseData() {
-                        (response: Response<NSData, NSError>) in
+                    upload.responseData() { response in
                         if response.data == nil {
                             let failureReason = "Response data was nil"
                             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -134,18 +134,18 @@ public class DocumentConversion {
                             //there's an error that's already been captured
                             failure?(error)
                             return
-                        } else if let error = self.dataToError(response.data!) {
+                        } else if let error = self.dataToError(data: response.data!) {
                             failure?(error)
                             return
                         }  else {
                             switch response.result {
-                            case .Success(_): success(
-                                String(data: response.data!, encoding: NSUTF8StringEncoding)!)
-                            case .Failure(let error): failure?(error)
+                            case .success(_): success(
+                                String(data: response.data!, encoding: String.Encoding.utf8)!)
+                            case .failure(let error): failure?(error)
                             }
                         }
                     }
-                case .Failure:
+                case .failure:
                     let failureReason = "One or more values could not be encoded as form data."
                     let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -171,7 +171,7 @@ public class DocumentConversion {
             let answerUnits = try ConversationResponse(json: toJson)
             return answerUnits
         } catch {
-            throw JSON.Error.ValueNotConvertible(value: toJson, to: ConversationResponse.self)
+            throw JSON.Error.valueNotConvertible(value: toJson, to: ConversationResponse.self)
         }
     }
     
@@ -185,21 +185,21 @@ public class DocumentConversion {
      
      - returns: The URL of a JSON file that includes the given parameters.
      */
-    public func writeConfig(type: ReturnType) throws -> NSURL {
+    public func writeConfig(type: ReturnType) throws -> URL {
         // construct JSON dictionary
         var json = [String: JSON]()
-        json["conversion_target"] = JSON.String(type.rawValue)
+        json["conversion_target"] = JSON.string(type.rawValue)
         
         // create a globally unique file name in a temporary directory
         let suffix = "DocumentConversionConfiguration.json"
-        let fileName = String(format: "%@_%@", NSUUID().UUIDString, suffix)
+        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let fileURL = directoryURL.URLByAppendingPathComponent(fileName)!
+        let fileURL = directoryURL.appendingPathComponent(fileName)!
         
         // save JSON dictionary to file
         do {
-            let data = try JSON.Dictionary(json).serialize()
-            try data.writeToURL(fileURL, options: .AtomicWrite)
+            let data = try JSON.dictionary(json).serialize()
+            try data.write(to: fileURL, options: .atomicWrite)
         } catch {
             let message = "Unable to create config file"
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -217,11 +217,11 @@ public class DocumentConversion {
 public enum ReturnType: String {
     
     /// Constant for AnswerUnits
-    case AnswerUnits = "ANSWER_UNITS"
+    case answerUnits = "ANSWER_UNITS"
     
     /// Constant for HTML
-    case HTML = "NORMALIZED_HTML"
+    case html = "NORMALIZED_HTML"
     
     /// Constant for Text
-    case Text = "NORMALIZED_TEXT"
+    case text = "NORMALIZED_TEXT"
 }

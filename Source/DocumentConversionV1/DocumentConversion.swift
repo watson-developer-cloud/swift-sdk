@@ -30,6 +30,9 @@ public class DocumentConversion {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let version: String
@@ -100,7 +103,8 @@ public class DocumentConversion {
             method: .POST,
             url: serviceURL + "/v1/convert_document",
             userAgent: userAgent,
-            queryParameters: [NSURLQueryItem(name: "version", value: version)]
+            queryParameters: [NSURLQueryItem(name: "version", value: version)],
+            headerParameters: defaultHeaders
         )
         
         // execute REST request

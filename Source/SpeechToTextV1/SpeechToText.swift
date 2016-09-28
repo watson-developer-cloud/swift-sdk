@@ -41,6 +41,9 @@ public class SpeechToText {
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private var microphoneSession: SpeechToTextSession?
@@ -92,7 +95,8 @@ public class SpeechToText {
             method: .GET,
             url: serviceURL + "/v1/models",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -119,7 +123,8 @@ public class SpeechToText {
             method: .GET,
             url: serviceURL + "/v1/models/" + modelID,
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -205,6 +210,9 @@ public class SpeechToText {
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
         
+        // set headers
+        session.defaultHeaders = defaultHeaders
+        
         // set callbacks
         session.onResults = success
         session.onError = failure
@@ -275,6 +283,9 @@ public class SpeechToText {
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
+        
+        // set headers
+        session.defaultHeaders = defaultHeaders
         
         // set callbacks
         session.onResults = success

@@ -95,7 +95,7 @@ public class RestRequest: URLRequestConvertible {
         contentType: String? = nil,
         userAgent: String? = nil,
         queryParameters: [NSURLQueryItem]? = nil,
-        headerParameters: [String: String]? = nil,
+        headerParameters: [String: String],
         messageBody: NSData? = nil)
     {
         self.method = method

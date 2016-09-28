@@ -29,6 +29,9 @@ public class RetrieveAndRank {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/retrieve-and-rank/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 RetrieveAndRankV1")
@@ -91,7 +94,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/solr_clusters",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -143,6 +147,7 @@ public class RetrieveAndRank {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -174,7 +179,8 @@ public class RetrieveAndRank {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -210,7 +216,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -243,7 +250,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -276,7 +284,8 @@ public class RetrieveAndRank {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -313,7 +322,8 @@ public class RetrieveAndRank {
         let request = RestRequest(
             method: .GET,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // locate downloads directory
@@ -409,7 +419,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
             contentType: "application/zip",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -455,7 +466,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -498,7 +510,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -542,7 +555,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -584,7 +598,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/update",
             contentType: contentType,
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -656,7 +671,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/select",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -710,7 +726,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/fcselect",
             userAgent: userAgent,
-            queryParameters: queryParameters
+            queryParameters: queryParameters,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -742,7 +759,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/rankers",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -792,7 +810,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/rankers",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -847,7 +866,8 @@ public class RetrieveAndRank {
             method: .POST,
             url: serviceURL + "/v1/rankers/\(rankerID)/rank",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -894,7 +914,8 @@ public class RetrieveAndRank {
         let request = RestRequest(
             method: .DELETE,
             url: serviceURL + "/v1/rankers/\(rankerID)",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -930,7 +951,8 @@ public class RetrieveAndRank {
             method: .GET,
             url: serviceURL + "/v1/rankers/\(rankerID)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request

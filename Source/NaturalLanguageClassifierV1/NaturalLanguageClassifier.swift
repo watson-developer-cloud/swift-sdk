@@ -31,6 +31,9 @@ public class NaturalLanguageClassifier {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
     
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
     private let username: String
     private let password: String
     private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.7.0 NaturalLanguageClassifierV1")
@@ -85,7 +88,8 @@ public class NaturalLanguageClassifier {
             method: .GET,
             url: serviceURL + "/v1/classifiers",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -123,7 +127,8 @@ public class NaturalLanguageClassifier {
             method: .POST,
             url: serviceURL + "/v1/classifiers",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -184,6 +189,7 @@ public class NaturalLanguageClassifier {
             acceptType: "application/json",
             contentType: "application/json",
             userAgent: userAgent,
+            headerParameters: defaultHeaders,
             messageBody: body
         )
         
@@ -216,7 +222,8 @@ public class NaturalLanguageClassifier {
             method: .DELETE,
             url: serviceURL + "/v1/classifiers/\(classifierId)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request
@@ -252,7 +259,8 @@ public class NaturalLanguageClassifier {
             method: .GET,
             url: serviceURL + "/v1/classifiers/\(classifierId)",
             acceptType: "application/json",
-            userAgent: userAgent
+            userAgent: userAgent,
+            headerParameters: defaultHeaders
         )
         
         // execute REST request

@@ -27,7 +27,7 @@ import RestKit
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
     
     private let username: String
     private let password: String

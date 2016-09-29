@@ -288,7 +288,7 @@ class DialogTests: XCTestCase {
         let newNode = DialogV1.Node(content: newGreeting, node: initialNode)
 
         dialog.updateContent(dialogID: dialogID!, nodes: [newNode], failure: failWithError) {
-            expectation.fulfill()tte
+            expectation.fulfill()
         }
         waitForExpectations()
     }

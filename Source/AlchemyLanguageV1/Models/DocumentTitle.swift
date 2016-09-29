@@ -35,6 +35,11 @@ public struct DocumentTitle: JSONDecodable {
     
     /// Used internally to initialize a DocumentTitle object
     public init(json: JSON) throws {
+        let status = try json.string("status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: DocumentTitle.self)
+        }
+
         url = try? json.string("url")
         title = try? json.string("title")
     }

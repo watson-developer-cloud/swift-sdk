@@ -32,6 +32,10 @@ public struct ImageLink: JSONDecodable {
     /// Used internally to initialize an `ImageLink` model from JSON.
     public init(json: JSON) throws {
         status = try json.string("status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: ImageLink.self)
+        }
+
         url = try json.string("url")
         image = try json.string("image")
     }

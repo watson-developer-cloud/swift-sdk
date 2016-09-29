@@ -27,7 +27,7 @@ import RestKit
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
     
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()

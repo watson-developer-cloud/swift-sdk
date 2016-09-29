@@ -53,6 +53,11 @@ public struct Language: JSONDecodable {
     
     /// Used internally to initialize a Language object
     public init(json: JSON) throws {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Language.self)
+        }
+        
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         ethnologue = try? json.getString(at: "ethnologue")

@@ -38,6 +38,10 @@ public struct SceneText: JSONDecodable {
     /// Used internally to initialize a `SceneText` model from JSON.
     public init(json: JSON) throws {
         status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: SceneText.self)
+        }
+        
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         sceneText = try json.getString(at: "sceneText")

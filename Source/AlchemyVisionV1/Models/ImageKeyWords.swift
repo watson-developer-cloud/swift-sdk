@@ -35,6 +35,10 @@ public struct ImageKeywords: JSONDecodable {
     /// Used internally to initialize an `ImageKeywords` model from JSON.
     public init(json: JSON) throws {
         status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: ImageKeywords.self)
+        }
+        
         url = try json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         imageKeywords = try json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)

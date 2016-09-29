@@ -300,7 +300,8 @@ class DialogTests: XCTestCase {
         let description1 = "Start a conversation with the dialog application."
         let expectation1 = self.expectation(description: description1)
         
-        let response1 = "Hi, I\'m Watson! I can help you order a pizza, what size would you like?"
+        let response1 = "Hi, I\'m Watson! I can help you order a pizza through my " +
+                        "convenient Swift SDK! What size would you like?"
         let startTime = Date()
         var conversationID: Int?
         var clientID: Int?
@@ -350,7 +351,8 @@ class DialogTests: XCTestCase {
         let description1 = "Start a conversation with the dialog application."
         let expectation1 = self.expectation(description: description1)
 
-        let response1 = "Hi, I\'m Watson! I can help you order a pizza, what size would you like?"
+        let response1 = "Hi, I\'m Watson! I can help you order a pizza through my " +
+                        "convenient Swift SDK! What size would you like?"
         let startTime = Date()
         var conversationID: Int?
         var clientID: Int?
@@ -448,7 +450,8 @@ class DialogTests: XCTestCase {
         let description1 = "Start a conversation with the dialog application."
         let expectation1 = self.expectation(description: description1)
 
-        let response1 = "Hi, I\'m Watson! I can help you order a pizza, what size would you like?"
+        let response1 = "Hi, I\'m Watson! I can help you order a pizza through my " +
+                        "convenient Swift SDK! What size would you like?"
         var conversationID: Int?
         var clientID: Int?
 

@@ -41,6 +41,11 @@ public struct ConceptResponse: JSONDecodable {
     
     /// Used internally to initialize a ConceptResponse object
     public init(json: JSON) throws {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: ConceptResponse.self)
+        }
+        
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {

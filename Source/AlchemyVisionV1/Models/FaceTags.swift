@@ -35,6 +35,10 @@ public struct FaceTags: JSONDecodable {
     /// Used internally to initialize a `FaceTags` model from JSON.
     public init(json: JSON) throws {
         status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: FaceTags.self)
+        }
+        
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         imageFaces = try json.decodedArray(at: "imageFaces", type: ImageFace.self)

@@ -44,6 +44,11 @@ public struct Entities: JSONDecodable {
     
     /// Used internally to initialize an Entities object
     public init(json: JSON) throws {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Entities.self)
+        }
+        
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {

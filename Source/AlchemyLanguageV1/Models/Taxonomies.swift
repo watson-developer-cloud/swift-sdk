@@ -44,6 +44,11 @@ public struct Taxonomies: JSONDecodable {
     
     /// Used internally to initialize a Taxonomies object
     public init(json: JSON) throws {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Taxonomies.self)
+        }
+        
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {

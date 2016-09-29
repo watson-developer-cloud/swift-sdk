@@ -441,8 +441,6 @@ public class VisualRecognition {
                 showLowConfidence: showLowConfidence
             )
             
-            print(try! String(contentsOfURL: parameters))
-            
             // classify images
             classify(
                 image,

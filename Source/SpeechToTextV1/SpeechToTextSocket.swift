@@ -259,6 +259,7 @@ extension SpeechToTextSocket: WebSocketDelegate {
     
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         state = .Disconnected
+        queue.suspended = true
         guard let error = error else {
             onDisconnect?()
             return

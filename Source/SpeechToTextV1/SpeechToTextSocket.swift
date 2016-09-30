@@ -69,6 +69,11 @@ internal class SpeechToTextSocket {
             return
         }
         
+        // flush operation queue
+        if state == .Disconnected {
+            queue.cancelAllOperations()
+        }
+        
         // update state
         state = .Connecting
         

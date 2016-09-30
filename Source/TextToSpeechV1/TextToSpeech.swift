@@ -244,7 +244,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .validate()
+            .validate(statusCode: 200...299)
             .responseData { response in
                 switch response.result {
                 case .Success(let data):

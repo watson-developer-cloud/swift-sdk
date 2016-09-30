@@ -148,6 +148,12 @@ public enum AudioMediaType {
     
     /// Opus audio format
     case Opus
+    
+    /// mu-law audio format
+    case MuLaw
+    
+    /// Basic audio format
+    case Basic
 
     /// A representation of the audio format as a MIME type string.
     var toString: String {
@@ -156,6 +162,8 @@ public enum AudioMediaType {
         case .L16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
         case .WAV:                         return "audio/wav"
         case .Opus:                        return "audio/ogg;codecs=opus"
+        case .MuLaw:                       return "audio/mulaw"
+        case .Basic:                       return "audio/basic"
         }
     }
 }

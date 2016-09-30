@@ -728,7 +728,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation = expectationWithDescription(description)
         
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 400)
+            XCTAssertEqual(error.code, -6003)
             expectation.fulfill()
         }
         
@@ -743,7 +743,7 @@ class TextToSpeechTests: XCTestCase {
         
         let voice = SynthesisVoice.Custom(voice: "invalid-voice")
         let failure = { (error: NSError) in
-            XCTAssertEqual(error.code, 404)
+            XCTAssertEqual(error.code, -6003)
             expectation.fulfill()
         }
         

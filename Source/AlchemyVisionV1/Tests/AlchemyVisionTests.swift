@@ -107,7 +107,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform face recognition on an uploaded image."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageFaceTags(image: obama, failure: failWithError) { faceTags in
+        alchemyVision.getRankedImageFaceTags(forImage: obama, failure: failWithError) { faceTags in
             
             // verify faceTags structure
             XCTAssertEqual(faceTags.status, "OK")
@@ -166,7 +166,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform face recognition on an uploaded image."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageFaceTags(image: obama, knowledgeGraph: true, failure: failWithError) { faceTags in
+        alchemyVision.getRankedImageFaceTags(forImage: obama, knowledgeGraph: true, failure: failWithError) { faceTags in
             
             // verify faceTags structure
             XCTAssertEqual(faceTags.status, "OK")
@@ -226,7 +226,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform face recognition on an uploaded image with no Celebrity Identity."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageFaceTags(image: thomas, failure: failWithError) { faceTags in
+        alchemyVision.getRankedImageFaceTags(forImage: thomas, failure: failWithError) { faceTags in
 
             // verify faceTags structure
             XCTAssertEqual(faceTags.status, "OK")
@@ -247,7 +247,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform face recognition on the image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getRankedImageFaceTags(url: obamaURL, failure: failWithError) { faceTags in
+        alchemyVision.getRankedImageFaceTags(forURL: obamaURL, failure: failWithError) { faceTags in
             
             // verify faceTags structure
             XCTAssertEqual(faceTags.status, "OK")
@@ -306,7 +306,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform face recognition on the image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getRankedImageFaceTags(url: obamaURL, knowledgeGraph: true, failure: failWithError) { faceTags in
+        alchemyVision.getRankedImageFaceTags(forURL: obamaURL, knowledgeGraph: true, failure: failWithError) { faceTags in
             
             // verify faceTags structure
             XCTAssertEqual(faceTags.status, "OK")
@@ -365,7 +365,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify the primary image in an HTML file."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getImage(html: html, failure: failWithError) { imageLinks in
+        alchemyVision.getImage(forHTML: html, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, "")
             XCTAssert(imageLinks.image.contains(self.htmlImageName))
@@ -378,7 +378,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify the primary image in an HTML file."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getImage(html: html, url: htmlURL, failure: failWithError) { imageLinks in
+        alchemyVision.getImage(forHTML: html, atURL: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
             XCTAssert(imageLinks.image.contains(self.htmlImageName))
@@ -391,7 +391,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify the primary image in an HTML document."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getImage(html: htmlContents, failure: failWithError) { imageLinks in
+        alchemyVision.getImage(forHTML: htmlContents, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, "")
             XCTAssert(imageLinks.image.contains(self.htmlImageName))
@@ -404,7 +404,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify the primary image in an HTML document."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getImage(html: htmlContents, url: htmlURL, failure: failWithError) { imageLinks in
+        alchemyVision.getImage(forHTML: htmlContents, atURL: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
             XCTAssert(imageLinks.image.contains(self.htmlImageName))
@@ -417,7 +417,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify the primary image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getImage(url: htmlURL, failure: failWithError) { imageLinks in
+        alchemyVision.getImage(forURL: htmlURL, failure: failWithError) { imageLinks in
             XCTAssertEqual(imageLinks.status, "OK")
             XCTAssertEqual(imageLinks.url, self.htmlURL)
             XCTAssert(imageLinks.image.contains(self.htmlImageName))
@@ -430,7 +430,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform image tagging on an uploaded image."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageKeywords(image: car, failure: failWithError) { imageKeywords in
+        alchemyVision.getRankedImageKeywords(forImage: car, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
             XCTAssertEqual(imageKeywords.status, "OK")
@@ -471,7 +471,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform image tagging on an uploaded image."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageKeywords(image: car, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
+        alchemyVision.getRankedImageKeywords(forImage: car, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
             XCTAssertEqual(imageKeywords.status, "OK")
@@ -512,7 +512,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform image tagging on the primary image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getRankedImageKeywords(url: carURL, failure: failWithError) { imageKeywords in
+        alchemyVision.getRankedImageKeywords(forURL: carURL, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
             XCTAssertEqual(imageKeywords.status, "OK")
@@ -553,7 +553,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Perform image tagging on the primary image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getRankedImageKeywords(url: carURL, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
+        alchemyVision.getRankedImageKeywords(forURL: carURL, forceShowAll: true, knowledgeGraph: true, failure: failWithError) { imageKeywords in
             
             // verify imageKeywords structure
             XCTAssertEqual(imageKeywords.status, "OK")
@@ -594,7 +594,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify text in an uploaded image."
         let expectation = self.expectation(description: description)
 
-        alchemyVision.getRankedImageSceneText(image: sign, failure: failWithError) { sceneTexts in
+        alchemyVision.getRankedImageSceneText(forImage: sign, failure: failWithError) { sceneTexts in
             
             // verify sceneTexts structure
             XCTAssertEqual(sceneTexts.status, "OK")
@@ -639,7 +639,7 @@ class AlchemyVisionTests: XCTestCase {
         let description = "Identify text in the primary image at a given URL."
         let expectation = self.expectation(description: description)
         
-        alchemyVision.getRankedImageSceneText(url: signURL, failure: failWithError) { sceneTexts in
+        alchemyVision.getRankedImageSceneText(forURL: signURL, failure: failWithError) { sceneTexts in
             
             // verify sceneTexts structure
             XCTAssertEqual(sceneTexts.status, "OK")
@@ -691,7 +691,7 @@ class AlchemyVisionTests: XCTestCase {
         }
         
         let url = "this-url-is-invalid"
-        alchemyVision.getRankedImageFaceTags(url: url, failure: failure, success: failWithResult)
+        alchemyVision.getRankedImageFaceTags(forURL: url, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -704,7 +704,7 @@ class AlchemyVisionTests: XCTestCase {
         }
         
         let html = "this-html-is-invalid"
-        alchemyVision.getImage(html: html, failure: failure, success: failWithResult)
+        alchemyVision.getImage(forHTML: html, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -717,7 +717,7 @@ class AlchemyVisionTests: XCTestCase {
         }
         
         let url = "this-url-is-invalid"
-        alchemyVision.getImage(url: url, failure: failure, success: failWithResult)
+        alchemyVision.getImage(forURL: url, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -730,7 +730,7 @@ class AlchemyVisionTests: XCTestCase {
         }
         
         let url = "this-url-is-invalid"
-        alchemyVision.getRankedImageKeywords(url: url, failure: failure, success: failWithResult)
+        alchemyVision.getRankedImageKeywords(forURL: url, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -743,7 +743,7 @@ class AlchemyVisionTests: XCTestCase {
         }
         
         let url = "this-url-is-invalid"
-        alchemyVision.getRankedImageSceneText(url: url, failure: failure, success: failWithResult)
+        alchemyVision.getRankedImageSceneText(forURL: url, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

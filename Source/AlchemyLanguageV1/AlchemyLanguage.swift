@@ -127,7 +127,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -171,7 +171,7 @@ public class AlchemyLanguage {
         success: @escaping (ConceptResponse) -> Void)
     {
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -222,7 +222,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -274,7 +274,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -331,7 +331,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entities) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -413,7 +413,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -496,7 +496,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -565,7 +565,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Keywords) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -629,7 +629,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -694,7 +694,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -786,7 +786,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -866,7 +866,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -948,7 +948,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -981,6 +981,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter url:                      the URL of the content
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1007,7 +1008,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SAORelations) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1067,6 +1068,7 @@ public class AlchemyLanguage {
      
      - parameter html:                     a HTML document
      - parameter url:                      a reference to where the HTML is located
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1097,7 +1099,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1159,6 +1161,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter text:                     a Text document
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1188,7 +1191,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1296,7 +1299,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1340,7 +1343,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1369,8 +1372,8 @@ public class AlchemyLanguage {
     /**
      Calculates the Sentiment of given content.
      
-     - parameter target:  a pharse to target analysis towards
      - parameter url:     the URL of the content
+     - parameter target:  a phrase to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
@@ -1408,7 +1411,7 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter html:    a HTML document
-     - parameter target:  a pharse to target analysis towards
+     - parameter target:  a phrase to target analysis towards
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
@@ -1423,7 +1426,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1457,7 +1460,7 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter text:    a Text document
-     - parameter target:  a pharse to target analysis towards
+     - parameter target:  a phrase to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
@@ -1470,7 +1473,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1549,7 +1552,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1593,7 +1596,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1671,7 +1674,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1716,7 +1719,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentText) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1769,7 +1772,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1817,7 +1820,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentTitle) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1864,7 +1867,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1949,7 +1952,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -2031,7 +2034,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -2076,7 +2079,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))

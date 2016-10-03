@@ -75,6 +75,11 @@ internal class SpeechToTextSocket {
             return
         }
         
+        // flush operation queue
+        if state == .Disconnected {
+            queue.cancelAllOperations()
+        }
+        
         // update state
         state = .Connecting
         
@@ -260,6 +265,7 @@ extension SpeechToTextSocket: WebSocketDelegate {
     
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         state = .Disconnected
+        queue.suspended = true
         guard let error = error else {
             onDisconnect?()
             return

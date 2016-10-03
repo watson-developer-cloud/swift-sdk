@@ -76,13 +76,10 @@ public class SpeechToTextSession {
     }
     
     /// Invoked when the session disconnects from the Speech to Text service.
-    public var onDisconnect: (Void -> Void)? {
-        get { return socket.onDisconnect }
-        set { socket.onDisconnect = newValue }
-    }
+    public var onDisconnect: (Void -> Void)?
     
     private lazy var socket: SpeechToTextSocket = {
-        SpeechToTextSocket(
+        var socket = SpeechToTextSocket(
             username: self.username,
             password: self.password,
             model: self.model,
@@ -92,6 +89,13 @@ public class SpeechToTextSession {
             websocketsURL: self.websocketsURL,
             defaultHeaders: self.defaultHeaders
         )
+        socket.onDisconnect = {
+            if self.recorder.isRecording {
+                self.stopMicrophone()
+            }
+            self.onDisconnect?()
+        }
+        return socket
     }()
     
     private var recorder: SpeechToTextRecorder

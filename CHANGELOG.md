@@ -7,9 +7,33 @@ _2016_09_14_
 
 This update adds support for Xcode 8 and Swift 2.3+.
 
+## Version 0.7.1
+
+_2016-09-30_
+
+The release updates the Swift 2.2 version of the iOS SDK with several bug fixes and minor changes.
+
+- All Services: The service URL parameter was moved from each `init` to a class property. To set a custom service URL parameter, set the class property instead of passing it as a parameter to the initializer. (For example: `textToSpeech.serviceURL = "..."`.)
+
+- Cartfile: The `Cartfile` was updated to explicitly specify Swift 2.2 compatible versions of the SDK's dependencies.
+
+- Credentials: Testing credentials were moved to a .swift file for convenience.
+
+- Language Translator: Update the default service URL for the recent release of the Language Translator service. To use an existing Language Translation service, specify a custom service URL.
+
+- Natural Language Classifier: Updates the trained classifier id used for testing.
+
+- Speech to Text: Added support for additional audio formats (`AudioMediaType.MuLaw` and `AudioMediaType.Basic`)
+
+- Speech to Text: Added support for the `supported_features` parameter of language models, which identifies whether certain additional service features are supported with any given model.
+
+- Speech to Text: Fix a bug where the microphone would continue recording when disconnected by the service (which also prevented the service from operating correctly when reconnecting).
+
+- Text to Speech: Validate the status code in the response to `synthesize()`. This helps to produce more meaningful error messages when using incorrect credentials with the service.
+
 ## Version 0.7.0
 
-_2016_09_11_
+_2016-09-11_
 
 This update adds a new implementation for Speech to Text. The implementation includes a better, redesigned API. It also includes two separate classes, SpeechToText and SpeechToTextSession for simple and advanced usage, respectively. In particular, SpeechToTextSession exposes more control over the WebSockets session and microphone, including access to raw data and the decibel power level.
 

@@ -55,15 +55,15 @@ public class AlchemyDataNews {
      http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields
      
      - parameter start:   the start value for the search timeframe
-     - parameter end:     the end value for the search timefram
+     - parameter end:     the end value for the search timeframe
      - parameter query:   key-value pairs that will build the request query
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with NewsResponse information
      */
     public func getNews(
-        start: String,
-        end: String,
-        query: [String : String]? = nil,
+        fromStartTime start: String,
+        toEndTime end: String,
+        forQuery query: [String : String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (NewsResponse) -> Void)
     {

@@ -49,7 +49,7 @@ class AlchemyDataNewsTests: XCTestCase {
         let description = "Get the volume of articles within a timeframe"
         let expectation = self.expectation(description: description)
         
-        alchemyDataNews.getNews(start: "now-1d", end: "now", failure: failWithError) { news in
+        alchemyDataNews.getNews(fromStartTime: "now-1d", toEndTime: "now", failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNotNil(news.result!.count, "Count should not be nil")
             expectation.fulfill()
@@ -65,7 +65,7 @@ class AlchemyDataNewsTests: XCTestCase {
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
         
-        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failWithError) { news in
+        alchemyDataNews.getNews(fromStartTime: "now-1d", toEndTime: "now", forQuery: queryDict, failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNil(news.result?.count, "Count should not return")
             XCTAssertNotNil(news.result?.docs?[0].id, "Document ID should not be nil")
@@ -91,7 +91,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(fromStartTime: "now-1d", toEndTime: "now", forQuery: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -107,7 +107,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews(start: "now-1d", end: "now", query: queryDict, failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(fromStartTime: "now-1d", toEndTime: "now", forQuery: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -119,7 +119,7 @@ class AlchemyDataNewsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        alchemyDataNews.getNews(start: "now", end: "now-1d", failure: failure, success: failWithResult)
+        alchemyDataNews.getNews(fromStartTime: "now", toEndTime: "now-1d", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     

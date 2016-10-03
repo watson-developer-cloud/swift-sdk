@@ -1,17 +1,20 @@
 # Watson Developer Cloud iOS SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master)
-[![Docs](https://img.shields.io/badge/Docs-0.4.2-green.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/ios-sdk)
 
 ## Overview
 
 The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build Watson-powered applications. With the iOS SDK you can leverage the power of Watson's advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.
 
-Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/blob/master/Documentation/Quickstart.md) to build your first Watson-powered app!
+There are many resources to help you build your first cognitive application with the iOS SDK:
+- Read the [Readme](README.md)
+- Follow the [QuickStart Guide](Documentation/Quickstart.md)
+- Review a [Sample Application](#sample-applications)
+- Browse the [Documentation](http://watson-developer-cloud.github.io/ios-sdk/)
 
 ## Contents
 
@@ -20,6 +23,10 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Service Instances](#service-instances)
+* [Sample Applications](#sample-applications)
+* [Xcode 8 Compatibility](#xcode-8-compatibility)
+* [Xcode 7 Compatibility](#xcode-7-compatibility)
+* [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -43,7 +50,8 @@ Follow our [Quickstart Guide](https://github.com/watson-developer-cloud/ios-sdk/
 ## Requirements
 
 - iOS 8.0+
-- Xcode 7.3+
+- Xcode 8.0+
+- Swift 2.3+
 
 ## Installation
 
@@ -120,6 +128,28 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 Note that service credentials are different from your Bluemix username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+
+## Sample Applications
+
+* [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
+* [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
+* [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
+
+## Xcode 8 Compatibility
+
+As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Since new Xcode 8 projects default to Swift 3.0, compatability with the iOS SDK requires you to [change your project settings](https://thatthinginswift.com/swift-2-xcode-8/) to specify Swift 2.3.
+
+## Xcode 7 Compatibility
+
+As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Unfortunately, Swift 2.3 is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
+
+To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
+
+`github "watson-developer-cloud/ios-sdk" ~> 0.7.0`
+
+## Objective-C Compatibility
+
+Please see [this tutorial](Documentation/ObjectiveC.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
 
 ## Contributing
 
@@ -663,7 +693,7 @@ func startStreaming() {
     speechToTextSession.onConnect = { print("connected") }
     speechToTextSession.onDisconnect = { print("disconnected") }
     speechToTextSession.onError = { error in print(error) }
-    speechToTextSession.onPower = { decibels in print(decibels) }
+    speechToTextSession.onPowerData = { decibels in print(decibels) }
     speechToTextSession.onMicrophoneData = { data in print("received data") }
     speechToTextSession.onResults = { results in print(results.bestTranscript) }
 

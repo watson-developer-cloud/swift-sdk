@@ -75,7 +75,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getAuthors(forHtml: url!, failure: failWithError) { authors in
+        alchemyLanguage.getAuthors(forHTML: url!, failure: failWithError) { authors in
             XCTAssertNotNil(authors, "Response should not be nil")
             XCTAssertNotNil(authors.authors, "Authors should not be nil")
             expectation.fulfill()
@@ -103,7 +103,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRankedConcepts(forHtml: url!, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(forHTML: url!, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -118,7 +118,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRankedConcepts(forHtml: url!, knowledgeGraph: QueryParam.Excluded, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(forHTML: url!, knowledgeGraph: QueryParam.excluded, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -133,7 +133,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRankedConcepts(forHtml: url!, knowledgeGraph: QueryParam.Included, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(forHTML: url!, knowledgeGraph: QueryParam.included, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -175,7 +175,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRankedNamedEntities(forHtml: url!, url: nil, failure: failWithError) { entities in
+        alchemyLanguage.getRankedNamedEntities(forHTML: url!, atURL: nil, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -216,7 +216,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
 
-        alchemyLanguage.getRankedKeywords(forHtml: url!, failure: failWithError) { keywords in
+        alchemyLanguage.getRankedKeywords(forHTML: url!, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -280,7 +280,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getMicroformatData(forHtml: url!, failure: failWithError) { microformats in
+        alchemyLanguage.getMicroformatData(forHTML: url!, failure: failWithError) { microformats in
             XCTAssertNotNil(microformats, "Response should not be nil")
             XCTAssertNotNil(microformats.microformats, "Microformats should not be nil")
             expectation.fulfill()
@@ -305,7 +305,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getPubDate(forHtml: url!, failure: failWithError) { pubDate in
+        alchemyLanguage.getPubDate(forHTML: url!, failure: failWithError) { pubDate in
             XCTAssertNotNil(pubDate, "Response should not be nil")
             XCTAssertNotNil(pubDate.publicationDate, "Publication date should not be nil")
             expectation.fulfill()
@@ -330,7 +330,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRelations(forHtml: url!, failure: failWithError) { relations in
+        alchemyLanguage.getRelations(forHTML: url!, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -369,7 +369,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getTextSentiment(forHtml: url!, failure: failWithError) { sentiment in
+        alchemyLanguage.getTextSentiment(forHTML: url!, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -397,7 +397,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the sentiment of a phrase in an Ars article"
         let expectation = self.expectation(description: description)
         let phrase = "Developers who want to offer Instant Apps will have to modularize their apps"
-        alchemyLanguage.getTargetedSentiment(forURL: testUrl, target: phrase, failure: failWithError) { sentiment in
+        alchemyLanguage.getTargetedSentiment(forURL: testUrl, withTarget: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Sentiment should not be nil")
             expectation.fulfill()
@@ -412,7 +412,7 @@ class AlchemyLanguageTests: XCTestCase {
         let phrase = "the Yangshao people brewed a mixed beer with specialized tools and knowledge of temperature control"
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getTargetedSentiment(forText: url!, target: phrase, failure: failWithError) { sentiment in
+        alchemyLanguage.getTargetedSentiment(forText: url!, withTarget: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -428,7 +428,7 @@ class AlchemyLanguageTests: XCTestCase {
         let phrase = "Square Enix announced that the Romancing SaGa 2 remake was heading stateside in April"
         let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
         
-        alchemyLanguage.getTargetedSentiment(forText: url!, target: phrase, failure: failWithError) { sentiment in
+        alchemyLanguage.getTargetedSentiment(forText: url!, withTarget: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -454,7 +454,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRankedTaxonomy(forHtml: url!, failure: failWithError) { taxonomies in
+        alchemyLanguage.getRankedTaxonomy(forHTML: url!, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -495,7 +495,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getRawText(forHtml: url!, failure: failWithError) { text in
+        alchemyLanguage.getRawText(forHTML: url!, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -521,7 +521,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getText(forHtml: url!, failure: failWithError) { text in
+        alchemyLanguage.getText(forHTML: url!, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -547,7 +547,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getTitle(forHtml: url!, failure: failWithError) { title in
+        alchemyLanguage.getTitle(forHTML: url!, failure: failWithError) { title in
             XCTAssertNotNil(title, "Response should not be nil")
             XCTAssertNotNil(title.title, "Title should not be nil")
             expectation.fulfill()
@@ -574,7 +574,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getFeedLinks(forHtml: url!, failure: failWithError) { feeds in
+        alchemyLanguage.getFeedLinks(forHTML: url!, failure: failWithError) { feeds in
             XCTAssertNotNil(feeds, "Response should not be nil")
             XCTAssertNotNil(feeds.feeds, "Feeds should not be nil")
             expectation.fulfill()
@@ -600,7 +600,7 @@ class AlchemyLanguageTests: XCTestCase {
         
         let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
         
-        alchemyLanguage.getEmotion(forHtml: url!, failure: failWithError) { emotion in
+        alchemyLanguage.getEmotion(forHTML: url!, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()

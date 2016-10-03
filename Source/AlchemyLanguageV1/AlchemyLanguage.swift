@@ -119,8 +119,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Author information
      */
     public func getAuthors(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAuthors) -> Void)
     {
@@ -213,8 +213,8 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
@@ -398,8 +398,8 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forHtml html: URL,
-        url: String?,
+        forHTML html: URL,
+        atURL url: String?,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -618,8 +618,8 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
@@ -858,8 +858,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Microformat information
      */
     public func getMicroformatData(
-        forHtml html: URL,
-        url: String? = " ",
+        forHTML html: URL,
+        atURL url: String? = " ",
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Microformats) -> Void)
     {
@@ -940,8 +940,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Publication information
      */
     public func getPubDate(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (PublicationResponse) -> Void)
     {
@@ -1082,8 +1082,8 @@ public class AlchemyLanguage {
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1291,8 +1291,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1379,7 +1379,7 @@ public class AlchemyLanguage {
      */
     public func getTargetedSentiment(
         forURL url: String,
-        target: String,
+        withTarget target: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1417,9 +1417,9 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forHtml html: URL,
-        target: String,
-        url: String? = nil,
+        forHTML html: URL,
+        withTarget target: String,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1466,7 +1466,7 @@ public class AlchemyLanguage {
      */
     public func getTargetedSentiment(
         forText text: URL,
-        target: String,
+        withTarget target: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1544,8 +1544,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Taxonomies) -> Void)
     {
@@ -1666,8 +1666,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Raw Text information
      */
     public func getRawText(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentText) -> Void)
     {
@@ -1762,8 +1762,8 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Text information
      */
     public func getText(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         useMetadata: QueryParam? = nil,
         extractLinks: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -1858,8 +1858,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Title information
      */
     public func getTitle(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         useMetadata: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentTitle) -> Void)
@@ -1944,8 +1944,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feeds information
      */
     public func getFeedLinks(
-        forHtml html: URL,
-        url: String? = " ",
+        forHTML html: URL,
+        atURL url: String? = " ",
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Feeds) -> Void)
     {
@@ -2025,8 +2025,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feed information
      */
     public func getEmotion(
-        forHtml html: URL,
-        url: String? = nil,
+        forHTML html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {

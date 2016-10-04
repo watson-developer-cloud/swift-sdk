@@ -65,14 +65,14 @@ public class Conversation {
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
-        workspaceID: WorkspaceID,
+        usingWorkspace workspaceID: WorkspaceID,
         text: String? = nil,
         context: Context? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
         let input = InputData(text: text)
-        message(workspaceID: workspaceID, input: input, context: context, failure: failure, success: success)
+        message(usingWorkspace: workspaceID, input: input, context: context, failure: failure, success: success)
     }
     
     /**
@@ -89,7 +89,7 @@ public class Conversation {
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
-        workspaceID: WorkspaceID,
+        usingWorkspace workspaceID: WorkspaceID,
         input: InputData,
         context: Context? = nil,
         entities: [Entity]? = nil,

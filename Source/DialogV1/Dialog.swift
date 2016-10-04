@@ -124,8 +124,8 @@ public class Dialog {
         application.
      */
     public func createDialog(
-        name: String,
-        fileURL: URL,
+        withName name: String,
+        fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogID) -> Void)
     {
@@ -177,7 +177,7 @@ public class Dialog {
         has been successfully deleted.
      */
     public func deleteDialog(
-        dialogID: DialogID,
+        withID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -216,8 +216,8 @@ public class Dialog {
      - parameter success: A function executed with the URL of the downloaded dialog file.
      */
     public func getDialogFile(
-        dialogID: DialogID,
-        format: Format? = nil,
+        for dialogID: DialogID,
+        inFormat format: Format? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void)
     {
@@ -317,8 +317,8 @@ public class Dialog {
         successfully uploaded.
      */
     public func updateDialog(
-        dialogID: DialogID,
-        fileURL: URL,
+        for dialogID: DialogID,
+        fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -372,7 +372,7 @@ public class Dialog {
      - parameter success: A function executed with the dialog application's nodes.
      */
     public func getContent(
-        dialogID: DialogID,
+        fromDialog dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Node]) -> Void)
     {

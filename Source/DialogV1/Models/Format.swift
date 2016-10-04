@@ -20,7 +20,7 @@ import Foundation
 public enum Format: String {
     
     /// OctetStream Format (i.e. a binary file)
-    case OctetStream = "application/octet-stream"
+    case octetStream = "application/octet-stream"
     
     /// WDSJSON Format
     case WDSJSON = "application/wds+json"

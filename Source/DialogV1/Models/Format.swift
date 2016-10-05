@@ -23,8 +23,8 @@ public enum Format: String {
     case octetStream = "application/octet-stream"
     
     /// WDSJSON Format
-    case WDSJSON = "application/wds+json"
+    case wdsJSON = "application/wds+json"
     
     /// WDSXML Format
-    case WDSXML = "application/wds+xml"
+    case wdsXML = "application/wds+xml"
 }

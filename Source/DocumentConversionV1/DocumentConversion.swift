@@ -91,9 +91,9 @@ public class DocumentConversion {
      - parameter success:  A function executed with the response String
      */
     public func convertDocument(
-        config: URL,
-        document: URL,
-        fileType: FileType? = nil,
+        usingConfiguration config: URL,
+        onDocument document: URL,
+        ofType fileType: FileType? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {

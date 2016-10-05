@@ -146,6 +146,9 @@ public class SpeechToText {
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+        request. The base language model of the specified custom language model must match the
+        model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
@@ -155,6 +158,7 @@ public class SpeechToText {
         audio: NSURL,
         settings: RecognitionSettings,
         model: String? = nil,
+        customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
@@ -171,6 +175,7 @@ public class SpeechToText {
             data,
             settings: settings,
             model: model,
+            customizationID: customizationID,
             learningOptOut: learningOptOut,
             failure: failure,
             success: success
@@ -184,6 +189,9 @@ public class SpeechToText {
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+        request. The base language model of the specified custom language model must match the
+        model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
@@ -193,6 +201,7 @@ public class SpeechToText {
         audio: NSData,
         settings: RecognitionSettings,
         model: String? = nil,
+        customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         failure: (NSError -> Void)? = nil,
         success: SpeechRecognitionResults -> Void)
@@ -202,6 +211,7 @@ public class SpeechToText {
             username: username,
             password: password,
             model: model,
+            customizationID: customizationID,
             learningOptOut: learningOptOut
         )
         
@@ -252,6 +262,9 @@ public class SpeechToText {
      - parameter settings: The configuration for this transcription request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+        request. The base language model of the specified custom language model must match the
+        model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter compress: Should microphone audio be compressed to Opus format?
         (Opus compression reduces latency and bandwidth.)
@@ -262,6 +275,7 @@ public class SpeechToText {
     public func recognizeMicrophone(
         settings: RecognitionSettings,
         model: String? = nil,
+        customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         failure: (NSError -> Void)? = nil,
@@ -276,6 +290,7 @@ public class SpeechToText {
             username: username,
             password: password,
             model: model,
+            customizationID: customizationID,
             learningOptOut: learningOptOut
         )
         

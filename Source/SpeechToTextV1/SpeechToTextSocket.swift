@@ -42,6 +42,7 @@ internal class SpeechToTextSocket {
         username: String,
         password: String,
         model: String?,
+        customizationID: String?,
         learningOptOut: Bool?,
         serviceURL: String,
         tokenURL: String,
@@ -53,7 +54,7 @@ internal class SpeechToTextSocket {
         restToken = RestToken(tokenURL: tokenURL, username: username, password: password)
         
         // build url with options
-        let url = SpeechToTextSocket.buildURL(websocketsURL, model: model, learningOptOut: learningOptOut)!
+        let url = SpeechToTextSocket.buildURL(websocketsURL, model: model, customizationID: customizationID, learningOptOut: learningOptOut)!
         
         // initialize socket
         socket = WebSocket(url: url)
@@ -170,10 +171,13 @@ internal class SpeechToTextSocket {
         }
     }
     
-    private static func buildURL(url: String, model: String?, learningOptOut: Bool?) -> NSURL? {
+    private static func buildURL(url: String, model: String?, customizationID: String?, learningOptOut: Bool?) -> NSURL? {
         var queryParameters = [NSURLQueryItem]()
         if let model = model {
             queryParameters.append(NSURLQueryItem(name: "model", value: model))
+        }
+        if let customizationID = customizationID {
+            queryParameters.append(NSURLQueryItem(name: "customization_id", value: customizationID))
         }
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"

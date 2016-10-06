@@ -77,8 +77,8 @@ public class LanguageTranslator {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getModels(
-        source: String? = nil,
-        target: String? = nil,
+        withSourceLanguage source: String? = nil,
+        withTargetLanguage target: String? = nil,
         defaultModelsOnly: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([TranslationModel]) -> Void)
@@ -134,9 +134,9 @@ public class LanguageTranslator {
      - parameter success: A function executed with the modelID of the created model.
      */
     public func createModel(
-        baseModelID: String,
-        name: String? = nil,
-        forcedGlossary: URL,
+        usingBaseModelID baseModelID: String,
+        withName name: String? = nil,
+        fromFile forcedGlossary: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {
@@ -192,7 +192,7 @@ public class LanguageTranslator {
      - parameter success: A function executed after the given model has been deleted.
      */
     public func deleteModel(
-        modelID: String,
+        withID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -228,7 +228,7 @@ public class LanguageTranslator {
      - parameter success: A function executed with the retrieved information about the model.
      */
     public func getModel(
-        modelID: String,
+        withID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MonitorTraining) -> Void)
     {
@@ -264,8 +264,8 @@ public class LanguageTranslator {
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: String,
-        modelID: String,
+        _ text: String,
+        usingModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -284,8 +284,8 @@ public class LanguageTranslator {
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: [String],
-        modelID: String,
+        _ text: [String],
+        usingModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -305,9 +305,9 @@ public class LanguageTranslator {
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: String,
-        source: String,
-        target: String,
+        _ text: String,
+        fromLanguage source: String,
+        toLanguage target: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -327,9 +327,9 @@ public class LanguageTranslator {
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: [String],
-        source: String,
-        target: String,
+        _ text: [String],
+        fromLanguage source: String,
+        toLanguage target: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -419,7 +419,7 @@ public class LanguageTranslator {
      - parameter success: A function executed with all identified languages in the given text.
      */
     public func identify(
-        text: String,
+        languageOf text: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([IdentifiedLanguage]) -> Void)
     {

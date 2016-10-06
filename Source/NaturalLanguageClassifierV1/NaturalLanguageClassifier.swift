@@ -159,14 +159,14 @@ public class NaturalLanguageClassifier {
      Uses the provided classifier to assign labels to the input text. The status of the classifier 
      must be "Available" before you can classify calls.
      
-     - parameter classifierId: Classifier ID to use
      - parameter text: Phrase to classify
+     - parameter classifierId: Classifier ID to use
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func classify(
+        _ text: String,
         usingClassifierID classifierId: String,
-        onText text: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void) {
         

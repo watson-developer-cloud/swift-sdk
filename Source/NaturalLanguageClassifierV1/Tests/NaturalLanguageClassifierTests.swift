@@ -135,7 +135,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: description)
         var classificationDetails: NaturalLanguageClassifierV1.Classification?
         
-        naturalLanguageClassifier.classify(usingClassifierID: classifierId, onText: text,
+        naturalLanguageClassifier.classify(text, usingClassifierID: classifierId,
                                            failure: failWithError) { classification in
             classificationDetails = classification
             expectation.fulfill()
@@ -315,8 +315,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
             expectation.fulfill()
         }
         
-        naturalLanguageClassifier.classify(usingClassifierID: trainedClassifierId,
-                                           onText: "", failure: failure, success: failWithResult)
+        naturalLanguageClassifier.classify("", usingClassifierID: trainedClassifierId,
+                                           failure: failure, success: failWithResult)
         
         waitForExpectations()
     }
@@ -330,8 +330,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
             expectation.fulfill()
         }
         
-        naturalLanguageClassifier.classify(usingClassifierID: "InvalidClassifierID",
-                                           onText: "How hot will it be today?",
+        naturalLanguageClassifier.classify("How hot will it be today?",
+                                           usingClassifierID: "InvalidClassifierID",
                                            failure: failure, success: failWithResult)
         
         waitForExpectations()

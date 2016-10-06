@@ -114,8 +114,8 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func createClassifier(
-        trainingMetadata: URL,
-        trainingData: URL,
+        usingMetadataFile trainingMetadata: URL,
+        withTrainingFile trainingData: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
         
@@ -165,8 +165,8 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func classify(
-        classifierId: String,
-        text: String,
+        usingClassifierID classifierId: String,
+        onText text: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void) {
         
@@ -208,7 +208,7 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func deleteClassifier(
-        classifierId: String,
+        withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -244,7 +244,7 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getClassifier(
-        classifierId: String,
+        withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
         

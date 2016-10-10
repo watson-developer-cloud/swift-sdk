@@ -146,13 +146,13 @@ public struct RelatedMentionArgument: JSONDecodable {
 public enum RelatedMentionClass: String {
     
     /// A relation between two specific arguments.
-    case Specific = "SPECIFIC"
+    case specific = "SPECIFIC"
     
     /// A negated relation.
-    case Negated = "NEG"
+    case negated = "NEG"
     
     /// A relation in which at least one of the two arguments is not specific.
-    case Other = "OTHER"
+    case other = "OTHER"
 }
 
 /** The nature of the related mention. */
@@ -160,24 +160,24 @@ public enum Modality: String {
     
     /// A relation that is asserted as fact and which can be interpreted as such in the world in 
     /// which the arguments exist.
-    case Asserted = "ASSERTED"
+    case asserted = "ASSERTED"
     
     /// A relation that can be interpreted to hold only in a counterfactual world.
-    case Other = "OTHER"
+    case other = "OTHER"
 }
 
 /** The time for which the relation mention holds. */
 public enum Tense: String {
     
     /// The relation holds only for some span prior to the publication time.
-    case Past = "PAST"
+    case past = "PAST"
     
     /// A relation holds for a limited span that overlaps with the publication time.
-    case Present = "PRESENT"
+    case present = "PRESENT"
     
     /// A relation holds for some span of time after the publication time.
-    case Future = "FUTURE"
+    case future = "FUTURE"
     
     /// The relation is static, or the span of time cannot be determined with certainty.
-    case Unspecified = "UNSPECIFIED"
+    case unspecified = "UNSPECIFIED"
 }

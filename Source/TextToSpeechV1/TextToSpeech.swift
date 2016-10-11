@@ -614,14 +614,14 @@ public class TextToSpeech {
     /**
      Lists the translation for a single word from the custom model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model.
      - parameter word: The word in the custom voice model whose translation should be listed.
+     - parameter customizationID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a Translation object.
      */
     public func getTranslation(
-        usingCustomizationID customizationID: String,
         forWord word: String,
+        usingCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void) {
         

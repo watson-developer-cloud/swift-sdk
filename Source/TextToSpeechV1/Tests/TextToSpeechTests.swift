@@ -610,7 +610,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Get the details of the newly added word."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.getTranslation(usingCustomizationID: customizationID, forWord: "IBM", failure: failWithError) {
+        textToSpeech.getTranslation(forWord: "IBM", usingCustomizationID: customizationID, failure: failWithError) {
             translation in
             
             XCTAssertEqual(translation.translation, "eye bee em")
@@ -968,8 +968,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            usingCustomizationID: "InvalidIDValue",
             forWord: "someWord",
+            usingCustomizationID: "InvalidIDValue",
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -983,8 +983,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            usingCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             forWord: "someWord",
+            usingCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()

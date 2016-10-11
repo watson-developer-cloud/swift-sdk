@@ -113,8 +113,8 @@ public class TextToSpeech {
      - parameter success: A function executed with information about the given voice.
      */
     public func getVoice(
-        voice: SynthesisVoice,
-        customizationID: String? = nil,
+        _ voice: SynthesisVoice,
+        usingCustomizationID customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
     {
@@ -162,9 +162,9 @@ public class TextToSpeech {
             criteria.
      */
     public func getPronunciation(
-        text: String,
-        voice: SynthesisVoice? = nil,
-        format: PhonemeFormat? = nil,
+        ofText text: String,
+        withVoice voice: SynthesisVoice? = nil,
+        inFormat format: PhonemeFormat? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Pronunciation) -> Void)
     {
@@ -214,9 +214,9 @@ public class TextToSpeech {
      */
     public func synthesize(
         text: String,
-        voice: SynthesisVoice? = nil,
-        customizationID: String? = nil,
-        audioFormat: AudioFormat = .wav,
+        withVoice voice: SynthesisVoice? = nil,
+        usingCustomizationID customizationID: String? = nil,
+        inAudioFormat audioFormat: AudioFormat = .wav,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Data) -> Void)
     {
@@ -285,7 +285,7 @@ public class TextToSpeech {
             models.
      */
     public func getCustomizations(
-        language: String? = nil,
+        forLanguage language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Customization]) -> Void) {
         
@@ -325,9 +325,9 @@ public class TextToSpeech {
      - parameter success: A function executed with a customization ID.
      */
     public func createCustomization(
-        name: String,
-        language: String? = nil,
-        description: String? = nil,
+        withName name: String,
+        forLanguage language: String? = nil,
+        withDescription description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationID) -> Void) {
         
@@ -377,7 +377,7 @@ public class TextToSpeech {
      - parameter success: A function executed if no error occurs.
      */
     public func deleteCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -413,7 +413,7 @@ public class TextToSpeech {
      - parameter success: A function executed with a CustomizationWords object.
      */
     public func getCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationWords) -> Void) {
         
@@ -450,9 +450,9 @@ public class TextToSpeech {
      - parameter success: A function executed if no error occurs.
      */
     public func updateCustomization(
-        customizationID: String,
-        name: String? = nil,
-        description: String? = nil,
+        withID customizationID: String,
+        newName name: String? = nil,
+        newDescription description: String? = nil,
         words: [Word] = [],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
@@ -501,7 +501,7 @@ public class TextToSpeech {
      - parameter success: A function executed with an array of Word objects.
      */
     public func getWords(
-        customizationID: String,
+        forCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Word]) -> Void) {
         
@@ -534,8 +534,8 @@ public class TextToSpeech {
      - parameter success: A function executed if no error occurs.
      */
     public func addWords(
-        customizationID: String,
-        words: [Word],
+        toCustomizationID customizationID: String,
+        fromArray words: [Word],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -577,14 +577,14 @@ public class TextToSpeech {
     /**
      Deletes the specified word from custom voice model.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter word: The word to be deleted from the custom voice model.
+     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteWord(
-        customizationID: String,
-        word: String,
+        _ word: String,
+        fromCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -620,8 +620,8 @@ public class TextToSpeech {
      - parameter success: A function executed with a Translation object.
      */
     public func getTranslation(
-        customizationID: String,
-        word: String,
+        usingCustomizationID customizationID: String,
+        forWord word: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void) {
         
@@ -647,16 +647,16 @@ public class TextToSpeech {
     /**
      Adds a single word and its translation to the custom voice model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter word: The new word to be added to the custom voice model.
+     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter translation: The translation of the new word.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func addWord(
-        customizationID: String,
-        word: String,
-        translation: String,
+        _ word: String,
+        toCustomizationID customizationID: String,
+        withTranslation translation: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         

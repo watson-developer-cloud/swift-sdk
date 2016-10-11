@@ -56,7 +56,7 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.getCustomizations(failure: failWithError) { customizations in
             for customization in customizations {
-                self.textToSpeech.deleteCustomization(customizationID: customization.customizationID)
+                self.textToSpeech.deleteCustomization(withID: customization.customizationID)
             }
             expectation.fulfill()
         }
@@ -99,7 +99,7 @@ class TextToSpeechTests: XCTestCase {
         for voice in allVoices {
             let description = "Get information about the given voice."
             let expectation = self.expectation(description: description)
-            textToSpeech.getVoice(voice: voice, failure: failWithError) { voice in
+            textToSpeech.getVoice(voice, failure: failWithError) { voice in
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -117,7 +117,7 @@ class TextToSpeechTests: XCTestCase {
                 continue
             }
             
-            textToSpeech.getPronunciation(text: text, voice: voice, format: .spr, failure: failWithError) {
+            textToSpeech.getPronunciation(ofText: text, withVoice: voice, inFormat: .spr, failure: failWithError) {
                 pronunciation in
                 XCTAssertGreaterThan(pronunciation.pronunciation.characters.count, 0)
                 expectation.fulfill()
@@ -153,7 +153,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, voice: .us_Lisa, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: text, withVoice: .us_Lisa, inAudioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -176,7 +176,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: germanText, voice: .de_Dieter, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: germanText, withVoice: .de_Dieter, inAudioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -199,7 +199,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: japaneseText, voice: .jp_Emi, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: japaneseText, withVoice: .jp_Emi, inAudioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -222,7 +222,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, audioFormat: .opus, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, inAudioFormat: .opus, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -234,7 +234,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, audioFormat: .wav, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, inAudioFormat: .wav, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -246,7 +246,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, audioFormat: .flac, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, inAudioFormat: .flac, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -258,7 +258,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, audioFormat: .l16, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, inAudioFormat: .l16, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -314,7 +314,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         var newCVMID: CustomizationID?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -342,7 +342,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the newly created custom voice model."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.deleteCustomization(withID: customizationID.customizationID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -354,7 +354,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: CustomizationID?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -373,8 +373,8 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.updateCustomization(
-            customizationID: customizationID.customizationID,
-            name: "Updated name",
+            withID: customizationID.customizationID,
+            newName: "Updated name",
             failure: failWithError) {
                 
             expectation2.fulfill()
@@ -384,7 +384,7 @@ class TextToSpeechTests: XCTestCase {
         let description3 = "Check that the custom voice model's name was updated properly."
         let expectation3 = self.expectation(description: description3)
         
-        textToSpeech.getCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.getCustomization(withID: customizationID.customizationID, failure: failWithError) {
             customization in
             
             XCTAssertEqual(customization.name, "Updated name")
@@ -395,7 +395,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the newly created custom voice model."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.deleteCustomization(withID: customizationID.customizationID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -407,7 +407,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: CustomizationID?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -426,8 +426,8 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.updateCustomization(
-            customizationID: customizationID.customizationID,
-            description: "Updated description",
+            withID: customizationID.customizationID,
+            newDescription: "Updated description",
             failure: failWithError) {
                 
                 expectation2.fulfill()
@@ -437,7 +437,7 @@ class TextToSpeechTests: XCTestCase {
         let description3 = "Check that the custom voice model's description was updated properly."
         let expectation3 = self.expectation(description: description3)
         
-        textToSpeech.getCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.getCustomization(withID: customizationID.customizationID, failure: failWithError) {
             customization in
             
             XCTAssertEqual(customization.description, "Updated description")
@@ -448,7 +448,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the newly created custom voice model."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.deleteCustomization(withID: customizationID.customizationID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -460,7 +460,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: CustomizationID?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -479,7 +479,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.updateCustomization(
-            customizationID: customizationID.customizationID,
+            withID: customizationID.customizationID,
             words: [Word(word: "IBM", translation: "eye bee em")],
             failure: failWithError) {
                 
@@ -490,7 +490,7 @@ class TextToSpeechTests: XCTestCase {
         let description3 = "Check that the custom voice model's words were updated properly."
         let expectation3 = self.expectation(description: description3)
         
-        textToSpeech.getCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.getCustomization(withID: customizationID.customizationID, failure: failWithError) {
             customization in
             
             XCTAssertEqual(customization.words.count, 1)
@@ -502,7 +502,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the newly created custom voice model."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID.customizationID, failure: failWithError) {
+        textToSpeech.deleteCustomization(withID: customizationID.customizationID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -514,7 +514,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: String?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -533,9 +533,8 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.addWords(
-            customizationID: customizationID,
-            words: [Word(word: "IBM",
-                translation: "eye bee em"),
+            toCustomizationID: customizationID,
+            fromArray: [Word(word: "IBM", translation: "eye bee em"),
                 Word(word: "MIL", translation: "mill")],
             failure: failWithError) {
                 
@@ -546,7 +545,7 @@ class TextToSpeechTests: XCTestCase {
         let description3 = "Make sure there are 2 words in the custom voice model."
         let expectation3 = self.expectation(description: description3)
         
-        textToSpeech.getWords(customizationID: customizationID, failure: failWithError) {
+        textToSpeech.getWords(forCustomizationID: customizationID, failure: failWithError) {
             words in
             
             XCTAssertEqual(words.count, 2)
@@ -557,7 +556,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the custom voice model."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID) {
+        textToSpeech.deleteCustomization(withID: customizationID) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -569,7 +568,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: String?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -588,9 +587,9 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.addWord(
-            customizationID: customizationID,
-            word: "IBM",
-            translation: "eye bee em",
+            "IBM",
+            toCustomizationID: customizationID,
+            withTranslation: "eye bee em",
             failure: failWithError) {
                 
             expectation2.fulfill()
@@ -600,7 +599,7 @@ class TextToSpeechTests: XCTestCase {
         let description3 = "Make sure there is 1 word in the custom voice model."
         let expectation3 = self.expectation(description: description3)
         
-        textToSpeech.getWords(customizationID: customizationID, failure: failWithError) {
+        textToSpeech.getWords(forCustomizationID: customizationID, failure: failWithError) {
             words in
             
             XCTAssertEqual(words.count, 1)
@@ -611,7 +610,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Get the details of the newly added word."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.getTranslation(customizationID: customizationID, word: "IBM", failure: failWithError) {
+        textToSpeech.getTranslation(usingCustomizationID: customizationID, forWord: "IBM", failure: failWithError) {
             translation in
             
             XCTAssertEqual(translation.translation, "eye bee em")
@@ -622,7 +621,7 @@ class TextToSpeechTests: XCTestCase {
         let description5 = "Delete the custom voice model."
         let expectation5 = self.expectation(description: description5)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID) {
+        textToSpeech.deleteCustomization(withID: customizationID) {
             expectation5.fulfill()
         }
         waitForExpectations()
@@ -634,7 +633,7 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: description1)
         
         var newCVMID: String?
-        textToSpeech.createCustomization(name: "Swift SDK Test Custom Voice Model", failure: failWithError) {
+        textToSpeech.createCustomization(withName: "Swift SDK Test Custom Voice Model", failure: failWithError) {
             customizationID in
             
             XCTAssertNotNil(customizationID)
@@ -653,9 +652,9 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         textToSpeech.addWord(
-            customizationID: customizationID,
-            word: "IBM",
-            translation: "eye bee em",
+            "IBM",
+            toCustomizationID: customizationID,
+            withTranslation: "eye bee em",
             failure: failWithError) {
                 
                 expectation2.fulfill()
@@ -665,7 +664,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Delete the newly added word."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.deleteWord(customizationID: customizationID, word: "IBM", failure: failWithError){
+        textToSpeech.deleteWord("IBM", fromCustomizationID: customizationID, failure: failWithError){
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -673,7 +672,7 @@ class TextToSpeechTests: XCTestCase {
         let description5 = "Make sure there are no words in the custom voice model."
         let expectation5 = self.expectation(description: description5)
         
-        textToSpeech.getWords(customizationID: customizationID, failure: failWithError) {
+        textToSpeech.getWords(forCustomizationID: customizationID, failure: failWithError) {
             words in
             
             XCTAssertEqual(words.count, 0)
@@ -684,7 +683,7 @@ class TextToSpeechTests: XCTestCase {
         let description6 = "Delete the custom voice model."
         let expectation6 = self.expectation(description: description6)
         
-        textToSpeech.deleteCustomization(customizationID: customizationID) {
+        textToSpeech.deleteCustomization(withID: customizationID) {
             expectation6.fulfill()
         }
         waitForExpectations()
@@ -702,7 +701,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getPronunciation(text: text, voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.getPronunciation(ofText: text, withVoice: voice, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -716,7 +715,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getVoice(voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.getVoice(voice, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -743,7 +742,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.synthesize(text: text, voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.synthesize(text: text, withVoice: voice, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -756,7 +755,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getCustomizations(language: "InvalidLanguage", failure: failure, success: failWithResult)
+        textToSpeech.getCustomizations(forLanguage: "InvalidLanguage", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -770,8 +769,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.createCustomization(
-            name: "CustomVoiceModelName",
-            language: "InvalidLanguage",
+            withName: "CustomVoiceModelName",
+            forLanguage: "InvalidLanguage",
             failure: failure,
             success: failWithResult)
         
@@ -787,7 +786,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.deleteCustomization(customizationID: "InvalidIDValue", failure: failure, success: failWithResult)
+        textToSpeech.deleteCustomization(withID: "InvalidIDValue", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -801,7 +800,7 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.deleteCustomization(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            withID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure,
             success: failWithResult)
         
@@ -817,7 +816,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getCustomization(customizationID: "InvalidIDValue", failure: failure, success: failWithResult)
+        textToSpeech.getCustomization(withID: "InvalidIDValue", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -831,7 +830,7 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getCustomization(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            withID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure,
             success: failWithResult)
         
@@ -847,7 +846,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getCustomization(customizationID: "InvalidIDValue", failure: failure, success: failWithResult)
+        textToSpeech.getCustomization(withID: "InvalidIDValue", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -861,7 +860,7 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getCustomization(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            withID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure,
             success: failWithResult)
         waitForExpectations()
@@ -876,7 +875,7 @@ class TextToSpeechTests: XCTestCase {
             expectation1.fulfill()
         }
         
-        textToSpeech.getWords(customizationID: "InvalidIDValue", failure: failure1, success: failWithResult)
+        textToSpeech.getWords(forCustomizationID: "InvalidIDValue", failure: failure1, success: failWithResult)
         waitForExpectations()
         
         let description2 = "Get all words of a custom voice model with a customization ID the " +
@@ -888,7 +887,7 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getWords(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            forCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()
@@ -904,8 +903,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.addWords(
-            customizationID: "InvalidIDValue",
-            words: [Word(word: "ACLs", translation: "ackles")],
+            toCustomizationID: "InvalidIDValue",
+            fromArray: [Word(word: "ACLs", translation: "ackles")],
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -919,8 +918,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.addWords(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
-            words: [Word(word: "ACLs", translation: "ackles")],
+            toCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            fromArray: [Word(word: "ACLs", translation: "ackles")],
             failure: failure2,
             success: failWithResult)
         waitForExpectations()
@@ -936,8 +935,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.deleteWord(
-            customizationID: "InvalidIDValue",
-            word: "someWord",
+            "someWord",
+            fromCustomizationID: "InvalidIDValue",
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -951,8 +950,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.deleteWord(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
-            word: "someWord",
+            "someWord",
+            fromCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()
@@ -969,8 +968,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            customizationID: "InvalidIDValue",
-            word: "someWord",
+            usingCustomizationID: "InvalidIDValue",
+            forWord: "someWord",
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -984,8 +983,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
-            word: "someWord",
+            usingCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            forWord: "someWord",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()
@@ -1002,9 +1001,9 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.addWord(
-            customizationID: "InvalidIDValue",
-            word: "someWord",
-            translation: "translation",
+            "someWord",
+            toCustomizationID: "InvalidIDValue",
+            withTranslation: "translation",
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -1018,9 +1017,9 @@ class TextToSpeechTests: XCTestCase {
         }
         
          textToSpeech.addWord(
-            customizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
-            word: "someWord",
-            translation: "translation",
+            "someWord",
+            toCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            withTranslation: "translation",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()

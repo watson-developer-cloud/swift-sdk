@@ -124,9 +124,9 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the created classifier.
      */
     public func createClassifier(
-        name: String,
-        positiveExamples: [Class],
-        negativeExamples: URL? = nil,
+        withName name: String,
+        fromPositiveExamples positiveExamples: [Class],
+        andNegativeExamples negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -204,7 +204,7 @@ public class VisualRecognition {
      - parameter success: A function executed after the classifier has been successfully deleted.
      */
     public func deleteClassifier(
-        classifierID: String,
+        withID classifierID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -246,7 +246,7 @@ public class VisualRecognition {
             classifier.
      */
     public func getClassifier(
-        classifierID: String,
+        withID classifierID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -289,9 +289,9 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the updated classifier.
      */
     public func updateClassifier(
-        classifierID: String,
-        positiveExamples: [Class]? = nil,
-        negativeExamples: URL? = nil,
+        withID classifierID: String,
+        withPositiveExamples positiveExamples: [Class]? = nil,
+        withNegativeExamples negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -362,9 +362,9 @@ public class VisualRecognition {
  
      - parameter url: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
             is safe to use with URL shorteners. The resolved URL is returned in the response.
-     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
             of the built-in classifier.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
      - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
             "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
@@ -374,8 +374,8 @@ public class VisualRecognition {
      */
     public func classify(
         url: String,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
+        usingClassifierID classifierIDs: [String]? = nil,
+        fromOwners owners: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -412,9 +412,9 @@ public class VisualRecognition {
      
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             to classify. The total number of images is limited to 100.
-     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
             of the built-in classifier.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
      - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
             "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
@@ -424,8 +424,8 @@ public class VisualRecognition {
      */
     public func classify(
         image: URL,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
+        usingClassifierID classifierIDs: [String]? = nil,
+        fromOwners owners: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -540,7 +540,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        url: String,
+        inImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithFaces) -> Void)
     {
@@ -572,7 +572,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        image: URL? = nil,
+        inImage image: URL? = nil,
         parameters: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithFaces) -> Void)
@@ -631,7 +631,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        url: String,
+        inImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithWords) -> Void)
     {
@@ -662,7 +662,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        image: URL? = nil,
+        inImage image: URL? = nil,
         parameters: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithWords) -> Void)

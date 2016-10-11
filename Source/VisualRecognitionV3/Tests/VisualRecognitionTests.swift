@@ -117,7 +117,7 @@ class VisualRecognitionTests: XCTestCase {
         
         let car = Class(name: "car", examples: examplesCars)
         let failure = { (error: Error) in XCTFail("Could not train classifier for test suite.") }
-        visualRecognition.createClassifier(name: classifierName, positiveExamples: [car], negativeExamples: examplesTrucks, failure: failure) {
+        visualRecognition.createClassifier(withName: classifierName, fromPositiveExamples: [car], andNegativeExamples: examplesTrucks, failure: failure) {
             classifier in
             self.classifierID = classifier.classifierID
             expectation.fulfill()
@@ -177,7 +177,7 @@ class VisualRecognitionTests: XCTestCase {
         let classes = [baseball, cars, trucks]
         
         var classifierID: String?
-        visualRecognition.createClassifier(name: name, positiveExamples: classes, failure: failWithError) {
+        visualRecognition.createClassifier(withName: name, fromPositiveExamples: classes, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, name)
             XCTAssertEqual(classifier.classes.count, 3)
@@ -203,7 +203,7 @@ class VisualRecognitionTests: XCTestCase {
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
         
-        visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -218,7 +218,7 @@ class VisualRecognitionTests: XCTestCase {
         let cars = Class(name: "car", examples: examplesCars)
         
         var classifierID: String?
-        visualRecognition.createClassifier(name: name, positiveExamples: [cars], negativeExamples: examplesTrucks, failure: failWithError) {
+        visualRecognition.createClassifier(withName: name, fromPositiveExamples: [cars], andNegativeExamples: examplesTrucks, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, name)
             XCTAssertEqual(classifier.classes.count, 1)
@@ -244,7 +244,7 @@ class VisualRecognitionTests: XCTestCase {
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
 
-        visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -255,7 +255,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Get information about the trained classifier."
         let expectation = self.expectation(description: description)
 
-        visualRecognition.getClassifier(classifierID: classifierID!, failure: failWithError) {
+        visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, self.classifierName)
             XCTAssertEqual(classifier.classes.count, 1)
@@ -270,7 +270,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let car = Class(name: "car", examples: examplesCars)
-        visualRecognition.updateClassifier(classifierID: classifierID!, positiveExamples: [car], negativeExamples: examplesTrucks, failure: failWithError) {
+        visualRecognition.updateClassifier(withID: classifierID!, withPositiveExamples: [car], withNegativeExamples: examplesTrucks, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, self.classifierName)
             expectation.fulfill()
@@ -289,9 +289,9 @@ class VisualRecognitionTests: XCTestCase {
         
         var classifierID: String?
         visualRecognition.createClassifier(
-            name: name,
-            positiveExamples: [cars],
-            negativeExamples: examplesBaseball,
+            withName: name,
+            fromPositiveExamples: [cars],
+            andNegativeExamples: examplesBaseball,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertEqual(classifier.classes.count, 1)
@@ -306,7 +306,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(classifierID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -320,7 +320,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -335,8 +335,8 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         visualRecognition.updateClassifier(
-            classifierID: classifierID!,
-            positiveExamples: [trucks],
+            withID: classifierID!,
+            withPositiveExamples: [trucks],
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()
@@ -349,7 +349,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the updated classifier and make sure there are 2 classes."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(classifierID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -364,7 +364,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -378,7 +378,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
         
-        visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -395,9 +395,9 @@ class VisualRecognitionTests: XCTestCase {
         
         var classifierID: String?
         visualRecognition.createClassifier(
-            name: name,
-            positiveExamples: classes,
-            negativeExamples: examplesTrucks,
+            withName: name,
+            fromPositiveExamples: classes,
+            andNegativeExamples: examplesTrucks,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertEqual(classifier.classes.count, 1)
@@ -412,7 +412,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(classifierID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -426,7 +426,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -440,8 +440,8 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Update the classifier with a negative example."
         let expectation2 = expectation(description: description2)
         visualRecognition.updateClassifier(
-            classifierID: classifierID!,
-            negativeExamples: examplesBaseball,
+            withID: classifierID!,
+            withNegativeExamples: examplesBaseball,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()
@@ -454,7 +454,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the updated classifier and make sure there is 1 class."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(classifierID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -469,7 +469,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -483,7 +483,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
         
-        visualRecognition.deleteClassifier(classifierID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -532,8 +532,8 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.classify(
             url: obamaURL,
-            owners: ["IBM"],
-            classifierIDs: ["default"],
+            usingClassifierID: ["default"],
+            fromOwners: ["IBM"],
             showLowConfidence: true,
             outputLanguage: "en",
             failure: failWithError)
@@ -573,7 +573,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify an image by URL using a custom classifier."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.classify(url: carURL, classifierIDs: [classifierID!], failure: failWithError) {
+        visualRecognition.classify(url: carURL, usingClassifierID: [classifierID!], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -611,8 +611,8 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.classify(
             url: carURL,
-            owners: ["me"],
-            classifierIDs: [classifierID!],
+            usingClassifierID: [classifierID!],
+            fromOwners: ["me"],
             showLowConfidence: true,
             outputLanguage: "en",
             failure: failWithError)
@@ -652,7 +652,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify an image by URL using a custom classifier."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.classify(url: carURL, classifierIDs: ["default", classifierID!], failure: failWithError) {
+        visualRecognition.classify(url: carURL, usingClassifierID: ["default", classifierID!], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -736,8 +736,8 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.classify(
             image: car,
-            owners: ["IBM"],
-            classifierIDs: ["default"],
+            usingClassifierID: ["default"],
+            fromOwners: ["IBM"],
             showLowConfidence: true,
             outputLanguage: "en",
             failure: failWithError)
@@ -777,7 +777,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify an uploaded image using a custom classifier."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.classify(image: car, classifierIDs: [classifierID!], failure: failWithError) {
+        visualRecognition.classify(image: car, usingClassifierID: [classifierID!], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -815,8 +815,8 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.classify(
             image: car,
-            owners: ["me"],
-            classifierIDs: [classifierID!],
+            usingClassifierID: [classifierID!],
+            fromOwners: ["me"],
             showLowConfidence: true,
             outputLanguage: "en",
             failure: failWithError)
@@ -856,7 +856,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify an uploaded image with the default and custom classifiers."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.classify(image: car, classifierIDs: ["default", classifierID!], failure: failWithError) {
+        visualRecognition.classify(image: car, usingClassifierID: ["default", classifierID!], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -902,7 +902,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Classify multiple images using a custom classifier."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.classify(image: examplesCars, classifierIDs: ["default", classifierID!], failure: failWithError) {
+        visualRecognition.classify(image: examplesCars, usingClassifierID: ["default", classifierID!], failure: failWithError) {
             classifiedImages in
             
             // verify classified images object
@@ -950,7 +950,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces by URL."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(url: obamaURL, failure: failWithError) {
+        visualRecognition.detectFaces(inImageAtURL: obamaURL, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -999,7 +999,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in an uploaded image."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(image: obama, failure: failWithError) {
+        visualRecognition.detectFaces(inImage: obama, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1048,7 +1048,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in uploaded images."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(image: faces, failure: failWithError) {
+        visualRecognition.detectFaces(inImage: faces, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1099,7 +1099,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text by URL."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.recognizeText(url: signURL, failure: failWithError) {
+        visualRecognition.recognizeText(inImageAtURL: signURL, failure: failWithError) {
             wordImages in
             
             // verify the word images object
@@ -1139,7 +1139,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text in an uploaded image."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.recognizeText(image: sign, failure: failWithError) {
+        visualRecognition.recognizeText(inImage: sign, failure: failWithError) {
             wordImages in
             
             // verify the word images object

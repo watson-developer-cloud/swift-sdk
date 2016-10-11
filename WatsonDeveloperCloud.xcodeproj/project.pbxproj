@@ -1318,7 +1318,7 @@
 				124C2E131D19E2FA00D9F602 /* Tests */,
 			);
 			name = TextToSpeechV1;
-			path = ../TextToSpeechV1;
+			path = Source/TextToSpeechV1;
 			sourceTree = "<group>";
 		};
 		124C2E071D19E2FA00D9F602 /* Models */ = {
@@ -1395,6 +1395,7 @@
 				7A987D621D19D923003626B2 /* RelationshipExtractionV1Beta */,
 				123B472F1D1B3D24007D0B22 /* RetrieveAndRankV1 */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
+				124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */,
 				B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */,
 				7A987D2C1D19D47D003626B2 /* TradeoffAnalyticsV1 */,
 				7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */,
@@ -1724,7 +1725,6 @@
 		7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */ = {
 			isa = PBXGroup;
 			children = (
-				124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */,
 				7A9EC80D1D79B76100507725 /* Dependencies */,
 				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,

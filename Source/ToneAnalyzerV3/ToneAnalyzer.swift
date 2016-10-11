@@ -65,9 +65,9 @@ public class ToneAnalyzer {
      - parameter success: A function invoked with the tone analysis.
      */
     public func getTone(
-        text: String,
-        tones: [String]? = nil,
-        sentences: Bool? = nil,
+        ofText text: String,
+        withSpecificTone tones: [String]? = nil,
+        withSentenceAnalysis sentences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ToneAnalysis) -> Void)
     {

@@ -63,8 +63,8 @@ public class TradeoffAnalytics {
      - parameter success: A function invoked with the resulting dilemma and visualization.
      */
     public func getDilemma(
-        problem: Problem,
-        generateVisualization: Bool? = nil,
+        given problem: Problem,
+        withVisualization generateVisualization: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Dilemma) -> Void)
     {

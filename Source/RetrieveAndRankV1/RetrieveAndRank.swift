@@ -118,7 +118,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SolrCluster` object.
      */
     public func createSolrCluster(
-        name: String,
+        withName name: String,
         size: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
@@ -166,7 +166,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed if no error occurs.
      */
     public func deleteSolrCluster(
-        solrClusterID: String,
+        withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -201,7 +201,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SolrCluster` object.
      */
     public func getSolrCluster(
-        solrClusterID: String,
+        withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
         
@@ -233,7 +233,7 @@ public class RetrieveAndRank {
             configurations associated with this Solr cluster.
      */
     public func getSolrConfigurations(
-        solrClusterID: String,
+        forSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
         
@@ -259,14 +259,14 @@ public class RetrieveAndRank {
     /**
      Delete this specific configuration from the specified cluster.
      
-     - parameter solrClusterID: The ID of the cluster that you want to delete the configuration of.
      - parameter configName: The name of the configuration you want to delete.
+     - parameter solrClusterID: The ID of the cluster that you want to delete the configuration of.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteSolrConfiguration(
-        solrClusterID: String,
-        configName: String,
+        withName configName: String,
+        fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -296,14 +296,14 @@ public class RetrieveAndRank {
     /**
      Gets a configuration .zip file with the given name from the specified cluster.
      
-     - parameter solrClusterID: The ID of the cluster that you want the configuration of.
      - parameter configName: The name of the configuration you want.
+     - parameter solrClusterID: The ID of the cluster that you want the configuration of.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the URL of the downloaded configuration file.
      */
     public func getSolrConfiguration(
-        solrClusterID: String,
-        configName: String,
+        withName configName: String,
+        fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void) {
         
@@ -383,16 +383,16 @@ public class RetrieveAndRank {
      Note: in order for your service instance to work with this SDK, you must make sure to define 
      the writer type in your solrconfig.xml file to be "json".
      
-     - parameter solrClusterID: The ID of the cluster whose configuration you want to update.
      - parameter configName: The name of the configuration you want to update.
+     - parameter solrClusterID: The ID of the cluster whose configuration you want to update.
      - parameter zipFile: The zip file configuration set that you would like to upload.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func uploadSolrConfiguration(
-        solrClusterID: String,
-        configName: String,
-        zipFile: URL,
+        withName configName: String,
+        toSolrClusterID solrClusterID: String,
+        fromZip zipFile: URL,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -423,16 +423,16 @@ public class RetrieveAndRank {
     /**
      Creates a new Solr collection.
      
-     - parameter solrClusterID: The ID of the cluster to add this collection to.
      - parameter name: The name of the collection.
+     - parameter solrClusterID: The ID of the cluster to add this collection to.
      - parameter configName: The name of the configuration to use.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func createSolrCollection(
-        solrClusterID: String,
-        name: String,
-        configName: String,
+        withName name: String,
+        forSolrClusterID solrClusterID: String,
+        usingConfiguration configName: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -469,14 +469,14 @@ public class RetrieveAndRank {
     /**
      Deletes a Solr collection.
      
-     - parameter solrClusterID: The ID of the cluster to delete this collection from.
      - parameter name: The name of the collection.
+     - parameter solrClusterID: The ID of the cluster to delete this collection from.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteSolrCollection(
-        solrClusterID: String,
-        name: String,
+        withName name: String,
+        fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -520,7 +520,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed with an array of collection names.
      */
     public func getSolrCollections(
-        solrClusterID: String,
+        forSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
         
@@ -554,8 +554,8 @@ public class RetrieveAndRank {
      how to structure the content files, refer to this link:
      https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations
      
-     - parameter solrClusterID: The ID of the cluster this collection points to.
      - parameter collectionName: The name of the collection you would like to update.
+     - parameter solrClusterID: The ID of the cluster this collection points to.
      - parameter contentType: The media type of the content that is being uploaded.
      - parameter contentFile: The content to be added to the collection. Accepted file types are 
             listed in the link above.
@@ -563,8 +563,8 @@ public class RetrieveAndRank {
      - parameter success: A function executed if no error occurs.
      */
     public func updateSolrCollection(
-        solrClusterID: String,
-        collectionName: String,
+        withName collectionName: String,
+        inSolrClusterID solrClusterID: String,
         contentType: String,
         contentFile: URL,
         failure: ((Error) -> Void)? = nil,
@@ -617,9 +617,9 @@ public class RetrieveAndRank {
      Note: For the SDK to work properly, you must define the writer type as "json" within the
      configuration solrconfig.xml file.
      
-     - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
-     - parameter query: The query. Refer to the following link for more information on how to 
+     - parameter solrClusterID: The ID of the Solr cluster.
+     - parameter query: The query. Refer to the following link for more information on how to
             structure the query string: 
             https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
      - parameter returnFields: The fields that should be returned. These fields should correspond
@@ -629,9 +629,9 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SearchResponse` object.
      */
     public func search(
-        solrClusterID: String,
-        collectionName: String,
-        query: String,
+        usingCollectionName collectionName: String,
+        inSolrClusterID solrClusterID: String,
+        forQuery query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
@@ -667,8 +667,8 @@ public class RetrieveAndRank {
      Note: For the SDK to work properly, you must define the writer type as "json" within the
      configuration solrconfig.xml file.
      
-     - parameter solrClusterID: The ID of the Solr cluster.
      - parameter collectionName: The name of the collection in the cluster.
+     - parameter solrClusterID: The ID of the Solr cluster.
      - parameter rankerID: The ID of the ranker.
      - parameter query: The query. Refer to the following link for more information on how to
             structure the query string:
@@ -680,10 +680,10 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
     public func searchAndRank(
-        solrClusterID: String,
-        collectionName: String,
-        rankerID: String,
-        query: String,
+        usingCollectionName collectionName: String,
+        inSolrClusterID solrClusterID: String,
+        withRankerID rankerID: String,
+        forQuery query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {
@@ -749,14 +749,14 @@ public class RetrieveAndRank {
      Creates and trains a new ranker. The status of the ranker will be set to `Training` until
      the ranker is ready. You need to wait until the status is `Available` before using.
      
-     - parameter trainingDataFile: The training data content that will be used to train this ranker.
      - parameter name: An optional name for the ranker.
+     - parameter trainingDataFile: The training data content that will be used to train this ranker.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `Ranker` object.
      */
     public func createRanker(
-        trainingDataFile: URL,
-        name: String? = nil,
+        withName name: String? = nil,
+        fromFile trainingDataFile: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RankerDetails) -> Void)
     {
@@ -815,17 +815,17 @@ public class RetrieveAndRank {
      Identifies the top answer from the list of provided results to rank, and provides the
      number of answers requested, listed in order from descending ranked score.
      
-     - parameter rankerID: The ID of the ranker to use.
      - parameter resultsFile: A CSV file containing the search results that you want ranked. The 
             first column header must be labeled `answer_id`. The other column headers should 
             match the names of the features in the `trainingDataFile` used to train the ranker.
+     - parameter rankerID: The ID of the ranker to use.
      - parameter numberOfResults: The number of answers needed. The default number given is 10.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `Ranking` object.
      */
     public func rankResults(
-        rankerID: String,
-        resultsFile: URL,
+        fromFile resultsFile: URL,
+        usingRankerID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Ranking) -> Void) {
         
@@ -872,7 +872,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed if no error occurs.
      */
     public func deleteRanker(
-        rankerID: String,
+        withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -907,7 +907,7 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `RankerDetails` object.
      */
     public func getRanker(
-        rankerID: String,
+        withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RankerDetails) -> Void) {
         

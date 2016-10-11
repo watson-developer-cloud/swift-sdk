@@ -57,17 +57,17 @@ public struct RankerDetails: JSONDecodable {
 public enum RankerStatus: String {
     
     /// Non Existent
-    case NonExistent = "Non_Existent"
+    case nonExistent = "Non_Existent"
     
     /// Still training
-    case Training = "Training"
+    case training = "Training"
     
     /// Training has failed
-    case Failed = "Failed"
+    case failed = "Failed"
     
     /// Ranker is available
-    case Available = "Available"
+    case available = "Available"
     
     /// Ranker is unavailable
-    case Unavailable = "Unavailable"
+    case unavailable = "Unavailable"
 }

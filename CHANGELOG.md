@@ -7,6 +7,16 @@ _2016_09_14_
 
 This update adds support for Xcode 8 and Swift 2.3+.
 
+## Version 0.7.2
+
+_2016-10-12_
+
+This release updates the Swift 2.2 version of the iOS SDK with several bug fixes and minor changes.
+
+- All Services: Default HTTP headers can now be set for each service.
+- Speech to Text: Add support for setting customization_id parameter.
+- Visual Recognition: Any errors writing the JSON parameters file are now passed back to the user.
+
 ## Version 0.7.1
 
 _2016-09-30_

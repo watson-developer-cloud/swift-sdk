@@ -1,9 +1,37 @@
 Change Log
 ==========
 
+## Version 0.8.1
+
+_2016-10-12_
+
+This release updates the Swift 2.3 version of the iOS SDK with several bug fixes and minor changes.
+
+- All Services: Default HTTP headers can now be set for each service.
+
+- All Services: The service URL parameter was moved from each `init` to a class property. To set a custom service URL parameter, set the class property instead of passing it as a parameter to the initializer. (For example: `textToSpeech.serviceURL = "..."`.)
+
+- Credentials: Testing credentials were moved to a .swift file for convenience.
+
+- Language Translator: Update the default service URL for the recent release of the Language Translator service. To use an existing Language Translation service, specify a custom service URL.
+
+- Natural Language Classifier: Updates the trained classifier id used for testing.
+
+- Speech to Text: Add support for setting customization_id parameter.
+
+- Speech to Text: Added support for additional audio formats (`AudioMediaType.MuLaw` and `AudioMediaType.Basic`)
+
+- Speech to Text: Added support for the `supported_features` parameter of language models, which identifies whether certain additional service features are supported with any given model.
+
+- Speech to Text: Fix a bug where the microphone would continue recording when disconnected by the service (which also prevented the service from operating correctly when reconnecting).
+
+- Text to Speech: Validate the status code in the response to `synthesize()`. This helps to produce more meaningful error messages when using incorrect credentials with the service.
+
+- Visual Recognition: Any errors writing the JSON parameters file are now passed back to the user.
+
 ## Version 0.8.0
 
-_2016_09_14_
+_2016-09-14_
 
 This update adds support for Xcode 8 and Swift 2.3+.
 

@@ -126,7 +126,7 @@ public class VisualRecognition {
     public func createClassifier(
         withName name: String,
         fromPositiveExamples positiveExamples: [Class],
-        andNegativeExamples negativeExamples: URL? = nil,
+        fromNegativeExamples negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -362,9 +362,9 @@ public class VisualRecognition {
  
      - parameter url: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
             is safe to use with URL shorteners. The resolved URL is returned in the response.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
             of the built-in classifier.
-     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
      - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
             "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
@@ -374,8 +374,8 @@ public class VisualRecognition {
      */
     public func classify(
         url: String,
-        usingClassifierID classifierIDs: [String]? = nil,
-        fromOwners owners: [String]? = nil,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -412,9 +412,9 @@ public class VisualRecognition {
      
      - parameter image: The image file (.jpg, .png, or .gif) or compressed (.zip) file of images
             to classify. The total number of images is limited to 100.
+     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter classifierIDs: A list of the ids for the classifiers to use. "default" is the id
             of the built-in classifier.
-     - parameter owners: A list with IBM and/or "me" to specify which classifiers to run.
      - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
      - parameter outputLanguage: The language of the output classifier (i.e. tag names). Can be
             "en" (English), "es" (Spanish), "ar" (Arabic), or "ja" (Japanese). Tags for which
@@ -424,8 +424,8 @@ public class VisualRecognition {
      */
     public func classify(
         image: URL,
-        usingClassifierID classifierIDs: [String]? = nil,
-        fromOwners owners: [String]? = nil,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
         showLowConfidence: Bool? = nil,
         outputLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,

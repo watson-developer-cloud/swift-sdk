@@ -100,7 +100,7 @@ public class VisualRecognition {
         
         // execute REST request
         Alamofire.request(request)
-            .responseArray(path: ["classifiers"]) {
+            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
                 (response: Response<[Classifier], NSError>) in
                 switch response.result {
                 case .Success(let classifiers): success(classifiers)
@@ -182,7 +182,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseObject() {
+                    upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<Classifier, NSError>) in
                         switch response.result {
                         case .Success(let classifier): success(classifier)
@@ -271,7 +271,7 @@ public class VisualRecognition {
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<Classifier, NSError>) in
                 switch response.result {
                 case .Success(let classifier): success(classifier)
@@ -347,7 +347,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseObject() {
+                    upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<Classifier, NSError>) in
                         switch response.result {
                         case .Success(let classifier): success(classifier)
@@ -524,7 +524,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseObject() {
+                    upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<ClassifiedImages, NSError>) in
                         switch response.result {
                         case .Success(let classifiedImages): success(classifiedImages)
@@ -616,7 +616,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseObject() {
+                    upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<ImagesWithFaces, NSError>) in
                         switch response.result {
                         case .Success(let faceImages): success(faceImages)
@@ -707,7 +707,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseObject() {
+                    upload.responseObject(dataToError: self.dataToError) {
                         (response: Response<ImagesWithWords, NSError>) in
                         switch response.result {
                         case .Success(let wordImages): success(wordImages)

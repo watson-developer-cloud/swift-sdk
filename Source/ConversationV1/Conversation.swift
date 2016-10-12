@@ -56,6 +56,24 @@ public class Conversation {
     }
     
     /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.string("error")
+            let code = (try? json.int("code")) ?? 400
+            let userInfo = [NSLocalizedFailureReasonErrorKey: error]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    /**
      Start a new conversation or get a response to a user's input.
      
      - parameter workspaceID: The unique identifier of the workspace to use.
@@ -136,7 +154,7 @@ public class Conversation {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<MessageResponse, NSError>) in
                 switch response.result {
                 case .Success(let response): success(response)

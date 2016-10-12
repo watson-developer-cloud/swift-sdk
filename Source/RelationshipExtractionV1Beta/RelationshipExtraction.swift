@@ -53,6 +53,26 @@ public class RelationshipExtraction {
     }
     
     /**
+     If the given data represents an error returned by the Relationship Extraction service, then 
+     return an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.int("error_code")
+            let error = try json.string("error_message")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    /**
      Analyzes a piece of text and extracts the different entities, along with the relationships that 
      exist between those entities.
      
@@ -86,7 +106,7 @@ public class RelationshipExtraction {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(path: ["doc"]) {
+            .responseObject(dataToError: dataToError, path: ["doc"]) {
                 (response: Response<Document, NSError>) in
                 switch response.result {
                 case .Success(let document): success(document)

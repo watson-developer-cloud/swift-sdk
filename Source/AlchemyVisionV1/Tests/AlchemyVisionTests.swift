@@ -116,7 +116,7 @@ class AlchemyVisionTests: XCTestCase {
             let face = faceTags.imageFaces.first
             
             // verify face age
-            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssertEqual(face?.age.ageRange, "45-54")
             XCTAssert(face?.age.score >= 0.0)
             XCTAssert(face?.age.score <= 1.0)
             
@@ -175,7 +175,7 @@ class AlchemyVisionTests: XCTestCase {
             let face = faceTags.imageFaces.first
             
             // verify face age
-            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssertEqual(face?.age.ageRange, "45-54")
             XCTAssert(face?.age.score >= 0.0)
             XCTAssert(face?.age.score <= 1.0)
             
@@ -256,7 +256,7 @@ class AlchemyVisionTests: XCTestCase {
             let face = faceTags.imageFaces.first
             
             // verify face age
-            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssertEqual(face?.age.ageRange, "45-54")
             XCTAssert(face?.age.score >= 0.0)
             XCTAssert(face?.age.score <= 1.0)
             
@@ -315,7 +315,7 @@ class AlchemyVisionTests: XCTestCase {
             let face = faceTags.imageFaces.first
             
             // verify face age
-            XCTAssertEqual(face?.age.ageRange, "55-64")
+            XCTAssertEqual(face?.age.ageRange, "45-54")
             XCTAssert(face?.age.score >= 0.0)
             XCTAssert(face?.age.score <= 1.0)
             
@@ -599,7 +599,7 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssertEqual(sceneTexts.status, "OK")
             XCTAssertNil(sceneTexts.url)
             XCTAssertEqual(sceneTexts.totalTransactions, 0)
-            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain traffic")
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain rain traffic")
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first
@@ -644,7 +644,7 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssertEqual(sceneTexts.status, "OK")
             XCTAssertEqual(sceneTexts.url, self.signURL)
             XCTAssertEqual(sceneTexts.totalTransactions, 0)
-            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain traffic")
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain rain traffic")
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first

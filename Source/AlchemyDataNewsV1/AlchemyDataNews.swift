@@ -44,6 +44,21 @@ public class AlchemyDataNews {
         self.apiKey = apiKey
     }
     
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.string("status")
+            let statusInfo = try json.string("statusInfo")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: status,
+                NSLocalizedDescriptionKey: statusInfo
+            ]
+            return NSError(domain: errorDomain, code: 400, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
     /**
      Returns articles matching the query. If no query is given, simply returns a count of articles
      matching the start/end timeframe.
@@ -95,7 +110,7 @@ public class AlchemyDataNews {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() {
+            .responseObject(dataToError: dataToError) {
                 (response: Response<NewsResponse, NSError>) in
                 switch response.result {
                 case .Success(let newsResponse): success(newsResponse)

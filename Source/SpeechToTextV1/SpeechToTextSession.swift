@@ -83,6 +83,7 @@ public class SpeechToTextSession {
             username: self.username,
             password: self.password,
             model: self.model,
+            customizationID: self.customizationID,
             learningOptOut: self.learningOptOut,
             serviceURL: self.serviceURL,
             tokenURL: self.tokenURL,
@@ -106,6 +107,7 @@ public class SpeechToTextSession {
     private let username: String
     private let password: String
     private let model: String?
+    private let customizationID: String?
     private let learningOptOut: Bool?
     
     /**
@@ -115,12 +117,16 @@ public class SpeechToTextSession {
      - parameter password: The password used to authenticate with the service.
      - parameter model: The language and sample rate of the audio. For supported models, visit
         https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+        request. The base language model of the specified custom language model must match the
+        model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public init(username: String, password: String, model: String? = nil, learningOptOut: Bool? = nil) {
+    public init(username: String, password: String, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
         self.username = username
         self.password = password
         self.model = model
+        self.customizationID = customizationID
         self.learningOptOut = learningOptOut
         
         recorder = SpeechToTextRecorder()

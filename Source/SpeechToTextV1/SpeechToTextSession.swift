@@ -43,7 +43,7 @@ public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
-        get { return socket.results ?? SpeechRecognitionResults() }
+        get { return socket.results }
     }
     
     /// Invoked when the session connects to the Speech to Text service.

@@ -34,11 +34,6 @@ public struct NewsResponse: JSONDecodable {
     
     /// Used internally to initialize a NewsResponse object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: NewsResponse.self)
-        }
-
         totalTransactions = try Int(json.string("totalTransactions"))!
         result = try? json.decode("result", type: NewsResult.self)
     }

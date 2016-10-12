@@ -41,11 +41,6 @@ public struct SAORelations: JSONDecodable {
     
     /// Used internally to initialize a SAORelations object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: SAORelations.self)
-        }
-
         language = try? json.string("language")
         url = try? json.string("url")
         text = try? json.string("text")

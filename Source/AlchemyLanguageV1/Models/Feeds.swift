@@ -41,11 +41,6 @@ public struct Feeds: JSONDecodable {
     
     /// Used internally to initialize a Feeds object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Feeds.self)
-        }
-
         if let totalTransactionString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionString)
         } else {

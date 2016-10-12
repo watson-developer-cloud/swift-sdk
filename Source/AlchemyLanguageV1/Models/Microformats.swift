@@ -35,11 +35,6 @@ public struct Microformats: JSONDecodable {
     
     /// Used internally to initialize a Microformats object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Microformats.self)
-        }
-
         url = try? json.string("url")
         microformats = try? json.arrayOf("microformats", type: Microformat.self)
     }

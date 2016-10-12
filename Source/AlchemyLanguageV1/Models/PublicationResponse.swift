@@ -42,11 +42,6 @@ public struct PublicationResponse: JSONDecodable {
     
     /// Used internally to initialize a PublicationResponse object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: PublicationResponse.self)
-        }
-
         if let totalTransactionsString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {

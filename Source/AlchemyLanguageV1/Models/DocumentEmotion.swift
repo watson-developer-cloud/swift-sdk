@@ -34,11 +34,6 @@ public struct DocumentEmotion: JSONDecodable {
     
     /// used internally to initialize a DocumentEmotion object
     public init(json: JSON) throws {
-        let status = try json.string("status")
-        guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
-        }
-
         url = try? json.string("url")
         if let totalTransactionsString = try? json.string("totalTransactions") {
             totalTransactions = Int(totalTransactionsString)

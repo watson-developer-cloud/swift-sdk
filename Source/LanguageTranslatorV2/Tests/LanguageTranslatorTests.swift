@@ -134,7 +134,7 @@ class LanguageTranslatorTests: XCTestCase {
             return
         }
         
-        languageTranslator.createModel(usingBaseModelID: "en-es", fromFile: glossary,
+        languageTranslator.createModel(fromBaseModelID: "en-es", fromGlossaryFile: glossary,
             withName: "custom-english-to-spanish-model", failure: failWithError)
         {
             modelID in
@@ -167,7 +167,7 @@ class LanguageTranslatorTests: XCTestCase {
 
         let text = "Hello"
         let modelID = "en-es-conversational"
-        languageTranslator.translate(text, usingModelID: modelID, failure: failWithError) {
+        languageTranslator.translate(text, withModelID: modelID, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
@@ -185,7 +185,7 @@ class LanguageTranslatorTests: XCTestCase {
 
         let text = ["Hello"]
         let modelID = "en-es-conversational"
-        languageTranslator.translate(text, usingModelID: modelID, failure: failWithError) {
+        languageTranslator.translate(text, withModelID: modelID, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)

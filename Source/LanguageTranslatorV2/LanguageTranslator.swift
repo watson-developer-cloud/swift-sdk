@@ -134,8 +134,8 @@ public class LanguageTranslator {
      - parameter success: A function executed with the modelID of the created model.
      */
     public func createModel(
-        usingBaseModelID baseModelID: String,
-        fromFile forcedGlossary: URL,
+        fromBaseModelID baseModelID: String,
+        fromGlossaryFile forcedGlossary: URL,
         withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
@@ -265,7 +265,7 @@ public class LanguageTranslator {
      */
     public func translate(
         _ text: String,
-        usingModelID modelID: String,
+        withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -285,7 +285,7 @@ public class LanguageTranslator {
      */
     public func translate(
         _ text: [String],
-        usingModelID modelID: String,
+        withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {

@@ -57,7 +57,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        forImage imageData: Data,
+        fromImage imageData: Data,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (FaceTags) -> Void)
@@ -107,7 +107,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        forURL url: String,
+        fromImageAtURL url: String,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (FaceTags) -> Void)
@@ -154,8 +154,8 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        forHTML html: URL,
-        atURL url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -166,7 +166,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        getImage(forHTML: html, atURL: url, failure: failure, success: success)
+        getImage(fromHTML: html, withURL: url, failure: failure, success: success)
     }
     
     /**
@@ -178,8 +178,8 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        forHTML html: String,
-        atURL url: String? = nil,
+        fromHTML html: String,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -238,7 +238,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        forURL url: String,
+        fromURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -277,7 +277,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        forImage imageData: Data,
+        fromImage imageData: Data,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -334,7 +334,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        forURL url: String,
+        fromImageAtURL url: String,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -387,7 +387,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        forImage imageData: Data,
+        fromImage imageData: Data,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SceneText) -> Void)
     {
@@ -426,7 +426,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        forURL url: String,
+        fromImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SceneText) -> Void)
     {

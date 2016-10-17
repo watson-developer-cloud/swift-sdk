@@ -60,7 +60,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        ofText text: String,
+        fromText text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -76,7 +76,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            ofContent: content,
+            fromContent: content,
             withType: "text/plain",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -100,7 +100,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        ofHTMLDocument html: String,
+        fromHTML html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -116,7 +116,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            ofContent: content,
+            fromContent: content,
             withType: "text/html",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -139,7 +139,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        ofContentItems contentItems: [ContentItem],
+        fromContentItems contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -157,7 +157,7 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            ofContent: content,
+            fromContent: content,
             withType: "application/json",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
@@ -182,7 +182,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     private func getProfile(
-        ofContent content: Data?,
+        fromContent content: Data?,
         withType contentType: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,

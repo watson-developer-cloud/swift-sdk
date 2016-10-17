@@ -96,7 +96,7 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = self.expectation(description: description)
 
-        personalityInsights.getProfile(ofText: kennedySpeech, failure: failWithError) { profile in
+        personalityInsights.getProfile(fromText: kennedySpeech, failure: failWithError) { profile in
             XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
             expectation.fulfill()
         }
@@ -123,7 +123,7 @@ class PersonalityInsightsTests: XCTestCase {
         )
 
         let contentItems = [contentItem, contentItem]
-        personalityInsights.getProfile(ofContentItems: contentItems, failure: failWithError) {
+        personalityInsights.getProfile(fromContentItems: contentItems, failure: failWithError) {
             profile in
             XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
             expectation.fulfill()
@@ -143,7 +143,7 @@ class PersonalityInsightsTests: XCTestCase {
         }
 
         personalityInsights.getProfile(
-            ofText: mobyDickIntro,
+            fromText: mobyDickIntro,
             failure: failure,
             success: failWithResult
         )

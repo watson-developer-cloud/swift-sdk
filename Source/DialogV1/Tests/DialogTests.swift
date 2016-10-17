@@ -194,7 +194,7 @@ class DialogTests: XCTestCase {
         let description = "Download the dialog file associated with the test application."
         let expectation = self.expectation(description: description)
         
-        dialog.getDialogFile(withDialogID: dialogID!, inFormat: format, failure: failWithError) { file in
+        dialog.getDialogFile(fromDialogID: dialogID!, inFormat: format, failure: failWithError) { file in
             let fileManager = FileManager.default
             XCTAssertTrue(fileManager.fileExists(atPath: file.path))
             XCTAssertTrue(self.verifyFiletype(format: format, url: file))
@@ -665,7 +665,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.getDialogFile(withDialogID: invalidID, failure: failure, success: failWithResult)
+        dialog.getDialogFile(fromDialogID: invalidID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 

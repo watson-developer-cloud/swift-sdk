@@ -216,7 +216,7 @@ public class Dialog {
      - parameter success: A function executed with the URL of the downloaded dialog file.
      */
     public func getDialogFile(
-        withDialogID dialogID: DialogID,
+        fromDialogID dialogID: DialogID,
         inFormat format: Format? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void)

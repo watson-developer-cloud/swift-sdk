@@ -66,7 +66,7 @@ class RelationshipExtractionTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         relationshipExtraction.getRelationships(
-            ofText: text,
+            fromText: text,
             withLanguage: "ie-en-news",
             failure: failWithError) { document in
                 
@@ -172,7 +172,7 @@ class RelationshipExtractionTests: XCTestCase {
         }
         
         relationshipExtraction.getRelationships(
-            ofText: "",
+            fromText: "",
             withLanguage: "ie-en-news",
             failure: failure,
             success: failWithResult)
@@ -190,7 +190,7 @@ class RelationshipExtractionTests: XCTestCase {
         }
         
         relationshipExtraction.getRelationships(
-            ofText: text,
+            fromText: text,
             withLanguage: "INVALIDLANGUAGE",
             failure: failure,
             success: failWithResult)

@@ -62,7 +62,7 @@ public class RelationshipExtraction {
      - parameter success: A function executed with a Document object.
      */
     public func getRelationships(
-        ofText text: String,
+        fromText text: String,
         withLanguage language: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Document) -> Void) {

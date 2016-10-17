@@ -233,7 +233,7 @@ public class RetrieveAndRank {
             configurations associated with this Solr cluster.
      */
     public func getSolrConfigurations(
-        forSolrClusterID solrClusterID: String,
+        fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
         
@@ -392,7 +392,7 @@ public class RetrieveAndRank {
     public func uploadSolrConfiguration(
         withName configName: String,
         toSolrClusterID solrClusterID: String,
-        fromZip zipFile: URL,
+        fromZipFile zipFile: URL,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -432,7 +432,7 @@ public class RetrieveAndRank {
     public func createSolrCollection(
         withName name: String,
         forSolrClusterID solrClusterID: String,
-        usingConfiguration configName: String,
+        withConfigurationName configName: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -556,17 +556,17 @@ public class RetrieveAndRank {
      
      - parameter collectionName: The name of the collection you would like to update.
      - parameter solrClusterID: The ID of the cluster this collection points to.
-     - parameter contentType: The media type of the content that is being uploaded.
      - parameter contentFile: The content to be added to the collection. Accepted file types are 
             listed in the link above.
+     - parameter contentType: The media type of the content that is being uploaded.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func updateSolrCollection(
         withName collectionName: String,
         inSolrClusterID solrClusterID: String,
-        contentType: String,
-        contentFile: URL,
+        fromContentFile contentFile: URL,
+        withFileType contentType: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -629,9 +629,9 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SearchResponse` object.
      */
     public func search(
-        usingCollectionName collectionName: String,
-        inSolrClusterID solrClusterID: String,
-        forQuery query: String,
+        withCollectionName collectionName: String,
+        fromSolrClusterID solrClusterID: String,
+        withQuery query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
@@ -680,10 +680,10 @@ public class RetrieveAndRank {
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
     public func searchAndRank(
-        usingCollectionName collectionName: String,
-        inSolrClusterID solrClusterID: String,
+        withCollectionName collectionName: String,
+        fromSolrClusterID solrClusterID: String,
         withRankerID rankerID: String,
-        forQuery query: String,
+        withQuery query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {
@@ -825,7 +825,7 @@ public class RetrieveAndRank {
      */
     public func rankResults(
         fromFile resultsFile: URL,
-        usingRankerID rankerID: String,
+        withRankerID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Ranking) -> Void) {
         

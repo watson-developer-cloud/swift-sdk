@@ -134,6 +134,7 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_star
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
+* [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
 
 ## Xcode 8 Compatibility
 

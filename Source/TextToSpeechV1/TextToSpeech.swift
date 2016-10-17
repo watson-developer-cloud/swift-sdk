@@ -114,7 +114,7 @@ public class TextToSpeech {
      */
     public func getVoice(
         _ voice: SynthesisVoice,
-        usingCustomizationID customizationID: String? = nil,
+        withCustomizationID customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
     {
@@ -215,7 +215,7 @@ public class TextToSpeech {
     public func synthesize(
         text: String,
         withVoice voice: SynthesisVoice? = nil,
-        usingCustomizationID customizationID: String? = nil,
+        withCustomizationID customizationID: String? = nil,
         inAudioFormat audioFormat: AudioFormat = .wav,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Data) -> Void)
@@ -285,7 +285,7 @@ public class TextToSpeech {
             models.
      */
     public func getCustomizations(
-        forLanguage language: String? = nil,
+        withLanguage language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Customization]) -> Void) {
         
@@ -326,8 +326,8 @@ public class TextToSpeech {
      */
     public func createCustomization(
         withName name: String,
-        forLanguage language: String? = nil,
-        withDescription description: String? = nil,
+        language: String? = nil,
+        description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationID) -> Void) {
         
@@ -451,8 +451,8 @@ public class TextToSpeech {
      */
     public func updateCustomization(
         withID customizationID: String,
-        newName name: String? = nil,
-        newDescription description: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
         words: [Word] = [],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
@@ -621,7 +621,7 @@ public class TextToSpeech {
      */
     public func getTranslation(
         forWord word: String,
-        usingCustomizationID customizationID: String,
+        withCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void) {
         

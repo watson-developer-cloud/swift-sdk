@@ -374,7 +374,7 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.updateCustomization(
             withID: customizationID.customizationID,
-            newName: "Updated name",
+            name: "Updated name",
             failure: failWithError) {
                 
             expectation2.fulfill()
@@ -427,7 +427,7 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.updateCustomization(
             withID: customizationID.customizationID,
-            newDescription: "Updated description",
+            description: "Updated description",
             failure: failWithError) {
                 
                 expectation2.fulfill()
@@ -610,7 +610,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Get the details of the newly added word."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.getTranslation(forWord: "IBM", usingCustomizationID: customizationID, failure: failWithError) {
+        textToSpeech.getTranslation(forWord: "IBM", withCustomizationID: customizationID, failure: failWithError) {
             translation in
             
             XCTAssertEqual(translation.translation, "eye bee em")
@@ -755,7 +755,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getCustomizations(forLanguage: "InvalidLanguage", failure: failure, success: failWithResult)
+        textToSpeech.getCustomizations(withLanguage: "InvalidLanguage", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -770,7 +770,7 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.createCustomization(
             withName: "CustomVoiceModelName",
-            forLanguage: "InvalidLanguage",
+            language: "InvalidLanguage",
             failure: failure,
             success: failWithResult)
         
@@ -984,7 +984,7 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.getTranslation(
             forWord: "someWord",
-            usingCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
+            withCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure2,
             success: failWithResult)
         waitForExpectations()

@@ -86,7 +86,7 @@ class DocumentConversionTests: XCTestCase {
         let description = "Convert a document to only its text pieces"
         let expectation = self.expectation(description: description)
         
-        documentConversion.convertDocument(usingConfiguration: textConfig, onDocument: testDocument,
+        documentConversion.convertDocument(testDocument, withConfigurationFile: textConfig,
                                            failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             expectation.fulfill()
@@ -98,7 +98,7 @@ class DocumentConversionTests: XCTestCase {
         let description = "Convert a document to html"
         let expectation = self.expectation(description: description)
         
-        documentConversion.convertDocument(usingConfiguration: htmlConfig, onDocument: testDocument,
+        documentConversion.convertDocument(testDocument, withConfigurationFile: htmlConfig,
                                            failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             expectation.fulfill()
@@ -112,8 +112,8 @@ class DocumentConversionTests: XCTestCase {
         
         do{
             try documentConversion.convertDocument(
-                usingConfiguration: documentConversion.writeConfig(type: ReturnType.text),
-                onDocument: testDocument,
+                testDocument,
+                withConfigurationFile: documentConversion.writeConfig(type: ReturnType.text),
                 failure: failWithError) { text in
                     XCTAssertNotNil(text, "Response should not be nil")
                     expectation.fulfill()
@@ -128,9 +128,8 @@ class DocumentConversionTests: XCTestCase {
         let description = "Convert a document to an answer unit object"
         let expectation = self.expectation(description: description)
         
-        documentConversion.convertDocument(usingConfiguration: answerUnitsConfig,
-                                           onDocument: testDocument, failure: failWithError) {
-            text in
+        documentConversion.convertDocument(testDocument, withConfigurationFile: answerUnitsConfig,
+                                           failure: failWithError) { text in
             do {
                 let responseObject = try self.documentConversion.deserializeAnswerUnits(string: text)
                 XCTAssertNotNil(responseObject.sourceDocId, "Source ID should not be nil")
@@ -178,8 +177,8 @@ class DocumentConversionTests: XCTestCase {
         documentConversion = DocumentConversion(username: username, password: password, version: version)
         
         documentConversion.convertDocument(
-            usingConfiguration: answerUnitsConfig,
-            onDocument: testDocument,
+            testDocument,
+            withConfigurationFile: answerUnitsConfig,
             failure: failure,
             success: failWithResult
         )
@@ -194,7 +193,7 @@ class DocumentConversionTests: XCTestCase {
             expectation.fulfill()
         }
         
-        documentConversion.convertDocument(usingConfiguration: answerUnitsConfig, onDocument: testPng,
+        documentConversion.convertDocument(testPng, withConfigurationFile: answerUnitsConfig,
                                 failure: failure, success: failWithResult)
         waitForExpectations()
     }

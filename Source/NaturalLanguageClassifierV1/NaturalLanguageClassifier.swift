@@ -114,8 +114,8 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func createClassifier(
-        usingMetadataFile trainingMetadata: URL,
-        withTrainingFile trainingData: URL,
+        fromMetadataFile trainingMetadata: URL,
+        andTrainingFile trainingData: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
         
@@ -166,7 +166,7 @@ public class NaturalLanguageClassifier {
      */
     public func classify(
         _ text: String,
-        usingClassifierID classifierId: String,
+        withClassifierID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void) {
         

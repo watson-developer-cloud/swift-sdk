@@ -79,8 +79,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 return nil
         }
         
-        naturalLanguageClassifier.createClassifier(usingMetadataFile: trainingMetadataURL,
-                                                   withTrainingFile: trainingDataURL,
+        naturalLanguageClassifier.createClassifier(fromMetadataFile: trainingMetadataURL,
+                                                   andTrainingFile: trainingDataURL,
                                                    failure: failWithError) { details in
             classifierDetails = details
             expectation.fulfill()
@@ -135,7 +135,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: description)
         var classificationDetails: NaturalLanguageClassifierV1.Classification?
         
-        naturalLanguageClassifier.classify(text, usingClassifierID: classifierId,
+        naturalLanguageClassifier.classify(text, withClassifierID: classifierId,
                                            failure: failWithError) { classification in
             classificationDetails = classification
             expectation.fulfill()
@@ -158,8 +158,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
             let failToCreate =  { (error: Error) in
                 XCTFail("Failed to create the trained classifier.")
             }
-            naturalLanguageClassifier.createClassifier(usingMetadataFile: trainingMetadataURL,
-                                                       withTrainingFile: trainingDataURL,
+            naturalLanguageClassifier.createClassifier(fromMetadataFile: trainingMetadataURL,
+                                                       andTrainingFile: trainingDataURL,
                                                        failure: failToCreate) { classifier in
                 XCTAssertNotNil(classifier)
                 XCTAssertNotEqual("", classifier.classifierId, "Expected to get an id")
@@ -299,8 +299,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 return
         }
         
-        naturalLanguageClassifier.createClassifier(usingMetadataFile: trainingMetadataURL,
-                                                   withTrainingFile: trainingDataURL,
+        naturalLanguageClassifier.createClassifier(fromMetadataFile: trainingMetadataURL,
+                                                   andTrainingFile: trainingDataURL,
                                                    failure: failure, success: failWithResult)
         
         waitForExpectations()
@@ -315,7 +315,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             expectation.fulfill()
         }
         
-        naturalLanguageClassifier.classify("", usingClassifierID: trainedClassifierId,
+        naturalLanguageClassifier.classify("", withClassifierID: trainedClassifierId,
                                            failure: failure, success: failWithResult)
         
         waitForExpectations()
@@ -331,7 +331,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         }
         
         naturalLanguageClassifier.classify("How hot will it be today?",
-                                           usingClassifierID: "InvalidClassifierID",
+                                           withClassifierID: "InvalidClassifierID",
                                            failure: failure, success: failWithResult)
         
         waitForExpectations()

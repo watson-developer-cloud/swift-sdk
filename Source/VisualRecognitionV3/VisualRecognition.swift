@@ -126,7 +126,7 @@ public class VisualRecognition {
     public func createClassifier(
         withName name: String,
         fromPositiveExamples positiveExamples: [Class],
-        fromNegativeExamples negativeExamples: URL? = nil,
+        andNegativeExamples negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -540,7 +540,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        inImageAtURL url: String,
+        fromImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithFaces) -> Void)
     {
@@ -572,7 +572,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected faces.
      */
     public func detectFaces(
-        inImage image: URL? = nil,
+        fromImage image: URL? = nil,
         parameters: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithFaces) -> Void)
@@ -631,7 +631,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        inImageAtURL url: String,
+        fromImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithWords) -> Void)
     {
@@ -662,7 +662,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the detected words.
      */
     public func recognizeText(
-        inImage image: URL? = nil,
+        fromImage image: URL? = nil,
         parameters: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImagesWithWords) -> Void)

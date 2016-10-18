@@ -120,7 +120,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             withName: classifierName,
             fromPositiveExamples: [car],
-            fromNegativeExamples: examplesTrucks,
+            andNegativeExamples: examplesTrucks,
             failure: failure) { classifier in
                 self.classifierID = classifier.classifierID
                 expectation.fulfill()
@@ -224,7 +224,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             withName: name,
             fromPositiveExamples: [cars],
-            fromNegativeExamples: examplesTrucks,
+            andNegativeExamples: examplesTrucks,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertEqual(classifier.classes.count, 1)
@@ -300,7 +300,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             withName: name,
             fromPositiveExamples: [cars],
-            fromNegativeExamples: examplesBaseball,
+            andNegativeExamples: examplesBaseball,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertEqual(classifier.classes.count, 1)
@@ -406,7 +406,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             withName: name,
             fromPositiveExamples: classes,
-            fromNegativeExamples: examplesTrucks,
+            andNegativeExamples: examplesTrucks,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertEqual(classifier.classes.count, 1)
@@ -959,7 +959,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces by URL."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(inImageAtURL: obamaURL, failure: failWithError) {
+        visualRecognition.detectFaces(fromImageAtURL: obamaURL, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1008,7 +1008,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in an uploaded image."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(inImage: obama, failure: failWithError) {
+        visualRecognition.detectFaces(fromImage: obama, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1057,7 +1057,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Detect faces in uploaded images."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.detectFaces(inImage: faces, failure: failWithError) {
+        visualRecognition.detectFaces(fromImage: faces, failure: failWithError) {
             faceImages in
             
             // verify face images object
@@ -1108,7 +1108,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text by URL."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.recognizeText(inImageAtURL: signURL, failure: failWithError) {
+        visualRecognition.recognizeText(fromImageAtURL: signURL, failure: failWithError) {
             wordImages in
             
             // verify the word images object
@@ -1148,7 +1148,7 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Recognize text in an uploaded image."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.recognizeText(inImage: sign, failure: failWithError) {
+        visualRecognition.recognizeText(fromImage: sign, failure: failWithError) {
             wordImages in
             
             // verify the word images object

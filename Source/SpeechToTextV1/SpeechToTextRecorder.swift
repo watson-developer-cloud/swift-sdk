@@ -23,26 +23,26 @@ internal class SpeechToTextRecorder {
     // This implementation closely follows Apple's "Audio Queue Services Programming Guide".
     // See the guide for more information about audio queues and recording.
     
-    internal var onMicrophoneData: (NSData -> Void)?                 // callback to handle pcm buffer
-    internal var onPowerData: (Float32 -> Void)?                     // callback for average dB power
+    internal var onMicrophoneData: ((Data) -> Void)?                 // callback to handle pcm buffer
+    internal var onPowerData: ((Float32) -> Void)?                   // callback for average dB power
     internal let session = AVAudioSession.sharedInstance()           // session for configuration / permission
     private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
     
-    private var queue: AudioQueueRef = nil                           // opaque reference to an audio queue
-    private var buffers = [AudioQueueBufferRef]()                    // array of audio queue buffers
-    private var bufferSize: UInt32 = 0                               // capacity of each buffer, in bytes
-    private var currentPacket: Int64 = 0                             // current packet index
+    private var queue: AudioQueueRef? = nil                          // opaque reference to an audio queue
     private var isRecording = false                                  // state of recording
-    private var powerTimer: NSTimer?                                 // timer to invoke metering callback
+    private var powerTimer: Timer?                                   // timer to invoke metering callback
     
     private let callback: AudioQueueInputCallback = {
         userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
         
+        // parse `userData` as `SpeechToTextRecorder`
+        guard let audioRecorder = userData?.assumingMemoryBound(to: SpeechToTextRecorder.self).pointee else {
+            return
+        }
+        
         // dereference pointers
-        let unmanagedAudioRecorder = Unmanaged<SpeechToTextRecorder>.fromOpaque(COpaquePointer(userData))
-        let audioRecorder = unmanagedAudioRecorder.takeUnretainedValue()
-        let buffer = UnsafePointer<AudioQueueBuffer>(bufferRef).memory
-        let startTime = startTimeRef.memory
+        let buffer = UnsafePointer<AudioQueueBuffer>(bufferRef).pointee
+        let startTime = startTimeRef.pointee
         
         // calculate number of packets
         var numPackets = numPackets
@@ -51,7 +51,7 @@ internal class SpeechToTextRecorder {
         }
         
         // execute callback with audio data
-        let pcm = NSData(bytes: buffer.mAudioData, length: Int(buffer.mAudioDataByteSize))
+        let pcm = Data(bytes: buffer.mAudioData, count: Int(buffer.mAudioDataByteSize))
         audioRecorder.onMicrophoneData?(pcm)
         
         // return early if recording is stopped
@@ -60,7 +60,9 @@ internal class SpeechToTextRecorder {
         }
         
         // enqueue buffer
-        AudioQueueEnqueueBuffer(audioRecorder.queue, bufferRef, 0, nil)
+        if let queue = audioRecorder.queue {
+            AudioQueueEnqueueBuffer(queue, bufferRef, 0, nil)
+        }
     }
     
     internal init() {
@@ -72,9 +74,9 @@ internal class SpeechToTextRecorder {
             mSampleRate: 16000.0,
             mFormatID: kAudioFormatLinearPCM,
             mFormatFlags: formatFlags,
-            mBytesPerPacket: UInt32(1*strideof(Int16)),
+            mBytesPerPacket: UInt32(1*MemoryLayout<Int16>.stride),
             mFramesPerPacket: 1,
-            mBytesPerFrame: UInt32(1*strideof(Int16)),
+            mBytesPerFrame: UInt32(1*MemoryLayout<Int16>.stride),
             mChannelsPerFrame: 1,
             mBitsPerChannel: 16,
             mReserved: 0
@@ -84,50 +86,59 @@ internal class SpeechToTextRecorder {
     private func prepareToRecord() {
         // create recording queue
         let opaque = Unmanaged<SpeechToTextRecorder>.passUnretained(self).toOpaque()
-        let pointer = UnsafeMutablePointer<Void>(opaque)
+        let pointer = UnsafeMutableRawPointer(opaque)
         AudioQueueNewInput(&format, callback, pointer, nil, nil, 0, &queue)
         
+        // ensure queue was set
+        guard let queue = queue else {
+            return
+        }
+        
         // update audio format
-        var formatSize = UInt32(strideof(format.dynamicType))
+        var formatSize = UInt32(MemoryLayout<AudioStreamBasicDescription>.stride)
         AudioQueueGetProperty(queue, kAudioQueueProperty_StreamDescription, &format, &formatSize)
         
         // allocate and enqueue buffers
         let numBuffers = 5
-        bufferSize = deriveBufferSize(0.5)
-        buffers = Array<AudioQueueBufferRef>(count: numBuffers, repeatedValue: nil)
-        for i in 0..<numBuffers {
-            AudioQueueAllocateBuffer(queue, bufferSize, &buffers[i])
-            AudioQueueEnqueueBuffer(queue, buffers[i], 0, nil)
+        let bufferSize = deriveBufferSize(seconds: 0.5)
+        for _ in 0..<numBuffers {
+            let bufferRef = UnsafeMutablePointer<AudioQueueBufferRef?>.allocate(capacity: 1)
+            AudioQueueAllocateBuffer(queue, bufferSize, bufferRef)
+            if let buffer = bufferRef.pointee {
+                AudioQueueEnqueueBuffer(queue, buffer, 0, nil)
+            }
         }
         
         // enable metering
         var metering: UInt32 = 1
-        let meteringSize = UInt32(strideof(metering.dynamicType))
+        let meteringSize = UInt32(MemoryLayout<UInt32>.stride)
         let meteringProperty = kAudioQueueProperty_EnableLevelMetering
         AudioQueueSetProperty(queue, meteringProperty, &metering, meteringSize)
         
         // set metering timer to invoke callback
-        powerTimer = NSTimer(
+        powerTimer = Timer(
             timeInterval: 0.025,
             target: self,
             selector: #selector(samplePower),
             userInfo: nil,
             repeats: true
         )
-        NSRunLoop.currentRunLoop().addTimer(powerTimer!, forMode: NSRunLoopCommonModes)
+        RunLoop.current.add(powerTimer!, forMode: RunLoopMode.commonModes)
     }
  
     internal func startRecording() throws {
         guard !isRecording else { return }
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
+        guard let queue = queue else { return }
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
         try session.setActive(true)
         self.prepareToRecord()
         self.isRecording = true
-        AudioQueueStart(self.queue, nil)
+        AudioQueueStart(queue, nil)
     }
  
     internal func stopRecording() throws {
         guard isRecording else { return }
+        guard let queue = queue else { return }
         isRecording = false
         powerTimer?.invalidate()
         AudioQueueStop(queue, true)
@@ -135,10 +146,11 @@ internal class SpeechToTextRecorder {
     }
  
     private func deriveBufferSize(seconds: Float64) -> UInt32 {
+        guard let queue = queue else { return 0 }
         let maxBufferSize = UInt32(0x50000)
         var maxPacketSize = format.mBytesPerPacket
         if maxPacketSize == 0 {
-            var maxVBRPacketSize = UInt32(strideof(maxPacketSize.dynamicType))
+            var maxVBRPacketSize = UInt32(MemoryLayout<UInt32>.stride)
             AudioQueueGetProperty(
                 queue,
                 kAudioQueueProperty_MaximumOutputPacketSize,
@@ -154,8 +166,9 @@ internal class SpeechToTextRecorder {
     
     @objc
     private func samplePower() {
+        guard let queue = queue else { return }
         var meters = [AudioQueueLevelMeterState(mAveragePower: 0, mPeakPower: 0)]
-        var metersSize = UInt32(meters.count * strideof(AudioQueueLevelMeterState))
+        var metersSize = UInt32(meters.count * MemoryLayout<AudioQueueLevelMeterState>.stride)
         let meteringProperty = kAudioQueueProperty_CurrentLevelMeterDB
         let meterStatus = AudioQueueGetProperty(queue, meteringProperty, &meters, &metersSize)
         guard meterStatus == 0 else { return }

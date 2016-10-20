@@ -28,14 +28,14 @@ public struct WordConfidence: JSONDecodable {
 
     /// Used internally to initialize a `WordConfidence` model from JSON.
     public init(json: JSON) throws {
-        let array = try json.array()
-        word = try array[Index.Word.rawValue].string()
-        confidence = try array[Index.Confidence.rawValue].double()
+        let array = try json.getArray()
+        word = try array[Index.word.rawValue].getString()
+        confidence = try array[Index.confidence.rawValue].getDouble()
     }
     
     /// The index of each element in the JSON array.
     private enum Index: Int {
-        case Word = 0
-        case Confidence = 1
+        case word = 0
+        case confidence = 1
     }
 }

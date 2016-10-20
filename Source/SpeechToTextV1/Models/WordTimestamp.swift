@@ -31,16 +31,16 @@ public struct WordTimestamp: JSONDecodable {
 
     /// Used internally to initialize a `WordTimestamp` model from JSON.
     public init(json: JSON) throws {
-        let array = try json.array()
-        word = try array[Index.Word.rawValue].string()
-        startTime = try array[Index.StartTime.rawValue].double()
-        endTime = try array[Index.EndTime.rawValue].double()
+        let array = try json.getArray()
+        word = try array[Index.word.rawValue].getString()
+        startTime = try array[Index.startTime.rawValue].getDouble()
+        endTime = try array[Index.endTime.rawValue].getDouble()
     }
     
     /// The index of each element in the JSON array.
     private enum Index: Int {
-        case Word = 0
-        case StartTime = 1
-        case EndTime = 2
+        case word = 0
+        case startTime = 1
+        case endTime = 2
     }
 }

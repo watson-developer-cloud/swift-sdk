@@ -19,15 +19,7 @@ import Alamofire
 
 public class RestRequest: URLRequestConvertible {
 
-    private let method: Alamofire.HTTPMethod
-    private let url: String
-    private let headerParameters: [String: String]
-    private let acceptType: String?
-    private let contentType: String?
-    private let queryParameters: [URLQueryItem]?
-    private let messageBody: Data?
-    
-    private let userAgent: String = {
+    public static let userAgent: String = {
         let sdk = "watson-apis-ios-sdk"
         let sdkVersion = "0.8.0"
         
@@ -55,6 +47,14 @@ public class RestRequest: URLRequestConvertible {
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
     
+    private let method: Alamofire.HTTPMethod
+    private let url: String
+    private let headerParameters: [String: String]
+    private let acceptType: String?
+    private let contentType: String?
+    private let queryParameters: [URLQueryItem]?
+    private let messageBody: Data?
+    
     public func asURLRequest() -> URLRequest {
         
         // construct url with query parameters
@@ -79,7 +79,7 @@ public class RestRequest: URLRequestConvertible {
         }
         
         // set the request's user agent
-        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
         
         // set the request's header parameters
         for (key, value) in headerParameters {

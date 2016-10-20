@@ -47,7 +47,6 @@ public class SpeechToText {
     private let username: String
     private let password: String
     private var microphoneSession: SpeechToTextSession?
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -67,7 +66,7 @@ public class SpeechToText {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
@@ -89,24 +88,22 @@ public class SpeechToText {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of models.
      */
-    public func getModels(failure: (NSError -> Void)? = nil, success: [Model] -> Void) {
+    public func getModels(failure: ((Error) -> Void)? = nil, success: @escaping ([Model]) -> Void) {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/models",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["models"]) {
-                (response: Response<[Model], NSError>) in
+            .responseArray(path: ["models"]) { (response: DataResponse<[Model]>) in
                 switch response.result {
-                case .Success(let models): success(models)
-                case .Failure(let error): failure?(error)
+                case .success(let models): success(models)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -117,24 +114,22 @@ public class SpeechToText {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
     */
-    public func getModel(modelID: String, failure: (NSError -> Void)? = nil, success: Model -> Void) {
+    public func getModel(modelID: String, failure: ((Error) -> Void)? = nil, success: @escaping (Model) -> Void) {
         //construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: .get,
             url: serviceURL + "/v1/models/" + modelID,
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() {
-                (response: Response<Model, NSError>) in
+            .responseObject() { (response: DataResponse<Model>) in
                 switch response.result {
-                case .Success(let model): success(model)
-                case .Failure(let error): failure?(error)
+                case .success(let model): success(model)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -152,29 +147,30 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: NSURL,
+        audio: URL,
         settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
-        guard let data = NSData(contentsOfURL: audio) else {
+        do {
+            let data = try Data(contentsOf: audio)
+            recognize(
+                audio: data,
+                settings: settings,
+                model: model,
+                learningOptOut: learningOptOut,
+                failure: failure,
+                success: success
+            )
+        } catch {
             let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
-
-        recognize(
-            data,
-            settings: settings,
-            model: model,
-            learningOptOut: learningOptOut,
-            failure: failure,
-            success: success
-        )
     }
 
     /**
@@ -190,12 +186,12 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: NSData,
+        audio: Data,
         settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
         // create session
         let session = SpeechToTextSession(
@@ -219,8 +215,8 @@ public class SpeechToText {
         
         // execute recognition request
         session.connect()
-        session.startRequest(settings)
-        session.recognize(audio)
+        session.startRequest(settings: settings)
+        session.recognize(audio: audio)
         session.stopRequest()
         session.disconnect()
     }
@@ -264,8 +260,8 @@ public class SpeechToText {
         model: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
         // validate settings
         var settings = settings
@@ -293,8 +289,8 @@ public class SpeechToText {
         
         // start recognition request
         session.connect()
-        session.startRequest(settings)
-        session.startMicrophone(compress)
+        session.startRequest(settings: settings)
+        session.startMicrophone(compress: compress)
         
         // store session
         microphoneSession = session

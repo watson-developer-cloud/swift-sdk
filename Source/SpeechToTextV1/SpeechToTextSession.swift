@@ -43,11 +43,11 @@ public class SpeechToTextSession {
     
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
-        get { return socket.results ?? SpeechRecognitionResults() }
+        get { return socket.results }
     }
     
     /// Invoked when the session connects to the Speech to Text service.
-    public var onConnect: (Void -> Void)? {
+    public var onConnect: ((Void) -> Void)? {
         get { return socket.onConnect }
         set { socket.onConnect = newValue }
     }
@@ -55,28 +55,28 @@ public class SpeechToTextSession {
     /// Invoked with microphone audio when a recording audio queue buffer has been filled.
     /// If microphone audio is being compressed, then the audio data is in Opus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
-    public var onMicrophoneData: (NSData -> Void)?
+    public var onMicrophoneData: ((Data) -> Void)?
     
     /// Invoked every 0.025s when recording with the average dB power of the microphone.
-    public var onPowerData: (Float32 -> Void)? {
+    public var onPowerData: ((Float32) -> Void)? {
         get { return recorder.onPowerData }
         set { recorder.onPowerData = newValue }
     }
     
     /// Invoked when transcription results are received for a recognition request.
-    public var onResults: (SpeechRecognitionResults -> Void)? {
+    public var onResults: ((SpeechRecognitionResults) -> Void)? {
         get { return socket.onResults }
         set { socket.onResults = newValue }
     }
     
     /// Invoked when an error or warning occurs.
-    public var onError: (NSError -> Void)? {
+    public var onError: ((Error) -> Void)? {
         get { return socket.onError }
         set { socket.onError = newValue }
     }
     
     /// Invoked when the session disconnects from the Speech to Text service.
-    public var onDisconnect: (Void -> Void)? {
+    public var onDisconnect: ((Void) -> Void)? {
         get { return socket.onDisconnect }
         set { socket.onDisconnect = newValue }
     }
@@ -123,7 +123,7 @@ public class SpeechToTextSession {
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
             opusRate: Int32(recorder.format.mSampleRate),
-            application: .VOIP
+            application: .voip
         )
     }
     
@@ -142,7 +142,7 @@ public class SpeechToTextSession {
      - parameter settings: The configuration to use for this recognition request.
      */
     public func startRequest(settings: RecognitionSettings) {
-        socket.writeStart(settings)
+        socket.writeStart(settings: settings)
     }
     
     /**
@@ -150,15 +150,17 @@ public class SpeechToTextSession {
      
      - parameter audio: The audio file to transcribe.
      */
-    public func recognize(audio: NSURL) {
-        guard let data = NSData(contentsOfURL: audio) else {
+    public func recognize(audio: URL) {
+        do {
+            let data = try Data(contentsOf: audio)
+            recognize(audio: data)
+        } catch {
             let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             onError?(error)
             return
         }
-        recognize(data)
     }
     
     /**
@@ -166,8 +168,8 @@ public class SpeechToTextSession {
      
      - parameter audio: The audio data to transcribe.
      */
-    public func recognize(audio: NSData) {
-        socket.writeAudio(audio)
+    public func recognize(audio: Data) {
+        socket.writeAudio(audio: audio)
     }
     
     /**
@@ -205,7 +207,7 @@ public class SpeechToTextSession {
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
             opusRate: Int32(recorder.format.mSampleRate),
-            application: .VOIP
+            application: .voip
         )
         
         // request recording permission
@@ -219,18 +221,18 @@ public class SpeechToTextSession {
             }
             
             // callback if uncompressed
-            let onMicrophoneDataPCM = { (pcm: NSData) in
-                guard pcm.length > 0 else { return }
-                self.socket.writeAudio(pcm)
+            let onMicrophoneDataPCM = { (pcm: Data) in
+                guard pcm.count > 0 else { return }
+                self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
             }
             
             // callback if compressed
-            let onMicrophoneDataOpus = { (pcm: NSData) in
-                guard pcm.length > 0 else { return }
-                try! self.encoder.encode(pcm)
-                let opus = self.encoder.bitstream(true)
-                self.socket.writeAudio(opus)
+            let onMicrophoneDataOpus = { (pcm: Data) in
+                guard pcm.count > 0 else { return }
+                try! self.encoder.encode(pcm: pcm)
+                let opus = self.encoder.bitstream(flush: true)
+                self.socket.writeAudio(audio: opus)
                 self.onMicrophoneData?(opus)
             }
             
@@ -270,7 +272,7 @@ public class SpeechToTextSession {
         
         if compress {
             let opus = try! encoder.endstream()
-            self.socket.writeAudio(opus)
+            self.socket.writeAudio(audio: opus)
         }
     }
     

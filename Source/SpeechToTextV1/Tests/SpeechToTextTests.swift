@@ -20,7 +20,7 @@ import SpeechToTextV1
 class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: NSTimeInterval = 10.0
+    private let timeout: TimeInterval = 10.0
 
     override func setUp() {
         super.setUp()
@@ -36,7 +36,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     /** Fail false negatives. */
-    func failWithError(error: NSError) {
+    func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
     
@@ -47,7 +47,7 @@ class SpeechToTextTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectationsWithTimeout(timeout) { error in
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -56,10 +56,10 @@ class SpeechToTextTests: XCTestCase {
     
     func testModels() {
         let description1 = "Get information about all models."
-        let expectation1 = expectationWithDescription(description1)
+        let expectation1 = expectation(description: description1)
         
         var allModels = [Model]()
-        speechToText.getModels(failWithError) { models in
+        speechToText.getModels(failure: failWithError) { models in
             allModels = models
             expectation1.fulfill()
         }
@@ -67,8 +67,8 @@ class SpeechToTextTests: XCTestCase {
         
         for model in allModels {
             let description2 = "Get information about a particular model."
-            let expectation2 = expectationWithDescription(description2)
-            speechToText.getModel(model.name) { newModel in
+            let expectation2 = expectation(description: description2)
+            speechToText.getModel(withID: model.name) { newModel in
                 XCTAssertEqual(model.name, newModel.name)
                 XCTAssertEqual(model.rate, newModel.rate)
                 XCTAssertEqual(model.language, newModel.language)
@@ -83,15 +83,15 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe File, Default Settings
 
     func testTranscribeFileDefaultWAV() {
-        transcribeFileDefault("SpeechSample", withExtension: "wav", format: .WAV)
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "wav", format: .wav)
     }
 
     func testTranscribeFileDefaultOpus() {
-        transcribeFileDefault("SpeechSample", withExtension: "ogg", format: .Opus)
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
     }
 
     func testTranscribeFileDefaultFLAC() {
-        transcribeFileDefault("SpeechSample", withExtension: "flac", format: .FLAC)
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "flac", format: .flac)
     }
 
     func transcribeFileDefault(
@@ -100,17 +100,17 @@ class SpeechToTextTests: XCTestCase {
         format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
 
         let settings = RecognitionSettings(contentType: format)
-        speechToText.recognize(file, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results.results, settings: settings)
+        speechToText.recognize(audioFile: file, with: settings, failure: failWithError) { results in
+            self.validateSTTResults(results: results.results, settings: settings)
             XCTAssertEqual(results.results.count, 1)
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
@@ -124,15 +124,15 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe File, Custom Settings
 
     func testTranscribeFileCustomWAV() {
-        transcribeFileCustom("SpeechSample", withExtension: "wav", format: .WAV)
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "wav", format: .wav)
     }
 
     func testTranscribeFileCustomOpus() {
-        transcribeFileCustom("SpeechSample", withExtension: "ogg", format: .Opus)
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
     }
 
     func testTranscribeFileCustomFLAC() {
-        transcribeFileCustom("SpeechSample", withExtension: "flac", format: .FLAC)
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "flac", format: .flac)
     }
 
     func transcribeFileCustom(
@@ -141,10 +141,10 @@ class SpeechToTextTests: XCTestCase {
         format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
@@ -161,8 +161,8 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.recognize(file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
-            self.validateSTTResults(results.results, settings: settings)
+        speechToText.recognize(audioFile: file, with: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            self.validateSTTResults(results: results.results, settings: settings)
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
@@ -176,15 +176,15 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe Data, Default Settings
 
     func testTranscribeDataDefaultWAV() {
-        transcribeDataDefault("SpeechSample", withExtension: "wav", format: .WAV)
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "wav", format: .wav)
     }
 
     func testTranscribeDataDefaultOpus() {
-        transcribeDataDefault("SpeechSample", withExtension: "ogg", format: .Opus)
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
     }
 
     func testTranscribeDataDefaultFLAC() {
-        transcribeDataDefault("SpeechSample", withExtension: "flac", format: .FLAC)
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "flac", format: .flac)
     }
 
     func transcribeDataDefault(
@@ -193,44 +193,46 @@ class SpeechToTextTests: XCTestCase {
         format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-
-        guard let audio = NSData(contentsOfURL: file) else {
+        
+        do {
+            let audio = try Data(contentsOf: file)
+            
+            let settings = RecognitionSettings(contentType: format)
+            speechToText.recognize(audioData: audio, with: settings, failure: failWithError) { results in
+                self.validateSTTResults(results: results.results, settings: settings)
+                XCTAssertEqual(results.results.count, 1)
+                XCTAssert(results.results.last?.final == true)
+                let transcript = results.results.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                expectation.fulfill()
+            }
+            waitForExpectations()
+        } catch {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
-
-        let settings = RecognitionSettings(contentType: format)
-        speechToText.recognize(audio, settings: settings, failure: failWithError) { results in
-            self.validateSTTResults(results.results, settings: settings)
-            XCTAssertEqual(results.results.count, 1)
-            XCTAssert(results.results.last?.final == true)
-            let transcript = results.results.last?.alternatives.last?.transcript
-            XCTAssertNotNil(transcript)
-            XCTAssertGreaterThan(transcript!.characters.count, 0)
-            expectation.fulfill()
-        }
-        waitForExpectations()
     }
 
     // MARK: - Transcribe Data, Custom Settings
 
     func testTranscribeDataCustomWAV() {
-        transcribeDataCustom("SpeechSample", withExtension: "wav", format: .WAV)
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "wav", format: .wav)
     }
 
     func testTranscribeDataCustomOpus() {
-        transcribeDataCustom("SpeechSample", withExtension: "ogg", format: .Opus)
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
     }
 
     func testTranscribeDataCustomFLAC() {
-        transcribeDataCustom("SpeechSample", withExtension: "flac", format: .FLAC)
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "flac", format: .flac)
     }
 
     func transcribeDataCustom(
@@ -239,41 +241,43 @@ class SpeechToTextTests: XCTestCase {
         format: AudioMediaType)
     {
         let description = "Transcribe an audio file."
-        let expectation = expectationWithDescription(description)
+        let expectation = self.expectation(description: description)
 
-        let bundle = NSBundle(forClass: self.dynamicType)
-        guard let file = bundle.URLForResource(filename, withExtension: withExtension) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-
-        guard let audio = NSData(contentsOfURL: file) else {
+        
+        do {
+            let audio = try Data(contentsOf: file)
+            
+            var settings = RecognitionSettings(contentType: format)
+            settings.continuous = true
+            settings.inactivityTimeout = -1
+            settings.keywords = ["tornadoes"]
+            settings.keywordsThreshold = 0.75
+            settings.maxAlternatives = 3
+            settings.interimResults = true
+            settings.wordAlternativesThreshold = 0.25
+            settings.wordConfidence = true
+            settings.timestamps = true
+            settings.filterProfanity = false
+            
+            speechToText.recognize(audioData: audio, with: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+                self.validateSTTResults(results: results.results, settings: settings)
+                if results.results.last?.final == true {
+                    let transcript = results.results.last?.alternatives.last?.transcript
+                    XCTAssertNotNil(transcript)
+                    XCTAssertGreaterThan(transcript!.characters.count, 0)
+                    expectation.fulfill()
+                }
+            }
+            waitForExpectations()
+        } catch {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
-
-        var settings = RecognitionSettings(contentType: format)
-        settings.continuous = true
-        settings.inactivityTimeout = -1
-        settings.keywords = ["tornadoes"]
-        settings.keywordsThreshold = 0.75
-        settings.maxAlternatives = 3
-        settings.interimResults = true
-        settings.wordAlternativesThreshold = 0.25
-        settings.wordConfidence = true
-        settings.timestamps = true
-        settings.filterProfanity = false
-
-        speechToText.recognize(audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
-            self.validateSTTResults(results.results, settings: settings)
-            if results.results.last?.final == true {
-                let transcript = results.results.last?.alternatives.last?.transcript
-                XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
-                expectation.fulfill()
-            }
-        }
-        waitForExpectations()
     }
 
     // MARK: - Transcribe Streaming
@@ -292,7 +296,7 @@ class SpeechToTextTests: XCTestCase {
 
     func validateSTTResults(results: [SpeechRecognitionResult], settings: RecognitionSettings) {
         for result in results {
-            validateSTTResult(result, settings: settings)
+            validateSTTResult(result: result, settings: settings)
         }
     }
 
@@ -306,9 +310,9 @@ class SpeechToTextTests: XCTestCase {
         for alternative in result.alternatives {
             if alternative.confidence != nil {
                 alternativesWithConfidence += 1
-                validateSTTTranscription(alternative, best: true, final: final, settings: settings)
+                validateSTTTranscription(transcription: alternative, best: true, final: final, settings: settings)
             } else {
-                validateSTTTranscription(alternative, best: false, final: final, settings: settings)
+                validateSTTTranscription(transcription: alternative, best: false, final: final, settings: settings)
             }
         }
 
@@ -316,14 +320,14 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertEqual(alternativesWithConfidence, 1)
         }
 
-        if settings.keywords?.count > 0 && final {
+        if settings.keywords != nil, settings.keywords!.count > 0 && final {
             XCTAssertNotNil(settings.keywordsThreshold)
             XCTAssertGreaterThanOrEqual(settings.keywordsThreshold!, 0.0)
             XCTAssertLessThanOrEqual(settings.keywordsThreshold!, 1.0)
             XCTAssertNotNil(result.keywordResults)
             XCTAssertGreaterThan(result.keywordResults!.count, 0)
             for (keyword, keywordResults) in result.keywordResults! {
-                validateSTTKeywordResults(keyword, keywordResults: keywordResults)
+                validateSTTKeywordResults(keyword: keyword, keywordResults: keywordResults)
             }
         } else {
             let isEmpty = (result.keywordResults?.count == 0)
@@ -338,7 +342,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNotNil(result.wordAlternatives)
             XCTAssertGreaterThan(result.wordAlternatives!.count, 0)
             for wordAlternatives in result.wordAlternatives! {
-                validateSTTWordAlternativeResults(wordAlternatives)
+                validateSTTWordAlternativeResults(wordAlternatives: wordAlternatives)
             }
         } else {
             let isEmpty = (result.wordAlternatives?.count == 0)
@@ -368,7 +372,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNotNil(transcription.timestamps)
             XCTAssertGreaterThan(transcription.timestamps!.count, 0)
             for timestamp in transcription.timestamps! {
-                validateSTTWordTimestamp(timestamp)
+                validateSTTWordTimestamp(timestamp: timestamp)
             }
         } else {
             let isEmpty = (transcription.timestamps?.count == 0)
@@ -380,7 +384,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNotNil(transcription.wordConfidence)
             XCTAssertGreaterThan(transcription.wordConfidence!.count, 0)
             for word in transcription.wordConfidence! {
-                validateSTTWordConfidence(word)
+                validateSTTWordConfidence(word: word)
             }
         } else {
             let isEmpty = (transcription.wordConfidence?.count == 0)
@@ -405,7 +409,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertGreaterThan(keyword.characters.count, 0)
         XCTAssertGreaterThan(keywordResults.count, 0)
         for keywordResult in keywordResults {
-            validateSTTKeywordResult(keywordResult)
+            validateSTTKeywordResult(keywordResult: keywordResult)
         }
     }
 
@@ -422,7 +426,7 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(wordAlternatives.endTime, wordAlternatives.startTime)
         XCTAssertGreaterThan(wordAlternatives.alternatives.count, 0)
         for wordAlternative in wordAlternatives.alternatives {
-            validateSTTWordAlternativeResult(wordAlternative)
+            validateSTTWordAlternativeResult(wordAlternative: wordAlternative)
         }
     }
 

@@ -150,10 +150,10 @@ public class SpeechToTextSession {
      
      - parameter audio: The audio file to transcribe.
      */
-    public func recognize(audio: URL) {
+    public func recognize(audioFile audio: URL) {
         do {
             let data = try Data(contentsOf: audio)
-            recognize(audio: data)
+            recognize(audioData: data)
         } catch {
             let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -168,7 +168,7 @@ public class SpeechToTextSession {
      
      - parameter audio: The audio data to transcribe.
      */
-    public func recognize(audio: Data) {
+    public func recognize(audioData audio: Data) {
         socket.writeAudio(audio: audio)
     }
     

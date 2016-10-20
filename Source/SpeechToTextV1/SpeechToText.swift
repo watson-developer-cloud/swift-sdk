@@ -114,7 +114,11 @@ public class SpeechToText {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
     */
-    public func getModel(modelID: String, failure: ((Error) -> Void)? = nil, success: @escaping (Model) -> Void) {
+    public func getModel(
+        withID modelID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Model) -> Void)
+    {
         //construct REST request
         let request = RestRequest(
             method: .get,
@@ -147,8 +151,8 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: URL,
-        settings: RecognitionSettings,
+        audioFile audio: URL,
+        with settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -157,8 +161,8 @@ public class SpeechToText {
         do {
             let data = try Data(contentsOf: audio)
             recognize(
-                audio: data,
-                settings: settings,
+                audioData: data,
+                with: settings,
                 model: model,
                 learningOptOut: learningOptOut,
                 failure: failure,
@@ -186,8 +190,8 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: Data,
-        settings: RecognitionSettings,
+        audioData audio: Data,
+        with settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -216,7 +220,7 @@ public class SpeechToText {
         // execute recognition request
         session.connect()
         session.startRequest(settings: settings)
-        session.recognize(audio: audio)
+        session.recognize(audioData: audio)
         session.stopRequest()
         session.disconnect()
     }
@@ -256,7 +260,7 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognizeMicrophone(
-        settings: RecognitionSettings,
+        with settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
@@ -265,7 +269,7 @@ public class SpeechToText {
     {
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
+        settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)
         
         // create session
         let session = SpeechToTextSession(

@@ -138,32 +138,32 @@ public struct RecognitionSettings: JSONEncodable {
 public enum AudioMediaType {
     
     /// FLAC audio format
-    case FLAC
+    case flac
     
     /// L16 audio format with a rate and channels
-    case L16(rate: Int, channels: Int)
+    case l16(rate: Int, channels: Int)
     
     /// WAV audio format
-    case WAV
+    case wav
     
     /// Opus audio format
-    case Opus
+    case opus
     
     /// mu-law audio format
-    case MuLaw
+    case muLaw
     
     /// Basic audio format
-    case Basic
+    case basic
 
     /// A representation of the audio format as a MIME type string.
     var toString: String {
         switch self {
-        case .FLAC:                        return "audio/flac"
-        case .L16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
-        case .WAV:                         return "audio/wav"
-        case .Opus:                        return "audio/ogg;codecs=opus"
-        case .MuLaw:                       return "audio/mulaw"
-        case .Basic:                       return "audio/basic"
+        case .flac:                        return "audio/flac"
+        case .l16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
+        case .wav:                         return "audio/wav"
+        case .opus:                        return "audio/ogg;codecs=opus"
+        case .muLaw:                       return "audio/mulaw"
+        case .basic:                       return "audio/basic"
         }
     }
 }

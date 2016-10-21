@@ -20,8 +20,9 @@ import Freddy
 import RestKit
 
 /**
- The AlchemyDataNews API utilizes natural language processing technologies to query the world's
- news and blogs like a database. 
+ AlchemyData News provides news and blog content enriched with natural language processing to allow
+ for highly targeted search and trend analysis. It enables you to query the world's news sources and
+ blogs like a database.
  */
 public class AlchemyDataNews {
     
@@ -31,12 +32,11 @@ public class AlchemyDataNews {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
+    /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    private let errorDomain = "com.watsonplatform.alchemyDataNews"
     
     /**
      Create an `AlchemyDataNews` object.
-     
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
@@ -44,43 +44,43 @@ public class AlchemyDataNews {
     }
     
     /**
-     Returns articles matching the query. If no query is given, simply returns a count of articles
-     matching the start/end timeframe.
+     Analyze news using Natural Language Processing (NLP) queries and sophisticated filters.
      
-     Timeframe values as numbers are assumed to be in second, however some convenience values are
-     recognized by the service. For a list of those values, visit
+     All time arguments assume seconds as the default unit, but a more user-friendly time format
+     can be used to specify relative times. For more information, see this service documentation:
      http://docs.alchemyapi.com/docs/counts
      
      There are several specific query parameters and 'return' fields. A list can be found at:
      http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields
      
-     - parameter start:   the start value for the search timeframe
-     - parameter end:     the end value for the search timefram
-     - parameter query:   key-value pairs that will build the request query
-     - parameter failure: a function executed if the call fails
-     - parameter success: a function executed with NewsResponse information
+     - parameter from: The time (in UTC seconds) of the beginning date and time of the query. Valid
+        values are UTC times and relative times.
+     - parameter to: The time (in UTC seconds) of the end date and time of the query. Valid values
+        are UTC times and relative times.
+     - parameter query: Additional key-value pairs for the NLP query. For a full list of valid
+        parameters, see: http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the service's response.
      */
     public func getNews(
-        start: String,
-        end: String,
+        from startTime: String,
+        to endTime: String? = nil,
         query: [String : String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (NewsResponse) -> Void)
     {
-        
-        // construct query paramerters
-        var queryParams = [URLQueryItem]()
-        
-        if let queries = query {
-            for (key, value) in queries {
-                queryParams.append(URLQueryItem(name: key, value: value))
+        // construct query items
+        var queryItems = [URLQueryItem]()
+        queryItems.append(URLQueryItem(name: "start", value: startTime))
+        queryItems.append(URLQueryItem(name: "end", value: endTime))
+        queryItems.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryItems.append(URLQueryItem(name: "outputMode", value: "json"))
+        if let query = query {
+            for (key, value) in query {
+                queryItems.append(URLQueryItem(name: key, value: value))
             }
         }
-        queryParams.append(URLQueryItem(name: "start", value: start))
-        queryParams.append(URLQueryItem(name: "end", value: end))
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        
+
         // construct request
         let request = RestRequest(
             method: .get,
@@ -88,7 +88,7 @@ public class AlchemyDataNews {
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryParameters: queryItems
         )
         
         // execute request
@@ -98,7 +98,6 @@ public class AlchemyDataNews {
                 case .success(let newsResponse): success(newsResponse)
                 case .failure(let error): failure?(error)
                 }
-        }
+            }
     }
-    
 }

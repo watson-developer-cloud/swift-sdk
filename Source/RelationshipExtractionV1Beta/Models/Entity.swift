@@ -87,27 +87,27 @@ public struct ReferencingMentions: JSONDecodable {
 public enum EntityClass: String {
     
     /// A reference to a specific thing.
-    case Specific = "SPC"
+    case specific = "SPC"
     
     /// A negated reference to a specific thing.
-    case Negated = "NEG"
+    case negated = "NEG"
     
     /// A generic reference that does not fit the other class types.
-    case Generic = "GEN"
+    case generic = "GEN"
 }
 
 /** The level of the entity. */
 public enum EntityLevel: String {
     
     /// A named entity, in the form of a proper name.
-    case Named = "NAM"
+    case named = "NAM"
     
     /// A nominal entity, not composed solely of a named entity or pronoun.
-    case Nominal = "NOM"
+    case nominal = "NOM"
     
     /// A pronoun.
-    case Pronoun = "PRO"
+    case pronoun = "PRO"
     
     /// An entity that does not match any of the other types.
-    case None = "NONE"
+    case none = "NONE"
 }

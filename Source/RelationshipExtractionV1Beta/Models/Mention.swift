@@ -100,27 +100,27 @@ public struct Mention: JSONDecodable {
 public enum MentionType: String {
     
     /// A named entity mention, in the form of a proper name.
-    case Named = "NAM"
+    case named = "NAM"
     
     /// A nominal entity mention, not composed solely of a named entity or pronoun.
-    case Nominal = "NOM"
+    case nominal = "NOM"
     
     /// A pronoun mention.
-    case Pronoun = "PRO"
+    case pronoun = "PRO"
     
     /// A mention that does not match any of the other types.
-    case None = "NONE"
+    case none = "NONE"
 }
 
 /** The class of the mention. */
 public enum MentionClass: String {
     
     /// The mention is a reference to a specific thing.
-    case Specific = "SPC"
+    case specific = "SPC"
     
     /// The mention is a negated reference to a specific thing.
-    case Negated = "NEG"
+    case negated = "NEG"
     
     /// A generic mention that does not fit the other class types.
-    case Generic = "GEN"
+    case generic = "GEN"
 }

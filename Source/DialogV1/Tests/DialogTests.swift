@@ -85,7 +85,7 @@ class DialogTests: XCTestCase {
             XCTFail("Failed to create the test dialog application.")
         }
 
-        dialog.createDialog(name: dialogName, fileURL: fileURL, failure: failure) { id in
+        dialog.createDialog(withName: dialogName, fromFile: fileURL, failure: failure) { id in
             self.dialogID = id
             self.dialogName = dialogName
             expectation.fulfill()
@@ -174,7 +174,7 @@ class DialogTests: XCTestCase {
             return
         }
         
-        dialog.createDialog(name: dialogName, fileURL: fileURL, failure: failWithError) { id in
+        dialog.createDialog(withName: dialogName, fromFile: fileURL, failure: failWithError) { id in
             dialogID = id
             expectation1.fulfill()
         }
@@ -183,7 +183,7 @@ class DialogTests: XCTestCase {
         let description2 = "Delete the dialog application."
         let expectation2 = self.expectation(description: description2)
         
-        dialog.deleteDialog(dialogID: dialogID!, failure: failWithError) {
+        dialog.deleteDialog(withID: dialogID!, failure: failWithError) {
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -194,7 +194,7 @@ class DialogTests: XCTestCase {
         let description = "Download the dialog file associated with the test application."
         let expectation = self.expectation(description: description)
         
-        dialog.getDialogFile(dialogID: dialogID!, format: format, failure: failWithError) { file in
+        dialog.getDialogFile(fromDialogID: dialogID!, inFormat: format, failure: failWithError) { file in
             let fileManager = FileManager.default
             XCTAssertTrue(fileManager.fileExists(atPath: file.path))
             XCTAssertTrue(self.verifyFiletype(format: format, url: file))
@@ -209,9 +209,9 @@ class DialogTests: XCTestCase {
         var filetype = ".mct"
         if let format = format {
             switch format {
-            case .OctetStream: filetype = ".mct"
-            case .WDSJSON: filetype = ".json"
-            case .WDSXML: filetype = ".xml"
+            case .octetStream: filetype = ".mct"
+            case .wdsJSON: filetype = ".json"
+            case .wdsXML: filetype = ".xml"
             }
         }
         return url.path.hasSuffix(filetype)
@@ -224,17 +224,17 @@ class DialogTests: XCTestCase {
 
     /** Download the dialog file associated with the test application in OctetStream format. */
     func testGetDialogFileOctetStream() {
-        getDialogFile(format: .OctetStream)
+        getDialogFile(format: .octetStream)
     }
 
     /** Download the dialog file associated with the test application in JSON format. */
     func testGetDialogFileJSON() {
-        getDialogFile(format: .WDSJSON)
+        getDialogFile(format: .wdsJSON)
     }
 
     /** Download the dialog file associated with the test application in XML format. */
     func testGetDialogFileXML() {
-        getDialogFile(format: .WDSXML)
+        getDialogFile(format: .wdsXML)
     }
 
     /** Update the dialog application. */
@@ -247,7 +247,7 @@ class DialogTests: XCTestCase {
             return
         }
 
-        dialog.updateDialog(dialogID: dialogID!, fileURL: fileURL, failure: failWithError) {
+        dialog.updateDialog(withID: dialogID!, fromFile: fileURL, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -262,7 +262,7 @@ class DialogTests: XCTestCase {
         let initialResponse = "Hi, I\'m Watson! I can help you order a pizza, " +
                               "what size would you like?"
 
-        dialog.getContent(dialogID: dialogID!, failure: failWithError) { nodes in
+        dialog.getContent(fromDialogID: dialogID!, failure: failWithError) { nodes in
             for node in nodes {
                 let nodeMatch = (node.node == initialNode)
                 let contentMatch = (node.content == initialResponse)
@@ -287,7 +287,7 @@ class DialogTests: XCTestCase {
 
         let newNode = DialogV1.Node(content: newGreeting, node: initialNode)
 
-        dialog.updateContent(dialogID: dialogID!, nodes: [newNode], failure: failWithError) {
+        dialog.updateContent(fromDialogID: dialogID!, forNodes: [newNode], failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -306,7 +306,7 @@ class DialogTests: XCTestCase {
         var conversationID: Int?
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             XCTAssertEqual(response.response.last, response1)
             conversationID = response.conversationID
             clientID = response.clientID
@@ -319,7 +319,7 @@ class DialogTests: XCTestCase {
 
         let response2 = "What toppings are you in the mood for? (Limit 4)"
 
-        dialog.converse(dialogID: dialogID!, conversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
+        dialog.converse(withDialogID: dialogID!, withConversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
             response in
             XCTAssertEqual(response.response.last, response2)
             expectation2.fulfill()
@@ -336,7 +336,7 @@ class DialogTests: XCTestCase {
         let dateFrom = Date(timeInterval: serverOffset - bufferOffset, since: startTime)
         let dateTo = Date(timeIntervalSinceNow: serverOffset + bufferOffset)
 
-        dialog.getConversationHistory(dialogID: dialogID!, dateFrom: dateFrom, dateTo: dateTo, failure: failWithError) {
+        dialog.getConversationHistory(fromDialogID: dialogID!, from: dateFrom, to: dateTo, failure: failWithError) {
             conversations in
             XCTAssertGreaterThanOrEqual(conversations.count, 1)
             XCTAssertEqual(conversations.last?.messages.count, 3)
@@ -357,7 +357,7 @@ class DialogTests: XCTestCase {
         var conversationID: Int?
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             XCTAssertEqual(response.response.last, response1)
             conversationID = response.conversationID
             clientID = response.clientID
@@ -370,7 +370,7 @@ class DialogTests: XCTestCase {
 
         let response2 = "What toppings are you in the mood for? (Limit 4)"
 
-        dialog.converse(dialogID: dialogID!, conversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
+        dialog.converse(withDialogID: dialogID!, withConversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
             response in
             XCTAssertEqual(response.response.last, response2)
             expectation2.fulfill()
@@ -388,7 +388,7 @@ class DialogTests: XCTestCase {
         let dateTo = Date(timeIntervalSinceNow: serverOffset + bufferOffset)
 
         let offset = 1000
-        dialog.getConversationHistory(dialogID: dialogID!, dateFrom: dateFrom, dateTo: dateTo, offset: offset, failure: failWithError) {
+        dialog.getConversationHistory(fromDialogID: dialogID!, from: dateFrom, to: dateTo, offset: offset, failure: failWithError) {
             conversations in
             XCTAssertEqual(conversations.count, 0)
             expectation3.fulfill()
@@ -406,7 +406,7 @@ class DialogTests: XCTestCase {
         var conversationID: Int?
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             XCTAssertEqual(response.response.last, response1)
             conversationID = response.conversationID
             clientID = response.clientID
@@ -419,7 +419,7 @@ class DialogTests: XCTestCase {
 
         let response2 = "What toppings are you in the mood for? (Limit 4)"
 
-        dialog.converse(dialogID: dialogID!, conversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
+        dialog.converse(withDialogID: dialogID!, withConversationID: conversationID!, clientID: clientID!, input: "large", failure: failWithError) {
             response in
             XCTAssertEqual(response.response.last, response2)
             expectation2.fulfill()
@@ -437,7 +437,7 @@ class DialogTests: XCTestCase {
         let dateTo = Date(timeIntervalSinceNow: serverOffset + bufferOffset)
 
         let limit = 0
-        dialog.getConversationHistory(dialogID: dialogID!, dateFrom: dateFrom, dateTo: dateTo, limit: limit, failure: failWithError) {
+        dialog.getConversationHistory(fromDialogID: dialogID!, from: dateFrom, to: dateTo, limit: limit, failure: failWithError) {
             conversations in
             // XCTAssertEqual(conversations.count, 0)
             expectation3.fulfill()
@@ -455,7 +455,7 @@ class DialogTests: XCTestCase {
         var conversationID: Int?
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             XCTAssertEqual(response.response.last, response1)
             conversationID = response.conversationID
             clientID = response.clientID
@@ -469,8 +469,8 @@ class DialogTests: XCTestCase {
         let response2 = "What toppings are you in the mood for? (Limit 4)"
 
         dialog.converse(
-            dialogID: dialogID!,
-            conversationID: conversationID!,
+            withDialogID: dialogID!,
+            withConversationID: conversationID!,
             clientID: clientID!,
             input: "large",
             failure: failWithError)
@@ -492,7 +492,7 @@ class DialogTests: XCTestCase {
         var conversationID: Int?
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             conversationID = response.conversationID
             clientID = response.clientID
             expectation1.fulfill()
@@ -503,8 +503,8 @@ class DialogTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         dialog.converse(
-            dialogID: dialogID!,
-            conversationID: conversationID!,
+            withDialogID: dialogID!,
+            withConversationID: conversationID!,
             clientID: clientID!,
             input: "large",
             failure: failWithError)
@@ -517,7 +517,7 @@ class DialogTests: XCTestCase {
         let description3 = "Retrieve the client's profile variables."
         let expectation3 = self.expectation(description: description3)
 
-        dialog.getProfile(dialogID: dialogID!, clientID: clientID!, failure: failWithError) { profile in
+        dialog.getProfile(fromDialogID: dialogID!, withClientID: clientID!, failure: failWithError) { profile in
             XCTAssertNil(profile.clientID)
             XCTAssertEqual(profile.parameters.first?.name, "size")
             XCTAssertEqual(profile.parameters.first?.value, "Large")
@@ -531,7 +531,7 @@ class DialogTests: XCTestCase {
         let description = "Update a new client's profile variables."
         let expectation = self.expectation(description: description)
 
-        dialog.updateProfile(dialogID: dialogID!, parameters: ["size": "Large"], failure: failWithError) {
+        dialog.updateProfile(fromDialogID: dialogID!, parameters: ["size": "Large"], failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -544,7 +544,7 @@ class DialogTests: XCTestCase {
 
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             clientID = response.clientID
             expectation1.fulfill()
         }
@@ -554,8 +554,8 @@ class DialogTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         dialog.updateProfile(
-            dialogID: dialogID!,
-            clientID: clientID!,
+            fromDialogID: dialogID!,
+            withClientID: clientID!,
             parameters: ["size": "Large"],
             failure: failWithError)
         {
@@ -582,7 +582,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.createDialog(name: dialogName, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.createDialog(withName: dialogName, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -600,7 +600,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.createDialog(name: dialogName!, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.createDialog(withName: dialogName!, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -620,7 +620,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.createDialog(name: longName, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.createDialog(withName: longName, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -637,7 +637,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.createDialog(name: dialogName, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.createDialog(withName: dialogName, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -651,7 +651,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.deleteDialog(dialogID: invalidID, failure: failure, success: failWithResult)
+        dialog.deleteDialog(withID: invalidID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -665,7 +665,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.getDialogFile(dialogID: invalidID, failure: failure, success: failWithResult)
+        dialog.getDialogFile(fromDialogID: invalidID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -683,7 +683,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.updateDialog(dialogID: dialogID!, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.updateDialog(withID: dialogID!, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -698,7 +698,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.updateDialog(dialogID: dialogID!, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.updateDialog(withID: dialogID!, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -718,7 +718,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.updateDialog(dialogID: invalidID, fileURL: fileURL, failure: failure, success: failWithResult)
+        dialog.updateDialog(withID: invalidID, fromFile: fileURL, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -733,7 +733,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.getContent(dialogID: invalidID, failure: failure, success: failWithResult)
+        dialog.getContent(fromDialogID: invalidID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -748,7 +748,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.updateContent(dialogID: dialogID!, nodes: nodes, failure: failure, success: failWithResult)
+        dialog.updateContent(fromDialogID: dialogID!, forNodes: nodes, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -765,7 +765,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.updateContent(dialogID: invalidID, nodes: nodes, failure: failure, success: failWithResult)
+        dialog.updateContent(fromDialogID: invalidID, forNodes: nodes, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -791,9 +791,9 @@ class DialogTests: XCTestCase {
         }
 
         dialog.getConversationHistory(
-            dialogID: invalidID,
-            dateFrom: dateFrom,
-            dateTo: dateTo,
+            fromDialogID: invalidID,
+            from: dateFrom,
+            to: dateTo,
             failure: failure,
             success: failWithResult
         )
@@ -811,7 +811,7 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
 
-        dialog.converse(dialogID: invalidID, failure: failure, success: failWithResult)
+        dialog.converse(withDialogID: invalidID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -828,8 +828,8 @@ class DialogTests: XCTestCase {
         }
 
         dialog.converse(
-            dialogID: dialogID!,
-            conversationID: invalidConversationID,
+            withDialogID: dialogID!,
+            withConversationID: invalidConversationID,
             clientID: invalidClientID,
             input: "large",
             failure: failure,
@@ -853,8 +853,8 @@ class DialogTests: XCTestCase {
         }
 
         dialog.getProfile(
-            dialogID: invalidID,
-            clientID: invalidClientID,
+            fromDialogID: invalidID,
+            withClientID: invalidClientID,
             failure: failure,
             success: failWithResult
         )
@@ -873,8 +873,8 @@ class DialogTests: XCTestCase {
         }
 
         dialog.getProfile(
-            dialogID: dialogID!,
-            clientID: invalidClientID,
+            fromDialogID: dialogID!,
+            withClientID: invalidClientID,
             failure: failure,
             success: failWithResult
         )
@@ -888,7 +888,7 @@ class DialogTests: XCTestCase {
 
         var clientID: Int?
 
-        dialog.converse(dialogID: dialogID!, failure: failWithError) { response in
+        dialog.converse(withDialogID: dialogID!, failure: failWithError) { response in
             clientID = response.clientID
             expectation1.fulfill()
         }
@@ -904,8 +904,8 @@ class DialogTests: XCTestCase {
         }
 
         dialog.getProfile(
-            dialogID: dialogID!,
-            clientID: clientID!,
+            fromDialogID: dialogID!,
+            withClientID: clientID!,
             names: invalidParameters,
             failure: failure,
             success: failWithResult
@@ -925,7 +925,7 @@ class DialogTests: XCTestCase {
         }
 
         dialog.updateProfile(
-            dialogID: invalidID,
+            fromDialogID: invalidID,
             parameters: ["size": "Large"],
             failure: failure,
             success: failWithResult
@@ -945,8 +945,8 @@ class DialogTests: XCTestCase {
         }
 
         dialog.updateProfile(
-            dialogID: dialogID!,
-            clientID: invalidID,
+            fromDialogID: dialogID!,
+            withClientID: invalidID,
             parameters: ["size": "Large"],
             failure: failure,
             success: failWithResult

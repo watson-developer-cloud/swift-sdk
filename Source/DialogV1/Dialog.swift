@@ -124,8 +124,8 @@ public class Dialog {
         application.
      */
     public func createDialog(
-        name: String,
-        fileURL: URL,
+        withName name: String,
+        fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogID) -> Void)
     {
@@ -177,7 +177,7 @@ public class Dialog {
         has been successfully deleted.
      */
     public func deleteDialog(
-        dialogID: DialogID,
+        withID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -216,8 +216,8 @@ public class Dialog {
      - parameter success: A function executed with the URL of the downloaded dialog file.
      */
     public func getDialogFile(
-        dialogID: DialogID,
-        format: Format? = nil,
+        fromDialogID dialogID: DialogID,
+        inFormat format: Format? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void)
     {
@@ -233,9 +233,9 @@ public class Dialog {
         var filetype = ".mct"
         if let format = format {
             switch format {
-            case .OctetStream: filetype = ".mct"
-            case .WDSJSON: filetype = ".json"
-            case .WDSXML: filetype = ".xml"
+            case .octetStream: filetype = ".mct"
+            case .wdsJSON: filetype = ".json"
+            case .wdsXML: filetype = ".xml"
             }
         }
         
@@ -317,8 +317,8 @@ public class Dialog {
         successfully uploaded.
      */
     public func updateDialog(
-        dialogID: DialogID,
-        fileURL: URL,
+        withID dialogID: DialogID,
+        fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -372,7 +372,7 @@ public class Dialog {
      - parameter success: A function executed with the dialog application's nodes.
      */
     public func getContent(
-        dialogID: DialogID,
+        fromDialogID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Node]) -> Void)
     {
@@ -404,8 +404,8 @@ public class Dialog {
      - parameter success: A function executed after the specified nodes have been updated.
      */
     public func updateContent(
-        dialogID: DialogID,
-        nodes: [Node],
+        fromDialogID dialogID: DialogID,
+        forNodes nodes: [Node],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -460,9 +460,9 @@ public class Dialog {
      - parameter success: A function executed with the retrieved conversation history.
      */
     public func getConversationHistory(
-        dialogID: DialogID,
-        dateFrom: Date,
-        dateTo: Date,
+        fromDialogID dialogID: DialogID,
+        from dateFrom: Date,
+        to dateTo: Date,
         offset: Int? = nil,
         limit: Int? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -517,8 +517,8 @@ public class Dialog {
      - parameter success: A function executed with the dialog application's response.
      */
     public func converse(
-        dialogID: DialogID,
-        conversationID: Int? = nil,
+        withDialogID dialogID: DialogID,
+        withConversationID conversationID: Int? = nil,
         clientID: Int? = nil,
         input: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -569,8 +569,8 @@ public class Dialog {
      - parameter success: A function executed with the retrieved profile variables.
      */
     public func getProfile(
-        dialogID: DialogID,
-        clientID: Int,
+        fromDialogID dialogID: DialogID,
+        withClientID clientID: Int,
         names: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Profile) -> Void)
@@ -616,8 +616,8 @@ public class Dialog {
      - parameter success: A function executed after the client's profile has been updated.
      */
     public func updateProfile(
-        dialogID: DialogID,
-        clientID: Int? = nil,
+        fromDialogID dialogID: DialogID,
+        withClientID clientID: Int? = nil,
         parameters: [String: String],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)

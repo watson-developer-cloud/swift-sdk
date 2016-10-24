@@ -57,7 +57,7 @@ public class ToneAnalyzer {
      The message is analyzed for several tones—social, emotional, and writing. For each tone,
      various traits are derived (e.g. conscientiousness, agreeableness, and openness).
      
-     - parameter text: The text to analyze.
+     - parameter ofText: The text to analyze.
      - parameter tones: Filter the results by a specific tone. Valid values for `tones` are
             `emotion`, `writing`, or `social`.
      - parameter sentences: Should sentence-level tone analysis by performed?
@@ -65,7 +65,7 @@ public class ToneAnalyzer {
      - parameter success: A function invoked with the tone analysis.
      */
     public func getTone(
-        text: String,
+        ofText text: String,
         tones: [String]? = nil,
         sentences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,

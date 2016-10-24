@@ -79,7 +79,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Author information
      */
     public func getAuthors(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAuthors) -> Void)
     {
@@ -119,15 +119,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Author information
      */
     public func getAuthors(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAuthors) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -165,13 +165,13 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
     {
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -213,8 +213,8 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
@@ -222,7 +222,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -266,7 +266,7 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forText text: URL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
@@ -274,7 +274,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -320,7 +320,7 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -331,7 +331,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entities) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -398,8 +398,8 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forHtml html: URL,
-        url: String?,
+        fromHTMLFile html: URL,
+        withURL url: String?,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -413,7 +413,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -482,7 +482,7 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forText text: URL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -496,7 +496,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -558,14 +558,14 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Keywords) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -618,8 +618,8 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
@@ -629,7 +629,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -684,7 +684,7 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forText text: URL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
@@ -694,7 +694,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -743,7 +743,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Language information
      */
     public func getLanguage(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Language) -> Void)
     {
@@ -779,14 +779,14 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Language information
      */
     public func getLanguage(
-        forText text: URL,
+        fromTextFile text: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Language) -> Void)
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -820,7 +820,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Microformat information
      */
     public func getMicroformatData(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Microformats) -> Void)
     {
@@ -858,15 +858,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Microformat information
      */
     public func getMicroformatData(
-        forHtml html: URL,
-        url: String? = " ",
+        fromHTMLFile html: URL,
+        withURL url: String? = " ",
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Microformats) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -903,7 +903,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Publication information
      */
     public func getPubDate(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (PublicationResponse) -> Void)
     {
@@ -940,15 +940,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Publication information
      */
     public func getPubDate(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (PublicationResponse) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -981,6 +981,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter url:                      the URL of the content
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -994,7 +995,7 @@ public class AlchemyLanguage {
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1007,7 +1008,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SAORelations) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1067,6 +1068,7 @@ public class AlchemyLanguage {
      
      - parameter html:                     a HTML document
      - parameter url:                      a reference to where the HTML is located
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1080,8 +1082,8 @@ public class AlchemyLanguage {
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1097,7 +1099,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1159,6 +1161,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter text:                     a Text document
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1172,7 +1175,7 @@ public class AlchemyLanguage {
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forText text: URL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1188,7 +1191,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1251,7 +1254,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1288,15 +1291,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1333,14 +1336,14 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forText text: URL,
+        fromTextFile text: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1369,14 +1372,14 @@ public class AlchemyLanguage {
     /**
      Calculates the Sentiment of given content.
      
-     - parameter target:  a pharse to target analysis towards
      - parameter url:     the URL of the content
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forURL url: String,
-        target: String,
+        fromContentAtURL url: String,
+        withTargets targets: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
@@ -1387,7 +1390,7 @@ public class AlchemyLanguage {
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryParameters: [
-                URLQueryItem(name: "target", value: target),
+                URLQueryItem(name: "target", value: targets),
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -1408,14 +1411,14 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter html:    a HTML document
-     - parameter target:  a pharse to target analysis towards
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forHtml html: URL,
-        target: String,
+        fromHTMLFile html: URL,
+        withTargets targets: String,
         url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
@@ -1423,12 +1426,12 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(URLQueryItem(name: "target", value: target))
+        queryParams.append(URLQueryItem(name: "target", value: targets))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
@@ -1457,25 +1460,25 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter text:    a Text document
-     - parameter target:  a pharse to target analysis towards
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forText text: URL,
-        target: String,
+        fromTextFile text: URL,
+        withTargets targets: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(URLQueryItem(name: "target", value: target))
+        queryParams.append(URLQueryItem(name: "target", value: targets))
         
         // construct request
         let request = RestRequest(
@@ -1505,7 +1508,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Taxonomies) -> Void)
     {
@@ -1541,15 +1544,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        atURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Taxonomies) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1586,14 +1589,14 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forText text: URL,
+        fromTextFile text: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Taxonomies) -> Void)
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1627,7 +1630,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Raw Text information
      */
     public func getRawText(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentText) -> Void)
     {
@@ -1663,15 +1666,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Raw Text information
      */
     public func getRawText(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentText) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1710,13 +1713,13 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Text information
      */
     public func getText(
-        forURL url: String,
+        fromContentAtURL url: String,
         useMetadata: QueryParam? = nil,
         extractLinks: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentText) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1759,8 +1762,8 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Text information
      */
     public func getText(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         useMetadata: QueryParam? = nil,
         extractLinks: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -1769,7 +1772,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1812,12 +1815,12 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Title information
      */
     public func getTitle(
-        forURL url: String,
+        fromContentAtURL url: String,
         useMetadata: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentTitle) -> Void)
     {
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1855,8 +1858,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Title information
      */
     public func getTitle(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         useMetadata: QueryParam? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentTitle) -> Void)
@@ -1864,7 +1867,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1904,7 +1907,7 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Feed information
      */
     public func getFeedLinks(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Feeds) -> Void)
     {
@@ -1941,15 +1944,15 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feeds information
      */
     public func getFeedLinks(
-        forHtml html: URL,
-        url: String? = " ",
+        fromHTMLFile html: URL,
+        withURL url: String? = " ",
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Feeds) -> Void)
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -1986,7 +1989,7 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Feed information
      */
     public func getEmotion(
-        forURL url: String,
+        fromContentAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {
@@ -2022,8 +2025,8 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feed information
      */
     public func getEmotion(
-        forHtml html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {
@@ -2031,7 +2034,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -2068,7 +2071,7 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feed information
      */
     public func getEmotion(
-        forText text: URL,
+        fromTextFile text: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {
@@ -2076,7 +2079,7 @@ public class AlchemyLanguage {
         // construct body
         let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
+        // construct query parameters
         var queryParams = [URLQueryItem]()
         
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))

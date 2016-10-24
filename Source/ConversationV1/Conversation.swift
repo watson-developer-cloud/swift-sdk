@@ -57,7 +57,7 @@ public class Conversation {
     /**
      Start a new conversation or get a response to a user's input.
      
-     - parameter workspaceID: The unique identifier of the workspace to use.
+     - parameter withWorkspace: The unique identifier of the workspace to use.
      - parameter text: The user's input message.
      - parameter context: The context, or state, associated with this request.
         Use a `nil` context to start a new conversation.
@@ -65,20 +65,20 @@ public class Conversation {
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
-        workspaceID: WorkspaceID,
+        withWorkspace workspaceID: WorkspaceID,
         text: String? = nil,
         context: Context? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
         let input = InputData(text: text)
-        message(workspaceID: workspaceID, input: input, context: context, failure: failure, success: success)
+        message(withWorkspace: workspaceID, input: input, context: context, failure: failure, success: success)
     }
     
     /**
      Start a new conversation or get a response to a user's input.
      
-     - parameter workspaceID: The unique identifier of the workspace to use.
+     - parameter withWorkspace: The unique identifier of the workspace to use.
      - parameter input: An input object that includes the input text.
      - parameter context: The context, or state, associated with this request.
      - parameter entities: An array of terms that shall be identified as entities
@@ -89,7 +89,7 @@ public class Conversation {
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
-        workspaceID: WorkspaceID,
+        withWorkspace workspaceID: WorkspaceID,
         input: InputData,
         context: Context? = nil,
         entities: [Entity]? = nil,

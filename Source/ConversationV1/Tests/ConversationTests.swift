@@ -67,7 +67,7 @@ class ConversationTests: XCTestCase {
         let nodes1 = ["node_1_1467221909631"]
         
         var context: Context?
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, failure: failWithError) {
             response in
             
             // verify input
@@ -104,7 +104,7 @@ class ConversationTests: XCTestCase {
         let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
         let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
         
-        conversation.message(workspaceID: workspaceID, text: text, context: context, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, text: text, context: context, failure: failWithError) {
             response in
             
             // verify input
@@ -149,7 +149,7 @@ class ConversationTests: XCTestCase {
         var intents: [Intent]?
         var output: OutputData?
         
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -163,7 +163,7 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(workspaceID: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -207,7 +207,7 @@ class ConversationTests: XCTestCase {
         var intents: [Intent]?
         var output: OutputData?
         
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, failure: failWithError) {
             response in
             context = response.context
             expectation1.fulfill()
@@ -218,7 +218,7 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let text2 = "Turn on the radio."
-        conversation.message(workspaceID: workspaceID, text: text2, context: context, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, text: text2, context: context, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -232,7 +232,7 @@ class ConversationTests: XCTestCase {
         let expectation3 = expectation(description: description3)
         
         let input3 = InputData(text: "Rock music.")
-        conversation.message(workspaceID: workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -278,7 +278,7 @@ class ConversationTests: XCTestCase {
             expectation.fulfill()
         }
         
-        conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
+        conversation.message(withWorkspace: workspaceID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -288,7 +288,7 @@ class ConversationTests: XCTestCase {
         
         let text = "Turn on the radio."
         let context = Context(conversationID: "this-id-is-invalid")
-        conversation.message(workspaceID: workspaceID, text: text, context: context, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, text: text, context: context, failure: failWithError) {
             response in
             expectation.fulfill()
         }

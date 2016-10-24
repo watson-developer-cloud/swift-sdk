@@ -49,8 +49,8 @@ public struct SolrCluster: JSONDecodable {
 public enum SolrClusterStatus: String {
     
     /// The cluster is ready.
-    case Ready = "READY"
+    case ready = "READY"
     
     /// The cluster is not available.
-    case NotAvailable = "NOT_AVAILABLE"
+    case notAvailable = "NOT_AVAILABLE"
 }

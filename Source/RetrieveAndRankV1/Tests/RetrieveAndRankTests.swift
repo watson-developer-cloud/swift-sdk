@@ -65,12 +65,12 @@ class RetrieveAndRankTests: XCTestCase {
     // MARK: - Helper Functions
     
     /** Create a new Solr cluster. */
-    private func createSolrCluster(clusterName: String, size: Int? = nil) -> SolrCluster? {
+    private func createSolrCluster(withName clusterName: String, size: Int? = nil) -> SolrCluster? {
         let description = "Create a new Solr Cluster."
         let expectation = self.expectation(description: description)
         
         var solrCluster: SolrCluster?
-        retrieveAndRank.createSolrCluster(name: clusterName, size: size, failure: failWithError) {
+        retrieveAndRank.createSolrCluster(withName: clusterName, size: size, failure: failWithError) {
             cluster in
             
             solrCluster = cluster
@@ -81,23 +81,23 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     /** Delete a Solr cluster. */
-    private func deleteSolrCluster(clusterID: String) {
+    private func deleteSolrCluster(withID clusterID: String) {
         let description = "Delete the Solr Cluster with the given ID."
         let expectation = self.expectation(description: description)
         
-        retrieveAndRank.deleteSolrCluster(solrClusterID: clusterID, failure: failWithError) {
+        retrieveAndRank.deleteSolrCluster(withID: clusterID, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
     }
     
     /** Get the Solr cluster with the specified ID. */
-    private func getSolrCluster(clusterID: String) -> SolrCluster? {
+    private func getSolrCluster(withID clusterID: String) -> SolrCluster? {
         let description = "Get the Solr cluster with the given ID."
         let expectation = self.expectation(description: description)
         
         var solrCluster: SolrCluster?
-        retrieveAndRank.getSolrCluster(solrClusterID: clusterID, failure: failWithError) { cluster in
+        retrieveAndRank.getSolrCluster(withID: clusterID, failure: failWithError) { cluster in
             solrCluster = cluster
             expectation.fulfill()
         }
@@ -106,12 +106,12 @@ class RetrieveAndRankTests: XCTestCase {
     }
     
     /** Create a new Ranker. */
-    private func createRanker(trainingDataFile: URL, rankerName: String? = nil) -> RankerDetails? {
+    private func createRanker(fromFile trainingDataFile: URL, withName rankerName: String? = nil) -> RankerDetails? {
         let description = "Create a new ranker."
         let expectation = self.expectation(description: description)
         
         var rankerDetails: RankerDetails?
-        retrieveAndRank.createRanker(trainingDataFile: trainingDataFile, name: rankerName, failure: failWithError) {
+        retrieveAndRank.createRanker(withName: rankerName, fromFile: trainingDataFile, failure: failWithError) {
             ranker in
             
             rankerDetails = ranker
@@ -130,7 +130,7 @@ class RetrieveAndRankTests: XCTestCase {
             let failToCreate =  { (error: Error) in
                 XCTFail("Failed to create the trained cluster.")
             }
-            retrieveAndRank.createSolrCluster(name: trainedClusterName, failure: failToCreate) {
+            retrieveAndRank.createSolrCluster(withName: trainedClusterName, failure: failToCreate) {
                 cluster in
                 
                 XCTAssertNotNil(cluster)
@@ -150,7 +150,7 @@ class RetrieveAndRankTests: XCTestCase {
             createTrainedCluster()
         }
 
-        retrieveAndRank.getSolrCluster(solrClusterID: clusterID, failure: failure) {
+        retrieveAndRank.getSolrCluster(withID: clusterID, failure: failure) {
             cluster in
             
             if cluster.solrClusterName != self.trainedClusterName {
@@ -160,7 +160,7 @@ class RetrieveAndRankTests: XCTestCase {
                 createTrainedCluster()
                 return
             }
-            if cluster.solrClusterStatus != SolrClusterStatus.Ready {
+            if cluster.solrClusterStatus != SolrClusterStatus.ready {
                 XCTFail(" Please wait. The given cluster is still being trained.")
                 return
             }
@@ -186,8 +186,8 @@ class RetrieveAndRankTests: XCTestCase {
             }
             
             retrieveAndRank.createRanker(
-                trainingDataFile: trainingDataFile,
-                name: trainedRankerName,
+                withName: trainedRankerName,
+                fromFile: trainingDataFile,
                 failure: failToCreate) { ranker in
 
                 XCTAssertNotNil(ranker)
@@ -207,7 +207,7 @@ class RetrieveAndRankTests: XCTestCase {
             createTrainedRanker()
         }
         
-        retrieveAndRank.getRanker(rankerID: rankerID, failure: failure) {
+        retrieveAndRank.getRanker(withID: rankerID, failure: failure) {
             ranker in
 
             if ranker.name != self.trainedRankerName {
@@ -217,7 +217,7 @@ class RetrieveAndRankTests: XCTestCase {
                 createTrainedRanker()
                 return
             }
-            if ranker.status != RankerStatus.Available {
+            if ranker.status != RankerStatus.available {
                 XCTFail("Please wait. The given ranker is still being trained.")
                 return
             }
@@ -254,7 +254,7 @@ class RetrieveAndRankTests: XCTestCase {
     
     /** Create and then delete a new Solr cluster. */
     func testCreateAndDeleteSolrCluster() {
-        guard let solrCluster = createSolrCluster(clusterName: "temp-swift-sdk-solr-cluster", size: 1) else {
+        guard let solrCluster = createSolrCluster(withName: "temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
@@ -264,19 +264,19 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertNotNil(solrCluster.solrClusterStatus)
         XCTAssertEqual(solrCluster.solrClusterName, "temp-swift-sdk-solr-cluster")
         XCTAssertEqual(solrCluster.solrClusterSize, 1)
-        XCTAssertEqual(solrCluster.solrClusterStatus, SolrClusterStatus.NotAvailable)
+        XCTAssertEqual(solrCluster.solrClusterStatus, SolrClusterStatus.notAvailable)
         
-        deleteSolrCluster(clusterID: solrCluster.solrClusterID)
+        deleteSolrCluster(withID: solrCluster.solrClusterID)
     }
     
     /** Get detailed information about a specific Solr cluster. */
     func testGetSolrCluster() {
-        guard let solrCluster = createSolrCluster(clusterName: "temp-swift-sdk-solr-cluster", size: 1) else {
+        guard let solrCluster = createSolrCluster(withName: "temp-swift-sdk-solr-cluster", size: 1) else {
             XCTFail("Failed to create the Solr cluster.")
             return
         }
         
-        guard let solrClusterDetails = getSolrCluster(clusterID: solrCluster.solrClusterID) else {
+        guard let solrClusterDetails = getSolrCluster(withID: solrCluster.solrClusterID) else {
             XCTFail("Failed to get the newly created Solr cluster.")
             return
         }
@@ -287,7 +287,7 @@ class RetrieveAndRankTests: XCTestCase {
         XCTAssertEqual(solrClusterDetails.solrClusterName, "temp-swift-sdk-solr-cluster")
         XCTAssertEqual(solrClusterDetails.solrClusterSize, 1)
         
-        deleteSolrCluster(clusterID: solrCluster.solrClusterID)
+        deleteSolrCluster(withID: solrCluster.solrClusterID)
     }
     
     /** List all Solr configurations associated with the trained Solr cluster. */
@@ -295,7 +295,7 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Get all configurations associated with the trained cluster."
         let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getSolrConfigurations(solrClusterID: trainedClusterID, failure: failWithError) {
+        retrieveAndRank.getSolrConfigurations(fromSolrClusterID: trainedClusterID, failure: failWithError) {
             configurations in
             
             XCTAssertEqual(configurations.count, 1)
@@ -315,8 +315,8 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            solrClusterID: trainedClusterID,
-            configName: "temp-swift-sdk-config",
+            withName: "temp-swift-sdk-config",
+            toSolrClusterID: trainedClusterID,
             zipFile: configFile,
             failure: failWithError) { response in
             
@@ -328,8 +328,8 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         retrieveAndRank.deleteSolrConfiguration(
-            solrClusterID: trainedClusterID,
-            configName: "temp-swift-sdk-config",
+            withName: "temp-swift-sdk-config",
+            fromSolrClusterID: trainedClusterID,
             failure: failWithError) {
                 
             expectation2.fulfill()
@@ -343,8 +343,8 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.getSolrConfiguration(
-            solrClusterID: trainedClusterID,
-            configName: trainedConfigurationName,
+            withName: trainedConfigurationName,
+            fromSolrClusterID: trainedClusterID,
             failure: failWithError) { url in
             
             XCTAssertNotNil(url)
@@ -359,7 +359,7 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.getSolrCollections(
-            solrClusterID: trainedClusterID,
+            forSolrClusterID: trainedClusterID,
             failure: failWithError) { collections in
             
             XCTAssertEqual(collections.count, 1)
@@ -375,9 +375,9 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.createSolrCollection(
-            solrClusterID: trainedClusterID,
-            name: "temp-swift-sdk-collection",
-            configName: trainedConfigurationName,
+            withName: "temp-swift-sdk-collection",
+            forSolrClusterID: trainedClusterID,
+            withConfigurationName: trainedConfigurationName,
             failure: failWithError) {
             
             expectation.fulfill()
@@ -387,8 +387,8 @@ class RetrieveAndRankTests: XCTestCase {
         let description2 = "Delete the newly created Solr collection."
         let expectation2 = self.expectation(description: description2)
         retrieveAndRank.deleteSolrCollection(
-            solrClusterID: trainedClusterID,
-            name: "temp-swift-sdk-collection",
+            withName: "temp-swift-sdk-collection",
+            fromSolrClusterID: trainedClusterID,
             failure: failWithError) {
             
             expectation2.fulfill()
@@ -402,9 +402,9 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.createSolrCollection(
-            solrClusterID: trainedClusterID,
-            name: "temp-swift-sdk-collection",
-            configName: trainedConfigurationName,
+            withName: "temp-swift-sdk-collection",
+            forSolrClusterID: trainedClusterID,
+            withConfigurationName: trainedConfigurationName,
             failure: failWithError) {
             
             expectation.fulfill()
@@ -419,10 +419,10 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.updateSolrCollection(
-            solrClusterID: trainedClusterID,
-            collectionName: "temp-swift-sdk-collection",
-            contentType: "application/json",
+            withName: "temp-swift-sdk-collection",
+            inSolrClusterID: trainedClusterID,
             contentFile: collectionFile,
+            contentType: "application/json",
             failure: failWithError) {
             
             expectation2.fulfill()
@@ -432,8 +432,8 @@ class RetrieveAndRankTests: XCTestCase {
         let description3 = "Delete the newly created Solr collection."
         let expectation3 = self.expectation(description: description3)
         retrieveAndRank.deleteSolrCollection(
-            solrClusterID: trainedClusterID,
-            name: "temp-swift-sdk-collection",
+            withName: "temp-swift-sdk-collection",
+            fromSolrClusterID: trainedClusterID,
             failure: failWithError) {
             
             expectation3.fulfill()
@@ -447,8 +447,8 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.search(
-            solrClusterID: trainedClusterID,
-            collectionName: trainedCollectionName,
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: trainedClusterID,
             query: "aerodynamics",
             returnFields: "id, title, author",
             failure: failWithError) { response in
@@ -477,8 +477,8 @@ class RetrieveAndRankTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         retrieveAndRank.searchAndRank(
-            solrClusterID: trainedClusterID,
-            collectionName: trainedCollectionName,
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: trainedClusterID,
             rankerID: trainedRankerID,
             query: "aerodynamics",
             returnFields: "id, title, author",
@@ -525,7 +525,7 @@ class RetrieveAndRankTests: XCTestCase {
         let description = "Get the ranker specified by this ID."
         let expectation = self.expectation(description: description)
         
-        retrieveAndRank.getRanker(rankerID: trainedRankerID, failure: failWithError) {
+        retrieveAndRank.getRanker(withID: trainedRankerID, failure: failWithError) {
             ranker in
         
             XCTAssertNotNil(ranker)
@@ -548,7 +548,7 @@ class RetrieveAndRankTests: XCTestCase {
             XCTFail("Failed to load training data needed to create the ranker.")
             return
         }
-        guard let ranker = createRanker(trainingDataFile: rankerFile, rankerName: "temp-swift-sdk-ranker") else {
+        guard let ranker = createRanker(fromFile: rankerFile, withName: "temp-swift-sdk-ranker") else {
             XCTFail("Failed to create the ranker.")
             return
         }
@@ -561,7 +561,7 @@ class RetrieveAndRankTests: XCTestCase {
         
         let description = "Delete the newly created ranker."
         let expectation = self.expectation(description: description)
-        retrieveAndRank.deleteRanker(rankerID: ranker.rankerID, failure: failWithError) {
+        retrieveAndRank.deleteRanker(withID: ranker.rankerID, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
@@ -576,7 +576,7 @@ class RetrieveAndRankTests: XCTestCase {
         
         let description = "Use the trained ranker to rerank the given answer results."
         let expectation = self.expectation(description: description)
-        retrieveAndRank.rankResults(rankerID: trainedRankerID, resultsFile: answerFile, failure: failWithError) {
+        retrieveAndRank.rankResults(fromFile: answerFile, withRankerID: trainedRankerID, failure: failWithError) {
             results in
             
             XCTAssertEqual(results.topAnswer, "aid_11")
@@ -603,7 +603,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.createSolrCluster(
-            name: "swift-sdk-solr-cluster",
+            withName: "swift-sdk-solr-cluster",
             size: 100,
             failure: failure,
             success: failWithResult)
@@ -621,7 +621,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.deleteSolrCluster(
-            solrClusterID: "abcde-12345-fghij-67890",
+            withID: "abcde-12345-fghij-67890",
             failure: failure,
             success: failWithResult)
         
@@ -637,7 +637,7 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.getSolrCluster(solrClusterID: "some_invalid_ID", failure: failure, success: failWithResult)
+        retrieveAndRank.getSolrCluster(withID: "some_invalid_ID", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -651,7 +651,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.getSolrConfigurations(
-            solrClusterID: "some_invalid_ID",
+            fromSolrClusterID: "some_invalid_ID",
             failure: failure,
             success: failWithResult)
         
@@ -668,7 +668,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.getSolrConfigurations(
-            solrClusterID: "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
+            fromSolrClusterID: "scfdb9563a_c46a_4e7d_8218_ae07a69c69e0",
             failure: failure,
             success: failWithResult)
     
@@ -689,8 +689,8 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            solrClusterID: "some_invalid_ID",
-            configName: "temp-swift-sdk-config",
+            withName: "temp-swift-sdk-config",
+            toSolrClusterID: "some_invalid_ID",
             zipFile: configFile,
             failure: failure,
             success: failWithResult)
@@ -712,8 +712,8 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.uploadSolrConfiguration(
-            solrClusterID: trainedClusterID,
-            configName: trainedConfigurationName,
+            withName: trainedConfigurationName,
+            toSolrClusterID: trainedClusterID,
             zipFile: configFile,
             failure: failure,
             success: failWithResult)
@@ -730,8 +730,8 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         retrieveAndRank.deleteSolrConfiguration(
-            solrClusterID: "invalid_cluster_ID",
-            configName: "someConfiguration",
+            withName: "invalid_cluster_ID",
+            fromSolrClusterID: "someConfiguration",
             failure: failure,
             success: failWithResult)
         
@@ -749,7 +749,7 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.getSolrCollections(
-            solrClusterID: "invalid_cluster_ID",
+            forSolrClusterID: "invalid_cluster_ID",
             failure: failure,
             success: failWithResult)
         
@@ -766,9 +766,9 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.createSolrCollection(
-            solrClusterID: "invalid_cluster_id",
-            name: "failed-collection",
-            configName: "config-name",
+            withName: "failed-collection",
+            forSolrClusterID: "invalid_cluster_id",
+            withConfigurationName: "config-name",
             failure: failure,
             success: failWithResult)
         
@@ -785,8 +785,8 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.deleteSolrCollection(
-            solrClusterID: "invalid_cluster_id",
-            name: "failed-collection",
+            withName: "failed-collection",
+            fromSolrClusterID: "invalid_cluster_id",
             failure: failure,
             success: failWithResult)
         
@@ -807,10 +807,10 @@ class RetrieveAndRankTests: XCTestCase {
             return
         }
         retrieveAndRank.updateSolrCollection(
-            solrClusterID: "invalid_cluster_id",
-            collectionName: "failed-collection",
-            contentType: "application/json",
+            withName: "failed-collection",
+            inSolrClusterID: "invalid_cluster_id",
             contentFile: collectionFile,
+            contentType: "application/json",
             failure: failure,
             success: failWithResult)
         
@@ -827,8 +827,8 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.search(
-            solrClusterID: "invalid_cluster_id",
-            collectionName: trainedCollectionName,
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: "invalid_cluster_id",
             query: "aerodynamics",
             returnFields: "id, author",
             failure: failure,
@@ -847,8 +847,8 @@ class RetrieveAndRankTests: XCTestCase {
         }
         
         retrieveAndRank.searchAndRank(
-            solrClusterID: "invalid_cluster_id",
-            collectionName: trainedCollectionName,
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: "invalid_cluster_id",
             rankerID: trainedRankerID,
             query: "aerodynamics",
             returnFields: "id, author",
@@ -867,7 +867,7 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.getRanker(rankerID: "invalid_ranker_id", failure: failure, success: failWithResult)
+        retrieveAndRank.getRanker(withID: "invalid_ranker_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -880,7 +880,7 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.getRanker(rankerID: "invalid_ranker_id", failure: failure, success: failWithResult)
+        retrieveAndRank.getRanker(withID: "invalid_ranker_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -898,7 +898,7 @@ class RetrieveAndRankTests: XCTestCase {
             expectation.fulfill()
         }
         
-        retrieveAndRank.rankResults(rankerID: "invalid_ranker_id", resultsFile: answerFile, failure: failure, success: failWithResult)
+        retrieveAndRank.rankResults(fromFile: answerFile, withRankerID: "invalid_ranker_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

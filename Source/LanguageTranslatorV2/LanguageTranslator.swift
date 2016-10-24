@@ -70,27 +70,27 @@ public class LanguageTranslator {
     /**
      List the available standard and custom models.
      
-     - parameter source: Specify a source to filter models by source language.
-     - parameter target: Specify a target to filter models by target language.
+     - parameter sourceLanguage: Filter models by a source language.
+     - parameter targetLanguage: Filter models by a target language.
      - parameter defaultModelsOnly: Specify `true` to filter models by whether they are default.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getModels(
-        source: String? = nil,
-        target: String? = nil,
+        sourceLanguage: String? = nil,
+        targetLanguage: String? = nil,
         defaultModelsOnly: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([TranslationModel]) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        if let source = source {
-            let queryParameter = URLQueryItem(name: "source", value: source)
+        if let sourceLanguage = sourceLanguage {
+            let queryParameter = URLQueryItem(name: "source", value: sourceLanguage)
             queryParameters.append(queryParameter)
         }
-        if let target = target {
-            let queryParameter = URLQueryItem(name: "target", value: target)
+        if let targetLanguage = targetLanguage {
+            let queryParameter = URLQueryItem(name: "target", value: targetLanguage)
             queryParameters.append(queryParameter)
         }
         if let defaultModelsOnly = defaultModelsOnly {
@@ -125,18 +125,18 @@ public class LanguageTranslator {
      hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
      size of all uploaded glossary and corpus files is limited to 250 MB.
      
-     - parameter baseModelID: Specifies the domain model that is used as the base for the training.
-     - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.
-     - parameter forcedGlossary: A TMX file with your customizations. Anything that is specified in
+     - parameter fromBaseModelID: Specifies the domain model that is used as the base for the training.
+     - parameter withGlossary: A TMX file with your customizations. Anything that is specified in
             this file completely overwrites the domain data translation. You can upload only one
+     - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.
             glossary with a file size less than 10 MB per call.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the modelID of the created model.
      */
     public func createModel(
-        baseModelID: String,
+        fromBaseModelID baseModelID: String,
+        withGlossary forcedGlossary: URL,
         name: String? = nil,
-        forcedGlossary: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {
@@ -187,12 +187,12 @@ public class LanguageTranslator {
     /**
      Delete a trained translation model.
      
-     - parameter modelID: The translation model's identifier.
+     - parameter withID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the given model has been deleted.
      */
     public func deleteModel(
-        modelID: String,
+        withID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -223,12 +223,12 @@ public class LanguageTranslator {
     /**
      Get information about the given translation model, including training status.
      
-     - parameter modelID: The translation model's identifier.
+     - parameter withID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the model.
      */
     public func getModel(
-        modelID: String,
+        withID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MonitorTraining) -> Void)
     {
@@ -257,15 +257,15 @@ public class LanguageTranslator {
      Translate text from a source language to a target language.
      
      - parameter text: The text to translate.
-     - parameter modelID: The unique modelID of the translation model that shall be used to
-            translate the text. The modelID inherently specifies the source, target language, and
+     - parameter withModelID: The unique model id of the translation model that shall be used to
+            translate the text. The model id inherently specifies the source, target language, and
             domain.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: String,
-        modelID: String,
+        _ text: String,
+        withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -277,15 +277,15 @@ public class LanguageTranslator {
      Translate text from a source language to a target language.
      
      - parameter text: The text to translate.
-     - parameter modelID: The unique modelID of the translation model that shall be used to
-            translate the text. The modelID inherently specifies the source, target language, and
+     - parameter withModelID: The unique model id of the translation model that shall be used to
+            translate the text. The model id inherently specifies the source, target language, and
             domain.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: [String],
-        modelID: String,
+        _ text: [String],
+        withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
@@ -297,21 +297,21 @@ public class LanguageTranslator {
      Translate text from a source language to a target language.
      
      - parameter text: The text to translate.
-     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+     - parameter from: The source language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
-     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+     - parameter to: The target language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: String,
-        source: String,
-        target: String,
+        _ text: String,
+        from sourceLanguage: String,
+        to targetLanguage: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
-        let translateRequest = TranslateRequest(text: [text], source: source, target: target)
+        let translateRequest = TranslateRequest(text: [text], source: sourceLanguage, target: targetLanguage)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
 
@@ -319,21 +319,21 @@ public class LanguageTranslator {
      Translate text from a source language to a target language.
      
      - parameter text: The text to translate.
-     - parameter source:  The source language in 2 or 5 letter language code. Use 2 letter codes
+     - parameter from: The source language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
-     - parameter target: The target language in 2 or 5 letter language code. Use 2 letter codes
+     - parameter to: The target language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the translation.
      */
     public func translate(
-        text: [String],
-        source: String,
-        target: String,
+        _ text: [String],
+        from sourceLanguage: String,
+        to targetLanguage: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslateResponse) -> Void)
     {
-        let translateRequest = TranslateRequest(text: text, source: source, target: target)
+        let translateRequest = TranslateRequest(text: text, source: sourceLanguage, target: targetLanguage)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
 
@@ -414,12 +414,12 @@ public class LanguageTranslator {
     /**
      Identify the language of the given text.
      
-     - parameter text: The text whose language shall be identified.
+     - parameter languageOf: The text whose language shall be identified.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with all identified languages in the given text.
      */
     public func identify(
-        text: String,
+        languageOf text: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([IdentifiedLanguage]) -> Void)
     {

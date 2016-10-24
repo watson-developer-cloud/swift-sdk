@@ -128,7 +128,7 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let tones = ["emotion", "writing"]
-        toneAnalyzer.getTone(ofText: text, withSpecificTone: tones, withSentenceAnalysis: false, failure: failWithError) {
+        toneAnalyzer.getTone(ofText: text, tones: tones, sentences: false, failure: failWithError) {
             toneAnalysis in
             
             for emotionTone in toneAnalysis.documentTone[0].tones {
@@ -177,7 +177,7 @@ class ToneAnalyzerTests: XCTestCase {
         }
         
         let tones = ["emotion", "this-tone-is-invalid"]
-        toneAnalyzer.getTone(ofText: text, withSpecificTone: tones, failure: failure, success: failWithResult)
+        toneAnalyzer.getTone(ofText: text, tones: tones, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

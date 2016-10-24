@@ -109,7 +109,7 @@ class SpeechToTextTests: XCTestCase {
         }
 
         let settings = RecognitionSettings(contentType: format)
-        speechToText.recognize(audioFile: file, with: settings, failure: failWithError) { results in
+        speechToText.recognize(audio: file, settings: settings, failure: failWithError) { results in
             self.validateSTTResults(results: results.results, settings: settings)
             XCTAssertEqual(results.results.count, 1)
             XCTAssert(results.results.last?.final == true)
@@ -161,7 +161,7 @@ class SpeechToTextTests: XCTestCase {
         settings.timestamps = true
         settings.filterProfanity = false
 
-        speechToText.recognize(audioFile: file, with: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+        speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results: results.results, settings: settings)
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
@@ -205,7 +205,7 @@ class SpeechToTextTests: XCTestCase {
             let audio = try Data(contentsOf: file)
             
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognize(audioData: audio, with: settings, failure: failWithError) { results in
+            speechToText.recognize(audio: audio, settings: settings, failure: failWithError) { results in
                 self.validateSTTResults(results: results.results, settings: settings)
                 XCTAssertEqual(results.results.count, 1)
                 XCTAssert(results.results.last?.final == true)
@@ -264,7 +264,7 @@ class SpeechToTextTests: XCTestCase {
             settings.timestamps = true
             settings.filterProfanity = false
             
-            speechToText.recognize(audioData: audio, with: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
                 self.validateSTTResults(results: results.results, settings: settings)
                 if results.results.last?.final == true {
                     let transcript = results.results.last?.alternatives.last?.transcript

@@ -110,7 +110,8 @@ public class SpeechToText {
     
     /**
      Retrieve information about a particular model that is available for use with the service.
- 
+     
+     - parameter withID: The alphanumeric ID of the model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
     */
@@ -151,8 +152,8 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audioFile audio: URL,
-        with settings: RecognitionSettings,
+        audio: URL,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -161,8 +162,8 @@ public class SpeechToText {
         do {
             let data = try Data(contentsOf: audio)
             recognize(
-                audioData: data,
-                with: settings,
+                audio: data,
+                settings: settings,
                 model: model,
                 learningOptOut: learningOptOut,
                 failure: failure,
@@ -190,8 +191,8 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audioData audio: Data,
-        with settings: RecognitionSettings,
+        audio: Data,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -220,7 +221,7 @@ public class SpeechToText {
         // execute recognition request
         session.connect()
         session.startRequest(settings: settings)
-        session.recognize(audioData: audio)
+        session.recognize(audio: audio)
         session.stopRequest()
         session.disconnect()
     }
@@ -260,7 +261,7 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognizeMicrophone(
-        with settings: RecognitionSettings,
+        settings: RecognitionSettings,
         model: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,

@@ -77,22 +77,22 @@ public class DocumentConversion {
     }
     
     /**
-     Sends a request to the Document Conversion service to attempt to convert a document from one 
-     format to another.
+     Convert a document to answer units, HTML, or text.
      
-     - parameter document: The document you want to convert
-     - parameter config:   Configuration file for the Document Conversion service. Information on
-                           config files can be found here:
-     http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
+     - parameter document: The document to convert.
+     - parameter withConfigurationFile: A configuration file that identifies the output type and
+        optionally includes information to define tags and structure in the converted output.
+        For more information about the configuration file, refer to the documentation:
+        http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
      - parameter fileType: Explicit type of the file you are converting, if the service cannot
-                           detect or you don't want the service to auto detect the file type
+        detect or you don't want the service to auto detect the file type.
      - parameter failure:  A function executed if the call fails
      - parameter success:  A function executed with the response String
      */
     public func convertDocument(
         _ document: URL,
         withConfigurationFile config: URL,
-        fromType fileType: FileType? = nil,
+        fileType: FileType? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {

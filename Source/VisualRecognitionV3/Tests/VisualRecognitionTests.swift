@@ -278,8 +278,8 @@ class VisualRecognitionTests: XCTestCase {
         let car = Class(name: "car", examples: examplesCars)
         visualRecognition.updateClassifier(
             withID: classifierID!,
-            withPositiveExamples: [car],
-            withNegativeExamples: examplesTrucks,
+            positiveExamples: [car],
+            negativeExamples: examplesTrucks,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, self.classifierName)
                 expectation.fulfill()
@@ -345,7 +345,7 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.updateClassifier(
             withID: classifierID!,
-            withPositiveExamples: [trucks],
+            positiveExamples: [trucks],
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()
@@ -450,7 +450,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         visualRecognition.updateClassifier(
             withID: classifierID!,
-            withNegativeExamples: examplesBaseball,
+            negativeExamples: examplesBaseball,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()

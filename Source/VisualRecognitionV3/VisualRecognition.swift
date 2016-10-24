@@ -112,12 +112,12 @@ public class VisualRecognition {
      To create a classifier, you must specify at least two classes—either two positive example sets,
      or one positive example set and one negative example set.
  
-     - parameter name: The name of the new classifier.
-     - parameter positiveExamples: An array of classes, each with a name and a zip archive file of
+     - parameter withName: The name of the new classifier.
+     - parameter fromPositiveExamples: An array of classes, each with a name and a zip archive file of
             images that prominently depict the visual subject of the class. Each class requires a
             minimum of 10 images. If you specify multiple classes, the system will learn to classify
             each category.
-     - parameter negativeExamples: A zip archive file of images that *do not* prominently depict the
+     - parameter andNegativeExamples: A zip archive file of images that *do not* prominently depict the
             visual subject of *any* of the classes being trained. Must contain a minimum of 10
             images.
      - parameter failure: A function executed if an error occurs.
@@ -199,7 +199,7 @@ public class VisualRecognition {
     /**
      Delete a custom classifier with the given classifier id.
  
-     - parameter classifierID: The id of the classifier to delete.
+     - parameter withID: The id of the classifier to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the classifier has been successfully deleted.
      */
@@ -240,7 +240,7 @@ public class VisualRecognition {
      Retrieve information about a specific classifier. Only user-trained classifiers may be
      addressed.
  
-     - parameter classifierID: The id of the classifier to retrieve information about.
+     - parameter withID: The id of the classifier to retrieve information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the given
             classifier.
@@ -277,7 +277,7 @@ public class VisualRecognition {
      Update an existing classifier by adding new classes or by adding new images to existing 
      classes. At least one compressed file must be passed in.
      
-     - parameter classifierID: The ID of the classifier you want to update.
+     - parameter withID: The ID of the classifier you want to update.
      - parameter positiveExamples: An array of classes, each with a name and a zip archive file of
         images that prominently depict the visual subject of the class. Each class requires a
         minimum of 10 images. If you specify multiple classes, the system will learn to classify
@@ -290,8 +290,8 @@ public class VisualRecognition {
      */
     public func updateClassifier(
         withID classifierID: String,
-        withPositiveExamples positiveExamples: [Class]? = nil,
-        withNegativeExamples negativeExamples: URL? = nil,
+        positiveExamples: [Class]? = nil,
+        negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -534,7 +534,7 @@ public class VisualRecognition {
     /**
      Detect faces in images by URL. The supported image formats include .jpg, .png, and .gif.
  
-     - parameter url: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
+     - parameter fromImageAtURL: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
             is safe to use with URL shorteners. The resolved URL is returned in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the detected faces.
@@ -625,7 +625,7 @@ public class VisualRecognition {
     /**
      Recognize text in images by URL. The supported image formats include .jpg, .png, and .gif.
      
-     - parameter url: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
+     - parameter fromImageAtURL: The URL of the image (.jpg, .png, or .gif). Redirects are followed, so it
             is safe to use with URL shorteners. The resolved URL is returned in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the detected words.

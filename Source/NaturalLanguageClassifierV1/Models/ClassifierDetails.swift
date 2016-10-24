@@ -61,17 +61,17 @@ public struct ClassifierDetails: JSONDecodable {
 public enum ClassifierStatus: String {
     
     /// Available
-    case Available = "Available"
+    case available = "Available"
     
     /// Failed
-    case Failed = "Failed"
+    case failed = "Failed"
     
     /// NonExistent
-    case NonExistent = "Non Existent"
+    case nonExistent = "Non Existent"
     
     /// Training
-    case Training = "Training"
+    case training = "Training"
     
     /// Unavailable
-    case Unavailable = "Unavailable"
+    case unavailable = "Unavailable"
 }

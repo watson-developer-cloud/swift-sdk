@@ -392,7 +392,7 @@ public class RetrieveAndRank {
     public func uploadSolrConfiguration(
         withName configName: String,
         toSolrClusterID solrClusterID: String,
-        fromZipFile zipFile: URL,
+        zipFile: URL,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -565,8 +565,8 @@ public class RetrieveAndRank {
     public func updateSolrCollection(
         withName collectionName: String,
         inSolrClusterID solrClusterID: String,
-        fromContentFile contentFile: URL,
-        withFileType contentType: String,
+        contentFile: URL,
+        contentType: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -631,7 +631,7 @@ public class RetrieveAndRank {
     public func search(
         withCollectionName collectionName: String,
         fromSolrClusterID solrClusterID: String,
-        withQuery query: String,
+        query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
@@ -682,8 +682,8 @@ public class RetrieveAndRank {
     public func searchAndRank(
         withCollectionName collectionName: String,
         fromSolrClusterID solrClusterID: String,
-        withRankerID rankerID: String,
-        withQuery query: String,
+        rankerID: String,
+        query: String,
         returnFields: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {

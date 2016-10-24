@@ -317,7 +317,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.uploadSolrConfiguration(
             withName: "temp-swift-sdk-config",
             toSolrClusterID: trainedClusterID,
-            fromZipFile: configFile,
+            zipFile: configFile,
             failure: failWithError) { response in
             
             expectation.fulfill()
@@ -421,8 +421,8 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.updateSolrCollection(
             withName: "temp-swift-sdk-collection",
             inSolrClusterID: trainedClusterID,
-            fromContentFile: collectionFile,
-            withFileType: "application/json",
+            contentFile: collectionFile,
+            contentType: "application/json",
             failure: failWithError) {
             
             expectation2.fulfill()
@@ -449,7 +449,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.search(
             withCollectionName: trainedCollectionName,
             fromSolrClusterID: trainedClusterID,
-            withQuery: "aerodynamics",
+            query: "aerodynamics",
             returnFields: "id, title, author",
             failure: failWithError) { response in
             
@@ -479,8 +479,8 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.searchAndRank(
             withCollectionName: trainedCollectionName,
             fromSolrClusterID: trainedClusterID,
-            withRankerID: trainedRankerID,
-            withQuery: "aerodynamics",
+            rankerID: trainedRankerID,
+            query: "aerodynamics",
             returnFields: "id, title, author",
             failure: failWithError) { response in
             
@@ -691,7 +691,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.uploadSolrConfiguration(
             withName: "temp-swift-sdk-config",
             toSolrClusterID: "some_invalid_ID",
-            fromZipFile: configFile,
+            zipFile: configFile,
             failure: failure,
             success: failWithResult)
         
@@ -714,7 +714,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.uploadSolrConfiguration(
             withName: trainedConfigurationName,
             toSolrClusterID: trainedClusterID,
-            fromZipFile: configFile,
+            zipFile: configFile,
             failure: failure,
             success: failWithResult)
         
@@ -809,8 +809,8 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.updateSolrCollection(
             withName: "failed-collection",
             inSolrClusterID: "invalid_cluster_id",
-            fromContentFile: collectionFile,
-            withFileType: "application/json",
+            contentFile: collectionFile,
+            contentType: "application/json",
             failure: failure,
             success: failWithResult)
         
@@ -829,7 +829,7 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.search(
             withCollectionName: trainedCollectionName,
             fromSolrClusterID: "invalid_cluster_id",
-            withQuery: "aerodynamics",
+            query: "aerodynamics",
             returnFields: "id, author",
             failure: failure,
             success: failWithResult)
@@ -849,8 +849,8 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.searchAndRank(
             withCollectionName: trainedCollectionName,
             fromSolrClusterID: "invalid_cluster_id",
-            withRankerID: trainedRankerID,
-            withQuery: "aerodynamics",
+            rankerID: trainedRankerID,
+            query: "aerodynamics",
             returnFields: "id, author",
             failure: failure,
             success: failWithResult)

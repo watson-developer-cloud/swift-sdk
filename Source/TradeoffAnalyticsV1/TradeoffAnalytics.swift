@@ -55,7 +55,7 @@ public class TradeoffAnalytics {
      of optimal options, their analytical characteristics, and, by default, their representation
      in a two-dimensional space.
      
-     - parameter problem: The decision problem.
+     - parameter for: The decision problem.
      - parameter generateVisualization: Indicated whether to calculate the map visualization for
         the results. If `true`, the visualization is returned; if `false`, no visualization is
         returned.
@@ -64,7 +64,7 @@ public class TradeoffAnalytics {
      */
     public func getDilemma(
         for problem: Problem,
-        withMapVisualization generateVisualization: Bool? = nil,
+        generateVisualization: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Dilemma) -> Void)
     {

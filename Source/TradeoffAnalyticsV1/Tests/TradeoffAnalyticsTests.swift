@@ -113,7 +113,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             subject: "Phone"
         )
         
-        tradeoffAnalytics.getDilemma(problem: problem, failure: failWithError) {
+        tradeoffAnalytics.getDilemma(for: problem, failure: failWithError) {
             dilemma in
             
             // verify problem
@@ -301,7 +301,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             subject: "TestProblem"
         )
         
-        tradeoffAnalytics.getDilemma(problem: problem, failure: failWithError) {
+        tradeoffAnalytics.getDilemma(for: problem, failure: failWithError) {
             dilemma in
             
             // verify problem
@@ -441,7 +441,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             expectation.fulfill()
         }
         
-        tradeoffAnalytics.getDilemma(problem: problem, failure: failure, success: failWithResult)
+        tradeoffAnalytics.getDilemma(for: problem, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

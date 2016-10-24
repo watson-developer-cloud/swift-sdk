@@ -113,7 +113,7 @@ public class TextToSpeech {
      - parameter success: A function executed with information about the given voice.
      */
     public func getVoice(
-        voice: SynthesisVoice,
+        _ voice: SynthesisVoice,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
@@ -150,7 +150,7 @@ public class TextToSpeech {
      You can request the pronunciation for a specific format. You can also request the pronunciation
      for a specific voice to see the default translation of the language of that voice.
      
-     - parameter text: The word for which the pronunciation is requested
+     - parameter of: The word for which the pronunciation is requested.
      - parameter voice: The voice in which the pronunciation for the specified word is to be
             returned. Specify a voice to obtain the pronunciation for the specified word in
             the language of that voice. Omit the parameter to obtain the pronunciation in the
@@ -162,7 +162,7 @@ public class TextToSpeech {
             criteria.
      */
     public func getPronunciation(
-        text: String,
+        of text: String,
         voice: SynthesisVoice? = nil,
         format: PhonemeFormat? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -213,7 +213,7 @@ public class TextToSpeech {
      - parameter success: A function executed with the spoken audio.
      */
     public func synthesize(
-        text: String,
+        _ text: String,
         voice: SynthesisVoice? = nil,
         customizationID: String? = nil,
         audioFormat: AudioFormat = .wav,
@@ -318,14 +318,14 @@ public class TextToSpeech {
     /**
      Creates a new empty custom voice model that is owned by the requesting user.
      
-     - parameter name: The name of the new custom voice model.
+     - parameter withName: The name of the new custom voice model.
      - parameter language: The language of the new custom voice model. 'en-US' is the default.
      - parameter description: A description of the new custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a customization ID.
      */
     public func createCustomization(
-        name: String,
+        withName name: String,
         language: String? = nil,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -372,12 +372,12 @@ public class TextToSpeech {
     /**
      Deletes the custom voice model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be deleted.
+     - parameter withID: The ID of the custom voice model to be deleted.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -408,12 +408,12 @@ public class TextToSpeech {
     /**
      Lists all information about the custom voice model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model.
+     - parameter withID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a CustomizationWords object.
      */
     public func getCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationWords) -> Void) {
         
@@ -442,7 +442,7 @@ public class TextToSpeech {
      You can update metadata of the custom voice model, such as the name and description of the 
      voice model. You can also update or add words and translations in the model.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
+     - parameter withID: The ID of the custom voice model to be updated.
      - parameter name: An updated name for the custom voice model.
      - parameter description: A new description for the custom voice model.
      - parameter words: An array of Word objects to be added to or updated in the custom voice model.
@@ -450,7 +450,7 @@ public class TextToSpeech {
      - parameter success: A function executed if no error occurs.
      */
     public func updateCustomization(
-        customizationID: String,
+        withID customizationID: String,
         name: String? = nil,
         description: String? = nil,
         words: [Word] = [],
@@ -496,12 +496,12 @@ public class TextToSpeech {
      Lists all of the words and their translations for the custom voice model with the specified
      customizationID.
      
-     - parameter customizationID: The ID of the custom voice model.
+     - parameter forCustomizationID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of Word objects.
      */
     public func getWords(
-        customizationID: String,
+        forCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Word]) -> Void) {
         
@@ -528,14 +528,14 @@ public class TextToSpeech {
      Adds one or more words and their translations to the custom voice model with the specified
      customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
+     - parameter toCustomizationID: The ID of the custom voice model to be updated.
      - parameter words: An array of Word objects to be added to the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func addWords(
-        customizationID: String,
-        words: [Word],
+        toCustomizationID customizationID: String,
+        fromArray words: [Word],
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -577,14 +577,14 @@ public class TextToSpeech {
     /**
      Deletes the specified word from custom voice model.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter word: The word to be deleted from the custom voice model.
+     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func deleteWord(
-        customizationID: String,
-        word: String,
+        _ word: String,
+        fromCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
@@ -614,14 +614,14 @@ public class TextToSpeech {
     /**
      Lists the translation for a single word from the custom model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model.
-     - parameter word: The word in the custom voice model whose translation should be listed.
+     - parameter for: The word in the custom voice model whose translation should be listed.
+     - parameter withCustomizationID: The ID of the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a Translation object.
      */
     public func getTranslation(
-        customizationID: String,
-        word: String,
+        for word: String,
+        withCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void) {
         
@@ -647,16 +647,16 @@ public class TextToSpeech {
     /**
      Adds a single word and its translation to the custom voice model with the specified customizationID.
      
-     - parameter customizationID: The ID of the custom voice model to be updated.
      - parameter word: The new word to be added to the custom voice model.
+     - parameter toCustomizationID: The ID of the custom voice model to be updated.
      - parameter translation: The translation of the new word.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
      */
     public func addWord(
-        customizationID: String,
-        word: String,
-        translation: String,
+        _ word: String,
+        toCustomizationID customizationID: String,
+        withTranslation translation: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         

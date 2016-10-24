@@ -60,7 +60,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        text: String,
+        fromText text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -76,8 +76,8 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content: content,
-            contentType: "text/plain",
+            fromContent: content,
+            withType: "text/plain",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
             includeRaw: includeRaw,
@@ -100,7 +100,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        html: String,
+        fromHTML html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -116,8 +116,8 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content: content,
-            contentType: "text/html",
+            fromContent: content,
+            withType: "text/html",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
             includeRaw: includeRaw,
@@ -130,6 +130,8 @@ public class PersonalityInsights {
      Analyze input content items to generate a personality profile.
  
      - parameter contentItems: The content items to analyze.
+     - parameter acceptLanguage: The desired language of the response.
+     - parameter contentLanguage: The language of the text being analyzed.
      - parameter includeRaw: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
         A raw sampling error for each characteristic is also returned.
@@ -137,7 +139,7 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        contentItems: [ContentItem],
+        fromContentItems contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
@@ -155,8 +157,8 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            content: content,
-            contentType: "application/json",
+            fromContent: content,
+            withType: "application/json",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
             includeRaw: includeRaw,
@@ -180,8 +182,8 @@ public class PersonalityInsights {
      - parameter success: A function executed with the personality profile.
      */
     private func getProfile(
-        content: Data?,
-        contentType: String,
+        fromContent content: Data?,
+        withType contentType: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,

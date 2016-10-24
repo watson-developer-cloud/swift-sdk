@@ -22,14 +22,14 @@ import Foundation
 public enum FileType: String {
     
     /// Constant for HTML file types
-    case HTML = "text/html"
+    case html = "text/html"
     
     /// Constant for XML file types
-    case XML = "text/xhtml+xml"
+    case xml = "text/xhtml+xml"
     
     /// Constant for PDF file types
-    case PDF = "application/pdf"
+    case pdf = "application/pdf"
     
     /// Constant for MicrosoftWord documents
-    case MSWord = "application/msword"
+    case msWord = "application/msword"
 }

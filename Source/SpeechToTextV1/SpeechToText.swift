@@ -110,11 +110,16 @@ public class SpeechToText {
     
     /**
      Retrieve information about a particular model that is available for use with the service.
- 
+     
+     - parameter withID: The alphanumeric ID of the model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
     */
-    public func getModel(modelID: String, failure: ((Error) -> Void)? = nil, success: @escaping (Model) -> Void) {
+    public func getModel(
+        withID modelID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Model) -> Void)
+    {
         //construct REST request
         let request = RestRequest(
             method: .get,
@@ -265,7 +270,7 @@ public class SpeechToText {
     {
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
+        settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)
         
         // create session
         let session = SpeechToTextSession(

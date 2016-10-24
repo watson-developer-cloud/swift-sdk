@@ -117,7 +117,7 @@ class TextToSpeechTests: XCTestCase {
                 continue
             }
             
-            textToSpeech.getPronunciation(ofText: text, withVoice: voice, inFormat: .spr, failure: failWithError) {
+            textToSpeech.getPronunciation(of: text, voice: voice, format: .spr, failure: failWithError) {
                 pronunciation in
                 XCTAssertGreaterThan(pronunciation.pronunciation.characters.count, 0)
                 expectation.fulfill()
@@ -131,7 +131,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, failure: failWithError) { data in
+        textToSpeech.synthesize(text, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -153,7 +153,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, withVoice: .us_Lisa, inAudioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text, voice: .us_Lisa, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -176,7 +176,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: germanText, withVoice: .de_Dieter, inAudioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(germanText, voice: .de_Dieter, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -199,7 +199,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: japaneseText, withVoice: .jp_Emi, inAudioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(japaneseText, voice: .jp_Emi, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -222,7 +222,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, inAudioFormat: .opus, failure: failWithError) { data in
+        textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -234,7 +234,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, inAudioFormat: .wav, failure: failWithError) { data in
+        textToSpeech.synthesize(text, audioFormat: .wav, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -246,7 +246,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, inAudioFormat: .flac, failure: failWithError) { data in
+        textToSpeech.synthesize(text, audioFormat: .flac, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -258,7 +258,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: text, inAudioFormat: .l16, failure: failWithError) { data in
+        textToSpeech.synthesize(text, audioFormat: .l16, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -270,7 +270,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize SSML to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text: ssmlString, failure: failWithError) { data in
+        textToSpeech.synthesize(ssmlString, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -610,7 +610,7 @@ class TextToSpeechTests: XCTestCase {
         let description4 = "Get the details of the newly added word."
         let expectation4 = self.expectation(description: description4)
         
-        textToSpeech.getTranslation(forWord: "IBM", withCustomizationID: customizationID, failure: failWithError) {
+        textToSpeech.getTranslation(for: "IBM", withCustomizationID: customizationID, failure: failWithError) {
             translation in
             
             XCTAssertEqual(translation.translation, "eye bee em")
@@ -701,7 +701,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getPronunciation(ofText: text, withVoice: voice, failure: failure, success: failWithResult)
+        textToSpeech.getPronunciation(of: text, voice: voice, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -728,7 +728,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.synthesize(text: "", failure: failure, success: failWithResult)
+        textToSpeech.synthesize("", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -742,7 +742,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.synthesize(text: text, withVoice: voice, failure: failure, success: failWithResult)
+        textToSpeech.synthesize(text, voice: voice, failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -755,7 +755,7 @@ class TextToSpeechTests: XCTestCase {
             expectation.fulfill()
         }
         
-        textToSpeech.getCustomizations(withLanguage: "InvalidLanguage", failure: failure, success: failWithResult)
+        textToSpeech.getCustomizations(language: "InvalidLanguage", failure: failure, success: failWithResult)
         waitForExpectations()
     }
     
@@ -968,8 +968,8 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            forWord: "someWord",
-            usingCustomizationID: "InvalidIDValue",
+            for: "someWord",
+            withCustomizationID: "InvalidIDValue",
             failure: failure1,
             success: failWithResult)
         waitForExpectations()
@@ -983,7 +983,7 @@ class TextToSpeechTests: XCTestCase {
         }
         
         textToSpeech.getTranslation(
-            forWord: "someWord",
+            for: "someWord",
             withCustomizationID: "9faad2c9-8602-4c9d-ae20-11696bd16721",
             failure: failure2,
             success: failWithResult)

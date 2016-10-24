@@ -57,7 +57,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        image imageData: Data,
+        fromImage imageData: Data,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (FaceTags) -> Void)
@@ -107,7 +107,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the detected faces.
      */
     public func getRankedImageFaceTags(
-        url: String,
+        fromImageAtURL url: String,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (FaceTags) -> Void)
@@ -154,8 +154,8 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        html: URL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -166,7 +166,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        getImage(html: html, url: url, failure: failure, success: success)
+        getImage(fromHTML: html, withURL: url, failure: failure, success: success)
     }
     
     /**
@@ -178,8 +178,8 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        html: String,
-        url: String? = nil,
+        fromHTML html: String,
+        withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -238,7 +238,7 @@ public class AlchemyVision {
      - parameter success: A function executed with information about the identified primary image.
      */
     public func getImage(
-        url: String,
+        fromURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ImageLink) -> Void)
     {
@@ -277,7 +277,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        image: Data,
+        fromImage imageData: Data,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -311,7 +311,7 @@ public class AlchemyVision {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryParameters: queryParameters,
-            messageBody: image
+            messageBody: imageData
         )
         
         // execute REST request
@@ -334,7 +334,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the identified tags.
      */
     public func getRankedImageKeywords(
-        url: String,
+        fromImageAtURL url: String,
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -387,7 +387,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        image: Data,
+        fromImage imageData: Data,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SceneText) -> Void)
     {
@@ -405,7 +405,7 @@ public class AlchemyVision {
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryParameters: queryParameters,
-            messageBody: image
+            messageBody: imageData
         )
         
         // execute REST requeset
@@ -426,7 +426,7 @@ public class AlchemyVision {
      - parameter success: A function executed with the detected text.
      */
     public func getRankedImageSceneText(
-        url: String,
+        fromImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SceneText) -> Void)
     {

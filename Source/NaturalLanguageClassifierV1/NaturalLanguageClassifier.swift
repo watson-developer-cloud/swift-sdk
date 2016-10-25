@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -34,8 +33,7 @@ public class NaturalLanguageClassifier {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
     
     /**
@@ -45,8 +43,7 @@ public class NaturalLanguageClassifier {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -86,14 +83,13 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["classifiers"]) { (response: RestResponse<[ClassifierModel]>) in
+        request.responseArray(path: ["classifiers"]) { (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -119,44 +115,32 @@ public class NaturalLanguageClassifier {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(trainingMetadata, withName: "training_metadata")
+        multipartFormData.append(trainingData, withName: "training_data")
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers",
+            credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: "application/json"
+            acceptType: "application/json",
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(trainingMetadata, withName: "training_metadata")
-                multipartFormData.append(trainingData, withName: "training_data")
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: RestResponse<ClassifierDetails>) in
-                        switch response.result {
-                        case .success(let classifierDetails): success(classifierDetails)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "Files could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<ClassifierDetails>) in
+            switch response.result {
+            case .success(let classifierDetails): success(classifierDetails)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
-     Uses the provided classifier to assign labels to the input text. The status of the classifier 
+     Uses the provided classifier to assign labels to the input text. The status of the classifier
      must be "Available" before you can classify calls.
      
      - parameter text: Phrase to classify
@@ -183,6 +167,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -190,9 +175,7 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<Classification>) in
+        request.responseObject() { (response: RestResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
                 case .failure(let error): failure?(error)
@@ -216,14 +199,13 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
+        request.responseData { response in
                 switch response.result {
                 case .success(let data):
                     switch self.dataToError(data: data) {
@@ -252,14 +234,13 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<ClassifierDetails>) in
+        request.responseObject() { (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)

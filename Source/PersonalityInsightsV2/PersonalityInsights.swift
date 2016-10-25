@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -32,8 +31,7 @@ public class PersonalityInsights {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
     /**
@@ -43,8 +41,7 @@ public class PersonalityInsights {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        credentials = Credentials.basicAuthentication(username: username, password: password)
     }
 
     /**
@@ -210,6 +207,7 @@ public class PersonalityInsights {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/profile",
+            credentials: credentials,
             headerParameters: headerParameters,
             acceptType: "application/json",
             contentType: contentType,
@@ -218,9 +216,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<Profile>) in
+        request.responseObject() { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

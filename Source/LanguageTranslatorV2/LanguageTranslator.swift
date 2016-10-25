@@ -220,14 +220,13 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/models/\(modelID)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<MonitorTraining>) in
+        request.responseObject() { (response: RestResponse<MonitorTraining>) in
                 switch response.result {
                 case .success(let monitorTraining): success(monitorTraining)
                 case .failure(let error): failure?(error)
@@ -347,6 +346,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/translate",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -354,9 +354,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<TranslateResponse>) in
+        request.responseObject() { (response: RestResponse<TranslateResponse>) in
                 switch response.result {
                 case .success(let translateResponse): success(translateResponse)
                 case .failure(let error): failure?(error)
@@ -380,14 +378,13 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/identifiable_languages",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiableLanguage]>) in
+        request.responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiableLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
                 case .failure(let error): failure?(error)
@@ -420,6 +417,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/identify",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "text/plain",
@@ -427,9 +425,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiedLanguage]>) in
+        request.responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiedLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
                 case .failure(let error): failure?(error)

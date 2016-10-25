@@ -82,7 +82,7 @@ public class TextToSpeech {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/voices",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -91,7 +91,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["voices"]) { (response: DataResponse<[Voice]>) in
+            .responseArray(path: ["voices"]) { (response: RestResponse<[Voice]>) in
                 switch response.result {
                 case .success(let voices): success(voices)
                 case .failure(let error): failure?(error)
@@ -126,17 +126,17 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/voices/\(voice.description())",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Voice>) in
+            .responseObject() { (response: RestResponse<Voice>) in
                 switch response.result {
                 case .success(let voice): success(voice)
                 case .failure(let error): failure?(error)
@@ -180,17 +180,17 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/pronunciation",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Pronunciation>) in
+            .responseObject() { (response: RestResponse<Pronunciation>) in
                 switch response.result {
                 case .success(let voice): success(voice)
                 case .failure(let error): failure?(error)
@@ -232,11 +232,11 @@ public class TextToSpeech {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/synthesize",
             headerParameters: defaultHeaders,
             acceptType: audioFormat.rawValue,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -297,17 +297,17 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/customizations",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["customizations"]) { (response: DataResponse<[Customization]>) in
+            .responseArray(path: ["customizations"]) { (response: RestResponse<[Customization]>) in
                 switch response.result {
                 case .success(let customizations): success(customizations)
                 case .failure(let error): failure?(error)
@@ -350,7 +350,7 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/customizations",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -361,7 +361,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<CustomizationID>) in
+            .responseObject() { (response: RestResponse<CustomizationID>) in
                 switch response.result {
                 case .success(let customizationID): success(customizationID)
                 case .failure(let error): failure?(error)
@@ -383,7 +383,7 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/customizations/\(customizationID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -419,7 +419,7 @@ public class TextToSpeech {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/customizations/\(customizationID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -428,7 +428,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<CustomizationWords>) in
+            .responseObject() { (response: RestResponse<CustomizationWords>) in
                 switch response.result {
                 case .success(let customizationWords): success(customizationWords)
                 case .failure(let error): failure?(error)
@@ -469,7 +469,7 @@ public class TextToSpeech {
 
         // construct the request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/customizations/\(customizationID)",
             headerParameters: defaultHeaders,
             contentType: "application/json",
@@ -507,7 +507,7 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -516,7 +516,7 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["words"]) { (response: DataResponse<[Word]>) in
+            .responseArray(path: ["words"]) { (response: RestResponse<[Word]>) in
                 switch response.result {
                 case .success(let words): success(words)
                 case .failure(let error): failure?(error)
@@ -551,7 +551,7 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
             headerParameters: defaultHeaders,
             contentType: "application/json",
@@ -590,7 +590,7 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             headerParameters: defaultHeaders
         )
@@ -627,7 +627,7 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -636,7 +636,7 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Translation>) in
+            .responseObject() { (response: RestResponse<Translation>) in
                 switch response.result {
                 case .success(let translation): success(translation)
                 case .failure(let error): failure?(error)
@@ -672,7 +672,7 @@ public class TextToSpeech {
         
         // construct the request
         let request = RestRequest(
-            method: .put,
+            method: "PUT",
             url: serviceURL + "/v1/customizations/\(customizationID)/words/\(word)",
             headerParameters: defaultHeaders,
             contentType: "application/json",

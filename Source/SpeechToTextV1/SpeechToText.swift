@@ -91,7 +91,7 @@ public class SpeechToText {
     public func getModels(failure: ((Error) -> Void)? = nil, success: @escaping ([Model]) -> Void) {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/models",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -100,7 +100,7 @@ public class SpeechToText {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["models"]) { (response: DataResponse<[Model]>) in
+            .responseArray(path: ["models"]) { (response: RestResponse<[Model]>) in
                 switch response.result {
                 case .success(let models): success(models)
                 case .failure(let error): failure?(error)
@@ -122,7 +122,7 @@ public class SpeechToText {
     {
         //construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/models/" + modelID,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -131,7 +131,7 @@ public class SpeechToText {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Model>) in
+            .responseObject() { (response: RestResponse<Model>) in
                 switch response.result {
                 case .success(let model): success(model)
                 case .failure(let error): failure?(error)

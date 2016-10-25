@@ -85,12 +85,12 @@ public class TradeoffAnalytics {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/dilemmas",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: body
         )
         
@@ -98,7 +98,7 @@ public class TradeoffAnalytics {
         Alamofire.request(request)
             .authenticate(user: username, password: password)
             .validate()
-            .responseObject() { (response: DataResponse<Dilemma>) in
+            .responseObject() { (response: RestResponse<Dilemma>) in
                 switch response.result {
                 case .success(let dilemma): success(dilemma)
                 case .failure(let error): failure?(error)

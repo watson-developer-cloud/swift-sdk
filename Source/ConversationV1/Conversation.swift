@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -35,8 +34,7 @@ public class Conversation {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
@@ -49,8 +47,7 @@ public class Conversation {
             in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.username = username
-        self.password = password
+        self.credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
     
@@ -122,23 +119,22 @@ public class Conversation {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: body
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<MessageResponse>) in
-                switch response.result {
-                case .success(let response): success(response)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<MessageResponse>) in
+            switch response.result {
+            case .success(let response): success(response)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

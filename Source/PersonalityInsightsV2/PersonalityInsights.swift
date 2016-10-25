@@ -208,19 +208,19 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v2/profile",
             headerParameters: headerParameters,
             acceptType: "application/json",
             contentType: contentType,
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: content
         )
 
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Profile>) in
+            .responseObject() { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

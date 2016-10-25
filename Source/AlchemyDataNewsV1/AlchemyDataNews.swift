@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -81,23 +80,23 @@ public class AlchemyDataNews {
             }
         }
 
-        // construct request
+        // construct rest request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceUrl + "/data/GetNews",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryItems
+            queryItems: queryItems
         )
         
-        // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<NewsResponse>) in
-                switch response.result {
-                case .success(let newsResponse): success(newsResponse)
-                case .failure(let error): failure?(error)
-                }
+        // execute rest request
+        request.responseObject() { (response: RestResponse<NewsResponse>) in
+            switch response.result {
+            case .success(let newsResponse): success(newsResponse)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

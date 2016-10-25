@@ -89,16 +89,16 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v3/classifiers",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseArray(path: ["classifiers"]) { (response: DataResponse<[Classifier]>) in
+            .responseArray(path: ["classifiers"]) { (response: RestResponse<[Classifier]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -150,11 +150,11 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/classifiers",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -179,7 +179,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<Classifier>) in
+                    upload.responseObject() { (response: RestResponse<Classifier>) in
                         switch response.result {
                         case .success(let classifier): success(classifier)
                         case .failure(let error): failure?(error)
@@ -215,10 +215,10 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -257,15 +257,15 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Classifier>) in
+            .responseObject() { (response: RestResponse<Classifier>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)
@@ -312,11 +312,11 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -340,7 +340,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<Classifier>) in
+                    upload.responseObject() { (response: RestResponse<Classifier>) in
                         switch response.result {
                         case .success(let classifier): success(classifier)
                         case .failure(let error): failure?(error)
@@ -493,11 +493,11 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/classify",
             headerParameters: headerParameters,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -514,7 +514,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ClassifiedImages>) in
+                    upload.responseObject() { (response: RestResponse<ClassifiedImages>) in
                         switch response.result {
                         case .success(let classifiedImages): success(classifiedImages)
                         case .failure(let error): failure?(error)
@@ -584,11 +584,11 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/detect_faces",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -605,7 +605,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ImagesWithFaces>) in
+                    upload.responseObject() { (response: RestResponse<ImagesWithFaces>) in
                         switch response.result {
                         case .success(let faceImages): success(faceImages)
                         case .failure(let error): failure?(error)
@@ -674,11 +674,11 @@ public class VisualRecognition {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/recognize_text",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -695,7 +695,7 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ImagesWithWords>) in
+                    upload.responseObject() { (response: RestResponse<ImagesWithWords>) in
                         switch response.result {
                         case .success(let wordImages): success(wordImages)
                         case .failure(let error): failure?(error)

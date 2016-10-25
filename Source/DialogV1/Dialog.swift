@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -36,8 +35,7 @@ public class Dialog {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -52,8 +50,7 @@ public class Dialog {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        self.credentials = .basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -88,16 +85,15 @@ public class Dialog {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/dialogs",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["dialogs"]) { (response: DataResponse<[DialogModel]>) in
+        request.responseArray(path: ["dialogs"]) { (response: RestResponse<[DialogModel]>) in
                 switch response.result {
                 case .success(let dialogs): success(dialogs)
                 case .failure(let error): failure?(error)
@@ -129,42 +125,29 @@ public class Dialog {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogID) -> Void)
     {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        let nameData = name.data(using: String.Encoding.utf8)!
+        multipartFormData.append(nameData, withName: "name")
+        multipartFormData.append(fileURL, withName: "file")
+        
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/dialogs",
+            credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: "application/json"
+            acceptType: "application/json",
+            messageBody: multipartFormData.toData()
         )
 
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                let nameData = name.data(using: String.Encoding.utf8)!
-                multipartFormData.append(nameData, withName: "name")
-                multipartFormData.append(fileURL, withName: "file")
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(path: ["dialog_id"]) {
-                        (response: DataResponse<DialogID>) in
-                        switch response.result {
-                        case .success(let dialogID): success(dialogID)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "File could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject(path: ["dialog_id"]) { (response: RestResponse<DialogID>) in
+            switch response.result {
+            case .success(let dialogID): success(dialogID)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
 
     /**
@@ -183,26 +166,25 @@ public class Dialog {
     {
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/dialogs/\(dialogID)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    switch self.dataToError(data: data) {
-                    case .some(let error): failure?(error)
-                    case .none: success?()
-                    }
-                case .failure(let error):
-                    failure?(error)
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
                 }
+            case .failure(let error):
+                failure?(error)
             }
+        }
     }
 
     /**
@@ -223,8 +205,9 @@ public class Dialog {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/dialogs/\(dialogID)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: format?.rawValue
         )
@@ -265,38 +248,33 @@ public class Dialog {
         }
         
         // specify download destination
-        let destinationURL = downloads.appendingPathComponent(filename)
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            return (destinationURL, [])
-        }
+        let destination = downloads.appendingPathComponent(filename)
 
         // execute REST request
-        Alamofire.download(request, to: destination)
-            .authenticate(user: username, password: password)
-            .response { response in
-                guard response.error == nil else {
-                    failure?(response.error!)
-                    return
-                }
-                
-                guard let statusCode = response.response?.statusCode else {
-                    let failureReason = "Did not receive response."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
-                
-                if statusCode != 200 {
-                    let failureReason = "Status code was not acceptable: \(statusCode)."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
-                
-                success(destinationURL)
+        request.download(to: destination) { response, error in
+            guard error == nil else {
+                failure?(error!)
+                return
             }
+            
+            guard let statusCode = response?.statusCode else {
+                let failureReason = "Did not receive response."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+            
+            if statusCode != 200 {
+                let failureReason = "Status code was not acceptable: \(statusCode)."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+            
+            success(destination)
+        }
     }
 
     /**
@@ -322,43 +300,31 @@ public class Dialog {
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(fileURL, withName: "file")
+        
         // construct REST request
         let request = RestRequest(
-            method: .put,
+            method: "PUT",
             url: serviceURL + "/v1/dialogs/\(dialogID)",
-            headerParameters: defaultHeaders
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            messageBody: multipartFormData.toData()
         )
 
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(fileURL, withName: "file")
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseData { response in
-                            switch response.result {
-                            case .success(let data):
-                                switch self.dataToError(data: data) {
-                                case .some(let error): failure?(error)
-                                case .none: success?()
-                                }
-                            case .failure(let error):
-                                failure?(error)
-                            }
-                    }
-                case .failure:
-                    let failureReason = "File could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
                 }
+            case .failure(let error):
+                failure?(error)
             }
-        )
+        }
     }
 
     /**
@@ -378,16 +344,15 @@ public class Dialog {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["items"]) { (response: DataResponse<[Node]>) in
+        request.responseArray(path: ["items"]) { (response: RestResponse<[Node]>) in
                 switch response.result {
                 case .success(let nodes): success(nodes)
                 case .failure(let error): failure?(error)
@@ -420,8 +385,9 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .put,
+            method: "PUT",
             url: serviceURL + "/v1/dialogs/\(dialogID)/content",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -429,9 +395,7 @@ public class Dialog {
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
+        request.responseData { response in
                 switch response.result {
                 case .success(let data):
                     switch self.dataToError(data: data) {
@@ -485,17 +449,16 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["conversations"]) { (response: DataResponse<[Conversation]>) in
+        request.responseArray(path: ["conversations"]) { (response: RestResponse<[Conversation]>) in
                 switch response.result {
                 case .success(let conversations): success(conversations)
                 case .failure(let error): failure?(error)
@@ -538,17 +501,16 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/dialogs/\(dialogID)/conversation",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ConversationResponse>) in
+        request.responseObject() { (response: RestResponse<ConversationResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -586,17 +548,16 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Profile>) in
+        request.responseObject() { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)
@@ -634,8 +595,9 @@ public class Dialog {
 
         // construct REST request
         let request = RestRequest(
-            method: .put,
+            method: "PUT",
             url: serviceURL + "/v1/dialogs/\(dialogID)/profile",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -643,9 +605,7 @@ public class Dialog {
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
+        request.responseData { response in
                 switch response.result {
                 case .success(let data):
                     switch self.dataToError(data: data) {

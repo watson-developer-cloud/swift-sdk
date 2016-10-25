@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -33,7 +32,9 @@ public class AlchemyVision {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
+    /// The API key credential to use when authenticating with the service.
     private let apiKey: String
+    
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
@@ -77,23 +78,23 @@ public class AlchemyVision {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/image/ImageGetRankedImageFaceTags",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: imageData
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<FaceTags>) in
-                switch response.result {
-                case .success(let faceTags): success(faceTags)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<FaceTags>) in
+            switch response.result {
+            case .success(let faceTags): success(faceTags)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 
     /**
@@ -127,22 +128,22 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/url/URLGetRankedImageFaceTags",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<FaceTags>) in
-                switch response.result {
-                case .success(let faceTags): success(faceTags)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<FaceTags>) in
+            switch response.result {
+            case .success(let faceTags): success(faceTags)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 
     /**
@@ -211,23 +212,23 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/html/HTMLGetImage",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageLink>) in
-                switch response.result {
-                case .success(let imageLinks): success(imageLinks)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ImageLink>) in
+            switch response.result {
+            case .success(let imageLinks): success(imageLinks)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 
     /**
@@ -250,21 +251,21 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/url/URLGetImage",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageLink>) in
-                switch response.result {
-                case .success(let imageLinks): success(imageLinks)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ImageLink>) in
+            switch response.result {
+            case .success(let imageLinks): success(imageLinks)
+            case .failure(let error): failure?(error)
             }
+        }
     }
     
     /**
@@ -305,22 +306,22 @@ public class AlchemyVision {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/image/ImageGetRankedImageKeywords",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: imageData
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageKeywords>) in
-                switch response.result {
-                case .success(let imageKeywords): success(imageKeywords)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ImageKeywords>) in
+            switch response.result {
+            case .success(let imageKeywords): success(imageKeywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -362,21 +363,21 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/url/URLGetRankedImageKeywords",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageKeywords>) in
-                switch response.result {
-                case .success(let imageKeywords): success(imageKeywords)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ImageKeywords>) in
+            switch response.result {
+            case .success(let imageKeywords): success(imageKeywords)
+            case .failure(let error): failure?(error)
             }
+        }
     }
     
     /**
@@ -399,22 +400,22 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/url/URLGetRankedImageSceneText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: imageData
         )
         
         // execute REST requeset
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SceneText>) in
-                switch response.result {
-                case .success(let sceneTexts): success(sceneTexts)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SceneText>) in
+            switch response.result {
+            case .success(let sceneTexts): success(sceneTexts)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -438,20 +439,20 @@ public class AlchemyVision {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/url/URLGetRankedImageSceneText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST requeset
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SceneText>) in
-                switch response.result {
-                case .success(let sceneTexts): success(sceneTexts)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SceneText>) in
+            switch response.result {
+            case .success(let sceneTexts): success(sceneTexts)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

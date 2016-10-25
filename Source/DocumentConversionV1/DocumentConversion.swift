@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -33,8 +32,7 @@ public class DocumentConversion {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
     
@@ -45,8 +43,7 @@ public class DocumentConversion {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String, version: String) {
-        self.username = username
-        self.password = password
+        credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
     
@@ -96,65 +93,37 @@ public class DocumentConversion {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(config, withName: "config")
+        multipartFormData.append(document, withName: "file")
+        if let type = fileType?.rawValue.data(using: String.Encoding.utf8) {
+            multipartFormData.append(type, withName: "type")
+        }
+        
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/convert_document",
+            credentials: credentials,
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(config, withName: "config")
-                multipartFormData.append(document, withName: "file")
-                if let type = fileType?.rawValue.data(using: String.Encoding.utf8) {
-                    multipartFormData.append(type, withName: "type")
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseData() { response in
-                        if response.data == nil {
-                            let failureReason = "Response data was nil"
-                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                            failure?(error)
-                            return
-                        } else if let error = response.result.error {
-                            //there's an error that's already been captured
-                            failure?(error)
-                            return
-                        } else if let error = self.dataToError(data: response.data!) {
-                            failure?(error)
-                            return
-                        }  else {
-                            switch response.result {
-                            case .success(_): success(
-                                String(data: response.data!, encoding: String.Encoding.utf8)!)
-                            case .failure(let error): failure?(error)
-                            }
-                        }
-                    }
-                case .failure:
-                    let failureReason = "One or more values could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseString() { response in
+            switch response.result {
+            case .success(let result): success(result)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
      Deserializes a response string to a ConversationResponse object. Only works with AnswerUnits
      as that's the only response type from the service that returns a JSON object. The other two

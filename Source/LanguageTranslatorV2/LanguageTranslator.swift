@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -32,8 +31,7 @@ public class LanguageTranslator {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
@@ -43,8 +41,7 @@ public class LanguageTranslator {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        credentials = Credentials.basicAuthentication(username: username, password: password)
     }
 
     /**
@@ -100,22 +97,21 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v2/models",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["models"]) { (response: DataResponse<[TranslationModel]>) in
-                switch response.result {
-                case .success(let models): success(models)
-                case .failure(let error): failure?(error)
-                }
+        request.responseArray(path: ["models"]) { (response: RestResponse<[TranslationModel]>) in
+            switch response.result {
+            case .success(let models): success(models)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 
     /**
@@ -140,6 +136,11 @@ public class LanguageTranslator {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (String) -> Void)
     {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(forcedGlossary, withName: "forced_glossary")
+        
+        
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))
@@ -150,43 +151,27 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v2/models",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryParameters: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
 
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(forcedGlossary, withName: "forced_glossary")
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(path: ["model_id"]) { (response: DataResponse<String>) in
-                        switch response.result {
-                        case .success(let modelID): success(modelID)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "Forced glossary could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject(path: ["model_id"]) { (response: RestResponse<String>) in
+            switch response.result {
+            case .success(let modelID): success(modelID)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
 
     /**
      Delete a trained translation model.
-     
+ 
      - parameter withID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the given model has been deleted.
@@ -198,26 +183,25 @@ public class LanguageTranslator {
     {
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v2/models/\(modelID)",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
 
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    switch self.dataToError(data: data) {
-                    case .some(let error): failure?(error)
-                    case .none: success?()
-                    }
-                case .failure(let error):
-                    failure?(error)
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
                 }
+            case .failure(let error):
+                failure?(error)
             }
+        }
     }
 
     /**
@@ -234,7 +218,7 @@ public class LanguageTranslator {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v2/models/\(modelID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -243,7 +227,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<MonitorTraining>) in
+            .responseObject() { (response: RestResponse<MonitorTraining>) in
                 switch response.result {
                 case .success(let monitorTraining): success(monitorTraining)
                 case .failure(let error): failure?(error)
@@ -361,7 +345,7 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v2/translate",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -372,7 +356,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<TranslateResponse>) in
+            .responseObject() { (response: RestResponse<TranslateResponse>) in
                 switch response.result {
                 case .success(let translateResponse): success(translateResponse)
                 case .failure(let error): failure?(error)
@@ -394,7 +378,7 @@ public class LanguageTranslator {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v2/identifiable_languages",
             headerParameters: defaultHeaders,
             contentType: "application/json"
@@ -403,7 +387,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) { (response: DataResponse<[IdentifiableLanguage]>) in
+            .responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiableLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
                 case .failure(let error): failure?(error)
@@ -434,7 +418,7 @@ public class LanguageTranslator {
 
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v2/identify",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -445,7 +429,7 @@ public class LanguageTranslator {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["languages"]) { (response: DataResponse<[IdentifiedLanguage]>) in
+            .responseArray(path: ["languages"]) { (response: RestResponse<[IdentifiedLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
                 case .failure(let error): failure?(error)

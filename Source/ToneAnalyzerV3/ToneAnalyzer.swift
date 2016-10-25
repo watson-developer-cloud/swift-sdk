@@ -93,19 +93,19 @@ public class ToneAnalyzer {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v3/tone",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            queryParameters: queryParameters,
+            queryItems: queryParameters,
             messageBody: body
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ToneAnalysis>) in
+            .responseObject() { (response: RestResponse<ToneAnalysis>) in
                 switch response.result {
                 case .success(let toneAnalysis): success(toneAnalysis)
                 case .failure(let error): failure?(error)

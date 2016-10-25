@@ -90,7 +90,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -99,7 +99,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["clusters"]) { (response: DataResponse<[SolrCluster]>) in
+            .responseArray(path: ["clusters"]) { (response: RestResponse<[SolrCluster]>) in
                 switch response.result {
                 case .success(let clusters): success(clusters)
                 case .failure(let error): failure?(error)
@@ -139,7 +139,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -150,7 +150,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SolrCluster>) in
+            .responseObject() { (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -172,7 +172,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)",
             headerParameters: defaultHeaders
         )
@@ -207,7 +207,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -216,7 +216,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SolrCluster>) in
+            .responseObject() { (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -239,7 +239,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -248,7 +248,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["solr_configs"]) { (response: DataResponse<[String]>) in
+            .responseArray(path: ["solr_configs"]) { (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let config): success(config)
                 case .failure(let error): failure?(error)
@@ -272,7 +272,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
             headerParameters: defaultHeaders
         )
@@ -309,7 +309,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
             headerParameters: defaultHeaders
         )
@@ -398,7 +398,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
             headerParameters: defaultHeaders,
             contentType: "application/zip"
@@ -444,10 +444,10 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -487,10 +487,10 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
@@ -531,16 +531,16 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/admin/collections",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["collections"]) { (response: DataResponse<[String]>) in
+            .responseArray(path: ["collections"]) { (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let collections): success(collections)
                 case .failure(let error): failure?(error)
@@ -572,7 +572,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/update",
             headerParameters: defaultHeaders,
             contentType: contentType
@@ -644,16 +644,16 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/select",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SearchResponse>) in
+            .responseObject() { (response: RestResponse<SearchResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -697,16 +697,16 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/solr/\(collectionName)/fcselect",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SearchAndRankResponse>) in
+            .responseObject() { (response: RestResponse<SearchAndRankResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -728,7 +728,7 @@ public class RetrieveAndRank {
     {
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/rankers",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -737,7 +737,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["rankers"]) { (response: DataResponse<[Ranker]>) in
+            .responseArray(path: ["rankers"]) { (response: RestResponse<[Ranker]>) in
                 switch response.result {
                 case .success(let rankers): success(rankers)
                 case .failure(let error): failure?(error)
@@ -777,7 +777,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/rankers",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -794,7 +794,7 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<RankerDetails>) in
+                    upload.responseObject() { (response: RestResponse<RankerDetails>) in
                         switch response.result {
                         case .success(let ranker): success(ranker)
                         case .failure(let error): failure?(error)
@@ -831,7 +831,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/rankers/\(rankerID)/rank",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -847,7 +847,7 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<Ranking>) in
+                    upload.responseObject() { (response: RestResponse<Ranking>) in
                         switch response.result {
                         case .success(let ranking): success(ranking)
                         case .failure(let error): failure?(error)
@@ -878,7 +878,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/rankers/\(rankerID)",
             headerParameters: defaultHeaders
         )
@@ -913,7 +913,7 @@ public class RetrieveAndRank {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/rankers/\(rankerID)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -922,7 +922,7 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<RankerDetails>) in
+            .responseObject() { (response: RestResponse<RankerDetails>) in
                 switch response.result {
                 case .success(let details): success(details)
                 case .failure(let error): failure?(error)

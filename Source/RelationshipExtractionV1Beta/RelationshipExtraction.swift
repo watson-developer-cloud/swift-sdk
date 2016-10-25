@@ -75,16 +75,16 @@ public class RelationshipExtraction {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/sire/0",
             headerParameters: defaultHeaders,
-            queryParameters: queryParameters
+            queryItems: queryParameters
         )
         
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject(path: ["doc"]) { (response: DataResponse<Document>) in
+            .responseObject(path: ["doc"]) { (response: RestResponse<Document>) in
                 switch response.result {
                 case .success(let document): success(document)
                 case .failure(let error): failure?(error)

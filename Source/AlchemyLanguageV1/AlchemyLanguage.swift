@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -32,9 +31,10 @@ public class AlchemyLanguage {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
+    /// The API key credential to use when authenticating with the service.
     private let apiKey: String
+    
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
- 
     private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz" +
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
         "1234567890-._~")
@@ -86,12 +86,13 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetAuthors",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -100,14 +101,12 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentAuthors>) in
-                switch response.result {
-                case .success(let authors): success(authors)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentAuthors>) in
+            switch response.result {
+            case .success(let authors): success(authors)
+            case .failure(let error): failure?(error)
+            }
         }
-        
     }
     
     /**
@@ -138,21 +137,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetAuthors",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentAuthors>) in
-                switch response.result {
-                case .success(let authors): success(authors)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentAuthors>) in
+            switch response.result {
+            case .success(let authors): success(authors)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -185,21 +184,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedConcepts",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
-                switch response.result {
-                case .success(let concepts): success(concepts)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -238,23 +237,22 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedConcepts",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
-                switch response.result {
-                case .success(let concepts): success(concepts)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
-        
     }
     
     /**
@@ -287,21 +285,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedConcepts",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
-                switch response.result {
-                case .success(let concepts): success(concepts)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -365,20 +363,20 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
-                switch response.result {
-                case .success(let entities): success(entities)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -449,21 +447,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedNamedEntities",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
-                switch response.result {
-                case .success(let entities): success(entities)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -529,21 +527,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedNamedEntities",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
-                switch response.result {
-                case .success(let entities): success(entities)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -589,20 +587,20 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedKeywords",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
-                switch response.result {
-                case .success(let keywords): success(keywords)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -655,21 +653,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedKeywords",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
-                switch response.result {
-                case .success(let keywords): success(keywords)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -717,21 +715,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedKeywords",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
-                switch response.result {
-                case .success(let keywords): success(keywords)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -749,12 +747,13 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetLanguage",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -762,12 +761,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Language>) in
-                switch response.result {
-                case .success(let language): success(language)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Language>) in
+            switch response.result {
+            case .success(let language): success(language)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -794,21 +792,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetLanguage",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Language>) in
-                switch response.result {
-                case .success(let language): success(language)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Language>) in
+            switch response.result {
+            case .success(let language): success(language)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -826,12 +824,13 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetMicroformatData",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -839,12 +838,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Microformats>) in
-                switch response.result {
-                case .success(let microformats): success(microformats)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Microformats>) in
+            switch response.result {
+            case .success(let microformats): success(microformats)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -877,21 +875,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetMicroformatData",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Microformats>) in
-                switch response.result {
-                case .success(let microformats): success(microformats)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Microformats>) in
+            switch response.result {
+            case .success(let microformats): success(microformats)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -909,12 +907,13 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetPubDate",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -922,12 +921,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<PublicationResponse>) in
-                switch response.result {
-                case .success(let pubResponse): success(pubResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<PublicationResponse>) in
+            switch response.result {
+            case .success(let pubResponse): success(pubResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -959,21 +957,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetPubDate",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<PublicationResponse>) in
-                switch response.result {
-                case .success(let pubResponse): success(pubResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<PublicationResponse>) in
+            switch response.result {
+            case .success(let pubResponse): success(pubResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1046,20 +1044,20 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRelations",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
-                switch response.result {
-                case .success(let relations): success(relations)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1139,21 +1137,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRelations",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
-                switch response.result {
-                case .success(let relations): success(relations)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1228,21 +1226,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRelations",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
-                switch response.result {
-                case .success(let relations): success(relations)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1260,12 +1258,13 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTextSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -1273,12 +1272,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1310,21 +1308,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTextSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1351,21 +1349,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetTextSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1385,11 +1383,12 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTargetedSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "target", value: targets),
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
@@ -1398,12 +1397,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1438,21 +1436,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTargetedSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1482,21 +1480,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetTargetedSentiment",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
-                switch response.result {
-                case .success(let sentimentResponse): success(sentimentResponse)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1514,11 +1512,12 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedTaxonomy",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -1526,12 +1525,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
-                switch response.result {
-                case .success(let taxonomies): success(taxonomies)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1563,21 +1561,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedTaxonomy",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
-                switch response.result {
-                case .success(let taxonomies): success(taxonomies)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1604,21 +1602,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedTaxonomy",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
-                switch response.result {
-                case .success(let taxonomies): success(taxonomies)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1636,11 +1634,12 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRawText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -1648,12 +1647,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
-                switch response.result {
-                case .success(let docText): success(docText)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1685,21 +1683,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRawText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
-                switch response.result {
-                case .success(let docText): success(docText)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1734,20 +1732,20 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
-                switch response.result {
-                case .success(let docText): success(docText)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1789,21 +1787,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetText",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
-                switch response.result {
-                case .success(let docText): success(docText)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1832,20 +1830,20 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTitle",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentTitle>) in
-                switch response.result {
-                case .success(let docTitle): success(docTitle)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentTitle>) in
+            switch response.result {
+            case .success(let docTitle): success(docTitle)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1881,21 +1879,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTitle",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentTitle>) in
-                switch response.result {
-                case .success(let docTitle): success(docTitle)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentTitle>) in
+            switch response.result {
+            case .success(let docTitle): success(docTitle)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1913,11 +1911,12 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetFeedLinks",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -1925,12 +1924,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Feeds>) in
-                switch response.result {
-                case .success(let feeds): success(feeds)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Feeds>) in
+            switch response.result {
+            case .success(let feeds): success(feeds)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1963,21 +1961,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetFeedLinks",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Feeds>) in
-                switch response.result {
-                case .success(let feeds): success(feeds)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Feeds>) in
+            switch response.result {
+            case .success(let feeds): success(feeds)
+            case .failure(let error): failure?(error)
+            }
         }
     }
  
@@ -1995,11 +1993,12 @@ public class AlchemyLanguage {
     {
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/url/URLGetEmotion",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: [
+            queryItems: [
                 URLQueryItem(name: "url", value: url),
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
@@ -2007,12 +2006,11 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
-                switch response.result {
-                case .success(let emotion): success(emotion)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -2045,21 +2043,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetEmotion",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
-                switch response.result {
-                case .success(let emotion): success(emotion)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -2087,21 +2085,21 @@ public class AlchemyLanguage {
         
         // construct request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceUrl + "/text/TextGetEmotion",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
-                switch response.result {
-                case .success(let emotion): success(emotion)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 }

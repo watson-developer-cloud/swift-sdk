@@ -308,6 +308,7 @@
 		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AEBE4371DBEAA130089188C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
@@ -908,6 +909,7 @@
 		7AEB13251CBF7C8A00101884 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
+		7AEBE4361DBEAA130089188C /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		7AFD74401D4F8A1600666173 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		7AFD74421D4F8A3800666173 /* Intent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
 		7AFD74441D4F8A5200666173 /* OutputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputData.swift; sourceTree = "<group>"; };
@@ -1492,6 +1494,7 @@
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
 				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
+				7AEBE4361DBEAA130089188C /* JSON.swift */,
 			);
 			name = RestKit;
 			path = Source/RestKit;
@@ -3401,6 +3404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
+				7AEBE4371DBEAA130089188C /* JSON.swift in Sources */,
 				7AAAF3BD1CEE9A2400B74848 /* RestToken.swift in Sources */,
 				7AAAF3BC1CEE9A2400B74848 /* RestSerialization.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,

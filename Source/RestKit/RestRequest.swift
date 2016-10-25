@@ -15,12 +15,12 @@
  **/
 
 import Foundation
-import Alamofire
+import Freddy
 
-public class RestRequest: URLRequestConvertible {
+public struct RestRequest {
 
     public static let userAgent: String = {
-        let sdk = "watson-apis-ios-sdk"
+        let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.8.0"
         
         let operatingSystem: String = {
@@ -46,27 +46,47 @@ public class RestRequest: URLRequestConvertible {
         
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
+
+    private let request: URLRequest
+    private let session = URLSession.shared
     
-    private let method: Alamofire.HTTPMethod
-    private let url: String
-    private let headerParameters: [String: String]
-    private let acceptType: String?
-    private let contentType: String?
-    private let queryParameters: [URLQueryItem]?
-    private let messageBody: Data?
-    
-    public func asURLRequest() -> URLRequest {
-        
+    public init(
+        method: String,
+        url: String,
+        credentials: Credentials,
+        headerParameters: [String: String],
+        acceptType: String? = nil,
+        contentType: String? = nil,
+        queryItems: [URLQueryItem]? = nil,
+        messageBody: Data? = nil)
+    {
         // construct url with query parameters
-        let urlComponents = NSURLComponents(string: self.url)!
-        if let queryParameters = queryParameters, !queryParameters.isEmpty {
-            urlComponents.queryItems = queryParameters
+        var urlComponents = URLComponents(string: url)!
+        if let queryItems = queryItems, !queryItems.isEmpty {
+            urlComponents.queryItems = queryItems
         }
         
         // construct basic mutable request
         var request = URLRequest(url: urlComponents.url!)
-        request.httpMethod = method.rawValue
+        request.httpMethod = method
         request.httpBody = messageBody
+        
+        // set the request's user agent
+        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
+        
+        // set the request's authentication credentials
+        switch credentials {
+        case .apiKey: break
+        case .basicAuthentication(let username, let password):
+            let authData = (username + ":" + password).data(using: .utf8)!
+            let authString = authData.base64EncodedString()
+            request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
+        }
+        
+        // set the request's header parameters
+        for (key, value) in headerParameters {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
         
         // set the request's accept type
         if let acceptType = acceptType {
@@ -78,32 +98,178 @@ public class RestRequest: URLRequestConvertible {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
         
-        // set the request's user agent
-        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-        
-        // set the request's header parameters
-        for (key, value) in headerParameters {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-
-        return request
+        self.request = request
     }
+    
+    public func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        let task = session.dataTask(with: request) { (data, response, error) in
+            completionHandler(data, response as? HTTPURLResponse, error)
+        }
+        task.resume()
+    }
+    
+    public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
+        response() { data, response, error in
+            guard let data = data else {
+                let result = Result<Data>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            let result = Result.success(data)
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+        }
+    }
+    
+    public func responseObject<T: JSONDecodable>(path: [JSONPathType]? = nil, completionHandler: @escaping (RestResponse<T>) -> Void) {
+        response() { data, response, error in
+            
+            // ensure data is not nil
+            guard let data = data else {
+                let result = Result<T>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // parse json object
+            let result: Result<T>
+            do {
+                let json = try JSON(data: data)
+                let object: T
+                if let path = path {
+                    switch path.count {
+                    case 0: object = try json.decode()
+                    case 1: object = try json.decode(at: path[0])
+                    case 2: object = try json.decode(at: path[0], path[1])
+                    case 3: object = try json.decode(at: path[0], path[1], path[2])
+                    case 4: object = try json.decode(at: path[0], path[1], path[2], path[3])
+                    case 5: object = try json.decode(at: path[0], path[1], path[2], path[3], path[4])
+                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    }
+                } else {
+                    object = try json.decode()
+                }
+                result = .success(object)
+            } catch {
+                result = .failure(RestError.serializationError)
+            }
+            
+            // execute callback
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
+    
+    public func responseArray<T: JSONDecodable>(path: [JSONPathType]? = nil, completionHandler: @escaping (RestResponse<[T]>) -> Void) {
+        response() { data, response, error in
+            
+            // ensure data is not nil
+            guard let data = data else {
+                let result = Result<[T]>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // parse json object
+            let result: Result<[T]>
+            do {
+                let json = try JSON(data: data)
+                var array: [JSON]
+                if let path = path {
+                    switch path.count {
+                    case 0: array = try json.getArray()
+                    case 1: array = try json.getArray(at: path[0])
+                    case 2: array = try json.getArray(at: path[0], path[1])
+                    case 3: array = try json.getArray(at: path[0], path[1], path[2])
+                    case 4: array = try json.getArray(at: path[0], path[1], path[2], path[3])
+                    case 5: array = try json.getArray(at: path[0], path[1], path[2], path[3], path[4])
+                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    }
+                } else {
+                    array = try json.getArray()
+                }
+                let objects: [T] = try array.map { json in try json.decode() }
+                result = .success(objects)
+            } catch {
+                result = .failure(RestError.serializationError)
+            }
+            
+            // execute callback
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
+    
+    public func responseString(completionHandler: @escaping (RestResponse<String>) -> Void) {
+        response() { data, response, error in
+            
+            // ensure data is not nil
+            guard let data = data else {
+                let result = Result<String>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // parse data as a string
+            guard let string = String(data: data, encoding: .utf8) else {
+                let result = Result<String>.failure(RestError.serializationError)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // execute callback
+            let result = Result.success(string)
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
+    
+    public func download(to: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
+        // TODO: implement this function
+    }
+}
 
-    public init(
-        method: Alamofire.HTTPMethod,
-        url: String,
-        headerParameters: [String: String],
-        acceptType: String? = nil,
-        contentType: String? = nil,
-        queryParameters: [URLQueryItem]? = nil,
-        messageBody: Data? = nil)
-    {
-        self.method = method
-        self.url = url
-        self.headerParameters = headerParameters
-        self.acceptType = acceptType
-        self.contentType = contentType
-        self.queryParameters = queryParameters
-        self.messageBody = messageBody
+public struct RestResponse<T> {
+    public let request: URLRequest?
+    public let response: HTTPURLResponse?
+    public let data: Data?
+    public let result: Result<T>
+}
+
+public enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
+
+public enum Credentials {
+    case apiKey
+    case basicAuthentication(username: String, password: String)
+}
+
+public enum RestError: Error {
+    case noData
+    case serializationError
+}
+
+public class MultipartFormData {
+    public init() {
+        
+    }
+    
+    public func append(_ data: Data, withName: String) {
+        // TODO: implement this function
+    }
+    
+    public func append(_ fileURL: URL, withName: String) {
+        // TODO: implement this function
+    }
+    
+    public func toData() -> Data {
+        // TODO: implement this function
+        return Data()
     }
 }

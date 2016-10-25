@@ -84,7 +84,7 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/classifiers",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -93,7 +93,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["classifiers"]) { (response: DataResponse<[ClassifierModel]>) in
+            .responseArray(path: ["classifiers"]) { (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -121,7 +121,7 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/classifiers",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -138,7 +138,7 @@ public class NaturalLanguageClassifier {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<ClassifierDetails>) in
+                    upload.responseObject() { (response: RestResponse<ClassifierDetails>) in
                         switch response.result {
                         case .success(let classifierDetails): success(classifierDetails)
                         case .failure(let error): failure?(error)
@@ -181,7 +181,7 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .post,
+            method: "POST",
             url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -192,7 +192,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Classification>) in
+            .responseObject() { (response: RestResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
                 case .failure(let error): failure?(error)
@@ -214,7 +214,7 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .delete,
+            method: "DELETE",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -250,7 +250,7 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .get,
+            method: "GET",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
             headerParameters: defaultHeaders,
             acceptType: "application/json"
@@ -259,7 +259,7 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ClassifierDetails>) in
+            .responseObject() { (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)

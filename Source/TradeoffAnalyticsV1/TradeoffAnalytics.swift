@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -33,8 +32,7 @@ public class TradeoffAnalytics {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
     /**
@@ -44,8 +42,7 @@ public class TradeoffAnalytics {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
 
     /**
@@ -87,6 +84,7 @@ public class TradeoffAnalytics {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/dilemmas",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -95,14 +93,12 @@ public class TradeoffAnalytics {
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .validate()
-            .responseObject() { (response: RestResponse<Dilemma>) in
-                switch response.result {
-                case .success(let dilemma): success(dilemma)
-                case .failure(let error): failure?(error)
-                }
+        // TODO: Add status code validation
+        request.responseObject() { (response: RestResponse<Dilemma>) in
+            switch response.result {
+            case .success(let dilemma): success(dilemma)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

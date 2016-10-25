@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -91,18 +90,18 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .responseArray(path: ["classifiers"]) { (response: RestResponse<[Classifier]>) in
-                switch response.result {
-                case .success(let classifiers): success(classifiers)
-                case .failure(let error): failure?(error)
-                }
+        request.responseArray(path: ["classifiers"]) { (response: RestResponse<[Classifier]>) in
+            switch response.result {
+            case .success(let classifiers): success(classifiers)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -148,57 +147,46 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        for positiveExample in positiveExamples {
+            let name = positiveExample.name + "_positive_examples"
+            if let examples = positiveExample.examples {
+                multipartFormData.append(examples, withName: name)
+            }
+        }
+        if let negativeExamples = negativeExamples {
+            let examples = negativeExamples
+            let name = "negative_examples"
+            multipartFormData.append(examples, withName: name)
+        }
+        if let name = name.data(using: String.Encoding.utf8) {
+            multipartFormData.append(name, withName: "name")
+        }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                for positiveExample in positiveExamples {
-                    let name = positiveExample.name + "_positive_examples"
-                    if let examples = positiveExample.examples {
-                        multipartFormData.append(examples, withName: name)
-                    }
-                }
-                if let negativeExamples = negativeExamples {
-                    let examples = negativeExamples
-                    let name = "negative_examples"
-                    multipartFormData.append(examples, withName: name)
-                }
-                if let name = name.data(using: String.Encoding.utf8) {
-                    multipartFormData.append(name, withName: "name")
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseObject() { (response: RestResponse<Classifier>) in
-                        switch response.result {
-                        case .success(let classifier): success(classifier)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "Provided file(s) could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<Classifier>) in
+            switch response.result {
+            case .success(let classifier): success(classifier)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
     
     /**
      Delete a custom classifier with the given classifier id.
- 
+     
      - parameter withID: The id of the classifier to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the classifier has been successfully deleted.
@@ -217,22 +205,22 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    switch self.dataToError(data: data) {
-                    case .some(let error): failure?(error)
-                    case .none: success?()
-                    }
-                case .failure(let error):
-                    failure?(error)
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
                 }
+            case .failure(let error):
+                failure?(error)
+            }
         }
     }
     
@@ -259,22 +247,22 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .responseObject() { (response: RestResponse<Classifier>) in
-                switch response.result {
-                case .success(let classifier): success(classifier)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<Classifier>) in
+            switch response.result {
+            case .success(let classifier): success(classifier)
+            case .failure(let error): failure?(error)
             }
+        }
     }
     
     /**
-     Update an existing classifier by adding new classes or by adding new images to existing 
+     Update an existing classifier by adding new classes or by adding new images to existing
      classes. At least one compressed file must be passed in.
      
      - parameter withID: The ID of the classifier you want to update.
@@ -310,53 +298,43 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let positiveExamples = positiveExamples {
+            for positiveExample in positiveExamples {
+                let name = positiveExample.name + "_positive_examples"
+                if let examples = positiveExample.examples {
+                    multipartFormData.append(examples, withName: name)
+                }
+            }
+        }
+        if let negativeExamples = negativeExamples {
+            let examples = negativeExamples
+            let name = "negative_examples"
+            multipartFormData.append(examples, withName: name)
+        }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if let positiveExamples = positiveExamples {
-                    for positiveExample in positiveExamples {
-                        let name = positiveExample.name + "_positive_examples"
-                        if let examples = positiveExample.examples {
-                            multipartFormData.append(examples, withName: name)
-                        }
-                    }                    
-                }
-                if let negativeExamples = negativeExamples {
-                    let examples = negativeExamples
-                    let name = "negative_examples"
-                    multipartFormData.append(examples, withName: name)
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseObject() { (response: RestResponse<Classifier>) in
-                        switch response.result {
-                        case .success(let classifier): success(classifier)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "Provided file(s) could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<Classifier>) in
+            switch response.result {
+            case .success(let classifier): success(classifier)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
+        
     }
-    
+
     /**
      Classify images by URL. The supported image formats include .jpg, .png, and .gif.
  
@@ -491,46 +469,35 @@ public class VisualRecognition {
             headerParameters["Accept-Language"] = outputLanguage
         }
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let image = image {
+            multipartFormData.append(image, withName: "images_file")
+        }
+        if let parameters = parameters {
+            multipartFormData.append(parameters, withName: "parameters")
+        }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classify",
+            credentials: .apiKey,
             headerParameters: headerParameters,
             acceptType: "application/json",
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if let image = image {
-                    multipartFormData.append(image, withName: "images_file")
-                }
-                if let parameters = parameters {
-                    multipartFormData.append(parameters, withName: "parameters")
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseObject() { (response: RestResponse<ClassifiedImages>) in
-                        switch response.result {
-                        case .success(let classifiedImages): success(classifiedImages)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "File(s) could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<ClassifiedImages>) in
+            switch response.result {
+            case .success(let classifiedImages): success(classifiedImages)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
      Detect faces in images by URL. The supported image formats include .jpg, .png, and .gif.
  
@@ -582,46 +549,35 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let image = image {
+            multipartFormData.append(image, withName: "images_file")
+        }
+        if let parameters = parameters {
+            multipartFormData.append(parameters, withName: "parameters")
+        }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if let image = image {
-                    multipartFormData.append(image, withName: "images_file")
-                }
-                if let parameters = parameters {
-                    multipartFormData.append(parameters, withName: "parameters")
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseObject() { (response: RestResponse<ImagesWithFaces>) in
-                        switch response.result {
-                        case .success(let faceImages): success(faceImages)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "File(s) could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<ImagesWithFaces>) in
+            switch response.result {
+            case .success(let faceImages): success(faceImages)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
      Recognize text in images by URL. The supported image formats include .jpg, .png, and .gif.
      
@@ -672,46 +628,36 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let image = image {
+            multipartFormData.append(image, withName: "images_file")
+        }
+        if let parameters = parameters {
+            multipartFormData.append(parameters, withName: "parameters")
+        }
+        
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/recognize_text",
+            credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: multipartFormData.toData()
         )
         
         // execute REST request
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if let image = image {
-                    multipartFormData.append(image, withName: "images_file")
-                }
-                if let parameters = parameters {
-                    multipartFormData.append(parameters, withName: "parameters")
-                }
-            },
-            with: request,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseObject() { (response: RestResponse<ImagesWithWords>) in
-                        switch response.result {
-                        case .success(let wordImages): success(wordImages)
-                        case .failure(let error): failure?(error)
-                        }
-                    }
-                case .failure:
-                    let failureReason = "File(s) could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject() { (response: RestResponse<ImagesWithWords>) in
+            switch response.result {
+            case .success(let wordImages): success(wordImages)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
      Write service input parameters to a temporary JSON file that can be uploaded.
      

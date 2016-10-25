@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -32,8 +31,7 @@ public class ToneAnalyzer {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
@@ -46,8 +44,7 @@ public class ToneAnalyzer {
             in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.username = username
-        self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
 
@@ -95,6 +92,7 @@ public class ToneAnalyzer {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/tone",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -103,13 +101,11 @@ public class ToneAnalyzer {
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<ToneAnalysis>) in
-                switch response.result {
-                case .success(let toneAnalysis): success(toneAnalysis)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject() { (response: RestResponse<ToneAnalysis>) in
+            switch response.result {
+            case .success(let toneAnalysis): success(toneAnalysis)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

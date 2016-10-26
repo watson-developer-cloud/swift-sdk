@@ -43,6 +43,21 @@ public class AlchemyDataNews {
         self.apiKey = apiKey
     }
     
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.getString(at: "status")
+            let statusInfo = try json.getString(at: "statusInfo")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: status,
+                NSLocalizedDescriptionKey: statusInfo
+            ]
+            return NSError(domain: "AlchemyDataNews", code: 400, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
     /**
      Analyze news using Natural Language Processing (NLP) queries and sophisticated filters.
      
@@ -93,7 +108,8 @@ public class AlchemyDataNews {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<NewsResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<NewsResponse>) in
                 switch response.result {
                 case .success(let newsResponse): success(newsResponse)
                 case .failure(let error): failure?(error)

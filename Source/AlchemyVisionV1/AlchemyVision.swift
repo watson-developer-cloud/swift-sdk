@@ -46,6 +46,32 @@ public class AlchemyVision {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
+    
+    /**
+     If the given data represents an error returned by the Alchemy Vision service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.getString(at: "status")
+            let statusInfo = try json.getString(at: "statusInfo")
+            if status == "OK" {
+                return nil
+            } else {
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: status,
+                    NSLocalizedDescriptionKey: statusInfo
+                ]
+                return NSError(domain: domain, code: 400, userInfo: userInfo)
+            }
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Perform face recognition on an uploaded image. For each face detected, the service returns
@@ -88,7 +114,7 @@ public class AlchemyVision {
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<FaceTags>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<FaceTags>) in
                 switch response.result {
                 case .success(let faceTags): success(faceTags)
                 case .failure(let error): failure?(error)
@@ -137,7 +163,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<FaceTags>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<FaceTags>) in
                 switch response.result {
                 case .success(let faceTags): success(faceTags)
                 case .failure(let error): failure?(error)
@@ -222,7 +248,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageLink>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<ImageLink>) in
                 switch response.result {
                 case .success(let imageLinks): success(imageLinks)
                 case .failure(let error): failure?(error)
@@ -259,7 +285,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageLink>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<ImageLink>) in
                 switch response.result {
                 case .success(let imageLinks): success(imageLinks)
                 case .failure(let error): failure?(error)
@@ -316,7 +342,7 @@ public class AlchemyVision {
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageKeywords>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<ImageKeywords>) in
                 switch response.result {
                 case .success(let imageKeywords): success(imageKeywords)
                 case .failure(let error): failure?(error)
@@ -371,7 +397,7 @@ public class AlchemyVision {
 
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ImageKeywords>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<ImageKeywords>) in
                 switch response.result {
                 case .success(let imageKeywords): success(imageKeywords)
                 case .failure(let error): failure?(error)
@@ -410,7 +436,7 @@ public class AlchemyVision {
         
         // execute REST requeset
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SceneText>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<SceneText>) in
                 switch response.result {
                 case .success(let sceneTexts): success(sceneTexts)
                 case .failure(let error): failure?(error)
@@ -447,7 +473,7 @@ public class AlchemyVision {
 
         // execute REST requeset
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SceneText>) in
+            .responseObject(dataToError: dataToError) { (response: DataResponse<SceneText>) in
                 switch response.result {
                 case .success(let sceneTexts): success(sceneTexts)
                 case .failure(let error): failure?(error)

@@ -99,7 +99,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["clusters"]) { (response: DataResponse<[SolrCluster]>) in
+            .responseArray(dataToError: dataToError, path: ["clusters"]) {
+                (response: DataResponse<[SolrCluster]>) in
                 switch response.result {
                 case .success(let clusters): success(clusters)
                 case .failure(let error): failure?(error)
@@ -150,7 +151,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SolrCluster>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -216,7 +218,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SolrCluster>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -248,7 +251,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["solr_configs"]) { (response: DataResponse<[String]>) in
+            .responseArray(dataToError: dataToError, path: ["solr_configs"]) {
+                (response: DataResponse<[String]>) in
                 switch response.result {
                 case .success(let config): success(config)
                 case .failure(let error): failure?(error)
@@ -540,7 +544,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["collections"]) { (response: DataResponse<[String]>) in
+            .responseArray(dataToError: dataToError, path: ["collections"]) {
+                (response: DataResponse<[String]>) in
                 switch response.result {
                 case .success(let collections): success(collections)
                 case .failure(let error): failure?(error)
@@ -653,7 +658,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SearchResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SearchResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -706,7 +712,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<SearchAndRankResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SearchAndRankResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -737,7 +744,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["rankers"]) { (response: DataResponse<[Ranker]>) in
+            .responseArray(dataToError: dataToError, path: ["rankers"]) {
+                (response: DataResponse<[Ranker]>) in
                 switch response.result {
                 case .success(let rankers): success(rankers)
                 case .failure(let error): failure?(error)
@@ -794,7 +802,8 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<RankerDetails>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: DataResponse<RankerDetails>) in
                         switch response.result {
                         case .success(let ranker): success(ranker)
                         case .failure(let error): failure?(error)
@@ -847,7 +856,8 @@ public class RetrieveAndRank {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<Ranking>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: DataResponse<Ranking>) in
                         switch response.result {
                         case .success(let ranking): success(ranking)
                         case .failure(let error): failure?(error)
@@ -922,7 +932,8 @@ public class RetrieveAndRank {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<RankerDetails>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<RankerDetails>) in
                 switch response.result {
                 case .success(let details): success(details)
                 case .failure(let error): failure?(error)

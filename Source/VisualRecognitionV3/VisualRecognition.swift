@@ -98,7 +98,8 @@ public class VisualRecognition {
         
         // execute REST request
         Alamofire.request(request)
-            .responseArray(path: ["classifiers"]) { (response: DataResponse<[Classifier]>) in
+            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
+            	(response: DataResponse<[Classifier]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -179,7 +180,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<Classifier>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                    	(response: DataResponse<Classifier>) in
                         switch response.result {
                         case .success(let classifier): success(classifier)
                         case .failure(let error): failure?(error)
@@ -265,7 +267,8 @@ public class VisualRecognition {
         
         // execute REST request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Classifier>) in
+            .responseObject(dataToError: dataToError) {
+            	(response: DataResponse<Classifier>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)
@@ -340,7 +343,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<Classifier>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                    	(response: DataResponse<Classifier>) in
                         switch response.result {
                         case .success(let classifier): success(classifier)
                         case .failure(let error): failure?(error)
@@ -514,7 +518,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ClassifiedImages>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                    	(response: DataResponse<ClassifiedImages>) in
                         switch response.result {
                         case .success(let classifiedImages): success(classifiedImages)
                         case .failure(let error): failure?(error)
@@ -605,7 +610,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ImagesWithFaces>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                    	(response: DataResponse<ImagesWithFaces>) in
                         switch response.result {
                         case .success(let faceImages): success(faceImages)
                         case .failure(let error): failure?(error)
@@ -695,7 +701,8 @@ public class VisualRecognition {
             encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload.responseObject() { (response: DataResponse<ImagesWithWords>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                    	(response: DataResponse<ImagesWithWords>) in
                         switch response.result {
                         case .success(let wordImages): success(wordImages)
                         case .failure(let error): failure?(error)

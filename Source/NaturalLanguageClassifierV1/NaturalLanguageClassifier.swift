@@ -93,7 +93,8 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["classifiers"]) { (response: DataResponse<[ClassifierModel]>) in
+            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
+                (response: DataResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -138,7 +139,8 @@ public class NaturalLanguageClassifier {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject() { (response: DataResponse<ClassifierDetails>) in
+                    upload.responseObject(dataToError: self.dataToError) {
+                        (response: DataResponse<ClassifierDetails>) in
                         switch response.result {
                         case .success(let classifierDetails): success(classifierDetails)
                         case .failure(let error): failure?(error)
@@ -192,7 +194,8 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Classification>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
                 case .failure(let error): failure?(error)
@@ -259,7 +262,8 @@ public class NaturalLanguageClassifier {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ClassifierDetails>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)

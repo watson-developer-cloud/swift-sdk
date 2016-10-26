@@ -48,6 +48,21 @@ public class AlchemyLanguage {
         self.apiKey = apiKey
     }
     
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.getString(at: "status")
+            let statusInfo = try json.getString(at: "statusInfo")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: status,
+                NSLocalizedDescriptionKey: statusInfo
+            ]
+            return NSError(domain: errorDomain, code: 400, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+
     private func buildBody(document:  URL, html: Bool) throws -> Data {
         guard let docAsString = try? String(contentsOf: document)
             .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
@@ -101,7 +116,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentAuthors>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentAuthors>) in
                 switch response.result {
                 case .success(let authors): success(authors)
                 case .failure(let error): failure?(error)
@@ -148,7 +164,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentAuthors>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentAuthors>) in
                 switch response.result {
                 case .success(let authors): success(authors)
                 case .failure(let error): failure?(error)
@@ -195,7 +212,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ConceptResponse>) in
                 switch response.result {
                 case .success(let concepts): success(concepts)
                 case .failure(let error): failure?(error)
@@ -248,7 +266,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ConceptResponse>) in
                 switch response.result {
                 case .success(let concepts): success(concepts)
                 case .failure(let error): failure?(error)
@@ -297,7 +316,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<ConceptResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ConceptResponse>) in
                 switch response.result {
                 case .success(let concepts): success(concepts)
                 case .failure(let error): failure?(error)
@@ -374,7 +394,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Entities>) in
                 switch response.result {
                 case .success(let entities): success(entities)
                 case .failure(let error): failure?(error)
@@ -459,7 +480,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Entities>) in
                 switch response.result {
                 case .success(let entities): success(entities)
                 case .failure(let error): failure?(error)
@@ -539,7 +561,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Entities>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Entities>) in
                 switch response.result {
                 case .success(let entities): success(entities)
                 case .failure(let error): failure?(error)
@@ -598,7 +621,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Keywords>) in
                 switch response.result {
                 case .success(let keywords): success(keywords)
                 case .failure(let error): failure?(error)
@@ -665,7 +689,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Keywords>) in
                 switch response.result {
                 case .success(let keywords): success(keywords)
                 case .failure(let error): failure?(error)
@@ -727,7 +752,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Keywords>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Keywords>) in
                 switch response.result {
                 case .success(let keywords): success(keywords)
                 case .failure(let error): failure?(error)
@@ -763,7 +789,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Language>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Language>) in
                 switch response.result {
                 case .success(let language): success(language)
                 case .failure(let error): failure?(error)
@@ -804,7 +831,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Language>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Language>) in
                 switch response.result {
                 case .success(let language): success(language)
                 case .failure(let error): failure?(error)
@@ -840,7 +868,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Microformats>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Microformats>) in
                 switch response.result {
                 case .success(let microformats): success(microformats)
                 case .failure(let error): failure?(error)
@@ -887,7 +916,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Microformats>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Microformats>) in
                 switch response.result {
                 case .success(let microformats): success(microformats)
                 case .failure(let error): failure?(error)
@@ -923,7 +953,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<PublicationResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<PublicationResponse>) in
                 switch response.result {
                 case .success(let pubResponse): success(pubResponse)
                 case .failure(let error): failure?(error)
@@ -969,7 +1000,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<PublicationResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<PublicationResponse>) in
                 switch response.result {
                 case .success(let pubResponse): success(pubResponse)
                 case .failure(let error): failure?(error)
@@ -1055,7 +1087,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SAORelations>) in
                 switch response.result {
                 case .success(let relations): success(relations)
                 case .failure(let error): failure?(error)
@@ -1149,7 +1182,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SAORelations>) in
                 switch response.result {
                 case .success(let relations): success(relations)
                 case .failure(let error): failure?(error)
@@ -1238,7 +1272,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SAORelations>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SAORelations>) in
                 switch response.result {
                 case .success(let relations): success(relations)
                 case .failure(let error): failure?(error)
@@ -1274,7 +1309,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1320,7 +1356,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1361,7 +1398,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1399,7 +1437,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1448,7 +1487,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1492,7 +1532,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<SentimentResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<SentimentResponse>) in
                 switch response.result {
                 case .success(let sentimentResponse): success(sentimentResponse)
                 case .failure(let error): failure?(error)
@@ -1527,7 +1568,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Taxonomies>) in
                 switch response.result {
                 case .success(let taxonomies): success(taxonomies)
                 case .failure(let error): failure?(error)
@@ -1573,7 +1615,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Taxonomies>) in
                 switch response.result {
                 case .success(let taxonomies): success(taxonomies)
                 case .failure(let error): failure?(error)
@@ -1614,7 +1657,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Taxonomies>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Taxonomies>) in
                 switch response.result {
                 case .success(let taxonomies): success(taxonomies)
                 case .failure(let error): failure?(error)
@@ -1649,7 +1693,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentText>) in
                 switch response.result {
                 case .success(let docText): success(docText)
                 case .failure(let error): failure?(error)
@@ -1695,7 +1740,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentText>) in
                 switch response.result {
                 case .success(let docText): success(docText)
                 case .failure(let error): failure?(error)
@@ -1743,7 +1789,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentText>) in
                 switch response.result {
                 case .success(let docText): success(docText)
                 case .failure(let error): failure?(error)
@@ -1799,7 +1846,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentText>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentText>) in
                 switch response.result {
                 case .success(let docText): success(docText)
                 case .failure(let error): failure?(error)
@@ -1841,7 +1889,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentTitle>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentTitle>) in
                 switch response.result {
                 case .success(let docTitle): success(docTitle)
                 case .failure(let error): failure?(error)
@@ -1891,7 +1940,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentTitle>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentTitle>) in
                 switch response.result {
                 case .success(let docTitle): success(docTitle)
                 case .failure(let error): failure?(error)
@@ -1926,7 +1976,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Feeds>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Feeds>) in
                 switch response.result {
                 case .success(let feeds): success(feeds)
                 case .failure(let error): failure?(error)
@@ -1973,7 +2024,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<Feeds>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Feeds>) in
                 switch response.result {
                 case .success(let feeds): success(feeds)
                 case .failure(let error): failure?(error)
@@ -2008,7 +2060,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentEmotion>) in
                 switch response.result {
                 case .success(let emotion): success(emotion)
                 case .failure(let error): failure?(error)
@@ -2055,7 +2108,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentEmotion>) in
                 switch response.result {
                 case .success(let emotion): success(emotion)
                 case .failure(let error): failure?(error)
@@ -2097,7 +2151,8 @@ public class AlchemyLanguage {
         
         // execute request
         Alamofire.request(request)
-            .responseObject() { (response: DataResponse<DocumentEmotion>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<DocumentEmotion>) in
                 switch response.result {
                 case .success(let emotion): success(emotion)
                 case .failure(let error): failure?(error)

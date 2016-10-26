@@ -55,7 +55,7 @@ public class Dialog {
         self.username = username
         self.password = password
     }
-    
+
     /**
      If the given data represents an error returned by the Visual Recognition service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -97,7 +97,8 @@ public class Dialog {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["dialogs"]) { (response: DataResponse<[DialogModel]>) in
+            .responseArray(dataToError: dataToError, path: ["dialogs"]) {
+                (response: DataResponse<[DialogModel]>) in
                 switch response.result {
                 case .success(let dialogs): success(dialogs)
                 case .failure(let error): failure?(error)
@@ -149,7 +150,7 @@ public class Dialog {
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(path: ["dialog_id"]) {
+                    upload.responseObject(dataToError: self.dataToError, path: ["dialog_id"]) {
                         (response: DataResponse<DialogID>) in
                         switch response.result {
                         case .success(let dialogID): success(dialogID)
@@ -387,7 +388,8 @@ public class Dialog {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["items"]) { (response: DataResponse<[Node]>) in
+            .responseArray(dataToError: dataToError, path: ["items"]) {
+                (response: DataResponse<[Node]>) in
                 switch response.result {
                 case .success(let nodes): success(nodes)
                 case .failure(let error): failure?(error)
@@ -495,7 +497,8 @@ public class Dialog {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["conversations"]) { (response: DataResponse<[Conversation]>) in
+            .responseArray(dataToError: dataToError, path: ["conversations"]) {
+                (response: DataResponse<[Conversation]>) in
                 switch response.result {
                 case .success(let conversations): success(conversations)
                 case .failure(let error): failure?(error)
@@ -548,7 +551,8 @@ public class Dialog {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ConversationResponse>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ConversationResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -596,7 +600,8 @@ public class Dialog {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Profile>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

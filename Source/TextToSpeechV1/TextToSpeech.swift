@@ -91,7 +91,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["voices"]) { (response: DataResponse<[Voice]>) in
+            .responseArray(dataToError: dataToError, path: ["voices"]) {
+                (response: DataResponse<[Voice]>) in
                 switch response.result {
                 case .success(let voices): success(voices)
                 case .failure(let error): failure?(error)
@@ -136,7 +137,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Voice>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Voice>) in
                 switch response.result {
                 case .success(let voice): success(voice)
                 case .failure(let error): failure?(error)
@@ -190,7 +192,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Pronunciation>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Pronunciation>) in
                 switch response.result {
                 case .success(let voice): success(voice)
                 case .failure(let error): failure?(error)
@@ -242,6 +245,7 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
+            .validate(statusCode: 200...299)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
@@ -307,7 +311,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["customizations"]) { (response: DataResponse<[Customization]>) in
+            .responseArray(dataToError: dataToError, path: ["customizations"]) {
+                (response: DataResponse<[Customization]>) in
                 switch response.result {
                 case .success(let customizations): success(customizations)
                 case .failure(let error): failure?(error)
@@ -361,7 +366,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<CustomizationID>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<CustomizationID>) in
                 switch response.result {
                 case .success(let customizationID): success(customizationID)
                 case .failure(let error): failure?(error)
@@ -428,7 +434,8 @@ public class TextToSpeech {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<CustomizationWords>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<CustomizationWords>) in
                 switch response.result {
                 case .success(let customizationWords): success(customizationWords)
                 case .failure(let error): failure?(error)
@@ -516,7 +523,8 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseArray(path: ["words"]) { (response: DataResponse<[Word]>) in
+            .responseArray(dataToError: dataToError, path: ["words"]) {
+                (response: DataResponse<[Word]>) in
                 switch response.result {
                 case .success(let words): success(words)
                 case .failure(let error): failure?(error)
@@ -636,7 +644,8 @@ public class TextToSpeech {
         // execute the request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<Translation>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<Translation>) in
                 switch response.result {
                 case .success(let translation): success(translation)
                 case .failure(let error): failure?(error)

@@ -50,6 +50,28 @@ public class ToneAnalyzer {
         self.password = password
         self.version = version
     }
+    
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: NSData) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.int("code")
+            let error = try json.string("error")
+            let help = try? json.string("help")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: "\(help)"
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Analyze the tone of the given text.
@@ -105,7 +127,8 @@ public class ToneAnalyzer {
         // execute REST request
         Alamofire.request(request)
             .authenticate(user: username, password: password)
-            .responseObject() { (response: DataResponse<ToneAnalysis>) in
+            .responseObject(dataToError: dataToError) {
+                (response: DataResponse<ToneAnalysis>) in
                 switch response.result {
                 case .success(let toneAnalysis): success(toneAnalysis)
                 case .failure(let error): failure?(error)

@@ -19,48 +19,75 @@ import Alamofire
 import Freddy
 
 public extension DataRequest {
-
+    
+    /**
+     Adds a handler to be called once the request has finished.
+     
+     - parameter queue: The queue to use.
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
+     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
+     - parameter completionHandler: The code to be executed once the request has finished.
+     */
     @discardableResult
     public func responseObject<T: JSONDecodable>(
         queue: DispatchQueue? = nil,
+        dataToError: ((Data) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (DataResponse<T>) -> Void)
         -> Self
     {
         return response(
             queue: queue,
-            responseSerializer: DataRequest.objectResponseSerializer(path: path),
+            responseSerializer: DataRequest.objectResponseSerializer(dataToError: dataToError, path: path),
             completionHandler: completionHandler
         )
     }
     
+    /**
+     Adds a handler to be called once the request has finished.
+     
+     - parameter queue: The queue to use.
+     - parameter dataToError: A function that interprets an error model to produce an NSError.
+     - parameter path: 0 or more `String` or `Int` that subscript the `JSON`.
+     - parameter completionHandler: The code to be executed once the request has finished.
+     */
     @discardableResult
     public func responseArray<T: JSONDecodable>(
         queue: DispatchQueue? = nil,
+        dataToError: ((Data) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (DataResponse<[T]>) -> Void)
         -> Self
     {
         return response(
             queue: queue,
-            responseSerializer: DataRequest.arrayResponseSerializer(path: path),
+            responseSerializer: DataRequest.arrayResponseSerializer(dataToError: dataToError, path: path),
             completionHandler: completionHandler
         )
     }
     
-    private static func objectResponseSerializer<T: JSONDecodable>(path: [JSONPathType]? = nil)
+    private static func objectResponseSerializer<T: JSONDecodable>(
+        dataToError: ((Data) -> Error?)? = nil,
+        path: [JSONPathType]? = nil)
         -> DataResponseSerializer<T>
     {
         return DataResponseSerializer { request, response, data, error in
             
             // fail if an error was already produced
             guard error == nil else { return .failure(error!) }
-
+            
             // fail if the data is nil
             guard let data = data else {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
-
+            
+            // fail if the data can be converted to an error
+            if let dataToError = dataToError {
+                if let dataError = dataToError(data) {
+                    return .failure(dataError)
+                }
+            }
+            
             // serialize a `T` from the json data
             do {
                 let json = try JSON(data: data)
@@ -80,26 +107,32 @@ public extension DataRequest {
                 }
                 return .success(object)
             } catch {
-                if let json = String(data: data, encoding: .utf8) {
-                    print("JSON Serialization Failed. Could not parse the following data.")
-                    print(json)
-                }
-                return .failure(AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
+                let failure = AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error))
+                return .failure(failure)
             }
         }
     }
-
-    private static func arrayResponseSerializer<T: JSONDecodable>(path: [JSONPathType]? = nil)
+    
+    private static func arrayResponseSerializer<T: JSONDecodable>(
+        dataToError: ((Data) -> Error?)? = nil,
+        path: [JSONPathType]? = nil)
         -> DataResponseSerializer<[T]>
     {
         return DataResponseSerializer { request, response, data, error in
-
+            
             // fail if an error was already produced
             guard error == nil else { return .failure(error!) }
-
+            
             // fail if the data is nil
             guard let data = data else {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
+            }
+            
+            // fail if the data can be converted to an error
+            if let dataToError = dataToError {
+                if let dataError = dataToError(data) {
+                    return .failure(dataError)
+                }
             }
             
             // serialize a `[T]` from the json data
@@ -122,11 +155,8 @@ public extension DataRequest {
                 let objects: [T] = try array.map { json in try json.decode() }
                 return .success(objects)
             } catch {
-                if let json = String(data: data, encoding: .utf8) {
-                    print("JSON Serialization Failed. Could not parse the following data.")
-                    print(json)
-                }
-                return .failure(AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
+                let failure = AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error))
+                return .failure(failure)
             }
         }
     }

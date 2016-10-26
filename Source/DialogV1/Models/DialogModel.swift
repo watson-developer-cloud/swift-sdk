@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog associated with a particular service instance. */
 public struct DialogModel: JSONDecodable {
@@ -27,7 +27,7 @@ public struct DialogModel: JSONDecodable {
     public let name: String
 
     /// Used internally to initialize a `DialogModel` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         dialogID = try json.getString(at: "dialog_id")
         name = try json.getString(at: "name")
     }

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {
@@ -38,16 +38,16 @@ public struct Node: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         content = try json.getString(at: "content")
         node = try json.getString(at: "node")
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["content"] = .string(content)
-        json["node"] = .string(node)
-        return .dictionary(json)
+    public func toJSON() -> [String: Any] {
+        var json = [String: Any]()
+        json["content"] = content
+        json["node"] = node
+        return json
     }
 }

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -40,10 +40,10 @@ public struct ConceptResponse: JSONDecodable {
     public let concepts: [Concept]?
     
     /// Used internally to initialize a ConceptResponse object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: ConceptResponse.self)
+            throw JSONError.valueNotConvertible(value: json, to: ConceptResponse.self)
         }
         
         language = try? json.getString(at: "language")
@@ -53,7 +53,7 @@ public struct ConceptResponse: JSONDecodable {
         } else {
             totalTransactions = 1
         }
-        concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
+        concepts = try? json.objects(at: "concepts")
     }
 }
 

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Search results returned by the Retrieve and Rank service, ordered by their ranking. */
 public struct Ranking: JSONDecodable {
@@ -36,12 +36,12 @@ public struct Ranking: JSONDecodable {
     public let answers: [RankedAnswer]
     
     /// Used internally to initialize a `Ranking` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         rankerID = try json.getString(at: "ranker_id")
         name = try? json.getString(at: "name")
         url = try json.getString(at: "url")
         topAnswer = try json.getString(at: "top_answer")
-        answers = try json.decodedArray(at: "answers", type: RankedAnswer.self)
+        answers = try json.objects(at: "answers")
     }
 }
 
@@ -60,7 +60,7 @@ public struct RankedAnswer: JSONDecodable {
     public let confidence: Double
     
     /// Used internally to initialize an `RankedAnswer` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         answerID = try json.getString(at: "answer_id")
         score = try json.getDouble(at: "score")
         confidence = try json.getDouble(at: "confidence")

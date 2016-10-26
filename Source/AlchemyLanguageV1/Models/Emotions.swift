@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  Emotions and their prevalence extracted from a document
@@ -25,7 +25,7 @@ public struct Emotions: JSONDecodable {
     public let sadness: Double?
     
     /// Used internally to initialize a Emotions object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         if let angerString = try? json.getString(at: "anger") {
             anger = Double(angerString)
         } else {

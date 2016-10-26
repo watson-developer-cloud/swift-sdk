@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -46,13 +46,13 @@ public struct AnswerUnits: JSONDecodable {
     public let content: [Content]?
     
     /** used internally to initialize AnswerUnits objects */
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         id = try? json.getString(at: "id")
         type = try? json.getString(at: "type")
         parentId = try? json.getString(at: "parent_id")
         title = try? json.getString(at: "title")
         direction = try? json.getString(at: "direction")
-        content = try? json.decodedArray(at: "content", type: Content.self)
+        content = try? json.objects(at: "content")
     }
     
 }

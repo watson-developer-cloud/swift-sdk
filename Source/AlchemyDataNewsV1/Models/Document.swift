@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -33,13 +33,13 @@ public struct Document: JSONDecodable {
     public let source: DocumentSource?
     
     /** the timestamp of publication */
-    public let timestamp: CLong?
+    public let timestamp: Int?
     
     /// used internally to initialize a Document object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         id = try? json.getString(at: "id")
-        source = try? json.decode(at: "source", type: DocumentSource.self)
-        timestamp = try? json.decode(at: "timestamp", type: CLong.self)
+        source = try? json.object(at: "source")
+        timestamp = try? json.getInt(at: "timestamp")
     }
     
 }

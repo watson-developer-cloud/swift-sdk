@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Alternative word hypotheses from Speech to Text for a word in the audio input. */
 public struct WordAlternativeResult: JSONDecodable {
@@ -27,7 +27,7 @@ public struct WordAlternativeResult: JSONDecodable {
     public let word: String
 
     /// Used internally to initialize an `WordAlternativeResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         confidence = try json.getDouble(at: "confidence")
         word = try json.getString(at: "word")
     }

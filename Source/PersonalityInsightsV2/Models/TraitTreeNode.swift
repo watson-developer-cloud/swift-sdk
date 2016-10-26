@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Detailed results for a specific characteristic of the input text. */
 public struct TraitTreeNode: JSONDecodable {
@@ -68,7 +68,7 @@ public struct TraitTreeNode: JSONDecodable {
     public let children: [TraitTreeNode]?
 
     /// Used internally to initialize a `TraitTreeNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         id = try json.getString(at: "id")
         name = try json.getString(at: "name")
         category = try? json.getString(at: "category")
@@ -76,6 +76,6 @@ public struct TraitTreeNode: JSONDecodable {
         samplingError = try? json.getDouble(at: "sampling_error")
         rawScore = try? json.getDouble(at: "raw_score")
         rawSamplingError = try? json.getDouble(at: "raw_sampling_error")
-        children = try? json.decodedArray(at: "children")
+        children = try? json.objects(at: "children")
     }
 }

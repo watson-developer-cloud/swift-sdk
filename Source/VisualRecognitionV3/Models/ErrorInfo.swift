@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Information about an error that occurred. */
 public struct ErrorInfo: JSONDecodable {
@@ -27,7 +27,7 @@ public struct ErrorInfo: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize an `ErrorInfo` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         errorID = try json.getString(at: "error_id")
         description = try json.getString(at: "description")
     }

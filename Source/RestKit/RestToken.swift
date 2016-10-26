@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 
 /**
  A `RestToken` object retrieves, stores, and refreshes an authentication token. The token is

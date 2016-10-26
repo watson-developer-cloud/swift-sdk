@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
 public struct KnowledgeGraph: JSONDecodable {
@@ -24,7 +24,7 @@ public struct KnowledgeGraph: JSONDecodable {
     public let typeHierarchy: String
 
     /// Used internally to initialize a `KnowledgeGraph` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         typeHierarchy = try json.getString(at: "typeHierarchy")
     }
 }

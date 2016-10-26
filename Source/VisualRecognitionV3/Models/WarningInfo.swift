@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Information about a warning that occurred. */
 public struct WarningInfo: JSONDecodable {
@@ -27,7 +27,7 @@ public struct WarningInfo: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize a `WarningInfo` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         warningID = try json.getString(at: "warning_id")
         description = try json.getString(at: "description")
     }

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A classifier for the Visual Recognition service. */
 public struct Classifier: JSONDecodable {
@@ -39,12 +39,12 @@ public struct Classifier: JSONDecodable {
     public let classes: [Class]
     
     /// Used internally to initialize a `Classifier` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         classifierID = try json.getString(at: "classifier_id")
         name = try json.getString(at: "name")
         owner = try json.getString(at: "owner")
         status = try json.getString(at: "status")
         created = try json.getString(at: "created")
-        classes = try json.decodedArray(at: "classes", type: Class.self)
+        classes = try json.objects(at: "classes")
     }
 }

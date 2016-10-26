@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -40,7 +40,7 @@ public struct Taxonomy: JSONDecodable {
     public let score: Double?
     
     /// Used internally to initialize a Taxonomy object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         confident = try? json.getString(at: "confident")
         label = try? json.getString(at: "label")
         if let scoreString = try? json.getString(at: "score") {

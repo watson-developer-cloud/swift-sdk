@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A pronunciation of text based on the voice and phoneme. */
 public struct Pronunciation: JSONDecodable {
@@ -24,7 +24,7 @@ public struct Pronunciation: JSONDecodable {
     public let pronunciation: String
     
     /// Used internally to initialize a `Pronunciation` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         pronunciation = try json.getString(at: "pronunciation")
     }
 }

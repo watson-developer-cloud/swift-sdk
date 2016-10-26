@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A translation model that can be used to translate between a source and target language. */
 public struct TranslationModel: JSONDecodable {
@@ -60,7 +60,7 @@ public struct TranslationModel: JSONDecodable {
     public let status: TrainingStatus
 
     /// Used internally to initialize a `TranslationModel` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         modelID = try json.getString(at: "model_id")
         name = try json.getString(at: "name")
         source = try json.getString(at: "source")

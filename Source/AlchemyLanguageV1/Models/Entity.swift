@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -44,21 +44,21 @@ public struct Entity: JSONDecodable {
     public let type: String?
     
     /// Used internally to initialize an Entity object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         if let countString = try? json.getString(at: "count") {
             count = Int(countString)
         } else {
             count = nil
         }
-        disambiguated = try? json.decode(at: "disambiguated", type: DisambiguatedLinks.self)
-        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
-        quotations = try? json.decodedArray(at: "quotations", type: Quotation.self)
+        disambiguated = try? json.object(at: "disambiguated")
+        knowledgeGraph = try? json.object(at: "knowledgeGraph")
+        quotations = try? json.objects(at: "quotations")
         if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        sentiment = try? json.object(at: "sentiment")
         text = try? json.getString(at: "text")
         type = try? json.getString(at: "type")
     }

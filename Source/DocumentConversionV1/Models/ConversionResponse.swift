@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -42,12 +42,12 @@ public struct ConversationResponse: JSONDecodable {
     public let answerUnits: [AnswerUnits]?
     
     /** used inernally to initialize ConversationResponse objects */
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         sourceDocId = try? json.getString(at: "source_document_id")
         timestamp = try? json.getString(at: "timestamp")
         detectedMediaType = try? json.getString(at: "media_type_detected")
-        metadata = try? json.decodedArray(at: "metadata", type: ConversionMetadata.self)
-        answerUnits = try? json.decodedArray(at: "answer_units", type: AnswerUnits.self)
+        metadata = try? json.objects(at: "metadata")
+        answerUnits = try? json.objects(at: "answer_units")
     }
     
 }

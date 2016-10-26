@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -106,7 +106,7 @@ public struct DisambiguatedLinks: JSONDecodable {
     public let yago: String?
     
     /// Used internally to initialize a DisambiguatedLinks object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         census = try? json.getString(at: "census")
@@ -119,7 +119,7 @@ public struct DisambiguatedLinks: JSONDecodable {
         musicBrainz = try? json.getString(at: "musicBrainz")
         name = try? json.getString(at: "name")
         opencyc = try? json.getString(at: "opencyc")
-        subType = try? json.decodedArray(at: "subType", type: Swift.String)
+        subType = try? json.getStringArray(at: "subType")
         umbel = try? json.getString(at: "umbel")
         website = try? json.getString(at: "website")
         yago = try? json.getString(at: "yago")

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An input object that includes the input text. */
 public struct InputData: JSONEncodable, JSONDecodable {
@@ -33,7 +33,7 @@ public struct InputData: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `InputData` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         text = try? json.getString(at: "text")
     }
     

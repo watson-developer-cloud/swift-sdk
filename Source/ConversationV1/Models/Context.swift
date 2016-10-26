@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The context, or state, associated with a message. */
 public struct Context: JSONEncodable, JSONDecodable {
@@ -40,7 +40,7 @@ public struct Context: JSONEncodable, JSONDecodable {
     /// Used internally to initialize a `Context` model from JSON.
     public init(json: [String: Any]) throws {
         conversationID = try? json.getString(at: "conversation_id")
-        system = try? json.decode(at: "system", type: SystemResponse.self)
+        system = try? json.object(at: "system")
     }
     
     /// Used internally to serialize a `Context` model to JSON.
@@ -86,7 +86,7 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     
     /// Used internally to initialize a `SystemResponse` model from JSON.
     public init(json: [String: Any]) throws {
-        dialogStack = try json.decodedArray(at: "dialog_stack", type: Swift.String)
+        dialogStack = try json.objects(at: "dialog_stack")
         dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
         dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
     }

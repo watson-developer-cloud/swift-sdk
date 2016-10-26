@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -31,7 +31,7 @@ public struct KnowledgeGraph: JSONDecodable {
     public let typeHierarchy: String?
     
     /// Used internally to initialize a KnowledgeGraph object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         typeHierarchy = try? json.getString(at: "typeHierarchy")
     }
 }

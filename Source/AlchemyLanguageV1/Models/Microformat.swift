@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -34,7 +34,7 @@ public struct Microformat: JSONDecodable {
     public let fieldName: String?
     
     /// Used internally to initialize a Microformat object
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         fieldData = try? json.getString(at: "fieldData")
         fieldName = try? json.getString(at: "fieldName")
     }

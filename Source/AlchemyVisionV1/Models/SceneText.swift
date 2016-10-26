@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The text of an image detected by the Alchemy Vision service. */
 public struct SceneText: JSONDecodable {
@@ -36,16 +36,16 @@ public struct SceneText: JSONDecodable {
     public let sceneTextLines: [SceneTextLine]
 
     /// Used internally to initialize a `SceneText` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: SceneText.self)
+            throw JSONError.valueNotConvertible(value: json, to: SceneText.self)
         }
         
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         sceneText = try json.getString(at: "sceneText")
-        sceneTextLines = try json.decodedArray(at: "sceneTextLines", type: SceneTextLine.self)
+        sceneTextLines = try json.objects(at: "sceneTextLines")
     }
 }
 
@@ -65,11 +65,11 @@ public struct SceneTextLine: JSONDecodable {
     public let words: [Word]
 
     /// Used internally to initialize a `SceneTextLine` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         confidence = try json.getDouble(at: "confidence")
-        region = try json.decode(at: "region")
+        region = try json.object(at: "region")
         text = try json.getString(at: "text")
-        words = try json.decodedArray(at: "words", type: Word.self)
+        words = try json.objects(at: "words")
     }
 }
 
@@ -89,7 +89,7 @@ public struct Region: JSONDecodable {
     public let y: Int
 
     /// Used internally to initialize a `Region` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         height = try json.getInt(at: "height")
         width = try json.getInt(at: "width")
         x = try json.getInt(at: "x")
@@ -110,9 +110,9 @@ public struct Word: JSONDecodable {
     public let text: String
 
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         confidence = try json.getDouble(at: "confidence")
-        region = try json.decode(at: "region")
+        region = try json.object(at: "region")
         text = try json.getString(at: "text")
     }
 }

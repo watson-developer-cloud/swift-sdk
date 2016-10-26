@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -30,8 +30,8 @@ public struct DocumentEnriched: JSONDecodable {
     public let url: DocumentUrl?
     
     /// used internally to define a DocumentEnriched object
-    public init(json: JSON) throws {
-        url = try? json.decode(at: "url", type: DocumentUrl.self)
+    public init(json: [String: Any]) throws {
+        url = try? json.object(at: "url")
     }
     
 }

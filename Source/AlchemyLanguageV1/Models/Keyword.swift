@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -40,14 +40,14 @@ public struct Keyword: JSONDecodable {
     public let text: String?
     
     /// Used internally to initialize a Keyword object
-    public init(json: JSON) throws {
-        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
+    public init(json: [String: Any]) throws {
+        knowledgeGraph = try? json.object(at: "knowledgeGraph")
         if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        sentiment = try? json.object(at: "sentiment")
         text = try? json.getString(at: "text")
     }
 }

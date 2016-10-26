@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -36,8 +35,7 @@ public class RelationshipExtraction {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
     
     /**
@@ -47,8 +45,7 @@ public class RelationshipExtraction {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -77,18 +74,17 @@ public class RelationshipExtraction {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/sire/0",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(path: ["doc"]) { (response: RestResponse<Document>) in
-                switch response.result {
-                case .success(let document): success(document)
-                case .failure(let error): failure?(error)
-                }
+        request.responseObject(path: ["doc"]) { (response: RestResponse<Document>) in
+            switch response.result {
+            case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 }

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 import Freddy
 import RestKit
 
@@ -46,6 +45,7 @@ public class SpeechToText {
     
     private let username: String
     private let password: String
+    private let credentials: Credentials
     private var microphoneSession: SpeechToTextSession?
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
@@ -58,6 +58,7 @@ public class SpeechToText {
     public init(username: String, password: String) {
         self.username = username
         self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -93,14 +94,13 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/models",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(path: ["models"]) { (response: RestResponse<[Model]>) in
+        request.responseArray(path: ["models"]) { (response: RestResponse<[Model]>) in
                 switch response.result {
                 case .success(let models): success(models)
                 case .failure(let error): failure?(error)
@@ -124,14 +124,13 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/models/" + modelID,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject() { (response: RestResponse<Model>) in
+        request.responseObject() { (response: RestResponse<Model>) in
                 switch response.result {
                 case .success(let model): success(model)
                 case .failure(let error): failure?(error)

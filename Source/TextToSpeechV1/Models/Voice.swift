@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A voice supported by the Text to Speech service. */
 public struct Voice: JSONDecodable {
@@ -44,13 +44,13 @@ public struct Voice: JSONDecodable {
     public let customization: Customization?
     
     /// Used internally to initialize a `Voice` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         name = try json.getString(at: "name")
         gender = try json.getString(at: "gender")
         language = try json.getString(at: "language")
         url = try json.getString(at: "url")
         description = try json.getString(at: "description")
         customizable = try json.getBool(at: "customizable")
-        customization = try? json.decode(at: "customization")
+        customization = try? json.object(at: "customization")
     }
 }

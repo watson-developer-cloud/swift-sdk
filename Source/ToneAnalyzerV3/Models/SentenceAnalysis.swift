@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The result of analyzing a sentence within a document. */
 public struct SentenceAnalysis: JSONDecodable {
@@ -38,11 +38,11 @@ public struct SentenceAnalysis: JSONDecodable {
     public let toneCategories: [ToneCategory]
     
     /// Used internally to initialize a `SentenceAnalysis` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         sentenceID = try json.getInt(at: "sentence_id")
         inputFrom = try json.getInt(at: "input_from")
         inputTo = try json.getInt(at: "input_to")
         text = try json.getString(at: "text")
-        toneCategories = try json.decodedArray(at: "tone_categories", type: ToneCategory.self)
+        toneCategories = try json.objects(at: "tone_categories")
     }
 }

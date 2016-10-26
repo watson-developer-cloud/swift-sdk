@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model used by the Text To Speech service, containing a word and its translation. */
 public struct Word: JSONEncodable, JSONDecodable {
@@ -33,13 +33,13 @@ public struct Word: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         word = try json.getString(at: "word")
         translation = try json.getString(at: "translation")
     }
     
     /// Used internally to serialize a `Word` model to JSON.
-    public func toJSON() -> JSON {
+    public func toJSON() -> [String: Any] {
         return .dictionary([
             "word": .string(word),
             "translation": .string(translation)])

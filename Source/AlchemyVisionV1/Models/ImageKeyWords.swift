@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A set of keywords for an image analyzed by the Alchemy Vision service. */
 public struct ImageKeywords: JSONDecodable {
@@ -33,15 +33,15 @@ public struct ImageKeywords: JSONDecodable {
     public let imageKeywords: [ImageKeyword]
 
     /// Used internally to initialize an `ImageKeywords` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: ImageKeywords.self)
+            throw JSONError.valueNotConvertible(value: json, to: ImageKeywords.self)
         }
         
         url = try json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
-        imageKeywords = try json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)
+        imageKeywords = try json.objects(at: "imageKeywords")
     }
 }
 
@@ -58,9 +58,9 @@ public struct ImageKeyword: JSONDecodable {
     public let knowledgeGraph: KnowledgeGraph?
 
     /// Used internally to initialize an `ImageKeyword` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         text = try json.getString(at: "text")
         score = try Double(json.getString(at: "score"))!
-        knowledgeGraph = try? json.decode(at: "knowledgeGraph")
+        knowledgeGraph = try? json.object(at: "knowledgeGraph")
     }
 }

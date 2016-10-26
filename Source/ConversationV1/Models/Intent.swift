@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A term from the request that was identified as an intent. */
 public struct Intent: JSONEncodable, JSONDecodable {
@@ -38,7 +38,7 @@ public struct Intent: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `Intent` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         intent = try? json.getString(at: "intent")
         confidence = try? json.getDouble(at: "confidence")
     }

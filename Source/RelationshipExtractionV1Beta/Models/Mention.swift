@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A Mention object contains annotations about a word or phrase that refers to an actual thing, or 
  entity, such as a person or location. */
@@ -70,7 +70,7 @@ public struct Mention: JSONDecodable {
     public let text: String
     
     /// Used internally to initialize a `Mention` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         mentionID = try json.getString(at: "mid")
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")

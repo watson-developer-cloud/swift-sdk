@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierDetails: JSONDecodable {
@@ -42,7 +42,7 @@ public struct ClassifierDetails: JSONDecodable {
     public let statusDescription: String
     
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         classifierId = try json.getString(at: "classifier_id")
         name = try? json.getString(at: "name")
         language = try json.getString(at: "language")

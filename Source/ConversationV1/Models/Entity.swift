@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A term from the request that was identified as an entity. */
 public struct Entity: JSONEncodable, JSONDecodable {
@@ -43,9 +43,9 @@ public struct Entity: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `Entity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         entity = try? json.getString(at: "entity")
-        location = try? json.decode(at: "location")
+        location = try? json.object(at: "location")
         value = try? json.getString(at: "value")
     }
     
@@ -90,8 +90,8 @@ public struct EntityLocation: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `EntityLocation` model from JSON.
-    public init(json: JSON) throws {
-        let indices = try json.decodedArray(type: Swift.Int)
+    public init(json: [String: Any]) throws {
+        let indices = try json.objects(type: Swift.Int)
         startIndex = indices[0]
         endIndex = indices[1]
     }

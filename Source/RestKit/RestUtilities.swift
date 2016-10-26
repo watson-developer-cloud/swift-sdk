@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 
 public extension Dictionary {
     

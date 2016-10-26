@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A custom voice model used by the Text to Speech service. */
 public struct CustomVoiceUpdate: JSONEncodable {
@@ -37,13 +37,13 @@ public struct CustomVoiceUpdate: JSONEncodable {
     }
     
     /// Used internally to serialize a `CustomVoiceUpdate` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSON() -> [String: Any] {
+        var json = [String: Any]()
         if let name = name {
-            json["name"] = .string(name)
+            json["name"] = name
         }
         if let description = description {
-            json["description"] = .string(description)
+            json["description"] = description
         }
         json["words"] = .array(words.map { word in word.toJSON() })
         

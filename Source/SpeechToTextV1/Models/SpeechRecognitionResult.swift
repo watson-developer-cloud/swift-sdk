@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 import RestKit
 
 /** A result from a Speech to Text recognition request. */
@@ -37,12 +37,12 @@ public struct SpeechRecognitionResult: JSONDecodable {
     public let wordAlternatives: [WordAlternativeResults]?
 
     /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: [String: Any]) throws {
         final = try json.getBool(at: "final")
-        alternatives = try json.decodedArray(at: "alternatives", type: SpeechRecognitionAlternative.self)
+        alternatives = try json.objects(at: "alternatives")
         keywordResults = try? json.getDictionary(at: "keywords_result").map {
-            json in try json.decodedArray(type: KeywordResult.self)
+            json in try json.objects(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.decodedArray(at: "word_alternatives", type: WordAlternativeResults.self)
+        wordAlternatives = try? json.objects(at: "word_alternatives")
     }
 }

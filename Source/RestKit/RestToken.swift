@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
 
 /**
  A `RestToken` object retrieves, stores, and refreshes an authentication token. The token is
@@ -28,8 +27,7 @@ public class RestToken {
     public var retries = 0
     
     private var tokenURL: String
-    private var username: String
-    private var password: String
+    private var credentials: Credentials
     
     /**
      Create a `RestToken`.
@@ -40,8 +38,7 @@ public class RestToken {
      */
     public init(tokenURL: String, username: String, password: String) {
         self.tokenURL = tokenURL
-        self.username = username
-        self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -54,17 +51,21 @@ public class RestToken {
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
-        Alamofire.request(tokenURL)
-            .authenticate(user: username, password: password)
-            .validate()
-            .responseString { response in
-                switch response.result {
-                case .success(let token):
-                    self.token = token
-                    success?()
-                case .failure(let error):
-                    failure?(error)
-                }
+        let request = RestRequest(
+            method: "GET",
+            url: tokenURL,
+            credentials: credentials,
+            headerParameters: [:])
+        
+        // TODO - validate request
+        request.responseString { response in
+            switch response.result {
+            case .success(let token):
+                self.token = token
+                success?()
+            case .failure(let error):
+                failure?(error)
             }
+        }
     }
 }

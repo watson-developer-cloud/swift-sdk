@@ -57,12 +57,12 @@ public class ToneAnalyzer {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let code = try json.int("code")
-            let error = try json.string("error")
-            let help = try? json.string("help")
+            let code = try json.getInt(at: "code")
+            let error = try json.getString(at: "error")
+            let help = try? json.getString(at: "help")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: "\(help)"

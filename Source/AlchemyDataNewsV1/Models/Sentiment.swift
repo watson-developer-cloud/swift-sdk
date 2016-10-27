@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -38,7 +38,7 @@ public struct Sentiment: JSONDecodable {
     public let type: String?
     
     /// Used internally to initialize a Sentiment object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         if let mixString = try? json.getString(at: "mixed") {
             mixed = Int(mixString)
         } else {

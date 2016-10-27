@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -37,10 +37,10 @@ public struct DocumentText: JSONDecodable {
     public let text: String?
     
     /// Used internally to initialize a DocumentText object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: DocumentText.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: DocumentText.self)
         }
         
         url = try? json.getString(at: "url")

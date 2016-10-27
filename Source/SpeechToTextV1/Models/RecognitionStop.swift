@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** Signals the end of an audio transmission to Speech to Text. */
 internal struct RecognitionStop: JSONEncodable {
@@ -24,7 +24,7 @@ internal struct RecognitionStop: JSONEncodable {
     private let action = "stop"
 
     /** Serialize a `RecognitionStop` model to JSON. */
-    internal func toJSON() -> [String: Any] {
+    internal func toJSON() -> JSON {
         return .dictionary(["action": .string(action)])
     }
 }

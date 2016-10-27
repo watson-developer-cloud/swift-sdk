@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** The state of the Speech to Text service. */
 internal struct RecognitionState: JSONDecodable {
@@ -24,7 +24,7 @@ internal struct RecognitionState: JSONDecodable {
     internal let state: String
 
     /// Used internally to initialize a `RecognitionState` model from JSON.
-    internal init(json: [String: Any]) throws {
+    internal init(json: JSON) throws {
         state = try json.getString(at: "state")
     }
 }

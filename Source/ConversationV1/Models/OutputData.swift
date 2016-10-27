@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
 public struct OutputData: JSONEncodable, JSONDecodable {
@@ -46,10 +46,10 @@ public struct OutputData: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `OutputData` model from JSON.
-    public init(json: [String: Any]) throws {
-        logMessages = try json.objects(at: "log_messages")
-        text = try json.getStringArray(at: "text")
-        nodesVisited = try json.getStringArray(at: "nodes_visited")
+    public init(json: JSON) throws {
+        logMessages = try json.decodedArray(at: "log_messages", type: LogMessageResponse.self)
+        text = try json.decodedArray(at: "text", type: Swift.String)
+        nodesVisited = try json.decodedArray(at: "nodes_visited", type: Swift.String)
     }
     
     /// Used internally to serialize an `OutputData` model to JSON.
@@ -83,7 +83,7 @@ public struct LogMessageResponse: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `LogMessageResponse` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         level = try? json.getString(at: "level")
         message = try? json.getString(at: "msg")
     }

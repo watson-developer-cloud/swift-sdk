@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -110,14 +110,14 @@ public struct Concept: JSONDecodable {
     public let crunchbase: String?
     
     /// Used internally to initialize a Concept object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         text = try? json.getString(at: "text")
         if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)
         } else {
             relevance = nil
         }
-        knowledgeGraph = try? json.object(at: "knowledgeGraph")
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
         website = try? json.getString(at: "website")
         geo = try? json.getString(at: "geo")
         dbpedia = try? json.getString(at: "dbpedia")

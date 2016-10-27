@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** The training status of a translation model. */
 public struct MonitorTraining: JSONDecodable {
@@ -27,7 +27,7 @@ public struct MonitorTraining: JSONDecodable {
     public let baseModelID: String
 
     /// Used internally to initialize a `MonitorTraining` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
             let type = type(of: TrainingStatus.available)
             throw JSON.Error.valueNotConvertible(value: json, to: type)

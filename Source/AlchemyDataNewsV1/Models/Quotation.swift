@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -31,7 +31,7 @@ public struct Quotation: JSONDecodable {
     public let quotation: String?
     
     /// Used internally to initialize a Quotation object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         quotation = try? json.getString(at: "quotation")
     }
 }

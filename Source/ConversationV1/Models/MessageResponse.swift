@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** A response from the Conversation service. */
 public struct MessageResponse: JSONDecodable {
@@ -39,11 +39,11 @@ public struct MessageResponse: JSONDecodable {
     public let output: OutputData
     
     /// Used internally to initialize a `MessageResponse` model from JSON.
-    public init(json: [String: Any]) throws {
-        input = try json.object(at: "input")
-        context = try json.object(at: "context")
-        entities = try json.objects(at: "entities")
-        intents = try json.objects(at: "intents",  type: Intent.self)
-        output = try json.object(at: "output")
+    public init(json: JSON) throws {
+        input = try json.decode(at: "input")
+        context = try json.decode(at: "context")
+        entities = try json.decodedArray(at: "entities", type: Entity.self)
+        intents = try json.decodedArray(at: "intents",  type: Intent.self)
+        output = try json.decode(at: "output")
     }
 }

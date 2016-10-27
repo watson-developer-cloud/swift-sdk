@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** Contains the analysis of an input sentence. Produced by the Relationship Extraction service. */
 public struct Sentence: JSONDecodable {
@@ -49,7 +49,7 @@ public struct Sentence: JSONDecodable {
     public let tokens: [Token]
     
     /// Used internally to initialize a `Sentence` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         sentenceID = try json.getInt(at: "sid")
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")
@@ -57,7 +57,7 @@ public struct Sentence: JSONDecodable {
         parse = try json.getString(at: "parse", "text")
         dependencyParse = try json.getString(at: "dependency_parse")
         usdDependencyParse = try json.getString(at: "usd_dependency_parse")
-        tokens = try json.objects(at: "tokens", "token")
+        tokens = try json.decodedArray(at: "tokens", "token", type: Token.self)
     }
 }
 
@@ -78,7 +78,7 @@ public struct Token: JSONDecodable {
     public let tokenID: Int
     
     /// Used internally to initialize a `Token` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")
         text = try json.getString(at: "text")

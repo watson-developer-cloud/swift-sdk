@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** A transcription alternative produced by Speech to Text. */
 public struct SpeechRecognitionAlternative: JSONDecodable {
@@ -35,10 +35,10 @@ public struct SpeechRecognitionAlternative: JSONDecodable {
     public let wordConfidence: [WordConfidence]?
 
     /// Used internally to initialize a `SpeechRecognitionAlternative` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         transcript = try json.getString(at: "transcript")
         confidence = try? json.getDouble(at: "confidence")
-        timestamps = try? json.objects(at: "timestamps")
-        wordConfidence = try? json.objects(at: "word_confidence")
+        timestamps = try? json.decodedArray(at: "timestamps", type: WordTimestamp.self)
+        wordConfidence = try? json.decodedArray(at: "word_confidence", type: WordConfidence.self)
     }
 }

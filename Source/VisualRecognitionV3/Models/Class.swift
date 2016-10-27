@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** A class associated with a Visual Recognition classifier. */
 public struct Class: JSONDecodable {
@@ -40,8 +40,8 @@ public struct Class: JSONDecodable {
     }
     
     /// Used internally to initialize a `Class` model from JSON.
-    public init(json: [String: Any]) throws {
-        name = try json.object(at: "class")
+    public init(json: JSON) throws {
+        name = try json.decode(at: "class")
         examples = nil
     }
 }

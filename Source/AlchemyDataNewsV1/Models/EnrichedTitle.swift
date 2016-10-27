@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -45,13 +45,13 @@ public struct EnrichedTitle: JSONDecodable {
     public let concepts: [Concept]?
     
     /// used internally to initialize an EnrichedTitle object
-    public init(json: [String: Any]) throws {
-        entities = try? json.objects(at: "entities")
-        relations = try? json.objects(at: "relations")
-        taxonomy = try? json.objects(at: "taxonomy")
-        sentiment = try? json.objects(at: "sentiment")
-        keywords = try? json.objects(at: "keywords")
-        concepts = try? json.objects(at: "concept")
+    public init(json: JSON) throws {
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
+        taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
+        sentiment = try? json.decodedArray(at: "sentiment", type: Sentiment.self)
+        keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        concepts = try? json.decodedArray(at: "concept", type: Concept.self)
     }
     
 }

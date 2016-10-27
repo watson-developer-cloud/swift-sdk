@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** A model supported by the Speech to Text service. */
 public struct Model: JSONDecodable {
@@ -37,7 +37,7 @@ public struct Model: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize a `Model` from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
         rate = try json.getInt(at: "rate")
         language = try json.getString(at: "language")

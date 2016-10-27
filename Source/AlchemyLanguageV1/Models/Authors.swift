@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -30,7 +30,7 @@ public struct Authors: JSONDecodable {
     public let names: [String]
     
     /// Used internally to initialize a Authors object
-    public init(json: [String: Any]) throws {
-        names = try json.getStringArray(at: "names")
+    public init(json: JSON) throws {
+        names = try json.decodedArray(at: "names", type: Swift.String)
     }
 }

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -34,14 +34,14 @@ public struct DocumentAuthors: JSONDecodable {
     public let authors: Authors
     
     /// Used internally to initialize a DocumentAuthors object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: DocumentAuthors.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: DocumentAuthors.self)
         }
         
         url = try json.getString(at: "url")
-        authors = try json.object(at: "authors")
+        authors = try json.decode(at: "authors", type: Authors.self)
     }
 }
 

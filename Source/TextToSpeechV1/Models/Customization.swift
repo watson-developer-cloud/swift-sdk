@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
     
 /** A custom voice model supported by the Text to Speech service. */
 public struct Customization: JSONDecodable {
@@ -45,7 +45,7 @@ public struct Customization: JSONDecodable {
     public let description: String?
     
     /// Used internally to initialize a `Customization` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         customizationID = try json.getString(at: "customization_id")
         name = try json.getString(at: "name")
         language = try json.getString(at: "language")

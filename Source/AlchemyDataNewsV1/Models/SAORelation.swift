@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -40,11 +40,11 @@ public struct SAORelation: JSONDecodable {
     public let object: RelationObject?
     
     /// Used internally to initialize a SAORelation object
-    public init(json: [String: Any]) throws {
-        action = try? json.object(at: "action")
+    public init(json: JSON) throws {
+        action = try? json.decode(at: "action", type: Action.self)
         sentence = try? json.getString(at: "sentence")
-        subject = try? json.object(at: "subject")
-        object = try? json.object(at: "object")
+        subject = try? json.decode(at: "subject", type: Subject.self)
+        object = try? json.decode(at: "object", type: RelationObject.self)
     }
     
 }
@@ -64,10 +64,10 @@ public struct Action: JSONDecodable {
     public let verb: Verb?
     
     /// Used internally to initialize an Action object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         text = try? json.getString(at: "text")
         lemmatized = try? json.getString(at: "lemmatized")
-        verb = try? json.object(at: "verb")
+        verb = try? json.decode(at: "verb", type: Verb.self)
     }
     
     /**
@@ -85,7 +85,7 @@ public struct Action: JSONDecodable {
         public let negated: Int?
         
         /// Used internally to initalize a Verb object
-        public init(json: [String: Any]) throws {
+        public init(json: JSON) throws {
             text = try? json.getString(at: "text")
             tense = try? json.getString(at: "tense")
             if let negatedString = try? json.getString(at: "negated") {
@@ -112,10 +112,10 @@ public struct Subject: JSONDecodable {
     public let entity: Entity?
     
     /// Used internally to initialize a Subject object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         text = try? json.getString(at: "text")
-        sentiment = try? json.object(at: "sentiment")
-        entity = try? json.object(at: "entity")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        entity = try? json.decode(at: "entity", type: Entity.self)
     }
 }
 
@@ -137,11 +137,11 @@ public struct RelationObject: JSONDecodable {
     public let entity: Entity?
     
     /// Used internally to initialize a RelationObject object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         text = try? json.getString(at: "text")
-        sentiment = try? json.object(at: "sentiment")
-        sentimentFromSubject = try? json.object(at: "sentimentFromSubject")
-        entity = try? json.object(at: "entity")
+        sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
+        sentimentFromSubject = try? json.decode(at: "sentimentFromSubject", type: Sentiment.self)
+        entity = try? json.decode(at: "entity", type: Entity.self)
     }
 }
 

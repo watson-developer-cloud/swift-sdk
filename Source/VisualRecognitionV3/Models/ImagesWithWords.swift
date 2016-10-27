@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** The results from recognizing text in one or more images. */
 public struct ImagesWithWords: JSONDecodable {
@@ -30,10 +30,10 @@ public struct ImagesWithWords: JSONDecodable {
     public let warnings: [WarningInfo]?
     
     /// Used internally to initialize an `ImagesWithWords` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         imagesProcessed = try json.getInt(at: "images_processed")
-        images = try json.objects(at: "images")
-        warnings = try? json.objects(at: "warnings")
+        images = try json.decodedArray(at: "images", type: ImageWithWords.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
@@ -59,13 +59,13 @@ public struct ImageWithWords: JSONDecodable {
     public let words: [Word]
     
     /// Used internally to initialize an `ImageWithWords` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         sourceURL = try? json.getString(at: "source_url")
         resolvedURL = try? json.getString(at: "resolved_url")
         image = try? json.getString(at: "image")
-        error = try? json.object(at: "error")
+        error = try? json.decode(at: "error")
         text = try json.getString(at: "text")
-        words = try json.objects(at: "words")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }
 
@@ -85,9 +85,9 @@ public struct Word: JSONDecodable {
     public let lineNumber: Int
     
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         word = try json.getString(at: "word")
-        location = try json.object(at: "location")
+        location = try json.decode(at: "location")
         score = try json.getDouble(at: "score")
         lineNumber = try json.getInt(at: "line_number")
     }
@@ -109,7 +109,7 @@ public struct WordLocation: JSONDecodable {
     public let top: Int
     
     /// Used internally to initialize a `WordLocation` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         width = try json.getInt(at: "width")
         height = try json.getInt(at: "height")
         left = try json.getInt(at: "left")

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -76,23 +76,23 @@ public struct DocumentUrl: JSONDecodable {
     public let text: String?
     
     /// used internally to initialize a DocumentUrl object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         title = try? json.getString(at: "title")
         url = try? json.getString(at: "url")
         author = try? json.getString(at: "author")
-        entities = try? json.objects(at: "entities")
-        relations = try? json.objects(at: "relations")
-        taxonomy = try? json.objects(at: "taxonomy")
-        sentiment = try? json.objects(at: "sentiment")
-        keywords = try? json.objects(at: "keywords")
-        concepts = try? json.objects(at: "concept")
-        enrichedTitle = try? json.object(at: "enrichedTitle")
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
+        taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
+        sentiment = try? json.decodedArray(at: "sentiment", type: Sentiment.self)
+        keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        concepts = try? json.decodedArray(at: "concept", type: Concept.self)
+        enrichedTitle = try? json.decode(at: "enrichedTitle", type: EnrichedTitle.self)
         
         image = try? json.getString(at: "image")
-        imageKeywords = try? json.objects(at: "imageKeywords")
-        feeds = try? json.objects(at: "feeds")
+        imageKeywords = try? json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)
+        feeds = try? json.decodedArray(at: "feeds", type: Feed.self)
         cleanedTitle = try? json.getString(at: "cleanedTitle")
-        publicationDate = try? json.object(at: "publicationDate")
+        publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
         text = try? json.getString(at: "text")
     }
     

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
     
 /** A dialog profile. */
 public struct Profile: JSONEncodable, JSONDecodable {
@@ -40,14 +40,14 @@ public struct Profile: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `Profile` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         clientID = try? json.getInt(at: "client_id")
-        parameters = try json.objects(at: "name_values")
+        parameters = try json.decodedArray(at: "name_values", type: Parameter.self)
     }
 
     /// Used internally to serialize a `Profile` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
         if let clientID = clientID { json["client_id"] = .int(clientID) }
         json["parameters"] = .array(parameters.map { parameter in parameter.toJSON() })
         return .dictionary(json)
@@ -75,16 +75,16 @@ public struct Parameter: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `Parameter` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
         value = try json.getString(at: "value")
     }
 
     /// Used internally to serialize a `Parameter` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
-        json["name"] = name
-        json["value"] = value
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["name"] = .string(name)
+        json["value"] = .string(value)
         return .dictionary(json)
     }
 }

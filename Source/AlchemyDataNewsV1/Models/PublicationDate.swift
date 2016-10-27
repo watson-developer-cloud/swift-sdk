@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /**
  
@@ -34,7 +34,7 @@ public struct PublicationDate: JSONDecodable {
     public let date: String?
     
     /// Used internally to initialize a PublicanDate object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         confident = try? json.getString(at: "confident")
         date = try? json.getString(at: "date")
     }

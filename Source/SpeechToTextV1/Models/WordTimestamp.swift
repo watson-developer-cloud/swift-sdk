@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import Freddy
 
 /** The timestamp of a word in a Speech to Text transcription. */
 public struct WordTimestamp: JSONDecodable {
@@ -30,7 +30,7 @@ public struct WordTimestamp: JSONDecodable {
     public let endTime: Double
 
     /// Used internally to initialize a `WordTimestamp` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let array = try json.getArray()
         word = try array[Index.word.rawValue].getString()
         startTime = try array[Index.startTime.rawValue].getDouble()

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A class associated with a Visual Recognition classifier. */
 public struct Class: JSONDecodable {

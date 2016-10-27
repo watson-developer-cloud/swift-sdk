@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A language that can be identified by the Language Translator service. */
 public struct IdentifiableLanguage: JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog conversation. */
 public struct Conversation: JSONDecodable {

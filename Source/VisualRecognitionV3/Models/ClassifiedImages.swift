@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The results from classifying one or more images. */
 public struct ClassifiedImages: JSONDecodable {

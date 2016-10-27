@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The results from recognizing text in one or more images. */
 public struct ImagesWithWords: JSONDecodable {

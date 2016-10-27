@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An entity object contains information about a specific entity in the input text. An entity is a 
  person, location, or event that is referred to by one or more mentions. */

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The text of an image detected by the Alchemy Vision service. */
 public struct SceneText: JSONDecodable {

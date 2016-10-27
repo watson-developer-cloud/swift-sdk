@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A pronunciation of text based on the voice and phoneme. */
 public struct Pronunciation: JSONDecodable {

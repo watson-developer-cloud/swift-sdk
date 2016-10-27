@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  Emotions and their prevalence extracted from a document

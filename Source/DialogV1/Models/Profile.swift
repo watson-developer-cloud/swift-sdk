@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog profile. */
 public struct Profile: JSONEncodable, JSONDecodable {

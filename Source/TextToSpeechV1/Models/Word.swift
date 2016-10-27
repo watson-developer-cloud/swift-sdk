@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model used by the Text To Speech service, containing a word and its translation. */
 public struct Word: JSONEncodable, JSONDecodable {

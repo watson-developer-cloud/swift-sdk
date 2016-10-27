@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Information about a warning that occurred. */
 public struct WarningInfo: JSONDecodable {

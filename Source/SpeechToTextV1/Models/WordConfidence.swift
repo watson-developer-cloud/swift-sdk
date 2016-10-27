@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The confidence of a word in a Speech to Text transcription. */
 public struct WordConfidence: JSONDecodable {

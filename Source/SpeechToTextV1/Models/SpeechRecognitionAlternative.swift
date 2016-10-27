@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A transcription alternative produced by Speech to Text. */
 public struct SpeechRecognitionAlternative: JSONDecodable {

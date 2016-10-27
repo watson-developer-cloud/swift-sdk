@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The response received when searching a specific query within the Solr cluster and collection. */
 public struct SearchResponse: JSONDecodable {

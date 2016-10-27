@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /// A resolution to a decision problem.
 public struct Resolution: JSONDecodable {

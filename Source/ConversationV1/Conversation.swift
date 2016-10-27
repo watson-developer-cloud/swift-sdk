@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /// A Workspace is a container for all the artifacts that define the behavior of your service.

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model supported by the Speech to Text service. */
 public struct Model: JSONDecodable {

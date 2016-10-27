@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Alternative word hypotheses from Speech to Text for a word in the audio input. */
 public struct WordAlternativeResult: JSONDecodable {

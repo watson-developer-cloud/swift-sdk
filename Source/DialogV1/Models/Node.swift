@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A term from the request that was identified as an entity. */
 public struct Entity: JSONEncodable, JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A dialog associated with a particular service instance. */
 public struct DialogModel: JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The primary image link detected on a webpage by the Alchemy Vision service. */
 public struct ImageLink: JSONDecodable {

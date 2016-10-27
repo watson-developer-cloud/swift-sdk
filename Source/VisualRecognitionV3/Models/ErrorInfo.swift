@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Information about an error that occurred. */
 public struct ErrorInfo: JSONDecodable {

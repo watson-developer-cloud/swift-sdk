@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
 public struct OutputData: JSONEncodable, JSONDecodable {

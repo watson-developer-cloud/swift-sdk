@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A Mention object contains annotations about a word or phrase that refers to an actual thing, or 
  entity, such as a person or location. */

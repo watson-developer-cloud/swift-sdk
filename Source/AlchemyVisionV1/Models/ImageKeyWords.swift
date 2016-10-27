@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A set of keywords for an image analyzed by the Alchemy Vision service. */
 public struct ImageKeywords: JSONDecodable {

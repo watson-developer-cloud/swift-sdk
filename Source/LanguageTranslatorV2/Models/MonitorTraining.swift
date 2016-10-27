@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The training status of a translation model. */
 public struct MonitorTraining: JSONDecodable {

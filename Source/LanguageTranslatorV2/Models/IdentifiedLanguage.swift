@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An identified language. */
 public struct IdentifiedLanguage: JSONDecodable {

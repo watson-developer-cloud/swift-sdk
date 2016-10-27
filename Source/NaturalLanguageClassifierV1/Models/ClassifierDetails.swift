@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierDetails: JSONDecodable {

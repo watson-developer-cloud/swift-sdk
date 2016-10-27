@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Describes the relationships that exist between entities in the text. */
 public struct Relations: JSONDecodable {

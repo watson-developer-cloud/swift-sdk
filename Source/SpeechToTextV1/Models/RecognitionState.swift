@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The state of the Speech to Text service. */
 internal struct RecognitionState: JSONDecodable {

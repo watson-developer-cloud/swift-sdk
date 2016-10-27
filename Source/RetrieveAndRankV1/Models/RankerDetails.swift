@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model containing information about a specific ranker. */
 public struct RankerDetails: JSONDecodable {

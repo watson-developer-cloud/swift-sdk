@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An input object that includes the input text. */
 public struct InputData: JSONEncodable, JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
 internal struct SpeechRecognitionEvent: JSONDecodable {

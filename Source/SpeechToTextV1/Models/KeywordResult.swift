@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A keyword identified by Speech to Text. */
 public struct KeywordResult: JSONDecodable {

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A request formatted for the Conversation service. */
 internal struct MessageRequest: JSONEncodable {

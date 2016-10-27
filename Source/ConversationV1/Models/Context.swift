@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The context, or state, associated with a message. */
 public struct Context: JSONEncodable, JSONDecodable {

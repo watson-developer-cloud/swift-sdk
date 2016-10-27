@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {

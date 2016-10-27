@@ -32,6 +32,24 @@ class NaturalLanguageClassifierTests: XCTestCase {
         instantiateNaturalLanguageClassifier()
     }
     
+    static var allTests : [(String, (NaturalLanguageClassifierTests) -> throws Void)] {
+        return [
+            ("instantiateNaturalLanguageClassifier", instantiateNaturalLanguageClassifier),
+            ("getAllClassifiers", getAllClassifiers),
+            ("createTrainedClassifier", createTrainedClassifier),
+            ("testCreateAndDelete", testCreateAndDelete),
+            ("testCreateAndDeleteClassifierWithoutOptionalName", testCreateAndDeleteClassifierWithoutOptionalName),
+            ("testGetAllClassifiers", testGetAllClassifiers),
+            ("testGetClassifier", testGetClassifier),
+            ("testClassify", testClassify),
+            ("testCreateClassifierWithMissingMetadata", testCreateClassifierWithMissingMetadata),
+            ("testClassifyEmptyString", testClassifyEmptyString),
+            ("testClassifyWithInvalidClassifier", testClassifyWithInvalidClassifier),
+            ("testDeleteInvalidClassifier", testDeleteInvalidClassifier),
+            ("testDeleteInvalidClassifier", testDeleteInvalidClassifier)
+        ]
+    }
+    
     /** Instantiate Natural Langauge Classifier instance. */
     func instantiateNaturalLanguageClassifier() {
         let username = Credentials.NaturalLanguageClassifierUsername

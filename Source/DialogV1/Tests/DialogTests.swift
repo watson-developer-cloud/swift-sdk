@@ -33,6 +33,49 @@ class DialogTests: XCTestCase {
         continueAfterFailure = false
         instantiateDialog()
         lookupDialog()
+    }static var allTests : [(String, (DialogTests) -> throws Void)] {
+        return [
+            ("instantiateDialog", instantiateDialog),
+            ("lookupDialog", lookupDialog),
+            ("createDialog", createDialog),
+            ("createDialogName", createDialogName),
+            ("testGetDialogs", testGetDialogs),
+            ("testCreateDelete", testCreateDelete),
+            ("testGetDialogFile", testGetDialogFile),
+            ("testGetDialogFileOctetStream", testGetDialogFileOctetStream),
+            ("testGetDialogFileJSON", testGetDialogFileJSON),
+            ("testGetDialogFileXML", testGetDialogFileXML),
+            ("testUpdateDialog", testUpdateDialog),
+            ("testGetContent", testGetContent),
+            ("testUpdateContent", testUpdateContent),
+            ("testGetConversationHistory", testGetConversationHistory),
+            ("testGetConversationHistoryWithOffset", testGetConversationHistoryWithOffset),
+            ("testGetConversationHistoryWithLimit", testGetConversationHistoryWithLimit),
+            ("testConverse", testConverse),
+            ("testGetProfile", testGetProfile),
+            ("testUpdateNewProfile", testUpdateNewProfile),
+            ("testUpdateExistingProfile", testUpdateExistingProfile),
+            ("testCreateDialogWithInvalidFile", testCreateDialogWithInvalidFile),
+            ("testCreateDialogWithConflictingName", testCreateDialogWithConflictingName),
+            ("testCreateDialogWithLongName", testCreateDialogWithLongName),
+            ("testCreateDialogWithNonexistentFile", testCreateDialogWithNonexistentFile),
+            ("testDeleteInvalidDialogID", testDeleteInvalidDialogID),
+            ("testGetDialogFileForInvalidDialogID", testGetDialogFileForInvalidDialogID),
+            ("testUpdateDialogWithInvalidFile", testUpdateDialogWithInvalidFile),
+            ("testUpdateDialogWithNonexistentFile", testUpdateDialogWithNonexistentFile),
+            ("testUpdateDialogForInvalidDialogID", testUpdateDialogForInvalidDialogID),
+            ("testGetContentForInvalidDialogID", testGetContentForInvalidDialogID),
+            ("testUpdateContentInvalid", testUpdateContentInvalid),
+            ("testUpdateContentForInvalidDialogID", testUpdateContentForInvalidDialogID),
+            ("testGetConversationHistoryForInvalidDialogID", testGetConversationHistoryForInvalidDialogID),
+            ("testConverseWithInvalidDialogID", testConverseWithInvalidDialogID),
+            ("testConverseWithInvalidIDs", testConverseWithInvalidIDs),
+            ("testGetProfileWithInvalidDialogID", testGetProfileWithInvalidDialogID),
+            ("testGetProfileWithInvalidClientID", testGetProfileWithInvalidClientID),
+            ("testGetProfileWithInvalidParameterNames", testGetProfileWithInvalidParameterNames),
+            ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID),
+            ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID)
+        ]
     }
 
     /** Instantiate Dialog. */

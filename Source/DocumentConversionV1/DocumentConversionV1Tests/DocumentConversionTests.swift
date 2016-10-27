@@ -35,6 +35,19 @@ class DocumentConversionTests: XCTestCase {
         loadResources()
     }
     
+    static var allTests : [(String, (DocumentConversionTests) -> throws Void)] {
+        return [
+            ("instantiateDocumentConversion", instantiateDocumentConversion),
+            ("loadResources", loadResources),
+            ("testConvertToText", testConvertToText),
+            ("testConvertToHtml", testConvertToHtml),
+            ("testConvertToTextCreateConfig", testConvertToTextCreateConfig),
+            ("testConvertToAnswerUnits", testConvertToAnswerUnits),
+            ("testInvalidVersion", testInvalidVersion),
+            ("testInvalidVersion", testInvalidVersion)
+        ]
+    }
+    
     func instantiateDocumentConversion() {
         let username = Credentials.DocumentConversionUsername
         let password = Credentials.DocumentConversionPassword

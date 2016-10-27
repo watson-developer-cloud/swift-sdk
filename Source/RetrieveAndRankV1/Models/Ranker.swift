@@ -33,7 +33,7 @@ public struct Ranker: JSONDecodable {
     public let created: String
     
     /// Used internally to initialize a `Ranker` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         rankerID = try json.getString(at: "ranker_id")
         url = try json.getString(at: "url")
         name = try json.getString(at: "name")

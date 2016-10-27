@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /// A Workspace is a container for all the artifacts that define the behavior of your service.
@@ -49,6 +48,24 @@ public class Conversation {
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
         self.version = version
+    }
+    
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.getString(at: "error")
+            let code = (try? json.getInt(at: "code")) ?? 400
+            let userInfo = [NSLocalizedFailureReasonErrorKey: error]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
     }
     
     /**
@@ -130,7 +147,8 @@ public class Conversation {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<MessageResponse>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<MessageResponse>) in
             switch response.result {
             case .success(let response): success(response)
             case .failure(let error): failure?(error)

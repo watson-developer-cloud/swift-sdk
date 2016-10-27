@@ -41,10 +41,10 @@ public struct PublicationResponse: JSONDecodable {
     public let publicationDate: PublicationDate?
     
     /// Used internally to initialize a PublicationResponse object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: PublicationResponse.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: PublicationResponse.self)
         }
         
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
@@ -54,6 +54,6 @@ public struct PublicationResponse: JSONDecodable {
         }
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
-        publicationDate = try? json.object(at: "publicationDate")
+        publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
     }
 }

@@ -86,17 +86,17 @@ public struct ContentItem: JSONEncodable {
     }
 
     /// Used internally to serialize a `ContentItem` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var map = [String: Any]()
-        map["content"] = content
-        if let id = id { map["id"] = id }
-        if let userID = userID { map["userid"] = userID }
-        if let sourceID = sourceID { map["sourceid"] = sourceID }
+    public func toJSON() -> JSON {
+        var map = [String: JSON]()
+        map["content"] = .string(content)
+        if let id = id { map["id"] = .string(id) }
+        if let userID = userID { map["userid"] = .string(userID) }
+        if let sourceID = sourceID { map["sourceid"] = .string(sourceID) }
         if let created = created { map["created"] = .int(created) }
         if let updated = updated { map["updated"] = .int(updated) }
-        if let contentType = contentType { map["contenttype"] = contentType }
-        if let language = language { map["language"] = language }
-        if let parentID = parentID { map["parentid"] = parentID }
+        if let contentType = contentType { map["contenttype"] = .string(contentType) }
+        if let language = language { map["language"] = .string(language) }
+        if let parentID = parentID { map["parentid"] = .string(parentID) }
         if let reply = reply { map["reply"] = .bool(reply) }
         if let forward = forward { map["forward"] = .bool(forward) }
         return .dictionary(map)

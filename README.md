@@ -134,6 +134,7 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_star
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
+* [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
 
 ## Xcode 8 Compatibility
 
@@ -735,14 +736,19 @@ import TextToSpeechV1
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
+var audioPlayer: AVAudioPlayer // see note below
 
 let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 textToSpeech.synthesize(text, failure: failure) { data in
-    let audioPlayer = try AVAudioPlayer(data: data)
+    audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
     audioPlayer.play()
 }
+
+// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing
+// if it falls out-of-scope. Therefore, it's important to declare it as a
+// property or otherwise keep it in-scope beyond the completion handler.
 ```
 
 The Text to Speech service supports a number of [voices](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
@@ -753,14 +759,19 @@ import TextToSpeechV1
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
+var audioPlayer: AVAudioPlayer // see note below
 
 let text = "your-text-here"
 let failure = { (error: NSError) in print(error) }
 textToSpeech.synthesize(text, voice: SynthesisVoice.GB_Kate, failure: failure) { data in
-    let audioPlayer = try AVAudioPlayer(data: data)
+    audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
     audioPlayer.play()
 }
+
+// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing
+// if it falls out-of-scope. Therefore, it's important to declare it as a
+// property or otherwise keep it in-scope beyond the completion handler.
 ```
 
 The following links provide more information about the IBM Text To Speech service:

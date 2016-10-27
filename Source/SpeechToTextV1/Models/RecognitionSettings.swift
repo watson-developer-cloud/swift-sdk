@@ -94,10 +94,10 @@ public struct RecognitionSettings: JSONEncodable {
     }
 
     /** Used internally to serialize a `RecognitionSettings` model to JSON. */
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
-        json["action"] = action
-        json["content-type"] = contentType.toString
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["action"] = .string(action)
+        json["content-type"] = .string(contentType.toString)
         if let continuous = continuous {
             json["continuous"] = .bool(continuous)
         }

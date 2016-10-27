@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -40,6 +39,21 @@ public class AlchemyDataNews {
      */
     public init(apiKey: String) {
         self.apiKey = apiKey
+    }
+    
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let status = try json.getString(at: "status")
+            let statusInfo = try json.getString(at: "statusInfo")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: status,
+                NSLocalizedDescriptionKey: statusInfo
+            ]
+            return NSError(domain: "AlchemyDataNews", code: 400, userInfo: userInfo)
+        } catch {
+            return nil
+        }
     }
     
     /**
@@ -92,7 +106,7 @@ public class AlchemyDataNews {
         )
         
         // execute rest request
-        request.responseObject() { (response: RestResponse<NewsResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<NewsResponse>) in
             switch response.result {
             case .success(let newsResponse): success(newsResponse)
             case .failure(let error): failure?(error)

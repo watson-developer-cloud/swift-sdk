@@ -47,6 +47,8 @@
 		12DBA9371D512D9100966E41 /* ranker_train_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9361D512D9100966E41 /* ranker_train_data.csv */; };
 		12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9381D52405E00966E41 /* ranker_test_data.csv */; };
 		12DEF7BD1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */; };
+		7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
+		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A517AC51D1C84E1004FD758 /* RelationshipExtractionV1Beta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -304,7 +306,6 @@
 		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AEBE4371DBEAA130089188C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
@@ -708,7 +709,6 @@
 		7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1Experimental.h; path = Source/SupportingFiles/ConversationV1Experimental.h; sourceTree = "<group>"; };
 		7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1Beta.h; path = Source/SupportingFiles/RelationshipExtractionV1Beta.h; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
-		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
 		7A6117551CB598D9009A4DA1 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7A6117561CB598D9009A4DA1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitTreeNode.swift; sourceTree = "<group>"; };
@@ -1469,7 +1469,6 @@
 			children = (
 				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
-				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
 				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
 				7AEBE4361DBEAA130089188C /* JSON.swift */,
 			);
@@ -3380,8 +3379,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
-				7AEBE4371DBEAA130089188C /* JSON.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,
+				7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */,
+				7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

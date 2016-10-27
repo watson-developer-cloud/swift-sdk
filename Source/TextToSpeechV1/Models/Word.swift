@@ -33,13 +33,13 @@ public struct Word: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         word = try json.getString(at: "word")
         translation = try json.getString(at: "translation")
     }
     
     /// Used internally to serialize a `Word` model to JSON.
-    public func toJSON() -> [String: Any] {
+    public func toJSON() -> JSON {
         return .dictionary([
             "word": .string(word),
             "translation": .string(translation)])

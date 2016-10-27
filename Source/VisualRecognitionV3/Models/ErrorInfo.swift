@@ -27,7 +27,7 @@ public struct ErrorInfo: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize an `ErrorInfo` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         errorID = try json.getString(at: "error_id")
         description = try json.getString(at: "description")
     }

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -89,7 +88,8 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseArray(path: ["classifiers"]) { (response: RestResponse<[ClassifierModel]>) in
+        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
+            (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
@@ -131,7 +131,8 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ClassifierDetails>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifierDetails>) in
             switch response.result {
             case .success(let classifierDetails): success(classifierDetails)
             case .failure(let error): failure?(error)
@@ -175,7 +176,8 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Classification>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
                 case .failure(let error): failure?(error)
@@ -240,7 +242,8 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ClassifierDetails>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)

@@ -39,12 +39,12 @@ public struct Document: JSONDecodable {
     public let relations: Relations
     
     /// Used internally to initialize a `Document` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         id = try json.getString(at: "id")
         text = try json.getString(at: "text")
-        sentences = try json.objects(at: "sents", "sent")
-        mentions = try json.objects(at: "mentions", "mention")
-        entities = try json.objects(at: "entities", "entity")
-        relations = try json.object(at: "relations")
+        sentences = try json.decodedArray(at: "sents", "sent", type: Sentence.self)
+        mentions = try json.decodedArray(at: "mentions", "mention", type: Mention.self)
+        entities = try json.decodedArray(at: "entities", "entity", type: Entity.self)
+        relations = try json.decode(at: "relations", type: Relations.self)
     }
 }

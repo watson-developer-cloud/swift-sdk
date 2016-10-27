@@ -25,7 +25,7 @@ public struct Emotions: JSONDecodable {
     public let sadness: Double?
     
     /// Used internally to initialize a Emotions object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         if let angerString = try? json.getString(at: "anger") {
             anger = Double(angerString)
         } else {

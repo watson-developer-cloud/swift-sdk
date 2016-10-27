@@ -38,16 +38,16 @@ public struct Node: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         content = try json.getString(at: "content")
         node = try json.getString(at: "node")
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
-        json["content"] = content
-        json["node"] = node
-        return json
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["content"] = .string(content)
+        json["node"] = .string(node)
+        return .dictionary(json)
     }
 }

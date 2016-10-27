@@ -47,7 +47,7 @@ public struct CustomizationWords: JSONDecodable {
     public let words: [Word]
     
     /// Used internally to initialize a `CustomizationWords` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         customizationID = try json.getString(at: "customization_id")
         name = try json.getString(at: "name")
         language = try json.getString(at: "language")
@@ -55,6 +55,6 @@ public struct CustomizationWords: JSONDecodable {
         created = try? json.getInt(at: "created")
         lastModified = try? json.getInt(at: "last_modified")
         description = try? json.getString(at: "description")
-        words = try json.objects(at: "words")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }

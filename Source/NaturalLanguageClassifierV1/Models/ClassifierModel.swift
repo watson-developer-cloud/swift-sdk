@@ -36,7 +36,7 @@ public struct ClassifierModel: JSONDecodable {
     public let created: String
     
     /// Used internally to initialize a `ClassifierModel` from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         classifierId = try json.getString(at: "classifier_id")
         url = try json.getString(at: "url")
         name = try? json.getString(at: "name")

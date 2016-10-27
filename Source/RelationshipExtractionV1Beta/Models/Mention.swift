@@ -70,7 +70,7 @@ public struct Mention: JSONDecodable {
     public let text: String
     
     /// Used internally to initialize a `Mention` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         mentionID = try json.getString(at: "mid")
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")

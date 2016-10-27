@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -46,6 +45,28 @@ public class ToneAnalyzer {
     public init(username: String, password: String, version: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
+    }
+    
+    /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.getInt(at: "code")
+            let error = try json.getString(at: "error")
+            let help = try? json.getString(at: "help")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: "\(help)"
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
     }
 
     /**
@@ -101,7 +122,8 @@ public class ToneAnalyzer {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ToneAnalysis>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ToneAnalysis>) in
             switch response.result {
             case .success(let toneAnalysis): success(toneAnalysis)
             case .failure(let error): failure?(error)

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /// A DialogID uniquely identifies a dialog application.
@@ -52,7 +51,7 @@ public class Dialog {
     public init(username: String, password: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Visual Recognition service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -93,7 +92,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(path: ["dialogs"]) { (response: RestResponse<[DialogModel]>) in
+        request.responseArray(dataToError: dataToError, path: ["dialogs"]) {
+            (response: RestResponse<[DialogModel]>) in
                 switch response.result {
                 case .success(let dialogs): success(dialogs)
                 case .failure(let error): failure?(error)
@@ -142,7 +142,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject(path: ["dialog_id"]) { (response: RestResponse<DialogID>) in
+        request.responseObject(dataToError: dataToError, path: ["dialog_id"]) {
+            (response: RestResponse<DialogID>) in
             switch response.result {
             case .success(let dialogID): success(dialogID)
             case .failure(let error): failure?(error)
@@ -352,7 +353,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(path: ["items"]) { (response: RestResponse<[Node]>) in
+        request.responseArray(dataToError: dataToError, path: ["items"]) {
+            (response: RestResponse<[Node]>) in
                 switch response.result {
                 case .success(let nodes): success(nodes)
                 case .failure(let error): failure?(error)
@@ -458,7 +460,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(path: ["conversations"]) { (response: RestResponse<[Conversation]>) in
+        request.responseArray(dataToError: dataToError, path: ["conversations"]) {
+            (response: RestResponse<[Conversation]>) in
                 switch response.result {
                 case .success(let conversations): success(conversations)
                 case .failure(let error): failure?(error)
@@ -510,7 +513,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject() { (response: RestResponse<ConversationResponse>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ConversationResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -557,7 +561,8 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject() { (response: RestResponse<Profile>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

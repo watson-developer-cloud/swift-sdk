@@ -48,18 +48,18 @@ public struct Problem: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Problem` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
         json["columns"] = .array(columns.map { column in column.toJSON() })
         json["options"] = .array(options.map { option in option.toJSON() })
-        json["subject"] = subject
+        json["subject"] = .string(subject)
         return .dictionary(json)
     }
     
     /// Used internally to initialize a `Problem` model from JSON.
-    public init(json: [String: Any]) throws {
-        columns = try json.objects(at: "columns")
-        options = try json.objects(at: "options")
+    public init(json: JSON) throws {
+        columns = try json.decodedArray(at: "columns", type: Column.self)
+        options = try json.decodedArray(at: "options", type: Option.self)
         subject = try json.getString(at: "subject")
     }
 }
@@ -210,9 +210,9 @@ public struct Column: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Column` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
-        json["key"] = key
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["key"] = .string(key)
         json["type"] = type?.toJSON()
         json["goal"] = goal?.toJSON()
         if let isObjective = isObjective {
@@ -232,19 +232,19 @@ public struct Column: JSONEncodable, JSONDecodable {
             json["insignificant_loss"] = .double(insignificantLoss)
         }
         if let format = format {
-            json["format"] = format
+            json["format"] = .string(format)
         }
         if let fullName = fullName {
-            json["full_name"] = fullName
+            json["full_name"] = .string(fullName)
         }
         if let description = description {
-            json["description"] = description
+            json["description"] = .string(description)
         }
         return .dictionary(json)
     }
     
     /// Used internally to initialize a `Column` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         key = try json.getString(at: "key")
         if let typeString = try? json.getString(at: "type") {
             type = ColumnType(rawValue: typeString)
@@ -257,8 +257,8 @@ public struct Column: JSONEncodable, JSONDecodable {
             goal = nil
         }
         isObjective = try? json.getBool(at: "is_objective")
-        range = try? json.object(at: "range")
-        preference = try? json.objects(at: "preference")
+        range = try? json.decode(at: "range")
+        preference = try? json.decodedArray(at: "preference", type: String.self)
         significantGain = try? json.getDouble(at: "significant_gain")
         significantLoss = try? json.getDouble(at: "significant_loss")
         insignificantLoss = try? json.getDouble(at: "insignificant_loss")
@@ -300,7 +300,7 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
     case string(Swift.String)
     
     /// Used internally to serialize an `OptionValue` model to JSON.
-    public func toJSON() -> [String: Any] {
+    public func toJSON() -> JSON {
         switch self {
         case .int(let x): return .int(x)
         case .double(let x): return .double(x)
@@ -310,7 +310,7 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `OptionValue` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         if let int = try? json.getInt() {
             self = .int(int)
         } else if let double = try? json.getDouble() {
@@ -318,9 +318,9 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
         } else if let dateString = try? json.getString(), let date = Range.dateFormatter.date(from: dateString) {
             self = .date(date)
         } else if let string = try? json.getString() {
-            self = string
+            self = .string(string)
         } else {
-            self = "Error: JSON could not be converted to `OptionValue`."
+            self = .string("Error: JSON could not be converted to `OptionValue`.")
             throw JSON.Error.valueNotConvertible(value: json, to: OptionValue.self)
         }
     }
@@ -359,12 +359,12 @@ public enum Range: JSONEncodable, JSONDecodable {
     }()
     
     /// Used internally to serialize a `Range` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
         switch self {
         case .dateRange(let low, let high):
-            json["low"] = Range.dateFormatter.string(from: low)
-            json["high"] = Range.dateFormatter.string(from: high)
+            json["low"] = .string(Range.dateFormatter.string(from: low))
+            json["high"] = .string(Range.dateFormatter.string(from: high))
             return .dictionary(json)
         case .numericRange(let low, let high):
             json["low"] = .double(low)
@@ -376,7 +376,7 @@ public enum Range: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Range` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         // try to parse as `Range.DateRange`
         if let low = try? json.getString(at: "low"), let high = try? json.getString(at: "high") {
             let lowDate = Range.dateFormatter.date(from: low)
@@ -394,7 +394,7 @@ public enum Range: JSONEncodable, JSONDecodable {
         }
         
         // try to parse as `Range.CategoricalRange`
-        if let categories = try? json.objects(type: String.self) {
+        if let categories = try? json.decodedArray(type: String.self) {
             self = .categoricalRange(categories: categories)
             return
         }
@@ -464,15 +464,15 @@ public struct Option: JSONEncodable, JSONDecodable {
     }
  
     /// Used internally to serialize an `Option` model to JSON.
-    public func toJSON() -> [String: Any] {
-        var json = [String: Any]()
-        json["key"] = key
+    public func toJSON() -> JSON {
+        var json = [String: JSON]()
+        json["key"] = .string(key)
         json["values"] = .dictionary(values.map { $0.toJSON() })
         if let name = name {
-            json["name"] = name
+            json["name"] = .string(name)
         }
         if let descriptionHTML = descriptionHTML {
-            json["description_html"] = descriptionHTML
+            json["description_html"] = .string(descriptionHTML)
         }
         if let appData = appData {
             json["app_data"] = appData
@@ -481,10 +481,10 @@ public struct Option: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize an `Option` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         key = try json.getString(at: "key")
         values = try json.getDictionary(at: "values").map {
-            json in try json.object()
+            json in try json.decode()
         }
         name = try? json.getString(at: "name")
         descriptionHTML = try? json.getString(at: "description_html")

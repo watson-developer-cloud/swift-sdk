@@ -26,10 +26,10 @@ internal class SpeechToTextRecorder {
     internal var onMicrophoneData: ((Data) -> Void)?                 // callback to handle pcm buffer
     internal var onPowerData: ((Float32) -> Void)?                   // callback for average dB power
     internal let session = AVAudioSession.sharedInstance()           // session for configuration / permission
-    private(set) internal var format = AudioStreamBasicDescription() // audio data format specification
+    internal var isRecording = false                                 // state of recording
+    internal private(set) var format = AudioStreamBasicDescription() // audio data format specification
     
     private var queue: AudioQueueRef? = nil                          // opaque reference to an audio queue
-    private var isRecording = false                                  // state of recording
     private var powerTimer: Timer?                                   // timer to invoke metering callback
     
     private let callback: AudioQueueInputCallback = {

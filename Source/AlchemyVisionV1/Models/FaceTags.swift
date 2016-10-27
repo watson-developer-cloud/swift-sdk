@@ -33,15 +33,15 @@ public struct FaceTags: JSONDecodable {
     public let imageFaces: [ImageFace]
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: FaceTags.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: FaceTags.self)
         }
         
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
-        imageFaces = try json.objects(at: "imageFaces")
+        imageFaces = try json.decodedArray(at: "imageFaces", type: ImageFace.self)
     }
 }
 
@@ -70,14 +70,14 @@ public struct ImageFace: JSONDecodable {
     public let identity: Identity?
 
     /// Used internally to initialize an `ImageFace` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         positionX = try Int(json.getString(at: "positionX"))!
         positionY = try Int(json.getString(at: "positionY"))!
         width = try Int(json.getString(at: "width"))!
         height = try Int(json.getString(at: "height"))!
-        gender = try json.object(at: "gender")
-        age = try json.object(at: "age")
-        identity = try? json.object(at: "identity")
+        gender = try json.decode(at: "gender")
+        age = try json.decode(at: "age")
+        identity = try? json.decode(at: "identity")
     }
 }
 
@@ -91,7 +91,7 @@ public struct Gender: JSONDecodable {
     public let score: Double
 
     /// Used internally to initialize a `Gender` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         gender = try json.getString(at: "gender")
         score = try Double(json.getString(at: "score"))!
     }
@@ -107,7 +107,7 @@ public struct Age: JSONDecodable {
     public let score: Double
 
     /// Used internally to initialize an `Age` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         ageRange = try json.getString(at: "ageRange")
         score = try Double(json.getString(at: "score"))!
     }
@@ -129,11 +129,11 @@ public struct Identity: JSONDecodable {
     public let knowledgeGraph: KnowledgeGraph?
 
     /// Used internally to initialize an `Identity` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
         score = try Double(json.getString(at: "score"))!
-        disambiguated = try json.object(at: "disambiguated")
-        knowledgeGraph = try? json.object(at: "knowledgeGraph")
+        disambiguated = try json.decode(at: "disambiguated")
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph")
     }
 }
 
@@ -169,9 +169,9 @@ public struct Disambiguated: JSONDecodable {
     public let crunchbase: String?
 
     /// Used internally to initialize a `Disambiguated` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
-        subType = try? json.getStringArray(at: "subType")
+        subType = try? json.decodedArray(at: "subType", type: String.self)
         website = try? json.getString(at: "website")
         dbpedia = try? json.getString(at: "dbpedia")
         yago = try? json.getString(at: "yago")

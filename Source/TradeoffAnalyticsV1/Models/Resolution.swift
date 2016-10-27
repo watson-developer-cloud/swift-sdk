@@ -28,9 +28,9 @@ public struct Resolution: JSONDecodable {
     public let solutions: [Solution]
     
     /// Used internally to initialize a `Resolution` model from JSON.
-    public init(json: [String: Any]) throws {
-        map = try? json.object(at: "map")
-        solutions = try json.objects(at: "solutions")
+    public init(json: JSON) throws {
+        map = try? json.decode(at: "map")
+        solutions = try json.decodedArray(at: "solutions", type: Solution.self)
     }
 }
 
@@ -48,9 +48,9 @@ public struct Map: JSONDecodable {
     public let nodes: [MapNode]
     
     /// Used internally to initialize a `Map` model from JSON.
-    public init(json: [String: Any]) throws {
-        anchors = try json.objects(at: "anchors")
-        nodes = try json.objects(at: "nodes")
+    public init(json: JSON) throws {
+        anchors = try json.decodedArray(at: "anchors", type: Anchor.self)
+        nodes = try json.decodedArray(at: "nodes", type: MapNode.self)
     }
 }
 
@@ -64,9 +64,9 @@ public struct Anchor: JSONDecodable {
     public let position: MapNodeCoordinates
     
     /// Used internally to initialize an `Anchor` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
-        position = try json.object(at: "position")
+        position = try json.decode(at: "position")
     }
 }
 
@@ -80,9 +80,9 @@ public struct MapNode: JSONDecodable {
     public let solutionRefs: [String]
     
     /// Used internally to initialize a `MapNode` model from JSON.
-    public init(json: [String: Any]) throws {
-        coordinates = try json.object(at: "coordinates")
-        solutionRefs = try json.objects(at: "solution_refs")
+    public init(json: JSON) throws {
+        coordinates = try json.decode(at: "coordinates")
+        solutionRefs = try json.decodedArray(at: "solution_refs", type: String.self)
     }
 }
 
@@ -96,7 +96,7 @@ public struct MapNodeCoordinates: JSONDecodable {
     public let y: Double
     
     /// Used internally to initialize a `MapNodeCoordinates` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         x = try json.getDouble(at: "x")
         y = try json.getDouble(at: "y")
     }
@@ -123,13 +123,13 @@ public struct Solution: JSONDecodable {
     public let statusCause: StatusCause?
     
     /// Used internally to initialize a `Solution` model from JSON.
-    public init(json: [String: Any]) throws {
-        shadowMe = try? json.objects(at: "shadow_me")
-        shadows = try? json.objects(at: "shadows")
+    public init(json: JSON) throws {
+        shadowMe = try? json.decodedArray(at: "shadow_me", type: String.self)
+        shadows = try? json.decodedArray(at: "shadows", type: String.self)
         solutionRef = try json.getString(at: "solution_ref")
-        statusCause = try? json.object(at: "status_cause")
+        statusCause = try? json.decode(at: "status_cause")
         
-        guard let status = SolutionStatus(rawValue: try json.object(at: "status")) else {
+        guard let status = SolutionStatus(rawValue: try json.decode(at: "status")) else {
             throw JSON.Error.valueNotConvertible(value: json, to: Solution.self)
         }
         self.status = status
@@ -170,13 +170,13 @@ public struct StatusCause: JSONDecodable {
     public let tokens: [String]
     
     /// Used internally to initialize a `StatusCause` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         guard let errorCode = TradeoffAnalyticsError(rawValue: try json.getString(at: "error_code")) else {
             throw JSON.Error.valueNotConvertible(value: json, to: StatusCause.self)
         }
         self.errorCode = errorCode
         message = try json.getString(at: "message")
-        tokens = try json.objects(at: "tokens")
+        tokens = try json.decodedArray(at: "tokens", type: String.self)
     }
 }
 

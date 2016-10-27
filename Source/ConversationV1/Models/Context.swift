@@ -38,9 +38,9 @@ public struct Context: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Context` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         conversationID = try? json.getString(at: "conversation_id")
-        system = try? json.object(at: "system")
+        system = try? json.decode(at: "system", type: SystemResponse.self)
     }
     
     /// Used internally to serialize a `Context` model to JSON.
@@ -85,8 +85,8 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `SystemResponse` model from JSON.
-    public init(json: [String: Any]) throws {
-        dialogStack = try json.objects(at: "dialog_stack")
+    public init(json: JSON) throws {
+        dialogStack = try json.decodedArray(at: "dialog_stack", type: Swift.String)
         dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
         dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
     }

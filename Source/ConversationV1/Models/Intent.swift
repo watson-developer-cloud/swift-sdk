@@ -38,7 +38,7 @@ public struct Intent: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `Intent` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         intent = try? json.getString(at: "intent")
         confidence = try? json.getDouble(at: "confidence")
     }

@@ -32,9 +32,9 @@ public struct WordAlternativeResults: JSONDecodable {
     public let alternatives: [WordAlternativeResult]
 
     /// Used internally to initialize an `WordAlternativeResults` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         startTime = try json.getDouble(at: "start_time")
         endTime = try json.getDouble(at: "end_time")
-        alternatives = try json.objects(at: "alternatives")
+        alternatives = try json.decodedArray(at: "alternatives", type: WordAlternativeResult.self)
     }
 }

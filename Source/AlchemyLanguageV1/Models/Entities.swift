@@ -43,10 +43,10 @@ public struct Entities: JSONDecodable {
     public let entitites: [Entity]?
     
     /// Used internally to initialize an Entities object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: Entities.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Entities.self)
         }
         
         language = try? json.getString(at: "language")
@@ -57,7 +57,7 @@ public struct Entities: JSONDecodable {
             totalTransactions = nil
         }
         text = try? json.getString(at: "text")
-        entitites = try? json.objects(at: "entities")
+        entitites = try? json.decodedArray(at: "entities", type: Entity.self)
     }
 }
 

@@ -24,7 +24,7 @@ internal struct RecognitionState: JSONDecodable {
     internal let state: String
 
     /// Used internally to initialize a `RecognitionState` model from JSON.
-    internal init(json: [String: Any]) throws {
+    internal init(json: JSON) throws {
         state = try json.getString(at: "state")
     }
 }

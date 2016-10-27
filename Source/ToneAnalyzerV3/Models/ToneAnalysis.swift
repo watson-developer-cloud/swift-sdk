@@ -28,9 +28,9 @@ public struct ToneAnalysis: JSONDecodable {
     public let sentencesTones: [SentenceAnalysis]?
     
     /// Used internally to initialize a `ToneAnalysis` model from JSON.
-    public init(json: [String: Any]) throws {
-        documentTone = try json.objects(at: "document_tone", "tone_categories")
-        sentencesTones = try? json.objects(at: "sentences_tone")
+    public init(json: JSON) throws {
+        documentTone = try json.decodedArray(at: "document_tone", "tone_categories", type: ToneCategory.self)
+        sentencesTones = try? json.decodedArray(at: "sentences_tone", type: SentenceAnalysis.self)
         
     }
 }

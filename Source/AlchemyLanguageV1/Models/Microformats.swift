@@ -34,13 +34,13 @@ public struct Microformats: JSONDecodable {
     public let microformats: [Microformat]?
     
     /// Used internally to initialize a Microformats object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: Microformats.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Microformats.self)
         }
         
         url = try? json.getString(at: "url")
-        microformats = try? json.objects(at: "microformats")
+        microformats = try? json.decodedArray(at: "microformats", type: Microformat.self)
     }
 }

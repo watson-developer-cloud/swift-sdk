@@ -16,7 +16,6 @@
 
 import Foundation
 import Starscream
-import Freddy
 import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
@@ -41,6 +40,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         username: String,
         password: String,
         model: String?,
+        customizationID: String?,
         learningOptOut: Bool?,
         serviceURL: String,
         tokenURL: String,
@@ -55,6 +55,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         let url = SpeechToTextSocket.buildURL(
             url: websocketsURL,
             model: model,
+            customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
         
@@ -76,6 +77,11 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         // ensure the socket is not already connected
         guard state == .Disconnected || state == .Connecting else {
             return
+        }
+        
+        // flush operation queue
+        if state == .Disconnected {
+            queue.cancelAllOperations()
         }
         
         // update state
@@ -168,10 +174,13 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
     
-    private static func buildURL(url: String, model: String?, learningOptOut: Bool?) -> URL? {
+    private static func buildURL(url: String, model: String?, customizationID: String?, learningOptOut: Bool?) -> URL? {
         var queryParameters = [URLQueryItem]()
         if let model = model {
             queryParameters.append(URLQueryItem(name: "model", value: model))
+        }
+        if let customizationID = customizationID {
+            queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
         }
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"
@@ -263,6 +272,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         state = .Disconnected
+        queue.isSuspended = true
         guard let error = error else {
             onDisconnect?()
             return

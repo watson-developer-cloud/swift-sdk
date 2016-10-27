@@ -33,15 +33,31 @@ public struct Model: JSONDecodable {
     /// The URI of the model.
     public let url: String
     
+    /// The additional service features supported with the model.
+    public let supportedFeatures: SupportedFeatures
+    
     /// A brief description of the model.
     public let description: String
     
     /// Used internally to initialize a `Model` from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
         rate = try json.getInt(at: "rate")
         language = try json.getString(at: "language")
         url = try json.getString(at: "url")
+        supportedFeatures = try json.decode(at: "supported_features")
         description = try json.getString(at: "description")
+    }
+}
+
+/** The additional service features supported with a model. */
+public struct SupportedFeatures: JSONDecodable {
+    
+    /// Indicates whether the model can be customized with a custom language model.
+    public let customLanguageModel: Bool
+    
+    /// Used internally to initialize a `SupportedFeatures` model from JSON.
+    public init(json: JSON) throws {
+        customLanguageModel = try json.getBool(at: "custom_language_model")
     }
 }

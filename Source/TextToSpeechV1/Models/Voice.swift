@@ -44,13 +44,13 @@ public struct Voice: JSONDecodable {
     public let customization: Customization?
     
     /// Used internally to initialize a `Voice` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         name = try json.getString(at: "name")
         gender = try json.getString(at: "gender")
         language = try json.getString(at: "language")
         url = try json.getString(at: "url")
         description = try json.getString(at: "description")
         customizable = try json.getBool(at: "customizable")
-        customization = try? json.object(at: "customization")
+        customization = try? json.decode(at: "customization")
     }
 }

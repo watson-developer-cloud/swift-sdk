@@ -36,16 +36,16 @@ public struct SceneText: JSONDecodable {
     public let sceneTextLines: [SceneTextLine]
 
     /// Used internally to initialize a `SceneText` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: SceneText.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: SceneText.self)
         }
         
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         sceneText = try json.getString(at: "sceneText")
-        sceneTextLines = try json.objects(at: "sceneTextLines")
+        sceneTextLines = try json.decodedArray(at: "sceneTextLines", type: SceneTextLine.self)
     }
 }
 
@@ -65,11 +65,11 @@ public struct SceneTextLine: JSONDecodable {
     public let words: [Word]
 
     /// Used internally to initialize a `SceneTextLine` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         confidence = try json.getDouble(at: "confidence")
-        region = try json.object(at: "region")
+        region = try json.decode(at: "region")
         text = try json.getString(at: "text")
-        words = try json.objects(at: "words")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }
 
@@ -89,7 +89,7 @@ public struct Region: JSONDecodable {
     public let y: Int
 
     /// Used internally to initialize a `Region` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         height = try json.getInt(at: "height")
         width = try json.getInt(at: "width")
         x = try json.getInt(at: "x")
@@ -110,9 +110,9 @@ public struct Word: JSONDecodable {
     public let text: String
 
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         confidence = try json.getDouble(at: "confidence")
-        region = try json.object(at: "region")
+        region = try json.decode(at: "region")
         text = try json.getString(at: "text")
     }
 }

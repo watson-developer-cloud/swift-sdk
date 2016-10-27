@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -97,7 +96,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseArray(path: ["classifiers"]) { (response: RestResponse<[Classifier]>) in
+        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
+            (response: RestResponse<[Classifier]>) in
             switch response.result {
             case .success(let classifiers): success(classifiers)
             case .failure(let error): failure?(error)
@@ -176,7 +176,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Classifier>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
             case .failure(let error): failure?(error)
@@ -253,7 +254,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Classifier>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
             case .failure(let error): failure?(error)
@@ -326,7 +328,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Classifier>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
             case .failure(let error): failure?(error)
@@ -490,7 +493,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ClassifiedImages>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifiedImages>) in
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
             case .failure(let error): failure?(error)
@@ -570,7 +574,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ImagesWithFaces>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ImagesWithFaces>) in
             switch response.result {
             case .success(let faceImages): success(faceImages)
             case .failure(let error): failure?(error)
@@ -650,7 +655,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<ImagesWithWords>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ImagesWithWords>) in
             switch response.result {
             case .success(let wordImages): success(wordImages)
             case .failure(let error): failure?(error)

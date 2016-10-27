@@ -39,12 +39,12 @@ public struct Classifier: JSONDecodable {
     public let classes: [Class]
     
     /// Used internally to initialize a `Classifier` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         classifierID = try json.getString(at: "classifier_id")
         name = try json.getString(at: "name")
         owner = try json.getString(at: "owner")
         status = try json.getString(at: "status")
         created = try json.getString(at: "created")
-        classes = try json.objects(at: "classes")
+        classes = try json.decodedArray(at: "classes", type: Class.self)
     }
 }

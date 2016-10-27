@@ -27,9 +27,9 @@ public struct SearchResponse: JSONDecodable {
     public let body: SearchResponseBody
     
     /// Used internally to initialize a `SearchResponse` model from JSON.
-    public init(json: [String: Any]) throws {
-        header = try json.object(at: "responseHeader")
-        body = try json.object(at: "response")
+    public init(json: JSON) throws {
+        header = try json.decode(at: "responseHeader", type: SearchResponseHeader.self)
+        body = try json.decode(at: "response", type: SearchResponseBody.self)
     }
 }
 
@@ -46,10 +46,10 @@ public struct SearchResponseHeader: JSONDecodable {
     public let params: RequestParameters
     
     /// Used internally to initialize a `SearchResponseHeader` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         status = try json.getInt(at: "status")
         qTime = try json.getInt(at: "QTime")
-        params = try json.object(at: "params")
+        params = try json.decode(at: "params", type: RequestParameters.self)
     }
 }
 
@@ -66,7 +66,7 @@ public struct RequestParameters: JSONDecodable {
     public let writerType: String
     
     /// Used internally to initialize a `RequestParameters` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         query = try json.getString(at: "q")
         returnFields = try json.getString(at: "fl")
         writerType = try json.getString(at: "wt")
@@ -90,7 +90,7 @@ public struct SearchResponseBody: JSONDecodable {
     public let documents: [Document]
     
     /// Used internally to initialize a `SearchResponseBody` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         numFound = try json.getInt(at: "numFound")
         start = try json.getInt(at: "start")
         

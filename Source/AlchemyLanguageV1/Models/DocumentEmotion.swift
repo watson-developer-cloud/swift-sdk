@@ -33,10 +33,10 @@ public struct DocumentEmotion: JSONDecodable {
     public let docEmotions: Emotions?
     
     /// used internally to initialize a DocumentEmotion object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: DocumentEmotion.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
         }
         
         url = try? json.getString(at: "url")
@@ -46,6 +46,6 @@ public struct DocumentEmotion: JSONDecodable {
             totalTransactions = nil
         }
         language = try? json.getString(at: "language")
-        docEmotions = try? json.object(at: "docEmotions")
+        docEmotions = try? json.decode(at: "docEmotions", type: Emotions.self)
     }
 }

@@ -47,13 +47,13 @@ public struct Entity: JSONDecodable {
     public let mentions: [ReferencingMentions]
     
     /// Used internally to initialize an `Entity` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         entityID = try json.getString(at: "eid")
         type = try json.getString(at: "type")
         generic = try json.getBool(at: "generic")
         subtype = try json.getString(at: "subtype")
         score = try json.getDouble(at: "score")
-        mentions = try json.objects(at: "mentref")
+        mentions = try json.decodedArray(at: "mentref", type: ReferencingMentions.self)
         
         guard let eClass = EntityClass(rawValue: try json.getString(at: "class")) else {
             throw JSON.Error.valueNotConvertible(value: json, to: EntityClass.self)
@@ -77,7 +77,7 @@ public struct ReferencingMentions: JSONDecodable {
     public let text: String
     
     /// Used internally to initialize a `ReferencingMentions` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         mentionID = try json.getString(at: "mid")
         text = try json.getString(at: "text")
     }

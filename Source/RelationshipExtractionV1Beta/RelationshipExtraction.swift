@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -46,6 +45,26 @@ public class RelationshipExtraction {
      */
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
+    }
+    
+    /**
+     If the given data represents an error returned by the Relationship Extraction service, then 
+     return an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.getInt(at: "error_code")
+            let error = try json.getString(at: "error_message")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
     }
     
     /**
@@ -80,7 +99,8 @@ public class RelationshipExtraction {
         )
         
         // execute REST request
-        request.responseObject(path: ["doc"]) { (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError, path: ["doc"]) {
+            (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /**
@@ -87,7 +86,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseArray(path: ["voices"]) { (response: RestResponse<[Voice]>) in
+        request.responseArray(dataToError: dataToError, path: ["voices"]) {
+            (response: RestResponse<[Voice]>) in
             switch response.result {
             case .success(let voices): success(voices)
             case .failure(let error): failure?(error)
@@ -131,7 +131,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Voice>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Voice>) in
             switch response.result {
             case .success(let voice): success(voice)
             case .failure(let error): failure?(error)
@@ -184,7 +185,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<Pronunciation>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Pronunciation>) in
             switch response.result {
             case .success(let voice): success(voice)
             case .failure(let error): failure?(error)
@@ -261,7 +263,6 @@ public class TextToSpeech {
                 failure?(error)
             }
         }
-        
     }
     
     // MARK: - Customizations
@@ -299,7 +300,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseArray(path: ["customizations"]) { (response: RestResponse<[Customization]>) in
+        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+            (response: RestResponse<[Customization]>) in
             switch response.result {
             case .success(let customizations): success(customizations)
             case .failure(let error): failure?(error)
@@ -352,7 +354,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<CustomizationID>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CustomizationID>) in
             switch response.result {
             case .success(let customizationID): success(customizationID)
             case .failure(let error): failure?(error)
@@ -417,7 +420,8 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject() { (response: RestResponse<CustomizationWords>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CustomizationWords>) in
             switch response.result {
             case .success(let customizationWords): success(customizationWords)
             case .failure(let error): failure?(error)
@@ -503,7 +507,8 @@ public class TextToSpeech {
         )
         
         // execute the request
-        request.responseArray(path: ["words"]) { (response: RestResponse<[Word]>) in
+        request.responseArray(dataToError: dataToError, path: ["words"]) {
+            (response: RestResponse<[Word]>) in
             switch response.result {
             case .success(let words): success(words)
             case .failure(let error): failure?(error)
@@ -620,7 +625,8 @@ public class TextToSpeech {
         )
         
         // execute the request
-        request.responseObject() { (response: RestResponse<Translation>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Translation>) in
             switch response.result {
             case .success(let translation): success(translation)
             case .failure(let error): failure?(error)

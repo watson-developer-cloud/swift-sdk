@@ -42,7 +42,7 @@ public struct ClassifierDetails: JSONDecodable {
     public let statusDescription: String
     
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         classifierId = try json.getString(at: "classifier_id")
         name = try? json.getString(at: "name")
         language = try json.getString(at: "language")

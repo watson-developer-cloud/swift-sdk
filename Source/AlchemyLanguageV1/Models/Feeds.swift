@@ -40,10 +40,10 @@ public struct Feeds: JSONDecodable {
     public let feeds: [Feed]?
     
     /// Used internally to initialize a Feeds object
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSONError.valueNotConvertible(value: json, to: Feeds.self)
+            throw JSON.Error.valueNotConvertible(value: json, to: Feeds.self)
         }
         
         if let totalTransactionString = try? json.getString(at: "totalTransactions") {
@@ -53,7 +53,7 @@ public struct Feeds: JSONDecodable {
         }
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
-        feeds = try? json.objects(at: "feeds")
+        feeds = try? json.decodedArray(at: "feeds", type: Feed.self)
     }
 }
 

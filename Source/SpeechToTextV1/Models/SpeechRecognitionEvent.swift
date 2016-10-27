@@ -33,8 +33,8 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
     internal let results: [SpeechRecognitionResult]
 
     /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
-    internal init(json: [String: Any]) throws {
+    internal init(json: JSON) throws {
         resultIndex = try json.getInt(at: "result_index")
-        results = try json.objects(at: "results")
+        results = try json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
     }
 }

@@ -38,12 +38,12 @@ public struct Classification: JSONDecodable {
     public let classes: [ClassifiedClass]
     
     /// Used internally to initialize a `Classification` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         classifierId = try json.getString(at: "classifier_id")
         url = try json.getString(at: "url")
         text = try json.getString(at: "text")
         topClass = try json.getString(at: "top_class")
-        classes = try json.objects(at: "classes")
+        classes = try json.decodedArray(at: "classes", type: ClassifiedClass.self)
     }
 }
 
@@ -58,7 +58,7 @@ public struct ClassifiedClass: JSONDecodable {
     public var className: String
     
     /// Used internally to initialize a `ClassifiedClass` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         confidence = try json.getDouble(at: "confidence")
         className = try json.getString(at: "class_name")
     }

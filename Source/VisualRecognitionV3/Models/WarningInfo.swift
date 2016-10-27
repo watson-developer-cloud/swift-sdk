@@ -27,7 +27,7 @@ public struct WarningInfo: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize a `WarningInfo` model from JSON.
-    public init(json: [String: Any]) throws {
+    public init(json: JSON) throws {
         warningID = try json.getString(at: "warning_id")
         description = try json.getString(at: "description")
     }

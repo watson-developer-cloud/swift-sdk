@@ -15,20 +15,22 @@
  **/
 import XCTest
 import AlchemyDataNewsV1
+import Foundation
 
 class AlchemyDataNewsTests: XCTestCase {
     
     private var alchemyDataNews: AlchemyDataNews!
     private let timeout: TimeInterval = 5.0
     
-    static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)[ {
+    static var allTests : [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
     return [
 	("testGetNews", testGetNews),
 	("testGetNewsWithQuery", testGetNewsWithQuery),
 	("testGetNewsWithInvalidQuery", testGetNewsWithInvalidQuery),
 	("testGetNewsWithInvalidReturnQuery", testGetNewsWithInvalidReturnQuery),
-	("testGetNewsInvalidTimeFrame", testGetNewsInvalidTimeFrame)
+	("testGetNewsInvalidTimeframe", testGetNewsInvalidTimeframe)
     ]
+}
 
     override func setUp() {
         super.setUp()

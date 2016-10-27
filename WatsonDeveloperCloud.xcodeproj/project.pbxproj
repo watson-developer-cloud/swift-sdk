@@ -708,7 +708,6 @@
 		7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1Experimental.h; path = Source/SupportingFiles/ConversationV1Experimental.h; sourceTree = "<group>"; };
 		7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1Beta.h; path = Source/SupportingFiles/RelationshipExtractionV1Beta.h; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
-		7A6117501CB5988B009A4DA1 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
 		7A6117551CB598D9009A4DA1 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7A6117561CB598D9009A4DA1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7A6117571CB598D9009A4DA1 /* TraitTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitTreeNode.swift; sourceTree = "<group>"; };
@@ -1469,7 +1468,6 @@
 			children = (
 				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
-				7A6117501CB5988B009A4DA1 /* RestSerialization.swift */,
 				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
 				7AEBE4361DBEAA130089188C /* JSON.swift */,
 			);

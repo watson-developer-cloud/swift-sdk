@@ -600,7 +600,7 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssertEqual(sceneTexts.status, "OK")
             XCTAssertNil(sceneTexts.url)
             XCTAssertEqual(sceneTexts.totalTransactions, 0)
-            XCTAssertEqual(sceneTexts.sceneText, "train rain traffic")
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain rain traffic")
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first
@@ -645,7 +645,7 @@ class AlchemyVisionTests: XCTestCase {
             XCTAssertEqual(sceneTexts.status, "OK")
             XCTAssertEqual(sceneTexts.url, self.signURL)
             XCTAssertEqual(sceneTexts.totalTransactions, 0)
-            XCTAssertEqual(sceneTexts.sceneText, "train rain traffic")
+            XCTAssertEqual(sceneTexts.sceneText, "notice\nincreased\ntrain rain traffic")
             
             // verify first scene text line
             let line = sceneTexts.sceneTextLines.first

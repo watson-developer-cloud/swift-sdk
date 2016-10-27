@@ -45,6 +45,28 @@ public class PersonalityInsights {
     }
 
     /**
+     If the given data represents an error returned by the Visual Recognition service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let code = try json.getInt(at: "code")
+            let error = try json.getString(at: "error")
+            let help = try json.getString(at: "help")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: help
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+
+    /**
      Analyze text to generate a personality profile.
  
      - parameter text: The text to analyze.
@@ -216,7 +238,8 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject() { (response: RestResponse<Profile>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

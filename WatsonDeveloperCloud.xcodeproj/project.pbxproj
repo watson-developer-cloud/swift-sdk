@@ -797,7 +797,7 @@
 		7AAA9A561CEE6089002C9564 /* faces.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = faces.zip; sourceTree = "<group>"; };
 		7AAA9A571CEE6089002C9564 /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAA9A581CEE6089002C9564 /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
-		7AAA9A591CEE6089002C9564 /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTests.swift; sourceTree = "<group>"; };
+		7AAA9A591CEE6089002C9564 /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = ../../../Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = "<group>"; };
 		7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognition.swift; sourceTree = "<group>"; };
 		7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVision.swift; sourceTree = "<group>"; };
 		7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTags.swift; sourceTree = "<group>"; };
@@ -1799,7 +1799,8 @@
 				7AAA9A521CEE6089002C9564 /* cars.zip */,
 				7AAA9A531CEE6089002C9564 /* trucks.zip */,
 			);
-			path = Classes;
+			name = Classes;
+			path = ../../../Tests/VisualRecognitionV3Tests/Classes;
 			sourceTree = "<group>";
 		};
 		7AAA9A541CEE6089002C9564 /* Images */ = {
@@ -1810,7 +1811,8 @@
 				7AAA9A571CEE6089002C9564 /* obama.jpg */,
 				7AAA9A581CEE6089002C9564 /* sign.jpg */,
 			);
-			path = Images;
+			name = Images;
+			path = ../../../Tests/VisualRecognitionV3Tests/Images;
 			sourceTree = "<group>";
 		};
 		7AAA9AA01CEE8B3C002C9564 /* AlchemyVisionV1 */ = {

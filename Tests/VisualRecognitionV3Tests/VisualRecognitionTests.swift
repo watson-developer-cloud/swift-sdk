@@ -25,6 +25,34 @@ class VisualRecognitionTests: XCTestCase {
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
     
+    static var allTests : [(String, (VisualRecognitionTests) -> () throws -> Void)] {
+        return [
+            ("testGetClassifiers", testGetClassifiers),
+            ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
+            ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
+            ("testGetClassifier", testGetClassifier),
+            ("testUpdateClassifier", testUpdateClassifier),
+            ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
+            ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
+            ("testClassifyByURL1", testClassifyByURL1),
+            ("testClassifyByURL2", testClassifyByURL2),
+            ("testClassifyByURL3", testClassifyByURL3),
+            ("testClassifyByURL4", testClassifyByURL4),
+            ("testClassifyByURL5", testClassifyByURL5),
+            ("testClassifyImage1", testClassifyImage1),
+            ("testClassifyImage2", testClassifyImage2),
+            ("testClassifyImage3", testClassifyImage3),
+            ("testClassifyImage4", testClassifyImage4),
+            ("testClassifyImage5", testClassifyImage5),
+            ("testClassifyImage6", testClassifyImage6),
+            ("testDetectFacesByURL", testDetectFacesByURL),
+            ("testDetectFacesByImage1", testDetectFacesByImage1),
+            ("testDetectFacesByImage2", testDetectFacesByImage2),
+            ("testRecognizeTextURL", testRecognizeTextURL),
+            ("testRecognizeTextByImage", testRecognizeTextByImage)
+        ]
+    }
+    
     private var examplesBaseball: URL!
     private var examplesCars: URL!
     private var examplesTrucks: URL!

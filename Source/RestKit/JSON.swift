@@ -1,277 +1,214 @@
-//
-//  JSON.swift
-//  WatsonDeveloperCloud
-//
-//  Created by Glenn Fisher on 10/24/16.
-//  Copyright © 2016 Glenn R. Fisher. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import Foundation
 
-// MARK: - JSON Errors
+// MARK: JSON Paths
 
-public enum JSONError: Error {
-    case indexOutOfBounds(index: Int)
-    case keyNotFound(key: String)
-    case valueNotConvertible(value: Any, to: Any.Type)
-    case nullValue(key: String)
+public protocol JSONPathType {
+    func value(in dictionary: [String: Any]) throws -> JSON
+    func value(in array: [Any]) throws -> JSON
 }
 
-// MARK: - JSON Object Protocols
-
-public protocol JSONDecodable {
-    init(json: [String: Any]) throws
-}
-
-public protocol JSONEncodable {
-    func toJSON() -> [String: Any]
-}
-
-// MARK: - JSON Key Types
-
-public protocol JSONKeyType {
-    var stringValue: String { get }
-}
-
-extension String: JSONKeyType {
-    public var stringValue: String {
-        return self
+extension String: JSONPathType {
+    public func value(in dictionary: [String: Any]) throws -> JSON {
+        let json = dictionary[self]
+        return JSON(json: json)
+    }
+    
+    public func value(in array: [Any]) throws -> JSON {
+        throw JSON.Error.unexpectedSubscript(type: String.self)
     }
 }
 
-// MARK: - JSON Value Types
+extension Int: JSONPathType {
+    public func value(in dictionary: [String: Any]) throws -> JSON {
+        throw JSON.Error.unexpectedSubscript(type: Int.self)
+    }
+    
+    public func value(in array: [Any]) throws -> JSON {
+        let json = array[self]
+        return JSON(json: json)
+    }
+}
 
-//public protocol JSONValueType {
-//    init (json: Any) throws
-//}
-//
-//extension String: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? String else {
-//            throw JSONError.valueNotConvertible(value: json, to: String.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Int: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? Int else {
-//            throw JSONError.valueNotConvertible(value: json, to: Int.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension UInt: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? UInt else {
-//            throw JSONError.valueNotConvertible(value: json, to: UInt.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Float: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? Float else {
-//            throw JSONError.valueNotConvertible(value: json, to: Float.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Double: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? Double else {
-//            throw JSONError.valueNotConvertible(value: json, to: Double.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Bool: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? Bool else {
-//            throw JSONError.valueNotConvertible(value: json, to: Bool.self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Array where Element: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let any = json as? [Any] else {
-//            throw JSONError.valueNotConvertible(value: json, to: [Element].self)
-//        }
-//        self = try any.map { try Element(json: $0) }
-//    }
-//}
-//
-//extension Dictionary: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let value = json as? [Key: Value] else {
-//            throw JSONError.valueNotConvertible(value: json, to: [Key: Value].self)
-//        }
-//        self = value
-//    }
-//}
-//
-//extension Dictionary where Value: JSONValueType {
-//    public init(json: Any) throws {
-//        guard let any = json as? [Key: Any] else {
-//            throw JSONError.valueNotConvertible(value: json, to: [Key: Any].self)
-//        }
-//        var dictionary = [Key: Value](minimumCapacity: any.count)
-//        for (key, value) in any {
-//            dictionary[key] = try Value(json: value)
-//        }
-//        self = dictionary
-//    }
-//}
-//
-//// MARK: - Dictionary extensions to parse JSON values
-//
-//extension Dictionary where Key: JSONKeyType {
-//    private func any(at keys: [Key]) throws -> Any {
-//        var accumulator: Any = self
-//        for key in keys {
-//            if let json = accumulator as? [Key: Any] {
-//                if let value = json[key] {
-//                    accumulator = value
-//                    continue
-//                }
-//            }
-//            throw JSONError.keyNotFound(key: key.stringValue)
-//        }
-//        return accumulator
-//    }
-//    
-//    public func json(at keys: [Key]) throws -> [String: Any] {
-//        guard let json = try self.any(at: keys) as? [String: Any] else {
-//            throw JSONError.valueNotConvertible(value: self, to: [String: Any].self)
-//        }
-//        return json
-//    }
-//    
-//    public func jsonValue<T: JSONValueType>(at keys: Key...) throws -> T {
-//        let json = try self.any(at: keys)
-//        let value = try T(json: json)
-//        return value
-//    }
-//    
-//    public func jsonValue<T: JSONValueType>(at keys: Key...) throws -> [T] {
-//        let json = try self.any(at: keys)
-//        let array = try [T](json: json)
-//        return array
-//    }
-//    
-//    public func jsonValue<T: JSONDecodableCustom>(at keys: Key...) throws -> T {
-//        let json = try self.any(at: keys)
-//        guard let jsonObject = json as? [String: Any] else {
-//            throw JSONError.valueNotConvertible(value: json, to: T.self)
-//        }
-//        let object = try T(json: jsonObject)
-//        return object
-//    }
-//}
+// MARK: - JSON
 
-extension Dictionary where Key: JSONKeyType {
-    private func value(at keys: [Key]) throws -> Any {
-        var value: Any = self
-        for key in keys {
-            if let object = value as? [Key: Any] {
-                if let property = object[key] {
-                    value = property
-                    continue
-                }
-            }
-            throw JSONError.keyNotFound(key: key.stringValue)
+public struct JSON {
+    fileprivate let json: Any
+    
+    fileprivate init(json: Any) {
+        self.json = json
+    }
+    
+    public init(data: Data) throws {
+        json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    }
+    
+    public init(dictionary: [String: Any]) {
+        json = dictionary
+    }
+    
+    public init(array: [Any]) {
+        json = array
+    }
+    
+    private func value(at path: JSONPathType) throws -> JSON {
+        if let dictionary = json as? [String: Any] {
+            return try path.value(in: dictionary)
+        }
+        if let array = json as? [Any] {
+            return try path.value(in: array)
+        }
+        throw Error.unexpectedSubscript(type: type(of: path))
+    }
+    
+    private func value(at path: [JSONPathType]) throws -> JSON {
+        var value = self
+        for fragment in path {
+            value = try self.value(at: fragment)
         }
         return value
     }
+
+    public func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
+        return try Decoded(json: value(at: path))
+    }
     
-    private func object(at keys: [Key]) throws -> [String: Any] {
-        guard let object = try value(at: keys) as? [String: Any] else {
-            throw JSONError.valueNotConvertible(value: self, to: [String: Any].self)
+    public func getDouble(at path: JSONPathType...) throws -> Double {
+        return try Double(json: value(at: path))
+    }
+    
+    public func getInt(at path: JSONPathType...) throws -> Int {
+        return try Int(json: value(at: path))
+    }
+    
+    public func getString(at path: JSONPathType...) throws -> String {
+        return try String(json: value(at: path))
+    }
+    
+    public func getBool(at path: JSONPathType...) throws -> Bool {
+        return try Bool(json: value(at: path))
+    }
+    
+    public func getArray(at path: JSONPathType...) throws -> [JSON] {
+        let json = try value(at: path)
+        guard let array = json.json as? [Any] else {
+            throw Error.valueNotConvertible(value: json, to: [JSON].self)
         }
-        return object
+        return array.map { JSON(json: $0) }
     }
     
-    private func objects(at keys: [Key]) throws -> [[String: Any]] {
-        guard let objects = try value(at: keys) as? [[String: Any]] else {
-            throw JSONError.valueNotConvertible(value: self, to: [Any].self)
+    public func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
+        let json = try value(at: path)
+        guard let array = json.json as? [Any] else {
+            throw Error.valueNotConvertible(value: json, to: [Decoded].self)
         }
-        return objects
+        return try array.map { try Decoded(json: JSON(json: $0)) }
     }
     
-    public func object<T: JSONDecodable>(at keys: Key...) throws -> T {
-        let json = try self.object(at: keys)
-        let object = try T(json: json)
-        return object
-    }
-    
-    public func objects<T: JSONDecodable>(at keys: Key...) throws -> [T] {
-        let json = try self.objects(at: keys)
-        let objects = try json.map { try T(json: $0) }
-        return objects
-    }
-    
-    public func getJSONObject(at keys: [Key]) throws -> [String: Any] {
-        let value = try self.value(at: keys)
-        guard let jsonObject = value as? [String: Any] else {
-            throw JSONError.valueNotConvertible(value: value, to: Double.self)
+    public func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
+        let json = try value(at: path)
+        guard let dictionary = json.json as? [String: Any] else {
+            throw Error.valueNotConvertible(value: json, to: [String: Decoded].self)
         }
-        return jsonObject
-    }
-    
-    public func getDouble(at keys: Key...) throws -> Double {
-        let value = try self.value(at: keys)
-        guard let double = value as? Double else {
-            throw JSONError.valueNotConvertible(value: value, to: Double.self)
+        var decoded = [String: Decoded](minimumCapacity: dictionary.count)
+        for (key, value) in dictionary {
+            decoded[key] = try Decoded(json: JSON(json: value))
         }
-        return double
+        return decoded
     }
-    
-    public func getInt(at keys: Key...) throws -> Int {
-        let value = try self.value(at: keys)
-        guard let int = value as? Int else {
-            throw JSONError.valueNotConvertible(value: value, to: Int.self)
+}
+
+// MARK: - JSON Errors
+
+extension JSON {
+    public enum Error: Swift.Error {
+        case indexOutOfBounds(index: Int)
+        case keyNotFound(key: String)
+        case unexpectedSubscript(type: JSONPathType.Type)
+        case valueNotConvertible(value: JSON, to: Any.Type)
+        case stringSerializationError
+    }
+}
+
+// MARK: - JSON Protocols
+
+public protocol JSONDecodable {
+    init(json: JSON) throws
+}
+
+public protocol JSONEncodable {
+    func toJSON() -> JSON
+}
+
+extension Double: JSONDecodable {
+    public init(json: JSON) throws {
+        let any = json.json
+        if let double = any as? Double {
+            self = double
+        } else if let int = any as? Int {
+            self = Double(int)
+        } else if let string = any as? String, let double = Double(string) {
+            self = double
+        } else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Double.self)
         }
-        return int
     }
-    
-    public func getIntArray(at keys: Key...) throws -> [Int] {
-        let value = try self.value(at: keys)
-        guard let ints = value as? [Int] else {
-            throw JSONError.valueNotConvertible(value: value, to: [Int].self)
+}
+
+extension Int: JSONDecodable {
+    public init(json: JSON) throws {
+        let any = json.json
+        if let int = any as? Int {
+            self = int
+        } else if let double = any as? Double, double <= Double(Int.max) {
+            self = Int(double)
+        } else if let string = any as? String, let int = Int(string) {
+            self = int
+        } else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Int.self)
         }
-        return ints
     }
-    
-    public func getString(at keys: Key...) throws -> String {
-        let value = try self.value(at: keys)
-        guard let string = value as? String else {
-            throw JSONError.valueNotConvertible(value: value, to: String.self)
+}
+
+extension Bool: JSONDecodable {
+    public init(json: JSON) throws {
+        let any = json.json
+        if let bool = any as? Bool {
+            self = bool
+        } else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Bool.self)
         }
-        return string
     }
-    
-    public func getStringArray(at keys: Key...) throws -> [String] {
-        let value = try self.value(at: keys)
-        guard let strings = value as? [String] else {
-            throw JSONError.valueNotConvertible(value: value, to: [String].self)
+}
+
+extension String: JSONDecodable {
+    public init(json: JSON) throws {
+        let any = json.json
+        if let string = any as? String {
+            self = string
+        } else if let int = any as? Int {
+            self = String(int)
+        } else if let bool = any as? Bool {
+            self = String(bool)
+        } else if let double = any as? Double {
+            self = String(double)
+        } else {
+            throw JSON.Error.valueNotConvertible(value: json, to: String.self)
         }
-        return strings
     }
-    
-    public func getBool(at keys: Key...) throws -> Bool {
-        let value = try self.value(at: keys)
-        guard let bool = value as? Bool else {
-            throw JSONError.valueNotConvertible(value: value, to: Bool.self)
-        }
-        return bool
-    }
-    
-    
 }

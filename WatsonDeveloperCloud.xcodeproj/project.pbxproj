@@ -48,6 +48,7 @@
 		12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9381D52405E00966E41 /* ranker_test_data.csv */; };
 		12DEF7BD1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */; };
 		7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
+		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A517AC51D1C84E1004FD758 /* RelationshipExtractionV1Beta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -3380,6 +3381,7 @@
 				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,
 				7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */,
+				7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

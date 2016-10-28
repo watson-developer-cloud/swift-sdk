@@ -1567,7 +1567,8 @@
 			children = (
 				7A987D321D19D47D003626B2 /* TradeoffAnalyticsTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/TradeoffAnalyticsV1Tests;
 			sourceTree = "<group>";
 		};
 		7A987D621D19D923003626B2 /* RelationshipExtractionV1Beta */ = {

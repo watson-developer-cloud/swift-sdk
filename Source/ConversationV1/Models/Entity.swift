@@ -50,18 +50,18 @@ public struct Entity: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize an `Entity` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         if let entity = entity {
-            json["entity"] = .string(entity)
+            json["entity"] = entity
         }
         if let location = location {
-            json["location"] = location.toJSON()
+            json["location"] = location.toJSONObject()
         }
         if let value = value {
-            json["value"] = .string(value)
+            json["value"] = value
         }
-        return .dictionary(json)
+        return json
     }
 }
 
@@ -97,8 +97,8 @@ public struct EntityLocation: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize an `EntityLocation` model to JSON.
-    public func toJSON() -> JSON {
-        let json = [JSON.int(startIndex), JSON.int(endIndex)]
-        return .array(json)
+    public func toJSONObject() -> Any {
+        let json = [startIndex, endIndex]
+        return json
     }
 }

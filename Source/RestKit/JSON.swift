@@ -54,6 +54,13 @@ public struct JSON {
         self.json = json
     }
     
+    public init(string: String) throws {
+        guard let data = string.data(using: .utf8) else {
+            throw Error.encodingError
+        }
+        json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    }
+    
     public init(data: Data) throws {
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
@@ -145,6 +152,7 @@ extension JSON {
         case keyNotFound(key: String)
         case unexpectedSubscript(type: JSONPathType.Type)
         case valueNotConvertible(value: JSON, to: Any.Type)
+        case encodingError
         case stringSerializationError
     }
 }

@@ -33,6 +33,48 @@ class TextToSpeechTests: XCTestCase {
         .es_Laura, .us_Sofia, .fr_Renee, .it_Francesca, .jp_Emi, .br_Isabela
     ]
     
+    static var allTests : [(String, (TextToSpeechTests) -> () throws -> Void)] {
+        return [
+            ("testGetVoices", testGetVoices),
+            ("testGetVoice", testGetVoice),
+            ("testGetPronunciation", testGetPronunciation),
+            ("testSynthesizeDefault", testSynthesizeDefault),
+            ("testSynthesizeLisa", testSynthesizeLisa),
+            ("testSynthesizeDieter", testSynthesizeDieter),
+            ("testSynthesizeEmi", testSynthesizeEmi),
+            ("testSynthesizeOpus", testSynthesizeOpus),
+            ("testSynthesizeWAV", testSynthesizeWAV),
+            ("testSynthesizeFLAC", testSynthesizeFLAC),
+            ("testSynthesizeL16", testSynthesizeL16),
+            ("testSynthesizeSSML", testSynthesizeSSML),
+            ("testGetCustomizations", testGetCustomizations),
+            ("testCreateAndDeleteCustomization", testCreateAndDeleteCustomization),
+            ("testCreateUpdateNameAndDeleteCustomVoiceModel", testCreateUpdateNameAndDeleteCustomVoiceModel),
+            ("testCreateUpdateDescriptionAndDeleteCustomVoiceModel", testCreateUpdateDescriptionAndDeleteCustomVoiceModel),
+            ("testCreateUpdateWordsListAndDeleteCustomVoiceModel", testCreateUpdateWordsListAndDeleteCustomVoiceModel),
+            ("testAddMultipleWordsToCustomVoiceModel", testAddMultipleWordsToCustomVoiceModel),
+            ("testAddOneWordToCustomVoiceModel", testAddOneWordToCustomVoiceModel),
+            ("testAddAndDeleteOneWordToCustomVoiceModel", testAddAndDeleteOneWordToCustomVoiceModel),
+            ("testGetPronunciationWithUndefinedVoice", testGetPronunciationWithUndefinedVoice),
+            ("testGetVoiceInvalid", testGetVoiceInvalid),
+            ("testSynthesizeEmptyString", testSynthesizeEmptyString),
+            ("testSynthesizeWithInvalidVoice", testSynthesizeWithInvalidVoice),
+            ("testGetCustomizationsWithInvalidLanguage", testGetCustomizationsWithInvalidLanguage),
+            ("testCreateCustomizationWithInvalidLanguage", testCreateCustomizationWithInvalidLanguage),
+            ("testDeleteCustomizationWithBadID", testDeleteCustomizationWithBadID),
+            ("testDeleteCustomizationWithInaccessibleID", testDeleteCustomizationWithInaccessibleID),
+            ("testGetCustomizationWithBadID", testGetCustomizationWithBadID),
+            ("testGetCustomizationWithInaccessibleID", testGetCustomizationWithInaccessibleID),
+            ("testUpdateCustomizationWithBadID", testUpdateCustomizationWithBadID),
+            ("testUpdateCustomizationWithInaccessibleID", testUpdateCustomizationWithInaccessibleID),
+            ("testGetWordsWithBadIDs", testGetWordsWithBadIDs),
+            ("testAddMultipleWordsWithBadIDs", testAddMultipleWordsWithBadIDs),
+            ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
+            ("testGetWordWithBadIDs", testGetWordWithBadIDs),
+            ("testGetWordWithBadIDs", testGetWordWithBadIDs)
+        ]
+    }
+    
     // MARK: - Test Configuration
     
     override func setUp() {

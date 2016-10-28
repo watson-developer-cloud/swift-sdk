@@ -23,6 +23,14 @@ class PersonalityInsightsTests: XCTestCase {
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
     private let timeout: TimeInterval = 5.0
+    
+    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+        return [
+            ("testProfile", testProfile),
+            ("testContentItem", testContentItem),
+            ("testContentItem", testContentItem)
+        ]
+    }
 
     // MARK: - Test Configuration
 

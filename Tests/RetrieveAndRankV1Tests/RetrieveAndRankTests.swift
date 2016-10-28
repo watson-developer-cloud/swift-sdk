@@ -28,6 +28,43 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedRankerID = "1ba90dx16-rank-674"
     private let trainedRankerName = "trained-swift-sdk-ranker"
     
+    static var allTests : [(String, (RetrieveAndRankTests) -> () throws -> Void)] {
+        return [
+            ("testGetSolrClusters", testGetSolrClusters),
+            ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
+            ("testGetSolrCluster", testGetSolrCluster),
+            ("testListAllSolrConfigurations", testListAllSolrConfigurations),
+            ("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
+            ("testGetSolrConfiguration", testGetSolrConfiguration),
+            ("testGetSolrCollections", testGetSolrCollections),
+            ("testCreateAndDeleteSolrCollection", testCreateAndDeleteSolrCollection),
+            ("testUpdateSolrCollection", testUpdateSolrCollection),
+            ("testSearch", testSearch),
+            ("testSearchAndRank", testSearchAndRank),
+            ("testGetRankers", testGetRankers),
+            ("testGetRankerWithSpecificID", testGetRankerWithSpecificID),
+            ("testCreateAndDeleteRanker", testCreateAndDeleteRanker),
+            ("testRanker", testRanker),
+            ("testCreateSolrClusterWithInvalidSize", testCreateSolrClusterWithInvalidSize),
+            ("testDeleteSolrClusterWithBadID", testDeleteSolrClusterWithBadID),
+            ("testGetSolrClusterWithInvalidID", testGetSolrClusterWithInvalidID),
+            ("testGetConfigurationsWithInvalidSolrClusterID", testGetConfigurationsWithInvalidSolrClusterID),
+            ("testGetConfigurationsWithInaccessibleSolrClusterID", testGetConfigurationsWithInaccessibleSolrClusterID),
+            ("testCreateSolrConfigurationWithBadSolrClusterID", testCreateSolrConfigurationWithBadSolrClusterID),
+            ("testCreateSolrConfigurationWithDuplicateName", testCreateSolrConfigurationWithDuplicateName),
+            ("testDeleteSolrConfigurationWithInvalidClusterID", testDeleteSolrConfigurationWithInvalidClusterID),
+            ("testGetCollectionsOfNonExistentCluster", testGetCollectionsOfNonExistentCluster),
+            ("testCreateCollectionInNonExistentCluster", testCreateCollectionInNonExistentCluster),
+            ("testDeleteCollectionInNonExistentCluster", testDeleteCollectionInNonExistentCluster),
+            ("testUpdateCollectionWithinNonExistentCluster", testUpdateCollectionWithinNonExistentCluster),
+            ("testSearchWithInvalidClusterID", testSearchWithInvalidClusterID),
+            ("testSearchAndRankWithInvalidClusterID", testSearchAndRankWithInvalidClusterID),
+            ("testGetDetailsOfNonExistentRanker", testGetDetailsOfNonExistentRanker),
+            ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
+            ("testDeleteNonExistentRanker", testDeleteNonExistentRanker)
+        ]
+    }
+    
     // MARK: - Test Configuration
     
     override func setUp() {

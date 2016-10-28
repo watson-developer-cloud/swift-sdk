@@ -21,6 +21,25 @@ class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
     private let timeout: TimeInterval = 10.0
+    
+    static var allTests : [(String, (SpeechToTextTests) -> () throws -> Void)] {
+        return [
+            ("testModels", testModels),
+            ("testTranscribeFileDefaultWAV", testTranscribeFileDefaultWAV),
+            ("testTranscribeFileDefaultOpus", testTranscribeFileDefaultOpus),
+            ("testTranscribeFileDefaultFLAC", testTranscribeFileDefaultFLAC),
+            ("testTranscribeFileCustomWAV", testTranscribeFileCustomWAV),
+            ("testTranscribeFileCustomOpus", testTranscribeFileCustomOpus),
+            ("testTranscribeFileCustomFLAC", testTranscribeFileCustomFLAC),
+            ("testTranscribeDataDefaultWAV", testTranscribeDataDefaultWAV),
+            ("testTranscribeDataDefaultOpus", testTranscribeDataDefaultOpus),
+            ("testTranscribeDataDefaultFLAC", testTranscribeDataDefaultFLAC),
+            ("testTranscribeDataCustomWAV", testTranscribeDataCustomWAV),
+            ("testTranscribeDataCustomOpus", testTranscribeDataCustomOpus),
+            ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC),
+            ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC)
+        ]
+    }
 
     override func setUp() {
         super.setUp()

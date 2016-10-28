@@ -50,7 +50,7 @@ extension Int: JSONPathType {
 public struct JSON {
     fileprivate let json: Any
     
-    fileprivate init(json: Any) {
+    public init(json: Any) {
         self.json = json
     }
     

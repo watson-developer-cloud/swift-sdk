@@ -156,7 +156,14 @@ public protocol JSONDecodable {
 }
 
 public protocol JSONEncodable {
-    func toJSON() -> Any
+    func toJSON() -> JSON
+    func toJSONObject() -> Any
+}
+
+extension JSONEncodable {
+    public func toJSON() -> JSON {
+        return JSON(json: self.toJSONObject())
+    }
 }
 
 extension Double: JSONDecodable {

@@ -90,7 +90,7 @@ public class ToneAnalyzer {
         success: @escaping (ToneAnalysis) -> Void)
     {
         // construct body
-        guard let body = try? ["text": text].toJSON().serialize() else {
+        guard let body = try? JSON(dictionary: ["text": text]).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

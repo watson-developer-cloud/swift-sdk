@@ -31,6 +31,17 @@ class ConversationTests: XCTestCase {
         continueAfterFailure = false
         instantiateConversation()
     }
+    
+    static var allTests : [(String, (ConversationTests) -> throws Void)] {
+        return [
+            ("instantiateConversation", instantiateConversation),
+            ("testMessage", testMessage),
+            ("testMessageAllFields1", testMessageAllFields1),
+            ("testMessageAllFields2", testMessageAllFields2),
+            ("testMessageInvalidWorkspace", testMessageInvalidWorkspace),
+            ("testMessageInvalidWorkspace", testMessageInvalidWorkspace)
+        ]
+    }
 
     /** Instantiate Conversation. */
     func instantiateConversation() {

@@ -28,6 +28,54 @@ class AlchemyLanguageTests: XCTestCase {
         alchemyLanguage = AlchemyLanguage(apiKey: Credentials.AlchemyAPIKey)
     }
     
+    static var allTests : [(String, (AlchemyLanguageTests) -> throws Void)] {
+        return [
+            ("testGetAuthorsURL", testGetAuthorsURL),
+            ("testGetAuthorsHtml", testGetAuthorsHtml),
+            ("testGetRankedConceptsURL", testGetRankedConceptsURL),
+            ("testGetRankedConceptsHtml", testGetRankedConceptsHtml),
+            ("testGetRankedConceptsHtmlWithEnum0", testGetRankedConceptsHtmlWithEnum0),
+            ("testGetRankedConceptsHtmlWithEnum1", testGetRankedConceptsHtmlWithEnum1),
+            ("testGetRankedConceptsText", testGetRankedConceptsText),
+            ("testGetRankedNamedEntitiesURL", testGetRankedNamedEntitiesURL),
+            ("testGetRankedNamedEntitiesHtml", testGetRankedNamedEntitiesHtml),
+            ("testGetRankedNamedEntitiesText", testGetRankedNamedEntitiesText),
+            ("testGetRankedKeywordsURL", testGetRankedKeywordsURL),
+            ("testGetRankedKeywordsHtml", testGetRankedKeywordsHtml),
+            ("testGetRankedKeywordsText", testGetRankedKeywordsText),
+            ("testGetLanguageURL", testGetLanguageURL),
+            ("testGetLanguageText", testGetLanguageText),
+            ("testGetMicroformatsURL", testGetMicroformatsURL),
+            ("testGetMicroformatsHtml", testGetMicroformatsHtml),
+            ("testGetPubDateURL", testGetPubDateURL),
+            ("testGetPubDateHtml", testGetPubDateHtml),
+            ("testGetRelationsURL", testGetRelationsURL),
+            ("testGetRelationsHtml", testGetRelationsHtml),
+            ("testGetRelationsText", testGetRelationsText),
+            ("testGetTextSentimentURL", testGetTextSentimentURL),
+            ("testGetTextSentimentHtml", testGetTextSentimentHtml),
+            ("testGetTextSentimentText", testGetTextSentimentText),
+            ("testGetTargetedSentimentURL", testGetTargetedSentimentURL),
+            ("testGetTargetedSentimentHtml", testGetTargetedSentimentHtml),
+            ("testGetTargetedSentimentText", testGetTargetedSentimentText),
+            ("testGetRankedTaxonomyURL", testGetRankedTaxonomyURL),
+            ("testGetRankedTaxonomyHtml", testGetRankedTaxonomyHtml),
+            ("testGetRankedTaxonomyText", testGetRankedTaxonomyText),
+            ("testGetRawTextURL", testGetRawTextURL),
+            ("testGetRawTextHtml", testGetRawTextHtml),
+            ("testGetTextURL", testGetTextURL),
+            ("testGetTextHtml", testGetTextHtml),
+            ("testGetTitleURL", testGetTitleURL),
+            ("testGetTitleHtml", testGetTitleHtml),
+            ("testDetectFeedsURL", testDetectFeedsURL),
+            ("testDetectFeedsHtml", testDetectFeedsHtml),
+            ("testGetEmotionURL", testGetEmotionURL),
+            ("testGetEmotionHtml", testGetEmotionHtml),
+            ("testGetEmotionText", testGetEmotionText),
+            ("testGetEmotionText", testGetEmotionText)
+        ]
+    }
+    
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

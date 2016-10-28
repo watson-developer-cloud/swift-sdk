@@ -31,6 +31,26 @@ class LanguageTranslatorTests: XCTestCase {
         instantiateLanguageTranslator()
         deleteStaleCustomModels()
     }
+    
+    static var allTests : [(String, (LanguageTranslatorTests) -> throws Void)] {
+        return [
+            ("instantiateLanguageTranslator", instantiateLanguageTranslator),
+            ("deleteStaleCustomModels", deleteStaleCustomModels),
+            ("testGetModelsAll", testGetModelsAll),
+            ("testGetModelsBySourceLanguage", testGetModelsBySourceLanguage),
+            ("testGetModelsByTargetLanguage", testGetModelsByTargetLanguage),
+            ("testGetModelsDefault", testGetModelsDefault),
+            ("testCreateDeleteModel", testCreateDeleteModel),
+            ("testGetModel", testGetModel),
+            ("testTranslateStringWithModelID", testTranslateStringWithModelID),
+            ("testTranslateArrayWithModelID", testTranslateArrayWithModelID),
+            ("testTranslateStringWithSourceAndTarget", testTranslateStringWithSourceAndTarget),
+            ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
+            ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
+            ("testIdentify", testIdentify),
+            ("testIdentify", testIdentify)
+        ]
+    }
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {

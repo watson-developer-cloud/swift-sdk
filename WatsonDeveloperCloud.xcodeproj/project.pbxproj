@@ -1286,7 +1286,8 @@
 				12DBA9361D512D9100966E41 /* ranker_train_data.csv */,
 				12DBA9381D52405E00966E41 /* ranker_test_data.csv */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/RetrieveAndRankV1Tests;
 			sourceTree = "<group>";
 		};
 		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
@@ -1323,7 +1324,8 @@
 			children = (
 				124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/TextToSpeechV1Tests;
 			sourceTree = "<group>";
 		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
@@ -1504,7 +1506,8 @@
 				7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */,
 				7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/PersonalityInsightsV2Tests;
 			sourceTree = "<group>";
 		};
 		7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */ = {
@@ -1599,7 +1602,8 @@
 			children = (
 				7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/RelationshipExtractionV1BetaTests;
 			sourceTree = "<group>";
 		};
 		7A9EC80D1D79B76100507725 /* Dependencies */ = {
@@ -1745,7 +1749,8 @@
 				7AAA9A211CEE3026002C9564 /* Audio Files */,
 				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/SpeechToTextV1Tests;
 			sourceTree = "<group>";
 		};
 		7AAA9A211CEE3026002C9564 /* Audio Files */ = {
@@ -2028,7 +2033,8 @@
 			children = (
 				B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/ToneAnalyzerV3Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

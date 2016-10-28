@@ -22,6 +22,15 @@ class ToneAnalyzerTests: XCTestCase {
     private var toneAnalyzer: ToneAnalyzer!
     private let timeout: TimeInterval = 5.0
     
+    static var allTests : [(String, (ToneAnalyzerTests) -> () throws -> Void)] {
+        return [
+            ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
+            ("testGetToneWithCustomParameters", testGetToneWithCustomParameters),
+            ("testGetToneEmptyString", testGetToneEmptyString),
+            ("testGetToneEmptyString", testGetToneEmptyString)
+        ]
+    }
+    
     let text = "I know the times are difficult! Our sales have been disappointing for " +
                "the past three quarters for our data analytics product suite. We have a " +
                "competitive data analytics product suite in the industry. But we need " +

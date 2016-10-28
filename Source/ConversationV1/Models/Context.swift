@@ -44,15 +44,15 @@ public struct Context: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Context` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         if let conversationID = conversationID {
-            json["conversation_id"] = .string(conversationID)
+            json["conversation_id"] = conversationID
         }
         if let system = system {
-            json["system"] = system.toJSON()
+            json["system"] = system.toJSONObject()
         }
-        return .dictionary(json)
+        return json
     }
 }
 
@@ -92,11 +92,11 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `SystemResponse` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["dialog_stack"] = .array(dialogStack.map { .string($0) })
-        json["dialog_turn_counter"] = .int(dialogTurnCounter)
-        json["dialog_request_counter"] = .int(dialogRequestCounter)
-        return .dictionary(json)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["dialog_stack"] = dialogStack
+        json["dialog_turn_counter"] = dialogTurnCounter
+        json["dialog_request_counter"] = dialogRequestCounter
+        return json
     }
 }

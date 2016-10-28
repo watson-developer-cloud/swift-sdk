@@ -50,8 +50,15 @@ extension Int: JSONPathType {
 public struct JSON {
     fileprivate let json: Any
     
-    fileprivate init(json: Any) {
+    public init(json: Any) {
         self.json = json
+    }
+    
+    public init(string: String) throws {
+        guard let data = string.data(using: .utf8) else {
+            throw Error.encodingError
+        }
+        json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
     
     public init(data: Data) throws {
@@ -64,6 +71,10 @@ public struct JSON {
     
     public init(array: [Any]) {
         json = array
+    }
+    
+    public func serialize() throws -> Data {
+        return try JSONSerialization.data(withJSONObject: json, options: [])
     }
     
     private func value(at path: JSONPathType) throws -> JSON {
@@ -141,6 +152,7 @@ extension JSON {
         case keyNotFound(key: String)
         case unexpectedSubscript(type: JSONPathType.Type)
         case valueNotConvertible(value: JSON, to: Any.Type)
+        case encodingError
         case stringSerializationError
     }
 }
@@ -153,6 +165,13 @@ public protocol JSONDecodable {
 
 public protocol JSONEncodable {
     func toJSON() -> JSON
+    func toJSONObject() -> Any
+}
+
+extension JSONEncodable {
+    public func toJSON() -> JSON {
+        return JSON(json: self.toJSONObject())
+    }
 }
 
 extension Double: JSONDecodable {

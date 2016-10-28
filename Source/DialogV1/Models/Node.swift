@@ -44,10 +44,10 @@ public struct Node: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["content"] = .string(content)
-        json["node"] = .string(node)
-        return .dictionary(json)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["content"] = content
+        json["node"] = node
+        return json
     }
 }

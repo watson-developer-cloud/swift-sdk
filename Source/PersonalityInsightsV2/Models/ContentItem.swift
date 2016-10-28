@@ -86,19 +86,19 @@ public struct ContentItem: JSONEncodable {
     }
 
     /// Used internally to serialize a `ContentItem` model to JSON.
-    public func toJSON() -> JSON {
-        var map = [String: JSON]()
-        map["content"] = .string(content)
-        if let id = id { map["id"] = .string(id) }
-        if let userID = userID { map["userid"] = .string(userID) }
-        if let sourceID = sourceID { map["sourceid"] = .string(sourceID) }
-        if let created = created { map["created"] = .int(created) }
-        if let updated = updated { map["updated"] = .int(updated) }
-        if let contentType = contentType { map["contenttype"] = .string(contentType) }
-        if let language = language { map["language"] = .string(language) }
-        if let parentID = parentID { map["parentid"] = .string(parentID) }
-        if let reply = reply { map["reply"] = .bool(reply) }
-        if let forward = forward { map["forward"] = .bool(forward) }
-        return .dictionary(map)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["content"] = content
+        if let id = id { json["id"] = id }
+        if let userID = userID { json["userid"] = userID }
+        if let sourceID = sourceID { json["sourceid"] = sourceID }
+        if let created = created { json["created"] = created }
+        if let updated = updated { json["updated"] = updated }
+        if let contentType = contentType { json["contenttype"] = contentType }
+        if let language = language { json["language"] = language }
+        if let parentID = parentID { json["parentid"] = parentID }
+        if let reply = reply { json["reply"] = reply }
+        if let forward = forward { json["forward"] = forward }
+        return json
     }
 }

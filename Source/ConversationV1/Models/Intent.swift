@@ -44,14 +44,14 @@ public struct Intent: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize an `Intent` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         if let intent = intent {
-            json["intent"] = .string(intent)
+            json["intent"] = intent
         }
         if let confidence = confidence {
-            json["confidence"] = .double(confidence)
+            json["confidence"] = confidence
         }
-        return .dictionary(json)
+        return json
     }
 }

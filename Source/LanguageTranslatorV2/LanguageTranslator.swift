@@ -140,7 +140,6 @@ public class LanguageTranslator {
         let multipartFormData = MultipartFormData()
         multipartFormData.append(forcedGlossary, withName: "forced_glossary")
         
-        
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))

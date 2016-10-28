@@ -377,7 +377,8 @@ public class Dialog {
         success: ((Void) -> Void)? = nil)
     {
         // serialize nodes to JSON
-        guard let body = try? JSON.dictionary(["items": nodes.toJSON()]).serialize() else {
+        let json = JSON(dictionary: ["items": nodes.map { $0.toJSONObject() }])
+        guard let body = try? json.serialize() else {
             let failureReason = "Nodes could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

@@ -47,7 +47,7 @@ public struct RestRequest {
     }()
 
     private let request: URLRequest
-    private let session = URLSession(configuration: URLSessionConfiguration())
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     
     public init(
         method: String,

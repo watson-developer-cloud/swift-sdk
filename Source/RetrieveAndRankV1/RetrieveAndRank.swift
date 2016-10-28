@@ -125,7 +125,7 @@ public class RetrieveAndRank {
             json["cluster_size"] = String(size)
         }
         
-        guard let body = try? json.toJSON().serialize() else {
+        guard let body = try? JSON(dictionary: json).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -737,7 +737,7 @@ public class RetrieveAndRank {
         } else {
             json["name"] = ""
         }
-        guard let trainingMetadata = try? json.toJSON().serialize() else {
+        guard let trainingMetadata = try? JSON(dictionary: json).serialize() else {
             let failureReason = "Ranker metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

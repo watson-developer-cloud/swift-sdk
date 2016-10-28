@@ -156,7 +156,8 @@ public class NaturalLanguageClassifier {
         success: @escaping (Classification) -> Void) {
         
         // construct query parameters
-        guard let body = try? ["text": text].toJSON().serialize() else {
+        let json = JSON(dictionary: ["text": text])
+        guard let body = try? json.serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

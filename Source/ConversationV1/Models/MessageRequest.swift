@@ -51,21 +51,21 @@ internal struct MessageRequest: JSONEncodable {
     }
     
     /// Used internally to serialize a `MessageRequest` model to JSON.
-    func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["input"] = input.toJSON()
+    func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["input"] = input.toJSONObject()
         if let context = context {
-            json["context"] = context.toJSON()
+            json["context"] = context.toJSONObject()
         }
         if let entities = entities {
-            json["entities"] = .array(entities.map {$0.toJSON()})
+            json["entities"] = entities.map { $0.toJSONObject() }
         }
         if let intents = intents {
-            json["intents"] = .array(intents.map {$0.toJSON()})
+            json["intents"] = intents.map { $0.toJSONObject() }
         }
         if let output = output {
-            json["output"] = output.toJSON()
+            json["output"] = output.toJSONObject()
         }
-        return .dictionary(json)
+        return json
     }
 }

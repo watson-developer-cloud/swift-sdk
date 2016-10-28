@@ -133,13 +133,9 @@ public class DocumentConversion {
      - retuns: A ConversationReponse object populated with the input's data
      */
     public func deserializeAnswerUnits(string: String) throws -> ConversationResponse {
-        let toJson = try JSON(jsonString: string)
-        do {
-            let answerUnits = try ConversationResponse(json: toJson)
-            return answerUnits
-        } catch {
-            throw JSON.Error.valueNotConvertible(value: toJson, to: ConversationResponse.self)
-        }
+        let json = try JSON(string: string)
+        let answerUnits = try ConversationResponse(json: json)
+        return answerUnits
     }
     
     /**
@@ -154,8 +150,8 @@ public class DocumentConversion {
      */
     public func writeConfig(type: ReturnType) throws -> URL {
         // construct JSON dictionary
-        var json = [String: JSON]()
-        json["conversion_target"] = JSON.string(type.rawValue)
+        var json = [String: Any]()
+        json["conversion_target"] = type.rawValue
         
         // create a globally unique file name in a temporary directory
         let suffix = "DocumentConversionConfiguration.json"
@@ -165,7 +161,7 @@ public class DocumentConversion {
         
         // save JSON dictionary to file
         do {
-            let data = try JSON.dictionary(json).serialize()
+            let data = try JSON(dictionary: json).serialize()
             try data.write(to: fileURL, options: .atomicWrite)
         } catch {
             let message = "Unable to create config file"

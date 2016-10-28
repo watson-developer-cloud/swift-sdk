@@ -164,9 +164,8 @@ public class PersonalityInsights {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Profile) -> Void)
     {
-        let items = contentItems.map { item in item.toJSON() }
-        let body = JSON.dictionary(["contentItems": JSON.array(items)])
-        guard let content = try? body.serialize() else {
+        let json = JSON(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
+        guard let content = try? json.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -184,7 +183,6 @@ public class PersonalityInsights {
             success: success
         )
     }
-
 
     /**
      Analyze content to generate a personality profile.

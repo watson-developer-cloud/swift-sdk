@@ -53,12 +53,12 @@ public struct OutputData: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize an `OutputData` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["log_messages"] = .array(logMessages.map { $0.toJSON() })
-        json["text"] = .array(text.map { .string($0) })
-        json["nodes_visited"] = .array(nodesVisited.map { .string($0) })
-        return .dictionary(json)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["log_messages"] = logMessages.map { $0.toJSONObject() }
+        json["text"] = text
+        json["nodes_visited"] = nodesVisited
+        return json
     }
 }
 
@@ -89,14 +89,14 @@ public struct LogMessageResponse: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `LogMessageResponse` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         if let level = level {
-            json["level"] = .string(level)
+            json["level"] = level
         }
         if let message = message {
-            json["msg"] = .string(message)
+            json["msg"] = message
         }
-        return .dictionary(json)
+        return json
     }
 }

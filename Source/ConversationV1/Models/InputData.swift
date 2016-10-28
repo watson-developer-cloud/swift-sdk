@@ -38,11 +38,11 @@ public struct InputData: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize an `InputData` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         if let text = text {
-            json["text"] = .string(text)
+            json["text"] = text
         }
-        return .dictionary(json)
+        return json
     }
 }

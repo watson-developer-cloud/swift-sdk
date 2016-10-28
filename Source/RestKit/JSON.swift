@@ -66,6 +66,10 @@ public struct JSON {
         json = array
     }
     
+    public func serialize() throws -> Data {
+        return try JSONSerialization.data(withJSONObject: json, options: [])
+    }
+    
     private func value(at path: JSONPathType) throws -> JSON {
         if let dictionary = json as? [String: Any] {
             return try path.value(in: dictionary)

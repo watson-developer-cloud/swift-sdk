@@ -160,6 +160,7 @@ class SpeechToTextTests: XCTestCase {
         settings.wordConfidence = true
         settings.timestamps = true
         settings.filterProfanity = false
+        settings.smartFormatting = true
 
         speechToText.recognize(file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results.results, settings: settings)
@@ -263,6 +264,7 @@ class SpeechToTextTests: XCTestCase {
         settings.wordConfidence = true
         settings.timestamps = true
         settings.filterProfanity = false
+        settings.smartFormatting = true
 
         speechToText.recognize(audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results.results, settings: settings)

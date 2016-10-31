@@ -39,9 +39,7 @@ public struct Word: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Word` model to JSON.
-    public func toJSON() -> JSON {
-        return .dictionary([
-            "word": .string(word),
-            "translation": .string(translation)])
+    public func toJSONObject() -> Any {
+        return ["word": word, "translation": translation]
     }
 }

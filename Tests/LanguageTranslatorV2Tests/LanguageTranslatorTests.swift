@@ -46,7 +46,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
             ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
             ("testIdentify", testIdentify),
-            ("testIdentify", testIdentify)
+            ("testGetModelDoesntExit", testGetModelDoesntExit)
         ]
     }
 

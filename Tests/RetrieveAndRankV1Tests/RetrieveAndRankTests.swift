@@ -61,7 +61,7 @@ class RetrieveAndRankTests: XCTestCase {
             ("testSearchAndRankWithInvalidClusterID", testSearchAndRankWithInvalidClusterID),
             ("testGetDetailsOfNonExistentRanker", testGetDetailsOfNonExistentRanker),
             ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
-            ("testDeleteNonExistentRanker", testDeleteNonExistentRanker)
+            ("testRankWithInvalidRankerID", testRankWithInvalidRankerID)
         ]
     }
     

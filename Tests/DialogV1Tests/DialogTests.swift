@@ -72,7 +72,7 @@ class DialogTests: XCTestCase {
             ("testGetProfileWithInvalidClientID", testGetProfileWithInvalidClientID),
             ("testGetProfileWithInvalidParameterNames", testGetProfileWithInvalidParameterNames),
             ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID),
-            ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID)
+            ("testUpdateProfileWithInvalidClientID", testUpdateProfileWithInvalidClientID)
         ]
     }
 

@@ -43,7 +43,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             ("testClassifyEmptyString", testClassifyEmptyString),
             ("testClassifyWithInvalidClassifier", testClassifyWithInvalidClassifier),
             ("testDeleteInvalidClassifier", testDeleteInvalidClassifier),
-            ("testDeleteInvalidClassifier", testDeleteInvalidClassifier)
+            ("testGetInvalidClassifier", testGetInvalidClassifier)
         ]
     }
     

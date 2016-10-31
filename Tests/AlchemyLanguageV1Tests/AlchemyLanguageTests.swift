@@ -72,7 +72,7 @@ class AlchemyLanguageTests: XCTestCase {
             ("testGetEmotionURL", testGetEmotionURL),
             ("testGetEmotionHtml", testGetEmotionHtml),
             ("testGetEmotionText", testGetEmotionText),
-            ("testGetEmotionText", testGetEmotionText)
+            ("testInvalidURL", testInvalidURL)
         ]
     }
     

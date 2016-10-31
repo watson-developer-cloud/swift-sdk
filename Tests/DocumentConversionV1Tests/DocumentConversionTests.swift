@@ -42,7 +42,7 @@ class DocumentConversionTests: XCTestCase {
             ("testConvertToTextCreateConfig", testConvertToTextCreateConfig),
             ("testConvertToAnswerUnits", testConvertToAnswerUnits),
             ("testInvalidVersion", testInvalidVersion),
-            ("testInvalidVersion", testInvalidVersion)
+            ("testInvalidFileType", testInvalidFileType)
         ]
     }
     

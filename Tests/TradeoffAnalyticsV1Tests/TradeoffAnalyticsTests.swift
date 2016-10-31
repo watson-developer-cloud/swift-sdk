@@ -26,7 +26,7 @@ class TradeoffAnalyticsTests: XCTestCase {
         return [
             ("testGetDilemma1", testGetDilemma1),
             ("testGetDilemma2", testGetDilemma2),
-            ("testGetDilemma2", testGetDilemma2)
+            ("testGetDilemmaMalformedProblem", testGetDilemmaMalformedProblem)
         ]
     }
     

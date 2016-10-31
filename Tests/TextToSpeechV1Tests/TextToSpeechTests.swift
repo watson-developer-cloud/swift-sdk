@@ -71,7 +71,7 @@ class TextToSpeechTests: XCTestCase {
             ("testAddMultipleWordsWithBadIDs", testAddMultipleWordsWithBadIDs),
             ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
             ("testGetWordWithBadIDs", testGetWordWithBadIDs),
-            ("testGetWordWithBadIDs", testGetWordWithBadIDs)
+            ("testAddWordWithBadIDs", testAddWordWithBadIDs)
         ]
     }
     

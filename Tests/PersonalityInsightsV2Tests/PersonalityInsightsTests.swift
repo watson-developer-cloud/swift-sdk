@@ -28,7 +28,7 @@ class PersonalityInsightsTests: XCTestCase {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
-            ("testContentItem", testContentItem)
+            ("testProfileWithShortText", testProfileWithShortText)
         ]
     }
 

@@ -27,7 +27,7 @@ class ToneAnalyzerTests: XCTestCase {
             ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
             ("testGetToneWithCustomParameters", testGetToneWithCustomParameters),
             ("testGetToneEmptyString", testGetToneEmptyString),
-            ("testGetToneEmptyString", testGetToneEmptyString)
+            ("testGetToneInvalidParameters", testGetToneInvalidParameters)
         ]
     }
     

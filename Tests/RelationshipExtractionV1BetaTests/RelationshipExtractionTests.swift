@@ -26,7 +26,7 @@ class RelationshipExtractionTests: XCTestCase {
         return [
             ("testGetRelationships", testGetRelationships),
             ("testGetRelationshipsEmptyText", testGetRelationshipsEmptyText),
-            ("testGetRelationshipsEmptyText", testGetRelationshipsEmptyText)
+            ("testGetRelationshipsWithInvalidLanguage", testGetRelationshipsWithInvalidLanguage)
         ]
     }
     

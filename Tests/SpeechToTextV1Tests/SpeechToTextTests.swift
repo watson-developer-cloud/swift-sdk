@@ -37,7 +37,7 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataCustomWAV", testTranscribeDataCustomWAV),
             ("testTranscribeDataCustomOpus", testTranscribeDataCustomOpus),
             ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC),
-            ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC)
+            ("testTranscribeStreaming", testTranscribeStreaming)
         ]
     }
 

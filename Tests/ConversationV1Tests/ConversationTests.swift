@@ -39,7 +39,7 @@ class ConversationTests: XCTestCase {
             ("testMessageAllFields1", testMessageAllFields1),
             ("testMessageAllFields2", testMessageAllFields2),
             ("testMessageInvalidWorkspace", testMessageInvalidWorkspace),
-            ("testMessageInvalidWorkspace", testMessageInvalidWorkspace)
+            ("testMessageInvalidConversationID", testMessageInvalidConversationID)
         ]
     }
 

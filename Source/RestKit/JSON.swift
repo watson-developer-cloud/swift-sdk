@@ -77,6 +77,14 @@ public struct JSON {
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
     
+    public func serializeString() throws -> String {
+        let data = try serialize()
+        guard let string = String(data: data, encoding: .utf8) else {
+            throw Error.stringSerializationError
+        }
+        return string
+    }
+    
     private func value(at path: JSONPathType) throws -> JSON {
         if let dictionary = json as? [String: Any] {
             return try path.value(in: dictionary)
@@ -141,6 +149,18 @@ public struct JSON {
             decoded[key] = try Decoded(json: JSON(json: value))
         }
         return decoded
+    }
+    
+    public func getJSON(at path: JSONPathType...) throws -> Any {
+        return try value(at: path).json
+    }
+    
+    public func getDictionary(at path: JSONPathType...) throws -> [String: JSON] {
+        let json = try value(at: path)
+        guard let dictionary = json.json as? [String: Any] else {
+            throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
+        }
+        return dictionary.map { JSON(json: $0) }
     }
 }
 

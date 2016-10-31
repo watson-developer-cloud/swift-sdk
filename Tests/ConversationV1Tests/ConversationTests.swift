@@ -32,7 +32,7 @@ class ConversationTests: XCTestCase {
         instantiateConversation()
     }
     
-    static var allTests : [(String, (ConversationTests) -> throws Void)] {
+    static var allTests : [(String, (ConversationTests) -> () throws -> Void)] {
         return [
             ("instantiateConversation", instantiateConversation),
             ("testMessage", testMessage),

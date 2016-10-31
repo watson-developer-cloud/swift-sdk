@@ -32,11 +32,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         instantiateNaturalLanguageClassifier()
     }
     
-    static var allTests : [(String, (NaturalLanguageClassifierTests) -> throws Void)] {
+    static var allTests : [(String, (NaturalLanguageClassifierTests) -> () throws -> Void)] {
         return [
-            ("instantiateNaturalLanguageClassifier", instantiateNaturalLanguageClassifier),
-            ("getAllClassifiers", getAllClassifiers),
-            ("createTrainedClassifier", createTrainedClassifier),
             ("testCreateAndDelete", testCreateAndDelete),
             ("testCreateAndDeleteClassifierWithoutOptionalName", testCreateAndDeleteClassifierWithoutOptionalName),
             ("testGetAllClassifiers", testGetAllClassifiers),

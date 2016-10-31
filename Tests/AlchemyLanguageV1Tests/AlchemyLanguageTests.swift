@@ -28,7 +28,7 @@ class AlchemyLanguageTests: XCTestCase {
         alchemyLanguage = AlchemyLanguage(apiKey: Credentials.AlchemyAPIKey)
     }
     
-    static var allTests : [(String, (AlchemyLanguageTests) -> throws Void)] {
+    static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
         return [
             ("testGetAuthorsURL", testGetAuthorsURL),
             ("testGetAuthorsHtml", testGetAuthorsHtml),

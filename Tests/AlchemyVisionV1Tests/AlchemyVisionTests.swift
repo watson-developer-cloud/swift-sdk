@@ -50,7 +50,7 @@ class AlchemyVisionTests: XCTestCase {
         loadResources()
     }
     
-    static var allTests : [(String, (AlchemyLanguageTests) -> throws Void)] {
+    static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
         return [
             ("testGetAuthorsURL", testGetAuthorsURL),
             ("testGetAuthorsHtml", testGetAuthorsHtml),

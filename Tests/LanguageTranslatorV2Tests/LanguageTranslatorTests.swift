@@ -32,10 +32,8 @@ class LanguageTranslatorTests: XCTestCase {
         deleteStaleCustomModels()
     }
     
-    static var allTests : [(String, (LanguageTranslatorTests) -> throws Void)] {
+    static var allTests : [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
         return [
-            ("instantiateLanguageTranslator", instantiateLanguageTranslator),
-            ("deleteStaleCustomModels", deleteStaleCustomModels),
             ("testGetModelsAll", testGetModelsAll),
             ("testGetModelsBySourceLanguage", testGetModelsBySourceLanguage),
             ("testGetModelsByTargetLanguage", testGetModelsByTargetLanguage),

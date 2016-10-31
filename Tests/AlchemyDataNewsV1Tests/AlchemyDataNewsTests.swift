@@ -23,14 +23,14 @@ class AlchemyDataNewsTests: XCTestCase {
     private let timeout: TimeInterval = 5.0
     
     static var allTests : [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
-    return [
-	("testGetNews", testGetNews),
-	("testGetNewsWithQuery", testGetNewsWithQuery),
-	("testGetNewsWithInvalidQuery", testGetNewsWithInvalidQuery),
-	("testGetNewsWithInvalidReturnQuery", testGetNewsWithInvalidReturnQuery),
-	("testGetNewsInvalidTimeframe", testGetNewsInvalidTimeframe)
-    ]
-}
+        return [
+            ("testGetNews", testGetNews),
+            ("testGetNewsWithQuery", testGetNewsWithQuery),
+            ("testGetNewsWithInvalidQuery", testGetNewsWithInvalidQuery),
+            ("testGetNewsWithInvalidReturnQuery", testGetNewsWithInvalidReturnQuery),
+            ("testGetNewsInvalidTimeframe", testGetNewsInvalidTimeframe)
+        ]
+    }
 
     override func setUp() {
         super.setUp()

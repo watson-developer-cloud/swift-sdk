@@ -35,10 +35,8 @@ class DocumentConversionTests: XCTestCase {
         loadResources()
     }
     
-    static var allTests : [(String, (DocumentConversionTests) -> throws Void)] {
+    static var allTests : [(String, (DocumentConversionTests) -> () throws -> Void)] {
         return [
-            ("instantiateDocumentConversion", instantiateDocumentConversion),
-            ("loadResources", loadResources),
             ("testConvertToText", testConvertToText),
             ("testConvertToHtml", testConvertToHtml),
             ("testConvertToTextCreateConfig", testConvertToTextCreateConfig),

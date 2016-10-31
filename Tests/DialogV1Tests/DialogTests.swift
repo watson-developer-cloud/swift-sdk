@@ -33,12 +33,10 @@ class DialogTests: XCTestCase {
         continueAfterFailure = false
         instantiateDialog()
         lookupDialog()
-    }static var allTests : [(String, (DialogTests) -> throws Void)] {
+    }
+    
+    static var allTests : [(String, (DialogTests) -> () throws -> Void)] {
         return [
-            ("instantiateDialog", instantiateDialog),
-            ("lookupDialog", lookupDialog),
-            ("createDialog", createDialog),
-            ("createDialogName", createDialogName),
             ("testGetDialogs", testGetDialogs),
             ("testCreateDelete", testCreateDelete),
             ("testGetDialogFile", testGetDialogFile),

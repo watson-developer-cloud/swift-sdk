@@ -24,7 +24,7 @@ internal struct RecognitionStop: JSONEncodable {
     private let action = "stop"
 
     /** Serialize a `RecognitionStop` model to JSON. */
-    internal func toJSON() -> JSON {
-        return .dictionary(["action": .string(action)])
+    internal func toJSONObject() -> Any {
+        return ["action": action]
     }
 }

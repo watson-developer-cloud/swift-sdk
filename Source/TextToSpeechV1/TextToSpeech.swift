@@ -334,7 +334,7 @@ public class TextToSpeech {
             dict["description"] = description
         }
         
-        guard let body = try? dict.toJSON().serialize() else {
+        guard let body = try? JSON(dictionary: dict).serialize() else {
             let failureReason = "Custom voice model metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -652,7 +652,7 @@ public class TextToSpeech {
         
         // construct the body
         let dict = ["translation": translation]
-        guard let body = try? dict.toJSON().serialize() else {
+        guard let body = try? JSON(dictionary: dict).serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

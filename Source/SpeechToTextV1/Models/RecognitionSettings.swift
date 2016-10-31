@@ -94,41 +94,41 @@ public struct RecognitionSettings: JSONEncodable {
     }
 
     /** Used internally to serialize a `RecognitionSettings` model to JSON. */
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["action"] = .string(action)
-        json["content-type"] = .string(contentType.toString)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["action"] = action
+        json["content-type"] = contentType.toString
         if let continuous = continuous {
-            json["continuous"] = .bool(continuous)
+            json["continuous"] = continuous
         }
         if let inactivityTimeout = inactivityTimeout {
-            json["inactivity_timeout"] = .int(inactivityTimeout)
+            json["inactivity_timeout"] = inactivityTimeout
         }
         if let keywords = keywords {
-            json["keywords"] = keywords.toJSON()
+            json["keywords"] = keywords
         }
         if let keywordsThreshold = keywordsThreshold {
-            json["keywords_threshold"] = .double(keywordsThreshold)
+            json["keywords_threshold"] = keywordsThreshold
         }
         if let maxAlternatives = maxAlternatives {
-            json["max_alternatives"] = .int(maxAlternatives)
+            json["max_alternatives"] = maxAlternatives
         }
         if let interimResults = interimResults {
-            json["interim_results"] = .bool(interimResults)
+            json["interim_results"] = interimResults
         }
         if let wordAlternativesThreshold = wordAlternativesThreshold {
-            json["word_alternatives_threshold"] = .double(wordAlternativesThreshold)
+            json["word_alternatives_threshold"] = wordAlternativesThreshold
         }
         if let wordConfidence = wordConfidence {
-            json["word_confidence"] = .bool(wordConfidence)
+            json["word_confidence"] = wordConfidence
         }
         if let timestamps = timestamps {
-            json["timestamps"] = .bool(timestamps)
+            json["timestamps"] = timestamps
         }
         if let filterProfanity = filterProfanity {
-            json["profanity_filter"] = .bool(filterProfanity)
+            json["profanity_filter"] = filterProfanity
         }
-        return .dictionary(json)
+        return json
     }
 }
 

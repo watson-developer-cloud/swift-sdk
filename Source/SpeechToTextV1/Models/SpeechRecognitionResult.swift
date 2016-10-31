@@ -16,7 +16,6 @@
 
 import Foundation
 import RestKit
-import RestKit
 
 /** A result from a Speech to Text recognition request. */
 public struct SpeechRecognitionResult: JSONDecodable {

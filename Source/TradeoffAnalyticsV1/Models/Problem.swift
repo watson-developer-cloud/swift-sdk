@@ -48,12 +48,12 @@ public struct Problem: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Problem` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["columns"] = .array(columns.map { column in column.toJSON() })
-        json["options"] = .array(options.map { option in option.toJSON() })
-        json["subject"] = .string(subject)
-        return .dictionary(json)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["columns"] = columns.map { column in column.toJSONObject() }
+        json["options"] = options.map { option in option.toJSONObject() }
+        json["subject"] = subject
+        return json
     }
     
     /// Used internally to initialize a `Problem` model from JSON.
@@ -210,37 +210,37 @@ public struct Column: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to serialize a `Column` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["key"] = .string(key)
-        json["type"] = type?.toJSON()
-        json["goal"] = goal?.toJSON()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["key"] = key
+        json["type"] = type?.rawValue
+        json["goal"] = goal?.rawValue
         if let isObjective = isObjective {
-            json["is_objective"] = .bool(isObjective)
+            json["is_objective"] = isObjective
         }
         json["range"] = range?.toJSON()
         if let preference = preference {
-            json["preference"] = .array(preference.map { .string($0) })
+            json["preference"] = preference
         }
         if let significantGain = significantGain {
-            json["significant_gain"] = .double(significantGain)
+            json["significant_gain"] = significantGain
         }
         if let significantLoss = significantLoss {
-            json["significant_loss"] = .double(significantLoss)
+            json["significant_loss"] = significantLoss
         }
         if let insignificantLoss = insignificantLoss {
-            json["insignificant_loss"] = .double(insignificantLoss)
+            json["insignificant_loss"] = insignificantLoss
         }
         if let format = format {
-            json["format"] = .string(format)
+            json["format"] = format
         }
         if let fullName = fullName {
-            json["full_name"] = .string(fullName)
+            json["full_name"] = fullName
         }
         if let description = description {
-            json["description"] = .string(description)
+            json["description"] = description
         }
-        return .dictionary(json)
+        return json
     }
     
     /// Used internally to initialize a `Column` model from JSON.
@@ -300,12 +300,12 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
     case string(Swift.String)
     
     /// Used internally to serialize an `OptionValue` model to JSON.
-    public func toJSON() -> JSON {
+    public func toJSONObject() -> Any {
         switch self {
-        case .int(let x): return .int(x)
-        case .double(let x): return .double(x)
-        case .date(let x): return .string(Range.dateFormatter.string(from: x))
-        case .string(let x): return .string(x)
+        case .int(let x): return x
+        case .double(let x): return x
+        case .date(let x): return Range.dateFormatter.string(from: x)
+        case .string(let x): return x
         }
     }
     
@@ -359,19 +359,19 @@ public enum Range: JSONEncodable, JSONDecodable {
     }()
     
     /// Used internally to serialize a `Range` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
         switch self {
         case .dateRange(let low, let high):
-            json["low"] = .string(Range.dateFormatter.string(from: low))
-            json["high"] = .string(Range.dateFormatter.string(from: high))
-            return .dictionary(json)
+            json["low"] = Range.dateFormatter.string(from: low)
+            json["high"] = Range.dateFormatter.string(from: high)
+            return json
         case .numericRange(let low, let high):
-            json["low"] = .double(low)
-            json["high"] = .double(high)
-            return .dictionary(json)
+            json["low"] = low
+            json["high"] = high
+            return json
         case .categoricalRange(let categories):
-            return .array(categories.map { .string($0) })
+            return categories
         }
     }
     
@@ -427,7 +427,7 @@ public struct Option: JSONEncodable, JSONDecodable {
     /// Application-specific data available to the hosting application; the service carries but
     /// does not use the data. Used only by the Tradeoff Analytics widget; not part of the
     /// problem definition.
-    public let appData: JSON?
+    public let appData: Any?
     
     /**
      Initialize an `Option` for a decision problem (i.e. a row in a tabular representation of
@@ -454,7 +454,7 @@ public struct Option: JSONEncodable, JSONDecodable {
         values: [String: OptionValue],
         name: String? = nil,
         descriptionHTML: String? = nil,
-        appData: JSON? = nil)
+        appData: Any? = nil)
     {
         self.key = key
         self.values = values
@@ -464,20 +464,20 @@ public struct Option: JSONEncodable, JSONDecodable {
     }
  
     /// Used internally to serialize an `Option` model to JSON.
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["key"] = .string(key)
-        json["values"] = .dictionary(values.map { $0.toJSON() })
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["key"] = key
+        json["values"] = values.map { $0.toJSONObject() }
         if let name = name {
-            json["name"] = .string(name)
+            json["name"] = name
         }
         if let descriptionHTML = descriptionHTML {
-            json["description_html"] = .string(descriptionHTML)
+            json["description_html"] = descriptionHTML
         }
         if let appData = appData {
             json["app_data"] = appData
         }
-        return .dictionary(json)
+        return json
     }
 
     /// Used internally to initialize an `Option` model from JSON.
@@ -488,6 +488,6 @@ public struct Option: JSONEncodable, JSONDecodable {
         }
         name = try? json.getString(at: "name")
         descriptionHTML = try? json.getString(at: "description_html")
-        appData = json["app_data"]
+        appData = try json.getJSON(at: "app_data")
     }
 }

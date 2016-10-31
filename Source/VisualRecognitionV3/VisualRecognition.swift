@@ -683,20 +683,18 @@ public class VisualRecognition {
         -> URL
     {
         // construct JSON dictionary
-        var json = [String: JSON]()
+        var json = [String: Any]()
         if let url = url {
-            json["url"] = JSON.string(url)
+            json["url"] = url
         }
         if let classifierIDs = classifierIDs {
-            let ids_json = classifierIDs.map { id in JSON.string(id) }
-            json["classifier_ids"] = JSON.array(ids_json)
+            json["classifier_ids"] = classifierIDs
         }
         if let owners = owners {
-            let owners_json = owners.map { owner in JSON.string(owner) }
-            json["owners"] = JSON.array(owners_json)
+            json["owners"] = owners
         }
         if let showLowConfidence = showLowConfidence {
-            json["show_low_confidence"] = JSON.bool(showLowConfidence)
+            json["show_low_confidence"] = showLowConfidence
         }
         
         // create a globally unique file name in a temporary directory
@@ -706,7 +704,7 @@ public class VisualRecognition {
         let fileURL = directoryURL.appendingPathComponent(fileName)!
         
         // save JSON dictionary to file
-        let data = try JSON.dictionary(json).serialize()
+        let data = try JSON(dictionary: json).serialize()
         try data.write(to: fileURL, options: .atomicWrite)
         
         return fileURL

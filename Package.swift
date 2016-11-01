@@ -24,5 +24,19 @@ let package = Package(
     ],
     dependencies: [
     ],
-    exclude: ["Source/AlchemyVisionV1", "Source/AlchemyLanguageV1", "Source/ConversationV1", "Source/DialogV1", "Source/DocumentConversionV1", "Source/LanguageTranslatorV2", "Source/NaturalLanguageClassifierV1", "Source/PersonalityInsightsV2", "Source/RelationshipExtractionV1Beta", "Source/RetrieveAndRankV1", "Source/SpeechToTextV1", "Source/TextToSpeechV1", "Source/ToneAnalyzerV3", "Source/TradeoffAnalyticsV1", "Source/VisualRecognitionV3"]
+    exclude: ["Source/AlchemyVisionV1",
+              "Source/AlchemyLanguageV1",
+              "Source/ConversationV1",
+              "Source/DialogV1",
+              "Source/DocumentConversionV1",
+              "Source/LanguageTranslatorV2",
+              "Source/NaturalLanguageClassifierV1",
+              "Source/PersonalityInsightsV2",
+              "Source/RelationshipExtractionV1Beta",
+              "Source/RetrieveAndRankV1",
+              "Source/SpeechToTextV1",
+              "Source/TextToSpeechV1",
+              "Source/ToneAnalyzerV3",
+              "Source/TradeoffAnalyticsV1",
+              "Source/VisualRecognitionV3"]
 )

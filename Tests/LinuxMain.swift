@@ -1,13 +1,13 @@
 import XCTest
 //@testable import WatsonDeveloperCloudTests
 @testable import AlchemyDataNewsV1Tests
-@testable import AlchemyLanguageV1
-@testable import AlchemyVisionV1
-@testable import ConversationV1
-@testable import DialogV1
-@testable import DocumentConversionV1
-@testable import LanguageTranslatorV2
-@testable import NaturalLanguageClassifierV1
+@testable import AlchemyLanguageV1Tests
+@testable import AlchemyVisionV1Tests
+@testable import ConversationV1Tests
+@testable import DialogV1Tests
+@testable import DocumentConversionV1Tests
+@testable import LanguageTranslatorV2Tests
+@testable import NaturalLanguageClassifierV1Tests
 @testable import PersonalityInsightsV2Tests
 @testable import RelationshipExtractionV1BetaTests
 @testable import RetrieveAndRankV1Tests

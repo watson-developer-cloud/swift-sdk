@@ -136,6 +136,14 @@ public struct RestRequest {
                 return
             }
             
+            // can the data be parsed as an error?
+            if let dataToError = dataToError, let error = dataToError(data) {
+                let result = Result<T>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
             // parse json object
             let result: Result<T>
             do {
@@ -176,6 +184,14 @@ public struct RestRequest {
             guard let data = data else {
                 let result = Result<[T]>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // can the data be parsed as an error?
+            if let dataToError = dataToError, let error = dataToError(data) {
+                let result = Result<[T]>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }

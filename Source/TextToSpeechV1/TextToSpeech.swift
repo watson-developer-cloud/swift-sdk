@@ -245,7 +245,7 @@ public class TextToSpeech {
                 case .none:
                     if audioFormat == .wav {
                         // repair the WAV header
-                        let wav = NSMutableData(data: data)
+                        var wav = data
                         guard TextToSpeech.isWAVFile(data: wav) else {
                             let failureReason = "Returned audio is in an unexpected format."
                             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -253,8 +253,8 @@ public class TextToSpeech {
                             failure?(error)
                             return
                         }
-                        TextToSpeech.repairWAVHeader(data: wav)
-                        success(wav as Data)
+                        TextToSpeech.repairWAVHeader(data: &wav)
+                        success(wav)
                     } else {
                         success(data)
                     }
@@ -696,9 +696,9 @@ public class TextToSpeech {
      - returns: A String initialized by converting the given big-endian byte buffer into
             Unicode characters using a UTF-8 encoding.
      */
-    private static func dataToUTF8String(data: NSData, offset: Int, length: Int) -> String? {
-        let range = NSMakeRange(offset, length)
-        let subdata = data.subdata(with: range)
+    private static func dataToUTF8String(data: Data, offset: Int, length: Int) -> String? {
+        let range = Range(uncheckedBounds: (lower: offset, upper: offset + length))
+        let subdata = data.subdata(in: range)
         return String(data: subdata, encoding: String.Encoding.utf8)
     }
     
@@ -711,11 +711,11 @@ public class TextToSpeech {
      - returns: An Int initialized by converting the given little-endian byte buffer into
             an unsigned 32-bit integer.
      */
-    private static func dataToUInt32(data: NSData, offset: Int) -> Int {
-        var num: UInt32 = 0
+    private static func dataToUInt32(data: Data, offset: Int) -> Int {
+        var num: UInt8 = 0
         let length = 4
-        let range = NSMakeRange(offset, length)
-        data.getBytes(&num, range: range)
+        let range = Range(uncheckedBounds: (lower: offset, upper: offset + length))
+        data.copyBytes(to: &num, from: range)
         return Int(num)
     }
     
@@ -731,7 +731,7 @@ public class TextToSpeech {
      
      - returns: `true` if the given data is a WAV-formatted audio file; otherwise, false.
      */
-    private static func isWAVFile(data: NSData) -> Bool {
+    private static func isWAVFile(data: Data) -> Bool {
         
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
@@ -756,17 +756,17 @@ public class TextToSpeech {
      - parameter data: The WAV-formatted audio file produced by Watson Text to Speech. The
             byte data will be analyzed and repaired in-place.
      */
-    private static func repairWAVHeader(data: NSMutableData) {
+    private static func repairWAVHeader(data: inout Data) {
         
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
         
         // update RIFF chunk size
-        let fileLength = data.length
+        let fileLength = data.count
         var riffChunkSize = UInt32(fileLength - 8)
-        let riffChunkSizeRange = NSMakeRange(4, 4)
-        data.replaceBytes(in: riffChunkSizeRange, withBytes: &riffChunkSize)
+        let riffChunkSizeData = Data(bytes: &riffChunkSize, count: MemoryLayout<UInt32>.stride)
+        data.replaceSubrange(Range(uncheckedBounds: (lower: 4, upper: 8)), with: riffChunkSizeData)
         
         // find data subchunk
         var subchunkID: String?
@@ -775,7 +775,7 @@ public class TextToSpeech {
         let fieldSize = 4
         while true {
             // prevent running off the end of the byte buffer
-            if fieldOffset + 2*fieldSize >= data.length {
+            if fieldOffset + 2*fieldSize >= data.count {
                 return
             }
             
@@ -792,10 +792,10 @@ public class TextToSpeech {
         }
         
         // compute data subchunk size (excludes id and size fields)
-        var dataSubchunkSize = UInt32(data.length - fieldOffset - fieldSize)
+        var dataSubchunkSize = UInt32(data.count - fieldOffset - fieldSize)
         
         // update data subchunk size
-        let dataSubchunkSizeRange = NSMakeRange(fieldOffset, fieldSize)
-        data.replaceBytes(in: dataSubchunkSizeRange, withBytes: &dataSubchunkSize)
+        let dataSubchunkSizeData = Data(bytes: &dataSubchunkSize, count: MemoryLayout<UInt32>.stride)
+        data.replaceSubrange(Range(uncheckedBounds: (lower: fieldOffset, upper: fieldOffset+fieldSize)), with: dataSubchunkSizeData)
     }
 }

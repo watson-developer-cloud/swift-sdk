@@ -31,6 +31,7 @@ class DocumentConversionTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        continueAfterFailure = false
         instantiateDocumentConversion()
         loadResources()
     }

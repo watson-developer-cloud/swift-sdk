@@ -301,23 +301,7 @@ public enum Credentials {
 public enum RestError: Error {
     case noData
     case serializationError
-}
-
-public class MultipartFormData {
-    public init() {
-        
-    }
-    
-    public func append(_ data: Data, withName: String) {
-        // TODO: implement this function
-    }
-    
-    public func append(_ fileURL: URL, withName: String) {
-        // TODO: implement this function
-    }
-    
-    public func toData() -> Data {
-        // TODO: implement this function
-        return Data()
-    }
+    case encodingError
+    case fileManagerError
+    case invalidFile
 }

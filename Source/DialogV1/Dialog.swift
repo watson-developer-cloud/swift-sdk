@@ -130,6 +130,10 @@ public class Dialog {
         let nameData = name.data(using: String.Encoding.utf8)!
         multipartFormData.append(nameData, withName: "name")
         multipartFormData.append(fileURL, withName: "file")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -138,7 +142,8 @@ public class Dialog {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            messageBody: multipartFormData.toData()
+            contentType: multipartFormData.contentType,
+            messageBody: body
         )
 
         // execute REST request
@@ -304,6 +309,10 @@ public class Dialog {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(fileURL, withName: "file")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -311,7 +320,7 @@ public class Dialog {
             url: serviceURL + "/v1/dialogs/\(dialogID)",
             credentials: credentials,
             headerParameters: defaultHeaders,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
 
         // execute REST request

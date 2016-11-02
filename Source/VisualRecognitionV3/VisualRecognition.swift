@@ -163,6 +163,10 @@ public class VisualRecognition {
         if let name = name.data(using: String.Encoding.utf8) {
             multipartFormData.append(name, withName: "name")
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -171,8 +175,9 @@ public class VisualRecognition {
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
@@ -315,6 +320,10 @@ public class VisualRecognition {
             let name = "negative_examples"
             multipartFormData.append(examples, withName: name)
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -323,8 +332,9 @@ public class VisualRecognition {
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
@@ -480,6 +490,10 @@ public class VisualRecognition {
         if let parameters = parameters {
             multipartFormData.append(parameters, withName: "parameters")
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -488,8 +502,9 @@ public class VisualRecognition {
             credentials: .apiKey,
             headerParameters: headerParameters,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
@@ -561,6 +576,10 @@ public class VisualRecognition {
         if let parameters = parameters {
             multipartFormData.append(parameters, withName: "parameters")
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -569,8 +588,9 @@ public class VisualRecognition {
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
@@ -641,7 +661,10 @@ public class VisualRecognition {
         if let parameters = parameters {
             multipartFormData.append(parameters, withName: "parameters")
         }
-        
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -650,8 +673,9 @@ public class VisualRecognition {
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request

@@ -119,6 +119,10 @@ public class NaturalLanguageClassifier {
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingMetadata, withName: "training_metadata")
         multipartFormData.append(trainingData, withName: "training_data")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -127,7 +131,8 @@ public class NaturalLanguageClassifier {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            messageBody: multipartFormData.toData()
+            contentType: multipartFormData.contentType,
+            messageBody: body
         )
         
         // execute REST request

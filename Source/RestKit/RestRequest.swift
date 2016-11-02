@@ -263,8 +263,21 @@ public struct RestRequest {
         }
     }
     
-    public func download(to: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
-        // TODO: implement this function
+    public func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
+        let task = session.downloadTask(with: request) { (source, response, error) in
+            guard let source = source else {
+                completionHandler(nil, RestError.invalidFile)
+                return
+            }
+            let fileManager = FileManager.default
+            do {
+                try fileManager.moveItem(at: source, to: destination)
+            } catch {
+                completionHandler(nil, RestError.fileManagerError)
+            }
+            completionHandler(response as? HTTPURLResponse, error)
+        }
+        task.resume()
     }
 }
 

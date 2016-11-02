@@ -226,13 +226,24 @@ public struct RestRequest {
         }
     }
     
-    public func responseString(completionHandler: @escaping (RestResponse<String>) -> Void) {
+    public func responseString(
+        dataToError: ((Data) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<String>) -> Void)
+    {
         response() { data, response, error in
             
             // ensure data is not nil
             guard let data = data else {
                 let result = Result<String>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // can the data be parsed as an error?
+            if let dataToError = dataToError, let error = dataToError(data) {
+                let result = Result<String>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }

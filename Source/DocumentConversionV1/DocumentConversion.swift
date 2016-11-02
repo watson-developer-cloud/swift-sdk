@@ -99,6 +99,10 @@ public class DocumentConversion {
         if let type = fileType?.rawValue.data(using: String.Encoding.utf8) {
             multipartFormData.append(type, withName: "type")
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -110,12 +114,13 @@ public class DocumentConversion {
             url: serviceURL + "/v1/convert_document",
             credentials: credentials,
             headerParameters: defaultHeaders,
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
-        request.responseString() { response in
+        request.responseString(dataToError: dataToError) { response in
             switch response.result {
             case .success(let result): success(result)
             case .failure(let error): failure?(error)

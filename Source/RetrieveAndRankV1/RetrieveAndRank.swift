@@ -553,8 +553,10 @@ public class RetrieveAndRank {
         success: ((Void) -> Void)? = nil) {
         
         // construct REST body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(contentFile, withName: "body")
+        guard let body = try? Data(contentsOf: contentFile) else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -563,7 +565,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: contentType,
-            messageBody: multipartFormData.toData()
+            messageBody: body
         )
         
         // execute REST request
@@ -730,12 +732,10 @@ public class RetrieveAndRank {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RankerDetails) -> Void)
     {
-        // construct body
+        // construct training metadata
         var json = [String: String]()
         if let name = name {
             json["name"] = name
-        } else {
-            json["name"] = ""
         }
         guard let trainingMetadata = try? JSON(dictionary: json).serialize() else {
             let failureReason = "Ranker metadata could not be serialized to JSON."
@@ -749,6 +749,10 @@ public class RetrieveAndRank {
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingDataFile, withName: "training_data")
         multipartFormData.append(trainingMetadata, withName: "training_metadata")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -757,7 +761,8 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            messageBody: multipartFormData.toData()
+            contentType: multipartFormData.contentType,
+            messageBody: body
         )
         
         // execute REST request
@@ -791,6 +796,10 @@ public class RetrieveAndRank {
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(resultsFile, withName: "answer_data")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -799,7 +808,8 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            messageBody: multipartFormData.toData()
+            contentType: multipartFormData.contentType,
+            messageBody: body
         )
         
         request.responseObject(dataToError: dataToError) {

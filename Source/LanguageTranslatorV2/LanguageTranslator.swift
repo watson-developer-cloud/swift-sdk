@@ -155,8 +155,9 @@ public class LanguageTranslator {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: multipartFormData.toData()
+            messageBody: try! multipartFormData.toData() // TODO
         )
 
         // execute REST request

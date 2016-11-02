@@ -98,7 +98,7 @@ public struct JSON {
     private func value(at path: [JSONPathType]) throws -> JSON {
         var value = self
         for fragment in path {
-            value = try self.value(at: fragment)
+            value = try value.value(at: fragment)
         }
         return value
     }

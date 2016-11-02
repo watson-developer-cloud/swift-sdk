@@ -226,13 +226,24 @@ public struct RestRequest {
         }
     }
     
-    public func responseString(completionHandler: @escaping (RestResponse<String>) -> Void) {
+    public func responseString(
+        dataToError: ((Data) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<String>) -> Void)
+    {
         response() { data, response, error in
             
             // ensure data is not nil
             guard let data = data else {
                 let result = Result<String>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // can the data be parsed as an error?
+            if let dataToError = dataToError, let error = dataToError(data) {
+                let result = Result<String>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -252,8 +263,21 @@ public struct RestRequest {
         }
     }
     
-    public func download(to: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
-        // TODO: implement this function
+    public func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
+        let task = session.downloadTask(with: request) { (source, response, error) in
+            guard let source = source else {
+                completionHandler(nil, RestError.invalidFile)
+                return
+            }
+            let fileManager = FileManager.default
+            do {
+                try fileManager.moveItem(at: source, to: destination)
+            } catch {
+                completionHandler(nil, RestError.fileManagerError)
+            }
+            completionHandler(response as? HTTPURLResponse, error)
+        }
+        task.resume()
     }
 }
 
@@ -277,23 +301,7 @@ public enum Credentials {
 public enum RestError: Error {
     case noData
     case serializationError
-}
-
-public class MultipartFormData {
-    public init() {
-        
-    }
-    
-    public func append(_ data: Data, withName: String) {
-        // TODO: implement this function
-    }
-    
-    public func append(_ fileURL: URL, withName: String) {
-        // TODO: implement this function
-    }
-    
-    public func toData() -> Data {
-        // TODO: implement this function
-        return Data()
-    }
+    case encodingError
+    case fileManagerError
+    case invalidFile
 }

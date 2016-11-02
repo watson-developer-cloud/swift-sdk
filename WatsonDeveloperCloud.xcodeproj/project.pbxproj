@@ -44,6 +44,7 @@
 		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		12740EFD1D40060200F7DCCE /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
+		12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */; };
 		12DBA9371D512D9100966E41 /* ranker_train_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9361D512D9100966E41 /* ranker_train_data.csv */; };
 		12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9381D52405E00966E41 /* ranker_test_data.csv */; };
 		12DEF7BD1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */; };
@@ -691,6 +692,7 @@
 		124C2E121D19E2FA00D9F602 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
+		12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechPlaybackTests.swift; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
@@ -1329,6 +1331,7 @@
 			isa = PBXGroup;
 			children = (
 				124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */,
+				12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */,
 			);
 			name = Tests;
 			path = ../../Tests/TextToSpeechV1Tests;
@@ -3355,6 +3358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6C7B4A1D8C960300CD97FA /* Credentials.swift in Sources */,
+				12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */,
 				124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

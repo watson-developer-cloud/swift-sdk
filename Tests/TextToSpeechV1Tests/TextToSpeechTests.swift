@@ -16,18 +16,13 @@
 
 import XCTest
 import TextToSpeechV1
-import AVFoundation
+import Foundation
 
 class TextToSpeechTests: XCTestCase {
     
     private var textToSpeech: TextToSpeech!
     private let timeout: TimeInterval = 5.0
-    private let playAudio = true
     private let text = "Swift at IBM is awesome. You should try it!"
-    private let germanText = "Erst denken, dann handeln."
-    private let japaneseText = "こんにちは"
-    private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
-                             "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
     private let allVoices: [SynthesisVoice] = [
         .de_Birgit, .de_Dieter, .gb_Kate, .es_Enrique, .us_Allison, .us_Lisa, .us_Michael,
         .es_Laura, .us_Sofia, .fr_Renee, .it_Francesca, .jp_Emi, .br_Isabela
@@ -38,15 +33,10 @@ class TextToSpeechTests: XCTestCase {
             ("testGetVoices", testGetVoices),
             ("testGetVoice", testGetVoice),
             ("testGetPronunciation", testGetPronunciation),
-            ("testSynthesizeDefault", testSynthesizeDefault),
-            ("testSynthesizeLisa", testSynthesizeLisa),
-            ("testSynthesizeDieter", testSynthesizeDieter),
-            ("testSynthesizeEmi", testSynthesizeEmi),
             ("testSynthesizeOpus", testSynthesizeOpus),
             ("testSynthesizeWAV", testSynthesizeWAV),
             ("testSynthesizeFLAC", testSynthesizeFLAC),
             ("testSynthesizeL16", testSynthesizeL16),
-            ("testSynthesizeSSML", testSynthesizeSSML),
             ("testGetCustomizations", testGetCustomizations),
             ("testCreateAndDeleteCustomization", testCreateAndDeleteCustomization),
             ("testCreateUpdateNameAndDeleteCustomVoiceModel", testCreateUpdateNameAndDeleteCustomVoiceModel),
@@ -168,97 +158,6 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
-    /** Synthesize text to spoken audio using the default parameters. */
-    func testSynthesizeDefault() {
-        let description = "Synthesize text to spoken audio using the default parameters."
-        let expectation = self.expectation(description: description)
-        
-        textToSpeech.synthesize(text, failure: failWithError) { data in
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(3)
-                }
-            } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Synthesize text to spoken audio using the Lisa voice. */
-    func testSynthesizeLisa() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-        
-        textToSpeech.synthesize(text, voice: .us_Lisa, audioFormat: .wav, failure: failWithError) {
-            data in
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(3)
-                }
-            } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Synthesize text to spoken audio using the Dieter voice. */
-    func testSynthesizeDieter() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-        
-        textToSpeech.synthesize(germanText, voice: .de_Dieter, audioFormat: .wav, failure: failWithError) {
-            data in
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(2)
-                }
-            } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Synthesize text to spoken audio using the Emi voice. */
-    func testSynthesizeEmi() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-        
-        textToSpeech.synthesize(japaneseText, voice: .jp_Emi, audioFormat: .wav, failure: failWithError) {
-            data in
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(2)
-                }
-            } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
     /** Synthesize text to spoken audio in Opus format. */
     func testSynthesizeOpus() {
         let description = "Synthesize text to spoken audio."
@@ -302,28 +201,6 @@ class TextToSpeechTests: XCTestCase {
         
         textToSpeech.synthesize(text, audioFormat: .l16, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Synthesize SSML to spoken audio. */
-    func testSynthesizeSSML() {
-        let description = "Synthesize SSML to spoken audio."
-        let expectation = self.expectation(description: description)
-        
-        textToSpeech.synthesize(ssmlString, failure: failWithError) { data in
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(1)
-                }
-            } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
-            }
             expectation.fulfill()
         }
         waitForExpectations()

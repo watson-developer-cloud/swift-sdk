@@ -218,7 +218,9 @@ public struct Column: JSONEncodable, JSONDecodable {
         if let isObjective = isObjective {
             json["is_objective"] = isObjective
         }
-        json["range"] = range?.toJSON()
+        if let range = range {
+            json["range"] = range.toJSONObject()
+        }
         if let preference = preference {
             json["preference"] = preference
         }

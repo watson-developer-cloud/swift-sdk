@@ -338,9 +338,13 @@ public class RetrieveAndRank {
         let destinationURL = downloads.appendingPathComponent(filename)
         
         // execute REST request
-        request.responseData { response in
+        request.download(to: destinationURL) { response, error in
+            guard error == nil else {
+                failure?(error!)
+                return
+            }
             
-            guard let statusCode = response.response?.statusCode else {
+            guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -355,8 +359,6 @@ public class RetrieveAndRank {
                 failure?(error)
                 return
             }
-            
-            // TODO: how to handle JSON data for failed download?
             
             success(destinationURL)
         }

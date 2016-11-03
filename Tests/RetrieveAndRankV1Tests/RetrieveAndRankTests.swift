@@ -382,9 +382,11 @@ class RetrieveAndRankTests: XCTestCase {
         retrieveAndRank.getSolrConfiguration(
             withName: trainedConfigurationName,
             fromSolrClusterID: trainedClusterID,
-            failure: failWithError) { url in
-            
-            XCTAssertNotNil(url)
+            failure: failWithError) { file in
+                
+            let fileManager = FileManager.default
+            XCTAssertTrue(fileManager.fileExists(atPath: file.path))
+            try! fileManager.removeItem(at: file)
             expectation.fulfill()
         }
         waitForExpectations()

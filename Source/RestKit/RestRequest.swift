@@ -164,7 +164,7 @@ public struct RestRequest {
                 }
                 result = .success(object)
             } catch {
-                result = .failure(RestError.serializationError)
+                result = .failure(error)
             }
             
             // execute callback
@@ -217,7 +217,7 @@ public struct RestRequest {
                 let objects: [T] = try array.map { json in try json.decode() }
                 result = .success(objects)
             } catch {
-                result = .failure(RestError.serializationError)
+                result = .failure(error)
             }
             
             // execute callback

@@ -383,13 +383,22 @@ public class RetrieveAndRank {
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil) {
         
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(zipFile, withName: "config_zip")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/solr_clusters/\(solrClusterID)/config/\(configName)",
             credentials: credentials,
             headerParameters: defaultHeaders,
-            contentType: "application/zip"
+            contentType: "application/zip",
+            messageBody: body
         )
         
         // execute REST request

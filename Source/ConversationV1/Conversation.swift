@@ -68,6 +68,50 @@ public class Conversation {
         }
     }
     
+    public func message(
+        withWorkspace workspaceID: WorkspaceID,
+        request: MessageRequest? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MessageResponse) -> Void)
+    {
+        // construct body
+        guard let body = try? request?.toJSON().serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct query items
+        var queryItems = [URLQueryItem]()
+        queryItems.append(URLQueryItem(name: "version", value: version))
+        
+        // construct rest request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryItems,
+            messageBody: body
+        )
+        
+        // execute rest request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<MessageResponse>) in
+            switch response.result {
+            case .success(let response): success(response)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+}
+
+
+    
+/**
+    
+    
     /**
      Start a new conversation or get a response to a user's input.
      
@@ -156,3 +200,5 @@ public class Conversation {
         }
     }
 }
+ 
+ */

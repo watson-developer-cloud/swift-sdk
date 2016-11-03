@@ -20,85 +20,35 @@ import RestKit
 /** A term from the request that was identified as an entity. */
 public struct Entity: JSONEncodable, JSONDecodable {
     
-    /// The name of the recognized entity.
-    public let entity: String?
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
     
-    /// The location where the entity value begins and ends in the input text.
-    public let location: EntityLocation?
+    /// The recognized entity from a term in the input.
+    public let entity: String
+    
+    /// The zero-based character offset that indicates
+    /// where the entity value begins in the input text.
+    public let startIndex: Int
+    
+    /// The zero-based character offset that indicates
+    /// where the entity value ends in the input text.
+    public let endIndex: Int
     
     /// The term in the input text that was recognized.
-    public let value: String?
-    
-    /**
-     Create an `Entity`.
- 
-     - parameter entity: The name of the recognized entity.
-     - parameter location: The location where the entity value begins and ends in the input text.
-     - parameter value: The term in the input text that was recognized.
-     */
-    public init(entity: String?, location: EntityLocation?, value: String?) {
-        self.entity = entity
-        self.location = location
-        self.value = value
-    }
+    public let value: String
     
     /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
-        entity = try? json.getString(at: "entity")
-        location = try? json.decode(at: "location")
-        value = try? json.getString(at: "value")
+        self.json = try json.getDictionaryObject()
+        entity = try json.getString(at: "entity")
+        let indices = try json.decodedArray(at: "location", type: Swift.Int)
+        startIndex = indices[0]
+        endIndex = indices[1]
+        value = try json.getString(at: "value")
     }
     
     /// Used internally to serialize an `Entity` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let entity = entity {
-            json["entity"] = entity
-        }
-        if let location = location {
-            json["location"] = location.toJSONObject()
-        }
-        if let value = value {
-            json["value"] = value
-        }
-        return json
-    }
-}
-
-/** The location where an entity value begins and ends in the input text. */
-public struct EntityLocation: JSONEncodable, JSONDecodable {
-    
-    /// The zero-based character offset that indicates
-    /// where an entity value begins in the input text.
-    public let startIndex: Int
-    
-    /// The zero-based character offset that indicates
-    /// where an entity value ends in the input text.
-    public let endIndex: Int
-    
-    /**
-     Create an `EntityLocation`.
- 
-     - parameter startIndex: The zero-based character offset that
-        indicates where an entity value begins in the input text.
-     - parameter endIndex: The zero-based character offset that
-        indicates where an entity value ends in the input text.
-    */
-    public init(startIndex: Int, endIndex: Int) {
-        self.startIndex = startIndex
-        self.endIndex = endIndex
-    }
-    
-    /// Used internally to initialize an `EntityLocation` model from JSON.
-    public init(json: JSON) throws {
-        let indices = try json.decodedArray(type: Swift.Int)
-        startIndex = indices[0]
-        endIndex = indices[1]
-    }
-    
-    /// Used internally to serialize an `EntityLocation` model to JSON.
-    public func toJSONObject() -> Any {
-        let json = [startIndex, endIndex]
         return json
     }
 }

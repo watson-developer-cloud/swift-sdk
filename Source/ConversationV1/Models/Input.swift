@@ -18,31 +18,32 @@ import Foundation
 import RestKit
 
 /** An input object that includes the input text. */
-public struct InputData: JSONEncodable, JSONDecodable {
+public struct Input: JSONEncodable, JSONDecodable {
+    
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
     
     /// The user's input.
-    public let text: String?
+    public let text: String
     
     /**
-     Create an `InputData` with the user's input text.
+     Create an `Input` with the user's input text.
  
      - parameter text: The user's input text.
      */
-    public init(text: String?) {
+    public init(text: String) {
+        self.json = ["text": text]
         self.text = text
     }
     
-    /// Used internally to initialize an `InputData` model from JSON.
+    /// Used internally to initialize an `Input` model from JSON.
     public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
+        self.json = try json.getDictionaryObject()
+        text = try json.getString(at: "text")
     }
     
-    /// Used internally to serialize an `InputData` model to JSON.
+    /// Used internally to serialize an `Input` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let text = text {
-            json["text"] = text
-        }
         return json
     }
 }

@@ -20,38 +20,24 @@ import RestKit
 /** A term from the request that was identified as an intent. */
 public struct Intent: JSONEncodable, JSONDecodable {
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// The name of the recognized intent.
-    public let intent: String?
+    public let intent: String
     
-    /// The confidence score of the intent, between 0 and 1.
-    public let confidence: Double?
-    
-    /**
-     Create an `Intent`.
-
-     - parameter intent: The name of the recognized intent.
-     - parameter confidence: The confidence score of the intent, between 0 and 1.
-     */
-    init(intent: String?, confidence: Double?) {
-        self.intent = intent
-        self.confidence = confidence
-    }
+    /// A decimal percentage that represents the confidence that Watson has in this intent.
+    public let confidence: Double
     
     /// Used internally to initialize an `Intent` model from JSON.
     public init(json: JSON) throws {
-        intent = try? json.getString(at: "intent")
-        confidence = try? json.getDouble(at: "confidence")
+        self.json = try json.getDictionaryObject()
+        intent = try json.getString(at: "intent")
+        confidence = try json.getDouble(at: "confidence")
     }
     
     /// Used internally to serialize an `Intent` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let intent = intent {
-            json["intent"] = intent
-        }
-        if let confidence = confidence {
-            json["confidence"] = confidence
-        }
         return json
     }
 }

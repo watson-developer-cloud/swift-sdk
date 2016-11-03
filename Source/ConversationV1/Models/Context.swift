@@ -20,46 +20,39 @@ import RestKit
 /** The context, or state, associated with a message. */
 public struct Context: JSONEncodable, JSONDecodable {
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// The unique identifier of the conversation.
-    public let conversationID: String?
+    public let conversationID: String
     
     /// A system object that includes information about the dialog.
-    public let system: SystemResponse?
-    
-    /**
-     Create a `Context` to specify the context, or state, associated with a message.
- 
-     - parameter conversationID: The unique identifier of the conversation.
-     - parameter system: A system object that includes information about the dialog.
-     */
-    public init(conversationID: String?, system: SystemResponse? = nil) {
-        self.conversationID = conversationID
-        self.system = system
-    }
+    public let system: System
     
     /// Used internally to initialize a `Context` model from JSON.
     public init(json: JSON) throws {
-        conversationID = try? json.getString(at: "conversation_id")
-        system = try? json.decode(at: "system", type: SystemResponse.self)
+        self.json = try json.getDictionaryObject()
+        conversationID = try json.getString(at: "conversation_id")
+        system = try json.decode(at: "system", type: System.self)
     }
     
     /// Used internally to serialize a `Context` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let conversationID = conversationID {
-            json["conversation_id"] = conversationID
-        }
-        if let system = system {
-            json["system"] = system.toJSONObject()
-        }
         return json
     }
 }
 
 /** A system object that includes information about the dialog. */
-public struct SystemResponse: JSONEncodable, JSONDecodable {
+public struct System: JSONEncodable, JSONDecodable {
     
-    /// An array of dialog node ids that are in focus in the conversation.
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
+    /// An array of dialog node ids that are in focus in the conversation. If no node is in the
+    /// list, the conversation restarts at the root with the next request. If multiple dialog nodes
+    /// are in the list, several dialogs are in progress, and the last ID in the list is active.
+    /// When the active dialog ends, it is removed from the stack and the previous one becomes
+    /// active.
     public let dialogStack: [String]
     
     /// The number of cycles of user input and response in this conversation.
@@ -69,34 +62,16 @@ public struct SystemResponse: JSONEncodable, JSONDecodable {
     /// `dialogTurnCounter` when multiple inputs are needed before a response can be returned.
     public let dialogRequestCounter: Int
     
-    /**
-     Create a `SystemResponse`.
-
-     - parameter dialogStack: An array of dialog node ids that are in focus in the conversation.
-     - parameter dialogTurnCounter: The number of cycles of user input and response in the conversation.
-     - parameter dialogRequestCounter: The number of inputs in this conversation. This counter might
-        be higher than the `dialogTurnCounter` when multiple inputs are needed before a response
-        can be returned.
-     */
-    public init(dialogStack: [String], dialogTurnCounter: Int, dialogRequestCounter: Int) {
-        self.dialogStack = dialogStack
-        self.dialogTurnCounter = dialogTurnCounter
-        self.dialogRequestCounter = dialogRequestCounter
-    }
-    
-    /// Used internally to initialize a `SystemResponse` model from JSON.
+    /// Used internally to initialize a `System` model from JSON.
     public init(json: JSON) throws {
-        dialogStack = try json.decodedArray(at: "dialog_stack", type: Swift.String)
+        self.json = try json.getDictionaryObject()
+        dialogStack = try json.getArray(at: "dialog_stack").map { try $0.getString(at: "dialog_node") }
         dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
         dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
     }
     
-    /// Used internally to serialize a `SystemResponse` model to JSON.
+    /// Used internally to serialize a `System` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["dialog_stack"] = dialogStack
-        json["dialog_turn_counter"] = dialogTurnCounter
-        json["dialog_request_counter"] = dialogRequestCounter
         return json
     }
 }

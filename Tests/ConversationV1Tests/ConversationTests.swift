@@ -38,8 +38,7 @@ class ConversationTests: XCTestCase {
             ("testMessage", testMessage),
             ("testMessageAllFields1", testMessageAllFields1),
             ("testMessageAllFields2", testMessageAllFields2),
-            ("testMessageInvalidWorkspace", testMessageInvalidWorkspace),
-            ("testMessageInvalidConversationID", testMessageInvalidConversationID)
+            ("testMessageInvalidWorkspace", testMessageInvalidWorkspace)
         ]
     }
 
@@ -47,7 +46,7 @@ class ConversationTests: XCTestCase {
     func instantiateConversation() {
         let username = Credentials.ConversationUsername
         let password = Credentials.ConversationPassword
-        let version = "2016-07-19"
+        let version = "2016-11-02"
         conversation = Conversation(username: username, password: password, version: version)
     }
 
@@ -82,15 +81,15 @@ class ConversationTests: XCTestCase {
             response in
             
             // verify input
-            XCTAssertNil(response.input.text)
+            XCTAssertNil(response.input)
             
             // verify context
             XCTAssertNotNil(response.context.conversationID)
             XCTAssertNotEqual(response.context.conversationID, "")
             XCTAssertNotNil(response.context.system)
-            XCTAssertEqual(response.context.system!.dialogStack, ["root"])
-            XCTAssertEqual(response.context.system!.dialogTurnCounter, 1)
-            XCTAssertEqual(response.context.system!.dialogRequestCounter, 1)
+            XCTAssertEqual(response.context.system.dialogStack, ["root"])
+            XCTAssertEqual(response.context.system.dialogTurnCounter, 1)
+            XCTAssertEqual(response.context.system.dialogRequestCounter, 1)
             
             // verify entities
             XCTAssertTrue(response.entities.isEmpty)
@@ -112,34 +111,35 @@ class ConversationTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         let text = "Turn on the radio."
+        let request = MessageRequest(text: text, context: context!)
         let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
         let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
         
-        conversation.message(withWorkspace: workspaceID, text: text, context: context, failure: failWithError) {
+        conversation.message(withWorkspace: workspaceID, request: request, failure: failWithError) {
             response in
             
             // verify input
-            XCTAssertEqual(response.input.text, text)
+            XCTAssertEqual(response.input!.text, text)
             
             // verify context
             XCTAssertEqual(response.context.conversationID, context!.conversationID)
             XCTAssertNotNil(response.context.system)
-            XCTAssertEqual(response.context.system!.dialogStack, ["node_1_1467994455318"])
-            XCTAssertEqual(response.context.system!.dialogTurnCounter, 2)
-            XCTAssertEqual(response.context.system!.dialogRequestCounter, 2)
+            XCTAssertEqual(response.context.system.dialogStack, ["node_1_1467994455318"])
+            XCTAssertEqual(response.context.system.dialogTurnCounter, 2)
+            XCTAssertEqual(response.context.system.dialogRequestCounter, 2)
             
             // verify entities
             XCTAssertEqual(response.entities.count, 1)
             XCTAssertEqual(response.entities[0].entity, "appliance")
-            XCTAssertEqual(response.entities[0].location?.startIndex, 12)
-            XCTAssertEqual(response.entities[0].location?.endIndex, 17)
+            XCTAssertEqual(response.entities[0].startIndex, 12)
+            XCTAssertEqual(response.entities[0].endIndex, 17)
             XCTAssertEqual(response.entities[0].value, "music")
             
             // verify intents
             XCTAssertEqual(response.intents.count, 1)
             XCTAssertEqual(response.intents[0].intent, "turn_on")
-            XCTAssert(response.intents[0].confidence! >= 0.90)
-            XCTAssert(response.intents[0].confidence! <= 1.00)
+            XCTAssert(response.intents[0].confidence >= 0.90)
+            XCTAssert(response.intents[0].confidence <= 1.00)
             
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
@@ -158,7 +158,7 @@ class ConversationTests: XCTestCase {
         var context: Context?
         var entities: [Entity]?
         var intents: [Intent]?
-        var output: OutputData?
+        var output: Output?
         
         conversation.message(withWorkspace: workspaceID, failure: failWithError) {
             response in
@@ -173,8 +173,9 @@ class ConversationTests: XCTestCase {
         let description2 = "Continue a conversation."
         let expectation2 = expectation(description: description2)
         
-        let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(withWorkspace: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        let text2 = "Turn on the radio."
+        let request2 = MessageRequest(text: text2, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(withWorkspace: workspaceID, request: request2, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -187,11 +188,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                if intent1.confidence != nil && intent2.confidence != nil {
-                    XCTAssertEqualWithAccuracy(intent1.confidence!, intent2.confidence!, accuracy: 10E-5)
-                } else {
-                    XCTAssertEqual(intent1.confidence, intent2.confidence)
-                }
+                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
@@ -199,8 +196,8 @@ class ConversationTests: XCTestCase {
                 let entity1 = entities![i]
                 let entity2 = response.entities[i]
                 XCTAssertEqual(entity1.entity, entity2.entity)
-                XCTAssertEqual(entity1.location?.startIndex, entity2.location?.startIndex)
-                XCTAssertEqual(entity1.location?.endIndex, entity2.location?.endIndex)
+                XCTAssertEqual(entity1.startIndex, entity2.startIndex)
+                XCTAssertEqual(entity1.endIndex, entity2.endIndex)
                 XCTAssertEqual(entity1.value, entity2.value)
             }
             
@@ -216,7 +213,7 @@ class ConversationTests: XCTestCase {
         var context: Context?
         var entities: [Entity]?
         var intents: [Intent]?
-        var output: OutputData?
+        var output: Output?
         
         conversation.message(withWorkspace: workspaceID, failure: failWithError) {
             response in
@@ -229,7 +226,8 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let text2 = "Turn on the radio."
-        conversation.message(withWorkspace: workspaceID, text: text2, context: context, failure: failWithError) {
+        let request2 = MessageRequest(text: text2, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(withWorkspace: workspaceID, request: request2, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -242,8 +240,9 @@ class ConversationTests: XCTestCase {
         let description3 = "Continue a conversation with non-empty intents and entities."
         let expectation3 = expectation(description: description3)
         
-        let input3 = InputData(text: "Rock music.")
-        conversation.message(withWorkspace: workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        let text3 = "Rock music."
+        let request3 = MessageRequest(text: text3, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(withWorkspace: workspaceID, request: request3, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -256,11 +255,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                if intent1.confidence != nil && intent2.confidence != nil {
-                    XCTAssertEqualWithAccuracy(intent1.confidence!, intent2.confidence!, accuracy: 10E-5)
-                } else {
-                    XCTAssertEqual(intent1.confidence, intent2.confidence)
-                }
+                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
@@ -268,12 +263,39 @@ class ConversationTests: XCTestCase {
                 let entity1 = entities![i]
                 let entity2 = response.entities[i]
                 XCTAssertEqual(entity1.entity, entity2.entity)
-                XCTAssertEqual(entity1.location?.startIndex, entity2.location?.startIndex)
-                XCTAssertEqual(entity1.location?.endIndex, entity2.location?.endIndex)
+                XCTAssertEqual(entity1.startIndex, entity2.startIndex)
+                XCTAssertEqual(entity1.endIndex, entity2.endIndex)
                 XCTAssertEqual(entity1.value, entity2.value)
             }
             
             expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testMessageGetContextVariable() {
+        let description1 = "Start a conversation."
+        let expectation1 = expectation(description: description1)
+        
+        var context: Context?
+        conversation.message(withWorkspace: workspaceID, failure: failWithError) {
+            response in
+            context = response.context
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Continue a conversation."
+        let expectation2 = expectation(description: description2)
+        
+        let text2 = "Turn on the radio."
+        let request2 = MessageRequest(text: text2, context: context)
+        conversation.message(withWorkspace: workspaceID, request: request2, failure: failWithError) {
+            response in
+            let reprompt = response.context.json["reprompt"] as? Bool
+            XCTAssertNotNil(reprompt)
+            XCTAssertTrue(reprompt!)
+            expectation2.fulfill()
         }
         waitForExpectations()
     }
@@ -290,19 +312,6 @@ class ConversationTests: XCTestCase {
         }
         
         conversation.message(withWorkspace: workspaceID, failure: failure, success: failWithResult)
-        waitForExpectations()
-    }
-    
-    func testMessageInvalidConversationID() {
-        let description = "Continue a conversation with an invalid conversation id."
-        let expectation = self.expectation(description: description)
-        
-        let text = "Turn on the radio."
-        let context = Context(conversationID: "this-id-is-invalid")
-        conversation.message(withWorkspace: workspaceID, text: text, context: context, failure: failWithError) {
-            response in
-            expectation.fulfill()
-        }
         waitForExpectations()
     }
 }

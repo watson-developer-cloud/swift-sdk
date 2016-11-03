@@ -162,6 +162,14 @@ public struct JSON {
         }
         return dictionary.map { JSON(json: $0) }
     }
+    
+    public func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
+        let json = try value(at: path)
+        guard let dictionary = json.json as? [String: Any] else {
+            throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
+        }
+        return dictionary
+    }
 }
 
 // MARK: - JSON Errors

@@ -15,10 +15,6 @@
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
 		123B47151D1B3ABA007D0B22 /* RetrieveAndRankV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 123B47141D1B3ABA007D0B22 /* RetrieveAndRankV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		123B471C1D1B3ABA007D0B22 /* RetrieveAndRankV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123B47121D1B3ABA007D0B22 /* RetrieveAndRankV1.framework */; };
-		123B472A1D1B3C41007D0B22 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		123B472B1D1B3C41007D0B22 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		123B472C1D1B3C52007D0B22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		123B472D1D1B3C52007D0B22 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		123B472E1D1B3C5A007D0B22 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		123B47331D1B3D63007D0B22 /* RetrieveAndRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47321D1B3D63007D0B22 /* RetrieveAndRank.swift */; };
 		123B47351D1B3D88007D0B22 /* RetrieveAndRankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */; };
@@ -38,12 +34,7 @@
 		124C2E221D19E2FA00D9F602 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */; };
 		124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */; };
 		124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		124C2E261D19E34200D9F602 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		124C2E271D19E34200D9F602 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		12740EFD1D40060200F7DCCE /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */; };
 		12DBA9371D512D9100966E41 /* ranker_train_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9361D512D9100966E41 /* ranker_train_data.csv */; };
 		12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9381D52405E00966E41 /* ranker_test_data.csv */; };
@@ -87,10 +78,6 @@
 		7A987D391D19D488003626B2 /* TradeoffAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D321D19D47D003626B2 /* TradeoffAnalyticsTests.swift */; };
 		7A987D3B1D19D4A4003626B2 /* TradeoffAnalyticsV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A987D3A1D19D4A4003626B2 /* TradeoffAnalyticsV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A987D3D1D19D4D7003626B2 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7A987D3E1D19D4DD003626B2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7A987D3F1D19D4DD003626B2 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
-		7A987D441D19D536003626B2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A987D451D19D536003626B2 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A987D551D19D887003626B2 /* RelationshipExtractionV1Beta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A987D4B1D19D887003626B2 /* RelationshipExtractionV1Beta.framework */; };
 		7A987D6C1D19D923003626B2 /* Doc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D641D19D923003626B2 /* Doc.swift */; };
 		7A987D6D1D19D923003626B2 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D651D19D923003626B2 /* Entity.swift */; };
@@ -99,11 +86,7 @@
 		7A987D701D19D923003626B2 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D681D19D923003626B2 /* Sentence.swift */; };
 		7A987D711D19D923003626B2 /* RelationshipExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D691D19D923003626B2 /* RelationshipExtraction.swift */; };
 		7A987D731D19D92F003626B2 /* RelationshipExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A987D6B1D19D923003626B2 /* RelationshipExtractionTests.swift */; };
-		7A987D741D19D984003626B2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7A987D751D19D984003626B2 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7A987D761D19D98A003626B2 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7A987D781D19D9DA003626B2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A987D791D19D9DA003626B2 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */; };
 		7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */; };
 		7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */; };
@@ -112,11 +95,7 @@
 		7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC81F1D79D7E300507725 /* SpeechToTextSocket.swift */; };
 		7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8211D79D8F300507725 /* SpeechToTextState.swift */; };
 		7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */; };
-		7A9EE3BF1D4FD91400FA2932 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7A9EE3C01D4FD91900FA2932 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3A81CEE99FC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF3B81CEE9A1700B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF3B91CEE9A1700B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7AAAF3CD1CEE9A3700B74848 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF3C31CEE9A3700B74848 /* VisualRecognitionV3.framework */; };
@@ -129,10 +108,6 @@
 		7AAAF3E81CEE9A5300B74848 /* WarningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */; };
 		7AAAF3E91CEE9A5300B74848 /* ImagesWithWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */; };
 		7AAAF3EA1CEE9A6800B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF3EE1CEE9AA900B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF3EF1CEE9AA900B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
-		7AAAF3F01CEE9B8900B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF3F11CEE9B8900B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4021CEE9D1900B74848 /* ToneAnalyzerV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF3F81CEE9D1900B74848 /* ToneAnalyzerV3.framework */; };
 		7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */; };
 		7AAAF4111CEE9D5300B74848 /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF31CE2461800393146 /* ToneAnalysis.swift */; };
@@ -140,11 +115,7 @@
 		7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF51CE2461800393146 /* ToneScore.swift */; };
 		7AAAF4141CEE9D5600B74848 /* ToneAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */; };
 		7AAAF4151CEE9D5A00B74848 /* ToneAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */; };
-		7AAAF4171CEE9D8600B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4181CEE9D8600B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF4191CEE9DAC00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF41C1CEE9E0700B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF41D1CEE9E1800B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4581CEE9F8800B74848 /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF44E1CEE9F8800B74848 /* SpeechToTextV1.framework */; };
 		7AAAF4651CEE9FB300B74848 /* WordAlternativeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A121CEE3026002C9564 /* WordAlternativeResult.swift */; };
 		7AAAF4661CEE9FB300B74848 /* WordAlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A131CEE3026002C9564 /* WordAlternativeResults.swift */; };
@@ -160,13 +131,7 @@
 		7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A221CEE3026002C9564 /* SpeechSample.flac */; };
 		7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */; };
 		7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9A241CEE3026002C9564 /* SpeechSample.wav */; };
-		7AAAF4781CEE9FCE00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4791CEE9FCE00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF47A1CEE9FCE00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF47C1CEE9FDF00B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF47D1CEE9FDF00B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF47E1CEEA04C00B74848 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; };
-		7AAAF47F1CEEA05400B74848 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF48F1CEEA07900B74848 /* PersonalityInsightsV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4851CEEA07900B74848 /* PersonalityInsightsV2.framework */; };
 		7AAAF49C1CEEA08600B74848 /* ContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117551CB598D9009A4DA1 /* ContentItem.swift */; };
 		7AAAF49D1CEEA08600B74848 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117561CB598D9009A4DA1 /* Profile.swift */; };
@@ -175,8 +140,6 @@
 		7AAAF4A01CEEA09200B74848 /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */; };
 		7AAAF4A11CEEA09200B74848 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */; };
 		7AAAF4A21CEEA09200B74848 /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */; };
-		7AAAF4A41CEEA0AE00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4A51CEEA0AE00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF4A61CEEA0AE00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF4B91CEEA10700B74848 /* NaturalLanguageClassifierV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4AF1CEEA10600B74848 /* NaturalLanguageClassifierV1.framework */; };
 		7AAAF4C61CEEA11700B74848 /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
@@ -189,11 +152,7 @@
 		7AAAF4CD1CEEA11E00B74848 /* training_meta_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */; };
 		7AAAF4CE1CEEA11E00B74848 /* training_meta_missing_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */; };
 		7AAAF4CF1CEEA11E00B74848 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2C1CDD46A300B20B38 /* training_meta.txt */; };
-		7AAAF4D11CEEA13600B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4D21CEEA13600B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF4D31CEEA13600B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF4D51CEEA14000B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF4D61CEEA14000B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF4E61CEEA16100B74848 /* LanguageTranslatorV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */; };
 		7AAAF4F31CEEA17400B74848 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
 		7AAAF4F41CEEA17400B74848 /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */; };
@@ -205,11 +164,7 @@
 		7AAAF4FA1CEEA17600B74848 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */; };
 		7AAAF4FB1CEEA17C00B74848 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 7A61179C1CB6D3F2009A4DA1 /* glossary.tmx */; };
 		7AAAF4FC1CEEA17C00B74848 /* LanguageTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */; };
-		7AAAF4FE1CEEA1AB00B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF4FF1CEEA1AB00B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF5001CEEA1AB00B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF5021CEEA1B600B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF5031CEEA1B600B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5131CEEA1DA00B74848 /* DialogV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF5091CEEA1DA00B74848 /* DialogV1.framework */; };
 		7AAAF5201CEEA1E700B74848 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB131C1CBF7C8A00101884 /* Dialog.swift */; };
 		7AAAF5211CEEA1EA00B74848 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13201CBF7C8A00101884 /* Conversation.swift */; };
@@ -221,11 +176,7 @@
 		7AAAF5271CEEA1EF00B74848 /* DialogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB13271CBF7C8A00101884 /* DialogTests.swift */; };
 		7AAAF5281CEEA1EF00B74848 /* pizza_sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7AEB13281CBF7C8A00101884 /* pizza_sample.xml */; };
 		7AAAF5291CEEA1EF00B74848 /* pizza_sample_invalid.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */; };
-		7AAAF52B1CEEA20500B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF52C1CEEA20500B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF52D1CEEA20500B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF52F1CEEA21200B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF5301CEEA21200B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5401CEEA23E00B74848 /* AlchemyVisionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF5361CEEA23D00B74848 /* AlchemyVisionV1.framework */; };
 		7AAAF54D1CEEA26000B74848 /* AlchemyVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */; };
 		7AAAF54E1CEEA26000B74848 /* FaceTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */; };
@@ -238,14 +189,8 @@
 		7AAAF5551CEEA26400B74848 /* example.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAB1CEE8B3C002C9564 /* example.html */; };
 		7AAAF5561CEEA26400B74848 /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAC1CEE8B3C002C9564 /* obama.jpg */; };
 		7AAAF5571CEEA26400B74848 /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAA9AAD1CEE8B3C002C9564 /* sign.jpg */; };
-		7AAAF5591CEEA29500B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF55A1CEEA29500B74848 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AAAF55B1CEEA29500B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AAAF55D1CEEA2A600B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AAAF55E1CEEA2A600B74848 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF56E1CEEA2DF00B74848 /* AlchemyLanguageV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF5641CEEA2DF00B74848 /* AlchemyLanguageV1.framework */; };
-		7AAAF5A81CEEA35600B74848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AAAF5B71CEEA69800B74848 /* AlchemyLanguageV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5B81CEEA69B00B74848 /* AlchemyVisionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AAAF5B91CEEA6AB00B74848 /* DialogV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5AE1CEEA62C00B74848 /* DialogV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -264,21 +209,17 @@
 		7AAD66561DCA5D730010481E /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664E1DCA5D730010481E /* obama.jpg */; };
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
+		7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */; };
+		7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */; };
 		7AB4452E1D3E647A00E8748A /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB445241D3E647A00E8748A /* ConversationV1.framework */; };
-		7AB4453B1D3E64F000E8748A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		7AB4453C1D3E64F000E8748A /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AB4453D1D3E64F600E8748A /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AB4453F1D3E653600E8748A /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7AB445401D3E653600E8748A /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AB445411D3E657900E8748A /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB445191D3E643B00E8748A /* Conversation.swift */; };
 		7AB445421D3E657E00E8748A /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4451B1D3E643B00E8748A /* MessageRequest.swift */; };
 		7AB445431D3E657E00E8748A /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4451C1D3E643B00E8748A /* MessageResponse.swift */; };
 		7AB445441D3E658200E8748A /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4451E1D3E643B00E8748A /* ConversationTests.swift */; };
 		7AB445461D3E6DE900E8748A /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB445451D3E6DE900E8748A /* Context.swift */; };
 		7AB445481D3E740800E8748A /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB445471D3E740800E8748A /* Input.swift */; };
-		7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7AB53B741CF64DE000FFC9DD /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B591CF64DE000FFC9DD /* Authors.swift */; };
 		7AB53B751CF64DE000FFC9DD /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5A1CF64DE000FFC9DD /* Concept.swift */; };
 		7AB53B761CF64DE000FFC9DD /* ConceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B5B1CF64DE000FFC9DD /* ConceptResponse.swift */; };
@@ -348,11 +289,7 @@
 		B1A8E55A1D19DCE600678412 /* AlchemyDataNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A8E52B1D19D02700678412 /* AlchemyDataNewsTests.swift */; };
 		B1AAD2DD1D08656B002DAB84 /* DocumentConversionV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AAD2D31D08656B002DAB84 /* DocumentConversionV1.framework */; };
 		B1AAD2EA1D0865DA002DAB84 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
-		B1AAD2EB1D0865F5002DAB84 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; };
-		B1AAD2EC1D0865F5002DAB84 /* Freddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; };
 		B1AAD2EF1D08664A002DAB84 /* DocumentConversionV1.h in Headers */ = {isa = PBXBuildFile; fileRef = B1AAD2ED1D086640002DAB84 /* DocumentConversionV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B1AAD2F11D086751002DAB84 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B1AAD2F21D08675A002DAB84 /* Freddy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1AAD2F61D086AE8002DAB84 /* DocumentConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2F51D086AE8002DAB84 /* DocumentConversion.swift */; };
 		B1AAD2F91D086B90002DAB84 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2F81D086B90002DAB84 /* FileType.swift */; };
 		B1AAD2FC1D087A33002DAB84 /* ConversionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FB1D087A33002DAB84 /* ConversionResponse.swift */; };
@@ -491,8 +428,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				123B472A1D1B3C41007D0B22 /* Alamofire.framework in CopyFiles */,
-				123B472B1D1B3C41007D0B22 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,8 +437,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				124C2E2A1D19E3D000D9F602 /* Alamofire.framework in CopyFiles */,
-				124C2E2B1D19E3D000D9F602 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,8 +446,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7A987D441D19D536003626B2 /* Alamofire.framework in CopyFiles */,
-				7A987D451D19D536003626B2 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,8 +455,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7A987D781D19D9DA003626B2 /* Alamofire.framework in CopyFiles */,
-				7A987D791D19D9DA003626B2 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,8 +464,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7A9EE3C01D4FD91900FA2932 /* Freddy.framework in CopyFiles */,
-				7A9EE3BF1D4FD91400FA2932 /* Alamofire.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,8 +473,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF3B81CEE9A1700B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF3B91CEE9A1700B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,8 +482,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF3F01CEE9B8900B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF3F11CEE9B8900B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,20 +491,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF41C1CEE9E0700B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF41D1CEE9E1800B74848 /* Freddy.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7AAAF47B1CEE9FD800B74848 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7AAAF47C1CEE9FDF00B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF47D1CEE9FDF00B74848 /* Freddy.framework in CopyFiles */,
-				7AAAF47F1CEEA05400B74848 /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,8 +500,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF4D51CEEA14000B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF4D61CEEA14000B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,8 +509,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF5021CEEA1B600B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF5031CEEA1B600B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,8 +518,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF52F1CEEA21200B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF5301CEEA21200B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,8 +527,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF55D1CEEA2A600B74848 /* Alamofire.framework in CopyFiles */,
-				7AAAF55E1CEEA2A600B74848 /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,8 +536,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AAAF5AB1CEEA38D00B74848 /* Alamofire.framework in CopyFiles */,
-				7AB53B561CF64B4200FFC9DD /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,8 +545,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7AB4453F1D3E653600E8748A /* Alamofire.framework in CopyFiles */,
-				7AB445401D3E653600E8748A /* Freddy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,8 +554,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B1AAD2F21D08675A002DAB84 /* Freddy.framework in CopyFiles */,
-				B1AAD2F11D086751002DAB84 /* Alamofire.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,9 +616,6 @@
 		7A61175C1CB598D9009A4DA1 /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
 		7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
 		7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsTests.swift; sourceTree = "<group>"; };
-		7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Freddy.framework; path = Carthage/Build/iOS/Freddy.framework; sourceTree = "<group>"; };
-		7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		7A6117921CB6D3F2009A4DA1 /* LanguageTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslator.swift; path = ../LanguageTranslatorV2/LanguageTranslator.swift; sourceTree = "<group>"; };
 		7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		7A6117971CB6D3F2009A4DA1 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguage.swift; path = ../../LanguageTranslatorV2/Models/IdentifiedLanguage.swift; sourceTree = "<group>"; };
@@ -846,6 +738,8 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
+		7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
+		7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7AB445191D3E643B00E8748A /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7AB4451B1D3E643B00E8748A /* MessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MessageRequest.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7AB4451C1D3E643B00E8748A /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
@@ -957,8 +851,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				123B472C1D1B3C52007D0B22 /* Alamofire.framework in Frameworks */,
-				123B472D1D1B3C52007D0B22 /* Freddy.framework in Frameworks */,
 				123B472E1D1B3C5A007D0B22 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -968,7 +860,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				123B471C1D1B3ABA007D0B22 /* RetrieveAndRankV1.framework in Frameworks */,
-				12740EFD1D40060200F7DCCE /* Freddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,8 +867,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				124C2E261D19E34200D9F602 /* Alamofire.framework in Frameworks */,
-				124C2E271D19E34200D9F602 /* Freddy.framework in Frameworks */,
 				124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -994,8 +883,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A987D3E1D19D4DD003626B2 /* Alamofire.framework in Frameworks */,
-				7A987D3F1D19D4DD003626B2 /* Freddy.framework in Frameworks */,
 				7A987D3D1D19D4D7003626B2 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1012,8 +899,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A987D741D19D984003626B2 /* Alamofire.framework in Frameworks */,
-				7A987D751D19D984003626B2 /* Freddy.framework in Frameworks */,
 				7A987D761D19D98A003626B2 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1045,8 +930,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF3EE1CEE9AA900B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF3EF1CEE9AA900B74848 /* Freddy.framework in Frameworks */,
 				7AAAF3EA1CEE9A6800B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1063,8 +946,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4171CEE9D8600B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4181CEE9D8600B74848 /* Freddy.framework in Frameworks */,
 				7AAAF4191CEE9DAC00B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1081,10 +962,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4781CEE9FCE00B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4791CEE9FCE00B74848 /* Freddy.framework in Frameworks */,
 				7A9EC81D1D79B93F00507725 /* libopus.a in Frameworks */,
-				7AAAF47E1CEEA04C00B74848 /* Starscream.framework in Frameworks */,
 				7A9EC81C1D79B93800507725 /* libogg.a in Frameworks */,
 				7AAAF47A1CEE9FCE00B74848 /* RestKit.framework in Frameworks */,
 			);
@@ -1102,8 +980,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4A41CEEA0AE00B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4A51CEEA0AE00B74848 /* Freddy.framework in Frameworks */,
 				7AAAF4A61CEEA0AE00B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1120,8 +996,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4D11CEEA13600B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4D21CEEA13600B74848 /* Freddy.framework in Frameworks */,
 				7AAAF4D31CEEA13600B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1138,8 +1012,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4FE1CEEA1AB00B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF4FF1CEEA1AB00B74848 /* Freddy.framework in Frameworks */,
 				7AAAF5001CEEA1AB00B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1156,8 +1028,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF52B1CEEA20500B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF52C1CEEA20500B74848 /* Freddy.framework in Frameworks */,
 				7AAAF52D1CEEA20500B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1174,8 +1044,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF5591CEEA29500B74848 /* Alamofire.framework in Frameworks */,
-				7AAAF55A1CEEA29500B74848 /* Freddy.framework in Frameworks */,
 				7AAAF55B1CEEA29500B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1192,8 +1060,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF5A81CEEA35600B74848 /* Alamofire.framework in Frameworks */,
-				7AB53B531CF64B2800FFC9DD /* Freddy.framework in Frameworks */,
 				7AB53B541CF64B2E00FFC9DD /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1210,8 +1076,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AB4453B1D3E64F000E8748A /* Alamofire.framework in Frameworks */,
-				7AB4453C1D3E64F000E8748A /* Freddy.framework in Frameworks */,
 				7AB4453D1D3E64F600E8748A /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1244,8 +1108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1AAD2EB1D0865F5002DAB84 /* Alamofire.framework in Frameworks */,
-				B1AAD2EC1D0865F5002DAB84 /* Freddy.framework in Frameworks */,
 				B1AAD2EA1D0865DA002DAB84 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1442,9 +1304,6 @@
 		7A0F97301C232CB5004C01C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7A61176B1CB5ADC2009A4DA1 /* Alamofire.framework */,
-				7A61176C1CB5ADC2009A4DA1 /* Freddy.framework */,
-				7A61176D1CB5ADC2009A4DA1 /* Starscream.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1625,6 +1484,7 @@
 				7A9EC80E1D79B76100507725 /* lib */,
 				7A9EC8111D79B76100507725 /* ogg */,
 				7A9EC8161D79B76100507725 /* opus */,
+				7AAEE5D61DCCCFC50056A346 /* Starscream */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -1870,6 +1730,16 @@
 			);
 			name = Images;
 			path = Tests/VisualRecognitionV3Tests/Images;
+			sourceTree = SOURCE_ROOT;
+		};
+		7AAEE5D61DCCCFC50056A346 /* Starscream */ = {
+			isa = PBXGroup;
+			children = (
+				7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */,
+				7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */,
+			);
+			name = Starscream;
+			path = Source/SpeechToTextV1/Dependencies/Starscream;
 			sourceTree = SOURCE_ROOT;
 		};
 		7AB445181D3E643B00E8748A /* ConversationV1 */ = {
@@ -2487,7 +2357,6 @@
 				7AAAF4531CEE9F8800B74848 /* Sources */,
 				7AAAF4541CEE9F8800B74848 /* Frameworks */,
 				7AAAF4551CEE9F8800B74848 /* Resources */,
-				7AAAF47B1CEE9FD800B74848 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -3479,12 +3348,14 @@
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
 				7AAAF4661CEE9FB300B74848 /* WordAlternativeResults.swift in Sources */,
+				7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */,
 				7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */,
 				7AAAF46A1CEE9FB300B74848 /* SpeechRecognitionEvent.swift in Sources */,
 				7AAAF46B1CEE9FB300B74848 /* RecognitionSettings.swift in Sources */,
 				7AAAF46C1CEE9FB300B74848 /* RecognitionState.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
 				7AAAF46F1CEE9FB300B74848 /* WordTimestamp.swift in Sources */,
+				7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */,
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
 				7AAAF46E1CEE9FB300B74848 /* WordConfidence.swift in Sources */,

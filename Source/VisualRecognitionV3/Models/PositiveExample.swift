@@ -18,30 +18,24 @@ import Foundation
 import RestKit
 
 /** A class associated with a Visual Recognition classifier. */
-public struct Class: JSONDecodable {
+public struct PositiveExample {
     
-    /// The name of the class
+    /// The name of the class.
     public let name: String
     
     /// A compressed (.zip) file of images that prominently
     /// depict the visual subject of the given class.
-    internal let examples: URL?
+    public let examples: URL
     
     /**
-     Define a class that shall be recognized by a classifier.
-
+     Define a set of positive examples that shall be recognized by a classifier.
+     
      - parameter name: The name of the class.
      - parameter examples: A compressed (.zip) file of images that prominently depict the visual
-            subject of the given class.
+        subject of the given class.
      */
     public init(name: String, examples: URL) {
         self.name = name
         self.examples = examples
-    }
-    
-    /// Used internally to initialize a `Class` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.decode(at: "class")
-        examples = nil
     }
 }

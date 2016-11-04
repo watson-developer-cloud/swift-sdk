@@ -100,13 +100,11 @@
 		7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		7AAAF3CD1CEE9A3700B74848 /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF3C31CEE9A3700B74848 /* VisualRecognitionV3.framework */; };
 		7AAAF3DA1CEE9A4700B74848 /* VisualRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */; };
-		7AAAF3E31CEE9A5300B74848 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A481CEE6089002C9564 /* Class.swift */; };
 		7AAAF3E41CEE9A5300B74848 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */; };
 		7AAAF3E51CEE9A5300B74848 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4A1CEE6089002C9564 /* Classifier.swift */; };
 		7AAAF3E61CEE9A5300B74848 /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */; };
 		7AAAF3E71CEE9A5300B74848 /* ImagesWithFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */; };
 		7AAAF3E81CEE9A5300B74848 /* WarningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */; };
-		7AAAF3E91CEE9A5300B74848 /* ImagesWithWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */; };
 		7AAAF3EA1CEE9A6800B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF4021CEE9D1900B74848 /* ToneAnalyzerV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF3F81CEE9D1900B74848 /* ToneAnalyzerV3.framework */; };
 		7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */; };
@@ -258,6 +256,7 @@
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AD240091DC7B4360002FEB5 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		7AFAC9071DCC59F300CADF12 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAC9061DCC59F300CADF12 /* PositiveExample.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
 		7AFD74451D4F8A5200666173 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74441D4F8A5200666173 /* Output.swift */; };
@@ -680,13 +679,11 @@
 		7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
 		7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUtilities.swift; sourceTree = "<group>"; };
 		7AAA9A3D1CEE3059002C9564 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
-		7AAA9A481CEE6089002C9564 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
 		7AAA9A4A1CEE6089002C9564 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesWithFaces.swift; sourceTree = "<group>"; };
 		7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningInfo.swift; sourceTree = "<group>"; };
-		7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesWithWords.swift; sourceTree = "<group>"; };
 		7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognition.swift; sourceTree = "<group>"; };
 		7AAA9AA11CEE8B3C002C9564 /* AlchemyVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlchemyVision.swift; sourceTree = "<group>"; };
 		7AAA9AA31CEE8B3C002C9564 /* FaceTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTags.swift; sourceTree = "<group>"; };
@@ -791,6 +788,7 @@
 		7AEB13271CBF7C8A00101884 /* DialogTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogTests.swift; sourceTree = "<group>"; };
 		7AEB13281CBF7C8A00101884 /* pizza_sample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample.xml; sourceTree = "<group>"; };
 		7AEBE4361DBEAA130089188C /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		7AFAC9061DCC59F300CADF12 /* PositiveExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveExample.swift; sourceTree = "<group>"; };
 		7AFD74401D4F8A1600666173 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Entity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7AFD74421D4F8A3800666173 /* Intent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Intent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7AFD74441D4F8A5200666173 /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Output.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1651,13 +1649,12 @@
 		7AAA9A471CEE6089002C9564 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A481CEE6089002C9564 /* Class.swift */,
 				7AAA9A491CEE6089002C9564 /* ClassifiedImages.swift */,
 				7AAA9A4A1CEE6089002C9564 /* Classifier.swift */,
 				7AAA9A4B1CEE6089002C9564 /* ErrorInfo.swift */,
 				7AAA9A4C1CEE6089002C9564 /* ImagesWithFaces.swift */,
+				7AFAC9061DCC59F300CADF12 /* PositiveExample.swift */,
 				7AAA9A4D1CEE6089002C9564 /* WarningInfo.swift */,
-				7AAA9A4E1CEE6089002C9564 /* ImagesWithWords.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3298,10 +3295,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAAF3E51CEE9A5300B74848 /* Classifier.swift in Sources */,
-				7AAAF3E91CEE9A5300B74848 /* ImagesWithWords.swift in Sources */,
 				7AAAF3E61CEE9A5300B74848 /* ErrorInfo.swift in Sources */,
+				7AFAC9071DCC59F300CADF12 /* PositiveExample.swift in Sources */,
 				7AAAF3E71CEE9A5300B74848 /* ImagesWithFaces.swift in Sources */,
-				7AAAF3E31CEE9A5300B74848 /* Class.swift in Sources */,
 				7AAAF3E81CEE9A5300B74848 /* WarningInfo.swift in Sources */,
 				7AAAF3E41CEE9A5300B74848 /* ClassifiedImages.swift in Sources */,
 				7AAAF3DA1CEE9A4700B74848 /* VisualRecognition.swift in Sources */,

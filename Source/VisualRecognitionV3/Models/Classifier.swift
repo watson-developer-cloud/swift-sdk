@@ -29,14 +29,17 @@ public struct Classifier: JSONDecodable {
     /// The owner of the classifier.
     public let owner: String
     
-    /// The status of the classifier.
+    /// The training status of the classifier.
     public let status: String
     
-    /// The creation date of the classifier.
+    /// If classifier training failed, this property may explain why.
+    public let explanation: String?
+    
+    /// The time and date when the classifier was created.
     public let created: String
     
     /// The classes of the classifier.
-    public let classes: [Class]
+    public let classes: [String]
     
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSON) throws {
@@ -44,7 +47,8 @@ public struct Classifier: JSONDecodable {
         name = try json.getString(at: "name")
         owner = try json.getString(at: "owner")
         status = try json.getString(at: "status")
+        explanation = try? json.getString(at: "explanation")
         created = try json.getString(at: "created")
-        classes = try json.decodedArray(at: "classes", type: Class.self)
+        classes = try json.getArray(at: "classes").map { try $0.getString(at: "class") }
     }
 }

@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-/** The results from detecting faces in one or more images. */
+/** The results of detecting faces in one or more images. */
 public struct ImagesWithFaces: JSONDecodable {
     
     /// The number of images processed.
@@ -40,16 +40,18 @@ public struct ImagesWithFaces: JSONDecodable {
 /** An image with detected faces. */
 public struct ImageWithFaces: JSONDecodable {
     
-    /// The source URL of the image that was processed.
+    /// The source URL of the image, before any redirects. This is omitted if the image was uploaded.
     public let sourceURL: String?
     
-    /// The resolved URL of the image that was processed.
+    /// The fully-resolved URL of the image, after redirects are followed.
+    /// This is omitted if the image was uploaded.
     public let resolvedURL: String?
     
-    /// The filename of the image that was classified.
+    /// The relative path of the image file. This is omitted if the image was passed by URL.
     public let image: String?
     
-    /// Information about an error that occured while processing the given image.
+    /// Information about what might have caused a failure, such as an image
+    /// that is too large. This omitted if there is no error or warning.
     public let error: ErrorInfo?
     
     /// The faces identified in the given image.
@@ -65,7 +67,7 @@ public struct ImageWithFaces: JSONDecodable {
     }
 }
 
-/** A face identified in a given image. */
+/** A face identified in an image. */
 public struct Face: JSONDecodable {
     
     /// The age of the identified face.
@@ -74,7 +76,7 @@ public struct Face: JSONDecodable {
     /// The gender of the identified face.
     public let gender: Gender
     
-    /// The location of the identified face in the given image.
+    /// The location of the identified face in the image.
     public let location: FaceLocation
     
     /// The identity of the identified face, if a known celebrity.
@@ -98,7 +100,8 @@ public struct Age: JSONDecodable {
     /// The estimated maximum age of the identified individual.
     public let max: Int
     
-    /// The confidence score of the given age range.
+    /// The confidence score of the given age range. If there are more than
+    /// 10 faces in an image, age confidence scores may return a score of 0.
     public let score: Double
     
     /// Used internally to initialize an `Age` model from JSON.
@@ -115,7 +118,8 @@ public struct Gender: JSONDecodable {
     /// The predicted gender of the identified individual.
     public let gender: String
     
-    /// The confidence score of the given gender prediction.
+    /// The confidence score of the given gender prediction. If there are more than
+    /// 10 faces in an image, gender confidence scores may return a score of 0.
     public let score: Double
     
     /// Used internally to initialize a `Gender` model from JSON.

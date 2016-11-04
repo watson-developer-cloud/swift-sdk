@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-/** Information about an error that occurred. */
+/** Information about an error that occurred during classification. */
 public struct ErrorInfo: JSONDecodable {
     
     /// A codified error string (e.g. "input_error").

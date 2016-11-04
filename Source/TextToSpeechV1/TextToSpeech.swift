@@ -109,7 +109,7 @@ public class TextToSpeech {
      - parameter success: A function executed with information about the given voice.
      */
     public func getVoice(
-        _ voice: SynthesisVoice,
+        _ voice: String,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
@@ -123,7 +123,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/voices/\(voice.description())",
+            url: serviceURL + "/v1/voices/\(voice)",
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -159,7 +159,7 @@ public class TextToSpeech {
      */
     public func getPronunciation(
         of text: String,
-        voice: SynthesisVoice? = nil,
+        voice: String? = nil,
         format: PhonemeFormat? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Pronunciation) -> Void)
@@ -168,7 +168,7 @@ public class TextToSpeech {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
         if let voice = voice {
-            queryParameters.append(URLQueryItem(name: "voice", value: voice.description()))
+            queryParameters.append(URLQueryItem(name: "voice", value: voice))
         }
         if let format = format {
             queryParameters.append(URLQueryItem(name: "format", value: format.rawValue))
@@ -210,7 +210,7 @@ public class TextToSpeech {
      */
     public func synthesize(
         _ text: String,
-        voice: SynthesisVoice? = nil,
+        voice: String? = nil,
         customizationID: String? = nil,
         audioFormat: AudioFormat = .wav,
         failure: ((Error) -> Void)? = nil,
@@ -220,7 +220,7 @@ public class TextToSpeech {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
         if let voice = voice {
-            queryParameters.append(URLQueryItem(name: "voice", value: voice.description()))
+            queryParameters.append(URLQueryItem(name: "voice", value: voice))
         }
         if let customizationID = customizationID {
             queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))

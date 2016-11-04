@@ -131,7 +131,7 @@ class TextToSpeechTests: XCTestCase {
         for voice in allVoices {
             let description = "Get information about the given voice."
             let expectation = self.expectation(description: description)
-            textToSpeech.getVoice(voice, failure: failWithError) { voice in
+            textToSpeech.getVoice(voice.rawValue, failure: failWithError) { voice in
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -149,7 +149,7 @@ class TextToSpeechTests: XCTestCase {
                 continue
             }
             
-            textToSpeech.getPronunciation(of: text, voice: voice, format: .spr, failure: failWithError) {
+            textToSpeech.getPronunciation(of: text, voice: voice.rawValue, format: .spr, failure: failWithError) {
                 pronunciation in
                 XCTAssertGreaterThan(pronunciation.pronunciation.characters.count, 0)
                 expectation.fulfill()
@@ -615,7 +615,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Get the phonetic pronunciation of the given text."
         let expectation = self.expectation(description: description)
         
-        let voice = SynthesisVoice.custom(voice: "invalid-voice")
+        let voice = "invalid-voice"
         let failure = { (error: Error) in
             expectation.fulfill()
         }
@@ -629,7 +629,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Get information about an invalid voice."
         let expectation = self.expectation(description: description)
         
-        let voice = SynthesisVoice.custom(voice: "invalid-voice")
+        let voice = "invalid-voice"
         let failure = { (error: Error) in
             expectation.fulfill()
         }
@@ -656,7 +656,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Synthesize text to spoken audio using an invalid voice."
         let expectation = self.expectation(description: description)
         
-        let voice = SynthesisVoice.custom(voice: "invalid-voice")
+        let voice = "invalid-voice"
         let failure = { (error: Error) in
             expectation.fulfill()
         }

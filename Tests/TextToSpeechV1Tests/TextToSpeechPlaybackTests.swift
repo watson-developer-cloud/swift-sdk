@@ -87,7 +87,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(text, voice: .us_Lisa, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text, voice: SynthesisVoice.us_Lisa.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -110,7 +110,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(germanText, voice: .de_Dieter, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(germanText, voice: SynthesisVoice.de_Dieter.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -133,7 +133,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
         
-        textToSpeech.synthesize(japaneseText, voice: .jp_Emi, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(japaneseText, voice: SynthesisVoice.jp_Emi.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {

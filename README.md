@@ -380,6 +380,8 @@ The following links provide more information about the IBM Document Conversion s
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
+Note that the Language Translator service was formerly known as Language Translation. It is recommended to [migrate](http://www.ibm.com/watson/developercloud/doc/language-translator/migrating.shtml) to Language Translator, however, existing Language Translation service instances are currently supported by the `LanguageTranslatorV2` framework. To use a legacy Language Translation service, set the `serviceURL` property before executing the first API call to the service.
+
 The following example demonstrates how to use the Language Translator service:
 
 ```swift
@@ -389,6 +391,9 @@ let username = "your-username-here"
 let password = "your-password-here"
 let languageTranslator = LanguageTranslator(username: username, password: password)
 
+// set the serviceURL property to use the legacy Language Translation service
+// languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+
 let failure = { (error: NSError) in print(error) }
 languageTranslator.translate("Hello", source: "en", target: "es", failure: failure) { translation in
     print(translation)
@@ -397,9 +402,9 @@ languageTranslator.translate("Hello", source: "en", target: "es", failure: failu
 
 The following links provide more information about the IBM Watson Language Translator service:
 
-* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translation.html)
-* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translation/)
-* [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
+* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translator.html)
+* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translator/)
+* [IBM Watson Language Translator - Demo](https://language-translator-demo.mybluemix.net/)
 
 ## Natural Language Classifier
 

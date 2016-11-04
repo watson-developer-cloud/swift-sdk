@@ -384,9 +384,7 @@ public class RetrieveAndRank {
         success: ((Void) -> Void)? = nil) {
         
         // construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(zipFile, withName: "config_zip")
-        guard let body = try? multipartFormData.toData() else {
+        guard let body = try? Data(contentsOf: zipFile) else {
             failure?(RestError.encodingError)
             return
         }

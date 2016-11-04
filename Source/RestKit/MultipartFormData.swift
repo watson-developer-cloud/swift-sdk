@@ -36,14 +36,14 @@ public class MultipartFormData {
         self.boundary = "watson-apis.boundary.bd0b4c6e3b9c2126"
     }
     
-    public func append(_ data: Data, withName: String) {
-        let bodyPart = BodyPart(key: withName, data: data)
+    public func append(_ data: Data, withName: String, mimeType: String? = nil, fileName: String? = nil) {
+        let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileName)
         bodyParts.append(bodyPart)
     }
     
-    public func append(_ fileURL: URL, withName: String) {
+    public func append(_ fileURL: URL, withName: String, mimeType: String? = nil) {
         if let data = try? Data.init(contentsOf: fileURL) {
-            let bodyPart = BodyPart(key: withName, data: data, fileName: fileURL.lastPathComponent)
+            let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileURL.lastPathComponent)
             bodyParts.append(bodyPart)
         }
     }

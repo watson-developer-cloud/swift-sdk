@@ -266,6 +266,20 @@ conversation.message(withWorkspace: workspaceID, request: request, failure: fail
 }
 ```
 
+The Conversation service allows users to define custom variables and values in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: `"pizza_toppings": ["ketchup", "ham", "onion"]`.
+
+Unfortunately, the iOS SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the `Conversation` framework include a `json: [String: Any]` property to allow users to access the underlying JSON payload and manually parse user-defined variables.
+
+The following example shows how to extract a user-defined `pizza_toppings` variable from the `context` of a Conversation response:
+
+```swift
+conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+    response in
+    let pizzaToppings = response.context.json["pizza_toppings"] as! [String]
+    print(pizzaToppings) // ["ketchup", "ham", "onion"]
+}
+```
+
 The following links provide more information about the IBM Conversation service:
 
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)

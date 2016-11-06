@@ -71,6 +71,8 @@ To use the Watson Developer Cloud iOS SDK in your application, specify it in you
 github "watson-developer-cloud/ios-sdk"
 ```
 
+In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
+
 Then run the following command to build the dependencies and frameworks:
 
 ```bash

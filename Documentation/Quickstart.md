@@ -18,15 +18,15 @@ We will use the [Carthage](https://github.com/Carthage/Carthage) dependency mana
 
 2. Add the following line to your `Cartfile`. This specifies the iOS SDK as a dependency. In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
 
-```
-github "watson-developer-cloud/ios-sdk"
-```
+    ```
+    github "watson-developer-cloud/ios-sdk"
+    ```
 
 3. Open the Terminal and navigate to your project directory. Then use Carthage to download and build the iOS SDK:
 
-```
-$ carthage update --platform iOS
-```
+    ```
+    $ carthage update --platform iOS
+    ```
 
 Carthage clones the iOS SDK repository and builds a framework for each Watson service in the `Carthage/Build/iOS` directory. It also builds a framework called `RestKit` that is used internally for networking and JSON parsing.
 
@@ -44,16 +44,16 @@ We also need to copy the frameworks into our application to make them accessible
 
 2. Add the following command to the run script phase:
 
-```
-/usr/local/bin/carthage copy-frameworks
-```
+    ```
+    /usr/local/bin/carthage copy-frameworks
+    ```
 
 4. Add the frameworks you'd like to use (and the `RestKit` framework) to the "Input Files" list:
 
-```
-$(SRCROOT)/Carthage/Build/iOS/TextToSpeechV1.framework
-$(SRCROOT)/Carthage/Build/iOS/RestKit.framework
-```
+    ```
+    $(SRCROOT)/Carthage/Build/iOS/TextToSpeechV1.framework
+    $(SRCROOT)/Carthage/Build/iOS/RestKit.framework
+    ```
 
 ## Add Exception for App Transport Security
 
@@ -63,25 +63,25 @@ To securely connect to IBM Watson services, the application's `Info.plist` file 
 
 2. Copy-and-paste the following source code into the `Info.plist` file.
 
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSExceptionDomains</key>
+    ```
+    <key>NSAppTransportSecurity</key>
     <dict>
-        <key>watsonplatform.net</key>
+        <key>NSExceptionDomains</key>
         <dict>
-            <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-            <false/>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-            <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-            <true/>
-            <key>NSTemporaryExceptionMinimumTLSVersion</key>
-            <string>TLSv1.0</string>
+            <key>watsonplatform.net</key>
+            <dict>
+                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+            </dict>
         </dict>
     </dict>
-</dict>
-```
+    ```
 
 ## Synthesize with Text to Speech
 
@@ -91,26 +91,26 @@ We will modify our project's `ViewController` to synthesize English text with th
 
 2. Add import statements for `TextToSpeechV1` and `AVFoundation`:
 
-```swift
-import TextToSpeechV1
-import AVFoundation
-```
+    ```swift
+    import TextToSpeechV1
+    import AVFoundation
+    ```
 
 3. Add a `var audioPlayer: AVAudioPlayer!` property to the `ViewController` class. This ensures that the audio player does not fall out of scope and end playback when the `viewDidLoad()` function returns.
 
 4. Add the following code to your `viewDidLoad` method. Be sure to update the username and password with the credentials for your Watson Text to Speech instance.
 
-```swift
-let username = "your-text-to-speech-username"
-let password = "your-text-to-speech-password"
-let textToSpeech = TextToSpeech(username: username, password: password)
-
-let text = "All the problems of the world could be settled easily if men were only willing to think."
-let failure = { (error: Error) in print(error) }
-textToSpeech.synthesize(text, failure: failure) { data in
-    self.audioPlayer = try! AVAudioPlayer(data: data)
-    self.audioPlayer.play()
-}
-```
+    ```swift
+    let username = "your-text-to-speech-username"
+    let password = "your-text-to-speech-password"
+    let textToSpeech = TextToSpeech(username: username, password: password)
+    
+    let text = "All the problems of the world could be settled easily if men were only willing to think."
+    let failure = { (error: Error) in print(error) }
+    textToSpeech.synthesize(text, failure: failure) { data in
+        self.audioPlayer = try! AVAudioPlayer(data: data)
+        self.audioPlayer.play()
+    }
+    ```
 
 5. Run your application in the simulator to hear the synthesized text!

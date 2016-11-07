@@ -47,6 +47,7 @@ public struct Output: JSONEncodable, JSONDecodable {
     }
 }
 
+/** A message logged with the request. */
 public struct LogMessage: JSONEncodable, JSONDecodable {
     
     /// The raw JSON object used to construct this model.

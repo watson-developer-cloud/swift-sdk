@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.9.0
+
+_2016-11-07_
+
+This release migrates the SDK to Swift 3.0 and removes external dependencies.
+
 ## Version 0.8.1
 
 _2016-10-12_

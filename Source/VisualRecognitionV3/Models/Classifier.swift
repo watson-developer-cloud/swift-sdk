@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A classifier for the Visual Recognition service. */
 public struct Classifier: JSONDecodable {
@@ -29,22 +29,26 @@ public struct Classifier: JSONDecodable {
     /// The owner of the classifier.
     public let owner: String
     
-    /// The status of the classifier.
+    /// The training status of the classifier.
     public let status: String
     
-    /// The creation date of the classifier.
+    /// If classifier training failed, this property may explain why.
+    public let explanation: String?
+    
+    /// The time and date when the classifier was created.
     public let created: String
     
     /// The classes of the classifier.
-    public let classes: [Class]
+    public let classes: [String]
     
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSON) throws {
-        classifierID = try json.string("classifier_id")
-        name = try json.string("name")
-        owner = try json.string("owner")
-        status = try json.string("status")
-        created = try json.string("created")
-        classes = try json.arrayOf("classes", type: Class.self)
+        classifierID = try json.getString(at: "classifier_id")
+        name = try json.getString(at: "name")
+        owner = try json.getString(at: "owner")
+        status = try json.getString(at: "status")
+        explanation = try? json.getString(at: "explanation")
+        created = try json.getString(at: "created")
+        classes = try json.getArray(at: "classes").map { try $0.getString(at: "class") }
     }
 }

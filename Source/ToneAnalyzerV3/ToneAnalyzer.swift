@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /**
@@ -32,10 +30,8 @@ public class ToneAnalyzer {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
+    private let credentials: Credentials
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ToneAnalyzerV3")
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
     /**
@@ -47,8 +43,7 @@ public class ToneAnalyzer {
             in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.username = username
-        self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
     
@@ -58,12 +53,12 @@ public class ToneAnalyzer {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let code = try json.int("code")
-            let error = try json.string("error")
-            let help = try? json.string("help")
+            let code = try json.getInt(at: "code")
+            let error = try json.getString(at: "error")
+            let help = try? json.getString(at: "help")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: "\(help)"
@@ -80,7 +75,7 @@ public class ToneAnalyzer {
      The message is analyzed for several tones—social, emotional, and writing. For each tone,
      various traits are derived (e.g. conscientiousness, agreeableness, and openness).
      
-     - parameter text: The text to analyze.
+     - parameter ofText: The text to analyze.
      - parameter tones: Filter the results by a specific tone. Valid values for `tones` are
             `emotion`, `writing`, or `social`.
      - parameter sentences: Should sentence-level tone analysis by performed?
@@ -88,14 +83,14 @@ public class ToneAnalyzer {
      - parameter success: A function invoked with the tone analysis.
      */
     public func getTone(
-        text: String,
+        ofText text: String,
         tones: [String]? = nil,
         sentences: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ToneAnalysis -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
     {
         // construct body
-        guard let body = try? ["text": text].toJSON().serialize() else {
+        guard let body = try? JSON(dictionary: ["text": text]).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -104,37 +99,35 @@ public class ToneAnalyzer {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let tones = tones {
-            let tonesList = tones.joinWithSeparator(",")
-            queryParameters.append(NSURLQueryItem(name: "tones", value: tonesList))
+            let tonesList = tones.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "tones", value: tonesList))
         }
         if let sentences = sentences {
-            queryParameters.append(NSURLQueryItem(name: "sentences", value: "\(sentences)"))
+            queryParameters.append(URLQueryItem(name: "sentences", value: "\(sentences)"))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceURL + "/v3/tone",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders,
+            queryItems: queryParameters,
             messageBody: body
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ToneAnalysis, NSError>) in
-                switch response.result {
-                case .Success(let toneAnalysis): success(toneAnalysis)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ToneAnalysis>) in
+            switch response.result {
+            case .success(let toneAnalysis): success(toneAnalysis)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

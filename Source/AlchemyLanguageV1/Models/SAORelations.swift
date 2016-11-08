@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -41,10 +41,15 @@ public struct SAORelations: JSONDecodable {
     
     /// Used internally to initialize a SAORelations object
     public init(json: JSON) throws {
-        language = try? json.string("language")
-        url = try? json.string("url")
-        text = try? json.string("text")
-        relations = try? json.arrayOf("relations", type: SAORelation.self)
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: SAORelations.self)
+        }
+        
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        text = try? json.getString(at: "text")
+        relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
     }
 }
 

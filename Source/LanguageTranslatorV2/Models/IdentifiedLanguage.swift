@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** An identified language. */
 public struct IdentifiedLanguage: JSONDecodable {
@@ -28,7 +28,7 @@ public struct IdentifiedLanguage: JSONDecodable {
 
     /// Used internally to initialize an `IdentifiedLanguage` model from JSON.
     public init(json: JSON) throws {
-        language = try json.string("language")
-        confidence = try json.double("confidence")
+        language = try json.getString(at: "language")
+        confidence = try json.getDouble(at: "confidence")
     }
 }

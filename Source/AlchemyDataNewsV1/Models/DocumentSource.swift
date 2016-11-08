@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -31,7 +31,7 @@ public struct DocumentSource: JSONDecodable {
     
     /// used internally to initialize a DocumentSource object
     public init(json: JSON) throws {
-        enriched = try? json.decode("enriched", type: DocumentEnriched.self)
+        enriched = try? json.decode(at: "enriched", type: DocumentEnriched.self)
     }
     
 }

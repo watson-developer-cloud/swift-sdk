@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -53,14 +53,19 @@ public struct Language: JSONDecodable {
     
     /// Used internally to initialize a Language object
     public init(json: JSON) throws {
-        language = try? json.string("language")
-        url = try? json.string("url")
-        ethnologue = try? json.string("ethnologue")
-        iso6391 = try? json.string("iso-639-1")
-        iso6392 = try? json.string("iso-639-2")
-        iso6393 = try? json.string("iso-639-3")
-        nativeSpeakers = try? json.string("native-speakers")
-        wikipedia = try? json.string("wikipedia")
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Language.self)
+        }
+        
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        ethnologue = try? json.getString(at: "ethnologue")
+        iso6391 = try? json.getString(at: "iso-639-1")
+        iso6392 = try? json.getString(at: "iso-639-2")
+        iso6393 = try? json.getString(at: "iso-639-3")
+        nativeSpeakers = try? json.getString(at: "native-speakers")
+        wikipedia = try? json.getString(at: "wikipedia")
     }
 }
 

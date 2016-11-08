@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model supported by the Speech to Text service. */
 public struct Model: JSONDecodable {
@@ -41,12 +41,12 @@ public struct Model: JSONDecodable {
     
     /// Used internally to initialize a `Model` from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        rate = try json.int("rate")
-        language = try json.string("language")
-        url = try json.string("url")
-        supportedFeatures = try json.decode("supported_features")
-        description = try json.string("description")
+        name = try json.getString(at: "name")
+        rate = try json.getInt(at: "rate")
+        language = try json.getString(at: "language")
+        url = try json.getString(at: "url")
+        supportedFeatures = try json.decode(at: "supported_features")
+        description = try json.getString(at: "description")
     }
 }
 
@@ -58,6 +58,6 @@ public struct SupportedFeatures: JSONDecodable {
     
     /// Used internally to initialize a `SupportedFeatures` model from JSON.
     public init(json: JSON) throws {
-        customLanguageModel = try json.bool("custom_language_model")
+        customLanguageModel = try json.getBool(at: "custom_language_model")
     }
 }

@@ -15,13 +15,10 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The results from classifying one or more images. */
 public struct ClassifiedImages: JSONDecodable {
-    
-    /// The number of images processed.
-    public let imagesProcessed: Int
     
     /// The images that were classified.
     public let images: [ClassifiedImage]
@@ -31,25 +28,26 @@ public struct ClassifiedImages: JSONDecodable {
     
     /// Used internally to initialize a `ClassifiedImages` model from JSON.
     public init(json: JSON) throws {
-        imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: ClassifiedImage.self)
-        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
+        images = try json.decodedArray(at: "images", type: ClassifiedImage.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
 /** A classified image. */
 public struct ClassifiedImage: JSONDecodable {
     
-    /// The source URL of the image that was classified.
+    /// The source URL of the image, before any redirects. This is omitted if the image was uploaded.
     public let sourceURL: String?
     
-    /// The resolved URL of the image that was classified.
+    /// The fully-resolved URL of the image, after redirects are followed.
+    /// This is omitted if the image was uploaded.
     public let resolvedURL: String?
     
-    /// The filename of the image that was classified.
+    /// The relative path of the image file. This is omitted if the image was passed by URL.
     public let image: String?
     
-    /// Information about an error that occurred while classifying the given image.
+    /// Information about what might have caused a failure, such as an image
+    /// that is too large. This omitted if there is no error or warning.
     public let error: ErrorInfo?
     
     /// Classifications of the given image by classifier.
@@ -57,11 +55,11 @@ public struct ClassifiedImage: JSONDecodable {
     
     /// Used internally to initialize a `ClassifiedImage` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try? json.string("source_url")
-        resolvedURL = try? json.string("resolved_url")
-        image = try? json.string("image")
-        error = try? json.decode("error")
-        classifiers = try json.arrayOf("classifiers", type: ClassifierResults.self)
+        sourceURL = try? json.getString(at: "source_url")
+        resolvedURL = try? json.getString(at: "resolved_url")
+        image = try? json.getString(at: "image")
+        error = try? json.decode(at: "error")
+        classifiers = try json.decodedArray(at: "classifiers", type: ClassifierResults.self)
     }
 }
 
@@ -71,7 +69,7 @@ public struct ClassifierResults: JSONDecodable {
     /// The name of the classifier.
     public let name: String
     
-    /// The id of the classifier. Only returned for custom classifiers.
+    /// The id of the classifier.
     public let classifierID: String?
     
     /// The classes identified by the classifier.
@@ -79,28 +77,28 @@ public struct ClassifierResults: JSONDecodable {
     
     /// Used internally to initialize a `ClassifierResults` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        classifierID = try json.string("classifier_id")
-        classes = try json.arrayOf("classes", type: Classification.self)
+        name = try json.getString(at: "name")
+        classifierID = try json.getString(at: "classifier_id")
+        classes = try json.decodedArray(at: "classes", type: Classification.self)
     }
 }
 
 /** The classification of an image. */
 public struct Classification: JSONDecodable {
     
-    /// The class identified by the classifier.
+    /// The class identified in the image.
     public let classification: String
     
-    /// The confidence score of the identified class.
+    /// The confidence score of the identified class. Scores range from 0 to 1, with a higher score indicating greater confidence.
     public let score: Double
     
-    /// The type hierarchy of the identified class.
+    /// The type hierarchy of the identified class, if found.
     public let typeHierarchy: String?
     
     /// Used internally to initialize a `Classification` model from JSON.
     public init(json: JSON) throws {
-        classification = try json.string("class")
-        score = try json.double("score")
-        typeHierarchy = try? json.string("type_hierarchy")
+        classification = try json.getString(at: "class")
+        score = try json.getDouble(at: "score")
+        typeHierarchy = try? json.getString(at: "type_hierarchy")
     }
 }

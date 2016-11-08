@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -34,8 +34,8 @@ public struct Content: JSONDecodable {
     
     /** used internally to initialize Content objects */
     public init(json: JSON) throws {
-        mediaType = try? json.string("media_type")
-        text = try? json.string("text")
+        mediaType = try? json.getString(at: "media_type")
+        text = try? json.getString(at: "text")
     }
     
 }

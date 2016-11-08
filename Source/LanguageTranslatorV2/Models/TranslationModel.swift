@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A translation model that can be used to translate between a source and target language. */
 public struct TranslationModel: JSONDecodable {
@@ -61,19 +61,19 @@ public struct TranslationModel: JSONDecodable {
 
     /// Used internally to initialize a `TranslationModel` model from JSON.
     public init(json: JSON) throws {
-        modelID = try json.string("model_id")
-        name = try json.string("name")
-        source = try json.string("source")
-        target = try json.string("target")
-        baseModelID = try json.string("base_model_id")
-        domain = try json.string("domain")
-        customizable = try json.bool("customizable")
-        defaultModel = try json.bool("default_model")
-        owner = try json.string("owner")
+        modelID = try json.getString(at: "model_id")
+        name = try json.getString(at: "name")
+        source = try json.getString(at: "source")
+        target = try json.getString(at: "target")
+        baseModelID = try json.getString(at: "base_model_id")
+        domain = try json.getString(at: "domain")
+        customizable = try json.getBool(at: "customizable")
+        defaultModel = try json.getBool(at: "default_model")
+        owner = try json.getString(at: "owner")
 
-        guard let status = TrainingStatus(rawValue: try json.string("status")) else {
-            let type = TrainingStatus.Available.dynamicType
-            throw JSON.Error.ValueNotConvertible(value: json, to: type)
+        guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
+            let type = type(of: TrainingStatus.available)
+            throw JSON.Error.valueNotConvertible(value: json, to: type)
         }
         self.status = status
     }

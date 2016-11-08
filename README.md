@@ -37,7 +37,6 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
-* [Dialog](#dialog)
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -53,13 +52,13 @@ There are many resources to help you build your first cognitive application with
 
 - iOS 8.0+
 - Xcode 8.0+
-- Swift 2.3+
+- Swift 3.0+
 
 ## Installation
 
 ### Dependency Management
 
-The Watson Developer Cloud iOS SDK uses [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build binary frameworks.
+We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the iOS SDK for your application.
 
 You can install Carthage with [Homebrew](http://brew.sh/):
 
@@ -73,6 +72,8 @@ To use the Watson Developer Cloud iOS SDK in your application, specify it in you
 ```
 github "watson-developer-cloud/ios-sdk"
 ```
+
+In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
 
 Then run the following command to build the dependencies and frameworks:
 
@@ -159,13 +160,9 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 * [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
 
-## Xcode 8 Compatibility
-
-As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Since new Xcode 8 projects default to Swift 3.0, compatability with the iOS SDK requires you to [change your project settings](https://thatthinginswift.com/swift-2-xcode-8/) to specify Swift 2.3.
-
 ## Xcode 7 Compatibility
 
-As of v0.8.0, the iOS SDK is written in Swift 2.3 using Xcode 8. Unfortunately, Swift 2.3 is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
+Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
 
 To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
 
@@ -204,9 +201,9 @@ let query = [
     "q.enriched.url.title": "O[IBM^Apple]",
     "return": "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
 ]
-let failure = { (error: NSError) in print(error) }
+let failure = { (error: Error) in print(error) }
 
-alchemyDataNews.getNews(start, end: end, query: query, failure: failure) { news in
+alchemyDataNews.getNews(from: start, to: end, query: query, failure: failure) { news in
     print(news)
 }
 ```
@@ -246,8 +243,8 @@ let apiKey = "your-apikey-here"
 let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
 
 let url = "https://github.com/watson-developer-cloud/ios-sdk"
-let failure = { (error: NSError) in print(error) }
-alchemyLanguage.getTextSentiment(forURL: url, failure: failure) { sentiment in
+let failure = { (error: Error) in print(error) }
+alchemyLanguage.getTextSentiment(fromContentAtURL: url, failure: failure) { sentiment in
     print(sentiment)
 }
 ```
@@ -273,9 +270,9 @@ let version = "YYYY-MM-DD" // use today's date for the most recent version
 let conversation = Conversation(username: username, password: password, version: version)
 
 let workspaceID = "your-workspace-id-here"
-let failure = { (error: NSError) in print(error) }
+let failure = { (error: Error) in print(error) }
 var context: Context? // save context to continue conversation
-conversation.message(workspaceID, failure: failure) { response in
+conversation.message(withWorkspace: workspaceID, failure: failure) { response in
     print(response.output.text)
     context = response.context
 }
@@ -285,10 +282,26 @@ The following example shows how to continue an existing conversation with the Co
 
 ```swift
 let text = "Turn on the radio."
-let failure = { (error: NSError) in print(error) }
-conversation.message(workspaceID, text: text, context: context, failure: failure) { response in
+let failure = { (error: Error) in print(error) }
+let request = MessageRequest(text: text, context: context)
+conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+    response in
     print(response.output.text)
     context = response.context
+}
+```
+
+The Conversation service allows users to define custom variables and values in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: `"pizza_toppings": ["ketchup", "ham", "onion"]`.
+
+Unfortunately, the iOS SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the `Conversation` framework include a `json: [String: Any]` property to allow users to access the underlying JSON payload and manually parse user-defined variables.
+
+The following example shows how to extract a user-defined `pizza_toppings` variable from the `context` of a Conversation response:
+
+```swift
+conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+    response in
+    let pizzaToppings = response.context.json["pizza_toppings"] as! [String]
+    print(pizzaToppings) // ["ketchup", "ham", "onion"]
 }
 ```
 
@@ -296,74 +309,6 @@ The following links provide more information about the IBM Conversation service:
 
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml)
-
-## Dialog
-
-The IBM Watson Dialog service provides a comprehensive and robust platform for managing conversations between virtual agents and users through an application programming interface (API). Developers automate branching conversations that use natural language to automatically respond to user questions, cross-sell and up-sell, walk users through processes or applications, or even hand-hold users through difficult tasks.
-
-To use the Dialog service, developers script conversations as they would happen in the real world, upload them to a Dialog application, and enable back-and-forth conversations with a user.
-
-The following example demonstrates how to instantiate a `Dialog` object:
-
-```swift
-import DialogV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let dialog = Dialog(username: username, password: password)
-```
-
-The following example demonstrates how to create a dialog application:
-
-```swift
-// store dialog id to access application
-var dialogID: DialogID?
-
-// load dialog file
-guard let fileURL = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-    print("Failed to locate dialog file.")
-    return
-}
-
-// create dialog application
-let name = "your-dialog-name"
-let failure = { (error: NSError) in print(error) }
-dialog.createDialog(dialogName, fileURL: fileURL, failure: failure) { dialogID in
-    self.dialogID = dialogID
-    print(dialogID)
-}
-```
-
-The following example demonstrates how to start a conversation with a dialog application:
-
-```swift
-// store ids to continue conversation
-var conversationID: Int?
-var clientID: Int?
-
-let failure = { (error: NSError) in print(error) }
-dialog.converse(dialogID!, failure: failure) { response in
-    self.conversationID = response.conversationID
-    self.clientID = response.clientID
-    print(response.response)
-}
-```
-
-The following example demonstrates how to continue a conversation with a dialog application:
-
-```swift
-let input = "your-text-here"
-let failure = { (error: NSError) in print(error) }
-dialog.converse(dialogID!, conversationID: conversationID!, clientID: clientID!, input: input, failure: failure) { response in
-    print(conversationResponse.response)
-}
-```
-
-The following links provide more information about the IBM Watson Dialog service:
-
-* [IBM Watson Dialog - Service Page](http://www.ibm.com/watson/developercloud/dialog.html)
-* [IBM Watson Dialog - Documentation](http://www.ibm.com/watson/developercloud/doc/dialog/)
-* [IBM Watson Dialog - Demo](http://dialog-demo.mybluemix.net/?cm_mc_uid=57695492765114489852726&cm_mc_sid_50200000=1449164796)
 
 ## Document Conversion
 
@@ -380,15 +325,17 @@ let version = "2015-12-15"
 let documentConversion = DocumentConversion(username: username, password: password, version: version)
 
 // load document
-guard let document = NSBundle.mainBundle().URLForResource("your-dialog-filename", withExtension: "xml") else {
-    print("Failed to locate dialog file.")
+let filename = "your-document-filename"
+guard let document = Bundle.main.url(forResource: filename, withExtension: "xml") else {
+    print("Failed to locate document.")
     return
 }
 
 // convert document
-let config = documentConversion.writeConfig(ReturnType.Text)
-let failure = { (error: NSError) in print(error) }
-documentConversion.convertDocument(config, document: document, failure: failure) { text in
+let config = try! documentConversion.writeConfig(type: ReturnType.text)
+let failure = { (error: Error) in print(error) }
+documentConversion.convertDocument(document, withConfigurationFile: config, failure: failure) {
+    text in
     print(text)
 }
 ```
@@ -403,6 +350,8 @@ The following links provide more information about the IBM Document Conversion s
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
+Note that the Language Translator service was formerly known as Language Translation. It is recommended to [migrate](http://www.ibm.com/watson/developercloud/doc/language-translator/migrating.shtml) to Language Translator, however, existing Language Translation service instances are currently supported by the `LanguageTranslatorV2` framework. To use a legacy Language Translation service, set the `serviceURL` property before executing the first API call to the service.
+
 The following example demonstrates how to use the Language Translator service:
 
 ```swift
@@ -412,17 +361,21 @@ let username = "your-username-here"
 let password = "your-password-here"
 let languageTranslator = LanguageTranslator(username: username, password: password)
 
-let failure = { (error: NSError) in print(error) }
-languageTranslator.translate("Hello", source: "en", target: "es", failure: failure) { translation in
+// set the serviceURL property to use the legacy Language Translation service
+// languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+
+let failure = { (error: Error) in print(error) }
+languageTranslator.translate("Hello", from: "en", to: "es", failure: failure) {
+    translation in
     print(translation)
 }
 ```
 
 The following links provide more information about the IBM Watson Language Translator service:
 
-* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translation.html)
-* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translation/)
-* [IBM Watson Language Translator - Demo](https://language-translation-demo.mybluemix.net/)
+* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translator.html)
+* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translator/)
+* [IBM Watson Language Translator - Demo](https://language-translator-demo.mybluemix.net/)
 
 ## Natural Language Classifier
 
@@ -439,8 +392,9 @@ let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, pa
 
 let classifierID = "your-trained-classifier-id"
 let text = "your-text-here"
-let failure = { (error: NSError) in print(error) }
-naturalLanguageClassifier.classify(classifierID, text: text, failure: failure) { classification in
+let failure = { (error: Error) in print(error) }
+naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure: failure) {
+    classification in
     print(classification)
 }
 ```
@@ -465,8 +419,8 @@ let password = "your-password-here"
 let personalityInsights = PersonalityInsights(username: username, password: password)
 
 let text = "your-input-text"
-let failure = { (error: NSError) in print(error) }
-personalityInsights.getProfile(text: text, failure: failure) { profile in
+let failure = { (error: Error) in print(error) }
+personalityInsights.getProfile(fromText: text, failure: failure) { profile in
     print(profile)                      
 }
 ```
@@ -494,59 +448,67 @@ let retrieveAndRank = RetrieveAndRank(username: username, password: password)
 The following example demonstrates how to create a Solr Cluster, configuration, and collection.
 
 ```swift
-let failure = { (error: NSError) in print(error) }
-
+let failure = { (error: Error) in print(error) }
+        
 // Create and store the Solr Cluster so you can access it later.
-var cluster: SolrCluster?
-retrieveAndRank.createSolrCluster("your-cluster-name-here", failure: failure) { solrCluster in
+var cluster: SolrCluster!
+let clusterName = "your-cluster-name-here"
+retrieveAndRank.createSolrCluster(withName: clusterName, failure: failure) {
+    solrCluster in
     cluster = solrCluster
 }
 
 // Load the configuration file.
-guard let configFile = NSBundle.mainBundle().URLForResource("your-config-filename", withExtension: "zip") else {
+guard let configFile = Bundle.main.url(forResource: "your-config-filename", withExtension: "zip") else {
     print("Failed to locate configuration file.")
     return
 }
-let configurationName = "your-config-name-here"
+
 // Create the configuration. Make sure the Solr Cluster status is READY first.
+let configurationName = "your-config-name-here"
 retrieveAndRank.uploadSolrConfiguration(
-    cluster.solrClusterID,
-    configName: configurationName,
+    withName: configurationName,
+    toSolrClusterID: cluster.solrClusterID,
     zipFile: configFile,
-    failure: failure)
+    failure: failure
+)
 
 // Create and store your Solr collection name.
 let collectionName = "your-collection-name-here"
 retrieveAndRank.createSolrCollection(
-    cluster.solrClusterID,
-    name: collectionName,
-    configName: configurationName,
-    failure)
+    withName: collectionName,
+    forSolrClusterID: cluster.solrClusterID,
+    withConfigurationName: configurationName,
+    failure: failure
+)
 
 // Load the documents you want to add to your collection.
-guard let collectionFile = NSBundle.mainBundle().URLForResource("your-collection-filename", withExtension: "json") else {
+guard let collectionFile = Bundle.main.url(forResource: "your-collection-filename", withExtension: "json") else {
     print("Failed to locate collection file.")
     return
 }
+
 // Upload the documents to your collection.
 retrieveAndRank.updateSolrCollection(
-    cluster.solrClusterID,
-    collectionName: collectionName,
-    contentType: "application/json",
+    withName: collectionName,
+    inSolrClusterID: cluster.solrClusterID,
     contentFile: collectionFile,
-    failure: failure)
+    contentType: "application/json",
+    failure: failure
+)
 ```
 
 The following example demonstrates how to use the Retrieve and Rank service to retrieve answers without ranking them.
 
 ```swift
 retrieveAndRank.search(
-    cluster.solrClusterID,
-    collectionName: collectionName,
+    withCollectionName: collectionName,
+    fromSolrClusterID: cluster.solrClusterID,
     query: "your-query-here",
     returnFields: "your-return-fields-here",
-    failure: failure) { response in
-        
+    failure: failure)
+{
+    response in
     print(response)
 }
 ```
@@ -555,18 +517,19 @@ The following example demonstrates how to create and train a Ranker.
 
 ``` swift
 // Load the ranker training data file.
-guard let rankerTrainingFile = NSBundle.mainBundle().URLForResource("your-ranker-training-data-filename", withExtension: "json") else {
+guard let rankerTrainingFile = Bundle.main.url(forResource: "your-ranker-training-data-filename", withExtension: "json") else {
     print("Failed to locate collection file.")
     return
 }
 
 // Create and store the ranker.
-var ranker = RankerDetails?
+var ranker: RankerDetails!
 retrieveAndRank.createRanker(
-    rankerTrainingFile,
-    name: "your-ranker-name-here",
-    failure: failure) { rankerDetails in
-    
+    withName: "your-ranker-name-here",
+    fromFile: rankerTrainingFile,
+    failure: failure)
+{
+    rankerDetails in
     ranker = rankerDetails
 }
 ```
@@ -575,13 +538,14 @@ The following example demonstrates how to use the service to retrieve and rank t
 
 ```swift
 retrieveAndRank.searchAndRank(
-    cluster.solrClusterID,
-    collectionName: collectionName,
+    withCollectionName: collectionName,
+    fromSolrClusterID: cluster.solrClusterID,
     rankerID: ranker.rankerID,
     query: "your-query-here",
     returnFields: "your-return-fields-here",
-    failure: failure) { response in
-        
+    failure: failure)
+{
+    response in
     print(response)
 }
 ```
@@ -605,7 +569,7 @@ The `RecognitionSettings` class is used to define the audio format and behavior 
 The following example demonstrates how to define a recognition request that transcribes Opus-formatted audio data with interim results until the stream terminates:
 
 ```swift
-var settings = RecognitionSettings(contentType: .WAV)
+var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
 settings.continuous = true
 ```
@@ -614,7 +578,7 @@ See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/se
 
 #### Microphone Audio and Compression
 
-The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
+The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
 
 Knowing when to stop the microphone depends upon the recognition request's `continuous` setting:
      
@@ -628,10 +592,10 @@ It's important to specify the correct audio format for recognition requests that
 
 ```swift
 // compressed microphone audio uses the Opus format
-let settings = RecognitionSettings(contentType: .Opus)
+let settings = RecognitionSettings(contentType: .opus)
 
 // uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz
-let settings = RecognitionSettings(contentType: .L16(rate: 16000, channels: 1))
+let settings = RecognitionSettings(contentType: .l16(rate: 16000, channels: 1))
 ```
 
 #### Transcribe Recorded Audio
@@ -645,11 +609,12 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
-let audio = NSBundle.mainBundle().URLForResource("filename", withExtension: "wav")!
-var settings = RecognitionSettings(contentType: .WAV)
+let audio = Bundle.main.url(forResource: "filename", withExtension: "wav")!
+var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
-let failure = { (error: NSError) in print(error) }
-speechToText.recognize(audio, settings: settings, failure: failure) { results in
+let failure = { (error: Error) in print(error) }
+speechToText.recognize(audio, settings: settings, failure: failure) {
+    results in
     print(results.bestTranscript)
 }
 ```
@@ -666,11 +631,11 @@ let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
 func startStreaming() {
-    var settings = RecognitionSettings(contentType: .Opus)
+    var settings = RecognitionSettings(contentType: .opus)
     settings.continuous = true
     settings.interimResults = true
-    let failure = { (error: NSError) in print(error) }
-    let request = speechToText.recognizeMicrophone(settings, failure: failure) { results in
+    let failure = { (error: Error) in print(error) }
+    speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
         print(results.bestTranscript)
     }
 }
@@ -722,13 +687,13 @@ func startStreaming() {
     speechToTextSession.onResults = { results in print(results.bestTranscript) }
 
     // define recognition request settings
-    var settings = RecognitionSettings(contentType: .Opus)
+    var settings = RecognitionSettings(contentType: .opus)
     settings.interimResults = true
     settings.continuous = true
 
     // start streaming microphone audio for transcription
     speechToTextSession.connect()
-    speechToTextSession.startRequest(settings)
+    speechToTextSession.startRequest(settings: settings)
     speechToTextSession.startMicrophone()
 }
 
@@ -755,14 +720,15 @@ The following example demonstrates how to use the Text to Speech service:
 
 ```swift
 import TextToSpeechV1
+import AVFoundation
 
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
-var audioPlayer: AVAudioPlayer // see note below
+var audioPlayer = AVAudioPlayer() // see note below
 
 let text = "your-text-here"
-let failure = { (error: NSError) in print(error) }
+let failure = { (error: Error) in print(error) }
 textToSpeech.synthesize(text, failure: failure) { data in
     audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
@@ -782,11 +748,11 @@ import TextToSpeechV1
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
-var audioPlayer: AVAudioPlayer // see note below
+var audioPlayer = AVAudioPlayer() // see note below
 
 let text = "your-text-here"
-let failure = { (error: NSError) in print(error) }
-textToSpeech.synthesize(text, voice: SynthesisVoice.GB_Kate, failure: failure) { data in
+let failure = { (error: Error) in print(error) }
+textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: failure) { data in
     audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
     audioPlayer.play()
@@ -820,8 +786,8 @@ let version = "YYYY-MM-DD" // use today's date for the most recent version
 let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
 
 let text = "your-input-text"
-let failure = { (error: NSError) in print(error) }
-toneAnalyzer.getTone(text, failure: failure) { tones in
+let failure = { (error: Error) in print(error) }
+toneAnalyzer.getTone(ofText: text, failure: failure) { tones in
     print(tones)
 }
 ```
@@ -848,44 +814,44 @@ let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password
 // define columns
 let price = Column(
     key: "price",
-    type: .Numeric,
-    goal: .Minimize,
+    type: .numeric,
+    goal: .minimize,
     isObjective: true
 )
 let ram = Column(
     key: "ram",
-    type: .Numeric,
-    goal: .Maximize,
+    type: .numeric,
+    goal: .maximize,
     isObjective: true
 )
 let screen = Column(
     key: "screen",
-    type: .Numeric,
-    goal: .Maximize,
+    type: .numeric,
+    goal: .maximize,
     isObjective: true
 )
 let os = Column(
     key: "os",
-    type: .Categorical,
+    type: .categorical,
     isObjective: true,
-    range: Range.CategoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
+    range: Range.categoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
     preference: ["android", "ios"]
 )
 
 // define options
 let galaxy = Option(
     key: "galaxy",
-    values: ["price": .Int(50), "ram": .Int(45), "screen": .Int(5), "os": .String("android")],
+    values: ["price": .int(50), "ram": .int(45), "screen": .int(5), "os": .string("android")],
     name: "Galaxy S4"
 )
 let iphone = Option(
     key: "iphone",
-    values: ["price": .Int(99), "ram": .Int(40), "screen": .Int(4), "os": .String("ios")],
+    values: ["price": .int(99), "ram": .int(40), "screen": .int(4), "os": .string("ios")],
     name: "iPhone 5"
 )
 let optimus = Option(
     key: "optimus",
-    values: ["price": .Int(10), "ram": .Int(300), "screen": .Int(5), "os": .String("android")],
+    values: ["price": .int(10), "ram": .int(300), "screen": .int(5), "os": .string("android")],
     name: "LG Optimus G"
 )
 
@@ -897,11 +863,11 @@ let problem = Problem(
 )
 
 // define failure function
-let failure = { (error: NSError) in print(error) }
+let failure = { (error: Error) in print(error) }
 
 // identify optimal options
-tradeoffAnalytics.getDilemma(problem, failure: failure) { dilemma in
-    print(dilemma.solutions)
+tradeoffAnalytics.getDilemma(for: problem, failure: failure) { dilemma in
+    print(dilemma.resolution)
 }
 ```
 
@@ -927,8 +893,8 @@ let version = "YYYY-MM-DD" // use today's date for the most recent version
 let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
 
 let url = "your-image-url"
-let failure = { (error: NSError) in print(error) }
-visualRecognition.classify(url, failure: failure) { classifiedImages in
+let failure = { (error: Error) in print(error) }
+visualRecognition.classify(image: url, failure: failure) { classifiedImages in
     print(classifiedImages)
 }
 ```

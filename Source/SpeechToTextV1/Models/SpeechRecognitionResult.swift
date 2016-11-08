@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import Freddy
 import RestKit
 
 /** A result from a Speech to Text recognition request. */
@@ -24,19 +23,6 @@ public struct SpeechRecognitionResult: JSONDecodable {
     /// If `true`, then the transcription result for this
     /// utterance is final and will not be updated further.
     public let final: Bool
-
-    /// The transcription with the greatest confidence.
-    public var bestTranscript: String? {
-        var transcript: String? = nil
-        var confidence: Double? = nil
-        for alternative in alternatives {
-            if alternative.confidence > confidence {
-                transcript = alternative.transcript
-                confidence = alternative.confidence
-            }
-        }
-        return transcript
-    }
     
     /// Alternative transcription results.
     public let alternatives: [SpeechRecognitionAlternative]
@@ -51,11 +37,11 @@ public struct SpeechRecognitionResult: JSONDecodable {
 
     /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
     public init(json: JSON) throws {
-        final = try json.bool("final")
-        alternatives = try json.arrayOf("alternatives", type: SpeechRecognitionAlternative.self)
-        keywordResults = try? json.dictionary("keywords_result").map {
-            json in try json.arrayOf(type: KeywordResult.self)
+        final = try json.getBool(at: "final")
+        alternatives = try json.decodedArray(at: "alternatives", type: SpeechRecognitionAlternative.self)
+        keywordResults = try? json.getDictionary(at: "keywords_result").map {
+            json in try json.decodedArray(type: KeywordResult.self)
         }
-        wordAlternatives = try? json.arrayOf("word_alternatives", type: WordAlternativeResults.self)
+        wordAlternatives = try? json.decodedArray(at: "word_alternatives", type: WordAlternativeResults.self)
     }
 }

@@ -21,17 +21,17 @@ public enum TrainingStatus: String {
 
     /// Training has completed and this translation model is
     /// ready for use with the Language Translator service.
-    case Available = "available"
+    case available = "available"
     
     /// Training has just started.
-    case Starting = "starting"
+    case starting = "starting"
 
     /// Training is still in progress.
-    case Training = "training"
+    case training = "training"
     
     /// Training has been uploaded.
-    case Uploaded = "uploaded"
+    case uploaded = "uploaded"
 
     /// Training did not complete because of an error.
-    case Error = "error"
+    case error = "error"
 }

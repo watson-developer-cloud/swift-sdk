@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The text of an image detected by the Alchemy Vision service. */
 public struct SceneText: JSONDecodable {
@@ -37,11 +37,15 @@ public struct SceneText: JSONDecodable {
 
     /// Used internally to initialize a `SceneText` model from JSON.
     public init(json: JSON) throws {
-        status = try json.string("status")
-        url = try? json.string("url")
-        totalTransactions = try Int(json.string("totalTransactions"))!
-        sceneText = try json.string("sceneText")
-        sceneTextLines = try json.arrayOf("sceneTextLines", type: SceneTextLine.self)
+        status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: SceneText.self)
+        }
+        
+        url = try? json.getString(at: "url")
+        totalTransactions = try Int(json.getString(at: "totalTransactions"))!
+        sceneText = try json.getString(at: "sceneText")
+        sceneTextLines = try json.decodedArray(at: "sceneTextLines", type: SceneTextLine.self)
     }
 }
 
@@ -62,10 +66,10 @@ public struct SceneTextLine: JSONDecodable {
 
     /// Used internally to initialize a `SceneTextLine` model from JSON.
     public init(json: JSON) throws {
-        confidence = try json.double("confidence")
-        region = try json.decode("region")
-        text = try json.string("text")
-        words = try json.arrayOf("words", type: Word.self)
+        confidence = try json.getDouble(at: "confidence")
+        region = try json.decode(at: "region")
+        text = try json.getString(at: "text")
+        words = try json.decodedArray(at: "words", type: Word.self)
     }
 }
 
@@ -86,10 +90,10 @@ public struct Region: JSONDecodable {
 
     /// Used internally to initialize a `Region` model from JSON.
     public init(json: JSON) throws {
-        height = try json.int("height")
-        width = try json.int("width")
-        x = try json.int("x")
-        y = try json.int("y")
+        height = try json.getInt(at: "height")
+        width = try json.getInt(at: "width")
+        x = try json.getInt(at: "x")
+        y = try json.getInt(at: "y")
     }
 }
 
@@ -107,8 +111,8 @@ public struct Word: JSONDecodable {
 
     /// Used internally to initialize a `Word` model from JSON.
     public init(json: JSON) throws {
-        confidence = try json.double("confidence")
-        region = try json.decode("region")
-        text = try json.string("text")
+        confidence = try json.getDouble(at: "confidence")
+        region = try json.decode(at: "region")
+        text = try json.getString(at: "text")
     }
 }

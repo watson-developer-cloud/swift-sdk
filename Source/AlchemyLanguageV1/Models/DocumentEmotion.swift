@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {
@@ -34,13 +34,18 @@ public struct DocumentEmotion: JSONDecodable {
     
     /// used internally to initialize a DocumentEmotion object
     public init(json: JSON) throws {
-        url = try? json.string("url")
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
+        }
+        
+        url = try? json.getString(at: "url")
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = nil
         }
-        language = try? json.string("language")
-        docEmotions = try? json.decode("docEmotions", type: Emotions.self)
+        language = try? json.getString(at: "language")
+        docEmotions = try? json.decode(at: "docEmotions", type: Emotions.self)
     }
 }

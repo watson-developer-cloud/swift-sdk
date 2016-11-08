@@ -15,35 +15,78 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A request formatted for the Conversation service. */
-internal struct MessageRequest: JSONEncodable {
+public struct MessageRequest: JSONEncodable {
     
-    private let input: InputData
+    private let input: Input
+    private let alternateIntents: Bool?
     private let context: Context?
     private let entities: [Entity]?
     private let intents: [Intent]?
-    private let output: OutputData?
+    private let output: Output?
     
     /**
      Create a `MessageRequest`.
      
      - parameter input: An input object that includes the input text.
-     - parameter context: The context, or state, associated with this request.
-     - parameter entities: An array of terms that shall be identified as entities
-     - parameter intents: An array of terms that shall be identified as intents.
-     - parameter output: An output object that includes the response to the user,
-        the nodes that were hit, and messages from the log.
+     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return
+        all matching intents. For example, return all intents when the confidence is not high
+        to allow users to choose their intent.
+     - parameter context: State information for the conversation. Include the context object from
+        the previous response when you send multiple requests for the same conversation.
+     - parameter entities: Include the entities from a previous response when they do not need to
+        change and to prevent Watson from trying to identify them.
+     - parameter intents: An array of name-confidence pairs for the user input. Include the intents
+        from the request when they do not need to change so that Watson does not try to identify
+        them.
+     - parameter output: System output. Include the output from the request when you have several
+        requests within the same Dialog turn to pass back in the intermediate information.
      */
-    init(
-        input: InputData,
+    public init(
+        input: Input,
+        alternateIntents: Bool? = nil,
         context: Context? = nil,
         entities: [Entity]? = nil,
         intents: [Intent]? = nil,
-        output: OutputData? = nil)
+        output: Output? = nil)
     {
         self.input = input
+        self.alternateIntents = alternateIntents
+        self.context = context
+        self.entities = entities
+        self.intents = intents
+        self.output = output
+    }
+    
+    /**
+     Create a `MessageRequest`.
+     
+     - parameter text: The input text.
+     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return
+        all matching intents. For example, return all intents when the confidence is not high
+        to allow users to choose their intent.
+     - parameter context: State information for the conversation. Include the context object from
+        the previous response when you send multiple requests for the same conversation.
+     - parameter entities: Include the entities from a previous response when they do not need to
+        change and to prevent Watson from trying to identify them.
+     - parameter intents: An array of name-confidence pairs for the user input. Include the intents
+        from the request when they do not need to change so that Watson does not try to identify
+        them.
+     - parameter output: System output. Include the output from the request when you have several
+        requests within the same Dialog turn to pass back in the intermediate information.
+     */
+    public init(
+        text: String,
+        alternateIntents: Bool? = nil,
+        context: Context? = nil,
+        entities: [Entity]? = nil,
+        intents: [Intent]? = nil,
+        output: Output? = nil)
+    {
+        self.input = Input(text: text)
+        self.alternateIntents = alternateIntents
         self.context = context
         self.entities = entities
         self.intents = intents
@@ -51,21 +94,24 @@ internal struct MessageRequest: JSONEncodable {
     }
     
     /// Used internally to serialize a `MessageRequest` model to JSON.
-    func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["input"] = input.toJSON()
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["input"] = input.toJSONObject()
+        if let alternateIntents = alternateIntents {
+            json["alternate_intents"] = alternateIntents
+        }
         if let context = context {
-            json["context"] = context.toJSON()
+            json["context"] = context.toJSONObject()
         }
         if let entities = entities {
-            json["entities"] = .Array(entities.map {$0.toJSON()})
+            json["entities"] = entities.map { $0.toJSONObject() }
         }
         if let intents = intents {
-            json["intents"] = .Array(intents.map {$0.toJSON()})
+            json["intents"] = intents.map { $0.toJSONObject() }
         }
         if let output = output {
-            json["output"] = output.toJSON()
+            json["output"] = output.toJSONObject()
         }
-        return JSON.Dictionary(json)
+        return json
     }
 }

@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /**
@@ -33,9 +31,7 @@ public class TradeoffAnalytics {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let username: String
-    private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 TradeoffAnalyticsV1")
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
     /**
@@ -45,8 +41,7 @@ public class TradeoffAnalytics {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
 
     /**
@@ -56,7 +51,7 @@ public class TradeoffAnalytics {
      of optimal options, their analytical characteristics, and, by default, their representation
      in a two-dimensional space.
      
-     - parameter problem: The decision problem.
+     - parameter for: The decision problem.
      - parameter generateVisualization: Indicated whether to calculate the map visualization for
         the results. If `true`, the visualization is returned; if `false`, no visualization is
         returned.
@@ -64,10 +59,10 @@ public class TradeoffAnalytics {
      - parameter success: A function invoked with the resulting dilemma and visualization.
      */
     public func getDilemma(
-        problem: Problem,
+        for problem: Problem,
         generateVisualization: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Dilemma -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Dilemma) -> Void)
     {
         // construct body
         guard let body = try? problem.toJSON().serialize() else {
@@ -79,33 +74,30 @@ public class TradeoffAnalytics {
         }
         
         // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
+        var queryParameters = [URLQueryItem]()
         if let generateVisualization = generateVisualization {
-            queryParameters.append(NSURLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
+            queryParameters.append(URLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
         }
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceURL + "/v1/dilemmas",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
-            headerParameters: defaultHeaders,
+            queryItems: queryParameters,
             messageBody: body
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .validate()
-            .responseObject() {
-                (response: Response<Dilemma, NSError>) in
-                switch response.result {
-                case .Success(let dilemma): success(dilemma)
-                case .Failure(let error): failure?(error)
-                }
+        // TODO: Add status code validation
+        request.responseObject() { (response: RestResponse<Dilemma>) in
+            switch response.result {
+            case .success(let dilemma): success(dilemma)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

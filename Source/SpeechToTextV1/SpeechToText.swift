@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /**
@@ -46,8 +44,8 @@ public class SpeechToText {
     
     private let username: String
     private let password: String
+    private let credentials: Credentials
     private var microphoneSession: SpeechToTextSession?
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 SpeechToTextV1")
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -59,6 +57,7 @@ public class SpeechToText {
     public init(username: String, password: String) {
         self.username = username
         self.password = password
+        self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -67,12 +66,12 @@ public class SpeechToText {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = try json.int("code")
-            let description = try json.string("code_description")
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try json.getString(at: "code_description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: description
@@ -89,52 +88,53 @@ public class SpeechToText {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of models.
      */
-    public func getModels(failure: (NSError -> Void)? = nil, success: [Model] -> Void) {
+    public func getModels(failure: ((Error) -> Void)? = nil, success: @escaping ([Model]) -> Void) {
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: "GET",
             url: serviceURL + "/v1/models",
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["models"]) {
-                (response: Response<[Model], NSError>) in
+        request.responseArray(dataToError: dataToError, path: ["models"]) {
+            (response: RestResponse<[Model]>) in
                 switch response.result {
-                case .Success(let models): success(models)
-                case .Failure(let error): failure?(error)
+                case .success(let models): success(models)
+                case .failure(let error): failure?(error)
                 }
             }
     }
     
     /**
      Retrieve information about a particular model that is available for use with the service.
- 
+     
+     - parameter withID: The alphanumeric ID of the model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
     */
-    public func getModel(modelID: String, failure: (NSError -> Void)? = nil, success: Model -> Void) {
+    public func getModel(
+        withID modelID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Model) -> Void)
+    {
         //construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: "GET",
             url: serviceURL + "/v1/models/" + modelID,
-            acceptType: "application/json",
-            userAgent: userAgent,
-            headerParameters: defaultHeaders
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Model, NSError>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Model>) in
                 switch response.result {
-                case .Success(let model): success(model)
-                case .Failure(let error): failure?(error)
+                case .success(let model): success(model)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -155,31 +155,31 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: NSURL,
+        audio: URL,
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
-        guard let data = NSData(contentsOfURL: audio) else {
+        do {
+            let data = try Data(contentsOf: audio)
+            recognize(
+                audio: data,
+                settings: settings,
+                model: model,
+                learningOptOut: learningOptOut,
+                failure: failure,
+                success: success
+            )
+        } catch {
             let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
-
-        recognize(
-            data,
-            settings: settings,
-            model: model,
-            customizationID: customizationID,
-            learningOptOut: learningOptOut,
-            failure: failure,
-            success: success
-        )
     }
 
     /**
@@ -198,13 +198,13 @@ public class SpeechToText {
         a final or interim transcription is received.
      */
     public func recognize(
-        audio: NSData,
+        audio: Data,
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
         // create session
         let session = SpeechToTextSession(
@@ -229,8 +229,8 @@ public class SpeechToText {
         
         // execute recognition request
         session.connect()
-        session.startRequest(settings)
-        session.recognize(audio)
+        session.startRequest(settings: settings)
+        session.recognize(audio: audio)
         session.stopRequest()
         session.disconnect()
     }
@@ -278,12 +278,12 @@ public class SpeechToText {
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
-        failure: (NSError -> Void)? = nil,
-        success: SpeechRecognitionResults -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
     {
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .Opus : .L16(rate: 16000, channels: 1)
+        settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)
         
         // create session
         let session = SpeechToTextSession(
@@ -308,8 +308,8 @@ public class SpeechToText {
         
         // start recognition request
         session.connect()
-        session.startRequest(settings)
-        session.startMicrophone(compress)
+        session.startRequest(settings: settings)
+        session.startMicrophone(compress: compress)
         
         // store session
         microphoneSession = session

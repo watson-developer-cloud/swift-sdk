@@ -15,9 +15,9 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
-/** The results from detecting faces in one or more images. */
+/** The results of detecting faces in one or more images. */
 public struct ImagesWithFaces: JSONDecodable {
     
     /// The number of images processed.
@@ -31,25 +31,27 @@ public struct ImagesWithFaces: JSONDecodable {
     
     /// Used internally to initialize an `ImagesWithFaces` model from JSON.
     public init(json: JSON) throws  {
-        imagesProcessed = try json.int("images_processed")
-        images = try json.arrayOf("images", type: ImageWithFaces.self)
-        warnings = try? json.arrayOf("warnings", type: WarningInfo.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
+        images = try json.decodedArray(at: "images", type: ImageWithFaces.self)
+        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
 }
 
 /** An image with detected faces. */
 public struct ImageWithFaces: JSONDecodable {
     
-    /// The source URL of the image that was processed.
+    /// The source URL of the image, before any redirects. This is omitted if the image was uploaded.
     public let sourceURL: String?
     
-    /// The resolved URL of the image that was processed.
+    /// The fully-resolved URL of the image, after redirects are followed.
+    /// This is omitted if the image was uploaded.
     public let resolvedURL: String?
     
-    /// The filename of the image that was classified.
+    /// The relative path of the image file. This is omitted if the image was passed by URL.
     public let image: String?
     
-    /// Information about an error that occured while processing the given image.
+    /// Information about what might have caused a failure, such as an image
+    /// that is too large. This omitted if there is no error or warning.
     public let error: ErrorInfo?
     
     /// The faces identified in the given image.
@@ -57,15 +59,15 @@ public struct ImageWithFaces: JSONDecodable {
     
     /// Used internally to initialize an `ImageWithFaces` model from JSON.
     public init(json: JSON) throws {
-        sourceURL = try? json.string("source_url")
-        resolvedURL = try? json.string("resolved_url")
-        image = try? json.string("image")
-        error = try? json.decode("error")
-        faces = try json.arrayOf("faces", type: Face.self)
+        sourceURL = try? json.getString(at: "source_url")
+        resolvedURL = try? json.getString(at: "resolved_url")
+        image = try? json.getString(at: "image")
+        error = try? json.decode(at: "error")
+        faces = try json.decodedArray(at: "faces", type: Face.self)
     }
 }
 
-/** A face identified in a given image. */
+/** A face identified in an image. */
 public struct Face: JSONDecodable {
     
     /// The age of the identified face.
@@ -74,7 +76,7 @@ public struct Face: JSONDecodable {
     /// The gender of the identified face.
     public let gender: Gender
     
-    /// The location of the identified face in the given image.
+    /// The location of the identified face in the image.
     public let location: FaceLocation
     
     /// The identity of the identified face, if a known celebrity.
@@ -82,10 +84,10 @@ public struct Face: JSONDecodable {
     
     /// Used internally to initialize a `Face` model from JSON.
     public init(json: JSON) throws {
-        age = try json.decode("age")
-        gender = try json.decode("gender")
-        location = try json.decode("face_location")
-        identity = try? json.decode("identity")
+        age = try json.decode(at: "age")
+        gender = try json.decode(at: "gender")
+        location = try json.decode(at: "face_location")
+        identity = try? json.decode(at: "identity")
     }
 }
 
@@ -98,14 +100,15 @@ public struct Age: JSONDecodable {
     /// The estimated maximum age of the identified individual.
     public let max: Int
     
-    /// The confidence score of the given age range.
+    /// The confidence score of the given age range. If there are more than
+    /// 10 faces in an image, age confidence scores may return a score of 0.
     public let score: Double
     
     /// Used internally to initialize an `Age` model from JSON.
     public init(json: JSON) throws {
-        min = try json.int("min")
-        max = try json.int("max")
-        score = try json.double("score")
+        min = try json.getInt(at: "min")
+        max = try json.getInt(at: "max")
+        score = try json.getDouble(at: "score")
     }
 }
 
@@ -115,13 +118,14 @@ public struct Gender: JSONDecodable {
     /// The predicted gender of the identified individual.
     public let gender: String
     
-    /// The confidence score of the given gender prediction.
+    /// The confidence score of the given gender prediction. If there are more than
+    /// 10 faces in an image, gender confidence scores may return a score of 0.
     public let score: Double
     
     /// Used internally to initialize a `Gender` model from JSON.
     public init(json: JSON) throws {
-        gender = try json.string("gender")
-        score = try json.double("score")
+        gender = try json.getString(at: "gender")
+        score = try json.getDouble(at: "score")
     }
 }
 
@@ -142,10 +146,10 @@ public struct FaceLocation: JSONDecodable {
     
     /// Used internally to initialize a `FaceLocation` model from JSON.
     public init(json: JSON) throws {
-        width = try json.int("width")
-        height = try json.int("height")
-        left = try json.int("left")
-        top = try json.int("top")
+        width = try json.getInt(at: "width")
+        height = try json.getInt(at: "height")
+        left = try json.getInt(at: "left")
+        top = try json.getInt(at: "top")
     }
 }
 
@@ -163,8 +167,8 @@ public struct Identity: JSONDecodable {
     
     /// Used internally to initialize an `Identity` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        score = try json.double("score")
-        typeHierarchy = try? json.string("type_hierarchy")
+        name = try json.getString(at: "name")
+        score = try json.getDouble(at: "score")
+        typeHierarchy = try? json.getString(at: "type_hierarchy")
     }
 }

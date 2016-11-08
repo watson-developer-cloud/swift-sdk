@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The response received when searching a specific query within the Solr cluster and collection,
  returned in ranked order. */
@@ -29,8 +29,8 @@ public struct SearchAndRankResponse: JSONDecodable {
     
     /// Used internally to initialize a `SearchAndRankResponse` model from JSON.
     public init(json: JSON) throws {
-        header = try json.decode("responseHeader", type: SearchAndRankResponseHeader.self)
-        body = try json.decode("response", type: SearchAndRankResponseBody.self)
+        header = try json.decode(at: "responseHeader", type: SearchAndRankResponseHeader.self)
+        body = try json.decode(at: "response", type: SearchAndRankResponseBody.self)
     }
 }
 
@@ -46,8 +46,8 @@ public struct SearchAndRankResponseHeader: JSONDecodable {
     
     /// Used internally to initialize a `SearchAndRankResponseHeader` model from JSON.
     public init(json: JSON) throws {
-        status = try json.int("status")
-        qTime = try json.int("QTime")
+        status = try json.getInt(at: "status")
+        qTime = try json.getInt(at: "QTime")
     }
 }
 
@@ -69,14 +69,14 @@ public struct SearchAndRankResponseBody: JSONDecodable {
     
     /// Used internally to initialize a `SearchAndRankResponseBody` model from JSON.
     public init(json: JSON) throws {
-        numFound = try json.int("numFound")
-        start = try json.int("start")
-        maxScore = try json.double("maxScore")
+        numFound = try json.getInt(at: "numFound")
+        start = try json.getInt(at: "start")
+        maxScore = try json.getDouble(at: "maxScore")
         
         var docs = [Document]()
-        let docsJSON = try json.array("docs")
+        let docsJSON = try json.getArray(at: "docs")
         for docJSON in docsJSON {
-            let doc = try NSJSONSerialization.JSONObjectWithData(docJSON.serialize(), options: NSJSONReadingOptions.AllowFragments) as! Document
+            let doc = try JSONSerialization.jsonObject(with: docJSON.serialize(), options: JSONSerialization.ReadingOptions.allowFragments) as! Document
             docs.append(doc)
         }
         documents = docs

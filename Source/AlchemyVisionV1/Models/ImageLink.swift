@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** The primary image link detected on a webpage by the Alchemy Vision service. */
 public struct ImageLink: JSONDecodable {
@@ -31,8 +31,12 @@ public struct ImageLink: JSONDecodable {
 
     /// Used internally to initialize an `ImageLink` model from JSON.
     public init(json: JSON) throws {
-        status = try json.string("status")
-        url = try json.string("url")
-        image = try json.string("image")
+        status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: ImageLink.self)
+        }
+        
+        url = try json.getString(at: "url")
+        image = try json.getString(at: "image")
     }
 }

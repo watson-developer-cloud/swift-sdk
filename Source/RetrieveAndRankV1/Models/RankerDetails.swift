@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model containing information about a specific ranker. */
 public struct RankerDetails: JSONDecodable {
@@ -40,14 +40,14 @@ public struct RankerDetails: JSONDecodable {
     
     /// Used internally to initialize a `RankerDetails` model from JSON.
     public init(json: JSON) throws {
-        rankerID = try json.string("ranker_id")
-        url = try json.string("url")
-        name = try json.string("name")
-        created = try json.string("created")
-        statusDescription = try json.string("status_description")
+        rankerID = try json.getString(at: "ranker_id")
+        url = try json.getString(at: "url")
+        name = try json.getString(at: "name")
+        created = try json.getString(at: "created")
+        statusDescription = try json.getString(at: "status_description")
         
-        guard let rankerStatus = RankerStatus(rawValue: try json.string("status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: RankerStatus.self)
+        guard let rankerStatus = RankerStatus(rawValue: try json.getString(at: "status")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: RankerStatus.self)
         }
         status = rankerStatus
     }
@@ -57,17 +57,17 @@ public struct RankerDetails: JSONDecodable {
 public enum RankerStatus: String {
     
     /// Non Existent
-    case NonExistent = "Non_Existent"
+    case nonExistent = "Non_Existent"
     
     /// Still training
-    case Training = "Training"
+    case training = "Training"
     
     /// Training has failed
-    case Failed = "Failed"
+    case failed = "Failed"
     
     /// Ranker is available
-    case Available = "Available"
+    case available = "Available"
     
     /// Ranker is unavailable
-    case Unavailable = "Unavailable"
+    case unavailable = "Unavailable"
 }

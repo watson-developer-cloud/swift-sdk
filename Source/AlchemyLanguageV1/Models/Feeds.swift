@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -41,14 +41,19 @@ public struct Feeds: JSONDecodable {
     
     /// Used internally to initialize a Feeds object
     public init(json: JSON) throws {
-        if let totalTransactionString = try? json.string("totalTransactions") {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Feeds.self)
+        }
+        
+        if let totalTransactionString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionString)
         } else {
             totalTransactions = 1
         }
-        language = try? json.string("language")
-        url = try? json.string("url")
-        feeds = try? json.arrayOf("feeds", type: Feed.self)
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        feeds = try? json.decodedArray(at: "feeds", type: Feed.self)
     }
 }
 

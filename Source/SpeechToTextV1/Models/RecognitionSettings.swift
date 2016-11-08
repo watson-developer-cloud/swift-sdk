@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will
@@ -94,41 +94,41 @@ public struct RecognitionSettings: JSONEncodable {
     }
 
     /** Used internally to serialize a `RecognitionSettings` model to JSON. */
-    public func toJSON() -> JSON {
-        var json = [String: JSON]()
-        json["action"] = .String(action)
-        json["content-type"] = .String(contentType.toString)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["action"] = action
+        json["content-type"] = contentType.toString
         if let continuous = continuous {
-            json["continuous"] = .Bool(continuous)
+            json["continuous"] = continuous
         }
         if let inactivityTimeout = inactivityTimeout {
-            json["inactivity_timeout"] = .Int(inactivityTimeout)
+            json["inactivity_timeout"] = inactivityTimeout
         }
         if let keywords = keywords {
-            json["keywords"] = keywords.toJSON()
+            json["keywords"] = keywords
         }
         if let keywordsThreshold = keywordsThreshold {
-            json["keywords_threshold"] = .Double(keywordsThreshold)
+            json["keywords_threshold"] = keywordsThreshold
         }
         if let maxAlternatives = maxAlternatives {
-            json["max_alternatives"] = .Int(maxAlternatives)
+            json["max_alternatives"] = maxAlternatives
         }
         if let interimResults = interimResults {
-            json["interim_results"] = .Bool(interimResults)
+            json["interim_results"] = interimResults
         }
         if let wordAlternativesThreshold = wordAlternativesThreshold {
-            json["word_alternatives_threshold"] = .Double(wordAlternativesThreshold)
+            json["word_alternatives_threshold"] = wordAlternativesThreshold
         }
         if let wordConfidence = wordConfidence {
-            json["word_confidence"] = .Bool(wordConfidence)
+            json["word_confidence"] = wordConfidence
         }
         if let timestamps = timestamps {
-            json["timestamps"] = .Bool(timestamps)
+            json["timestamps"] = timestamps
         }
         if let filterProfanity = filterProfanity {
-            json["profanity_filter"] = .Bool(filterProfanity)
+            json["profanity_filter"] = filterProfanity
         }
-        return .Dictionary(json)
+        return json
     }
 }
 
@@ -138,32 +138,32 @@ public struct RecognitionSettings: JSONEncodable {
 public enum AudioMediaType {
     
     /// FLAC audio format
-    case FLAC
+    case flac
     
     /// L16 audio format with a rate and channels
-    case L16(rate: Int, channels: Int)
+    case l16(rate: Int, channels: Int)
     
     /// WAV audio format
-    case WAV
+    case wav
     
     /// Opus audio format
-    case Opus
+    case opus
     
     /// mu-law audio format
-    case MuLaw
+    case muLaw
     
     /// Basic audio format
-    case Basic
+    case basic
 
     /// A representation of the audio format as a MIME type string.
     var toString: String {
         switch self {
-        case .FLAC:                        return "audio/flac"
-        case .L16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
-        case .WAV:                         return "audio/wav"
-        case .Opus:                        return "audio/ogg;codecs=opus"
-        case .MuLaw:                       return "audio/mulaw"
-        case .Basic:                       return "audio/basic"
+        case .flac:                        return "audio/flac"
+        case .l16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
+        case .wav:                         return "audio/wav"
+        case .opus:                        return "audio/ogg;codecs=opus"
+        case .muLaw:                       return "audio/mulaw"
+        case .basic:                       return "audio/basic"
         }
     }
 }

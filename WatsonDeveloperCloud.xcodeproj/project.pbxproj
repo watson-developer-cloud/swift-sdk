@@ -307,6 +307,8 @@
 		B1AAD3001D0880AE002DAB84 /* AnswerUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FF1D0880AE002DAB84 /* AnswerUnits.swift */; };
 		B1AAD3021D0881BC002DAB84 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD3011D0881BC002DAB84 /* Content.swift */; };
 		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
+		CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */; };
+		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -870,6 +872,8 @@
 		CE2D64581DC7B114001E23ED /* testConfigHtml.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfigHtml.json; sourceTree = "<group>"; };
 		CE2D64591DC7B114001E23ED /* testConfigText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfigText.json; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
+		CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesCategoryNode.swift; sourceTree = "<group>"; };
+		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1479,6 +1483,8 @@
 				7A6711991DD0F1790070CA9D /* ContentItem.swift */,
 				7A67119A1DD0F1790070CA9D /* Profile.swift */,
 				7A67119B1DD0F1790070CA9D /* TraitTreeNode.swift */,
+				CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */,
+				CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3385,8 +3391,10 @@
 			files = (
 				7A67119D1DD0F1790070CA9D /* ContentItem.swift in Sources */,
 				7A67119E1DD0F1790070CA9D /* Profile.swift in Sources */,
+				CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */,
 				7A67119F1DD0F1790070CA9D /* TraitTreeNode.swift in Sources */,
 				7A6711A01DD0F1790070CA9D /* PersonalityInsights.swift in Sources */,
+				CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5291,6 +5299,7 @@
 				7A6711921DD0EEEB0070CA9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A6711961DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3Tests" */ = {
 			isa = XCConfigurationList;
@@ -5299,6 +5308,7 @@
 				7A6711941DD0EEEB0070CA9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7A987D291D19D424003626B2 /* Build configuration list for PBXNativeTarget "TradeoffAnalyticsV1" */ = {
 			isa = XCConfigurationList;

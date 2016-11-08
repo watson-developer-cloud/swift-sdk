@@ -41,6 +41,9 @@ public struct Profile: JSONDecodable {
 
     /// The language model that was used to process the input.
     public let processedLanguage: String
+    
+    /// Detailed results for each category of consumption preferences.
+    public let consumptionPreferences: ConsumptionPreferencesCategoryNode
 
     /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {

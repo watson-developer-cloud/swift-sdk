@@ -309,6 +309,8 @@
 		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
 		CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */; };
 		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
+		CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77E1DD233E9003336BD /* BehaviorNode.swift */; };
+		CE78B7811DD258B8003336BD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7801DD258B8003336BD /* Warning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -874,6 +876,8 @@
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
 		CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesCategoryNode.swift; sourceTree = "<group>"; };
 		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
+		CE78B77E1DD233E9003336BD /* BehaviorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorNode.swift; sourceTree = "<group>"; };
+		CE78B7801DD258B8003336BD /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1485,6 +1489,8 @@
 				7A67119B1DD0F1790070CA9D /* TraitTreeNode.swift */,
 				CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */,
 				CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */,
+				CE78B77E1DD233E9003336BD /* BehaviorNode.swift */,
+				CE78B7801DD258B8003336BD /* Warning.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3393,7 +3399,9 @@
 				7A67119E1DD0F1790070CA9D /* Profile.swift in Sources */,
 				CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */,
 				7A67119F1DD0F1790070CA9D /* TraitTreeNode.swift in Sources */,
+				CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */,
 				7A6711A01DD0F1790070CA9D /* PersonalityInsights.swift in Sources */,
+				CE78B7811DD258B8003336BD /* Warning.swift in Sources */,
 				CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

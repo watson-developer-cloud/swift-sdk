@@ -71,19 +71,23 @@ public class PersonalityInsights {
      - parameter text: The text to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
-     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+     - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
         A raw sampling error for each characteristic is also returned.
+     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
+     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
      */
     public func getProfile(
         fromText text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
-        includeRaw: Bool? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        success: @escaping (Profile) -> Void,
+        version: String)
     {
         guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
@@ -98,9 +102,11 @@ public class PersonalityInsights {
             withType: "text/plain",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
-            includeRaw: includeRaw,
+            rawScores: rawScores,
+            consumptionPreferences: consumptionPreferences,
             failure: failure,
-            success: success
+            success: success,
+            version: version
         )
     }
 
@@ -111,19 +117,23 @@ public class PersonalityInsights {
      - parameter html: The webpage that contains text to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
-     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+     - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
         A raw sampling error for each characteristic is also returned.
+     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
+     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
      */
     public func getProfile(
         fromHTML html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
-        includeRaw: Bool? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        success: @escaping (Profile) -> Void,
+        version: String)
     {
         guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
@@ -138,9 +148,11 @@ public class PersonalityInsights {
             withType: "text/html",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
-            includeRaw: includeRaw,
+            rawScores: rawScores,
+            consumptionPreferences: consumptionPreferences,
             failure: failure,
-            success: success
+            success: success,
+            version: version
         )
     }
 
@@ -150,19 +162,23 @@ public class PersonalityInsights {
      - parameter contentItems: The content items to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
-     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+     - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
         A raw sampling error for each characteristic is also returned.
+     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
+     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
      */
     public func getProfile(
         fromContentItems contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
-        includeRaw: Bool? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        success: @escaping (Profile) -> Void,
+        version: String)
     {
         let json = JSON(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
         guard let content = try? json.serialize() else {
@@ -178,9 +194,11 @@ public class PersonalityInsights {
             withType: "application/json",
             acceptLanguage: acceptLanguage,
             contentLanguage: contentLanguage,
-            includeRaw: includeRaw,
+            rawScores: rawScores,
+            consumptionPreferences: consumptionPreferences,
             failure: failure,
-            success: success
+            success: success,
+            version: version
         )
     }
 
@@ -191,27 +209,35 @@ public class PersonalityInsights {
      - parameter contentType: The MIME content-type of the content.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
-     - parameter includeRaw: If true, then a raw score for each characteristic is returned in
+     - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
         A raw sampling error for each characteristic is also returned.
+     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
+     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
      */
     private func getProfile(
         fromContent content: Data?,
         withType contentType: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
-        includeRaw: Bool? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        success: @escaping (Profile) -> Void,
+        version: String)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        if let includeRaw = includeRaw {
-            let queryParameter = URLQueryItem(name: "include_raw", value: "\(includeRaw)")
+        if let rawScores = rawScores {
+            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
             queryParameters.append(queryParameter)
         }
+        let consumptionPreferenceQueryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
+        let versionQueryParameter = URLQueryItem(name: "version", value: version)
+        queryParameters.append(consumptionPreferenceQueryParameter)
+        queryParameters.append(versionQueryParameter)
 
         // construct header parameters
         var headerParameters = defaultHeaders

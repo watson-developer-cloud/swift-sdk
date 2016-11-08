@@ -16,13 +16,13 @@
 
 import Foundation
 import RestKit
+
+//TODO - figure out where ContentListContainer object is in order to possibly pass in userid and sourceid (https://www.ibm.com/watson/developercloud/doc/personality-insights/relnotes.shtml)
     
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
 
     private let id: String?
-    private let userID: String?
-    private let sourceID: String?
     private let created: Int?
     private let updated: Int?
     private let contentType: String?
@@ -36,9 +36,6 @@ public struct ContentItem: JSONEncodable {
      Initialize a `ContentItem` to be analyzed by Personality Insights.
 
      - parameter id: Unique identifier for this content item.
-     - parameter userID: Unique identifier for the author of this content.
-     - parameter sourceID: Identifier for the source of this content. For example, blog123,
-        or twitter.
      - parameter created: Timestamp that identifies when this content was created, in
         milliseconds since midnight 1/1/1970 UTC. Required only for results about temporal
         behavior data.
@@ -61,8 +58,6 @@ public struct ContentItem: JSONEncodable {
     */
     public init(
         id: String? = nil,
-        userID: String? = nil,
-        sourceID: String? = nil,
         created: Int? = nil,
         updated: Int? = nil,
         contentType: String? = nil,
@@ -73,8 +68,6 @@ public struct ContentItem: JSONEncodable {
         forward: Bool? = nil)
     {
         self.id = id
-        self.userID = userID
-        self.sourceID = sourceID
         self.created = created
         self.updated = updated
         self.contentType = contentType
@@ -90,8 +83,6 @@ public struct ContentItem: JSONEncodable {
         var json = [String: Any]()
         json["content"] = content
         if let id = id { json["id"] = id }
-        if let userID = userID { json["userid"] = userID }
-        if let sourceID = sourceID { json["sourceid"] = sourceID }
         if let created = created { json["created"] = created }
         if let updated = updated { json["updated"] = updated }
         if let contentType = contentType { json["contenttype"] = contentType }

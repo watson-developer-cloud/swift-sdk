@@ -1002,8 +1002,8 @@ class VisualRecognitionTests: XCTestCase {
             
             // verify the age
             let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min, 45)
-            XCTAssertLessThanOrEqual(age!.max, 54)
+            XCTAssertGreaterThanOrEqual(age!.min!, 45)
+            XCTAssertLessThanOrEqual(age!.max!, 54)
             XCTAssertGreaterThanOrEqual(age!.score, 0.25)
             
             // verify the face location

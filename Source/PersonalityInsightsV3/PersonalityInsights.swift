@@ -31,7 +31,7 @@ public class PersonalityInsights {
     public var defaultHeaders = [String: String]()
     
     private let credentials: Credentials
-    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
+    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
 
     /**
      Create a `PersonalityInsights` object.
@@ -234,9 +234,11 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
             queryParameters.append(queryParameter)
         }
-        let consumptionPreferenceQueryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
+        if let consumptionPreferences = consumptionPreferences {
+            let consumptionPreferenceQueryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
+            queryParameters.append(consumptionPreferenceQueryParameter)
+        }
         let versionQueryParameter = URLQueryItem(name: "version", value: version)
-        queryParameters.append(consumptionPreferenceQueryParameter)
         queryParameters.append(versionQueryParameter)
 
         // construct header parameters
@@ -251,7 +253,7 @@ public class PersonalityInsights {
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/profile",
+            url: serviceURL + "/v3/profile",
             credentials: credentials,
             headerParameters: headerParameters,
             acceptType: "application/json",

@@ -56,9 +56,10 @@ public struct Profile: JSONDecodable {
         wordCount = try json.getInt(at: "word_count")
         wordCountMessage = try? json.getString(at: "word_count_message")
         processedLanguage = try json.getString(at: "processed_language")
+        values = try json.decodedArray(at: "values", type: TraitTreeNode.self)
         personality = try json.decodedArray(at: "personality", type: TraitTreeNode.self)
         needs = try json.decodedArray(at: "needs", type: TraitTreeNode.self)
-        values = try json.decodedArray(at: "values", type: TraitTreeNode.self)
+
         behavior = try? json.decodedArray(at: "behavior", type: BehaviorNode.self)
         consumptionPreferences = try? json.decodedArray(at: "consumption_preferences", type: ConsumptionPreferencesCategoryNode.self)
         warnings = try? json.decodedArray(at: "warnings", type: Warning.self)

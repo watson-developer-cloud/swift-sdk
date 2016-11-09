@@ -15,14 +15,15 @@
  **/
 
 import XCTest
-import PersonalityInsightsV2
+import PersonalityInsightsV3
 
 class PersonalityInsightsTests: XCTestCase {
 
-    private var personalityInsights: PersonalityInsights!
+    private var personalityInsightsV3: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
     private let timeout: TimeInterval = 5.0
+    private var version: String = "2016-10-20"
     
     static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
@@ -45,9 +46,9 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Instantiate Personality Insights. */
     func instantiatePersonalityInsights() {
-        let username = Credentials.PersonalityInsightsUsername
-        let password = Credentials.PersonalityInsightsPassword
-        personalityInsights = PersonalityInsights(username: username, password: password)
+        let username = Credentials.PersonalityInsightsV3Username
+        let password = Credentials.PersonalityInsightsV3Password
+        personalityInsightsV3 = PersonalityInsights(username: username, password: password)
     }
     
     /** Load "MobyDickIntro.txt". */
@@ -103,11 +104,23 @@ class PersonalityInsightsTests: XCTestCase {
     func testProfile() {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = self.expectation(description: description)
+        
+        personalityInsightsV3.getProfile(fromText: kennedySpeech,
+                                         failure: failWithError,
+                                         success: { profile in
+                                            //for preference in profile.personality {
+                                                XCTAssertNotNil(profile.personality[0].name)
+                                                XCTAssertNotNil(profile.personality[0].trait_id)
+                                                expectation.fulfill()
+                                           // }
+//                                            NSLog("\(profile.personality)")
+//                                            for node in profile.consumptionPreferences:
+                                            //just check if the value for the key is not nil.
+//                                                node.
+//                                            profile.consumptionPreferences[0].
+                                        },
+                                         version: version)
 
-        personalityInsights.getProfile(fromText: kennedySpeech, failure: failWithError) { profile in
-            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
-            expectation.fulfill()
-        }
         waitForExpectations()
     }
     
@@ -116,10 +129,8 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze content items."
         let expectation = self.expectation(description: description)
 
-        let contentItem = PersonalityInsightsV2.ContentItem(
+        let contentItem = PersonalityInsightsV3.ContentItem(
             id: "245160944223793152",
-            userID: "Bob",
-            sourceID: "Twitter",
             created: 1427720427,
             updated: 1427720427,
             contentType: "text/plain",
@@ -131,11 +142,13 @@ class PersonalityInsightsTests: XCTestCase {
         )
 
         let contentItems = [contentItem, contentItem]
-        personalityInsights.getProfile(fromContentItems: contentItems, failure: failWithError) {
-            profile in
-            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
-            expectation.fulfill()
-        }
+        personalityInsightsV3.getProfile(fromContentItems: contentItems,
+                                         failure: failWithError,
+                                         success: { profile in
+//                                            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
+                                            expectation.fulfill()
+            },
+                                         version: version)
         waitForExpectations()
     }
 
@@ -150,10 +163,11 @@ class PersonalityInsightsTests: XCTestCase {
             expectation.fulfill()
         }
 
-        personalityInsights.getProfile(
+        personalityInsightsV3.getProfile(
             fromText: mobyDickIntro,
             failure: failure,
-            success: failWithResult
+            success: failWithResult,
+            version: version
         )
         waitForExpectations()
     }

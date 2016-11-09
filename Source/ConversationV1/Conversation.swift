@@ -68,6 +68,15 @@ public class Conversation {
         }
     }
     
+    /**
+     Send a message to the Conversation service. To start a new conversation set the `request`
+     parameter to `nil`.
+ 
+     - parameter withWorkspace: The unique identifier of the workspace to use.
+     - parameter request: The message requst to send to the server.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the conversation service's response.
+     */
     public func message(
         withWorkspace workspaceID: WorkspaceID,
         request: MessageRequest? = nil,

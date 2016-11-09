@@ -36,12 +36,11 @@ internal class SpeechToTextRecorder {
         userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
         
         // parse `userData` as `SpeechToTextRecorder`
-        guard let audioRecorder = userData?.assumingMemoryBound(to: SpeechToTextRecorder.self).pointee else {
-            return
-        }
+        guard let userData = userData else { return }
+        let audioRecorder = Unmanaged<SpeechToTextRecorder>.fromOpaque(userData).takeUnretainedValue()
         
         // dereference pointers
-        let buffer = UnsafePointer<AudioQueueBuffer>(bufferRef).pointee
+        let buffer = bufferRef.pointee
         let startTime = startTimeRef.pointee
         
         // calculate number of packets
@@ -85,8 +84,7 @@ internal class SpeechToTextRecorder {
     
     private func prepareToRecord() {
         // create recording queue
-        let opaque = Unmanaged<SpeechToTextRecorder>.passUnretained(self).toOpaque()
-        let pointer = UnsafeMutableRawPointer(opaque)
+        let pointer = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
         AudioQueueNewInput(&format, callback, pointer, nil, nil, 0, &queue)
         
         // ensure queue was set
@@ -128,11 +126,11 @@ internal class SpeechToTextRecorder {
  
     internal func startRecording() throws {
         guard !isRecording else { return }
-        guard let queue = queue else { return }
         try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
         try session.setActive(true)
         self.prepareToRecord()
         self.isRecording = true
+        guard let queue = queue else { return }
         AudioQueueStart(queue, nil)
     }
  

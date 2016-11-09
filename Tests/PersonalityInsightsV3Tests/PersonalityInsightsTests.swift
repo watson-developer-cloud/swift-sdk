@@ -105,21 +105,15 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = self.expectation(description: description)
         
-        personalityInsightsV3.getProfile(fromText: kennedySpeech,
-                                         failure: failWithError,
-                                         success: { profile in
-                                            //for preference in profile.personality {
-                                                XCTAssertNotNil(profile.personality[0].name)
-                                                XCTAssertNotNil(profile.personality[0].trait_id)
-                                                expectation.fulfill()
-                                           // }
-//                                            NSLog("\(profile.personality)")
-//                                            for node in profile.consumptionPreferences:
-                                            //just check if the value for the key is not nil.
-//                                                node.
-//                                            profile.consumptionPreferences[0].
-                                        },
-                                         version: version)
+        personalityInsightsV3.getProfile(version: version,
+                                         fromText: kennedySpeech,
+                                         failure: failWithError) { profile in
+                                            for preference in profile.personality {
+                                                XCTAssertNotNil(preference.name)
+                                                XCTAssertNotNil(preference.trait_id)
+                                             }
+                                            expectation.fulfill()
+        }
 
         waitForExpectations()
     }
@@ -142,13 +136,15 @@ class PersonalityInsightsTests: XCTestCase {
         )
 
         let contentItems = [contentItem, contentItem]
-        personalityInsightsV3.getProfile(fromContentItems: contentItems,
-                                         failure: failWithError,
-                                         success: { profile in
-//                                            XCTAssertEqual("root", profile.tree.name, "Tree root should be named root")
+        personalityInsightsV3.getProfile(version: version,
+                                         fromContentItems: contentItems,
+                                         failure: failWithError) { profile in
+                                            for preference in profile.personality {
+                                                XCTAssertNotNil(preference.name)
+                                                XCTAssertNotNil(preference.trait_id)
+                                            }
                                             expectation.fulfill()
-            },
-                                         version: version)
+        }
         waitForExpectations()
     }
 
@@ -164,10 +160,10 @@ class PersonalityInsightsTests: XCTestCase {
         }
 
         personalityInsightsV3.getProfile(
+            version: version,
             fromText: mobyDickIntro,
             failure: failure,
-            success: failWithResult,
-            version: version
+            success: failWithResult
         )
         waitForExpectations()
     }

@@ -83,7 +83,6 @@ public struct RecognitionSettings: JSONEncodable {
     /// if false (the default), no formatting is performed. Applies to US English transcription only.
     public var smartFormatting: Bool?
     
-    
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.

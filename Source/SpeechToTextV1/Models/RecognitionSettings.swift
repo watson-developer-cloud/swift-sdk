@@ -76,7 +76,14 @@ public struct RecognitionSettings: JSONEncodable {
     /// If `true`, then profanity will be censored from the service's output, obscuring each
     /// occurrence with a set of asterisks. The default is `true`.
     public var filterProfanity: Bool?
-
+    
+    /// Indicates whether dates, times, series of digits and numbers, phone numbers, currency values, 
+    /// and Internet addresses are to be converted into more readable, conventional representations 
+    /// in the final transcript of a recognition request. If true, smart formatting is performed; 
+    /// if false (the default), no formatting is performed. Applies to US English transcription only.
+    public var smartFormatting: Bool?
+    
+    
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -127,6 +134,9 @@ public struct RecognitionSettings: JSONEncodable {
         }
         if let filterProfanity = filterProfanity {
             json["profanity_filter"] = .Bool(filterProfanity)
+        }
+        if let smartFormatting = smartFormatting {
+            json["smart_formatting"] = .Bool(smartFormatting)
         }
         return .Dictionary(json)
     }

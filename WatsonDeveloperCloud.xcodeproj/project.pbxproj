@@ -320,7 +320,6 @@
 		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFD74411D4F8A1600666173 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74401D4F8A1600666173 /* Entity.swift */; };
 		7AFD74431D4F8A3800666173 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74421D4F8A3800666173 /* Intent.swift */; };
 		7AFD74451D4F8A5200666173 /* OutputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD74441D4F8A5200666173 /* OutputData.swift */; };
@@ -374,6 +373,8 @@
 		B1AAD3161D0F13FA002DAB84 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = B1AAD3141D0F13F5002DAB84 /* car.png */; };
 		B1C4DFD21D134E37004CC4B0 /* arsArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = B1C4DFCF1D134DB4004CC4B0 /* arsArticle.html */; };
 		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
+		CEBA070D1DCCC971004E80A0 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = CEBA070B1DCCC95A004E80A0 /* StockAnnouncement.wav */; };
+		CEE38B291DCBCF6C0041FAE4 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -995,6 +996,7 @@
 		B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerTests.swift; sourceTree = "<group>"; };
 		B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzer.swift; sourceTree = "<group>"; };
 		BE1733901D1FE557003E8966 /* thomas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thomas.png; sourceTree = "<group>"; };
+		CEBA070B1DCCC95A004E80A0 /* StockAnnouncement.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StockAnnouncement.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1856,6 +1858,7 @@
 		7AAA9A211CEE3026002C9564 /* Audio Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEBA070B1DCCC95A004E80A0 /* StockAnnouncement.wav */,
 				7AAA9A221CEE3026002C9564 /* SpeechSample.flac */,
 				7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */,
 				7AAA9A241CEE3026002C9564 /* SpeechSample.wav */,
@@ -3268,6 +3271,7 @@
 			files = (
 				7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */,
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
+				CEBA070D1DCCC971004E80A0 /* StockAnnouncement.wav in Resources */,
 				7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3629,7 +3633,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6C7B491D8C960300CD97FA /* Credentials.swift in Sources */,
-				7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */,
+				CEE38B291DCBCF6C0041FAE4 /* SpeechToTextTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

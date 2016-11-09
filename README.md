@@ -26,7 +26,6 @@ There are many resources to help you build your first cognitive application with
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
-* [Xcode 8 Compatibility](#xcode-8-compatibility)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)

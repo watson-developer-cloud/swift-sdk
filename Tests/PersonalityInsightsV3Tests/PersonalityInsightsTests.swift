@@ -109,8 +109,8 @@ class PersonalityInsightsTests: XCTestCase {
                                          fromText: kennedySpeech,
                                          failure: failWithError) { profile in
                                             for preference in profile.personality {
-                                                XCTAssertNotNil(preference.name)
-                                                XCTAssertNotNil(preference.trait_id)
+                                                XCTAssertEqual("Openness", preference.name)
+                                                break
                                              }
                                             expectation.fulfill()
         }
@@ -139,11 +139,11 @@ class PersonalityInsightsTests: XCTestCase {
         personalityInsightsV3.getProfile(version: version,
                                          fromContentItems: contentItems,
                                          failure: failWithError) { profile in
-                                            for preference in profile.personality {
-                                                XCTAssertNotNil(preference.name)
-                                                XCTAssertNotNil(preference.trait_id)
+                                            if let behaviors = profile.behavior {                                            for behavior in behaviors {
+                                                XCTAssertNotNil(behavior.trait_id)
+                                                }
+                                                expectation.fulfill()
                                             }
-                                            expectation.fulfill()
         }
         waitForExpectations()
     }

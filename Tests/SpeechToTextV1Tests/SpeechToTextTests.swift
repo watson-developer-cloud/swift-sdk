@@ -179,6 +179,7 @@ class SpeechToTextTests: XCTestCase {
         settings.wordConfidence = true
         settings.timestamps = true
         settings.filterProfanity = false
+        settings.smartFormatting = true
 
         speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results: results.results, settings: settings)
@@ -282,6 +283,7 @@ class SpeechToTextTests: XCTestCase {
             settings.wordConfidence = true
             settings.timestamps = true
             settings.filterProfanity = false
+            settings.smartFormatting = true
             
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
                 self.validateSTTResults(results: results.results, settings: settings)
@@ -297,6 +299,53 @@ class SpeechToTextTests: XCTestCase {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
+    }
+    
+    // MARK: - Transcribe Data with Smart Formatting
+    
+    func testTranscribeStockAnnouncementCustomWAV() {
+        transcribeDataCustomForNumbers(
+            filename: "StockAnnouncement",
+            withExtension: "wav",
+            format: .wav,
+            substring: "$152.37"
+        )
+    }
+    
+    func transcribeDataCustomForNumbers(
+        filename: String,
+        withExtension: String,
+        format: AudioMediaType,
+        substring: String)
+    {
+        let description = "Transcribe an audio file with smart formatting."
+        let expectation = self.expectation(description: description)
+        
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+        
+        guard let audio = try? Data(contentsOf: file) else {
+            XCTFail("Unable to read \(filename).\(withExtension).")
+            return
+        }
+        
+        var settings = RecognitionSettings(contentType: format)
+        settings.smartFormatting = true
+        
+        speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            self.validateSTTResults(results: results.results, settings: settings)
+            if results.results.last?.final == true {
+                let transcript = results.results.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertTrue(transcript!.contains(substring))
+                expectation.fulfill()
+            }
+        }
+        waitForExpectations()
     }
 
     // MARK: - Transcribe Streaming

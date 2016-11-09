@@ -103,7 +103,7 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Custom model
     
     func testTranscribeWithCustomModel() {
-        let description = "Transcribe microphone data using custom model."
+        let description = "Transcribe an audio file using custom model."
         let expectation = self.expectation(description: description)
         
         let bundle = Bundle(for: type(of: self))

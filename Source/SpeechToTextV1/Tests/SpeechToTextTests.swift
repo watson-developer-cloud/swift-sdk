@@ -281,13 +281,14 @@ class SpeechToTextTests: XCTestCase {
     // MARK: - Transcribe Data with Smart Formatting
     
     func testTranscribeStockAnnouncementCustomWAV() {
-        transcribeDataCustomForNumbers("StockAnnouncement", withExtension: "wav", format: .WAV)
+        transcribeDataCustomForNumbers("StockAnnouncement", withExtension: "wav", format: .WAV, substring: "$152.37")
     }
     
     func transcribeDataCustomForNumbers(
         filename: String,
         withExtension: String,
-        format: AudioMediaType)
+        format: AudioMediaType,
+        substring: String)
     {
         let description = "Transcribe an audio file with smart formatting."
         let expectation = expectationWithDescription(description)
@@ -304,16 +305,6 @@ class SpeechToTextTests: XCTestCase {
         }
         
         var settings = RecognitionSettings(contentType: format)
-        settings.continuous = true
-        settings.inactivityTimeout = 1
-        settings.keywords = ["stock"]
-        settings.keywordsThreshold = 0.75
-        settings.maxAlternatives = 3
-        settings.interimResults = true
-        settings.wordAlternativesThreshold = 0.25
-        settings.wordConfidence = true
-        settings.timestamps = true
-        settings.filterProfanity = false
         settings.smartFormatting = true
         
         speechToText.recognize(audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
@@ -322,7 +313,7 @@ class SpeechToTextTests: XCTestCase {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.characters.count, 0)
-                XCTAssertTrue(transcript!.containsString("$152.37"))
+                XCTAssertTrue(transcript!.containsString(substring))
                 expectation.fulfill()
             }
         }

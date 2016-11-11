@@ -113,22 +113,22 @@ class SpeechToTextTests: XCTestCase {
         }
         
         let settings = RecognitionSettings(contentType: .wav)
-        speechToText.recognize(audio: file,
-                               settings: settings,
-                               model: "en-US_BroadbandModel",
-                               customizationID: trainedCustomizationID,
-                               failure: failWithError) { results in
-            
+        speechToText.recognize(
+            audio: file,
+            settings: settings,
+            model: "en-US_BroadbandModel",
+            customizationID: trainedCustomizationID,
+            failure: failWithError)
+        {
+            results in
             self.validateSTTResults(results: results.results, settings: settings)
             XCTAssertEqual(results.results.count, 1)
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.characters.count, 0)
-            
             expectation.fulfill()
         }
-        
         waitForExpectations()
     }
 

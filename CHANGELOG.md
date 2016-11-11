@@ -1,6 +1,24 @@
 Change Log
 ==========
 
+## Version 0.9.1
+
+_2016-11-11_
+
+This update adds support for the Speech to Text service's smart formatting parameter in Swift 3. It also fixes some broken links in the documentation.
+
+## Version 0.8.2
+
+_2016-11-11_
+
+This update adds support for the Speech to Text service's smart formatting parameter in Swift 2.3.
+
+## Version 0.7.3
+
+_2016-11-11_
+
+This update adds support for the Speech to Text service's smart formatting parameter in Swift 2.2.
+
 ## Version 0.9.0
 
 _2016-11-07_

@@ -64,7 +64,7 @@ class VisualRecognitionTests: XCTestCase {
     private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/" +
                          "java-sdk/master/tests/src/test/resources/visual_recognition/car.png"
     private let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-                          "master/src/test/resources/visual_recognition/open.png"
+                          "master/tests/src/test/resources/visual_recognition/open.png"
     
     // MARK: - Test Configuration
     

@@ -228,15 +228,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     
     private func isNormalDisconnect(error: Error) -> Bool {
         let error = error as NSError
-        
-        guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
-            return false
-        }
-        
         let matchesDomain = (error.domain == "WebSocket")
         let matchesCode = (error.code == 1000)
-        let matchesDescription = (description == "connection closed by server")
-        if matchesDomain && matchesCode && matchesDescription {
+        if matchesDomain && matchesCode {
             return true
         }
         return false

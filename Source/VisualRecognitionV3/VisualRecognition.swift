@@ -55,15 +55,25 @@ public class VisualRecognition {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let imagesProcessed = try json.getInt(at: "images_processed") // TODO: may not be present?
-            let code = try json.getInt(at: "error", "code")
-            let error = try json.getString(at: "error", "error_id")
-            let description = try json.getString(at: "error", "description")
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
-            ]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            if let code = try? json.getInt(at: "error", "code") {
+                let error = try json.getString(at: "error", "error_id")
+                let description = try json.getString(at: "error", "description")
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: error,
+                    NSLocalizedDescriptionKey: description
+                ]
+                return NSError(domain: domain, code: code, userInfo: userInfo)
+            } else if let error = try? json.getString(at: "images", 0, "error", "error_id") {
+                let description = try json.getString(at: "images", 0, "error", "description")
+                let imagesProcessed = try json.getInt(at: "images_processed")
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: error,
+                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
+                ]
+                return NSError(domain: domain, code: 400, userInfo: userInfo)
+            } else {
+                return nil
+            }
         } catch {
             return nil
         }

@@ -23,11 +23,11 @@
 import Foundation
 import Security
 
-public protocol SSLTrustValidator {
+internal protocol SSLTrustValidator {
     func isValid(_ trust: SecTrust, domain: String?) -> Bool
 }
 
-open class SSLCert {
+internal class SSLCert {
     var certData: Data?
     var key: SecKey?
     
@@ -54,7 +54,7 @@ open class SSLCert {
     }
 }
 
-open class SSLSecurity : SSLTrustValidator {
+internal class SSLSecurity : SSLTrustValidator {
     public var validatedDN = true //should the domain name be validated?
     
     var isReady = false //is the key processing done?

@@ -21,8 +21,8 @@ let package = Package(
     targets: [
         Target(name: "RestKit"),
         Target(name: "AlchemyDataNewsV1",            dependencies: [.Target(name: "RestKit")]),
-        Target(name: "AlchemyVisionV1",              dependencies: [.Target(name: "RestKit")]),
         Target(name: "AlchemyLanguageV1",            dependencies: [.Target(name: "RestKit")]),
+        Target(name: "AlchemyVisionV1",              dependencies: [.Target(name: "RestKit")]),
         Target(name: "ConversationV1",               dependencies: [.Target(name: "RestKit")]),
         Target(name: "DialogV1",                     dependencies: [.Target(name: "RestKit")]),
         Target(name: "DocumentConversionV1",         dependencies: [.Target(name: "RestKit")]),

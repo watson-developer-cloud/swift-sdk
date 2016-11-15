@@ -25,7 +25,9 @@ public protocol JSONPathType {
 
 extension String: JSONPathType {
     public func value(in dictionary: [String: Any]) throws -> JSON {
-        let json = dictionary[self]
+        guard let json = dictionary[self] else {
+            throw JSON.Error.keyNotFound(key: self)
+        }
         return JSON(json: json)
     }
     

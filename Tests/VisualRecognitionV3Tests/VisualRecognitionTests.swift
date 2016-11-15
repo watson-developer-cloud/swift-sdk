@@ -64,7 +64,7 @@ class VisualRecognitionTests: XCTestCase {
     private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/" +
                          "java-sdk/master/tests/src/test/resources/visual_recognition/car.png"
     private let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-                          "master/src/test/resources/visual_recognition/open.png"
+                          "master/tests/src/test/resources/visual_recognition/open.png"
     
     // MARK: - Test Configuration
     
@@ -1002,8 +1002,8 @@ class VisualRecognitionTests: XCTestCase {
             
             // verify the age
             let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min, 45)
-            XCTAssertLessThanOrEqual(age!.max, 54)
+            XCTAssertGreaterThanOrEqual(age!.min!, 45)
+            XCTAssertLessThanOrEqual(age!.max!, 54)
             XCTAssertGreaterThanOrEqual(age!.score, 0.25)
             
             // verify the face location

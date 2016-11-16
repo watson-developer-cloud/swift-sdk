@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {

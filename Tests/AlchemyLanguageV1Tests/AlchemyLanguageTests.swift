@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import AlchemyLanguageV1
 
 class AlchemyLanguageTests: XCTestCase {

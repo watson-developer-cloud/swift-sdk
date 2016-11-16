@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import AlchemyVisionV1
 
 class AlchemyVisionTests: XCTestCase {

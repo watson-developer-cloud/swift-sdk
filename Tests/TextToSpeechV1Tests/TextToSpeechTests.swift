@@ -15,8 +15,8 @@
  **/
 
 import XCTest
-import TextToSpeechV1
 import Foundation
+import TextToSpeechV1
 
 class TextToSpeechTests: XCTestCase {
     

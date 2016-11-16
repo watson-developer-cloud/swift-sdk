@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import DocumentConversionV1
 
 class DocumentConversionTests: XCTestCase {

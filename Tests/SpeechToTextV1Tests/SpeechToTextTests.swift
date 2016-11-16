@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import SpeechToTextV1
 
 class SpeechToTextTests: XCTestCase {

@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import TradeoffAnalyticsV1
 
 class TradeoffAnalyticsTests: XCTestCase {

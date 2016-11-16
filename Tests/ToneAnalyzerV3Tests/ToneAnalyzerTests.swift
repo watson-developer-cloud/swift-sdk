@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import ToneAnalyzerV3
 
 class ToneAnalyzerTests: XCTestCase {

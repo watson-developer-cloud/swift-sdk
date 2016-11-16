@@ -14,8 +14,8 @@
  * limitations under the License.
  **/
 import XCTest
-import AlchemyDataNewsV1
 import Foundation
+import AlchemyDataNewsV1
 
 class AlchemyDataNewsTests: XCTestCase {
     

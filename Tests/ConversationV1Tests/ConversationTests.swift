@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import ConversationV1
 
 class ConversationTests: XCTestCase {

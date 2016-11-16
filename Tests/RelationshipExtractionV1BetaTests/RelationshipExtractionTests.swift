@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import RelationshipExtractionV1Beta
 
 class RelationshipExtractionTests: XCTestCase {

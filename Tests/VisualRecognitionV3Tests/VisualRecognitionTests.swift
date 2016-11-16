@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import VisualRecognitionV3
 
 class VisualRecognitionTests: XCTestCase {

@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import PersonalityInsightsV2
 
 class PersonalityInsightsTests: XCTestCase {

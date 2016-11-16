@@ -29,7 +29,8 @@ class PersonalityInsightsTests: XCTestCase {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
+            ("testConsumptionPreferences", testConsumptionPreferences)
         ]
     }
 
@@ -115,6 +116,33 @@ class PersonalityInsightsTests: XCTestCase {
                                             expectation.fulfill()
         }
 
+        waitForExpectations()
+    }
+    
+    /** Analyze consumption preferences. */
+    func testConsumptionPreferences() {
+        let description = "Analyze consumption preferences."
+        let expectation = self.expectation(description: description)
+        
+        personalityInsightsV3.getProfile(version: version,
+                                         fromText: kennedySpeech,
+                                         consumptionPreferences: true,
+                                         failure: failWithError) { profile in
+                                            guard let preferences = profile.consumptionPreferences else {
+                                                XCTFail("No consumption preferences found.")
+                                                return
+                                            }
+                                            for consumption in preferences {
+                                                for node in consumption.consumptionPreferences {
+                                                    XCTAssertEqual("consumption_preferences_shopping", consumption.consumptionPreferenceCategoryId)
+                                                    XCTAssertNotNil(node.score)
+                                                    expectation.fulfill()
+                                                    return
+
+                                                }
+                                            }
+        }
+        
         waitForExpectations()
     }
     

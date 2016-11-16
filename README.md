@@ -23,8 +23,9 @@ There are many resources to help you build your first cognitive application with
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Service Instances](#service-instances)
+* [Custom Service URLs](#custom-service-urls)
+* [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
-* [Xcode 8 Compatibility](#xcode-8-compatibility)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Contributing](#contributing)
@@ -129,6 +130,27 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 Note that service credentials are different from your Bluemix username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+
+## Custom Service URLs
+
+In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.
+
+You can set a custom service URL like so:
+
+```swift
+let dialog = Dialog(username: "your-username-here", password: "your-password-here")
+dialog.serviceURL = "your-custom-service-url"
+```
+
+## Custom Headers
+There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.
+
+We have exposed a `defaultHeaders` public property in each class to allow users to easily customize their headers:
+
+```swift
+let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
+```
 
 ## Sample Applications
 

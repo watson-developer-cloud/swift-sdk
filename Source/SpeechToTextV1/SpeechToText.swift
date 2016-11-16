@@ -169,6 +169,7 @@ public class SpeechToText {
                 audio: data,
                 settings: settings,
                 model: model,
+                customizationID: customizationID,
                 learningOptOut: learningOptOut,
                 failure: failure,
                 success: success

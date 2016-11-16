@@ -95,10 +95,10 @@ public struct Face: JSONDecodable {
 public struct Age: JSONDecodable {
     
     /// The estimated minimum age of the identified individual.
-    public let min: Int
+    public let min: Int?
     
     /// The estimated maximum age of the identified individual.
-    public let max: Int
+    public let max: Int?
     
     /// The confidence score of the given age range. If there are more than
     /// 10 faces in an image, age confidence scores may return a score of 0.
@@ -106,8 +106,8 @@ public struct Age: JSONDecodable {
     
     /// Used internally to initialize an `Age` model from JSON.
     public init(json: JSON) throws {
-        min = try json.getInt(at: "min")
-        max = try json.getInt(at: "max")
+        min = try? json.getInt(at: "min")
+        max = try? json.getInt(at: "max")
         score = try json.getDouble(at: "score")
     }
 }

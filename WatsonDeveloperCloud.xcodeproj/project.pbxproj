@@ -43,6 +43,7 @@
 		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
 		7A517AC51D1C84E1004FD758 /* RelationshipExtractionV1Beta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A552C371DC941FD0002CB48 /* DocumentConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D64551DC7B114001E23ED /* DocumentConversionTests.swift */; };
 		7A552C391DC9424E0002CB48 /* arsArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = CE2D64531DC7B114001E23ED /* arsArticle.html */; };
@@ -628,6 +629,7 @@
 		7A1B0F281D82645100783EA3 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7A1F486A1D47AF7E00971377 /* ConversationV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1.h; path = Source/SupportingFiles/ConversationV1.h; sourceTree = "<group>"; };
 		7A219F321D1351DB0003D934 /* ConversationV1Experimental.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationV1Experimental.h; path = Source/SupportingFiles/ConversationV1Experimental.h; sourceTree = "<group>"; };
+		7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StockAnnouncement.wav; sourceTree = "<group>"; };
 		7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelationshipExtractionV1Beta.h; path = Source/SupportingFiles/RelationshipExtractionV1Beta.h; sourceTree = "<group>"; };
 		7A61174F1CB5988B009A4DA1 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		7A6117551CB598D9009A4DA1 /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContentItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1723,6 +1725,7 @@
 				7AAA9A221CEE3026002C9564 /* SpeechSample.flac */,
 				7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */,
 				7AAA9A241CEE3026002C9564 /* SpeechSample.wav */,
+				7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */,
 			);
 			path = "Audio Files";
 			sourceTree = "<group>";
@@ -3180,6 +3183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */,
 				7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */,
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
 				7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */,

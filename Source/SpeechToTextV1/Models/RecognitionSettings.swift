@@ -21,8 +21,8 @@ import RestKit
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will
  use a default value provided by the Watson Speech to Text service.
  
- Visit https://ibm.biz/BdHCrX for more information about the Speech to Text service's
- parameters.
+ For more information about the Speech to Text service parameters, visit:
+ http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml
  */
 public struct RecognitionSettings: JSONEncodable {
 
@@ -30,7 +30,8 @@ public struct RecognitionSettings: JSONEncodable {
     private let action = "start"
 
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
-    /// service. Visit https://ibm.biz/BdHCrB for more information about the supported formats.
+    /// service. For more information aboutthe supported formats, visit:
+    /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
     public var contentType: AudioMediaType
 
     /// If `true`, then the entire audio stream will be transcribed until it terminates rather
@@ -76,14 +77,20 @@ public struct RecognitionSettings: JSONEncodable {
     /// If `true`, then profanity will be censored from the service's output, obscuring each
     /// occurrence with a set of asterisks. The default is `true`.
     public var filterProfanity: Bool?
-
+    
+    /// Indicates whether dates, times, series of digits and numbers, phone numbers, currency values, 
+    /// and Internet addresses are to be converted into more readable, conventional representations 
+    /// in the final transcript of a recognition request. If true, smart formatting is performed; 
+    /// if false (the default), no formatting is performed. Applies to US English transcription only.
+    public var smartFormatting: Bool?
+    
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
 
      - parameter contentType: The format of the audio data. Endianness is automatically detected
-        by the Speech to Text service. Visit https://ibm.biz/BdHCrB for more information about
-        the supported formats.
+        by the Speech to Text service. For more information about the supported formats, visit:
+        http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
      
      - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
@@ -127,6 +134,9 @@ public struct RecognitionSettings: JSONEncodable {
         }
         if let filterProfanity = filterProfanity {
             json["profanity_filter"] = filterProfanity
+        }
+        if let smartFormatting = smartFormatting {
+            json["smart_formatting"] = smartFormatting
         }
         return json
     }

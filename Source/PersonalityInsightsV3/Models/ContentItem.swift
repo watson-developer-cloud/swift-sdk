@@ -18,16 +18,16 @@ import Foundation
 import RestKit
 
 //TODO - figure out where ContentListContainer object is in order to possibly pass in userid and sourceid (https://www.ibm.com/watson/developercloud/doc/personality-insights/relnotes.shtml)
-    
+
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
 
+    private let content: String
     private let id: String?
     private let created: Int?
     private let updated: Int?
     private let contentType: String?
     private let language: String?
-    private let content: String
     private let parentID: String?
     private let reply: Bool?
     private let forward: Bool?
@@ -35,6 +35,7 @@ public struct ContentItem: JSONEncodable {
     /**
      Initialize a `ContentItem` to be analyzed by Personality Insights.
 
+     - parameter content: Content to be analyzed. Up to 20MB of content is supported.
      - parameter id: Unique identifier for this content item.
      - parameter created: Timestamp that identifies when this content was created, in
         milliseconds since midnight 1/1/1970 UTC. Required only for results about temporal
@@ -49,7 +50,6 @@ public struct ContentItem: JSONEncodable {
         ("en") and Spanish ("es") input content are supported. The default is English. In all
         cases, regional variants are treated as their parent language; for example, "en-US" is
         interpreted as "en".
-     - parameter content: Content to be analyzed. Up to 20MB of content is supported.
      - parameter parentID: Unique id of the parent content item. Used to identify hierarchical
         relationships between posts/replies, messages/replies, etc.
      - parameter reply: Indicates whether this content item is a reply to another content item.
@@ -57,22 +57,22 @@ public struct ContentItem: JSONEncodable {
         another content item.
     */
     public init(
+        content: String,
         id: String? = nil,
         created: Int? = nil,
         updated: Int? = nil,
         contentType: String? = nil,
         language: String? = nil,
-        content: String,
         parentID: String? = nil,
         reply: Bool? = nil,
         forward: Bool? = nil)
     {
+        self.content = content
         self.id = id
         self.created = created
         self.updated = updated
         self.contentType = contentType
         self.language = language
-        self.content = content
         self.parentID = parentID
         self.reply = reply
         self.forward = forward

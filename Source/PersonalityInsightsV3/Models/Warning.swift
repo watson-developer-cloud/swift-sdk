@@ -21,13 +21,13 @@ import RestKit
 public struct Warning: JSONDecodable {
     
     /// The unique identifier for warning message
-    public let warning_id: String
+    public let warningID: String
     
     /// The message associated with the ID.
     public let message: String
     
     public init(json: JSON) throws {
-        warning_id = try json.getString(at: "warning_id")
+        warningID = try json.getString(at: "warning_id")
         message = try json.getString(at: "message")
     }
 }

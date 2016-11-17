@@ -227,13 +227,13 @@ public class PersonalityInsights {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
+                queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             queryParameters.append(URLQueryItem(name: "raw_scores", value: "\(rawScores)"))
         }
         if let consumptionPreferences = consumptionPreferences {
             queryParameters.append(URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)"))
         }
-        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct header parameters
         var headerParameters = defaultHeaders

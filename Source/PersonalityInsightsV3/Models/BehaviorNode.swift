@@ -23,7 +23,7 @@ public struct BehaviorNode: JSONDecodable {
     
     /// The globally unique id of the characteristic that pertains to behavior
     /// day and hour.
-    public let trait_id: String
+    public let traitID: String
     
     /// The user-displayable name of the characteristic.
     public let name: String
@@ -39,7 +39,7 @@ public struct BehaviorNode: JSONDecodable {
     
     /// Used internally to initialize a 'BehaviorNode' model from JSON.
     public init(json: JSON) throws {
-        trait_id = try json.getString(at: "trait_id")
+        traitID = try json.getString(at: "trait_id")
         name = try json.getString(at: "name")
         category = try json.getString(at: "category")
         percentage = try json.getDouble(at: "percentage")

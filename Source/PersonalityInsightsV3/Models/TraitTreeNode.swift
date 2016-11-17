@@ -21,14 +21,14 @@ import RestKit
 public struct TraitTreeNode: JSONDecodable {
 
     /// The globally unique id of the characteristic.
-    public let trait_id: String
+    public let traitID: String
 
     /// The user-displayable name of the characteristic.
     public let name: String
 
     /// The category of the characteristic: personality,
     /// needs, values, or behavior (for temporal data).
-    public let category: String?
+    public let category: String
 
     /// For personality, needs, and values characteristics, the normalized
     /// percentile score for the characteristic, from 0-1. For example, if
@@ -37,7 +37,7 @@ public struct TraitTreeNode: JSONDecodable {
     /// less open than 74% of the population. For temporal behavior
     /// characteristics, the percentage of timestamped data that occurred
     /// during that day or hour.
-    public let percentile: Double?
+    public let percentile: Double
 
     /// For personality, needs, and values characteristics, the raw score
     /// for the characteristic. A positive or negative score indicates
@@ -54,10 +54,10 @@ public struct TraitTreeNode: JSONDecodable {
 
     /// Used internally to initialize a `TraitTreeNode` model from JSON.
     public init(json: JSON) throws {
-        trait_id  = try json.getString(at: "trait_id")
+        traitID  = try json.getString(at: "trait_id")
         name = try json.getString(at: "name")
-        category = try? json.getString(at: "category")
-        percentile = try? json.getDouble(at: "percentile")
+        category = try json.getString(at: "category")
+        percentile = try json.getDouble(at: "percentile")
         rawScore = try? json.getDouble(at: "raw_score")
         children = try? json.decodedArray(at: "children")
     }

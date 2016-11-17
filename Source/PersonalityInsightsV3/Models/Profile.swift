@@ -23,14 +23,9 @@ public struct Profile: JSONDecodable {
     /// The number of words found in the input.
     public let wordCount: Int
 
-    /// A message indicating the number of words found and where the value falls
-    /// in the range of required or suggested number of words when guidance is
-    /// available.
-    public let wordCountMessage: String?
-
-    /// The language model that was used to process the input.
+    /// The language model used to process the input.
     public let processedLanguage: String
-    
+
     /// Recursive array of characteristics describing the Big Five dimensions 
     /// inferred from the input text.
     public let personality: [TraitTreeNode]
@@ -49,19 +44,23 @@ public struct Profile: JSONDecodable {
     public let consumptionPreferences: [ConsumptionPreferencesCategoryNode]?
     
     /// Array of warning messages generated from the input text.
-    public let warnings: [Warning]?
-
+    public let warnings: [Warning]
+    
+    /// A message indicating the number of words found and where the value falls
+    /// in the range of required or suggested number of words when guidance is
+    /// available.
+    public let wordCountMessage: String?
+    
     /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
         wordCount = try json.getInt(at: "word_count")
-        wordCountMessage = try? json.getString(at: "word_count_message")
         processedLanguage = try json.getString(at: "processed_language")
-        values = try json.decodedArray(at: "values", type: TraitTreeNode.self)
         personality = try json.decodedArray(at: "personality", type: TraitTreeNode.self)
         needs = try json.decodedArray(at: "needs", type: TraitTreeNode.self)
-
+        values = try json.decodedArray(at: "values", type: TraitTreeNode.self)
         behavior = try? json.decodedArray(at: "behavior", type: BehaviorNode.self)
         consumptionPreferences = try? json.decodedArray(at: "consumption_preferences", type: ConsumptionPreferencesCategoryNode.self)
-        warnings = try? json.decodedArray(at: "warnings", type: Warning.self)
+        warnings = try json.decodedArray(at: "warnings", type: Warning.self)
+        wordCountMessage = try? json.getString(at: "word_count_message")
     }
 }

@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import DialogV1
 
 class DialogTests: XCTestCase {

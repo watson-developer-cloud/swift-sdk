@@ -160,14 +160,14 @@ public class DocumentConversion {
         
         // create a globally unique file name in a temporary directory
         let suffix = "DocumentConversionConfiguration.json"
-        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
+        let fileName = "\(UUID().uuidString)_\(suffix)"
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let fileURL = directoryURL.appendingPathComponent(fileName)!
         
         // save JSON dictionary to file
         do {
             let data = try JSON(dictionary: json).serialize()
-            try data.write(to: fileURL, options: .atomicWrite)
+            try data.write(to: fileURL, options: .atomic)
         } catch {
             let message = "Unable to create config file"
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]

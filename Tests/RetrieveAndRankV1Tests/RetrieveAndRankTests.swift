@@ -15,6 +15,7 @@
  **/
 
 import XCTest
+import Foundation
 import RetrieveAndRankV1
 
 class RetrieveAndRankTests: XCTestCase {

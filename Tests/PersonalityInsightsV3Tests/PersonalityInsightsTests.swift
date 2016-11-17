@@ -49,7 +49,7 @@ class PersonalityInsightsTests: XCTestCase {
     func instantiatePersonalityInsights() {
         let username = Credentials.PersonalityInsightsV3Username
         let password = Credentials.PersonalityInsightsV3Password
-        personalityInsightsV3 = PersonalityInsights(username: username, password: password)
+        personalityInsightsV3 = PersonalityInsights(username: username, password: password, version: version)
     }
     
     /** Load "MobyDickIntro.txt". */
@@ -106,8 +106,7 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = self.expectation(description: description)
         
-        personalityInsightsV3.getProfile(version: version,
-                                         fromText: kennedySpeech,
+        personalityInsightsV3.getProfile(fromText: kennedySpeech,
                                          failure: failWithError) { profile in
                                             for preference in profile.personality {
                                                 XCTAssertEqual("Openness", preference.name)
@@ -124,8 +123,7 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze consumption preferences."
         let expectation = self.expectation(description: description)
         
-        personalityInsightsV3.getProfile(version: version,
-                                         fromText: kennedySpeech,
+        personalityInsightsV3.getProfile(fromText: kennedySpeech,
                                          consumptionPreferences: true,
                                          failure: failWithError) { profile in
                                             guard let preferences = profile.consumptionPreferences else {
@@ -164,8 +162,7 @@ class PersonalityInsightsTests: XCTestCase {
         )
 
         let contentItems = [contentItem, contentItem]
-        personalityInsightsV3.getProfile(version: version,
-                                         fromContentItems: contentItems,
+        personalityInsightsV3.getProfile(fromContentItems: contentItems,
                                          failure: failWithError) { profile in
                                             if let behaviors = profile.behavior {                                            for behavior in behaviors {
                                                 XCTAssertNotNil(behavior.trait_id)
@@ -188,7 +185,6 @@ class PersonalityInsightsTests: XCTestCase {
         }
 
         personalityInsightsV3.getProfile(
-            version: version,
             fromText: mobyDickIntro,
             failure: failure,
             success: failWithResult

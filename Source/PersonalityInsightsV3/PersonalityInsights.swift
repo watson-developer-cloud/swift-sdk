@@ -23,30 +23,34 @@ import RestKit
  through blogs, tweets, forum posts, and more.
  */
 public class PersonalityInsights {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
+    private let version: String
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
 
     /**
      Create a `PersonalityInsights` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
+     - parameter version: The release date of the version of the API to use. Specify the date
+            in "YYYY-MM-DD" format.
      */
-    public init(username: String, password: String) {
+    public init(username: String, password: String, version: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
+        self.version = version
     }
 
     /**
      If the given data represents an error returned by the Visual Recognition service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func dataToError(data: Data) -> NSError? {
@@ -67,20 +71,19 @@ public class PersonalityInsights {
 
     /**
      Analyze text to generate a personality profile.
-     
-      - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
-     - parameter text: The text to analyze.
+
+     - parameter fromText: The text to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
      - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
-        A raw sampling error for each characteristic is also returned.
-     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
+        An average Mean Absolute Error (MAE) is returned to measure the results' precision.
+     - parameter consumptionPreferences: If true, then information inferred about consumption
+        preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        version: String,
         fromText text: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
@@ -98,7 +101,6 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            version: version,
             fromContent: content,
             withType: "text/plain",
             acceptLanguage: acceptLanguage,
@@ -113,20 +115,19 @@ public class PersonalityInsights {
     /**
      Analyze the text of a webpage to generate a personality profile.
      The HTML tags are stripped before the text is analyzed.
-     
-     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
-     - parameter html: The webpage that contains text to analyze.
+
+     - parameter fromHTML: The HTML text to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
      - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
-        A raw sampling error for each characteristic is also returned.
-     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
+        An average Mean Absolute Error (MAE) is returned to measure the results' precision.
+     - parameter consumptionPreferences: If true, then information inferred about consumption
+        preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        version: String,
         fromHTML html: String,
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
@@ -144,7 +145,6 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            version: version,
             fromContent: content,
             withType: "text/html",
             acceptLanguage: acceptLanguage,
@@ -158,20 +158,19 @@ public class PersonalityInsights {
 
     /**
      Analyze input content items to generate a personality profile.
-     
-     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
-     - parameter contentItems: The content items to analyze.
+
+     - parameter fromContentItems: The content items to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
      - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
-        A raw sampling error for each characteristic is also returned.
-     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
+        An average Mean Absolute Error (MAE) is returned to measure the results' precision.
+     - parameter consumptionPreferences: If true, then information inferred about consumption
+        preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
      */
     public func getProfile(
-        version: String,
         fromContentItems contentItems: [ContentItem],
         acceptLanguage: String? = nil,
         contentLanguage: String? = nil,
@@ -190,7 +189,6 @@ public class PersonalityInsights {
         }
 
         getProfile(
-            version: version,
             fromContent: content,
             withType: "application/json",
             acceptLanguage: acceptLanguage,
@@ -204,21 +202,20 @@ public class PersonalityInsights {
 
     /**
      Analyze content to generate a personality profile.
- 
-     - parameter version: The date in the form "YYYY-MM-DD" that will specify a version no later than the date provided.
-     - parameter content: The content to analyze.
-     - parameter contentType: The MIME content-type of the content.
+
+     - parameter fromContent: The content to analyze.
+     - parameter withType: The MIME content-type of the content.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
      - parameter rawScores: If true, then a raw score for each characteristic is returned in
         addition to a normalized score. Raw scores are not compared with a sample population.
-        A raw sampling error for each characteristic is also returned.
-     - parameter consumptionPreferences: If true, then information inferred about consumption preferences is returned in addition to the results.
+        An average Mean Absolute Error (MAE) is returned to measure the results' precision.
+     - parameter consumptionPreferences: If true, then information inferred about consumption
+        preferences is returned in addition to the results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the personality profile.
      */
     private func getProfile(
-        version: String,
         fromContent content: Data?,
         withType contentType: String,
         acceptLanguage: String? = nil,
@@ -231,15 +228,12 @@ public class PersonalityInsights {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let rawScores = rawScores {
-            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
-            queryParameters.append(queryParameter)
+            queryParameters.append(URLQueryItem(name: "raw_scores", value: "\(rawScores)"))
         }
         if let consumptionPreferences = consumptionPreferences {
-            let consumptionPreferenceQueryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
-            queryParameters.append(consumptionPreferenceQueryParameter)
+            queryParameters.append(URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)"))
         }
-        let versionQueryParameter = URLQueryItem(name: "version", value: version)
-        queryParameters.append(versionQueryParameter)
+        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct header parameters
         var headerParameters = defaultHeaders

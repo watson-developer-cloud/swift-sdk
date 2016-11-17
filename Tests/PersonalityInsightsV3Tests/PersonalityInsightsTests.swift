@@ -20,8 +20,9 @@ import PersonalityInsightsV3
 class PersonalityInsightsTests: XCTestCase {
 
     private var personalityInsights: PersonalityInsights!
-    private var mobyDickIntro: String!
-    private var kennedySpeech: String!
+    private var mobyDickIntro: String?
+    private var kennedySpeechTXT: String?
+    private var kennedySpeechHTML: String?
     private let timeout: TimeInterval = 5.0
     private var version: String = "2016-10-20"
 
@@ -29,8 +30,9 @@ class PersonalityInsightsTests: XCTestCase {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
-            ("testProfileWithShortText", testProfileWithShortText),
-            ("testConsumptionPreferences", testConsumptionPreferences)
+            ("testHTMLProfile", testHTMLProfile),
+            ("testConsumptionPreferences", testConsumptionPreferences),
+            ("testProfileWithShortText", testProfileWithShortText)
         ]
     }
 
@@ -41,8 +43,7 @@ class PersonalityInsightsTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiatePersonalityInsights()
-        loadMobyDickIntro()
-        loadKennedySpeech()
+        loadTestResources()
     }
 
     /** Instantiate Personality Insights. */
@@ -52,34 +53,20 @@ class PersonalityInsightsTests: XCTestCase {
         personalityInsights = PersonalityInsights(username: username, password: password, version: version)
     }
 
-    /** Load "MobyDickIntro.txt". */
-    func loadMobyDickIntro() {
+    /** Load external files to test. */
+    func load(forResource resource: String, ofType type: String) -> String? {
         let bundle = Bundle(for: type(of: self))
-        guard let file = bundle.path(forResource: "MobyDickIntro", ofType: "txt") else {
-            XCTFail("Unable to locate MobyDickIntro.txt file.")
-            return
+        guard let file = bundle.path(forResource: resource, ofType: type) else {
+            return nil
         }
-
-        mobyDickIntro = try? String(contentsOfFile: file)
-        guard mobyDickIntro != nil else {
-            XCTFail("Unable to read MobyDickIntro.txt file.")
-            return
-        }
+        return try? String(contentsOfFile: file)
     }
 
-    /** Load "KennedySpeech.txt." */
-    func loadKennedySpeech() {
-        let bundle = Bundle(for: type(of: self))
-        guard let file = bundle.path(forResource: "KennedySpeech", ofType: "txt") else {
-            XCTFail("Unable to locate KennedySpeech.txt file.")
-            return
-        }
-
-        kennedySpeech = try? String(contentsOfFile: file)
-        guard kennedySpeech != nil else {
-            XCTFail("Unable to read KennedySpeech.txt file.")
-            return
-        }
+    /** Load all testing resources required to run the tests. */
+    public func loadTestResources() {
+        self.mobyDickIntro = load(forResource: "MobyDickIntro", ofType: "txt")
+        self.kennedySpeechTXT = load(forResource: "KennedySpeech", ofType: "txt")
+        self.kennedySpeechHTML = load(forResource: "KennedySpeech", ofType: "html")
     }
 
     /** Fail false negatives. */
@@ -106,6 +93,10 @@ class PersonalityInsightsTests: XCTestCase {
         let description = "Analyze the text of Kennedy's speech."
         let expectation = self.expectation(description: description)
 
+        guard let kennedySpeech = kennedySpeechTXT else {
+            XCTFail("Unable to locate or read KennedySpeech.txt file.")
+            return
+        }
         personalityInsights.getProfile(fromText: kennedySpeech,
                                          failure: failWithError)
         {
@@ -119,29 +110,24 @@ class PersonalityInsightsTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Analyze consumption preferences. */
-    func testConsumptionPreferences() {
-        let description = "Analyze consumption preferences."
+    /** Analyze the HTML text of Kennedy's speech. */
+    func testHTMLProfile() {
+        let description = "Analyze the HTML text of Kennedy's speech."
         let expectation = self.expectation(description: description)
 
-        personalityInsights.getProfile(fromText: kennedySpeech,
-                                         consumptionPreferences: true,
-                                         failure: failWithError)
+        guard let kennedySpeech = kennedySpeechHTML else {
+            XCTFail("Unable to locate or read KennedySpeech.html file.")
+            return
+        }
+        personalityInsights.getProfile(fromHTML: kennedySpeech,
+                                       failure: failWithError)
         {
             profile in
-            guard let preferences = profile.consumptionPreferences else {
-                XCTFail("No consumption preferences found.")
-                return
+            for preference in profile.personality {
+                XCTAssertEqual("Openness", preference.name)
+                break
             }
-            for consumption in preferences {
-                for node in consumption.consumptionPreferences {
-                    XCTAssertEqual("consumption_preferences_shopping", consumption.consumptionPreferenceCategoryId)
-                    XCTAssertNotNil(node.score)
-                    expectation.fulfill()
-                    return
-                    
-                }
-            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -150,6 +136,11 @@ class PersonalityInsightsTests: XCTestCase {
     func testContentItem() {
         let description = "Analyze content items."
         let expectation = self.expectation(description: description)
+
+        guard let kennedySpeech = kennedySpeechTXT else {
+            XCTFail("Unable to locate or read KennedySpeech.txt file.")
+            return
+        }
 
         let contentItem = PersonalityInsightsV3.ContentItem(
             content: kennedySpeech,
@@ -178,12 +169,49 @@ class PersonalityInsightsTests: XCTestCase {
         waitForExpectations()
     }
 
+    /** Analyze consumption preferences. */
+    func testConsumptionPreferences() {
+        let description = "Analyze consumption preferences."
+        let expectation = self.expectation(description: description)
+
+        guard let kennedySpeech = kennedySpeechTXT else {
+            XCTFail("Unable to locate or read KennedySpeech.txt file.")
+            return
+        }
+
+        personalityInsights.getProfile(fromText: kennedySpeech,
+                                       consumptionPreferences: true,
+                                       failure: failWithError)
+        {
+            profile in
+            guard let preferences = profile.consumptionPreferences else {
+                XCTAssertNotNil(profile.consumptionPreferences)
+                return
+            }
+            for consumption in preferences {
+                for node in consumption.consumptionPreferences {
+                    XCTAssertEqual("consumption_preferences_shopping", consumption.consumptionPreferenceCategoryId)
+                    XCTAssertNotNil(node.score)
+                    expectation.fulfill()
+                    return
+
+                }
+            }
+        }
+        waitForExpectations()
+    }
+
     // MARK: - Negative Tests
 
     /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
         let description = "Try to analyze text that is too short (less than 100 words)."
         let expectation = self.expectation(description: description)
+
+        guard let mobyDickIntro = mobyDickIntro else {
+            XCTFail("Unable to locate or read MobyDickIntro.txt file.")
+            return
+        }
 
         let failure = { (error: Error) in
             expectation.fulfill()

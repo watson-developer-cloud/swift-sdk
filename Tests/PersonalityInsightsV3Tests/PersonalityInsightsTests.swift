@@ -103,7 +103,7 @@ class PersonalityInsightsTests: XCTestCase {
         {
             profile in
             for preference in profile.personality {
-                XCTAssertEqual("Openness", preference.name)
+                XCTAssertNotNil(preference.name)
                 break
             }
             expectation.fulfill()
@@ -125,7 +125,7 @@ class PersonalityInsightsTests: XCTestCase {
         {
             profile in
             for preference in profile.personality {
-                XCTAssertEqual("Openness", preference.name)
+                XCTAssertNotNil(preference.name)
                 break
             }
             expectation.fulfill()
@@ -196,7 +196,7 @@ class PersonalityInsightsTests: XCTestCase {
             }
             for consumption in preferences {
                 for node in consumption.consumptionPreferences {
-                    XCTAssertEqual("consumption_preferences_shopping", consumption.consumptionPreferenceCategoryId)
+                    XCTAssertNotNil(consumption.consumptionPreferenceCategoryId)
                     XCTAssertNotNil(node.score)
                     expectation.fulfill()
                     return

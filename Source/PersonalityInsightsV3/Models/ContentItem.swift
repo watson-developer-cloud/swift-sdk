@@ -17,8 +17,6 @@
 import Foundation
 import RestKit
 
-//TODO - figure out where ContentListContainer object is in order to possibly pass in userid and sourceid (https://www.ibm.com/watson/developercloud/doc/personality-insights/relnotes.shtml)
-
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
 

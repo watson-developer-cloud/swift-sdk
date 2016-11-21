@@ -242,6 +242,7 @@ public class SpeechToTextSession {
                 guard pcm.count > 0 else { return }
                 try! self.encoder.encode(pcm: pcm)
                 let opus = self.encoder.bitstream(flush: true)
+                guard opus.count > 0 else { return }
                 self.socket.writeAudio(audio: opus)
                 self.onMicrophoneData?(opus)
             }
@@ -282,6 +283,7 @@ public class SpeechToTextSession {
         
         if compress {
             let opus = try! encoder.endstream()
+            guard opus.count > 0 else { return }
             self.socket.writeAudio(audio: opus)
         }
     }

@@ -227,7 +227,7 @@ public class PersonalityInsights {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-                queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             queryParameters.append(URLQueryItem(name: "raw_scores", value: "\(rawScores)"))
         }

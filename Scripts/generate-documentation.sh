@@ -37,24 +37,25 @@ cd ..
 # Create folder for generated documentation
 ################################################################################
 
-if [ -d "docs/services" ]; then
-  echo "The docs/services directory already exists."
+if [ -d "docs/swift-api" ]; then
+  echo "The docs/swift-api directory already exists."
   echo "Please remove the directory and try again."
   exit
 fi
 
-mkdir docs/services
+mkdir docs/swift-api
+mkdir docs/swift-api/services
 
 ################################################################################
 # Run Jazzy to generate documentation
 ################################################################################
 
 for service in ${services[@]}; do
-  mkdir docs/services/${service}
+  mkdir docs/swift-api/services/${service}
   xcodebuild_arguments=-project,WatsonDeveloperCloud.xcodeproj,-scheme,${service}
   jazzy \
     --xcodebuild-arguments $xcodebuild_arguments \
-    --output docs/services/${service} \
+    --output docs/swift-api/services/${service} \
     --clean \
     --github_url https://github.com/watson-developer-cloud/ios-sdk \
     --hide-documentation-coverage
@@ -66,34 +67,34 @@ done
 
 cp Scripts/generate-documentation-resources/index-prefix docs/index.html
 for service in ${services[@]}; do
-  html="<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
+  html="<li><a target="_blank" href="./swift-api/services/${service}/index.html">${service}</a></li>"
   echo ${html} >> docs/index.html
 done
 cat Scripts/generate-documentation-resources/index-postfix >> docs/index.html
 
-cp -r Scripts/generate-documentation-resources/* docs/
-rm docs/index-prefix docs/index-postfix
+cp -r Scripts/generate-documentation-resources/* docs/swift-api
+rm docs/swift-api/index-prefix docs/swift-api/index-postfix
 
 ################################################################################
 # Collect undocumented.json files
 ################################################################################
 
-touch docs/undocumented.json
-echo "[" >> docs/undocumented.json
+touch docs/swift-api/undocumented.json
+echo "[" >> docs/swift-api/undocumented.json
 
 declare -a undocumenteds
-undocumenteds=($(ls -r docs/services/*/undocumented.json))
+undocumenteds=($(ls -r docs/swift-api/services/*/undocumented.json))
 
 if [ ${#undocumenteds[@]} -gt 0 ]; then
-  echo -e -n "\t" >> docs/undocumented.json
-  cat "${undocumenteds[0]}" >> docs/undocumented.json
+  echo -e -n "\t" >> docs/swift-api/undocumented.json
+  cat "${undocumenteds[0]}" >> docs/swift-api/undocumented.json
   unset undocumenteds[0]
   for f in "${undocumenteds[@]}"; do
-    echo "," >> docs/undocumented.json
-    echo -e -n "\t" >> docs/undocumented.json
-    cat "$f" >> docs/undocumented.json
+    echo "," >> docs/swift-api/undocumented.json
+    echo -e -n "\t" >> docs/swift-api/undocumented.json
+    cat "$f" >> docs/swift-api/undocumented.json
   done
 fi
 
-echo "" >> docs/undocumented.json
-echo "]" >> docs/undocumented.json
+echo "" >> docs/swift-api/undocumented.json
+echo "]" >> docs/swift-api/undocumented.json

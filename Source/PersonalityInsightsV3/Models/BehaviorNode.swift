@@ -37,7 +37,7 @@ public struct BehaviorNode: JSONDecodable {
     /// items were created between midnight and 1:00 AM.
     public let percentage: Double
     
-    /// Used internally to initialize a 'BehaviorNode' model from JSON.
+    /// Used internally to initialize a `BehaviorNode` model from JSON.
     public init(json: JSON) throws {
         traitID = try json.getString(at: "trait_id")
         name = try json.getString(at: "name")

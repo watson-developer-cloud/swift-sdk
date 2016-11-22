@@ -13,6 +13,7 @@ The following tasks should be completed before publishing a release. Track the p
 
 - [ ] Run all tests to verify correctness. Fix any errors.
 - [ ] Update `.travis.yml` for any new targets/services.
+- [ ] Encrypt `Credentials.swift` to support any new targets/services with Travis.
 - [ ] If changes were made to Speech to Text, then test continuous streaming support on a physical device.
 
 #### Documentation

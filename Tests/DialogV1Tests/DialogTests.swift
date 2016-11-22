@@ -28,11 +28,11 @@ class DialogTests: XCTestCase {
 
     // MARK: - Test Configuration
 
-	private func generateRandomNumber(max: Int) -> Int {
+	private func generateRandomNumber(max: UInt32) -> Int {
 		#if os(Linux)
 			return Int(rand() % Int32(max))
 		#else
-			return Int(arc4random_uniform(max))		
+			return Int(arc4random_uniform(max))
 		#endif
 	}
 

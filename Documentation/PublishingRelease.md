@@ -2,30 +2,30 @@ The following tasks should be completed before publishing a release. Track the p
 
 #### Github and Project Planning
 
-- [ ] Review pull requests and merge as appropriate.
-- [ ] Review the issues assigned to the release's milestone.
+- [ ] Review and merge any outstanding pull requests.
+- [ ] Review any oustanding issues assigned to this release milestone.
 
 #### User Agent
 
-- [ ] Use find-and-replace to update the version number in the `userAgent` prefixes.
-- [ ] Temporarily make `userAgent` a required parameter to `RestRequest`.
+- [ ] Update the `sdkVersion` property in `RestRequest.swift`.
 
 #### Tests and Verification
 
 - [ ] Run all tests to verify correctness. Fix any errors.
-- [ ] Verify that all necessary changes to `.travis.yml` have been made.
-- [ ] If changes were made to Speech to Text then test continuous streaming support on a physical device.
+- [ ] Update `.travis.yml` for any new targets/services.
+- [ ] If changes were made to Speech to Text, then test continuous streaming support on a physical device.
 
 #### Documentation
 
-- [ ] Update the `generateDocumentation.sh` script for any new targets/services.
-- [ ] Generate documentation for the gh-pages branch using `generateDocumentation.sh`.
-- [ ] Fix any undocumented code. Then re-generate the gh-pages documentation.
-- [ ] Update the change log.
-- [ ] Update the readme.
+- [ ] Update the `generate-documentation.sh` script for any new targets/services.
+- [ ] Execute the `generate-documentation.sh` script to update the API documentation.
+- [ ] Check `undocumented.json` for any missing documentation comments. Make the necessary changes then re-run the `generate-documentation.sh` script.
+- [ ] Update `CHANGELOG.md`.
+- [ ] Update `README.md`.
 
 #### Publish Release
 
 - [ ] Use Github to create a tag/release.
-- [ ] Ensure that Carthage successfully builds each service's framework.
+- [ ] Execute the `generate-binaries.sh` script to build and archive frameworks into a `WatsonDeveloperCloud.framework.zip` file. Then attach `WatsonDeveloperCloud.framework.zip` to the GitHub release.
+- [ ] Test that Carthage successfully builds each service's framework.
 - [ ] Celebrate the team's hard work! :)

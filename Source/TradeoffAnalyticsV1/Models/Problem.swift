@@ -490,6 +490,6 @@ public struct Option: JSONEncodable, JSONDecodable {
         }
         name = try? json.getString(at: "name")
         descriptionHTML = try? json.getString(at: "description_html")
-        appData = try json.getJSON(at: "app_data")
+        appData = try? json.getJSON(at: "app_data")
     }
 }

@@ -24,91 +24,76 @@ services=(
 )
 
 ################################################################################
-# Define parameters for Jazzy
-################################################################################
-
-jazzyParams="
-  --clean \
-  --github_url https://github.com/watson-developer-cloud/ios-sdk \
-  --hide-documentation-coverage"
-
-################################################################################
 # Change directory to repository root
 ################################################################################
 
-echo "Changing directory to repository root."
-cd ../..
+pushd `dirname $0` > /dev/null
+root=`pwd`
+popd > /dev/null
+cd $root
+cd ..
 
 ################################################################################
 # Create folder for generated documentation
 ################################################################################
 
-if [ -d "gh-pages" ]; then
-  echo "gh-pages directory already exists"
-  echo "please remove the directory and try again"
+if [ -d "docs/services" ]; then
+  echo "The docs/services directory already exists."
+  echo "Please remove the directory and try again."
   exit
 fi
 
-mkdir gh-pages
-mkdir gh-pages/services
+mkdir docs/services
 
 ################################################################################
 # Run Jazzy to generate documentation
 ################################################################################
 
 for service in ${services[@]}; do
+  mkdir docs/services/${service}
   xcodebuild_arguments=-project,WatsonDeveloperCloud.xcodeproj,-scheme,${service}
-  jazzy -x $xcodebuild_arguments $jazzyParams
-  mv docs gh-pages/services/${service}
+  jazzy \
+    --xcodebuild-arguments $xcodebuild_arguments \
+    --output docs/services/${service} \
+    --clean \
+    --github_url https://github.com/watson-developer-cloud/ios-sdk \
+    --hide-documentation-coverage
 done
 
 ################################################################################
 # Generate index.html and copy supporting files
 ################################################################################
 
-cp Scripts/GenerateDocumentation/resources/index-prefix gh-pages/index.html
+cp Scripts/generate-documentation-resources/index-prefix docs/index.html
 for service in ${services[@]}; do
   html="<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
-  echo ${html} >> gh-pages/index.html
+  echo ${html} >> docs/index.html
 done
-cat Scripts/GenerateDocumentation/resources/index-postfix >> gh-pages/index.html
+cat Scripts/generate-documentation-resources/index-postfix >> docs/index.html
 
-cp -r Scripts/GenerateDocumentation/resources/* gh-pages/
-rm gh-pages/index-prefix gh-pages/index-postfix
+cp -r Scripts/generate-documentation-resources/* docs/
+rm docs/index-prefix docs/index-postfix
 
 ################################################################################
 # Collect undocumented.json files
 ################################################################################
 
-touch gh-pages/undocumented.json
-echo "[" >> gh-pages/undocumented.json
+touch docs/undocumented.json
+echo "[" >> docs/undocumented.json
 
 declare -a undocumenteds
-undocumenteds=($(ls -r gh-pages/services/*/undocumented.json))
+undocumenteds=($(ls -r docs/services/*/undocumented.json))
 
 if [ ${#undocumenteds[@]} -gt 0 ]; then
-  echo -e -n "\t" >> gh-pages/undocumented.json
-  cat "${undocumenteds[0]}" >> gh-pages/undocumented.json
+  echo -e -n "\t" >> docs/undocumented.json
+  cat "${undocumenteds[0]}" >> docs/undocumented.json
   unset undocumenteds[0]
   for f in "${undocumenteds[@]}"; do
-    echo "," >> gh-pages/undocumented.json
-    echo -e -n "\t" >> gh-pages/undocumented.json
-    cat "$f" >> gh-pages/undocumented.json
+    echo "," >> docs/undocumented.json
+    echo -e -n "\t" >> docs/undocumented.json
+    cat "$f" >> docs/undocumented.json
   done
 fi
 
-echo "" >> gh-pages/undocumented.json
-echo "]" >> gh-pages/undocumented.json
-
-################################################################################
-# Print message about copying contents to gh-pages branch
-################################################################################
-
-echo ""
-echo "Documentation was successfully generated at gh-pages/."
-echo "See gh-pages/undocumented.json for warnings and undocumented code."
-echo ""
-echo "Please test the generated documentation. Then manually move"
-echo "the contents of the gh-pages folder to the gh-pages branch."
-echo "After doing so, delete the gh-pages folder from this directory."
-echo ""
+echo "" >> docs/undocumented.json
+echo "]" >> docs/undocumented.json

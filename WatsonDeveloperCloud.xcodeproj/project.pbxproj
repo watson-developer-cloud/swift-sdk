@@ -53,6 +53,17 @@
 		7A552C3D1DC9424E0002CB48 /* testConfigHtml.json in Resources */ = {isa = PBXBuildFile; fileRef = CE2D64581DC7B114001E23ED /* testConfigHtml.json */; };
 		7A552C3E1DC9424E0002CB48 /* testConfigText.json in Resources */ = {isa = PBXBuildFile; fileRef = CE2D64591DC7B114001E23ED /* testConfigText.json */; };
 		7A552C441DC945F10002CB48 /* trained_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */; };
+		7A6711891DD0EEEB0070CA9D /* PersonalityInsightsV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6711801DD0EEEB0070CA9D /* PersonalityInsightsV3.framework */; };
+		7A6711901DD0EEEB0070CA9D /* PersonalityInsightsV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A67119D1DD0F1790070CA9D /* ContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6711991DD0F1790070CA9D /* ContentItem.swift */; };
+		7A67119E1DD0F1790070CA9D /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A67119A1DD0F1790070CA9D /* Profile.swift */; };
+		7A67119F1DD0F1790070CA9D /* TraitTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A67119B1DD0F1790070CA9D /* TraitTreeNode.swift */; };
+		7A6711A01DD0F1790070CA9D /* PersonalityInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A67119C1DD0F1790070CA9D /* PersonalityInsights.swift */; };
+		7A6711A51DD0F1970070CA9D /* KennedySpeech.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A6711A21DD0F1970070CA9D /* KennedySpeech.txt */; };
+		7A6711A61DD0F1970070CA9D /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A6711A31DD0F1970070CA9D /* MobyDickIntro.txt */; };
+		7A6711A71DD0F1970070CA9D /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6711A41DD0F1970070CA9D /* PersonalityInsightsTests.swift */; };
+		7A6711A81DD0F1CC0070CA9D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
+		7A6711A91DD0F2DF0070CA9D /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7A6C7B3D1D8C960300CD97FA /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
 		7A6C7B3E1D8C960300CD97FA /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
 		7A6C7B3F1D8C960300CD97FA /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
@@ -297,6 +308,11 @@
 		B1AAD3001D0880AE002DAB84 /* AnswerUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FF1D0880AE002DAB84 /* AnswerUnits.swift */; };
 		B1AAD3021D0881BC002DAB84 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD3011D0881BC002DAB84 /* Content.swift */; };
 		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
+		CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */; };
+		CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */; };
+		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
+		CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77E1DD233E9003336BD /* BehaviorNode.swift */; };
+		CE78B7811DD258B8003336BD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7801DD258B8003336BD /* Warning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +329,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 124C2DEE1D19E29000D9F602;
 			remoteInfo = TextToSpeechV1;
+		};
+		7A67118A1DD0EEEB0070CA9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A67117F1DD0EEEB0070CA9D;
+			remoteInfo = PersonalityInsightsV3;
 		};
 		7A987D1F1D19D424003626B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -627,6 +650,16 @@
 		7A61179D1CB6D3F2009A4DA1 /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorTests.swift; sourceTree = "<group>"; };
 		7A6117A91CB6D760009A4DA1 /* MonitorTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonitorTraining.swift; path = ../../LanguageTranslatorV2/Models/MonitorTraining.swift; sourceTree = "<group>"; };
 		7A6117AB1CB6D7CC009A4DA1 /* TrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingStatus.swift; path = ../../LanguageTranslatorV2/Models/TrainingStatus.swift; sourceTree = "<group>"; };
+		7A6711801DD0EEEB0070CA9D /* PersonalityInsightsV3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PersonalityInsightsV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PersonalityInsightsV3.h; path = Source/SupportingFiles/PersonalityInsightsV3.h; sourceTree = "<group>"; };
+		7A6711881DD0EEEB0070CA9D /* PersonalityInsightsV3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalityInsightsV3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A6711991DD0F1790070CA9D /* ContentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentItem.swift; sourceTree = "<group>"; };
+		7A67119A1DD0F1790070CA9D /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		7A67119B1DD0F1790070CA9D /* TraitTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitTreeNode.swift; sourceTree = "<group>"; };
+		7A67119C1DD0F1790070CA9D /* PersonalityInsights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsights.swift; sourceTree = "<group>"; };
+		7A6711A21DD0F1970070CA9D /* KennedySpeech.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KennedySpeech.txt; sourceTree = "<group>"; };
+		7A6711A31DD0F1970070CA9D /* MobyDickIntro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MobyDickIntro.txt; sourceTree = "<group>"; };
+		7A6711A41DD0F1970070CA9D /* PersonalityInsightsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalityInsightsTests.swift; sourceTree = "<group>"; };
 		7A6C7B3C1D8C960300CD97FA /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credentials.swift; path = Source/SupportingFiles/Credentials.swift; sourceTree = "<group>"; };
 		7A7150131CC6C88E00DFEBB0 /* pizza_sample_invalid.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pizza_sample_invalid.xml; sourceTree = "<group>"; };
 		7A818EB81D81B470008C9720 /* SpeechRecognitionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionResults.swift; sourceTree = "<group>"; };
@@ -844,6 +877,11 @@
 		CE2D64581DC7B114001E23ED /* testConfigHtml.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfigHtml.json; sourceTree = "<group>"; };
 		CE2D64591DC7B114001E23ED /* testConfigText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfigText.json; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
+		CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
+		CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesCategoryNode.swift; sourceTree = "<group>"; };
+		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
+		CE78B77E1DD233E9003336BD /* BehaviorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorNode.swift; sourceTree = "<group>"; };
+		CE78B7801DD258B8003336BD /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -876,6 +914,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				124C2DF91D19E29100D9F602 /* TextToSpeechV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A67117C1DD0EEEB0070CA9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6711A91DD0F2DF0070CA9D /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A6711851DD0EEEB0070CA9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6711891DD0EEEB0070CA9D /* PersonalityInsightsV3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1246,6 +1300,7 @@
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
+				7A6711971DD0F1790070CA9D /* PersonalityInsightsV3 */,
 				7A987D621D19D923003626B2 /* RelationshipExtractionV1Beta */,
 				123B472F1D1B3D24007D0B22 /* RetrieveAndRankV1 */,
 				7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */,
@@ -1297,6 +1352,8 @@
 				123B471B1D1B3ABA007D0B22 /* RetrieveAndRankV1Tests.xctest */,
 				7AB445241D3E647A00E8748A /* ConversationV1.framework */,
 				7AB4452D1D3E647A00E8748A /* ConversationV1Tests.xctest */,
+				7A6711801DD0EEEB0070CA9D /* PersonalityInsightsV3.framework */,
+				7A6711881DD0EEEB0070CA9D /* PersonalityInsightsV3Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1323,6 +1380,7 @@
 				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslatorV2.h */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */,
+				7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */,
 				7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */,
 				7AAAF5B21CEEA62C00B74848 /* RestKit.h */,
 				123B47141D1B3ABA007D0B22 /* RetrieveAndRankV1.h */,
@@ -1415,6 +1473,43 @@
 			name = Tests;
 			path = ../../Tests/LanguageTranslatorV2Tests;
 			sourceTree = "<group>";
+		};
+		7A6711971DD0F1790070CA9D /* PersonalityInsightsV3 */ = {
+			isa = PBXGroup;
+			children = (
+				7A6711981DD0F1790070CA9D /* Models */,
+				7A67119C1DD0F1790070CA9D /* PersonalityInsights.swift */,
+				7A6711A11DD0F1970070CA9D /* Tests */,
+			);
+			name = PersonalityInsightsV3;
+			path = Source/PersonalityInsightsV3;
+			sourceTree = "<group>";
+		};
+		7A6711981DD0F1790070CA9D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A6711991DD0F1790070CA9D /* ContentItem.swift */,
+				7A67119A1DD0F1790070CA9D /* Profile.swift */,
+				7A67119B1DD0F1790070CA9D /* TraitTreeNode.swift */,
+				CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */,
+				CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */,
+				CE78B77E1DD233E9003336BD /* BehaviorNode.swift */,
+				CE78B7801DD258B8003336BD /* Warning.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A6711A11DD0F1970070CA9D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */,
+				7A6711A21DD0F1970070CA9D /* KennedySpeech.txt */,
+				7A6711A31DD0F1970070CA9D /* MobyDickIntro.txt */,
+				7A6711A41DD0F1970070CA9D /* PersonalityInsightsTests.swift */,
+			);
+			name = Tests;
+			path = Tests/PersonalityInsightsV3Tests;
+			sourceTree = SOURCE_ROOT;
 		};
 		7A987D2C1D19D47D003626B2 /* TradeoffAnalyticsV1 */ = {
 			isa = PBXGroup;
@@ -1945,6 +2040,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A67117D1DD0EEEB0070CA9D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6711901DD0EEEB0070CA9D /* PersonalityInsightsV3.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7A987D111D19D424003626B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2145,6 +2248,42 @@
 			name = TextToSpeechV1Tests;
 			productName = TextToSpeechV1Tests;
 			productReference = 124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7A67117F1DD0EEEB0070CA9D /* PersonalityInsightsV3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A6711951DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3" */;
+			buildPhases = (
+				7A67117B1DD0EEEB0070CA9D /* Sources */,
+				7A67117C1DD0EEEB0070CA9D /* Frameworks */,
+				7A67117D1DD0EEEB0070CA9D /* Headers */,
+				7A67117E1DD0EEEB0070CA9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PersonalityInsightsV3;
+			productName = PersonalityInsightsV3;
+			productReference = 7A6711801DD0EEEB0070CA9D /* PersonalityInsightsV3.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7A6711871DD0EEEB0070CA9D /* PersonalityInsightsV3Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A6711961DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3Tests" */;
+			buildPhases = (
+				7A6711841DD0EEEB0070CA9D /* Sources */,
+				7A6711851DD0EEEB0070CA9D /* Frameworks */,
+				7A6711861DD0EEEB0070CA9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A67118B1DD0EEEB0070CA9D /* PBXTargetDependency */,
+			);
+			name = PersonalityInsightsV3Tests;
+			productName = PersonalityInsightsV3Tests;
+			productReference = 7A6711881DD0EEEB0070CA9D /* PersonalityInsightsV3Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7A987D131D19D424003626B2 /* TradeoffAnalyticsV1 */ = {
@@ -2706,7 +2845,7 @@
 		7A0F95AA1C23288E004C01C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
@@ -2725,6 +2864,14 @@
 					124C2DF71D19E29100D9F602 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
+					};
+					7A67117F1DD0EEEB0070CA9D = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					7A6711871DD0EEEB0070CA9D = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
 					};
 					7A987D131D19D424003626B2 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2880,6 +3027,8 @@
 				7AAAF4B71CEEA10700B74848 /* NaturalLanguageClassifierV1Tests */,
 				7AAAF4841CEEA07900B74848 /* PersonalityInsightsV2 */,
 				7AAAF48D1CEEA07900B74848 /* PersonalityInsightsV2Tests */,
+				7A67117F1DD0EEEB0070CA9D /* PersonalityInsightsV3 */,
+				7A6711871DD0EEEB0070CA9D /* PersonalityInsightsV3Tests */,
 				7A987D4A1D19D887003626B2 /* RelationshipExtractionV1Beta */,
 				7A987D531D19D887003626B2 /* RelationshipExtractionV1BetaTests */,
 				123B47111D1B3ABA007D0B22 /* RetrieveAndRankV1 */,
@@ -2930,6 +3079,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A67117E1DD0EEEB0070CA9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A6711861DD0EEEB0070CA9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6711A51DD0F1970070CA9D /* KennedySpeech.txt in Resources */,
+				7A6711A61DD0F1970070CA9D /* MobyDickIntro.txt in Resources */,
+				CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3230,6 +3396,30 @@
 				7A6C7B4A1D8C960300CD97FA /* Credentials.swift in Sources */,
 				12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */,
 				124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A67117B1DD0EEEB0070CA9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A67119D1DD0F1790070CA9D /* ContentItem.swift in Sources */,
+				7A67119E1DD0F1790070CA9D /* Profile.swift in Sources */,
+				CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */,
+				7A67119F1DD0F1790070CA9D /* TraitTreeNode.swift in Sources */,
+				CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */,
+				7A6711A01DD0F1790070CA9D /* PersonalityInsights.swift in Sources */,
+				CE78B7811DD258B8003336BD /* Warning.swift in Sources */,
+				CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A6711841DD0EEEB0070CA9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A6711A81DD0F1CC0070CA9D /* Credentials.swift in Sources */,
+				7A6711A71DD0F1970070CA9D /* PersonalityInsightsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3626,6 +3816,11 @@
 			target = 124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */;
 			targetProxy = 124C2DFA1D19E29100D9F602 /* PBXContainerItemProxy */;
 		};
+		7A67118B1DD0EEEB0070CA9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A67117F1DD0EEEB0070CA9D /* PersonalityInsightsV3 */;
+			targetProxy = 7A67118A1DD0EEEB0070CA9D /* PBXContainerItemProxy */;
+		};
 		7A987D201D19D424003626B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7A987D131D19D424003626B2 /* TradeoffAnalyticsV1 */;
@@ -3939,6 +4134,84 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7A6711911DD0EEEB0070CA9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.PersonalityInsightsV3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7A6711921DD0EEEB0070CA9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.PersonalityInsightsV3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		7A6711931DD0EEEB0070CA9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.PersonalityInsightsV3Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7A6711941DD0EEEB0070CA9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.PersonalityInsightsV3Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -5031,6 +5304,24 @@
 			buildConfigurations = (
 				7A0F95C51C23288E004C01C0 /* Debug */,
 				7A0F95C61C23288E004C01C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A6711951DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A6711911DD0EEEB0070CA9D /* Debug */,
+				7A6711921DD0EEEB0070CA9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A6711961DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A6711931DD0EEEB0070CA9D /* Debug */,
+				7A6711941DD0EEEB0070CA9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

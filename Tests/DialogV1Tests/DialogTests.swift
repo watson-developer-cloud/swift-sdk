@@ -28,6 +28,14 @@ class DialogTests: XCTestCase {
 
     // MARK: - Test Configuration
 
+	private func generateRandomNumber(max: Int) -> Int {
+		#if os(Linux)
+			return Int(rand() % Int32(max))
+		#else
+			return Int(arc4random_uniform(max))		
+		#endif
+	}
+
     /** Set up for each test by instantiating the service. */
     override func setUp() {
         super.setUp()
@@ -161,7 +169,7 @@ class DialogTests: XCTestCase {
         var randomString = ""
 
         for _ in (0..<length) {
-            let randomNum = Int(arc4random_uniform(allowedCharsCount))
+            let randomNum = generateRandomNumber(allowedCharsCount)
             let newCharacter = allowedChars[allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)]
             randomString += String(newCharacter)
         }

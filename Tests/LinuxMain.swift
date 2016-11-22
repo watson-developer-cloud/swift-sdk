@@ -11,7 +11,6 @@ import XCTest
 @testable import PersonalityInsightsV2Tests
 @testable import RelationshipExtractionV1BetaTests
 @testable import RetrieveAndRankV1Tests
-@testable import SpeechToTextV1Tests
 @testable import TextToSpeechV1Tests
 @testable import ToneAnalyzerV3Tests
 @testable import TradeoffAnalyticsV1Tests
@@ -30,7 +29,6 @@ XCTMain([
     testCase(PersonalityInsightsTests.allTests),
     testCase(RelationshipExtractionTests.allTests),
     testCase(RetrieveAndRankTests.allTests),
-    testCase(SpeechToTextTests.allTests),
     testCase(TextToSpeechTests.allTests),
     testCase(ToneAnalyzerTests.allTests),
     testCase(TradeoffAnalyticsTests.allTests),

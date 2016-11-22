@@ -40,6 +40,6 @@ let package = Package(
     ],
     exclude: [
         "Source/SpeechToTextV1",
-        "Tests/SpeechToTextV1"
+        "Tests/SpeechToTextV1Tests"
     ]
 )

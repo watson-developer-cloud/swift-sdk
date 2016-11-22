@@ -169,7 +169,7 @@ class DialogTests: XCTestCase {
         var randomString = ""
 
         for _ in (0..<length) {
-            let randomNum = generateRandomNumber(allowedCharsCount)
+            let randomNum = generateRandomNumber(max: allowedCharsCount)
             let newCharacter = allowedChars[allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)]
             randomString += String(newCharacter)
         }

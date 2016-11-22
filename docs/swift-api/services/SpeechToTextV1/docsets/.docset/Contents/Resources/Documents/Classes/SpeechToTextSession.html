@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SpeechToTextSession Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/SpeechToTextSession" class="dashAnchor"></a>
+    <a title="SpeechToTextSession Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        SpeechToTextSession Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToText.html">SpeechToText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToTextSession.html">SpeechToTextSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AudioMediaType.html">AudioMediaType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KeywordResult.html">KeywordResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Model.html">Model</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionSettings.html">RecognitionSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResult.html">WordAlternativeResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResults.html">WordAlternativeResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordConfidence.html">WordConfidence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordTimestamp.html">WordTimestamp</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SpeechToTextSession</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SpeechToTextSession</span></code></pre>
+
+                </div>
+              </div>
+            <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
+your application. It uses machine intelligence to combine information about grammar and language
+structure to generate an accurate transcription. Transcriptions are supported for various audio
+formats and languages.</p>
+
+<p>This class enables fine-tuned control of a WebSockets session with the Speech to Text service.
+Although it is a more complex interface than the <code><a href="../Classes/SpeechToText.html">SpeechToText</a></code> class, it provides more control
+and customizability of the session.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession10serviceURLSS"></a>
+                    <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession10serviceURLSS">serviceURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base URL of the Speech to Text service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://stream.watsonplatform.net/speech-to-text/api"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession8tokenURLSS"></a>
+                    <a name="//apple_ref/swift/Property/tokenURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession8tokenURLSS">tokenURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The URL that shall be used to obtain a token.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tokenURL</span> <span class="o">=</span> <span class="s">"https://stream.watsonplatform.net/authorization/api/v1/token"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession13websocketsURLSS"></a>
+                    <a name="//apple_ref/swift/Property/websocketsURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession13websocketsURLSS">websocketsURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The URL that shall be used to stream audio for transcription.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">websocketsURL</span> <span class="o">=</span> <span class="s">"wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession14defaultHeadersGVs10DictionarySSSS_"></a>
+                    <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession14defaultHeadersGVs10DictionarySSSS_">defaultHeaders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default HTTP headers for all requests to the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession7resultsVS_24SpeechRecognitionResults"></a>
+                    <a name="//apple_ref/swift/Property/results" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession7resultsVS_24SpeechRecognitionResults">results</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The results of the most recent recognition request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">results</span><span class="p">:</span> <span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession9onConnectGSqFT_T__"></a>
+                    <a name="//apple_ref/swift/Property/onConnect" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession9onConnectGSqFT_T__">onConnect</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked when the session connects to the Speech to Text service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onConnect</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession16onMicrophoneDataGSqFV10Foundation4DataT__"></a>
+                    <a name="//apple_ref/swift/Property/onMicrophoneData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession16onMicrophoneDataGSqFV10Foundation4DataT__">onMicrophoneData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked with microphone audio when a recording audio queue buffer has been filled.
+If microphone audio is being compressed, then the audio data is in Opus format.
+If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onMicrophoneData</span><span class="p">:</span> <span class="p">((</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession11onPowerDataGSqFSfT__"></a>
+                    <a name="//apple_ref/swift/Property/onPowerData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession11onPowerDataGSqFSfT__">onPowerData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked every 0.025s when recording with the average dB power of the microphone.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onPowerData</span><span class="p">:</span> <span class="p">((</span><span class="kt">Float32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession9onResultsGSqFVS_24SpeechRecognitionResultsT__"></a>
+                    <a name="//apple_ref/swift/Property/onResults" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession9onResultsGSqFVS_24SpeechRecognitionResultsT__">onResults</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked when transcription results are received for a recognition request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onResults</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession7onErrorGSqFPs5Error_T__"></a>
+                    <a name="//apple_ref/swift/Property/onError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession7onErrorGSqFPs5Error_T__">onError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked when an error or warning occurs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onError</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC14SpeechToTextV119SpeechToTextSession12onDisconnectGSqFT_T__"></a>
+                    <a name="//apple_ref/swift/Property/onDisconnect" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC14SpeechToTextV119SpeechToTextSession12onDisconnectGSqFT_T__">onDisconnect</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invoked when the session disconnects from the Speech to Text service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">onDisconnect</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSessioncFT8usernameSS8passwordSS5modelGSqSS_15customizationIDGSqSS_14learningOptOutGSqSb__S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(username:password:model:customizationID:learningOptOut:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSessioncFT8usernameSS8passwordSS5modelGSqSS_15customizationIDGSqSS_14learningOptOutGSqSb__S0_">init(username:password:model:customizationID:learningOptOut:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>SpeechToTextSession</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The username used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The password used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language and sample rate of the audio. For supported models, visit <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models">https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models</a>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The GUID of a custom language model that is to be used with the request. The base language model of the specified custom language model must match the model specified with the <code>model</code> parameter. By default, no custom model is used.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>learningOptOut</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, then this request will not be logged for training.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession7connectFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/connect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession7connectFT_T_">connect()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Connect to the Speech to Text service.</p>
+
+<p>If set, the <code>onConnect()</code> callback will be invoked after the session connects to the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">connect</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession12startRequestFT8settingsVS_19RecognitionSettings_T_"></a>
+                    <a name="//apple_ref/swift/Method/startRequest(settings:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession12startRequestFT8settingsVS_19RecognitionSettings_T_">startRequest(settings:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start a recognition request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startRequest</span><span class="p">(</span><span class="nv">settings</span><span class="p">:</span> <span class="kt"><a href="../Structs/RecognitionSettings.html">RecognitionSettings</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>settings</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The configuration to use for this recognition request.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession9recognizeFT5audioV10Foundation3URL_T_"></a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession9recognizeFT5audioV10Foundation3URL_T_">recognize(audio:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send an audio file to transcribe.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">recognize</span><span class="p">(</span><span class="nv">audio</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>audio</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The audio file to transcribe.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession9recognizeFT5audioV10Foundation4Data_T_"></a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession9recognizeFT5audioV10Foundation4Data_T_">recognize(audio:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send audio data to transcribe.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">recognize</span><span class="p">(</span><span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>audio</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The audio data to transcribe.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession15startMicrophoneFT8compressSb_T_"></a>
+                    <a name="//apple_ref/swift/Method/startMicrophone(compress:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession15startMicrophoneFT8compressSb_T_">startMicrophone(compress:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start streaming microphone audio data to transcribe.</p>
+
+<p>Knowing when to stop the microphone depends upon the recognition request&rsquo;s continuous setting:</p>
+
+<ul>
+<li><p>If <code>false</code>, then the service ends the recognition request at the first end-of-speech
+incident (denoted by a half-second of non-speech or when the stream terminates). This
+will coincide with a <code>final</code> transcription result. So the <code>success</code> callback should
+be configured to stop the microphone when a final transcription result is received.</p></li>
+<li><p>If <code>true</code>, then you will typically stop the microphone based on user-feedback. For example,
+your application may have a button to start/stop the request, or you may stream the
+microphone for the duration of a long press on a UI element.</p></li>
+</ul>
+
+<p>By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
+To disable Opus compression and send linear PCM data instead, set <code>compress</code> to <code>false</code>.</p>
+
+<p>If compression is enabled, the recognitions request&rsquo;s <code>contentType</code> setting should be set to
+<code>AudioMediaType.Opus</code>. If compression is disabled, then the <code>contentType</code> settings should be
+set to <code>AudioMediaType.L16(rate: 16000, channels: 1)</code>.</p>
+
+<p>This function may cause the system to automatically prompt the user for permission
+to access the microphone. Use <code>AVAudioSession.requestRecordPermission(_:)</code> if you
+would rather prefer to ask for the user&rsquo;s permission in advance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startMicrophone</span><span class="p">(</span><span class="nv">compress</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>compress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Should microphone audio be compressed to Opus format? (Opus compression reduces latency and bandwidth.)</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession14stopMicrophoneFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stopMicrophone()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession14stopMicrophoneFT_T_">stopMicrophone()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stop streaming microphone audio data to transcribe.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopMicrophone</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession11stopRequestFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stopRequest()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession11stopRequestFT_T_">stopRequest()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stop the recognition request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopRequest</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession9keepAliveFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/keepAlive()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession9keepAliveFT_T_">keepAlive()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send a message to prevent the service from automatically disconnecting due to inactivity.</p>
+
+<p>As described in the service documentation, the Speech to Text service terminates the session
+and closes the connection if the inactivity or session timeout is reached. The inactivity
+timeout occurs if audio is being sent by the client but the service detects no speech. The
+inactivity timeout is 30 seconds by default, but can be configured by specifying a value for
+the <code>inactivityTimeout</code> setting. The session timeout occurs if the service receives no data
+from the client or sends no interim results for 30 seconds. You cannot change the length of
+this timeout; however, you can extend the session by sending a message. This function sends
+a <code>no-op</code> message to touch the session and reset the session timeout in order to keep the
+connection alive.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">keepAlive</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14SpeechToTextV119SpeechToTextSession10disconnectFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/disconnect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14SpeechToTextV119SpeechToTextSession10disconnectFT_T_">disconnect()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Wait for any queued recognition requests to complete then disconnect from the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">disconnect</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-11-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

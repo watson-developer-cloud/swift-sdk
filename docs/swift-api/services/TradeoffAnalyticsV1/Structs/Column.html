@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Column Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Column" class="dashAnchor"></a>
+    <a title="Column Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Column Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TradeoffAnalytics.html">TradeoffAnalytics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ColumnType.html">ColumnType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Goal.html">Goal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/OptionValue.html">OptionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SolutionStatus.html">SolutionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TradeoffAnalyticsError.html">TradeoffAnalyticsError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Anchor.html">Anchor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Column.html">Column</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Dilemma.html">Dilemma</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Map.html">Map</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MapNode.html">MapNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MapNodeCoordinates.html">MapNodeCoordinates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Option.html">Option</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Problem.html">Problem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Resolution.html">Resolution</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Solution.html">Solution</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatusCause.html">StatusCause</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Column</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Column</span><span class="p">:</span> <span class="kt">JSONEncodable</span><span class="p">,</span> <span class="kt">JSONDecodable</span></code></pre>
+
+                </div>
+              </div>
+            <p>An objective (i.e. a column in a tabular representation of the data).</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column3keySS"></a>
+                    <a name="//apple_ref/swift/Property/key" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column3keySS">key</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An identifier for the column that is unique among all columns for the problem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column4typeGSqOS_10ColumnType_"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column4typeGSqOS_10ColumnType_">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An indication of whether a column is specified as a <code>Numeric</code> value, a <code>Categorical</code> value,
+a <code>DateTime</code>, or as <code>Text</code>. Specify a list of valid values for a <code>Categorical</code> column by
+using the <code><a href="../Structs/Column.html#/s:vV19TradeoffAnalyticsV16Column5rangeGSqOS_5Range_">range</a></code> property. For <code>DateAndTime</code> columns, options must specify values in
+full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). By default, the type is <code>Text</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ColumnType.html">ColumnType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column4goalGSqOS_4Goal_"></a>
+                    <a name="//apple_ref/swift/Property/goal" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column4goalGSqOS_4Goal_">goal</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The direction of the column. The direction can be minimized (e.g. price of a car) or
+maximized (e.g. safety of a car). Meaningful only for columns for which <code><a href="../Structs/Column.html#/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_">isObjective</a></code> is
+<code>true</code>. By default, the goal is <code>Maximize</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">goal</span><span class="p">:</span> <span class="kt"><a href="../Enums/Goal.html">Goal</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_"></a>
+                    <a name="//apple_ref/swift/Property/isObjective" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_">isObjective</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An indication of whether the column is an objective for the problem. If <code>true</code>, the column
+contributes to the resolution; if false, the column does not contribute to the resolution.
+By default, the value is <code>false</code>. A column with type <code>Text</code> cannot be set to <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isObjective</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column5rangeGSqOS_5Range_"></a>
+                    <a name="//apple_ref/swift/Property/range" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column5rangeGSqOS_5Range_">range</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The range of valid values for the column. Any option whose value is outside of the
+specified range is marked as <code>incomplete</code> and is excluded from the resolution. By default,
+the range is calculated from the minimum and maximum values provided in the data set for
+the column. See the <code><a href="../Enums/Range.html">Range</a></code> model for examples of specifying ranges.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">range</span><span class="p">:</span> <span class="kt"><a href="../Enums/Range.html">Range</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column10preferenceGSqGSaSS__"></a>
+                    <a name="//apple_ref/swift/Property/preference" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column10preferenceGSqGSaSS__">preference</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For columns whose type is <code>categorical</code>, a subset of the values in the range that indicates
+their preference; valid only for <code>categorical</code> columns. If goal is <code>min</code>, elements in the
+low position of the array are favored; if goal is <code>max</code>, elements in the high position are
+favored. By default, preference matches the order of the values in range and the direction
+indicated by goal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">preference</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column15significantGainGSqSd_"></a>
+                    <a name="//apple_ref/swift/Property/significantGain" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column15significantGainGSqSd_">significantGain</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A significant gain for the column in the range of 0 to 1. The value is a proportion of
+the complete range for the column. The field is relevant only for columns whose
+<code><a href="../Structs/Column.html#/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_">isObjective</a></code> property is <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">significantGain</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column15significantLossGSqSd_"></a>
+                    <a name="//apple_ref/swift/Property/significantLoss" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column15significantLossGSqSd_">significantLoss</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A significant loss for the column in the range of 0 to 1. The value is a proportion of
+the complete range for the column. The field is relevant only for columns whose
+<code><a href="../Structs/Column.html#/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_">isObjective</a></code> property is <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">significantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column17insignificantLossGSqSd_"></a>
+                    <a name="//apple_ref/swift/Property/insignificantLoss" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column17insignificantLossGSqSd_">insignificantLoss</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An insignificant loss for the column in the range of 0 to 1. The value is a proportion of
+the complete range for the column. The field is relevant only for columns whose
+<code><a href="../Structs/Column.html#/s:vV19TradeoffAnalyticsV16Column11isObjectiveGSqSb_">isObjective</a></code> property is <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">insignificantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column6formatGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/format" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column6formatGSqSS_">format</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For columns whose type is <code>Numeric</code> or <code>DateTime</code>, specifies a number or date pattern
+that indicates how the value is to be presented by the visualization. For <code>Numeric</code>
+columns, examples include <q>number:2</q>, <q>currency:&lsquo;USD$&rsquo;:1</q>, <q>taPrefix:&lsquo;g&rsquo;</q>, <q>taSuffix:'g&rsquo;</q>,
+and combinations of the form <q>number:2 | taSuffix:'g&rsquo;</q>. For <code>DateTime</code> columns, examples
+include <q>date:'MMM dd, yyyy&rsquo;</q> and <q>date:'h:m:s a&rsquo;</q>. For more information about <code>number</code>,
+<code>currency</code>, and <code>date</code> formatters, see the descriptions of the corresponding filter
+components in the AngularJS documentation. Used only by the Tradeoff Analytics widget;
+not part of the problem definition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column8fullNameGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/fullName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column8fullNameGSqSS_">fullName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A descriptive name. Used only by the Tradeoff Analytics widget; not part of the problem
+definition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">fullName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV19TradeoffAnalyticsV16Column11descriptionGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Column11descriptionGSqSS_">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A long description of the column. Used only by the Tradeoff Analytics widget; not part
+of the problem definition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV19TradeoffAnalyticsV16ColumncFT3keySS4typeGSqOS_10ColumnType_4goalGSqOS_4Goal_11isObjectiveGSqSb_5rangeGSqOS_5Range_10preferenceGSqGSaSS__15significantGainGSqSd_15significantLossGSqSd_17insignificantLossGSqSd_6formatGSqSS_8fullNameGSqSS_11descriptionGSqSS__S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(key:type:goal:isObjective:range:preference:significantGain:significantLoss:insignificantLoss:format:fullName:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16ColumncFT3keySS4typeGSqOS_10ColumnType_4goalGSqOS_4Goal_11isObjectiveGSqSb_5rangeGSqOS_5Range_10preferenceGSqGSaSS__15significantGainGSqSd_15significantLossGSqSd_17insignificantLossGSqSd_6formatGSqSS_8fullNameGSqSS_11descriptionGSqSS__S0_">init(key:type:goal:isObjective:range:preference:significantGain:significantLoss:insignificantLoss:format:fullName:description:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>Column</code> for a decision problem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+        <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ColumnType.html">ColumnType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">goal</span><span class="p">:</span> <span class="kt"><a href="../Enums/Goal.html">Goal</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">isObjective</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">range</span><span class="p">:</span> <span class="kt"><a href="../Enums/Range.html">Range</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">preference</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">significantGain</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">significantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">insignificantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">fullName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>key</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An identifier for the column that is unique among all columns for the problem.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An indication of whether a column is specified as a <code>Numeric</code> value, a <code>Categorical</code> value, a <code>DateTime</code>, or as <code>Text</code>. Specify a list of valid values for a <code>Categorical</code> column by using the <code>range</code> property. For <code>DateAndTime</code> columns, options must specify values in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). By default, the type is <code>Text</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>goal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The direction of the column. The direction can be minimized (e.g. price of a car) or maximized (e.g. safety of a car). Meaningful only for columns for which <code>isObjective</code> is <code>true</code>. By default, the goal is <code>Maximize</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isObjective</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An indication of whether the column is an objective for the problem. If <code>true</code>, the column contributes to the resolution; if false, the column does not contribute to the resolution. By default, the value is <code>false</code>. A column with type <code>Text</code> cannot be set to <code>true</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range of valid values for the column. Any option whose value is outside of the specified range is marked as <code>incomplete</code> and is excluded from the resolution. By default, the range is calculated from the minimum and maximum values provided in the data set for the column. See the <code>Range</code> model for examples of specifying ranges.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>preference</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>For columns whose type is <code>categorical</code>, a subset of the values in the range that indicates their preference; valid only for <code>categorical</code> columns. If goal is <code>min</code>, elements in the low position of the array are favored; if goal is <code>max</code>, elements in the high position are favored. By default, preference matches the order of the values in range and the direction indicated by goal.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>significantGain</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A significant gain for the column in the range of 0 to 1. The value is a proportion of the complete range for the column. The field is relevant only for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>significantLoss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A significant loss for the column in the range of 0 to 1. The value is a proportion of the complete range for the column. The field is relevant only for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>insignificantLoss</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An insignificant loss for the column in the range of 0 to 1. The value is a proportion of the complete range for the column. The field is relevant only for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>format</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>For columns whose type is <code>Numeric</code> or <code>DateTime</code>, specifies a number or date pattern that indicates how the value is to be presented by the visualization. For <code>Numeric</code> columns, examples include “number:2”, “currency:‘USD$’:1”, “taPrefix:‘g’”, “taSuffix:‘g’”, and combinations of the form “number:2 | taSuffix:‘g’”. For <code>DateTime</code> columns, examples include “date:‘MMM dd, yyyy’” and “date:‘h:m:s a’”. For more information about <code>number</code>, <code>currency</code>, and <code>date</code> formatters, see the descriptions of the corresponding filter components in the AngularJS documentation. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fullName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A descriptive name. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A long description of the column. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>Column</code> that can be included in a decision problem.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV19TradeoffAnalyticsV16Column12toJSONObjectFT_P_"></a>
+                    <a name="//apple_ref/swift/Method/toJSONObject()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16Column12toJSONObjectFT_P_">toJSONObject()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to serialize a <code>Column</code> model to JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONObject</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV19TradeoffAnalyticsV16ColumncFzT4jsonV7RestKit4JSON_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16ColumncFzT4jsonV7RestKit4JSON_S0_">init(json:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to initialize a <code>Column</code> model from JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-11-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RetrieveAndRank Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/RetrieveAndRank" class="dashAnchor"></a>
+    <a title="RetrieveAndRank Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        RetrieveAndRank Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/RetrieveAndRank.html">RetrieveAndRank</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/RankerStatus.html">RankerStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SolrClusterStatus.html">SolrClusterStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/RankedAnswer.html">RankedAnswer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ranker.html">Ranker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RankerDetails.html">RankerDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ranking.html">Ranking</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RequestParameters.html">RequestParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchAndRankResponseBody.html">SearchAndRankResponseBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchAndRankResponseHeader.html">SearchAndRankResponseHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchResponse.html">SearchResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchResponseBody.html">SearchResponseBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchResponseHeader.html">SearchResponseHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SolrCluster.html">SolrCluster</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:17RetrieveAndRankV18Document">Document</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>RetrieveAndRank</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RetrieveAndRank</span></code></pre>
+
+                </div>
+              </div>
+            <p>The IBM Watson Retrieve and Rank service combines two information retrieval components into a 
+single service. The service uses Apache Solr in conjunction with a machine learning algorithm to
+provide users with more relevant search results by automatically re-ranking them.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17RetrieveAndRankV115RetrieveAndRank10serviceURLSS"></a>
+                    <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17RetrieveAndRankV115RetrieveAndRank10serviceURLSS">serviceURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base URL to use when contacting the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/retrieve-and-rank/api"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17RetrieveAndRankV115RetrieveAndRank14defaultHeadersGVs10DictionarySSSS_"></a>
+                    <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17RetrieveAndRankV115RetrieveAndRank14defaultHeadersGVs10DictionarySSSS_">defaultHeaders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default HTTP headers for all requests to the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRankcFT8usernameSS8passwordSS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(username:password:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRankcFT8usernameSS8passwordSS_S0_">init(username:password:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>RetrieveAndRank</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The username used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The password used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Solr%20Clusters"></a>
+                <a name="//apple_ref/swift/Section/Solr Clusters" class="dashAnchor"></a>
+                <a href="#/Solr%20Clusters">
+                  <h3 class="section-name">Solr Clusters</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank15getSolrClustersFT7failureGSqFPs5Error_T__7successFGSaVS_11SolrCluster_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getSolrClusters(failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank15getSolrClustersFT7failureGSqFPs5Error_T__7successFGSaVS_11SolrCluster_T__T_">getSolrClusters(failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves the list of Solr clusters available for this Retrieve and Rank instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrClusters</span><span class="p">(</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with an array of <code>SolrCluster</code> objects.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank17createSolrClusterFT8withNameSS4sizeGSqSi_7failureGSqFPs5Error_T__7successFVS_11SolrClusterT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createSolrCluster(withName:size:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank17createSolrClusterFT8withNameSS4sizeGSqSi_7failureGSqFPs5Error_T__7successFVS_11SolrClusterT__T_">createSolrCluster(withName:size:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new Solr cluster. The Solr cluster will have an initial status of <q>Not Available</q>
+and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSolrCluster</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name for the new Solr cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the Solr cluster to create. This can range from 1 to 7. You can create one small free cluster for testing by keeping this value empty.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>SolrCluster</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank17deleteSolrClusterFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteSolrCluster(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank17deleteSolrClusterFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteSolrCluster(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops and deletes a Solr cluster.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrCluster</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the Solr cluster to delete.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank14getSolrClusterFT6withIDSS7failureGSqFPs5Error_T__7successFVS_11SolrClusterT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getSolrCluster(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank14getSolrClusterFT6withIDSS7failureGSqFPs5Error_T__7successFVS_11SolrClusterT__T_">getSolrCluster(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets the status and other information about a specific cluster.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrCluster</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster that you want more information about.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>SolrCluster</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank21getSolrConfigurationsFT17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successFGSaSS_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getSolrConfigurations(fromSolrClusterID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank21getSolrConfigurationsFT17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successFGSaSS_T__T_">getSolrConfigurations(fromSolrClusterID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets all configurations for the specific cluster.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrConfigurations</span><span class="p">(</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster that you want the configurations of.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a string array listing the names of all the configurations associated with this Solr cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank23deleteSolrConfigurationFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteSolrConfiguration(withName:fromSolrClusterID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank23deleteSolrConfigurationFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteSolrConfiguration(withName:fromSolrClusterID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete this specific configuration from the specified cluster.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrConfiguration</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the configuration you want to delete.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster that you want to delete the configuration of.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank20getSolrConfigurationFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successFV10Foundation3URLT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getSolrConfiguration(withName:fromSolrClusterID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank20getSolrConfigurationFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successFV10Foundation3URLT__T_">getSolrConfiguration(withName:fromSolrClusterID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets a configuration .zip file with the given name from the specified cluster.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrConfiguration</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the configuration you want.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster that you want the configuration of.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the URL of the downloaded configuration file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank23uploadSolrConfigurationFT8withNameSS15toSolrClusterIDSS7zipFileV10Foundation3URL7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/uploadSolrConfiguration(withName:toSolrClusterID:zipFile:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank23uploadSolrConfigurationFT8withNameSS15toSolrClusterIDSS7zipFileV10Foundation3URL7failureGSqFPs5Error_T__7successGSqFT_T___T_">uploadSolrConfiguration(withName:toSolrClusterID:zipFile:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Uploads a configuration .zip file set with the given name to the specified cluster.</p>
+
+<p>Note: in order for your service instance to work with this SDK, you must make sure to define 
+the writer type in your solrconfig.xml file to be <q>json</q>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uploadSolrConfiguration</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">toSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">zipFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the configuration you want to update.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster whose configuration you want to update.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>zipFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The zip file configuration set that you would like to upload.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank20createSolrCollectionFT8withNameSS16forSolrClusterIDSS21withConfigurationNameSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/createSolrCollection(withName:forSolrClusterID:withConfigurationName:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank20createSolrCollectionFT8withNameSS16forSolrClusterIDSS21withConfigurationNameSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">createSolrCollection(withName:forSolrClusterID:withConfigurationName:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new Solr collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSolrCollection</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster to add this collection to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the configuration to use.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank20deleteSolrCollectionFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteSolrCollection(withName:fromSolrClusterID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank20deleteSolrCollectionFT8withNameSS17fromSolrClusterIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteSolrCollection(withName:fromSolrClusterID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes a Solr collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrCollection</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster to delete this collection from.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank18getSolrCollectionsFT16forSolrClusterIDSS7failureGSqFPs5Error_T__7successFGSaSS_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getSolrCollections(forSolrClusterID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank18getSolrCollectionsFT16forSolrClusterIDSS7failureGSqFPs5Error_T__7successFGSaSS_T__T_">getSolrCollections(forSolrClusterID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Lists the names of the collections in this Solr cluster.</p>
+
+<p>Note: For the SDK to work properly, you must define the writer type as <q>json</q> within the
+configuration solrconfig.xml file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrCollections</span><span class="p">(</span>
+        <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster whose collections you want.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with an array of collection names.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank20updateSolrCollectionFT8withNameSS15inSolrClusterIDSS11contentFileV10Foundation3URL11contentTypeSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/updateSolrCollection(withName:inSolrClusterID:contentFile:contentType:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank20updateSolrCollectionFT8withNameSS15inSolrClusterIDSS11contentFileV10Foundation3URL11contentTypeSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">updateSolrCollection(withName:inSolrClusterID:contentFile:contentType:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update a collection by adding content to it. This indexes the documents and allows us to 
+search the newly uploaded data later. For more information about the accepted file types and
+how to structure the content files, refer to this link:
+<a href="https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations">https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateSolrCollection</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">inSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">contentFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection you would like to update.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the cluster this collection points to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content to be added to the collection. Accepted file types are listed in the link above.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The media type of the content that is being uploaded.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/search(withCollectionName:fromSolrClusterID:query:returnFields:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_">search(withCollectionName:fromSolrClusterID:query:returnFields:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Use the given query to search this specific collection within a given cluster. This command
+doesn&rsquo;t rank the values; to search and rank, use the <code>searchAndRank()</code> call.</p>
+
+<p>Note: For the SDK to work properly, you must define the writer type as <q>json</q> within the
+configuration solrconfig.xml file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">search</span><span class="p">(</span>
+        <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchResponse.html">SearchResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection in the cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the Solr cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The query. Refer to the following link for more information on how to structure the query string: <a href="https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser">https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser</a></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>returnFields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The fields that should be returned. These fields should correspond to the fields within the content that has been uploaded to the collection. This parameter should be a comma-separated list.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>SearchResponse</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_">searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Searches the results and then returns them in ranked order.</p>
+
+<p>Note: For the SDK to work properly, you must define the writer type as <q>json</q> within the
+configuration solrconfig.xml file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">searchAndRank</span><span class="p">(</span>
+        <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection in the cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>solrClusterID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the Solr cluster.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rankerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the ranker.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The query. Refer to the following link for more information on how to structure the query string: <a href="https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser">https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser</a></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>returnFields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The fields that should be returned. These fields should correspond to the fields within the content that has been uploaded to the collection. This parameter should be a comma-separated list.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>SearchAndRankResponse</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Rankers"></a>
+                <a name="//apple_ref/swift/Section/Rankers" class="dashAnchor"></a>
+                <a href="#/Rankers">
+                  <h3 class="section-name">Rankers</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank10getRankersFT7failureGSqFPs5Error_T__7successFGSaVS_6Ranker_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getRankers(failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank10getRankersFT7failureGSqFPs5Error_T__7successFGSaVS_6Ranker_T__T_">getRankers(failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves the list of rankers available for this Retrieve and Rank instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRankers</span><span class="p">(</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Ranker.html">Ranker</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with an array of <code>Ranker</code> objects.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank12createRankerFT8withNameGSqSS_8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successFVS_13RankerDetailsT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createRanker(withName:fromFile:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank12createRankerFT8withNameGSqSS_8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successFVS_13RankerDetailsT__T_">createRanker(withName:fromFile:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and trains a new ranker. The status of the ranker will be set to <code>Training</code> until
+the ranker is ready. You need to wait until the status is <code>Available</code> before using.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createRanker</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">fromFile</span> <span class="nv">trainingDataFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the ranker.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingDataFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The training data content that will be used to train this ranker.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>Ranker</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS7failureGSqFPs5Error_T__7successFVS_7RankingT__T_"></a>
+                    <a name="//apple_ref/swift/Method/rankResults(fromFile:withRankerID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS7failureGSqFPs5Error_T__7successFVS_7RankingT__T_">rankResults(fromFile:withRankerID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Identifies the top answer from the list of provided results to rank, and provides the
+number of answers requested, listed in order from descending ranked score.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">rankResults</span><span class="p">(</span>
+        <span class="n">fromFile</span> <span class="nv">resultsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="n">withRankerID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Ranking.html">Ranking</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultsFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A CSV file containing the search results that you want ranked. The first column header must be labeled <code>answer_id</code>. The other column headers should match the names of the features in the <code>trainingDataFile</code> used to train the ranker.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rankerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the ranker to use.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfResults</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of answers needed. The default number given is 10.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>Ranking</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank12deleteRankerFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteRanker(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank12deleteRankerFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteRanker(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a ranker.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteRanker</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rankerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ranker to delete.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if no error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank9getRankerFT6withIDSS7failureGSqFPs5Error_T__7successFVS_13RankerDetailsT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getRanker(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank9getRankerFT6withIDSS7failureGSqFPs5Error_T__7successFVS_13RankerDetailsT__T_">getRanker(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get status and information about a specific ranker.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRanker</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rankerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier for the ranker you want more information about.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a <code>RankerDetails</code> object.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-11-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

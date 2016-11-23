@@ -29,6 +29,7 @@ let package = Package(
         Target(name: "LanguageTranslatorV2",         dependencies: [.Target(name: "RestKit")]),
         Target(name: "NaturalLanguageClassifierV1",  dependencies: [.Target(name: "RestKit")]),
         Target(name: "PersonalityInsightsV2",        dependencies: [.Target(name: "RestKit")]),
+        Target(name: "PersonalityInsightsV3",        dependencies: [.Target(name: "RestKit")]),
         Target(name: "RelationshipExtractionV1Beta", dependencies: [.Target(name: "RestKit")]),
         Target(name: "RetrieveAndRankV1",            dependencies: [.Target(name: "RestKit")]),
         Target(name: "TextToSpeechV1",               dependencies: [.Target(name: "RestKit")]),

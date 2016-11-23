@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+## Version 0.10.0
+
+_2016-11-23_
+
+This update add support for Personality Insights V3 and several minor bug fixes:
+
+- RestKit: Add a guard statement to avoid Any? to Any coercion.
+- Speech to Text: Avoid sending data when payload is empty.
+- Visual Recognition: Make age max and min properties optional.
+- Visual Recognition: Updated error handling to recognize more service errors.
+
 ## Version 0.9.1
 
 _2016-11-11_

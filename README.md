@@ -12,7 +12,7 @@ The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build 
 
 There are many resources to help you build your first cognitive application with the iOS SDK:
 - Read the [Readme](README.md)
-- Follow the [QuickStart Guide](Documentation/Quickstart.md)
+- Follow the [QuickStart Guide](docs/quickstart.md)
 - Review a [Sample Application](#sample-applications)
 - Browse the [Documentation](http://watson-developer-cloud.github.io/ios-sdk/)
 
@@ -169,7 +169,7 @@ To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x re
 
 ## Objective-C Compatibility
 
-Please see [this tutorial](Documentation/ObjectiveC.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
+Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
 
 ## Contributing
 

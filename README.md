@@ -411,11 +411,12 @@ The IBM Watson Personality Insights service enables applications to derive insig
 The following example demonstrates how to use the Personality Insights service:
 
 ```swift
-import PersonalityInsightsV2
+import PersonalityInsightsV3
 
 let username = "your-username-here"
 let password = "your-password-here"
-let personalityInsights = PersonalityInsights(username: username, password: password)
+let version = "yyyy-mm-dd" // use today's date for the most recent version
+let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
 
 let text = "your-input-text"
 let failure = { (error: Error) in print(error) }

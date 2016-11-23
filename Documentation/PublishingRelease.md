@@ -5,9 +5,10 @@ The following tasks should be completed before publishing a release. Track the p
 - [ ] Review and merge any outstanding pull requests.
 - [ ] Review any oustanding issues assigned to this release milestone.
 
-#### User Agent
+#### Source Changes
 
 - [ ] Update the `sdkVersion` property in `RestRequest.swift`.
+- [ ] Add any new targets/services to `Package.swift`.
 
 #### Tests and Verification
 

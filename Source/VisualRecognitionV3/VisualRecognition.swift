@@ -610,6 +610,163 @@ public class VisualRecognition {
         }
         
     }
+    
+    /** 
+     Create a new collection. A maximum of five collections can be created.
+     
+     - parameter name:  The name of the new collection. The name can be a maximum of 128 UTF-8
+        characters, with no spaces.
+    */
+    public func createCollection (
+        collectionName name: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        let nameData = name.data(using: String.Encoding.utf8)!
+        multipartFormData.append(nameData, withName: "collection_name")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+    List all collections created.
+ 
+    - parameter failure: A function executed if an error occurs.
+    - parameter success: A function executed with the list of classifiers.
+    */
+    public func getCollections(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Collection]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+            (response: RestResponse<[Collection]>) in
+            switch response.result {
+            case .success(let collections): success(collections)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /// func deleteCollection
+    /**
+     Add images to a collection. Each collection can hold 1000000 images. Each image takes
+     one second to upload.
+ 
+     - parameter toCollection: The ID of the collection images will be added to.
+     - parameter imageFile: The image file (.jpg or .png) of the image to add to the
+        collection. The maximum file size to upload an image is 2 MB. If the images do not 
+        require a specific resolution, shrink the image to make the request faster.
+        Concurrent requests of uploading photos is not supported. Uploading more than one
+        image (.zip or folder of images) is not supported too.
+     - parameter metadata: The JSON file that adds metadata to the image. The maximum
+        file size for each image is 2 KB. Metadata can be used to identify images.
+    */
+    func addImages(
+        toCollection collectionID: String,
+        imageFile image: URL,
+        metadata: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([CollectionImages]) -> Void)
+    {
+        // construct query parameters
+    }
+ 
+    /**
+     Find similar images to an uploaded image within a collection.
+     
+     - parameter withinCollection: The ID of the collection to search within.
+     - parameter imageFile: The image file (.jpg or .png) of the image to search against the
+         collection.
+     - parameter limit: The number of similar results you want returned. Default is 10 with
+         a max of 100 results.
+    */
+    public func findSimilarImages(
+        withinCollection collectionID: String,
+        imageFile image: URL,
+        limit: Int? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CollectionImages) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections/\(collectionID)/find_similar",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CollectionImages>) in
+            switch response.result {
+            case .success(let similarImages): success(similarImages)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }
 
 

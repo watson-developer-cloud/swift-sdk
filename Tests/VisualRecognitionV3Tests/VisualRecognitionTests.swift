@@ -22,7 +22,9 @@ class VisualRecognitionTests: XCTestCase {
     
     private var visualRecognition: VisualRecognition!
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
+    private let collectionName = "swift-sdk-unit-test-cars-trucks"
     private var classifierID: String?
+    private var collectionID: String?
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
     
@@ -49,6 +51,8 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByURL", testDetectFacesByURL),
 //            ("testDetectFacesByImage1", testDetectFacesByImage1),
 //            ("testDetectFacesByImage2", testDetectFacesByImage2),
+            ("testGetCollections", testGetCollections),
+//            ("testSimilarImages1", testSimilarImages1),
         ]
     }
     
@@ -76,6 +80,7 @@ class VisualRecognitionTests: XCTestCase {
         instantiateVisualRecognition()
         loadImageFiles()
         lookupClassifier()
+        lookupCollection()
     }
     
     /** Instantiate Visual Recognition. */
@@ -137,6 +142,33 @@ class VisualRecognitionTests: XCTestCase {
         }
     }
     
+    /** Look up (or create) the collection. */
+    func lookupCollection() {
+        let description = "Look up (or create) the collection."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            XCTFail("Failed to locate the collection.")
+        }
+        
+        visualRecognition.getCollections(failure: failure) { collections in
+            for collection in collections {
+                if collection.name == self.collectionName {
+                    XCTAssert(collection.status == "available", "Wait for collection to be made.")
+                    self.collectionID = collection.collectionID
+                    expectation.fulfill()
+                    return
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        if (classifierID == nil) {
+            createCollection()
+        }
+    }
+    
     /** Train a classifier for the test suite. */
     func trainClassifier() {
         let description = "Train a classifier for the test suite."
@@ -155,6 +187,22 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
         
         XCTFail("Training a classifier for the test suite. Try again in 10 seconds.")
+    }
+    
+    /** Create a collection for the test suite. */
+    func createCollection() {
+        let description = "Create a collection for the test suite."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in XCTFail("Could not create a collection for test suite.") }
+        visualRecognition.createCollection(
+            collectionName: collectionName,
+            failure: failure) { collection in
+                self.collectionID = collection.collectionID
+                expectation.fulfill()
+        }
+        waitForExpectations()
+        XCTFail("Creating a classifier.")
     }
 
     /** Fail false negatives. */
@@ -1129,5 +1177,34 @@ class VisualRecognitionTests: XCTestCase {
 //            expectation.fulfill()
 //        }
 //        waitForExpectations()
+//    }
+    
+    /** List all collections. */
+    func testGetCollections() {
+        let description = "List all collections."
+        let expectation = self.expectation(description: description)
+        
+        visualRecognition.getCollections(failure: failWithError) { collections in
+            for collection in collections {
+                XCTAssertEqual(collection.collectionID, self.collectionID)
+                XCTAssertEqual(collection.name, self.collectionName)
+                XCTAssertNotNil(collection.images)
+                XCTAssertEqual(collection.status, "available")
+                XCTAssertEqual(collection.capacity, "1000000")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Find similar images using the default classifier and all default parameters. */
+//    func testSimilarImages1() {
+//        let description = "Find images similar to an uploaded image using the default classifier."
+//        let expectation = self.expectation(description: description)
+//        
+//        visualRecognition.findSimilarImages(
+//            withinCollection: self.collectionID,
+//            imageFile: <#T##URL#>,
+//            success: <#T##(SimilarImages) -> Void#>)
 //    }
 }

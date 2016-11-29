@@ -715,6 +715,41 @@ public class VisualRecognition {
         success: @escaping ([CollectionImages]) -> Void)
     {
         // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file")
+        if let metadata = metadata {
+            multipartFormData.append(metadata, withName: "metadata")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections/\(collectionID)/images",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["images"]) {
+            (response: RestResponse<[CollectionImages]>) in
+            switch response.result {
+            case .success(let images): success(images)
+            case .failure(let error): failure?(error)
+            }
+        }
     }
  
     /**

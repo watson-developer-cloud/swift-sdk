@@ -37,26 +37,26 @@ public struct CollectionImages: JSONDecodable {
 public struct CollectionImage: JSONDecodable {
     
     /// The ID of the image. Can be used to add or remove from the collection.
-    public let imageID: String?
+    public let imageID: String
     
     /// The date the image was added to the collection.
-    public let created: String?
+    public let created: String
     
     /// The name of the image.
-    public let imageFile: String?
+    public let imageFile: String
     
     /// The metadata associated with the image.
     public let metadata: [String : Any]?
     
     /// The confidence level of the match with similar images.
-    public let score: Int?
+    public let score: Int
     
     /// Used internally to initialize a 'CollectionImage' model from JSON.
     public init(json: JSON) throws {
-        imageID = try? json.getString(at: "image_id")
-        created = try? json.getString(at: "created")
-        imageFile = try? json.getString(at: "imageFile")
+        imageID = try json.getString(at: "image_id")
+        created = try json.getString(at: "created")
+        imageFile = try json.getString(at: "imageFile")
         metadata = try? json.getDictionaryObject()
-        score = try? json.getInt(at: "score")
+        score = try json.getInt(at: "score")
     }
 }

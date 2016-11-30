@@ -21,34 +21,34 @@ import RestKit
 public struct Collection: JSONDecodable {
     
     /// The unique ID of the collection.
-    public let collectionID: String?
+    public let collectionID: String
     
     /// The name of the collection.
-    public let name: String?
+    public let name: String
     
     /// The date the collection was created.
-    public let created: String?
+    public let created: String
     
     /// The number of images in the collection.
-    public let images: Int?
+    public let images: Int
     
     /// The status of the collection. Returns 'available' when images can be added
     /// to the collection. Returns 'unavailable' when the collection is being created
     /// or trained.
-    public let status: String?
+    public let status: String
     
     /// The number of images possible in the collection. Each collection can contain
     /// 1000000 images.
-    public let capacity: String?
+    public let capacity: String
     
     /// Used internally to initialize a 'Collection' model from JSON.
     public init(json: JSON) throws {
-        collectionID = try? json.getString(at: "collection_id")
-        name = try? json.getString(at: "name")
-        created = try? json.getString(at: "created")
-        images = try? json.getInt(at: "images")
-        status = try? json.getString(at: "status")
-        capacity = try? json.getString(at: "capacity")
+        collectionID = try json.getString(at: "collection_id")
+        name = try json.getString(at: "name")
+        created = try json.getString(at: "created")
+        images = try json.getInt(at: "images")
+        status = try json.getString(at: "status")
+        capacity = try json.getString(at: "capacity")
     }
 }
 

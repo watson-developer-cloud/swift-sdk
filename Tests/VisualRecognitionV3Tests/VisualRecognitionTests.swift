@@ -22,7 +22,7 @@ class VisualRecognitionTests: XCTestCase {
     
     private var visualRecognition: VisualRecognition!
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
-    private let collectionName = "swift-sdk-unit-test-cars-trucks"
+    private let collectionName = "swift-sdk-unit-test-faces"
     private var classifierID: String?
     private var collectionID: String?
     private let timeout: TimeInterval = 10.0
@@ -52,6 +52,7 @@ class VisualRecognitionTests: XCTestCase {
 //            ("testDetectFacesByImage1", testDetectFacesByImage1),
 //            ("testDetectFacesByImage2", testDetectFacesByImage2),
             ("testGetCollections", testGetCollections),
+            ("testRetrieveCollectionDetails", testRetrieveCollectionDetails),
 //            ("testSimilarImages1", testSimilarImages1),
         ]
     }
@@ -60,6 +61,9 @@ class VisualRecognitionTests: XCTestCase {
     private var examplesCars: URL!
     private var examplesTrucks: URL!
     private var faces: URL!
+    private var face1: URL!
+    private var face2: URL!
+    private var face3: URL!
     private var car: URL!
     private var obama: URL!
     private var sign: URL!
@@ -98,6 +102,9 @@ class VisualRecognitionTests: XCTestCase {
             let examplesCars = bundle.url(forResource: "cars", withExtension: "zip"),
             let examplesTrucks = bundle.url(forResource: "trucks", withExtension: "zip"),
             let faces = bundle.url(forResource: "faces", withExtension: "zip"),
+            let face1 = bundle.url(forResource: "face1", withExtension: "jpg"),
+            let face2 = bundle.url(forResource: "face2", withExtension: "jpg"),
+            let face3 = bundle.url(forResource: "face3", withExtension: "jpg"),
             let car = bundle.url(forResource: "car", withExtension: "png"),
             let obama = bundle.url(forResource: "obama", withExtension: "jpg"),
             let sign = bundle.url(forResource: "sign", withExtension: "jpg")
@@ -110,6 +117,9 @@ class VisualRecognitionTests: XCTestCase {
         self.examplesCars = examplesCars
         self.examplesTrucks = examplesTrucks
         self.faces = faces
+        self.face1 = face1
+        self.face2 = face2
+        self.face3 = face3
         self.car = car
         self.obama = obama
         self.sign = sign
@@ -1193,6 +1203,78 @@ class VisualRecognitionTests: XCTestCase {
                 XCTAssertEqual(collection.capacity, "1000000")
             }
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Retrieve test collection details. */
+    func testRetrieveCollectionDetails() {
+        let description = "Retrieve test collection."
+        let expectation = self.expectation(description: description)
+        
+        guard let collectionID = self.collectionID else {
+            lookupCollection()
+            return
+        }
+
+        visualRecognition.retrieveCollectionDetails(
+            collectionID: collectionID!,
+            failure: failWithError) { collection in
+                
+                XCTAssertEqual(collection.collectionID, self.collectionID)
+                XCTAssertEqual(collection.name, self.collectionName)
+                XCTAssertNotNil(collection.images)
+                XCTAssertEqual(collection.status, "available")
+                XCTAssertEqual(collection.capacity, "1000000")
+                
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Add images to collection. */
+    func testAddDeleteImageToCollection() {
+        let description = "Add image to test collection."
+        let expectation = self.expectation(description: description)
+
+        var imageID: String?
+        visualRecognition.addImageToCollection(
+            collectionID: collectionID!,
+            imageFile: face1,
+            failure: failWithError) { collectionImages in
+                for collectionImage in collectionImages {
+                    XCTAssertNotEqual(0, collectionImage.imagesProcessed)
+                    guard let images = collectionImage.collectionImages else {
+                        return
+                    }
+                    for image in images {
+                        if image.imageFile == "face1" {
+                            imageID = image.imageID
+                            expectation.fulfill()
+                            return
+                        }
+                    }
+                }
+                XCTFail("Image was not successfully added to the collection.")
+        }
+        waitForExpectations()
+        
+        let description2 = "Check that our image can be retrieved."
+        let expectation2 = self.expectation(description: description2)
+        
+        guard let image = imageID else {
+            XCTFail("Image failed to be added to collection.")
+            return
+        }
+        visualRecognition.listImageDetails(
+            inCollection: collectionID!,
+            imageID: image,
+            failure: failWithError) { collectionImage in
+                if collectionImage.imageFile == "face1" {
+                    expectation2.fulfill()
+                    return
+                }
+                XCTFail("The added image could not be retreived from the collection.")
         }
         waitForExpectations()
     }

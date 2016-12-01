@@ -60,3 +60,23 @@ public struct CollectionImage: JSONDecodable {
         score = try? json.getInt(at: "score")
     }
 }
+
+/** Similar images found by the service. */
+public struct SimilarImages: JSONDecodable {
+    
+    /// The file name of the image used to search against other images in the collection.
+    public let imageFile: String
+    
+    /// The array of similar images.
+    public let similarImages: [CollectionImage]
+    
+    /// The number of images processed.
+    public let imagesProcessed: Int
+    
+    /// Used internally to initialize a `CollectionImages` model from JSON.
+    public init(json: JSON) throws {
+        imageFile = try json.getString(at: "image_file")
+        similarImages = try json.decodedArray(at: "similar_images", type: CollectionImage.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
+    }
+}

@@ -832,7 +832,7 @@ public class VisualRecognition {
     public func getImagesInCollection(
         collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([CollectionImages]) -> Void)
+        success: @escaping ([CollectionImage]) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -850,7 +850,7 @@ public class VisualRecognition {
         
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["images"]) {
-            (response: RestResponse<[CollectionImages]>) in
+            (response: RestResponse<[CollectionImage]>) in
             switch response.result {
             case .success(let images): success(images)
             case .failure(let error): failure?(error)
@@ -947,7 +947,7 @@ public class VisualRecognition {
         imageFile image: URL,
         limit: Int? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (CollectionImages) -> Void)
+        success: @escaping (SimilarImages) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -976,7 +976,7 @@ public class VisualRecognition {
         
         // execute REST request
         request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<CollectionImages>) in
+            (response: RestResponse<SimilarImages>) in
             switch response.result {
             case .success(let similarImages): success(similarImages)
             case .failure(let error): failure?(error)

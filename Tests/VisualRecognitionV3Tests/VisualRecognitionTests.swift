@@ -174,7 +174,7 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
         
-        if (classifierID == nil) {
+        if (collectionID == nil) {
             createCollection()
         }
     }
@@ -212,7 +212,6 @@ class VisualRecognitionTests: XCTestCase {
                 expectation.fulfill()
         }
         waitForExpectations()
-        XCTFail("Creating a classifier.")
     }
 
     /** Fail false negatives. */
@@ -1211,11 +1210,6 @@ class VisualRecognitionTests: XCTestCase {
     func testRetrieveCollectionDetails() {
         let description = "Retrieve test collection."
         let expectation = self.expectation(description: description)
-        
-        guard let collectionID = self.collectionID else {
-            lookupCollection()
-            return
-        }
 
         visualRecognition.retrieveCollectionDetails(
             collectionID: collectionID!,
@@ -1242,17 +1236,16 @@ class VisualRecognitionTests: XCTestCase {
             collectionID: collectionID!,
             imageFile: face1,
             failure: failWithError) { collectionImages in
-                for collectionImage in collectionImages {
-                    XCTAssertNotEqual(0, collectionImage.imagesProcessed)
-                    guard let images = collectionImage.collectionImages else {
+                
+                XCTAssertEqual(1, collectionImages.imagesProcessed)
+                guard let images = collectionImages.collectionImages else {
+                    return
+                }
+                for image in images {
+                    if image.imageFile == "face1.jpg" {
+                        imageID = image.imageID
+                        expectation.fulfill()
                         return
-                    }
-                    for image in images {
-                        if image.imageFile == "face1" {
-                            imageID = image.imageID
-                            expectation.fulfill()
-                            return
-                        }
                     }
                 }
                 XCTFail("Image was not successfully added to the collection.")
@@ -1270,7 +1263,7 @@ class VisualRecognitionTests: XCTestCase {
             inCollection: collectionID!,
             imageID: image,
             failure: failWithError) { collectionImage in
-                if collectionImage.imageFile == "face1" {
+                if collectionImage.imageFile == "face1.jpg" {
                     expectation2.fulfill()
                     return
                 }

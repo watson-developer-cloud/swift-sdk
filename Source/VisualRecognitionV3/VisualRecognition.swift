@@ -630,7 +630,7 @@ public class VisualRecognition {
         //construct body
         let multipartFormData = MultipartFormData()
         let nameData = name.data(using: String.Encoding.utf8)!
-        multipartFormData.append(nameData, withName: "collection_name")
+        multipartFormData.append(nameData, withName: "name")
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
@@ -783,7 +783,7 @@ public class VisualRecognition {
         imageFile image: URL,
         metadata: URL? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([CollectionImages]) -> Void)
+        success: @escaping (CollectionImages) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -814,8 +814,8 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["images"]) {
-            (response: RestResponse<[CollectionImages]>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CollectionImages>) in
             switch response.result {
             case .success(let images): success(images)
             case .failure(let error): failure?(error)
@@ -877,7 +877,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/collections/\(collectionID)",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             queryItems: queryParameters

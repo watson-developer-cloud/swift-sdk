@@ -28,7 +28,7 @@ public struct CollectionImages: JSONDecodable {
     
     /// Used internally to initialize a `CollectionImages` model from JSON.
     public init(json: JSON) throws {
-        collectionImages = try? json.decodedArray(at: "collection_images", type: CollectionImage.self)
+        collectionImages = try? json.decodedArray(at: "images", type: CollectionImage.self)
         imagesProcessed = try? json.getInt(at: "images_processed")
     }
 }
@@ -55,7 +55,7 @@ public struct CollectionImage: JSONDecodable {
     public init(json: JSON) throws {
         imageID = try json.getString(at: "image_id")
         created = try json.getString(at: "created")
-        imageFile = try json.getString(at: "imageFile")
+        imageFile = try json.getString(at: "image_file")
         metadata = try? json.getDictionaryObject()
         score = try? json.getInt(at: "score")
     }

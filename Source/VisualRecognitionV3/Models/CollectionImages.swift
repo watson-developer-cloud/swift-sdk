@@ -48,8 +48,8 @@ public struct CollectionImage: JSONDecodable {
     /// The metadata associated with the image.
     public let metadata: [String : Any]?
     
-    /// The confidence level of the match with similar images.
-    public let score: Int
+    /// The confidence level of the match with similar images. Provided only when searching for similar images.
+    public let score: Int?
     
     /// Used internally to initialize a 'CollectionImage' model from JSON.
     public init(json: JSON) throws {
@@ -57,6 +57,6 @@ public struct CollectionImage: JSONDecodable {
         created = try json.getString(at: "created")
         imageFile = try json.getString(at: "imageFile")
         metadata = try? json.getDictionaryObject()
-        score = try json.getInt(at: "score")
+        score = try? json.getInt(at: "score")
     }
 }

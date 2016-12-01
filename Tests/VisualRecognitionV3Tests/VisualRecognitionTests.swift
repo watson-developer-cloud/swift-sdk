@@ -56,7 +56,7 @@ class VisualRecognitionTests: XCTestCase {
             ("testAddDeleteImageToCollection", testAddDeleteImageToCollection),
             ("testCreateDeleteCollection", testCreateDeleteCollection),
             ("testListImagesInCollection", testListImagesInCollection),
-//            ("testSimilarImages1", testSimilarImages1),
+            ("testSimilarImages1", testSimilarImages1),
         ]
     }
     
@@ -1301,6 +1301,35 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
     }
     
+    // Uncomment when .PNG bug is fixed. Currently this test fails at the XCTAssertEqual
+    // callback is nil
+//    /** Add images to collection. */
+//    func testAddDeletePNGImageToCollection() {
+//        let description = "Add image to test collection."
+//        let expectation = self.expectation(description: description)
+//        
+//        let imageFile = "car.png"
+//        
+//        visualRecognition.addImageToCollection(
+//            collectionID: collectionID!,
+//            imageFile: car,
+//            failure: failWithError) { collectionImages in
+//                
+//                XCTAssertEqual(1, collectionImages.imagesProcessed)
+//                guard let images = collectionImages.collectionImages else {
+//                    return
+//                }
+//                for image in images {
+//                    if image.imageFile == imageFile {
+//                        expectation.fulfill()
+//                        return
+//                    }
+//                }
+//                XCTFail("Image was not successfully added to the collection.")
+//        }
+//        waitForExpectations()
+//    }
+    
     /** List images in a collection. */
     func testCreateDeleteCollection() {
         let description = "Create a collection."
@@ -1349,7 +1378,7 @@ class VisualRecognitionTests: XCTestCase {
     }
 
     /** Find similar images using the default classifier and all default parameters. */
-    func testSimilarImagesNegative() {
+    func testSimilarImages() {
         let description = "Find images similar to an uploaded image using the default classifier."
         let expectation = self.expectation(description: description)
         
@@ -1357,11 +1386,16 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.findSimilarImages(
             withinCollection: collectionID!,
-            imageFile: car,
+            imageFile: obama,
             failure: failWithError) { similarImages in
                 XCTAssertEqual(imageFile, similarImages.imageFile)
-                
-                
+                XCTAssertNotEqual(0, similarImages.similarImages.count)
+                XCTAssertEqual(1, similarImages.imagesProcessed)
+                for image in similarImages.similarImages {
+                    XCTAssertNotEqual(0, image.score)
+                }
+                expectation.fulfill()
         }
+        waitForExpectations()
     }
 }

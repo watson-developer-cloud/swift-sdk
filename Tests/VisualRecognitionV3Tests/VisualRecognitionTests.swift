@@ -55,9 +55,11 @@ class VisualRecognitionTests: XCTestCase {
             ("testGetCollections", testGetCollections),
             ("testRetrieveCollectionDetails", testRetrieveCollectionDetails),
             ("testAddDeleteImageToCollection", testAddDeleteImageToCollection),
+            ("testAddDeleteImageWithMetadataToCollection", testAddDeleteImageWithMetadataToCollection),
             ("testCreateDeleteCollection", testCreateDeleteCollection),
             ("testListImagesInCollection", testListImagesInCollection),
             ("testSimilarImages", testSimilarImages),
+            ("testNegativeSimilarImages", testNegativeSimilarImages),
         ]
     }
     
@@ -232,6 +234,15 @@ class VisualRecognitionTests: XCTestCase {
             expectation3.fulfill()
         }
         waitForExpectations()
+    }
+    
+    /** Load file used when adding metadata to an image. */
+    func loadMetadataFile(withName name: String, withExtension: String) -> URL? {
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
+            return nil
+        }
+        return url
     }
 
     /** Fail false negatives. */
@@ -1312,6 +1323,51 @@ class VisualRecognitionTests: XCTestCase {
         let expectation3 = self.expectation(description: description3)
         visualRecognition.deleteImage(fromCollection: collectionID!, imageID: imageIDToDelete, failure: failWithError) {
             expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Add image with metadata to collection. */
+    func testAddDeleteImageWithMetadataToCollection() {
+        let description = "Add image to test collection."
+        let expectation = self.expectation(description: description)
+        
+        var imageID: String?
+        let imageFile = "obama.jpg"
+        
+        guard let imageMetadataURL = loadMetadataFile(withName: "metadata", withExtension: "txt") else {
+            XCTFail("Failed to load image metadata file.")
+            return
+        }
+        
+        visualRecognition.addImageToCollection(
+            collectionID: collectionID!,
+            imageFile: obama,
+            metadata: imageMetadataURL,
+            failure: failWithError) { collectionImages in
+                
+                XCTAssertEqual(1, collectionImages.imagesProcessed)
+                for image in collectionImages.collectionImages {
+                    if image.imageFile == imageFile {
+                        imageID = image.imageID
+                        XCTAssertNotNil(image.metadata)
+                        expectation.fulfill()
+                        return
+                    }
+                }
+                XCTFail("Image was not successfully added to the collection.")
+        }
+        waitForExpectations()
+        
+        guard let imageIDToDelete = imageID else {
+            XCTFail("Image failed to be added to collection.")
+            return
+        }
+        
+        let description2 = "Delete the image added."
+        let expectation2 = self.expectation(description: description2)
+        visualRecognition.deleteImage(fromCollection: collectionID!, imageID: imageIDToDelete, failure: failWithError) {
+            expectation2.fulfill()
         }
         waitForExpectations()
     }

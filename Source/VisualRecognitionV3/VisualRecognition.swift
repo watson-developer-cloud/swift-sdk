@@ -55,12 +55,11 @@ public class VisualRecognition {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            if let code = try? json.getInt(at: "error", "code") {
-                let error = try json.getString(at: "error", "error_id")
-                let description = try json.getString(at: "error", "description")
+            if let code = try? json.getInt(at: "code") {
+                let error = try json.getString(at: "error")
                 let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
-                    NSLocalizedDescriptionKey: description
+                    NSLocalizedFailureReasonErrorKey: "\(code)",
+                    NSLocalizedDescriptionKey: error
                 ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else if let error = try? json.getString(at: "images", 0, "error", "error_id") {
@@ -451,7 +450,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(dataToError: dataToError, path: ["classifiers"]) {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)

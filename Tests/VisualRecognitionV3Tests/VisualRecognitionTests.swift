@@ -296,9 +296,13 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Check that our classifier can be retrieved."
         let expectation2 = expectation(description: description2)
         
+        guard let classifierIDToDelete = classifierID else {
+            return
+        }
+        
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
             for classifier in classifiers {
-                if classifier.classifierID == classifierID! {
+                if classifier.classifierID == classifierIDToDelete {
                     expectation2.fulfill()
                     return
                 }
@@ -310,7 +314,7 @@ class VisualRecognitionTests: XCTestCase {
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
         
-        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: classifierIDToDelete, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -337,12 +341,17 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
         
+        guard let newClassifierID = classifierID else {
+            XCTFail("Failed to create a new classifier due to free account.")
+            return
+        }
+        
         let description2 = "Check that our classifier can be retrieved."
         let expectation2 = expectation(description: description2)
         
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
             for classifier in classifiers {
-                if classifier.classifierID == classifierID! {
+                if classifier.classifierID == newClassifierID {
                     expectation2.fulfill()
                     return
                 }
@@ -354,7 +363,7 @@ class VisualRecognitionTests: XCTestCase {
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
 
-        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -413,13 +422,17 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
         
+        guard let newClassifierID = classifierID else {
+            XCTFail("Failed to create a new classifier due to free account.")
+            return
+        }
         var trained = false
         var tries = 0
         while(!trained) {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -433,7 +446,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -448,7 +461,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         visualRecognition.updateClassifier(
-            withID: classifierID!,
+            withID: newClassifierID,
             positiveExamples: [trucks],
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
@@ -462,7 +475,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the updated classifier and make sure there are 2 classes."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -477,7 +490,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -491,7 +504,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
         
-        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -519,13 +532,18 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
         
+        guard let newClassifierID = classifierID else {
+            XCTFail("Failed to create a new classifier due to free account.")
+            return
+        }
+        
         var trained = false
         var tries = 0
         while(!trained) {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -539,7 +557,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -553,7 +571,7 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Update the classifier with a negative example."
         let expectation2 = expectation(description: description2)
         visualRecognition.updateClassifier(
-            withID: classifierID!,
+            withID: newClassifierID,
             negativeExamples: examplesBaseball,
             failure: failWithError) { classifier in
                 XCTAssertEqual(classifier.name, name)
@@ -567,7 +585,7 @@ class VisualRecognitionTests: XCTestCase {
             tries += 1
             let description = "Get the updated classifier and make sure there is 1 class."
             let expectation = self.expectation(description: description)
-            visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
+            visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
                 
                 if classifier.status == "ready" {
@@ -582,7 +600,7 @@ class VisualRecognitionTests: XCTestCase {
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
                 
-                visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
                 waitForExpectations()
@@ -596,7 +614,7 @@ class VisualRecognitionTests: XCTestCase {
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
         
-        visualRecognition.deleteClassifier(withID: classifierID!, failure: failWithError) {
+        visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
             expectation4.fulfill()
         }
         waitForExpectations()
@@ -1393,6 +1411,22 @@ class VisualRecognitionTests: XCTestCase {
                 }
                 expectation.fulfill()
         }
+        waitForExpectations()
+    }
+    
+    /** Test error message for finding similar images to an invalid file type. */
+    func testNegativeSimilarImages() {
+        let description = "Find images similar to an uploaded image using the default classifier."
+        let expectation = self.expectation(description: description)
+        
+        visualRecognition.findSimilarImages(
+            withinCollection: collectionID!,
+            imageFile: examplesCars,
+            failure: { (Error) in
+                XCTAssertEqual("Invalid image file", Error.localizedDescription)
+                expectation.fulfill()
+            },
+            success: { (SimilarImages) in return})
         waitForExpectations()
     }
 }

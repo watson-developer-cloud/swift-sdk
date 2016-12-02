@@ -21,15 +21,15 @@ import RestKit
 public struct CollectionImages: JSONDecodable {
     
     /// The images within a collection.
-    public let collectionImages: [CollectionImage]?
+    public let collectionImages: [CollectionImage]
     
     /// The number of images processed.
-    public let imagesProcessed: Int?
+    public let imagesProcessed: Int
     
     /// Used internally to initialize a `CollectionImages` model from JSON.
     public init(json: JSON) throws {
-        collectionImages = try? json.decodedArray(at: "images", type: CollectionImage.self)
-        imagesProcessed = try? json.getInt(at: "images_processed")
+        collectionImages = try json.decodedArray(at: "images", type: CollectionImage.self)
+        imagesProcessed = try json.getInt(at: "images_processed")
     }
 }
 

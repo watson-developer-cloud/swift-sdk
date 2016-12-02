@@ -25,6 +25,7 @@ class VisualRecognitionTests: XCTestCase {
     private let collectionName = "swift-sdk-unit-test-faces"
     private var classifierID: String?
     private var collectionID: String?
+    private var imageFaceID: String?
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
     
@@ -56,7 +57,7 @@ class VisualRecognitionTests: XCTestCase {
             ("testAddDeleteImageToCollection", testAddDeleteImageToCollection),
             ("testCreateDeleteCollection", testCreateDeleteCollection),
             ("testListImagesInCollection", testListImagesInCollection),
-            ("testSimilarImages1", testSimilarImages1),
+            ("testSimilarImages", testSimilarImages),
         ]
     }
     
@@ -220,6 +221,7 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
         visualRecognition.addImageToCollection(collectionID: collection, imageFile: face1, failure: failure2) { images in
+            self.imageFaceID = images.collectionImages[0].imageID
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1260,10 +1262,7 @@ class VisualRecognitionTests: XCTestCase {
             failure: failWithError) { collectionImages in
                 
                 XCTAssertEqual(1, collectionImages.imagesProcessed)
-                guard let images = collectionImages.collectionImages else {
-                    return
-                }
-                for image in images {
+                for image in collectionImages.collectionImages {
                     if image.imageFile == imageFile {
                         imageID = image.imageID
                         expectation.fulfill()

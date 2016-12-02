@@ -207,8 +207,6 @@ class VisualRecognitionTests: XCTestCase {
             collectionName: collectionName,
             failure: failure) { collection in
                 self.collectionID = collection.collectionID
-                //TODO - remove the print statement.
-                NSLog("collection ID is \(self.collectionID)")
                 expectation.fulfill()
         }
         waitForExpectations()
@@ -1276,13 +1274,13 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Check that our image can be retrieved."
         let expectation2 = self.expectation(description: description2)
         
-        guard let image = imageID else {
+        guard let imageIDToDelete = imageID else {
             XCTFail("Image failed to be added to collection.")
             return
         }
         visualRecognition.listImageDetails(
             inCollection: collectionID!,
-            imageID: image,
+            imageID: imageIDToDelete,
             failure: failWithError) { collectionImage in
                 if collectionImage.imageFile == imageFile {
                     expectation2.fulfill()
@@ -1294,7 +1292,7 @@ class VisualRecognitionTests: XCTestCase {
         
         let description3 = "Delete the image added."
         let expectation3 = self.expectation(description: description3)
-        visualRecognition.deleteImage(fromCollection: collectionID!, imageID: image, failure: failWithError) {
+        visualRecognition.deleteImage(fromCollection: collectionID!, imageID: imageIDToDelete, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()

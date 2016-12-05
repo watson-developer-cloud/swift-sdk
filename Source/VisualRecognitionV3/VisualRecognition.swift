@@ -450,7 +450,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["classifiers"]) {
+        request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
@@ -618,7 +618,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the newly created collection.
     */
     public func createCollection (
-        collectionName name: String,
+        withName name: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Collection) -> Void)
     {
@@ -696,12 +696,12 @@ public class VisualRecognition {
     /**
      Retrieve the information of a specified collection.
      
-     - parameter collectionID: The ID of the collection to retrieve.
+     - parameter withID: The ID of the collection to retrieve.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the collection retrieved.
      */
     public func retrieveCollectionDetails(
-        collectionID: String,
+        withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Collection) -> Void)
     {
@@ -732,12 +732,12 @@ public class VisualRecognition {
     /**
      Delete a collection.
      
-     - parameter collectionID: The ID of the collection to delete.
+     - parameter withID: The ID of the collection to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the collection has been successfully deleted.
     */
     public func deleteCollection(
-        collectionID: String,
+        withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -773,7 +773,7 @@ public class VisualRecognition {
      Add images to a collection. Each collection can hold 1000000 images. Each image takes
      one second to upload.
      
-     - parameter collectionID: The ID of the collection images will be added to.
+     - parameter withID: The ID of the collection images will be added to.
      - parameter imageFile: The image file (.jpg or .png) of the image to add to the
         collection. The maximum file size to upload an image is 2 MB. If the images do not
         require a specific resolution, shrink the image to make the request faster.
@@ -787,7 +787,7 @@ public class VisualRecognition {
         collection.
      */
     public func addImageToCollection(
-        collectionID: String,
+        withID collectionID: String,
         imageFile image: URL,
         metadata: URL? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -835,12 +835,12 @@ public class VisualRecognition {
      List an arbitrary selection of 100 images in a selected collection. Each
      collection can contain 1000000 images.
      
-     - parameter collectionID: The ID of the collection to list the images from.
+     - parameter withID: The ID of the collection to list the images from.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of images in the collection.
      */
     public func getImagesInCollection(
-        collectionID: String,
+        withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([CollectionImage]) -> Void)
     {
@@ -871,13 +871,13 @@ public class VisualRecognition {
     /**
      List the details of an image within a collection.
      
-     - parameter inCollection: The ID of the collection the image is in.
+     - parameter withID: The ID of the collection the image is in.
      - parameter imageID: The ID of the image to get details from.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image's details.
      */
-    public func listImageDetails(
-        inCollection collectionID: String,
+    public func listImageDetailsInCollection(
+        withID collectionID: String,
         imageID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CollectionImage) -> Void)
@@ -909,13 +909,13 @@ public class VisualRecognition {
     /**
      Delete an image from a collection.
  
-     - parameter fromCollection: The ID of the collection to delete the image from.
+     - parameter withID: The ID of the collection to delete the image from.
      - parameter imageID: The ID of the image to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image is deleted successfully.
     */
-    public func deleteImage(
-        fromCollection collectionID: String,
+    public func deleteImageFromCollection(
+        withID collectionID: String,
         imageID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
@@ -959,8 +959,8 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of similar images.
     */
-    public func findSimilarImages(
-        withinCollection collectionID: String,
+    public func findSimilarImagesInCollection(
+        withID collectionID: String,
         imageFile image: URL,
         limit: Int? = nil,
         failure: ((Error) -> Void)? = nil,

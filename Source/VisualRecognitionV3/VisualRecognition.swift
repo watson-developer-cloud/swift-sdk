@@ -147,92 +147,87 @@ public class VisualRecognition {
         }
     }
     
-    // TODO: The following classify function uploads images to be classified.
-    // Unfortunately, we are seeing an undefined error from the service.
-    // Most likely, there is an issue with the multipart/form data payload.
-    // We will be investigating this issue further and issuing updates soon.
-    
-//    /**
-//     Upload and classify an image or multiple images in a compressed (.zip) file.
-//     
-//     - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-//        total number of images is limited to 20, with a max .zip size of 5 MB.
-//     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
-//     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-//        built-in classifier.
-//     - parameter threshold: The minimum score a class must have to be displayed in the response.
-//     - parameter language: The language of the output class names. Can be "en" (English), "es"
-//        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-//        are omitted.
-//     - parameter failure: A function executed if an error occurs.
-//     - parameter success: A function executed with the image classifications.
-//     */
-//    public func classify(
-//        imageFile image: URL,
-//        owners: [String]? = nil,
-//        classifierIDs: [String]? = nil,
-//        threshold: Double? = nil,
-//        language: String? = nil,
-//        failure: ((Error) -> Void)? = nil,
-//        success: @escaping (ClassifiedImages) -> Void)
-//    {
-//        // construct query parameters
-//        var queryParameters = [URLQueryItem]()
-//        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-//        queryParameters.append(URLQueryItem(name: "version", value: version))
-//        
-//        // construct header parameters
-//        var headerParameters = defaultHeaders
-//        if let language = language {
-//            headerParameters["Accept-Language"] = language
-//        }
-//        
-//        // construct visual recognition parameters
-//        var parameters = [String: Any]()
-//        if let owners = owners {
-//            parameters["owners"] = owners
-//        }
-//        if let classifierIDs = classifierIDs {
-//            parameters["classifier_ids"] = classifierIDs
-//        }
-//        if let threshold = threshold {
-//            parameters["threshold"] = threshold
-//        }
-//        guard let json = try? JSON(dictionary: parameters).serialize() else {
-//            failure?(RestError.encodingError)
-//            return
-//        }
-//        
-//        // construct body
-//        let multipartFormData = MultipartFormData()
-//        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
-//        // multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
-//        guard let body = try? multipartFormData.toData() else {
-//            failure?(RestError.encodingError)
-//            return
-//        }
-//        
-//        // construct REST request
-//        let request = RestRequest(
-//            method: "POST",
-//            url: serviceURL + "/v3/classify",
-//            credentials: .apiKey,
-//            headerParameters: headerParameters,
-//            acceptType: "application/json",
-//            contentType: multipartFormData.contentType,
-//            queryItems: queryParameters,
-//            messageBody: body
-//        )
-//        
-//        // execute REST request
-//        request.responseObject(dataToError: dataToError) {
-//            (response: RestResponse<ClassifiedImages>) in
-//            switch response.result {
-//            case .success(let classifiedImages): success(classifiedImages)
-//            case .failure(let error): failure?(error)
-//            }
-//        }
-//    }
+    /**
+     Upload and classify an image or multiple images in a compressed (.zip) file.
+     
+     - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
+        total number of images is limited to 20, with a max .zip size of 5 MB.
+     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
+     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
+        built-in classifier.
+     - parameter threshold: The minimum score a class must have to be displayed in the response.
+     - parameter language: The language of the output class names. Can be "en" (English), "es"
+        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
+        are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    public func classify(
+        imageFile image: URL,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
+        threshold: Double? = nil,
+        language: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let language = language {
+            headerParameters["Accept-Language"] = language
+        }
+        
+        // construct visual recognition parameters
+        var parameters = [String: Any]()
+        if let owners = owners {
+            parameters["owners"] = owners
+        }
+        if let classifierIDs = classifierIDs {
+            parameters["classifier_ids"] = classifierIDs
+        }
+        if let threshold = threshold {
+            parameters["threshold"] = threshold
+        }
+        guard let json = try? JSON(dictionary: parameters).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
+        multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/classify",
+            credentials: .apiKey,
+            headerParameters: headerParameters,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifiedImages>) in
+            switch response.result {
+            case .success(let classifiedImages): success(classifiedImages)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
     
     /**
      Detect faces in an image at the given URL. Each face is analyzed to estimate age, gender,
@@ -275,59 +270,54 @@ public class VisualRecognition {
         }
     }
     
-    // TODO: The following classify function uploads images to be classified.
-    // Unfortunately, we are seeing an undefined error from the service.
-    // Most likely, there is an issue with the multipart/form data payload.
-    // We will be investigating this issue further and issuing updates soon.
-    
-//    /**
-//     Upload and detect faces in an image or multiple images in a compressed (.zip) file. Each face
-//     is analyzed to estimate age, gender, celebrity name, and more.
-//     
-//     - parameter inImageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-//        total number of images is limited to 20, with a max .zip size of 5 MB.
-//     - parameter failure: A function executed if an error occurs.
-//     - parameter success: A function executed with the image classifications.
-//     */
-//    public func detectFaces(
-//        inImageFile image: URL,
-//        failure: ((Error) -> Void)? = nil,
-//        success: @escaping (ImagesWithFaces) -> Void)
-//    {
-//        // construct query parameters
-//        var queryParameters = [URLQueryItem]()
-//        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-//        queryParameters.append(URLQueryItem(name: "version", value: version))
-//
-//        // construct body
-//        let multipartFormData = MultipartFormData()
-//        multipartFormData.append(image, withName: "image_file")
-//        guard let body = try? multipartFormData.toData() else {
-//            failure?(RestError.encodingError)
-//            return
-//        }
-//        
-//        // construct REST request
-//        let request = RestRequest(
-//            method: "POST",
-//            url: serviceURL + "/v3/detect_faces",
-//            credentials: .apiKey,
-//            headerParameters: defaultHeaders,
-//            acceptType: "application/json",
-//            contentType: multipartFormData.contentType,
-//            queryItems: queryParameters,
-//            messageBody: body
-//        )
-//        
-//        // execute REST request
-//        request.responseObject(dataToError: dataToError) {
-//            (response: RestResponse<ImagesWithFaces>) in
-//            switch response.result {
-//            case .success(let classifiedImages): success(classifiedImages)
-//            case .failure(let error): failure?(error)
-//            }
-//        }
-//    }
+    /**
+     Upload and detect faces in an image or multiple images in a compressed (.zip) file. Each face
+     is analyzed to estimate age, gender, celebrity name, and more.
+     
+     - parameter inImageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
+        total number of images is limited to 20, with a max .zip size of 5 MB.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    public func detectFaces(
+        inImageFile image: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ImagesWithFaces) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/detect_faces",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ImagesWithFaces>) in
+            switch response.result {
+            case .success(let classifiedImages): success(classifiedImages)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
     
     // MARK: - Custom Classifiers
 
@@ -1000,59 +990,50 @@ public class VisualRecognition {
             }
         }
     }
+
+    /**
+     Write service input parameters to a temporary JSON file that can be uploaded.
+     
+     - parameter url: An array of image URLs to use.
+     - parameter classifierIDs: An array of classifier ids. "default" is the id of the built-in
+            classifier.
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
+     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
+     
+     - returns: The URL of a JSON file that includes the given parameters.
+     */
+    private func writeParameters(
+        url: String? = nil,
+        classifierIDs: [String]? = nil,
+        owners: [String]? = nil,
+        showLowConfidence: Bool? = nil) throws
+        -> URL
+    {
+        // construct JSON dictionary
+        var json = [String: Any]()
+        if let url = url {
+            json["url"] = url
+        }
+        if let classifierIDs = classifierIDs {
+            json["classifier_ids"] = classifierIDs
+        }
+        if let owners = owners {
+            json["owners"] = owners
+        }
+        if let showLowConfidence = showLowConfidence {
+            json["show_low_confidence"] = showLowConfidence
+        }
+        
+        // create a globally unique file name in a temporary directory
+        let suffix = "VisualRecognitionParameters.json"
+        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
+        let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let fileURL = directoryURL.appendingPathComponent(fileName)!
+        
+        // save JSON dictionary to file
+        let data = try JSON(dictionary: json).serialize()
+        try data.write(to: fileURL, options: .atomicWrite)
+        
+        return fileURL
+    }
 }
-
-
-
-// TODO: remove the following unnecessary function, if all tests pass!
-// The classify function requires a file. We used to use this function to actually create
-// a file in the file-system with the given parameters, then pass that file to Alamofire
-// to be encoded in the multipart/form data payload. It's possible that we can avoid creating
-// the file by constructing the multipart/form data payload manually. If it works, then we can
-// remove the code below.
-
-//    /**
-//     Write service input parameters to a temporary JSON file that can be uploaded.
-//     
-//     - parameter url: An array of image URLs to use.
-//     - parameter classifierIDs: An array of classifier ids. "default" is the id of the built-in
-//            classifier.
-//     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
-//     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
-//     
-//     - returns: The URL of a JSON file that includes the given parameters.
-//     */
-//    private func writeParameters(
-//        url: String? = nil,
-//        classifierIDs: [String]? = nil,
-//        owners: [String]? = nil,
-//        showLowConfidence: Bool? = nil) throws
-//        -> URL
-//    {
-//        // construct JSON dictionary
-//        var json = [String: Any]()
-//        if let url = url {
-//            json["url"] = url
-//        }
-//        if let classifierIDs = classifierIDs {
-//            json["classifier_ids"] = classifierIDs
-//        }
-//        if let owners = owners {
-//            json["owners"] = owners
-//        }
-//        if let showLowConfidence = showLowConfidence {
-//            json["show_low_confidence"] = showLowConfidence
-//        }
-//        
-//        // create a globally unique file name in a temporary directory
-//        let suffix = "VisualRecognitionParameters.json"
-//        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
-//        let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-//        let fileURL = directoryURL.appendingPathComponent(fileName)!
-//        
-//        // save JSON dictionary to file
-//        let data = try JSON(dictionary: json).serialize()
-//        try data.write(to: fileURL, options: .atomicWrite)
-//        
-//        return fileURL
-//    }

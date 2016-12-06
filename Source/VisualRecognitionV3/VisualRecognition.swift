@@ -599,6 +599,8 @@ public class VisualRecognition {
         }
     }
     
+    // MARK: - Custom Collections
+    
     /** 
      Create a new collection. A maximum of five collections can be created.
      

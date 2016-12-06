@@ -55,12 +55,11 @@ public class VisualRecognition {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            if let code = try? json.getInt(at: "error", "code") {
-                let error = try json.getString(at: "error", "error_id")
-                let description = try json.getString(at: "error", "description")
+            if let code = try? json.getInt(at: "code") {
+                let error = try json.getString(at: "error")
                 let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
-                    NSLocalizedDescriptionKey: description
+                    NSLocalizedFailureReasonErrorKey: "\(code)",
+                    NSLocalizedDescriptionKey: error
                 ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else if let error = try? json.getString(at: "images", 0, "error", "error_id") {
@@ -598,7 +597,398 @@ public class VisualRecognition {
             case .failure(let error): failure?(error)
             }
         }
+    }
+    
+    /** 
+     Create a new collection. A maximum of five collections can be created.
+     
+     - parameter name:  The name of the new collection. The name can be a maximum of 128 UTF-8
+        characters. The name cannot contain any spaces.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the newly created collection.
+    */
+    public func createCollection (
+        withName name: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        //construct body
+        let multipartFormData = MultipartFormData()
+        let nameData = name.data(using: String.Encoding.utf8)!
+        multipartFormData.append(nameData, withName: "name")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+    List all collections created.
+ 
+    - parameter failure: A function executed if an error occurs.
+    - parameter success: A function executed with the list of classifiers.
+    */
+    public func getCollections(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Collection]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+            (response: RestResponse<[Collection]>) in
+            switch response.result {
+            case .success(let collections): success(collections)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Retrieve the information of a specified collection.
+     
+     - parameter withID: The ID of the collection to retrieve.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the collection retrieved.
+     */
+    public func retrieveCollectionDetails(
+        withID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections/\(collectionID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete a collection.
+     
+     - parameter withID: The ID of the collection to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed after the collection has been successfully deleted.
+    */
+    public func deleteCollection(
+        withID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v3/collections/\(collectionID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add images to a collection. Each collection can hold 1000000 images. Each image takes
+     one second to upload.
+     
+     - parameter withID: The ID of the collection images will be added to.
+     - parameter imageFile: The image file (.jpg or .png) of the image to add to the
+        collection. The maximum file size to upload an image is 2 MB. If the images do not
+        require a specific resolution, shrink the image to make the request faster.
+        Concurrent requests of uploading photos is not supported. Uploading more than one
+        image (.zip or folder of images) is not supported too. Uploading one image takes
+        approximately one second.
+     - parameter metadata: The JSON file that adds metadata to the image. The maximum
+        file size for each image is 2 KB. Metadata can be used to identify images.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the image added to the
+        collection.
+     */
+    public func addImageToCollection(
+        withID collectionID: String,
+        imageFile image: URL,
+        metadata: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CollectionImages) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file")
+        if let metadata = metadata {
+            multipartFormData.append(metadata, withName: "metadata")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections/\(collectionID)/images",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CollectionImages>) in
+            switch response.result {
+            case .success(let images): success(images)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     List an arbitrary selection of 100 images in a selected collection. Each
+     collection can contain 1000000 images.
+     
+     - parameter withID: The ID of the collection to list the images from.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of images in the collection.
+     */
+    public func getImagesInCollection(
+        withID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([CollectionImage]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections/\(collectionID)/images",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["images"]) {
+            (response: RestResponse<[CollectionImage]>) in
+            switch response.result {
+            case .success(let images): success(images)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     List the details of an image within a collection.
+     
+     - parameter withID: The ID of the collection the image is in.
+     - parameter imageID: The ID of the image to get details from.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image's details.
+     */
+    public func listImageDetailsInCollection(
+        withID collectionID: String,
+        imageID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CollectionImage) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CollectionImage>) in
+            switch response.result {
+            case .success(let image): success(image)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete an image from a collection.
+ 
+     - parameter withID: The ID of the collection to delete the image from.
+     - parameter imageID: The ID of the image to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed when the image is deleted successfully.
+    */
+    public func deleteImageFromCollection(
+        withID collectionID: String,
+        imageID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+ 
+    /**
+     Find similar images to an uploaded image within a collection.
+     
+     - parameter withinCollection: The ID of the collection to find similar images in.
+     - parameter imageFile: The image file (.jpg or .png) of the image to search against the
+         collection.
+     - parameter limit: The number of similar results you want returned. Default is 10 with
+         a max of 100 results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the list of similar images.
+    */
+    public func findSimilarImagesInCollection(
+        withID collectionID: String,
+        imageFile image: URL,
+        limit: Int? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SimilarImages) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image, withName: "image_file")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/collections/\(collectionID)/find_similar",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<SimilarImages>) in
+            switch response.result {
+            case .success(let similarImages): success(similarImages)
+            case .failure(let error): failure?(error)
+            }
+        }
     }
 
     /**

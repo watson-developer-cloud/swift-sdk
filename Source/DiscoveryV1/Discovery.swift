@@ -163,4 +163,22 @@ public class Discovery {
         }
     }
 
+    // MARK: - Collections
+    
+    /**
+     Create a new collection for storing documents.
+     
+     - parameter withEnvironmentID: Unique ID of the environment to create a collection in.
+     - parameter body: JSON string or file that defines the new collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the created collection.
+     */
+    public func createCollection(
+        withEnvironmentID environmentID: String,
+        body: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping([Collection]) -> Void)
+    {
+        // construct query parameters
+    }
 }

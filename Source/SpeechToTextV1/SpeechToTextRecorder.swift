@@ -25,7 +25,7 @@ internal class SpeechToTextRecorder {
     
     internal var onMicrophoneData: ((Data) -> Void)?                 // callback to handle pcm buffer
     internal var onPowerData: ((Float32) -> Void)?                   // callback for average dB power
-    internal let session = AVAudioSession.sharedInstance()           // session for configuration / permission
+    internal let session = AVAudioSession.sharedInstance()           // session for recording permission
     internal var isRecording = false                                 // state of recording
     internal private(set) var format = AudioStreamBasicDescription() // audio data format specification
     
@@ -126,8 +126,6 @@ internal class SpeechToTextRecorder {
  
     internal func startRecording() throws {
         guard !isRecording else { return }
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
-        try session.setActive(true)
         self.prepareToRecord()
         self.isRecording = true
         guard let queue = queue else { return }

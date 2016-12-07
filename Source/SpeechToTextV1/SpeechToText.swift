@@ -16,6 +16,7 @@
 
 import Foundation
 import RestKit
+import AVFoundation
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -46,6 +47,7 @@ public class SpeechToText {
     private let password: String
     private let credentials: Credentials
     private var microphoneSession: SpeechToTextSession?
+    private let audioSession = AVAudioSession.sharedInstance()
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
@@ -282,6 +284,18 @@ public class SpeechToText {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
+        // make sure the AVAudioSession shared instance is properly configured
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.defaultToSpeaker, .mixWithOthers])
+            try audioSession.setActive(true)
+        } catch {
+            let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        
         // validate settings
         var settings = settings
         settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)

@@ -46,7 +46,62 @@ public class Discovery {
         self.version = version
     }
     
+    /**
+     If the given data represents an error returned by the Discovery service, then return
+     an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let userInfo = [NSLocalizedFailureReasonErrorKey: error]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
     // MARK: - Environments
+    
+    /**
+     Get all existing environments for this Discovery instance.
+     
+     - parameter name: Show only the environment with the given name.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with a list of all environments associated with this service instance.
+     */
+    public func getEnvironments (
+        withName name: String?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Environment]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "name", value: name))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["environments"]) {
+            (response: RestResponse<[Environment]>) in
+            switch response.result {
+            case .success(let environments): success(environments)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
     
     /**
      Create an environment for this service instance.
@@ -63,9 +118,49 @@ public class Discovery {
         withName name: String,
         withDescription description: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Environment]) -> Void)
+        success: @escaping (Environment) -> Void)
     {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct json from parameters
+        var bodyData = [String: Any]()
+        bodyData["name"] = name
+        bodyData["description"] = description
+        guard let json = try? JSON(dictionary: bodyData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
         // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(json, withName: "body")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Environment>) in
+            switch response.result {
+            case .success(let environment): success(environment)
+            case .failure(let error): failure?(error)
+            }
+        }
     }
 
 }

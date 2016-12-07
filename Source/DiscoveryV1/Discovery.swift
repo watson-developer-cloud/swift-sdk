@@ -24,7 +24,7 @@ import RestKit
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/discovery-experimental/api/v1"
+    public var serviceURL = "https://gateway.watsonplatform.net/discovery-experimental/api"
     
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -74,14 +74,16 @@ public class Discovery {
      - parameter success: A function executed with a list of all environments associated with this service instance.
      */
     public func getEnvironments (
-        withName name: String?,
+        withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Environment]) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "name", value: name))
+        if let name = name {
+            queryParameters.append(URLQueryItem(name: "name", value: name))
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -124,19 +126,11 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
-        // construct json from parameters
-        var bodyData = [String: Any]()
-        bodyData["name"] = name
-        bodyData["description"] = description
-        guard let json = try? JSON(dictionary: bodyData).serialize() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
         // construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(json, withName: "body")
-        guard let body = try? multipartFormData.toData() else {
+        var jsonData = [String: Any]()
+        jsonData["name"] = name
+        jsonData["description"] = description
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
             failure?(RestError.encodingError)
             return
         }
@@ -148,7 +142,7 @@ public class Discovery {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            contentType: "application/json",
             queryItems: queryParameters,
             messageBody: body
         )
@@ -156,6 +150,41 @@ public class Discovery {
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Environment>) in
+            switch response.result {
+            case .success(let environment): success(environment)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete the environment with the given environment ID.
+     
+     - parameter environmentID: The name of the new environment.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the newly deleted environment.
+     */
+    public func deleteEnvironment(
+        withID environmentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeletedEnvironment) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/environments/\(environmentID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<DeletedEnvironment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)

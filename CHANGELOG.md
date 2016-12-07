@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## Version 0.11.0
+
+_2016-12-06_
+
+This update adds support for the Visual Recognition service's similarity search. It also updates sample applications for Swift 3.0 and adds several bug fixes:
+
+- Visual Recognition: Enable uploading and classifying .PNG images.
+- Speech to Text: Allow audio playback when AVAudioSession is activated.
+
 ## Version 0.10.0
 
 _2016-11-23_

@@ -118,7 +118,7 @@ public class Discovery {
      */
     public func createEnvironment(
         withName name: String,
-        withDescription description: String,
+        withDescription description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
@@ -129,7 +129,9 @@ public class Discovery {
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
-        jsonData["description"] = description
+        if let description = description {
+            jsonData["description"] = description
+        }
         guard let body = try? JSON(dictionary: jsonData).serialize() else {
             failure?(RestError.encodingError)
             return
@@ -185,6 +187,96 @@ public class Discovery {
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<DeletedEnvironment>) in
+            switch response.result {
+            case .success(let environment): success(environment)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Retrieve information about an environment.
+     
+     - parameter environmentID: The ID of the environment to retrieve information about.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the requested environment.
+     */
+    public func getEnvironment(
+        withID environmentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Environment) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Environment>) in
+            switch response.result {
+            case .success(let environment): success(environment)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Update an environment.
+     
+     - parameter environmentID: The ID of the environment to retrieve information about.
+     - parameter name: The updated name of the environment.
+     - parameter description: The updated description of the environment.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with information about the requested environment.
+     */
+    public func updateEnvironment(
+        withID environmentID: String,
+        name: String? = nil,
+        description: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Environment) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct body
+        var jsonData = [String: Any]()
+        if let name = name {
+            jsonData["name"] = name
+        }
+        if let description = description {
+            jsonData["description"] = description
+        }
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)

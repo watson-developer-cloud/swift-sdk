@@ -418,8 +418,6 @@ public class Discovery {
         }
     }
     
-    /** Get collection details.*/
-    
     /** Delete a collection in the environment the collection is located in.
      
      - parameter withEnvironmentID: The ID of the environment the collection is in.
@@ -456,4 +454,33 @@ public class Discovery {
         }
     }
  
+    /** Retrieve the information of a specified collection. */
+    public func retrieveCollectionDetails(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

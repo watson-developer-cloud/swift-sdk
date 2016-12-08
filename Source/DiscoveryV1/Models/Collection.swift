@@ -63,6 +63,25 @@ public struct Collection: JSONDecodable {
     }
 }
 
+/** A deleted collection. */
+public struct DeletedCollection: JSONDecodable {
+    
+    /// The ID of the deleted collection.
+    public let collectionID: String
+    
+    /// The status of the collection.
+    public let status: CollectionStatus
+    
+    /// Used internally to initialize a 'DeletedCollection' model from JSON.
+    public init(json: JSON) throws {
+        collectionID = try json.getString(at: "collection_id")
+        guard let collectionStatus = CollectionStatus(rawValue: try json.getString(at: "status")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
+        }
+        status = collectionStatus
+    }
+}
+
 /* The status of a collection. */
 public enum CollectionStatus: String {
     /// Active
@@ -70,4 +89,7 @@ public enum CollectionStatus: String {
     
     /// Pending
     case pending = "pending"
+    
+    /// Deleted
+    case deleted = "deleted"
 }

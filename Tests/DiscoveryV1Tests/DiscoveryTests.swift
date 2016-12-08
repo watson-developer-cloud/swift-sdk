@@ -22,6 +22,10 @@ class DiscoveryTests: XCTestCase {
     
     private var discovery: Discovery!
     private let timeout: TimeInterval = 15.0
+    private let environmentName: String = "swift-sdk-unit-test-environment"
+    private let environmentDescription: String = "For testing"
+    private var environmentID: String?
+    private var configurationID: String?
     
     // MARK: - Test Configuration
     
@@ -29,6 +33,8 @@ class DiscoveryTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateDiscovery()
+        lookupEnvironment()
+        lookupConfiguration()
     }
     
     /** Instantiate Retrieve and Rank instance. */
@@ -37,6 +43,76 @@ class DiscoveryTests: XCTestCase {
         let password = Credentials.DiscoveryPassword
         let version = "2016-11-07"
         discovery = Discovery(username: username, password: password, version: version)
+    }
+    
+    /** Look up (or create) environment. */
+    func lookupEnvironment() {
+        let description = "Look up (or create) the environment."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            XCTFail("Failed to locate environment")
+        }
+        
+        discovery.getEnvironments(withName: environmentName, failure: failure) { environments in
+            for environment in environments {
+                if environment.name == self.environmentName {
+                    self.environmentID = environment.environmentID
+                    expectation.fulfill()
+                    return
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        if (environmentID == nil) {
+            createEnvironment()
+        }
+    }
+    
+    /** Create an environment for test suite. */
+    func createEnvironment() {
+        let description = "Create an environment for the test suite."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in XCTFail("Could not create environment") }
+        discovery.createEnvironment(
+            withName: environmentName,
+            withDescription: environmentDescription,
+            failure: failure) { environment in
+                self.environmentID = environment.environmentID
+                expectation.fulfill()
+        }
+        waitForExpectations()
+        
+    }
+    
+    /** Lookup default configuration for environment created. */
+    func lookupConfiguration() {
+        let description = "Look up default configuration for the test suite's environment."
+        let expectation = self.expectation(description: description)
+        
+        let defaultConfigName = "Default Configuration"
+        let failure = { (error: Error) in XCTFail("Could not find configuration") }
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to create environment for test suite.")
+            return
+        }
+        discovery.getConfigurations(
+            withEnvironmentID: environmentID,
+            withName: nil,
+            failure: failure) { configurations in
+                for configuration in configurations {
+                    if configuration.name == defaultConfigName {
+                        self.configurationID = configuration.configurationID
+                    }
+                }
+                // Not sure if the first item will be the default value
+                // Or if the dafault configuration name will always be "Default Configuration"
+//                self.configurationID = configurations[0].configurationID
+                expectation.fulfill()
+        }
+        waitForExpectations()
     }
     
     /** Fail false negatives. */
@@ -127,6 +203,66 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(environment.environmentID, environmentID)
             XCTAssertEqual(environment.status, "deleted")
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Create and delete collection. */
+    func testCreateAndDeleteCollection() {
+        let description = "Create a new collection."
+        let expectation = self.expectation(description: description)
+        
+        let collectionName = "swift-sdk-unit-test-collection"
+        let collectionDescription = "collection for test suite"
+        var collectionID: String?
+        
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+        
+        guard let configurationID = configurationID else {
+            XCTFail("Failed to find default configuration ID")
+            return
+        }
+        
+        discovery.createCollection(
+            withEnvironmentID: environmentID,
+            withName: collectionName,
+            withDescription: collectionDescription,
+            withConfigurationID: configurationID,
+            failure: failWithError)
+        {
+            collection in
+            
+            // Verify collection was made
+            collectionID = collection.collectionID
+            XCTAssertEqual(collectionName, collection.name)
+            XCTAssertEqual(collectionDescription, collection.description)
+            XCTAssertNotNil(collection.created)
+            XCTAssertNotNil(collection.updated)
+            XCTAssertNotNil(collection.status)
+            XCTAssertEqual(configurationID, collection.configurationID)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new collection."
+        let expectation2 = self.expectation(description: description2)
+        
+        guard let collectionToDelete = collectionID else {
+            XCTFail("Failed to instantiate collectionID when creating collection.")
+            return
+        }
+        
+        discovery.deleteCollection(withEnvironmentID: environmentID, withCollectionID: collectionToDelete, failure: failWithError) {
+            collection in
+            
+            XCTAssertEqual(collection.collectionID, collectionToDelete)
+            XCTAssertEqual(collection.status, CollectionStatus.deleted)
             
             expectation2.fulfill()
         }

@@ -283,23 +283,185 @@ public class Discovery {
             }
         }
     }
+    
+    // MARK: - Configurations
+
+    /**
+     List existing configurations for the service instance. 
+    
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the configurations.
+    */
+    public func getConfigurations(
+        withEnvironmentID environmentID: String,
+        withName name: String?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping([Configuration]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/configurations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["configurations"]) {
+            (response: RestResponse<[Configuration]>) in
+            switch response.result {
+            case .success(let configurations): success(configurations)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 
     // MARK: - Collections
     
     /**
+     Get all existing collections.
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the collections.
+    */
+    public func getCollections(
+        withEnvironmentID environmentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping([Collection]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+            (response: RestResponse<[Collection]>) in
+            switch response.result {
+            case .success(let collections): success(collections)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
      Create a new collection for storing documents.
      
-     - parameter withEnvironmentID: Unique ID of the environment to create a collection in.
-     - parameter body: JSON string or file that defines the new collection.
+     - parameter withEnvironmentID: The unique ID of the environment to create a collection in.
+     - parameter withName: The name of the new collection.
+     - parameter withDescription: The description of the configuration.
+     - parameter withConfigurationID: The unique ID of the configuration the collection will be
+        created with. To specify the default, call the getConfigurationID method.
+     - parameter language: Specifies the language of the documents the collection stores. Currently
+        English is the only supported language.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the created collection.
      */
     public func createCollection(
         withEnvironmentID environmentID: String,
-        body: URL,
+        withName name: String,
+        withDescription description: String,
+        withConfigurationID configurationID: String,
+        withLanguage language: String = "en_us",
         failure: ((Error) -> Void)? = nil,
-        success: @escaping([Collection]) -> Void)
+        success: @escaping(Collection) -> Void)
     {
         // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct json from parameters
+        var bodyData = [String: Any]()
+        bodyData["name"] = name
+        bodyData["description"] = description
+        bodyData["configuration_id"] = configurationID
+        bodyData["language"] = language
+        guard let json = try? JSON(dictionary: bodyData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(json, withName: "body")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
     }
+    
+    /** Get collection details.*/
+    
+    /** Delete a collection in the environment the collection is located in.
+     
+     - parameter withEnvironmentID: The ID of the environment the collection is in.
+     - parameter withCollectionID: The ID of the collection to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the newly deleted environment.
+     */
+    public func deleteCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeletedCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<DeletedCollection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+ 
 }

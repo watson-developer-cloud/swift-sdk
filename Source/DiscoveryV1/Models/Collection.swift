@@ -88,6 +88,22 @@ public struct DocumentCounts: JSONDecodable {
     }
 }
 
+/** The field of a collection. */
+public struct Field: JSONDecodable {
+    
+    /// The name of the field.
+    public let field: String
+    
+    /// The type of the field.
+    public let type: String
+    
+    /// Used internally to initialize a 'Field' model from JSON.
+    public init (json: JSON) throws {
+        field = try json.getString(at: "field")
+        type = try json.getString(at: "type")
+    }
+}
+
 /** A deleted collection. */
 public struct DeletedCollection: JSONDecodable {
     

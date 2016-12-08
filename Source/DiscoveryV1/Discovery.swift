@@ -327,6 +327,7 @@ public class Discovery {
     /**
      Get all existing collections.
 
+     - parameter withEnvironmentID: The ID of the environment the collections are stored in.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the collections.
     */
@@ -366,7 +367,8 @@ public class Discovery {
      - parameter withName: The name of the new collection.
      - parameter withDescription: The description of the configuration.
      - parameter withConfigurationID: The unique ID of the configuration the collection will be
-        created with. To specify the default, call the getConfigurationID method.
+        created with. If nil, the default value will be specified. Call the getConfigurationID method
+        to find the default value.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the created collection.
      */
@@ -454,7 +456,13 @@ public class Discovery {
         }
     }
  
-    /** Retrieve the information of a specified collection. */
+    /** Retrieve the information of a specified collection.
+     
+     - paramater withEnvironmentID: The ID of the environment the collection is in.
+     - paramater withCollectionID: The ID of the collection to retrieve details of.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the collection retrieved.
+     */
     public func retrieveCollectionDetails(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
@@ -479,6 +487,105 @@ public class Discovery {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /** Replaces an existing collection.
+     
+     - paramater withEnvironmentID: The ID of the environment the collection is in.
+     - paramater withCollectionID: The ID of the collection to update by replacing the collection with
+        the updated information.
+     - parameter name: The updated name of the collection.
+     - parameter description: The updated description of the collection. If ommitted, the default
+        description will replace the current description.
+     - parameter configurationID: The configuration ID of the collection in which the collection is to
+        be updated. If omitted, the default configuration ID will replace the current ID.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the collection retrieved.
+    */
+    public func updateCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        name: String,
+        description: String?,
+        configurationID: String?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct json from parameters
+        var bodyData = [String: Any]()
+        bodyData["name"] = name
+        if let description = description {
+            bodyData["description"] = description
+        }
+        if let configurationID = configurationID {
+            bodyData["configuration_id"] = configurationID
+        }
+        guard let json = try? JSON(dictionary: bodyData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: json
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let collection): success(collection)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /** Retrieve all unique fields and each field's type stored in a collection's index.
+ 
+    - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+    - paramater withCollectionID: The unique identifier of the collection to display the fields of.
+    - paramater failure: A function executed if an error occurs.
+    - paramater success: A function executed with details of the fields.
+    */
+    public func listCollectionFields(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping([Field]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/fields",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["fields"]) {
+            (response: RestResponse<[Field]>) in
+            switch response.result {
+            case .success(let fields): success(fields)
             case .failure(let error): failure?(error)
             }
         }

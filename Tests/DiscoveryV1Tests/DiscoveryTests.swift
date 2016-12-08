@@ -138,6 +138,7 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         discovery.getEnvironments(failure: failWithError) { environments in
+            XCTAssertGreaterThan(environments.count, 1)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -200,6 +201,65 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(environment.environmentID, environmentID)
             XCTAssertEqual(environment.status, "deleted")
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Get the trained environment. */
+    func testGetTrainedEnvironment() {
+        let description = "Retrieve the trained environment."
+        let expectation = self.expectation(description: description)
+        
+        discovery.getEnvironment(withID: self.environmentID!, failure: failWithError) {
+            environment in
+            
+            XCTAssertEqual(environment.name, self.environmentName)
+            XCTAssertEqual(environment.description, self.environmentDescription)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Update the name and description of the trained environment. */
+    func testUpdateEnvironment() {
+        let description = "Update the trained environment's description and name."
+        let expectation = self.expectation(description: description)
+        
+        discovery.updateEnvironment(
+            withID: self.environmentID!,
+            name: "new name",
+            description: "new description",
+            failure: failWithError)
+        {
+            environment in
+            
+            XCTAssertEqual(environment.environmentID, self.environmentID)
+            XCTAssertNotEqual(environment.name, self.environmentName)
+            XCTAssertEqual(environment.name, "new name")
+            XCTAssertNotEqual(environment.description, self.environmentDescription)
+            XCTAssertEqual(environment.description, "new description")
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Change trained environment's description and name back to normal."
+        let expectation2 = self.expectation(description: description2)
+        
+        discovery.updateEnvironment(
+            withID: self.environmentID!,
+            name: self.environmentName,
+            description: self.environmentDescription,
+            failure: failWithError)
+        {
+            environment in
+            
+            XCTAssertEqual(environment.environmentID, self.environmentID)
+            XCTAssertEqual(environment.name, self.environmentName)
+            XCTAssertEqual(environment.description, self.environmentDescription)
             
             expectation2.fulfill()
         }

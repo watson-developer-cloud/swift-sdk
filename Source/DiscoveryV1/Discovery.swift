@@ -240,7 +240,7 @@ public class Discovery {
      */
     public func updateEnvironment(
         withID environmentID: String,
-        name: String? = nil,
+        name: String,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
@@ -251,9 +251,7 @@ public class Discovery {
         
         // construct body
         var jsonData = [String: Any]()
-        if let name = name {
-            jsonData["name"] = name
-        }
+        jsonData["name"] = name
         if let description = description {
             jsonData["description"] = description
         }
@@ -264,7 +262,7 @@ public class Discovery {
         
         // construct REST request
         let request = RestRequest(
-            method: "POST",
+            method: "PUT",
             url: serviceURL + "/v1/environments/\(environmentID)",
             credentials: credentials,
             headerParameters: defaultHeaders,

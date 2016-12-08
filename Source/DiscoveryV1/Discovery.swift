@@ -367,17 +367,14 @@ public class Discovery {
      - parameter withDescription: The description of the configuration.
      - parameter withConfigurationID: The unique ID of the configuration the collection will be
         created with. To specify the default, call the getConfigurationID method.
-     - parameter language: Specifies the language of the documents the collection stores. Currently
-        English is the only supported language.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the created collection.
      */
     public func createCollection(
         withEnvironmentID environmentID: String,
         withName name: String,
-        withDescription description: String,
-        withConfigurationID configurationID: String,
-        withLanguage language: String = "en_us",
+        withDescription description: String?,
+        withConfigurationID configurationID: String?,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(Collection) -> Void)
     {
@@ -388,18 +385,13 @@ public class Discovery {
         // construct json from parameters
         var bodyData = [String: Any]()
         bodyData["name"] = name
-        bodyData["description"] = description
-        bodyData["configuration_id"] = configurationID
-        bodyData["language"] = language
-        guard let json = try? JSON(dictionary: bodyData).serialize() else {
-            failure?(RestError.encodingError)
-            return
+        if let description = description {
+            bodyData["description"] = description
         }
-        
-        //construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(json, withName: "body")
-        guard let body = try? multipartFormData.toData() else {
+        if let configurationID = configurationID {
+            bodyData["configuration_id"] = configurationID
+        }
+        guard let json = try? JSON(dictionary: bodyData).serialize() else {
             failure?(RestError.encodingError)
             return
         }
@@ -411,9 +403,9 @@ public class Discovery {
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            contentType: "application/json",
             queryItems: queryParameters,
-            messageBody: body
+            messageBody: json
         )
         
         // execute REST request

@@ -107,9 +107,6 @@ class DiscoveryTests: XCTestCase {
                         self.configurationID = configuration.configurationID
                     }
                 }
-                // Not sure if the first item will be the default value
-                // Or if the dafault configuration name will always be "Default Configuration"
-//                self.configurationID = configurations[0].configurationID
                 expectation.fulfill()
         }
         waitForExpectations()

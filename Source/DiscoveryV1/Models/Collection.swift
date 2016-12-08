@@ -46,6 +46,10 @@ public struct Collection: JSONDecodable {
     /// The language of the collection's documents.
     public let language: String?
     
+    /// The object providing information about the documents in the collection.
+    /// Seen only when retrieving details of a colleciton.
+    public let documentCounts: DocumentCounts?
+    
     /// Used internally to initialize a `Collection` model from JSON.
     public init(json: JSON) throws {
         collectionID = try? json.getString(at: "collection_id")
@@ -60,6 +64,43 @@ public struct Collection: JSONDecodable {
         status = collectionStatus
         configurationID = try json.getString(at: "configuration_id")
         language = try? json.getString(at: "langauge")
+        documentCounts = try? json.decode(at: "document_counts", type: DocumentCounts.self)
+    }
+}
+
+/** The information about documents in a collection. */
+public struct DocumentCounts: JSONDecodable {
+    
+    /// Number of available documents.
+    public let available: Int?
+    
+    /// Number of processing documents.
+    public let processing: Int?
+    
+    /// Number of failed documents.
+    public let failed: Int?
+    
+    /// Used internally to initialize a 'DocumentCounts' model from JSON.
+    public init(json: JSON) throws {
+        available = try? json.getInt(at: "available")
+        processing = try? json.getInt(at: "processing")
+        failed = try? json.getInt(at: "failed")
+    }
+}
+
+/** The field of a collection. */
+public struct Field: JSONDecodable {
+    
+    /// The name of the field.
+    public let field: String
+    
+    /// The type of the field.
+    public let type: String
+    
+    /// Used internally to initialize a 'Field' model from JSON.
+    public init (json: JSON) throws {
+        field = try json.getString(at: "field")
+        type = try json.getString(at: "type")
     }
 }
 

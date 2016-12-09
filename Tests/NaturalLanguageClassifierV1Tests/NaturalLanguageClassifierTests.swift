@@ -83,7 +83,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 return nil
             }
         #else
-            let url = URL(fileURLWithPath: "NaturalLanguageClassifierV1Tests/"+name+"."+withExtension)
+            let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/"+name+"."+withExtension)
         #endif
         
         return url

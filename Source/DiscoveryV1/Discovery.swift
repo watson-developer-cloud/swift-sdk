@@ -418,7 +418,8 @@ public class Discovery {
         }
     }
     
-    /** Delete a collection in the environment the collection is located in.
+    /** 
+     Delete a collection in the environment the collection is located in.
      
      - parameter withEnvironmentID: The ID of the environment the collection is in.
      - parameter withCollectionID: The ID of the collection to delete.
@@ -454,7 +455,8 @@ public class Discovery {
         }
     }
  
-    /** Retrieve the information of a specified collection.
+    /** 
+     Retrieve the information of a specified collection.
      
      - paramater withEnvironmentID: The ID of the environment the collection is in.
      - paramater withCollectionID: The ID of the collection to retrieve details of.
@@ -490,7 +492,8 @@ public class Discovery {
         }
     }
     
-    /** Replaces an existing collection.
+    /** 
+     Replaces an existing collection.
      
      - paramater withEnvironmentID: The ID of the environment the collection is in.
      - paramater withCollectionID: The ID of the collection to update by replacing the collection with
@@ -552,12 +555,13 @@ public class Discovery {
         }
     }
     
-    /** Retrieve all unique fields and each field's type stored in a collection's index.
+    /** 
+     Retrieve all unique fields and each field's type stored in a collection's index.
  
-    - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-    - paramater withCollectionID: The unique identifier of the collection to display the fields of.
-    - paramater failure: A function executed if an error occurs.
-    - paramater success: A function executed with details of the fields.
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - paramater withCollectionID: The unique identifier of the collection to display the fields of.
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with details of the fields.
     */
     public func listCollectionFields(
         withEnvironmentID environmentID: String,
@@ -588,4 +592,79 @@ public class Discovery {
             }
         }
     }
+    
+    // MARK - Documents
+    
+    /** 
+     Add document to collection. If both the configuration ID and configuration file are
+        provided, the request will be rejected. Either metadata or file must be specified.
+        
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - parameter withCollectionID: The unique identifier of the collection to add a document to.
+     - parameter withConfigurationID: The unique identifier of the configuration to process the
+        document.
+     - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
+        paramater is not specififed, the metadata parameter must be specififed instead.
+     - parameter metadata: The JSON specifiying metadata related to the document. If not specified,
+        the file parameter must be specified.
+     - parameter configuration: The name of the configuration used to process the document. If this
+        parameter is specified at the same time as the configuration ID is specified, the request
+        will be rejected.
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with details of the document.
+     */
+    
+    public func addDocumentToCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        withConfigurationID configurationID: String?,
+        file: URL?,
+        metadata: URL?,
+        configuration: URL?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Document) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let configurationID = configurationID {
+            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let file = file {
+            multipartFormData.append(file, withName: "file")
+        }
+        if let metadata = metadata {
+            multipartFormData.append(metadata, withName: "metadata")
+        }
+        if let configuration = configuration {
+            multipartFormData.append(configuration, withName: "configuration")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Document>) in
+            switch response.result {
+            case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
+        }    }
 }

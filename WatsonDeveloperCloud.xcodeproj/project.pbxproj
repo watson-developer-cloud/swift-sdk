@@ -327,6 +327,8 @@
 		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
 		CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77E1DD233E9003336BD /* BehaviorNode.swift */; };
 		CE78B7811DD258B8003336BD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7801DD258B8003336BD /* Warning.swift */; };
+		CE95E9A31DFB661F00DBB27A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9A21DFB661F00DBB27A /* Document.swift */; };
+		CE95E9A51DFB6D4900DBB27A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9A41DFB6D4900DBB27A /* Notice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -916,6 +918,8 @@
 		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
 		CE78B77E1DD233E9003336BD /* BehaviorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorNode.swift; sourceTree = "<group>"; };
 		CE78B7801DD258B8003336BD /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
+		CE95E9A21DFB661F00DBB27A /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		CE95E9A41DFB6D4900DBB27A /* Notice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1365,6 +1369,8 @@
 				CE61C35D1DF8734E0060B4A2 /* Collection.swift */,
 				CE61C35F1DF8C8470060B4A2 /* Configuration.swift */,
 				12F800641DF89AAA006851D6 /* DeletedEnvironment.swift */,
+				CE95E9A21DFB661F00DBB27A /* Document.swift */,
+				CE95E9A41DFB6D4900DBB27A /* Notice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3565,6 +3571,8 @@
 			files = (
 				CE61C35E1DF8734E0060B4A2 /* Collection.swift in Sources */,
 				CE61C3601DF8C8470060B4A2 /* Configuration.swift in Sources */,
+				CE95E9A31DFB661F00DBB27A /* Document.swift in Sources */,
+				CE95E9A51DFB6D4900DBB27A /* Notice.swift in Sources */,
 				12F800631DF770BC006851D6 /* Environment.swift in Sources */,
 				12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */,
 				12F800651DF89AAA006851D6 /* DeletedEnvironment.swift in Sources */,

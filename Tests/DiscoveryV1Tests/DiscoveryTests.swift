@@ -417,4 +417,62 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    /** Update the test collection with a new description. */
+    func testUpdateCollection() {
+        let description = "Update test collection name and description."
+        let expectation = self.expectation(description: description)
+        
+        let updatedName = "updated-name"
+        let updatedDescription = "updated-description"
+        
+        discovery.updateCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            name: updatedName,
+            description: updatedDescription,
+            configurationID: configurationID!) {
+                collection in
+                XCTAssertEqual(updatedName, collection.name)
+                XCTAssertEqual(updatedDescription, collection.description)
+                XCTAssertEqual(self.configurationID, collection.configurationID)
+                
+                expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Revert collection and description names to original values."
+        let expectation2 = self.expectation(description: description2)
+        
+        discovery.updateCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            name: collectionName,
+            description: testDescription,
+            configurationID: configurationID!) {
+                collection in
+                XCTAssertEqual(self.collectionName, collection.name)
+                XCTAssertEqual(self.testDescription, collection.description)
+                XCTAssertEqual(self.configurationID, collection.configurationID)
+                
+                expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** List the fields in the test suite's collection. */
+    func testListCollectionFields() {
+        let description = "List the fields in the test suite's collection."
+        let expectation = self.expectation(description: description)
+        
+        discovery.listCollectionFields(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            failure: failWithError) {
+                fields in
+                XCTAssertNotNil(fields)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 }

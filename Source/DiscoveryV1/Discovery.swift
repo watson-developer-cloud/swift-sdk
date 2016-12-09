@@ -532,7 +532,7 @@ public class Discovery {
         
         // construct REST request
         let request = RestRequest(
-            method: "POST",
+            method: "PUT",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
             credentials: .apiKey,
             headerParameters: defaultHeaders,

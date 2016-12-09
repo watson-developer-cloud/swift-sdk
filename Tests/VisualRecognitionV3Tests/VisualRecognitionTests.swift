@@ -100,20 +100,32 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Load image files with class examples and test images. */
     func loadImageFiles() {
-        let bundle = Bundle(for: type(of: self))
-        guard
-            let examplesBaseball = bundle.url(forResource: "baseball", withExtension: "zip"),
-            let examplesCars = bundle.url(forResource: "cars", withExtension: "zip"),
-            let examplesTrucks = bundle.url(forResource: "trucks", withExtension: "zip"),
-            let faces = bundle.url(forResource: "faces", withExtension: "zip"),
-            let face1 = bundle.url(forResource: "face1", withExtension: "jpg"),
-            let car = bundle.url(forResource: "car", withExtension: "png"),
-            let obama = bundle.url(forResource: "obama", withExtension: "jpg"),
-            let sign = bundle.url(forResource: "sign", withExtension: "jpg")
-        else {
-            XCTFail("Unable to locate sample image files.")
-            return
-        }
+        
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard
+                let examplesBaseball =  bundle.url(forResource: "baseball", withExtension: "zip"),
+                let examplesCars =      bundle.url(forResource: "cars", withExtension: "zip"),
+                let examplesTrucks =    bundle.url(forResource: "trucks", withExtension: "zip"),
+                let faces =             bundle.url(forResource: "faces", withExtension: "zip"),
+                let face1 =             bundle.url(forResource: "face1", withExtension: "jpg"),
+                let car =               bundle.url(forResource: "car", withExtension: "png"),
+                let obama =             bundle.url(forResource: "obama", withExtension: "jpg"),
+                let sign =              bundle.url(forResource: "sign", withExtension: "jpg")
+                else {
+                    XCTFail("Unable to locate sample image files.")
+                    return
+            }
+        #else
+            let examplesBaseball =  URL(fileURLWithPath: "VisualRecognitionV3Tests/Classes/baseball.zip")   //bundle.url(forResource: "baseball", withExtension: "zip"),
+            let examplesCars =      URL(fileURLWithPath: "VisualRecognitionV3Tests/Classes/cars.zip")   //bundle.url(forResource: "cars", withExtension: "zip"),
+            let examplesTrucks =    URL(fileURLWithPath: "VisualRecognitionV3Tests/Classes/trucks.zip")   //bundle.url(forResource: "trucks", withExtension: "zip"),
+            let faces =             URL(fileURLWithPath: "VisualRecognitionV3Tests/Images/faces.zip")   //bundle.url(forResource: "faces", withExtension: "zip"),
+            let face1 =             URL(fileURLWithPath: "VisualRecognitionV3Tests/Images/face1.jpg")   //bundle.url(forResource: "face1", withExtension: "jpg"),
+            let car =               URL(fileURLWithPath: "VisualRecognitionV3Tests/Images/car.jpg")   //bundle.url(forResource: "car", withExtension: "png"),
+            let obama =             URL(fileURLWithPath: "VisualRecognitionV3Tests/Images/obama.jpg")   //bundle.url(forResource: "obama", withExtension: "jpg"),
+            let sign =              URL(fileURLWithPath: "VisualRecognitionV3Tests/Images/sign.jpg")   //bundle.url(forResource: "sign", withExtension: "jpg")
+        #endif
         
         self.examplesBaseball = examplesBaseball
         self.examplesCars = examplesCars
@@ -382,6 +394,7 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Get information about the trained classifier. */
     func testGetClassifier() {
+        
         let description = "Get information about the trained classifier."
         let expectation = self.expectation(description: description)
 

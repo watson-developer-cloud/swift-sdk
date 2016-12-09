@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /**
- The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide 
+ The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide
  high-level semantic information about your content.
  */
 
@@ -34,9 +34,9 @@ public class AlchemyLanguage {
     private let apiKey: String
     
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
-    private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        "1234567890-._~")
+    
+    // This string must remain on a single line or CharacterSet breaks in Linux
+    private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")//-._~")
     
     /**
      Create an `AlchemyLanguage` object.
@@ -61,9 +61,9 @@ public class AlchemyLanguage {
             return nil
         }
     }
-
+    
     private func buildBody(document:  URL, html: Bool) throws -> Data {
-        guard let docAsString = try? String(contentsOf: document)
+        guard let docAsString = try? String(contentsOf: document, encoding:String.Encoding.utf8)
             .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let failureReason = "Profile could not be escaped."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -76,7 +76,7 @@ public class AlchemyLanguage {
         } else {
             type = "text"
         }
-        guard let body = "\(type)=\(docAsString!)".data(using: String.Encoding.utf8) else {
+        guard let body = "\(type)=\(docAsString)".data(using: String.Encoding.utf8) else {
             let failureReason = "Profile could not be encoded."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
@@ -139,7 +139,6 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
         // construct query parameters
         var queryParams = [URLQueryItem]()
         
@@ -159,7 +158,6 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
         // execute request
         request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
@@ -193,7 +191,7 @@ public class AlchemyLanguage {
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+                                            value: String(myGraph.rawValue)))
         }
         
         // construct request
@@ -232,9 +230,9 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
     {
+        
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
         // construct query parameters
         var queryParams = [URLQueryItem]()
         
@@ -246,9 +244,8 @@ public class AlchemyLanguage {
         }
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+                                            value: String(myGraph.rawValue)))
         }
-        
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -259,7 +256,6 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
         // execute request
         request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
@@ -294,7 +290,7 @@ public class AlchemyLanguage {
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+                                            value: String(myGraph.rawValue)))
         }
         
         // construct request
@@ -351,11 +347,11 @@ public class AlchemyLanguage {
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value:String(myGraph.rawValue)))
+                                            value:String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
             queryParams.append(URLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
             queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
@@ -371,7 +367,7 @@ public class AlchemyLanguage {
         }
         if let structEnts = structuredEntities {
             queryParams.append(URLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+                                            value: String(structEnts.rawValue)))
         }
         
         
@@ -435,11 +431,11 @@ public class AlchemyLanguage {
         }
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value:String(myGraph.rawValue)))
+                                            value:String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
             queryParams.append(URLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
             queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
@@ -455,7 +451,7 @@ public class AlchemyLanguage {
         }
         if let structEnts = structuredEntities {
             queryParams.append(URLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+                                            value: String(structEnts.rawValue)))
         }
         
         
@@ -515,11 +511,11 @@ public class AlchemyLanguage {
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+                                            value: String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
             queryParams.append(URLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
             queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
@@ -535,7 +531,7 @@ public class AlchemyLanguage {
         }
         if let structEnts = structuredEntities {
             queryParams.append(URLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+                                            value: String(structEnts.rawValue)))
         }
         
         
@@ -1000,8 +996,7 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
@@ -1049,11 +1044,11 @@ public class AlchemyLanguage {
         }
         if let reqEnts = requireEntities {
             queryParams.append(URLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
@@ -1087,8 +1082,7 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
@@ -1142,11 +1136,11 @@ public class AlchemyLanguage {
         }
         if let reqEnts = requireEntities {
             queryParams.append(URLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
@@ -1180,8 +1174,7 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
@@ -1231,11 +1224,11 @@ public class AlchemyLanguage {
         }
         if let reqEnts = requireEntities {
             queryParams.append(URLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
@@ -1257,7 +1250,7 @@ public class AlchemyLanguage {
             }
         }
     }
-
+    
     /**
      Calculates the Sentiment of given content.
      
@@ -1992,7 +1985,7 @@ public class AlchemyLanguage {
             }
         }
     }
- 
+    
     /**
      Extracts the Emotion of given content.
      

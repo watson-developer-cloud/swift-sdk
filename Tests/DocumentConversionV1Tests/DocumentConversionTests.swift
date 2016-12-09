@@ -56,18 +56,27 @@ class DocumentConversionTests: XCTestCase {
     }
     
     func loadResources() {
-        let bundle = Bundle(for: type(of: self))
-        guard
-            let htmlUrl = bundle.url(forResource: "arsArticle", withExtension: "html"),
-            let pngUrl = bundle.url(forResource: "car", withExtension: "png"),
-            let config1 = bundle.url(forResource: "testConfigText", withExtension: ".json"),
-            let config2 = bundle.url(forResource: "testConfigHtml", withExtension: ".json"),
-            let config3 = bundle.url(forResource: "testConfigAU", withExtension: ".json")
-            else
-        {
-            XCTFail("One or more resources could not be loaded.")
-            return
-        }
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard
+                let htmlUrl = bundle.url(forResource: "arsArticle", withExtension: "html"),
+                let pngUrl = bundle.url(forResource: "car", withExtension: "png"),
+                let config1 = bundle.url(forResource: "testConfigText", withExtension: ".json"),
+                let config2 = bundle.url(forResource: "testConfigHtml", withExtension: ".json"),
+                let config3 = bundle.url(forResource: "testConfigAU", withExtension: ".json")
+                else
+            {
+                XCTFail("One or more resources could not be loaded.")
+                return
+            }
+        #else
+            let htmlUrl =   URL(fileURLWithPath: "DocumentConversionV1Tests/arsArticle.html")
+            let pngUrl =    URL(fileURLWithPath: "DocumentConversionV1Tests/car.png")
+            let config1 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigText.json")
+            let config2 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigHtml.json")
+            let config3 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigAU.json")
+        #endif
+        
         
         testDocument = htmlUrl
         testPng = pngUrl
@@ -101,8 +110,8 @@ class DocumentConversionTests: XCTestCase {
         
         documentConversion.convertDocument(testDocument, withConfigurationFile: textConfig,
                                            failure: failWithError) { text in
-            XCTAssertNotNil(text, "Response should not be nil")
-            expectation.fulfill()
+                                            XCTAssertNotNil(text, "Response should not be nil")
+                                            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -113,8 +122,8 @@ class DocumentConversionTests: XCTestCase {
         
         documentConversion.convertDocument(testDocument, withConfigurationFile: htmlConfig,
                                            failure: failWithError) { text in
-            XCTAssertNotNil(text, "Response should not be nil")
-            expectation.fulfill()
+                                            XCTAssertNotNil(text, "Response should not be nil")
+                                            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -143,33 +152,33 @@ class DocumentConversionTests: XCTestCase {
         
         documentConversion.convertDocument(testDocument, withConfigurationFile: answerUnitsConfig,
                                            failure: failWithError) { text in
-            do {
-                let responseObject = try self.documentConversion.deserializeAnswerUnits(string: text)
-                XCTAssertNotNil(responseObject.sourceDocId, "Source ID should not be nil")
-                XCTAssertNotNil(responseObject.timestamp, "Timestamp should not be nil")
-                XCTAssertNotNil(responseObject.detectedMediaType, "DetectedMediaType should not be nil")
-                if let metadata = responseObject.metadata {
-                    for entry in metadata {
-                        XCTAssertNotNil(entry.content, "Content should not be nil")
-                        XCTAssertNotNil(entry.name, "Name should not be nil")
-                    }
-                }
-                if let answerUnits = responseObject.answerUnits {
-                    for unit in answerUnits {
-                        XCTAssertNotNil(unit.id, "Id should not be nil")
-                        XCTAssertNotNil(unit.type, "Type should not be nil")
-                        XCTAssertNotNil(unit.parentId, "ParentId should not be nil")
-                        XCTAssertNotNil(unit.title, "Title should not be nil")
-                        XCTAssertNotNil(unit.direction, "Direction should not be nil")
-                        XCTAssertNotNil(unit.content, "Content should not be nil")
-                        XCTAssertNotNil(unit.content?[0].mediaType, "Media type should not be nil")
-                        XCTAssertNotNil(unit.content?[0].text, "Text should not be nil")
-                    }
-                }
-                expectation.fulfill()
-            } catch {
-                XCTFail()
-            }
+                                            do {
+                                                let responseObject = try self.documentConversion.deserializeAnswerUnits(string: text)
+                                                XCTAssertNotNil(responseObject.sourceDocId, "Source ID should not be nil")
+                                                XCTAssertNotNil(responseObject.timestamp, "Timestamp should not be nil")
+                                                XCTAssertNotNil(responseObject.detectedMediaType, "DetectedMediaType should not be nil")
+                                                if let metadata = responseObject.metadata {
+                                                    for entry in metadata {
+                                                        XCTAssertNotNil(entry.content, "Content should not be nil")
+                                                        XCTAssertNotNil(entry.name, "Name should not be nil")
+                                                    }
+                                                }
+                                                if let answerUnits = responseObject.answerUnits {
+                                                    for unit in answerUnits {
+                                                        XCTAssertNotNil(unit.id, "Id should not be nil")
+                                                        XCTAssertNotNil(unit.type, "Type should not be nil")
+                                                        XCTAssertNotNil(unit.parentId, "ParentId should not be nil")
+                                                        XCTAssertNotNil(unit.title, "Title should not be nil")
+                                                        XCTAssertNotNil(unit.direction, "Direction should not be nil")
+                                                        XCTAssertNotNil(unit.content, "Content should not be nil")
+                                                        XCTAssertNotNil(unit.content?[0].mediaType, "Media type should not be nil")
+                                                        XCTAssertNotNil(unit.content?[0].text, "Text should not be nil")
+                                                    }
+                                                }
+                                                expectation.fulfill()
+                                            } catch {
+                                                XCTFail()
+                                            }
         }
         waitForExpectations()
     }
@@ -207,7 +216,7 @@ class DocumentConversionTests: XCTestCase {
         }
         
         documentConversion.convertDocument(testPng, withConfigurationFile: answerUnitsConfig,
-                                failure: failure, success: failWithResult)
+                                           failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

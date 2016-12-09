@@ -104,12 +104,27 @@ class AlchemyLanguageTests: XCTestCase {
         }
     }
     
+    /** Load a file. */
+    func loadFile(name: String, withExtension: String) -> URL? {
+        
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let url:URL = bundle.url(forResource: name, withExtension: withExtension) else {
+                return nil
+            }
+        #else
+            let url = URL(fileURLWithPath: "Tests/AlchemyLanguageV1Tests/"+name+"."+withExtension)
+        #endif
+        
+        return url
+    }
+    
     // Positive Unit Tests
     
     func testGetAuthorsURL() {
         let description = "Get the author of an Ars article"
         let expectation = self.expectation(description: description)
-
+        
         alchemyLanguage.getAuthors(fromContentAtURL: testUrl, failure: failWithError) { authors in
             XCTAssertNotNil(authors, "Response should not be nil")
             XCTAssertNotNil(authors.authors, "Authors should not be nil")
@@ -122,9 +137,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the author of an article, given the html"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getAuthors(fromHTMLFile: url!, failure: failWithError) { authors in
+        alchemyLanguage.getAuthors(fromHTMLFile: fileURL, failure: failWithError) { authors in
             XCTAssertNotNil(authors, "Response should not be nil")
             XCTAssertNotNil(authors.authors, "Authors should not be nil")
             expectation.fulfill()
@@ -150,9 +168,11 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
-        
-        alchemyLanguage.getRankedConcepts(fromHTMLFile: url!, failure: failWithError) { concepts in
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        alchemyLanguage.getRankedConcepts(fromHTMLFile: fileURL, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -165,9 +185,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedConcepts(fromHTMLFile: url!, knowledgeGraph: QueryParam.excluded, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(fromHTMLFile: fileURL, knowledgeGraph: QueryParam.excluded, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -180,9 +203,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedConcepts(fromHTMLFile: url!, knowledgeGraph: QueryParam.included, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(fromHTMLFile: fileURL, knowledgeGraph: QueryParam.included, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -195,9 +221,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of some text"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedConcepts(fromTextFile: url!, failure: failWithError) { concepts in
+        alchemyLanguage.getRankedConcepts(fromTextFile: fileURL, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Response should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
             expectation.fulfill()
@@ -222,9 +251,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedNamedEntities(fromHTMLFile: url!, withURL: nil, failure: failWithError) { entities in
+        alchemyLanguage.getRankedNamedEntities(fromHTMLFile: fileURL, withURL: nil, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -237,9 +269,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of some text"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedNamedEntities(fromTextFile: url!, failure: failWithError) { entities in
+        alchemyLanguage.getRankedNamedEntities(fromTextFile: fileURL, failure: failWithError) { entities in
             XCTAssertNotNil(entities, "Response should not be nil")
             XCTAssertNotNil(entities.entitites, "Entities should not be nil")
             expectation.fulfill()
@@ -263,9 +298,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the keywords of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
-
-        alchemyLanguage.getRankedKeywords(fromHTMLFile: url!, failure: failWithError) { keywords in
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        
+        alchemyLanguage.getRankedKeywords(fromHTMLFile: fileURL, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -277,9 +315,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the keywords of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedKeywords(fromTextFile: url!, failure: failWithError) { keywords in
+        alchemyLanguage.getRankedKeywords(fromTextFile: fileURL, failure: failWithError) { keywords in
             XCTAssertNotNil(keywords, "Response should not be nil")
             XCTAssertNotNil(keywords.keywords, "Keywords should not be nil")
             expectation.fulfill()
@@ -302,9 +343,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the language of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getLanguage(fromTextFile: url!, failure: failWithError) { language in
+        alchemyLanguage.getLanguage(fromTextFile: fileURL, failure: failWithError) { language in
             XCTAssertNotNil(language, "Response should not be nil")
             XCTAssertNotNil(language.language, "Language should not be nil")
             expectation.fulfill()
@@ -327,9 +371,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the microformats of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getMicroformatData(fromHTMLFile: url!, failure: failWithError) { microformats in
+        alchemyLanguage.getMicroformatData(fromHTMLFile: fileURL, failure: failWithError) { microformats in
             XCTAssertNotNil(microformats, "Response should not be nil")
             XCTAssertNotNil(microformats.microformats, "Microformats should not be nil")
             expectation.fulfill()
@@ -352,9 +399,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the publication date of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getPubDate(fromHTMLFile: url!, failure: failWithError) { pubDate in
+        alchemyLanguage.getPubDate(fromHTMLFile: fileURL, failure: failWithError) { pubDate in
             XCTAssertNotNil(pubDate, "Response should not be nil")
             XCTAssertNotNil(pubDate.publicationDate, "Publication date should not be nil")
             expectation.fulfill()
@@ -377,9 +427,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the Subject-Action-Object relations of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRelations(fromHTMLFile: url!, failure: failWithError) { relations in
+        alchemyLanguage.getRelations(fromHTMLFile: fileURL, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -391,9 +444,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the Subject-Action-Object relations of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRelations(fromTextFile: url!, failure: failWithError) { relations in
+        alchemyLanguage.getRelations(fromTextFile: fileURL, failure: failWithError) { relations in
             XCTAssertNotNil(relations, "Response should not be nil")
             XCTAssertNotNil(relations.relations, "Relations should not be nil")
             expectation.fulfill()
@@ -416,9 +472,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the sentiment of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getTextSentiment(fromHTMLFile: url!, failure: failWithError) { sentiment in
+        alchemyLanguage.getTextSentiment(fromHTMLFile: fileURL, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -431,9 +490,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the sentiment of some text"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getTextSentiment(fromTextFile: url!, failure: failWithError) { sentiment in
+        alchemyLanguage.getTextSentiment(fromTextFile: fileURL, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -459,9 +521,12 @@ class AlchemyLanguageTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let phrase = "the Yangshao people brewed a mixed beer with specialized tools and knowledge of temperature control"
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getTargetedSentiment(fromTextFile: url!, withTargets: phrase, failure: failWithError) { sentiment in
+        alchemyLanguage.getTargetedSentiment(fromTextFile: fileURL, withTargets: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -475,9 +540,12 @@ class AlchemyLanguageTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let phrase = "Square Enix announced that the Romancing SaGa 2 remake was heading stateside in April"
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getTargetedSentiment(fromTextFile: url!, withTargets: phrase, failure: failWithError) { sentiment in
+        alchemyLanguage.getTargetedSentiment(fromTextFile: fileURL, withTargets: phrase, failure: failWithError) { sentiment in
             XCTAssertNotNil(sentiment, "Response should not be nil")
             XCTAssertNotNil(sentiment.docSentiment, "Entities should not be nil")
             expectation.fulfill()
@@ -501,9 +569,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the taxonomy of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRankedTaxonomy(fromHTMLFile: url!, failure: failWithError) { taxonomies in
+        alchemyLanguage.getRankedTaxonomy(fromHTMLFile: fileURL, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -516,9 +587,11 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the taxonomy of some text"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
-        
-        alchemyLanguage.getRankedTaxonomy(fromTextFile: url!, failure: failWithError) { taxonomies in
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        alchemyLanguage.getRankedTaxonomy(fromTextFile: fileURL, failure: failWithError) { taxonomies in
             XCTAssertNotNil(taxonomies, "Response should not be nil")
             XCTAssertNotNil(taxonomies.taxonomy, "Taxonomies should not be nil")
             expectation.fulfill()
@@ -542,9 +615,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the raw text of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getRawText(fromHTMLFile: url!, failure: failWithError) { text in
+        alchemyLanguage.getRawText(fromHTMLFile: fileURL, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -568,9 +644,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the raw text of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getText(fromHTMLFile: url!, failure: failWithError) { text in
+        alchemyLanguage.getText(fromHTMLFile: fileURL, failure: failWithError) { text in
             XCTAssertNotNil(text, "Response should not be nil")
             XCTAssertNotNil(text.text, "Text should not be nil")
             expectation.fulfill()
@@ -594,9 +673,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the title of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getTitle(fromHTMLFile: url!, failure: failWithError) { title in
+        alchemyLanguage.getTitle(fromHTMLFile: fileURL, failure: failWithError) { title in
             XCTAssertNotNil(title, "Response should not be nil")
             XCTAssertNotNil(title.title, "Title should not be nil")
             expectation.fulfill()
@@ -621,9 +703,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getFeedLinks(fromHTMLFile: url!, failure: failWithError) { feeds in
+        alchemyLanguage.getFeedLinks(fromHTMLFile: fileURL, failure: failWithError) { feeds in
             XCTAssertNotNil(feeds, "Response should not be nil")
             XCTAssertNotNil(feeds.feeds, "Feeds should not be nil")
             expectation.fulfill()
@@ -634,7 +719,7 @@ class AlchemyLanguageTests: XCTestCase {
     func testGetEmotionURL() {
         let description = "Get the emotion of an Ars article"
         let expectation = self.expectation(description: description)
-    
+        
         alchemyLanguage.getEmotion(fromContentAtURL: testUrl, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
@@ -647,9 +732,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testArticle", withExtension: "html")
+        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getEmotion(fromHTMLFile: url!, failure: failWithError) { emotion in
+        alchemyLanguage.getEmotion(fromHTMLFile: fileURL, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()
@@ -661,9 +749,12 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = self.expectation(description: description)
         
-        let url = Bundle(for: type(of: self)).url(forResource: "testText", withExtension: "txt")
+        guard let fileURL = loadFile(name: "testText", withExtension: "txt") else {
+            XCTFail("Failed to load file.")
+            return
+        }
         
-        alchemyLanguage.getEmotion(fromTextFile: url!, failure: failWithError) { emotion in
+        alchemyLanguage.getEmotion(fromTextFile: fileURL, failure: failWithError) { emotion in
             XCTAssertNotNil(emotion, "Response should not be nil")
             XCTAssertNotNil(emotion.docEmotions, "Feeds should not be nil")
             expectation.fulfill()

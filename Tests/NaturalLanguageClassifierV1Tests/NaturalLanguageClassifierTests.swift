@@ -76,10 +76,16 @@ class NaturalLanguageClassifierTests: XCTestCase {
     
     /** Load a file used when creating a classifier. */
     func loadClassifierFile(withName name: String, withExtension: String) -> URL? {
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
-            return nil
-        }
+        
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
+                return nil
+            }
+        #else
+            let url = URL(fileURLWithPath: "NaturalLanguageClassifierV1Tests/"+name+"."+withExtension)
+        #endif
+        
         return url
     }
     

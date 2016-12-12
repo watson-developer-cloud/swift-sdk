@@ -596,20 +596,26 @@ public class Discovery {
     // MARK - Documents
     
     /** 
-     Add document to collection. If both the configuration ID and configuration file are
-        provided, the request will be rejected. Either metadata or file must be specified.
+     Add document to collection with optional metadata and optional configuration. If both the 
+     configuration ID and configuration file are provided, the request will be rejected. Either
+     metadata or file must be specified.
         
      - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
      - parameter withCollectionID: The unique identifier of the collection to add a document to.
      - parameter withConfigurationID: The unique identifier of the configuration to process the
         document.
      - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
-        paramater is not specififed, the metadata parameter must be specififed instead.
+        paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
+        types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml,
+        and application/vnd.openxmlformats-officedocument.wordprocessingml.document.
+     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects 
+        the wrong MIME type.
      - parameter metadata: The JSON specifiying metadata related to the document. If not specified,
         the file parameter must be specified.
-     - parameter configuration: The name of the configuration used to process the document. If this
+     - parameter configuration: The configuration used to process the document. If this
         parameter is specified at the same time as the configuration ID is specified, the request
-        will be rejected.
+        will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call
+        the getConfigurationOfCollection method.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document.
      */
@@ -619,6 +625,7 @@ public class Discovery {
         withCollectionID collectionID: String,
         withConfigurationID configurationID: String?,
         file: URL?,
+        fileMimeType: String?,
         metadata: URL?,
         configuration: URL?,
         failure: ((Error) -> Void)? = nil,
@@ -635,6 +642,10 @@ public class Discovery {
         let multipartFormData = MultipartFormData()
         if let file = file {
             multipartFormData.append(file, withName: "file")
+        }
+        if let fileMimeType = fileMimeType {
+            let type = fileMimeType.data(using: String.Encoding.utf8)!
+            multipartFormData.append(type, withName: "type")
         }
         if let metadata = metadata {
             multipartFormData.append(metadata, withName: "metadata")
@@ -666,5 +677,174 @@ public class Discovery {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
             }
-        }    }
+        }
+    }
+    
+    /**
+     Delete document from collection.
+     
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - parameter withCollectionID: The unique identifier of the collection to add a document to.
+     - parameter withDocumentID: The unique identifier of the document.
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with details of the document deletion status. If the
+        given document id is invalid or if the document is not found, the status returned is set 
+        to 'deleted'.
+    */
+    public func deleteDocumentFromCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        withDocumentID documentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Document) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Document>) in
+            switch response.result {
+            case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /** 
+     Fetch status details about a submitted document. Returns only the document's processing status
+     and any notices (warnings or errors) that were generated when the document was ingested. To fetch
+     the actual document content, use the Query method.
+ 
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - parameter withCollectionID: The unique identifier of the collection to add a document to.
+     - parameter withDocumentID: The unique identifier of the document.
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with details of the document.
+    */
+    public func listDocumentDetails(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        withDocumentID documentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Document) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Document>) in
+            switch response.result {
+            case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add a new document or replace an existing document with optional metadata and optional configuration
+     overrides.
+ 
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - parameter withCollectionID: The unique identifier of the collection to add a document to.
+     - parameter withDocumentID: The unique identifier of the document.
+     - parameter withConfigurationID: The unique identifier of the configuration to process the
+        document. If the configuration parameter is also provided at the same time, the request will
+        be rejected.
+     - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
+        paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
+        types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml,
+        and application/vnd.openxmlformats-officedocument.wordprocessingml.document.
+     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects
+        the wrong MIME type.
+     - parameter metadata: The JSON specifiying metadata related to the document. The maximum supported
+        metadata file size is 1 MB. If you're using the Data Crawler If not specified,
+        the file parameter must be specified.
+     - parameter configuration: The configuration used to process the document. If this
+        parameter is specified at the same time as the configuration ID is specified, the request
+        will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call
+        the getConfigurationOfCollection method.
+
+    */
+    public func updateDocumentInCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        withDocumentID documentID: String,
+        withConfigurationID configurationID: String?,
+        file: URL?,
+        fileMimeType: String?,
+        metadata: URL?,
+        configuration: URL?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(Document) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let configurationID = configurationID {
+            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let file = file {
+            multipartFormData.append(file, withName: "file")
+        }
+        if let fileMimeType = fileMimeType {
+            let type = fileMimeType.data(using: String.Encoding.utf8)!
+            multipartFormData.append(type, withName: "type")
+        }
+        if let metadata = metadata {
+            multipartFormData.append(metadata, withName: "metadata")
+        }
+        if let configuration = configuration {
+            multipartFormData.append(configuration, withName: "configuration")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Document>) in
+            switch response.result {
+            case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

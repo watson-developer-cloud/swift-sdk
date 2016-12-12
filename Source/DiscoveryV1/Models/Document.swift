@@ -67,6 +67,9 @@ public enum DocumentStatus: String {
     /// Availabe with notices
     case availableWithNotices = "available with notices"
     
+    /// Deleted
+    case deleted = "deleted"
+    
     /// Failed
     case failed = "failed"
     

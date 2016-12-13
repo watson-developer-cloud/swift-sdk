@@ -24,6 +24,13 @@ class AlchemyLanguageTests: XCTestCase {
     private let timeout: TimeInterval = 5.0
     private let testUrl = "http://arstechnica.com/gadgets/2016/05/android-instant-apps-will-blur-the-lines-between-apps-and-mobile-sites/"
     
+    // use a simpler HTML file in Linux to avoid an issue with processing certain characters
+    #if os(iOS)
+        let testHtmlFileName = "testArticle"
+    #else
+        let testHtmlFileName = "simpleTestArticle"
+    #endif
+    
     override func setUp() {
         super.setUp()
         alchemyLanguage = AlchemyLanguage(apiKey: Credentials.AlchemyAPIKey)
@@ -137,7 +144,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the author of an article, given the html"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -155,7 +162,6 @@ class AlchemyLanguageTests: XCTestCase {
     func testGetRankedConceptsURL() {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
-        
         alchemyLanguage.getRankedConcepts(fromContentAtURL: testUrl, failure: failWithError) { concepts in
             XCTAssertNotNil(concepts, "Reponse should not be nil")
             XCTAssertNotNil(concepts.concepts, "Concepts should not be nil")
@@ -168,7 +174,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -185,7 +191,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -203,7 +209,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -251,7 +257,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the ranked concepts of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -298,7 +304,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the keywords of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -371,7 +377,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the microformats of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -399,7 +405,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the publication date of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -427,7 +433,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the Subject-Action-Object relations of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -472,7 +478,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the sentiment of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -521,7 +527,7 @@ class AlchemyLanguageTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let phrase = "the Yangshao people brewed a mixed beer with specialized tools and knowledge of temperature control"
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -569,7 +575,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the taxonomy of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -615,7 +621,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the raw text of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -644,7 +650,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the raw text of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -673,7 +679,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the title of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -703,7 +709,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
@@ -732,7 +738,7 @@ class AlchemyLanguageTests: XCTestCase {
         let description = "Get the feeds of an Ars article"
         let expectation = self.expectation(description: description)
         
-        guard let fileURL = loadFile(name: "testArticle", withExtension: "html") else {
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }

@@ -35,9 +35,8 @@ public class AlchemyLanguage {
     
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
     
-    // This string must remain on a single line or CharacterSet breaks in Linux
+    // The characters at the end of the CharacterSet break in Linux
     private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")//-._~")
-    
     /**
      Create an `AlchemyLanguage` object.
      
@@ -63,13 +62,15 @@ public class AlchemyLanguage {
     }
     
     private func buildBody(document:  URL, html: Bool) throws -> Data {
-        guard let docAsString = try? String(contentsOf: document, encoding:String.Encoding.utf8)
+        
+        guard let docAsString = try String(contentsOfFile: document.relativePath, encoding:.utf8)
             .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let failureReason = "Profile could not be escaped."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
                 throw error
         }
+        
         let type: String
         if html == true {
             type = "html"
@@ -147,7 +148,6 @@ public class AlchemyLanguage {
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -158,6 +158,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
+        
         // execute request
         request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
@@ -996,7 +997,8 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
@@ -1082,7 +1084,8 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
@@ -1174,7 +1177,8 @@ public class AlchemyLanguage {
      - parameter sentiment:                whether to include sentiment analysis
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
-     - parameter requireEntities:          whether to incldue relations that contain at least one named entity
+     - parameter requireEntities:          whether to incldue relations that contain at least one
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information

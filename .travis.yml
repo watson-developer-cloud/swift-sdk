@@ -1,33 +1,41 @@
-language: objective-c
-osx_image: xcode8
-branches:
-  only:
-    - master
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
+      osx_image: xcode8
+
 env:
   global:
     - IOS_SDK="iphonesimulator10.0"
     - IOS10_DESTINATION="OS=10.0,name=iPhone 6"
 before_install:
   - openssl aes-256-cbc -K $encrypted_5cd05c057710_key -iv $encrypted_5cd05c057710_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
+  - for D in `find Tests -type d -maxdepth 1 -mindepth 1`; do echo "cp SupportingFiles/Credentials.swift $D/"; done
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  
 script:
   # build and test for iOS 10
-  - xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" | xcpretty
-  - xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "PersonalityInsightsV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "RetrieveAndRankV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-  - xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "PersonalityInsightsV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "RetrieveAndRankV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; swift build ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; swift test ; fi

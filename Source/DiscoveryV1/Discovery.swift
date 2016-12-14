@@ -336,7 +336,7 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         configuration: ConfigurationDetails,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping([ConfigurationDetails]) -> Void)
+        success: @escaping(ConfigurationDetails) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()

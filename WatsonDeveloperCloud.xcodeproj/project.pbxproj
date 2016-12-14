@@ -331,6 +331,10 @@
 		CE78B7811DD258B8003336BD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7801DD258B8003336BD /* Warning.swift */; };
 		CE95E9A31DFB661F00DBB27A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9A21DFB661F00DBB27A /* Document.swift */; };
 		CE95E9A51DFB6D4900DBB27A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9A41DFB6D4900DBB27A /* Notice.swift */; };
+		CE95E9A91E0195D700DBB27A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9A81E0195D700DBB27A /* Result.swift */; };
+		CE95E9AB1E0195E600DBB27A /* Aggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9AA1E0195E600DBB27A /* Aggregation.swift */; };
+		CE95E9B11E01BAF000DBB27A /* QueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B01E01BAF000DBB27A /* QueryResponse.swift */; };
+		CE95E9B31E01D8E600DBB27A /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B21E01D8E600DBB27A /* EnrichedText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -924,6 +928,10 @@
 		CE78B7801DD258B8003336BD /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
 		CE95E9A21DFB661F00DBB27A /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		CE95E9A41DFB6D4900DBB27A /* Notice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		CE95E9A81E0195D700DBB27A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		CE95E9AA1E0195E600DBB27A /* Aggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aggregation.swift; sourceTree = "<group>"; };
+		CE95E9B01E01BAF000DBB27A /* QueryResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryResponse.swift; sourceTree = "<group>"; };
+		CE95E9B21E01D8E600DBB27A /* EnrichedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1369,14 +1377,18 @@
 		12F800611DF770A9006851D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				12F800621DF770BC006851D6 /* Environment.swift */,
+				CE95E9AA1E0195E600DBB27A /* Aggregation.swift */,
 				CE61C35D1DF8734E0060B4A2 /* Collection.swift */,
 				CE61C35F1DF8C8470060B4A2 /* Configuration.swift */,
+				1200926A1E005A7300107C0A /* ConfigurationDetails.swift */,
+				120092671DFF0EF500107C0A /* DeletedConfiguration.swift */,
 				1200926C1E01947500107C0A /* DeletedEnvironment.swift */,
 				CE95E9A21DFB661F00DBB27A /* Document.swift */,
+				CE95E9B21E01D8E600DBB27A /* EnrichedText.swift */,
+				12F800621DF770BC006851D6 /* Environment.swift */,
+				CE95E9B01E01BAF000DBB27A /* QueryResponse.swift */,
+				CE95E9A81E0195D700DBB27A /* Result.swift */,
 				CE95E9A41DFB6D4900DBB27A /* Notice.swift */,
-				120092671DFF0EF500107C0A /* DeletedConfiguration.swift */,
-				1200926A1E005A7300107C0A /* ConfigurationDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3575,8 +3587,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE95E9A91E0195D700DBB27A /* Result.swift in Sources */,
 				CE61C35E1DF8734E0060B4A2 /* Collection.swift in Sources */,
+				CE95E9B11E01BAF000DBB27A /* QueryResponse.swift in Sources */,
+				CE95E9B31E01D8E600DBB27A /* EnrichedText.swift in Sources */,
 				CE61C3601DF8C8470060B4A2 /* Configuration.swift in Sources */,
+				CE95E9AB1E0195E600DBB27A /* Aggregation.swift in Sources */,
 				CE95E9A31DFB661F00DBB27A /* Document.swift in Sources */,
 				CE95E9A51DFB6D4900DBB27A /* Notice.swift in Sources */,
 				1200926B1E005A7300107C0A /* ConfigurationDetails.swift in Sources */,

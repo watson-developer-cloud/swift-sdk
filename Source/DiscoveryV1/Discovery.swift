@@ -765,7 +765,7 @@ public class Discovery {
         }
     }
     
-    // MARK - Documents
+    // MARK: - Documents
     
     /** 
      Add document to collection with optional metadata and optional configuration. If both the 
@@ -957,7 +957,8 @@ public class Discovery {
         parameter is specified at the same time as the configuration ID is specified, the request
         will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call
         the getConfigurationOfCollection method.
-
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with details of the document.
     */
     public func updateDocumentInCollection(
         withEnvironmentID environmentID: String,
@@ -1015,6 +1016,78 @@ public class Discovery {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    // MARK: - Queries
+    
+    /** 
+     Query the documents in your collection. See the documentation for reference on how to build
+     a query string. https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml.
+     
+     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
+     - parameter withCollectionID: The unique identifier of the collection to add a document to.
+     - parameter withFilter: The filter query that is cacheable and drives performance.
+     - parameter withQuery: The full text (TF/IDF) based ranking query. Not cacheable, but the 
+        query returns documents in order based on match level.
+     - parameter withAggregation: Aggregated metrics and answers from the dataset. If the filter
+        is provided, aggregation will run only on the matching documents.
+     - parameter count: The number of documents to return. 
+     - parameter return: An additional filter on the values of the returned document. A comma-separated
+        list of Fully Qualified Names (FQNs) matching the portion(s) of the document hiearchy to return.
+     - parameter offset: Returns additional pages of results for pagination purposes. Deep pagination
+        should be avoided due to the consequential decrease in performance.
+     - paramater failure: A function executed if an error occurs.
+     - paramater success: A function executed with the results of the query. The response includes the
+        document ID, metadata and the content of the document. 
+    */
+    public func queryDocumentsInCollection(
+        withEnvironmentID environmentID: String,
+        withCollectionID collectionID: String,
+        withFilter filter: String?,
+        withQuery query: String?,
+        withAggregation aggregation: String?,
+        count: Int?,
+        return returnQuery: String?,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(QueryResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            queryParameters.append(URLQueryItem(name: "filter", value: filter))
+        }
+        if let query = query {
+            queryParameters.append(URLQueryItem(name: "query", value: query))
+        }
+        if let aggregation = aggregation {
+            queryParameters.append(URLQueryItem(name: "aggregation", value: aggregation))
+        }
+        if let count = count {
+            queryParameters.append(URLQueryItem(name: "count", value: "\(count)"))
+        }
+        if let returnQuery = returnQuery {
+            queryParameters.append(URLQueryItem(name: "return", value: returnQuery))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/query",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<QueryResponse>) in
+            switch response.result {
+            case .success(let queryResponse): success(queryResponse)
             case .failure(let error): failure?(error)
             }
         }

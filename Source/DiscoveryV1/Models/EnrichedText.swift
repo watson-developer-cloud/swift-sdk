@@ -19,5 +19,7 @@ import RestKit
 
 /** A result produced by the Discovery service to analyze the input provided. */
 public struct EnrichedText: JSONDecodable {
+    public init(json: JSON) throws {
 
+    }
 }

@@ -20,11 +20,11 @@ import RestKit
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public struct Aggregation: JSONDecodable {
     
-    /// Type of aggregation.
-    public let type: String?
-    
-    /// The path along the given document structure parsed by the Watson service.
-    public let path: String?
+//    /// Type of aggregation.
+//    public let type: String?
+//    
+//    /// The path along the given document structure parsed by the Watson service.
+//    public let path: String?
     
     /// Number of matching results
     public let matchingResults: Int?
@@ -32,29 +32,24 @@ public struct Aggregation: JSONDecodable {
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
     
-    public let field: String?
-    
-
-    
-    public let match: String?
-    
-    
-    /// Results returned by the Discovery service.
-    public let results: [Result]?
-    
-
-    
-    public let value: Int?
-    
-    public let key: String?
-    
-    public let interval: String?
+//    public let field: String?
+//    
+//    public let match: String?
+//    
+//    /// Results returned by the Discovery service.
+//    public let results: [Result]?
+//    
+//    public let value: Int?
+//    
+//    public let key: String?
+//    
+//    public let interval: String?
     
     
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSON) throws {
         matchingResults = try? json.getInt(at: "matching_results")
-        results = try? json.decodedArray(at: "results", type: Result.self)
+//        results = try? json.decodedArray(at: "results", type: Result.self)
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
     }
 }

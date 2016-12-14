@@ -49,7 +49,7 @@ public struct Result: JSONDecodable {
     
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSON) throws {
-        documentID = try? json.getInt(at: "id")
+        documentID = try? json.getString(at: "id")
         score = try? json.getDouble(at: "score")
         extractedMetadata = try? json.getString(at: "extracted_metadata", "title")
         html = try? json.getString(at: "html")

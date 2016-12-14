@@ -1079,13 +1079,13 @@ public class Discovery {
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/query",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
-            acceptType: "application/json"
+            acceptType: "application/json",
             queryItems: queryParameters
         )
         
         // execute REST request
         request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<QueryDetails>) in
+            (response: RestResponse<QueryResponse>) in
             switch response.result {
             case .success(let queryResponse): success(queryResponse)
             case .failure(let error): failure?(error)

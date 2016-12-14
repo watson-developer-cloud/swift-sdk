@@ -475,4 +475,11 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    func testQueryInCollection() {
+        let description = "Query news resources in Watson collection."
+        let expectation = self.expectation(description: description)
+        
+        
+    }
 }

@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-/** The context, or state, associated with a message. */
+/** A custom configuration for the environment. */
 public struct Configuration: JSONDecodable {
     
     /// The unique identifier of the configuration.

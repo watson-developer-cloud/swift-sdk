@@ -287,6 +287,8 @@ public class Discovery {
     /**
      List existing configurations for the service instance. 
     
+     - parameter environmentID: The ID of your environment.
+     - parameter name: Show only the configuration with the given name.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the configurations.
     */
@@ -315,6 +317,176 @@ public class Discovery {
             (response: RestResponse<[Configuration]>) in
             switch response.result {
             case .success(let configurations): success(configurations)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Create a new configuration for this service instance.
+     
+     - parameter environmentID: The ID of your environment.
+     - parameter configuration:  JSON object that allows you to customize how your content is
+     ingested and what enrichments are added to your data. `name` is required and must be
+     unique within the current environment. All other properties are optional.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the configurations.
+     */
+    public func createConfiguration(
+        withEnvironmentID environmentID: String,
+        configuration: ConfigurationDetails,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping([ConfigurationDetails]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct body
+        guard let body = try? configuration.toJSON().serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/configurations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ConfigurationDetails>) in
+            switch response.result {
+            case .success(let configuration): success(configuration)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete the specified configuration.
+     
+     - parameter environmentID: The ID of your environment.
+     - parameter configurationID: The ID of your configuration.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the deleted configuration.
+     */
+    public func deleteConfiguration(
+        withEnvironmentID environmentID: String,
+        withConfigurationID configurationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(DeletedConfiguration) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<DeletedConfiguration>) in
+            switch response.result {
+            case .success(let configuration): success(configuration)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Get details of a specific configuration.
+     
+     - parameter environmentID: The ID of your environment.
+     - parameter configurationID: The ID of your configuration.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the configuration.
+     */
+    public func getConfiguration(
+        withEnvironmentID environmentID: String,
+        withConfigurationID configurationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(ConfigurationDetails) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ConfigurationDetails>) in
+            switch response.result {
+            case .success(let configuration): success(configuration)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Replaces the configuration that was at the given path before.
+     
+     - parameter environmentID: The ID of the environment in which the configuration is located.
+     - parameter configurationID: The ID of the configuration you want to replace.
+     - parameter configuration: A JSON object with the new configuration details.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the configuration.
+     */
+    public func updateConfiguration(
+        withEnvironmentID environmentID: String,
+        withConfigurationID configurationID: String,
+        configuration: ConfigurationDetails,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(ConfigurationDetails) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct body
+        guard let body = try? configuration.toJSON().serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "PUT",
+            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ConfigurationDetails>) in
+            switch response.result {
+            case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
             }
         }

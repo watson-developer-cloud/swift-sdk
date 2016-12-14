@@ -32,6 +32,9 @@ public class Discovery {
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
     private let version: String
+    private let unreservedCharacters = CharacterSet(charactersIn:
+        "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~(),:.&=")
+    private let encodingError = "Failed to percent encode HTML document"
     
     /**
      Create a `Discovery` object.
@@ -1057,14 +1060,32 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
         if let filter = filter {
-            queryParameters.append(URLQueryItem(name: "filter", value: filter))
+            guard let filterEncoded = filter.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "filter", value: filterEncoded))
         }
+
         if let query = query {
-            queryParameters.append(URLQueryItem(name: "query", value: query))
+            guard let queryEncoded = query.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "query", value: queryEncoded))
         }
+        
         if let aggregation = aggregation {
-            queryParameters.append(URLQueryItem(name: "aggregation", value: aggregation))
+            guard let aggregationEncoded = aggregation.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "aggregation", value: aggregationEncoded))
         }
         if let count = count {
             queryParameters.append(URLQueryItem(name: "count", value: "\(count)"))
@@ -1091,5 +1112,12 @@ public class Discovery {
             case .failure(let error): failure?(error)
             }
         }
+    }
+    
+    private func failWithError(reason: String) -> NSError {
+        let failureReason = "Failed to percent encode HTML document."
+        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+        return error
     }
 }

@@ -43,4 +43,4 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-3.0.2-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm Source/SupportingFiles/Credentials.swift ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
+ # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi

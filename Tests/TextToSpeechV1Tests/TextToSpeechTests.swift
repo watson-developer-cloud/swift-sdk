@@ -22,13 +22,7 @@ class TextToSpeechTests: XCTestCase {
     
     private var textToSpeech: TextToSpeech!
     private let timeout: TimeInterval = 5.0
-    
-    // There seems to be a limit in Linux to the size of the payload of the request/response
-    #if os(iOS)
     private let text = "Swift at IBM is awesome. You should try it!"
-    #else
-    private let text = "Swift"
-    #endif
     
     private let allVoices: [SynthesisVoice] = [
         .de_Birgit, .de_Dieter, .gb_Kate, .es_Enrique, .us_Allison, .us_Lisa, .us_Michael,

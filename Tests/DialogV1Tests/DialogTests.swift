@@ -191,7 +191,7 @@ class DialogTests: XCTestCase {
                 return nil
             }
         #else
-            let url = URL(fileURLWithPath: "DialogV1Tests/"+name+"."+withExtension)
+            let url = URL(fileURLWithPath: "Tests/DialogV1Tests/"+name+"."+withExtension)
         #endif
         
         return url

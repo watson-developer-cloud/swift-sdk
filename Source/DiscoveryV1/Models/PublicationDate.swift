@@ -17,9 +17,19 @@
 import Foundation
 import RestKit
 
-/** A result produced by the Discovery service to analyze the input provided. */
-public struct EnrichedText: JSONDecodable {
+/// Publication date found within the document.
+public struct PublicationDate: JSONDecodable {
+    
+    /// Confidence level of the detection of the publication date.
+    public let confident: String?
+    
+    /// Detected publication date in the format yyyy-MM-dd'T'HH:mm
+    /// :ss.SSS'Z'.
+    public let date: String?
+    
+    /// Used internally to initialize a PublicationDate object
     public init(json: JSON) throws {
-
+        confident = try? json.getString(at: "confident")
+        date = try? json.getString(at: "date")
     }
 }

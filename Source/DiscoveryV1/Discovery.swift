@@ -1115,8 +1115,7 @@ public class Discovery {
     }
     
     private func failWithError(reason: String) -> NSError {
-        let failureReason = "Failed to percent encode HTML document."
-        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        let userInfo = [NSLocalizedFailureReasonErrorKey: reason]
         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
         return error
     }

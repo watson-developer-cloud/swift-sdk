@@ -70,11 +70,11 @@ class DocumentConversionTests: XCTestCase {
                 return
             }
         #else
-            let htmlUrl =   URL(fileURLWithPath: "DocumentConversionV1Tests/arsArticle.html")
-            let pngUrl =    URL(fileURLWithPath: "DocumentConversionV1Tests/car.png")
-            let config1 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigText.json")
-            let config2 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigHtml.json")
-            let config3 =   URL(fileURLWithPath: "DocumentConversionV1Tests/testConfigAU.json")
+            let htmlUrl =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/arsArticle.html")
+            let pngUrl =    URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/car.png")
+            let config1 =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/testConfigText.json")
+            let config2 =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/testConfigHtml.json")
+            let config3 =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/testConfigAU.json")
         #endif
         
         

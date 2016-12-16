@@ -23,13 +23,7 @@ class AlchemyLanguageTests: XCTestCase {
     private var alchemyLanguage: AlchemyLanguage!
     private let timeout: TimeInterval = 5.0
     private let testUrl = "http://arstechnica.com/gadgets/2016/05/android-instant-apps-will-blur-the-lines-between-apps-and-mobile-sites/"
-    
-    // use a simpler HTML file in Linux to avoid an issue with processing certain characters
-    #if os(iOS)
-        let testHtmlFileName = "testArticle"
-    #else
-        let testHtmlFileName = "simpleTestArticle"
-    #endif
+    private let testHtmlFileName = "testArticle"
     
     override func setUp() {
         super.setUp()
@@ -381,7 +375,6 @@ class AlchemyLanguageTests: XCTestCase {
             XCTFail("Failed to load file.")
             return
         }
-        
         alchemyLanguage.getMicroformatData(fromHTMLFile: fileURL, failure: failWithError) { microformats in
             XCTAssertNotNil(microformats, "Response should not be nil")
             XCTAssertNotNil(microformats.microformats, "Microformats should not be nil")

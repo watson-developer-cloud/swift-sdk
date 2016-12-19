@@ -300,7 +300,7 @@ public class Discovery {
     */
     public func getConfigurations(
         withEnvironmentID environmentID: String,
-        withName name: String?,
+        withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping([Configuration]) -> Void)
     {

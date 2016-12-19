@@ -225,8 +225,7 @@ class DiscoveryTests: XCTestCase {
         }
     }
     
-    // MARK: - Positive Tests
-    
+    // MARK: - Environments
     
     /** Retrieve a list of the environments associated with this service instance. */
     func testGetEnvironments() {
@@ -359,6 +358,31 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    // MARK: Configurations
+    func testGetConfigurations() {
+        let description = "Retrieve a list of configurations."
+        let expectation = self.expectation(description: description)
+        
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+        
+        discovery.getConfigurations(withEnvironmentID: environmentID, failure: failWithError) {
+            configurations in
+            
+            for configuration in configurations {
+                if configuration.name == "Default Configuration" {
+                    XCTAssertEqual(configuration.description, "The configuration used by default when creating a new collection without specifying a configuration_id.")
+                    expectation.fulfill()
+                }
+            }
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Collections
     
     /** Retrieve a list of the collections associated with the test suite's environment. */
     func testGetCollections() {

@@ -86,6 +86,7 @@ class DiscoveryTests: XCTestCase {
         let failure = { (error: Error) in XCTFail("Could not create environment") }
         discovery.createEnvironment(
             withName: environmentName,
+            withSize: .zero,
             withDescription: testDescription,
             failure: failure) { environment in
                 self.environmentID = environment.environmentID
@@ -249,6 +250,7 @@ class DiscoveryTests: XCTestCase {
         var environmentID: String?
         discovery.createEnvironment(
             withName: environmentName,
+            withSize: .zero,
             withDescription: environmentDescription,
             failure: failWithError)
         {

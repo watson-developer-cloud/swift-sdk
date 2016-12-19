@@ -121,6 +121,7 @@ public class Discovery {
      */
     public func createEnvironment(
         withName name: String,
+        withSize size: EnvironmentSize,
         withDescription description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
@@ -132,6 +133,7 @@ public class Discovery {
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
+        jsonData["size"] = size.rawValue
         if let description = description {
             jsonData["description"] = description
         }

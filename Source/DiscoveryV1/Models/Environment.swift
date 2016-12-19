@@ -124,3 +124,14 @@ public struct MemoryUsage: JSONDecodable {
         percentUsed = try json.getDouble(at: "percent_used")
     }
 }
+
+public enum EnvironmentSize: Int {
+    
+    case zero = 0
+    
+    case one = 1
+    
+    case two = 2
+    
+    case three = 3
+}

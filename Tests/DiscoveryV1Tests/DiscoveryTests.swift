@@ -232,7 +232,7 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         discovery.getEnvironments(failure: failWithError) { environments in
-            XCTAssertGreaterThan(environments.count, 1)
+            XCTAssertGreaterThan(environments.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -264,24 +264,24 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(environment.created)
             XCTAssertNotNil(environment.updated)
             XCTAssertNotNil(environment.status)
-            XCTAssertNotNil(environment.indexCapacity.diskUsage)
-            XCTAssertNotNil(environment.indexCapacity.memoryUsage)
+            XCTAssertNotNil(environment.indexCapacity?.diskUsage)
+            XCTAssertNotNil(environment.indexCapacity?.memoryUsage)
             
             // check all the fields within diskUsage are present
-            let diskUsage = environment.indexCapacity.diskUsage
-            XCTAssertNotNil(diskUsage.usedBytes)
-            XCTAssertNotNil(diskUsage.totalBytes)
-            XCTAssertNotNil(diskUsage.used)
-            XCTAssertNotNil(diskUsage.total)
-            XCTAssertNotNil(diskUsage.percentUsed)
+            let diskUsage = environment.indexCapacity?.diskUsage
+            XCTAssertNotNil(diskUsage?.usedBytes)
+            XCTAssertNotNil(diskUsage?.totalBytes)
+            XCTAssertNotNil(diskUsage?.used)
+            XCTAssertNotNil(diskUsage?.total)
+            XCTAssertNotNil(diskUsage?.percentUsed)
             
             // check all the fields within memoryUsage are present
-            let memoryUsage = environment.indexCapacity.memoryUsage
-            XCTAssertNotNil(memoryUsage.usedBytes)
-            XCTAssertNotNil(memoryUsage.totalBytes)
-            XCTAssertNotNil(memoryUsage.used)
-            XCTAssertNotNil(memoryUsage.total)
-            XCTAssertNotNil(memoryUsage.percentUsed)
+            let memoryUsage = environment.indexCapacity?.memoryUsage
+            XCTAssertNotNil(memoryUsage?.usedBytes)
+            XCTAssertNotNil(memoryUsage?.totalBytes)
+            XCTAssertNotNil(memoryUsage?.used)
+            XCTAssertNotNil(memoryUsage?.total)
+            XCTAssertNotNil(memoryUsage?.percentUsed)
             
             expectation.fulfill()
         }

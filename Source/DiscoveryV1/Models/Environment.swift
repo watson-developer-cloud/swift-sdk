@@ -39,7 +39,7 @@ public struct Environment: JSONDecodable {
     public let status: String
     
     /// Object containing information about disk and memory usage.
-    public let indexCapacity: IndexCapacity
+    public let indexCapacity: IndexCapacity?
     
     /// Used internally to initialize an `Environment` model from JSON.
     public init(json: JSON) throws {
@@ -49,7 +49,7 @@ public struct Environment: JSONDecodable {
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
         status = try json.getString(at: "status")
-        indexCapacity = try json.decode(at: "index_capacity")
+        indexCapacity = try? json.decode(at: "index_capacity")
     }
 }
 

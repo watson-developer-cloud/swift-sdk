@@ -91,6 +91,7 @@ class DiscoveryTests: XCTestCase {
             failure: failure) { environment in
                 self.environmentID = environment.environmentID
                 expectation.fulfill()
+                return
         }
         waitForExpectations()
     }
@@ -385,7 +386,7 @@ class DiscoveryTests: XCTestCase {
         let description = "Create a new collection."
         let expectation = self.expectation(description: description)
         
-        let collectionName = "swift-sdk-unit-test-collection"
+        let collectionName = "swift-sdk-unit-test-collection-to-delete"
         let collectionDescription = "collection for test suite"
         var collectionID: String?
         
@@ -530,28 +531,19 @@ class DiscoveryTests: XCTestCase {
         let description = "Query news resources in Watson collection."
         let expectation = self.expectation(description: description)
         
-        
-        
-        let newsEnvironmentID = "bb6407ab-fc75-434c-a5dc-dd85acfceaa8"
-//        let watsonCollectionID = "779825db-e4db-4e51-a811-2facc6299eeb"
-        let newsCollectionID = "779825db-e4db-4e51-a811-2facc6299eeb"
-        //let query = "entities:(text:IBM,type:company),entities:(text:Carmen Gonsalez,type:Person),language:english,taxonomy:(label:\"technology and computing\")&return=url,enrichedTitle.text"
         let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
         let query2 = "results.concepts.entities:(text:Congress,type:Organization),results.concepts.entities:(text:John F. Kennedy,type:Person),language:english,taxonomy:(label:\"unrest and war\")&return=url,enrichedTitle.text"
-//        let aggregation = "aggregation=[timeslice(blekko.chrondate,1day).nested(entities).filter(entities.type:Company).term(entities.text),nested(entities).filter(entities.type:Company).term(entities.text),nested(entities).filter(entities.type:Person).term(entities.text.raw),nested(keywords).term(keywords.text.raw),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
         let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
         let filter = "blekko.chrondate>1481335550"
         let returnWatson = "url,enrichedTitle.text,text,docSentiment.type,blekko.chrondate"
-//        NSLog("environment ID = \(environmentID!)")
-//        NSLog("collection ID = \(collectionID!)")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: newsEnvironmentID,
-            withCollectionID: newsCollectionID,
-            withFilter: nil,
-            withQuery: nil,
-            withAggregation: nil,
+            withEnvironmentID: newsEnvironmentID!,
+            withCollectionID: newsCollectionID!,
+            withFilter: filter,
+            withQuery: query,
+            withAggregation: aggregation,
             count: 10,
-            return: nil,
+            return: returnWatson,
             failure: failWithError) {
                 queryResponse in
                 XCTAssertNotNil(queryResponse.aggregations)

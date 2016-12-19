@@ -24,7 +24,7 @@ import RestKit
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/discovery-experimental/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/discovery/api"
     
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -85,7 +85,12 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let name = name {
-            queryParameters.append(URLQueryItem(name: "name", value: name))
+            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
         }
         
         // construct REST request
@@ -304,6 +309,14 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -501,17 +514,27 @@ public class Discovery {
      Get all existing collections.
 
      - parameter withEnvironmentID: The ID of the environment the collections are stored in.
+     - parameter withName: The name of the collection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the collections.
     */
     public func getCollections(
         withEnvironmentID environmentID: String,
+        withName name: String?,
         failure: ((Error) -> Void)? = nil,
         success: @escaping([Collection]) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
+                let error = failWithError(reason: encodingError)
+                failure?(error)
+                return
+            }
+            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
+        }
         
         // construct REST request
         let request = RestRequest(

@@ -25,6 +25,10 @@ class DiscoveryTests: XCTestCase {
     private let environmentName: String = "swift-sdk-unit-test-environment"
     private let testDescription: String = "For testing"
     private var environmentID: String?
+    private let newsEnvironmentName: String = "Watson News Environment"
+    private var newsEnvironmentID: String?
+    private let newsCollectionName: String = "watson_news"
+    private var newsCollectionID: String?
     private let collectionName: String = "swift-sdk-unit-test-collection"
     private var collectionID: String?
     private var configurationID: String?
@@ -35,6 +39,7 @@ class DiscoveryTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateDiscovery()
+        lookupNewsCollectionEnvironment()
         lookupEnvironment()
         lookupConfiguration()
         lookupCollection()
@@ -44,7 +49,7 @@ class DiscoveryTests: XCTestCase {
     func instantiateDiscovery() {
         let username = Credentials.DiscoveryUsername
         let password = Credentials.DiscoveryPassword
-        let version = "2016-11-07"
+        let version = "2016-12-01"
         discovery = Discovery(username: username, password: password, version: version)
     }
     
@@ -122,7 +127,7 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let failure = { (error: Error) in XCTFail("Could not find collection with specified environmentID") }
-        discovery.getCollections(withEnvironmentID: environmentID!, failure: failure) {
+        discovery.getCollections(withEnvironmentID: environmentID!, withName: nil, failure: failure) {
             collections in
             for collection in collections {
                 if self.collectionName == collection.name {
@@ -137,6 +142,49 @@ class DiscoveryTests: XCTestCase {
         if collectionID == nil {
             createCollection()
         }
+    }
+    
+    /** Look up news collection from the given news environment. */
+    func lookupNewsCollectionEnvironment() {
+        let description = "Look up example news environment."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            XCTFail("Failed to locate news environment")
+        }
+        
+        discovery.getEnvironments(withName: newsEnvironmentName, failure: failure) { environments in
+            for environment in environments {
+                if environment.name == self.newsEnvironmentName {
+                    self.newsEnvironmentID = environment.environmentID
+                    NSLog("news environment ID = \(self.newsEnvironmentID)")
+                    expectation.fulfill()
+                    return
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Look up news collection within found news environment"
+        let expectation2 = self.expectation(description: description2)
+        
+        let failure2 = { (error: Error) in
+            XCTFail("Failed to locate news collection")
+        }
+        
+        discovery.getCollections(withEnvironmentID: newsEnvironmentID!, withName: newsCollectionName, failure: failure2) { collections in
+            for collection in collections {
+                if collection.name == self.newsCollectionName {
+                    self.newsCollectionID = collection.collectionID
+                    NSLog("news collection ID = \(self.newsCollectionID)")
+                    expectation2.fulfill()
+                    return
+                }
+            }
+            expectation2.fulfill()
+        }
+        waitForExpectations()
     }
     
     /** Create a collection for the test suite. */
@@ -322,7 +370,7 @@ class DiscoveryTests: XCTestCase {
             return
         }
         
-        discovery.getCollections(withEnvironmentID: environmentID) {
+        discovery.getCollections(withEnvironmentID: environmentID, withName: collectionName) {
             collections in
             XCTAssertNotNil(collections)
             expectation.fulfill()
@@ -476,10 +524,40 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
-    func testQueryInCollection() {
+    func testQueryInNewsCollection() {
         let description = "Query news resources in Watson collection."
         let expectation = self.expectation(description: description)
         
         
+        
+        let newsEnvironmentID = "bb6407ab-fc75-434c-a5dc-dd85acfceaa8"
+//        let watsonCollectionID = "779825db-e4db-4e51-a811-2facc6299eeb"
+        let newsCollectionID = "779825db-e4db-4e51-a811-2facc6299eeb"
+        //let query = "entities:(text:IBM,type:company),entities:(text:Carmen Gonsalez,type:Person),language:english,taxonomy:(label:\"technology and computing\")&return=url,enrichedTitle.text"
+        let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
+        let query2 = "results.concepts.entities:(text:Congress,type:Organization),results.concepts.entities:(text:John F. Kennedy,type:Person),language:english,taxonomy:(label:\"unrest and war\")&return=url,enrichedTitle.text"
+//        let aggregation = "aggregation=[timeslice(blekko.chrondate,1day).nested(entities).filter(entities.type:Company).term(entities.text),nested(entities).filter(entities.type:Company).term(entities.text),nested(entities).filter(entities.type:Person).term(entities.text.raw),nested(keywords).term(keywords.text.raw),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
+        let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
+        let filter = "blekko.chrondate>1481335550"
+        let returnWatson = "url,enrichedTitle.text,text,docSentiment.type,blekko.chrondate"
+//        NSLog("environment ID = \(environmentID!)")
+//        NSLog("collection ID = \(collectionID!)")
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
+            withFilter: nil,
+            withQuery: nil,
+            withAggregation: nil,
+            count: 10,
+            return: nil,
+            failure: failWithError) {
+                queryResponse in
+                XCTAssertNotNil(queryResponse.aggregations)
+                XCTAssertNotNil(queryResponse.matchingResults)
+                XCTAssertNotNil(queryResponse.results)
+                
+                expectation.fulfill()
+        }
+        waitForExpectations()
     }
 }

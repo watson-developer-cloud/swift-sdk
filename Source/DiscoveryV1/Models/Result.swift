@@ -56,9 +56,6 @@ public struct Result: JSONDecodable {
     /// The named entities extracted from a document.
     public let entities: [Entity]?
     
-//    /// The publication date in epoch seconds from UTC.
-//    public let chrondate: Int?
-    
     public let extractedMetadata: String?
     
     public let html: String?
@@ -96,6 +93,7 @@ public struct Result: JSONDecodable {
     /// The URL of the result.
 //    public let resultURL: String?
 //    
+    /// 
     public let key: String?
     
     public let matchingResults: Int?
@@ -111,7 +109,6 @@ public struct Result: JSONDecodable {
         status = try? json.getString(at: "status")
         documentSentiment = try? json.decode(at: "docSentiment", type: Sentiment.self)
         taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
-//        chrondate = try? json.getInt(at: "chrondate")
         enrichedTitle = try? json.decode(at: "enrichedTitle", type: EnrichedTitle.self)
         publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)

@@ -556,6 +556,8 @@ class DiscoveryTests: XCTestCase {
         let query2 = "results.concepts.entities:(text:Congress,type:Organization),results.concepts.entities:(text:John F. Kennedy,type:Person),language:english,taxonomy:(label:\"unrest and war\")&return=url,enrichedTitle.text"
         let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
         let filter = "blekko.chrondate>1481335550"
+        let filterDate = 1481335550
+        let count = 10
         let returnWatson = "url,enrichedTitle.text,text,docSentiment.type,blekko.chrondate"
         discovery.queryDocumentsInCollection(
             withEnvironmentID: newsEnvironmentID!,
@@ -563,12 +565,96 @@ class DiscoveryTests: XCTestCase {
             withFilter: filter,
             withQuery: query,
             withAggregation: aggregation,
-            count: 10,
+            count: count,
             return: returnWatson,
             failure: failWithError) {
                 queryResponse in
-                XCTAssertNotNil(queryResponse.aggregations)
                 XCTAssertNotNil(queryResponse.matchingResults)
+                if let count = queryResponse.matchingResults {
+                    XCTAssertGreaterThan(count, 0)
+                }
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    XCTAssertEqual(count, results.count)
+                    for result in results {
+                        XCTAssertNotNil(result.documentID)
+                        XCTAssertNotNil(result.score)
+                        if let sentiment = result.documentSentiment {
+                            XCTAssertNotNil(sentiment.type)
+                        }
+                        if let blekko = result.blekko {
+                            if let chronDate = blekko.chrondate {
+                                XCTAssertGreaterThan(chronDate, filterDate)
+                            }
+                        }
+                        XCTAssertNotNil(result.text)
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.text)
+                        }
+                        XCTAssertNotNil(result.extractedURL)
+                        break
+                    }
+                }
+                /// Test all different types of aggregation queries.
+                XCTAssertNotNil(queryResponse.aggregations)
+                if let aggregations = queryResponse.aggregations {
+                    for aggregation in aggregations {
+                        if let type = aggregation.type {
+                            XCTAssertNotNil(type)
+                            if type == "term" {
+                                XCTAssertNotNil(aggregation.field)
+                                if let results = aggregation.results {
+                                    for result in results {
+                                        XCTAssertNotNil(result.key)
+                                        XCTAssertNotNil(result.matchingResults)
+                                        break
+                                    }
+                                }
+                            }
+                            if type == "filter" {
+                                XCTAssertNotNil(aggregation.match)
+                                XCTAssertNotNil(aggregation.matchingResults)
+                                if let results = aggregation.results {
+                                    for result in results {
+                                        XCTAssertNotNil(result.key)
+                                        XCTAssertNotNil(result.matchingResults)
+                                        break
+                                    }
+                                }
+                                if let aggregations = aggregation.aggregations {
+                                    XCTAssertNotNil(aggregations)
+                                }
+                            }
+                            if type == "max" || type == "min" {
+                                XCTAssertNotNil(aggregation.value)
+                            }
+                            if type == "timeslice" {
+                                XCTAssertEqual("12h", aggregation.interval)
+                                if let results = aggregation.results {
+                                    for result in results {
+                                        XCTAssertNotNil(result.matchingResults)
+                                        XCTAssertNotNil(result.aggregations)
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                        if let field = aggregation.field {
+                            XCTAssertNotNil(field)
+                            if field == "blekko.host" {
+                                if let results = aggregation.results {
+                                    for result in results {
+                                        XCTAssertNotNil(result.aggregations)
+                                        break
+                                    }
+                                }
+                            }
+                        }
+
+                        XCTAssertNotNil(aggregation.type)
+                    }
+                }
                 XCTAssertNotNil(queryResponse.results)
                 
                 expectation.fulfill()

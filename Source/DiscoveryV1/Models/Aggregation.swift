@@ -20,36 +20,58 @@ import RestKit
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public struct Aggregation: JSONDecodable {
     
-//    /// Type of aggregation.
-//    public let type: String?
-//    
-//    /// The path along the given document structure parsed by the Watson service.
-//    public let path: String?
+    /// Type of aggregation command used. e.g. term, filter, max, min, etc.
+    public let type: String?
     
-    /// Number of matching results
+    /// The field where the aggregation is located in the document.
+    public let field: String?
+    
+    /// Results of the aggregation
+    public let results: [AggregationResult]?
+    
+    /// The match the aggregated results queried for.
+    public let match: String?
+    
+    /// Number of matching results.
     public let matchingResults: Int?
     
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
     
-//    public let field: String?
-//    
-//    public let match: String?
-//    
-//    /// Results returned by the Discovery service.
-//    public let results: [Result]?
-//    
-//    public let value: Int?
-//    
-//    public let key: String?
-//    
-//    public let interval: String?
+    /// Interval specified by using aggregation type 'timeslice'
+    public let interval: String?
     
+    /// Value of the aggregation. (For 'max' and 'min' type).
+    public let value: Double?
     
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSON) throws {
+        type = try? json.getString(at: "type")
+        field = try? json.getString(at: "field")
+        results = try? json.decodedArray(at: "results", type: AggregationResult.self)
+        match = try? json.getString(at: "match")
         matchingResults = try? json.getInt(at: "matching_results")
-//        results = try? json.decodedArray(at: "results", type: Result.self)
+        aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
+        interval = try? json.getString(at: "interval")
+        value = try? json.getDouble(at: "value")
+    }
+}
+
+public struct AggregationResult: JSONDecodable {
+    
+    /// Key that matched the aggregation type.
+    public let key: String?
+    
+    /// Number of matching results.
+    public let matchingResults: Int?
+    
+    /// Aggregations returned in the case of chained aggregations.
+    public let aggregations: [Aggregation]?
+    
+    /// Used internally to initialze an 'AggregationResult' model from JSON.
+    public init(json: JSON) throws {
+        key = try? json.getString(at: "key")
+        matchingResults = try? json.getInt(at: "matching_results")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
     }
 }

@@ -115,6 +115,7 @@ public class Discovery {
      available disk space, and 1GB RAM.
      
      - parameter name: The name of the new environment.
+     - parameter withSize: The size of the environment.
      - parameter description: The description of the new environment.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the newly created environment.

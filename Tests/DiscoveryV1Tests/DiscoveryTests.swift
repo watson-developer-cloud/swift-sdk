@@ -240,30 +240,40 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Create and delete an environment. */
-    func testCreateAndDeleteEnvironment() {
-        let description = "Create a new environment."
+    /** Delete and create a test environment. */
+    func testDeleteAndCreateEnvironment() {
+        
+        let description = "Delete the existing test environment."
         let expectation = self.expectation(description: description)
         
-        let environmentName = "swift-sdk-unit-test-environment"
-        let environmentDescription = "A temporary environment created for a Swift SDK test."
+        discovery.deleteEnvironment(withID: self.environmentID!, failure: failWithError) {
+            environment in
+            
+            XCTAssertEqual(environment.environmentID, self.environmentID)
+            XCTAssertEqual(environment.status, "deleted")
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
         
-        var environmentID: String?
+        let description2 = "Recreate the deleted environment."
+        let expectation2 = self.expectation(description: description2)
+
         discovery.createEnvironment(
             withName: environmentName,
             withSize: .zero,
-            withDescription: environmentDescription,
+            withDescription: testDescription,
             failure: failWithError)
         {
             environment in
             
             // verify that an environment ID was returned, and save this value
             XCTAssertNotNil(environment.environmentID)
-            environmentID = environment.environmentID
+            self.environmentID = environment.environmentID
             
             // check all the fields are present
-            XCTAssertEqual(environment.name, environmentName)
-            XCTAssertEqual(environment.description, environmentDescription)
+            XCTAssertEqual(environment.name, self.environmentName)
+            XCTAssertEqual(environment.description, self.testDescription)
             XCTAssertNotNil(environment.created)
             XCTAssertNotNil(environment.updated)
             XCTAssertNotNil(environment.status)
@@ -285,19 +295,6 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(memoryUsage?.used)
             XCTAssertNotNil(memoryUsage?.total)
             XCTAssertNotNil(memoryUsage?.percentUsed)
-            
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        let description2 = "Delete the new environment."
-        let expectation2 = self.expectation(description: description2)
-        
-        discovery.deleteEnvironment(withID: environmentID!, failure: failWithError) {
-            environment in
-            
-            XCTAssertEqual(environment.environmentID, environmentID)
-            XCTAssertEqual(environment.status, "deleted")
             
             expectation2.fulfill()
         }

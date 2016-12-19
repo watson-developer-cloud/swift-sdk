@@ -83,15 +83,10 @@ public class Discovery {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let name = name {
-            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
+            queryParameters.append(URLQueryItem(name: "name", value: name))
         }
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
@@ -308,15 +303,10 @@ public class Discovery {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let name = name {
-            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
+            queryParameters.append(URLQueryItem(name: "name", value: name))
         }
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(
@@ -526,15 +516,10 @@ public class Discovery {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
         if let name = name {
-            guard let nameEncoded = name.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "name", value: nameEncoded))
+            queryParameters.append(URLQueryItem(name: "name", value: name))
         }
+        queryParameters.append(URLQueryItem(name: "version", value: version))
         
         // construct REST request
         let request = RestRequest(

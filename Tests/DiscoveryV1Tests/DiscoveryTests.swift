@@ -417,7 +417,7 @@ class DiscoveryTests: XCTestCase {
             options: ["extract": "keyword"])
         
         let configuration = ConfigurationDetails(
-            name: "swift-sdk-unit-test-environment",
+            name: "swift-sdk-unit-test-configuration",
             description: "test configuration",
             conversions: conversions,
             enrichments: [enrichment],
@@ -516,6 +516,119 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(configuration.normalizations)
                 
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test updating a configuration. */
+    func testCreateUpdateAndDeleteConfiguration() {
+        let description = "Create a new configuration."
+        let expectation = self.expectation(description: description)
+        
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+        
+        let enrichment = Enrichment(
+            destinationField: "alchemy_enriched_text",
+            sourceField: "text",
+            enrichment: "alchemy_language",
+            options: ["extract": "keyword"])
+        
+        let configuration = ConfigurationDetails(
+            name: "swift-sdk-unit-test-configuration",
+            description: "test configuration",
+            enrichments: [enrichment])
+        
+        var newConfigurationID: String?
+        
+        discovery.createConfiguration(
+            withEnvironmentID: environmentID,
+            configuration: configuration,
+            failure: failWithError) { configuration in
+                
+                XCTAssertNotNil(configuration.configurationID)
+                newConfigurationID = configuration.configurationID
+                expectation.fulfill()
+        }
+        waitForExpectations()
+
+        guard let newConfigID = newConfigurationID else {
+            XCTFail("Failed to instantiate configurationID when creating configuration.")
+            return
+        }
+        
+        let description2 = "Update the configuration."
+        let expectation2 = self.expectation(description: description2)
+        
+        let normalization = Normalization(
+            operation: .move,
+            sourceField: "extracted_metadata.title",
+            destinationField: "metadata.title"
+        )
+        
+        let configuration2 = ConfigurationDetails(
+            name: "swift-sdk-unit-test-new-configuration",
+            description: "replacement test configuration",
+            normalizations: [normalization])
+        
+        discovery.updateConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: newConfigID,
+            configuration: configuration2,
+            failure: failWithError) { configuration in
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Retrieve details of the updated configuration."
+        let expectation3 = self.expectation(description: description3)
+        
+        discovery.getConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: newConfigID,
+            failure: failWithError) { configuration in
+                
+            // check name changed
+            XCTAssertEqual(configuration.name, "swift-sdk-unit-test-new-configuration")
+            
+            // check description exists
+            XCTAssertEqual(configuration.description, "replacement test configuration")
+            
+            // check conversion object doesn't exist
+            XCTAssertNil(configuration.conversions)
+            
+            // check enrichment object doesn't exist
+            XCTAssertNil(configuration.enrichments)
+            
+            // check normalization object exists
+            XCTAssertNotNil(configuration.normalizations)
+            if let configNormArray = configuration.normalizations {
+                for configNorm in configNormArray {
+                    XCTAssertNotNil(configNorm.operation)
+                    XCTAssertNotNil(configNorm.sourceField)
+                    XCTAssertNotNil(configNorm.destinationField)
+                }
+            }
+            
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        let description4 = "Delete the new configuration."
+        let expectation4 = self.expectation(description: description4)
+        
+        discovery.deleteConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: newConfigID,
+            failure: failWithError) { configuration in
+                
+                XCTAssertEqual(configuration.configurationID, newConfigID)
+                XCTAssertEqual(configuration.status, "deleted")
+                XCTAssertEqual(configuration.noticeMessages?.count, nil)
+                expectation4.fulfill()
         }
         waitForExpectations()
     }

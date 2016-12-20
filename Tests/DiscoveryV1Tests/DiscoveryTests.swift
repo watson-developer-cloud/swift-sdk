@@ -360,6 +360,8 @@ class DiscoveryTests: XCTestCase {
     }
     
     // MARK: Configurations
+    
+    /** Retrieve a list of the configurations in the given environment. */
     func testGetConfigurations() {
         let description = "Retrieve a list of configurations."
         let expectation = self.expectation(description: description)
@@ -378,6 +380,76 @@ class DiscoveryTests: XCTestCase {
                     expectation.fulfill()
                 }
             }
+        }
+        waitForExpectations()
+    }
+    
+    /** Create and delete a configuration. */
+    func testCreateAndDeleteConfiguration() {
+        let description = "Create a new configuration."
+        let expectation = self.expectation(description: description)
+        
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+        
+        let normalization1 = Normalization(
+            operation: .move,
+            sourceField: "extracted_metadata.title",
+            destinationField: "metadata.title"
+        )
+        
+        let normalization2 = Normalization(
+            operation: .remove,
+            sourceField: "extracted_metadata"
+        )
+        
+        let conversions = Conversion(
+            html: ["exclude_tags_keep_content": ["font", "span"]],
+            jsonNormalizations: [normalization1, normalization2]
+        )
+        
+        let enrichment = Enrichment(
+            destinationField: "alchemy_enriched_text",
+            sourceField: "text",
+            enrichment: "alchemy_language",
+            options: ["extract": "keyword"])
+        
+        let configuration = ConfigurationDetails(
+            name: "swift-sdk-unit-test-environment",
+            description: "test configuration",
+            conversions: conversions,
+            enrichments: [enrichment],
+            normalizations: [normalization1, normalization2])
+        
+        var configurationID: String?
+        
+        discovery.createConfiguration(
+        withEnvironmentID: environmentID,
+        configuration: configuration,
+        failure: failWithError) {
+            configuration in
+            
+            
+            XCTAssertNotNil(configuration.configurationID)
+            configurationID = configuration.configurationID
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new configuration."
+        let expectation2 = self.expectation(description: description2)
+        
+        guard let newConfigurationID = configurationID else {
+            XCTFail("Failed to instantiate configurationID when creating configuration.")
+            return
+        }
+        
+        discovery.deleteConfiguration(withEnvironmentID: environmentID, withConfigurationID: newConfigurationID, failure: failWithError) {
+            configuration in
+            
+            expectation2.fulfill()
         }
         waitForExpectations()
     }

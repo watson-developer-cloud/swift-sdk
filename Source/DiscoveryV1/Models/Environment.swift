@@ -125,13 +125,20 @@ public struct MemoryUsage: JSONDecodable {
     }
 }
 
+/** The size of the environment. */
 public enum EnvironmentSize: Int {
     
+    /// A free trial environment. 2GB disk space, 1GB RAM, unlimited enrichments, single search
+    /// node, so therefore no high availability. 30-day trial only.
+    /// Only one free trial environment per service instance is allowed.
     case zero = 0
     
+    /// 48GB disk space, 2GB RAM, 4000 enrichments.
     case one = 1
     
+    /// 192GB disk space, 8GB RAM, 16000 enrichments.
     case two = 2
     
+    /// 384GB disk space, 16GB RAM, 32000 enrichments.
     case three = 3
 }

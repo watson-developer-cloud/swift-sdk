@@ -34,7 +34,7 @@ public struct DeletedConfiguration: JSONDecodable {
     public init(json: JSON) throws {
         configurationID = try json.getString(at: "configuration_id")
         status = try json.getString(at: "status")
-        noticeMessages = try json.decodedArray(at: "notices")
+        noticeMessages = try? json.decodedArray(at: "notices")
     }
 }
 

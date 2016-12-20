@@ -122,7 +122,7 @@ public struct Conversion: JSONDecodable {
     public let html: [String: Any]?
     
     /// An array of JSON normalization operations.
-    public let jsonNormalizations: [Normalization]
+    public let jsonNormalizations: [Normalization]?
     
     /// Used internally to initialize a `Conversion` model from JSON.
     public init(json: JSON) throws {
@@ -147,10 +147,10 @@ public struct Conversion: JSONDecodable {
      - parameter jsonNormalizations: An array of JSON normalization operations.
      */
     public init(
-        word: [String: Any]?,
-        pdf: [String: Any]?,
-        html: [String: Any]?,
-        jsonNormalizations: [Normalization] = [])
+        word: [String: Any]? = nil,
+        pdf: [String: Any]? = nil,
+        html: [String: Any]? = nil,
+        jsonNormalizations: [Normalization]? = [])
     {
         self.word = word
         self.pdf = pdf
@@ -162,15 +162,17 @@ public struct Conversion: JSONDecodable {
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let word = word {
-            json["word"] = JSON(dictionary: word)
+            json["word"] = word
         }
         if let pdf = pdf {
-            json["pdf"] = JSON(dictionary: pdf)
+            json["pdf"] = pdf
         }
         if let html = html {
-            json["html"] = JSON(dictionary: html)
+            json["html"] = html
         }
-        json["json_normalizations"] = jsonNormalizations
+        if let jsonNormalizations = jsonNormalizations {
+            json["json_normalizations"] = jsonNormalizations.map { normalization in normalization.toJSONObject() }
+        }
         return json
     }
 }
@@ -225,7 +227,7 @@ public struct Enrichment: JSONDecodable {
         json["destination_field"] = destinationField
         json["source_field"] = sourceField
         json["enrichment"] = enrichment
-        json["options"] = JSON(dictionary: options)
+        json["options"] = options
         return json
     }
 }
@@ -265,8 +267,8 @@ public struct Normalization: JSONDecodable {
      */
     public init(
         operation: NormalizationOperation,
-        sourceField: String?,
-        destinationField: String?)
+        sourceField: String? = nil,
+        destinationField: String? = nil)
     {
         self.operation = operation
         self.sourceField = sourceField

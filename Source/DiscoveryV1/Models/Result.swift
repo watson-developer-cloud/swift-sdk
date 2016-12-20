@@ -92,12 +92,7 @@ public struct Result: JSONDecodable {
     
     /// The URL of the result.
 //    public let resultURL: String?
-//    
-    /// 
-    public let key: String?
-    
-    public let matchingResults: Int?
-    
+//
     public let keyAsString: String?
     
     public let aggregations: [Aggregation]?
@@ -128,8 +123,7 @@ public struct Result: JSONDecodable {
         concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
 //        enrichedText = try? json.decode(at: "enriched_text", type: EnrichedText.self)
 //        resultURL = try? json.getString(at: "url")
-        key = try? json.getString(at: "key")
-        matchingResults = try? json.getInt(at: "matching_results")
+
         keyAsString = try? json.getString(at: "key_as_string")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
     }

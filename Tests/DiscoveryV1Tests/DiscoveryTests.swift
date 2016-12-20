@@ -423,17 +423,46 @@ class DiscoveryTests: XCTestCase {
             enrichments: [enrichment],
             normalizations: [normalization1, normalization2])
         
-        var configurationID: String?
+        var newConfigurationID: String?
         
         discovery.createConfiguration(
-        withEnvironmentID: environmentID,
-        configuration: configuration,
-        failure: failWithError) {
-            configuration in
+            withEnvironmentID: environmentID,
+            configuration: configuration,
+            failure: failWithError) { configuration in
             
+            // check description exists
+            XCTAssertEqual(configuration.description, "test configuration")
+                
+            // check conversion object exists, fields exist within it
+            XCTAssertNotNil(configuration.conversions)
+            if let configConversion = configuration.conversions {
+                XCTAssertNil(configConversion.word)
+                XCTAssertNil(configConversion.pdf)
+                XCTAssertNotNil(configConversion.html)
+                XCTAssertNotNil(configConversion.jsonNormalizations)
+            }
+                
+            // check enrichment object exists, fields exist within it
+            XCTAssertNotNil(configuration.enrichments)
+            if let configEnrichment = configuration.enrichments?[0] {
+                XCTAssertNotNil(configEnrichment)
+                XCTAssertEqual(configEnrichment.destinationField, enrichment.destinationField)
+                XCTAssertEqual(configEnrichment.sourceField, enrichment.sourceField)
+                XCTAssertEqual(configEnrichment.enrichment, enrichment.enrichment)
+                XCTAssertNotNil(configEnrichment.options)
+            }
             
+            // check normalization object exists
+            XCTAssertNotNil(configuration.normalizations)
+            if let configNormArray = configuration.normalizations {
+                for configNorm in configNormArray {
+                    XCTAssertNotNil(configNorm.operation)
+                    XCTAssertNotNil(configNorm.sourceField)
+                }
+            }
+                
             XCTAssertNotNil(configuration.configurationID)
-            configurationID = configuration.configurationID
+            newConfigurationID = configuration.configurationID
             expectation.fulfill()
         }
         waitForExpectations()
@@ -441,15 +470,52 @@ class DiscoveryTests: XCTestCase {
         let description2 = "Delete the new configuration."
         let expectation2 = self.expectation(description: description2)
         
-        guard let newConfigurationID = configurationID else {
+        guard let newConfigID = newConfigurationID else {
             XCTFail("Failed to instantiate configurationID when creating configuration.")
             return
         }
         
-        discovery.deleteConfiguration(withEnvironmentID: environmentID, withConfigurationID: newConfigurationID, failure: failWithError) {
-            configuration in
+        discovery.deleteConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: newConfigID,
+            failure: failWithError) { configuration in
             
+            XCTAssertEqual(configuration.configurationID, newConfigID)
+            XCTAssertEqual(configuration.status, "deleted")
+            XCTAssertEqual(configuration.noticeMessages?.count, nil)
             expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Get the default configuration. */
+    func testGetDefaultConfigurationDetails() {
+        let description = "Retrieve details of the default configuration."
+        let expectation = self.expectation(description: description)
+        
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+        
+        guard let configurationID = configurationID else {
+            XCTFail("Failed to find the default configuration.")
+            return
+        }
+        
+        discovery.getConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: configurationID,
+            failure: failWithError) { configuration in
+                
+            XCTAssertEqual(configuration.configurationID, configurationID)
+            XCTAssertEqual(configuration.name, "Default Configuration")
+            XCTAssertEqual(configuration.description, "The configuration used by default when creating a new collection without specifying a configuration_id.")
+            XCTAssertNotNil(configuration.conversions)
+            XCTAssertNotNil(configuration.enrichments)
+            XCTAssertNotNil(configuration.normalizations)
+                
+            expectation.fulfill()
         }
         waitForExpectations()
     }

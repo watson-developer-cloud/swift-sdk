@@ -36,7 +36,7 @@ public class AlchemyLanguage {
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
     
     // The characters at the end of the CharacterSet break in Linux
-    private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")//-._~")
+    private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-._~")
     /**
      Create an `AlchemyLanguage` object.
      

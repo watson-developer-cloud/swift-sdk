@@ -1071,14 +1071,97 @@ class DiscoveryTests: XCTestCase {
                         XCTAssertNotNil(result.score)
                         XCTAssertNotNil(result.enrichedTitle)
                         if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.concepts)
+                            var conceptMatchesQuery = false
                             if let concepts = enrichedTitle.concepts {
                                 for concept in concepts {
                                     if concept.text == query {
+                                        conceptMatchesQuery = true
                                         XCTAssertNotNil(concept.website, "http://www.un.org/")
                                         XCTAssertNotNil(concept.dbpedia)
                                         XCTAssertNotNil(concept.relevance)
+                                        XCTAssertNotNil(concept.freebase)
+                                        XCTAssertNotNil(concept.yago)
                                         break
                                     }
+                                }
+                            }
+                            XCTAssertEqual(true, conceptMatchesQuery)
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /* Test EnrichedTitle.docSentiment model within the documents in the test collection. */
+    func testDocumentSentimentModel() {
+        let description = "Test EnrichedTitle.docSentiment model within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.docSentiment"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.documentSentiment)
+                            if let documentSentiment = enrichedTitle.documentSentiment {
+                                XCTAssertNotNil(documentSentiment.mixed)
+                                XCTAssertNotNil(documentSentiment.score)
+                                XCTAssertNotNil(documentSentiment.type)
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /* Test EnrichedTitle.taxonomy within the document in the test collection.*/
+    func testTaxonomyModel() {
+        let description = "Test EnrichedTitle.docSentiment model within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.taxonomy"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.taxonomy)
+                            if let taxonomies = enrichedTitle.taxonomy {
+                                for taxonomy in taxonomies {
+                                    XCTAssertNotNil(taxonomy.score)
+                                    XCTAssertNotNil(taxonomy.confident)
+                                    XCTAssertNotNil(taxonomy.label)
                                 }
                             }
                         }
@@ -1089,4 +1172,80 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
+    /* Test EnrichedTitle.relations, SAO relations within the document in the test collection. */
+    func testRelationsModel() {
+        let description = "Test EnrichedTitle.docSentiment, subject, action, object models within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.relations"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.relations)
+                            if let relations = enrichedTitle.relations {
+                                for relation in relations {
+                                    XCTAssertNotNil(relation.sentence)
+                                    XCTAssertNotNil(relation.action)
+                                    if let action = relation.action {
+                                        XCTAssertNotNil(action.lemmatized)
+                                        XCTAssertNotNil(action.text)
+                                        XCTAssertNotNil(action.verb)
+                                    }
+                                    XCTAssertNotNil(relation.sentence)
+                                    XCTAssertNotNil(relation.subject)
+                                    if let subject = relation.subject {
+                                        if let keywords = subject.keywords {
+                                            for keyword in keywords {
+                                                if let knowledgeGraph = keyword.knowledgeGraph {
+                                                    XCTAssertNotNil(knowledgeGraph.typeHierarchy)
+                                                }
+                                                XCTAssertNotNil(keyword.text)
+                                                break
+                                            }
+                                        }
+                                        XCTAssertNotNil(subject.text)
+                                    }
+                                    if let object = relation.object {
+                                        if let keywords = object.keywords {
+                                            XCTAssertNotNil(keywords[0])
+                                        }
+                                        XCTAssertNotNil(object.text)
+                                        if let sentiment = object.sentiment {
+                                            XCTAssertNotNil(sentiment.mixed)
+                                            XCTAssertNotNil(sentiment.type)
+                                            XCTAssertNotNil(sentiment.score)
+                                        }
+                                    }
+                                    if let entities = relation.entities {
+                                        for entity in entities {
+                                            XCTAssertNotNil(entity.text)
+                                            XCTAssertNotNil(entity.type)
+                                            XCTAssertNotNil(entity.disambiguated)
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 }

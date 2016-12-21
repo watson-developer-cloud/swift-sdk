@@ -88,16 +88,14 @@ public struct Result: JSONDecodable {
     /// Extracted concepts of the document.
     public let concepts: [Concept]?
     
-    //public let enrichedText: EnrichedText?
-    
-    /// The URL of the result.
-//    public let resultURL: String?
-//
     public let keyAsString: String?
     
     public let aggregations: [Aggregation]?
     
-    /// Used internally to initialize a `Notice` model from JSON.
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
+    /// Used internally to initialize a `Result` model from JSON.
     public init(json: JSON) throws {
         documentID = try? json.getString(at: "id")
         score = try? json.getDouble(at: "score")
@@ -121,10 +119,13 @@ public struct Result: JSONDecodable {
         extractedURL = try? json.getString(at: "url")
         title = try? json.getString(at: "title")
         concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
-//        enrichedText = try? json.decode(at: "enriched_text", type: EnrichedText.self)
-//        resultURL = try? json.getString(at: "url")
-
         keyAsString = try? json.getString(at: "key_as_string")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Result' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

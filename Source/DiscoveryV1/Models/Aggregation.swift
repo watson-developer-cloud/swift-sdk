@@ -44,6 +44,9 @@ public struct Aggregation: JSONDecodable {
     /// Value of the aggregation. (For 'max' and 'min' type).
     public let value: Double?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSON) throws {
         type = try? json.getString(at: "type")
@@ -54,6 +57,12 @@ public struct Aggregation: JSONDecodable {
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
         interval = try? json.getString(at: "interval")
         value = try? json.getDouble(at: "value")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'Aggregation' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 
@@ -68,10 +77,19 @@ public struct AggregationResult: JSONDecodable {
     /// Aggregations returned in the case of chained aggregations.
     public let aggregations: [Aggregation]?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialze an 'AggregationResult' model from JSON.
     public init(json: JSON) throws {
         key = try? json.getString(at: "key")
         matchingResults = try? json.getInt(at: "matching_results")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'AggregationResult' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

@@ -331,6 +331,9 @@
 		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
 		CE78B77F1DD233E9003336BD /* BehaviorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77E1DD233E9003336BD /* BehaviorNode.swift */; };
 		CE78B7811DD258B8003336BD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7801DD258B8003336BD /* Warning.swift */; };
+		CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE351E09E358000367FE /* KennedySpeech.html */; };
+		CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE371E09FCC6000367FE /* discoverySample.json */; };
+		CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE3A1E0A221B000367FE /* metadata.json */; };
 		CE8AEBD71E0460D200E61E10 /* DisambiguatedLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBD61E0460D200E61E10 /* DisambiguatedLinks.swift */; };
 		CE8AEBD91E04613500E61E10 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBD81E04613500E61E10 /* KnowledgeGraph.swift */; };
 		CE8AEBDB1E0464FA00E61E10 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBDA1E0464FA00E61E10 /* Concept.swift */; };
@@ -938,6 +941,9 @@
 		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
 		CE78B77E1DD233E9003336BD /* BehaviorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorNode.swift; sourceTree = "<group>"; };
 		CE78B7801DD258B8003336BD /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
+		CE7BEE351E09E358000367FE /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
+		CE7BEE371E09FCC6000367FE /* discoverySample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = discoverySample.json; sourceTree = "<group>"; };
+		CE7BEE3A1E0A221B000367FE /* metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata.json; sourceTree = "<group>"; };
 		CE8AEBD61E0460D200E61E10 /* DisambiguatedLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguatedLinks.swift; sourceTree = "<group>"; };
 		CE8AEBD81E04613500E61E10 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
 		CE8AEBDA1E0464FA00E61E10 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
@@ -1388,7 +1394,10 @@
 		12F8005A1DF71B74006851D6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
+				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
+				CE7BEE3A1E0A221B000367FE /* metadata.json */,
 			);
 			name = Tests;
 			path = ../../Tests/DiscoveryV1Tests;
@@ -3291,6 +3300,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */,
+				CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */,
+				CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

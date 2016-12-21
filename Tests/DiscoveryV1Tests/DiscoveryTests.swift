@@ -936,7 +936,6 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
-        let query2 = "results.concepts.entities:(text:Congress,type:Organization),results.concepts.entities:(text:John F. Kennedy,type:Person),language:english,taxonomy:(label:\"unrest and war\")&return=url,enrichedTitle.text"
         let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
         let filter = "blekko.chrondate>1481335550"
         let filterDate = 1481335550
@@ -1231,15 +1230,85 @@ class DiscoveryTests: XCTestCase {
                                             XCTAssertNotNil(sentiment.score)
                                         }
                                     }
-                                    if let entities = relation.entities {
-                                        for entity in entities {
-                                            XCTAssertNotNil(entity.text)
-                                            XCTAssertNotNil(entity.type)
-                                            XCTAssertNotNil(entity.disambiguated)
-                                            break
-                                        }
-                                    }
                                 }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test enriched_text.entities model. */
+    func testEntityModel() {
+        let description = "Test enriched_text.entities models within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.entities"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.entities)
+                            if let entities = result.entities {
+                                for entity in entities {
+                                    XCTAssertNotNil(entity.count)
+                                    XCTAssertNotNil(entity.disambiguated)
+                                    XCTAssertNotNil(entity.relevance)
+                                    XCTAssertNotNil(entity.text)
+                                    XCTAssertNotNil(entity.type)
+                                    XCTAssertNotNil(entity.sentiment)
+                                }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test aggregation query. */
+    func testEntityAggregationModel() {
+        let description = "Test enriched_text.entities models within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        let aggregation = "max(enriched_text.entities.sentiment.score)"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: aggregation,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                if let results = queryResponse.results {
+                    for result in results {
+                        if let entities = result.entities {
+                            for entity in entities {
+                                XCTAssertNotNil(entity.sentiment)
+                                XCTAssertNotNil(entity.text)
                             }
                         }
                     }

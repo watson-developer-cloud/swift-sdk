@@ -16,6 +16,7 @@
 
 import XCTest
 import Foundation
+import RestKit
 import DiscoveryV1
 
 class DiscoveryTests: XCTestCase {
@@ -32,6 +33,7 @@ class DiscoveryTests: XCTestCase {
     private let collectionName: String = "swift-sdk-unit-test-collection"
     private var collectionID: String?
     private var configurationID: String?
+    private var documentID: String?
     
     // MARK: - Test Configuration
     
@@ -43,6 +45,7 @@ class DiscoveryTests: XCTestCase {
         lookupEnvironment()
         lookupConfiguration()
         lookupCollection()
+        addDocumentToCollection()
     }
     
     /** Instantiate Retrieve and Rank instance. */
@@ -203,6 +206,35 @@ class DiscoveryTests: XCTestCase {
             failure: failure) {
                 collection in
                 self.collectionID = collection.collectionID
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Add document to collection to test. */
+    func addDocumentToCollection() {
+        let description = "Add a document to the collection."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in XCTFail("Could not add document to collection.") }
+        
+        guard let file = Bundle(for: type(of: self)).url(forResource: "KennedySpeech", withExtension: "html") else {
+            XCTFail("Unable to locate KennedySpeech.html")
+            return
+        }
+        discovery.addDocumentToCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withConfigurationID: nil,
+            file: file,
+            fileMimeType: nil,
+            metadata: nil,
+            configuration: nil,
+            failure: failure) {
+                document in
+                XCTAssertNotNil(document.documentID)
+                self.documentID = document.documentID
+                XCTAssertEqual(document.status, DocumentStatus.processing)
                 expectation.fulfill()
         }
         waitForExpectations()
@@ -799,8 +831,108 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
+    // MARK: - Test Documents
+    func testAddDeleteDocumentToCollection() {
+        let description = "Add a document to the sample collection."
+        let expectation = self.expectation(description: description)
+        
+        guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
+            XCTFail("Unable to locate discoverySample.json")
+            return
+        }
+        var documentID: String?
+        // Add document to test collection and environment
+        discovery.addDocumentToCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withConfigurationID: nil,
+            file: file,
+            fileMimeType: nil,
+            metadata: nil,
+            configuration: nil,
+            failure: failWithError) {
+                document in
+                documentID = document.documentID
+                XCTAssertNotNil(document.status)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete newly created document from collection."
+        let expectation2 = self.expectation(description: description2)
+        guard let docID = documentID else {
+            XCTFail("Failed to grab document ID from adding document to collection.")
+            return
+        }
+        // Delete document from test collection and environment
+        discovery.deleteDocumentFromCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withDocumentID: docID,
+            failure: failWithError) {
+                document in
+                XCTAssertEqual(documentID, document.documentID)
+                XCTAssertEqual(DocumentStatus.deleted, document.status)
+                expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /* List details of a document in the test collection. */
+    func testListDocumentDetails() {
+        let description = "List details of a document in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        discovery.listDocumentDetails(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withDocumentID: documentID!,
+            failure: failWithError) { document in
+                XCTAssertEqual(self.documentID!, document.documentID)
+                XCTAssertEqual(document.status, DocumentStatus.processing)
+                XCTAssertNotNil(document.notices)
+                XCTAssertNotNil(document.statusDescription)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /* Update document in the test collection. */
+    func testUpdateDocument() {
+        let description = "Update document name and description in collection."
+        let expectation = self.expectation(description: description)
+        
+        guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
+            XCTFail("Unable to locate discoverySample.json")
+            return
+        }
+        
+        guard let metadata = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
+            XCTFail("Unable to locate metadata.json")
+            return
+        }
+
+        discovery.updateDocumentInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withDocumentID: documentID!,
+            withConfigurationID: nil,
+            file: file,
+            fileMimeType: nil,
+            metadata: metadata,
+            configuration: nil,
+            failure: failWithError) { document in
+                XCTAssertEqual(self.documentID!, document.documentID)
+                XCTAssertEqual(document.status, DocumentStatus.processing)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: - Test Query
+    
     func testQueryInNewsCollection() {
-        let description = "Query news resources in Watson collection."
+        let description = "Query, filter and aggregate news resources in Watson collection."
         let expectation = self.expectation(description: description)
         
         let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
@@ -912,4 +1044,5 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
 }

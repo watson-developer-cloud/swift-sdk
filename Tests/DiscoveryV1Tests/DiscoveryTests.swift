@@ -936,7 +936,6 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
-        let query2 = "results.concepts.entities:(text:Congress,type:Organization),results.concepts.entities:(text:John F. Kennedy,type:Person),language:english,taxonomy:(label:\"unrest and war\")&return=url,enrichedTitle.text"
         let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
         let filter = "blekko.chrondate>1481335550"
         let filterDate = 1481335550
@@ -1285,7 +1284,7 @@ class DiscoveryTests: XCTestCase {
     }
     
     /** Test aggregation query. */
-    func testEntityModel() {
+    func testEntityAggregationModel() {
         let description = "Test enriched_text.entities models within the documents in the test collection."
         let expectation = self.expectation(description: description)
         

@@ -1231,15 +1231,85 @@ class DiscoveryTests: XCTestCase {
                                             XCTAssertNotNil(sentiment.score)
                                         }
                                     }
-                                    if let entities = relation.entities {
-                                        for entity in entities {
-                                            XCTAssertNotNil(entity.text)
-                                            XCTAssertNotNil(entity.type)
-                                            XCTAssertNotNil(entity.disambiguated)
-                                            break
-                                        }
-                                    }
                                 }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test enriched_text.entities model. */
+    func testEntityModel() {
+        let description = "Test enriched_text.entities models within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.entities"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            XCTAssertNotNil(enrichedTitle.entities)
+                            if let entities = result.entities {
+                                for entity in entities {
+                                    XCTAssertNotNil(entity.count)
+                                    XCTAssertNotNil(entity.disambiguated)
+                                    XCTAssertNotNil(entity.relevance)
+                                    XCTAssertNotNil(entity.text)
+                                    XCTAssertNotNil(entity.type)
+                                    XCTAssertNotNil(entity.sentiment)
+                                }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Test aggregation query. */
+    func testEntityModel() {
+        let description = "Test enriched_text.entities models within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        let aggregation = "max(enriched_text.entities.sentiment.score)"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: aggregation,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                if let results = queryResponse.results {
+                    for result in results {
+                        if let entities = result.entities {
+                            for entity in entities {
+                                XCTAssertNotNil(entity.sentiment)
+                                XCTAssertNotNil(entity.text)
                             }
                         }
                     }

@@ -45,6 +45,9 @@ public struct EnrichedTitle: JSONDecodable {
     
     /// Keywords found.
     public let keywords: [Keyword]?
+    
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
 
     /// Used internally to initialize an EnrichedTitle object
     public init(json: JSON) throws {
@@ -56,5 +59,11 @@ public struct EnrichedTitle: JSONDecodable {
         text = try? json.getString(at: "text")
         concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'EnrichedTitle' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

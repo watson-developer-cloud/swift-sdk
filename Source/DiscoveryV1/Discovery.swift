@@ -834,10 +834,18 @@ public class Discovery {
             multipartFormData.append(type, withName: "type")
         }
         if let metadata = metadata {
-            multipartFormData.append(metadata, withName: "metadata")
+            guard let data = try? Data(contentsOf: metadata) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "metadata")
         }
         if let configuration = configuration {
-            multipartFormData.append(configuration, withName: "configuration")
+            guard let data = try? Data(contentsOf: configuration) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "configuration")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -1003,10 +1011,18 @@ public class Discovery {
             multipartFormData.append(type, withName: "type")
         }
         if let metadata = metadata {
-            multipartFormData.append(metadata, withName: "metadata")
+            guard let data = try? Data(contentsOf: metadata) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "metadata")
         }
         if let configuration = configuration {
-            multipartFormData.append(configuration, withName: "configuration")
+            guard let data = try? Data(contentsOf: configuration) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "configuration")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -1016,7 +1032,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents",
+            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             acceptType: "application/json",

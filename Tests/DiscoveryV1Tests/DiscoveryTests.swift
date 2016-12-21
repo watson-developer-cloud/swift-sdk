@@ -1045,4 +1045,48 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
+    /* Test 'Concepts' model within the documents in the test collection. */
+    func testConceptsModel() {
+        let description = "Test \'Concepts\' model within the documents in the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let query = "United Nations"
+        
+        /// Specify which portion of the document hierarchy to return.
+        let returnHierarchies = "enriched_text.concepts"
+        
+        discovery.queryDocumentsInCollection(
+            withEnvironmentID: environmentID!,
+            withCollectionID: collectionID!,
+            withFilter: nil,
+            withQuery: query,
+            withAggregation: nil,
+            count: nil,
+            return: returnHierarchies,
+            failure: failWithError) { queryResponse in
+                XCTAssertNotNil(queryResponse.matchingResults)
+                XCTAssertNotNil(queryResponse.results)
+                if let results = queryResponse.results {
+                    for result in results {
+                        XCTAssertNotNil(result.score)
+                        XCTAssertNotNil(result.enrichedTitle)
+                        if let enrichedTitle = result.enrichedTitle {
+                            if let concepts = enrichedTitle.concepts {
+                                for concept in concepts {
+                                    if concept.text == query {
+                                        XCTAssertNotNil(concept.website, "http://www.un.org/")
+                                        XCTAssertNotNil(concept.dbpedia)
+                                        XCTAssertNotNil(concept.relevance)
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
 }

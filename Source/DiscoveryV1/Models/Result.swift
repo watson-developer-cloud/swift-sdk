@@ -38,7 +38,7 @@ public struct Result: JSONDecodable {
     public let taxonomy: [Taxonomy]?
     
     /// Enrichments to the document as specified by the configurations
-    public let enrichedTitle: EnrichedTitle?
+    public var enrichedTitle: EnrichedTitle?
     
     /// The publication date of the collection in the format yyyy-MM-dd'T'HH:mm
     /// :ss.SSS'Z'.
@@ -103,6 +103,9 @@ public struct Result: JSONDecodable {
         documentSentiment = try? json.decode(at: "docSentiment", type: Sentiment.self)
         taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
         enrichedTitle = try? json.decode(at: "enrichedTitle", type: EnrichedTitle.self)
+        if enrichedTitle == nil {
+            enrichedTitle = try? json.decode(at: "enriched_text", type: EnrichedTitle.self)
+        }
         publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         author = try? json.getString(at: "author")

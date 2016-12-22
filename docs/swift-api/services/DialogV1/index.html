@@ -123,6 +123,7 @@
 <li><a href="#alchemydata-news">AlchemyData News</a></li>
 <li><a href="#alchemylanguage">AlchemyLanguage</a></li>
 <li><a href="#conversation">Conversation</a></li>
+<li><a href="#discovery">Discovery</a></li>
 <li><a href="#document-conversion">Document Conversion</a></li>
 <li><a href="#language-translator">Language Translator</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
@@ -378,6 +379,135 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/conversation.html">IBM Watson Conversation - Service Page</a></li>
 <li><a href="http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml">IBM Watson Conversation - Documentation</a></li>
+</ul>
+<a href='#discovery' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='discovery'>Discovery</h2>
+
+<p>The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.</p>
+
+<p>The following example shows how to instantiate a Discivery object:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DiscoveryV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
+<span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The following example demonstrates how to create a Discovery environment and collection with the default configuration, and add documents to the collection.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="c1">// Create and store the environment ID for you to access later:</span>
+<span class="k">var</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+<span class="k">let</span> <span class="nv">environmentName</span> <span class="o">=</span> <span class="s">"your-environment-name-here"</span>
+
+<span class="n">discovery</span><span class="o">.</span><span class="nf">createEnvironment</span><span class="p">(</span>
+    <span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span>
+    <span class="nv">withSize</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span>
+    <span class="nv">withDescription</span><span class="p">:</span> <span class="n">testDescription</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> 
+<span class="p">{</span>   
+    <span class="n">environment</span> <span class="k">in</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">environmentID</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">environmentID</span>
+<span class="p">}</span>
+
+<span class="c1">// Wait for the environment to be ready before creating a collection:</span>
+<span class="n">bool</span> <span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">environmentReady</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">discovery</span><span class="o">.</span><span class="nf">getEnvironment</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+    <span class="p">{</span> 
+        <span class="n">environment</span> <span class="k">in</span>
+        <span class="k">if</span> <span class="n">environment</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">"active"</span> <span class="p">{</span>
+         <span class="k">self</span><span class="o">.</span><span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Create a collection and store the collection ID for you to access later:</span>
+<span class="k">var</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+
+<span class="k">let</span> <span class="nv">collectionName</span> <span class="o">=</span> <span class="s">"your-collection-name-here"</span>
+<span class="n">discovery</span><span class="o">.</span><span class="nf">createCollection</span><span class="p">(</span>
+    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">withName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
+    <span class="nv">withDescription</span><span class="p">:</span> <span class="n">collectionDescription</span><span class="p">,</span>
+    <span class="nv">withConfigurationID</span><span class="p">:</span> <span class="n">configurationID</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>   
+    <span class="n">collection</span> <span class="k">in</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">collectionID</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">collectionID</span>
+<span class="p">}</span>
+
+<span class="c1">// Wait for the collection to be "available" before adding a document:</span>
+<span class="n">bool</span> <span class="n">collectionReady</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">collectionReady</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">discovery</span><span class="o">.</span><span class="nf">listCollectionDetails</span><span class="p">(</span>
+    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="n">collection</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="kt">CollectionStatus</span><span class="o">.</span><span class="n">active</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">collectionReady</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Add a document to the collection with the saved environment and collection ID:</span>
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="nf">type</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="k">self</span><span class="p">))</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"your-Document-Name"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"document-type"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kt">XCTFail</span><span class="p">(</span><span class="s">"Unable to locate your-Document-Name.document-type"</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+<span class="n">discovery</span><span class="o">.</span><span class="nf">addDocumentToCollection</span><span class="p">(</span>
+    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="n">document</span> <span class="k">in</span>
+    <span class="kt">NSLog</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<p>The following example demonstrates how to perform a query on the Discovery instance using the <code>KennedySpeech.html</code> we have within our <code>DiscoveryV1Tests</code> folder:</p>
+<pre class="highlight swift"><code><span class="c1">/// String to search for within the documents.</span>
+<span class="k">let</span> <span class="nv">query</span> <span class="o">=</span> <span class="s">"United Nations"</span>
+
+<span class="c1">/// Find the max sentiment score for entities within the enriched text.</span>
+<span class="k">let</span> <span class="nv">aggregation</span> <span class="o">=</span> <span class="s">"max(enriched_text.entities.sentiment.score)"</span>
+
+<span class="c1">/// Specify which portion of the document hierarchy to return.</span>
+<span class="k">let</span> <span class="nv">returnHierarchies</span> <span class="o">=</span> <span class="s">"enriched_text.entities.sentiment,enriched_text.entities.text"</span>
+
+<span class="n">discovery</span><span class="o">.</span><span class="nf">queryDocumentsInCollection</span><span class="p">(</span>
+    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
+    <span class="nv">withQuery</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+    <span class="nv">withAggregation</span><span class="p">:</span> <span class="n">aggregation</span><span class="p">,</span>
+    <span class="nv">return</span><span class="p">:</span> <span class="n">returnHierarchies</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+<span class="p">{</span> 
+    <span class="n">queryResponse</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">queryResponse</span><span class="o">.</span><span class="n">results</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="k">in</span> <span class="n">results</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">entities</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">entities</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">entities</span> <span class="p">{</span>
+                        <span class="kt">NSLog</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The following links provide more information about the IBM Discovery service: </p>
+
+<ul>
+<li><a href="http://www.ibm.com/watson/developercloud/discovery.html">IBM Discovery - Service Page</a></li>
+<li><a href="http://www.ibm.com/watson/developercloud/doc/discovery/">IBM Discovery - Documentation</a></li>
+<li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
+<li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
+<li><a href="http://www.ibm.com/watson/developercloud/doc/discovery/query-reference.shtml#parameters">IBM Discovery - Query Building</a></li>
 </ul>
 <a href='#document-conversion' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='document-conversion'>Document Conversion</h2>
 
@@ -950,7 +1080,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-12-06)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-12-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

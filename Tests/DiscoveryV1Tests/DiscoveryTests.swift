@@ -45,7 +45,6 @@ class DiscoveryTests: XCTestCase {
         lookupEnvironment()
         lookupConfiguration()
         lookupCollection()
-        addDocumentToCollection()
     }
     
     /** Instantiate Retrieve and Rank instance. */
@@ -146,6 +145,7 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
         if collectionID == nil {
             createCollection()
+            addDocumentToCollection()
         }
     }
     

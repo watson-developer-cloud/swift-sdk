@@ -115,7 +115,7 @@ public class Discovery {
      available disk space, and 1GB RAM.
      
      - parameter name: The name of the new environment.
-     - parameter withSize: The size of the environment.
+     - parameter size: The size of the environment.
      - parameter description: The description of the new environment.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the newly created environment.
@@ -336,8 +336,8 @@ public class Discovery {
      
      - parameter environmentID: The ID of your environment.
      - parameter configuration:  JSON object that allows you to customize how your content is
-     ingested and what enrichments are added to your data. `name` is required and must be
-     unique within the current environment. All other properties are optional.
+        ingested and what enrichments are added to your data. `name` is required and must be
+        unique within the current environment. All other properties are optional.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the configurations.
      */
@@ -506,8 +506,8 @@ public class Discovery {
     /**
      Get all existing collections.
 
-     - parameter withEnvironmentID: The ID of the environment the collections are stored in.
-     - parameter withName: The name of the collection.
+     - parameter environmentID: The ID of the environment the collections are stored in.
+     - parameter name: The name of the collection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the collections.
     */
@@ -547,10 +547,10 @@ public class Discovery {
     /**
      Create a new collection for storing documents.
      
-     - parameter withEnvironmentID: The unique ID of the environment to create a collection in.
-     - parameter withName: The name of the new collection.
-     - parameter withDescription: The description of the configuration.
-     - parameter withConfigurationID: The unique ID of the configuration the collection will be
+     - parameter environmentID: The unique ID of the environment to create a collection in.
+     - parameter name: The name of the new collection.
+     - parameter description: The description of the configuration.
+     - parameter configurationID: The unique ID of the configuration the collection will be
         created with. If nil, the default value will be specified. Call the getConfigurationID method
         to find the default value.
      - parameter failure: A function executed if an error occurs.
@@ -607,8 +607,8 @@ public class Discovery {
     /** 
      Delete a collection in the environment the collection is located in.
      
-     - parameter withEnvironmentID: The ID of the environment the collection is in.
-     - parameter withCollectionID: The ID of the collection to delete.
+     - parameter environmentID: The ID of the environment the collection is in.
+     - parameter collectionID: The ID of the collection to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the newly deleted environment.
      */
@@ -644,8 +644,8 @@ public class Discovery {
     /** 
      Retrieve the information of a specified collection.
      
-     - paramater withEnvironmentID: The ID of the environment the collection is in.
-     - paramater withCollectionID: The ID of the collection to retrieve details of.
+     - paramater environmentID: The ID of the environment the collection is in.
+     - paramater collectionID: The ID of the collection to retrieve details of.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the collection retrieved.
      */
@@ -681,8 +681,8 @@ public class Discovery {
     /** 
      Replaces an existing collection.
      
-     - paramater withEnvironmentID: The ID of the environment the collection is in.
-     - paramater withCollectionID: The ID of the collection to update by replacing the collection with
+     - paramater environmentID: The ID of the environment the collection is in.
+     - paramater collectionID: The ID of the collection to update by replacing the collection with
         the updated information.
      - parameter name: The updated name of the collection.
      - parameter description: The updated description of the collection. If ommitted, the default
@@ -744,8 +744,8 @@ public class Discovery {
     /** 
      Retrieve all unique fields and each field's type stored in a collection's index.
  
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - paramater withCollectionID: The unique identifier of the collection to display the fields of.
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - paramater collectionID: The unique identifier of the collection to display the fields of.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the fields.
     */
@@ -786,9 +786,9 @@ public class Discovery {
      configuration ID and configuration file are provided, the request will be rejected. Either
      metadata or file must be specified.
         
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - parameter withCollectionID: The unique identifier of the collection to add a document to.
-     - parameter withConfigurationID: The unique identifier of the configuration to process the
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - parameter collectionID: The unique identifier of the collection to add a document to.
+     - parameter configurationID: The unique identifier of the configuration to process the
         document.
      - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
         paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
@@ -877,9 +877,9 @@ public class Discovery {
     /**
      Delete document from collection.
      
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - parameter withCollectionID: The unique identifier of the collection to add a document to.
-     - parameter withDocumentID: The unique identifier of the document.
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - parameter collectionID: The unique identifier of the collection to add a document to.
+     - parameter documentID: The unique identifier of the document.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document deletion status. If the
         given document id is invalid or if the document is not found, the status returned is set 
@@ -920,9 +920,9 @@ public class Discovery {
      and any notices (warnings or errors) that were generated when the document was ingested. To fetch
      the actual document content, use the Query method.
  
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - parameter withCollectionID: The unique identifier of the collection to add a document to.
-     - parameter withDocumentID: The unique identifier of the document.
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - parameter collectionID: The unique identifier of the collection to add a document to.
+     - parameter documentID: The unique identifier of the document.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document.
     */
@@ -960,10 +960,10 @@ public class Discovery {
      Add a new document or replace an existing document with optional metadata and optional configuration
      overrides.
  
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - parameter withCollectionID: The unique identifier of the collection to add a document to.
-     - parameter withDocumentID: The unique identifier of the document.
-     - parameter withConfigurationID: The unique identifier of the configuration to process the
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - parameter collectionID: The unique identifier of the collection to add a document to.
+     - parameter documentID: The unique identifier of the document.
+     - parameter configurationID: The unique identifier of the configuration to process the
         document. If the configuration parameter is also provided at the same time, the request will
         be rejected.
      - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
@@ -1057,12 +1057,12 @@ public class Discovery {
      Query the documents in your collection. See the documentation for reference on how to build
      a query string. https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml.
      
-     - parameter withEnvironmentID: The unique identifier of the environment the collection is in.
-     - parameter withCollectionID: The unique identifier of the collection to add a document to.
-     - parameter withFilter: The filter query that is cacheable and drives performance.
-     - parameter withQuery: The full text (TF/IDF) based ranking query. Not cacheable, but the 
+     - parameter environmentID: The unique identifier of the environment the collection is in.
+     - parameter collectionID: The unique identifier of the collection to add a document to.
+     - parameter filter: The filter query that is cacheable and drives performance.
+     - parameter query: The full text (TF/IDF) based ranking query. Not cacheable, but the
         query returns documents in order based on match level.
-     - parameter withAggregation: Aggregated metrics and answers from the dataset. If the filter
+     - parameter aggregation: Aggregated metrics and answers from the dataset. If the filter
         is provided, aggregation will run only on the matching documents.
      - parameter count: The number of documents to return. 
      - parameter return: An additional filter on the values of the returned document. A comma-separated

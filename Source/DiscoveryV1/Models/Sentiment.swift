@@ -35,7 +35,7 @@ public struct Sentiment: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a Sentiment object
+    /// Used internally to initialize a Sentiment object from JSON.
     public init(json: JSON) throws {
         mixed = try? json.getString(at: "mixed")
         score = try? json.getString(at: "score")

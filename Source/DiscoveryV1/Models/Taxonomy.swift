@@ -36,7 +36,7 @@ public struct Taxonomy: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a Taxonomy object
+    /// Used internally to initialize a Taxonomy object from JSON.
     public init(json: JSON) throws {
         confident = try? json.getString(at: "confident")
         label = try? json.getString(at: "label")

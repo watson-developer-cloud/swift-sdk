@@ -52,8 +52,8 @@ class DiscoveryTests: XCTestCase {
     
     /** Instantiate Retrieve and Rank instance. */
     func instantiateDiscovery() {
-        let username = Credentials.DiscoveryWatsonUsername
-        let password = Credentials.DiscoveryWatsonPassword
+        let username = Credentials.DiscoveryUsername
+        let password = Credentials.DiscoveryPassword
         let version = "2016-12-01"
         discovery = Discovery(username: username, password: password, version: version)
     }

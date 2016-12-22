@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-/** The context, or state, associated with a message. */
+/** A collection for storing documents. */
 public struct Collection: JSONDecodable {
     
     /// The unique identifier of the collection.
@@ -29,8 +29,7 @@ public struct Collection: JSONDecodable {
     /// The description of the collection.
     public let description: String?
     
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm
-    /// :ss.SSS'Z'.
+    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
     public let created: String
     
     /// The timestamp of when the collection was last updated in the format

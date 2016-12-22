@@ -53,7 +53,7 @@ public struct NoticeMessage: JSONDecodable {
     /// Description of the notice.
     public let description: String
     
-    /// Used internally to initialize a `Notice` model from JSON.
+    /// Used internally to initialize a `NoticeMessage` model from JSON.
     public init(json: JSON) throws {
         noticeID = try json.getString(at: "notice_id")
         created = try json.getString(at: "created")

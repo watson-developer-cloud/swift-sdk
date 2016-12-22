@@ -26,7 +26,7 @@ public struct Aggregation: JSONDecodable {
     /// The field where the aggregation is located in the document.
     public let field: String?
     
-    /// Results of the aggregation
+    /// Results of the aggregation.
     public let results: [AggregationResult]?
     
     /// The match the aggregated results queried for.
@@ -38,7 +38,7 @@ public struct Aggregation: JSONDecodable {
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
     
-    /// Interval specified by using aggregation type 'timeslice'
+    /// Interval specified by using aggregation type 'timeslice'.
     public let interval: String?
     
     /// Value of the aggregation. (For 'max' and 'min' type).
@@ -47,7 +47,7 @@ public struct Aggregation: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a `Aggregation` model from JSON.
+    /// Used internally to initialize an `Aggregation` model from JSON.
     public init(json: JSON) throws {
         type = try? json.getString(at: "type")
         field = try? json.getString(at: "field")
@@ -66,6 +66,7 @@ public struct Aggregation: JSONDecodable {
     }
 }
 
+/** Results of the aggregation. */
 public struct AggregationResult: JSONDecodable {
     
     /// Key that matched the aggregation type.

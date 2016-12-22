@@ -26,11 +26,11 @@ public struct Document: JSONDecodable {
     /// The unique identifier of the collection's configuration.
     public let configurationID: String?
     
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm
+    /// The creation date of the document in the format yyyy-MM-dd'T'HH:mm
     /// :ss.SSS'Z'.
     public let created: String?
     
-    /// The timestamp of when the collection was last updated in the format
+    /// The timestamp of when the document was last updated in the format
     /// yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let updated: String?
     

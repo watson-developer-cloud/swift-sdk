@@ -22,10 +22,10 @@ public struct BlekkoResult: JSONDecodable {
     
     /// Language of the document. If the language is something other than "en" for
     /// english, the document will fail to be processed and the Status of the QueryResponse
-    /// will be 'ERROR'
+    /// will be 'ERROR'.
     public let language: String?
     
-    /// Raw title of the document
+    /// Raw title of the document.
     public let rawTitle: [String]?
     
     /// Cleaned title of the document by the service.
@@ -49,6 +49,7 @@ public struct BlekkoResult: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
+    /// Used internally to initialize a `BlekkoResult` model from JSON.
     public init(json: JSON) throws {
         language = try? json.getString(at: "lang")
         rawTitle = try? json.decodedArray(at: "raw_title", type: Swift.String)
@@ -61,7 +62,7 @@ public struct BlekkoResult: JSONDecodable {
         self.json = try json.getDictionaryObject()
     }
     
-    /// Used internally to serialize an 'BlekkoResult' model to JSON.
+    /// Used internally to serialize a 'BlekkoResult' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }

@@ -19,6 +19,7 @@ import RestKit
 
 /** A named entity (a person, company, organization, etc) extracted from a document. */
 public struct Entity: JSONDecodable {
+    
     /// How often this entity is seen.
     public let count: Int?
     
@@ -43,7 +44,7 @@ public struct Entity: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize an Entity object
+    /// Used internally to initialize an `Entity` object from JSON.
     public init(json: JSON) throws {
         count = try? json.getInt(at: "count")
         disambiguated = try? json.decode(at: "disambiguated", type: DisambiguatedLinks.self)

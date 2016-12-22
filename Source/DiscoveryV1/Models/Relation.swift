@@ -38,7 +38,7 @@ public struct Relation: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a Sentiment object
+    /// Used internally to initialize a Relation object from JSON.
     public init(json: JSON) throws {
         action = try? json.decode(at: "action", type: Action.self)
         object = try? json.decode(at: "object", type: RelationObject.self)
@@ -69,7 +69,7 @@ public struct Action: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize an Action object.
+    /// Used internally to initialize an Action object from JSON.
     public init(json: JSON) throws {
         text = try? json.getString(at: "text")
         verb = try? json.decode(at: "verb", type: Verb.self)
@@ -77,7 +77,7 @@ public struct Action: JSONDecodable {
         self.json = try json.getDictionaryObject()
     }
     
-    /// Used internally to initialize an 'Action' model from JSON.
+    /// Used internally to serialize an 'Action' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
@@ -120,7 +120,7 @@ public struct RelationObject: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a RelationObject object
+    /// Used internally to initialize a RelationObject object from JSON.
     public init(json: JSON) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         text = try? json.getString(at: "text")
@@ -137,6 +137,7 @@ public struct RelationObject: JSONDecodable {
     
     /** A keyword. */
     public struct Keyword: JSONDecodable {
+        
         /// Text of the extracted keyword.
         public let text: String?
         
@@ -169,7 +170,7 @@ public struct Subject: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a Subject object
+    /// Used internally to initialize a Subject object from JSON.
     public init(json: JSON) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         text = try? json.getString(at: "text")

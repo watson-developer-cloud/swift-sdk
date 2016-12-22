@@ -27,48 +27,50 @@ import RestKit
 
 public struct DisambiguatedLinks: JSONDecodable {
     
-    /** detected language */
+    /** Detected language. */
     public let language: String?
     
-    /** content URL */
+    /** Content URL. */
     public let url: String?
     
     /**
-     sameAs link to the US Census for this concept tag
-     Note: Provided only for entities that exist in this linked data-set
+     Link to the US Census for this concept tag.
+     Note: Provided only for entities that exist in this linked data-set.
      */
     public let census: String?
     
     /**
-     sameAs link to the CIA World Factbook for this concept tag
-     Note: Provided only for entities that exist in this linked data-set
+     Link to the CIA World Factbook for this concept tag;
+     Note: Provided only for entities that exist in this linked data-set.
      */
     public let ciaFactbook: String?
     
     /**
-     website link to CrunchBase for this concept tag.
+     Link to CrunchBase for this concept tag.
      Note: Provided only for entities that exist in CrunchBase.
      */
     public let crunchbase: String?
     
     /**
-     sameAs link to DBpedia for this concept tag
-     Note: Provided only for entities that exist in this linked data-set
+     Link to DBpedia for this concept tag.
+     Note: Provided only for entities that exist in this linked data-set.
      */
     public let dbpedia: String?
     
     /**
-     sameAs link to Freebase for this concept tag.
-     Note: Provided only for entities that exist in this linked data-set
+     Link to Freebase for this concept tag.
+     Note: Provided only for entities that exist in this linked data-set.
      */
     public let freebase: String?
     
-    /** latitude longitude - the geographic coordinates associated with this concept tag */
+    /**
+     latitude longitude - the geographic coordinates associated with this concept tag.
+     */
     public let geo: String?
     
     /**
-     sameAs link to Geonames for this concept tag
-     Note: Provided only for entities that exist in this linked data-set
+     Link to Geonames for this concept tag.
+     Note: Provided only for entities that exist in this linked data-set.
      */
     public let geonames: String?
     
@@ -108,7 +110,7 @@ public struct DisambiguatedLinks: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a DisambiguatedLinks object
+    /// Used internally to initialize a `DisambiguatedLinks` object.
     public init(json: JSON) throws {
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")

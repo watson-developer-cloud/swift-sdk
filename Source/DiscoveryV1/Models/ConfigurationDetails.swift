@@ -23,14 +23,14 @@ public struct ConfigurationDetails: JSONDecodable, JSONEncodable {
     /// The unique identifier of the configuration.
     public let configurationID: String?
     
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /// The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let created: String?
     
-    /// The timestamp of when the collection was last updated in the format
+    /// The timestamp of when the configuration was last updated in the format
     /// yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let updated: String?
     
-    /// The name of the configurations.
+    /// The name of the configuration.
     public let name: String
     
     /// The description of the configuration, if available.
@@ -290,7 +290,7 @@ public struct Normalization: JSONDecodable {
 }
 
 /**
- The difference JSON normalization operations. Visit the documentation page for more information: 
+ The different JSON normalization operations. Visit the documentation page for more information:
  http://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
  */
 public enum NormalizationOperation: String {

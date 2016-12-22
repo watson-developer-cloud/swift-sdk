@@ -49,7 +49,7 @@ public struct EnrichedTitle: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
 
-    /// Used internally to initialize an EnrichedTitle object
+    /// Used internally to initialize an `EnrichedTitle` object from JSON.
     public init(json: JSON) throws {
         status = try? json.getString(at: "status")
         documentSentiment = try? json.decode(at: "docSentiment", type: Sentiment.self)

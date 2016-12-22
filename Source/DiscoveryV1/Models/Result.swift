@@ -44,6 +44,7 @@ public struct Result: JSONDecodable {
     /// :ss.SSS'Z'.
     public let publicationDate: PublicationDate?
     
+    /// A list of important topics extracted from the document.
     public let keywords: [Keyword]?
     
     /// Detected author of the document.
@@ -56,8 +57,10 @@ public struct Result: JSONDecodable {
     /// The named entities extracted from a document.
     public let entities: [Entity]?
     
+    /// Metadata of the document.
     public let extractedMetadata: String?
     
+    /// HTML of the document.
     public let html: String?
     
     /// Entire text of the document including hyperlinks, url, etc.
@@ -90,6 +93,7 @@ public struct Result: JSONDecodable {
     
     public let keyAsString: String?
     
+    /// A list of aggregations provided by the service.
     public let aggregations: [Aggregation]?
     
     /// The raw JSON object used to construct this model.

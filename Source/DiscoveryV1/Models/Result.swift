@@ -66,8 +66,6 @@ public struct Result: JSONDecodable {
     /// Entire text of the document including hyperlinks, url, etc.
     public let text: String?
     
-    public let acSuggest: [String]?
-    
     /// Results of Blekko search engine.
     public let blekko: BlekkoResult?
     
@@ -90,8 +88,6 @@ public struct Result: JSONDecodable {
     
     /// Extracted concepts of the document.
     public let concepts: [Concept]?
-    
-    public let keyAsString: String?
     
     /// A list of aggregations provided by the service.
     public let aggregations: [Aggregation]?
@@ -118,7 +114,6 @@ public struct Result: JSONDecodable {
         extractedMetadata = try? json.getString(at: "extracted_metadata", "title")
         html = try? json.getString(at: "html")
         text = try? json.getString(at: "text")
-        acSuggest = try? json.decodedArray(at: "ac_suggest", type: Swift.String)
         blekko = try? json.decode(at: "blekko", type: BlekkoResult.self)
         language = try? json.getString(at: "language")
         alchemyapiText = try? json.getString(at: "alchemyapi_text")
@@ -126,7 +121,6 @@ public struct Result: JSONDecodable {
         extractedURL = try? json.getString(at: "url")
         title = try? json.getString(at: "title")
         concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
-        keyAsString = try? json.getString(at: "key_as_string")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
         self.json = try json.getDictionaryObject()
     }

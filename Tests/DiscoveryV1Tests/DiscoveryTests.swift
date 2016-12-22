@@ -739,11 +739,11 @@ class DiscoveryTests: XCTestCase {
     }
     
     /** Retrieve test collection details. */
-    func testRetrieveCollectionDetails() {
+    func testListCollectionDetails() {
         let description = "Retrieve test collection."
         let expectation = self.expectation(description: description)
         
-        discovery.retrieveCollectionDetails(
+        discovery.listCollectionDetails(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
             failure: failWithError) {

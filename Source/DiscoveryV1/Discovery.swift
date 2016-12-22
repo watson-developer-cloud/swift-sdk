@@ -649,7 +649,7 @@ public class Discovery {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the collection retrieved.
      */
-    public func retrieveCollectionDetails(
+    public func listCollectionDetails(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,

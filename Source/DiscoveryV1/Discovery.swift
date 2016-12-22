@@ -513,7 +513,7 @@ public class Discovery {
     */
     public func getCollections(
         withEnvironmentID environmentID: String,
-        withName name: String?,
+        withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping([Collection]) -> Void)
     {
@@ -559,8 +559,8 @@ public class Discovery {
     public func createCollection(
         withEnvironmentID environmentID: String,
         withName name: String,
-        withDescription description: String?,
-        withConfigurationID configurationID: String?,
+        withDescription description: String? = nil,
+        withConfigurationID configurationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(Collection) -> Void)
     {
@@ -696,8 +696,8 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         name: String,
-        description: String?,
-        configurationID: String?,
+        description: String? = nil,
+        configurationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(Collection) -> Void)
     {
@@ -809,11 +809,11 @@ public class Discovery {
     public func addDocumentToCollection(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
-        withConfigurationID configurationID: String?,
-        file: URL?,
-        fileMimeType: String?,
-        metadata: URL?,
-        configuration: URL?,
+        withConfigurationID configurationID: String? = nil,
+        file: URL? = nil,
+        fileMimeType: String? = nil,
+        metadata: URL? = nil,
+        configuration: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(Document) -> Void)
     {
@@ -986,11 +986,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         withDocumentID documentID: String,
-        withConfigurationID configurationID: String?,
-        file: URL?,
-        fileMimeType: String?,
-        metadata: URL?,
-        configuration: URL?,
+        withConfigurationID configurationID: String? = nil,
+        file: URL? = nil,
+        fileMimeType: String? = nil,
+        metadata: URL? = nil,
+        configuration: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(Document) -> Void)
     {
@@ -1076,11 +1076,11 @@ public class Discovery {
     public func queryDocumentsInCollection(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
-        withFilter filter: String?,
-        withQuery query: String?,
-        withAggregation aggregation: String?,
-        count: Int?,
-        return returnQuery: String?,
+        withFilter filter: String? = nil,
+        withQuery query: String? = nil,
+        withAggregation aggregation: String? = nil,
+        count: Int? = nil,
+        return returnQuery: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping(QueryResponse) -> Void)
     {

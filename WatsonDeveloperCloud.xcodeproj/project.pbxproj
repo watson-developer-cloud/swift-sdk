@@ -334,6 +334,7 @@
 		CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE351E09E358000367FE /* KennedySpeech.html */; };
 		CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE371E09FCC6000367FE /* discoverySample.json */; };
 		CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = CE7BEE3A1E0A221B000367FE /* metadata.json */; };
+		CE7BEE401E0C7F69000367FE /* TestConfigurationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BEE3F1E0C7F69000367FE /* TestConfigurationDetails.swift */; };
 		CE8AEBD71E0460D200E61E10 /* DisambiguatedLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBD61E0460D200E61E10 /* DisambiguatedLinks.swift */; };
 		CE8AEBD91E04613500E61E10 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBD81E04613500E61E10 /* KnowledgeGraph.swift */; };
 		CE8AEBDB1E0464FA00E61E10 /* Concept.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AEBDA1E0464FA00E61E10 /* Concept.swift */; };
@@ -944,6 +945,7 @@
 		CE7BEE351E09E358000367FE /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
 		CE7BEE371E09FCC6000367FE /* discoverySample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = discoverySample.json; sourceTree = "<group>"; };
 		CE7BEE3A1E0A221B000367FE /* metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metadata.json; sourceTree = "<group>"; };
+		CE7BEE3F1E0C7F69000367FE /* TestConfigurationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConfigurationDetails.swift; sourceTree = "<group>"; };
 		CE8AEBD61E0460D200E61E10 /* DisambiguatedLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguatedLinks.swift; sourceTree = "<group>"; };
 		CE8AEBD81E04613500E61E10 /* KnowledgeGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraph.swift; sourceTree = "<group>"; };
 		CE8AEBDA1E0464FA00E61E10 /* Concept.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concept.swift; sourceTree = "<group>"; };
@@ -1428,6 +1430,7 @@
 				CE95E9A81E0195D700DBB27A /* Result.swift */,
 				CE95E9B41E04448300DBB27A /* Sentiment.swift */,
 				CE95E9B61E0446C300DBB27A /* Taxonomy.swift */,
+				CE7BEE3F1E0C7F69000367FE /* TestConfigurationDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3636,6 +3639,7 @@
 				CE8AEBDB1E0464FA00E61E10 /* Concept.swift in Sources */,
 				CE95E9B11E01BAF000DBB27A /* QueryResponse.swift in Sources */,
 				CE95E9B31E01D8E600DBB27A /* EnrichedTitle.swift in Sources */,
+				CE7BEE401E0C7F69000367FE /* TestConfigurationDetails.swift in Sources */,
 				CE8AEBDD1E04752500E61E10 /* Keyword.swift in Sources */,
 				CE61C3601DF8C8470060B4A2 /* Configuration.swift in Sources */,
 				CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */,

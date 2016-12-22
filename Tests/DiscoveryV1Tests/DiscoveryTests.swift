@@ -658,7 +658,40 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
-    // MARK: Collections
+    // MARK: - Test Configuration on Document
+    
+    /** Test default configuration on document. */
+    func testConfigurationOnDocument() {
+        let description = "Test default configuration on document."
+        let expectation = self.expectation(description: description)
+        
+        guard let file = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
+            XCTFail("Unable to locate metadata.json")
+            return
+        }
+        
+        discovery.testConfigurationInEnvironment(
+            withEnvironmentID: environmentID!,
+            withConfigurationID: configurationID!,
+            file: file,
+            failure: failWithError) {
+                testConfigurationDetails in
+                XCTAssertEqual(testConfigurationDetails.status, "completed")
+                XCTAssertEqual(testConfigurationDetails.enrichedFieldUnits, 0)
+                XCTAssertEqual(testConfigurationDetails.originalMediaType, "application/json")
+                if let snapshots = testConfigurationDetails.snapshots {
+                    for snapshot in snapshots {
+                        XCTAssertNotNil(snapshot.step)
+                        XCTAssertNotNil(snapshot.snapshot)
+                    }
+                }
+                XCTAssertNotNil(testConfigurationDetails.notices)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: - Collections
     
     /** Retrieve a list of the collections associated with the test suite's environment. */
     func testGetCollections() {

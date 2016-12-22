@@ -500,7 +500,95 @@ public class Discovery {
             }
         }
     }
+    
+    // MARK: - Test Configuration on Document
 
+    /**
+     Run a sample document against your configuration or the default configuration
+     to return diagnostic information to help you understand how the document was
+     processed. The document is not added to the index. 
+ 
+     - parameter environmentID: The ID of the environment in which the configuration is located.
+     - parameter configuration: The configuration to use to process the document. If
+        this parameter is provided, the provided configuration of the environment will bee
+        used to process the document. If both the configuration and configurationID parameter
+        are provided, the request will be rejected. The maximum supported configuration size
+        is 1MB. Must provide either a configuration or the configuration ID.
+     - parameter configurationID: The ID of the configuration to use to process the document.
+        If both the configurationID and the configuration parameters are provided, the
+        request will be rejected. Must provide either a configuration or the configuration ID.
+     - parameter file: The content of the document to ingest and test the configuration on.
+        The maximum supported file size is 50 MB. Files larger than 50 MB will be rejected.
+        Must provide either a file or a metadata.
+     - parameter metadata: If you're using the Data Crawler to upload your documents, you 
+        can test a document against the type of metadata that the Data Crawler might send. 
+        The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
+        are rejected. Must provide either a file or a metadata.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with details of the configuration.
+     */
+    public func testConfigurationInEnvironment(
+        withEnvironmentID environmentID: String,
+        withConfiguration configuration: URL? = nil,
+        withConfigurationID configurationID: String? = nil,
+        file: URL? = nil,
+        metadata: URL? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping(TestConfigurationDetails) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let configurationID = configurationID {
+            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let file = file {
+            multipartFormData.append(file, withName: "file")
+        }
+        if let metadata = metadata {
+            guard let data = try? Data(contentsOf: metadata) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "metadata")
+        }
+        if let configuration = configuration {
+            guard let data = try? Data(contentsOf: configuration) else {
+                failure?(RestError.encodingError)
+                return
+            }
+            multipartFormData.append(data, withName: "configuration")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/environments/\(environmentID)/preview",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<TestConfigurationDetails>) in
+            switch response.result {
+            case .success(let configurationDetails): success(configurationDetails)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
     // MARK: - Collections
     
     /**

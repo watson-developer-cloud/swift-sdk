@@ -25,6 +25,7 @@ let package = Package(
         Target(name: "AlchemyVisionV1",              dependencies: [.Target(name: "RestKit")]),
         Target(name: "ConversationV1",               dependencies: [.Target(name: "RestKit")]),
         Target(name: "DialogV1",                     dependencies: [.Target(name: "RestKit")]),
+        Target(name: "DiscoveryV1",                  dependencies: [.Target(name: "RestKit")]),
         Target(name: "DocumentConversionV1",         dependencies: [.Target(name: "RestKit")]),
         Target(name: "LanguageTranslatorV2",         dependencies: [.Target(name: "RestKit")]),
         Target(name: "NaturalLanguageClassifierV1",  dependencies: [.Target(name: "RestKit")]),

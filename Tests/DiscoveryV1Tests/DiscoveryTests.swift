@@ -111,7 +111,6 @@ class DiscoveryTests: XCTestCase {
         }
         discovery.getConfigurations(
             withEnvironmentID: environmentID,
-            withName: nil,
             failure: failure) { configurations in
                 for configuration in configurations {
                     if configuration.name == defaultConfigName {
@@ -131,7 +130,7 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         let failure = { (error: Error) in XCTFail("Could not find collection with specified environmentID") }
-        discovery.getCollections(withEnvironmentID: environmentID!, withName: nil, failure: failure) {
+        discovery.getCollections(withEnvironmentID: environmentID!, failure: failure) {
             collections in
             for collection in collections {
                 if self.collectionName == collection.name {
@@ -225,11 +224,7 @@ class DiscoveryTests: XCTestCase {
         discovery.addDocumentToCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withConfigurationID: nil,
             file: file,
-            fileMimeType: nil,
-            metadata: nil,
-            configuration: nil,
             failure: failure) {
                 document in
                 XCTAssertNotNil(document.documentID)
@@ -845,11 +840,7 @@ class DiscoveryTests: XCTestCase {
         discovery.addDocumentToCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withConfigurationID: nil,
             file: file,
-            fileMimeType: nil,
-            metadata: nil,
-            configuration: nil,
             failure: failWithError) {
                 document in
                 documentID = document.documentID
@@ -916,11 +907,8 @@ class DiscoveryTests: XCTestCase {
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
             withDocumentID: documentID!,
-            withConfigurationID: nil,
             file: file,
-            fileMimeType: nil,
             metadata: metadata,
-            configuration: nil,
             failure: failWithError) { document in
                 XCTAssertEqual(self.documentID!, document.documentID)
                 XCTAssertEqual(document.status, DocumentStatus.processing)
@@ -1057,10 +1045,7 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
-            withAggregation: nil,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 XCTAssertNotNil(queryResponse.matchingResults)
@@ -1107,10 +1092,7 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
-            withAggregation: nil,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 XCTAssertNotNil(queryResponse.results)
@@ -1145,10 +1127,7 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
-            withAggregation: nil,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 XCTAssertNotNil(queryResponse.results)
@@ -1184,10 +1163,7 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
-            withAggregation: nil,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 XCTAssertNotNil(queryResponse.results)
@@ -1253,10 +1229,7 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
-            withAggregation: nil,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 XCTAssertNotNil(queryResponse.results)
@@ -1297,10 +1270,8 @@ class DiscoveryTests: XCTestCase {
         discovery.queryDocumentsInCollection(
             withEnvironmentID: environmentID!,
             withCollectionID: collectionID!,
-            withFilter: nil,
             withQuery: query,
             withAggregation: aggregation,
-            count: nil,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
                 if let results = queryResponse.results {

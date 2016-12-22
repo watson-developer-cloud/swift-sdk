@@ -24,9 +24,7 @@ class DiscoveryTests: XCTestCase {
     private var discovery: Discovery!
     private let timeout: TimeInterval = 15.0
     private let environmentName: String = "swift-sdk-unit-test-environment"
-    private let environmentNameForNow: String = "new env"
     private let testDescription: String = "For testing"
-    private let testDescriptionForNow: String = "bogus env"
     private var environmentID: String?
     private let newsEnvironmentName: String = "Watson News Environment"
     private var newsEnvironmentID: String?
@@ -52,8 +50,8 @@ class DiscoveryTests: XCTestCase {
     
     /** Instantiate Retrieve and Rank instance. */
     func instantiateDiscovery() {
-        let username = Credentials.DiscoveryWatsonUsername
-        let password = Credentials.DiscoveryWatsonPassword
+        let username = Credentials.DiscoveryUsername
+        let password = Credentials.DiscoveryPassword
         let version = "2016-12-01"
         discovery = Discovery(username: username, password: password, version: version)
     }
@@ -67,9 +65,9 @@ class DiscoveryTests: XCTestCase {
             XCTFail("Failed to locate environment")
         }
         
-        discovery.getEnvironments(withName: environmentNameForNow, failure: failure) { environments in
+        discovery.getEnvironments(withName: environmentName, failure: failure) { environments in
             for environment in environments {
-                if environment.name == self.environmentNameForNow {
+                if environment.name == self.environmentName {
                     self.environmentID = environment.environmentID
                     expectation.fulfill()
                     return
@@ -271,67 +269,66 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
     
-    // TODO: - Add in after receiving credentials that allow deleting and creating new environments.
     /** Delete and create a test environment. */
-//    func testDeleteAndCreateEnvironment() {
-//        
-//        let description = "Delete the existing test environment."
-//        let expectation = self.expectation(description: description)
-//        
-//        discovery.deleteEnvironment(withID: self.environmentID!, failure: failWithError) {
-//            environment in
-//            
-//            XCTAssertEqual(environment.environmentID, self.environmentID)
-//            XCTAssertEqual(environment.status, "deleted")
-//            
-//            expectation.fulfill()
-//        }
-//        waitForExpectations()
-//        
-//        let description2 = "Recreate the deleted environment."
-//        let expectation2 = self.expectation(description: description2)
-//
-//        discovery.createEnvironment(
-//            withName: environmentName,
-//            withSize: .zero,
-//            withDescription: testDescription,
-//            failure: failWithError)
-//        {
-//            environment in
-//            
-//            // verify that an environment ID was returned, and save this value
-//            XCTAssertNotNil(environment.environmentID)
-//            self.environmentID = environment.environmentID
-//            
-//            // check all the fields are present
-//            XCTAssertEqual(environment.name, self.environmentName)
-//            XCTAssertEqual(environment.description, self.testDescription)
-//            XCTAssertNotNil(environment.created)
-//            XCTAssertNotNil(environment.updated)
-//            XCTAssertNotNil(environment.status)
-//            XCTAssertNotNil(environment.indexCapacity?.diskUsage)
-//            XCTAssertNotNil(environment.indexCapacity?.memoryUsage)
-//            
-//            // check all the fields within diskUsage are present
-//            let diskUsage = environment.indexCapacity?.diskUsage
-//            XCTAssertNotNil(diskUsage?.usedBytes)
-//            XCTAssertNotNil(diskUsage?.totalBytes)
-//            XCTAssertNotNil(diskUsage?.used)
-//            XCTAssertNotNil(diskUsage?.total)
-//            XCTAssertNotNil(diskUsage?.percentUsed)
-//            
-//            // check all the fields within memoryUsage are present
-//            let memoryUsage = environment.indexCapacity?.memoryUsage
-//            XCTAssertNotNil(memoryUsage?.usedBytes)
-//            XCTAssertNotNil(memoryUsage?.totalBytes)
-//            XCTAssertNotNil(memoryUsage?.used)
-//            XCTAssertNotNil(memoryUsage?.total)
-//            XCTAssertNotNil(memoryUsage?.percentUsed)
-//            
-//            expectation2.fulfill()
-//        }
-//        waitForExpectations()
-//    }
+    func testDeleteAndCreateEnvironment() {
+        
+        let description = "Delete the existing test environment."
+        let expectation = self.expectation(description: description)
+        
+        discovery.deleteEnvironment(withID: self.environmentID!, failure: failWithError) {
+            environment in
+            
+            XCTAssertEqual(environment.environmentID, self.environmentID)
+            XCTAssertEqual(environment.status, "deleted")
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Recreate the deleted environment."
+        let expectation2 = self.expectation(description: description2)
+
+        discovery.createEnvironment(
+            withName: environmentName,
+            withSize: .zero,
+            withDescription: testDescription,
+            failure: failWithError)
+        {
+            environment in
+            
+            // verify that an environment ID was returned, and save this value
+            XCTAssertNotNil(environment.environmentID)
+            self.environmentID = environment.environmentID
+            
+            // check all the fields are present
+            XCTAssertEqual(environment.name, self.environmentName)
+            XCTAssertEqual(environment.description, self.testDescription)
+            XCTAssertNotNil(environment.created)
+            XCTAssertNotNil(environment.updated)
+            XCTAssertNotNil(environment.status)
+            XCTAssertNotNil(environment.indexCapacity?.diskUsage)
+            XCTAssertNotNil(environment.indexCapacity?.memoryUsage)
+            
+            // check all the fields within diskUsage are present
+            let diskUsage = environment.indexCapacity?.diskUsage
+            XCTAssertNotNil(diskUsage?.usedBytes)
+            XCTAssertNotNil(diskUsage?.totalBytes)
+            XCTAssertNotNil(diskUsage?.used)
+            XCTAssertNotNil(diskUsage?.total)
+            XCTAssertNotNil(diskUsage?.percentUsed)
+            
+            // check all the fields within memoryUsage are present
+            let memoryUsage = environment.indexCapacity?.memoryUsage
+            XCTAssertNotNil(memoryUsage?.usedBytes)
+            XCTAssertNotNil(memoryUsage?.totalBytes)
+            XCTAssertNotNil(memoryUsage?.used)
+            XCTAssertNotNil(memoryUsage?.total)
+            XCTAssertNotNil(memoryUsage?.percentUsed)
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
     
     /** Get the trained environment. */
     func testGetTrainedEnvironment() {

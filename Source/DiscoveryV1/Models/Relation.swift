@@ -35,6 +35,9 @@ public struct Relation: JSONDecodable {
     /// Sentence of the extracted Subject, Action, Object parts
     public let sentence: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a Sentiment object
     public init(json: JSON) throws {
         action = try? json.decode(at: "action", type: Action.self)
@@ -42,6 +45,12 @@ public struct Relation: JSONDecodable {
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
         subject = try? json.decode(at: "subject", type: Subject.self)
         sentence = try? json.getString(at: "sentence")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Relation' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 
@@ -57,11 +66,20 @@ public struct Action: JSONDecodable {
     /// The base or dictionary form of the word.
     public let lemmatized: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize an Action object.
     public init(json: JSON) throws {
         text = try? json.getString(at: "text")
         verb = try? json.decode(at: "verb", type: Verb.self)
         lemmatized = try? json.getString(at: "lemmatized")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to initialize an 'Action' model from JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
     
     /** A verb as defined by the AlchemyLanguage service. */
@@ -99,6 +117,9 @@ public struct RelationObject: JSONDecodable {
     /// see **Sentiment**
     public let sentimentFromSubject: Sentiment?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a RelationObject object
     public init(json: JSON) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
@@ -106,9 +127,13 @@ public struct RelationObject: JSONDecodable {
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
         sentimentFromSubject = try? json.decode(at: "sentimentFromSubject", type: Sentiment.self)
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        self.json = try json.getDictionaryObject()
     }
     
-
+    /// Used internally to serialize a 'RelationObject' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
+    }
     
     /** A keyword. */
     public struct Keyword: JSONDecodable {
@@ -141,11 +166,20 @@ public struct Subject: JSONDecodable {
     /// see **Entity**
     public let entities: [Entity]?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a Subject object
     public init(json: JSON) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Subject' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

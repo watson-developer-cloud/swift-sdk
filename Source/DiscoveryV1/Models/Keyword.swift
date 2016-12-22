@@ -33,12 +33,21 @@ public struct Keyword: JSONDecodable {
     /// The detected keyword text.
     public let text: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a Keyword object
     public init(json: JSON) throws {
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
         relevance = try? json.getDouble(at: "relevance")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
         text = try? json.getString(at: "text")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Keyword' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 

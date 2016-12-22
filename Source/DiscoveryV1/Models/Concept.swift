@@ -63,6 +63,9 @@ public struct Concept: JSONDecodable {
     /// Link to CrunchBase for this concept tag.
     public let crunchbase: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a Concept object.
     public init(json: JSON) throws {
         website = try? json.getString(at: "website")
@@ -79,6 +82,12 @@ public struct Concept: JSONDecodable {
         geonames = try? json.getString(at: "geonames")
         musicBrainz = try? json.getString(at: "musicBrainz")
         crunchbase = try? json.getString(at: "crunchbase")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Concept' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
     

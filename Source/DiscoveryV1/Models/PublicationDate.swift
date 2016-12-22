@@ -27,9 +27,18 @@ public struct PublicationDate: JSONDecodable {
     /// :ss.SSS'Z'.
     public let date: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a PublicationDate object
     public init(json: JSON) throws {
         confident = try? json.getString(at: "confident")
         date = try? json.getString(at: "date")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'PublicationDate' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

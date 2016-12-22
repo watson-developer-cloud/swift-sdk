@@ -105,6 +105,9 @@ public struct DisambiguatedLinks: JSONDecodable {
      */
     public let yago: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a DisambiguatedLinks object
     public init(json: JSON) throws {
         language = try? json.getString(at: "language")
@@ -123,6 +126,12 @@ public struct DisambiguatedLinks: JSONDecodable {
         umbel = try? json.getString(at: "umbel")
         website = try? json.getString(at: "website")
         yago = try? json.getString(at: "yago")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'DisambiguatedLinks' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 

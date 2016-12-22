@@ -47,7 +47,7 @@ public struct Aggregation: JSONDecodable {
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
     
-    /// Used internally to initialize a `Notice` model from JSON.
+    /// Used internally to initialize a `Aggregation` model from JSON.
     public init(json: JSON) throws {
         type = try? json.getString(at: "type")
         field = try? json.getString(at: "field")

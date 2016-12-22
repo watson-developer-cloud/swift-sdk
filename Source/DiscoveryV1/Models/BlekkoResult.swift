@@ -46,6 +46,9 @@ public struct BlekkoResult: JSONDecodable {
     /// Extracted type of document. 
     public let documentType: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     public init(json: JSON) throws {
         language = try? json.getString(at: "lang")
         rawTitle = try? json.decodedArray(at: "raw_title", type: Swift.String)
@@ -55,5 +58,11 @@ public struct BlekkoResult: JSONDecodable {
         snippets = try? json.decodedArray(at: "snippets", type: Swift.String)
         host = try? json.getString(at: "host")
         documentType = try? json.getString(at: "documentType")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'BlekkoResult' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

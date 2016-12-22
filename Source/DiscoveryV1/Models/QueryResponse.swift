@@ -29,11 +29,19 @@ public struct QueryResponse: JSONDecodable {
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
     
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSON) throws {
         matchingResults = try? json.getInt(at: "matching_results")
         results = try? json.decodedArray(at: "results", type: Result.self)
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'QueryResponse' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

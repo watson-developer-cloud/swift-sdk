@@ -40,6 +40,9 @@ public struct Entity: JSONDecodable {
     /// Classification of the entity.
     public let type: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize an Entity object
     public init(json: JSON) throws {
         count = try? json.getInt(at: "count")
@@ -49,6 +52,12 @@ public struct Entity: JSONDecodable {
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
         text = try? json.getString(at: "text")
         type = try? json.getString(at: "type")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'Entity' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 

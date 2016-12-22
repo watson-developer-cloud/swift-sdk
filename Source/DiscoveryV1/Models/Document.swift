@@ -43,6 +43,9 @@ public struct Document: JSONDecodable {
     /// The array of notices produced by the document-ingestion process.
     public let notices: [Notice]?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a `Document` model from JSON.
     public init(json: JSON) throws {
         documentID = try json.getString(at: "document_id")
@@ -55,6 +58,12 @@ public struct Document: JSONDecodable {
         status = documentStatus
         statusDescription = try? json.getString(at: "status_description")
         notices = try? json.decodedArray(at: "notices", type: Notice.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'Document' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 

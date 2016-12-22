@@ -50,6 +50,9 @@ public struct Collection: JSONDecodable {
     /// Seen only when retrieving details of a colleciton.
     public let documentCounts: DocumentCounts?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a `Collection` model from JSON.
     public init(json: JSON) throws {
         collectionID = try? json.getString(at: "collection_id")
@@ -65,6 +68,12 @@ public struct Collection: JSONDecodable {
         configurationID = try json.getString(at: "configuration_id")
         language = try? json.getString(at: "langauge")
         documentCounts = try? json.decode(at: "document_counts", type: DocumentCounts.self)
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'Collection' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 
@@ -80,11 +89,20 @@ public struct DocumentCounts: JSONDecodable {
     /// Number of failed documents.
     public let failed: Int?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a 'DocumentCounts' model from JSON.
     public init(json: JSON) throws {
         available = try? json.getInt(at: "available")
         processing = try? json.getInt(at: "processing")
         failed = try? json.getInt(at: "failed")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'DocumentCounts' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 
@@ -97,10 +115,14 @@ public struct Field: JSONDecodable {
     /// The type of the field.
     public let type: String
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a 'Field' model from JSON.
     public init (json: JSON) throws {
         field = try json.getString(at: "field")
         type = try json.getString(at: "type")
+        self.json = try json.getDictionaryObject()
     }
 }
 
@@ -113,6 +135,9 @@ public struct DeletedCollection: JSONDecodable {
     /// The status of the collection.
     public let status: CollectionStatus
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a 'DeletedCollection' model from JSON.
     public init(json: JSON) throws {
         collectionID = try json.getString(at: "collection_id")
@@ -120,6 +145,12 @@ public struct DeletedCollection: JSONDecodable {
             throw JSON.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
         }
         status = collectionStatus
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize a 'DeletedCollectoin' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }
 

@@ -32,10 +32,19 @@ public struct Sentiment: JSONDecodable {
     /// sentiment polarity - "positive", "negative", "neutral"
     public let type: String?
     
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
+    
     /// Used internally to initialize a Sentiment object
     public init(json: JSON) throws {
         mixed = try? json.getString(at: "mixed")
         score = try? json.getString(at: "score")
         type = try? json.getString(at: "type")
+        self.json = try json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize an 'Sentiment' model to JSON.
+    public func toJSONObject() -> Any {
+        return json
     }
 }

@@ -153,7 +153,7 @@ public struct DeletedCollection: JSONDecodable {
     }
 }
 
-/* The status of a collection. */
+/** The status of a collection. */
 public enum CollectionStatus: String {
     /// Active
     case active = "active"

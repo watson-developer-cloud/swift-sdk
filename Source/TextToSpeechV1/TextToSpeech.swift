@@ -737,22 +737,22 @@ public class TextToSpeech {
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
         
-        let riffHeaderChuckIDOffset = 0
-        let riffHeaderChuckIDSize = 4
-        let riffHeaderChuckSizeOffset = 8
-        let riffHeaderChuckSizeSize = 4
+        let riffHeaderChunkIDOffset = 0
+        let riffHeaderChunkIDSize = 4
+        let riffHeaderChunkSizeOffset = 8
+        let riffHeaderChunkSizeSize = 4
         let riffHeaderSize = 12
 
-        if data.count < riffHeaderSize {
+        guard data.count >= riffHeaderSize else {
             return false
         }
         
-        let riffChunkID = dataToUTF8String(data: data, offset: riffHeaderChuckIDOffset, length: riffHeaderChuckIDSize)
+        let riffChunkID = dataToUTF8String(data: data, offset: riffHeaderChunkIDOffset, length: riffHeaderChunkIDSize)
         guard riffChunkID == "RIFF" else {
             return false
         }
         
-        let riffFormat = dataToUTF8String(data: data, offset: riffHeaderChuckSizeOffset, length: riffHeaderChuckSizeSize)
+        let riffFormat = dataToUTF8String(data: data, offset: riffHeaderChunkSizeOffset, length: riffHeaderChunkSizeSize)
         guard riffFormat == "WAVE" else {
             return false
         }

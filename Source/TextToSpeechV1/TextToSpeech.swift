@@ -736,17 +736,23 @@ public class TextToSpeech {
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
+        
+        let riffHeaderChuckIDOffset = 0
+        let riffHeaderChuckIDSize = 4
+        let riffHeaderChuckSizeOffset = 8
+        let riffHeaderChuckSizeSize = 4
+        let riffHeaderSize = 12
 
-        if data.count < 12 {
+        if data.count < riffHeaderSize {
             return false
         }
         
-        let riffChunkID = dataToUTF8String(data: data, offset: 0, length: 4)
+        let riffChunkID = dataToUTF8String(data: data, offset: riffHeaderChuckIDOffset, length: riffHeaderChuckIDSize)
         guard riffChunkID == "RIFF" else {
             return false
         }
         
-        let riffFormat = dataToUTF8String(data: data, offset: 8, length: 4)
+        let riffFormat = dataToUTF8String(data: data, offset: riffHeaderChuckSizeOffset, length: riffHeaderChuckSizeSize)
         guard riffFormat == "WAVE" else {
             return false
         }

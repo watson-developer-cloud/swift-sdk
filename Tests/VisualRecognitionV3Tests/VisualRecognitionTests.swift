@@ -658,6 +658,9 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(image: obamaURL, failure: failWithError) {
             classifiedImages in
             
+            var containsPersonClass = false
+            var classifierScore: Double?
+            
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
             XCTAssertEqual(classifiedImages.images.count, 1)
@@ -674,9 +677,21 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, "default")
             XCTAssertEqual(classifier?.name, "default")
-            XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.classification, "person")
-            if let score = classifier?.classes.first?.score {
+            
+            guard let classes = classifier?.classes else {
+                XCTFail("Did not return any classes")
+                return
+            }
+            XCTAssertGreaterThan(classes.count, 0)
+            for c in classes {
+                if c.classification == "person" {
+                    containsPersonClass = true
+                    classifierScore = c.score
+                    break
+                }
+            }
+            XCTAssertEqual(true, containsPersonClass)
+            if let score = classifierScore {
                 XCTAssertGreaterThan(score, 0.5)
             }
             
@@ -700,6 +715,9 @@ class VisualRecognitionTests: XCTestCase {
         {
             classifiedImages in
             
+            var containsPersonClass = false
+            var classifierScore: Double?
+            
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
             XCTAssertEqual(classifiedImages.images.count, 1)
@@ -716,9 +734,20 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, "default")
             XCTAssertEqual(classifier?.name, "default")
-            XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.classification, "person")
-            if let score = classifier?.classes.first?.score {
+            guard let classes = classifier?.classes else {
+                XCTFail("Did not return any classes.")
+                return
+            }
+            XCTAssertGreaterThan(classes.count, 0)
+            for c in classes {
+                if c.classification == "person" {
+                    containsPersonClass = true
+                    classifierScore = c.score
+                    break
+                }
+            }
+            XCTAssertEqual(containsPersonClass, true)
+            if let score = classifierScore {
                 XCTAssertGreaterThan(score, 0.5)
             }
             
@@ -822,28 +851,45 @@ class VisualRecognitionTests: XCTestCase {
             XCTAssertEqual(image?.resolvedURL, self.carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
-            XCTAssertEqual(image?.classifiers.count, 2)
             
-            // verify the image's default classifier
-            let classifier1 = image?.classifiers.first
-            XCTAssertEqual(classifier1?.classifierID, "default")
-            XCTAssertEqual(classifier1?.name, "default")
-            XCTAssertEqual(classifier1?.classes.count, 4)
-            XCTAssertEqual(classifier1?.classes.first?.classification, "car")
-            if let score = classifier1?.classes.first?.score {
-                XCTAssertGreaterThan(score, 0.5)
+            // verify 2 classifiers are returned
+            guard let classifiers = image?.classifiers else {
+                XCTFail("No classifiers found")
+                return
             }
-            
-            // verify the image's custom classifier
-            let classifier2 = image?.classifiers.last
-            XCTAssertEqual(classifier2?.classifierID, self.classifierID!)
-            XCTAssertEqual(classifier2?.name, self.classifierName)
-            XCTAssertEqual(classifier2?.classes.count, 1)
-            XCTAssertEqual(classifier2?.classes.first?.classification, "car")
-            if let score = classifier2?.classes.first?.score {
-                XCTAssertGreaterThan(score, 0.5)
+            XCTAssertEqual(2, classifiers.count)
+            for classifier in classifiers {
+                var containsCarClass = false
+                var classifierScore: Double?
+                // verify the image's default classifier
+                if classifier.name == "default" {
+                    XCTAssertEqual(classifier.classifierID, "default")
+                    XCTAssertEqual(classifier.name, "default")
+                    
+                    XCTAssertGreaterThan(classifier.classes.count, 0)
+                    for c in classifier.classes {
+                        if c.classification == "car" {
+                            containsCarClass = true
+                            classifierScore = c.score
+                        }
+                    }
+                    XCTAssertEqual(containsCarClass, true)
+                    if let score = classifierScore {
+                        XCTAssertGreaterThan(score, 0.5)
+                    }
+                } else {
+                    // verify the image's custom classifier
+                    XCTAssertEqual(classifier.classifierID, self.classifierID!)
+                    if classifier.classifierID != classifier.name {
+                        XCTAssertEqual(classifier.name, self.classifierName)
+                    }
+                    XCTAssertEqual(classifier.classes.count, 1)
+                    XCTAssertEqual(classifier.classes.first?.classification, "car")
+                    if let score = classifier.classes.first?.score {
+                        XCTAssertGreaterThan(score, 0.5)
+                    }
+                }
             }
-            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -856,7 +902,8 @@ class VisualRecognitionTests: XCTestCase {
         
         visualRecognition.classify(imageFile: car, failure: failWithError) {
             classifiedImages in
-            
+            var containsPersonClass = false
+            var classifierScore: Double?
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
             XCTAssertEqual(classifiedImages.images.count, 1)
@@ -873,9 +920,20 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, "default")
             XCTAssertEqual(classifier?.name, "default")
-            XCTAssertEqual(classifier?.classes.count, 4)
-            XCTAssertEqual(classifier?.classes.first?.classification, "car")
-            if let score = classifier?.classes.first?.score {
+            guard let classes = classifier?.classes else {
+                XCTFail("Did not return any classes")
+                return
+            }
+            XCTAssertGreaterThan(classes.count, 0)
+            for c in classes {
+                if c.classification == "car" {
+                    containsPersonClass = true
+                    classifierScore = c.score
+                    break
+                }
+            }
+            XCTAssertEqual(true, containsPersonClass)
+            if let score = classifierScore {
                 XCTAssertGreaterThan(score, 0.5)
             }
             
@@ -899,6 +957,9 @@ class VisualRecognitionTests: XCTestCase {
         {
             classifiedImages in
             
+            var containsPersonClass = false
+            var classifierScore: Double?
+            
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
             XCTAssertEqual(classifiedImages.images.count, 1)
@@ -915,12 +976,22 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, "default")
             XCTAssertEqual(classifier?.name, "default")
-            XCTAssertEqual(classifier?.classes.count, 4)
-            XCTAssertEqual(classifier?.classes.first?.classification, "car")
-            if let score = classifier?.classes.first?.score {
+            guard let classes = classifier?.classes else {
+                XCTFail("Did not return any classes.")
+                return
+            }
+            XCTAssertGreaterThan(classes.count, 0)
+            for c in classes {
+                if c.classification == "car" {
+                    containsPersonClass = true
+                    classifierScore = c.score
+                    break
+                }
+            }
+            XCTAssertEqual(containsPersonClass, true)
+            if let score = classifierScore {
                 XCTAssertGreaterThan(score, 0.5)
             }
-            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1015,6 +1086,9 @@ class VisualRecognitionTests: XCTestCase {
         {
             classifiedImages in
             
+            var containsCarClass = false
+            var classifierScore: Double?
+            
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
             XCTAssertEqual(classifiedImages.images.count, 1)
@@ -1025,28 +1099,41 @@ class VisualRecognitionTests: XCTestCase {
             XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
-            XCTAssertEqual(image?.classifiers.count, 2)
-            
-            // verify the image's default classifier
-            let classifier1 = image?.classifiers.first
-            XCTAssertEqual(classifier1?.classifierID, "default")
-            XCTAssertEqual(classifier1?.name, "default")
-            XCTAssertEqual(classifier1?.classes.count, 4)
-            XCTAssertEqual(classifier1?.classes.first?.classification, "car")
-            if let score = classifier1?.classes.first?.score {
-                XCTAssertGreaterThan(score, 0.5)
+
+            // verify 2 classifiers are returned
+            guard let classifiers = image?.classifiers else {
+                XCTFail("No classifiers found")
+                return
             }
-            
-            // verify the image's custom classifier
-            let classifier2 = image?.classifiers.last
-            XCTAssertEqual(classifier2?.classifierID, self.classifierID!)
-            XCTAssertEqual(classifier2?.name, self.classifierName)
-            XCTAssertEqual(classifier2?.classes.count, 1)
-            XCTAssertEqual(classifier2?.classes.first?.classification, "car")
-            if let score = classifier2?.classes.first?.score {
-                XCTAssertGreaterThan(score, 0.5)
+            XCTAssertEqual(2, classifiers.count)
+            for classifier in classifiers {
+                // verify the image's default classifier
+                if classifier.name == "default" {
+                    XCTAssertEqual(classifier.classifierID, "default")
+                    XCTAssertEqual(classifier.name, "default")
+                    
+                    XCTAssertGreaterThan(classifier.classes.count, 0)
+                    for c in classifier.classes {
+                        if c.classification == "car" {
+                            containsCarClass = true
+                            classifierScore = c.score
+                        }
+                    }
+                    XCTAssertEqual(containsCarClass, true)
+                    if let score = classifierScore {
+                        XCTAssertGreaterThan(score, 0.5)
+                    }
+                } else {
+                    // verify the image's custom classifier
+                    XCTAssertEqual(classifier.classifierID, self.classifierID!)
+//                    XCTAssertEqual(classifier.name, self.classifierName)
+                    XCTAssertEqual(classifier.classes.count, 1)
+                    XCTAssertEqual(classifier.classes.first?.classification, "car")
+                    if let score = classifier.classes.first?.score {
+                        XCTAssertGreaterThan(score, 0.5)
+                    }
+                }
             }
-            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1076,25 +1163,37 @@ class VisualRecognitionTests: XCTestCase {
                 XCTAssertNil(image.error)
                 XCTAssertEqual(image.classifiers.count, 2)
             
-                // verify the image's default classifier
-                let classifier1 = image.classifiers.first
-                XCTAssertEqual(classifier1?.classifierID, "default")
-                XCTAssertEqual(classifier1?.name, "default")
-                XCTAssert(classifier1!.classes.count >= 1)
-                let classification = classifier1?.classes.first?.classification
-                XCTAssert(classification == "car" || classification == "vehicle")
-                if let score = classifier1?.classes.first?.score {
-                    XCTAssertGreaterThan(score, 0.5)
-                }
-                
-                // verify the image's custom classifier
-                let classifier2 = image.classifiers.last
-                XCTAssertEqual(classifier2?.classifierID, self.classifierID!)
-                XCTAssertEqual(classifier2?.name, self.classifierName)
-                XCTAssertEqual(classifier2?.classes.count, 1)
-                XCTAssertEqual(classifier2?.classes.first?.classification, "car")
-                if let score = classifier2?.classes.first?.score {
-                    XCTAssertGreaterThan(score, 0.5)
+                for classifier in image.classifiers {
+                    var containsCarClass = false
+                    var classifierScore: Double?
+                    // verify the image's default classifier
+                    if classifier.name == "default" {
+                        XCTAssertEqual(classifier.classifierID, "default")
+                        XCTAssertEqual(classifier.name, "default")
+                        
+                        XCTAssertGreaterThan(classifier.classes.count, 0)
+                        for c in classifier.classes {
+                            if c.classification == "car" || c.classification == "vehicle" {
+                                containsCarClass = true
+                                classifierScore = c.score
+                            }
+                        }
+                        XCTAssertEqual(containsCarClass, true)
+                        if let score = classifierScore {
+                            XCTAssertGreaterThan(score, 0.5)
+                        }
+                    } else {
+                        // verify the image's custom classifier
+                        XCTAssertEqual(classifier.classifierID, self.classifierID!)
+                        if classifier.classifierID != classifier.name {
+                            XCTAssertEqual(classifier.name, self.classifierName)
+                        }
+                        XCTAssertEqual(classifier.classes.count, 1)
+                        XCTAssertEqual(classifier.classes.first?.classification, "car")
+                        if let score = classifier.classes.first?.score {
+                            XCTAssertGreaterThan(score, 0.5)
+                        }
+                    }
                 }
             }
             

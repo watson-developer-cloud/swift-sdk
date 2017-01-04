@@ -13,6 +13,8 @@
 		121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F968F1D2D8A9600E295B0 /* Ranker.swift */; };
 		121F96921D2EAD1600E295B0 /* Ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96911D2EAD1600E295B0 /* Ranking.swift */; };
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
+		1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9261E1DA3F000B740C1 /* Customization.swift */; };
+		1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9281E1DACA800B740C1 /* CustomizationID.swift */; };
 		122819761D3D2C910060C745 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122819751D3D2C910060C745 /* SearchResponse.swift */; };
 		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
@@ -632,6 +634,8 @@
 		121F968F1D2D8A9600E295B0 /* Ranker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranker.swift; sourceTree = "<group>"; };
 		121F96911D2EAD1600E295B0 /* Ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranking.swift; sourceTree = "<group>"; };
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
+		1221C9261E1DA3F000B740C1 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		1221C9281E1DACA800B740C1 /* CustomizationID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationID.swift; sourceTree = "<group>"; };
 		122819751D3D2C910060C745 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
 		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
@@ -1859,6 +1863,8 @@
 				7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */,
 				7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */,
 				7A1B0F281D82645100783EA3 /* Model.swift */,
+				1221C9261E1DA3F000B740C1 /* Customization.swift */,
+				1221C9281E1DACA800B740C1 /* CustomizationID.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3805,6 +3811,7 @@
 			files = (
 				7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */,
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
+				1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */,
 				7AAAF4671CEE9FB300B74848 /* KeywordResult.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
@@ -3820,6 +3827,7 @@
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
 				7AAAF46E1CEE9FB300B74848 /* WordConfidence.swift in Sources */,
+				1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
 				7A1B0F291D82645100783EA3 /* Model.swift in Sources */,
 				7AAAF4681CEE9FB300B74848 /* SpeechRecognitionAlternative.swift in Sources */,

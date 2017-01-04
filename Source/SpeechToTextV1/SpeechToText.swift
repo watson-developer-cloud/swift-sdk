@@ -343,4 +343,97 @@ public class SpeechToText {
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
     }
+    
+    // MARK: - Customizations
+    
+    // MARK: Custom Models
+    
+    /**
+     List information about all custom language models owned by the calling user. Specify a language
+     to see custom models for that language only.
+     
+     - parameter language: The language of the custom models that you want returned.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of custom models.
+     */
+    public func getCustomizations(
+        language: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Customization]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let language = language {
+            queryParameters.append(URLQueryItem(name: "language", value: language))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+            (response: RestResponse<[Customization]>) in
+            switch response.result {
+            case .success(let customizations): success(customizations)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Create a new custom language model for a specified base language model.
+     
+     - parameter name: The name of the new custom model.
+     - parameter baseModelName: The name of the language model that will be customized by the new 
+        model.
+     - parameter description: The description of the new model.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a `CustomizationID` object.
+     */
+    public func createCustomization(
+        withName name: String,
+        withBaseModelName baseModelName: String,
+        description: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CustomizationID) -> Void)
+    {
+        // construct body
+        var jsonData = [String: Any]()
+        jsonData["name"] = name
+        jsonData["base_model_name"] = baseModelName
+        if let description = description {
+            jsonData["description"] = description
+        }
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CustomizationID>) in
+            switch response.result {
+            case .success(let customization): success(customization)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

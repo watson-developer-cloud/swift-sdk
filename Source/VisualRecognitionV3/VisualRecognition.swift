@@ -941,6 +941,136 @@ public class VisualRecognition {
     }
  
     /**
+     Delete an image's metadata from a collection.
+     
+     - parameter withID: The ID of the collection to delete the image from.
+     - parameter imageID: The ID of the image to delete.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed when the image metadata is deleted successfully.
+    */
+    public func deleteImageMetadataFromCollection(
+        withID collectionID: String,
+        imageID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     List an image's metadata from a collection. 
+     
+     - parameter withID: The ID of the collection to list the image's metadata from.
+     - parameter imageID: The ID of the image to list metadata from.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed when the image metadata is listed successfully.
+     */
+    public func listImageMetadataFromCollection(
+        withID collectionID: String,
+        imageID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Metadata) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Metadata>) in
+            switch response.result {
+            case .success(let metadata): success(metadata)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Update an image's metadata from a collection. 
+ 
+     - parameter withID: The ID of the collection to update the image's metadata.
+     - parameter imageID: The ID of the image to update.
+     - parameter metadata: The JSON file that adds metadata to the image. The maximum
+        file size for each image is 2 KB. Metadata can be used to identify images.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed when the image metadata is updated successfully.
+    */
+    public func updateImageMetadataFromCollection(
+        withID collectionID: String,
+        imageID: String,
+        metadata: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Metadata) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        //construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(metadata, withName: "metadata")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "PUT",
+            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Metadata>) in
+            switch response.result {
+            case .success(let metadata): success(metadata)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+ 
+    /**
      Find similar images to an uploaded image within a collection.
      
      - parameter withinCollection: The ID of the collection to find similar images in.

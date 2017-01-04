@@ -61,6 +61,23 @@ public struct CollectionImage: JSONDecodable {
     }
 }
 
+/** Metadata object to handle updating, viewing metadata per image within a collection. */
+public struct Metadata: JSONDecodable {
+    /// The metadata associated with the image.
+    public let metadata: [String: Any]?
+    
+    /// Used internally to intialize a 'Metadata' model from JSON.
+    public init(json: JSON) throws {
+        self.metadata = try? json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize metadata to JSON.
+    public func toJSONObject() -> Any {
+        return metadata
+    }
+    
+}
+
 /** Similar images found by the service. */
 public struct SimilarImages: JSONDecodable {
     

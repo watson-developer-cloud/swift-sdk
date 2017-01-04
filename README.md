@@ -1,7 +1,7 @@
 # Watson Developer Cloud iOS SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
-![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
+![](https://img.shields.io/badge/platform-iOS)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/ios-sdk)
@@ -175,6 +175,8 @@ Please see [this tutorial](docs/objective-c.md) for more information about consu
 
 ## Linux Compatibility
 
+The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
+
 To include the Watson SDK to your Linux projects, add the following to your `Package.swift` file:
 
 ```swift
@@ -185,8 +187,6 @@ dependencies: [
 ```
 
 To build the project, run `swift build` from the command line.
-
-Please note some services are not yet fully supported such as Text to Speech, Speech to Text, and Visual Recognition. 
 
 ## Contributing
 

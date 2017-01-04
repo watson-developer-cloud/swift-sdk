@@ -37,6 +37,7 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
+* [Discovery] (#discovery)
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -324,6 +325,138 @@ The following links provide more information about the IBM Conversation service:
 
 * [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)
 * [IBM Watson Conversation - Documentation](http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml)
+
+## Discovery
+
+The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.
+
+The following example shows how to instantiate a Discivery object:
+
+```swift
+import DiscoveryV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let discovery = Discovery(username: username, password: password, version: version)
+}
+```
+The following example demonstrates how to create a Discovery environment and collection with the default configuration, and add documents to the collection.
+
+```swift
+let failure = { (error: Error) in print(error) }
+
+// Create and store the environment ID for you to access later:
+var environmentID: String?
+let environmentName = "your-environment-name-here"
+
+discovery.createEnvironment(
+    withName: environmentName,
+    withSize: .zero,
+    withDescription: testDescription,
+    failure: failure) 
+{   
+	environment in
+    self.environmentID = environment.environmentID
+}
+
+// Wait for the environment to be ready before creating a collection:
+bool environmentReady = false
+while (!environmentReady) {
+	discovery.getEnvironment(withName: environmentName, failure: failure)
+	{ 
+		environment in
+		if environment.status == "active" {
+		 self.environmentReady = true
+		}
+	}
+}
+
+// Create a collection and store the collection ID for you to access later:
+var collectionID: String?
+
+let collectionName = "your-collection-name-here"
+discovery.createCollection(
+    withEnvironmentID: environmentID!,
+    withName: collectionName,
+    withDescription: collectionDescription,
+    withConfigurationID: configurationID,
+    failure: failure)
+{   
+	collection in
+    self.collectionID = collection.collectionID
+}
+
+// Wait for the collection to be "available" before adding a document:
+bool collectionReady = false
+while (!collectionReady) {
+	discovery.listCollectionDetails(
+	withEnvironmentID: environmentID!,
+	withCollectionID: collectionID!,
+	failure: failWithError) 
+{
+    collection in
+    if collection.status == CollectionStatus.active {
+        self.collectionReady = true
+    }
+}
+
+// Add a document to the collection with the saved environment and collection ID:
+guard let file = Bundle(for: type(of: self)).url(forResource: "your-Document-Name", withExtension: "document-type") else {
+    XCTFail("Unable to locate your-Document-Name.document-type")
+    return
+}
+discovery.addDocumentToCollection(
+    withEnvironmentID: environmentID!,
+    withCollectionID: collectionID!,
+    file: file,
+    failure: failWithError) 
+{
+    document in
+    NSLog(document)
+}
+
+```
+The following example demonstrates how to perform a query on the Discovery instance using the `KennedySpeech.html` we have within our `DiscoveryV1Tests` folder:
+
+```swift 
+/// String to search for within the documents.
+let query = "United Nations"
+
+/// Find the max sentiment score for entities within the enriched text.
+let aggregation = "max(enriched_text.entities.sentiment.score)"
+    
+/// Specify which portion of the document hierarchy to return.
+let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
+    
+discovery.queryDocumentsInCollection(
+    withEnvironmentID: environmentID!,
+    withCollectionID: collectionID!,
+    withQuery: query,
+    withAggregation: aggregation,
+    return: returnHierarchies,
+    failure: failWithError) 
+{ 
+    queryResponse in
+    if let results = queryResponse.results {
+        for result in results {
+            if let entities = result.entities {
+                for entity in entities {
+						NSLog(entity)
+                }
+            }
+        }
+    }
+}
+```
+
+The following links provide more information about the IBM Discovery service: 
+
+* [IBM Discovery - Service Page](http://www.ibm.com/watson/developercloud/discovery.html)
+* [IBM Discovery - Documentation] (http://www.ibm.com/watson/developercloud/doc/discovery/)
+* [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
+* [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
+* [IBM Discovery - Query Building](http://www.ibm.com/watson/developercloud/doc/discovery/query-reference.shtml#parameters)
 
 ## Document Conversion
 

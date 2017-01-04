@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.12.0
+
+_2016-12-22_
+
+This release adds support for the Discovery service.
+
 ## Version 0.11.0
 
 _2016-12-06_

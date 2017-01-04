@@ -184,10 +184,16 @@ class DialogTests: XCTestCase {
 
     /** Load a dialog file. */
     func loadDialogFile(name: String, withExtension: String) -> URL? {
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
-            return nil
-        }
+
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
+                return nil
+            }
+        #else
+            let url = URL(fileURLWithPath: "Tests/DialogV1Tests/"+name+"."+withExtension)
+        #endif
+        
         return url
     }
 

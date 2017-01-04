@@ -23,6 +23,7 @@ class TextToSpeechTests: XCTestCase {
     private var textToSpeech: TextToSpeech!
     private let timeout: TimeInterval = 5.0
     private let text = "Swift at IBM is awesome. You should try it!"
+    
     private let allVoices: [SynthesisVoice] = [
         .de_Birgit, .de_Dieter, .gb_Kate, .es_Enrique, .us_Allison, .us_Lisa, .us_Michael,
         .es_Laura, .us_Sofia, .fr_Renee, .it_Francesca, .jp_Emi, .br_Isabela

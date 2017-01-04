@@ -1,7 +1,7 @@
 # Watson Developer Cloud iOS SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
-[![codecov.io](https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master)](https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master)
+![](https://img.shields.io/badge/platform-iOS-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/ios-sdk)
@@ -28,6 +28,7 @@ There are many resources to help you build your first cognitive application with
 * [Sample Applications](#sample-applications)
 * [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
+* [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -171,6 +172,21 @@ To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x re
 ## Objective-C Compatibility
 
 Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
+
+## Linux Compatibility
+
+The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
+
+To include the Watson SDK to your Linux projects, add the following to your `Package.swift` file:
+
+```swift
+dependencies: [
+	.Package(url: "https://github.com/watson-developer-cloud/ios-sdk",
+	         majorVersion: 0)
+]
+```
+
+To build the project, run `swift build` from the command line.
 
 ## Contributing
 

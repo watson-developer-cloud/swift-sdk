@@ -23,7 +23,7 @@ class PersonalityInsightsTests: XCTestCase {
     private var mobyDickIntro: String?
     private var kennedySpeechTXT: String?
     private var kennedySpeechHTML: String?
-    private let timeout: TimeInterval = 5.0
+    private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
     static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {

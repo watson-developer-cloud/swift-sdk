@@ -5,7 +5,9 @@ matrix:
       sudo: required
     - os: osx
       osx_image: xcode8
-
+branches:
+  only:
+    - master
 env:
   global:
     - IOS_SDK="iphonesimulator10.0"

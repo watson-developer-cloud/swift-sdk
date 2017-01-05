@@ -1056,6 +1056,8 @@ public class VisualRecognition {
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body
         )

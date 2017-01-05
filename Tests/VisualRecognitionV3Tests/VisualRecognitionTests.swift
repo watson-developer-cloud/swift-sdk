@@ -1549,6 +1549,50 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    /** Add metadata to the test image in test's colleciton. */
+    func testAddMetadataToImageInCollection() {
+        let description = "Find image ID in collection."
+        let expectation = self.expectation(description: description)
+        
+        guard let metadata = loadMetadataFile(withName: "metadata", withExtension: "txt") else {
+            XCTFail("Failed to load metadata file.")
+            return
+        }
+        
+        var imageID: String?
+        
+        // Grab image ID.
+        visualRecognition.getImagesInCollection(withID: collectionID!, failure: failWithError) { images in
+            imageID = images[0].imageID
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description1 = "Add metadata to image in collection."
+        let expectation1 = self.expectation(description: description1)
+        
+        guard let image = imageID else {
+            XCTFail("failed to grab image ID.")
+            return
+        }
+        
+        visualRecognition.updateImageMetadataFromCollection(
+            withID: collectionID!,
+            imageID: image,
+            metadata: metadata,
+            failure: failWithError) { metadata in
+                NSLog("metadata = \(metadata.metadata?.description)")
+                guard let metadata = metadata.metadata else {
+                    XCTFail("No metadata found")
+                    return
+                }
+                expectation1.fulfill()
+//                XCTAssertEqual(metadata["name"], "obama")
+//                XCTAssertEqual(metadata["description"], "for unit tests")
+        }
+        waitForExpectations()
+    }
 
     /** Find similar images using the default classifier and all default parameters. */
     func testSimilarImages() {

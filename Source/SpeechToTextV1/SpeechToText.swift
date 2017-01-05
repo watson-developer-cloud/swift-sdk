@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ public class SpeechToText {
      - parameter success: A function executed with a list of custom models.
      */
     public func getCustomizations(
-        language: String? = nil,
+        withLanguage language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Customization]) -> Void)
     {
@@ -446,7 +446,7 @@ public class SpeechToText {
      - parameter success: A function executed whenever a success occurs.
      */
     public func deleteCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -481,7 +481,7 @@ public class SpeechToText {
      - parameter success: A function executed with information about the custom model.
      */
     public func getCustomization(
-        customizationID: String,
+        withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Customization) -> Void)
     {
@@ -516,10 +516,15 @@ public class SpeechToText {
      Upgrades a custom language model.
      */
     
-    // MARK: Custom corpora
+    // MARK: Custom Corpora
     
     /**
      Lists information about all corpora for a custom language model.
+     
+     - parameter customizationID: The ID of the custom language model whose corpora you want
+        information about.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of corpora for this custom model.
      */
     public func getCorpora(
         customizationID: String,
@@ -544,4 +549,85 @@ public class SpeechToText {
             }
         }
     }
+    
+    /**
+     Deletes a corpus from a custom language model. Note: removing a corpus doesn't affect the custom
+     model until you train the model with the `train` method.
+     
+     - parameter name: The name of the corpus to delete.
+     - parameter customizationID: The ID of the custom model the corpus belongs to.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteCorpus(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Lists information about a specific corpus for a custom language model.
+     
+     - parameter name: The name of the corpus you want details about.
+     - parameter customizationID: The ID of the custom language model that the corpus is for.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func getCorpus(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Corpus) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Corpus>) in
+            switch response.result {
+            case .success(let corpus): success(corpus)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add a corpus text file to a custom language model.
+     */
+    
+    // MARK: Custom Words
+    
+    /**
+     List all custom words from a custom language model.
+     */
 }

@@ -436,4 +436,112 @@ public class SpeechToText {
             }
         }
     }
+    
+    /**
+     Delete an existing custom language model with the given ID. The custom model can't be deleted
+     if another request, such as adding a corpus to the model, is currently being processed.
+     
+     - parameter customizationID: The ID of the custom model to delete.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteCustomization(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Get information about a custom language model.
+     
+     - parameter customizationID: The ID of the custom language model to return information about.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with information about the custom model.
+     */
+    public func getCustomization(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Customization) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Customization>) in
+            switch response.result {
+            case .success(let customization): success(customization)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Trains a custom language model.
+     */
+    
+    /**
+     Resets a custom language model.
+     */
+    
+    /**
+     Upgrades a custom language model.
+     */
+    
+    // MARK: Custom corpora
+    
+    /**
+     Lists information about all corpora for a custom language model.
+     */
+    public func getCorpora(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Corpus]) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["corpora"]) {
+            (response: RestResponse<[Corpus]>) in
+            switch response.result {
+            case .success(let corpora): success(corpora)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

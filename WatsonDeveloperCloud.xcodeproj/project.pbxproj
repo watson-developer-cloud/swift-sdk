@@ -15,6 +15,7 @@
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
 		1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9261E1DA3F000B740C1 /* Customization.swift */; };
 		1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9281E1DACA800B740C1 /* CustomizationID.swift */; };
+		1221C92B1E1EB0AD00B740C1 /* Corpus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C92A1E1EB0AD00B740C1 /* Corpus.swift */; };
 		122819761D3D2C910060C745 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122819751D3D2C910060C745 /* SearchResponse.swift */; };
 		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
@@ -636,6 +637,7 @@
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
 		1221C9261E1DA3F000B740C1 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
 		1221C9281E1DACA800B740C1 /* CustomizationID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationID.swift; sourceTree = "<group>"; };
+		1221C92A1E1EB0AD00B740C1 /* Corpus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Corpus.swift; sourceTree = "<group>"; };
 		122819751D3D2C910060C745 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
 		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
@@ -1865,6 +1867,7 @@
 				7A1B0F281D82645100783EA3 /* Model.swift */,
 				1221C9261E1DA3F000B740C1 /* Customization.swift */,
 				1221C9281E1DACA800B740C1 /* CustomizationID.swift */,
+				1221C92A1E1EB0AD00B740C1 /* Corpus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3828,6 +3831,7 @@
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
 				7AAAF46E1CEE9FB300B74848 /* WordConfidence.swift in Sources */,
 				1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */,
+				1221C92B1E1EB0AD00B740C1 /* Corpus.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
 				7A1B0F291D82645100783EA3 /* Model.swift in Sources */,
 				7AAAF4681CEE9FB300B74848 /* SpeechRecognitionAlternative.swift in Sources */,

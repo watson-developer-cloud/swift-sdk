@@ -50,7 +50,7 @@ public struct Customization: JSONDecodable {
     
     /// If the request contained unknown query parameters, a list of those unknown parameters will 
     /// be included here.
-    public let warnings: String
+    public let warnings: String?
     
     /// Used internally to initialize a `Customization` model from JSON.
     public init(json: JSON) throws {
@@ -66,7 +66,7 @@ public struct Customization: JSONDecodable {
         }
         status = customizationStatus
         progress = try json.getInt(at: "progress")
-        warnings = try json.getString(at: "warnings")
+        warnings = try? json.getString(at: "warnings")
     }
 }
 

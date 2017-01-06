@@ -58,8 +58,14 @@ class VisualRecognitionTests: XCTestCase {
             ("testAddDeleteImageWithMetadataToCollection", testAddDeleteImageWithMetadataToCollection),
             ("testCreateDeleteCollection", testCreateDeleteCollection),
             ("testListImagesInCollection", testListImagesInCollection),
+            ("testAddDeleteMetadataToImageInCollection", testAddDeleteMetadataToImageInCollection),
+            ("testAddListMetadataForImageInCollection", testAddListMetadataForImageInCollection),
             ("testSimilarImages", testSimilarImages),
             ("testSimilarImagesWithInvalidFile", testSimilarImagesWithInvalidFile),
+            ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
+            ("testClassifyByInvalidURL", testClassifyByInvalidURL),
+            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
+            ("testAddZipToCollection", testAddZipToCollection)
         ]
     }
     
@@ -1737,8 +1743,8 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** Test classifying an invalid image using the default classifier and parameters. */
-    func testClassifyInvalidImage() {
+    /** Test detecting faces with an invalid URL using the default classifier and parameters. */
+    func testDetectFacesByInvalidURL() {
         let description = "Classify an image with an invalid type."
         let expectation = self.expectation(description: description)
         
@@ -1746,7 +1752,21 @@ class VisualRecognitionTests: XCTestCase {
             expectation.fulfill()
         }
         
-        visualRecognition.classify(imageFile: examplesCars, failure: failure, success: failWithResult)
+        let invalidImageURL = "invalid-image-url"
+        visualRecognition.detectFaces(inImage: invalidImageURL, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+    
+    /** Test add zip file to a collection. */
+    func testAddZipToCollection() {
+        let description = "Add a zip file to the test collection."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            expectation.fulfill()
+        }
+        
+        visualRecognition.addImageToCollection(withID: collectionID!, imageFile: examplesCars, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

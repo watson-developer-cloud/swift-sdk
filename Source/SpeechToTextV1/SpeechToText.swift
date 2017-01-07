@@ -678,4 +678,50 @@ public class SpeechToText {
             }
         }
     }
+    
+    /**
+     Add one or more words to the custom language model.
+     */
+    
+    /**
+     Delete a custom word from the specified custom model. If the word also exists in the service's 
+     base vocabulary, the service removes only the custom pronunciation for the word; the word 
+     remains in the base vocabulary.
+     
+     Note: Removing a custom word does not affect the custom model until you train the model.
+     
+     - parameter name: The name of the word you would like to delete.
+     - parameter customizationID: The ID of the custom model from which you would like to delete the
+        word from.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteWord(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
 }

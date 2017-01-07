@@ -629,5 +629,53 @@ public class SpeechToText {
     
     /**
      List all custom words from a custom language model.
+     
+     - parameter customizationID: The ID of the custom model.
+     - parameter wordType: The types of words to return. By default, all words are returned.
+     - parameter sortOrder: The order in which to return the list of words. By default, words are 
+        returned in sorted alphabetical order.
+     - parameter sortDirection: The order the list of words should be sorted. By default, words are 
+        sorted alphabetically in ascending order.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of words in the custom language model.
      */
+    public func getWords(
+        customizationID: String,
+        wordType: WordType? = nil,
+        sortOrder: WordSort? = nil,
+        sortDirection: WordSortDirection? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Word]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let wordType = wordType {
+            queryParameters.append(URLQueryItem(name: "word_type", value: wordType.rawValue))
+        }
+        if let sortOrder = sortOrder {
+            if let sortDirection = sortDirection {
+                queryParameters.append(URLQueryItem(name: "sort", value: "\(sortDirection.rawValue)\(sortOrder.rawValue)"))
+            } else {
+                queryParameters.append(URLQueryItem(name: "sort", value: sortOrder.rawValue))
+            }
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["words"]) {
+            (response: RestResponse<[Word]>) in
+            switch response.result {
+            case .success(let words): success(words)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

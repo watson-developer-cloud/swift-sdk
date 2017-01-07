@@ -594,7 +594,7 @@ public class SpeechToText {
      - parameter name: The name of the corpus you want details about.
      - parameter customizationID: The ID of the custom language model that the corpus is for.
      - parameter failure: A function executed whenever an error occurs.
-     - parameter success: A function executed whenever a success occurs.
+     - parameter success: A function executed with details of the corpus.
      */
     public func getCorpus(
         withName name: String,
@@ -724,4 +724,41 @@ public class SpeechToText {
             }
         }
     }
+    
+    /**
+     Get details of a word from a specific custom language model.
+     
+     - parameter name: The name of the word.
+     - parameter customizationID: The ID of the custom language model.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with details of the word.
+     */
+    public func getWord(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Word) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Word>) in
+            switch response.result {
+            case .success(let word): success(word)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add a single custom word to the custom language model.
+     */
 }

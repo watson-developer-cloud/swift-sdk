@@ -48,7 +48,7 @@ public struct Word: JSONDecodable {
         displayAs = try json.getString(at: "display_as")
         count = try json.getInt(at: "count")
         source = try json.decodedArray(at: "source", type: Swift.String)
-        error = try json.decodedArray(at: "error", type: WordError.self)
+        error = try? json.decodedArray(at: "error", type: WordError.self)
     }
 }
 

@@ -344,9 +344,7 @@ public class SpeechToText {
         microphoneSession?.disconnect()
     }
     
-    // MARK: - Customizations
-    
-    // MARK: Custom Models
+    // MARK: - Custom Models
     
     /**
      List information about all custom language models owned by the calling user. Specify a language
@@ -516,7 +514,7 @@ public class SpeechToText {
      Upgrades a custom language model.
      */
     
-    // MARK: Custom Corpora
+    // MARK: - Custom Corpora
     
     /**
      Lists information about all corpora for a custom language model.
@@ -623,9 +621,67 @@ public class SpeechToText {
     
     /**
      Add a corpus text file to a custom language model.
+     
+     - parameter textFile: A plain text file that contains the training data for the corpus. For 
+        more information about how to prepare a corpus file, visit this link:
+        http://www.ibm.com/watson/developercloud/doc/speech-to-text/custom.shtml#prepareCorpus
+     - parameter name: The name of the corpus to be added. This cannot be `user`, which is a 
+        reserved word. If a corpus with the same name exists already, you must set `allowOverwrite` 
+        to true or the request will fail.
+     - parameter customizationID: The ID of the custom model to which this corpus should be added.
+     - parameter allowOverwrite: If a corpus with the same name exists, this value must be set to 
+        true or the request will fail. By default, this parameter is false. This parameter is 
+        ignored if there is no other corpus with the same name.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
      */
+    public func addCorpus(
+        fromFile textFile: URL,
+        withName name: String,
+        customizationID: String,
+        allowOverwrite: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let allowOverwrite = allowOverwrite {
+            queryParameters.append(URLQueryItem(name: "allow_overwrite", value: "\(allowOverwrite)"))
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(textFile, withName: "body")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body)
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
     
-    // MARK: Custom Words
+    // MARK: - Custom Words
     
     /**
      List all custom words from a custom language model.

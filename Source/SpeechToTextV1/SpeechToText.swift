@@ -680,8 +680,52 @@ public class SpeechToText {
     }
     
     /**
-     Add one or more words to the custom language model.
+     Add one or more words to the custom language model, or replace the definition of an existing 
+     word with the same name.
+    
+     - parameter customizationID: The ID of the custom language model to add words to.
+     - parameter words: An array of `NewWords` objects that describes what words should be added.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
      */
+    public func addWords(
+        customizationID: String,
+        words: [NewWord],
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct body
+        var jsonData = [String: Any]()
+        jsonData["words"] = words.map { word in word.toJSONObject() }
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
     
     /**
      Delete a custom word from the specified custom model. If the word also exists in the service's 
@@ -759,6 +803,49 @@ public class SpeechToText {
     }
     
     /**
-     Add a single custom word to the custom language model.
+     Add a single custom word to the custom language model, or modify an existing word.
+     
+     - parameter customizationID: The ID of the custom language model to add the new word to.
+     - parameter name: The word that should be added.
+     - parameter word: An object describing information about the custom word.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
      */
+    public func addWord(
+        withName name: String,
+        customizationID: String,
+        word: NewWord? = NewWord(),
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct body
+        guard let body = try? word?.toJSON().serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "PUT",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
 }

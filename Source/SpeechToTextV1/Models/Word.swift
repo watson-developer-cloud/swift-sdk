@@ -52,6 +52,56 @@ public struct Word: JSONDecodable {
     }
 }
 
+/** A new word to add to the custom language model. */
+public struct NewWord: JSONEncodable {
+    
+    /// A custom word from the custom model. The spelling of the word is used to train the model.
+    public let word: String?
+    
+    /// An array of pronunciations for the custom word.
+    public let soundsLike: [String]?
+    
+    /// The spelling of the custom word that the service uses to display the word in a transcript.
+    /// If no display-as value is provided for the word, an empty string is stored here and the word
+    /// is displayed as it is spelled.
+    public let displayAs: String?
+    
+    /**
+     Create a `NewWord`.
+     
+     - parameter word: The word that is to be added to the custom model. Do not include spaces in
+        the word, use a dash or underscore.
+     - parameter soundsLike: Specify pronunciation for words that are difficult to pronounce, 
+        foreign words, and acronyms. Omit this parameter
+     - parameter displayAs: An alternative spelling for the custom word when it appears in a transcript.
+     */
+    public init(
+        word: String? = nil,
+        soundsLike: [String]? = nil,
+        displayAs: String? = nil)
+    {
+        self.word = word
+        self.soundsLike = soundsLike
+        self.displayAs = displayAs
+    }
+    
+    /// Used internally to serialize a `NewWord` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let word = word {
+            json["word"] = word
+        }
+        if let soundsLike = soundsLike {
+            json["sounds_like"] = soundsLike
+        }
+        if let displayAs = displayAs {
+            json["display_as"] = displayAs
+        }
+        return json
+    }
+
+}
+
 /** An object describing problems with the custom word. */
 public struct WordError: JSONDecodable {
     

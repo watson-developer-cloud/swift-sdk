@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private let japaneseText = "こんにちは"
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
     "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
+    private let emptyString = ""
     
     
     // MARK: - Test Configuration
@@ -49,6 +50,11 @@ class TextToSpeechPlaybackTests: XCTestCase {
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
+    }
+    
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
     }
     
     /** Wait for expectations. */
@@ -170,6 +176,21 @@ class TextToSpeechPlaybackTests: XCTestCase {
             }
             expectation.fulfill()
         }
+        waitForExpectations()
+    }
+    
+    // MARK: - Negative Tests.
+    
+    /** Synthesize SSML to spoken audio. */
+    func testSynthesizeEmptySSML() {
+        let description = "Synthesize Empty string to spoken audio."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            expectation.fulfill()
+        }
+        
+        textToSpeech.synthesize(emptyString, voice: SynthesisVoice.us_Lisa.rawValue, audioFormat: .wav, failure:  failure, success: failWithResult)
         waitForExpectations()
     }
 }

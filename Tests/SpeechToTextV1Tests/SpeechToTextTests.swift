@@ -132,6 +132,62 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    func testGetAllCustomModels() {
+        let description = "Retrieve a list of custom language models associated with this account."
+        let expectation = self.expectation(description: description)
+        
+        speechToText.getCustomizations(failure: failWithError) { customizations in
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteCustomModel() {
+        let description = "Create a new customization."
+        let expectation = self.expectation(description: description)
+        
+        var newCustomizationID: String?
+        
+        speechToText.createCustomization(
+            withName: "swift-sdk-unit-test-customization-to-delete",
+            withBaseModelName: "en-US_BroadbandModel",
+            description: "customization created for test",
+            failure: failWithError) { customization in
+            
+            XCTAssertNotNil(customization.customizationID)
+            newCustomizationID = customization.customizationID
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new customization."
+        let expectation2 = self.expectation(description: description2)
+        
+        guard let customizationToDelete = newCustomizationID else {
+            XCTFail("Failed to instantiate customizationID when creating customization.")
+            return
+        }
+        
+        speechToText.deleteCustomization(withID: customizationToDelete, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: - Custom words
+    
+//    func testGetAllWords() {
+//        let description = "Get all words of a custom model."
+//        let expectation = self.expectation(description: description)
+//
+//        speechToText.getWords(customizationID: "", wordType: .all, failure: failWithError) {
+//            words in
+//
+//            expectation.fulfill()
+//        }
+//        waitForExpectations()
+//    }
 
     // MARK: - Transcribe File, Default Settings
 

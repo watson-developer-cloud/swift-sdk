@@ -886,9 +886,7 @@ class VisualRecognitionTests: XCTestCase {
                 } else {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID!)
-                    if classifier.classifierID != classifier.name {
-                        XCTAssertEqual(classifier.name, self.classifierName)
-                    }
+                    XCTAssertEqual(classifier.name, self.classifierName)
                     XCTAssertEqual(classifier.classes.count, 1)
                     XCTAssertEqual(classifier.classes.first?.classification, "car")
                     if let score = classifier.classes.first?.score {
@@ -1132,9 +1130,7 @@ class VisualRecognitionTests: XCTestCase {
                 } else {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID!)
-                    if classifier.classifierID != classifier.name {
-                        XCTAssertEqual(classifier.name, self.classifierName)
-                    }
+                    XCTAssertEqual(classifier.name, self.classifierName)
                     XCTAssertEqual(classifier.classes.count, 1)
                     XCTAssertEqual(classifier.classes.first?.classification, "car")
                     if let score = classifier.classes.first?.score {
@@ -1193,9 +1189,7 @@ class VisualRecognitionTests: XCTestCase {
                     } else {
                         // verify the image's custom classifier
                         XCTAssertEqual(classifier.classifierID, self.classifierID!)
-                        if classifier.classifierID != classifier.name {
-                            XCTAssertEqual(classifier.name, self.classifierName)
-                        }
+                        XCTAssertEqual(classifier.name, self.classifierName)
                         XCTAssertEqual(classifier.classes.count, 1)
                         XCTAssertEqual(classifier.classes.first?.classification, "car")
                         if let score = classifier.classes.first?.score {
@@ -1699,13 +1693,15 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Find images similar to an invalid image using the default classifier."
         let expectation = self.expectation(description: description)
         
+        let failure = { (error: Error) in
+            XCTAssertEqual("Invalid image file", error.localizedDescription)
+            expectation.fulfill()
+        }
+        
         visualRecognition.findSimilarImages(
             toImageFile: examplesCars,
             inCollectionID: collectionID!,
-            failure: { (Error) in
-                XCTAssertEqual("Invalid image file", Error.localizedDescription)
-                expectation.fulfill()
-            },
+            failure: failure,
             success: failWithResult)
         waitForExpectations()
     }

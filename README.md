@@ -330,7 +330,7 @@ The following links provide more information about the IBM Conversation service:
 
 The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.
 
-The following example shows how to instantiate a Discivery object:
+The following example shows how to instantiate a Discovery object:
 
 ```swift
 import DiscoveryV1

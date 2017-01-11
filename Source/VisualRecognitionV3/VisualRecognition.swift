@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -943,14 +943,14 @@ public class VisualRecognition {
     /**
      Delete an image's metadata from a collection.
      
-     - parameter withID: The ID of the collection to delete the image from.
-     - parameter imageID: The ID of the image to delete.
+     - parameter forImageID: The ID of the image containing the metadata to delete.
+     - parameter inCollectionID: The ID of the collection to delete the image's metadata from.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is deleted successfully.
     */
-    public func deleteImageMetadataFromCollection(
-        withID collectionID: String,
-        imageID: String,
+    public func deleteImageMetadata(
+        forImageID imageID: String,
+        inCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
         success: ((Void) -> Void)? = nil)
     {
@@ -985,14 +985,15 @@ public class VisualRecognition {
     /**
      List an image's metadata from a collection. 
      
-     - parameter withID: The ID of the collection to list the image's metadata from.
-     - parameter imageID: The ID of the image to list metadata from.
+     - parameter forImageID: The ID of the image to list metadata from.
+     - parameter inCollectionID: The ID of the collection to list the image's metadata from.
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is listed successfully.
      */
-    public func listImageMetadataFromCollection(
-        withID collectionID: String,
-        imageID: String,
+    public func listImageMetadata(
+        forImageID imageID: String,
+        inCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Metadata) -> Void)
     {
@@ -1022,17 +1023,17 @@ public class VisualRecognition {
     
     /**
      Update an image's metadata from a collection. 
- 
-     - parameter withID: The ID of the collection to update the image's metadata.
-     - parameter imageID: The ID of the image to update.
+     
+     - parameter forImageID: The ID of the image to update.
+     - parameter inCollectionID: The ID of the collection to update the image's metadata.
      - parameter metadata: The JSON file that adds metadata to the image. The maximum
         file size for each image is 2 KB. Metadata can be used to identify images.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is updated successfully.
     */
-    public func updateImageMetadataFromCollection(
-        withID collectionID: String,
-        imageID: String,
+    public func updateImageMetadata(
+        forImageID imageID: String,
+        inCollectionID collectionID: String,
         metadata: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Metadata) -> Void)
@@ -1075,17 +1076,17 @@ public class VisualRecognition {
     /**
      Find similar images to an uploaded image within a collection.
      
-     - parameter withinCollection: The ID of the collection to find similar images in.
-     - parameter imageFile: The image file (.jpg or .png) of the image to search against the
-         collection.
+     - parameter toImageFile: The image file (.jpg or .png) of the image to search against the
+        collection.
+     - parameter inCollectionID: The ID of the collection to find similar images in.
      - parameter limit: The number of similar results you want returned. Default is 10 with
          a max of 100 results.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of similar images.
     */
-    public func findSimilarImagesInCollection(
-        withID collectionID: String,
-        imageFile image: URL,
+    public func findSimilarImages(
+        toImageFile image: URL,
+        inCollectionID collectionID: String,
         limit: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SimilarImages) -> Void)

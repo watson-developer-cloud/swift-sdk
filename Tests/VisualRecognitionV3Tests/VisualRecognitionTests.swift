@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1585,9 +1585,9 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
         
-        visualRecognition.updateImageMetadataFromCollection(
-            withID: collectionID!,
-            imageID: image,
+        visualRecognition.updateImageMetadata(
+            forImageID: image,
+            inCollectionID: collectionID!,
             metadata: metadata,
             failure: failWithError) { metadata in
                 
@@ -1608,9 +1608,9 @@ class VisualRecognitionTests: XCTestCase {
         let description2 = "Delete metadata to image in collection."
         let expectation2 = self.expectation(description: description2)
         
-        visualRecognition.deleteImageMetadataFromCollection(
-            withID: collectionID!,
-            imageID: image,
+        visualRecognition.deleteImageMetadata(
+            forImageID: image,
+            inCollectionID: collectionID!,
             failure: failWithError) {
                 expectation2.fulfill()
         }
@@ -1644,9 +1644,9 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
         
-        visualRecognition.updateImageMetadataFromCollection(
-            withID: collectionID!,
-            imageID: image,
+        visualRecognition.updateImageMetadata(
+            forImageID: image,
+            inCollectionID: collectionID!,
             metadata: metadata,
             failure: failWithError) { metadata in
                 expectation1.fulfill()
@@ -1655,7 +1655,7 @@ class VisualRecognitionTests: XCTestCase {
         
         let description2 = "List metadata of the image within the collection."
         let expectation2 = self.expectation(description: description2)
-        visualRecognition.listImageMetadataFromCollection(withID: collectionID!, imageID: image, failure: failWithError) { metadata in
+        visualRecognition.listImageMetadata(forImageID: image, inCollectionID: collectionID!, failure: failWithError) { metadata in
             guard let metadata = metadata.metadata else {
                 XCTFail("No metadata found")
                 return
@@ -1677,9 +1677,9 @@ class VisualRecognitionTests: XCTestCase {
         
         let imageFile = "obama.jpg"
         
-        visualRecognition.findSimilarImagesInCollection(
-            withID: collectionID!,
-            imageFile: obama,
+        visualRecognition.findSimilarImages(
+            toImageFile: obama,
+            inCollectionID: collectionID!,
             failure: failWithError) { similarImages in
                 XCTAssertEqual(imageFile, similarImages.imageFile)
                 XCTAssertNotEqual(0, similarImages.similarImages.count)
@@ -1699,9 +1699,9 @@ class VisualRecognitionTests: XCTestCase {
         let description = "Find images similar to an invalid image using the default classifier."
         let expectation = self.expectation(description: description)
         
-        visualRecognition.findSimilarImagesInCollection(
-            withID: collectionID!,
-            imageFile: examplesCars,
+        visualRecognition.findSimilarImages(
+            toImageFile: examplesCars,
+            inCollectionID: collectionID!,
             failure: { (Error) in
                 XCTAssertEqual("Invalid image file", Error.localizedDescription)
                 expectation.fulfill()

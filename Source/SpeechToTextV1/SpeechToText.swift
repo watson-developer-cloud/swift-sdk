@@ -503,12 +503,90 @@ public class SpeechToText {
     }
     
     /**
-     Trains a custom language model.
+     Initiates the training of a custom language model with new corpora, words, or both. The service 
+     cannot accept subsequent training requests, or requests to add new corpora or words, until the 
+     existing request completes. 
+     
+     Training will fail if no new training data has been added, if pre-processing of new corpora 
+     or words is incomplete, or if one or more words have errors that must be fixed.
+     
+     - parameter customizationID: The ID of the custom model to train.
+     - parameter wordTypeToAdd: The type of words from the custom model's words resource on which 
+        to train the model: `all` trains the model on all new words. `user` trains the model only 
+        on new words that were added or modified by the user - the model is not trained on new 
+        words extracted from corpora.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
      */
+    public func trainCustomization(
+        withID customizationID: String,
+        wordTypeToAdd: WordTypeToAdd? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let wordTypeToAdd = wordTypeToAdd {
+            queryParameters.append(URLQueryItem(name: "word_type_to_add", value: "\(wordTypeToAdd.rawValue)"))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/train",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters)
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
     
     /**
-     Resets a custom language model.
+     Resets a custom language model by removing all corpora and words from the model. Metadata such 
+     as the name and language of the model are preserved.
+     
+     - parameter customizationID: The ID of the custom model to reset.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
      */
+    public func resetCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/reset",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json")
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
     
     /**
      Upgrades a custom language model.
@@ -636,8 +714,8 @@ public class SpeechToText {
      - parameter success: A function executed when a success occurs.
      */
     public func addCorpus(
-        fromFile textFile: URL,
         withName name: String,
+        fromFile textFile: URL,
         customizationID: String,
         allowOverwrite: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -697,7 +775,7 @@ public class SpeechToText {
      */
     public func getWords(
         customizationID: String,
-        wordType: WordType? = nil,
+        wordType: WordTypesToList? = nil,
         sortOrder: WordSort? = nil,
         sortDirection: WordSortDirection? = nil,
         failure: ((Error) -> Void)? = nil,

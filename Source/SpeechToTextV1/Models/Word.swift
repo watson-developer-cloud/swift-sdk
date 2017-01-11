@@ -117,8 +117,18 @@ public struct WordError: JSONDecodable {
     }
 }
 
-/** Enum describing the type of word to be listed. */
-public enum WordType: String {
+/** Enum describing the types of words to be added to the custom language model. */
+public enum WordTypeToAdd: String {
+    
+    /// List all words.
+    case all = "all"
+    
+    /// Show only custom words that were added or modified by the user.
+    case user = "user"
+}
+
+/** Enum describing the types of words to be listed. */
+public enum WordTypesToList: String {
     
     /// List all words.
     case all = "all"

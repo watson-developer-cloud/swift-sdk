@@ -73,6 +73,15 @@ class SpeechToTextTests: XCTestCase {
         }
     }
     
+    /** Load files needed for the following unit tests. */
+    private func loadFile(name: String, withExtension: String) -> URL? {
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
+            return nil
+        }
+        return url
+    }
+    
     // MARK: - Models
     
     func testModels() {
@@ -138,6 +147,19 @@ class SpeechToTextTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         speechToText.getCustomizations(failure: failWithError) { customizations in
+            XCTAssertGreaterThanOrEqual(customizations.count, 1)
+            
+            for customization in customizations {
+                XCTAssertNotNil(customization.customizationID)
+                XCTAssertNotNil(customization.created)
+                XCTAssertNotNil(customization.language)
+                XCTAssertNotNil(customization.owner)
+                XCTAssertNotNil(customization.name)
+                XCTAssertNotNil(customization.baseModelName)
+                XCTAssertNotNil(customization.status)
+                XCTAssertNotNil(customization.progress)
+            }
+            
             expectation.fulfill()
         }
         waitForExpectations()
@@ -175,19 +197,142 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectations()
     }
     
+    func testListTrainedCustomModelDetails() {
+        let description = "List details of the trained custom model."
+        let expectation = self.expectation(description: description)
+        
+        speechToText.getCustomization(withID: trainedCustomizationID, failure: failWithError) {
+            customization in
+            
+            XCTAssertEqual(customization.customizationID, self.trainedCustomizationID)
+            XCTAssertNotNil(customization.created)
+            XCTAssertEqual(customization.language, "en-US")
+            XCTAssertNotNil(customization.owner)
+            XCTAssertEqual(customization.name, "test-model")
+            XCTAssertEqual(customization.baseModelName, "en-US_BroadbandModel")
+            XCTAssertEqual(customization.status, CustomizationStatus.available)
+            XCTAssertEqual(customization.progress, 100)
+            XCTAssertEqual(customization.warnings, nil)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: - Custom corpora
+    
+    func testGetAllCorpora() {
+        let description = "List all corpora for the trained custom model."
+        let expectation = self.expectation(description: description)
+        
+        speechToText.getCorpora(customizationID: trainedCustomizationID, failure: failWithError) {
+            corpora in
+            
+            XCTAssertGreaterThanOrEqual(corpora.count, 1)
+            for corpus in corpora {
+                XCTAssertNotNil(corpus.name)
+                XCTAssertNotNil(corpus.status)
+                XCTAssertNotNil(corpus.totalWords)
+                XCTAssertNotNil(corpus.outOfVocabularyWords)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteCorpus() {
+        let description = "Create a new corpus."
+        let expectation = self.expectation(description: description)
+        
+        guard let corpusFile = loadFile(name: "healthcare", withExtension: "txt") else {
+            XCTFail("Failed to load file needed to create the corpus.")
+            return
+        }
+        
+        let newCorpusName = "swift-sdk-unit-test-corpus-to-delete"
+        
+        speechToText.addCorpus(
+            withName: newCorpusName,
+            fromFile: corpusFile,
+            customizationID: trainedCustomizationID,
+            failure: failWithError) {
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        var trained = false
+        while(!trained) {
+            let description2 = "Wait until the corpus is processed before deleting it."
+            let expectation2 = self.expectation(description: description2)
+            
+            speechToText.getCorpus(
+                withName: newCorpusName,
+                customizationID: trainedCustomizationID,
+                failure: failWithError) { corpus in
+            
+                if corpus.status == .analyzed {
+                    trained = true
+                }
+                expectation2.fulfill()
+            }
+            waitForExpectations()
+            
+            sleep(3)
+        }
+        
+        let description3 = "Delete the new corpus."
+        let expectation3 = self.expectation(description: description3)
+        
+        speechToText.deleteCorpus(
+            withName: newCorpusName,
+            customizationID: trainedCustomizationID,
+            failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetCorpusForTrainedCustomization() {
+        let description = "Get the corpus used to build the trained customization."
+        let expectation = self.expectation(description: description)
+        
+        speechToText.getCorpus(
+            withName: "testCorpus",
+            customizationID: trainedCustomizationID,
+            failure: failWithError) { corpus in
+                
+            XCTAssertEqual(corpus.name, "testCorpus")
+            XCTAssertEqual(corpus.status, .analyzed)
+            XCTAssertEqual(corpus.totalWords, 1154)
+            XCTAssertEqual(corpus.outOfVocabularyWords, 6)
+            XCTAssertNil(corpus.error)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     // MARK: - Custom words
     
-//    func testGetAllWords() {
-//        let description = "Get all words of a custom model."
-//        let expectation = self.expectation(description: description)
-//
-//        speechToText.getWords(customizationID: "", wordType: .all, failure: failWithError) {
-//            words in
-//
-//            expectation.fulfill()
-//        }
-//        waitForExpectations()
-//    }
+    func testGetAllWords() {
+        let description = "Get all words of a custom model."
+        let expectation = self.expectation(description: description)
+
+        speechToText.getWords(customizationID: trainedCustomizationID, wordType: .all, failure: failWithError) {
+            words in
+            
+            XCTAssertGreaterThanOrEqual(words.count, 1)
+            for word in words {
+                XCTAssertNotNil(word.word)
+                XCTAssertNotNil(word.soundsLike)
+                XCTAssertNotNil(word.displayAs)
+                XCTAssertNotNil(word.count)
+                XCTAssertNotNil(word.source)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 
     // MARK: - Transcribe File, Default Settings
 

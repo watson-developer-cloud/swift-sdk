@@ -30,6 +30,17 @@ class SpeechToTextTests: XCTestCase {
     static var allTests : [(String, (SpeechToTextTests) -> () throws -> Void)] {
         return [
             ("testModels", testModels),
+            ("testTranscribeWithCustomModel", testTranscribeWithCustomModel),
+            ("testGetAllCustomModels", testGetAllCustomModels),
+            ("testCreateAndDeleteCustomModel", testCreateAndDeleteCustomModel),
+            ("testListTrainedCustomModelDetails", testListTrainedCustomModelDetails),
+            ("testGetAllCorpora", testGetAllCorpora),
+            ("testCreateAndDeleteCorpus", testCreateAndDeleteCorpus),
+            ("testGetCorpusForTrainedCustomization", testGetCorpusForTrainedCustomization),
+            ("testGetAllWords", testGetAllWords),
+            ("testAddAndDeleteMultipleWords", testAddAndDeleteMultipleWords),
+            ("testAddAndDeleteASingleWord", testAddAndDeleteASingleWord),
+            ("testGetWord", testGetWord),
             ("testTranscribeFileDefaultWAV", testTranscribeFileDefaultWAV),
             ("testTranscribeFileDefaultOpus", testTranscribeFileDefaultOpus),
             ("testTranscribeFileDefaultFLAC", testTranscribeFileDefaultFLAC),
@@ -42,6 +53,7 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataCustomWAV", testTranscribeDataCustomWAV),
             ("testTranscribeDataCustomOpus", testTranscribeDataCustomOpus),
             ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC),
+            ("testTranscribeStockAnnouncementCustomWAV", testTranscribeStockAnnouncementCustomWAV),
             ("testTranscribeStreaming", testTranscribeStreaming)
         ]
     }

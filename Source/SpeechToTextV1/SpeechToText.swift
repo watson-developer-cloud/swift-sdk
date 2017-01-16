@@ -772,6 +772,7 @@ public class SpeechToText {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body)
         

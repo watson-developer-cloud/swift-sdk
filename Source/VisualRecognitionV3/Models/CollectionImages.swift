@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public struct CollectionImage: JSONDecodable {
     public let imageFile: String
     
     /// The metadata associated with the image.
-    public let metadata: [String : Any]?
+    public let metadata: Metadata?
     
     /// The confidence level of the match with similar images. Provided only when searching for similar images.
     public let score: Double?
@@ -56,8 +56,25 @@ public struct CollectionImage: JSONDecodable {
         imageID = try json.getString(at: "image_id")
         created = try json.getString(at: "created")
         imageFile = try json.getString(at: "image_file")
-        metadata = try? json.getDictionary(at: "metadata")
+        metadata = try? json.decode(at: "metadata", type: Metadata.self)
         score = try? json.getDouble(at: "score")
+    }
+}
+
+/** Metadata object to handle updating, viewing metadata per image within a collection. */
+public struct Metadata: JSONDecodable {
+    
+    /// The metadata associated with the image.
+    public let metadata: [String: Any]?
+    
+    /// Used internally to intialize a 'Metadata' model from JSON.
+    public init(json: JSON) throws {
+        self.metadata = try? json.getDictionaryObject()
+    }
+    
+    /// Used internally to serialize metadata to JSON.
+    public func toJSONObject() -> Any {
+        return metadata
     }
 }
 

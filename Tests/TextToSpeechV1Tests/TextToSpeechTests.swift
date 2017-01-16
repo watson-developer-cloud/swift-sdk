@@ -16,6 +16,7 @@
 
 import XCTest
 import Foundation
+import AVFoundation
 import TextToSpeechV1
 
 class TextToSpeechTests: XCTestCase {
@@ -23,6 +24,7 @@ class TextToSpeechTests: XCTestCase {
     private var textToSpeech: TextToSpeech!
     private let timeout: TimeInterval = 5.0
     private let text = "Swift at IBM is awesome. You should try it!"
+    private var player: AVAudioPlayer?
     
     private let allVoices: [SynthesisVoice] = [
         .de_Birgit, .de_Dieter, .gb_Kate, .es_Enrique, .us_Allison, .us_Lisa, .us_Michael,
@@ -157,6 +159,23 @@ class TextToSpeechTests: XCTestCase {
             }
             waitForExpectations()
         }
+    }
+    
+    /** Synthesize text to spokemkon audio and play Opus format. */
+    func testSynthesizePlayOpus() {
+        let description = "Synthesize text to spoken audio."
+        let expectation = self.expectation(description: description)
+        
+        textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
+            do {
+                self.player = try AVAudioPlayer(data: data)
+                self.player!.play()
+                expectation.fulfill()
+            } catch {
+                XCTFail("Failed to create audio player.")
+            }
+        }
+        waitForExpectations()
     }
     
     /** Synthesize text to spoken audio in Opus format. */

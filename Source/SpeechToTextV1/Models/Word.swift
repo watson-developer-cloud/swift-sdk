@@ -58,7 +58,9 @@ public struct NewWord: JSONEncodable {
     /// A custom word from the custom model. The spelling of the word is used to train the model.
     public let word: String?
     
-    /// An array of pronunciations for the custom word.
+    /// An array of pronunciations for the custom word. You can specify a maximum of five sounds-like 
+    /// pronunciations for each word. For pronunciation rules, refer to the following link:
+    /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/custom.shtml#soundsLike
     public let soundsLike: [String]?
     
     /// The spelling of the custom word that the service uses to display the word in a transcript.

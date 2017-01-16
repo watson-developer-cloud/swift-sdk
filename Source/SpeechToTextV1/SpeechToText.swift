@@ -589,8 +589,38 @@ public class SpeechToText {
     }
     
     /**
-     Upgrades a custom language model.
+     Upgrades a custom language model to the latest release level of the Speech to Text service.
+     
+     - parameter customizationID: The ID of the custom model to upgrade.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
      */
+    public func upgradeCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/upgrade",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json")
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
     
     // MARK: - Custom Corpora
     
@@ -800,7 +830,8 @@ public class SpeechToText {
             url: serviceURL + "/v1/customizations/\(customizationID)/words",
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: "application/json"
+            acceptType: "application/json",
+            queryItems: queryParameters
         )
         
         // execute REST request

@@ -22,7 +22,11 @@ class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
     private let timeout: TimeInterval = 10.0
-    private let trainedCustomizationID = "efe96500-a600-11e6-9b09-6f4eec3a410e"
+//    private let trainedCustomizationID = "efe96500-a600-11e6-9b09-6f4eec3a410e"
+    private let trainedCustomizationName = "swift-sdk-unit-test-trained-customization"
+    private let trainedCustomizationDescription = "swift sdk test customization"
+    private var trainedCustomizationID: String!
+    private let corpusName = "swift-sdk-unit-test-corpus"
     
     static var allTests : [(String, (SpeechToTextTests) -> () throws -> Void)] {
         return [
@@ -47,6 +51,7 @@ class SpeechToTextTests: XCTestCase {
         super.setUp()
         self.continueAfterFailure = false
         instantiateSpeechToText()
+        lookupCustomization()
     }
     
     /** Instantiate Speech to Text. */
@@ -80,6 +85,130 @@ class SpeechToTextTests: XCTestCase {
             return nil
         }
         return url
+    }
+    
+    /** Look up (or create) the trained customization. */
+    func lookupCustomization() {
+        let description = "Look up the trained customization."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            XCTFail("Failed to list customizations for this service instance.")
+        }
+        
+        speechToText.getCustomizations(failure: failure) { customizations in
+            for customization in customizations {
+                if customization.name == self.trainedCustomizationName {
+                    switch customization.status {
+                    case .available:
+                        self.trainedCustomizationID = customization.customizationID
+                    case .ready, .pending: // train -> then fail (wait for training)
+                        print("Training the `trained customization` used for tests.")
+                        self.trainCustomizationWithCorpus()
+                        XCTFail("Please wait for the trained customization to finish training.")
+                    case .training: // fail (wait for training)
+                        XCTFail("Please wait for the trained customization to finish training.")
+                    case .failed: // training failed => delete & retry
+                        let message = "Creating a trained ranker has failed. Check the errors " +
+                            "within the corpus and customization and retry."
+                        XCTFail(message)
+                    }
+                    expectation.fulfill()
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        if(trainedCustomizationID == nil) {
+            print("Trained customization does not exist; creating a new one now.")
+            createTrainedCustomization()
+            print("Adding a corpus to the trained customization.")
+            addCorpusToTrainedCustomization()
+            print("Training the customization with the corpus.")
+            trainCustomizationWithCorpus()
+        }
+    }
+    
+    func createTrainedCustomization() {
+        let failToCreateCustomization =  { (error: Error) in
+            XCTFail("Failed to create the new customization.")
+        }
+        
+        let description = "Create a new customization."
+        let expectation = self.expectation(description: description)
+        speechToText.createCustomization(
+            withName: self.trainedCustomizationName,
+            withBaseModelName: "en-US_BroadbandModel",
+            description: self.trainedCustomizationDescription,
+            failure: failToCreateCustomization) { customization in
+                
+            self.trainedCustomizationID = customization.customizationID
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func addCorpusToTrainedCustomization() {
+        
+        let failToCreateCorpus =  { (error: Error) in
+            XCTFail("Failed to create the new corpus.")
+        }
+        
+        guard let corpusFile = loadFile(name: "healthcare", withExtension: "txt") else {
+            XCTFail("Failed to load file needed to create the corpus.")
+            return
+        }
+        
+        let description = "Add a corpus for the customization."
+        let expectation = self.expectation(description: description)
+        speechToText.addCorpus(
+            withName: corpusName,
+            fromFile: corpusFile,
+            customizationID: self.trainedCustomizationID,
+            failure: failToCreateCorpus) {
+                
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func trainCustomizationWithCorpus() {
+        
+        let failToGetCorpusStatus = { (error: Error) in
+            XCTFail("Failed to get the status of the new corpus.")
+        }
+        
+        let failToTrainCustomization = { (error: Error) in
+            XCTFail("Failed to train the new customization.")
+        }
+        
+        var trained = false
+        while(!trained) {
+            let description = "Wait until the corpus is processed before training the customization."
+            let expectation = self.expectation(description: description)
+            
+            speechToText.getCorpus(
+                withName: corpusName,
+                customizationID: self.trainedCustomizationID,
+                failure: failToGetCorpusStatus) { corpus in
+                    
+                    if corpus.status == .analyzed {
+                        trained = true
+                    }
+                    expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            sleep(3)
+        }
+        
+        let description2 = "Train the customization with the new corpus."
+        let expectation2 = self.expectation(description: description2)
+        speechToText.trainCustomization(withID: self.trainedCustomizationID, failure: failToTrainCustomization) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
     }
     
     // MARK: - Models
@@ -210,8 +339,8 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNotNil(customization.owner)
             XCTAssertEqual(customization.name, "test-model")
             XCTAssertEqual(customization.baseModelName, "en-US_BroadbandModel")
-            XCTAssertEqual(customization.status, CustomizationStatus.available)
-            XCTAssertEqual(customization.progress, 100)
+            XCTAssertNotNil(customization.status)
+            XCTAssertNotNil(customization.progress)
             XCTAssertEqual(customization.warnings, nil)
             
             expectation.fulfill()
@@ -260,26 +389,6 @@ class SpeechToTextTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations()
-        
-        var trained = false
-        while(!trained) {
-            let description2 = "Wait until the corpus is processed before deleting it."
-            let expectation2 = self.expectation(description: description2)
-            
-            speechToText.getCorpus(
-                withName: newCorpusName,
-                customizationID: trainedCustomizationID,
-                failure: failWithError) { corpus in
-            
-                if corpus.status == .analyzed {
-                    trained = true
-                }
-                expectation2.fulfill()
-            }
-            waitForExpectations()
-            
-            sleep(3)
-        }
         
         let description3 = "Delete the new corpus."
         let expectation3 = self.expectation(description: description3)
@@ -330,6 +439,52 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssertNotNil(word.source)
             }
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testAddAndDeleteMultipleWords() {
+        let description = "Add 2 words to the trained customization."
+        let expectation = self.expectation(description: description)
+        
+        let word1 = NewWord(word: "HHonors", soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
+        let word2 = NewWord(word: "IEEE", soundsLike: ["i triple e"])
+        speechToText.addWords(customizationID: trainedCustomizationID, words: [word1, word2], failure: failWithError) {
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        var trained = false
+        while(!trained) {
+            let description1 = "Wait until the customization is ready before deleting the new words."
+            let expectation1 = self.expectation(description: description1)
+            
+            speechToText.getCustomization(withID: trainedCustomizationID, failure: failWithError) {
+                customization in
+                
+                if customization.status == .ready {
+                    trained = true
+                }
+                expectation1.fulfill()
+            }
+            waitForExpectations()
+            
+            sleep(3)
+        }
+        
+        let description2 = "Delete word1"
+        let expectation2 = self.expectation(description: description2)
+        
+        speechToText.deleteWord(withName: word1.word!, customizationID: trainedCustomizationID, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete word2"
+        let expectation3 = self.expectation(description: description3)
+        
+        speechToText.deleteWord(withName: word2.word!, customizationID: trainedCustomizationID, failure: failWithError) {
+            expectation3.fulfill()
         }
         waitForExpectations()
     }

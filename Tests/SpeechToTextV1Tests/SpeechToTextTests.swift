@@ -21,8 +21,7 @@ import SpeechToTextV1
 class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: TimeInterval = 10.0
-//    private let trainedCustomizationID = "efe96500-a600-11e6-9b09-6f4eec3a410e"
+    private let timeout: TimeInterval = 15.0
     private let trainedCustomizationName = "swift-sdk-unit-test-trained-customization"
     private let trainedCustomizationDescription = "swift sdk test customization"
     private var trainedCustomizationID: String!
@@ -94,6 +93,7 @@ class SpeechToTextTests: XCTestCase {
         
         let failure = { (error: Error) in
             XCTFail("Failed to list customizations for this service instance.")
+            return
         }
         
         var customizationStatus: CustomizationStatus?
@@ -123,9 +123,9 @@ class SpeechToTextTests: XCTestCase {
             }
             
             switch customizationStatus {
-            case .available:
+            case .available, .ready:
                 break // do nothing, because the customization is trained
-            case .ready, .pending: // train -> then fail (wait for training)
+            case .pending: // train -> then fail (wait for training)
                 print("Training the `trained customization` used for tests.")
                 self.trainCustomizationWithCorpus()
                 print("The customization has been trained and is ready for use.")
@@ -133,17 +133,20 @@ class SpeechToTextTests: XCTestCase {
                 let message = "Please wait a few minutes for the trained customization to finish " +
                 "training. You can try running the tests again afterwards."
                 XCTFail(message)
+                return
             case .failed: // training failed => delete & retry
                 let message = "Creating a trained ranker has failed. Check the errors " +
                 "within the corpus and customization and retry."
                 XCTFail(message)
+                return
             }
         }
     }
     
     func createTrainedCustomization() {
         let failToCreateCustomization =  { (error: Error) in
-            XCTFail("Failed to create the new customization.")
+            XCTFail("Failed to create the new customization: \(error)")
+            return
         }
         
         let description = "Create a new customization."
@@ -163,7 +166,8 @@ class SpeechToTextTests: XCTestCase {
     func addCorpusToTrainedCustomization() {
         
         let failToCreateCorpus =  { (error: Error) in
-            XCTFail("Failed to create the new corpus.")
+            XCTFail("Failed to create the new corpus: \(error)")
+            return
         }
         
         guard let corpusFile = loadFile(name: "healthcare", withExtension: "txt") else {
@@ -187,19 +191,24 @@ class SpeechToTextTests: XCTestCase {
     func trainCustomizationWithCorpus() {
         
         let failToGetCorpusStatus = { (error: Error) in
-            XCTFail("Failed to get the status of the new corpus.")
+            XCTFail("Failed to get the status of the new corpus: \(error)")
+            return
         }
         
         let failToTrainCustomization = { (error: Error) in
-            XCTFail("Failed to train the new customization.")
+            XCTFail("Failed to train the new customization: \(error)")
+            return
         }
         
         let failToGetCustomizationStatus = { (error: Error) in
-            XCTFail("Failed to get the status of the new customization.")
+            XCTFail("Failed to get the status of the new customization: \(error)")
+            return
         }
         
         var trained = false
+        var tries = 0
         while(!trained) {
+            tries += 1
             let description = "Wait until the corpus is processed before training the customization."
             let expectation = self.expectation(description: description)
             
@@ -215,6 +224,10 @@ class SpeechToTextTests: XCTestCase {
             }
             waitForExpectations()
             
+            if tries > 10 {
+                XCTFail("The corpus has not been processed. Please check the corpus errors.")
+            }
+            
             sleep(3)
         }
         
@@ -229,7 +242,9 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectations()
         
         trained = false
+        tries = 0
         while(!trained) {
+            tries += 1
             let description3 = "Wait until the customization is trained."
             let expectation3 = self.expectation(description: description3)
             
@@ -243,6 +258,10 @@ class SpeechToTextTests: XCTestCase {
                 expectation3.fulfill()
             }
             waitForExpectations()
+            
+            if tries > 10 {
+                XCTFail("Customization is not ready. Please check the customization errors.")
+            }
             
             sleep(3)
         }
@@ -411,7 +430,7 @@ class SpeechToTextTests: XCTestCase {
         let description = "Create a new corpus."
         let expectation = self.expectation(description: description)
         
-        guard let corpusFile = loadFile(name: "healthcare", withExtension: "txt") else {
+        guard let corpusFile = loadFile(name: "healthcare-short", withExtension: "txt") else {
             XCTFail("Failed to load file needed to create the corpus.")
             return
         }
@@ -429,7 +448,9 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectations()
         
         var trained = false
+        var tries = 0
         while(!trained) {
+            tries += 1
             let description2 = "Wait until the corpus is processed before deleting it."
             let expectation2 = self.expectation(description: description2)
             
@@ -444,6 +465,10 @@ class SpeechToTextTests: XCTestCase {
                     expectation2.fulfill()
             }
             waitForExpectations()
+            
+            if tries > 10 {
+                XCTFail("Customization is not ready. Please check the customization errors.")
+            }
             
             sleep(3)
         }
@@ -471,8 +496,8 @@ class SpeechToTextTests: XCTestCase {
                 
             XCTAssertEqual(corpus.name, self.corpusName)
             XCTAssertEqual(corpus.status, .analyzed)
-            XCTAssertEqual(corpus.totalWords, 226)
-            XCTAssertEqual(corpus.outOfVocabularyWords, 2)
+            XCTAssertEqual(corpus.totalWords, 40286)
+            XCTAssertEqual(corpus.outOfVocabularyWords, 286)
             XCTAssertNil(corpus.error)
             expectation.fulfill()
         }
@@ -513,7 +538,9 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectations()
         
         var trained = false
+        var tries = 0
         while(!trained) {
+            tries += 1
             let description1 = "Wait until the customization is ready before deleting the new words."
             let expectation1 = self.expectation(description: description1)
             
@@ -527,10 +554,14 @@ class SpeechToTextTests: XCTestCase {
             }
             waitForExpectations()
             
+            if tries > 10 {
+                XCTFail("Customization is not ready. Please check the customization errors.")
+            }
+            
             sleep(3)
         }
         
-        let description2 = "Delete word1"
+        let description2 = "Delete word1."
         let expectation2 = self.expectation(description: description2)
         
         speechToText.deleteWord(withName: word1.word!, customizationID: trainedCustomizationID, failure: failWithError) {
@@ -538,7 +569,7 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
         
-        let description3 = "Delete word2"
+        let description3 = "Delete word2."
         let expectation3 = self.expectation(description: description3)
         
         speechToText.deleteWord(withName: word2.word!, customizationID: trainedCustomizationID, failure: failWithError) {
@@ -547,8 +578,42 @@ class SpeechToTextTests: XCTestCase {
         waitForExpectations()
     }
     
-    func testGetWord() {
+    func testAddAndDeleteASingleWord() {
+        let description = "Add 1 word to the trained customization."
+        let expectation = self.expectation(description: description)
         
+        let word1 = NewWord(soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
+        speechToText.addWord(withName: "HHonors", customizationID: trainedCustomizationID, word: word1, failure: failWithError) {
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete word1."
+        let expectation2 = self.expectation(description: description2)
+        
+        speechToText.deleteWord(withName: "HHonors", customizationID: trainedCustomizationID, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetWord() {
+        let description = "Get a specific word."
+        let expectation = self.expectation(description: description)
+        
+        speechToText.getWord(
+            withName: "hyperventilation",
+            customizationID: trainedCustomizationID,
+            failure: failWithError) { word in
+            
+            XCTAssertEqual(word.word, "hyperventilation")
+            XCTAssertEqual(word.soundsLike, ["hyperventilation"])
+            XCTAssertEqual(word.displayAs, "hyperventilation")
+            XCTAssertEqual(word.count, 1)
+            XCTAssertEqual(word.source, [self.corpusName])
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
 
     // MARK: - Transcribe File, Default Settings

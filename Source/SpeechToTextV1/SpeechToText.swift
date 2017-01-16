@@ -410,7 +410,7 @@ public class SpeechToText {
             jsonData["description"] = description
         }
         guard let body = try? JSON(dictionary: jsonData).serialize() else {
-            failure?(RestError.encodingError)
+            failure?(RestError.serializationError)
             return
         }
         
@@ -764,7 +764,7 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -864,7 +864,7 @@ public class SpeechToText {
         var jsonData = [String: Any]()
         jsonData["words"] = words.map { word in word.toJSONObject() }
         guard let body = try? JSON(dictionary: jsonData).serialize() else {
-            failure?(RestError.encodingError)
+            failure?(RestError.serializationError)
             return
         }
         
@@ -986,7 +986,7 @@ public class SpeechToText {
     {
         // construct body
         guard let body = try? word?.toJSON().serialize() else {
-            failure?(RestError.encodingError)
+            failure?(RestError.serializationError)
             return
         }
         

@@ -987,7 +987,6 @@ public class VisualRecognition {
      
      - parameter forImageID: The ID of the image to list metadata from.
      - parameter inCollectionID: The ID of the collection to list the image's metadata from.
-
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is listed successfully.
      */

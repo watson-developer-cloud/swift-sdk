@@ -217,9 +217,9 @@ class SpeechToTextTests: XCTestCase {
             return
         }
         
-        var trained = false
+        var processed = false
         var tries = 0
-        while(!trained) {
+        repeat {
             tries += 1
             let description = "Wait until the corpus is processed before training the customization."
             let expectation = self.expectation(description: description)
@@ -230,18 +230,22 @@ class SpeechToTextTests: XCTestCase {
                 failure: failToGetCorpusStatus) { corpus in
                     
                     if corpus.status == .analyzed {
-                        trained = true
+                        processed = true
+                    } else if corpus.status == .undetermined {
+                        let message = "There was an error when processing the corpus, please check " +
+                            "and fix the errors before trying again."
+                        XCTFail(message)
                     }
                     expectation.fulfill()
             }
             waitForExpectations()
             
             if tries > 10 {
-                XCTFail("The corpus has not been processed. Please check the corpus errors.")
+                XCTFail("The corpus is taking too long to process. Please try again later.")
             }
             
             sleep(3)
-        }
+        } while(!processed)
         
         let description2 = "Train the customization with the new corpus."
         let expectation2 = self.expectation(description: description2)
@@ -253,9 +257,9 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
         
-        trained = false
+        var trained = false
         tries = 0
-        while(!trained) {
+        repeat {
             tries += 1
             let description3 = "Wait until the customization is trained."
             let expectation3 = self.expectation(description: description3)
@@ -266,17 +270,21 @@ class SpeechToTextTests: XCTestCase {
                 
                 if customization.status == .available {
                     trained = true
+                } else if customization.status == .failed {
+                    let message = "There was an error when training the customization, please " +
+                    "check and fix the errors before trying again."
+                    XCTFail(message)
                 }
                 expectation3.fulfill()
             }
             waitForExpectations()
             
             if tries > 10 {
-                XCTFail("Customization is not ready. Please check the customization errors.")
+                XCTFail("The customization is taking too long to train. Please try again later.")
             }
             
             sleep(3)
-        }
+        } while(!trained)
     }
     
     // MARK: - Models
@@ -459,9 +467,9 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
         
-        var trained = false
+        var processed = false
         var tries = 0
-        while(!trained) {
+        repeat {
             tries += 1
             let description2 = "Wait until the corpus is processed before deleting it."
             let expectation2 = self.expectation(description: description2)
@@ -472,18 +480,22 @@ class SpeechToTextTests: XCTestCase {
                 failure: failWithError) { corpus in
                     
                     if corpus.status == .analyzed {
-                        trained = true
+                        processed = true
+                    } else if corpus.status == .undetermined {
+                        let message = "There was an error when processing the corpus, please check " +
+                        "and fix the errors before trying again."
+                        XCTFail(message)
                     }
                     expectation2.fulfill()
             }
             waitForExpectations()
             
             if tries > 10 {
-                XCTFail("Customization is not ready. Please check the customization errors.")
+                XCTFail("The corpus is taking too long to process. Please try again later.")
             }
             
             sleep(3)
-        }
+        } while(!processed)
         
         let description3 = "Delete the new corpus."
         let expectation3 = self.expectation(description: description3)
@@ -549,9 +561,9 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
         
-        var trained = false
+        var ready = false
         var tries = 0
-        while(!trained) {
+        repeat {
             tries += 1
             let description1 = "Wait until the customization is ready before deleting the new words."
             let expectation1 = self.expectation(description: description1)
@@ -560,18 +572,22 @@ class SpeechToTextTests: XCTestCase {
                 customization in
                 
                 if customization.status == .ready {
-                    trained = true
+                    ready = true
+                } else if customization.status == .failed {
+                    let message = "The customization has failed, please fix the errors and try " +
+                        "again later."
+                    XCTFail(message)
                 }
                 expectation1.fulfill()
             }
             waitForExpectations()
             
             if tries > 10 {
-                XCTFail("Customization is not ready. Please check the customization errors.")
+                XCTFail("Customization is not ready. Please try again later.")
             }
             
             sleep(3)
-        }
+        } while(!ready)
         
         let description2 = "Delete word1."
         let expectation2 = self.expectation(description: description2)

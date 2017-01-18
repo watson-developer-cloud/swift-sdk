@@ -1,6 +1,6 @@
-# Watson Developer Cloud iOS SDK: Objective-C Compatability
+# Watson Developer Cloud Swift SDK: Objective-C Compatability
 
-The Watson Developer Cloud iOS SDK is written in Swift and we strive to write "Swifty" code that follows the community's conventions and best practices. Unfortunately, that means our framework does not automatically bridge to Objective-C. We recommend writing a custom bridge in Swift to consume the iOS SDK in an Objective-C application. The following tutorial describes how to build a Swift bridge to consume the Watson Developer Cloud iOS SDK in an Objective-C application.
+The Watson Developer Cloud Swift SDK strives to write "Swifty" code that follows the community's conventions and best practices. Unfortunately, that means our framework does not automatically bridge to Objective-C. We recommend writing a custom bridge in Swift to consume the Swift SDK in an Objective-C application. The following tutorial describes how to build a Swift bridge to consume the Watson Developer Cloud Swift SDK in an Objective-C application.
 
 ## Create Application and Load Dependencies
 
@@ -8,10 +8,10 @@ Create an Objective-C application.
 
 <img width="1410" alt="screen shot 2016-09-10 at 11 51 19 pm" src="https://cloud.githubusercontent.com/assets/1957636/18415277/06699246-77b2-11e6-880e-9b533bed5b7f.png">
 
-We recommend using the Carthage dependency manager to build the SDK and keep it up-to-date. To use Carthage, create a file called `Cartfile` in the root directory of your project with the contents `github "watson-developer-cloud/ios-sdk"` and run `carthage update --platform iOS`.
+We recommend using the Carthage dependency manager to build the SDK and keep it up-to-date. To use Carthage, create a file called `Cartfile` in the root directory of your project with the contents `github "watson-developer-cloud/swift-sdk"` and run `carthage update --platform iOS`.
 
 ```bash
-$ echo "github \"watson-developer-cloud/ios-sdk\"" > Cartfile
+$ echo "github \"watson-developer-cloud/swift-sdk\"" > Cartfile
 $ carthage update --platform iOS
 ```
 
@@ -61,7 +61,7 @@ Create a `WatsonBridge.swift` file. When prompted, allow Xcode to build an Objec
 
 <img width="742" alt="screen shot 2016-09-11 at 12 05 26 am" src="https://cloud.githubusercontent.com/assets/1957636/18415325/7a4355ac-77b3-11e6-9e3b-a4365f906eea.png">
 
-Import the iOS SDK framework(s) you'd like to use in `WatsonBridge.swift`.
+Import the Swift SDK framework(s) you'd like to use in `WatsonBridge.swift`.
 
 <img width="697" alt="screen shot 2016-09-11 at 12 13 51 am" src="https://cloud.githubusercontent.com/assets/1957636/18415358/a5693d04-77b4-11e6-859e-ff067388bd19.png">
 

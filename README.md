@@ -1,4 +1,4 @@
-# Watson Developer Cloud iOS SDK
+# Watson Developer Cloud Swift SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
 ![](https://img.shields.io/badge/platform-iOS-blue.svg?style=flat)
@@ -8,9 +8,10 @@
 
 ## Overview
 
-The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build Watson-powered applications. With the iOS SDK you can leverage the power of Watson's advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.
+The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson's advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.
 
-There are many resources to help you build your first cognitive application with the iOS SDK:
+There are many resources to help you build your first cognitive application with the Swift SDK:
+
 - Read the [Readme](README.md)
 - Follow the [QuickStart Guide](docs/quickstart.md)
 - Review a [Sample Application](#sample-applications)
@@ -59,7 +60,7 @@ There are many resources to help you build your first cognitive application with
 
 ### Dependency Management
 
-We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the iOS SDK for your application.
+We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the Swift SDK for your application.
 
 You can install Carthage with [Homebrew](http://brew.sh/):
 
@@ -68,10 +69,10 @@ $ brew update
 $ brew install carthage
 ```
 
-To use the Watson Developer Cloud iOS SDK in your application, specify it in your `Cartfile`:
+To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
 
 ```
-github "watson-developer-cloud/ios-sdk"
+github "watson-developer-cloud/swift-sdk"
 ```
 
 In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
@@ -165,13 +166,13 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 
 Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
 
-To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
+To continue using the Swift SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
 
-`github "watson-developer-cloud/ios-sdk" ~> 0.7.0`
+`github "watson-developer-cloud/swift-sdk" ~> 0.7.0`
 
 ## Objective-C Compatibility
 
-Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.
+Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.
 
 ## Linux Compatibility
 
@@ -181,7 +182,7 @@ To include the Watson SDK to your Linux projects, add the following to your `Pac
 
 ```swift
 dependencies: [
-	.Package(url: "https://github.com/watson-developer-cloud/ios-sdk",
+	.Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
 	         majorVersion: 0)
 ]
 ```
@@ -197,7 +198,7 @@ We would love any and all help! If you would like to contribute, please read our
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
 
-This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
+This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools. 
 
 ## AlchemyData News
 
@@ -258,7 +259,7 @@ import AlchemyLanguageV1
 let apiKey = "your-apikey-here"
 let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
 
-let url = "https://github.com/watson-developer-cloud/ios-sdk"
+let url = "https://github.com/watson-developer-cloud/swift-sdk"
 let failure = { (error: Error) in print(error) }
 alchemyLanguage.getTextSentiment(fromContentAtURL: url, failure: failure) { sentiment in
     print(sentiment)
@@ -309,7 +310,7 @@ conversation.message(withWorkspace: workspaceID, request: request, failure: fail
 
 The Conversation service allows users to define custom variables and values in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: `"pizza_toppings": ["ketchup", "ham", "onion"]`.
 
-Unfortunately, the iOS SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the `Conversation` framework include a `json: [String: Any]` property to allow users to access the underlying JSON payload and manually parse user-defined variables.
+Unfortunately, the Swift SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the `Conversation` framework include a `json: [String: Any]` property to allow users to access the underlying JSON payload and manually parse user-defined variables.
 
 The following example shows how to extract a user-defined `pizza_toppings` variable from the `context` of a Conversation response:
 
@@ -850,6 +851,110 @@ func stopStreaming() {
     speechToTextSession.stopMicrophone()
     speechToTextSession.stopRequest()
     speechToTextSession.disconnect()
+}
+```
+
+#### Customization
+Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on. 
+
+The following example demonstrates an example of how to customize the language model:
+
+```swift
+import SpeechToTextV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let speechToText = SpeechToText(username: username, password: password)
+
+guard let corpusFile = loadFile(name: "healthcare-short", withExtension: "txt") else {
+    NSLog("Failed to load file needed to create the corpus.")
+    return
+}
+
+let newCorpusName = "swift-sdk-unit-test-corpus"
+
+speechToText.addCorpus(
+    withName: newCorpusName,
+    fromFile: corpusFile,
+    customizationID: trainedCustomizationID,
+    failure: failWithError) {
+}
+
+// Get the custom corpus to build the trained customization
+speechToText.getCorpus(
+    withName: corpusName,
+    customizationID: trainedCustomizationID,
+    failure: failWithError) { corpus in
+        
+    print(corpus.name)
+    // Check that the corpus is finished processing 
+    print("finished processing: \(corpus.status == .analyzed)")
+    print(corpus.totalWords)
+    print(corpus.outOfVocabularyWords)
+    // Check the corpus has no error
+    print("errors: \(corpus.error == nil)")
+}
+```
+
+There is also an option to add words to a trained customization:
+
+```swift
+import SpeechToTextV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let speechToText = SpeechToText(username: username, password: password)
+let error = NSError(domain: "testing", code: 0)
+
+var trainedCustomizationName = "your-customization-name-here"
+var customizationStatus = CustomizationStatus?
+
+
+// Look up the customization to add the words to
+speechToText.getCustomizations(failure: failure) { customizations in
+    for customization in customizations {
+        if customization.name == self.trainedCustomizationName {
+            self.trainedCustomizationID = customization.customizationID
+            customizationStatus = customization.status
+        }
+    }
+}
+
+guard let customizationStatus = customizationStatus else {
+	throw error	
+}
+
+// Check the customization status
+switch customizationStatus {
+case .available, .ready:
+    break // do nothing, because the customization is trained
+case .pending: // train -> then fail (wait for training)
+    print("Training the `trained customization` used for tests.")
+    self.trainCustomizationWithCorpus()
+    print("The customization has been trained and is ready for use.")
+case .training: // fail (wait for training)
+    let message = "Please wait a few minutes for the trained customization to finish " +
+    "training. You can try running the tests again afterwards."
+    print(message)
+    throw error
+case .failed: // training failed => delete & retry
+    let message = "Creating a trained ranker has failed. Check the errors " +
+    "within the corpus and customization and retry."
+    print(message)
+    throw error
+}
+
+// Add custom words to the corpus
+if customizationStatus == .available {
+	let customWord1 = NewWord(word: "HHonors", soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
+	let customWord2 = NewWord(word: "IEEE", soundsLike: ["i triple e"])
+	
+	speechToText.addWords(
+		customizationID: trainedCustomizationID, 
+		words: [customWord1, customWord2], 
+		failure: failWithError) {
+		print("added words to corpus")
+	}
 }
 ```
 

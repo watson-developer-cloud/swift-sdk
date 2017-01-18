@@ -55,22 +55,25 @@
         <section>
           <section class="section">
             
-            <a href='#watson-developer-cloud-ios-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-ios-sdk'>Watson Developer Cloud iOS SDK</h1>
+            <a href='#watson-developer-cloud-swift-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-swift-sdk'>Watson Developer Cloud Swift SDK</h1>
 
 <p><a href="https://travis-ci.org/watson-developer-cloud/ios-sdk"><img src="https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master" alt="Build Status"></a>
-<a href="https://codecov.io/github/watson-developer-cloud/ios-sdk?branch=master"><img src="https://codecov.io/github/watson-developer-cloud/ios-sdk/coverage.svg?branch=master" alt="codecov.io"></a>
+<img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="http://watson-developer-cloud.github.io/ios-sdk/"><img src="https://img.shields.io/badge/Documentation-API-blue.svg?style=flat" alt="Documentation"></a>
 <a href="https://cla-assistant.io/watson-developer-cloud/ios-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk" alt="CLA assistant"></a></p>
 <a href='#overview' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='overview'>Overview</h2>
 
-<p>The Watson Developer Cloud iOS SDK makes it easy for mobile developers to build Watson-powered applications. With the iOS SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
+<p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
 
-<p>There are many resources to help you build your first cognitive application with the iOS SDK:
-- Read the <a href="README.md">Readme</a>
-- Follow the <a href="docs/quickstart.md">QuickStart Guide</a>
-- Review a <a href="#sample-applications">Sample Application</a>
-- Browse the <a href="http://watson-developer-cloud.github.io/ios-sdk/">Documentation</a></p>
+<p>There are many resources to help you build your first cognitive application with the Swift SDK:</p>
+
+<ul>
+<li>Read the <a href="README.md">Readme</a></li>
+<li>Follow the <a href="docs/quickstart.md">QuickStart Guide</a></li>
+<li>Review a <a href="#sample-applications">Sample Application</a></li>
+<li>Browse the <a href="http://watson-developer-cloud.github.io/ios-sdk/">Documentation</a></li>
+</ul>
 <a href='#contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contents'>Contents</h2>
 <a href='#general' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='general'>General</h3>
 
@@ -83,6 +86,7 @@
 <li><a href="#sample-applications">Sample Applications</a></li>
 <li><a href="#xcode-7-compatibility">Xcode 7 Compatibility</a></li>
 <li><a href="#objective-c-compatibility">Objective-C Compatibility</a></li>
+<li><a href="#linux-compatibility">Linux Compatibility</a></li>
 <li><a href="#contributing">Contributing</a></li>
 <li><a href="#license">License</a></li>
 </ul>
@@ -114,15 +118,15 @@
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#dependency-management' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='dependency-management'>Dependency Management</h3>
 
-<p>We recommend using <a href="https://github.com/Carthage/Carthage">Carthage</a> to manage dependencies and build the iOS SDK for your application.</p>
+<p>We recommend using <a href="https://github.com/Carthage/Carthage">Carthage</a> to manage dependencies and build the Swift SDK for your application.</p>
 
 <p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a>:</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>brew update
 <span class="gp">$ </span>brew install carthage
 </code></pre>
 
-<p>To use the Watson Developer Cloud iOS SDK in your application, specify it in your <code>Cartfile</code>:</p>
-<pre class="highlight plaintext"><code>github "watson-developer-cloud/ios-sdk"
+<p>To use the Watson Developer Cloud Swift SDK in your application, specify it in your <code>Cartfile</code>:</p>
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk"
 </code></pre>
 
 <p>In a production app, you may also want to specify a <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement">version requirement</a>.</p>
@@ -211,12 +215,24 @@
 
 <p>Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.</p>
 
-<p>To continue using the iOS SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:</p>
+<p>To continue using the Swift SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:</p>
 
-<p><code>github &quot;watson-developer-cloud/ios-sdk&quot; ~&gt; 0.7.0</code></p>
+<p><code>github &quot;watson-developer-cloud/swift-sdk&quot; ~&gt; 0.7.0</code></p>
 <a href='#objective-c-compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='objective-c-compatibility'>Objective-C Compatibility</h2>
 
-<p>Please see <a href="docs/objective-c.md">this tutorial</a> for more information about consuming the Watson Developer Cloud iOS SDK in an Objective-C application.</p>
+<p>Please see <a href="docs/objective-c.md">this tutorial</a> for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.</p>
+<a href='#linux-compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='linux-compatibility'>Linux Compatibility</h2>
+
+<p>The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.</p>
+
+<p>To include the Watson SDK to your Linux projects, add the following to your <code>Package.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span>
+             <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+
+<p>To build the project, run <code>swift build</code> from the command line.</p>
 <a href='#contributing' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contributing'>Contributing</h2>
 
 <p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
@@ -225,7 +241,7 @@
 <p>This library is licensed under Apache 2.0. Full license text is
 available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE">LICENSE</a>.</p>
 
-<p>This SDK is intended solely for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.</p>
+<p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools. </p>
 <a href='#alchemydata-news' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='alchemydata-news'>AlchemyData News</h2>
 
 <p>AlchemyData News provides news and blog content enriched with natural language processing to allow for highly targeted search and trend analysis. Now you can query the world&rsquo;s news sources and blogs like a database.</p>
@@ -285,7 +301,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-apikey-here"</span>
 <span class="k">let</span> <span class="nv">alchemyLanguage</span> <span class="o">=</span> <span class="kt">AlchemyLanguage</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="s">"https://github.com/watson-developer-cloud/ios-sdk"</span>
+<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">alchemyLanguage</span><span class="o">.</span><span class="nf">getTextSentiment</span><span class="p">(</span><span class="nv">fromContentAtURL</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">sentiment</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">sentiment</span><span class="p">)</span>
@@ -333,7 +349,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <p>The Conversation service allows users to define custom variables and values in their application&rsquo;s payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: <code>&quot;pizza_toppings&quot;: [&quot;ketchup&quot;, &quot;ham&quot;, &quot;onion&quot;]</code>.</p>
 
-<p>Unfortunately, the iOS SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the <code>Conversation</code> framework include a <code>json: [String: Any]</code> property to allow users to access the underlying JSON payload and manually parse user-defined variables.</p>
+<p>Unfortunately, the Swift SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the <code>Conversation</code> framework include a <code>json: [String: Any]</code> property to allow users to access the underlying JSON payload and manually parse user-defined variables.</p>
 
 <p>The following example shows how to extract a user-defined <code>pizza_toppings</code> variable from the <code>context</code> of a Conversation response:</p>
 <pre class="highlight swift"><code><span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
@@ -353,7 +369,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <p>The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.</p>
 
-<p>The following example shows how to instantiate a Discivery object:</p>
+<p>The following example shows how to instantiate a Discovery object:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DiscoveryV1</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
@@ -849,6 +865,106 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
+<a href='#customization' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='customization'>Customization</h4>
+
+<p>Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on. </p>
+
+<p>The following example demonstrates an example of how to customize the language model:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">corpusFile</span> <span class="o">=</span> <span class="nf">loadFile</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"healthcare-short"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"txt"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kt">NSLog</span><span class="p">(</span><span class="s">"Failed to load file needed to create the corpus."</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">newCorpusName</span> <span class="o">=</span> <span class="s">"swift-sdk-unit-test-corpus"</span>
+
+<span class="n">speechToText</span><span class="o">.</span><span class="nf">addCorpus</span><span class="p">(</span>
+    <span class="nv">withName</span><span class="p">:</span> <span class="n">newCorpusName</span><span class="p">,</span>
+    <span class="nv">fromFile</span><span class="p">:</span> <span class="n">corpusFile</span><span class="p">,</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// Get the custom corpus to build the trained customization</span>
+<span class="n">speechToText</span><span class="o">.</span><span class="nf">getCorpus</span><span class="p">(</span>
+    <span class="nv">withName</span><span class="p">:</span> <span class="n">corpusName</span><span class="p">,</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span> <span class="n">corpus</span> <span class="k">in</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="c1">// Check that the corpus is finished processing </span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"finished processing: </span><span class="se">\(</span><span class="n">corpus</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="o">.</span><span class="n">analyzed</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">totalWords</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">outOfVocabularyWords</span><span class="p">)</span>
+    <span class="c1">// Check the corpus has no error</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"errors: </span><span class="se">\(</span><span class="n">corpus</span><span class="o">.</span><span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>There is also an option to add words to a trained customization:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="kt">NSError</span><span class="p">(</span><span class="nv">domain</span><span class="p">:</span> <span class="s">"testing"</span><span class="p">,</span> <span class="nv">code</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="nv">trainedCustomizationName</span> <span class="o">=</span> <span class="s">"your-customization-name-here"</span>
+<span class="k">var</span> <span class="nv">customizationStatus</span> <span class="o">=</span> <span class="kt">CustomizationStatus</span><span class="p">?</span>
+
+
+<span class="c1">// Look up the customization to add the words to</span>
+<span class="n">speechToText</span><span class="o">.</span><span class="nf">getCustomizations</span><span class="p">(</span><span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">customizations</span> <span class="k">in</span>
+    <span class="k">for</span> <span class="n">customization</span> <span class="k">in</span> <span class="n">customizations</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">customization</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="k">self</span><span class="o">.</span><span class="n">trainedCustomizationName</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">trainedCustomizationID</span> <span class="o">=</span> <span class="n">customization</span><span class="o">.</span><span class="n">customizationID</span>
+            <span class="n">customizationStatus</span> <span class="o">=</span> <span class="n">customization</span><span class="o">.</span><span class="n">status</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">customizationStatus</span> <span class="o">=</span> <span class="n">customizationStatus</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="n">error</span> 
+<span class="p">}</span>
+
+<span class="c1">// Check the customization status</span>
+<span class="k">switch</span> <span class="n">customizationStatus</span> <span class="p">{</span>
+<span class="k">case</span> <span class="o">.</span><span class="n">available</span><span class="p">,</span> <span class="o">.</span><span class="nv">ready</span><span class="p">:</span>
+    <span class="k">break</span> <span class="c1">// do nothing, because the customization is trained</span>
+<span class="k">case</span> <span class="o">.</span><span class="nv">pending</span><span class="p">:</span> <span class="c1">// train -&gt; then fail (wait for training)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Training the `trained customization` used for tests."</span><span class="p">)</span>
+    <span class="k">self</span><span class="o">.</span><span class="nf">trainCustomizationWithCorpus</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The customization has been trained and is ready for use."</span><span class="p">)</span>
+<span class="k">case</span> <span class="o">.</span><span class="nv">training</span><span class="p">:</span> <span class="c1">// fail (wait for training)</span>
+    <span class="k">let</span> <span class="nv">message</span> <span class="o">=</span> <span class="s">"Please wait a few minutes for the trained customization to finish "</span> <span class="o">+</span>
+    <span class="s">"training. You can try running the tests again afterwards."</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">throw</span> <span class="n">error</span>
+<span class="k">case</span> <span class="o">.</span><span class="nv">failed</span><span class="p">:</span> <span class="c1">// training failed =&gt; delete &amp; retry</span>
+    <span class="k">let</span> <span class="nv">message</span> <span class="o">=</span> <span class="s">"Creating a trained ranker has failed. Check the errors "</span> <span class="o">+</span>
+    <span class="s">"within the corpus and customization and retry."</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">throw</span> <span class="n">error</span>
+<span class="p">}</span>
+
+<span class="c1">// Add custom words to the corpus</span>
+<span class="k">if</span> <span class="n">customizationStatus</span> <span class="o">==</span> <span class="o">.</span><span class="n">available</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">customWord1</span> <span class="o">=</span> <span class="kt">NewWord</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="s">"HHonors"</span><span class="p">,</span> <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="s">"hilton honors"</span><span class="p">,</span> <span class="s">"h honors"</span><span class="p">],</span> <span class="nv">displayAs</span><span class="p">:</span> <span class="s">"HHonors"</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">customWord2</span> <span class="o">=</span> <span class="kt">NewWord</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="s">"IEEE"</span><span class="p">,</span> <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="s">"i triple e"</span><span class="p">])</span>
+
+    <span class="n">speechToText</span><span class="o">.</span><span class="nf">addWords</span><span class="p">(</span>
+        <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span> 
+        <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="n">customWord1</span><span class="p">,</span> <span class="n">customWord2</span><span class="p">],</span> 
+        <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"added words to corpus"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
 <a href='#additional-information' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='additional-information'>Additional Information</h4>
 
 <p>The following links provide more information about the IBM Speech to Text service:</p>
@@ -1049,7 +1165,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-12-22)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-01-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

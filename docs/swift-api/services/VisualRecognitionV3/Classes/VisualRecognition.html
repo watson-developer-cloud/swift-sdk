@@ -88,6 +88,9 @@
                 <a href="../Structs/ImagesWithFaces.html">ImagesWithFaces</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Metadata.html">Metadata</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/PositiveExample.html">PositiveExample</a>
               </li>
               <li class="nav-group-task">
@@ -1725,9 +1728,293 @@ collection can contain 1000000 images.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC19VisualRecognitionV317VisualRecognition29findSimilarImagesInCollectionFT6withIDSS9imageFileV10Foundation3URL5limitGSqSi_7failureGSqFPs5Error_T__7successFVS_13SimilarImagesT__T_"></a>
-                    <a name="//apple_ref/swift/Method/findSimilarImagesInCollection(withID:imageFile:limit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC19VisualRecognitionV317VisualRecognition29findSimilarImagesInCollectionFT6withIDSS9imageFileV10Foundation3URL5limitGSqSi_7failureGSqFPs5Error_T__7successFVS_13SimilarImagesT__T_">findSimilarImagesInCollection(withID:imageFile:limit:failure:success:)</a>
+                    <a name="/s:FC19VisualRecognitionV317VisualRecognition19deleteImageMetadataFT10forImageIDSS14inCollectionIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteImageMetadata(forImageID:inCollectionID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC19VisualRecognitionV317VisualRecognition19deleteImageMetadataFT10forImageIDSS14inCollectionIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteImageMetadata(forImageID:inCollectionID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete an image&rsquo;s metadata from a collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteImageMetadata</span><span class="p">(</span>
+        <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forImageID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the image containing the metadata to delete.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inCollectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection to delete the image’s metadata from.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the image metadata is deleted successfully.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC19VisualRecognitionV317VisualRecognition17listImageMetadataFT10forImageIDSS14inCollectionIDSS7failureGSqFPs5Error_T__7successFVS_8MetadataT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listImageMetadata(forImageID:inCollectionID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC19VisualRecognitionV317VisualRecognition17listImageMetadataFT10forImageIDSS14inCollectionIDSS7failureGSqFPs5Error_T__7successFVS_8MetadataT__T_">listImageMetadata(forImageID:inCollectionID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List an image&rsquo;s metadata from a collection. </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listImageMetadata</span><span class="p">(</span>
+        <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Metadata.html">Metadata</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forImageID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the image to list metadata from.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inCollectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection to list the image’s metadata from.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the image metadata is listed successfully.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC19VisualRecognitionV317VisualRecognition19updateImageMetadataFT10forImageIDSS14inCollectionIDSS8metadataV10Foundation3URL7failureGSqFPs5Error_T__7successFVS_8MetadataT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateImageMetadata(forImageID:inCollectionID:metadata:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC19VisualRecognitionV317VisualRecognition19updateImageMetadataFT10forImageIDSS14inCollectionIDSS8metadataV10Foundation3URL7failureGSqFPs5Error_T__7successFVS_8MetadataT__T_">updateImageMetadata(forImageID:inCollectionID:metadata:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update an image&rsquo;s metadata from a collection. </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateImageMetadata</span><span class="p">(</span>
+        <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Metadata.html">Metadata</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forImageID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the image to update.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inCollectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection to update the image’s metadata.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The JSON file that adds metadata to the image. The maximum file size for each image is 2 KB. Metadata can be used to identify images.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the image metadata is updated successfully.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC19VisualRecognitionV317VisualRecognition17findSimilarImagesFT11toImageFileV10Foundation3URL14inCollectionIDSS5limitGSqSi_7failureGSqFPs5Error_T__7successFVS_13SimilarImagesT__T_"></a>
+                    <a name="//apple_ref/swift/Method/findSimilarImages(toImageFile:inCollectionID:limit:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC19VisualRecognitionV317VisualRecognition17findSimilarImagesFT11toImageFileV10Foundation3URL14inCollectionIDSS5limitGSqSi_7failureGSqFPs5Error_T__7successFVS_13SimilarImagesT__T_">findSimilarImages(toImageFile:inCollectionID:limit:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1742,9 +2029,9 @@ collection can contain 1000000 images.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">findSimilarImagesInCollection</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">imageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">findSimilarImages</span><span class="p">(</span>
+        <span class="n">toImageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SimilarImages.html">SimilarImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -1758,12 +2045,12 @@ collection can contain 1000000 images.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>withinCollection</em>
+                                <em>toImageFile</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the collection to find similar images in.</p>
+                                  <p>The image file (.jpg or .png) of the image to search against the collection.</p>
 
                                 </div>
                               </td>
@@ -1771,12 +2058,12 @@ collection can contain 1000000 images.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>imageFile</em>
+                                <em>inCollectionID</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The image file (.jpg or .png) of the image to search against the collection.</p>
+                                  <p>The ID of the collection to find similar images in.</p>
 
                                 </div>
                               </td>
@@ -1831,7 +2118,7 @@ collection can contain 1000000 images.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-12-22)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-01-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

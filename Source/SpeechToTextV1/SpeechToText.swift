@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -342,5 +342,676 @@ public class SpeechToText {
         microphoneSession?.stopMicrophone()
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
+    }
+    
+    // MARK: - Custom Models
+    
+    /**
+     List information about all custom language models owned by the calling user. Specify a language
+     to see custom models for that language only.
+     
+     - parameter language: The language of the custom models that you want returned.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of custom models.
+     */
+    public func getCustomizations(
+        withLanguage language: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Customization]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let language = language {
+            queryParameters.append(URLQueryItem(name: "language", value: language))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+            (response: RestResponse<[Customization]>) in
+            switch response.result {
+            case .success(let customizations): success(customizations)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Create a new custom language model for a specified base language model.
+     
+     - parameter name: The name of the new custom model.
+     - parameter baseModelName: The name of the language model that will be customized by the new 
+        model.
+     - parameter description: The description of the new model.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a `CustomizationID` object.
+     */
+    public func createCustomization(
+        withName name: String,
+        withBaseModelName baseModelName: String,
+        description: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CustomizationID) -> Void)
+    {
+        // construct body
+        var jsonData = [String: Any]()
+        jsonData["name"] = name
+        jsonData["base_model_name"] = baseModelName
+        if let description = description {
+            jsonData["description"] = description
+        }
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+            failure?(RestError.serializationError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<CustomizationID>) in
+            switch response.result {
+            case .success(let customization): success(customization)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete an existing custom language model with the given ID. The custom model can't be deleted
+     if another request, such as adding a corpus to the model, is currently being processed.
+     
+     - parameter customizationID: The ID of the custom model to delete.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Get information about a custom language model.
+     
+     - parameter customizationID: The ID of the custom language model to return information about.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with information about the custom model.
+     */
+    public func getCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Customization) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Customization>) in
+            switch response.result {
+            case .success(let customization): success(customization)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Initiates the training of a custom language model with new corpora, words, or both. The service 
+     cannot accept subsequent training requests, or requests to add new corpora or words, until the 
+     existing request completes. 
+     
+     Training will fail if no new training data has been added, if pre-processing of new corpora 
+     or words is incomplete, or if one or more words have errors that must be fixed.
+     
+     - parameter customizationID: The ID of the custom model to train.
+     - parameter wordTypeToAdd: The type of words from the custom model's words resource on which 
+        to train the model: `all` trains the model on all new words. `user` trains the model only 
+        on new words that were added or modified by the user - the model is not trained on new 
+        words extracted from corpora.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
+     */
+    public func trainCustomization(
+        withID customizationID: String,
+        wordTypeToAdd: WordTypeToAdd? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let wordTypeToAdd = wordTypeToAdd {
+            queryParameters.append(URLQueryItem(name: "word_type_to_add", value: "\(wordTypeToAdd.rawValue)"))
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/train",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters)
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Resets a custom language model by removing all corpora and words from the model. Metadata such 
+     as the name and language of the model are preserved.
+     
+     - parameter customizationID: The ID of the custom model to reset.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
+     */
+    public func resetCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/reset",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json")
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Upgrades a custom language model to the latest release level of the Speech to Text service.
+     
+     - parameter customizationID: The ID of the custom model to upgrade.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
+     */
+    public func upgradeCustomization(
+        withID customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/upgrade",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json")
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    // MARK: - Custom Corpora
+    
+    /**
+     Lists information about all corpora for a custom language model.
+     
+     - parameter customizationID: The ID of the custom language model whose corpora you want
+        information about.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of corpora for this custom model.
+     */
+    public func getCorpora(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Corpus]) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["corpora"]) {
+            (response: RestResponse<[Corpus]>) in
+            switch response.result {
+            case .success(let corpora): success(corpora)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Deletes a corpus from a custom language model. Note: removing a corpus doesn't affect the custom
+     model until you train the model with the `train` method.
+     
+     - parameter name: The name of the corpus to delete.
+     - parameter customizationID: The ID of the custom model the corpus belongs to.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteCorpus(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Lists information about a specific corpus for a custom language model.
+     
+     - parameter name: The name of the corpus you want details about.
+     - parameter customizationID: The ID of the custom language model that the corpus is for.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with details of the corpus.
+     */
+    public func getCorpus(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Corpus) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Corpus>) in
+            switch response.result {
+            case .success(let corpus): success(corpus)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add a corpus text file to a custom language model.
+     
+     - parameter textFile: A plain text file that contains the training data for the corpus. For 
+        more information about how to prepare a corpus file, visit this link:
+        http://www.ibm.com/watson/developercloud/doc/speech-to-text/custom.shtml#prepareCorpus
+     - parameter name: The name of the corpus to be added. This cannot be `user`, which is a 
+        reserved word. If a corpus with the same name exists already, you must set `allowOverwrite` 
+        to true or the request will fail.
+     - parameter customizationID: The ID of the custom model to which this corpus should be added.
+     - parameter allowOverwrite: If a corpus with the same name exists, this value must be set to 
+        true or the request will fail. By default, this parameter is false. This parameter is 
+        ignored if there is no other corpus with the same name.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed when a success occurs.
+     */
+    public func addCorpus(
+        withName name: String,
+        fromFile textFile: URL,
+        customizationID: String,
+        allowOverwrite: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let allowOverwrite = allowOverwrite {
+            queryParameters.append(URLQueryItem(name: "allow_overwrite", value: "\(allowOverwrite)"))
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(textFile, withName: "body")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/corpora/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body)
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    // MARK: - Custom Words
+    
+    /**
+     List all custom words from a custom language model.
+     
+     - parameter customizationID: The ID of the custom model.
+     - parameter wordType: The types of words to return. By default, all words are returned.
+     - parameter sortOrder: The order in which to return the list of words. By default, words are 
+        returned in sorted alphabetical order.
+     - parameter sortDirection: The order the list of words should be sorted. By default, words are 
+        sorted alphabetically in ascending order.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with a list of words in the custom language model.
+     */
+    public func getWords(
+        customizationID: String,
+        wordType: WordTypesToList? = nil,
+        sortOrder: WordSort? = nil,
+        sortDirection: WordSortDirection? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([Word]) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let wordType = wordType {
+            queryParameters.append(URLQueryItem(name: "word_type", value: wordType.rawValue))
+        }
+        if let sortOrder = sortOrder {
+            if let sortDirection = sortDirection {
+                queryParameters.append(URLQueryItem(name: "sort", value: "\(sortDirection.rawValue)\(sortOrder.rawValue)"))
+            } else {
+                queryParameters.append(URLQueryItem(name: "sort", value: sortOrder.rawValue))
+            }
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
+        )
+        
+        // execute REST request
+        request.responseArray(dataToError: dataToError, path: ["words"]) {
+            (response: RestResponse<[Word]>) in
+            switch response.result {
+            case .success(let words): success(words)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add one or more words to the custom language model, or replace the definition of an existing 
+     word with the same name.
+    
+     - parameter customizationID: The ID of the custom language model to add words to.
+     - parameter words: An array of `NewWords` objects that describes what words should be added.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func addWords(
+        customizationID: String,
+        words: [NewWord],
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct body
+        var jsonData = [String: Any]()
+        jsonData["words"] = words.map { word in word.toJSONObject() }
+        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+            failure?(RestError.serializationError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Delete a custom word from the specified custom model. If the word also exists in the service's 
+     base vocabulary, the service removes only the custom pronunciation for the word; the word 
+     remains in the base vocabulary.
+     
+     Note: Removing a custom word does not affect the custom model until you train the model.
+     
+     - parameter name: The name of the word you would like to delete.
+     - parameter customizationID: The ID of the custom model from which you would like to delete the
+        word from.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func deleteWord(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Get details of a word from a specific custom language model.
+     
+     - parameter name: The name of the word.
+     - parameter customizationID: The ID of the custom language model.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed with details of the word.
+     */
+    public func getWord(
+        withName name: String,
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Word) -> Void)
+    {
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Word>) in
+            switch response.result {
+            case .success(let word): success(word)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Add a single custom word to the custom language model, or modify an existing word.
+     
+     - parameter customizationID: The ID of the custom language model to add the new word to.
+     - parameter name: The word that should be added.
+     - parameter word: An object describing information about the custom word.
+     - parameter failure: A function executed whenever an error occurs.
+     - parameter success: A function executed whenever a success occurs.
+     */
+    public func addWord(
+        withName name: String,
+        customizationID: String,
+        word: NewWord? = NewWord(),
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil)
+    {
+        // construct body
+        guard let body = try? word?.toJSON().serialize() else {
+            failure?(RestError.serializationError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "PUT",
+            url: serviceURL + "/v1/customizations/\(customizationID)/words/\(name)",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseData { response in
+            switch response.result {
+            case .success(let data):
+                switch self.dataToError(data: data) {
+                case .some(let error): failure?(error)
+                case .none: success?()
+                }
+            case .failure(let error):
+                failure?(error)
+            }
+        }
     }
 }

@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+## Version 0.13.0
+
+_2016-01-18_
+
+This update adds the following features and support:
+
+- Customize Speech to Text.
+- Add and edit metadata to photos within Visual Recognition.
+- Basic Linux support for Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics.
+
+Please note this release includes renaming the iOS SDK to Swift SDK.
+
 ## Version 0.12.0
 
 _2016-12-22_

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -182,7 +182,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     // MARK: - Negative Tests.
     
     /** Synthesize SSML to spoken audio. */
-    func testSynthesizeEmptySSML() {
+    func testSynthesizeEmptyString() {
         let description = "Synthesize Empty string to spoken audio."
         let expectation = self.expectation(description: description)
         

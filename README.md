@@ -1,10 +1,10 @@
 # Watson Developer Cloud Swift SDK
 
-[![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/ios-sdk)
+[![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
 ![](https://img.shields.io/badge/platform-iOS-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg?style=flat)](http://watson-developer-cloud.github.io/ios-sdk/)
-[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/ios-sdk)
+[![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg?style=flat)](http://watson-developer-cloud.github.io/swift-sdk/)
+[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 
 ## Overview
 
@@ -15,7 +15,7 @@ There are many resources to help you build your first cognitive application with
 - Read the [Readme](README.md)
 - Follow the [QuickStart Guide](docs/quickstart.md)
 - Review a [Sample Application](#sample-applications)
-- Browse the [Documentation](http://watson-developer-cloud.github.io/ios-sdk/)
+- Browse the [Documentation](http://watson-developer-cloud.github.io/swift-sdk/)
 
 ## Contents
 

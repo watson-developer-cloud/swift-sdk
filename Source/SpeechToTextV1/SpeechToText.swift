@@ -73,10 +73,12 @@ public class SpeechToText {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
             let code = try json.getInt(at: "code")
-            let description = try json.getString(at: "code_description")
+            let codeDescription = try? json.getString(at: "code_description")
+            let description = try? json.getString(at: "description")
+            let recoverySuggestion = codeDescription ?? description
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: description
+                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

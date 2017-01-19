@@ -511,6 +511,39 @@ class RetrieveAndRankTests: XCTestCase {
         waitForExpectations()
     }
     
+    /** Test the search portion only of the retrieve and rank service, make sure there are 5 documents. */
+    func testSearchReturn5Documents() {
+        let description = "Test the search portion of retrieve and rank."
+        let expectation = self.expectation(description: description)
+        
+        retrieveAndRank.search(
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: trainedClusterID,
+            query: "aerodynamics",
+            returnFields: "id, title, author",
+            numberOfDocuments: 5,
+            failure: failWithError) { response in
+                
+                XCTAssertNotNil(response.header)
+                XCTAssertNotNil(response.header.status)
+                XCTAssertNotNil(response.header.qTime)
+                XCTAssertNotNil(response.header.params)
+                XCTAssertNotNil(response.header.params.query)
+                XCTAssertNotNil(response.header.params.returnFields)
+                XCTAssertNotNil(response.header.params.writerType)
+                
+                XCTAssertNotNil(response.body)
+                XCTAssertNotNil(response.body.start)
+                XCTAssertNotNil(response.body.numFound)
+                XCTAssertNotNil(response.body.documents)
+                
+                XCTAssertEqual(response.body.documents.count, 5)
+                
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     /** Test search and rank. */
     func testSearchAndRank() {
         let description = "Test search and rank."
@@ -535,6 +568,37 @@ class RetrieveAndRankTests: XCTestCase {
             XCTAssertNotNil(response.body.documents)
             
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Ensure search and rank can return the specified number of documents. */
+    func testSearchAndRankReturn5Documents() {
+        let description = "Test that search and rank returns 5 documents."
+        let expectation = self.expectation(description: description)
+        
+        retrieveAndRank.searchAndRank(
+            withCollectionName: trainedCollectionName,
+            fromSolrClusterID: trainedClusterID,
+            rankerID: trainedRankerID,
+            query: "aerodynamics",
+            returnFields: "id, title, author",
+            numberOfDocuments: 5,
+            failure: failWithError) { response in
+                
+                XCTAssertNotNil(response.header)
+                XCTAssertNotNil(response.header.status)
+                XCTAssertNotNil(response.header.qTime)
+                
+                XCTAssertNotNil(response.body)
+                XCTAssertNotNil(response.body.start)
+                XCTAssertNotNil(response.body.numFound)
+                XCTAssertNotNil(response.body.maxScore)
+                XCTAssertNotNil(response.body.documents)
+                
+                XCTAssertEqual(response.body.documents.count, 5)
+                
+                expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -621,6 +685,34 @@ class RetrieveAndRankTests: XCTestCase {
             
             XCTAssertEqual(results.topAnswer, "aid_11")
             XCTAssertNotNil(results.answers)
+            for answer in results.answers {
+                XCTAssertNotNil(answer.answerID)
+                XCTAssertNotNil(answer.confidence)
+                XCTAssertNotNil(answer.score)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Make sure the rankResults function can return the number of documents the user specifies. */
+    func testRankerReturn5Documents() {
+        guard let answerFile = loadFile(name: "ranker_test_data", withExtension: "csv") else {
+            XCTFail("Failed to load test data needed to test the ranker.")
+            return
+        }
+        
+        let description = "Use the trained ranker to rerank the given answer results."
+        let expectation = self.expectation(description: description)
+        retrieveAndRank.rankResults(
+            fromFile: answerFile,
+            withRankerID: trainedRankerID,
+            numberOfDocuments: 5,
+            failure: failWithError) { results in
+            
+            XCTAssertEqual(results.topAnswer, "aid_11")
+            XCTAssertNotNil(results.answers)
+            XCTAssertEqual(results.answers.count, 5)
             for answer in results.answers {
                 XCTAssertNotNil(answer.answerID)
                 XCTAssertNotNil(answer.confidence)

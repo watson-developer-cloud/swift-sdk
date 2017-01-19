@@ -606,6 +606,8 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
+     - parameter numberOfDocuments: The number of documents to return. The default number is set in
+            the solrconfig.xml configuration file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchResponse` object.
      */
@@ -614,6 +616,7 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         query: String,
         returnFields: String,
+        numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
         
@@ -622,6 +625,9 @@ public class RetrieveAndRank {
         queryParameters.append(URLQueryItem(name: "q", value: query))
         queryParameters.append(URLQueryItem(name: "fl", value: returnFields))
         queryParameters.append(URLQueryItem(name: "wt", value: "json"))
+        if let numberOfDocuments = numberOfDocuments {
+            queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -657,6 +663,8 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
+     - parameter numberOfDocuments: The number of documents to return. The default number is set in 
+            the solrconfig.xml configuration file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
@@ -666,6 +674,7 @@ public class RetrieveAndRank {
         rankerID: String,
         query: String,
         returnFields: String,
+        numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {
         
@@ -675,6 +684,9 @@ public class RetrieveAndRank {
         queryParameters.append(URLQueryItem(name: "ranker_id", value: rankerID))
         queryParameters.append(URLQueryItem(name: "fl", value: returnFields))
         queryParameters.append(URLQueryItem(name: "wt", value: "json"))
+        if let numberOfDocuments = numberOfDocuments {
+            queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -792,19 +804,24 @@ public class RetrieveAndRank {
             first column header must be labeled `answer_id`. The other column headers should 
             match the names of the features in the `trainingDataFile` used to train the ranker.
      - parameter rankerID: The ID of the ranker to use.
-     - parameter numberOfResults: The number of answers needed. The default number given is 10.
+     - parameter numberOfDocuments: The number of answers needed. The default number is 10.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `Ranking` object.
      */
     public func rankResults(
         fromFile resultsFile: URL,
         withRankerID rankerID: String,
+        numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Ranking) -> Void) {
         
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(resultsFile, withName: "answer_data")
+        if let numberOfDocuments = numberOfDocuments {
+            let number = String(numberOfDocuments)
+            multipartFormData.append(number.data(using: .utf8)!, withName: "answers")
+        }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return

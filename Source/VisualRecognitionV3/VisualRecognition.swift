@@ -1161,9 +1161,7 @@ public class VisualRecognition {
         // create a globally unique file name in a temporary directory
         let suffix = "VisualRecognitionParameters.json"
         
-        let arg1:CVarArg = UUID().uuidString as CVarArg
-        let arg2:CVarArg = suffix as CVarArg
-        let fileName = String(format: "%@_%@", arg1, arg2)
+        let fileName = String(format: "%@_%@", UUID().uuidString, suffix)
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let fileURL = directoryURL.appendingPathComponent(fileName)!
         

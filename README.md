@@ -551,7 +551,7 @@ naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure
 The following links provide more information about the Natural Language Classifier service:
 
 * [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/watson/developercloud/nl-classifier.html)
-* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/nl-classifier)
+* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
 ## Personality Insights

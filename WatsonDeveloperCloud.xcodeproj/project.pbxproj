@@ -26,6 +26,12 @@
 		123B47331D1B3D63007D0B22 /* RetrieveAndRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47321D1B3D63007D0B22 /* RetrieveAndRank.swift */; };
 		123B47351D1B3D88007D0B22 /* RetrieveAndRankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */; };
 		123B47381D1C6822007D0B22 /* SolrCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B47371D1C6821007D0B22 /* SolrCluster.swift */; };
+		1241DFB71E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1241DFAE1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework */; };
+		1241DFC51E380F4000B8B33E /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		1241DFC81E38105C00B8B33E /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241DFC71E38105C00B8B33E /* NaturalLanguageUnderstanding.swift */; };
+		1241DFCB1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241DFCA1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift */; };
+		1241DFCD1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 1241DFCC1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1241DFCE1E38111500B8B33E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
 		124C2DF91D19E29100D9F602 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */; };
 		124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E081D19E2FA00D9F602 /* AudioFormat.swift */; };
 		124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E091D19E2FA00D9F602 /* Customization.swift */; };
@@ -364,6 +370,13 @@
 			remoteGlobalIDString = 123B47111D1B3ABA007D0B22;
 			remoteInfo = RetrieveAndRankV1;
 		};
+		1241DFB81E380F0A00B8B33E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1241DFAD1E380F0A00B8B33E;
+			remoteInfo = NaturalLanguageUnderstandingV1;
+		};
 		124C2DFA1D19E29100D9F602 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
@@ -650,6 +663,11 @@
 		123B47321D1B3D63007D0B22 /* RetrieveAndRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrieveAndRank.swift; sourceTree = "<group>"; };
 		123B47341D1B3D88007D0B22 /* RetrieveAndRankTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrieveAndRankTests.swift; sourceTree = "<group>"; };
 		123B47371D1C6821007D0B22 /* SolrCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolrCluster.swift; sourceTree = "<group>"; };
+		1241DFAE1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NaturalLanguageUnderstandingV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1241DFB61E380F0A00B8B33E /* NaturalLanguageUnderstandingV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaturalLanguageUnderstandingV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1241DFC71E38105C00B8B33E /* NaturalLanguageUnderstanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstanding.swift; sourceTree = "<group>"; };
+		1241DFCA1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstandingV1Tests.swift; sourceTree = "<group>"; };
+		1241DFCC1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NaturalLanguageUnderstandingV1.h; path = Source/SupportingFiles/NaturalLanguageUnderstandingV1.h; sourceTree = "<group>"; };
 		124C2DEF1D19E29000D9F602 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextToSpeechV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		124C2DF81D19E29100D9F602 /* TextToSpeechV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextToSpeechV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		124C2E081D19E2FA00D9F602 /* AudioFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFormat.swift; sourceTree = "<group>"; };
@@ -989,6 +1007,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1241DFAA1E380F0A00B8B33E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1241DFC51E380F4000B8B33E /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1241DFB31E380F0A00B8B33E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1241DFB71E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		124C2DEB1D19E29000D9F602 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1318,6 +1352,25 @@
 			path = ../../Tests/RetrieveAndRankV1Tests;
 			sourceTree = "<group>";
 		};
+		1241DFC61E38103C00B8B33E /* NaturalLanguageUnderstandingV1 */ = {
+			isa = PBXGroup;
+			children = (
+				1241DFC71E38105C00B8B33E /* NaturalLanguageUnderstanding.swift */,
+				1241DFC91E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests */,
+			);
+			name = NaturalLanguageUnderstandingV1;
+			path = Source/NaturalLanguageUnderstandingV1;
+			sourceTree = "<group>";
+		};
+		1241DFC91E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1241DFCA1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift */,
+			);
+			name = NaturalLanguageUnderstandingV1Tests;
+			path = Tests/NaturalLanguageUnderstandingV1Tests;
+			sourceTree = SOURCE_ROOT;
+		};
 		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1456,6 +1509,7 @@
 				B1AAD2D41D08656B002DAB84 /* DocumentConversionV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */,
 				12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */,
+				1241DFC61E38103C00B8B33E /* NaturalLanguageUnderstandingV1 */,
 				7A6117531CB598D9009A4DA1 /* PersonalityInsightsV2 */,
 				7A6711971DD0F1790070CA9D /* PersonalityInsightsV3 */,
 				7A987D621D19D923003626B2 /* RelationshipExtractionV1Beta */,
@@ -1513,6 +1567,8 @@
 				7A6711881DD0EEEB0070CA9D /* PersonalityInsightsV3Tests.xctest */,
 				12F800401DF71921006851D6 /* DiscoveryV1.framework */,
 				12F800481DF71921006851D6 /* DiscoveryV1Tests.xctest */,
+				1241DFAE1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework */,
+				1241DFB61E380F0A00B8B33E /* NaturalLanguageUnderstandingV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1539,6 +1595,7 @@
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
 				7AAAF5AF1CEEA62C00B74848 /* LanguageTranslatorV2.h */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
+				1241DFCC1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h */,
 				7AAAF5B11CEEA62C00B74848 /* PersonalityInsightsV2.h */,
 				7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */,
 				7A517AC41D1C84E1004FD758 /* RelationshipExtractionV1Beta.h */,
@@ -2202,6 +2259,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1241DFAB1E380F0A00B8B33E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1241DFCD1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		124C2DEC1D19E29000D9F602 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2389,6 +2454,42 @@
 			name = RetrieveAndRankV1Tests;
 			productName = RetrieveAndRankV1Tests;
 			productReference = 123B471B1D1B3ABA007D0B22 /* RetrieveAndRankV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1241DFAD1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1241DFBF1E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1" */;
+			buildPhases = (
+				1241DFA91E380F0A00B8B33E /* Sources */,
+				1241DFAA1E380F0A00B8B33E /* Frameworks */,
+				1241DFAB1E380F0A00B8B33E /* Headers */,
+				1241DFAC1E380F0A00B8B33E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NaturalLanguageUnderstandingV1;
+			productName = NaturalLanguageUnderstandingV1;
+			productReference = 1241DFAE1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1241DFB51E380F0A00B8B33E /* NaturalLanguageUnderstandingV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1241DFC21E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1Tests" */;
+			buildPhases = (
+				1241DFB21E380F0A00B8B33E /* Sources */,
+				1241DFB31E380F0A00B8B33E /* Frameworks */,
+				1241DFB41E380F0A00B8B33E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1241DFB91E380F0A00B8B33E /* PBXTargetDependency */,
+			);
+			name = NaturalLanguageUnderstandingV1Tests;
+			productName = NaturalLanguageUnderstandingV1Tests;
+			productReference = 1241DFB61E380F0A00B8B33E /* NaturalLanguageUnderstandingV1Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */ = {
@@ -3059,7 +3160,7 @@
 		7A0F95AA1C23288E004C01C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
@@ -3070,6 +3171,15 @@
 					123B471A1D1B3ABA007D0B22 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
+					};
+					1241DFAD1E380F0A00B8B33E = {
+						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
+					};
+					1241DFB51E380F0A00B8B33E = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
 					};
 					124C2DEE1D19E29000D9F602 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3250,6 +3360,8 @@
 				7AAAF4E41CEEA16100B74848 /* LanguageTranslatorV2Tests */,
 				7AAAF4AE1CEEA10600B74848 /* NaturalLanguageClassifierV1 */,
 				7AAAF4B71CEEA10700B74848 /* NaturalLanguageClassifierV1Tests */,
+				1241DFAD1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1 */,
+				1241DFB51E380F0A00B8B33E /* NaturalLanguageUnderstandingV1Tests */,
 				7AAAF4841CEEA07900B74848 /* PersonalityInsightsV2 */,
 				7AAAF48D1CEEA07900B74848 /* PersonalityInsightsV2Tests */,
 				7A67117F1DD0EEEB0070CA9D /* PersonalityInsightsV3 */,
@@ -3290,6 +3402,20 @@
 				123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */,
 				123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */,
 				12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1241DFAC1E380F0A00B8B33E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1241DFB41E380F0A00B8B33E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3612,6 +3738,23 @@
 			files = (
 				7A6C7B481D8C960300CD97FA /* Credentials.swift in Sources */,
 				123B47351D1B3D88007D0B22 /* RetrieveAndRankTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1241DFA91E380F0A00B8B33E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1241DFC81E38105C00B8B33E /* NaturalLanguageUnderstanding.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1241DFB21E380F0A00B8B33E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1241DFCE1E38111500B8B33E /* Credentials.swift in Sources */,
+				1241DFCB1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4102,6 +4245,11 @@
 			target = 123B47111D1B3ABA007D0B22 /* RetrieveAndRankV1 */;
 			targetProxy = 123B471D1D1B3ABA007D0B22 /* PBXContainerItemProxy */;
 		};
+		1241DFB91E380F0A00B8B33E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1241DFAD1E380F0A00B8B33E /* NaturalLanguageUnderstandingV1 */;
+			targetProxy = 1241DFB81E380F0A00B8B33E /* PBXContainerItemProxy */;
+		};
 		124C2DFB1D19E29100D9F602 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 124C2DEE1D19E29000D9F602 /* TextToSpeechV1 */;
@@ -4266,6 +4414,85 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.RetrieveAndRankV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		1241DFC01E380F0A00B8B33E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1241DFC11E380F0A00B8B33E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		1241DFC31E380F0A00B8B33E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1241DFC41E380F0A00B8B33E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -5659,6 +5886,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		1241DFBF1E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1241DFC01E380F0A00B8B33E /* Debug */,
+				1241DFC11E380F0A00B8B33E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1241DFC21E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1241DFC31E380F0A00B8B33E /* Debug */,
+				1241DFC41E380F0A00B8B33E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		124C2E001D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */ = {
 			isa = XCConfigurationList;

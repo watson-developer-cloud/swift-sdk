@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-This guide contains step-by-step instructions to create an iOS application with the Watson Developer Cloud iOS SDK. The application we build will synthesize English text into spoken audio using the Watson Text to Speech service.
+This guide contains step-by-step instructions to create an iOS application with the Watson Developer Cloud Swift SDK. The application we build will synthesize English text into spoken audio using the Watson Text to Speech service.
 
 ## Create Application
 
@@ -12,23 +12,23 @@ This guide contains step-by-step instructions to create an iOS application with 
     
     ![Project Settings](quickstart-resources/02-ProjectSettings.png?raw=true)
 
-## Download and Build the iOS SDK Frameworks
+## Download and Build the Swift SDK Frameworks
 
-We will use the [Carthage](https://github.com/Carthage/Carthage) dependency manager to download and build the iOS SDK. You will need to [install Carthage](https://github.com/Carthage/Carthage#installing-carthage) if it is not already installed on your system.
+We will use the [Carthage](https://github.com/Carthage/Carthage) dependency manager to download and build the Swift SDK. You will need to [install Carthage](https://github.com/Carthage/Carthage#installing-carthage) if it is not already installed on your system.
 
 1. Create a file in your project directory called `Cartfile`.
 
     ![Create Cartfile](quickstart-resources/03-CreateCartfile.png?raw=true)
 
-2. Add the following line to your `Cartfile`. This specifies the iOS SDK as a dependency. In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
+2. Add the following line to your `Cartfile`. This specifies the Swift SDK as a dependency. In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
 
     ```
-    github "watson-developer-cloud/ios-sdk"
+    github "watson-developer-cloud/swift-sdk"
     ```
 
     ![Add Dependency](quickstart-resources/04-AddDependency.png?raw=true)
 
-3. Open the Terminal and navigate to your project directory. Then use Carthage to download and build the iOS SDK:
+3. Open the Terminal and navigate to your project directory. Then use Carthage to download and build the Swift SDK:
 
     ```
     $ carthage update --platform iOS
@@ -36,11 +36,11 @@ We will use the [Carthage](https://github.com/Carthage/Carthage) dependency mana
 
     ![Carthage Update](quickstart-resources/05-CarthageUpdate.png?raw=true)
 
-Carthage clones the iOS SDK repository and builds a framework for each Watson service in the `Carthage/Build/iOS` directory. It also builds a framework called `RestKit` that is used internally for networking and JSON parsing.
+Carthage clones the Swift SDK repository and builds a framework for each Watson service in the `Carthage/Build/iOS` directory. It also builds a framework called `RestKit` that is used internally for networking and JSON parsing.
 
-### Add iOS SDK Frameworks to Application
+### Add Swift SDK Frameworks to Application
 
-To use the iOS SDK frameworks, we need to link them with our application.
+To use the Swift SDK frameworks, we need to link them with our application.
 
 1. In Xcode, navigate to your application target's "General" settings tab. Then scroll down to the "Linked Frameworks and Libraries" section and click the `+` icon.
 

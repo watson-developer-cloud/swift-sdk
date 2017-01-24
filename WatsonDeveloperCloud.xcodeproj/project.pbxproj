@@ -13,6 +13,10 @@
 		121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F968F1D2D8A9600E295B0 /* Ranker.swift */; };
 		121F96921D2EAD1600E295B0 /* Ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96911D2EAD1600E295B0 /* Ranking.swift */; };
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
+		1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9261E1DA3F000B740C1 /* Customization.swift */; };
+		1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C9281E1DACA800B740C1 /* CustomizationID.swift */; };
+		1221C92B1E1EB0AD00B740C1 /* Corpus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C92A1E1EB0AD00B740C1 /* Corpus.swift */; };
+		1221C92D1E1EFCB100B740C1 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1221C92C1E1EFCB100B740C1 /* Word.swift */; };
 		122819761D3D2C910060C745 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122819751D3D2C910060C745 /* SearchResponse.swift */; };
 		123A09231D237F2D00A8DA56 /* cranfield_solr_config.zip in Resources */ = {isa = PBXBuildFile; fileRef = 123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */; };
 		123A09251D2579BF00A8DA56 /* cranfield_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 123A09241D2579BF00A8DA56 /* cranfield_data.json */; };
@@ -39,6 +43,8 @@
 		124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */; };
+		12D82B4E1E26DBAE00430DB3 /* healthcare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4D1E26DBAE00430DB3 /* healthcare.txt */; };
+		12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */; };
 		12DBA9371D512D9100966E41 /* ranker_train_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9361D512D9100966E41 /* ranker_train_data.csv */; };
 		12DBA93A1D52435900966E41 /* ranker_test_data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12DBA9381D52405E00966E41 /* ranker_test_data.csv */; };
 		12DEF7BD1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */; };
@@ -168,10 +174,8 @@
 		7AAAF4C91CEEA11900B74848 /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */; };
 		7AAAF4CA1CEEA11E00B74848 /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */; };
 		7AAAF4CB1CEEA11E00B74848 /* weather_data_train.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12A248561CD3171800C63CF1 /* weather_data_train.csv */; };
-		7AAAF4CC1CEEA11E00B74848 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12A248551CD3171800C63CF1 /* training_meta.txt */; };
 		7AAAF4CD1CEEA11E00B74848 /* training_meta_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */; };
 		7AAAF4CE1CEEA11E00B74848 /* training_meta_missing_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */; };
-		7AAAF4CF1CEEA11E00B74848 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12B07D2C1CDD46A300B20B38 /* training_meta.txt */; };
 		7AAAF4D31CEEA13600B74848 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AAAF4E61CEEA16100B74848 /* LanguageTranslatorV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4DC1CEEA16100B74848 /* LanguageTranslatorV2.framework */; };
 		7AAAF4F31CEEA17400B74848 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6117961CB6D3F2009A4DA1 /* IdentifiableLanguage.swift */; };
@@ -349,6 +353,7 @@
 		CE95E9B31E01D8E600DBB27A /* EnrichedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */; };
 		CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B41E04448300DBB27A /* Sentiment.swift */; };
 		CE95E9B71E0446C300DBB27A /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B61E0446C300DBB27A /* Taxonomy.swift */; };
+		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -632,6 +637,10 @@
 		121F968F1D2D8A9600E295B0 /* Ranker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranker.swift; sourceTree = "<group>"; };
 		121F96911D2EAD1600E295B0 /* Ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranking.swift; sourceTree = "<group>"; };
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
+		1221C9261E1DA3F000B740C1 /* Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customization.swift; sourceTree = "<group>"; };
+		1221C9281E1DACA800B740C1 /* CustomizationID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationID.swift; sourceTree = "<group>"; };
+		1221C92A1E1EB0AD00B740C1 /* Corpus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Corpus.swift; sourceTree = "<group>"; };
+		1221C92C1E1EFCB100B740C1 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		122819751D3D2C910060C745 /* SearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		123A09221D237F2D00A8DA56 /* cranfield_solr_config.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = cranfield_solr_config.zip; sourceTree = "<group>"; };
 		123A09241D2579BF00A8DA56 /* cranfield_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cranfield_data.json; sourceTree = "<group>"; };
@@ -658,7 +667,6 @@
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechPlaybackTests.swift; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
-		12A248551CD3171800C63CF1 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
 		12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifier.swift; path = Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
 		12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierModel.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierModel.swift; sourceTree = "<group>"; };
@@ -666,7 +674,8 @@
 		12B07D101CD791A300B20B38 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Source/NaturalLanguageClassifierV1/Models/Classification.swift; sourceTree = "<group>"; };
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_missing_name.txt; sourceTree = "<group>"; };
-		12B07D2C1CDD46A300B20B38 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
+		12D82B4D1E26DBAE00430DB3 /* healthcare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = healthcare.txt; sourceTree = "<group>"; };
+		12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "healthcare-short.txt"; sourceTree = "<group>"; };
 		12DBA9361D512D9100966E41 /* ranker_train_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ranker_train_data.csv; sourceTree = "<group>"; };
 		12DBA9381D52405E00966E41 /* ranker_test_data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ranker_test_data.csv; sourceTree = "<group>"; };
 		12DEF7BC1D3DD0F8009A7FA0 /* SearchAndRankResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAndRankResponse.swift; sourceTree = "<group>"; };
@@ -960,6 +969,7 @@
 		CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTitle.swift; sourceTree = "<group>"; };
 		CE95E9B41E04448300DBB27A /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
 		CE95E9B61E0446C300DBB27A /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1371,12 +1381,11 @@
 			isa = PBXGroup;
 			children = (
 				CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */,
+				CEEFC6131E3164CD004011D5 /* training_meta.txt */,
 				12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */,
 				12A248561CD3171800C63CF1 /* weather_data_train.csv */,
-				12A248551CD3171800C63CF1 /* training_meta.txt */,
 				12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */,
 				12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */,
-				12B07D2C1CDD46A300B20B38 /* training_meta.txt */,
 			);
 			name = Tests;
 			path = Tests/NaturalLanguageClassifierV1Tests;
@@ -1859,6 +1868,10 @@
 				7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */,
 				7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */,
 				7A1B0F281D82645100783EA3 /* Model.swift */,
+				1221C9261E1DA3F000B740C1 /* Customization.swift */,
+				1221C9281E1DACA800B740C1 /* CustomizationID.swift */,
+				1221C92A1E1EB0AD00B740C1 /* Corpus.swift */,
+				1221C92C1E1EFCB100B740C1 /* Word.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1868,6 +1881,8 @@
 			children = (
 				7AAA9A211CEE3026002C9564 /* Audio Files */,
 				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
+				12D82B4D1E26DBAE00430DB3 /* healthcare.txt */,
+				12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */,
 			);
 			name = Tests;
 			path = ../../Tests/SpeechToTextV1Tests;
@@ -3045,7 +3060,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Glenn R. Fisher";
 				TargetAttributes = {
 					123B47111D1B3ABA007D0B22 = {
@@ -3419,6 +3434,8 @@
 				7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */,
 				7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */,
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
+				12D82B4E1E26DBAE00430DB3 /* healthcare.txt in Resources */,
+				12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */,
 				7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3450,11 +3467,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAAF4CF1CEEA11E00B74848 /* training_meta.txt in Resources */,
 				7A552C441DC945F10002CB48 /* trained_meta.txt in Resources */,
 				7AAAF4CD1CEEA11E00B74848 /* training_meta_empty.txt in Resources */,
+				CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */,
 				7AAAF4CB1CEEA11E00B74848 /* weather_data_train.csv in Resources */,
-				7AAAF4CC1CEEA11E00B74848 /* training_meta.txt in Resources */,
 				7AAAF4CE1CEEA11E00B74848 /* training_meta_missing_name.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3805,6 +3821,7 @@
 			files = (
 				7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */,
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
+				1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */,
 				7AAAF4671CEE9FB300B74848 /* KeywordResult.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
@@ -3819,7 +3836,10 @@
 				7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */,
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
+				1221C92D1E1EFCB100B740C1 /* Word.swift in Sources */,
 				7AAAF46E1CEE9FB300B74848 /* WordConfidence.swift in Sources */,
+				1221C9271E1DA3F000B740C1 /* Customization.swift in Sources */,
+				1221C92B1E1EB0AD00B740C1 /* Corpus.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
 				7A1B0F291D82645100783EA3 /* Model.swift in Sources */,
 				7AAAF4681CEE9FB300B74848 /* SpeechRecognitionAlternative.swift in Sources */,

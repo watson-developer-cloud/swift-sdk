@@ -118,8 +118,6 @@
 		7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */; };
 		7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */; };
 		7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */; };
-		7A9EC81C1D79B93800507725 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9EC80F1D79B76100507725 /* libogg.a */; };
-		7A9EC81D1D79B93F00507725 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9EC8101D79B76100507725 /* libopus.a */; };
 		7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC81F1D79D7E300507725 /* SpeechToTextSocket.swift */; };
 		7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EC8211D79D8F300507725 /* SpeechToTextState.swift */; };
 		7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */; };
@@ -233,8 +231,6 @@
 		7AAD66561DCA5D730010481E /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664E1DCA5D730010481E /* obama.jpg */; };
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
-		7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */; };
-		7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */; };
 		7AB4452E1D3E647A00E8748A /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB445241D3E647A00E8748A /* ConversationV1.framework */; };
 		7AB4453D1D3E64F600E8748A /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
 		7AB445411D3E657900E8748A /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB445191D3E643B00E8748A /* Conversation.swift */; };
@@ -274,12 +270,6 @@
 		7AB53B921CF64DE700FFC9DD /* AlchemyLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B8F1CF64DE700FFC9DD /* AlchemyLanguageTests.swift */; };
 		7AB53B931CF64DE700FFC9DD /* testArticle.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B901CF64DE700FFC9DD /* testArticle.html */; };
 		7AB53B941CF64DE700FFC9DD /* testText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AB53B911CF64DE700FFC9DD /* testText.txt */; };
-		7AC97FC21D8308440046124C /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8141D79B76100507725 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC97FC41D8308690046124C /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8181D79B76100507725 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC97FC51D8308690046124C /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8191D79B76100507725 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC97FC61D8308690046124C /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81A1D79B76100507725 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AD240091DC7B4360002FEB5 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7AFAC9071DCC59F300CADF12 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAC9061DCC59F300CADF12 /* PositiveExample.swift */; };
@@ -353,6 +343,26 @@
 		CE95E9B31E01D8E600DBB27A /* EnrichedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */; };
 		CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B41E04448300DBB27A /* Sentiment.swift */; };
 		CE95E9B71E0446C300DBB27A /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B61E0446C300DBB27A /* Taxonomy.swift */; };
+		CED4F5151E37C126007E9F6A /* TextToSpeechAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */; };
+		CED4F5171E37C12E007E9F6A /* TextToSpeechDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */; };
+		CED4F5181E37C138007E9F6A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746D1E37BF8D00081451 /* libogg.a */; };
+		CED4F5191E37C13B007E9F6A /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746E1E37BF8D00081451 /* libopus.a */; };
+		CED4F51A1E37C141007E9F6A /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74761E37BF8D00081451 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED4F51B1E37C144007E9F6A /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74771E37BF8D00081451 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED4F51C1E37C148007E9F6A /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74781E37BF8D00081451 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED4F51D1E37C148007E9F6A /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74791E37BF8D00081451 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED4F51E1E37C16F007E9F6A /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74721E37BF8D00081451 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED4F51F1E37C16F007E9F6A /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74731E37BF8D00081451 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC747D1E37BFAA00081451 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74721E37BF8D00081451 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC747E1E37BFAA00081451 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74731E37BF8D00081451 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC747F1E37BFAA00081451 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74761E37BF8D00081451 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC74801E37BFAA00081451 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74771E37BF8D00081451 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC74811E37BFAA00081451 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74781E37BF8D00081451 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC74821E37BFAA00081451 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CEEC74791E37BF8D00081451 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEEC74831E37BFFB00081451 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC747B1E37BF8D00081451 /* SSLSecurity.swift */; };
+		CEEC74841E37BFFE00081451 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC747C1E37BF8D00081451 /* WebSocket.swift */; };
+		CEEC74851E37C00400081451 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746E1E37BF8D00081451 /* libopus.a */; };
+		CEEC74861E37C00700081451 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746D1E37BF8D00081451 /* libogg.a */; };
 		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
 /* End PBXBuildFile section */
 
@@ -744,17 +754,6 @@
 		7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextEncoder.swift; sourceTree = "<group>"; };
 		7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextRecorder.swift; sourceTree = "<group>"; };
 		7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextSession.swift; sourceTree = "<group>"; };
-		7A9EC80F1D79B76100507725 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		7A9EC8101D79B76100507725 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
-		7A9EC8121D79B76100507725 /* config_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
-		7A9EC8131D79B76100507725 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		7A9EC8141D79B76100507725 /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
-		7A9EC8151D79B76100507725 /* os_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
-		7A9EC8171D79B76100507725 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		7A9EC8181D79B76100507725 /* opus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
-		7A9EC8191D79B76100507725 /* opus_defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
-		7A9EC81A1D79B76100507725 /* opus_multistream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
-		7A9EC81B1D79B76100507725 /* opus_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
 		7A9EC81F1D79D7E300507725 /* SpeechToTextSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextSocket.swift; sourceTree = "<group>"; };
 		7A9EC8211D79D8F300507725 /* SpeechToTextState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextState.swift; sourceTree = "<group>"; };
 		7AAA9A121CEE3026002C9564 /* WordAlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAlternativeResult.swift; sourceTree = "<group>"; };
@@ -831,8 +830,6 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
-		7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
-		7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7AB445191D3E643B00E8748A /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7AB4451B1D3E643B00E8748A /* MessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MessageRequest.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7AB4451C1D3E643B00E8748A /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
@@ -969,6 +966,21 @@
 		CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTitle.swift; sourceTree = "<group>"; };
 		CE95E9B41E04448300DBB27A /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
 		CE95E9B61E0446C300DBB27A /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechAudio.swift; sourceTree = "<group>"; };
+		CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechDecoder.swift; sourceTree = "<group>"; };
+		CEEC746D1E37BF8D00081451 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		CEEC746E1E37BF8D00081451 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
+		CEEC74701E37BF8D00081451 /* config_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		CEEC74711E37BF8D00081451 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		CEEC74721E37BF8D00081451 /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		CEEC74731E37BF8D00081451 /* os_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		CEEC74751E37BF8D00081451 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		CEEC74761E37BF8D00081451 /* opus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
+		CEEC74771E37BF8D00081451 /* opus_defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
+		CEEC74781E37BF8D00081451 /* opus_multistream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
+		CEEC74791E37BF8D00081451 /* opus_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
+		CEEC747B1E37BF8D00081451 /* SSLSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
+		CEEC747C1E37BF8D00081451 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -994,6 +1006,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */,
+				CED4F5181E37C138007E9F6A /* libogg.a in Frameworks */,
+				CED4F5191E37C13B007E9F6A /* libopus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,8 +1134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A9EC81D1D79B93F00507725 /* libopus.a in Frameworks */,
-				7A9EC81C1D79B93800507725 /* libogg.a in Frameworks */,
+				CEEC74851E37C00400081451 /* libopus.a in Frameworks */,
+				CEEC74861E37C00700081451 /* libogg.a in Frameworks */,
 				7AAAF47A1CEE9FCE00B74848 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1321,6 +1335,8 @@
 		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
 			isa = PBXGroup;
 			children = (
+				CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */,
+				CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */,
 				124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */,
 				124C2E071D19E2FA00D9F602 /* Models */,
 				124C2E131D19E2FA00D9F602 /* Tests */,
@@ -1527,6 +1543,7 @@
 		7A6117231CB596E0009A4DA1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				CEEC746B1E37BF8D00081451 /* Dependencies */,
 				7AAAF5AC1CEEA62C00B74848 /* AlchemyLanguageV1.h */,
 				7AAAF5AD1CEEA62C00B74848 /* AlchemyVisionV1.h */,
 				7A1F486A1D47AF7E00971377 /* ConversationV1.h */,
@@ -1733,49 +1750,6 @@
 			path = ../../Tests/RelationshipExtractionV1BetaTests;
 			sourceTree = "<group>";
 		};
-		7A9EC80D1D79B76100507725 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				7A9EC80E1D79B76100507725 /* lib */,
-				7A9EC8111D79B76100507725 /* ogg */,
-				7A9EC8161D79B76100507725 /* opus */,
-				7AAEE5D61DCCCFC50056A346 /* Starscream */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		7A9EC80E1D79B76100507725 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				7A9EC80F1D79B76100507725 /* libogg.a */,
-				7A9EC8101D79B76100507725 /* libopus.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		7A9EC8111D79B76100507725 /* ogg */ = {
-			isa = PBXGroup;
-			children = (
-				7A9EC8121D79B76100507725 /* config_types.h */,
-				7A9EC8131D79B76100507725 /* module.modulemap */,
-				7A9EC8141D79B76100507725 /* ogg.h */,
-				7A9EC8151D79B76100507725 /* os_types.h */,
-			);
-			path = ogg;
-			sourceTree = "<group>";
-		};
-		7A9EC8161D79B76100507725 /* opus */ = {
-			isa = PBXGroup;
-			children = (
-				7A9EC8171D79B76100507725 /* module.modulemap */,
-				7A9EC8181D79B76100507725 /* opus.h */,
-				7A9EC8191D79B76100507725 /* opus_defines.h */,
-				7A9EC81A1D79B76100507725 /* opus_multistream.h */,
-				7A9EC81B1D79B76100507725 /* opus_types.h */,
-			);
-			path = opus;
-			sourceTree = "<group>";
-		};
 		7AA7ACE11CED11A0009DD700 /* AlchemyLanguageV1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1838,7 +1812,6 @@
 		7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */ = {
 			isa = PBXGroup;
 			children = (
-				7A9EC80D1D79B76100507725 /* Dependencies */,
 				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
 				7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */,
@@ -1995,16 +1968,6 @@
 			);
 			name = Images;
 			path = Tests/VisualRecognitionV3Tests/Images;
-			sourceTree = SOURCE_ROOT;
-		};
-		7AAEE5D61DCCCFC50056A346 /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */,
-				7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */,
-			);
-			name = Starscream;
-			path = Source/SpeechToTextV1/Dependencies/Starscream;
 			sourceTree = SOURCE_ROOT;
 		};
 		7AB445181D3E643B00E8748A /* ConversationV1 */ = {
@@ -2191,6 +2154,59 @@
 			path = ../../Tests/ToneAnalyzerV3Tests;
 			sourceTree = "<group>";
 		};
+		CEEC746B1E37BF8D00081451 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC746C1E37BF8D00081451 /* lib */,
+				CEEC746F1E37BF8D00081451 /* ogg */,
+				CEEC74741E37BF8D00081451 /* opus */,
+				CEEC747A1E37BF8D00081451 /* Starscream */,
+			);
+			name = Dependencies;
+			path = Source/SupportingFiles/Dependencies;
+			sourceTree = "<group>";
+		};
+		CEEC746C1E37BF8D00081451 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC746D1E37BF8D00081451 /* libogg.a */,
+				CEEC746E1E37BF8D00081451 /* libopus.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		CEEC746F1E37BF8D00081451 /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC74701E37BF8D00081451 /* config_types.h */,
+				CEEC74711E37BF8D00081451 /* module.modulemap */,
+				CEEC74721E37BF8D00081451 /* ogg.h */,
+				CEEC74731E37BF8D00081451 /* os_types.h */,
+			);
+			path = ogg;
+			sourceTree = "<group>";
+		};
+		CEEC74741E37BF8D00081451 /* opus */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC74751E37BF8D00081451 /* module.modulemap */,
+				CEEC74761E37BF8D00081451 /* opus.h */,
+				CEEC74771E37BF8D00081451 /* opus_defines.h */,
+				CEEC74781E37BF8D00081451 /* opus_multistream.h */,
+				CEEC74791E37BF8D00081451 /* opus_types.h */,
+			);
+			path = opus;
+			sourceTree = "<group>";
+		};
+		CEEC747A1E37BF8D00081451 /* Starscream */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC747B1E37BF8D00081451 /* SSLSecurity.swift */,
+				CEEC747C1E37BF8D00081451 /* WebSocket.swift */,
+			);
+			path = Starscream;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2206,7 +2222,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED4F51E1E37C16F007E9F6A /* ogg.h in Headers */,
+				CED4F51D1E37C148007E9F6A /* opus_types.h in Headers */,
 				124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */,
+				CED4F51C1E37C148007E9F6A /* opus_multistream.h in Headers */,
+				CED4F51B1E37C144007E9F6A /* opus_defines.h in Headers */,
+				CED4F51F1E37C16F007E9F6A /* os_types.h in Headers */,
+				CED4F51A1E37C141007E9F6A /* opus.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2270,13 +2292,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AC97FC41D8308690046124C /* opus.h in Headers */,
-				7AC97FC21D8308440046124C /* ogg.h in Headers */,
-				7AC97FC51D8308690046124C /* opus_defines.h in Headers */,
-				7AC97FC71D8308690046124C /* opus_types.h in Headers */,
 				7AAAF5BE1CEEA6C000B74848 /* SpeechToTextV1.h in Headers */,
-				7AC97FC81D830A020046124C /* os_types.h in Headers */,
-				7AC97FC61D8308690046124C /* opus_multistream.h in Headers */,
+				CEEC747D1E37BFAA00081451 /* ogg.h in Headers */,
+				CEEC747E1E37BFAA00081451 /* os_types.h in Headers */,
+				CEEC747F1E37BFAA00081451 /* opus.h in Headers */,
+				CEEC74801E37BFAA00081451 /* opus_defines.h in Headers */,
+				CEEC74811E37BFAA00081451 /* opus_multistream.h in Headers */,
+				CEEC74821E37BFAA00081451 /* opus_types.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3619,6 +3641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED4F5171E37C12E007E9F6A /* TextToSpeechDecoder.swift in Sources */,
 				124C2E1C1D19E2FA00D9F602 /* Pronunciation.swift in Sources */,
 				124C2E1A1D19E2FA00D9F602 /* CustomVoiceUpdate.swift in Sources */,
 				124C2E1E1D19E2FA00D9F602 /* Translation.swift in Sources */,
@@ -3626,6 +3649,7 @@
 				124C2E181D19E2FA00D9F602 /* CustomizationID.swift in Sources */,
 				124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */,
 				124C2E201D19E2FA00D9F602 /* Word.swift in Sources */,
+				CED4F5151E37C126007E9F6A /* TextToSpeechAudio.swift in Sources */,
 				124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */,
 				124C2E191D19E2FA00D9F602 /* CustomizationWords.swift in Sources */,
 				124C2E1F1D19E2FA00D9F602 /* Voice.swift in Sources */,
@@ -3823,17 +3847,16 @@
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
 				1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */,
 				7AAAF4671CEE9FB300B74848 /* KeywordResult.swift in Sources */,
+				CEEC74841E37BFFE00081451 /* WebSocket.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
 				7AAAF4661CEE9FB300B74848 /* WordAlternativeResults.swift in Sources */,
-				7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */,
 				7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */,
 				7AAAF46A1CEE9FB300B74848 /* SpeechRecognitionEvent.swift in Sources */,
 				7AAAF46B1CEE9FB300B74848 /* RecognitionSettings.swift in Sources */,
 				7AAAF46C1CEE9FB300B74848 /* RecognitionState.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
 				7AAAF46F1CEE9FB300B74848 /* WordTimestamp.swift in Sources */,
-				7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */,
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
 				1221C92D1E1EFCB100B740C1 /* Word.swift in Sources */,
@@ -3843,6 +3866,7 @@
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
 				7A1B0F291D82645100783EA3 /* Model.swift in Sources */,
 				7AAAF4681CEE9FB300B74848 /* SpeechRecognitionAlternative.swift in Sources */,
+				CEEC74831E37BFFB00081451 /* SSLSecurity.swift in Sources */,
 				7AAAF4651CEE9FB300B74848 /* WordAlternativeResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4285,6 +4309,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -4306,6 +4334,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -4954,7 +4986,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Source/SpeechToTextV1/Dependencies/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4980,7 +5012,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Source/SpeechToTextV1/Dependencies/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";

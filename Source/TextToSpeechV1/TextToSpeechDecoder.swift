@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,21 @@
  * limitations under the License.
  **/
 
-#import <UIKit/UIKit.h>
+import Foundation
+import AudioToolbox
 
-//! Project version number for TextToSpeechV1.
-FOUNDATION_EXPORT double TextToSpeechV1VersionNumber;
-
-//! Project version string for TextToSpeechV1.
-FOUNDATION_EXPORT const unsigned char TextToSpeechV1VersionString[];
-
-// Import ogg and opus headers to access C code from Swift
-#import "ogg.h"
-#import "opus.h"
-#import "opus_multistream.h"
+internal class TextToSpeechDecoder {
+    
+    private typealias opus_decoder = OpaquePointer
+    
+    private var sync: ogg_sync_state
+    
+    convenience init() {
+        
+    }
+    
+    init() throws {
+        
+    }
+    
+}

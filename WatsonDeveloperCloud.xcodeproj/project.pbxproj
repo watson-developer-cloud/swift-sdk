@@ -360,6 +360,7 @@
 		CE95E9B31E01D8E600DBB27A /* EnrichedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */; };
 		CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B41E04448300DBB27A /* Sentiment.swift */; };
 		CE95E9B71E0446C300DBB27A /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B61E0446C300DBB27A /* Taxonomy.swift */; };
+		CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5201E392F77007E9F6A /* AnalysisResults.swift */; };
 		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
 /* End PBXBuildFile section */
 
@@ -989,6 +990,7 @@
 		CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTitle.swift; sourceTree = "<group>"; };
 		CE95E9B41E04448300DBB27A /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
 		CE95E9B61E0446C300DBB27A /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		CED4F5201E392F77007E9F6A /* AnalysisResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
 		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1417,6 +1419,7 @@
 			isa = PBXGroup;
 			children = (
 				124E7B541E39093500F09E38 /* AnalyzeRequest.swift */,
+				CED4F5201E392F77007E9F6A /* AnalysisResults.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3756,6 +3759,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */,
 				124E7B551E39093500F09E38 /* AnalyzeRequest.swift in Sources */,
 				1241DFC81E38105C00B8B33E /* NaturalLanguageUnderstanding.swift in Sources */,
 			);

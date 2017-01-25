@@ -48,6 +48,7 @@
 		124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */; };
 		124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		124C2E281D19E34B00D9F602 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF39E1CEE99FC00B74848 /* RestKit.framework */; };
+		124E7B551E39093500F09E38 /* AnalyzeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E7B541E39093500F09E38 /* AnalyzeRequest.swift */; };
 		12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */; };
 		12D82B4E1E26DBAE00430DB3 /* healthcare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4D1E26DBAE00430DB3 /* healthcare.txt */; };
 		12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */; };
@@ -683,6 +684,7 @@
 		124C2E121D19E2FA00D9F602 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
+		124E7B541E39093500F09E38 /* AnalyzeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeRequest.swift; sourceTree = "<group>"; };
 		12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechPlaybackTests.swift; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
@@ -1356,6 +1358,7 @@
 			isa = PBXGroup;
 			children = (
 				1241DFC71E38105C00B8B33E /* NaturalLanguageUnderstanding.swift */,
+				124E7B531E39091D00F09E38 /* Models */,
 				1241DFC91E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests */,
 			);
 			name = NaturalLanguageUnderstandingV1;
@@ -1408,6 +1411,14 @@
 			);
 			name = Tests;
 			path = ../../Tests/TextToSpeechV1Tests;
+			sourceTree = "<group>";
+		};
+		124E7B531E39091D00F09E38 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				124E7B541E39093500F09E38 /* AnalyzeRequest.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		12AE2BCB1CCFB5090034CF4E /* NaturalLanguageClassifierV1 */ = {
@@ -3745,6 +3756,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				124E7B551E39093500F09E38 /* AnalyzeRequest.swift in Sources */,
 				1241DFC81E38105C00B8B33E /* NaturalLanguageUnderstanding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5894,6 +5906,7 @@
 				1241DFC11E380F0A00B8B33E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1241DFC21E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -5902,6 +5915,7 @@
 				1241DFC41E380F0A00B8B33E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		124C2E001D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1" */ = {
 			isa = XCConfigurationList;

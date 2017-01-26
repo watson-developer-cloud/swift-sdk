@@ -17,55 +17,22 @@
 import Foundation
 import RestKit
 
-public struct ConceptsResult: JSONDecodable,JSONEncodable {
-    /// Name of the concept
+/** The general concepts referenced or alluded to in the specified content. */
+public struct ConceptsResult: JSONDecodable {
+    
+    /// Name of the concept.
     public let name: String?
-    /// Relevance score between 0 and 1. Higher scores indicate greater relevance
+    
+    /// Relevance score between 0 and 1. Higher scores indicate greater relevance.
     public let relevance: Double?
-    /// link to the corresponding DBpedia resource
-    public let dbpediaResource: DBpediaResource?
+    
+    /// Link to the corresponding DBpedia resource.
+    public let dbpediaResource: String?
 
-    /**
-     Initialize a `ConceptsResult` with required member variables.
-
-     - returns: An initialized `ConceptsResult`.
-    */
-    public init() {
-        self.name = nil
-        self.relevance = nil
-        self.dbpediaResource = nil
-    }
-
-    /**
-    Initialize a `ConceptsResult` with all member variables.
-
-     - parameter name: Name of the concept
-     - parameter relevance: Relevance score between 0 and 1. Higher scores indicate greater relevance
-     - parameter dbpediaResource: link to the corresponding DBpedia resource
-
-    - returns: An initialized `ConceptsResult`.
-    */
-    public init(name: String, relevance: Double, dbpediaResource: DBpediaResource) {
-        self.name = name
-        self.relevance = relevance
-        self.dbpediaResource = dbpediaResource
-    }
-
-    // MARK: JSONDecodable
     /// Used internally to initialize a `ConceptsResult` model from JSON.
     public init(json: JSON) throws {
         name = try? json.getString(at: "name")
         relevance = try? json.getDouble(at: "relevance")
-        dbpediaResource = try? json.getJSON(at: "dbpedia_resource") as! DBpediaResource
-    }
-
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `ConceptsResult` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let name = name { json["name"] = name }
-        if let relevance = relevance { json["relevance"] = relevance }
-        if let dbpediaResource = dbpediaResource { json["dbpedia_resource"] = dbpediaResource }
-        return json
+        dbpediaResource = try? json.getString(at: "dbpedia_resource")
     }
 }

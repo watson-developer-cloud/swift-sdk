@@ -17,56 +17,23 @@
 import Foundation
 import RestKit
 
-public struct MetadataResult: JSONDecodable,JSONEncodable {
+/** The Authors, Publication Date, and Title of the document. Supports URL
+    and HTML input types. */
+public struct MetadataResult: JSONDecodable {
+    
+    /// The authors of the document.
     public let authors: [Author]?
-    /// ISO 8601 date-time
+    
+    /// The publication date in the format ISO 8601.
     public let publicationDate: String?
-    /// Title of the document
+    
+    /// The title of the document.
     public let title: String?
 
-    /**
-     Initialize a `MetadataResult` with required member variables.
-
-     - returns: An initialized `MetadataResult`.
-    */
-    public init() {
-        self.authors = nil
-        self.publicationDate = nil
-        self.title = nil
-    }
-
-    /**
-    Initialize a `MetadataResult` with all member variables.
-
-     - parameter authors: 
-     - parameter publicationDate: ISO 8601 date-time
-     - parameter title: Title of the document
-
-    - returns: An initialized `MetadataResult`.
-    */
-    public init(authors: [Author], publicationDate: String, title: String) {
-        self.authors = authors
-        self.publicationDate = publicationDate
-        self.title = title
-    }
-
-    // MARK: JSONDecodable
     /// Used internally to initialize a `MetadataResult` model from JSON.
     public init(json: JSON) throws {
         authors = try? json.decodedArray(at: "authors", type: Author.self)
         publicationDate = try? json.getString(at: "publication_date")
         title = try? json.getString(at: "title")
-    }
-
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `MetadataResult` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let authors = authors {
-            json["authors"] = authors.map { authorsElem in authorsElem.toJSONObject() }
-        }
-        if let publicationDate = publicationDate { json["publication_date"] = publicationDate }
-        if let title = title { json["title"] = title }
-        return json
     }
 }

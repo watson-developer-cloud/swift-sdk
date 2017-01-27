@@ -361,6 +361,32 @@
 		CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B41E04448300DBB27A /* Sentiment.swift */; };
 		CE95E9B71E0446C300DBB27A /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B61E0446C300DBB27A /* Taxonomy.swift */; };
 		CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5201E392F77007E9F6A /* AnalysisResults.swift */; };
+		CED4F5591E3A84BE007E9F6A /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5281E3A84BE007E9F6A /* Author.swift */; };
+		CED4F55A1E3A84BE007E9F6A /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5291E3A84BE007E9F6A /* CategoriesOptions.swift */; };
+		CED4F55B1E3A84BE007E9F6A /* CategoriesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F52A1E3A84BE007E9F6A /* CategoriesResult.swift */; };
+		CED4F55D1E3A84BE007E9F6A /* ConceptsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F52C1E3A84BE007E9F6A /* ConceptsOptions.swift */; };
+		CED4F55E1E3A84BE007E9F6A /* ConceptsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F52D1E3A84BE007E9F6A /* ConceptsResult.swift */; };
+		CED4F5631E3A84BE007E9F6A /* EmotionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5321E3A84BE007E9F6A /* EmotionOptions.swift */; };
+		CED4F5641E3A84BE007E9F6A /* EmotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5331E3A84BE007E9F6A /* EmotionResult.swift */; };
+		CED4F5671E3A84BE007E9F6A /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5361E3A84BE007E9F6A /* EntitiesOptions.swift */; };
+		CED4F5681E3A84BE007E9F6A /* EntitiesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5371E3A84BE007E9F6A /* EntitiesResult.swift */; };
+		CED4F56A1E3A84BE007E9F6A /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5391E3A84BE007E9F6A /* Features.swift */; };
+		CED4F56B1E3A84BE007E9F6A /* FeaturesResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53A1E3A84BE007E9F6A /* FeaturesResults.swift */; };
+		CED4F56C1E3A84BE007E9F6A /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */; };
+		CED4F56D1E3A84BE007E9F6A /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */; };
+		CED4F56F1E3A84BE007E9F6A /* LinkedDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */; };
+		CED4F5701E3A84BE007E9F6A /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */; };
+		CED4F5711E3A84BE007E9F6A /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5401E3A84BE007E9F6A /* MetadataOptions.swift */; };
+		CED4F5721E3A84BE007E9F6A /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */; };
+		CED4F5741E3A84BE007E9F6A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5431E3A84BE007E9F6A /* Model.swift */; };
+		CED4F5751E3A84BE007E9F6A /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5441E3A84BE007E9F6A /* Parameters.swift */; };
+		CED4F5771E3A84BE007E9F6A /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */; };
+		CED4F5781E3A84BE007E9F6A /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */; };
+		CED4F5791E3A84BE007E9F6A /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5481E3A84BE007E9F6A /* RelationsResult.swift */; };
+		CED4F57F1E3A84BE007E9F6A /* SemanticRolesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F54E1E3A84BE007E9F6A /* SemanticRolesOptions.swift */; };
+		CED4F5801E3A84BE007E9F6A /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */; };
+		CED4F5841E3A84BE007E9F6A /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */; };
+		CED4F5851E3A84BE007E9F6A /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */; };
 		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
 /* End PBXBuildFile section */
 
@@ -991,6 +1017,32 @@
 		CE95E9B41E04448300DBB27A /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
 		CE95E9B61E0446C300DBB27A /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		CED4F5201E392F77007E9F6A /* AnalysisResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
+		CED4F5281E3A84BE007E9F6A /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		CED4F5291E3A84BE007E9F6A /* CategoriesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
+		CED4F52A1E3A84BE007E9F6A /* CategoriesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesResult.swift; sourceTree = "<group>"; };
+		CED4F52C1E3A84BE007E9F6A /* ConceptsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptsOptions.swift; sourceTree = "<group>"; };
+		CED4F52D1E3A84BE007E9F6A /* ConceptsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptsResult.swift; sourceTree = "<group>"; };
+		CED4F5321E3A84BE007E9F6A /* EmotionOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionOptions.swift; sourceTree = "<group>"; };
+		CED4F5331E3A84BE007E9F6A /* EmotionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionResult.swift; sourceTree = "<group>"; };
+		CED4F5361E3A84BE007E9F6A /* EntitiesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
+		CED4F5371E3A84BE007E9F6A /* EntitiesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitiesResult.swift; sourceTree = "<group>"; };
+		CED4F5391E3A84BE007E9F6A /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
+		CED4F53A1E3A84BE007E9F6A /* FeaturesResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturesResults.swift; sourceTree = "<group>"; };
+		CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
+		CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
+		CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedDataResult.swift; sourceTree = "<group>"; };
+		CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
+		CED4F5401E3A84BE007E9F6A /* MetadataOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
+		CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
+		CED4F5431E3A84BE007E9F6A /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CED4F5441E3A84BE007E9F6A /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
+		CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
+		CED4F5481E3A84BE007E9F6A /* RelationsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
+		CED4F54E1E3A84BE007E9F6A /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
+		CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
+		CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
+		CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
 		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1420,6 +1472,32 @@
 			children = (
 				124E7B541E39093500F09E38 /* AnalyzeRequest.swift */,
 				CED4F5201E392F77007E9F6A /* AnalysisResults.swift */,
+				CED4F5281E3A84BE007E9F6A /* Author.swift */,
+				CED4F5291E3A84BE007E9F6A /* CategoriesOptions.swift */,
+				CED4F52A1E3A84BE007E9F6A /* CategoriesResult.swift */,
+				CED4F52C1E3A84BE007E9F6A /* ConceptsOptions.swift */,
+				CED4F52D1E3A84BE007E9F6A /* ConceptsResult.swift */,
+				CED4F5321E3A84BE007E9F6A /* EmotionOptions.swift */,
+				CED4F5331E3A84BE007E9F6A /* EmotionResult.swift */,
+				CED4F5361E3A84BE007E9F6A /* EntitiesOptions.swift */,
+				CED4F5371E3A84BE007E9F6A /* EntitiesResult.swift */,
+				CED4F5391E3A84BE007E9F6A /* Features.swift */,
+				CED4F53A1E3A84BE007E9F6A /* FeaturesResults.swift */,
+				CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */,
+				CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */,
+				CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */,
+				CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */,
+				CED4F5401E3A84BE007E9F6A /* MetadataOptions.swift */,
+				CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */,
+				CED4F5431E3A84BE007E9F6A /* Model.swift */,
+				CED4F5441E3A84BE007E9F6A /* Parameters.swift */,
+				CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */,
+				CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */,
+				CED4F5481E3A84BE007E9F6A /* RelationsResult.swift */,
+				CED4F54E1E3A84BE007E9F6A /* SemanticRolesOptions.swift */,
+				CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */,
+				CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */,
+				CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3761,7 +3839,33 @@
 			files = (
 				CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */,
 				124E7B551E39093500F09E38 /* AnalyzeRequest.swift in Sources */,
+				CED4F5631E3A84BE007E9F6A /* EmotionOptions.swift in Sources */,
+				CED4F5781E3A84BE007E9F6A /* RelationsOptions.swift in Sources */,
+				CED4F56C1E3A84BE007E9F6A /* KeywordsOptions.swift in Sources */,
+				CED4F5591E3A84BE007E9F6A /* Author.swift in Sources */,
+				CED4F5791E3A84BE007E9F6A /* RelationsResult.swift in Sources */,
+				CED4F5841E3A84BE007E9F6A /* SentimentOptions.swift in Sources */,
+				CED4F56D1E3A84BE007E9F6A /* KeywordsResult.swift in Sources */,
+				CED4F55E1E3A84BE007E9F6A /* ConceptsResult.swift in Sources */,
+				CED4F55D1E3A84BE007E9F6A /* ConceptsOptions.swift in Sources */,
+				CED4F5721E3A84BE007E9F6A /* MetadataResult.swift in Sources */,
+				CED4F5701E3A84BE007E9F6A /* ListModelsResults.swift in Sources */,
+				CED4F5851E3A84BE007E9F6A /* SentimentResult.swift in Sources */,
+				CED4F5801E3A84BE007E9F6A /* SemanticRolesResult.swift in Sources */,
+				CED4F5771E3A84BE007E9F6A /* RelationEntity.swift in Sources */,
+				CED4F56A1E3A84BE007E9F6A /* Features.swift in Sources */,
+				CED4F5741E3A84BE007E9F6A /* Model.swift in Sources */,
+				CED4F5681E3A84BE007E9F6A /* EntitiesResult.swift in Sources */,
+				CED4F5641E3A84BE007E9F6A /* EmotionResult.swift in Sources */,
+				CED4F56F1E3A84BE007E9F6A /* LinkedDataResult.swift in Sources */,
+				CED4F5671E3A84BE007E9F6A /* EntitiesOptions.swift in Sources */,
+				CED4F57F1E3A84BE007E9F6A /* SemanticRolesOptions.swift in Sources */,
+				CED4F56B1E3A84BE007E9F6A /* FeaturesResults.swift in Sources */,
+				CED4F55A1E3A84BE007E9F6A /* CategoriesOptions.swift in Sources */,
+				CED4F55B1E3A84BE007E9F6A /* CategoriesResult.swift in Sources */,
+				CED4F5711E3A84BE007E9F6A /* MetadataOptions.swift in Sources */,
 				1241DFC81E38105C00B8B33E /* NaturalLanguageUnderstanding.swift in Sources */,
+				CED4F5751E3A84BE007E9F6A /* Parameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

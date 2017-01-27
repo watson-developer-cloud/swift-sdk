@@ -51,12 +51,12 @@ public struct FeaturesResults: JSONDecodable {
     public init(json: JSON) throws {
         concepts = try? json.decodedArray(at: "concepts", type: ConceptsResult.self)
         entities = try? json.decodedArray(at: "entities", type: EntitiesResult.self)
-        keywords = try? json.decodedArray(at: "keywords", type: KeywordsResults.self)
+        keywords = try? json.decodedArray(at: "keywords", type: KeywordsResult.self)
         categories = try? json.decodedArray(at: "categories", type: CategoriesResult.self)
         emotion = try? json.decodedArray(at: "emotion", type: EmotionResult.self)
         metadata = try? json.decode(at: "metadata", type: MetadataResult.self)
         relations = try? json.decodedArray(at: "relations", type: RelationsResult.self)
-        semanticRoles = try? json.decodedArray(at: "semantic_roles", type: SemanticRolesResult)
+        semanticRoles = try? json.decodedArray(at: "semantic_roles", type: SemanticRolesResult.self)
         sentiment = try? json.decodedArray(at: "sentiment", type: SentimentResult.self)
     }
 }

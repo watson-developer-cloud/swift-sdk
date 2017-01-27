@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-ublic struct KeywordsResult: JSONDecodable {
+public struct KeywordsResult: JSONDecodable {
     
     /// Relevance score from 0 to 1. Higher values indicate greater relevance
     public let relevance: Double?

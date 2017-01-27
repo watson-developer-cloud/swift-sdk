@@ -41,7 +41,7 @@ public struct DocumentSentimentResults: JSONDecodable {
     
     /// Used internally to initialize a `DocumentSentimentResults` model from JSON.
     public init(json: JSON) throws {
-        score = try? json.getString(at: "score")
+        score = try? json.getDouble(at: "score")
     }
 }
 

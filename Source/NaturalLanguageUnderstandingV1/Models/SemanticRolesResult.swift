@@ -60,11 +60,13 @@ public struct SemanticRolesSubject: JSONDecodable {
         keywords = try? json.decodedArray(at: "keywords", type: SemanticRolesKeyword.self)
     }
     
-    public struct SemanticRolesEntity: JSONDecodable,JSONEncodable {
+    /** The entity extracted from the text. */
+    public struct SemanticRolesEntity: JSONDecodable {
         
-        /// Entity type
+        /// The entity type.
         public let type: String?
-        /// The entity text
+        
+        /// The entity text.
         public let text: String?
         
         /// Used internally to initialize a `SemanticRolesEntity` model from JSON.

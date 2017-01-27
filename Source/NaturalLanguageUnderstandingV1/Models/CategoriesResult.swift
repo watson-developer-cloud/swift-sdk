@@ -17,48 +17,18 @@
 import Foundation
 import RestKit
 
-
-public struct CategoriesResult: JSONDecodable,JSONEncodable {
-    /// The path to the category through the taxonomy hierarchy
+/** The hierarchical 5-level taxonomy the content is categorized into. */
+public struct CategoriesResult: JSONDecodable {
+    
+    /// The path to the category through the taxonomy hierarchy.
     public let label: String?
+    
     /// Confidence score for the category classification. Higher values indicate greater confidence.
     public let score: Double?
 
-    /**
-     Initialize a `CategoriesResult` with required member variables.
-
-
-     - returns: An initialized `CategoriesResult`.
-    */
-    public init() {
-    }
-
-    /**
-    Initialize a `CategoriesResult` with all member variables.
-
-     - parameter label: The path to the category through the taxonomy hierarchy
-     - parameter score: Confidence score for the category classification. Higher values indicate greater confidence.
-
-    - returns: An initialized `CategoriesResult`.
-    */
-    public init(label: String, score: Double) {
-        self.label = label
-        self.score = score
-    }
-
-    // MARK: JSONDecodable
     /// Used internally to initialize a `CategoriesResult` model from JSON.
     public init(json: JSON) throws {
         label = try? json.getString(at: "label")
-        score = try? json.getString(at: "score")
-    }
-
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CategoriesResult` model to JSON.
-    func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let label = label { json["label"] = label }
-        if let score = score { json["score"] = score }
-        return json
+        score = try? json.getDouble(at: "score")
     }
 }

@@ -17,66 +17,42 @@
 import Foundation
 import RestKit
 
-/** Results of the analysis, organized by feature */
-public struct AnalysisResults: JSONDecodable,JSONEncodable {
-    /// Language used to analyze the text
+/** An object containing the results returned by the NLU service. */
+public struct AnalysisResults: JSONDecodable {
+    
+    /// Language used to analyze the text.
     public let language: String?
-    /// Text that was used in the analysis
+    
+    /// Text that was used in the analysis.
     public let analyzedText: String?
-    /// URL that was used to retrieve HTML content
+    
+    /// URL that was used to retrieve HTML content.
     public let retrievedUrl: String?
     
-    public let usage: Any?
+    /// The number of features used in the API call.
+    public let usage: Usage?
     
-    public let features: Any?
+    /// The results returned by the features used to analyze the text.
+    public let features: FeaturesResults?
 
-    /**
-     Initialize a `AnalysisResults` with required member variables.
-
-
-     - returns: An initialized `AnalysisResults`.
-    */
-    public init() {
-    }
-
-    /**
-    Initialize a `AnalysisResults` with all member variables.
-
-     - parameter language: Language used to analyze the text
-     - parameter analyzedText: Text that was used in the analysis
-     - parameter retrievedUrl: URL that was used to retrieve HTML content
-     - parameter usage: 
-     - parameter features: 
-
-    - returns: An initialized `AnalysisResults`.
-    */
-    public init(language: String, analyzedText: String, retrievedUrl: String, usage: Any, features: Any) {
-        self.language = language
-        self.analyzedText = analyzedText
-        self.retrievedUrl = retrievedUrl
-        self.usage = usage
-        self.features = features
-    }
-
-    // MARK: JSONDecodable
     /// Used internally to initialize a `AnalysisResults` model from JSON.
     public init(json: JSON) throws {
         language = try? json.getString(at: "language")
         analyzedText = try? json.getString(at: "analyzed_text")
         retrievedUrl = try? json.getString(at: "retrieved_url")
-        usage = try? json.getString(at: "usage")
-        features = try? json.getString(at: "features")
+        usage = try? json.decode(at: "usage", type: Usage.self)
+        features = try? json.decode(at: "features", type: FeaturesResults.self)
     }
+}
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `AnalysisResults` model to JSON.
-    func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let language = language { json["language"] = language }
-        if let analyzedText = analyzedText { json["analyzed_text"] = analyzedText }
-        if let retrievedUrl = retrievedUrl { json["retrieved_url"] = retrievedUrl }
-        if let usage = usage { json["usage"] = usage }
-        if let features = features { json["features"] = features }
-        return json
+/** An object containing how many features used. */
+public struct Usage: JSONDecodable {
+    
+    /// The number of features used in the API call.
+    public let features: Int
+    
+    /// Used internally to initialize a 'Usage' model from JSON.
+    public init(json: JSON) throws {
+        features = try json.getInt(at: "features")
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,20 @@
 import Foundation
 import RestKit
 
-
 public struct KeywordsOptions: JSONDecodable,JSONEncodable {
     /// Maximum number of keywords to return
-    public let limit: Int32?
+    public let limit: Int?
     /// Set this to true to return sentiment information for detected keywords
     public let sentiment: Bool?
 
     /**
      Initialize a `KeywordsOptions` with required member variables.
 
-
      - returns: An initialized `KeywordsOptions`.
     */
     public init() {
+        self.limit = nil
+        self.sentiment = nil
     }
 
     /**
@@ -41,7 +41,7 @@ public struct KeywordsOptions: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `KeywordsOptions`.
     */
-    public init(limit: Int32, sentiment: Bool) {
+    public init(limit: Int, sentiment: Bool) {
         self.limit = limit
         self.sentiment = sentiment
     }
@@ -49,13 +49,13 @@ public struct KeywordsOptions: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `KeywordsOptions` model from JSON.
     public init(json: JSON) throws {
-        limit = try? json.getString(at: "limit")
-        sentiment = try? json.getString(at: "sentiment")
+        limit = try? json.getInt(at: "limit")
+        sentiment = try? json.getBool(at: "sentiment")
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `KeywordsOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let limit = limit { json["limit"] = limit }
         if let sentiment = sentiment { json["sentiment"] = sentiment }

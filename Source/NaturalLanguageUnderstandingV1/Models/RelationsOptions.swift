@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 import Foundation
 import RestKit
 
-
 public struct RelationsOptions: JSONDecodable,JSONEncodable {
     /// Enter a custom model ID to override the default &#x60;en-news&#x60; model&lt;br&gt;&lt;ul&gt;&lt;li&gt;es-news: Spanish news&lt;/li&gt;&lt;li&gt;ar-news: Arabic news&lt;/li&gt;&lt;/ul&gt;
     public let model: String?
@@ -25,10 +24,10 @@ public struct RelationsOptions: JSONDecodable,JSONEncodable {
     /**
      Initialize a `RelationsOptions` with required member variables.
 
-
      - returns: An initialized `RelationsOptions`.
     */
     public init() {
+        self.model = nil
     }
 
     /**
@@ -50,7 +49,7 @@ public struct RelationsOptions: JSONDecodable,JSONEncodable {
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `RelationsOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let model = model { json["model"] = model }
         return json

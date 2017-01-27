@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,20 @@
 import Foundation
 import RestKit
 
-
 public struct ConceptsOptions: JSONDecodable,JSONEncodable {
     /// Maximum number of concepts to return
-    public let limit: Int32?
+    public let limit: Int?
     /// Set this to false to hide Linked Data information in the response
     public let linkedData: Bool?
 
     /**
      Initialize a `ConceptsOptions` with required member variables.
 
-
      - returns: An initialized `ConceptsOptions`.
     */
     public init() {
+        self.limit = nil
+        self.linkedData = nil
     }
 
     /**
@@ -41,7 +41,7 @@ public struct ConceptsOptions: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `ConceptsOptions`.
     */
-    public init(limit: Int32, linkedData: Bool) {
+    public init(limit: Int, linkedData: Bool) {
         self.limit = limit
         self.linkedData = linkedData
     }
@@ -49,13 +49,13 @@ public struct ConceptsOptions: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `ConceptsOptions` model from JSON.
     public init(json: JSON) throws {
-        limit = try? json.getString(at: "limit")
-        linkedData = try? json.getString(at: "linked_data")
+        limit = try? json.getInt(at: "limit")
+        linkedData = try? json.getBool(at: "linked_data")
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `ConceptsOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let limit = limit { json["limit"] = limit }
         if let linkedData = linkedData { json["linked_data"] = linkedData }

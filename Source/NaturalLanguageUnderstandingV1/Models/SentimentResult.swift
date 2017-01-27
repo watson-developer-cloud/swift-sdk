@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,46 +17,48 @@
 import Foundation
 import RestKit
 
-/** The sentiment of the content. */
-public struct SentimentResult: JSONDecodable {
-    
-    /// The document level sentiment.
+public struct SentimentResult: JSONDecodable,JSONEncodable {
     public let document: DocumentSentimentResults?
-    
-    /// The targeted sentiment to analyze.
     public let targets: [TargetedSentimentResults]?
 
+    /**
+     Initialize a `SentimentResult` with required member variables.
+
+     - returns: An initialized `SentimentResult`.
+    */
+    public init() {
+        self.document = nil
+        self.targets = nil
+    }
+
+    /**
+    Initialize a `SentimentResult` with all member variables.
+
+     - parameter document: 
+     - parameter targets: 
+
+    - returns: An initialized `SentimentResult`.
+    */
+    public init(document: DocumentSentimentResults, targets: [TargetedSentimentResults]) {
+        self.document = document
+        self.targets = targets
+    }
+
+    // MARK: JSONDecodable
     /// Used internally to initialize a `SentimentResult` model from JSON.
     public init(json: JSON) throws {
-        document = try? json.decode(at: "document", type: DocumentSentimentResults.self)
+        document = try? json.getJSON(at: "document") as! DocumentSentimentResults
         targets = try? json.decodedArray(at: "targets", type: TargetedSentimentResults.self)
     }
-}
 
-/** The sentiment results of the document. */
-public struct DocumentSentimentResults: JSONDecodable {
-    
-    /// Sentiment score from -1 (negative) to 1 (positive).
-    public let score: Double?
-    
-    /// Used internally to initialize a `DocumentSentimentResults` model from JSON.
-    public init(json: JSON) throws {
-        score = try? json.getString(at: "score")
-    }
-}
-
-/** The targeted sentiment results of the document. */
-public struct TargetedSentimentResults: JSONDecodable {
-    
-    /// Targeted text.
-    public let text: String?
-    
-    /// Sentiment score from -1 (negative) to 1 (positive).
-    public let score: Double?
-    
-    /// Used internally to initialize a `TargetedSentimentResults` model from JSON.
-    public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
-        score = try? json.getDouble(at: "score")
+    // MARK: JSONEncodable
+    /// Used internally to serialize a `SentimentResult` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let document = document { json["document"] = document }
+        if let targets = targets {
+            json["targets"] = targets.map { targetsElem in targetsElem.toJSONObject() }
+        }
+        return json
     }
 }

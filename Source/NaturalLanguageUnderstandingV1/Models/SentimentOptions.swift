@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 import Foundation
 import RestKit
 
-
 public struct SentimentOptions: JSONDecodable,JSONEncodable {
     /// Set this to false to hide document-level sentiment results
     public let document: Bool?
@@ -27,10 +26,11 @@ public struct SentimentOptions: JSONDecodable,JSONEncodable {
     /**
      Initialize a `SentimentOptions` with required member variables.
 
-
      - returns: An initialized `SentimentOptions`.
     */
     public init() {
+        self.document = nil
+        self.targets = nil
     }
 
     /**
@@ -49,17 +49,17 @@ public struct SentimentOptions: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `SentimentOptions` model from JSON.
     public init(json: JSON) throws {
-        document = try? json.getString(at: "document")
-        targets = try? json.getString(at: "targets")
+        document = try? json.getBool(at: "document")
+        targets = try? json.decodedArray(at: "targets", type: String.self)
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `SentimentOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let document = document { json["document"] = document }
         if let targets = targets {
-            json["targets"] = targets.map { targetsElem in targetsElem.toJSONObject() }
+            json["targets"] = targets.map { targetsElem in targetsElem }
         }
         return json
     }

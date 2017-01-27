@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,9 @@
 import Foundation
 import RestKit
 
-
 public struct EntitiesOptions: JSONDecodable,JSONEncodable {
     /// Maximum number of entities to return
-    public let limit: Int32?
+    public let limit: Int?
     /// Enter a custom model ID to override the standard entity detection model
     public let model: String?
     /// Set this to false to hide entity disambiguation information in the response
@@ -31,10 +30,13 @@ public struct EntitiesOptions: JSONDecodable,JSONEncodable {
     /**
      Initialize a `EntitiesOptions` with required member variables.
 
-
      - returns: An initialized `EntitiesOptions`.
     */
     public init() {
+        self.limit = nil
+        self.model = nil
+        self.disambiguation = nil
+        self.sentiment = nil
     }
 
     /**
@@ -47,7 +49,7 @@ public struct EntitiesOptions: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `EntitiesOptions`.
     */
-    public init(limit: Int32, model: String, disambiguation: Bool, sentiment: Bool) {
+    public init(limit: Int, model: String, disambiguation: Bool, sentiment: Bool) {
         self.limit = limit
         self.model = model
         self.disambiguation = disambiguation
@@ -57,15 +59,15 @@ public struct EntitiesOptions: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `EntitiesOptions` model from JSON.
     public init(json: JSON) throws {
-        limit = try? json.getString(at: "limit")
+        limit = try? json.getInt(at: "limit")
         model = try? json.getString(at: "model")
-        disambiguation = try? json.getString(at: "disambiguation")
-        sentiment = try? json.getString(at: "sentiment")
+        disambiguation = try? json.getBool(at: "disambiguation")
+        sentiment = try? json.getBool(at: "sentiment")
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `EntitiesOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let limit = limit { json["limit"] = limit }
         if let model = model { json["model"] = model }

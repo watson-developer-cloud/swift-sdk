@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,45 @@
 import Foundation
 import RestKit
 
-/** The relations between entities found in the content. */
-public struct RelationsResult: JSONDecodable {
-    
+public struct RelationsResult: JSONDecodable,JSONEncodable {
     /// Confidence score for the relation. Higher values indicate greater confidence.
     public let score: Double?
-    
-    /// The sentence that contains the relation.
+    /// The sentence that contains the relation
     public let sentence: String?
-    
-    /// The type of the relation.
+    /// The type of the relation
     public let type: String?
-    
-    /// The extracted relation objects from the text.
     public let arguments: [RelationArgument]?
 
+    /**
+     Initialize a `RelationsResult` with required member variables.
+
+     - returns: An initialized `RelationsResult`.
+    */
+    public init() {
+        self.score = nil
+        self.sentence = nil
+        self.type = nil
+        self.arguments = nil
+    }
+
+    /**
+    Initialize a `RelationsResult` with all member variables.
+
+     - parameter score: Confidence score for the relation. Higher values indicate greater confidence.
+     - parameter sentence: The sentence that contains the relation
+     - parameter type: The type of the relation
+     - parameter arguments: 
+
+    - returns: An initialized `RelationsResult`.
+    */
+    public init(score: Double, sentence: String, type: String, arguments: [RelationArgument]) {
+        self.score = score
+        self.sentence = sentence
+        self.type = type
+        self.arguments = arguments
+    }
+
+    // MARK: JSONDecodable
     /// Used internally to initialize a `RelationsResult` model from JSON.
     public init(json: JSON) throws {
         score = try? json.getDouble(at: "score")
@@ -39,20 +63,17 @@ public struct RelationsResult: JSONDecodable {
         type = try? json.getString(at: "type")
         arguments = try? json.decodedArray(at: "arguments", type: RelationArgument.self)
     }
-}
 
-/** The extracted relation in the content.. */
-public struct RelationArgument: JSONDecodable {
-    
-    /// The relationship of the entity pulled from a sentence.
-    public let entities: [RelationEntity]?
-    
-    /// Text that corresponds to the argument
-    public let text: String?
-    
-    /// Used internally to initialize a `RelationArgument` model from JSON.
-    public init(json: JSON) throws {
-        entities = try? json.decodedArray(at: "entities", type: RelationEntity.self)
-        text = try? json.getString(at: "text")
+    // MARK: JSONEncodable
+    /// Used internally to serialize a `RelationsResult` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let score = score { json["score"] = score }
+        if let sentence = sentence { json["sentence"] = sentence }
+        if let type = type { json["type"] = type }
+        if let arguments = arguments {
+            json["arguments"] = arguments.map { argumentsElem in argumentsElem.toJSONObject() }
+        }
+        return json
     }
 }

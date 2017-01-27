@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,9 @@
 import Foundation
 import RestKit
 
-
 public struct SemanticRolesOptions: JSONDecodable,JSONEncodable {
     /// Maximum number of semantic_roles results to return
-    public let limit: Int32?
+    public let limit: Int?
     /// Set this to true to return keyword information for subjects and objects
     public let keywords: Bool?
     /// Set this to true to return entity information for subjects and objects
@@ -33,10 +32,14 @@ public struct SemanticRolesOptions: JSONDecodable,JSONEncodable {
     /**
      Initialize a `SemanticRolesOptions` with required member variables.
 
-
      - returns: An initialized `SemanticRolesOptions`.
     */
     public init() {
+        self.limit = nil
+        self.keywords = nil
+        self.entities = nil
+        self.requireEntities = nil
+        self.disambiguate = nil
     }
 
     /**
@@ -50,7 +53,7 @@ public struct SemanticRolesOptions: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `SemanticRolesOptions`.
     */
-    public init(limit: Int32, keywords: Bool, entities: Bool, requireEntities: Bool, disambiguate: Bool) {
+    public init(limit: Int, keywords: Bool, entities: Bool, requireEntities: Bool, disambiguate: Bool) {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities
@@ -61,16 +64,16 @@ public struct SemanticRolesOptions: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `SemanticRolesOptions` model from JSON.
     public init(json: JSON) throws {
-        limit = try? json.getString(at: "limit")
-        keywords = try? json.getString(at: "keywords")
-        entities = try? json.getString(at: "entities")
-        requireEntities = try? json.getString(at: "require_entities")
-        disambiguate = try? json.getString(at: "disambiguate")
+        limit = try? json.getInt(at: "limit")
+        keywords = try? json.getBool(at: "keywords")
+        entities = try? json.getBool(at: "entities")
+        requireEntities = try? json.getBool(at: "require_entities")
+        disambiguate = try? json.getBool(at: "disambiguate")
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `SemanticRolesOptions` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let limit = limit { json["limit"] = limit }
         if let keywords = keywords { json["keywords"] = keywords }

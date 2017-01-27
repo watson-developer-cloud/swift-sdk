@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 import Foundation
 import RestKit
 
-
 public struct Author: JSONDecodable,JSONEncodable {
     /// Name of the author
     public let name: String?
@@ -25,10 +24,10 @@ public struct Author: JSONDecodable,JSONEncodable {
     /**
      Initialize a `Author` with required member variables.
 
-
      - returns: An initialized `Author`.
     */
     public init() {
+        self.name = nil
     }
 
     /**
@@ -50,7 +49,7 @@ public struct Author: JSONDecodable,JSONEncodable {
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `Author` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let name = name { json["name"] = name }
         return json

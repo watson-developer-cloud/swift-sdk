@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +19,31 @@ import RestKit
 
 /** Analysis features and options */
 public struct Features: JSONDecodable,JSONEncodable {
-    
     public let concepts: ConceptsOptions?
-    
     public let emotion: EmotionOptions?
-    
     public let entities: EntitiesOptions?
-    
     public let keywords: KeywordsOptions?
-    
     public let metadata: MetadataOptions?
-    
     public let relations: RelationsOptions?
-    
     public let semanticRoles: SemanticRolesOptions?
-    
     public let sentiment: SentimentOptions?
-    
     public let categories: CategoriesOptions?
 
     /**
      Initialize a `Features` with required member variables.
 
-
      - returns: An initialized `Features`.
     */
     public init() {
+        self.concepts = nil
+        self.emotion = nil
+        self.entities = nil
+        self.keywords = nil
+        self.metadata = nil
+        self.relations = nil
+        self.semanticRoles = nil
+        self.sentiment = nil
+        self.categories = nil
     }
 
     /**
@@ -77,20 +76,20 @@ public struct Features: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `Features` model from JSON.
     public init(json: JSON) throws {
-        concepts = try? json.getString(at: "concepts")
-        emotion = try? json.getString(at: "emotion")
-        entities = try? json.getString(at: "entities")
-        keywords = try? json.getString(at: "keywords")
-        metadata = try? json.getString(at: "metadata")
-        relations = try? json.getString(at: "relations")
-        semanticRoles = try? json.getString(at: "semantic_roles")
-        sentiment = try? json.getString(at: "sentiment")
-        categories = try? json.getString(at: "categories")
+        concepts = try? json.getJSON(at: "concepts") as! ConceptsOptions
+        emotion = try? json.getJSON(at: "emotion") as! EmotionOptions
+        entities = try? json.getJSON(at: "entities") as! EntitiesOptions
+        keywords = try? json.getJSON(at: "keywords") as! KeywordsOptions
+        metadata = try? json.getJSON(at: "metadata") as! MetadataOptions
+        relations = try? json.getJSON(at: "relations") as! RelationsOptions
+        semanticRoles = try? json.getJSON(at: "semantic_roles") as! SemanticRolesOptions
+        sentiment = try? json.getJSON(at: "sentiment") as! SentimentOptions
+        categories = try? json.getJSON(at: "categories") as! CategoriesOptions
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `Features` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let concepts = concepts { json["concepts"] = concepts }
         if let emotion = emotion { json["emotion"] = emotion }

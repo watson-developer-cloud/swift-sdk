@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,15 @@ import RestKit
 
 /** Models available for Relations and Entities features */
 public struct ListModelsResults: JSONDecodable,JSONEncodable {
-    
     public let models: [Model]?
 
     /**
      Initialize a `ListModelsResults` with required member variables.
 
-
      - returns: An initialized `ListModelsResults`.
     */
     public init() {
+        self.models = nil
     }
 
     /**
@@ -45,12 +44,12 @@ public struct ListModelsResults: JSONDecodable,JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `ListModelsResults` model from JSON.
     public init(json: JSON) throws {
-        models = try? json.getString(at: "models")
+        models = try? json.decodedArray(at: "models", type: Model.self)
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `ListModelsResults` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let models = models {
             json["models"] = models.map { modelsElem in modelsElem.toJSONObject() }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,48 @@
 import Foundation
 import RestKit
 
-/* The entities extracted from a sentence in a given document. */
-public struct RelationEntity: JSONDecodable {
-    
+public struct RelationEntity: JSONDecodable,JSONEncodable {
     /// Text that corresponds to the entity
     public let text: String?
-    
     /// Entity type
     public let type: String?
 
+    /**
+     Initialize a `RelationEntity` with required member variables.
+
+     - returns: An initialized `RelationEntity`.
+    */
+    public init() {
+        self.text = nil
+        self.type = nil
+    }
+
+    /**
+    Initialize a `RelationEntity` with all member variables.
+
+     - parameter text: Text that corresponds to the entity
+     - parameter type: Entity type
+
+    - returns: An initialized `RelationEntity`.
+    */
+    public init(text: String, type: String) {
+        self.text = text
+        self.type = type
+    }
+
+    // MARK: JSONDecodable
     /// Used internally to initialize a `RelationEntity` model from JSON.
     public init(json: JSON) throws {
         text = try? json.getString(at: "text")
         type = try? json.getString(at: "type")
+    }
+
+    // MARK: JSONEncodable
+    /// Used internally to serialize a `RelationEntity` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let text = text { json["text"] = text }
+        if let type = type { json["type"] = type }
+        return json
     }
 }

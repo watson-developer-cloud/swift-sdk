@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import RestKit
-
 /** An object containing the results returned by the NLU service. */
 public struct AnalysisResults: JSONDecodable {
     

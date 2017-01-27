@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 import Foundation
 import RestKit
 
-
 public struct LinkedDataResult: JSONDecodable,JSONEncodable {
     /// Name of the Linked Data source
     public let source: String?
@@ -27,10 +26,11 @@ public struct LinkedDataResult: JSONDecodable,JSONEncodable {
     /**
      Initialize a `LinkedDataResult` with required member variables.
 
-
      - returns: An initialized `LinkedDataResult`.
     */
     public init() {
+        self.source = nil
+        self.link = nil
     }
 
     /**
@@ -55,7 +55,7 @@ public struct LinkedDataResult: JSONDecodable,JSONEncodable {
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `LinkedDataResult` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let source = source { json["source"] = source }
         if let link = link { json["link"] = link }

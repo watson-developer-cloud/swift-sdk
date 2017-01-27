@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,13 @@ public struct Model: JSONDecodable,JSONEncodable {
     /**
      Initialize a `Model` with required member variables.
 
-
      - returns: An initialized `Model`.
     */
     public init() {
+        self.status = nil
+        self.modelId = nil
+        self.language = nil
+        self.description = nil
     }
 
     /**
@@ -65,7 +68,7 @@ public struct Model: JSONDecodable,JSONEncodable {
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `Model` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let status = status { json["status"] = status }
         if let modelId = modelId { json["model_id"] = modelId }

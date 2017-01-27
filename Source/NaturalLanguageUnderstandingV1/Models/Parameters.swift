@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,21 +19,15 @@ import RestKit
 
 /** JSON object containing request parameters */
 public struct Parameters: JSONDecodable,JSONEncodable {
-    
     public let text: String?
-    
     public let html: String?
-    
     public let url: String?
-    
     public let features: Features
-    
     public let clean: Bool?
     /// XPath query for targeting nodes in HTML
     public let xpath: String?
     /// Whether to use raw HTML content if text cleaning fails
     public let fallbackToRaw: Bool?
-    
     public let returnAnalyzedText: Bool?
     /// ISO 639-1 code indicating the language to use in the analysis
     public let language: String?
@@ -41,12 +35,18 @@ public struct Parameters: JSONDecodable,JSONEncodable {
     /**
      Initialize a `Parameters` with required member variables.
 
-     - parameter features: 
-
      - returns: An initialized `Parameters`.
     */
     public init(features: Features) {
         self.features = features
+        self.text = nil
+        self.html = nil
+        self.url = nil
+        self.clean = nil
+        self.xpath = nil
+        self.fallbackToRaw = nil
+        self.returnAnalyzedText = nil
+        self.language = nil
     }
 
     /**
@@ -82,16 +82,17 @@ public struct Parameters: JSONDecodable,JSONEncodable {
         text = try? json.getString(at: "text")
         html = try? json.getString(at: "html")
         url = try? json.getString(at: "url")
-        clean = try? json.getString(at: "clean")
+        features = try json.getJSON(at: "features") as! Features
+        clean = try? json.getBool(at: "clean")
         xpath = try? json.getString(at: "xpath")
-        fallbackToRaw = try? json.getString(at: "fallback_to_raw")
-        returnAnalyzedText = try? json.getString(at: "return_analyzed_text")
+        fallbackToRaw = try? json.getBool(at: "fallback_to_raw")
+        returnAnalyzedText = try? json.getBool(at: "return_analyzed_text")
         language = try? json.getString(at: "language")
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `Parameters` model to JSON.
-    func toJSONObject() -> Any {
+    public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["features"] = features
         if let text = text { json["text"] = text }

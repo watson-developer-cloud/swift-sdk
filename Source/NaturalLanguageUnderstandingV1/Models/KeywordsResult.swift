@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,48 @@
 import Foundation
 import RestKit
 
-
-public struct KeywordsResult: JSONDecodable {
-    
+public struct KeywordsResult: JSONDecodable,JSONEncodable {
     /// Relevance score from 0 to 1. Higher values indicate greater relevance
     public let relevance: Double?
-    
-    /// The text of the keyword.
+    /// The keyword text
     public let text: String?
 
+    /**
+     Initialize a `KeywordsResult` with required member variables.
+
+     - returns: An initialized `KeywordsResult`.
+    */
+    public init() {
+        self.relevance = nil
+        self.text = nil
+    }
+
+    /**
+    Initialize a `KeywordsResult` with all member variables.
+
+     - parameter relevance: Relevance score from 0 to 1. Higher values indicate greater relevance
+     - parameter text: The keyword text
+
+    - returns: An initialized `KeywordsResult`.
+    */
+    public init(relevance: Double, text: String) {
+        self.relevance = relevance
+        self.text = text
+    }
+
+    // MARK: JSONDecodable
     /// Used internally to initialize a `KeywordsResult` model from JSON.
     public init(json: JSON) throws {
         relevance = try? json.getDouble(at: "relevance")
         text = try? json.getString(at: "text")
     }
 
+    // MARK: JSONEncodable
+    /// Used internally to serialize a `KeywordsResult` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let relevance = relevance { json["relevance"] = relevance }
+        if let text = text { json["text"] = text }
+        return json
+    }
 }

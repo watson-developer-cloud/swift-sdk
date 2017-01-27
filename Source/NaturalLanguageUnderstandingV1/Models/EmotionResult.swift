@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,64 +17,48 @@
 import Foundation
 import RestKit
 
-/** The detected anger, disgust, fear, joy, or sadness that is conveyed 
-    by the content. Emotion information can be returned for detected entities, 
-    keywords, or user-specified target phrases found in the text. */
-public struct EmotionResult: JSONDecodable {
-    
-    /// The returned emotion results across the document.
-    public let document: EmotionScores?
-    
-    /// The returned emotion results per specified target.
+public struct EmotionResult: JSONDecodable,JSONEncodable {
+    public let document: DocumentEmotionResults?
     public let targets: [TargetedEmotionResults]?
 
-    /// Used internally to initialize an `EmotionResult` model from JSON.
+    /**
+     Initialize a `EmotionResult` with required member variables.
+
+     - returns: An initialized `EmotionResult`.
+    */
+    public init() {
+        self.document = nil
+        self.targets = nil
+    }
+
+    /**
+    Initialize a `EmotionResult` with all member variables.
+
+     - parameter document: 
+     - parameter targets: 
+
+    - returns: An initialized `EmotionResult`.
+    */
+    public init(document: DocumentEmotionResults, targets: [TargetedEmotionResults]) {
+        self.document = document
+        self.targets = targets
+    }
+
+    // MARK: JSONDecodable
+    /// Used internally to initialize a `EmotionResult` model from JSON.
     public init(json: JSON) throws {
-        document = try? json.decode(at: "document", type: EmotionScores.self)
+        document = try? json.getJSON(at: "document") as! DocumentEmotionResults
         targets = try? json.decodedArray(at: "targets", type: TargetedEmotionResults.self)
     }
-}
 
-/** An object containing all the emotion results in a document. */
-public struct EmotionScores: JSONDecodable {
-    
-    /// Anger score from 0 to 1. A higher score means that the text is more likely to convey anger.
-    public let anger: Double?
-    
-    /// Disgust score from 0 to 1. A higher score means that the text is more likely to convey disgust.
-    public let disgust: Double?
-    
-    /// Fear score from 0 to 1. A higher score means that the text is more likely to convey fear.
-    public let fear: Double?
-    
-    /// Joy score from 0 to 1. A higher score means that the text is more likely to convey joy.
-    public let joy: Double?
-    
-    /// Sadness score from 0 to 1. A higher score means that the text is more likely to convey sadness.
-    public let sadness: Double?
-    
-    /// Used internally to intialize a 'DocumentEmotionResults' model from JSON.
-    public init(json: JSON) throws {
-        anger = try? json.getDouble(at: "anger")
-        disgust = try? json.getDouble(at: "disgust")
-        fear = try? json.getDouble(at: "fear")
-        joy = try? json.getDouble(at: "joy")
-        sadness = try? json.getDouble(at: "sadness")
-    }
-}
-
-/** An object containing the emotion results per target specified. */
-public struct TargetedEmotionResults: JSONDecodable {
-    
-    /// Targeted text.
-    public let text: String?
-    
-    /// The emotion results of the targetted text.
-    public let emotion: EmotionScores?
-    
-    /// Used internally to initialize a `TargetedEmotionResults` model from JSON.
-    public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
-        emotion = try? json.decode(at: "emotion", type: EmotionScores.self)
+    // MARK: JSONEncodable
+    /// Used internally to serialize a `EmotionResult` model to JSON.
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let document = document { json["document"] = document }
+        if let targets = targets {
+            json["targets"] = targets.map { targetsElem in targetsElem.toJSONObject() }
+        }
+        return json
     }
 }

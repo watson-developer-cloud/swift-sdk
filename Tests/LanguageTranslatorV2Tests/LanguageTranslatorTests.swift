@@ -154,7 +154,7 @@ class LanguageTranslatorTests: XCTestCase {
                 return
             }
         #else
-            glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
+            let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
         #endif
         
         languageTranslator.createModel(fromBaseModelID: "en-es", withGlossary: glossary,

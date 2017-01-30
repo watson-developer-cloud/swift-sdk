@@ -10,6 +10,8 @@
 		120092691DFF0EF900107C0A /* DeletedConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120092671DFF0EF500107C0A /* DeletedConfiguration.swift */; };
 		1200926B1E005A7300107C0A /* ConfigurationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926A1E005A7300107C0A /* ConfigurationDetails.swift */; };
 		1200926D1E01947500107C0A /* DeletedEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926C1E01947500107C0A /* DeletedEnvironment.swift */; };
+		12103CD21E3FADDB00F9C842 /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12103CD11E3FADDB00F9C842 /* MetadataOptions.swift */; };
+		12103CD41E3FAE9A00F9C842 /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12103CD31E3FAE9A00F9C842 /* CategoriesOptions.swift */; };
 		121F96901D2D8A9600E295B0 /* Ranker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F968F1D2D8A9600E295B0 /* Ranker.swift */; };
 		121F96921D2EAD1600E295B0 /* Ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96911D2EAD1600E295B0 /* Ranking.swift */; };
 		121F96941D2EF66400E295B0 /* RankerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F96931D2EF66400E295B0 /* RankerDetails.swift */; };
@@ -672,6 +674,8 @@
 		120092671DFF0EF500107C0A /* DeletedConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedConfiguration.swift; sourceTree = "<group>"; };
 		1200926A1E005A7300107C0A /* ConfigurationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationDetails.swift; sourceTree = "<group>"; };
 		1200926C1E01947500107C0A /* DeletedEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedEnvironment.swift; sourceTree = "<group>"; };
+		12103CD11E3FADDB00F9C842 /* MetadataOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
+		12103CD31E3FAE9A00F9C842 /* CategoriesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
 		121F968F1D2D8A9600E295B0 /* Ranker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranker.swift; sourceTree = "<group>"; };
 		121F96911D2EAD1600E295B0 /* Ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ranking.swift; sourceTree = "<group>"; };
 		121F96931D2EF66400E295B0 /* RankerDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankerDetails.swift; sourceTree = "<group>"; };
@@ -1479,6 +1483,7 @@
 				CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */,
 				CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */,
 				CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */,
+				12103CD11E3FADDB00F9C842 /* MetadataOptions.swift */,
 				CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */,
 				CED4F5431E3A84BE007E9F6A /* Model.swift */,
 				CED4F5441E3A84BE007E9F6A /* Parameters.swift */,
@@ -1489,6 +1494,7 @@
 				CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */,
 				CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */,
 				CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */,
+				12103CD31E3FAE9A00F9C842 /* CategoriesOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3828,6 +3834,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12103CD41E3FAE9A00F9C842 /* CategoriesOptions.swift in Sources */,
 				CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */,
 				CED4F5631E3A84BE007E9F6A /* EmotionOptions.swift in Sources */,
 				CED4F5781E3A84BE007E9F6A /* RelationsOptions.swift in Sources */,
@@ -3835,6 +3842,7 @@
 				CED4F5591E3A84BE007E9F6A /* Author.swift in Sources */,
 				CED4F5791E3A84BE007E9F6A /* RelationsResult.swift in Sources */,
 				CED4F5841E3A84BE007E9F6A /* SentimentOptions.swift in Sources */,
+				12103CD21E3FADDB00F9C842 /* MetadataOptions.swift in Sources */,
 				CED4F56D1E3A84BE007E9F6A /* KeywordsResult.swift in Sources */,
 				CED4F55E1E3A84BE007E9F6A /* ConceptsResult.swift in Sources */,
 				CED4F55D1E3A84BE007E9F6A /* ConceptsOptions.swift in Sources */,

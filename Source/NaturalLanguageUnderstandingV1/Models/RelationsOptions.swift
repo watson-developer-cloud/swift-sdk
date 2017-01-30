@@ -17,7 +17,8 @@
 import Foundation
 import RestKit
 
-public struct RelationsOptions: JSONDecodable,JSONEncodable {
+public struct RelationsOptions: JSONEncodable {
+    
     /// Enter a custom model ID to override the default `en-news` model. Use `es-news` for Spanish
     /// news, and `ar-news` for Arabic news.
     public let model: String?

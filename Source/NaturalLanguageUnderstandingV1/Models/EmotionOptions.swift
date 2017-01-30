@@ -44,7 +44,7 @@ public struct EmotionOptions: JSONEncodable {
         var json = [String: Any]()
         if let document = document { json["document"] = document }
         if let targets = targets {
-            json["targets"] = targets.map { targetsElem in targetsElem }
+            json["targets"] = targets
         }
         return json
     }

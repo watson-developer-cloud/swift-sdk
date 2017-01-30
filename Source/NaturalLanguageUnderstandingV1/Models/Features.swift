@@ -50,19 +50,34 @@ public struct Features: JSONEncodable {
     /**
     Initialize a `Features` with all member variables.
 
-     - parameter concepts: 
-     - parameter emotion: 
-     - parameter entities: 
-     - parameter keywords: 
-     - parameter metadata: 
-     - parameter relations: 
-     - parameter semanticRoles: 
-     - parameter sentiment: 
-     - parameter categories: 
+     - parameter concepts: Whether or not to return the concepts that are mentioned in the analyzed 
+        text.
+     - parameter emotion: Whether or not to extract the emotions implied in the analyzed text.
+     - parameter entities: Whether or not to extract detected entity objects from the analyzed text.
+     - parameter keywords: Whether or not to return the keywords in the analyzed text.
+     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text 
+        should be returned.
+     - parameter relations: Whether or not to return the relationships between detected entities in the 
+        analyzed text.
+     - parameter semanticRoles: Whether or not to return the subject-action-object relations from the 
+        analyzed text.
+     - parameter sentiment: Whether or not to return the overall sentiment of the analyzed text.
+     - parameter categories: Whether or not to return the high level category the content is categorized 
+        as (i.e. news, art).
 
     - returns: An initialized `Features`.
     */
-    public init(concepts: ConceptsOptions? = nil, emotion: EmotionOptions? = nil, entities: EntitiesOptions? = nil, keywords: KeywordsOptions? = nil, metadata: MetadataOptions? = nil, relations: RelationsOptions? = nil, semanticRoles: SemanticRolesOptions? = nil, sentiment: SentimentOptions? = nil, categories: CategoriesOptions? = nil) {
+    public init(
+        concepts: ConceptsOptions? = nil,
+        emotion: EmotionOptions? = nil,
+        entities: EntitiesOptions? = nil,
+        keywords: KeywordsOptions? = nil,
+        metadata: MetadataOptions? = nil,
+        relations: RelationsOptions? = nil,
+        semanticRoles: SemanticRolesOptions? = nil,
+        sentiment: SentimentOptions? = nil,
+        categories: CategoriesOptions? = nil)
+    {
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities
@@ -78,15 +93,15 @@ public struct Features: JSONEncodable {
     /// Used internally to serialize a `Features` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        if let concepts = concepts { json["concepts"] = concepts }
-        if let emotion = emotion { json["emotion"] = emotion }
-        if let entities = entities { json["entities"] = entities }
-        if let keywords = keywords { json["keywords"] = keywords }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let relations = relations { json["relations"] = relations }
-        if let semanticRoles = semanticRoles { json["semantic_roles"] = semanticRoles }
-        if let sentiment = sentiment { json["sentiment"] = sentiment }
-        if let categories = categories { json["categories"] = categories }
+        if let concepts = concepts { json["concepts"] = concepts.toJSONObject() }
+        if let emotion = emotion { json["emotion"] = emotion.toJSONObject() }
+        if let entities = entities { json["entities"] = entities.toJSONObject() }
+        if let keywords = keywords { json["keywords"] = keywords.toJSONObject() }
+        if let metadata = metadata { json["metadata"] = metadata.toJSONObject() }
+        if let relations = relations { json["relations"] = relations.toJSONObject() }
+        if let semanticRoles = semanticRoles { json["semantic_roles"] = semanticRoles.toJSONObject() }
+        if let sentiment = sentiment { json["sentiment"] = sentiment.toJSONObject() }
+        if let categories = categories { json["categories"] = categories.toJSONObject() }
         return json
     }
 }

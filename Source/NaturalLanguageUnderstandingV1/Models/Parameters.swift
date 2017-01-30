@@ -62,7 +62,17 @@ public struct Parameters: JSONEncodable {
 
     - returns: An initialized `Parameters`.
     */
-    public init(features: Features, text: String? = nil, html: String? = nil, url: String? = nil, clean: Bool? = nil, xpath: String? = nil, fallbackToRaw: Bool? = nil, returnAnalyzedText: Bool? = nil, language: String? = nil) {
+    public init(
+        features: Features,
+        text: String? = nil,
+        html: String? = nil,
+        url: String? = nil,
+        clean: Bool? = nil,
+        xpath: String? = nil,
+        fallbackToRaw: Bool? = nil,
+        returnAnalyzedText: Bool? = nil, language
+        : String? = nil)
+    {
         self.text = text
         self.html = html
         self.url = url
@@ -78,7 +88,7 @@ public struct Parameters: JSONEncodable {
     /// Used internally to serialize a `Parameters` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["features"] = features
+        json["features"] = features.toJSONObject()
         if let text = text { json["text"] = text }
         if let html = html { json["html"] = html }
         if let url = url { json["url"] = url }

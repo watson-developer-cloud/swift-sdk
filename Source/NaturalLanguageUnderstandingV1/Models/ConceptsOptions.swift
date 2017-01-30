@@ -36,6 +36,7 @@ public struct ConceptsOptions: JSONEncodable {
         self.limit = limit
         self.linkedData = linkedData
     }
+    
     // MARK: JSONEncodable
     /// Used internally to serialize a `ConceptsOptions` model to JSON.
     public func toJSONObject() -> Any {

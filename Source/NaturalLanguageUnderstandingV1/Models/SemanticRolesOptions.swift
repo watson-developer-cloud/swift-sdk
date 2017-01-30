@@ -44,7 +44,13 @@ public struct SemanticRolesOptions: JSONEncodable {
 
     - returns: An initialized `SemanticRolesOptions`.
     */
-    public init(limit: Int? = nil, keywords: Bool? = nil, entities: Bool? = nil, requireEntities: Bool? = nil, disambiguate: Bool? = nil) {
+    public init(
+        limit: Int? = nil,
+        keywords: Bool? = nil,
+        entities: Bool? = nil,
+        requireEntities: Bool? = nil,
+        disambiguate: Bool? = nil)
+    {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities

@@ -20,7 +20,8 @@ import NaturalLanguageUnderstandingV1
 
 class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
-    private var NaturalLanguageUnderstanding: NaturalLanguageUnderstanding!
+    private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
+    private let timeout: TimeInterval = 5.0
     
     override func setUp() {
         super.setUp()
@@ -36,7 +37,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     func instantiateNaturalLanguageUnderstanding() {
         let username = Credentials.NaturalLanguageUnderstandingUsername
         let password = Credentials.NaturalLanguageUnderstandingPassword
-        NaturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password)
+        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password)
     }
     
     /** Fail false negatives. */

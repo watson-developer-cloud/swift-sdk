@@ -70,6 +70,40 @@ public class NaturalLanguageUnderstanding {
     /**
      Analyze text, HTML, or a public webpage with one or more text analysis features.
      
+     - parameter parameters: A `Parameters` object containing the content to be analyzed, as well as 
+        the specific features to analyze the content for.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the results from the text analysis.
      */
-//    public func analyzeContent
+    public func analyzeContent(
+        withParamaters parameters: Parameters,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (AnalysisResults) -> Void) {
+        
+        // construct body
+        guard let body = try? parameters.toJSON().serialize() else {
+            failure?(RestError.serializationError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/analyze",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<AnalysisResults>) in
+            switch response.result {
+            case .success(let result): success(result)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
 }

@@ -17,21 +17,13 @@
 import Foundation
 import RestKit
 
-public struct KeywordsOptions: JSONDecodable,JSONEncodable {
-    /// Maximum number of keywords to return
+public struct KeywordsOptions: JSONEncodable {
+    
+    /// Maximum number of keywords to return.
     public let limit: Int?
-    /// Set this to true to return sentiment information for detected keywords
+    
+    /// Set this to true to return sentiment information for detected keywords.
     public let sentiment: Bool?
-
-    /**
-     Initialize a `KeywordsOptions` with required member variables.
-
-     - returns: An initialized `KeywordsOptions`.
-    */
-    public init() {
-        self.limit = nil
-        self.sentiment = nil
-    }
 
     /**
     Initialize a `KeywordsOptions` with all member variables.
@@ -41,16 +33,9 @@ public struct KeywordsOptions: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `KeywordsOptions`.
     */
-    public init(limit: Int, sentiment: Bool) {
+    public init(limit: Int? = nil, sentiment: Bool? = nil) {
         self.limit = limit
         self.sentiment = sentiment
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `KeywordsOptions` model from JSON.
-    public init(json: JSON) throws {
-        limit = try? json.getInt(at: "limit")
-        sentiment = try? json.getBool(at: "sentiment")
     }
 
     // MARK: JSONEncodable

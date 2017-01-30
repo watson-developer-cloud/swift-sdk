@@ -18,53 +18,51 @@ import Foundation
 import RestKit
 
 /** JSON object containing request parameters */
-public struct Parameters: JSONDecodable,JSONEncodable {
+public struct Parameters: JSONEncodable {
+    
+    /// The plain text to analyze.
     public let text: String?
+    
+    /// The HTML file to analyze.
     public let html: String?
+    
+    /// The web page to analyze.
     public let url: String?
+    
+    /// Specific features to analyze the document for.
     public let features: Features
+    
+    /// Remove website elements, such as links, ads, etc.
     public let clean: Bool?
-    /// XPath query for targeting nodes in HTML
+    
+    /// XPath query for targeting nodes in HTML.
     public let xpath: String?
-    /// Whether to use raw HTML content if text cleaning fails
+    
+    /// Whether to use raw HTML content if text cleaning fails.
     public let fallbackToRaw: Bool?
+    
+    /// Whether or not to return the analyzed text.
     public let returnAnalyzedText: Bool?
+    
     /// ISO 639-1 code indicating the language to use in the analysis
     public let language: String?
 
     /**
-     Initialize a `Parameters` with required member variables.
-
-     - returns: An initialized `Parameters`.
-    */
-    public init(features: Features) {
-        self.features = features
-        self.text = nil
-        self.html = nil
-        self.url = nil
-        self.clean = nil
-        self.xpath = nil
-        self.fallbackToRaw = nil
-        self.returnAnalyzedText = nil
-        self.language = nil
-    }
-
-    /**
     Initialize a `Parameters` with all member variables.
 
-     - parameter text: 
-     - parameter html: 
-     - parameter url: 
-     - parameter features: 
-     - parameter clean: 
-     - parameter xpath: XPath query for targeting nodes in HTML
-     - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails
-     - parameter returnAnalyzedText: 
-     - parameter language: ISO 639-1 code indicating the language to use in the analysis
+     - parameter text: The plain text to analyze.
+     - parameter html: The HTML file to analyze.
+     - parameter url: The web page to analyze.
+     - parameter features: Specific features to analyze the document for.
+     - parameter clean: Remove website elements, such as links, ads, etc.
+     - parameter xpath: XPath query for targeting nodes in HTML.
+     - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
+     - parameter returnAnalyzedText: Whether or not to return the analyzed text.
+     - parameter language: ISO 639-1 code indicating the language to use in the analysis.
 
     - returns: An initialized `Parameters`.
     */
-    public init(text: String, html: String, url: String, features: Features, clean: Bool, xpath: String, fallbackToRaw: Bool, returnAnalyzedText: Bool, language: String) {
+    public init(features: Features, text: String? = nil, html: String? = nil, url: String? = nil, clean: Bool? = nil, xpath: String? = nil, fallbackToRaw: Bool? = nil, returnAnalyzedText: Bool? = nil, language: String? = nil) {
         self.text = text
         self.html = html
         self.url = url
@@ -74,20 +72,6 @@ public struct Parameters: JSONDecodable,JSONEncodable {
         self.fallbackToRaw = fallbackToRaw
         self.returnAnalyzedText = returnAnalyzedText
         self.language = language
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Parameters` model from JSON.
-    public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
-        html = try? json.getString(at: "html")
-        url = try? json.getString(at: "url")
-        features = try json.getJSON(at: "features") as! Features
-        clean = try? json.getBool(at: "clean")
-        xpath = try? json.getString(at: "xpath")
-        fallbackToRaw = try? json.getBool(at: "fallback_to_raw")
-        returnAnalyzedText = try? json.getBool(at: "return_analyzed_text")
-        language = try? json.getString(at: "language")
     }
 
     // MARK: JSONEncodable

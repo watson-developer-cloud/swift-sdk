@@ -17,34 +17,35 @@
 import Foundation
 import RestKit
 
-/** Analysis features and options */
-public struct Features: JSONDecodable,JSONEncodable {
+/** Analysis features and options. */
+public struct Features: JSONEncodable {
+    
+    /// Whether or not to return the concepts that are mentioned in the analyzed text.
     public let concepts: ConceptsOptions?
+    
+    /// Whether or not to extract the emotions implied in the analyzed text.
     public let emotion: EmotionOptions?
+    
+    /// Whether or not to extract detected entity objects from the analyzed text.
     public let entities: EntitiesOptions?
+    
+    /// Whether or not to return the keywords in the analyzed text.
     public let keywords: KeywordsOptions?
+    
+    /// Whether or not the author, publication date, and title of the analyzed text should be returned.
     public let metadata: MetadataOptions?
+    
+    /// Whether or not to return the relationships between detected entities in the analyzed text.
     public let relations: RelationsOptions?
+    
+    /// Whether or not to return the subject-action-object relations from the analyzed text.
     public let semanticRoles: SemanticRolesOptions?
+    
+    /// Whether or not to return the overall sentiment of the analyzed text.
     public let sentiment: SentimentOptions?
+    
+    /// Wether or not to return the high level category the content is categorized as (i.e. news, art).
     public let categories: CategoriesOptions?
-
-    /**
-     Initialize a `Features` with required member variables.
-
-     - returns: An initialized `Features`.
-    */
-    public init() {
-        self.concepts = nil
-        self.emotion = nil
-        self.entities = nil
-        self.keywords = nil
-        self.metadata = nil
-        self.relations = nil
-        self.semanticRoles = nil
-        self.sentiment = nil
-        self.categories = nil
-    }
 
     /**
     Initialize a `Features` with all member variables.
@@ -61,7 +62,7 @@ public struct Features: JSONDecodable,JSONEncodable {
 
     - returns: An initialized `Features`.
     */
-    public init(concepts: ConceptsOptions, emotion: EmotionOptions, entities: EntitiesOptions, keywords: KeywordsOptions, metadata: MetadataOptions, relations: RelationsOptions, semanticRoles: SemanticRolesOptions, sentiment: SentimentOptions, categories: CategoriesOptions) {
+    public init(concepts: ConceptsOptions? = nil, emotion: EmotionOptions? = nil, entities: EntitiesOptions? = nil, keywords: KeywordsOptions? = nil, metadata: MetadataOptions? = nil, relations: RelationsOptions? = nil, semanticRoles: SemanticRolesOptions? = nil, sentiment: SentimentOptions? = nil, categories: CategoriesOptions? = nil) {
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities
@@ -71,20 +72,6 @@ public struct Features: JSONDecodable,JSONEncodable {
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
         self.categories = categories
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Features` model from JSON.
-    public init(json: JSON) throws {
-        concepts = try? json.getJSON(at: "concepts") as! ConceptsOptions
-        emotion = try? json.getJSON(at: "emotion") as! EmotionOptions
-        entities = try? json.getJSON(at: "entities") as! EntitiesOptions
-        keywords = try? json.getJSON(at: "keywords") as! KeywordsOptions
-        metadata = try? json.getJSON(at: "metadata") as! MetadataOptions
-        relations = try? json.getJSON(at: "relations") as! RelationsOptions
-        semanticRoles = try? json.getJSON(at: "semantic_roles") as! SemanticRolesOptions
-        sentiment = try? json.getJSON(at: "sentiment") as! SentimentOptions
-        categories = try? json.getJSON(at: "categories") as! CategoriesOptions
     }
 
     // MARK: JSONEncodable

@@ -18,33 +18,20 @@ import Foundation
 import RestKit
 
 public struct RelationsOptions: JSONDecodable,JSONEncodable {
-    /// Enter a custom model ID to override the default &#x60;en-news&#x60; model&lt;br&gt;&lt;ul&gt;&lt;li&gt;es-news: Spanish news&lt;/li&gt;&lt;li&gt;ar-news: Arabic news&lt;/li&gt;&lt;/ul&gt;
+    /// Enter a custom model ID to override the default `en-news` model. Use `es-news` for Spanish
+    /// news, and `ar-news` for Arabic news.
     public let model: String?
-
-    /**
-     Initialize a `RelationsOptions` with required member variables.
-
-     - returns: An initialized `RelationsOptions`.
-    */
-    public init() {
-        self.model = nil
-    }
 
     /**
     Initialize a `RelationsOptions` with all member variables.
 
-     - parameter model: Enter a custom model ID to override the default &#x60;en-news&#x60; model&lt;br&gt;&lt;ul&gt;&lt;li&gt;es-news: Spanish news&lt;/li&gt;&lt;li&gt;ar-news: Arabic news&lt;/li&gt;&lt;/ul&gt;
-
-    - returns: An initialized `RelationsOptions`.
+     - parameter model: Enter a custom model ID to override the default `en-news` model. Use 
+        `es-news` for Spanish news, and `ar-news` for Arabic news.
+    
+     - returns: An initialized `RelationsOptions`.
     */
-    public init(model: String) {
+    public init(model: String? = nil) {
         self.model = model
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `RelationsOptions` model from JSON.
-    public init(json: JSON) throws {
-        model = try? json.getString(at: "model")
     }
 
     // MARK: JSONEncodable

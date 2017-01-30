@@ -17,42 +17,25 @@
 import Foundation
 import RestKit
 
-public struct ConceptsOptions: JSONDecodable,JSONEncodable {
-    /// Maximum number of concepts to return
+public struct ConceptsOptions: JSONEncodable {
+    
+    /// Maximum number of concepts to return.
     public let limit: Int?
-    /// Set this to false to hide Linked Data information in the response
+    
+    /// Set this to false to hide Linked Data information in the response.
     public let linkedData: Bool?
-
-    /**
-     Initialize a `ConceptsOptions` with required member variables.
-
-     - returns: An initialized `ConceptsOptions`.
-    */
-    public init() {
-        self.limit = nil
-        self.linkedData = nil
-    }
-
     /**
     Initialize a `ConceptsOptions` with all member variables.
 
-     - parameter limit: Maximum number of concepts to return
-     - parameter linkedData: Set this to false to hide Linked Data information in the response
+     - parameter limit: Maximum number of concepts to return.
+     - parameter linkedData: Set this to false to hide Linked Data information in the response.
 
     - returns: An initialized `ConceptsOptions`.
     */
-    public init(limit: Int, linkedData: Bool) {
+    public init(limit: Int? = nil, linkedData: Bool? = nil) {
         self.limit = limit
         self.linkedData = linkedData
     }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `ConceptsOptions` model from JSON.
-    public init(json: JSON) throws {
-        limit = try? json.getInt(at: "limit")
-        linkedData = try? json.getBool(at: "linked_data")
-    }
-
     // MARK: JSONEncodable
     /// Used internally to serialize a `ConceptsOptions` model to JSON.
     public func toJSONObject() -> Any {

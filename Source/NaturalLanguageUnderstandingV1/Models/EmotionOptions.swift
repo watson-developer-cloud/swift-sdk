@@ -17,40 +17,25 @@
 import Foundation
 import RestKit
 
-public struct EmotionOptions: JSONDecodable,JSONEncodable {
-    /// Set this to false to hide document-level emotion results
+public struct EmotionOptions: JSONEncodable {
+    
+    /// Set this to false to hide document-level emotion results.
     public let document: Bool?
-    /// Emotion results will be returned for each target string that is found in the document
+    
+    /// Emotion results will be returned for each target string that is found in the document.
     public let targets: [String]?
-
-    /**
-     Initialize a `EmotionOptions` with required member variables.
-
-     - returns: An initialized `EmotionOptions`.
-    */
-    public init() {
-        self.document = nil
-        self.targets = nil
-    }
-
+    
     /**
     Initialize a `EmotionOptions` with all member variables.
 
-     - parameter document: Set this to false to hide document-level emotion results
-     - parameter targets: Emotion results will be returned for each target string that is found in the document
+     - parameter document: Set this to false to hide document-level emotion results.
+     - parameter targets: Emotion results will be returned for each target string that is found in the document.
 
     - returns: An initialized `EmotionOptions`.
     */
-    public init(document: Bool, targets: [String]) {
+    public init(document: Bool? = nil, targets: [String]? = nil) {
         self.document = document
         self.targets = targets
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `EmotionOptions` model from JSON.
-    public init(json: JSON) throws {
-        document = try? json.getBool(at: "document")
-        targets = try? json.decodedArray(at: "targets", type: String.self)
     }
 
     // MARK: JSONEncodable

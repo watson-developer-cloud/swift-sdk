@@ -17,40 +17,24 @@
 import Foundation
 import RestKit
 
-public struct SentimentOptions: JSONDecodable,JSONEncodable {
-    /// Set this to false to hide document-level sentiment results
+public struct SentimentOptions: JSONEncodable {
+    /// Set this to false to hide document-level sentiment results.
     public let document: Bool?
-    /// Sentiment results will be returned for each target string that is found in the document
+    
+    /// Sentiment results will be returned for each target string that is found in the document.
     public let targets: [String]?
-
-    /**
-     Initialize a `SentimentOptions` with required member variables.
-
-     - returns: An initialized `SentimentOptions`.
-    */
-    public init() {
-        self.document = nil
-        self.targets = nil
-    }
 
     /**
     Initialize a `SentimentOptions` with all member variables.
 
-     - parameter document: Set this to false to hide document-level sentiment results
-     - parameter targets: Sentiment results will be returned for each target string that is found in the document
+     - parameter document: Set this to false to hide document-level sentiment results.
+     - parameter targets: Sentiment results will be returned for each target string that is found in the document.
 
     - returns: An initialized `SentimentOptions`.
     */
     public init(document: Bool, targets: [String]) {
         self.document = document
         self.targets = targets
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `SentimentOptions` model from JSON.
-    public init(json: JSON) throws {
-        document = try? json.getBool(at: "document")
-        targets = try? json.decodedArray(at: "targets", type: String.self)
     }
 
     // MARK: JSONEncodable

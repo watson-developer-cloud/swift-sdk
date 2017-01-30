@@ -17,52 +17,35 @@
 import Foundation
 import RestKit
 
-public struct EntitiesOptions: JSONDecodable,JSONEncodable {
-    /// Maximum number of entities to return
+public struct EntitiesOptions: JSONEncodable {
+    
+    /// Maximum number of entities to return.
     public let limit: Int?
-    /// Enter a custom model ID to override the standard entity detection model
+    
+    /// Enter a custom model ID to override the standard entity detection model.
     public let model: String?
-    /// Set this to false to hide entity disambiguation information in the response
+    
+    /// Set this to false to hide entity disambiguation information in the response.
     public let disambiguation: Bool?
-    /// Set this to true to return sentiment information for detected entities
+    
+    /// Set this to true to return sentiment information for detected entities.
     public let sentiment: Bool?
-
-    /**
-     Initialize a `EntitiesOptions` with required member variables.
-
-     - returns: An initialized `EntitiesOptions`.
-    */
-    public init() {
-        self.limit = nil
-        self.model = nil
-        self.disambiguation = nil
-        self.sentiment = nil
-    }
-
+    
     /**
     Initialize a `EntitiesOptions` with all member variables.
 
-     - parameter limit: Maximum number of entities to return
-     - parameter model: Enter a custom model ID to override the standard entity detection model
-     - parameter disambiguation: Set this to false to hide entity disambiguation information in the response
-     - parameter sentiment: Set this to true to return sentiment information for detected entities
+     - parameter limit: Maximum number of entities to return.
+     - parameter model: Enter a custom model ID to override the standard entity detection model.
+     - parameter disambiguation: Set this to false to hide entity disambiguation information in the response.
+     - parameter sentiment: Set this to true to return sentiment information for detected entities.
 
     - returns: An initialized `EntitiesOptions`.
     */
-    public init(limit: Int, model: String, disambiguation: Bool, sentiment: Bool) {
+    public init(limit: Int? = nil, model: String? = nil, disambiguation: Bool? = nil, sentiment: Bool? = nil) {
         self.limit = limit
         self.model = model
         self.disambiguation = disambiguation
         self.sentiment = sentiment
-    }
-
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `EntitiesOptions` model from JSON.
-    public init(json: JSON) throws {
-        limit = try? json.getInt(at: "limit")
-        model = try? json.getString(at: "model")
-        disambiguation = try? json.getBool(at: "disambiguation")
-        sentiment = try? json.getBool(at: "sentiment")
     }
 
     // MARK: JSONEncodable

@@ -384,7 +384,6 @@
 		CED4F5801E3A84BE007E9F6A /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */; };
 		CED4F5841E3A84BE007E9F6A /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */; };
 		CED4F5851E3A84BE007E9F6A /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */; };
-		CED4F58D1E3AB323007E9F6A /* AnalyzeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F58C1E3AB323007E9F6A /* AnalyzeRequest.swift */; };
 		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
 /* End PBXBuildFile section */
 
@@ -1038,7 +1037,6 @@
 		CED4F54F1E3A84BE007E9F6A /* SemanticRolesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
 		CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
 		CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
-		CED4F58C1E3AB323007E9F6A /* AnalyzeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeRequest.swift; sourceTree = "<group>"; };
 		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1466,7 +1464,6 @@
 		124E7B531E39091D00F09E38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CED4F58C1E3AB323007E9F6A /* AnalyzeRequest.swift */,
 				CED4F5201E392F77007E9F6A /* AnalysisResults.swift */,
 				CED4F5281E3A84BE007E9F6A /* Author.swift */,
 				CED4F52A1E3A84BE007E9F6A /* CategoriesResult.swift */,
@@ -3831,7 +3828,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED4F58D1E3AB323007E9F6A /* AnalyzeRequest.swift in Sources */,
 				CED4F5211E392F77007E9F6A /* AnalysisResults.swift in Sources */,
 				CED4F5631E3A84BE007E9F6A /* EmotionOptions.swift in Sources */,
 				CED4F5781E3A84BE007E9F6A /* RelationsOptions.swift in Sources */,

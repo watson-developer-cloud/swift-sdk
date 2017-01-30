@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /**
@@ -31,9 +29,10 @@ public class NaturalLanguageClassifier {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
     
-    private let username: String
-    private let password: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 NaturalLanguageClassifierV1")
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
     
     /**
@@ -43,8 +42,7 @@ public class NaturalLanguageClassifier {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.username = username
-        self.password = password
+        credentials = Credentials.basicAuthentication(username: username, password: password)
     }
     
     /**
@@ -53,12 +51,12 @@ public class NaturalLanguageClassifier {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = try json.int("code")
-            let description = try json.string("description")
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try json.getString(at: "description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: description
@@ -77,25 +75,24 @@ public class NaturalLanguageClassifier {
        The array is empty if no classifiers are available.
      */
     public func getClassifiers(
-        failure: (NSError -> Void)? = nil,
-        success: [ClassifierModel] -> Void) {
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping ([ClassifierModel]) -> Void) {
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: "GET",
             url: serviceURL + "/v1/classifiers",
-            acceptType: "application/json",
-            userAgent: userAgent
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseArray(dataToError: dataToError, path: ["classifiers"]) {
-                (response: Response<[ClassifierModel], NSError>) in
+        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
+            (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
-                case .Success(let classifiers): success(classifiers)
-                case .Failure(let error): failure?(error)
+                case .success(let classifiers): success(classifiers)
+                case .failure(let error): failure?(error)
                 }
         }
     }
@@ -113,64 +110,59 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func createClassifier(
-        trainingMetadata: NSURL,
-        trainingData: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: ClassifierDetails -> Void) {
+        fromMetadataFile trainingMetadata: URL,
+        andTrainingFile trainingData: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifierDetails) -> Void) {
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(trainingMetadata, withName: "training_metadata")
+        multipartFormData.append(trainingData, withName: "training_data")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceURL + "/v1/classifiers",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
-            userAgent: userAgent
+            contentType: multipartFormData.contentType,
+            messageBody: body
         )
         
         // execute REST request
-        Alamofire.upload(request,
-            multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(fileURL: trainingMetadata, name: "training_metadata")
-                multipartFormData.appendBodyPart(fileURL: trainingData, name: "training_data")
-            },
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.authenticate(user: self.username, password: self.password)
-                    upload.responseObject(dataToError: self.dataToError) {
-                        (response: Response<ClassifierDetails, NSError>) in
-                        switch response.result {
-                        case .Success(let classifierDetails): success(classifierDetails)
-                        case .Failure(let error): failure?(error)
-                        }
-                    }
-                case .Failure:
-                    let failureReason = "Files could not be encoded as form data."
-                    let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifierDetails>) in
+            switch response.result {
+            case .success(let classifierDetails): success(classifierDetails)
+            case .failure(let error): failure?(error)
             }
-        )
+        }
     }
-    
+
     /**
-     Uses the provided classifier to assign labels to the input text. The status of the classifier 
+     Uses the provided classifier to assign labels to the input text. The status of the classifier
      must be "Available" before you can classify calls.
      
-     - parameter classifierId: Classifier ID to use
      - parameter text: Phrase to classify
+     - parameter classifierId: Classifier ID to use
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func classify(
-        classifierId: String,
-        text: String,
-        failure: (NSError -> Void)? = nil,
-        success: Classification -> Void) {
+        _ text: String,
+        withClassifierID classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classification) -> Void) {
         
         // construct query parameters
-        guard let body = try? ["text": text].toJSON().serialize() else {
+        let json = JSON(dictionary: ["text": text])
+        guard let body = try? json.serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -180,22 +172,21 @@ public class NaturalLanguageClassifier {
         
         // construct REST request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceURL + "/v1/classifiers/\(classifierId)/classify",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
             messageBody: body
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Classification, NSError>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<Classification>) in
                 switch response.result {
-                case .Success(let classification): success(classification)
-                case .Failure(let error): failure?(error)
+                case .success(let classification): success(classification)
+                case .failure(let error): failure?(error)
                 }
             }
     }
@@ -208,29 +199,28 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func deleteClassifier(
-        classifierId: String,
-        failure: (NSError -> Void)? = nil,
-        success: (Void -> Void)? = nil) {
+        withID classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((Void) -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
-            method: .DELETE,
+            method: "DELETE",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
-            acceptType: "application/json",
-            userAgent: userAgent
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseData { response in
+        request.responseData { response in
                 switch response.result {
-                case .Success(let data):
-                    switch self.dataToError(data) {
-                    case .Some(let error): failure?(error)
-                    case .None: success?()
+                case .success(let data):
+                    switch self.dataToError(data: data) {
+                    case .some(let error): failure?(error)
+                    case .none: success?()
                     }
-                case .Failure(let error):
+                case .failure(let error):
                     failure?(error)
                 }
         }
@@ -244,26 +234,25 @@ public class NaturalLanguageClassifier {
      - parameter success: A function executed with the list of available standard and custom models.
      */
     public func getClassifier(
-        classifierId: String,
-        failure: (NSError -> Void)? = nil,
-        success: ClassifierDetails -> Void) {
+        withID classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifierDetails) -> Void) {
         
         // construct REST request
         let request = RestRequest(
-            method: .GET,
+            method: "GET",
             url: serviceURL + "/v1/classifiers/\(classifierId)",
-            acceptType: "application/json",
-            userAgent: userAgent
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json"
         )
         
         // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ClassifierDetails, NSError>) in
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
-                case .Success(let classifier): success(classifier)
-                case .Failure(let error): failure?(error)
+                case .success(let classifier): success(classifier)
+                case .failure(let error): failure?(error)
                 }
         }
     }

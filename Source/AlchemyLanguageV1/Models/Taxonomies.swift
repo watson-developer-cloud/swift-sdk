@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -44,14 +44,19 @@ public struct Taxonomies: JSONDecodable {
     
     /// Used internally to initialize a Taxonomies object
     public init(json: JSON) throws {
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Taxonomies.self)
+        }
+        
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = 1
         }
-        language = try? json.string("language")
-        url = try? json.string("url")
-        text = try? json.string("text")
-        taxonomy = try? json.arrayOf("taxonomy", type: Taxonomy.self)
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        text = try? json.getString(at: "text")
+        taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)
     }
 }

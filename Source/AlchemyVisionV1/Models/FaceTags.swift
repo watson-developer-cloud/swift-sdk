@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A set of faces identified in an image by the Alchemy Vision service. */
 public struct FaceTags: JSONDecodable {
@@ -34,10 +34,14 @@ public struct FaceTags: JSONDecodable {
 
     /// Used internally to initialize a `FaceTags` model from JSON.
     public init(json: JSON) throws {
-        status = try json.string("status")
-        url = try? json.string("url")
-        totalTransactions = try Int(json.string("totalTransactions"))!
-        imageFaces = try json.arrayOf("imageFaces", type: ImageFace.self)
+        status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: FaceTags.self)
+        }
+        
+        url = try? json.getString(at: "url")
+        totalTransactions = try Int(json.getString(at: "totalTransactions"))!
+        imageFaces = try json.decodedArray(at: "imageFaces", type: ImageFace.self)
     }
 }
 
@@ -67,13 +71,13 @@ public struct ImageFace: JSONDecodable {
 
     /// Used internally to initialize an `ImageFace` model from JSON.
     public init(json: JSON) throws {
-        positionX = try Int(json.string("positionX"))!
-        positionY = try Int(json.string("positionY"))!
-        width = try Int(json.string("width"))!
-        height = try Int(json.string("height"))!
-        gender = try json.decode("gender")
-        age = try json.decode("age")
-        identity = try? json.decode("identity")
+        positionX = try Int(json.getString(at: "positionX"))!
+        positionY = try Int(json.getString(at: "positionY"))!
+        width = try Int(json.getString(at: "width"))!
+        height = try Int(json.getString(at: "height"))!
+        gender = try json.decode(at: "gender")
+        age = try json.decode(at: "age")
+        identity = try? json.decode(at: "identity")
     }
 }
 
@@ -88,8 +92,8 @@ public struct Gender: JSONDecodable {
 
     /// Used internally to initialize a `Gender` model from JSON.
     public init(json: JSON) throws {
-        gender = try json.string("gender")
-        score = try Double(json.string("score"))!
+        gender = try json.getString(at: "gender")
+        score = try Double(json.getString(at: "score"))!
     }
 }
 
@@ -104,8 +108,8 @@ public struct Age: JSONDecodable {
 
     /// Used internally to initialize an `Age` model from JSON.
     public init(json: JSON) throws {
-        ageRange = try json.string("ageRange")
-        score = try Double(json.string("score"))!
+        ageRange = try json.getString(at: "ageRange")
+        score = try Double(json.getString(at: "score"))!
     }
 }
 
@@ -126,10 +130,10 @@ public struct Identity: JSONDecodable {
 
     /// Used internally to initialize an `Identity` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        score = try Double(json.string("score"))!
-        disambiguated = try json.decode("disambiguated")
-        knowledgeGraph = try? json.decode("knowledgeGraph")
+        name = try json.getString(at: "name")
+        score = try Double(json.getString(at: "score"))!
+        disambiguated = try json.decode(at: "disambiguated")
+        knowledgeGraph = try? json.decode(at: "knowledgeGraph")
     }
 }
 
@@ -166,14 +170,14 @@ public struct Disambiguated: JSONDecodable {
 
     /// Used internally to initialize a `Disambiguated` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        subType = try? json.arrayOf("subType", type: String.self)
-        website = try? json.string("website")
-        dbpedia = try? json.string("dbpedia")
-        yago = try? json.string("yago")
-        opencyc = try? json.string("opencyc")
-        umbel = try? json.string("umbel")
-        freebase = try? json.string("freebase")
-        crunchbase = try? json.string("crunchbase")
+        name = try json.getString(at: "name")
+        subType = try? json.decodedArray(at: "subType", type: String.self)
+        website = try? json.getString(at: "website")
+        dbpedia = try? json.getString(at: "dbpedia")
+        yago = try? json.getString(at: "yago")
+        opencyc = try? json.getString(at: "opencyc")
+        umbel = try? json.getString(at: "umbel")
+        freebase = try? json.getString(at: "freebase")
+        crunchbase = try? json.getString(at: "crunchbase")
     }
 }

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 
 /**
@@ -42,13 +42,18 @@ public struct PublicationResponse: JSONDecodable {
     
     /// Used internally to initialize a PublicationResponse object
     public init(json: JSON) throws {
-        if let totalTransactionsString = try? json.string("totalTransactions") {
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: PublicationResponse.self)
+        }
+        
+        if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
             totalTransactions = 1
         }
-        language = try? json.string("language")
-        url = try? json.string("url")
-        publicationDate = try? json.decode("publicationDate", type: PublicationDate.self)
+        language = try? json.getString(at: "language")
+        url = try? json.getString(at: "url")
+        publicationDate = try? json.decode(at: "publicationDate", type: PublicationDate.self)
     }
 }

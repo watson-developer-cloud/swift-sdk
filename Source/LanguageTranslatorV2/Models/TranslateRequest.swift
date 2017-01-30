@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** A request to translate input text from a source language to a target language. */
 internal struct TranslateRequest: JSONEncodable {
@@ -64,12 +64,12 @@ internal struct TranslateRequest: JSONEncodable {
     }
 
     /// Used internally to serialize a `TranslateRequest` model to JSON.
-    func toJSON() -> JSON {
-        var json = [String: JSON]()
-        if let modelID = modelID { json["model_id"] = .String(modelID) }
-        if let source = source { json["source"] = .String(source) }
-        if let target = target { json["target"] = .String(target) }
-        json["text"] = .Array(text.map { text in .String(text) })
-        return JSON.Dictionary(json)
+    func toJSONObject() -> Any {
+        var json = [String: Any]()
+        if let modelID = modelID { json["model_id"] = modelID }
+        if let source = source { json["source"] = source }
+        if let target = target { json["target"] = target }
+        json["text"] = text
+        return json
     }
 }

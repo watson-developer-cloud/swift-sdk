@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -31,7 +31,7 @@ public struct Feed: JSONDecodable {
     
     /// Used internally to initialize a Feed object
     public init(json: JSON) throws {
-        feed = try? json.string("feed")
+        feed = try? json.getString(at: "feed")
     }
 }
 

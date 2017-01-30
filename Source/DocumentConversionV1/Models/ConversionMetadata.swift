@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -34,8 +34,8 @@ public struct ConversionMetadata: JSONDecodable {
     
     /** used interally to initialize ConversationMetadata objects */
     public init(json: JSON) throws {
-        name = try json.string("name")
-        content = try json.string("content")
+        name = try json.getString(at: "name")
+        content = try json.getString(at: "content")
     }
     
 }

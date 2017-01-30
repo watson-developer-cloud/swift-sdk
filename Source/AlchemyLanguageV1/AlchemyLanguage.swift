@@ -15,12 +15,10 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /**
- The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide 
+ The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide
  high-level semantic information about your content.
  */
 
@@ -29,14 +27,16 @@ public class AlchemyLanguage {
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
     
-    private let apiKey: String
-    private let errorDomain = "com.watsonplatform.alchemyLanguage"
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 AlchemyLanguageV1")
- 
-    private let unreservedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        "1234567890-._~")
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
     
+    /// The API key credential to use when authenticating with the service.
+    private let apiKey: String
+    
+    private let errorDomain = "com.watsonplatform.alchemyLanguage"
+    
+    // The characters at the end of the CharacterSet break in Linux
+    private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-._~")
     /**
      Create an `AlchemyLanguage` object.
      
@@ -46,11 +46,11 @@ public class AlchemyLanguage {
         self.apiKey = apiKey
     }
     
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let status = try json.string("status")
-            let statusInfo = try json.string("statusInfo")
+            let status = try json.getString(at: "status")
+            let statusInfo = try json.getString(at: "statusInfo")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: status,
                 NSLocalizedDescriptionKey: statusInfo
@@ -61,21 +61,23 @@ public class AlchemyLanguage {
         }
     }
     
-    private func buildBody(document: NSURL, html: Bool) throws -> NSData {
-        guard let docAsString = try? String(contentsOfURL: document)
-            .stringByAddingPercentEncodingWithAllowedCharacters(unreservedCharacters) else {
+    private func buildBody(document:  URL, html: Bool) throws -> Data {
+        
+        guard let docAsString = try String(contentsOfFile: document.relativePath, encoding:.utf8)
+            .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let failureReason = "Profile could not be escaped."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
                 throw error
         }
+        
         let type: String
         if html == true {
             type = "html"
         } else {
             type = "text"
         }
-        guard let body = "\(type)=\(docAsString!)".dataUsingEncoding(NSUTF8StringEncoding) else {
+        guard let body = "\(type)=\(docAsString)".data(using: String.Encoding.utf8) else {
             let failureReason = "Profile could not be encoded."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
@@ -92,35 +94,34 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Author information
      */
     public func getAuthors(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentAuthors -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentAuthors) -> Void)
     {
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetAuthors",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
+            
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentAuthors, NSError>) in
-                switch response.result {
-                case .Success(let authors): success(authors)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
+            switch response.result {
+            case .success(let authors): success(authors)
+            case .failure(let error): failure?(error)
+            }
         }
-        
     }
     
     /**
@@ -132,41 +133,38 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Author information
      */
     public func getAuthors(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentAuthors -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentAuthors) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
-        
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetAuthors",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentAuthors, NSError>) in
-                switch response.result {
-                case .Success(let authors): success(authors)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
+            switch response.result {
+            case .success(let authors): success(authors)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -179,42 +177,41 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ConceptResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ConceptResponse) -> Void)
     {
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "linkedData", value: "1"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value: String(myGraph.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedConcepts",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ConceptResponse, NSError>) in
-                switch response.result {
-                case .Success(let concepts): success(concepts)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -228,49 +225,45 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forHtml html: NSURL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ConceptResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ConceptResponse) -> Void)
     {
+        
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
-        
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "linkedData", value: "1"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value: String(myGraph.rawValue)))
         }
-        
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedConcepts",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
-        
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ConceptResponse, NSError>) in
-                switch response.result {
-                case .Success(let concepts): success(concepts)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
-        
     }
     
     /**
@@ -282,43 +275,42 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Concept information
      */
     public func getRankedConcepts(
-        forText text: NSURL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: ConceptResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ConceptResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "linkedData", value: "1"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value: String(myGraph.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedConcepts",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<ConceptResponse, NSError>) in
-                switch response.result {
-                case .Success(let concepts): success(concepts)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+            switch response.result {
+            case .success(let concepts): success(concepts)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -337,7 +329,7 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -345,58 +337,57 @@ public class AlchemyLanguage {
         sentiment: QueryParam? = nil,
         quotations: QueryParam? = nil,
         structuredEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Entities -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Entities) -> Void)
     {
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value:String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value:String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguatedEntities",
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let quotes = quotations {
-            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
+            queryParams.append(URLQueryItem(name: "quotations", value: String(quotes.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let structEnts = structuredEntities {
-            queryParams.append(NSURLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "structuredEntities",
+                                            value: String(structEnts.rawValue)))
         }
         
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Entities, NSError>) in
-                switch response.result {
-                case .Success(let entities): success(entities)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -416,8 +407,8 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forHtml html: NSURL,
-        url: String?,
+        fromHTMLFile html: URL,
+        withURL url: String?,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -425,64 +416,63 @@ public class AlchemyLanguage {
         sentiment: QueryParam? = nil,
         quotations: QueryParam? = nil,
         structuredEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Entities -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Entities) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value:String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value:String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguatedEntities",
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let quotes = quotations {
-            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
+            queryParams.append(URLQueryItem(name: "quotations", value: String(quotes.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let structEnts = structuredEntities {
-            queryParams.append(NSURLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "structuredEntities",
+                                            value: String(structEnts.rawValue)))
         }
         
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedNamedEntities",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Entities, NSError>) in
-                switch response.result {
-                case .Success(let entities): success(entities)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -501,7 +491,7 @@ public class AlchemyLanguage {
      - parameter success:              a function executed with Entity information
      */
     public func getRankedNamedEntities(
-        forText text: NSURL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -509,61 +499,60 @@ public class AlchemyLanguage {
         sentiment: QueryParam? = nil,
         quotations: QueryParam? = nil,
         structuredEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Entities -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Entities) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myGraph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph",
-                value: String(myGraph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph",
+                                            value: String(myGraph.rawValue)))
         }
         if let disambiguate = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguatedEntities",
-                value: String(disambiguate.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguatedEntities",
+                                            value: String(disambiguate.rawValue)))
         }
         if let linked = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(linked.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(linked.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let quotes = quotations {
-            queryParams.append(NSURLQueryItem(name: "quotations", value: String(quotes.rawValue)))
+            queryParams.append(URLQueryItem(name: "quotations", value: String(quotes.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let structEnts = structuredEntities {
-            queryParams.append(NSURLQueryItem(name: "structuredEntities",
-                value: String(structEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "structuredEntities",
+                                            value: String(structEnts.rawValue)))
         }
         
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedNamedEntities",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Entities, NSError>) in
-                switch response.result {
-                case .Success(let entities): success(entities)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+            switch response.result {
+            case .success(let entities): success(entities)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -578,24 +567,24 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        failure: (NSError -> Void)? = nil,
-        success: Keywords -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Keywords) -> Void)
     {
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keywordExtractMode = strictMode {
             let mode: String
@@ -604,26 +593,25 @@ public class AlchemyLanguage {
             } else {
                 mode = "normal"
             }
-            queryParams.append(NSURLQueryItem(name: "keywordExtractMode", value: mode))
+            queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedKeywords",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Keywords, NSError>) in
-                switch response.result {
-                case .Success(let keywords): success(keywords)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -639,30 +627,30 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forHtml html: NSURL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        failure: (NSError -> Void)? = nil,
-        success: Keywords -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Keywords) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keywordExtractMode = strictMode {
             let mode: String
@@ -671,27 +659,26 @@ public class AlchemyLanguage {
             } else {
                 mode = "normal"
             }
-            queryParams.append(NSURLQueryItem(name: "keywordExtractMode", value: mode))
+            queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedKeywords",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Keywords, NSError>) in
-                switch response.result {
-                case .Success(let keywords): success(keywords)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -706,26 +693,26 @@ public class AlchemyLanguage {
      - parameter success:        a function executed with Keyword information
      */
     public func getRankedKeywords(
-        forText text: NSURL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         sentiment: QueryParam? = nil,
         strictMode: Bool? = false,
-        failure: (NSError -> Void)? = nil,
-        success: Keywords -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Keywords) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keywordExtractMode = strictMode {
             let mode: String
@@ -734,27 +721,26 @@ public class AlchemyLanguage {
             } else {
                 mode = "normal"
             }
-            queryParams.append(NSURLQueryItem(name: "keywordExtractMode", value: mode))
+            queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedKeywords",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Keywords, NSError>) in
-                switch response.result {
-                case .Success(let keywords): success(keywords)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+            switch response.result {
+            case .success(let keywords): success(keywords)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -766,32 +752,31 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Language information
      */
     public func getLanguage(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: Language -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Language) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetLanguage",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Language, NSError>) in
-                switch response.result {
-                case .Success(let language): success(language)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Language>) in
+            switch response.result {
+            case .success(let language): success(language)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -803,37 +788,36 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Language information
      */
     public func getLanguage(
-        forText text: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: Language -> Void)
+        fromTextFile text: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Language) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetLanguage",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Language, NSError>) in
-                switch response.result {
-                case .Success(let language): success(language)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Language>) in
+            switch response.result {
+            case .success(let language): success(language)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -845,32 +829,31 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Microformat information
      */
     public func getMicroformatData(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: Microformats -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Microformats) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetMicroformatData",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Microformats, NSError>) in
-                switch response.result {
-                case .Success(let microformats): success(microformats)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Microformats>) in
+            switch response.result {
+            case .success(let microformats): success(microformats)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -884,41 +867,40 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Microformat information
      */
     public func getMicroformatData(
-        forHtml html: NSURL,
-        url: String? = " ",
-        failure: (NSError -> Void)? = nil,
-        success: Microformats -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = " ",
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Microformats) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetMicroformatData",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Microformats, NSError>) in
-                switch response.result {
-                case .Success(let microformats): success(microformats)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Microformats>) in
+            switch response.result {
+            case .success(let microformats): success(microformats)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -930,32 +912,31 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Publication information
      */
     public func getPubDate(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: PublicationResponse -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (PublicationResponse) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetPubDate",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<PublicationResponse, NSError>) in
-                switch response.result {
-                case .Success(let pubResponse): success(pubResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<PublicationResponse>) in
+            switch response.result {
+            case .success(let pubResponse): success(pubResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -968,41 +949,40 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Publication information
      */
     public func getPubDate(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: PublicationResponse -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (PublicationResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetPubDate",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<PublicationResponse, NSError>) in
-                switch response.result {
-                case .Success(let pubResponse): success(pubResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<PublicationResponse>) in
+            switch response.result {
+            case .success(let pubResponse): success(pubResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1010,6 +990,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter url:                      the URL of the content
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1017,13 +998,13 @@ public class AlchemyLanguage {
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
      - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forURL url: String,
+        fromContentAtURL url: String,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1033,62 +1014,61 @@ public class AlchemyLanguage {
         entities: QueryParam? = nil,
         requireEntities: QueryParam? = nil,
         sentimentExcludeEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SAORelations -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SAORelations) -> Void)
     {
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let disEnts = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
         }
         if let link = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(link.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keyWords = keywords {
-            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
+            queryParams.append(URLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
         }
         if let ents = entities {
-            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
+            queryParams.append(URLQueryItem(name: "entities", value: String(ents.rawValue)))
         }
         if let reqEnts = requireEntities {
-            queryParams.append(NSURLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "requireEntities",
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
-            queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRelations",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SAORelations, NSError>) in
-                switch response.result {
-                case .Success(let relations): success(relations)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1097,6 +1077,7 @@ public class AlchemyLanguage {
      
      - parameter html:                     a HTML document
      - parameter url:                      a reference to where the HTML is located
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1104,14 +1085,14 @@ public class AlchemyLanguage {
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
      - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forHtml html: NSURL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1121,68 +1102,67 @@ public class AlchemyLanguage {
         entities: QueryParam? = nil,
         requireEntities: QueryParam? = nil,
         sentimentExcludeEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SAORelations -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SAORelations) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let disEnts = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
         }
         if let link = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(link.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keyWords = keywords {
-            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
+            queryParams.append(URLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
         }
         if let ents = entities {
-            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
+            queryParams.append(URLQueryItem(name: "entities", value: String(ents.rawValue)))
         }
         if let reqEnts = requireEntities {
-            queryParams.append(NSURLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "requireEntities",
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
-            queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRelations",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SAORelations, NSError>) in
-                switch response.result {
-                case .Success(let relations): success(relations)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1190,6 +1170,7 @@ public class AlchemyLanguage {
      Extracts the Subject-Action-Object relations of given content.
      
      - parameter text:                     a Text document
+     - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
      - parameter linkedData:               whether to include linked data
      - parameter coreference:              whether to include coreferences
@@ -1197,13 +1178,13 @@ public class AlchemyLanguage {
      - parameter keywords:                 whether to include keyword extraction
      - parameter entities:                 whether to include entity extraction
      - parameter requireEntities:          whether to incldue relations that contain at least one
-                                           named entity
+     named entity
      - parameter sentimentExcludeEntities: whether to include relation info in sentiment analysis
      - parameter failure:                  a function executed if the call fails
      - parameter success:                  a function executed with Relationship information
      */
     public func getRelations(
-        forText text: NSURL,
+        fromTextFile text: URL,
         knowledgeGraph: QueryParam? = nil,
         disambiguateEntities: QueryParam? = nil,
         linkedData: QueryParam? = nil,
@@ -1213,68 +1194,67 @@ public class AlchemyLanguage {
         entities: QueryParam? = nil,
         requireEntities: QueryParam? = nil,
         sentimentExcludeEntities: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SAORelations -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SAORelations) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
-            queryParams.append(NSURLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
+            queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
         }
         if let disEnts = disambiguateEntities {
-            queryParams.append(NSURLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "disambiguate", value: String(disEnts.rawValue)))
         }
         if let link = linkedData {
-            queryParams.append(NSURLQueryItem(name: "linkedData", value: String(link.rawValue)))
+            queryParams.append(URLQueryItem(name: "linkedData", value: String(link.rawValue)))
         }
         if let coref = coreference {
-            queryParams.append(NSURLQueryItem(name: "coreference", value: String(coref.rawValue)))
+            queryParams.append(URLQueryItem(name: "coreference", value: String(coref.rawValue)))
         }
         if let senti = sentiment {
-            queryParams.append(NSURLQueryItem(name: "sentiment", value: String(senti.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentiment", value: String(senti.rawValue)))
         }
         if let keyWords = keywords {
-            queryParams.append(NSURLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
+            queryParams.append(URLQueryItem(name: "keywords", value: String(keyWords.rawValue)))
         }
         if let ents = entities {
-            queryParams.append(NSURLQueryItem(name: "entities", value: String(ents.rawValue)))
+            queryParams.append(URLQueryItem(name: "entities", value: String(ents.rawValue)))
         }
         if let reqEnts = requireEntities {
-            queryParams.append(NSURLQueryItem(name: "requireEntities",
-                value: String(reqEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "requireEntities",
+                                            value: String(reqEnts.rawValue)))
         }
         if let sentiExEnts = sentimentExcludeEntities {
-            queryParams.append(NSURLQueryItem(name: "sentimentExcludeEntities",
-                value: String(sentiExEnts.rawValue)))
+            queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
+                                            value: String(sentiExEnts.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRelations",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SAORelations, NSError>) in
-                switch response.result {
-                case .Success(let relations): success(relations)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+            switch response.result {
+            case .success(let relations): success(relations)
+            case .failure(let error): failure?(error)
+            }
         }
     }
-
+    
     /**
      Calculates the Sentiment of given content.
      
@@ -1283,32 +1263,31 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTextSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1321,41 +1300,40 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTextSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1367,76 +1345,74 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Sentiment information
      */
     public func getTextSentiment(
-        forText text: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        fromTextFile text: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetTextSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
     /**
      Calculates the Sentiment of given content.
      
-     - parameter target:  a pharse to target analysis towards
      - parameter url:     the URL of the content
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forURL url: String,
-        target: String,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        fromContentAtURL url: String,
+        withTargets targets: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTargetedSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "target", value: target),
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "target", value: targets),
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1444,49 +1420,48 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter html:    a HTML document
-     - parameter target:  a pharse to target analysis towards
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forHtml html: NSURL,
-        target: String,
+        fromHTMLFile html: URL,
+        withTargets targets: String,
         url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "target", value: target))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "target", value: targets))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTargetedSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1494,44 +1469,43 @@ public class AlchemyLanguage {
      Calculates the Sentiment of given content.
      
      - parameter text:    a Text document
-     - parameter target:  a pharse to target analysis towards
+     - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
      */
     public func getTargetedSentiment(
-        forText text: NSURL,
-        target: String,
-        failure: (NSError -> Void)? = nil,
-        success: SentimentResponse -> Void)
+        fromTextFile text: URL,
+        withTargets targets: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SentimentResponse) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "target", value: target))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "target", value: targets))
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetTargetedSentiment",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<SentimentResponse, NSError>) in
-                switch response.result {
-                case .Success(let sentimentResponse): success(sentimentResponse)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+            switch response.result {
+            case .success(let sentimentResponse): success(sentimentResponse)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1543,31 +1517,30 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: Taxonomies -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Taxonomies) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRankedTaxonomy",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Taxonomies, NSError>) in
-                switch response.result {
-                case .Success(let taxonomies): success(taxonomies)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1580,41 +1553,40 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: Taxonomies -> Void)
+        fromHTMLFile html: URL,
+        atURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Taxonomies) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedTaxonomy",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Taxonomies, NSError>) in
-                switch response.result {
-                case .Success(let taxonomies): success(taxonomies)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1626,37 +1598,36 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Taxonomy information
      */
     public func getRankedTaxonomy(
-        forText text: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: Taxonomies -> Void)
+        fromTextFile text: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Taxonomies) -> Void)
     {
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetRankedTaxonomy",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Taxonomies, NSError>) in
-                switch response.result {
-                case .Success(let taxonomies): success(taxonomies)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+            switch response.result {
+            case .success(let taxonomies): success(taxonomies)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1668,31 +1639,30 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Raw Text information
      */
     public func getRawText(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentText -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentText) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetRawText",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentText, NSError>) in
-                switch response.result {
-                case .Success(let docText): success(docText)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1705,41 +1675,40 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Raw Text information
      */
     public func getRawText(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentText -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentText) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetRawText",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentText, NSError>) in
-                switch response.result {
-                case .Success(let docText): success(docText)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1753,42 +1722,41 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Text information
      */
     public func getText(
-        forURL url: String,
+        fromContentAtURL url: String,
         useMetadata: QueryParam? = nil,
         extractLinks: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentText -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentText) -> Void)
     {
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+            queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         if let extract = extractLinks {
-            queryParams.append(NSURLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
+            queryParams.append(URLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetText",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentText, NSError>) in
-                switch response.result {
-                case .Success(let docText): success(docText)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1803,49 +1771,48 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Text information
      */
     public func getText(
-        forHtml html: NSURL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         useMetadata: QueryParam? = nil,
         extractLinks: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentText -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentText) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+            queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         if let extract = extractLinks {
-            queryParams.append(NSURLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
+            queryParams.append(URLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetText",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentText, NSError>) in
-                switch response.result {
-                case .Success(let docText): success(docText)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+            switch response.result {
+            case .success(let docText): success(docText)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1857,38 +1824,37 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Title information
      */
     public func getTitle(
-        forURL url: String,
+        fromContentAtURL url: String,
         useMetadata: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentTitle -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentTitle) -> Void)
     {
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
-        queryParams.append(NSURLQueryItem(name: "url", value: url))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "url", value: url))
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+            queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetTitle",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams
+            queryItems: queryParams
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentTitle, NSError>) in
-                switch response.result {
-                case .Success(let docTitle): success(docTitle)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentTitle>) in
+            switch response.result {
+            case .success(let docTitle): success(docTitle)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1901,45 +1867,44 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Title information
      */
     public func getTitle(
-        forHtml html: NSURL,
-        url: String? = nil,
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
         useMetadata: QueryParam? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentTitle -> Void)
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentTitle) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         if let metadata = useMetadata {
-            queryParams.append(NSURLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
+            queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetTitle",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentTitle, NSError>) in
-                switch response.result {
-                case .Success(let docTitle): success(docTitle)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentTitle>) in
+            switch response.result {
+            case .success(let docTitle): success(docTitle)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1951,31 +1916,30 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Feed information
      */
     public func getFeedLinks(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: Feeds -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Feeds) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetFeedLinks",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Feeds, NSError>) in
-                switch response.result {
-                case .Success(let feeds): success(feeds)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Feeds>) in
+            switch response.result {
+            case .success(let feeds): success(feeds)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -1989,44 +1953,43 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feeds information
      */
     public func getFeedLinks(
-        forHtml html: NSURL,
-        url: String? = " ",
-        failure: (NSError -> Void)? = nil,
-        success: Feeds -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = " ",
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Feeds) -> Void)
     {
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetFeedLinks",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<Feeds, NSError>) in
-                switch response.result {
-                case .Success(let feeds): success(feeds)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Feeds>) in
+            switch response.result {
+            case .success(let feeds): success(feeds)
+            case .failure(let error): failure?(error)
+            }
         }
     }
- 
+    
     /**
      Extracts the Emotion of given content.
      
@@ -2035,31 +1998,30 @@ public class AlchemyLanguage {
      - parameter success:      a function executed with Feed information
      */
     public func getEmotion(
-        forURL url: String,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentEmotion -> Void)
+        fromContentAtURL url: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentEmotion) -> Void)
     {
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/url/URLGetEmotion",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: [
-                NSURLQueryItem(name: "url", value: url),
-                NSURLQueryItem(name: "apikey", value: apiKey),
-                NSURLQueryItem(name: "outputMode", value: "json")
+            queryItems: [
+                URLQueryItem(name: "url", value: url),
+                URLQueryItem(name: "apikey", value: apiKey),
+                URLQueryItem(name: "outputMode", value: "json")
             ]
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentEmotion, NSError>) in
-                switch response.result {
-                case .Success(let emotion): success(emotion)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -2072,42 +2034,41 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feed information
      */
     public func getEmotion(
-        forHtml html: NSURL,
-        url: String? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentEmotion -> Void)
+        fromHTMLFile html: URL,
+        withURL url: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentEmotion) -> Void)
     {
         
         // construct body
-        let body = try? buildBody(html, html: true)
+        let body = try? buildBody(document: html, html: true)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
-            queryParams.append(NSURLQueryItem(name: "url", value: myUrl))
+            queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/html/HTMLGetEmotion",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentEmotion, NSError>) in
-                switch response.result {
-                case .Success(let emotion): success(emotion)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
     
@@ -2119,39 +2080,37 @@ public class AlchemyLanguage {
      - parameter success: a function executed with Feed information
      */
     public func getEmotion(
-        forText text: NSURL,
-        failure: (NSError -> Void)? = nil,
-        success: DocumentEmotion -> Void)
+        fromTextFile text: URL,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DocumentEmotion) -> Void)
     {
         
         // construct body
-        let body = try? buildBody(text, html: false)
+        let body = try? buildBody(document: text, html: false)
         
-        // construct query paramerters
-        var queryParams = [NSURLQueryItem]()
+        // construct query parameters
+        var queryParams = [URLQueryItem]()
         
-        queryParams.append(NSURLQueryItem(name: "apikey", value: apiKey))
-        queryParams.append(NSURLQueryItem(name: "outputMode", value: "json"))
+        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
+        queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         
         // construct request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceUrl + "/text/TextGetEmotion",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
-            userAgent: userAgent,
-            queryParameters: queryParams,
+            queryItems: queryParams,
             messageBody: body
         )
         
         // execute request
-        Alamofire.request(request)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<DocumentEmotion, NSError>) in
-                switch response.result {
-                case .Success(let emotion): success(emotion)
-                case .Failure(let error): failure?(error)
-                }
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+            switch response.result {
+            case .success(let emotion): success(emotion)
+            case .failure(let error): failure?(error)
+            }
         }
     }
-
 }

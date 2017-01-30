@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierDetails: JSONDecodable {
@@ -43,15 +43,15 @@ public struct ClassifierDetails: JSONDecodable {
     
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
     public init(json: JSON) throws {
-        classifierId = try json.string("classifier_id")
-        name = try? json.string("name")
-        language = try json.string("language")
-        created = try json.string("created")
-        url = try json.string("url")
-        statusDescription = try json.string("status_description")
+        classifierId = try json.getString(at: "classifier_id")
+        name = try? json.getString(at: "name")
+        language = try json.getString(at: "language")
+        created = try json.getString(at: "created")
+        url = try json.getString(at: "url")
+        statusDescription = try json.getString(at: "status_description")
         
-        guard let classifierStatus = ClassifierStatus(rawValue: try json.string("status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: ClassifierStatus.self)
+        guard let classifierStatus = ClassifierStatus(rawValue: try json.getString(at: "status")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: ClassifierStatus.self)
         }
         status = classifierStatus
     }
@@ -61,17 +61,17 @@ public struct ClassifierDetails: JSONDecodable {
 public enum ClassifierStatus: String {
     
     /// Available
-    case Available = "Available"
+    case available = "Available"
     
     /// Failed
-    case Failed = "Failed"
+    case failed = "Failed"
     
     /// NonExistent
-    case NonExistent = "Non Existent"
+    case nonExistent = "Non Existent"
     
     /// Training
-    case Training = "Training"
+    case training = "Training"
     
     /// Unavailable
-    case Unavailable = "Unavailable"
+    case unavailable = "Unavailable"
 }

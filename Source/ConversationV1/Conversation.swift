@@ -15,8 +15,6 @@
  **/
 
 import Foundation
-import Alamofire
-import Freddy
 import RestKit
 
 /// A Workspace is a container for all the artifacts that define the behavior of your service.
@@ -32,10 +30,11 @@ public class Conversation {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/conversation/api"
     
-    private let username: String
-    private let password: String
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
+    private let credentials: Credentials
     private let version: String
-    private let userAgent = buildUserAgent("watson-apis-ios-sdk/0.8.0 ConversationV1")
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
     
     /**
@@ -47,8 +46,7 @@ public class Conversation {
             in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.username = username
-        self.password = password
+        self.credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
     
@@ -58,11 +56,11 @@ public class Conversation {
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: NSData) -> NSError? {
+    private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            let error = try json.string("error")
-            let code = (try? json.int("code")) ?? 400
+            let error = try json.getString(at: "error")
+            let code = (try? json.getInt(at: "code")) ?? 400
             let userInfo = [NSLocalizedFailureReasonErrorKey: error]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
@@ -71,91 +69,49 @@ public class Conversation {
     }
     
     /**
-     Start a new conversation or get a response to a user's input.
-     
-     - parameter workspaceID: The unique identifier of the workspace to use.
-     - parameter text: The user's input message.
-     - parameter context: The context, or state, associated with this request.
-        Use a `nil` context to start a new conversation.
+     Send a message to the Conversation service. To start a new conversation set the `request`
+     parameter to `nil`.
+ 
+     - parameter withWorkspace: The unique identifier of the workspace to use.
+     - parameter request: The message requst to send to the server.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the conversation service's response.
      */
     public func message(
-        workspaceID: WorkspaceID,
-        text: String? = nil,
-        context: Context? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: MessageResponse -> Void)
+        withWorkspace workspaceID: WorkspaceID,
+        request: MessageRequest? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MessageResponse) -> Void)
     {
-        let input = InputData(text: text)
-        message(workspaceID, input: input, context: context, failure: failure, success: success)
-    }
-    
-    /**
-     Start a new conversation or get a response to a user's input.
-     
-     - parameter workspaceID: The unique identifier of the workspace to use.
-     - parameter input: An input object that includes the input text.
-     - parameter context: The context, or state, associated with this request.
-     - parameter entities: An array of terms that shall be identified as entities
-     - parameter intents: An array of terms that shall be identified as intents.
-     - parameter output: An output object that includes the response to the user,
-        the nodes that were hit, and messages from the log.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the conversation service's response.
-     */
-    public func message(
-        workspaceID: WorkspaceID,
-        input: InputData,
-        context: Context? = nil,
-        entities: [Entity]? = nil,
-        intents: [Intent]? = nil,
-        output: OutputData? = nil,
-        failure: (NSError -> Void)? = nil,
-        success: MessageResponse -> Void)
-    {
-        // construct message request
-        let messageRequest = MessageRequest(
-            input: input,
-            context: context,
-            entities: entities,
-            intents: intents,
-            output: output
-        )
-        
         // construct body
-        guard let body = try? messageRequest.toJSON().serialize() else {
-            let failureReason = "MessageRequest could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
+        guard let body = try? request?.toJSON().serialize() else {
+            failure?(RestError.encodingError)
             return
         }
         
-        // construct query parameters
-        var queryParameters = [NSURLQueryItem]()
-        queryParameters.append(NSURLQueryItem(name: "version", value: version))
+        // construct query items
+        var queryItems = [URLQueryItem]()
+        queryItems.append(URLQueryItem(name: "version", value: version))
         
-        // construct REST request
+        // construct rest request
         let request = RestRequest(
-            method: .POST,
+            method: "POST",
             url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            userAgent: userAgent,
-            queryParameters: queryParameters,
+            queryItems: queryItems,
             messageBody: body
         )
         
-        // execute REST request
-        Alamofire.request(request)
-            .authenticate(user: username, password: password)
-            .responseObject(dataToError: dataToError) {
-                (response: Response<MessageResponse, NSError>) in
-                switch response.result {
-                case .Success(let response): success(response)
-                case .Failure(let error): failure?(error)
-                }
+        // execute rest request
+        request.responseObject(dataToError: dataToError) {
+            (response: RestResponse<MessageResponse>) in
+            switch response.result {
+            case .success(let response): success(response)
+            case .failure(let error): failure?(error)
             }
+        }
     }
 }

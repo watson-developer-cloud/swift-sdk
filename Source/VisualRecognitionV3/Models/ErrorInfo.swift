@@ -15,9 +15,9 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
-/** Information about an error that occurred. */
+/** Information about an error that occurred during classification. */
 public struct ErrorInfo: JSONDecodable {
     
     /// A codified error string (e.g. "input_error").
@@ -28,7 +28,7 @@ public struct ErrorInfo: JSONDecodable {
     
     /// Used internally to initialize an `ErrorInfo` model from JSON.
     public init(json: JSON) throws {
-        errorID = try json.string("error_id")
-        description = try json.string("description")
+        errorID = try json.getString(at: "error_id")
+        description = try json.getString(at: "description")
     }
 }

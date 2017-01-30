@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
 internal struct SpeechRecognitionEvent: JSONDecodable {
@@ -34,7 +34,7 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
 
     /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
     internal init(json: JSON) throws {
-        resultIndex = try json.int("result_index")
-        results = try json.arrayOf("results", type: SpeechRecognitionResult.self)
+        resultIndex = try json.getInt(at: "result_index")
+        results = try json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
     }
 }

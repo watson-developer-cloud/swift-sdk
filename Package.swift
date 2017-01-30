@@ -18,22 +18,30 @@ import PackageDescription
 
 let package = Package(
   name: "WatsonDeveloperCloud",
-    dependencies: [ 
-        .Package(url: "https://github.com/Alamofire/Alamofire.git", majorVersion: 3),
-        .Package(url: "https://github.com/bignerdranch/Freddy.git", majorVersion: 2),
-        .Package(url: "https://github.com/daltoniam/Starscream.git", majorVersion: 1)        
-    ],
     targets: [
         Target(name: "RestKit"),
-        Target(name: "AlchemyLanguageV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "AlchemyVisionV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "DialogV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "LanguageTranslatorV2", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "NaturalLanguageClassifierV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "PersonalityInsightsV2", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "SpeechToTextV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "TextToSpeechV1", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "ToneAnalyzerV3", dependencies: [.Target(name: "RestKit")]),
-        Target(name: "VisualRecognitionV3", dependencies: [.Target(name: "RestKit")])
+        Target(name: "AlchemyDataNewsV1",            dependencies: [.Target(name: "RestKit")]),
+        Target(name: "AlchemyLanguageV1",            dependencies: [.Target(name: "RestKit")]),
+        Target(name: "AlchemyVisionV1",              dependencies: [.Target(name: "RestKit")]),
+        Target(name: "ConversationV1",               dependencies: [.Target(name: "RestKit")]),
+        Target(name: "DialogV1",                     dependencies: [.Target(name: "RestKit")]),
+        Target(name: "DiscoveryV1",                  dependencies: [.Target(name: "RestKit")]),
+        Target(name: "DocumentConversionV1",         dependencies: [.Target(name: "RestKit")]),
+        Target(name: "LanguageTranslatorV2",         dependencies: [.Target(name: "RestKit")]),
+        Target(name: "NaturalLanguageClassifierV1",  dependencies: [.Target(name: "RestKit")]),
+        Target(name: "PersonalityInsightsV2",        dependencies: [.Target(name: "RestKit")]),
+        Target(name: "PersonalityInsightsV3",        dependencies: [.Target(name: "RestKit")]),
+        Target(name: "RelationshipExtractionV1Beta", dependencies: [.Target(name: "RestKit")]),
+        Target(name: "RetrieveAndRankV1",            dependencies: [.Target(name: "RestKit")]),
+        Target(name: "TextToSpeechV1",               dependencies: [.Target(name: "RestKit")]),
+        Target(name: "ToneAnalyzerV3",               dependencies: [.Target(name: "RestKit")]),
+        Target(name: "TradeoffAnalyticsV1",          dependencies: [.Target(name: "RestKit")]),
+        Target(name: "VisualRecognitionV3",          dependencies: [.Target(name: "RestKit")]),
+    ],
+    dependencies: [
+    ],
+    exclude: [
+        "Source/SpeechToTextV1",
+        "Tests/SpeechToTextV1Tests"
     ]
 )

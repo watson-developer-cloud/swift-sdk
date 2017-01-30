@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /// A resolution to a decision problem.
 public struct Resolution: JSONDecodable {
@@ -29,8 +29,8 @@ public struct Resolution: JSONDecodable {
     
     /// Used internally to initialize a `Resolution` model from JSON.
     public init(json: JSON) throws {
-        map = try? json.decode("map")
-        solutions = try json.arrayOf("solutions", type: Solution.self)
+        map = try? json.decode(at: "map")
+        solutions = try json.decodedArray(at: "solutions", type: Solution.self)
     }
 }
 
@@ -49,8 +49,8 @@ public struct Map: JSONDecodable {
     
     /// Used internally to initialize a `Map` model from JSON.
     public init(json: JSON) throws {
-        anchors = try json.arrayOf("anchors", type: Anchor.self)
-        nodes = try json.arrayOf("nodes", type: MapNode.self)
+        anchors = try json.decodedArray(at: "anchors", type: Anchor.self)
+        nodes = try json.decodedArray(at: "nodes", type: MapNode.self)
     }
 }
 
@@ -65,8 +65,8 @@ public struct Anchor: JSONDecodable {
     
     /// Used internally to initialize an `Anchor` model from JSON.
     public init(json: JSON) throws {
-        name = try json.string("name")
-        position = try json.decode("position")
+        name = try json.getString(at: "name")
+        position = try json.decode(at: "position")
     }
 }
 
@@ -81,8 +81,8 @@ public struct MapNode: JSONDecodable {
     
     /// Used internally to initialize a `MapNode` model from JSON.
     public init(json: JSON) throws {
-        coordinates = try json.decode("coordinates")
-        solutionRefs = try json.arrayOf("solution_refs", type: String.self)
+        coordinates = try json.decode(at: "coordinates")
+        solutionRefs = try json.decodedArray(at: "solution_refs", type: String.self)
     }
 }
 
@@ -97,8 +97,8 @@ public struct MapNodeCoordinates: JSONDecodable {
     
     /// Used internally to initialize a `MapNodeCoordinates` model from JSON.
     public init(json: JSON) throws {
-        x = try json.double("x")
-        y = try json.double("y")
+        x = try json.getDouble(at: "x")
+        y = try json.getDouble(at: "y")
     }
 }
 
@@ -124,13 +124,13 @@ public struct Solution: JSONDecodable {
     
     /// Used internally to initialize a `Solution` model from JSON.
     public init(json: JSON) throws {
-        shadowMe = try? json.arrayOf("shadow_me", type: String.self)
-        shadows = try? json.arrayOf("shadows", type: String.self)
-        solutionRef = try json.string("solution_ref")
-        statusCause = try? json.decode("status_cause")
+        shadowMe = try? json.decodedArray(at: "shadow_me", type: String.self)
+        shadows = try? json.decodedArray(at: "shadows", type: String.self)
+        solutionRef = try json.getString(at: "solution_ref")
+        statusCause = try? json.decode(at: "status_cause")
         
-        guard let status = SolutionStatus(rawValue: try json.decode("status")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Solution.self)
+        guard let status = SolutionStatus(rawValue: try json.decode(at: "status")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Solution.self)
         }
         self.status = status
     }
@@ -140,20 +140,20 @@ public struct Solution: JSONDecodable {
 public enum SolutionStatus: String {
     
     /// `Front` indicates that the option is included among the top options for the problem.
-    case Front = "FRONT"
+    case front = "FRONT"
     
     /// `Excluded` indicates that another option is strictly better than the option.
-    case Excluded = "EXCLUDED"
+    case excluded = "EXCLUDED"
     
     /// `Incomplete` indicates that either the option's specification does not include a value
     /// for one of the columns or its value for one of the columns lies outside the range specified
     /// for the column. Only a column whose `isObjective` property is set to `true` can generate
     /// this status.
-    case Incomplete = "INCOMPLETE"
+    case incomplete = "INCOMPLETE"
     
     /// `DoesNotMeetPreference` indicates that the option specifies a value for a `Categorical`
     /// column that is not included in the column's preference.
-    case DoesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
+    case doesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
 }
 
 /// Additional information about the cause of an option's status.
@@ -171,12 +171,12 @@ public struct StatusCause: JSONDecodable {
     
     /// Used internally to initialize a `StatusCause` model from JSON.
     public init(json: JSON) throws {
-        guard let errorCode = TradeoffAnalyticsError(rawValue: try json.string("error_code")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: StatusCause.self)
+        guard let errorCode = TradeoffAnalyticsError(rawValue: try json.getString(at: "error_code")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: StatusCause.self)
         }
         self.errorCode = errorCode
-        message = try json.string("message")
-        tokens = try json.arrayOf("tokens", type: String.self)
+        message = try json.getString(at: "message")
+        tokens = try json.decodedArray(at: "tokens", type: String.self)
     }
 }
 
@@ -185,13 +185,13 @@ public enum TradeoffAnalyticsError: String {
     
     /// Indicates that a column for which the `isObjective` property is `true` is absent from
     /// the option's specification.
-    case MissingObjectiveValue = "MISSING_OBJECTIVE_VALUE"
+    case missingObjectiveValue = "MISSING_OBJECTIVE_VALUE"
     
     /// Indicates that the option's specifications defines a value that is outside of the range
     /// specified for an objective.
-    case RangeMismatch = "RANGE_MISMATCH"
+    case rangeMismatch = "RANGE_MISMATCH"
     
     /// Indicates that a `Categorical` column value for the option is not in the preference
     /// for that column.
-    case DoesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
+    case doesNotMeetPreference = "DOES_NOT_MEET_PREFERENCE"
 }

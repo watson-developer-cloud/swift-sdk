@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A Mention object contains annotations about a word or phrase that refers to an actual thing, or 
  entity, such as a person or location. */
@@ -71,26 +71,26 @@ public struct Mention: JSONDecodable {
     
     /// Used internally to initialize a `Mention` model from JSON.
     public init(json: JSON) throws {
-        mentionID = try json.string("mid")
-        begin = try json.int("begin")
-        end = try json.int("end")
-        headBegin = try json.int("head-begin")
-        headEnd = try json.int("head-end")
-        entityID = try json.string("eid")
-        entityType = try json.string("etype")
-        entityRole = try json.string("role")
-        metonymy = try json.bool("metonymy")
-        score = try json.double("score")
-        corefScore = try json.double("corefScore")
-        text = try json.string("text")
+        mentionID = try json.getString(at: "mid")
+        begin = try json.getInt(at: "begin")
+        end = try json.getInt(at: "end")
+        headBegin = try json.getInt(at: "head-begin")
+        headEnd = try json.getInt(at: "head-end")
+        entityID = try json.getString(at: "eid")
+        entityType = try json.getString(at: "etype")
+        entityRole = try json.getString(at: "role")
+        metonymy = try json.getBool(at: "metonymy")
+        score = try json.getDouble(at: "score")
+        corefScore = try json.getDouble(at: "corefScore")
+        text = try json.getString(at: "text")
         
-        guard let mentionType = MentionType(rawValue: try json.string("mtype")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: MentionType.self)
+        guard let mentionType = MentionType(rawValue: try json.getString(at: "mtype")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: MentionType.self)
         }
         type = mentionType
         
-        guard let mClass = MentionClass(rawValue: try json.string("class")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: MentionClass.self)
+        guard let mClass = MentionClass(rawValue: try json.getString(at: "class")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: MentionClass.self)
         }
         mentionClass = mClass
     }
@@ -100,27 +100,27 @@ public struct Mention: JSONDecodable {
 public enum MentionType: String {
     
     /// A named entity mention, in the form of a proper name.
-    case Named = "NAM"
+    case named = "NAM"
     
     /// A nominal entity mention, not composed solely of a named entity or pronoun.
-    case Nominal = "NOM"
+    case nominal = "NOM"
     
     /// A pronoun mention.
-    case Pronoun = "PRO"
+    case pronoun = "PRO"
     
     /// A mention that does not match any of the other types.
-    case None = "NONE"
+    case none = "NONE"
 }
 
 /** The class of the mention. */
 public enum MentionClass: String {
     
     /// The mention is a reference to a specific thing.
-    case Specific = "SPC"
+    case specific = "SPC"
     
     /// The mention is a negated reference to a specific thing.
-    case Negated = "NEG"
+    case negated = "NEG"
     
     /// A generic mention that does not fit the other class types.
-    case Generic = "GEN"
+    case generic = "GEN"
 }

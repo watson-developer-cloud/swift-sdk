@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
     
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
@@ -86,19 +86,19 @@ public struct ContentItem: JSONEncodable {
     }
 
     /// Used internally to serialize a `ContentItem` model to JSON.
-    public func toJSON() -> JSON {
-        var map = [String: JSON]()
-        map["content"] = .String(content)
-        if let id = id { map["id"] = .String(id) }
-        if let userID = userID { map["userid"] = .String(userID) }
-        if let sourceID = sourceID { map["sourceid"] = .String(sourceID) }
-        if let created = created { map["created"] = .Int(created) }
-        if let updated = updated { map["updated"] = .Int(updated) }
-        if let contentType = contentType { map["contenttype"] = .String(contentType) }
-        if let language = language { map["language"] = .String(language) }
-        if let parentID = parentID { map["parentid"] = .String(parentID) }
-        if let reply = reply { map["reply"] = .Bool(reply) }
-        if let forward = forward { map["forward"] = .Bool(forward) }
-        return JSON.Dictionary(map)
+    public func toJSONObject() -> Any {
+        var json = [String: Any]()
+        json["content"] = content
+        if let id = id { json["id"] = id }
+        if let userID = userID { json["userid"] = userID }
+        if let sourceID = sourceID { json["sourceid"] = sourceID }
+        if let created = created { json["created"] = created }
+        if let updated = updated { json["updated"] = updated }
+        if let contentType = contentType { json["contenttype"] = contentType }
+        if let language = language { json["language"] = language }
+        if let parentID = parentID { json["parentid"] = parentID }
+        if let reply = reply { json["reply"] = reply }
+        if let forward = forward { json["forward"] = forward }
+        return json
     }
 }

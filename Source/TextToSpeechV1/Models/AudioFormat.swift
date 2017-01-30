@@ -20,14 +20,14 @@ import Foundation
 public enum AudioFormat: String {
     
     /// Opus audio format
-    case Opus = "audio/ogg;codecs=opus"
+    case opus = "audio/ogg;codecs=opus"
     
     /// WAV audio format
-    case WAV = "audio/wav"
+    case wav = "audio/wav"
     
     /// FLAC audio format
-    case FLAC = "audio/flac"
+    case flac = "audio/flac"
     
     /// L16 audio format
-    case L16 = "audio/l16"
+    case l16 = "audio/l16"
 }

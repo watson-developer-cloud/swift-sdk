@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** A model containing information about a specific ranker. */
 public struct Ranker: JSONDecodable {
@@ -34,9 +34,9 @@ public struct Ranker: JSONDecodable {
     
     /// Used internally to initialize a `Ranker` model from JSON.
     public init(json: JSON) throws {
-        rankerID = try json.string("ranker_id")
-        url = try json.string("url")
-        name = try json.string("name")
-        created = try json.string("created")
+        rankerID = try json.getString(at: "ranker_id")
+        url = try json.getString(at: "url")
+        name = try json.getString(at: "name")
+        created = try json.getString(at: "created")
     }
 }

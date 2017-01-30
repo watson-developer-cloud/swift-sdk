@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /**
  
@@ -35,7 +35,12 @@ public struct Microformats: JSONDecodable {
     
     /// Used internally to initialize a Microformats object
     public init(json: JSON) throws {
-        url = try? json.string("url")
-        microformats = try? json.arrayOf("microformats", type: Microformat.self)
+        let status = try json.getString(at: "status")
+        guard status == "OK" else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Microformats.self)
+        }
+        
+        url = try? json.getString(at: "url")
+        microformats = try? json.decodedArray(at: "microformats", type: Microformat.self)
     }
 }

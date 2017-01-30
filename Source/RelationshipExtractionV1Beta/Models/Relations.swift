@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import Freddy
+import RestKit
 
 /** Describes the relationships that exist between entities in the text. */
 public struct Relations: JSONDecodable {
@@ -28,8 +28,8 @@ public struct Relations: JSONDecodable {
     
     /// Used internally to initialize a `Relations` model from JSON.
     public init(json: JSON) throws {
-        relations = try json.arrayOf("relation", type: Relation.self)
-        version = try json.string("version")
+        relations = try json.decodedArray(at: "relation", type: Relation.self)
+        version = try json.getString(at: "version")
     }
 }
 
@@ -53,11 +53,11 @@ public struct Relation: JSONDecodable {
     
     /// Used internally to initialize a `Relation` model from JSON.
     public init(json: JSON) throws {
-        relationID = try json.string("rid")
-        type = try json.string("type")
-        subtype = try json.string("subtype")
-        relationEntityArgument = try json.arrayOf("rel_entity_arg", type: RelationEntityArgument.self)
-        relatedMentions = try json.arrayOf("relmentions", "relmention", type: RelatedMentions.self)
+        relationID = try json.getString(at: "rid")
+        type = try json.getString(at: "type")
+        subtype = try json.getString(at: "subtype")
+        relationEntityArgument = try json.decodedArray(at: "rel_entity_arg", type: RelationEntityArgument.self)
+        relatedMentions = try json.decodedArray(at: "relmentions", "relmention", type: RelatedMentions.self)
     }
 }
 
@@ -72,8 +72,8 @@ public struct RelationEntityArgument: JSONDecodable {
     
     /// Used internally to initialize a `RelationEntityArgument` model from JSON.
     public init(json: JSON) throws {
-        entityID = try json.string("eid")
-        argumentNumber = try json.int("argnum")
+        entityID = try json.getString(at: "eid")
+        argumentNumber = try json.getInt(at: "argnum")
     }
 }
 
@@ -101,22 +101,22 @@ public struct RelatedMentions: JSONDecodable {
     
     /// Used internally to initialize a `RelatedMentions` model from JSON.
     public init(json: JSON) throws {
-        relatedMentionID = try json.string("rmid")
-        score = try json.double("score")
-        relatedMentionArgument = try json.arrayOf("rel_mention_arg", type: RelatedMentionArgument.self)
+        relatedMentionID = try json.getString(at: "rmid")
+        score = try json.getDouble(at: "score")
+        relatedMentionArgument = try json.decodedArray(at: "rel_mention_arg", type: RelatedMentionArgument.self)
         
-        guard let rMClass = RelatedMentionClass(rawValue: try json.string("class")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: RelatedMentionClass.self)
+        guard let rMClass = RelatedMentionClass(rawValue: try json.getString(at: "class")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: RelatedMentionClass.self)
         }
         relatedMentionClass = rMClass
         
-        guard let tempModality = Modality(rawValue: try json.string("modality")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Modality.self)
+        guard let tempModality = Modality(rawValue: try json.getString(at: "modality")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Modality.self)
         }
         modality = tempModality
         
-        guard let tempTense = Tense(rawValue: try json.string("tense")) else {
-            throw JSON.Error.ValueNotConvertible(value: json, to: Tense.self)
+        guard let tempTense = Tense(rawValue: try json.getString(at: "tense")) else {
+            throw JSON.Error.valueNotConvertible(value: json, to: Tense.self)
         }
         tense = tempTense
     }
@@ -136,9 +136,9 @@ public struct RelatedMentionArgument: JSONDecodable {
     
     /// Used internally to initialize a `RelatedMentionArgument` model from JSON.
     public init(json: JSON) throws {
-        mentionID = try json.string("mid")
-        argumentNumber = try json.int("argnum")
-        text = try json.string("text")
+        mentionID = try json.getString(at: "mid")
+        argumentNumber = try json.getInt(at: "argnum")
+        text = try json.getString(at: "text")
     }
 }
 
@@ -146,13 +146,13 @@ public struct RelatedMentionArgument: JSONDecodable {
 public enum RelatedMentionClass: String {
     
     /// A relation between two specific arguments.
-    case Specific = "SPECIFIC"
+    case specific = "SPECIFIC"
     
     /// A negated relation.
-    case Negated = "NEG"
+    case negated = "NEG"
     
     /// A relation in which at least one of the two arguments is not specific.
-    case Other = "OTHER"
+    case other = "OTHER"
 }
 
 /** The nature of the related mention. */
@@ -160,24 +160,24 @@ public enum Modality: String {
     
     /// A relation that is asserted as fact and which can be interpreted as such in the world in 
     /// which the arguments exist.
-    case Asserted = "ASSERTED"
+    case asserted = "ASSERTED"
     
     /// A relation that can be interpreted to hold only in a counterfactual world.
-    case Other = "OTHER"
+    case other = "OTHER"
 }
 
 /** The time for which the relation mention holds. */
 public enum Tense: String {
     
     /// The relation holds only for some span prior to the publication time.
-    case Past = "PAST"
+    case past = "PAST"
     
     /// A relation holds for a limited span that overlaps with the publication time.
-    case Present = "PRESENT"
+    case present = "PRESENT"
     
     /// A relation holds for some span of time after the publication time.
-    case Future = "FUTURE"
+    case future = "FUTURE"
     
     /// The relation is static, or the span of time cannot be determined with certainty.
-    case Unspecified = "UNSPECIFIED"
+    case unspecified = "UNSPECIFIED"
 }

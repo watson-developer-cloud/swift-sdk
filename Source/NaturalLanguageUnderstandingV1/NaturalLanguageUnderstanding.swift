@@ -15,3 +15,61 @@
  **/
 
 import Foundation
+import RestKit
+
+/**
+ The IBM Watson Natural Language Understanding service enables developers to programmatically
+ explore various features of text content at scale. Provide text, raw HTML, or a public URL and
+ the service will give you results for the features requested. Features to request for includes
+ the ability to pull Concepts, Entities, Keywords, Categories, Sentiment, Emotion, Relations,
+ Semantic Roles and Metadata from the content given.
+ */
+public class NaturalLanguageUnderstanding {
+    
+    /// The base URL to use when contacting the service.
+    public var serviceURL = "https://gateway-s.watsonplatform.net/natural-language-understanding/api"
+    
+    /// The default HTTP headers for all requests to the service.
+    public var defaultHeaders = [String: String]()
+    
+    private let credentials: Credentials
+    private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
+    
+    /**
+     Create a `NaturalLanguageUnderstanding` object.
+     
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
+    public init(username: String, password: String) {
+        credentials = Credentials.basicAuthentication(username: username, password: password)
+    }
+    
+    /**
+     If the given data represents an error returned by the Natural Language Understanding service,
+     then return an NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try json.getString(at: "description")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: description
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
+    
+    /**
+     Analyze text, HTML, or a public webpage with one or more text analysis features.
+     
+     */
+//    public func analyzeContent
+}

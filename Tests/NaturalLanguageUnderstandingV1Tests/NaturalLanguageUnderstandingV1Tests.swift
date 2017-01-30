@@ -15,30 +15,62 @@
  **/
 
 import XCTest
-@testable import NaturalLanguageUnderstandingV1
+import Foundation
+import NaturalLanguageUnderstandingV1
 
 class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
+    private var NaturalLanguageUnderstanding: NaturalLanguageUnderstanding!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        instantiateNaturalLanguageUnderstanding()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    static var allTests : [(String, (NaturalLanguageUnderstandingV1Tests) -> () throws -> Void)] {
+        return [
+        ]
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    /** Instantiate Natural Language Understanding instance. */
+    func instantiateNaturalLanguageUnderstanding() {
+        let username = Credentials.NaturalLanguageUnderstandingUsername
+        let password = Credentials.NaturalLanguageUnderstandingPassword
+        NaturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    /** Fail false negatives. */
+    func failWithError(error: Error) {
+        XCTFail("Positive test failed with error: \(error)")
+    }
+    
+    /** Fail false positives. */
+    func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Wait for expectations. */
+    func waitForExpectations() {
+        waitForExpectations(timeout: timeout) { error in
+            XCTAssertNil(error, "Timeout")
         }
     }
+    
+    // MARK: - Helper Functions
+    
+    /// load text to analyze
+    
+    /// load html to analyze
+    
+    /// load public webpage to analyze.
+    
+    // MARK: - Positive tests
+    
+    /** Analyze given test text with . */
+    func testAnalyzeText() {
+        let description = "Analyze text with features."
+    }
+
+    // MARK: - Negative tests
     
 }

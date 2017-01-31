@@ -96,7 +96,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let features = Features()
         
         let param = Parameters(features: features, text: text)
-        naturalLanguageUnderstanding.analyzeContent(withParamaters: param, failure: failWithError) {
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
             results in
             
             print(results)

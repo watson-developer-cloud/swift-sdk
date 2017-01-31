@@ -78,7 +78,7 @@ public class NaturalLanguageUnderstanding {
      - parameter success: A function executed with the results from the text analysis.
      */
     public func analyzeContent(
-        withParamaters parameters: Parameters,
+        withParameters parameters: Parameters,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AnalysisResults) -> Void) {
         

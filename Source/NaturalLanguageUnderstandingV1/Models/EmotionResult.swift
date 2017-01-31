@@ -23,15 +23,27 @@ import RestKit
 public struct EmotionResult: JSONDecodable {
     
     /// The returned emotion results across the document.
-    public let document: EmotionScores?
+    public let document: DocumentEmotionResults?
     
     /// The returned emotion results per specified target.
     public let targets: [TargetedEmotionResults]?
 
     /// Used internally to initialize an `EmotionResult` model from JSON.
     public init(json: JSON) throws {
-        document = try? json.decode(at: "document", type: EmotionScores.self)
+        document = try? json.decode(at: "document", type: DocumentEmotionResults.self)
         targets = try? json.decodedArray(at: "targets", type: TargetedEmotionResults.self)
+    }
+}
+
+/** An object containing the emotion results of a document. */
+public struct DocumentEmotionResults: JSONDecodable {
+    
+    /// The returned emotion result.
+    public let emotion: EmotionScores?
+    
+    /// Used internally to initialize a 'DocumentEmotionResults' model from JSON.
+    public init(json: JSON) throws {
+        emotion = try? json.decode(at: "emotion", type: EmotionScores.self)
     }
 }
 

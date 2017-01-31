@@ -83,9 +83,103 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     // MARK: - Positive tests
     
-    /** Analyze given test text with . */
-    func testAnalyzeText() {
+    /** Analyze given test input text for concepts. */
+    func testAnalyzeTextForConcepts() {
         let description = "Analyze text with features."
+        let expectation = self.expectation(description: description)
+        
+        let text = "In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject to public reproach. An explosion of social media has given ordinary people more ways to express themselves, and has raised people's expectations for those of us in power. Indeed, our international order has been so successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful union; that China and India remain on a path of remarkable growth."
+        let concepts = ConceptsOptions(limit: 5)
+        let features = Features(concepts: concepts)
+        let parameters = Parameters(features: features, text: text)
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            guard let concepts = results.concepts else {
+                XCTAssertNil(results.concepts)
+                return
+            }
+            for concept in concepts {
+                XCTAssertNotNil(concept.name)
+                XCTAssertNotNil(concept.dbpediaResource)
+                XCTAssertNotNil(concept.relevance)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for emotions. */
+    func testAnalyzeTextForEmotions() {
+        let description = "Analyze text for emotions."
+        let expectation = self.expectation(description: description)
+        
+        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
+        let emotion = EmotionOptions(targets: ["democracy", "entrepreneurs", "media", "economies"])
+        let features = Features(emotion: emotion)
+        let parameters = Parameters(features: features, text: text)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            print(results)
+            guard let emotion = results.emotion else {
+                XCTAssertNil(results.emotion)
+                return
+            }
+
+            XCTAssertNotNil(emotion.document)
+            guard let targets = emotion.targets else {
+                XCTAssertNil(emotion.targets)
+                return
+            }
+            for target in targets {
+                XCTAssertNotNil(target.text)
+                guard let emotion = target.emotion else {
+                    XCTAssertNil(target.emotion)
+                    return
+                }
+                XCTAssertNotNil(emotion.anger)
+                XCTAssertNotNil(emotion.disgust)
+                XCTAssertNotNil(emotion.fear)
+                XCTAssertNotNil(emotion.joy)
+                XCTAssertNotNil(emotion.sadness)
+                break
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for emotions. */
+    func testAnalyzeTextForEmotionsWithoutTargets() {
+        let description = "Analyze text for emotions without targets."
+        let expectation = self.expectation(description: description)
+        
+        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
+        let features = Features(emotion: EmotionOptions())
+        let parameters = Parameters(features: features, text: text)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            print(results)
+            guard let emotionResults = results.emotion else {
+                XCTAssertNil(results.emotion)
+                return
+            }
+            XCTAssertNotNil(emotionResults.document)
+            guard let documentEmotion = emotionResults.document?.emotion else {
+                XCTAssertNil(emotionResults.document?.emotion)
+                return
+            }
+            XCTAssertNotNil(documentEmotion.anger)
+            XCTAssertNotNil(documentEmotion.disgust)
+            XCTAssertNotNil(documentEmotion.fear)
+            XCTAssertNotNil(documentEmotion.joy)
+            XCTAssertNotNil(documentEmotion.sadness)
+            
+            XCTAssertNil(emotionResults.targets)
+
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
     
     func testAnalyzeTextWithSemanticRoles() {

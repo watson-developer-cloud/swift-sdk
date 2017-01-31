@@ -32,8 +32,32 @@ public struct AnalysisResults: JSONDecodable {
     /// The number of features used in the API call.
     public let usage: Usage?
     
-    /// The results returned by the features used to analyze the text.
-    public let features: FeaturesResults?
+    /// The general concepts referenced or alluded to in the specified content.
+    public let concepts: [ConceptsResult]?
+    
+    /// The important entities in the specified content.
+    public let entities: [EntitiesResult]?
+    
+    /// The important keywords in content organized by relevance.
+    public let keywords: [KeywordsResult]?
+    
+    /// The hierarchical 5-level taxonomy the content is categorized into.
+    public let categories: [CategoriesResult]?
+    
+    /// The anger, disgust, fear, joy, or sadness conveyed by the content.
+    public let emotion: [EmotionResult]?
+    
+    /// The metadata holds author information, publication date and the title of the text/HTML content.
+    public let metadata: MetadataResult?
+    
+    /// The relationships between entities in the content.
+    public let relations: [RelationsResult]?
+    
+    /// The subjects of actions and the objects the actions act upon.
+    public let semanticRoles: [SemanticRolesResult]?
+    
+    /// The sentiment of the content.
+    public let sentiment: [SentimentResult]?
     
     /// Used internally to initialize a `AnalysisResults` model from JSON.
     public init(json: JSON) throws {
@@ -41,7 +65,15 @@ public struct AnalysisResults: JSONDecodable {
         analyzedText = try? json.getString(at: "analyzed_text")
         retrievedUrl = try? json.getString(at: "retrieved_url")
         usage = try? json.decode(at: "usage", type: Usage.self)
-        features = try? json.decode(at: "features", type: FeaturesResults.self)
+        concepts = try? json.decodedArray(at: "concepts", type: ConceptsResult.self)
+        entities = try? json.decodedArray(at: "entities", type: EntitiesResult.self)
+        keywords = try? json.decodedArray(at: "keywords", type: KeywordsResult.self)
+        categories = try? json.decodedArray(at: "categories", type: CategoriesResult.self)
+        emotion = try? json.decodedArray(at: "emotion", type: EmotionResult.self)
+        metadata = try? json.decode(at: "metadata", type: MetadataResult.self)
+        relations = try? json.decodedArray(at: "relations", type: RelationsResult.self)
+        semanticRoles = try? json.decodedArray(at: "semantic_roles", type: SemanticRolesResult.self)
+        sentiment = try? json.decodedArray(at: "sentiment", type: SentimentResult.self)
     }
 }
 

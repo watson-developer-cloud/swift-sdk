@@ -70,8 +70,8 @@ public struct Parameters: JSONEncodable {
         clean: Bool? = nil,
         xpath: String? = nil,
         fallbackToRaw: Bool? = nil,
-        returnAnalyzedText: Bool? = nil, language
-        : String? = nil)
+        returnAnalyzedText: Bool? = nil,
+        language: String? = nil)
     {
         self.text = text
         self.html = html

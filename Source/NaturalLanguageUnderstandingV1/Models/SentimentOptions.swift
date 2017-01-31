@@ -32,7 +32,7 @@ public struct SentimentOptions: JSONEncodable {
 
     - returns: An initialized `SentimentOptions`.
     */
-    public init(document: Bool, targets: [String]) {
+    public init(document: Bool? = nil, targets: [String]? = nil) {
         self.document = document
         self.targets = targets
     }

@@ -69,7 +69,6 @@ public struct AnalysisResults: JSONDecodable {
         entities = try? json.decodedArray(at: "entities", type: EntitiesResult.self)
         keywords = try? json.decodedArray(at: "keywords", type: KeywordsResult.self)
         categories = try? json.decodedArray(at: "categories", type: CategoriesResult.self)
-//        emotion = try? json.decodedArray(at: "emotion", type: EmotionResult.self)
         emotion = try? json.decode(at: "emotion", type: EmotionResult.self)
         metadata = try? json.decode(at: "metadata", type: MetadataResult.self)
         relations = try? json.decodedArray(at: "relations", type: RelationsResult.self)

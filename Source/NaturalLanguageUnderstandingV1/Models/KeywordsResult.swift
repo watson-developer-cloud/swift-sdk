@@ -24,10 +24,26 @@ public struct KeywordsResult: JSONDecodable {
     
     /// The text of the keyword.
     public let text: String?
+    
+    /// The sentiment value of the keyword.
+    public let sentiment: KeywordSentiment?
 
     /// Used internally to initialize a `KeywordsResult` model from JSON.
     public init(json: JSON) throws {
         relevance = try? json.getDouble(at: "relevance")
         text = try? json.getString(at: "text")
+        sentiment = try? json.decode(at: "sentiment", type: KeywordSentiment.self)
+    }
+    
+    /** The sentiment of the entity. */
+    public struct KeywordSentiment: JSONDecodable {
+        
+        /// The sentiment value of the found entity within the text from 0 to 1.
+        public let score: Double?
+        
+        /// Used internally to initialize an `EntitySentiment` model from JSON.
+        public init(json: JSON) throws {
+            score = try? json.getDouble(at: "score")
+        }
     }
 }

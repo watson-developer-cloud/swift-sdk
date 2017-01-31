@@ -162,6 +162,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
+            
             XCTAssertEqual(results.analyzedText, text)
             guard let emotionResults = results.emotion else {
                 XCTAssertNil(results.emotion)
@@ -187,14 +188,13 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     /** Analyze input text for entities. */
     func testAnalyzeTextForEntities() {
-        let description = "Analyze text for entities."
+        let description = "Analyze text for entities and its corresponding sentiment values."
         let expectation = self.expectation(description: description)
 
         let features = Features(entities: EntitiesOptions(limit: 2, sentiment: true))
         let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
-            print (results)
             
             XCTAssertEqual(results.analyzedText, self.text)
             guard let entityResults = results.entities else {
@@ -207,6 +207,32 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
                 XCTAssertNotNil(result.relevance)
                 XCTAssertNotNil(result.text)
                 XCTAssertNotNil(result.type)
+                XCTAssertNotNil(result.sentiment)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for keywords. */
+    func testAnalyzeTextForKeywords() {
+        let description = "Analyze text for keywords and its corresponding sentiment values."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(keywords: KeywordsOptions(sentiment: true))
+        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            guard let keywords = results.keywords else {
+                XCTAssertNil(results.keywords)
+                return
+            }
+            for keyword in keywords {
+                XCTAssertNotNil(keyword.relevance)
+                XCTAssertNotNil(keyword.text)
+                XCTAssertNotNil(keyword.sentiment)
             }
             expectation.fulfill()
         }

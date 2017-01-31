@@ -31,6 +31,9 @@ public struct EntitiesResult: JSONDecodable {
     
     /// The name of the entity
     public let text: String?
+    
+    /// The sentiment of the entity.
+    public let sentiment: EntitySentiment?
 
     /// Used internally to initialize an `EntitiesResult` model from JSON.
     public init(json: JSON) throws {
@@ -38,5 +41,18 @@ public struct EntitiesResult: JSONDecodable {
         relevance = try? json.getDouble(at: "relevance")
         count = try? json.getInt(at: "count")
         text = try? json.getString(at: "text")
+        sentiment = try? json.decode(at: "sentiment", type: EntitySentiment.self)
+    }
+    
+    /** The sentiment of the entity. */
+    public struct EntitySentiment: JSONDecodable {
+        
+        /// The sentiment value of the found entity within the text from 0 to 1.
+        public let score: Double?
+        
+        /// Used internally to initialize an `EntitySentiment` model from JSON.
+        public init(json: JSON) throws {
+            score = try? json.getDouble(at: "score")
+        }
     }
 }

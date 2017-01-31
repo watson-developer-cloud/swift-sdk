@@ -22,6 +22,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
     private let timeout: TimeInterval = 5.0
+    private let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
     
     override func setUp() {
         super.setUp()
@@ -87,19 +88,78 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let description = "Analyze text with features."
     }
     
-    func testAnalyzeTextWithCategories() {
-        let description = "analyze text with categories"
+    func testAnalyzeTextWithSemanticRoles() {
+        let description = "Analyze text and verify semantic roles returned."
         let expectation = self.expectation(description: description)
         
-        let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+        let features = Features(semanticRoles: SemanticRolesOptions(limit: 7, keywords: true, entities: true, requireEntities: false))
         
-        let features = Features()
-        
-        let param = Parameters(features: features, text: text)
+        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
             results in
             
-            print(results)
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.semanticRoles)
+            for semanticRole in results.semanticRoles! {
+                XCTAssertEqual(semanticRole.sentence, self.text)
+                if let subject = semanticRole.subject {
+                    XCTAssertNotNil(subject.text)
+                }
+                if let action = semanticRole.action {
+                    XCTAssertNotNil(action.text)
+                }
+                if let object = semanticRole.object {
+                    XCTAssertNotNil(object.text)
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testAnalyzeTextWithSentiment() {
+        let description = "Analyze text and verify sentiment returned."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(sentiment: SentimentOptions(document: true, targets: ["Elliot Turner", "traction"]))
+        
+        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.sentiment)
+            XCTAssertNotNil(results.sentiment?.document)
+            XCTAssertNotNil(results.sentiment?.document?.score)
+            XCTAssertNotNil(results.sentiment?.targets)
+            for target in (results.sentiment?.targets)! {
+                XCTAssertNotNil(target.text)
+                XCTAssertNotNil(target.score)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testAnalyzeTextWithCategories() {
+        let description = "Analyze text and verify categories returned."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(categories: CategoriesOptions())
+        
+        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.categories)
+            for category in results.categories! {
+                XCTAssertNotNil(category.label)
+                XCTAssertNotNil(category.score)
+            }
             expectation.fulfill()
         }
         waitForExpectations()

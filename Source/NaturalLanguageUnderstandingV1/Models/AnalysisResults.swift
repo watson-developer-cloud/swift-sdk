@@ -57,7 +57,7 @@ public struct AnalysisResults: JSONDecodable {
     public let semanticRoles: [SemanticRolesResult]?
     
     /// The sentiment of the content.
-    public let sentiment: [SentimentResult]?
+    public let sentiment: SentimentResult?
     
     /// Used internally to initialize a `AnalysisResults` model from JSON.
     public init(json: JSON) throws {
@@ -73,7 +73,7 @@ public struct AnalysisResults: JSONDecodable {
         metadata = try? json.decode(at: "metadata", type: MetadataResult.self)
         relations = try? json.decodedArray(at: "relations", type: RelationsResult.self)
         semanticRoles = try? json.decodedArray(at: "semantic_roles", type: SemanticRolesResult.self)
-        sentiment = try? json.decodedArray(at: "sentiment", type: SentimentResult.self)
+        sentiment = try? json.decode(at: "sentiment", type: SentimentResult.self)
     }
 }
 

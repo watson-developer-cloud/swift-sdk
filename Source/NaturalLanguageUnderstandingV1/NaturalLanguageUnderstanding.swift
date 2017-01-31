@@ -33,6 +33,7 @@ public class NaturalLanguageUnderstanding {
     public var defaultHeaders = [String: String]()
     
     private let credentials: Credentials
+    private let version: String
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
     
     /**
@@ -41,8 +42,9 @@ public class NaturalLanguageUnderstanding {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
-    public init(username: String, password: String) {
+    public init(username: String, password: String, version: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
+        self.version = version
     }
     
     /**
@@ -56,7 +58,7 @@ public class NaturalLanguageUnderstanding {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
             let code = try json.getInt(at: "code")
-            let description = try json.getString(at: "description")
+            let description = try? json.getString(at: "description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
                 NSLocalizedRecoverySuggestionErrorKey: description
@@ -86,6 +88,10 @@ public class NaturalLanguageUnderstanding {
             return
         }
         
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -94,6 +100,7 @@ public class NaturalLanguageUnderstanding {
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
+            queryItems: queryParameters,
             messageBody: body
         )
         

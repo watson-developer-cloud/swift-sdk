@@ -37,7 +37,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     func instantiateNaturalLanguageUnderstanding() {
         let username = Credentials.NaturalLanguageUnderstandingUsername
         let password = Credentials.NaturalLanguageUnderstandingPassword
-        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password)
+        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: "2016-05-17")
     }
     
     /** Fail false negatives. */
@@ -59,6 +59,21 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     // MARK: - Helper Functions
     
+    /** Load a file. */
+    func loadFile(name: String, withExtension: String) -> URL? {
+        
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let url:URL = bundle.url(forResource: name, withExtension: withExtension) else {
+                return nil
+            }
+        #else
+            let url = URL(fileURLWithPath: "Tests/NaturalLanguageUnderstandingV1Tests/"+name+"."+withExtension)
+        #endif
+        
+        return url
+    }
+    
     /// load text to analyze
     
     /// load html to analyze
@@ -70,6 +85,24 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     /** Analyze given test text with . */
     func testAnalyzeText() {
         let description = "Analyze text with features."
+    }
+    
+    func testAnalyzeTextWithCategories() {
+        let description = "analyze text with categories"
+        let expectation = self.expectation(description: description)
+        
+        let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+        
+        let features = Features()
+        
+        let param = Parameters(features: features, text: text)
+        naturalLanguageUnderstanding.analyzeContent(withParamaters: param, failure: failWithError) {
+            results in
+            
+            print(results)
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
 
     // MARK: - Negative tests

@@ -91,10 +91,12 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let text = "In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject to public reproach. An explosion of social media has given ordinary people more ways to express themselves, and has raised people's expectations for those of us in power. Indeed, our international order has been so successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful union; that China and India remain on a path of remarkable growth."
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, text: text)
+        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
+            
+            XCTAssertEqual(results.analyzedText, text)
             guard let concepts = results.concepts else {
                 XCTAssertNil(results.concepts)
                 return
@@ -117,10 +119,11 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
         let emotion = EmotionOptions(targets: ["democracy", "entrepreneurs", "media", "economies"])
         let features = Features(emotion: emotion)
-        let parameters = Parameters(features: features, text: text)
+        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
-            print(results)
+            
+            XCTAssertEqual(results.analyzedText, text)
             guard let emotion = results.emotion else {
                 XCTAssertNil(results.emotion)
                 return
@@ -156,10 +159,10 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         
         let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
         let features = Features(emotion: EmotionOptions())
-        let parameters = Parameters(features: features, text: text)
+        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
-            print(results)
+            XCTAssertEqual(results.analyzedText, text)
             guard let emotionResults = results.emotion else {
                 XCTAssertNil(results.emotion)
                 return
@@ -177,6 +180,34 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
             
             XCTAssertNil(emotionResults.targets)
 
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for entities. */
+    func testAnalyzeTextForEntities() {
+        let description = "Analyze text for entities."
+        let expectation = self.expectation(description: description)
+
+        let features = Features(entities: EntitiesOptions(limit: 2, sentiment: true))
+        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            print (results)
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            guard let entityResults = results.entities else {
+                XCTAssertNil(results.entities)
+                return
+            }
+            XCTAssertEqual(2, entityResults.count)
+            for result in entityResults {
+                XCTAssertNotNil(result.count)
+                XCTAssertNotNil(result.relevance)
+                XCTAssertNotNil(result.text)
+                XCTAssertNotNil(result.type)
+            }
             expectation.fulfill()
         }
         waitForExpectations()

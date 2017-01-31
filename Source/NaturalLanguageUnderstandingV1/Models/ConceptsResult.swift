@@ -31,7 +31,7 @@ public struct ConceptsResult: JSONDecodable {
 
     /// Used internally to initialize a `ConceptsResult` model from JSON.
     public init(json: JSON) throws {
-        name = try? json.getString(at: "name")
+        name = try? json.getString(at: "text")
         relevance = try? json.getDouble(at: "relevance")
         dbpediaResource = try? json.getString(at: "dbpedia_resource")
     }

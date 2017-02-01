@@ -24,11 +24,11 @@ internal class TextToSpeechDecoder {
     private var audioData: Data
     
 //    private var buffer: oggpack_buffer
-//    private var page: ogg_page
-    private var stream: ogg_stream_state    // state of ogg stream?
+    private var page: ogg_page
+    private var streamState: ogg_stream_state    // state of ogg stream?
     private var packet: ogg_packet          // packet within a stream passing information
-    private var sync: ogg_sync_state        // state of ogg sync
-
+    private var syncState: ogg_sync_state        // state of ogg sync
+    private var beginStream: true
     
     convenience init(data: Data) {
         self.audioData = data
@@ -39,14 +39,45 @@ internal class TextToSpeechDecoder {
         // set properties
         
         // initialize ogg sync state 
-        ogg_sync_init(&sync)
+        ogg_sync_init(&syncState)
         var processedByteCount = 0 // guarantee data is pulled from stream.
         var audioDataSize = audioData.count
         
         // write into buffer of size __
+        var bufferSize: Int
+        var bufferData: UnsafeMutablePointer<Int8>
+        
+        if audioData.count < 255 {
+            bufferSize = 255
+        } else {
+            bufferSize = audioData.count - processedByteCount
+        }
+//        let range = Range(uncheckedBounds: (lower: processedByteCount, upper: bufferSize))
+        bufferData = ogg_sync_buffer(&syncState, bufferSize)
+        
+        for index in processedByteCount..<bufferSize+processedByteCount {
+            bufferData[index] = Int8(audioData[index])
+        }
+        processedByteCount += bufferSize
+        /// Advance pointer to end of processed data
+        ogg_sync_wrote(&syncState, bufferSize)
+        
+        let receivedData = ogg_sync_pageout(&syncState, &page)
+        while (receivedData == 1) {
+            if beginStream {
+                /// Assign stream's number with the page.
+                ogg_stream_init(&streamState, ogg_page_serialno(&page))
+                beginStream = false
+            }
+            /// If ogg page's serial number does not match stream's serial number
+            /// reset stream's serial number because.... ___
+            if (ogg_page_serialno(&page) != Int32(streamState.serialno)) {
+                ogg_stream_reset_serialno(&streamState, ogg_page_serialno(&page))
+            }
+        }
         
         // initialize ogg stream state to allocate memory to decode. Returns 0 if successful.
-        let status = ogg_stream_init(&stream, serial)
+        let status = ogg_stream_init(&streamState, serial)
         guard status == 0 else {
             throw OpusError.internalError
         }

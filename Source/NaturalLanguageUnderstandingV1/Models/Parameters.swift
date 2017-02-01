@@ -24,7 +24,7 @@ public struct Parameters: JSONEncodable {
     public let text: String?
     
     /// The HTML file to analyze.
-    public let html: String?
+    public let html: URL?
     
     /// The web page to analyze.
     public let url: String?
@@ -46,6 +46,9 @@ public struct Parameters: JSONEncodable {
     
     /// ISO 639-1 code indicating the language to use in the analysis
     public let language: String?
+    
+    /// Error domain for when errors are thrown.
+    private let errorDomain = "com.watsonplatform.naturalLanguageUnderstanding"
 
     /**
     Initialize a `Parameters` with all member variables.
@@ -65,7 +68,7 @@ public struct Parameters: JSONEncodable {
     public init(
         features: Features,
         text: String? = nil,
-        html: String? = nil,
+        html: URL? = nil,
         url: String? = nil,
         clean: Bool? = nil,
         xpath: String? = nil,
@@ -90,7 +93,10 @@ public struct Parameters: JSONEncodable {
         var json = [String: Any]()
         json["features"] = features.toJSONObject()
         if let text = text { json["text"] = text }
-        if let html = html { json["html"] = html }
+        if let html = html {
+            let htmlAsString = try? docAsString(document: html)
+            json["html"] = htmlAsString
+        }
         if let url = url { json["url"] = url }
         if let clean = clean { json["clean"] = clean }
         if let xpath = xpath { json["xpath"] = xpath }
@@ -98,5 +104,17 @@ public struct Parameters: JSONEncodable {
         if let returnAnalyzedText = returnAnalyzedText { json["return_analyzed_text"] = returnAnalyzedText }
         if let language = language { json["language"] = language }
         return json
+    }
+    
+    /// Build HTML as string.
+    private func docAsString(document: URL) throws -> String {
+        
+        guard let docAsString = try? String(contentsOfFile: document.relativePath, encoding:.utf8) else {
+            let failureReason = "Unable to convert document to string."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
+            throw error
+        }
+        return docAsString
     }
 }

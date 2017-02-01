@@ -23,6 +23,8 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
     private let timeout: TimeInterval = 5.0
     private let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+    private let url = "http://www.politico.com/story/2016/07/dnc-2016-obama-prepared-remarks-226345"
+    private let testHtmlFileName = "testArticle"
     
     override func setUp() {
         super.setUp()
@@ -82,6 +84,51 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     /// load public webpage to analyze.
     
     // MARK: - Positive tests
+    
+    /** Analyze test HTML. */
+    func testAnalyzeHTML() {
+        let description = "Analyze HTML"
+        let expectation = self.expectation(description: description)
+        
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        let features = Features(concepts: ConceptsOptions())
+        let parameters = Parameters(features: features, html: fileURL, returnAnalyzedText: true)
+        
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            print(results)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze given url for concepts. */
+    func testAnalyzeURL() {
+        let description = "Analyze url with features."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(concepts: ConceptsOptions(),
+                                emotion: EmotionOptions(),
+                                entities: EntitiesOptions(),
+                                keywords: KeywordsOptions(),
+                                metadata: MetadataOptions(),
+                                relations: RelationsOptions(),
+                                semanticRoles: SemanticRolesOptions(),
+                                sentiment: SentimentOptions(),
+                                categories: CategoriesOptions())
+        let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            print(results)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
     
     /** Analyze given test input text for concepts. */
     func testAnalyzeTextForConcepts() {

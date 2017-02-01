@@ -85,8 +85,8 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     // MARK: - Positive tests
     
-    /** Analyze test HTML. */
-    func testAnalyzeHTML() {
+    /** Analyze test HTML for concepts. */
+    func testAnalyzeHTMLForConcepts() {
         let description = "Analyze HTML"
         let expectation = self.expectation(description: description)
         
@@ -97,10 +97,20 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         let features = Features(concepts: ConceptsOptions())
         let parameters = Parameters(features: features, html: fileURL, returnAnalyzedText: true)
         
-        
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
             print(results)
+            XCTAssertNotNil(results.analyzedText)
+            XCTAssertNotNil(results.concepts)
+            guard let concepts = results.concepts else {
+                XCTAssertNil(results.concepts)
+                return
+            }
+            for concept in concepts {
+                XCTAssertNotNil(concept.name)
+                XCTAssertNotNil(concept.dbpediaResource)
+                XCTAssertNotNil(concept.relevance)
+            }
             expectation.fulfill()
         }
         waitForExpectations()

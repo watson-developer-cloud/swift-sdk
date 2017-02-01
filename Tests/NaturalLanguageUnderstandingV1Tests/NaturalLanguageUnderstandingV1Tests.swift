@@ -294,6 +294,27 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         waitForExpectations()
     }
     
+    func testAnalyzeTextWithSentimentWithoutTargets() {
+        let description = "Analyze text and verify sentiment returned."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(sentiment: SentimentOptions(document: true))
+        
+        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.sentiment)
+            XCTAssertNotNil(results.sentiment?.document)
+            XCTAssertNotNil(results.sentiment?.document?.score)
+            XCTAssertNil(results.sentiment?.targets)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
     func testAnalyzeTextWithCategories() {
         let description = "Analyze text and verify categories returned."
         let expectation = self.expectation(description: description)

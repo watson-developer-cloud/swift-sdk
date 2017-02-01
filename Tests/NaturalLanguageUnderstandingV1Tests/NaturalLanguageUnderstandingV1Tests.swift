@@ -77,64 +77,49 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         return url
     }
     
-    /// load text to analyze
-    
-    /// load html to analyze
-    
-    /// load public webpage to analyze.
-    
     // MARK: - Positive tests
     
-    /** Analyze test HTML for concepts. */
-    func testAnalyzeHTMLForConcepts() {
-        let description = "Analyze HTML"
+    /** Default test for HTML input. */
+    func testAnalyzeHTML() {
+        let description = "Analyze HTML."
         let expectation = self.expectation(description: description)
         
         guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
             XCTFail("Failed to load file.")
             return
         }
-        let features = Features(concepts: ConceptsOptions())
-        let parameters = Parameters(features: features, html: fileURL, returnAnalyzedText: true)
+        let parameters = Parameters(features: Features(), html: fileURL)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
-            print(results)
-            XCTAssertNotNil(results.analyzedText)
-            XCTAssertNotNil(results.concepts)
-            guard let concepts = results.concepts else {
-                XCTAssertNil(results.concepts)
-                return
-            }
-            for concept in concepts {
-                XCTAssertNotNil(concept.name)
-                XCTAssertNotNil(concept.dbpediaResource)
-                XCTAssertNotNil(concept.relevance)
-            }
             expectation.fulfill()
         }
         waitForExpectations()
     }
     
-    /** Analyze given url for concepts. */
-    func testAnalyzeURL() {
-        let description = "Analyze url with features."
+    /** Default test for text input. */
+    func testAnalyzeText() {
+        let description = "Analyze text with no features."
         let expectation = self.expectation(description: description)
         
-        let features = Features(concepts: ConceptsOptions(),
-                                emotion: EmotionOptions(),
-                                entities: EntitiesOptions(),
-                                keywords: KeywordsOptions(),
-                                metadata: MetadataOptions(),
-                                relations: RelationsOptions(),
-                                semanticRoles: SemanticRolesOptions(),
-                                sentiment: SentimentOptions(),
-                                categories: CategoriesOptions())
-        let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
+        let parameters = Parameters(features: Features(), text: text)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
-            print(results)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    /** Default test for URL. */
+    func testAnalyzeURL() {
+        let description = "Analyze URL with no features."
+        let expectation = self.expectation(description: description)
+        
+        let parameters = Parameters(features: Features(), url: url, returnAnalyzedText: true)
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
             expectation.fulfill()
         }
         waitForExpectations()
@@ -154,6 +139,37 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
             results in
             
             XCTAssertEqual(results.analyzedText, text)
+            guard let concepts = results.concepts else {
+                XCTAssertNil(results.concepts)
+                return
+            }
+            for concept in concepts {
+                XCTAssertNotNil(concept.name)
+                XCTAssertNotNil(concept.dbpediaResource)
+                XCTAssertNotNil(concept.relevance)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze test HTML for concepts. */
+    func testAnalyzeHTMLForConcepts() {
+        let description = "Analyze HTML for concepts."
+        let expectation = self.expectation(description: description)
+        
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        let features = Features(concepts: ConceptsOptions())
+        let parameters = Parameters(features: features, html: fileURL, returnAnalyzedText: true)
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            
+            XCTAssertNotNil(results.analyzedText)
+            XCTAssertNotNil(results.concepts)
             guard let concepts = results.concepts else {
                 XCTAssertNil(results.concepts)
                 return

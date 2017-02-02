@@ -42,9 +42,12 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
             ("testAnalyzeTextForEmotionsWithoutTargets", testAnalyzeTextForEmotionsWithoutTargets),
             ("testAnalyzeTextForEntities", testAnalyzeTextForEntities),
             ("testAnalyzeTextForKeywords", testAnalyzeTextForKeywords),
-            ("testAnalyzeTextWithSemanticRoles", testAnalyzeTextWithSemanticRoles),
-            ("testAnalyzeTextWithSentiment", testAnalyzeTextWithSentiment),
-            ("testAnalyzeTextWithCategories", testAnalyzeTextWithCategories)
+            ("testAnalyzeHTMLForMetadata", testAnalyzeHTMLForMetadata),
+            ("testAnalyzeTextForRelations", testAnalyzeTextForRelations),
+            ("testAnalyzeTextForSemanticRoles", testAnalyzeTextForSemanticRoles),
+            ("testAnalyzeTextForSentiment", testAnalyzeTextForSentiment),
+            ("testAnalyzeTextForSentimentWithoutTargets", testAnalyzeTextForSentimentWithoutTargets),
+            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories)
         ]
     }
     

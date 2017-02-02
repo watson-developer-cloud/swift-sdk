@@ -33,6 +33,18 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
     
     static var allTests : [(String, (NaturalLanguageUnderstandingV1Tests) -> () throws -> Void)] {
         return [
+            ("testAnalyzeHTML", testAnalyzeHTML),
+            ("testAnalyzeText", testAnalyzeText),
+            ("testAnalyzeURL", testAnalyzeURL),
+            ("testAnalyzeTextForConcepts", testAnalyzeTextForConcepts),
+            ("testAnalyzeHTMLForConcepts", testAnalyzeHTMLForConcepts),
+            ("testAnalyzeTextForEmotions", testAnalyzeTextForEmotions),
+            ("testAnalyzeTextForEmotionsWithoutTargets", testAnalyzeTextForEmotionsWithoutTargets),
+            ("testAnalyzeTextForEntities", testAnalyzeTextForEntities),
+            ("testAnalyzeTextForKeywords", testAnalyzeTextForKeywords),
+            ("testAnalyzeTextWithSemanticRoles", testAnalyzeTextWithSemanticRoles),
+            ("testAnalyzeTextWithSentiment", testAnalyzeTextWithSentiment),
+            ("testAnalyzeTextWithCategories", testAnalyzeTextWithCategories)
         ]
     }
     

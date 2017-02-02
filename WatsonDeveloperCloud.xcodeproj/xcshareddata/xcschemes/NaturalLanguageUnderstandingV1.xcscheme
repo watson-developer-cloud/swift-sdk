@@ -42,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1241DFB51E380F0A00B8B33E"
+               BuildableName = "NaturalLanguageUnderstandingV1Tests.xctest"
+               BlueprintName = "NaturalLanguageUnderstandingV1Tests"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

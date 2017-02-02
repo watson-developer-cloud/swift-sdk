@@ -324,7 +324,57 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         waitForExpectations()
     }
     
-    func testAnalyzeTextWithSemanticRoles() {
+    /** Analyze html input for metadata. */
+    func testAnalyzeHTMLForMetadata() {
+        let description = "Analyze html for metadata."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(metadata: MetadataOptions())
+        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
+            XCTFail("Failed to load file.")
+            return
+        }
+        let fileTitle = "This 5,000-year-old recipe for beer actually sounds pretty tasty"
+        let fileDate = "2016-05-23T20:13:00"
+        let fileAuthor = "Annalee Newitz"
+        
+        let parameters = Parameters(features: features, html: fileURL, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.language, "en")
+            XCTAssertEqual(results.metadata?.title, fileTitle)
+            XCTAssertEqual(results.metadata?.publicationDate, fileDate)
+            XCTAssertEqual(results.metadata?.authors?.count, 1)
+            XCTAssertEqual(results.metadata?.authors?.first?.name, fileAuthor)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for relations. */
+    func testAnalyzeTextForRelations() {
+        let description = "Analyze text for relations."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(relations: RelationsOptions())
+        
+        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.relations)
+            
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for semantic roles. */
+    func testAnalyzeTextForSemanticRoles() {
         let description = "Analyze text and verify semantic roles returned."
         let expectation = self.expectation(description: description)
         
@@ -354,7 +404,8 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         waitForExpectations()
     }
     
-    func testAnalyzeTextWithSentiment() {
+    /** Analyze input text for sentiment with targets. */
+    func testAnalyzeTextForSentiment() {
         let description = "Analyze text and verify sentiment returned."
         let expectation = self.expectation(description: description)
         
@@ -379,7 +430,30 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         waitForExpectations()
     }
     
-    func testAnalyzeTextWithCategories() {
+    /** Analyze input text for sentiment without targets. */
+    func testAnalyzeTextForSentimentWithoutTargets() {
+        let description = "Analyze text and verify sentiment returned."
+        let expectation = self.expectation(description: description)
+        
+        let features = Features(sentiment: SentimentOptions(document: true))
+        
+        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
+            results in
+            
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.sentiment)
+            XCTAssertNotNil(results.sentiment?.document)
+            XCTAssertNotNil(results.sentiment?.document?.score)
+            XCTAssertNil(results.sentiment?.targets)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    /** Analyze input text for categories. */
+    func testAnalyzeTextForCategories() {
         let description = "Analyze text and verify categories returned."
         let expectation = self.expectation(description: description)
         

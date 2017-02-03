@@ -35,6 +35,7 @@
 
 #include "opus_types.h"
 #include "opus_defines.h"
+#include "opus_header.h"
 
 #ifdef __cplusplus
 extern "C" {

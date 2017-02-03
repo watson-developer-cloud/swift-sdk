@@ -320,6 +320,8 @@
 		CE61C3601DF8C8470060B4A2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61C35F1DF8C8470060B4A2 /* Configuration.swift */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
 		CE6B98DC1DF22638004CD6B5 /* metadata.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98DB1DF22638004CD6B5 /* metadata.txt */; };
+		CE758EE51E43D85E0050EC29 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = CE758EE31E43D8440050EC29 /* opus_header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE758EE61E43D9270050EC29 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = CE758EE21E43D8240050EC29 /* opus_header.c */; };
 		CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */; };
 		CE78B7791DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */; };
 		CE78B77D1DD13935003336BD /* ConsumptionPreferencesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */; };
@@ -943,6 +945,8 @@
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
 		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = metadata.txt; path = Tests/VisualRecognitionV3Tests/metadata.txt; sourceTree = SOURCE_ROOT; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
+		CE758EE21E43D8240050EC29 /* opus_header.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
+		CE758EE31E43D8440050EC29 /* opus_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
 		CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
 		CE78B7781DD12F88003336BD /* ConsumptionPreferencesCategoryNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesCategoryNode.swift; sourceTree = "<group>"; };
 		CE78B77C1DD13935003336BD /* ConsumptionPreferencesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionPreferencesNode.swift; sourceTree = "<group>"; };
@@ -2190,6 +2194,8 @@
 			isa = PBXGroup;
 			children = (
 				CEEC74751E37BF8D00081451 /* module.modulemap */,
+				CE758EE21E43D8240050EC29 /* opus_header.c */,
+				CE758EE31E43D8440050EC29 /* opus_header.h */,
 				CEEC74761E37BF8D00081451 /* opus.h */,
 				CEEC74771E37BF8D00081451 /* opus_defines.h */,
 				CEEC74781E37BF8D00081451 /* opus_multistream.h */,
@@ -2224,6 +2230,7 @@
 			files = (
 				CED4F51E1E37C16F007E9F6A /* ogg.h in Headers */,
 				CED4F51D1E37C148007E9F6A /* opus_types.h in Headers */,
+				CE758EE51E43D85E0050EC29 /* opus_header.h in Headers */,
 				124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */,
 				CED4F51C1E37C148007E9F6A /* opus_multistream.h in Headers */,
 				CED4F51B1E37C144007E9F6A /* opus_defines.h in Headers */,
@@ -3643,6 +3650,7 @@
 			files = (
 				CED4F5171E37C12E007E9F6A /* TextToSpeechDecoder.swift in Sources */,
 				124C2E1C1D19E2FA00D9F602 /* Pronunciation.swift in Sources */,
+				CE758EE61E43D9270050EC29 /* opus_header.c in Sources */,
 				124C2E1A1D19E2FA00D9F602 /* CustomVoiceUpdate.swift in Sources */,
 				124C2E1E1D19E2FA00D9F602 /* Translation.swift in Sources */,
 				124C2E1B1D19E2FA00D9F602 /* PhonemeFormat.swift in Sources */,

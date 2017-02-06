@@ -37,6 +37,7 @@ internal class TextToSpeechDecoder {
     private var linkOut: Int32 = 0
     private var totalLinks: Int = 0
     private var numChannels: Int32 = 1
+    private var pcmData = Data()
     
     private var sampleRate = Int32(48000)
     private var preSkip = Int32(0)
@@ -111,6 +112,17 @@ internal class TextToSpeechDecoder {
             /// While there's a packet, extract.
             try extractPacket(&streamState, &packet)
             
+            if totalLinks != 0 {
+                NSLog("Does not look like an opus file.")
+                
+                throw OpusError.invalidState
+            }
+            opus_multistream_decoder_destroy(decoder)
+            if (!beginStream) {
+                ogg_stream_clear(&streamState)
+            }
+            ogg_sync_clear(&syncState)
+
 //            while (ogg_stream_packetout(&streamState, &packet) == 1) {
 //                /// Check for initial stream header
 //                if (packet.bytes >= 8 && packet.b_o_s == 1) {
@@ -134,7 +146,7 @@ internal class TextToSpeechDecoder {
 
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         
-        var pcmData: UnsafeMutablePointer<opus_int16>
+        var pcmDataBuffer: UnsafeMutablePointer<Float>
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
             /// Skip if initial stream header.
             if (packet.bytes >= 8 && packet.b_o_s == 1 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
@@ -181,7 +193,7 @@ internal class TextToSpeechDecoder {
                 granOffset = preSkip
                 
                 // TODO - Check stride vs size in allocating memory
-                pcmData = UnsafeMutablePointer<opus_int16>.allocate(capacity: MemoryLayout<opus_int16>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
+                pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
                 
             } else if (packetCount == 1) {
                 hasTagsPacket = true
@@ -196,7 +208,7 @@ internal class TextToSpeechDecoder {
                 var outSample: Int64
                 
                 /// Decode opus packet.
-                numberOfSamplesDecoded = opus_multistream_decode(decoder, packet.packet, Int32(packet.bytes), pcmData, MAX_FRAME_SIZE, 0)
+                numberOfSamplesDecoded = opus_multistream_decode_float(decoder, packet.packet, Int32(packet.bytes), pcmDataBuffer, MAX_FRAME_SIZE, 0)
                 
                 if numberOfSamplesDecoded < 0 {
                     NSLog("Decoding error: \(opus_strerror(numberOfSamplesDecoded))")
@@ -208,11 +220,16 @@ internal class TextToSpeechDecoder {
                 /// Make sure the output duration follows the final end-trim
                 /// Output sample count should not be ahead of granpos value.
                 maxOut = ((pageGranulePosition - Int64(granOffset)) * Int64(sampleRate) / 48000) - Int64(linkOut)
-                outSample
+                outSample = try audioWrite(&pcmDataBuffer, numChannels, frameSize, &preSkip, &maxOut)
                 
+                linkOut = Int32(outSample) + linkOut
                 
             }
+            packetCount += 1
         }
+        
+        //TODO: - check this is the right place to deallocate pcmDataBuffer
+        pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
     }
     
     /// channels - used to __
@@ -237,12 +254,14 @@ internal class TextToSpeechDecoder {
     }
     
     /// Returns number of bytes written (?)
-    private func audioWrite(_ pcmData: inout opus_int16,
+    // put pcm uffer into pcm data
+    private func audioWrite(_ pcmDataBuffer: inout UnsafeMutablePointer<Float>,
                             _ channels: Int32,
                             _ frameSize: Int32,
-                            _ fout: inout Data,
                             _ skip: inout Int32,
                             _ maxOut: inout Int64) throws -> Int64 {
+        /// Save pointer(?)
+        var pcmDataBuffer = pcmDataBuffer
         var sampOut: Int64 = 0
         var tmpSkip: Int32
         var outLength: UInt
@@ -263,12 +282,28 @@ internal class TextToSpeechDecoder {
         } else {
             tmpSkip = 0
         }
+        output = pcmDataBuffer.advanced(by: Int(channels) * Int(tmpSkip))
         
-        output = withUnsafeMutablePointer(to: &pcmData){
-            (pcmDataPtr: UnsafeMutablePointer<Float>) in
-            pcmDataPtr.advanced(by: Int(channels) * Int(tmpSkip))
+        outLength = UInt(frameSize) - UInt(tmpSkip)
+        
+        let maxLoop = Int(outLength) * Int(channels)
+        
+        
+        // TODO - convert possibly short to float.
+//        for (i in 0..< maxLoop) {
+//            out[i] = max(-32768, min(&output[i]*Float(32768), 32767))
+//        }
+
+        // TODO - convert output (float) to UnsafePointer<Int8>
+        if maxOut > 0 {
+            pcmData.append(output, count: outLength)
+            sampOut = sampOut + Int64(outLength)
         }
         
+//        pcmData.append(UnsafePointer<UInt8>, count: <#T##Int#>)
+//        pcmData.append
+        return sampOut
+
     }
 }
 

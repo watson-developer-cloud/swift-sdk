@@ -133,6 +133,7 @@ internal class TextToSpeechDecoder {
     
 
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
+        
         var pcmData: UnsafeMutablePointer<opus_int16>
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
             /// Skip if initial stream header.
@@ -207,6 +208,7 @@ internal class TextToSpeechDecoder {
                 /// Make sure the output duration follows the final end-trim
                 /// Output sample count should not be ahead of granpos value.
                 maxOut = ((pageGranulePosition - Int64(granOffset)) * Int64(sampleRate) / 48000) - Int64(linkOut)
+                outSample
                 
                 
             }
@@ -234,9 +236,38 @@ internal class TextToSpeechDecoder {
         return decoder
     }
     
-    private func audioWrite(_ pcmData: inout opus_int16, _ channels: Int32, _ frameSize: Int32, _ fout: inout Data, _ skip: Int32, _ file: Int, _ maxOut: Int64, _ fp: Int) throws -> Int64 {
+    /// Returns number of bytes written (?)
+    private func audioWrite(_ pcmData: inout opus_int16,
+                            _ channels: Int32,
+                            _ frameSize: Int32,
+                            _ fout: inout Data,
+                            _ skip: inout Int32,
+                            _ maxOut: inout Int64) throws -> Int64 {
         var sampOut: Int64 = 0
-        var i, tmpSkip, outLength: Int64
+        var tmpSkip: Int32
+        var outLength: UInt
+        var out: UnsafeMutablePointer<CShort>
+        var output: UnsafeMutablePointer<Float>
+        out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
+        if maxOut < 0 {
+            maxOut = 0
+        }
+        
+        if preSkip != 0 {
+            if skip > frameSize {
+                tmpSkip = frameSize
+            } else {
+                tmpSkip = skip
+            }
+            skip -= tmpSkip
+        } else {
+            tmpSkip = 0
+        }
+        
+        output = withUnsafeMutablePointer(to: &pcmData){
+            (pcmDataPtr: UnsafeMutablePointer<Float>) in
+            pcmDataPtr.advanced(by: Int(channels) * Int(tmpSkip))
+        }
         
     }
 }

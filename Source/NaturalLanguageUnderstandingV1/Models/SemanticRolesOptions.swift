@@ -17,7 +17,10 @@
 import Foundation
 import RestKit
 
+/** An option specifying whether or not to identify the subjects, actions, and verbs in the 
+ analyzed content. */
 public struct SemanticRolesOptions: JSONEncodable {
+    
     /// Maximum number of semantic_roles results to return.
     public let limit: Int?
     
@@ -58,7 +61,6 @@ public struct SemanticRolesOptions: JSONEncodable {
         self.disambiguate = disambiguate
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `SemanticRolesOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

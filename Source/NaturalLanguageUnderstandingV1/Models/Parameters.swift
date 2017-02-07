@@ -87,7 +87,6 @@ public struct Parameters: JSONEncodable {
         self.language = language
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `Parameters` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

@@ -17,6 +17,7 @@
 import Foundation
 import RestKit
 
+/** An option indicating whether or not important keywords from the analyzed content should be returned. */
 public struct KeywordsOptions: JSONEncodable {
     
     /// Maximum number of keywords to return.
@@ -38,7 +39,6 @@ public struct KeywordsOptions: JSONEncodable {
         self.sentiment = sentiment
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `KeywordsOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

@@ -374,10 +374,7 @@
 		CED4F56A1E3A84BE007E9F6A /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5391E3A84BE007E9F6A /* Features.swift */; };
 		CED4F56C1E3A84BE007E9F6A /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */; };
 		CED4F56D1E3A84BE007E9F6A /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */; };
-		CED4F56F1E3A84BE007E9F6A /* LinkedDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */; };
-		CED4F5701E3A84BE007E9F6A /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */; };
 		CED4F5721E3A84BE007E9F6A /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */; };
-		CED4F5741E3A84BE007E9F6A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5431E3A84BE007E9F6A /* Model.swift */; };
 		CED4F5751E3A84BE007E9F6A /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5441E3A84BE007E9F6A /* Parameters.swift */; };
 		CED4F5771E3A84BE007E9F6A /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */; };
 		CED4F5781E3A84BE007E9F6A /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */; };
@@ -1029,10 +1026,7 @@
 		CED4F5391E3A84BE007E9F6A /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
 		CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
 		CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
-		CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedDataResult.swift; sourceTree = "<group>"; };
-		CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
 		CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
-		CED4F5431E3A84BE007E9F6A /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CED4F5441E3A84BE007E9F6A /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
 		CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
@@ -1481,11 +1475,8 @@
 				CED4F5391E3A84BE007E9F6A /* Features.swift */,
 				CED4F53B1E3A84BE007E9F6A /* KeywordsOptions.swift */,
 				CED4F53C1E3A84BE007E9F6A /* KeywordsResult.swift */,
-				CED4F53E1E3A84BE007E9F6A /* LinkedDataResult.swift */,
-				CED4F53F1E3A84BE007E9F6A /* ListModelsResults.swift */,
 				12103CD11E3FADDB00F9C842 /* MetadataOptions.swift */,
 				CED4F5411E3A84BE007E9F6A /* MetadataResult.swift */,
-				CED4F5431E3A84BE007E9F6A /* Model.swift */,
 				CED4F5441E3A84BE007E9F6A /* Parameters.swift */,
 				CED4F5461E3A84BE007E9F6A /* RelationEntity.swift */,
 				CED4F5471E3A84BE007E9F6A /* RelationsOptions.swift */,
@@ -3848,15 +3839,12 @@
 				CED4F55E1E3A84BE007E9F6A /* ConceptsResult.swift in Sources */,
 				CED4F55D1E3A84BE007E9F6A /* ConceptsOptions.swift in Sources */,
 				CED4F5721E3A84BE007E9F6A /* MetadataResult.swift in Sources */,
-				CED4F5701E3A84BE007E9F6A /* ListModelsResults.swift in Sources */,
 				CED4F5851E3A84BE007E9F6A /* SentimentResult.swift in Sources */,
 				CED4F5801E3A84BE007E9F6A /* SemanticRolesResult.swift in Sources */,
 				CED4F5771E3A84BE007E9F6A /* RelationEntity.swift in Sources */,
 				CED4F56A1E3A84BE007E9F6A /* Features.swift in Sources */,
-				CED4F5741E3A84BE007E9F6A /* Model.swift in Sources */,
 				CED4F5681E3A84BE007E9F6A /* EntitiesResult.swift in Sources */,
 				CED4F5641E3A84BE007E9F6A /* EmotionResult.swift in Sources */,
-				CED4F56F1E3A84BE007E9F6A /* LinkedDataResult.swift in Sources */,
 				CED4F5671E3A84BE007E9F6A /* EntitiesOptions.swift in Sources */,
 				CED4F57F1E3A84BE007E9F6A /* SemanticRolesOptions.swift in Sources */,
 				CED4F55B1E3A84BE007E9F6A /* CategoriesResult.swift in Sources */,

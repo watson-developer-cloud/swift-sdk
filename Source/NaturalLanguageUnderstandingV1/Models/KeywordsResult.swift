@@ -17,9 +17,10 @@
 import Foundation
 import RestKit
 
+/** The most important keywords in the content, organized by relevance. */
 public struct KeywordsResult: JSONDecodable {
     
-    /// Relevance score from 0 to 1. Higher values indicate greater relevance
+    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
     public let relevance: Double?
     
     /// The text of the keyword.

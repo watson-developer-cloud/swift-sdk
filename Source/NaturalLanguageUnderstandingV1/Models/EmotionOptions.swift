@@ -17,6 +17,7 @@
 import Foundation
 import RestKit
 
+/** Whether or not to return emotion analysis of the content. */
 public struct EmotionOptions: JSONEncodable {
     
     /// Set this to false to hide document-level emotion results.
@@ -38,7 +39,6 @@ public struct EmotionOptions: JSONEncodable {
         self.targets = targets
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `EmotionOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

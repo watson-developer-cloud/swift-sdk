@@ -17,41 +17,14 @@
 import Foundation
 import RestKit
 
-public struct Author: JSONDecodable,JSONEncodable {
-    /// Name of the author
+/** The author of the analyzed content. */
+public struct Author: JSONDecodable {
+    
+    /// Name of the author.
     public let name: String?
 
-    /**
-     Initialize a `Author` with required member variables.
-
-     - returns: An initialized `Author`.
-    */
-    public init() {
-        self.name = nil
-    }
-
-    /**
-    Initialize a `Author` with all member variables.
-
-     - parameter name: Name of the author
-
-    - returns: An initialized `Author`.
-    */
-    public init(name: String) {
-        self.name = name
-    }
-
-    // MARK: JSONDecodable
     /// Used internally to initialize a `Author` model from JSON.
     public init(json: JSON) throws {
         name = try? json.getString(at: "name")
-    }
-
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Author` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let name = name { json["name"] = name }
-        return json
     }
 }

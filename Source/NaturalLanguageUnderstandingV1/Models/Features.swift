@@ -90,7 +90,6 @@ public struct Features: JSONEncodable {
         self.categories = categories
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `Features` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

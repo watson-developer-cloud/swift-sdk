@@ -17,6 +17,8 @@
 import Foundation
 import RestKit
 
+/** Whether or not to return important people, places, geopolitical, and other entities detected
+ in the analyzed content. */
 public struct EntitiesOptions: JSONEncodable {
     
     /// Maximum number of entities to return.
@@ -48,7 +50,6 @@ public struct EntitiesOptions: JSONEncodable {
         self.sentiment = sentiment
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `EntitiesOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

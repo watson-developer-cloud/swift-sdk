@@ -17,6 +17,8 @@
 import Foundation
 import RestKit
 
+/** An option indicating whether or not to include the author, publication date, and title of 
+ the HTML or URL content. */
 public struct MetadataOptions: JSONEncodable {
     
     public let json: [String: Any]?
@@ -30,7 +32,6 @@ public struct MetadataOptions: JSONEncodable {
         json = [String: Any]()
     }
     
-    // MARK: JSONEncodable
     /// Used internally to serialize a `MetadataOptions` model to JSON.
     public func toJSONObject() -> Any {
         return json ?? [String: Any]()

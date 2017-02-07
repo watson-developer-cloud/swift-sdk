@@ -17,6 +17,8 @@
 import Foundation
 import RestKit
 
+/** An option specifying if the relationships found between entities in the analyzed content should 
+ be returned. */
 public struct RelationsOptions: JSONEncodable {
     
     /// Enter a custom model ID to override the default `en-news` model. Use `es-news` for Spanish
@@ -35,7 +37,6 @@ public struct RelationsOptions: JSONEncodable {
         self.model = model
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `RelationsOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

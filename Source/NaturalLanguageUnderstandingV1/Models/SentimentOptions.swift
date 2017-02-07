@@ -17,7 +17,9 @@
 import Foundation
 import RestKit
 
+/** An options specifying if sentiment of detected entities, keywords, or phrases should be returned. */
 public struct SentimentOptions: JSONEncodable {
+    
     /// Set this to false to hide document-level sentiment results.
     public let document: Bool?
     
@@ -37,7 +39,6 @@ public struct SentimentOptions: JSONEncodable {
         self.targets = targets
     }
 
-    // MARK: JSONEncodable
     /// Used internally to serialize a `SentimentOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

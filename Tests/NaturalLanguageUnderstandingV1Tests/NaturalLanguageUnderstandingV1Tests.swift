@@ -18,7 +18,7 @@ import XCTest
 import Foundation
 import NaturalLanguageUnderstandingV1
 
-class NaturalLanguageUnderstandingV1Tests: XCTestCase {
+class NaturalLanguageUnderstandingTests: XCTestCase {
     
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
     private let timeout: TimeInterval = 5.0
@@ -31,7 +31,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         instantiateNaturalLanguageUnderstanding()
     }
     
-    static var allTests : [(String, (NaturalLanguageUnderstandingV1Tests) -> () throws -> Void)] {
+    static var allTests : [(String, (NaturalLanguageUnderstandingTests) -> () throws -> Void)] {
         return [
             ("testAnalyzeHTML", testAnalyzeHTML),
             ("testAnalyzeText", testAnalyzeText),
@@ -126,7 +126,7 @@ class NaturalLanguageUnderstandingV1Tests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Default test for URL. */
+    /** Default test for URL. Not yet supported by NLU service (test should fail). */
     func testAnalyzeURL() {
         let description = "Analyze URL with no features."
         let expectation = self.expectation(description: description)

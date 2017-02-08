@@ -161,7 +161,7 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
-    /** Synthesize text to spokemkon audio and play Opus format. */
+    /** Synthesize text to spoken audio and play Opus format. */
     func testSynthesizePlayOpus() {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)

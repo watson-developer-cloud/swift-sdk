@@ -23,7 +23,7 @@ internal class TextToSpeechDecoder {
     
     //    private var buffer: oggpack_buffer
     private var decoder: opus_decoder   // decoder to convert opus to pcm
-    private var header: OpusHeader
+    private var header: OpusHeader = OpusHeader.init()
     private var page: ogg_page
     private var streamState: ogg_stream_state    // state of ogg stream?
     private var packet: ogg_packet          // packet within a stream passing information
@@ -37,7 +37,7 @@ internal class TextToSpeechDecoder {
     private var linkOut: Int32 = 0
     private var totalLinks: Int = 0
     private var numChannels: Int32 = 1
-    private var pcmData = Data()
+    var pcmData = Data()
     
     private var sampleRate = Int32(48000)
     private var preSkip = Int32(0)
@@ -73,19 +73,24 @@ internal class TextToSpeechDecoder {
         
         // write into buffer of size __
         var bufferSize: Int
-        var bufferData: UnsafeMutablePointer<Int8>
         
         if audioData.count < 200 {
             bufferSize = 200
         } else {
             bufferSize = audioData.count - processedByteCount
         }
+        var bufferData = UnsafeMutablePointer<Int8>.allocate(capacity: bufferSize)
+        
         //        let range = Range(uncheckedBounds: (lower: processedByteCount, upper: bufferSize))
         bufferData = ogg_sync_buffer(&syncState, bufferSize)
         
         for index in processedByteCount..<bufferSize+processedByteCount {
+            print (bufferData[index])
             bufferData[index] = Int8(audioData[index])
         }
+        
+        
+        
         processedByteCount += bufferSize
         /// Advance pointer to end of processed data
         ogg_sync_wrote(&syncState, bufferSize)
@@ -146,7 +151,7 @@ internal class TextToSpeechDecoder {
 
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         
-        var pcmDataBuffer: UnsafeMutablePointer<Float>
+        var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
             /// Skip if initial stream header.
             if (packet.bytes >= 8 && packet.b_o_s == 1 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
@@ -192,7 +197,6 @@ internal class TextToSpeechDecoder {
                 
                 granOffset = preSkip
                 
-                // TODO - Check stride vs size in allocating memory
                 pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
                 
             } else if (packetCount == 1) {
@@ -261,13 +265,13 @@ internal class TextToSpeechDecoder {
                             _ skip: inout Int32,
                             _ maxOut: inout Int64) throws -> Int64 {
         /// Save pointer(?)
-        var pcmDataBuffer = pcmDataBuffer
+//        var pcmDataBuffer = pcmDataBuffer
         var sampOut: Int64 = 0
         var tmpSkip: Int32
         var outLength: UInt
-        var out: UnsafeMutablePointer<CShort>
+//        var out: UnsafeMutablePointer<CShort>
         var output: UnsafeMutablePointer<Float>
-        out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
+//        out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
         if maxOut < 0 {
             maxOut = 0
         }
@@ -286,22 +290,25 @@ internal class TextToSpeechDecoder {
         
         outLength = UInt(frameSize) - UInt(tmpSkip)
         
-        let maxLoop = Int(outLength) * Int(channels)
-        
-        
         // TODO - convert possibly short to float.
+//        let maxLoop = Int(outLength) * Int(channels)
 //        for (i in 0..< maxLoop) {
 //            out[i] = max(-32768, min(&output[i]*Float(32768), 32767))
 //        }
 
         // TODO - convert output (float) to UnsafePointer<Int8>
+        
+        // TODO: check capacity in the unsafemutableRawPointer func
+
+        
+        let u8UnsafeMutableRawPointer = UnsafeMutableRawPointer(output).bindMemory(to: UInt8.self, capacity: Int(outLength) * Int(channels))
+        let u8UnsafePointer = UnsafePointer(u8UnsafeMutableRawPointer)
+        
         if maxOut > 0 {
-            pcmData.append(output, count: outLength)
+            pcmData.append(u8UnsafePointer, count: Int(outLength))
             sampOut = sampOut + Int64(outLength)
         }
         
-//        pcmData.append(UnsafePointer<UInt8>, count: <#T##Int#>)
-//        pcmData.append
         return sampOut
 
     }

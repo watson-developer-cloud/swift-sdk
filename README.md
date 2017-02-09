@@ -1,7 +1,7 @@
 # Watson Developer Cloud Swift SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
-![](https://img.shields.io/badge/platform-iOS-blue.svg?style=flat)
+![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
@@ -42,6 +42,7 @@ There are many resources to help you build your first cognitive application with
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
+* [Natural Language Understanding](#natural-language-understanding)
 * [Personality Insights](#personality-insights)
 * [Retrieve and Rank](#retrieve-and-rank)
 * [Speech to Text](#speech-to-text)
@@ -580,6 +581,44 @@ The following links provide more information about the Personality Insights serv
 * [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
 * [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
+
+## Natural Language Understanding
+
+The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
+
+Natural Language Understanding has the following features:
+
+- Concepts
+- Entities
+- Keywords
+- Categories
+- Sentiment
+- Emotion
+- Relations
+- Semantic Roles
+
+The following example demonstrates how to use the service:
+
+```swift
+import NaturalLanguageUnderstandingV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "yyyy-mm-dd" // use today's date for the most recent version
+
+let naturalLanguageUndersanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+
+let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+
+=let parameters = Parameters(features: Features(), text: text)
+
+let failure = { (error: Error) in print(error) }
+naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
+	results in 
+	print (results)
+}
+
+```
 
 ## Retrieve and Rank
 

@@ -71,80 +71,87 @@ internal class TextToSpeechDecoder {
         ogg_sync_init(&syncState)
         var processedByteCount = 0 // guarantee data is pulled from stream.
         
-        // write into buffer of size __
-        var bufferSize: Int
-        
-        if audioData.count < 200 {
-            bufferSize = 200
-        } else {
-            bufferSize = audioData.count - processedByteCount
-        }
-        var bufferData = UnsafeMutablePointer<Int8>.allocate(capacity: bufferSize)
-        
-        //        let range = Range(uncheckedBounds: (lower: processedByteCount, upper: bufferSize))
-        bufferData = ogg_sync_buffer(&syncState, bufferSize)
-        
-        for index in processedByteCount..<bufferSize+processedByteCount {
-            print (bufferData[index])
-            bufferData[index] = Int8(audioData[index])
-        }
-        
-        
-        
-        processedByteCount += bufferSize
-        /// Advance pointer to end of processed data
-        ogg_sync_wrote(&syncState, bufferSize)
-        
-        let receivedData = ogg_sync_pageout(&syncState, &page)
-        while (receivedData == 1) {
-            if beginStream {
-                /// Assign stream's number with the page.
-                ogg_stream_init(&streamState, ogg_page_serialno(&page))
-                beginStream = false
+        while processedByteCount < audioData.count {
+            
+            // write into buffer of size __
+            var bufferSize: Int
+            
+            if audioData.count - processedByteCount > 200 {
+                bufferSize = 200
+            } else {
+                bufferSize = audioData.count - processedByteCount
             }
-            /// If ogg page's serial number does not match stream's serial number
-            /// reset stream's serial number because.... ___
-            if (ogg_page_serialno(&page) != Int32(streamState.serialno)) {
-                ogg_stream_reset_serialno(&streamState, ogg_page_serialno(&page))
-            }
+            //        var bufferData = UnsafeMutablePointer<Int8>.allocate(capacity: bufferSize)
+            var bufferData: UnsafeMutablePointer<Int8>
             
-            /// Add page to the stream.
-            ogg_stream_pagein(&streamState, &page)
+            //        let range = Range(uncheckedBounds: (lower: processedByteCount, upper: bufferSize))
+            bufferData = ogg_sync_buffer(&syncState, bufferSize)
             
-            /// Check granularity position?
-            pageGranulePosition = ogg_page_granulepos(&page)
-            
-            /// While there's a packet, extract.
-            try extractPacket(&streamState, &packet)
-            
-            if totalLinks != 0 {
-                NSLog("Does not look like an opus file.")
+            bufferData.withMemoryRebound(to: UInt8.self, capacity: bufferSize) {
+                bufferDataUInt8 in
                 
-                throw OpusError.invalidState
+//                audioData.copyBytes(to: bufferDataUInt8, count: bufferSize)
+                audioData.copyBytes(to: bufferDataUInt8, from: processedByteCount..<processedByteCount + bufferSize)
             }
-            opus_multistream_decoder_destroy(decoder)
-            if (!beginStream) {
-                ogg_stream_clear(&streamState)
-            }
-            ogg_sync_clear(&syncState)
-
-//            while (ogg_stream_packetout(&streamState, &packet) == 1) {
-//                /// Check for initial stream header
-//                if (packet.bytes >= 8 && packet.b_o_s == 1) {
-//                    
-//                }
-//            }
-            
-            
-            
-            // initialize ogg stream state to allocate memory to decode. Returns 0 if successful.
-            //        let status = ogg_stream_init(&streamState, serial)
-            //        guard status == 0 else {
-            //            throw OpusError.internalError
+            //
+            //
+            //        for index in processedByteCount..<bufferSize+processedByteCount {
+            //            print (bufferData[index])
+            //            bufferData[index] = Int8(audioData[index])
             //        }
-            // build buffer.
             
+            processedByteCount += bufferSize
+            /// Advance pointer to end of processed data
+            ogg_sync_wrote(&syncState, bufferSize)
+            
+//            let receivedData =
+            while (ogg_sync_pageout(&syncState, &page) == 1) {
+                if beginStream {
+                    /// Assign stream's number with the page.
+                    ogg_stream_init(&streamState, ogg_page_serialno(&page))
+                    beginStream = false
+                }
+                /// If ogg page's serial number does not match stream's serial number
+                /// reset stream's serial number because.... ___
+                if (ogg_page_serialno(&page) != Int32(streamState.serialno)) {
+                    ogg_stream_reset_serialno(&streamState, ogg_page_serialno(&page))
+                }
+                
+                /// Add page to the stream.
+                ogg_stream_pagein(&streamState, &page)
+                
+                /// Check granularity position?
+                pageGranulePosition = ogg_page_granulepos(&page)
+                
+                /// While there's a packet, extract.
+                try extractPacket(&streamState, &packet)
+                
+                //            while (ogg_stream_packetout(&streamState, &packet) == 1) {
+                //                /// Check for initial stream header
+                //                if (packet.bytes >= 8 && packet.b_o_s == 1) {
+                //
+                //                }
+                //            }
+                
+                // initialize ogg stream state to allocate memory to decode. Returns 0 if successful.
+                //        let status = ogg_stream_init(&streamState, serial)
+                //        guard status == 0 else {
+                //            throw OpusError.internalError
+                //        }
+                // build buffer.
+                
+            }
         }
+        if totalLinks != 0 {
+            NSLog("Does not look like an opus file.")
+            
+            throw OpusError.invalidState
+        }
+        opus_multistream_decoder_destroy(decoder)
+        if (!beginStream) {
+            ogg_stream_clear(&streamState)
+        }
+        ogg_sync_clear(&syncState)
         
     }
     
@@ -153,8 +160,8 @@ internal class TextToSpeechDecoder {
         
         var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
-            /// Skip if initial stream header.
-            if (packet.bytes >= 8 && packet.b_o_s == 1 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
+            /// Execute if initial stream header.
+            if (packet.bytes >= 8 && packet.b_o_s == 256 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
                 /// Check if there's another opus head to see if stream is chained without EOS.
                 if (hasOpusStream && hasTagsPacket) {
                     hasOpusStream = false
@@ -230,6 +237,7 @@ internal class TextToSpeechDecoder {
                 
             }
             packetCount += 1
+//            print (packet.e_o_s)
         }
         
         //TODO: - check this is the right place to deallocate pcmDataBuffer

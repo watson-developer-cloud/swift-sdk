@@ -73,7 +73,7 @@ public struct Metadata: JSONDecodable {
     }
     
     /// Used internally to serialize metadata to JSON.
-    public func toJSONObject() -> Any {
+    public func toJSONObject() -> Any? {
         return metadata
     }
 }

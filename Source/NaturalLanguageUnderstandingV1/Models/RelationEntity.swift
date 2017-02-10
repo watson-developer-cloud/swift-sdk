@@ -17,13 +17,13 @@
 import Foundation
 import RestKit
 
-/* The entities extracted from a sentence in a given document. */
+/** The entities extracted from a sentence in a given document. */
 public struct RelationEntity: JSONDecodable {
     
-    /// Text that corresponds to the entity
+    /// Text that corresponds to the entity.
     public let text: String?
     
-    /// Entity type
+    /// Entity type.
     public let type: String?
 
     /// Used internally to initialize a `RelationEntity` model from JSON.

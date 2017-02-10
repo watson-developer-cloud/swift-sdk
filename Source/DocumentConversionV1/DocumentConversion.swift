@@ -55,15 +55,22 @@ public class DocumentConversion {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
+            let message = try json.getString(at: "error")
+            let description = try? json.getString(at: "description")
+            
             if let errCode = try? json.getInt(at: "code") {
                 let code = errCode
-                let message = try json.getString(at: "error")
-                let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: message,
+                    NSLocalizedRecoverySuggestionErrorKey: description
+                ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else if let errCode = try? json.getString(at: "code") {
                 let code = Int(errCode)!
-                let message = try json.getString(at: "error")
-                let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: message,
+                    NSLocalizedRecoverySuggestionErrorKey: description
+                ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             }
             return nil

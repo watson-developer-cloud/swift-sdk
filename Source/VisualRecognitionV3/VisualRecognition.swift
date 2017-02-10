@@ -55,7 +55,14 @@ public class VisualRecognition {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            if let code = try? json.getInt(at: "code") {
+            if let status = try? json.getString(at: "status") {
+                let statusInfo = try json.getString(at: "statusInfo")
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: status,
+                    NSLocalizedDescriptionKey: statusInfo
+                ]
+                return NSError(domain: domain, code: 401, userInfo: userInfo)
+            } else if let code = try? json.getInt(at: "code") {
                 let error = try json.getString(at: "error")
                 let userInfo = [
                     NSLocalizedFailureReasonErrorKey: "\(code)",

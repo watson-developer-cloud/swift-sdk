@@ -43,6 +43,28 @@ public class TradeoffAnalytics {
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
+    
+    /**
+     If the given data represents an error returned by the Tradeoff Analytics service, then return
+     an NSError object with information about the error that occured. Otherwise, return nil.
+     
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func dataToError(data: Data) -> NSError? {
+        do {
+            let json = try JSON(data: data)
+            let error = try json.getString(at: "error")
+            let code = try json.getInt(at: "code")
+            let description = try? json.getString(at: "description")
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedRecoverySuggestionErrorKey: description
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
+        } catch {
+            return nil
+        }
+    }
 
     /**
      Get a dilemma that contains a problem and its resolution.
@@ -93,7 +115,7 @@ public class TradeoffAnalytics {
         
         // execute REST request
         // TODO: Add status code validation
-        request.responseObject() { (response: RestResponse<Dilemma>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Dilemma>) in
             switch response.result {
             case .success(let dilemma): success(dilemma)
             case .failure(let error): failure?(error)

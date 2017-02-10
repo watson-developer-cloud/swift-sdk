@@ -59,9 +59,11 @@ public class ToneAnalyzer {
             let code = try json.getInt(at: "code")
             let error = try json.getString(at: "error")
             let help = try? json.getString(at: "help")
+            let description = try? json.getString(at: "description")
+            let recoverySuggestion = help ?? description
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: "\(help)"
+                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

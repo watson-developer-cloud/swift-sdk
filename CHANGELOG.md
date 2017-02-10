@@ -1,6 +1,28 @@
 Change Log
 ==========
 
+## Version 0.14.0
+_2016-02-10_
+
+This update includes:
+
+- Support for Natural Language Understanding service.
+- Fixes for error handling when parsing credential errors.
+
+## Version 0.13.2
+_2016-01-25_
+
+This update fixes build errors for Linux compatibility by:
+
+- Removing CVarArg
+- Editing the glossary reading error.
+
+## Version 0.13.1
+_2016-01-19_
+
+This update fixes Carthage Build and update to Xcode 8.2, Swift 3.0.2
+
+
 ## Version 0.13.0
 
 _2016-01-18_

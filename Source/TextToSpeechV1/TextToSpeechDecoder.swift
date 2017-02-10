@@ -37,6 +37,7 @@ internal class TextToSpeechDecoder {
     private var linkOut: Int32 = 0
     private var totalLinks: Int = 0
     private var numChannels: Int32 = 1
+    var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
     var pcmData = Data()
     
     private var sampleRate = Int32(48000)
@@ -142,7 +143,7 @@ internal class TextToSpeechDecoder {
                 
             }
         }
-        if totalLinks != 0 {
+        if totalLinks == 0 {
             NSLog("Does not look like an opus file.")
             
             throw OpusError.invalidState
@@ -153,12 +154,14 @@ internal class TextToSpeechDecoder {
         }
         ogg_sync_clear(&syncState)
         
+        //TODO: - check this is the right place to deallocate pcmDataBuffer
+        pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
+        
     }
     
 
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         
-        var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
             /// Execute if initial stream header.
             if (packet.bytes >= 8 && packet.b_o_s == 256 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
@@ -240,8 +243,6 @@ internal class TextToSpeechDecoder {
 //            print (packet.e_o_s)
         }
         
-        //TODO: - check this is the right place to deallocate pcmDataBuffer
-        pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
     }
     
     /// channels - used to __
@@ -284,7 +285,7 @@ internal class TextToSpeechDecoder {
             maxOut = 0
         }
         
-        if preSkip != 0 {
+        if skip != 0 {
             if skip > frameSize {
                 tmpSkip = frameSize
             } else {

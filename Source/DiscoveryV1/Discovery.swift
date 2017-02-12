@@ -60,11 +60,17 @@ public class Discovery {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
             let code = try json.getInt(at: "code")
-            let description = try? json.getString(at: "description")
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: description
-            ]
+            var userInfo: [String: String]
+            if let description = try? json.getString(at: "description") {
+                userInfo = [
+                    NSLocalizedFailureReasonErrorKey: error,
+                    NSLocalizedRecoverySuggestionErrorKey: description
+                ]
+            } else {
+                userInfo = [
+                    NSLocalizedFailureReasonErrorKey: error
+                ]
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil

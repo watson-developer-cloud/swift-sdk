@@ -55,11 +55,13 @@ public class TradeoffAnalytics {
             let json = try JSON(data: data)
             let error = try json.getString(at: "error")
             let code = try json.getInt(at: "code")
-            let description = try? json.getString(at: "description")
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: description
+            var userInfo = [
+                NSLocalizedFailureReasonErrorKey: error
             ]
+            if let description = try? json.getString(at: "description") {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
+
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil

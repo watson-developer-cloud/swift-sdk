@@ -21,6 +21,7 @@ import RestKit
  the HTML or URL content. */
 public struct MetadataOptions: JSONEncodable {
     
+    /// The JSON object to internally serialize the model to JSON.
     public let json: [String: Any]?
     
     /**

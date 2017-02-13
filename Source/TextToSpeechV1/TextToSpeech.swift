@@ -57,11 +57,12 @@ public class TextToSpeech {
             let code = try json.getInt(at: "code")
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
-            let recoverySuggestion = codeDescription ?? description
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion
+            var userInfo = [
+                NSLocalizedFailureReasonErrorKey: error
             ]
+            if let recoverySuggestion = codeDescription ?? description {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil

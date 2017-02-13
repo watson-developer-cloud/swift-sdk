@@ -14,7 +14,7 @@
     <header>
       <div class="content-wrapper">
         <p><a href="index.html"> Docs</a></p>
-        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="swift-api/img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="swift-api/img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -30,6 +30,6 @@
         <section>
           <section class="section">
             
-            <a href='#watson-developer-cloud-ios-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-ios-sdk'>Watson Developer Cloud iOS SDK</h1>
+            <a href='#watson-developer-cloud-swift-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-swift-sdk'>Watson Developer Cloud Swift SDK</h1>
 
 <a href='#table-of-contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='table-of-contents'>Table of Contents</h2>

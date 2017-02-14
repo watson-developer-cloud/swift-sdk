@@ -57,6 +57,7 @@ internal class TextToSpeechDecoder {
     }
     
     init(audioData: Data) throws {
+        
         // set properties
         streamState = ogg_stream_state()
         syncState = ogg_sync_state()
@@ -236,7 +237,7 @@ internal class TextToSpeechDecoder {
                 maxOut = ((pageGranulePosition - Int64(granOffset)) * Int64(sampleRate) / 48000) - Int64(linkOut)
                 outSample = try audioWrite(&pcmDataBuffer, numChannels, frameSize, &preSkip, &maxOut)
                 
-                linkOut = Int32(outSample) + linkOut
+                linkOut += Int32(outSample)
                 
             }
             packetCount += 1
@@ -249,20 +250,29 @@ internal class TextToSpeechDecoder {
     private func processHeader(_ packet: inout ogg_packet, _ channels: inout Int32, _ preskip: inout Int32) throws -> opus_decoder {
         
         // create status to capture errors
-        var error = Int32(0)
+        let error = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32>.stride)
         
         // TODO - figure out where opus header header files should live.
         if (opus_header_parse(packet.packet, Int32(packet.bytes), &header) == 0) {
             throw OpusError.invalidPacket
         }
+//        header.channels = Int32(2)
         channels = header.channels
         preskip = header.preskip
         
+        let rate = Int32(header.input_sample_rate)
+        if rate >= 8000 && rate <= 192000 {
+            sampleRate = rate
+        }
+        
         /// TODO - check weird stream_map.0
-        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, &error)
-        if error != OpusError.ok.rawValue {
+        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, error)
+//        decoder = opus_decoder_create(sampleRate, channels, &error)
+        if error.pointee != OpusError.ok.rawValue {
+            error.deallocate(capacity: MemoryLayout<Int32>.stride)
             throw OpusError.badArgument
         }
+        error.deallocate(capacity: MemoryLayout<Int32>.stride)
         return decoder
     }
     
@@ -278,9 +288,9 @@ internal class TextToSpeechDecoder {
         var sampOut: Int64 = 0
         var tmpSkip: Int32
         var outLength: UInt
-//        var out: UnsafeMutablePointer<CShort>
+        var out: UnsafeMutablePointer<CShort>
         var output: UnsafeMutablePointer<Float>
-//        out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
+        out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
         if maxOut < 0 {
             maxOut = 0
         }
@@ -300,23 +310,44 @@ internal class TextToSpeechDecoder {
         outLength = UInt(frameSize) - UInt(tmpSkip)
         
         // TODO - convert possibly short to float.
-//        let maxLoop = Int(outLength) * Int(channels)
-//        for (i in 0..< maxLoop) {
+        let maxLoop = Int(outLength) * Int(channels)
+        for count in 0..<maxLoop {
 //            out[i] = max(-32768, min(&output[i]*Float(32768), 32767))
-//        }
+            let newShort = (CShort((floor(0.5 + max(-32768, min(output.advanced(by: count).pointee * Float(32768), 32767))))))
+            out.advanced(by: count).initialize(to: newShort)
+        }
 
         // TODO - convert output (float) to UnsafePointer<Int8>
         
         // TODO: check capacity in the unsafemutableRawPointer func
 
         
-        let u8UnsafeMutableRawPointer = UnsafeMutableRawPointer(output).bindMemory(to: UInt8.self, capacity: Int(outLength) * Int(channels))
-        let u8UnsafePointer = UnsafePointer(u8UnsafeMutableRawPointer)
+//        let u8UnsafeMutableRawPointer = UnsafeMutableRawPointer(output).bindMemory(to: UInt8.self, capacity: Int(outLength) * Int(channels))
+//        let u8UnsafePointer = UnsafePointer(u8UnsafeMutableRawPointer)
+//        
+//        if maxOut > 0 {
+//            pcmData.append(u8UnsafePointer, count: Int(outLength) * 2)
+//            sampOut = sampOut + Int64(outLength)
+//        }
         
-        if maxOut > 0 {
-            pcmData.append(u8UnsafePointer, count: Int(outLength))
-            sampOut = sampOut + Int64(outLength)
+//        output.withMemoryRebound(to: UInt8.self, capacity: (Int(outLength) * Int(channels)) / 4) {
+//            outputUint8 in
+//            
+//            if maxOut > 0 {
+//                pcmData.append(outputUint8, count: Int(outLength) * 2)
+//                sampOut = sampOut + Int64(outLength)
+//            }
+//        }
+        
+        out.withMemoryRebound(to: UInt8.self, capacity: Int(outLength) * Int(channels)) {
+            outUint8 in
+            
+            if maxOut > 0 {
+                pcmData.append(outUint8, count: Int(outLength) * 2)
+                sampOut = sampOut + Int64(outLength)
+            }
         }
+
         
         return sampOut
 

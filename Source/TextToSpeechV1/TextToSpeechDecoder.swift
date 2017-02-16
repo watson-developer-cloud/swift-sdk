@@ -20,101 +20,77 @@ import AudioToolbox
 internal class TextToSpeechDecoder {
     
     private typealias opus_decoder = OpaquePointer
+    private let MAX_FRAME_SIZE = Int32(960 * 6)
     
-    //    private var buffer: oggpack_buffer
-    private var decoder: opus_decoder   // decoder to convert opus to pcm
-    private var header: OpusHeader = OpusHeader.init()
-    private var page: ogg_page
-    private var streamState: ogg_stream_state    // state of ogg stream?
-    private var packet: ogg_packet          // packet within a stream passing information
-    private var packetCount: Int64 = 0
-    private var syncState: ogg_sync_state        // state of ogg sync
-    private var beginStream = true
-    private var pageGranulePosition: Int64 = 0     // Position of the packet data at page
+    private var streamState: ogg_stream_state   // state of ogg stream
+    private var page: ogg_page                  // encapsulates the data for an Ogg page
+    private var syncState: ogg_sync_state       // tracks the status of data during decoding
+    private var packet: ogg_packet              // packet within a stream passing information
+    private var header: OpusHeader              // header of the Opus file to decode
+    private var decoder: opus_decoder           // decoder to convert opus to pcm
+    
+    private var packetCount: Int64 = 0          // number of packets read during decoding
+    private var beginStream = true              // if decoding of stream has begun
+    private var pageGranulePosition: Int64 = 0  // position of the packet data at page
     private var hasOpusStream = false
     private var hasTagsPacket = false
     private var opusSerialNumber: Int = 0
     private var linkOut: Int32 = 0
     private var totalLinks: Int = 0
     private var numChannels: Int32 = 1
-    var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
-    var pcmData = Data()
-    
-    private var sampleRate = Int32(48000)
-    private var preSkip = Int32(0)
-    
+    private var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
+    private var sampleRate: Int32 = 48000       // sample rate for decoding. default value is 48000
+    private var preSkip: Int32 = 0
     private var granOffset: Int32 = 0
     private var frameSize: Int32 = 0
     
-    private let MAX_FRAME_SIZE = Int32(960 * 6)
-    
-    convenience init(data: Data) throws {
-        
-        try self.init(
-            audioData: data
-        )
-        
-    }
+    var pcmData = Data()
     
     init(audioData: Data) throws {
-        
         // set properties
         streamState = ogg_stream_state()
-        syncState = ogg_sync_state()
         page = ogg_page()
+        syncState = ogg_sync_state()
         packet = ogg_packet()
+        header = OpusHeader()
         
-        // Status to catch errors
+        // Status to catch errors when creating decoder
         var status = Int32(0)
-        
         decoder = opus_decoder_create(sampleRate, numChannels, &status)
         
         // initialize ogg sync state
         ogg_sync_init(&syncState)
-        var processedByteCount = 0 // guarantee data is pulled from stream.
+        var processedByteCount = 0
         
         while processedByteCount < audioData.count {
-            
-            // write into buffer of size __
+            // determine the size of the buffer to ask for
             var bufferSize: Int
-            
             if audioData.count - processedByteCount > 200 {
                 bufferSize = 200
             } else {
                 bufferSize = audioData.count - processedByteCount
             }
-            //        var bufferData = UnsafeMutablePointer<Int8>.allocate(capacity: bufferSize)
-            var bufferData: UnsafeMutablePointer<Int8>
             
-            //        let range = Range(uncheckedBounds: (lower: processedByteCount, upper: bufferSize))
+            // obtain a buffer from the syncState
+            var bufferData: UnsafeMutablePointer<Int8>
             bufferData = ogg_sync_buffer(&syncState, bufferSize)
             
-            bufferData.withMemoryRebound(to: UInt8.self, capacity: bufferSize) {
-                bufferDataUInt8 in
-                
-//                audioData.copyBytes(to: bufferDataUInt8, count: bufferSize)
+            // write data from the service into the syncState buffer
+            bufferData.withMemoryRebound(to: UInt8.self, capacity: bufferSize) { bufferDataUInt8 in
                 audioData.copyBytes(to: bufferDataUInt8, from: processedByteCount..<processedByteCount + bufferSize)
             }
-            //
-            //
-            //        for index in processedByteCount..<bufferSize+processedByteCount {
-            //            print (bufferData[index])
-            //            bufferData[index] = Int8(audioData[index])
-            //        }
-            
             processedByteCount += bufferSize
-            /// Advance pointer to end of processed data
+            // notify syncState of number of bytes we actually wrote
             ogg_sync_wrote(&syncState, bufferSize)
             
-//            let receivedData =
+            // attempt to get a page from the data that we wrote
             while (ogg_sync_pageout(&syncState, &page) == 1) {
                 if beginStream {
                     /// Assign stream's number with the page.
                     ogg_stream_init(&streamState, ogg_page_serialno(&page))
                     beginStream = false
                 }
-                /// If ogg page's serial number does not match stream's serial number
-                /// reset stream's serial number because.... ___
+                
                 if (ogg_page_serialno(&page) != Int32(streamState.serialno)) {
                     ogg_stream_reset_serialno(&streamState, ogg_page_serialno(&page))
                 }
@@ -122,56 +98,37 @@ internal class TextToSpeechDecoder {
                 /// Add page to the stream.
                 ogg_stream_pagein(&streamState, &page)
                 
-                /// Check granularity position?
+                /// Save position of the current decoding process
                 pageGranulePosition = ogg_page_granulepos(&page)
                 
                 /// While there's a packet, extract.
                 try extractPacket(&streamState, &packet)
-                
-                //            while (ogg_stream_packetout(&streamState, &packet) == 1) {
-                //                /// Check for initial stream header
-                //                if (packet.bytes >= 8 && packet.b_o_s == 1) {
-                //
-                //                }
-                //            }
-                
-                // initialize ogg stream state to allocate memory to decode. Returns 0 if successful.
-                //        let status = ogg_stream_init(&streamState, serial)
-                //        guard status == 0 else {
-                //            throw OpusError.internalError
-                //        }
-                // build buffer.
-                
             }
         }
+        
         if totalLinks == 0 {
             NSLog("Does not look like an opus file.")
-            
             throw OpusError.invalidState
         }
+        
+        // perform cleanup
         opus_multistream_decoder_destroy(decoder)
         if (!beginStream) {
             ogg_stream_clear(&streamState)
         }
         ogg_sync_clear(&syncState)
-        
-        //TODO: - check this is the right place to deallocate pcmDataBuffer
         pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
-        
     }
     
-
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
-        
+        // attempt to extract a packet from the streamState
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
             /// Execute if initial stream header.
-            if (packet.bytes >= 8 && packet.b_o_s == 256 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
+            if (packet.b_o_s != 0 && packet.bytes >= 8 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
                 /// Check if there's another opus head to see if stream is chained without EOS.
                 if (hasOpusStream && hasTagsPacket) {
                     hasOpusStream = false
-                    // TODO - how to check if decoder exists.  Should we use opus_decoder_destroy instead?
                     opus_multistream_decoder_destroy(decoder)
-                    NSLog("decoder destroyed. kaboom.")
                 }
                 
                 /// Reset packet flags if not in opus streams.
@@ -195,13 +152,11 @@ internal class TextToSpeechDecoder {
                 break
             }
             
-            // If first packet is in logical stream, process header
+            // If first packet in logical stream, process header
             if packetCount == 0 {
-                // set decoder to identified header
-                guard let decoder = try? processHeader(&packet, &numChannels, &preSkip) else {
-                    throw OpusError.invalidPacket
-                }
-                /// Check that there are no more packets in the page.
+                // create decoder from information in Opus header
+                decoder = try processHeader(&packet, &numChannels, &preSkip)
+                /// Check that there are no more packets in the first page.
                 if (ogg_stream_packetout(&streamState, &packet) != 0 || page.header[page.header_len - 1] == 255) {
                     throw OpusError.invalidPacket
                 }
@@ -214,7 +169,6 @@ internal class TextToSpeechDecoder {
                 hasTagsPacket = true
                 if (ogg_stream_packetout(&streamState, &packet) != 0 || page.header[page.header_len-1] == 255) {
                     NSLog("Extra packets on initial tags page. Invalid stream.")
-                    
                     throw OpusError.invalidPacket
                 }
             } else {
@@ -241,56 +195,48 @@ internal class TextToSpeechDecoder {
                 
             }
             packetCount += 1
-//            print (packet.e_o_s)
         }
         
     }
     
-    /// channels - used to __
+    // Process the Opus header and create a decoder with these values
     private func processHeader(_ packet: inout ogg_packet, _ channels: inout Int32, _ preskip: inout Int32) throws -> opus_decoder {
-        
         // create status to capture errors
-        let error = UnsafeMutablePointer<Int32>.allocate(capacity: MemoryLayout<Int32>.stride)
+        var error = Int32(0)
         
-        // TODO - figure out where opus header header files should live.
         if (opus_header_parse(packet.packet, Int32(packet.bytes), &header) == 0) {
             throw OpusError.invalidPacket
         }
-//        header.channels = Int32(2)
+        
         channels = header.channels
         preskip = header.preskip
         
+        // update the sample rate if a reasonable one is specified in the header
         let rate = Int32(header.input_sample_rate)
         if rate >= 8000 && rate <= 192000 {
             sampleRate = rate
         }
         
-        /// TODO - check weird stream_map.0
-        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, error)
-//        decoder = opus_decoder_create(sampleRate, channels, &error)
-        if error.pointee != OpusError.ok.rawValue {
-            error.deallocate(capacity: MemoryLayout<Int32>.stride)
+        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, &error)
+        if error != OpusError.ok.rawValue {
             throw OpusError.badArgument
         }
-        error.deallocate(capacity: MemoryLayout<Int32>.stride)
         return decoder
     }
     
-    /// Returns number of bytes written (?)
-    // put pcm uffer into pcm data
+    // Write the decoded Opus data (now PCM) to the pcmData object
     private func audioWrite(_ pcmDataBuffer: inout UnsafeMutablePointer<Float>,
                             _ channels: Int32,
                             _ frameSize: Int32,
                             _ skip: inout Int32,
                             _ maxOut: inout Int64) throws -> Int64 {
-        /// Save pointer(?)
-//        var pcmDataBuffer = pcmDataBuffer
         var sampOut: Int64 = 0
         var tmpSkip: Int32
         var outLength: UInt
         var out: UnsafeMutablePointer<CShort>
         var output: UnsafeMutablePointer<Float>
         out = UnsafeMutablePointer<CShort>.allocate(capacity: MemoryLayout<CShort>.stride * Int(MAX_FRAME_SIZE) * Int(channels))
+        
         if maxOut < 0 {
             maxOut = 0
         }
@@ -309,48 +255,21 @@ internal class TextToSpeechDecoder {
         
         outLength = UInt(frameSize) - UInt(tmpSkip)
         
-        // TODO - convert possibly short to float.
         let maxLoop = Int(outLength) * Int(channels)
         for count in 0..<maxLoop {
-//            out[i] = max(-32768, min(&output[i]*Float(32768), 32767))
-            let newShort = (CShort((floor(0.5 + max(-32768, min(output.advanced(by: count).pointee * Float(32768), 32767))))))
-            out.advanced(by: count).initialize(to: newShort)
+            let maxMin = max(-32768, min(output.advanced(by: count).pointee * Float(32768), 32767))
+            let float2int = CShort((floor(0.5 + maxMin)))
+            out.advanced(by: count).initialize(to: float2int)
         }
-
-        // TODO - convert output (float) to UnsafePointer<Int8>
         
-        // TODO: check capacity in the unsafemutableRawPointer func
-
-        
-//        let u8UnsafeMutableRawPointer = UnsafeMutableRawPointer(output).bindMemory(to: UInt8.self, capacity: Int(outLength) * Int(channels))
-//        let u8UnsafePointer = UnsafePointer(u8UnsafeMutableRawPointer)
-//        
-//        if maxOut > 0 {
-//            pcmData.append(u8UnsafePointer, count: Int(outLength) * 2)
-//            sampOut = sampOut + Int64(outLength)
-//        }
-        
-//        output.withMemoryRebound(to: UInt8.self, capacity: (Int(outLength) * Int(channels)) / 4) {
-//            outputUint8 in
-//            
-//            if maxOut > 0 {
-//                pcmData.append(outputUint8, count: Int(outLength) * 2)
-//                sampOut = sampOut + Int64(outLength)
-//            }
-//        }
-        
-        out.withMemoryRebound(to: UInt8.self, capacity: Int(outLength) * Int(channels)) {
-            outUint8 in
-            
+        out.withMemoryRebound(to: UInt8.self, capacity: Int(outLength) * Int(channels)) { outUint8 in
             if maxOut > 0 {
                 pcmData.append(outUint8, count: Int(outLength) * 2)
                 sampOut = sampOut + Int64(outLength)
             }
         }
-
         
         return sampOut
-
     }
 }
 

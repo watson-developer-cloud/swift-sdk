@@ -172,5 +172,27 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    /** Synthesize text to spoken audio in Opus format. */
+    func testSynthesizeOpus() {
+        let description = "Synthesize text to spoken audio in Opus format."
+        let expectation = self.expectation(description: description)
+        
+        textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
+            XCTAssertGreaterThan(data.count, 0)
+            do {
+                let audioPlayer = try AVAudioPlayer(data: data)
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                if self.playAudio {
+                    sleep(1)
+                }
+            } catch {
+                XCTFail("Failed to create audio player.")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 }
 #endif

@@ -90,7 +90,8 @@ public class SpeechToTextSession {
             websocketsURL: self.websocketsURL,
             defaultHeaders: self.defaultHeaders
         )
-        socket.onDisconnect = {
+        socket.onDisconnect = { [weak self] in
+            guard let `self` = self else { return }
             if self.recorder.isRecording {
                 self.stopMicrophone()
             }
@@ -231,14 +232,16 @@ public class SpeechToTextSession {
             }
             
             // callback if uncompressed
-            let onMicrophoneDataPCM = { (pcm: Data) in
+            let onMicrophoneDataPCM = { [weak self] (pcm: Data) in
+                guard let `self` = self else { return }
                 guard pcm.count > 0 else { return }
                 self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
             }
             
             // callback if compressed
-            let onMicrophoneDataOpus = { (pcm: Data) in
+            let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
+                guard let `self` = self else { return }
                 guard pcm.count > 0 else { return }
                 try! self.encoder.encode(pcm: pcm)
                 let opus = self.encoder.bitstream(flush: true)

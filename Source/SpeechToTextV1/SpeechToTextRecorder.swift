@@ -51,7 +51,9 @@ internal class SpeechToTextRecorder {
         
         // execute callback with audio data
         let pcm = Data(bytes: buffer.mAudioData, count: Int(buffer.mAudioDataByteSize))
-        audioRecorder.onMicrophoneData?(pcm)
+        autoreleasepool { _ in
+            audioRecorder.onMicrophoneData?(pcm)
+        }
         
         // return early if recording is stopped
         guard audioRecorder.isRecording else {

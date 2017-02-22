@@ -610,12 +610,12 @@ let naturalLanguageUndersanding = NaturalLanguageUnderstanding(username: usernam
 
 let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
 
-=let parameters = Parameters(features: Features(), text: text)
+let parameters = Parameters(features: Features(), text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
-	results in 
-	print (results)
+    results in 
+    print (results)
 }
 
 ```

@@ -185,7 +185,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                 audioPlayer.prepareToPlay()
                 audioPlayer.play()
                 if self.playAudio {
-                    sleep(1)
+                    sleep(3)
                 }
             } catch {
                 XCTFail("Failed to create audio player.")

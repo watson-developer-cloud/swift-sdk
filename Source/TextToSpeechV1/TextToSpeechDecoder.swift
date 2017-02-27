@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import AudioToolbox
 
 internal class TextToSpeechDecoder {
     
@@ -44,7 +43,8 @@ internal class TextToSpeechDecoder {
     private var granOffset: Int32 = 0
     private var frameSize: Int32 = 0
     
-    var pcmData = Data()
+    private var pcmData = Data()
+    var pcmDataWithHeaders = Data()
     
     init(audioData: Data) throws {
         // set properties
@@ -110,6 +110,9 @@ internal class TextToSpeechDecoder {
             NSLog("Does not look like an opus file.")
             throw OpusError.invalidState
         }
+        
+        // add wav header
+        addWAVHeader()
         
         // perform cleanup
         opus_multistream_decoder_destroy(decoder)
@@ -270,6 +273,69 @@ internal class TextToSpeechDecoder {
         }
         
         return sampOut
+    }
+    
+    // Add WAV headers to the decoded PCM data.
+    // Refer to the documentation here for details: http://soundfile.sapp.org/doc/WaveFormat/
+    private func addWAVHeader() {
+        var header = Data()
+        let headerSize = 44
+        let pcmDataLength = pcmData.count
+        let bitsPerSample = Int32(16)
+        
+        // RIFF chunk descriptor
+        let ChunkID = [UInt8]("RIFF".utf8)
+        header.append(ChunkID, count: 4)
+        
+        var ChunkSize = Int32(pcmDataLength + headerSize - 4).littleEndian
+        let ChunkSizePointer = UnsafeBufferPointer(start: &ChunkSize, count: 1)
+        header.append(ChunkSizePointer)
+        
+        let Format = [UInt8]("WAVE".utf8)
+        header.append(Format, count: 4)
+        
+        // "fmt" sub-chunk
+        let Subchunk1ID = [UInt8]("fmt ".utf8)
+        header.append(Subchunk1ID, count: 4)
+        
+        var Subchunk1Size = Int32(16).littleEndian
+        let Subchunk1SizePointer = UnsafeBufferPointer(start: &Subchunk1Size, count: 1)
+        header.append(Subchunk1SizePointer)
+        
+        var AudioFormat = Int16(1).littleEndian
+        let AudioFormatPointer = UnsafeBufferPointer(start: &AudioFormat, count: 1)
+        header.append(AudioFormatPointer)
+        
+        var NumChannels = Int16(numChannels).littleEndian
+        let NumChannelsPointer = UnsafeBufferPointer(start: &NumChannels, count: 1)
+        header.append(NumChannelsPointer)
+        
+        var SampleRate = Int32(sampleRate).littleEndian
+        let SampleRatePointer = UnsafeBufferPointer(start: &SampleRate, count: 1)
+        header.append(SampleRatePointer)
+        
+        var ByteRate = Int32(sampleRate * numChannels * bitsPerSample / 8).littleEndian
+        let ByteRatePointer = UnsafeBufferPointer(start: &ByteRate, count: 1)
+        header.append(ByteRatePointer)
+        
+        var BlockAlign = Int16(numChannels * bitsPerSample / 8).littleEndian
+        let BlockAlignPointer = UnsafeBufferPointer(start: &BlockAlign, count: 1)
+        header.append(BlockAlignPointer)
+        
+        var BitsPerSample = Int16(bitsPerSample).littleEndian
+        let BitsPerSamplePointer = UnsafeBufferPointer(start: &BitsPerSample, count: 1)
+        header.append(BitsPerSamplePointer)
+        
+        // "data" sub-chunk
+        let Subchunk2ID = [UInt8]("data".utf8)
+        header.append(Subchunk2ID, count: 4)
+        
+        var Subchunk2Size = Int32(pcmDataLength).littleEndian
+        let Subchunk2SizePointer = UnsafeBufferPointer(start: &Subchunk2Size, count: 1)
+        header.append(Subchunk2SizePointer)
+        
+        pcmDataWithHeaders.append(header)
+        pcmDataWithHeaders.append(pcmData)
     }
 }
 

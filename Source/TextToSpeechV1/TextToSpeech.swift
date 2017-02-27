@@ -258,7 +258,7 @@ public class TextToSpeech {
                     } else if audioFormat == .opus {
                         do {
                             let pcm = try TextToSpeechDecoder.init(audioData: data)
-                            success(pcm.pcmData)
+                            success(pcm.pcmDataWithHeaders)
                         } catch {
                             let failureReason = "Returned audio is in an unexpected format."
                             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

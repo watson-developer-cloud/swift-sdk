@@ -51,7 +51,8 @@ public struct Parameters: JSONEncodable {
     private let errorDomain = "com.watsonplatform.naturalLanguageUnderstanding"
 
     /**
-    Initialize a `Parameters` with all member variables.
+    Initialize a `Parameters` with all member variables. It is required to have either the text, 
+     html, or url parameter.
 
      - parameter text: The plain text to analyze.
      - parameter html: The HTML file to analyze.

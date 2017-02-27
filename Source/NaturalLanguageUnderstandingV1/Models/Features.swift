@@ -49,7 +49,7 @@ public struct Features: JSONEncodable {
     public let categories: CategoriesOptions?
 
     /**
-    Initialize a `Features` with all member variables.
+    Initialize a `Features` object. You must include at least one feature.
 
      - parameter concepts: Whether or not to return the concepts that are mentioned in the analyzed 
         text.

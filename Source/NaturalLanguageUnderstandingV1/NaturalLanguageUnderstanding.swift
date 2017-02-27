@@ -27,7 +27,7 @@ import RestKit
 public class NaturalLanguageUnderstanding {
     
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway-s.watsonplatform.net/natural-language-understanding/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/natural-language-understanding/api"
     
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()

@@ -103,7 +103,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTFail("Failed to load file.")
             return
         }
-        let parameters = Parameters(features: Features(), html: fileURL)
+        let concepts = ConceptsOptions(limit: 5)
+        let features = Features(concepts: concepts)
+        let parameters = Parameters(features: features, html: fileURL)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
@@ -117,7 +119,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text with no features."
         let expectation = self.expectation(description: description)
         
-        let parameters = Parameters(features: Features(), text: text)
+        let concepts = ConceptsOptions(limit: 5)
+        let features = Features(concepts: concepts)
+        let parameters = Parameters(features: features, text: text)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in
@@ -126,12 +130,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Default test for URL. Not yet supported by NLU service (test should fail). */
+    /** Default test for URL. */
     func testAnalyzeURL() {
         let description = "Analyze URL with no features."
         let expectation = self.expectation(description: description)
         
-        let parameters = Parameters(features: Features(), url: url, returnAnalyzedText: true)
+        let concepts = ConceptsOptions(limit: 5)
+        let features = Features(concepts: concepts)
+        let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
             results in

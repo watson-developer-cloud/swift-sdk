@@ -58,11 +58,14 @@ public class PersonalityInsights {
             let json = try JSON(data: data)
             let code = try json.getInt(at: "code")
             let error = try json.getString(at: "error")
-            let help = try json.getString(at: "help")
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-                NSLocalizedRecoverySuggestionErrorKey: help
+            let help = try? json.getString(at: "help")
+            let description = try? json.getString(at: "description")
+            var userInfo = [
+                NSLocalizedFailureReasonErrorKey: error
             ]
+            if let recoverySuggestion = help ?? description {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil

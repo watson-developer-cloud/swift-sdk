@@ -21,6 +21,7 @@ The following tasks should be completed before publishing a release. Track the p
 
 - [ ] Update the `generate-documentation.sh` script for any new targets/services.
 - [ ] Execute the `generate-documentation.sh` script to update the API documentation.
+- [ ] Update the `docs/index.html` page to add any new services and/or change the date. Consider opening an issue to automate this. 
 - [ ] Check `undocumented.json` for any missing documentation comments. Make the necessary changes then re-run the `generate-documentation.sh` script.
 - [ ] Update `CHANGELOG.md`.
 - [ ] Update `README.md`.
@@ -30,4 +31,5 @@ The following tasks should be completed before publishing a release. Track the p
 - [ ] Use Github to create a tag/release.
 - [ ] Execute the `generate-binaries.sh` script to build and archive frameworks into a `WatsonDeveloperCloud.framework.zip` file. Then attach `WatsonDeveloperCloud.framework.zip` to the GitHub release.
 - [ ] Test that Carthage successfully builds each service's framework.
+- [ ] Test that the documentation badge includes the service(s) added, if any.
 - [ ] Celebrate the team's hard work! :)

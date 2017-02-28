@@ -345,7 +345,6 @@
 		CE95E9B31E01D8E600DBB27A /* EnrichedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */; };
 		CE95E9B51E04448300DBB27A /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B41E04448300DBB27A /* Sentiment.swift */; };
 		CE95E9B71E0446C300DBB27A /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95E9B61E0446C300DBB27A /* Taxonomy.swift */; };
-		CED4F5151E37C126007E9F6A /* TextToSpeechAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */; };
 		CED4F5171E37C12E007E9F6A /* TextToSpeechDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */; };
 		CED4F5181E37C138007E9F6A /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746D1E37BF8D00081451 /* libogg.a */; };
 		CED4F5191E37C13B007E9F6A /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEC746E1E37BF8D00081451 /* libopus.a */; };
@@ -970,7 +969,6 @@
 		CE95E9B21E01D8E600DBB27A /* EnrichedTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTitle.swift; sourceTree = "<group>"; };
 		CE95E9B41E04448300DBB27A /* Sentiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
 		CE95E9B61E0446C300DBB27A /* Taxonomy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
-		CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechAudio.swift; sourceTree = "<group>"; };
 		CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechDecoder.swift; sourceTree = "<group>"; };
 		CEEC746D1E37BF8D00081451 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		CEEC746E1E37BF8D00081451 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
@@ -1339,7 +1337,6 @@
 		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
 			isa = PBXGroup;
 			children = (
-				CED4F5141E37C126007E9F6A /* TextToSpeechAudio.swift */,
 				CED4F5161E37C12E007E9F6A /* TextToSpeechDecoder.swift */,
 				124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */,
 				124C2E071D19E2FA00D9F602 /* Models */,
@@ -3657,7 +3654,6 @@
 				124C2E181D19E2FA00D9F602 /* CustomizationID.swift in Sources */,
 				124C2E161D19E2FA00D9F602 /* AudioFormat.swift in Sources */,
 				124C2E201D19E2FA00D9F602 /* Word.swift in Sources */,
-				CED4F5151E37C126007E9F6A /* TextToSpeechAudio.swift in Sources */,
 				124C2E171D19E2FA00D9F602 /* Customization.swift in Sources */,
 				124C2E191D19E2FA00D9F602 /* CustomizationWords.swift in Sources */,
 				124C2E1F1D19E2FA00D9F602 /* Voice.swift in Sources */,

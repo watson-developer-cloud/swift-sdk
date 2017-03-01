@@ -10,9 +10,11 @@ services=(
   AlchemyVisionV1
   ConversationV1
   DialogV1
+  DiscoveryV1
   DocumentConversionV1
   LanguageTranslatorV2
   NaturalLanguageClassifierV1
+  NaturalLanguageUnderstandingV1
   PersonalityInsightsV2
   PersonalityInsightsV3
   RelationshipExtractionV1Beta

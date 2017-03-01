@@ -71,11 +71,11 @@
             
             <a href='#watson-developer-cloud-swift-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-swift-sdk'>Watson Developer Cloud Swift SDK</h1>
 
-<p><a href="https://travis-ci.org/watson-developer-cloud/ios-sdk"><img src="https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master" alt="Build Status"></a>
-<img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="">
+<p><a href="https://travis-ci.org/watson-developer-cloud/swift-sdk"><img src="https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master" alt="Build Status"></a>
+<img src="https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat" alt="">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
-<a href="http://watson-developer-cloud.github.io/ios-sdk/"><img src="https://img.shields.io/badge/Documentation-API-blue.svg?style=flat" alt="Documentation"></a>
-<a href="https://cla-assistant.io/watson-developer-cloud/ios-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk" alt="CLA assistant"></a></p>
+<a href="http://watson-developer-cloud.github.io/swift-sdk"><img src="https://img.shields.io/badge/Documentation-API-blue.svg" alt="Documentation"></a>
+<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk" alt="CLA assistant"></a></p>
 <a href='#overview' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='overview'>Overview</h2>
 
 <p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
@@ -86,7 +86,7 @@
 <li>Read the <a href="README.md">Readme</a></li>
 <li>Follow the <a href="docs/quickstart.md">QuickStart Guide</a></li>
 <li>Review a <a href="#sample-applications">Sample Application</a></li>
-<li>Browse the <a href="http://watson-developer-cloud.github.io/ios-sdk/">Documentation</a></li>
+<li>Browse the <a href="http://watson-developer-cloud.github.io/swift-sdk/">Documentation</a></li>
 </ul>
 <a href='#contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contents'>Contents</h2>
 <a href='#general' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='general'>General</h3>
@@ -114,6 +114,7 @@
 <li><a href="#document-conversion">Document Conversion</a></li>
 <li><a href="#language-translator">Language Translator</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
+<li><a href="#natural-language-understanding">Natural Language Understanding</a></li>
 <li><a href="#personality-insights">Personality Insights</a></li>
 <li><a href="#retrieve-and-rank">Retrieve and Rank</a></li>
 <li><a href="#speech-to-text">Speech to Text</a></li>
@@ -597,7 +598,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/nl-classifier.html">IBM Watson Natural Language Classifier - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/nl-classifier">IBM Watson Natural Language Classifier - Documentation</a></li>
+<li><a href="http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html">IBM Watson Natural Language Classifier - Documentation</a></li>
 <li><a href="https://natural-language-classifier-demo.mybluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
 </ul>
 <a href='#personality-insights' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='personality-insights'>Personality Insights</h2>
@@ -626,6 +627,43 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="http://www.ibm.com/watson/developercloud/doc/personality-insights">IBM Watson Personality Insights - Documentation</a></li>
 <li><a href="https://personality-insights-livedemo.mybluemix.net">IBM Watson Personality Insights - Demo</a></li>
 </ul>
+<a href='#natural-language-understanding' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='natural-language-understanding'>Natural Language Understanding</h2>
+
+<p>The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.</p>
+
+<p>Natural Language Understanding has the following features:</p>
+
+<ul>
+<li>Concepts</li>
+<li>Entities</li>
+<li>Keywords</li>
+<li>Categories</li>
+<li>Sentiment</li>
+<li>Emotion</li>
+<li>Relations</li>
+<li>Semantic Roles</li>
+</ul>
+
+<p>The following example demonstrates how to use the service:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">NaturalLanguageUnderstandingV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
+
+<span class="k">let</span> <span class="nv">naturalLanguageUndersanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">textToAnalyze</span> <span class="o">=</span> <span class="s">"In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."</span>
+
+<span class="o">=</span><span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="kt">Features</span><span class="p">(),</span> <span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyzeContent</span><span class="p">(</span><span class="nv">withParameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">results</span> <span class="k">in</span> 
+    <span class="nf">print</span> <span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre>
 <a href='#retrieve-and-rank' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='retrieve-and-rank'>Retrieve and Rank</h2>
 
 <p>The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.</p>
@@ -1179,7 +1217,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-01-18)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-02-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

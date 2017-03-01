@@ -68,6 +68,12 @@ public class SpeechToTextSession {
         get { return socket.onResults }
         set { socket.onResults = newValue }
     }
+
+    /// Invoked when transcription service state changes to "listeneing"
+    public var onListening: ((Void) -> Void)? {
+        get { return socket.onListening }
+        set { socket.onListening = newValue }
+    }
     
     /// Invoked when an error or warning occurs.
     public var onError: ((Error) -> Void)? {
@@ -177,9 +183,10 @@ public class SpeechToTextSession {
      Send audio data to transcribe.
      
      - parameter audio: The audio data to transcribe.
+     - parameter socketWriteCompletion: Called when the audio data has been written to the socket
      */
-    public func recognize(audio: Data) {
-        socket.writeAudio(audio: audio)
+    public func recognize(audio: Data, socketWriteCompletion completion: ((Void) -> Void)? = nil) {
+        socket.writeAudio(audio: audio, completion: completion)
     }
     
     /**

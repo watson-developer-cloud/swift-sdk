@@ -606,7 +606,7 @@ let username = "your-username-here"
 let password = "your-password-here"
 let version = "yyyy-mm-dd" // use today's date for the most recent version
 
-let naturalLanguageUndersanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
 
 let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
 

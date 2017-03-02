@@ -13,7 +13,7 @@ env:
     - IOS_SDK="iphonesimulator10.0"
     - IOS10_DESTINATION="OS=10.0,name=iPhone 6"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_566f29436663_key -iv $encrypted_566f29436663_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
+  - openssl aes-256-cbc -K $encrypted_22b37a8b9ae9_key -iv $encrypted_22b37a8b9ae9_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
   - for D in `find Tests -type d -maxdepth 1 -mindepth 1`; do echo "cp SupportingFiles/Credentials.swift $D/"; done
 
 after_success:

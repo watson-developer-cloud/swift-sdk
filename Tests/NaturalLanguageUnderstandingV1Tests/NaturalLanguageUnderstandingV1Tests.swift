@@ -47,7 +47,8 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForSemanticRoles", testAnalyzeTextForSemanticRoles),
             ("testAnalyzeTextForSentiment", testAnalyzeTextForSentiment),
             ("testAnalyzeTextForSentimentWithoutTargets", testAnalyzeTextForSentimentWithoutTargets),
-            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories)
+            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
+	    ("testAnalyzeCCForForSentiment", testAnalyzeCCForForSentiment)
         ]
     }
     

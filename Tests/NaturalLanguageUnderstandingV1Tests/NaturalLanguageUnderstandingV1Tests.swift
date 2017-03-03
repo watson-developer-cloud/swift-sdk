@@ -48,7 +48,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForSentiment", testAnalyzeTextForSentiment),
             ("testAnalyzeTextForSentimentWithoutTargets", testAnalyzeTextForSentimentWithoutTargets),
             ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
-	    ("testAnalyzeCCForForSentiment", testAnalyzeCCForForSentiment)
+            ("testAnalyzeTextCCForSentiment", testAnalyzeTextCCForSentiment)
         ]
     }
     
@@ -453,12 +453,16 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         
         naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
             results in
-            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.analyzedText, textCC)
             XCTAssertEqual(results.language, "en")
-            XCTAssertNotNil(results.sentiment)
-            XCTAssertNotNil(results.sentiment?.document)
-            XCTAssertNotNil(results.sentiment?.document?.score)
-            XCTAssertNotNil(results.sentiment?.targets)
+            guard let keywords = results.keywords else {
+                XCTFail()
+                return
+            }
+            for keyword in keywords {
+                XCTAssertNotNil(keyword.sentiment)
+                
+            }
             expectation.fulfill()
         }
         waitForExpectations()

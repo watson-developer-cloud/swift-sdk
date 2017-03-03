@@ -458,10 +458,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertNotNil(results.sentiment?.document)
             XCTAssertNotNil(results.sentiment?.document?.score)
             XCTAssertNotNil(results.sentiment?.targets)
-            for target in (results.sentiment?.targets)! {
-                XCTAssertNotNil(target.text)
-                XCTAssertNotNil(target.score)
-            }
             expectation.fulfill()
         }
         waitForExpectations()

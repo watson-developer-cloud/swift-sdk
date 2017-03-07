@@ -33,6 +33,8 @@ public struct SpeechRecognitionResults {
         return transcripts.reduce("") { $0 + " " + $1 }
     }
     
+    public var speakerLabels = [SpeakerLabel]()
+    
     /// Add the updates specified by a `SpeechRecognitionEvent`.
     mutating internal func addResults(wrapper: SpeechRecognitionEvent) {
         var resultsIndex = wrapper.resultIndex
@@ -45,6 +47,12 @@ public struct SpeechRecognitionResults {
         while wrapperIndex < wrapper.results.count {
             results.append(wrapper.results[wrapperIndex])
             wrapperIndex += 1
+        }
+        /// If we have parsed some speakerLabel objects, then store them here
+        if (wrapper.speakerLabels != nil) {
+            for speakerLabel in wrapper.speakerLabels! {
+                speakerLabels.append(speakerLabel)
+            }
         }
     }
 }

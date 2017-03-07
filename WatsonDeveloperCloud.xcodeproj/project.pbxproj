@@ -384,6 +384,8 @@
 		CED4F5841E3A84BE007E9F6A /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */; };
 		CED4F5851E3A84BE007E9F6A /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */; };
 		CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6131E3164CD004011D5 /* training_meta.txt */; };
+		E2B208BB1E6F571A00932C35 /* SpeakerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B208BA1E6F571A00932C35 /* SpeakerLabel.swift */; };
+		E2B208BC1E6F574800932C35 /* SpeakerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B208BA1E6F571A00932C35 /* SpeakerLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1036,6 +1038,7 @@
 		CED4F5531E3A84BE007E9F6A /* SentimentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
 		CED4F5541E3A84BE007E9F6A /* SentimentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
 		CEEFC6131E3164CD004011D5 /* training_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta.txt; sourceTree = "<group>"; };
+		E2B208BA1E6F571A00932C35 /* SpeakerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2005,6 +2008,7 @@
 				7AAA9A1B1CEE3026002C9564 /* WordConfidence.swift */,
 				7AAA9A1C1CEE3026002C9564 /* WordTimestamp.swift */,
 				7A1B0F281D82645100783EA3 /* Model.swift */,
+				E2B208BA1E6F571A00932C35 /* SpeakerLabel.swift */,
 				1221C9261E1DA3F000B740C1 /* Customization.swift */,
 				1221C9281E1DACA800B740C1 /* CustomizationID.swift */,
 				1221C92A1E1EB0AD00B740C1 /* Corpus.swift */,
@@ -4066,6 +4070,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B208BC1E6F574800932C35 /* SpeakerLabel.swift in Sources */,
 				7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */,
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
 				1221C9291E1DACA800B740C1 /* CustomizationID.swift in Sources */,
@@ -4294,6 +4299,7 @@
 				B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */,
 				B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */,
 				B1A8E54C1D19DCDF00678412 /* DocumentUrl.swift in Sources */,
+				E2B208BB1E6F571A00932C35 /* SpeakerLabel.swift in Sources */,
 				B1A8E5521D19DCDF00678412 /* KnowledgeGraph.swift in Sources */,
 				B1A8E5551D19DCDF00678412 /* PublicationDate.swift in Sources */,
 				B1A8E5531D19DCDF00678412 /* NewsResponse.swift in Sources */,

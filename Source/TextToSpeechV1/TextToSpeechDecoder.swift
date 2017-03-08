@@ -18,6 +18,8 @@ import Foundation
 
 internal class TextToSpeechDecoder {
     
+    var pcmDataWithHeaders = Data()
+    
     private typealias opus_decoder = OpaquePointer
     private let MAX_FRAME_SIZE = Int32(960 * 6)
     
@@ -38,13 +40,13 @@ internal class TextToSpeechDecoder {
     private var totalLinks: Int = 0
     private var numChannels: Int32 = 1
     private var pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: 0)
-    private var sampleRate: Int32 = 48000       // sample rate for decoding. default value is 48000
+    private var sampleRate: Int32 = 48000       // sample rate for decoding. default value by Opus is 48000
     private var preSkip: Int32 = 0
-    private var granOffset: Int32 = 0
+    // TODO: conider writing out the entire variable rather than shortening the varnames.
+    private var granOffset: Int32 = 0           // granular offset of a page for where to begin reading the data from Opus
     private var frameSize: Int32 = 0
     
     private var pcmData = Data()
-    var pcmDataWithHeaders = Data()
     
     init(audioData: Data) throws {
         // set properties
@@ -120,21 +122,33 @@ internal class TextToSpeechDecoder {
             ogg_stream_clear(&streamState)
         }
         ogg_sync_clear(&syncState)
+        
+        // add defer block to act as guard. 
+
         pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
     }
     
+    // TODO: pass by reference: inout; pass by value: no inout
+    // TODO - break apart functions and add comments to the functions (
+    // (cmd + opt + forward slash)
+    /// Function examines stream state and puts the data grabbed
+    ///
+    /// - Parameters:
+    ///   - streamState: <#streamState description#>
+    ///   - packet: <#packet description#>
+    /// - Throws: <#throws value description#>
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         // attempt to extract a packet from the streamState
         while (ogg_stream_packetout(&streamState, &packet) == 1) {
-            /// Execute if initial stream header.
+            // Execute if initial stream header.
             if (packet.b_o_s != 0 && packet.bytes >= 8 && (memcmp(packet.packet, "OpusHead", 8) == 0)) {
-                /// Check if there's another opus head to see if stream is chained without EOS.
+                // Check if there's another opus head to see if stream is chained without EOS.
                 if (hasOpusStream && hasTagsPacket) {
                     hasOpusStream = false
                     opus_multistream_decoder_destroy(decoder)
                 }
                 
-                /// Reset packet flags if not in opus streams.
+                // Reset packet flags if not in opus streams.
                 if (!hasOpusStream) {
                     if (packetCount > 0 && opusSerialNumber == streamState.serialno) {
                         NSLog("Apparent chaining without changing serial number. Something bad happened.")
@@ -150,7 +164,7 @@ internal class TextToSpeechDecoder {
                     NSLog("Warning: ignoring opus stream.")
                 }
             }
-            
+            // TODO - get rid of all parantheses after if statements.
             if (!hasOpusStream || streamState.serialno != opusSerialNumber) {
                 break
             }
@@ -159,8 +173,11 @@ internal class TextToSpeechDecoder {
             if packetCount == 0 {
                 // create decoder from information in Opus header
                 decoder = try processHeader(&packet, &numChannels, &preSkip)
-                /// Check that there are no more packets in the first page.
-                if (ogg_stream_packetout(&streamState, &packet) != 0 || page.header[page.header_len - 1] == 255) {
+                // Check that there are no more packets in the first page.
+                
+                //TODO - define 255 variable.
+                let lastElementIndex = page.header_len - 1
+                if (ogg_stream_packetout(&streamState, &packet) != 0 || page.header[lastElementIndex] == 255) {
                     throw OpusError.invalidPacket
                 }
                 
@@ -168,9 +185,13 @@ internal class TextToSpeechDecoder {
                 
                 pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
                 
+                // Deallocate pcmDataBuffer when function ends or errors out.
+                defer {
+                    pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
+                }
             } else if (packetCount == 1) {
                 hasTagsPacket = true
-                if (ogg_stream_packetout(&streamState, &packet) != 0 || page.header[page.header_len-1] == 255) {
+                if ogg_stream_packetout(&streamState, &packet) != 0 || page.header[page.header_len-1] == 255 {
                     NSLog("Extra packets on initial tags page. Invalid stream.")
                     throw OpusError.invalidPacket
                 }
@@ -207,7 +228,7 @@ internal class TextToSpeechDecoder {
         // create status to capture errors
         var error = Int32(0)
         
-        if (opus_header_parse(packet.packet, Int32(packet.bytes), &header) == 0) {
+        if opus_header_parse(packet.packet, Int32(packet.bytes), &header) == 0 {
             throw OpusError.invalidPacket
         }
         
@@ -220,13 +241,17 @@ internal class TextToSpeechDecoder {
             sampleRate = rate
         }
         
-        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, &error)
+        // TODO - create helper variable to help document header.stream_map.0
+        // Accessing first element of the header stream map in order to specify __
+        var streamMap = header.stream_map.0
+        decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &streamMap, &error)
         if error != OpusError.ok.rawValue {
             throw OpusError.badArgument
         }
         return decoder
     }
     
+    // TODO - describe or change out v output var names
     // Write the decoded Opus data (now PCM) to the pcmData object
     private func audioWrite(_ pcmDataBuffer: inout UnsafeMutablePointer<Float>,
                             _ channels: Int32,
@@ -243,6 +268,11 @@ internal class TextToSpeechDecoder {
         if maxOut < 0 {
             maxOut = 0
         }
+        
+        // if shouldSkip, then define skip var.
+        // change tmpSkip/skip names.
+        // look into computed variable
+        
         
         if skip != 0 {
             if skip > frameSize {
@@ -275,6 +305,7 @@ internal class TextToSpeechDecoder {
         return sampOut
     }
     
+    // TODO - lowercase for var names.
     // Add WAV headers to the decoded PCM data.
     // Refer to the documentation here for details: http://soundfile.sapp.org/doc/WaveFormat/
     private func addWAVHeader() {
@@ -287,6 +318,8 @@ internal class TextToSpeechDecoder {
         let ChunkID = [UInt8]("RIFF".utf8)
         header.append(ChunkID, count: 4)
         
+        
+        // Definfe chunksize as Int32, grab
         var ChunkSize = Int32(pcmDataLength + headerSize - 4).littleEndian
         let ChunkSizePointer = UnsafeBufferPointer(start: &ChunkSize, count: 1)
         header.append(ChunkSizePointer)

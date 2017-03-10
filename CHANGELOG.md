@@ -1,8 +1,16 @@
 Change Log
 ==========
 
+## Version 0.14.1
+_2017-03-2_
+
+This update includes:
+
+- Updates for Natural Language Understanding service.
+- Bug fixes for memory leak in text to speech. 
+
 ## Version 0.14.0
-_2016-02-10_
+_2017-02-10_
 
 This update includes:
 
@@ -10,7 +18,7 @@ This update includes:
 - Fixes for error handling when parsing credential errors.
 
 ## Version 0.13.2
-_2016-01-25_
+_2017-01-25_
 
 This update fixes build errors for Linux compatibility by:
 
@@ -18,14 +26,14 @@ This update fixes build errors for Linux compatibility by:
 - Editing the glossary reading error.
 
 ## Version 0.13.1
-_2016-01-19_
+_2017-01-19_
 
 This update fixes Carthage Build and update to Xcode 8.2, Swift 3.0.2
 
 
 ## Version 0.13.0
 
-_2016-01-18_
+_2017-01-18_
 
 This update adds the following features and support:
 

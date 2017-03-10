@@ -581,7 +581,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/environments/\(environmentID)/preview",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -684,7 +684,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/environments/\(environmentID)/collections",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -761,7 +761,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -821,7 +821,7 @@ public class Discovery {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
@@ -954,7 +954,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -998,7 +998,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -1039,7 +1039,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -1131,7 +1131,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -1223,7 +1223,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/query",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters

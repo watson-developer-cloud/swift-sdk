@@ -48,7 +48,7 @@ class DiscoveryTests: XCTestCase {
         addDocumentToCollection()
     }
     
-    /** Instantiate Retrieve and Rank instance. */
+    /** Instantiate Discovery instance. */
     func instantiateDiscovery() {
         let username = Credentials.DiscoveryUsername
         let password = Credentials.DiscoveryPassword

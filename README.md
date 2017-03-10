@@ -614,8 +614,8 @@ let parameters = Parameters(features: Features(), text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
-	results in 
-	print (results)
+    results in 
+    print (results)
 }
 
 ```

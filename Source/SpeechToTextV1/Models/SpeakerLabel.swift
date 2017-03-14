@@ -20,19 +20,27 @@ import RestKit
 /** An object containing information about speaker label object. */
 public struct SpeakerLabel: JSONDecodable {
     
+    /// The from/start timestamp, in seconds, of this speaker label
     public let fromTime: Double
+    
+    /// The to/end timestamp, in seconds, of this speaker label
     public let toTime: Double
+    
+    /// The confidence score of the speaker label between 0 and 1
     public let confidence: Double
+    
+    /// The speaker label in the form of an integer (greater than or equal to 0)
     public let speaker: Int
+    
+    /// The final field will only be true for the last word of a complete audio stream.  Otherwise, the final field will be false
     public let final: Bool
     
     public init(json: JSON) throws {
-        let dict = try json.getDictionaryObject()
         
-        fromTime = dict["from"] as! Double
-        toTime = dict["to"] as! Double
-        confidence = dict["confidence"] as! Double
-        speaker = dict["speaker"] as! Int
-        final = dict["final"] as! Bool
+        fromTime = try json.getDouble(at: "from")
+        toTime = try json.getDouble(at: "to")
+        confidence = try json.getDouble(at: "confidence")
+        speaker = try json.getInt(at: "speaker")
+        final = try json.getBool(at: "final")
     }
 }

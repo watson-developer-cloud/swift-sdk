@@ -35,8 +35,8 @@ public struct SpeakerLabel: JSONDecodable {
     /// The final field will only be true for the last word of a complete audio stream.  Otherwise, the final field will be false
     public let final: Bool
     
+    /// Used internally to initialize a `SpeakerLabel` model from JSON.
     public init(json: JSON) throws {
-        
         fromTime = try json.getDouble(at: "from")
         toTime = try json.getDouble(at: "to")
         confidence = try json.getDouble(at: "confidence")

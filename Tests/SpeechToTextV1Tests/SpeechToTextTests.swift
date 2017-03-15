@@ -54,6 +54,9 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataCustomOpus", testTranscribeDataCustomOpus),
             ("testTranscribeDataCustomFLAC", testTranscribeDataCustomFLAC),
             ("testTranscribeStockAnnouncementCustomWAV", testTranscribeStockAnnouncementCustomWAV),
+            ("testTranscribeDataWithSpeakerLabelsWAV", testTranscribeDataWithSpeakerLabelsWAV),
+            ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
+            ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
             ("testTranscribeStreaming", testTranscribeStreaming)
         ]
     }
@@ -892,6 +895,56 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    func testTranscribeDataWithSpeakerLabelsWAV() {
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "wav", format: .wav)
+    }
+    
+    func testTranscribeDataWithSpeakerLabelsOpus() {
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+    }
+    
+    func testTranscribeDataWithSpeakerLabelsFLAC() {
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "flac", format: .flac)
+    }
+    
+    func transcribeDataWithSpeakerLabels(
+        filename: String,
+        withExtension: String,
+        format: AudioMediaType)
+    {
+        let description = "Transcribe an audio file."
+        let expectation = self.expectation(description: description)
+        
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+        
+        do {
+            let audio = try Data(contentsOf: file)
+            
+            var settings = RecognitionSettings(contentType: format)
+            settings.continuous = true
+            settings.inactivityTimeout = -1
+            settings.interimResults = false
+            settings.wordConfidence = true
+            settings.timestamps = true
+            settings.filterProfanity = false
+            settings.speakerLabels = true
+            
+            speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
+                self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels)
+                expectation.fulfill()
+            }
+            waitForExpectations()
+        } catch {
+            XCTFail("Unable to read \(filename).\(withExtension).")
+            return
+        }
+    }
+
 
     // MARK: - Transcribe Streaming
 
@@ -1048,4 +1101,19 @@ class SpeechToTextTests: XCTestCase {
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
         XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)
     }
+    
+    func validateSTTSpeakerLabels(speakerLabels: [SpeakerLabel]) {
+        for speakerLabel in speakerLabels {
+            validateSTTSpeakerLabel(speakerLabel: speakerLabel)
+        }
+    }
+    
+    func validateSTTSpeakerLabel(speakerLabel: SpeakerLabel) {
+        XCTAssertGreaterThanOrEqual(speakerLabel.fromTime, 0)
+        XCTAssertGreaterThanOrEqual(speakerLabel.toTime, 0)
+        XCTAssertGreaterThanOrEqual(speakerLabel.confidence, 0.0)
+        XCTAssertLessThanOrEqual(speakerLabel.confidence, 1.0)
+        XCTAssertGreaterThanOrEqual(speakerLabel.speaker, 0)
+    }
+
 }

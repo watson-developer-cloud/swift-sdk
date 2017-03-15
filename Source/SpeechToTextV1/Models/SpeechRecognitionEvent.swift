@@ -31,10 +31,14 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
     /// lowest index in the array that has changed. `resultIndex` always points to the slot
     /// just after the most recent final result.
     internal let results: [SpeechRecognitionResult]
+    
+    /// The speakerLabels variable will contain an optional array of SpeakerLabel objects
+    internal let speakerLabels: [SpeakerLabel]?
 
     /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
     internal init(json: JSON) throws {
         resultIndex = try json.getInt(at: "result_index")
         results = try json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
+        speakerLabels = try? json.decodedArray(at: "speaker_labels", type: SpeakerLabel.self)
     }
 }

@@ -84,6 +84,9 @@ public struct RecognitionSettings: JSONEncodable {
     /// if false (the default), no formatting is performed. Applies to US English transcription only.
     public var smartFormatting: Bool?
     
+    /// If `true`, then speaker labels will be returned for each timestamp.  The default is `false`.
+    public var speakerLabels: Bool?
+    
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -138,6 +141,10 @@ public struct RecognitionSettings: JSONEncodable {
         if let smartFormatting = smartFormatting {
             json["smart_formatting"] = smartFormatting
         }
+        if let speakerLabels = speakerLabels {
+            json["speaker_labels"] = speakerLabels
+        }
+
         return json
     }
 }

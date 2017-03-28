@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Version 0.14.3
+_2017-03-28_
+
+This release provides support for Xcode 8.3 and Swift 3.1.
+
+## Version 0.14.2
+_2017-03-8_
+
+Updating small Discovery service bug that prevented reading credentials.
+
 ## Version 0.14.1
 _2017-03-2_
 

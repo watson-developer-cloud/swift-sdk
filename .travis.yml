@@ -42,9 +42,9 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -y ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-3.0.2-RELEASE-ubuntu14.04.tar.gz ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-3.0.2-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://swift.org/builds/swift-3.1-release/ubuntu1404/swift-3.1-RELEASE/swift-3.1-RELEASE-ubuntu14.04.tar.gz ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-3.1-RELEASE-ubuntu14.04.tar.gz ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-3.1-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm Source/SupportingFiles/Credentials.swift ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi

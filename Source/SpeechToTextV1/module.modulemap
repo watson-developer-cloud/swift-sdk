@@ -1,0 +1,9 @@
+module Ogg {
+    header "Dependencies/ogg/ogg.h"
+    export *
+}
+
+module Opus {
+    header "Dependencies/opus/opus.h"
+    export *
+}

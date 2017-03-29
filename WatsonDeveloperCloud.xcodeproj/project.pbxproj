@@ -712,6 +712,7 @@
 		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechPlaybackTests.swift; sourceTree = "<group>"; };
+		12889E761E8C17C30015D153 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
 		12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifier.swift; path = Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
@@ -793,10 +794,8 @@
 		7A9EC80F1D79B76100507725 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		7A9EC8101D79B76100507725 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
 		7A9EC8121D79B76100507725 /* config_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
-		7A9EC8131D79B76100507725 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		7A9EC8141D79B76100507725 /* ogg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
 		7A9EC8151D79B76100507725 /* os_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
-		7A9EC8171D79B76100507725 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		7A9EC8181D79B76100507725 /* opus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
 		7A9EC8191D79B76100507725 /* opus_defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
 		7A9EC81A1D79B76100507725 /* opus_multistream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
@@ -1896,7 +1895,6 @@
 			isa = PBXGroup;
 			children = (
 				7A9EC8121D79B76100507725 /* config_types.h */,
-				7A9EC8131D79B76100507725 /* module.modulemap */,
 				7A9EC8141D79B76100507725 /* ogg.h */,
 				7A9EC8151D79B76100507725 /* os_types.h */,
 			);
@@ -1906,7 +1904,6 @@
 		7A9EC8161D79B76100507725 /* opus */ = {
 			isa = PBXGroup;
 			children = (
-				7A9EC8171D79B76100507725 /* module.modulemap */,
 				7A9EC8181D79B76100507725 /* opus.h */,
 				7A9EC8191D79B76100507725 /* opus_defines.h */,
 				7A9EC81A1D79B76100507725 /* opus_multistream.h */,
@@ -1979,6 +1976,7 @@
 			children = (
 				7A9EC80D1D79B76100507725 /* Dependencies */,
 				7AAA9A111CEE3026002C9564 /* Models */,
+				12889E761E8C17C30015D153 /* module.modulemap */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
 				7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */,
 				7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */,
@@ -4298,7 +4296,6 @@
 				B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */,
 				B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */,
 				B1A8E54C1D19DCDF00678412 /* DocumentUrl.swift in Sources */,
-				E2B208BB1E6F571A00932C35 /* SpeakerLabel.swift in Sources */,
 				B1A8E5521D19DCDF00678412 /* KnowledgeGraph.swift in Sources */,
 				B1A8E5551D19DCDF00678412 /* PublicationDate.swift in Sources */,
 				B1A8E5531D19DCDF00678412 /* NewsResponse.swift in Sources */,
@@ -5292,10 +5289,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SpeechToTextV1/Dependencies/lib",
 				);
+				MODULEMAP_FILE = "";
+				MODULEMAP_PRIVATE_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/Source/SpeechToTextV1";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -5318,10 +5317,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SpeechToTextV1/Dependencies/lib",
 				);
+				MODULEMAP_FILE = "";
+				MODULEMAP_PRIVATE_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/Source/SpeechToTextV1";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

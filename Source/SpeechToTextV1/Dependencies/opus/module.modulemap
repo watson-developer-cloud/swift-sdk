@@ -1,4 +1,0 @@
-module Opus {
-    header "opus.h"
-    export *
-}

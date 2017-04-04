@@ -38,7 +38,7 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
-* [Discovery] (#discovery)
+* [Discovery](#discovery)
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -614,8 +614,8 @@ let parameters = Parameters(features: Features(), text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
-	results in 
-	print (results)
+    results in 
+    print (results)
 }
 
 ```

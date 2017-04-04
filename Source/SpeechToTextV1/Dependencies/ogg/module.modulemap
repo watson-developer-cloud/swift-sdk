@@ -1,4 +1,0 @@
-module Ogg {
-    header "ogg.h"
-    export *
-}

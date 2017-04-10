@@ -89,6 +89,9 @@
                 <a href="Structs/RecognitionSettings.html">RecognitionSettings</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/SpeakerLabel.html">SpeakerLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
               </li>
               <li class="nav-group-task">
@@ -258,7 +261,7 @@
 
 <p>Note that service credentials are different from your Bluemix username and password.</p>
 
-<p>See <a href="https://www.ibm.com/watson/developercloud/doc/getting_started/">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
+<p>See <a href="https://www.ibm.com/watson/developercloud/doc/common/">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
 <a href='#custom-service-urls' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='custom-service-urls'>Custom Service URLs</h2>
 
 <p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
@@ -353,7 +356,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>AlchemyLanguage has a number of features, including:</p>
 <li>Entity Extraction</li>
 <li>Sentiment Analysis</li>
-<li>Keyword Extraction</li>
+<div class="aside aside-keyword">
+    <p class="aside-title">Keyword</p>
+    Keyword Extraction
+
+</div>
 <li>Concept Tagging</li>
 <li>Relation Extraction</li>
 <li>Taxonomy Classification</li>
@@ -708,11 +715,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
 
-<span class="k">let</span> <span class="nv">naturalLanguageUndersanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">naturalLanguageUnderstanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">textToAnalyze</span> <span class="o">=</span> <span class="s">"In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."</span>
 
-<span class="o">=</span><span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="kt">Features</span><span class="p">(),</span> <span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="kt">Features</span><span class="p">(),</span> <span class="nv">text</span><span class="p">:</span> <span class="n">textToAnalyze</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyzeContent</span><span class="p">(</span><span class="nv">withParameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
@@ -1274,8 +1281,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-02-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

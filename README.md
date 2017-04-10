@@ -38,7 +38,7 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
-* [Discovery] (#discovery)
+* [Discovery](#discovery)
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -133,7 +133,7 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
-See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Custom Service URLs
 
@@ -606,16 +606,16 @@ let username = "your-username-here"
 let password = "your-password-here"
 let version = "yyyy-mm-dd" // use today's date for the most recent version
 
-let naturalLanguageUndersanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
 
 let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
 
-=let parameters = Parameters(features: Features(), text: text)
+let parameters = Parameters(features: Features(), text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
-	results in 
-	print (results)
+    results in 
+    print (results)
 }
 
 ```

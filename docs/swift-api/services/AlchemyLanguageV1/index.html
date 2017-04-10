@@ -285,7 +285,7 @@
 
 <p>Note that service credentials are different from your Bluemix username and password.</p>
 
-<p>See <a href="https://www.ibm.com/watson/developercloud/doc/getting_started/">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
+<p>See <a href="https://www.ibm.com/watson/developercloud/doc/common/">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
 <a href='#custom-service-urls' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='custom-service-urls'>Custom Service URLs</h2>
 
 <p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
@@ -380,7 +380,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>AlchemyLanguage has a number of features, including:</p>
 <li>Entity Extraction</li>
 <li>Sentiment Analysis</li>
-<li>Keyword Extraction</li>
+<div class="aside aside-keyword">
+    <p class="aside-title">Keyword</p>
+    Keyword Extraction
+
+</div>
 <li>Concept Tagging</li>
 <li>Relation Extraction</li>
 <li>Taxonomy Classification</li>
@@ -489,8 +493,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span>
     <span class="nv">withSize</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span>
     <span class="nv">withDescription</span><span class="p">:</span> <span class="n">testDescription</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> 
-<span class="p">{</span>   
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>
     <span class="n">environment</span> <span class="k">in</span>
     <span class="k">self</span><span class="o">.</span><span class="n">environmentID</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">environmentID</span>
 <span class="p">}</span>
@@ -499,7 +503,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="n">bool</span> <span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">environmentReady</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">discovery</span><span class="o">.</span><span class="nf">getEnvironment</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-    <span class="p">{</span> 
+    <span class="p">{</span>
         <span class="n">environment</span> <span class="k">in</span>
         <span class="k">if</span> <span class="n">environment</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">"active"</span> <span class="p">{</span>
          <span class="k">self</span><span class="o">.</span><span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">true</span>
@@ -517,7 +521,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withDescription</span><span class="p">:</span> <span class="n">collectionDescription</span><span class="p">,</span>
     <span class="nv">withConfigurationID</span><span class="p">:</span> <span class="n">configurationID</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>   
+<span class="p">{</span>
     <span class="n">collection</span> <span class="k">in</span>
     <span class="k">self</span><span class="o">.</span><span class="n">collectionID</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">collectionID</span>
 <span class="p">}</span>
@@ -528,7 +532,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">discovery</span><span class="o">.</span><span class="nf">listCollectionDetails</span><span class="p">(</span>
     <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">collection</span> <span class="k">in</span>
     <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="kt">CollectionStatus</span><span class="o">.</span><span class="n">active</span> <span class="p">{</span>
@@ -545,7 +549,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">file</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">document</span> <span class="k">in</span>
     <span class="kt">NSLog</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
@@ -569,8 +573,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withQuery</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
     <span class="nv">withAggregation</span><span class="p">:</span> <span class="n">aggregation</span><span class="p">,</span>
     <span class="nv">return</span><span class="p">:</span> <span class="n">returnHierarchies</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
-<span class="p">{</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
+<span class="p">{</span>
     <span class="n">queryResponse</span> <span class="k">in</span>
     <span class="k">if</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">queryResponse</span><span class="o">.</span><span class="n">results</span> <span class="p">{</span>
         <span class="k">for</span> <span class="n">result</span> <span class="k">in</span> <span class="n">results</span> <span class="p">{</span>
@@ -700,7 +704,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-input-text"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">personalityInsights</span><span class="o">.</span><span class="nf">getProfile</span><span class="p">(</span><span class="nv">fromText</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">profile</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>                      
+    <span class="nf">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -735,11 +739,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
 
-<span class="k">let</span> <span class="nv">naturalLanguageUndersanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">naturalLanguageUnderstanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">textToAnalyze</span> <span class="o">=</span> <span class="s">"In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."</span>
 
-<span class="o">=</span><span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="kt">Features</span><span class="p">(),</span> <span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="kt">Features</span><span class="p">(),</span> <span class="nv">text</span><span class="p">:</span> <span class="n">textToAnalyze</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyzeContent</span><span class="p">(</span><span class="nv">withParameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
@@ -1065,7 +1069,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 
 <span class="k">guard</span> <span class="k">let</span> <span class="nv">customizationStatus</span> <span class="o">=</span> <span class="n">customizationStatus</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">throw</span> <span class="n">error</span> 
+    <span class="k">throw</span> <span class="n">error</span>
 <span class="p">}</span>
 
 <span class="c1">// Check the customization status</span>
@@ -1094,8 +1098,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="k">let</span> <span class="nv">customWord2</span> <span class="o">=</span> <span class="kt">NewWord</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="s">"IEEE"</span><span class="p">,</span> <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="s">"i triple e"</span><span class="p">])</span>
 
     <span class="n">speechToText</span><span class="o">.</span><span class="nf">addWords</span><span class="p">(</span>
-        <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span> 
-        <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="n">customWord1</span><span class="p">,</span> <span class="n">customWord2</span><span class="p">],</span> 
+        <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span>
+        <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="n">customWord1</span><span class="p">,</span> <span class="n">customWord2</span><span class="p">],</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"added words to corpus"</span><span class="p">)</span>
     <span class="p">}</span>
@@ -1301,8 +1305,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-02-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

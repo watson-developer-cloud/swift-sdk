@@ -300,6 +300,176 @@ class ConversationTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    func testListAllWorkspaces() {
+        let description = "List all workspaces."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(failure: failWithError) { workspaceResponse in
+            XCTAssertGreaterThanOrEqual(workspaceResponse.workspaces.count, 15)
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllWorkspacesPageLimit1() {
+        let description = "List all workspaces with page limit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(pageLimit: 1, failure: failWithError) { workspaceResponse in
+            XCTAssertEqual(workspaceResponse.workspaces.count, 1)
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResponse.pagination.nextUrl)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllWorkspacesWithCountTrue() {
+        let description = "List all workspaces with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(includeCount: true, failure: failWithError) { workspaceResponse in
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResponse.pagination.total)
+            XCTAssertNotNil(workspaceResponse.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteWorkspace() {
+        var newWorkspace: String?
+        
+        let description1 = "Create a workspace."
+        let expectation1 = expectation(description: description1)
+
+        let workspaceName = "swift-sdk-test-workspace"
+        let workspaceDescription = "temporary workspace for the swift sdk unit tests"
+        let workspaceLanguage = "en"
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
+        conversation.createWorkspace(body: createWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            
+            newWorkspace = workspace.workspaceID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let newWorkspaceID = newWorkspace else {
+            XCTFail("Failed to get the ID of the newly created workspace.")
+            return
+        }
+        
+        let description2 = "Delete the newly created workspace."
+        let expectation2 = expectation(description: description2)
+        
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListSingleWorkspace() {
+        let description = "List details of a single workspace."
+        let expectation = self.expectation(description: description)
+        
+        conversation.getWorkspace(workspaceID: workspaceID, export: false, failure: failWithError) { workspace in
+            XCTAssertNotNil(workspace.name)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.language)
+            XCTAssertNotNil(workspace.metadata)
+            XCTAssertNotNil(workspace.workspaceID)
+            XCTAssertNotNil(workspace.status)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteWorkspace() {
+        var newWorkspace: String?
+        
+        let description1 = "Create a workspace."
+        let expectation1 = expectation(description: description1)
+        
+        let workspaceName = "swift-sdk-test-workspace"
+        let workspaceDescription = "temporary workspace for the swift sdk unit tests"
+        let workspaceLanguage = "en"
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
+        conversation.createWorkspace(body: createWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            
+            newWorkspace = workspace.workspaceID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let newWorkspaceID = newWorkspace else {
+            XCTFail("Failed to get the ID of the newly created workspace.")
+            return
+        }
+        let description2 = "Update the newly created workspace."
+        let expectation2 = expectation(description: description2)
+        
+        let newWorkspaceName = "swift-sdk-test-workspace-2"
+        let newWorkspaceDescription = "new description for the temporary workspace"
+        
+        let updateWorkspaceBody = UpdateWorkspace(name: newWorkspaceName, description: newWorkspaceDescription)
+        conversation.updateWorkspace(workspaceID: newWorkspaceID, body: updateWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, newWorkspaceName)
+            XCTAssertEqual(workspace.description, newWorkspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the newly created workspace."
+        let expectation3 = expectation(description: description3)
+        
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
 
     // MARK: - Negative Tests
 

@@ -301,12 +301,13 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
+    // MARK: Workspaces
+    
     func testListAllWorkspaces() {
         let description = "List all workspaces."
         let expectation = self.expectation(description: description)
         
         conversation.listWorkspaces(failure: failWithError) { workspaceResponse in
-            XCTAssertGreaterThanOrEqual(workspaceResponse.workspaces.count, 15)
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
@@ -321,7 +322,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
-    func testListAllWorkspacesPageLimit1() {
+    func testListAllWorkspacesWithPageLimit1() {
         let description = "List all workspaces with page limit specified as 1."
         let expectation = self.expectation(description: description)
         
@@ -342,7 +343,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
-    func testListAllWorkspacesWithCountTrue() {
+    func testListAllWorkspacesWithIncludeCount() {
         let description = "List all workspaces with includeCount as true."
         let expectation = self.expectation(description: description)
         
@@ -358,6 +359,7 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
             XCTAssertNotNil(workspaceResponse.pagination.total)
             XCTAssertNotNil(workspaceResponse.pagination.matched)
+            XCTAssertEqual(workspaceResponse.pagination.total, workspaceResponse.workspaces.count)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -518,6 +520,182 @@ class ConversationTests: XCTestCase {
         let expectation3 = expectation(description: description3)
         
         conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Intents
+    
+    func testListAllIntents() {
+        let description = "List all the intents in a workspace."
+        let expectation = self.expectation(description: description)
+
+        conversation.listIntents(workspaceID: workspaceID, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithIncludeCount() {
+        let description = "List all the intents in a workspace with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, includeCount: true, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.total)
+            XCTAssertNotNil(intents.pagination.matched)
+            XCTAssertEqual(intents.pagination.total, intents.intents.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithPageLimit1() {
+        let description = "List all the intents in a workspace with pageLimit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { intents in
+            XCTAssertEqual(intents.intents.count, 1)
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNotNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithExport() {
+        let description = "List all the intents in a workspace with export as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, export: true, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNotNil(intent.examples)
+                for example in intent.examples! {
+                    XCTAssertNotNil(example.created)
+                    XCTAssertNotNil(example.updated)
+                    XCTAssertNotNil(example.text)
+                }
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteIntent() {
+        let description = "Create a new intent."
+        let expectation = self.expectation(description: description)
+        
+        let newIntentName = "swift-sdk-test-intent"
+        let newIntentDescription = "description for swift-sdk-test-intent"
+        let example1 = CreateExample(text: "example 1 for swift-sdk-test-intent")
+        let example2 = CreateExample(text: "example 2 for swift-sdk-test-intent")
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.description, newIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new intent."
+        let expectation2 = self.expectation(description: description2)
+
+        conversation.deleteIntent(workspaceID: workspaceID, intent: newIntentName, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetIntentWithExport() {
+        let description = "Get details of a specific intent."
+        let expectation = self.expectation(description: description)
+        
+        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, failure: failWithError) { intent in
+            XCTAssertNotNil(intent.intent)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            XCTAssertNotNil(intent.examples)
+            for example in intent.examples! {
+                XCTAssertNotNil(example.created)
+                XCTAssertNotNil(example.updated)
+                XCTAssertNotNil(example.text)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteIntent() {
+        let description = "Create a new intent."
+        let expectation = self.expectation(description: description)
+        
+        let newIntentName = "swift-sdk-test-intent"
+        let newIntentDescription = "description for \(newIntentName)"
+        let example1 = CreateExample(text: "example 1 for \(newIntentName)")
+        let example2 = CreateExample(text: "example 2 for \(newIntentName)")
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.description, newIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Update the new intent."
+        let expectation2 = self.expectation(description: description2)
+        
+        let updatedIntentName = "updated-name-for-\(newIntentName)"
+        let updatedIntentDescription = "updated-description-for-\(newIntentName)"
+        let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
+        let updateBody = UpdateIntent(intent: updatedIntentName, description: updatedIntentDescription, examples: [updatedExample1])
+        conversation.updateIntent(workspaceID: workspaceID, intent: newIntentName, body: updateBody, failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, updatedIntentName)
+            XCTAssertEqual(intent.description, updatedIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the new intent."
+        let expectation3 = self.expectation(description: description3)
+        
+        conversation.deleteIntent(workspaceID: workspaceID, intent: updatedIntentName, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()

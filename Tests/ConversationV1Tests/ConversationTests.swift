@@ -47,7 +47,7 @@ class ConversationTests: XCTestCase {
     func instantiateConversation() {
         let username = Credentials.ConversationUsername
         let password = Credentials.ConversationPassword
-        let version = "2016-11-02"
+        let version = "2017-04-21"
         conversation = Conversation(username: username, password: password, version: version)
     }
 
@@ -372,7 +372,17 @@ class ConversationTests: XCTestCase {
         let workspaceName = "swift-sdk-test-workspace"
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
-        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
+        var workspaceMetadata = [String: Any]()
+        workspaceMetadata["testKey"] = "testValue"
+        let intentExample = CreateExample(text: "This is an example of Intent1")
+        let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
+        let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
+        let workspaceEntity = CreateEntity(entity: "Entity1", description: "description of Entity1", source: "Source of the entity", values: [entityValue])
+        let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
+        let workspaceCounterexample = CreateExample(text: "This is a counterexample")
+        
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, metadata: workspaceMetadata, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample])
+        
         conversation.createWorkspace(body: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
@@ -391,11 +401,49 @@ class ConversationTests: XCTestCase {
             return
         }
         
-        let description2 = "Delete the newly created workspace."
+        let description2 = "Get the newly created workspace."
         let expectation2 = expectation(description: description2)
         
-        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.metadata)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertEqual(workspace.workspaceID, newWorkspaceID)
+            XCTAssertNotNil(workspace.status)
+            
+            XCTAssertNotNil(workspace.intents)
+            for intent in workspace.intents! {
+                XCTAssertEqual(intent.intent, workspaceIntent.intent)
+                XCTAssertEqual(intent.description, workspaceIntent.description)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNotNil(intent.examples)
+                for example in intent.examples! {
+                    XCTAssertNotNil(example.created)
+                    XCTAssertNotNil(example.updated)
+                    XCTAssertEqual(example.text, intentExample.text)
+                }
+            }
+            
+            XCTAssertNotNil(workspace.counterexamples)
+            for counterexample in workspace.counterexamples! {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertEqual(counterexample.text, workspaceCounterexample.text)
+            }
+            
             expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the newly created workspace."
+        let expectation3 = expectation(description: description3)
+        
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation3.fulfill()
         }
         waitForExpectations()
     }
@@ -412,6 +460,10 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(workspace.metadata)
             XCTAssertNotNil(workspace.workspaceID)
             XCTAssertNotNil(workspace.status)
+            XCTAssertNil(workspace.intents)
+            XCTAssertNil(workspace.entities)
+            XCTAssertNil(workspace.counterexamples)
+            XCTAssertNil(workspace.dialogNodes)
             expectation.fulfill()
         }
         waitForExpectations()

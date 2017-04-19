@@ -829,6 +829,136 @@ class ConversationTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    // MARK: Counterexamples
+    
+    func testListAllCounterexamples() {
+        let description = "List all the counterexamples of a workspace."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNil(counterexamples.pagination.total)
+            XCTAssertNil(counterexamples.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllCounterexamplesWithIncludeCount() {
+        let description = "List all the counterexamples of a workspace with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNotNil(counterexamples.pagination.total)
+            XCTAssertNotNil(counterexamples.pagination.matched)
+            XCTAssertEqual(counterexamples.pagination.total, counterexamples.counterexamples.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllCounterexamplesWithPageLimit1() {
+        let description = "List all the counterexamples of a workspace with pageLimit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.total)
+            XCTAssertNil(counterexamples.pagination.matched)
+            XCTAssertEqual(counterexamples.counterexamples.count, 1)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+ 
+    func testCreateAndDeleteCounterexample() {
+        let description = "Create a new counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-counterexample"
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertNotNil(counterexample.text)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new counterexample."
+        let expectation2 = self.expectation(description: description2)
+        
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testGetCounterexample() {
+        let description = "Get details of a specific counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let exampleText = "I want financial advice today."
+        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, exampleText)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteCounterexample() {
+        let description = "Create a new counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-counterexample"
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, newExample)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Update the new example."
+        let expectation2 = self.expectation(description: description2)
+        
+        let updatedExample = UpdateExample(text: "updated-swift-sdk-test-counterexample")
+        conversation.updateCounterexample(workspaceID: workspaceID, text: newExample, body: updatedExample, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, updatedExample.text)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the new counterexample."
+        let expectation3 = self.expectation(description: description3)
+        
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: updatedExample.text!, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
 
     // MARK: - Negative Tests
 

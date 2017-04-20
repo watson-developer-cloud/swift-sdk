@@ -26,57 +26,69 @@ public typealias WorkspaceID = String
  to provide outstanding customer engagements.
  */
 public class Conversation {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/conversation/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
-    private let version: String
     private let domain = "com.ibm.watson.developer-cloud.ConversationV1"
-    
+    private let version: String
+
     /**
      Create a `Conversation` object.
- 
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-            in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
-     If the given data represents an error returned by the Visual Recognition service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
-     
+     If the response or data represents an error returned by the Conversation service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
+
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = (try? json.getInt(at: "code")) ?? 400
-            var userInfo = [
-                NSLocalizedFailureReasonErrorKey: error
-            ]
-            if let description = try? json.getString(at: "description") {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
     }
-    
+
     /**
      Send a message to the Conversation service. To start a new conversation set the `request`
      parameter to `nil`.
- 
+
      - parameter withWorkspace: The unique identifier of the workspace to use.
      - parameter request: The message requst to send to the server.
      - parameter failure: A function executed if an error occurs.
@@ -90,15 +102,15 @@ public class Conversation {
     {
         // construct body
         guard let body = try? request?.toJSON().serialize() else {
-            failure?(RestError.encodingError)
+            failure?(RestError.serializationError)
             return
         }
-        
-        // construct query items
-        var queryItems = [URLQueryItem]()
-        queryItems.append(URLQueryItem(name: "version", value: version))
-        
-        // construct rest request
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
@@ -106,15 +118,15 @@ public class Conversation {
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
-            queryItems: queryItems,
+            queryItems: queryParameters,
             messageBody: body
         )
-        
-        // execute rest request
-        request.responseObject(dataToError: dataToError) {
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<MessageResponse>) in
             switch response.result {
-            case .success(let response): success(response)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

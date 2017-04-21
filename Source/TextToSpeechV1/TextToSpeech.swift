@@ -248,16 +248,21 @@ public class TextToSpeech {
                 case .none:
                     if audioFormat == .wav {
                         // repair the WAV header
-                        var wav = data
-                        guard TextToSpeech.isWAVFile(data: wav) else {
+                        guard TextToSpeech.isWAVFile(data: data) else {
                             let failureReason = "Returned audio is in an unexpected format."
                             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                             failure?(error)
                             return
                         }
-                        TextToSpeech.repairWAVHeader(data: &wav)
-                        success(wav)
+                        guard let repairedWav = TextToSpeech.repairWAVHeader(data: data) else {
+                            let failureReason = "WAV header is in an unexpected format. The offset and/or length may be incorrect."
+                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                            failure?(error)
+                            return
+                        }
+                        success(repairedWav)
                     } else {
                         success(data)
                     }
@@ -700,6 +705,9 @@ public class TextToSpeech {
             Unicode characters using a UTF-8 encoding.
      */
     private static func dataToUTF8String(data: Data, offset: Int, length: Int) -> String? {
+        if data.count < length || data.count < (offset + length) {
+            return nil
+        }
         let range = Range(uncheckedBounds: (lower: offset, upper: offset + length))
         let subdata = data.subdata(in: range)
         return String(data: subdata, encoding: String.Encoding.utf8)
@@ -744,11 +752,6 @@ public class TextToSpeech {
         let riffHeaderChunkIDSize = 4
         let riffHeaderChunkSizeOffset = 8
         let riffHeaderChunkSizeSize = 4
-        let riffHeaderSize = 12
-
-        guard data.count >= riffHeaderSize else {
-            return false
-        }
         
         let riffChunkID = dataToUTF8String(data: data, offset: riffHeaderChunkIDOffset, length: riffHeaderChunkIDSize)
         guard riffChunkID == "RIFF" else {
@@ -769,31 +772,36 @@ public class TextToSpeech {
      - parameter data: The WAV-formatted audio file produced by Watson Text to Speech. The
             byte data will be analyzed and repaired in-place.
      */
-    private static func repairWAVHeader(data: inout Data) {
+    private static func repairWAVHeader(data: Data) -> Data? {
         
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
         
         // update RIFF chunk size
+        var data = data
         let fileLength = data.count
         var riffChunkSize = UInt32(fileLength - 8)
         let riffChunkSizeData = Data(bytes: &riffChunkSize, count: MemoryLayout<UInt32>.stride)
+        if data.count < 8 {
+            return nil
+        }
         data.replaceSubrange(Range(uncheckedBounds: (lower: 4, upper: 8)), with: riffChunkSizeData)
         
         // find data subchunk
-        var subchunkID: String?
         var subchunkSize = 0
         var fieldOffset = 12
         let fieldSize = 4
         while true {
             // prevent running off the end of the byte buffer
             if fieldOffset + 2*fieldSize >= data.count {
-                return
+                return nil
             }
             
             // read subchunk ID
-            subchunkID = dataToUTF8String(data: data, offset: fieldOffset, length: fieldSize)
+            guard let subchunkID = dataToUTF8String(data: data, offset: fieldOffset, length: fieldSize) else {
+                return nil
+            }
             fieldOffset += fieldSize
             if subchunkID == "data" {
                 break
@@ -810,5 +818,7 @@ public class TextToSpeech {
         // update data subchunk size
         let dataSubchunkSizeData = Data(bytes: &dataSubchunkSize, count: MemoryLayout<UInt32>.stride)
         data.replaceSubrange(Range(uncheckedBounds: (lower: fieldOffset, upper: fieldOffset+fieldSize)), with: dataSubchunkSizeData)
+        
+        return data
     }
 }

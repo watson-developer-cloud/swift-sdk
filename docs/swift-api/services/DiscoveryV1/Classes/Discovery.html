@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Discovery Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Discovery" class="dashAnchor"></a>
+    <a title="Discovery Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Discovery Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Discovery.html">Discovery</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CollectionStatus.html">CollectionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/DocumentStatus.html">DocumentStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnvironmentSize.html">EnvironmentSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NormalizationOperation.html">NormalizationOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NoticeSeverity.html">NoticeSeverity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Action.html">Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Action/Verb.html">– Verb</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AggregationResult.html">AggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BlekkoResult.html">BlekkoResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Concept.html">Concept</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Configuration.html">Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Conversion.html">Conversion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedCollection.html">DeletedCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedConfiguration.html">DeletedConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedEnvironment.html">DeletedEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DisambiguatedLinks.html">DisambiguatedLinks</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DiskUsage.html">DiskUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Document.html">Document</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentCounts.html">DocumentCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichedTitle.html">EnrichedTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Field.html">Field</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IndexCapacity.html">IndexCapacity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Keyword.html">Keyword</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KnowledgeGraph.html">KnowledgeGraph</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MemoryUsage.html">MemoryUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Normalization.html">Normalization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice.html">Notice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NoticeMessage.html">NoticeMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PublicationDate.html">PublicationDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Relation.html">Relation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RelationObject.html">RelationObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RelationObject/Keyword.html">– Keyword</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sentiment.html">Sentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Subject.html">Subject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Taxonomy.html">Taxonomy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TestConfigurationDetails.html">TestConfigurationDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TestConfigurationDetails/Snapshot.html">– Snapshot</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Discovery</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Discovery</span></code></pre>
+
+                </div>
+              </div>
+            <p>The IBM Watson Discovery service uses data analysis combined with cognitive intuition to take your
+unstructured data and enrich it so you can query it for the information you need.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC11DiscoveryV19Discovery10serviceURLSS"></a>
+                    <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC11DiscoveryV19Discovery10serviceURLSS">serviceURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base URL to use when contacting the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/discovery/api"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC11DiscoveryV19Discovery14defaultHeadersGVs10DictionarySSSS_"></a>
+                    <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC11DiscoveryV19Discovery14defaultHeadersGVs10DictionarySSSS_">defaultHeaders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default HTTP headers for all requests to the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19DiscoverycFT8usernameSS8passwordSS7versionSS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(username:password:version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19DiscoverycFT8usernameSS8passwordSS7versionSS_S0_">init(username:password:version:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>Discovery</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The username used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The password used to authenticate with the service.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date in “YYYY-MM-DD” format.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Environments"></a>
+                <a name="//apple_ref/swift/Section/Environments" class="dashAnchor"></a>
+                <a href="#/Environments">
+                  <h3 class="section-name">Environments</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery15getEnvironmentsFT8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_11Environment_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getEnvironments(withName:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery15getEnvironmentsFT8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_11Environment_T__T_">getEnvironments(withName:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get all existing environments for this Discovery instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnvironments</span> <span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Show only the environment with the given name.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with a list of all environments associated with this service instance.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery17createEnvironmentFT8withNameSS8withSizeOS_15EnvironmentSize15withDescriptionGSqSS_7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createEnvironment(withName:withSize:withDescription:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery17createEnvironmentFT8withNameSS8withSizeOS_15EnvironmentSize15withDescriptionGSqSS_7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_">createEnvironment(withName:withSize:withDescription:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create an environment for this service instance.</p>
+
+<p>For the experimental release, the size of the environment is fixed at 2GB
+available disk space, and 1GB RAM.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEnvironment</span><span class="p">(</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withSize</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Enums/EnvironmentSize.html">EnvironmentSize</a></span><span class="p">,</span>
+        <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the new environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the new environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the newly created environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery17deleteEnvironmentFT6withIDSS7failureGSqFPs5Error_T__7successFVS_18DeletedEnvironmentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteEnvironment(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery17deleteEnvironmentFT6withIDSS7failureGSqFPs5Error_T__7successFVS_18DeletedEnvironmentT__T_">deleteEnvironment(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete the environment with the given environment ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEnvironment</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedEnvironment.html">DeletedEnvironment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the new environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the newly deleted environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery14getEnvironmentFT6withIDSS7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getEnvironment(withID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery14getEnvironmentFT6withIDSS7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_">getEnvironment(withID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve information about an environment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnvironment</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the environment to retrieve information about.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with information about the requested environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery17updateEnvironmentFT6withIDSS4nameSS11descriptionGSqSS_7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateEnvironment(withID:name:description:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery17updateEnvironmentFT6withIDSS4nameSS11descriptionGSqSS_7failureGSqFPs5Error_T__7successFVS_11EnvironmentT__T_">updateEnvironment(withID:name:description:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update an environment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateEnvironment</span><span class="p">(</span>
+        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the environment to retrieve information about.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The updated name of the environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The updated description of the environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with information about the requested environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Configurations"></a>
+                <a name="//apple_ref/swift/Section/Configurations" class="dashAnchor"></a>
+                <a href="#/Configurations">
+                  <h3 class="section-name">Configurations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery17getConfigurationsFT17withEnvironmentIDSS8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_13Configuration_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getConfigurations(withEnvironmentID:withName:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery17getConfigurationsFT17withEnvironmentIDSS8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_13Configuration_T__T_">getConfigurations(withEnvironmentID:withName:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List existing configurations for the service instance. </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConfigurations</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Configuration])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Show only the configuration with the given name.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the configurations.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery19createConfigurationFT17withEnvironmentIDSS13configurationVS_20ConfigurationDetails7failureGSqFPs5Error_T__7successFS1_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/createConfiguration(withEnvironmentID:configuration:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery19createConfigurationFT17withEnvironmentIDSS13configurationVS_20ConfigurationDetails7failureGSqFPs5Error_T__7successFS1_T__T_">createConfiguration(withEnvironmentID:configuration:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new configuration for this service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createConfiguration</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON object that allows you to customize how your content is ingested and what enrichments are added to your data. <code>name</code> is required and must be unique within the current environment. All other properties are optional.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the configurations.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery19deleteConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS7failureGSqFPs5Error_T__7successFVS_20DeletedConfigurationT__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteConfiguration(withEnvironmentID:withConfigurationID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery19deleteConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS7failureGSqFPs5Error_T__7successFVS_20DeletedConfigurationT__T_">deleteConfiguration(withEnvironmentID:withConfigurationID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete the specified configuration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteConfiguration</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(DeletedConfiguration)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the deleted configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery16getConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS7failureGSqFPs5Error_T__7successFVS_20ConfigurationDetailsT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getConfiguration(withEnvironmentID:withConfigurationID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery16getConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS7failureGSqFPs5Error_T__7successFVS_20ConfigurationDetailsT__T_">getConfiguration(withEnvironmentID:withConfigurationID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get details of a specific configuration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConfiguration</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your environment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of your configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery19updateConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS13configurationVS_20ConfigurationDetails7failureGSqFPs5Error_T__7successFS1_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateConfiguration(withEnvironmentID:withConfigurationID:configuration:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery19updateConfigurationFT17withEnvironmentIDSS19withConfigurationIDSS13configurationVS_20ConfigurationDetails7failureGSqFPs5Error_T__7successFS1_T__T_">updateConfiguration(withEnvironmentID:withConfigurationID:configuration:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Replaces the configuration that was at the given path before.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateConfiguration</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the environment in which the configuration is located.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the configuration you want to replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A JSON object with the new configuration details.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Test%20Configuration%20on%20Document"></a>
+                <a name="//apple_ref/swift/Section/Test Configuration on Document" class="dashAnchor"></a>
+                <a href="#/Test%20Configuration%20on%20Document">
+                  <h3 class="section-name">Test Configuration on Document</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery30testConfigurationInEnvironmentFT17withEnvironmentIDSS17withConfigurationGSqV10Foundation3URL_19withConfigurationIDGSqSS_4fileGSqS2__8metadataGSqS2__7failureGSqFPs5Error_T__7successFVS_24TestConfigurationDetailsT__T_"></a>
+                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(withEnvironmentID:withConfiguration:withConfigurationID:file:metadata:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery30testConfigurationInEnvironmentFT17withEnvironmentIDSS17withConfigurationGSqV10Foundation3URL_19withConfigurationIDGSqSS_4fileGSqS2__8metadataGSqS2__7failureGSqFPs5Error_T__7successFVS_24TestConfigurationDetailsT__T_">testConfigurationInEnvironment(withEnvironmentID:withConfiguration:withConfigurationID:file:metadata:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run a sample document against your configuration or the default configuration
+to return diagnostic information to help you understand how the document was
+processed. The document is not added to the index. </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testConfigurationInEnvironment</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfiguration</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(TestConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the environment in which the configuration is located.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The configuration to use to process the document. If this parameter is provided, the provided configuration of the environment will bee used to process the document. If both the configuration and configurationID parameter are provided, the request will be rejected. The maximum supported configuration size is 1MB. Must provide either a configuration or the configuration ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the configuration to use to process the document. If both the configurationID and the configuration parameters are provided, the request will be rejected. Must provide either a configuration or the configuration ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content of the document to ingest and test the configuration on. The maximum supported file size is 50 MB. Files larger than 50 MB will be rejected. Must provide either a file or a metadata.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If you’re using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Must provide either a file or a metadata.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Collections"></a>
+                <a name="//apple_ref/swift/Section/Collections" class="dashAnchor"></a>
+                <a href="#/Collections">
+                  <h3 class="section-name">Collections</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery14getCollectionsFT17withEnvironmentIDSS8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_10Collection_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getCollections(withEnvironmentID:withName:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery14getCollectionsFT17withEnvironmentIDSS8withNameGSqSS_7failureGSqFPs5Error_T__7successFGSaVS_10Collection_T__T_">getCollections(withEnvironmentID:withName:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get all existing collections.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollections</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Collection])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the environment the collections are stored in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the collections.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery16createCollectionFT17withEnvironmentIDSS8withNameSS15withDescriptionGSqSS_19withConfigurationIDGSqSS_7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createCollection(withEnvironmentID:withName:withDescription:withConfigurationID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery16createCollectionFT17withEnvironmentIDSS8withNameSS15withDescriptionGSqSS_19withConfigurationIDGSqSS_7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_">createCollection(withEnvironmentID:withName:withDescription:withConfigurationID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new collection for storing documents.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique ID of the environment to create a collection in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the new collection.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the configuration.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique ID of the configuration the collection will be created with. If nil, the default value will be specified. Call the getConfigurationID method to find the default value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with details of the created collection.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery16deleteCollectionFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFVS_17DeletedCollectionT__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteCollection(withEnvironmentID:withCollectionID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery16deleteCollectionFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFVS_17DeletedCollectionT__T_">deleteCollection(withEnvironmentID:withCollectionID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a collection in the environment the collection is located in.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedCollection.html">DeletedCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery21listCollectionDetailsFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listCollectionDetails(withEnvironmentID:withCollectionID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery21listCollectionDetailsFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_">listCollectionDetails(withEnvironmentID:withCollectionID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve the information of a specified collection.</p>
+
+<ul>
+<li>paramater environmentID: The ID of the environment the collection is in.</li>
+<li>paramater collectionID: The ID of the collection to retrieve details of.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollectionDetails</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery16updateCollectionFT17withEnvironmentIDSS16withCollectionIDSS4nameSS11descriptionGSqSS_15configurationIDGSqSS_7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateCollection(withEnvironmentID:withCollectionID:name:description:configurationID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery16updateCollectionFT17withEnvironmentIDSS16withCollectionIDSS4nameSS11descriptionGSqSS_15configurationIDGSqSS_7failureGSqFPs5Error_T__7successFVS_10CollectionT__T_">updateCollection(withEnvironmentID:withCollectionID:name:description:configurationID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Replaces an existing collection.</p>
+
+<ul>
+<li>paramater environmentID: The ID of the environment the collection is in.</li>
+<li>paramater collectionID: The ID of the collection to update by replacing the collection with
+the updated information.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery20listCollectionFieldsFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFGSaVS_5Field_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/listCollectionFields(withEnvironmentID:withCollectionID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery20listCollectionFieldsFT17withEnvironmentIDSS16withCollectionIDSS7failureGSqFPs5Error_T__7successFGSaVS_5Field_T__T_">listCollectionFields(withEnvironmentID:withCollectionID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve all unique fields and each field&rsquo;s type stored in a collection&rsquo;s index.</p>
+
+<ul>
+<li>paramater collectionID: The unique identifier of the collection to display the fields of.</li>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with details of the fields.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollectionFields</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Field])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Documents"></a>
+                <a name="//apple_ref/swift/Section/Documents" class="dashAnchor"></a>
+                <a href="#/Documents">
+                  <h3 class="section-name">Documents</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery23addDocumentToCollectionFT17withEnvironmentIDSS16withCollectionIDSS19withConfigurationIDGSqSS_4fileGSqV10Foundation3URL_12fileMimeTypeGSqSS_8metadataGSqS2__13configurationGSqS2__7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/addDocumentToCollection(withEnvironmentID:withCollectionID:withConfigurationID:file:fileMimeType:metadata:configuration:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery23addDocumentToCollectionFT17withEnvironmentIDSS16withCollectionIDSS19withConfigurationIDGSqSS_4fileGSqV10Foundation3URL_12fileMimeTypeGSqSS_8metadataGSqS2__13configurationGSqS2__7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_">addDocumentToCollection(withEnvironmentID:withCollectionID:withConfigurationID:file:fileMimeType:metadata:configuration:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add document to collection with optional metadata and optional configuration. If both the 
+configuration ID and configuration file are provided, the request will be rejected. Either
+metadata or file must be specified.</p>
+
+<ul>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with details of the document.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addDocumentToCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery28deleteDocumentFromCollectionFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteDocumentFromCollection(withEnvironmentID:withCollectionID:withDocumentID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery28deleteDocumentFromCollectionFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_">deleteDocumentFromCollection(withEnvironmentID:withCollectionID:withDocumentID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete document from collection.</p>
+
+<ul>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with details of the document deletion status. If the
+given document id is invalid or if the document is not found, the status returned is set 
+to &lsquo;deleted&rsquo;.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteDocumentFromCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the environment the collection is in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the collection to add a document to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>documentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the document.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery19listDocumentDetailsFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listDocumentDetails(withEnvironmentID:withCollectionID:withDocumentID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery19listDocumentDetailsFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_">listDocumentDetails(withEnvironmentID:withCollectionID:withDocumentID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch status details about a submitted document. Returns only the document&rsquo;s processing status
+and any notices (warnings or errors) that were generated when the document was ingested. To fetch
+the actual document content, use the Query method.</p>
+
+<ul>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with details of the document.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listDocumentDetails</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery26updateDocumentInCollectionFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS19withConfigurationIDGSqSS_4fileGSqV10Foundation3URL_12fileMimeTypeGSqSS_8metadataGSqS2__13configurationGSqS2__7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateDocumentInCollection(withEnvironmentID:withCollectionID:withDocumentID:withConfigurationID:file:fileMimeType:metadata:configuration:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery26updateDocumentInCollectionFT17withEnvironmentIDSS16withCollectionIDSS14withDocumentIDSS19withConfigurationIDGSqSS_4fileGSqV10Foundation3URL_12fileMimeTypeGSqSS_8metadataGSqS2__13configurationGSqS2__7failureGSqFPs5Error_T__7successFVS_8DocumentT__T_">updateDocumentInCollection(withEnvironmentID:withCollectionID:withDocumentID:withConfigurationID:file:fileMimeType:metadata:configuration:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a new document or replace an existing document with optional metadata and optional configuration
+overrides.</p>
+
+<ul>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with details of the document.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateDocumentInCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the environment the collection is in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the collection to add a document to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>documentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the document.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique identifier of the configuration to process the document. If the configuration parameter is also provided at the same time, the request will be rejected.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content of the document to ingest. Maximum file size is 50 MB. If this paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml, and application/vnd.openxmlformats-officedocument.wordprocessingml.document.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileMimeType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Content type of the document to ingest. Specify if the API detects the wrong MIME type.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The JSON specifiying metadata related to the document. The maximum supported metadata file size is 1 MB. If you’re using the Data Crawler If not specified, the file parameter must be specified.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The configuration used to process the document. If this parameter is specified at the same time as the configuration ID is specified, the request will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call the getConfigurationOfCollection method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Queries"></a>
+                <a name="//apple_ref/swift/Section/Queries" class="dashAnchor"></a>
+                <a href="#/Queries">
+                  <h3 class="section-name">Queries</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11DiscoveryV19Discovery26queryDocumentsInCollectionFT17withEnvironmentIDSS16withCollectionIDSS10withFilterGSqSS_9withQueryGSqSS_15withAggregationGSqSS_5countGSqSi_6returnGSqSS_7failureGSqFPs5Error_T__7successFVS_13QueryResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/queryDocumentsInCollection(withEnvironmentID:withCollectionID:withFilter:withQuery:withAggregation:count:return:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11DiscoveryV19Discovery26queryDocumentsInCollectionFT17withEnvironmentIDSS16withCollectionIDSS10withFilterGSqSS_9withQueryGSqSS_15withAggregationGSqSS_5countGSqSi_6returnGSqSS_7failureGSqFPs5Error_T__7successFVS_13QueryResponseT__T_">queryDocumentsInCollection(withEnvironmentID:withCollectionID:withFilter:withQuery:withAggregation:count:return:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Query the documents in your collection. See the documentation for reference on how to build
+a query string. <a href="https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml">https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml</a>.</p>
+
+<ul>
+<li>paramater failure: A function executed if an error occurs.</li>
+<li>paramater success: A function executed with the results of the query. The response includes the
+document ID, metadata and the content of the document.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">queryDocumentsInCollection</span><span class="p">(</span>
+        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="n">withFilter</span> <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">withQuery</span> <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">withAggregation</span> <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="k">return</span> <span class="nv">returnQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(QueryResponse)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

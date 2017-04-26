@@ -1306,9 +1306,9 @@ how to structure the content files, refer to this link:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_"></a>
-                    <a name="//apple_ref/swift/Method/search(withCollectionName:fromSolrClusterID:query:returnFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_">search(withCollectionName:fromSolrClusterID:query:returnFields:failure:success:)</a>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/search(withCollectionName:fromSolrClusterID:query:returnFields:numberOfDocuments:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank6searchFT18withCollectionNameSS17fromSolrClusterIDSS5querySS12returnFieldsSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_14SearchResponseT__T_">search(withCollectionName:fromSolrClusterID:query:returnFields:numberOfDocuments:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1332,6 +1332,7 @@ configuration solrconfig.xml file.</p>
         <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchResponse.html">SearchResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1396,6 +1397,19 @@ configuration solrconfig.xml file.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>numberOfDocuments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of documents to return. The default number is set in the solrconfig.xml configuration file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1428,9 +1442,9 @@ configuration solrconfig.xml file.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_"></a>
-                    <a name="//apple_ref/swift/Method/searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_">searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:failure:success:)</a>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:numberOfDocuments:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank13searchAndRankFT18withCollectionNameSS17fromSolrClusterIDSS8rankerIDSS5querySS12returnFieldsSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_21SearchAndRankResponseT__T_">searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:numberOfDocuments:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1454,6 +1468,7 @@ configuration solrconfig.xml file.</p>
         <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1524,6 +1539,19 @@ configuration solrconfig.xml file.</p>
                               <td>
                                 <div>
                                   <p>The fields that should be returned. These fields should correspond to the fields within the content that has been uploaded to the collection. This parameter should be a comma-separated list.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfDocuments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of documents to return. The default number is set in the solrconfig.xml configuration file.</p>
 
                                 </div>
                               </td>
@@ -1727,9 +1755,9 @@ the ranker is ready. You need to wait until the status is <code>Available</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS7failureGSqFPs5Error_T__7successFVS_7RankingT__T_"></a>
-                    <a name="//apple_ref/swift/Method/rankResults(fromFile:withRankerID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS7failureGSqFPs5Error_T__7successFVS_7RankingT__T_">rankResults(fromFile:withRankerID:failure:success:)</a>
+                    <a name="/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_7RankingT__T_"></a>
+                    <a name="//apple_ref/swift/Method/rankResults(fromFile:withRankerID:numberOfDocuments:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17RetrieveAndRankV115RetrieveAndRank11rankResultsFT8fromFileV10Foundation3URL12withRankerIDSS17numberOfDocumentsGSqSi_7failureGSqFPs5Error_T__7successFVS_7RankingT__T_">rankResults(fromFile:withRankerID:numberOfDocuments:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1748,6 +1776,7 @@ number of answers requested, listed in order from descending ranked score.</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">rankResults</span><span class="p">(</span>
         <span class="n">fromFile</span> <span class="nv">resultsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
         <span class="n">withRankerID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Ranking.html">Ranking</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1786,12 +1815,12 @@ number of answers requested, listed in order from descending ranked score.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>numberOfResults</em>
+                                <em>numberOfDocuments</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of answers needed. The default number given is 10.</p>
+                                  <p>The number of answers needed. The default number is 10.</p>
 
                                 </div>
                               </td>
@@ -1985,8 +2014,8 @@ number of answers requested, listed in order from descending ranked score.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-01-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

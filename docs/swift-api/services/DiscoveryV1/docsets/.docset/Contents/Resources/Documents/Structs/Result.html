@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Result Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Result" class="dashAnchor"></a>
+    <a title="Result Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Result Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Discovery.html">Discovery</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CollectionStatus.html">CollectionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/DocumentStatus.html">DocumentStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnvironmentSize.html">EnvironmentSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NormalizationOperation.html">NormalizationOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NoticeSeverity.html">NoticeSeverity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Action.html">Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Action/Verb.html">– Verb</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AggregationResult.html">AggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BlekkoResult.html">BlekkoResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Concept.html">Concept</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Configuration.html">Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Conversion.html">Conversion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedCollection.html">DeletedCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedConfiguration.html">DeletedConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeletedEnvironment.html">DeletedEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DisambiguatedLinks.html">DisambiguatedLinks</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DiskUsage.html">DiskUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Document.html">Document</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentCounts.html">DocumentCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichedTitle.html">EnrichedTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Field.html">Field</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IndexCapacity.html">IndexCapacity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Keyword.html">Keyword</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KnowledgeGraph.html">KnowledgeGraph</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MemoryUsage.html">MemoryUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Normalization.html">Normalization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice.html">Notice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NoticeMessage.html">NoticeMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PublicationDate.html">PublicationDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Relation.html">Relation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RelationObject.html">RelationObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RelationObject/Keyword.html">– Keyword</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sentiment.html">Sentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Subject.html">Subject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Taxonomy.html">Taxonomy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TestConfigurationDetails.html">TestConfigurationDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TestConfigurationDetails/Snapshot.html">– Snapshot</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Result</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Result</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+
+                </div>
+              </div>
+            <p>A result produced by the Discovery service to analyze the input provided.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result10documentIDGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/documentID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result10documentIDGSqSS_">documentID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The unique identifier of the document ID</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result5scoreGSqSd_"></a>
+                    <a name="//apple_ref/swift/Property/score" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result5scoreGSqSd_">score</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The confidence score of the result&rsquo;s analysis. Scores range from 0 to 1, with 
+a higher score indicating greater confidence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">score</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result6statusGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result6statusGSqSS_">status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Status of the processed document which can be &lsquo;OK&rsquo;, &lsquo;ERROR&rsquo; depending on if
+the document type and tags are accepted by the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result17documentSentimentGSqVS_9Sentiment_"></a>
+                    <a name="//apple_ref/swift/Property/documentSentiment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result17documentSentimentGSqVS_9Sentiment_">documentSentiment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The attitude, opinion or feeling toward something such as a person, product,
+organization or location.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">documentSentiment</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sentiment.html">Sentiment</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result8taxonomyGSqGSaVS_8Taxonomy__"></a>
+                    <a name="//apple_ref/swift/Property/taxonomy" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result8taxonomyGSqGSaVS_8Taxonomy__">taxonomy</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The extracted topic categories.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">taxonomy</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Taxonomy.html">Taxonomy</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result13enrichedTitleGSqVS_13EnrichedTitle_"></a>
+                    <a name="//apple_ref/swift/Property/enrichedTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result13enrichedTitleGSqVS_13EnrichedTitle_">enrichedTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enrichments to the document as specified by the configurations</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enrichedTitle</span><span class="p">:</span> <span class="kt"><a href="../Structs/EnrichedTitle.html">EnrichedTitle</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result15publicationDateGSqVS_15PublicationDate_"></a>
+                    <a name="//apple_ref/swift/Property/publicationDate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result15publicationDateGSqVS_15PublicationDate_">publicationDate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The publication date of the collection in the format yyyy-MM-dd&rsquo;T&#39;HH:mm
+:ss.SSS&#39;Z&rsquo;.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">publicationDate</span><span class="p">:</span> <span class="kt"><a href="../Structs/PublicationDate.html">PublicationDate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result8keywordsGSqGSaVS_7Keyword__"></a>
+                    <a name="//apple_ref/swift/Property/keywords" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result8keywordsGSqGSaVS_7Keyword__">keywords</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A list of important topics extracted from the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">keywords</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Keyword.html">Keyword</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result6authorGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/author" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result6authorGSqSS_">author</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Detected author of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">author</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result9relationsGSqGSaVS_8Relation__"></a>
+                    <a name="//apple_ref/swift/Property/relations" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result9relationsGSqGSaVS_8Relation__">relations</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The extracted relationships between the subject, action and object
+parts of a sentence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">relations</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Relation.html">Relation</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result8entitiesGSqGSaVS_6Entity__"></a>
+                    <a name="//apple_ref/swift/Property/entities" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result8entitiesGSqGSaVS_6Entity__">entities</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The named entities extracted from a document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Entity.html">Entity</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result17extractedMetadataGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/extractedMetadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result17extractedMetadataGSqSS_">extractedMetadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Metadata of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">extractedMetadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result4htmlGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/html" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result4htmlGSqSS_">html</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>HTML of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result4textGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/text" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result4textGSqSS_">text</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Entire text of the document including hyperlinks, url, etc.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result6blekkoGSqVS_12BlekkoResult_"></a>
+                    <a name="//apple_ref/swift/Property/blekko" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result6blekkoGSqVS_12BlekkoResult_">blekko</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Results of Blekko search engine.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">blekko</span><span class="p">:</span> <span class="kt"><a href="../Structs/BlekkoResult.html">BlekkoResult</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result8languageGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/language" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result8languageGSqSS_">language</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Language of the document. If the language is something other than <q>en</q> for
+english, the document will fail to be processed and the Status of the QueryResponse
+will be &lsquo;ERROR&rsquo;</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result14alchemyapiTextGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/alchemyapiText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result14alchemyapiTextGSqSS_">alchemyapiText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Text Alchemy API analyzes. Contains text of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">alchemyapiText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result4hostGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/host" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result4hostGSqSS_">host</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extracted host of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">host</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result12extractedURLGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/extractedURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result12extractedURLGSqSS_">extractedURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extracted url of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">extractedURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result5titleGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/title" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result5titleGSqSS_">title</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extracted title of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result8conceptsGSqGSaVS_7Concept__"></a>
+                    <a name="//apple_ref/swift/Property/concepts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result8conceptsGSqGSaVS_7Concept__">concepts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extracted concepts of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">concepts</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Concept.html">Concept</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result12aggregationsGSqGSaVS_11Aggregation__"></a>
+                    <a name="//apple_ref/swift/Property/aggregations" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result12aggregationsGSqGSaVS_11Aggregation__">aggregations</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A list of aggregations provided by the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">aggregations</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Aggregation.html">Aggregation</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV11DiscoveryV16Result4jsonGVs10DictionarySSP__"></a>
+                    <a name="//apple_ref/swift/Property/json" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV11DiscoveryV16Result4jsonGVs10DictionarySSP__">json</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The raw JSON object used to construct this model.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">json</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV11DiscoveryV16ResultcFzT4jsonV7RestKit4JSON_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV11DiscoveryV16ResultcFzT4jsonV7RestKit4JSON_S0_">init(json:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to initialize a <code>Result</code> model from JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV11DiscoveryV16Result12toJSONObjectFT_P_"></a>
+                    <a name="//apple_ref/swift/Method/toJSONObject()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV11DiscoveryV16Result12toJSONObjectFT_P_">toJSONObject()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to serialize a &lsquo;Result&rsquo; model to JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONObject</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -22,7 +22,6 @@ class ConversationTests: XCTestCase {
     
     private var conversation: Conversation!
     private let workspaceID = "8d869397-411b-4f0a-864d-a2ba419bb249"
-    private let timeout: TimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -47,7 +46,7 @@ class ConversationTests: XCTestCase {
     func instantiateConversation() {
         let username = Credentials.ConversationUsername
         let password = Credentials.ConversationPassword
-        let version = "2016-11-02"
+        let version = "2017-02-03"
         conversation = Conversation(username: username, password: password, version: version)
     }
 
@@ -62,7 +61,7 @@ class ConversationTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -297,6 +296,664 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(reprompt)
             XCTAssertTrue(reprompt!)
             expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Workspaces
+    
+    func testListAllWorkspaces() {
+        let description = "List all workspaces."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(failure: failWithError) { workspaceResponse in
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                //XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllWorkspacesWithPageLimit1() {
+        let description = "List all workspaces with page limit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(pageLimit: 1, failure: failWithError) { workspaceResponse in
+            XCTAssertEqual(workspaceResponse.workspaces.count, 1)
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResponse.pagination.nextUrl)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllWorkspacesWithIncludeCount() {
+        let description = "List all workspaces with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listWorkspaces(includeCount: true, failure: failWithError) { workspaceResponse in
+            for workspace in workspaceResponse.workspaces {
+                XCTAssertNotNil(workspace.name)
+                XCTAssertNotNil(workspace.created)
+                XCTAssertNotNil(workspace.updated)
+                XCTAssertNotNil(workspace.language)
+                //XCTAssertNotNil(workspace.metadata)
+                XCTAssertNotNil(workspace.workspaceID)
+            }
+            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResponse.pagination.total)
+            XCTAssertNotNil(workspaceResponse.pagination.matched)
+            XCTAssertEqual(workspaceResponse.pagination.total, workspaceResponse.workspaces.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteWorkspace() {
+        var newWorkspace: String?
+        
+        let description1 = "Create a workspace."
+        let expectation1 = expectation(description: description1)
+
+        let workspaceName = "swift-sdk-test-workspace"
+        let workspaceDescription = "temporary workspace for the swift sdk unit tests"
+        let workspaceLanguage = "en"
+        var workspaceMetadata = [String: Any]()
+        workspaceMetadata["testKey"] = "testValue"
+        let intentExample = CreateExample(text: "This is an example of Intent1")
+        let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
+        let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
+        let workspaceEntity = CreateEntity(entity: "Entity1", description: "description of Entity1", values: [entityValue])
+        //let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
+        let workspaceCounterexample = CreateExample(text: "This is a counterexample")
+        
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: nil, counterexamples: [workspaceCounterexample],metadata: workspaceMetadata)
+        
+        conversation.createWorkspace(body: createWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            
+            newWorkspace = workspace.workspaceID
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: 10.0)
+        
+        guard let newWorkspaceID = newWorkspace else {
+            XCTFail("Failed to get the ID of the newly created workspace.")
+            return
+        }
+        
+        let description2 = "Get the newly created workspace."
+        let expectation2 = expectation(description: description2)
+        
+        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.metadata)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertEqual(workspace.workspaceID, newWorkspaceID)
+            XCTAssertNotNil(workspace.status)
+            
+            XCTAssertNotNil(workspace.intents)
+            for intent in workspace.intents! {
+                XCTAssertEqual(intent.intent, workspaceIntent.intent)
+                XCTAssertEqual(intent.description, workspaceIntent.description)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNotNil(intent.examples)
+                for example in intent.examples! {
+                    XCTAssertNotNil(example.created)
+                    XCTAssertNotNil(example.updated)
+                    XCTAssertEqual(example.text, intentExample.text)
+                }
+            }
+            
+            XCTAssertNotNil(workspace.counterexamples)
+            for counterexample in workspace.counterexamples! {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertEqual(counterexample.text, workspaceCounterexample.text)
+            }
+            
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: 10.0)
+        
+        let description3 = "Delete the newly created workspace."
+        let expectation3 = expectation(description: description3)
+        
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListSingleWorkspace() {
+        let description = "List details of a single workspace."
+        let expectation = self.expectation(description: description)
+        
+        conversation.getWorkspace(workspaceID: workspaceID, export: false, failure: failWithError) { workspace in
+            XCTAssertNotNil(workspace.name)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.language)
+            XCTAssertNotNil(workspace.metadata)
+            XCTAssertNotNil(workspace.workspaceID)
+            XCTAssertNotNil(workspace.status)
+            XCTAssertNil(workspace.intents)
+            XCTAssertNil(workspace.entities)
+            XCTAssertNil(workspace.counterexamples)
+            //XCTAssertNil(workspace.dialogNodes)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteWorkspace() {
+        var newWorkspace: String?
+        
+        let description1 = "Create a workspace."
+        let expectation1 = expectation(description: description1)
+        
+        let workspaceName = "swift-sdk-test-workspace"
+        let workspaceDescription = "temporary workspace for the swift sdk unit tests"
+        let workspaceLanguage = "en"
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
+        conversation.createWorkspace(body: createWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, workspaceName)
+            XCTAssertEqual(workspace.description, workspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            
+            newWorkspace = workspace.workspaceID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard let newWorkspaceID = newWorkspace else {
+            XCTFail("Failed to get the ID of the newly created workspace.")
+            return
+        }
+        let description2 = "Update the newly created workspace."
+        let expectation2 = expectation(description: description2)
+        
+        let newWorkspaceName = "swift-sdk-test-workspace-2"
+        let newWorkspaceDescription = "new description for the temporary workspace"
+        
+        let updateWorkspaceBody = UpdateWorkspace(name: newWorkspaceName, description: newWorkspaceDescription)
+        conversation.updateWorkspace(workspaceID: newWorkspaceID, body: updateWorkspaceBody, failure: failWithError) { workspace in
+            XCTAssertEqual(workspace.name, newWorkspaceName)
+            XCTAssertEqual(workspace.description, newWorkspaceDescription)
+            XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertNotNil(workspace.created)
+            XCTAssertNotNil(workspace.updated)
+            XCTAssertNotNil(workspace.workspaceID)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the newly created workspace."
+        let expectation3 = expectation(description: description3)
+        
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Intents
+    
+    func testListAllIntents() {
+        let description = "List all the intents in a workspace."
+        let expectation = self.expectation(description: description)
+
+        conversation.listIntents(workspaceID: workspaceID, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithIncludeCount() {
+        let description = "List all the intents in a workspace with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, includeCount: true, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.total)
+            XCTAssertNotNil(intents.pagination.matched)
+            XCTAssertEqual(intents.pagination.total, intents.intents.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithPageLimit1() {
+        let description = "List all the intents in a workspace with pageLimit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { intents in
+            XCTAssertEqual(intents.intents.count, 1)
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNil(intent.examples)
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNotNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllIntentsWithExport() {
+        let description = "List all the intents in a workspace with export as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listIntents(workspaceID: workspaceID, export: true, failure: failWithError) { intents in
+            for intent in intents.intents {
+                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.created)
+                XCTAssertNotNil(intent.updated)
+                XCTAssertNotNil(intent.examples)
+                for example in intent.examples! {
+                    XCTAssertNotNil(example.created)
+                    XCTAssertNotNil(example.updated)
+                    XCTAssertNotNil(example.text)
+                }
+            }
+            XCTAssertNotNil(intents.pagination.refreshUrl)
+            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNil(intents.pagination.total)
+            XCTAssertNil(intents.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteIntent() {
+        let description = "Create a new intent."
+        let expectation = self.expectation(description: description)
+        
+        let newIntentName = "swift-sdk-test-intent" + UUID().uuidString
+        let newIntentDescription = "description for \(newIntentName)"
+        let example1 = CreateExample(text: "example 1 for \(newIntentName)")
+        let example2 = CreateExample(text: "example 2 for \(newIntentName)")
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.description, newIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new intent."
+        let expectation2 = self.expectation(description: description2)
+
+        conversation.deleteIntent(workspaceID: workspaceID, intent: newIntentName, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetIntentWithExport() {
+        let description = "Get details of a specific intent."
+        let expectation = self.expectation(description: description)
+        
+        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, failure: failWithError) { intent in
+            XCTAssertNotNil(intent.intent)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            XCTAssertNotNil(intent.examples)
+            for example in intent.examples! {
+                XCTAssertNotNil(example.created)
+                XCTAssertNotNil(example.updated)
+                XCTAssertNotNil(example.text)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteIntent() {
+        let description = "Create a new intent."
+        let expectation = self.expectation(description: description)
+        
+        let newIntentName = "swift-sdk-test-intent" + UUID().uuidString
+        let newIntentDescription = "description for \(newIntentName)"
+        let example1 = CreateExample(text: "example 1 for \(newIntentName)")
+        let example2 = CreateExample(text: "example 2 for \(newIntentName)")
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.description, newIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Update the new intent."
+        let expectation2 = self.expectation(description: description2)
+        
+        let updatedIntentName = "updated-name-for-\(newIntentName)"
+        let updatedIntentDescription = "updated-description-for-\(newIntentName)"
+        let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
+        conversation.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1], failure: failWithError) { intent in
+            XCTAssertEqual(intent.intent, updatedIntentName)
+            XCTAssertEqual(intent.description, updatedIntentDescription)
+            XCTAssertNotNil(intent.created)
+            XCTAssertNotNil(intent.updated)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the new intent."
+        let expectation3 = self.expectation(description: description3)
+        
+        conversation.deleteIntent(workspaceID: workspaceID, intent: updatedIntentName, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Examples
+    
+    func testListAllExamples() {
+        let description = "List all the examples of an intent."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", failure: failWithError) { examples in
+            for example in examples.examples {
+                XCTAssertNotNil(example.created)
+                XCTAssertNotNil(example.updated)
+                XCTAssertNotNil(example.text)
+            }
+            XCTAssertNotNil(examples.pagination.refreshUrl)
+            XCTAssertNil(examples.pagination.total)
+            XCTAssertNil(examples.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllExamplesWithIncludeCount() {
+        let description = "List all the examples for an intent with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, failure: failWithError) { examples in
+            for example in examples.examples {
+                XCTAssertNotNil(example.created)
+                XCTAssertNotNil(example.updated)
+                XCTAssertNotNil(example.text)
+            }
+            XCTAssertNotNil(examples.pagination.refreshUrl)
+            XCTAssertNotNil(examples.pagination.total)
+            XCTAssertNotNil(examples.pagination.matched)
+            XCTAssertEqual(examples.pagination.total, examples.examples.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllExamplesWithPageLimit1() {
+        let description = "List all the examples for an intent with pageLimit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, failure: failWithError) { examples in
+            XCTAssertEqual(examples.examples.count, 1)
+            for example in examples.examples {
+                XCTAssertNotNil(example.created)
+                XCTAssertNotNil(example.updated)
+                XCTAssertNotNil(example.text)
+            }
+            XCTAssertNotNil(examples.pagination.refreshUrl)
+            XCTAssertNotNil(examples.pagination.nextUrl)
+            XCTAssertNil(examples.pagination.total)
+            XCTAssertNil(examples.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateAndDeleteExample() {
+        let description = "Create a new example."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-example" + UUID().uuidString
+        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
+            XCTAssertNotNil(example.created)
+            XCTAssertNotNil(example.updated)
+            XCTAssertEqual(example.text, newExample)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new example."
+        let expectation2 = self.expectation(description: description2)
+        
+        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testGetExample() {
+        let description = "Get details of a specific example."
+        let expectation = self.expectation(description: description)
+        
+        let exampleText = "tell me the weather"
+        conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, failure: failWithError) { example in
+            XCTAssertNotNil(example.created)
+            XCTAssertNotNil(example.updated)
+            XCTAssertEqual(example.text, exampleText)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testCreateUpdateAndDeleteExample() {
+        let description = "Create a new example."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-example" + UUID().uuidString
+        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
+            XCTAssertNotNil(example.created)
+            XCTAssertNotNil(example.updated)
+            XCTAssertEqual(example.text, newExample)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Update the new example."
+        let expectation2 = self.expectation(description: description2)
+        
+        let updatedText = "updated-" + newExample
+        conversation.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText, failure: failWithError) { example in
+            XCTAssertNotNil(example.created)
+            XCTAssertNotNil(example.updated)
+            XCTAssertEqual(example.text, updatedText)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the new example."
+        let expectation3 = self.expectation(description: description3)
+        
+        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: updatedText, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // MARK: Counterexamples
+    
+    func testListAllCounterexamples() {
+        let description = "List all the counterexamples of a workspace."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNil(counterexamples.pagination.total)
+            XCTAssertNil(counterexamples.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllCounterexamplesWithIncludeCount() {
+        let description = "List all the counterexamples of a workspace with includeCount as true."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNotNil(counterexamples.pagination.total)
+            XCTAssertNotNil(counterexamples.pagination.matched)
+            XCTAssertEqual(counterexamples.pagination.total, counterexamples.counterexamples.count)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testListAllCounterexamplesWithPageLimit1() {
+        let description = "List all the counterexamples of a workspace with pageLimit specified as 1."
+        let expectation = self.expectation(description: description)
+        
+        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { counterexamples in
+            for counterexample in counterexamples.counterexamples {
+                XCTAssertNotNil(counterexample.created)
+                XCTAssertNotNil(counterexample.updated)
+                XCTAssertNotNil(counterexample.text)
+            }
+            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNil(counterexamples.pagination.total)
+            XCTAssertNil(counterexamples.pagination.matched)
+            XCTAssertEqual(counterexamples.counterexamples.count, 1)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+ 
+    func testCreateAndDeleteCounterexample() {
+        let description = "Create a new counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertNotNil(counterexample.text)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Delete the new counterexample."
+        let expectation2 = self.expectation(description: description2)
+        
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testGetCounterexample() {
+        let description = "Get details of a specific counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let exampleText = "I want financial advice today."
+        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, exampleText)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCreateUpdateAndDeleteCounterexample() {
+        let description = "Create a new counterexample."
+        let expectation = self.expectation(description: description)
+        
+        let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, newExample)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        let description2 = "Update the new example."
+        let expectation2 = self.expectation(description: description2)
+        
+        let updatedText = "updated-"+newExample
+        conversation.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, updatedText)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        let description3 = "Delete the new counterexample."
+        let expectation3 = self.expectation(description: description3)
+        
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: updatedText, failure: failWithError) {
+            expectation3.fulfill()
         }
         waitForExpectations()
     }

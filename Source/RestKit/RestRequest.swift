@@ -20,7 +20,7 @@ public struct RestRequest {
 
     public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.13.0"
+        let sdkVersion = "0.15.0"
         
         let operatingSystem: String = {
             #if os(iOS)
@@ -120,14 +120,48 @@ public struct RestRequest {
             completionHandler(dataResponse)
         }
     }
-    
+
+    fileprivate func dataToErrorWrapper(dataToError: ((Data) -> Error?)? = nil) -> ((HTTPURLResponse?, Data?) -> Error?)?
+    {
+        return { response, data in
+            // ensure data is not nil
+            guard let data = data else {
+                return RestError.noData
+            }
+
+            // can the data be parsed as an error?
+            if let dataToError = dataToError,
+                let error = dataToError(data) {
+                return error
+            }
+
+            return nil
+        }
+    }
+
     public func responseObject<T: JSONDecodable>(
         dataToError: ((Data) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
+        responseObject(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
+    }
+
+    public func responseObject<T: JSONDecodable>(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        path: [JSONPathType]? = nil,
+        completionHandler: @escaping (RestResponse<T>) -> Void)
+    {
         response() { data, response, error in
             
+            if let responseToError = responseToError,
+                let error = responseToError(response, data) {
+                let result = Result<T>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+
             // ensure data is not nil
             guard let data = data else {
                 let result = Result<T>.failure(RestError.noData)
@@ -135,15 +169,7 @@ public struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
-            // can the data be parsed as an error?
-            if let dataToError = dataToError, let error = dataToError(data) {
-                let result = Result<T>.failure(error)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-            
+
             // parse json object
             let result: Result<T>
             do {
@@ -178,8 +204,24 @@ public struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
+        responseArray(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
+    }
+
+    public func responseArray<T: JSONDecodable>(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        path: [JSONPathType]? = nil,
+        completionHandler: @escaping (RestResponse<[T]>) -> Void)
+    {
         response() { data, response, error in
-            
+
+            if let responseToError = responseToError,
+                let error = responseToError(response, data) {
+                let result = Result<[T]>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+
             // ensure data is not nil
             guard let data = data else {
                 let result = Result<[T]>.failure(RestError.noData)
@@ -187,15 +229,7 @@ public struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
-            // can the data be parsed as an error?
-            if let dataToError = dataToError, let error = dataToError(data) {
-                let result = Result<[T]>.failure(error)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-            
+
             // parse json object
             let result: Result<[T]>
             do {
@@ -225,13 +259,28 @@ public struct RestRequest {
             completionHandler(dataResponse)
         }
     }
-    
+
     public func responseString(
         dataToError: ((Data) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
+        responseString(responseToError: dataToErrorWrapper(dataToError: dataToError), completionHandler: completionHandler)
+    }
+
+    public func responseString(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<String>) -> Void)
+    {
         response() { data, response, error in
-            
+
+            if let responseToError = responseToError,
+                let error = responseToError(response, data) {
+                let result = Result<String>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+
             // ensure data is not nil
             guard let data = data else {
                 let result = Result<String>.failure(RestError.noData)
@@ -239,15 +288,7 @@ public struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
-            // can the data be parsed as an error?
-            if let dataToError = dataToError, let error = dataToError(data) {
-                let result = Result<String>.failure(error)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-            
+
             // parse data as a string
             guard let string = String(data: data, encoding: .utf8) else {
                 let result = Result<String>.failure(RestError.serializationError)
@@ -262,7 +303,27 @@ public struct RestRequest {
             completionHandler(dataResponse)
         }
     }
-    
+
+    public func responseVoid(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<Void>) -> Void)
+    {
+        response() { data, response, error in
+
+            if let responseToError = responseToError, let error = responseToError(response, data) {
+                let result = Result<Void>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+
+            // execute callback
+            let result = Result<Void>.success()
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
+
     public func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
         let task = session.downloadTask(with: request) { (source, response, error) in
             guard let source = source else {

@@ -52,10 +52,21 @@ public class LanguageTranslator {
     private func dataToError(data: Data) -> Error? {
         do {
             let json = try JSON(data: data)
-            let code = try json.getInt(at: "error_code")
-            let message = try json.getString(at: "error_message")
-            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            
+            if let code = try? json.getInt(at: "error_code") {
+                let message = try json.getString(at: "error_message")
+                let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+                return NSError(domain: domain, code: code, userInfo: userInfo)
+            } else {
+                let error = try json.getString(at: "error")
+                let code = try json.getInt(at: "code")
+                let description = try json.getString(at: "description")
+                let userInfo = [
+                    NSLocalizedFailureReasonErrorKey: error,
+                    NSLocalizedRecoverySuggestionErrorKey: description
+                ]
+                return NSError(domain: domain, code: code, userInfo: userInfo)
+            }
         } catch {
             return nil
         }

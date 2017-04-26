@@ -1,7 +1,7 @@
 # Watson Developer Cloud Swift SDK
 
-[![Build Status](https://travis-ci.org/watson-developer-cloud/ios-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
-![](https://img.shields.io/badge/platform-iOS-blue.svg?style=flat)
+[![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
+![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
@@ -38,10 +38,11 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
-* [Discovery] (#discovery)
+* [Discovery](#discovery)
 * [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
+* [Natural Language Understanding](#natural-language-understanding)
 * [Personality Insights](#personality-insights)
 * [Retrieve and Rank](#retrieve-and-rank)
 * [Speech to Text](#speech-to-text)
@@ -67,6 +68,12 @@ You can install Carthage with [Homebrew](http://brew.sh/):
 ```bash
 $ brew update
 $ brew install carthage
+```
+
+Then, navigate to the root directory of your project (where your .xcodeproj file is located) and create an empty `Cartfile` there:
+
+```bash
+$ touch Cartfile
 ```
 
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
@@ -132,7 +139,7 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
-See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Custom Service URLs
 
@@ -551,8 +558,56 @@ naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure
 The following links provide more information about the Natural Language Classifier service:
 
 * [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/watson/developercloud/nl-classifier.html)
-* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/nl-classifier)
+* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
+
+## Natural Language Understanding
+
+The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
+
+Natural Language Understanding has the following features:
+
+- Concepts
+- Entities
+- Keywords
+- Categories
+- Sentiment
+- Emotion
+- Relations
+- Semantic Roles
+
+The following example demonstrates how to use the service:
+
+```swift
+import NaturalLanguageUnderstandingV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "yyyy-mm-dd" // use today's date for the most recent version
+
+let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+
+let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+
+let features = Features(concepts: ConceptsOptions(limit: 5))
+let parameters = Parameters(features: features, text: textToAnalyze)
+
+let failure = { (error: Error) in print(error) }
+naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
+    results in 
+    print (results)
+}
+
+```
+
+#### 500 errors
+Note that **you are required to include at least one feature in your request.** You will receive a 500 error if you do not include any features in your request.
+
+The following links provide more information about the Natural Language Understanding service:
+
+* [IBM Watson Natural Language Understanding - Service Page](http://www.ibm.com/watson/developercloud/natural-language-understanding.html)
+* [IBM Watson Natural Language Understanding - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-understanding/)
+* [IBM Watson Natural Language Understanding - Demo](http://natural-language-understanding-demo.mybluemix.net)
 
 ## Personality Insights
 
@@ -797,7 +852,7 @@ func stopStreaming() {
 
 #### Session Management and Advanced Features
 
-Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
+Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
 
 The following steps describe how to execute a recognition request with `SpeechToTextSession`:
 
@@ -826,6 +881,14 @@ import SpeechToTextV1
 let username = "your-username-here"
 let password = "your-password-here"
 let speechToTextSession = SpeechToTextSession(username: username, password: password)
+
+do {
+    let session = AVAudioSession.sharedInstance()
+    try session.setActive(true)
+    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
+} catch {
+    // handle errors
+}
 
 func startStreaming() {
     // define callbacks
@@ -957,6 +1020,20 @@ if customizationStatus == .available {
 	}
 }
 ```
+
+#### Important notes
+* Since v0.11.0, if you use `SpeechToTextSession`, you'll need to manage the setup for the `AVAudioSession` shared instance. Without the code below, you won't receive data from the Speech To Text service properly. This isn't necessary if you use the `SpeechToText` class.
+```swift
+do {
+    let session = AVAudioSession.sharedInstance()
+    try session.setActive(true)
+    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
+} catch {
+    // handle errors
+}
+```
+
+* As of iOS 10, if you access the device's microphone, you'll be required to include the `NSMicrophoneUsageDescription` key in your `Info.plist` file, or the app will exit. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
 
 #### Additional Information
 

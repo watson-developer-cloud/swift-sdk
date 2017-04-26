@@ -80,10 +80,10 @@ class VisualRecognitionTests: XCTestCase {
     
     private let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
                            "Administration/People/president_official_portrait_lores.jpg"
-    private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/" +
-                         "java-sdk/master/tests/src/test/resources/visual_recognition/car.png"
+    private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk" +
+                         "/master/visual-recognition/src/test/resources/visual_recognition/car.png"
     private let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-                          "master/tests/src/test/resources/visual_recognition/open.png"
+                          "master/visual-recognition/src/test/resources/visual_recognition/open.png"
     
     // MARK: - Test Configuration
     

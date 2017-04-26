@@ -438,7 +438,7 @@ class ConversationTests: XCTestCase {
             
             expectation2.fulfill()
         }
-        waitForExpectations()
+        waitForExpectations(timeout: 10.0)
         
         let description3 = "Delete the newly created workspace."
         let expectation3 = expectation(description: description3)

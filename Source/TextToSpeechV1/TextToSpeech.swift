@@ -248,16 +248,15 @@ public class TextToSpeech {
                 case .none:
                     if audioFormat == .wav {
                         // repair the WAV header
-                        var wav = data
-                        guard TextToSpeech.isWAVFile(data: wav) else {
-                            let failureReason = "Returned audio is in an unexpected format."
-                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                        do {
+                            var wav = data
+                            try TextToSpeech.repairWAV(data: &wav)
+                            success(wav)
+                        } catch {
+                            let error = self.foundationErrorFromWAVRepair(error: error)
                             failure?(error)
                             return
                         }
-                        TextToSpeech.repairWAVHeader(data: &wav)
-                        success(wav)
                     } else {
                         success(data)
                     }
@@ -267,12 +266,41 @@ public class TextToSpeech {
             }
         }
     }
-    
+
+    private func foundationErrorFromWAVRepair(error: Error) -> NSError {
+        let failureReason: String
+        switch error {
+        case RepairWAVError.unexpectedFormat:
+            failureReason = "Returned audio is in an unexpected format."
+        default:
+            failureReason = "Returned audio could not be repaired."
+        }
+        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        return NSError(domain: self.domain, code: 0, userInfo: userInfo)
+    }
+
+    public enum RepairWAVError: Error {
+        case unexpectedFormat
+    }
+
+    /**
+     Repair the WAV header for a WAV-formatted audio file.
+
+     - parameter data: The WAV-formatted audio file with a corrupt or incomplete header. The
+     byte data will be analyzed and repaired in-place.
+     */
+    public static func repairWAV(data wav: inout Data) throws {
+        guard TextToSpeech.isWAVFile(data: wav) else {
+            throw RepairWAVError.unexpectedFormat
+        }
+        TextToSpeech.repairWAVHeader(data: &wav)
+    }
+
     // MARK: - Customizations
-    
+
     /**
      Lists metadata, such as name and description, for the custom voice models that you own.
-     
+
      You can use the language query parameter to list voice models for the specified language. If
      you leave language as nil, this will list all custom voice models you own for all languages.
      

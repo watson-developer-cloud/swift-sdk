@@ -123,10 +123,10 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
     
-    internal func writeAudio(audio: Data) {
+    internal func writeAudio(audio: Data, completion: ((Void) -> Void)? = nil) {
         guard state != .Disconnected else { return }
         queue.addOperation {
-            self.socket.write(data: audio)
+            self.socket.write(data: audio, completion: completion)
             if self.state == .Listening {
                 self.state = .SentAudio
             }

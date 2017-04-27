@@ -26,3 +26,4 @@ FOUNDATION_EXPORT const unsigned char TextToSpeechV1VersionString[];
 #import "ogg.h"
 #import "opus.h"
 #import "opus_multistream.h"
+#import "opus_header.h"

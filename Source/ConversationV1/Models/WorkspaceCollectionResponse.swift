@@ -23,13 +23,14 @@ public struct WorkspaceCollectionResponse: JSONDecodable, JSONEncodable {
     /// An array of WorkspaceResponse objects describing the workspaces associated with the service instance.
     public let workspaces: [WorkspaceResponse]
 
+    /// A PaginationResponse object defining the pagination data for the returned objects.
     public let pagination: PaginationResponse
 
     /**
      Initialize a `WorkspaceCollectionResponse` with member variables.
 
      - parameter workspaces: An array of WorkspaceResponse objects describing the workspaces associated with the service instance.
-     - parameter pagination: 
+     - parameter pagination: A PaginationResponse object defining the pagination data for the returned objects.
 
      - returns: An initialized `WorkspaceCollectionResponse`.
     */

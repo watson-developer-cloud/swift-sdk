@@ -23,13 +23,14 @@ public struct CounterexampleCollectionResponse: JSONDecodable, JSONEncodable {
     /// An array of ExampleResponse objects describing the examples marked as irrelevant input.
     public let counterexamples: [ExampleResponse]
 
+    /// A PaginationResponse object defining the pagination data for the returned objects.
     public let pagination: PaginationResponse
 
     /**
      Initialize a `CounterexampleCollectionResponse` with member variables.
 
      - parameter counterexamples: An array of ExampleResponse objects describing the examples marked as irrelevant input.
-     - parameter pagination: 
+     - parameter pagination: A PaginationResponse object defining the pagination data for the returned objects.
 
      - returns: An initialized `CounterexampleCollectionResponse`.
     */

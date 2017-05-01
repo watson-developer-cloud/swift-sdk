@@ -23,13 +23,14 @@ public struct ExampleCollectionResponse: JSONDecodable, JSONEncodable {
     /// An array of ExampleResponse objects describing the examples defined for the intent.
     public let examples: [ExampleResponse]
 
+    /// A PaginationResponse object defining the pagination data for the returned objects.
     public let pagination: PaginationResponse
 
     /**
      Initialize a `ExampleCollectionResponse` with member variables.
 
      - parameter examples: An array of ExampleResponse objects describing the examples defined for the intent.
-     - parameter pagination: 
+     - parameter pagination: A PaginationResponse object defining the pagination data for the returned objects.
 
      - returns: An initialized `ExampleCollectionResponse`.
     */

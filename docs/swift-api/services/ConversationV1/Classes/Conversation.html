@@ -43,13 +43,52 @@
                 <a href="../Structs/Context.html">Context</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CounterexampleCollectionResponse.html">CounterexampleCollectionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode.html">CreateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateExample.html">CreateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateWorkspace.html">CreateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityExportResponse.html">EntityExportResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExampleCollectionResponse.html">ExampleCollectionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExampleResponse.html">ExampleResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Input.html">Input</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentCollectionResponse.html">IntentCollectionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentExportResponse.html">IntentExportResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentResponse.html">IntentResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogMessage.html">LogMessage</a>
@@ -64,7 +103,31 @@
                 <a href="../Structs/Output.html">Output</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/PaginationResponse.html">PaginationResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/System.html">System</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateExample.html">UpdateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateIntent.html">UpdateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueExportResponse.html">ValueExportResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceCollectionResponse.html">WorkspaceCollectionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceExportResponse.html">WorkspaceExportResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceResponse.html">WorkspaceResponse</a>
               </li>
             </ul>
           </li>
@@ -314,12 +377,2174 @@ parameter to <code>nil</code>.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation20createCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createCounterexample(workspaceID:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation20createCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">createCounterexample(workspaceID:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create counterexample.</p>
+
+<p>Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCounterexample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of a user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation20deleteCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteCounterexample(workspaceID:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation20deleteCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFT_T__T_">deleteCounterexample(workspaceID:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete counterexample.</p>
+
+<p>Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCounterexample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of a user input counterexample (for example, <code>What are you wearing?</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation17getCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getCounterexample(workspaceID:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation17getCounterexampleFT11workspaceIDSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">getCounterexample(workspaceID:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get counterexample.</p>
+
+<p>Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCounterexample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of a user input counterexample (for example, <code>What are you wearing?</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation19listCounterexamplesFT11workspaceIDSS9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_32CounterexampleCollectionResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation19listCounterexamplesFT11workspaceIDSS9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_32CounterexampleCollectionResponseT__T_">listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List counterexamples.</p>
+
+<p>List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCounterexamples</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CounterexampleCollectionResponse.html">CounterexampleCollectionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results. The default page limit is 100.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records returned.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sort order that determines the behavior of the pagination cursor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the last value from the previous page of results.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation20updateCounterexampleFT11workspaceIDSS4textSS7newTextGSqSS_7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateCounterexample(workspaceID:text:newText:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation20updateCounterexampleFT11workspaceIDSS4textSS7newTextGSqSS_7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">updateCounterexample(workspaceID:text:newText:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update counterexample.</p>
+
+<p>Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCounterexample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">newText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of a user input counterexample (for example, <code>What are you wearing?</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newText</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of the user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation13createExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createExample(workspaceID:intent:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation13createExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">createExample(workspaceID:intent:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create user input example.</p>
+
+<p>Add a new user input example to an intent.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createExample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of a user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation13deleteExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteExample(workspaceID:intent:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation13deleteExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFT_T__T_">deleteExample(workspaceID:intent:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete user input example.</p>
+
+<p>Delete a user input example from an intent.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteExample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of the user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation10getExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getExample(workspaceID:intent:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation10getExampleFT11workspaceIDSS6intentSS4textSS7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">getExample(workspaceID:intent:text:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get user input example.</p>
+
+<p>Get information about a user input example.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getExample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of the user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation12listExamplesFT11workspaceIDSS6intentSS9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_25ExampleCollectionResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation12listExamplesFT11workspaceIDSS6intentSS9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_25ExampleCollectionResponseT__T_">listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List user input examples.</p>
+
+<p>List the user input examples for an intent.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listExamples</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleCollectionResponse.html">ExampleCollectionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results. The default page limit is 100.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records returned.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sort order that determines the behavior of the pagination cursor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the last value from the previous page of results.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation13updateExampleFT11workspaceIDSS6intentSS4textSS7newTextGSqSS_7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateExample(workspaceID:intent:text:newText:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation13updateExampleFT11workspaceIDSS6intentSS4textSS7newTextGSqSS_7failureGSqFPs5Error_T__7successFVS_15ExampleResponseT__T_">updateExample(workspaceID:intent:text:newText:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update user input example.</p>
+
+<p>Update the text of a user input example.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateExample</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">newText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleResponse.html">ExampleResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of the user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newText</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text of the user input example.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation12createIntentFT11workspaceIDSS6intentSS11descriptionGSqSS_8examplesGSqGSaVS_13CreateExample__7failureGSqFPs5Error_T__7successFVS_14IntentResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createIntent(workspaceID:intent:description:examples:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation12createIntentFT11workspaceIDSS6intentSS11descriptionGSqSS_8examplesGSqGSaVS_13CreateExample__7failureGSqFPs5Error_T__7successFVS_14IntentResponseT__T_">createIntent(workspaceID:intent:description:examples:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create intent.</p>
+
+<p>Create a new intent.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createIntent</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">examples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateExample.html">CreateExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentResponse.html">IntentResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the intent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the intent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>examples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of user input examples.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation12deleteIntentFT11workspaceIDSS6intentSS7failureGSqFPs5Error_T__7successFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteIntent(workspaceID:intent:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation12deleteIntentFT11workspaceIDSS6intentSS7failureGSqFPs5Error_T__7successFT_T__T_">deleteIntent(workspaceID:intent:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete intent.</p>
+
+<p>Delete an intent from a workspace.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteIntent</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation9getIntentFT11workspaceIDSS6intentSS6exportGSqSb_7failureGSqFPs5Error_T__7successFVS_20IntentExportResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getIntent(workspaceID:intent:export:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation9getIntentFT11workspaceIDSS6intentSS6exportGSqSb_7failureGSqFPs5Error_T__7successFVS_20IntentExportResponseT__T_">getIntent(workspaceID:intent:export:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get intent.</p>
+
+<p>Get information about an intent, optionally including all intent content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getIntent</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentExportResponse.html">IntentExportResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>export</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include all element content in the returned data. If export=<code>false</code>, the returned data includes only information about the element itself. If export=<code>true</code>, all content, including subelements, is included. The default value is <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation11listIntentsFT11workspaceIDSS6exportGSqSb_9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_24IntentCollectionResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation11listIntentsFT11workspaceIDSS6exportGSqSb_9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_24IntentCollectionResponseT__T_">listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List intents.</p>
+
+<p>List the intents for a workspace.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listIntents</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentCollectionResponse.html">IntentCollectionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>export</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include all element content in the returned data. If export=<code>false</code>, the returned data includes only information about the element itself. If export=<code>true</code>, all content, including subelements, is included. The default value is <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results. The default page limit is 100.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records returned.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sort order that determines the behavior of the pagination cursor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the last value from the previous page of results.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation12updateIntentFT11workspaceIDSS6intentSS9newIntentGSqSS_14newDescriptionGSqSS_11newExamplesGSqGSaVS_13CreateExample__7failureGSqFPs5Error_T__7successFVS_14IntentResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation12updateIntentFT11workspaceIDSS6intentSS9newIntentGSqSS_14newDescriptionGSqSS_11newExamplesGSqGSaVS_13CreateExample__7failureGSqFPs5Error_T__7successFVS_14IntentResponseT__T_">updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update intent.</p>
+
+<p>Update an existing intent with new or modified data. You must provide JSON data defining the content of the updated intent.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateIntent</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">newIntent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">newDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">newExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateExample.html">CreateExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentResponse.html">IntentResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The intent name (for example, <code>pizza_order</code>).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newIntent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the intent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the intent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newExamples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of user input examples for the intent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation15createWorkspaceFT4bodyGSqVS_15CreateWorkspace_7failureGSqFPs5Error_T__7successFVS_17WorkspaceResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createWorkspace(body:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation15createWorkspaceFT4bodyGSqVS_15CreateWorkspace_7failureGSqFPs5Error_T__7successFVS_17WorkspaceResponseT__T_">createWorkspace(body:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create workspace.</p>
+
+<p>Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createWorkspace</span><span class="p">(</span>
+        <span class="nv">body</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateWorkspace.html">CreateWorkspace</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceResponse.html">WorkspaceResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>body</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Valid JSON data defining the content of the new workspace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation15deleteWorkspaceFT11workspaceIDSS7failureGSqFPs5Error_T__7successFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/deleteWorkspace(workspaceID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation15deleteWorkspaceFT11workspaceIDSS7failureGSqFPs5Error_T__7successFT_T__T_">deleteWorkspace(workspaceID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete workspace.</p>
+
+<p>Delete a workspace from the service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteWorkspace</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation12getWorkspaceFT11workspaceIDSS6exportGSqSb_7failureGSqFPs5Error_T__7successFVS_23WorkspaceExportResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getWorkspace(workspaceID:export:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation12getWorkspaceFT11workspaceIDSS6exportGSqSb_7failureGSqFPs5Error_T__7successFVS_23WorkspaceExportResponseT__T_">getWorkspace(workspaceID:export:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get information about a workspace.</p>
+
+<p>Get information about a workspace, optionally including all workspace content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getWorkspace</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceExportResponse.html">WorkspaceExportResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>export</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include all element content in the returned data. If export=<code>false</code>, the returned data includes only information about the element itself. If export=<code>true</code>, all content, including subelements, is included. The default value is <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation14listWorkspacesFT9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_27WorkspaceCollectionResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/listWorkspaces(pageLimit:includeCount:sort:cursor:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation14listWorkspacesFT9pageLimitGSqSi_12includeCountGSqSb_4sortGSqSS_6cursorGSqSS_7failureGSqFPs5Error_T__7successFVS_27WorkspaceCollectionResponseT__T_">listWorkspaces(pageLimit:includeCount:sort:cursor:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List workspaces.</p>
+
+<p>List the workspaces associated with a Conversation service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWorkspaces</span><span class="p">(</span>
+        <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceCollectionResponse.html">WorkspaceCollectionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results. The default page limit is 100.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records returned.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sort order that determines the behavior of the pagination cursor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the last value from the previous page of results.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC14ConversationV112Conversation15updateWorkspaceFT11workspaceIDSS4bodyGSqVS_15UpdateWorkspace_7failureGSqFPs5Error_T__7successFVS_17WorkspaceResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:body:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC14ConversationV112Conversation15updateWorkspaceFT11workspaceIDSS4bodyGSqVS_15UpdateWorkspace_7failureGSqFPs5Error_T__7successFVS_17WorkspaceResponseT__T_">updateWorkspace(workspaceID:body:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update workspace.</p>
+
+<p>Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateWorkspace</span><span class="p">(</span>
+        <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">body</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceResponse.html">WorkspaceResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The workspace ID.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>body</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Valid JSON data defining the new workspace content. Any elements included in the new JSON will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new JSON.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-03-28)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-05-01)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## Version 0.15.1
+_2017-05-1_
+
+This release includes support for the following Conversation endpoints:
+- Examples
+- Counterexamples
+- Workspaces
+- Intents
+
 ## Version 0.15.0
 _2017-04-5_
 

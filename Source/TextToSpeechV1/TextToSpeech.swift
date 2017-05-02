@@ -258,6 +258,17 @@ public class TextToSpeech {
                         }
                         TextToSpeech.repairWAVHeader(data: &wav)
                         success(wav)
+                    } else if audioFormat == .opus {
+                        do {
+                            let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                            success(decodedAudio.pcmDataWithHeaders)
+                        } catch {
+                            let failureReason = "Returned audio is in an unexpected format."
+                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                            failure?(error)
+                            return
+                        }
                     } else {
                         success(data)
                     }

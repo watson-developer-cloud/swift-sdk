@@ -22,6 +22,8 @@ FOUNDATION_EXPORT double TextToSpeechV1VersionNumber;
 //! Project version string for TextToSpeechV1.
 FOUNDATION_EXPORT const unsigned char TextToSpeechV1VersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <TextToSpeechV1/PublicHeader.h>
-
-
+// Import ogg and opus headers to access C code from Swift
+#import "ogg.h"
+#import "opus.h"
+#import "opus_multistream.h"
+#import "opus_header.h"

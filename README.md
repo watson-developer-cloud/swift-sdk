@@ -1094,6 +1094,11 @@ textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: f
 // property or otherwise keep it in-scope beyond the completion handler.
 ```
 
+#### Important notes
+* Prior to v0.15.2, users could already request Opus as the return type. Opus files are much smaller than WAV files, so this would save bandwidth. However, Opus isn't playable by the iOS platform.
+* In v0.15.2, we have added functionality to decode Opus files and convert them to WAV files.
+* Currently, this is being done automatically when Opus files are requested. In a future release, we will allow users more control over when the decoding process occurs.
+
 The following links provide more information about the IBM Text To Speech service:
 
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/watson/developercloud/text-to-speech.html)

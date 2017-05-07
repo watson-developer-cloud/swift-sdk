@@ -434,7 +434,40 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
+    /** Retrieve a configuration by name where the name contains special chars. */
+    func testGetConfigurationWithFunkyName() {
+        let description = "Retrieve a configuration with a funky name."
+        let expectation = self.expectation(description: description)
+
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+
+        let configurationName = UUID().uuidString + " with \"funky\" ?x=y&foo=bar ,[x](y) ~!@#$%^&*()-+ {} | ;:<>\\/ chars"
+
+        let configuration = ConfigurationDetails(
+            name: configurationName,
+            description: "configuration with funky name")
+
+        discovery.createConfiguration(
+            withEnvironmentID: environmentID,
+            configuration: configuration,
+            failure: failWithError) { _ in
+
+                self.discovery.getConfigurations(withEnvironmentID: environmentID, withName: configurationName, failure: self.failWithError) {
+                    configurations in
+
+                    XCTAssertEqual(configurations.count, 1)
+                    XCTAssertEqual(configurations[0].name, configurationName)
+                    expectation.fulfill()
+                }
+            }
+
+        waitForExpectations()
+    }
+
     /** Create and delete a configuration. */
     func testCreateAndDeleteConfiguration() {
         let description = "Create a new configuration."

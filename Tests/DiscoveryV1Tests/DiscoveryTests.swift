@@ -22,7 +22,7 @@ import DiscoveryV1
 class DiscoveryTests: XCTestCase {
     
     private var discovery: Discovery!
-    private let timeout: TimeInterval = 15.0
+    private let timeout: TimeInterval = 20.0
     private let environmentName: String = "swift-sdk-unit-test-environment"
     private let testDescription: String = "For testing"
     private var environmentID: String?
@@ -89,7 +89,7 @@ class DiscoveryTests: XCTestCase {
         let failure = { (error: Error) in XCTFail("Could not create environment") }
         discovery.createEnvironment(
             withName: environmentName,
-            withSize: .zero,
+            withSize: .one,
             withDescription: testDescription,
             failure: failure) { environment in
                 self.environmentID = environment.environmentID
@@ -191,6 +191,29 @@ class DiscoveryTests: XCTestCase {
     
     /** Create a collection for the test suite. */
     func createCollection() {
+        
+        var environmentReady = false
+        var tries = 0
+        while(!environmentReady) {
+            tries += 1
+            let description = "Get environment and check if it's `active`."
+            let expectation = self.expectation(description: description)
+            self.discovery.getEnvironment(withID: environmentID!, failure: failWithError) { environment in
+                if environment.status == "active" {
+                    environmentReady = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                XCTFail("Environment is not ready, could not add new collection. Try again later.")
+                return
+            }
+            
+            sleep(5)
+        }
+        
         let description = "Create collection for the test suite."
         let expectation = self.expectation(description: description)
         
@@ -285,7 +308,7 @@ class DiscoveryTests: XCTestCase {
 
         discovery.createEnvironment(
             withName: environmentName,
-            withSize: .zero,
+            withSize: .one,
             withDescription: testDescription,
             failure: failWithError)
         {
@@ -323,6 +346,9 @@ class DiscoveryTests: XCTestCase {
             expectation2.fulfill()
         }
         waitForExpectations()
+        
+        // Allow time for the environment to be ready for the next test.
+        sleep(20)
     }
     
     /** Get the trained environment. */
@@ -507,7 +533,7 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(configuration.configurationID, newConfigID)
             XCTAssertEqual(configuration.status, "deleted")
-            XCTAssertEqual(configuration.noticeMessages?.count, nil)
+            XCTAssertEqual(configuration.noticeMessages?.count, 0)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -652,7 +678,7 @@ class DiscoveryTests: XCTestCase {
                 
                 XCTAssertEqual(configuration.configurationID, newConfigID)
                 XCTAssertEqual(configuration.status, "deleted")
-                XCTAssertEqual(configuration.noticeMessages?.count, nil)
+                XCTAssertEqual(configuration.noticeMessages?.count, 0)
                 expectation4.fulfill()
         }
         waitForExpectations()

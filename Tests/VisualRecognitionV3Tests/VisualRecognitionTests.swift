@@ -145,29 +145,46 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Look up (or create) the trained classifier. */
     func lookupClassifier() {
-        let description = "Look up (or create) the trained classifier."
-        let expectation = self.expectation(description: description)
-        
-        let failure = { (error: Error) in
-            XCTFail("Failed to locate the trained classifier.")
-        }
-        
-        visualRecognition.getClassifiers(failure: failure) { classifiers in
-            for classifier in classifiers {
-                if classifier.name == self.classifierName {
-                    XCTAssert(classifier.status == "ready", "Wait for training to complete.")
-                    self.classifierID = classifier.classifierID
-                    expectation.fulfill()
-                    return
-                }
+        var trained = false
+        var tries = 0
+        while(!trained) {
+            tries += 1
+            
+            let description = "Look up (or create) the trained classifier."
+            let expectation = self.expectation(description: description)
+            
+            let failure = { (error: Error) in
+                XCTFail("Failed to locate the trained classifier.")
             }
-            expectation.fulfill()
+            
+            visualRecognition.getClassifiers(failure: failure) { classifiers in
+                for classifier in classifiers {
+                    if classifier.name == self.classifierName {
+//                        XCTAssert(classifier.status == "ready", "Wait for training to complete.")
+                        if classifier.status == "ready" {
+                            trained = true
+                        }
+                        self.classifierID = classifier.classifierID
+                        expectation.fulfill()
+                        return
+                    }
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                XCTFail("Classifier is not ready yet, please wait for training to complete.")
+                return
+            }
+            
+            if (classifierID == nil) {
+                trainClassifier()
+            }
+            
+            sleep(10)
         }
-        waitForExpectations()
         
-        if (classifierID == nil) {
-            trainClassifier()
-        }
     }
     
     /** Look up (or create) the collection. */
@@ -281,7 +298,7 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectations(timeout: timeout) { error in
+        waitForExpectations(timeout: timeoutLong) { error in
             XCTAssertNil(error, "Timeout")
         }
     }

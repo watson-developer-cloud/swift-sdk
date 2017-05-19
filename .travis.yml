@@ -26,7 +26,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DiscoveryV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi

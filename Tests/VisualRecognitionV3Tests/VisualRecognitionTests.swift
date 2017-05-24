@@ -23,8 +23,8 @@ class VisualRecognitionTests: XCTestCase {
     private var visualRecognition: VisualRecognition!
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
     private let collectionName = "swift-sdk-unit-test-faces"
-    private var classifierID: String?
-    private var collectionID: String?
+    private var classifierID: String? //= "swiftsdkunittestcarstrucks_378338040"
+    private var collectionID: String? //= "swift-sdk-unit-test-faces_1f7785"
     private var imageFaceID: String?
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
@@ -35,7 +35,6 @@ class VisualRecognitionTests: XCTestCase {
             ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
             ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
-            ("testUpdateClassifier", testUpdateClassifier),
             ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
             ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
             ("testClassifyByURL1", testClassifyByURL1),
@@ -145,46 +144,29 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Look up (or create) the trained classifier. */
     func lookupClassifier() {
-        var trained = false
-        var tries = 0
-        while(!trained) {
-            tries += 1
-            
-            let description = "Look up (or create) the trained classifier."
-            let expectation = self.expectation(description: description)
-            
-            let failure = { (error: Error) in
-                XCTFail("Failed to locate the trained classifier.")
-            }
-            
-            visualRecognition.getClassifiers(failure: failure) { classifiers in
-                for classifier in classifiers {
-                    if classifier.name == self.classifierName {
-//                        XCTAssert(classifier.status == "ready", "Wait for training to complete.")
-                        if classifier.status == "ready" {
-                            trained = true
-                        }
-                        self.classifierID = classifier.classifierID
-                        expectation.fulfill()
-                        return
-                    }
-                }
-                expectation.fulfill()
-            }
-            waitForExpectations()
-            
-            if tries > 5 {
-                XCTFail("Classifier is not ready yet, please wait for training to complete.")
-                return
-            }
-            
-            if (classifierID == nil) {
-                trainClassifier()
-            }
-            
-            sleep(10)
+        let description = "Look up (or create) the trained classifier."
+        let expectation = self.expectation(description: description)
+        
+        let failure = { (error: Error) in
+            XCTFail("Failed to locate the trained classifier.")
         }
         
+        visualRecognition.getClassifiers(failure: failure) { classifiers in
+            for classifier in classifiers {
+                if classifier.name == self.classifierName {
+                    XCTAssert(classifier.status == "ready", "Wait for training to complete.")
+                    self.classifierID = classifier.classifierID
+                    expectation.fulfill()
+                    return
+                }
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+        
+        if (classifierID == nil) {
+            trainClassifier()
+        }
     }
     
     /** Look up (or create) the collection. */
@@ -432,23 +414,6 @@ class VisualRecognitionTests: XCTestCase {
             XCTAssertEqual(classifier.name, self.classifierName)
             XCTAssertEqual(classifier.classes.count, 1)
             expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Update the trained classifier. */
-    func testUpdateClassifier() {
-        let description = "Update the trained classifier."
-        let expectation = self.expectation(description: description)
-        
-        let car = PositiveExample(name: "car", examples: examplesCars)
-        visualRecognition.updateClassifier(
-            withID: classifierID!,
-            positiveExamples: [car],
-            negativeExamples: examplesTrucks,
-            failure: failWithError) { classifier in
-                XCTAssertEqual(classifier.name, self.classifierName)
-                expectation.fulfill()
         }
         waitForExpectations()
     }

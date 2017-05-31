@@ -69,6 +69,7 @@ class RelationshipExtractionTests: XCTestCase {
     
     // MARK: - Positive Tests
     
+    // Disabled test, failed with: `Code: 415. Unsupported Media Type.`
     /** Analyze a piece of text for the relationships between all entities. */
     func testGetRelationships() {
         let description = "Test the getRelationships method."

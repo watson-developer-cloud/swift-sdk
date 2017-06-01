@@ -23,8 +23,8 @@ class VisualRecognitionTests: XCTestCase {
     private var visualRecognition: VisualRecognition!
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
     private let collectionName = "swift-sdk-unit-test-faces"
-    private var classifierID: String? //= "swiftsdkunittestcarstrucks_378338040"
-    private var collectionID: String? //= "swift-sdk-unit-test-faces_1f7785"
+    private var classifierID: String?
+    private var collectionID: String?
     private var imageFaceID: String?
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0

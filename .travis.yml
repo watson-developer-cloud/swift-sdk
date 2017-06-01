@@ -8,7 +8,6 @@ matrix:
 branches:
   only:
     - master
-    - travis-test-failures
 env:
   global:
     - IOS_SDK="iphonesimulator10.3"

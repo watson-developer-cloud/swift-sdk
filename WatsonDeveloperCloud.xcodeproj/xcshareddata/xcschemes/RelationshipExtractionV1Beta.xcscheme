@@ -51,6 +51,11 @@
                BlueprintName = "RelationshipExtractionV1BetaTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RelationshipExtractionTests/testGetRelationships()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

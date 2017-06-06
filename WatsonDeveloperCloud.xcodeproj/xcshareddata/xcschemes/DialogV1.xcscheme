@@ -37,6 +37,20 @@
                BlueprintName = "DialogV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "DialogTests/testCreateDialogWithNonexistentFile()">
+               </Test>
+               <Test
+                  Identifier = "DialogTests/testGetContent()">
+               </Test>
+               <Test
+                  Identifier = "DialogTests/testGetConversationHistoryWithLimit()">
+               </Test>
+               <Test
+                  Identifier = "DialogTests/testUpdateDialog()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

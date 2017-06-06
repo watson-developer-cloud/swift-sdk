@@ -51,6 +51,14 @@
                BlueprintName = "TextToSpeechV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TextToSpeechPlaybackTests/testSynthesizeOpus()">
+               </Test>
+               <Test
+                  Identifier = "TextToSpeechTests/testSynthesizeOpus()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

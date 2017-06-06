@@ -138,7 +138,7 @@ class ConversationTests: XCTestCase {
             // verify intents
             XCTAssertEqual(response.intents.count, 1)
             XCTAssertEqual(response.intents[0].intent, "turn_on")
-            XCTAssert(response.intents[0].confidence >= 0.90)
+            XCTAssert(response.intents[0].confidence >= 0.80)
             XCTAssert(response.intents[0].confidence <= 1.00)
             
             // verify output

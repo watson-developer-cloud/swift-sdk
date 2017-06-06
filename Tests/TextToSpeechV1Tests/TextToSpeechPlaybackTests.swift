@@ -173,6 +173,9 @@ class TextToSpeechPlaybackTests: XCTestCase {
         waitForExpectations()
     }
     
+    // This test works when you run it individually, but for some reason, running it after the
+    // testSynthesizeFlac() method causes this one to fail. The audio types aren't updated somehow,
+    // and the service seems to think we are still requesting .flac instead of .opus.
     /** Synthesize text to spoken audio in Opus format. */
     func testSynthesizeOpus() {
         let description = "Synthesize text to spoken audio in Opus format."

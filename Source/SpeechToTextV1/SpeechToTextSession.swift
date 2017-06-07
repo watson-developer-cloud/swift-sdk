@@ -182,7 +182,15 @@ public class SpeechToTextSession {
     public func recognize(audio: Data) {
         socket.writeAudio(audio: audio)
     }
-    
+
+    public func recognizePCMtoOpus(audio: Data) {
+		guard audio.count > 0 else { return }
+		try! self.encoder.encode(pcm: audio)
+		let opus = self.encoder.bitstream(flush: true)
+		guard opus.count > 0 else { return }
+		self.socket.writeAudio(audio: opus)
+    }
+
     /**
      Start streaming microphone audio data to transcribe.
      

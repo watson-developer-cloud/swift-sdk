@@ -47,7 +47,8 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForSemanticRoles", testAnalyzeTextForSemanticRoles),
             ("testAnalyzeTextForSentiment", testAnalyzeTextForSentiment),
             ("testAnalyzeTextForSentimentWithoutTargets", testAnalyzeTextForSentimentWithoutTargets),
-            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories)
+            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
+            ("testAnalyzeTextCCForSentiment", testAnalyzeTextCCForSentiment)
         ]
     }
     
@@ -433,6 +434,34 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             for target in (results.sentiment?.targets)! {
                 XCTAssertNotNil(target.text)
                 XCTAssertNotNil(target.score)
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testAnalyzeTextCCForSentiment() {
+        
+        let description = "Analyze text and verify sentiment returned."
+        let expectation = self.expectation(description: description)
+        
+        
+        let features = Features(keywords: KeywordsOptions(limit: 100, sentiment: true))
+        let textCC = "DON'T EAT HERE! Waiter was Pompas a**, recommend a bottle of wine that was terrible.. I was very specific about what we like. It seems that they were more interest in selling what they need to get rid of. Steak was tough, nothing was worth the price.  The worst was for a 330$ tab, we handed over 400! The waiter didn't even come back to the table! Apparently you automatically give 20% tip, even if food is mediocre and service sub par! Go to Capitol Grill, or old town Steakhouse... You'll be WAY happier.. Me and my Wife were in Vegas for a day layover and before we went home we wanted a nice steak dinner to cap off a great day and christmas weekend...unfortunately that was not the case.  The service and food up to the main course was great, we were having a great time.  Once the entree came out we started eating and chatting away.  As my wife was about to take her next bite she found a piece of metal shard in her bite of mushrooms and steak.  This could have come from a cleaning sponge or from a wire brush.  We let the staff know and they came over and were nice about it.  They gave us a new batch of mushrooms, which were over cooked, and again apologized.  After that moment we continued but were guarded in eating the rest of the meal.  After finding the shard kinda killed the meal and experience.  Due to our short stay we had to leave back to N.Y.  Also talked with the GM and never heard back. From someone who is in the hospitality industry... all in all it was a disappointing experience. I guess if you haven't eaten at any top of the lie steak houses this would be an above avg experience. The service was 5 stars all the way. Apps- Bacon-4 stars. Shrimp cocktail -1 star. Absolutely some of the smallest shrimp I have seen and at $5 a shrimp it's a must skip. Steak- Bone-in ribeye-3 stars. I have had much better, but I have also had much worse. Dessert- Warm brownie with ice cream covered in hot fudge 3 stars. OK service. We sat at the bar this time. I wouldn't suggest it. Table service is much more professional. Food just average this time. My go to Las Vegas Steakhouse!  Food and service is always amazing.  Typically we'll sit out on the patio so we can smoke cigars, which is nice, since most places don't allow it.  Prices for food, wine and liquor are typical for high-end Vegas steakhouses but worth it."
+        
+        let param = Parameters(features: features, text: textCC, returnAnalyzedText: true)
+        
+        naturalLanguageUnderstanding.analyzeContent(withParameters: param, failure: failWithError) {
+            results in
+            XCTAssertEqual(results.analyzedText, textCC)
+            XCTAssertEqual(results.language, "en")
+            guard let keywords = results.keywords else {
+                XCTFail()
+                return
+            }
+            for keyword in keywords {
+                XCTAssertNotNil(keyword.sentiment)
+                
             }
             expectation.fulfill()
         }

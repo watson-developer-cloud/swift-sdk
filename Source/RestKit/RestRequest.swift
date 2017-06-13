@@ -64,7 +64,10 @@ public struct RestRequest {
         if let queryItems = queryItems, !queryItems.isEmpty {
             urlComponents.queryItems = queryItems
         }
-        
+
+        // Must encode "+" to %2B (URLComponents does not do this)
+        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+
         // construct basic mutable request
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = method

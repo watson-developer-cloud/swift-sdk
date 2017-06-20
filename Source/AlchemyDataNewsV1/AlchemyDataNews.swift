@@ -33,6 +33,8 @@ public class AlchemyDataNews {
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
     
+    private let errorDomain = "com.ibm.watson.developer-cloud.AlchemyDataNews"
+    
     /**
      Create an `AlchemyDataNews` object.
      - parameter apiKey: The API key credential to use when authenticating with the service.
@@ -41,16 +43,32 @@ public class AlchemyDataNews {
         self.apiKey = apiKey
     }
     
-    private func dataToError(data: Data) -> NSError? {
+    /**
+     If the response or data represents an error returned by the AlchemyDataNews service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: errorDomain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
+            let code = 400
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: status,
                 NSLocalizedDescriptionKey: statusInfo
             ]
-            return NSError(domain: "AlchemyDataNews", code: 400, userInfo: userInfo)
+            return NSError(domain: errorDomain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -106,7 +124,7 @@ public class AlchemyDataNews {
         )
         
         // execute rest request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<NewsResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<NewsResponse>) in
             switch response.result {
             case .success(let newsResponse): success(newsResponse)
             case .failure(let error): failure?(error)

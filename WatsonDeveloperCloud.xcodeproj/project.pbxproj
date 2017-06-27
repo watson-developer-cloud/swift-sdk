@@ -343,29 +343,29 @@
 		CA640F051EEDF55600EC9435 /* CreateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE41EEDF55600EC9435 /* CreateValue.swift */; };
 		CA640F061EEDF55600EC9435 /* CreateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */; };
 		CA640F071EEDF55600EC9435 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE61EEDF55600EC9435 /* Entity.swift */; };
-		CA640F081EEDF55600EC9435 /* EntityCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE71EEDF55600EC9435 /* EntityCollectionResponse.swift */; };
-		CA640F091EEDF55600EC9435 /* EntityExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE81EEDF55600EC9435 /* EntityExportResponse.swift */; };
+		CA640F081EEDF55600EC9435 /* EntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE71EEDF55600EC9435 /* EntityCollection.swift */; };
+		CA640F091EEDF55600EC9435 /* EntityExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE81EEDF55600EC9435 /* EntityExport.swift */; };
 		CA640F0A1EEDF55600EC9435 /* EntityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE91EEDF55600EC9435 /* EntityResponse.swift */; };
 		CA640F0B1EEDF55600EC9435 /* ExampleCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */; };
 		CA640F0C1EEDF55600EC9435 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEB1EEDF55600EC9435 /* Input.swift */; };
 		CA640F0D1EEDF55600EC9435 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEC1EEDF55600EC9435 /* Intent.swift */; };
 		CA640F0E1EEDF55600EC9435 /* IntentCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */; };
 		CA640F0F1EEDF55600EC9435 /* IntentExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */; };
-		CA640F101EEDF55600EC9435 /* LogCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEF1EEDF55600EC9435 /* LogCollectionResponse.swift */; };
-		CA640F111EEDF55600EC9435 /* LogExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF01EEDF55600EC9435 /* LogExportResponse.swift */; };
-		CA640F121EEDF55600EC9435 /* LogPaginationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF11EEDF55600EC9435 /* LogPaginationResponse.swift */; };
+		CA640F101EEDF55600EC9435 /* LogCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEF1EEDF55600EC9435 /* LogCollection.swift */; };
+		CA640F111EEDF55600EC9435 /* LogExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF01EEDF55600EC9435 /* LogExport.swift */; };
+		CA640F121EEDF55600EC9435 /* LogPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF11EEDF55600EC9435 /* LogPagination.swift */; };
 		CA640F131EEDF55600EC9435 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF21EEDF55600EC9435 /* MessageRequest.swift */; };
 		CA640F141EEDF55600EC9435 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF31EEDF55600EC9435 /* MessageResponse.swift */; };
 		CA640F151EEDF55600EC9435 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF41EEDF55600EC9435 /* Output.swift */; };
-		CA640F161EEDF55600EC9435 /* SynonymCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF51EEDF55600EC9435 /* SynonymCollectionResponse.swift */; };
-		CA640F171EEDF55600EC9435 /* SynonymResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF61EEDF55600EC9435 /* SynonymResponse.swift */; };
+		CA640F161EEDF55600EC9435 /* SynonymCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */; };
+		CA640F171EEDF55600EC9435 /* Synonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF61EEDF55600EC9435 /* Synonym.swift */; };
 		CA640F181EEDF55600EC9435 /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */; };
 		CA640F191EEDF55600EC9435 /* UpdateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */; };
 		CA640F1A1EEDF55600EC9435 /* UpdateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF91EEDF55600EC9435 /* UpdateValue.swift */; };
 		CA640F1B1EEDF55600EC9435 /* UpdateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */; };
-		CA640F1C1EEDF55600EC9435 /* ValueCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFB1EEDF55600EC9435 /* ValueCollectionResponse.swift */; };
-		CA640F1D1EEDF55600EC9435 /* ValueExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFC1EEDF55600EC9435 /* ValueExportResponse.swift */; };
-		CA640F1E1EEDF55600EC9435 /* ValueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFD1EEDF55600EC9435 /* ValueResponse.swift */; };
+		CA640F1C1EEDF55600EC9435 /* ValueCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */; };
+		CA640F1D1EEDF55600EC9435 /* ValueExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFC1EEDF55600EC9435 /* ValueExport.swift */; };
+		CA640F1E1EEDF55600EC9435 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFD1EEDF55600EC9435 /* Value.swift */; };
 		CA640F1F1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */; };
 		CA640F201EEDF55600EC9435 /* WorkspaceExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */; };
 		CA640F251EEE00A900EC9435 /* ExampleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F231EEE008800EC9435 /* ExampleResponse.swift */; };
@@ -1023,29 +1023,29 @@
 		CA640EE41EEDF55600EC9435 /* CreateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateValue.swift; sourceTree = "<group>"; };
 		CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWorkspace.swift; sourceTree = "<group>"; };
 		CA640EE61EEDF55600EC9435 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		CA640EE71EEDF55600EC9435 /* EntityCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EE81EEDF55600EC9435 /* EntityExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityExportResponse.swift; sourceTree = "<group>"; };
+		CA640EE71EEDF55600EC9435 /* EntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollection.swift; sourceTree = "<group>"; };
+		CA640EE81EEDF55600EC9435 /* EntityExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityExport.swift; sourceTree = "<group>"; };
 		CA640EE91EEDF55600EC9435 /* EntityResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityResponse.swift; sourceTree = "<group>"; };
 		CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCollectionResponse.swift; sourceTree = "<group>"; };
 		CA640EEB1EEDF55600EC9435 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		CA640EEC1EEDF55600EC9435 /* Intent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
 		CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentCollectionResponse.swift; sourceTree = "<group>"; };
 		CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentExportResponse.swift; sourceTree = "<group>"; };
-		CA640EEF1EEDF55600EC9435 /* LogCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EF01EEDF55600EC9435 /* LogExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExportResponse.swift; sourceTree = "<group>"; };
-		CA640EF11EEDF55600EC9435 /* LogPaginationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogPaginationResponse.swift; sourceTree = "<group>"; };
+		CA640EEF1EEDF55600EC9435 /* LogCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCollection.swift; sourceTree = "<group>"; };
+		CA640EF01EEDF55600EC9435 /* LogExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExport.swift; sourceTree = "<group>"; };
+		CA640EF11EEDF55600EC9435 /* LogPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogPagination.swift; sourceTree = "<group>"; };
 		CA640EF21EEDF55600EC9435 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
 		CA640EF31EEDF55600EC9435 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		CA640EF41EEDF55600EC9435 /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
-		CA640EF51EEDF55600EC9435 /* SynonymCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynonymCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EF61EEDF55600EC9435 /* SynonymResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynonymResponse.swift; sourceTree = "<group>"; };
+		CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynonymCollection.swift; sourceTree = "<group>"; };
+		CA640EF61EEDF55600EC9435 /* Synonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synonym.swift; sourceTree = "<group>"; };
 		CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateEntity.swift; sourceTree = "<group>"; };
 		CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSynonym.swift; sourceTree = "<group>"; };
 		CA640EF91EEDF55600EC9435 /* UpdateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateValue.swift; sourceTree = "<group>"; };
 		CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateWorkspace.swift; sourceTree = "<group>"; };
-		CA640EFB1EEDF55600EC9435 /* ValueCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EFC1EEDF55600EC9435 /* ValueExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueExportResponse.swift; sourceTree = "<group>"; };
-		CA640EFD1EEDF55600EC9435 /* ValueResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueResponse.swift; sourceTree = "<group>"; };
+		CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCollection.swift; sourceTree = "<group>"; };
+		CA640EFC1EEDF55600EC9435 /* ValueExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueExport.swift; sourceTree = "<group>"; };
+		CA640EFD1EEDF55600EC9435 /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCollectionResponse.swift; sourceTree = "<group>"; };
 		CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceExportResponse.swift; sourceTree = "<group>"; };
 		CA640F211EEE006500EC9435 /* PaginationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationResponse.swift; sourceTree = "<group>"; };
@@ -2255,8 +2255,8 @@
 				CA640EE41EEDF55600EC9435 /* CreateValue.swift */,
 				CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */,
 				CA640EE61EEDF55600EC9435 /* Entity.swift */,
-				CA640EE71EEDF55600EC9435 /* EntityCollectionResponse.swift */,
-				CA640EE81EEDF55600EC9435 /* EntityExportResponse.swift */,
+				CA640EE71EEDF55600EC9435 /* EntityCollection.swift */,
+				CA640EE81EEDF55600EC9435 /* EntityExport.swift */,
 				CA640EE91EEDF55600EC9435 /* EntityResponse.swift */,
 				CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */,
 				CA640F231EEE008800EC9435 /* ExampleResponse.swift */,
@@ -2265,24 +2265,24 @@
 				CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */,
 				CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */,
 				CA640F2D1EEE012300EC9435 /* IntentResponse.swift */,
-				CA640EEF1EEDF55600EC9435 /* LogCollectionResponse.swift */,
-				CA640EF01EEDF55600EC9435 /* LogExportResponse.swift */,
-				CA640EF11EEDF55600EC9435 /* LogPaginationResponse.swift */,
+				CA640EEF1EEDF55600EC9435 /* LogCollection.swift */,
+				CA640EF01EEDF55600EC9435 /* LogExport.swift */,
+				CA640EF11EEDF55600EC9435 /* LogPagination.swift */,
 				CA640EF21EEDF55600EC9435 /* MessageRequest.swift */,
 				CA640EF31EEDF55600EC9435 /* MessageResponse.swift */,
 				CA640EF41EEDF55600EC9435 /* Output.swift */,
 				CA640F211EEE006500EC9435 /* PaginationResponse.swift */,
-				CA640EF51EEDF55600EC9435 /* SynonymCollectionResponse.swift */,
-				CA640EF61EEDF55600EC9435 /* SynonymResponse.swift */,
+				CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */,
+				CA640EF61EEDF55600EC9435 /* Synonym.swift */,
 				CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */,
 				CA640F2E1EEE012300EC9435 /* UpdateExample.swift */,
 				CA640F2F1EEE012300EC9435 /* UpdateIntent.swift */,
 				CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */,
 				CA640EF91EEDF55600EC9435 /* UpdateValue.swift */,
 				CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */,
-				CA640EFB1EEDF55600EC9435 /* ValueCollectionResponse.swift */,
-				CA640EFC1EEDF55600EC9435 /* ValueExportResponse.swift */,
-				CA640EFD1EEDF55600EC9435 /* ValueResponse.swift */,
+				CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */,
+				CA640EFC1EEDF55600EC9435 /* ValueExport.swift */,
+				CA640EFD1EEDF55600EC9435 /* Value.swift */,
 				CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */,
 				CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */,
 				CA640F301EEE012300EC9435 /* WorkspaceResponse.swift */,
@@ -4399,21 +4399,21 @@
 				CA640F2B1EEE00F200EC9435 /* CreateExample.swift in Sources */,
 				7AB445411D3E657900E8748A /* Conversation.swift in Sources */,
 				CA640F5C1EEE016700EC9435 /* UpdateIntent.swift in Sources */,
-				CA640F161EEDF55600EC9435 /* SynonymCollectionResponse.swift in Sources */,
+				CA640F161EEDF55600EC9435 /* SynonymCollection.swift in Sources */,
 				CA640F041EEDF55600EC9435 /* CreateSynonym.swift in Sources */,
 				CA640F001EEDF55600EC9435 /* Context.swift in Sources */,
 				CA640F2C1EEE00F200EC9435 /* CreateIntent.swift in Sources */,
-				CA640F081EEDF55600EC9435 /* EntityCollectionResponse.swift in Sources */,
-				CA640F091EEDF55600EC9435 /* EntityExportResponse.swift in Sources */,
+				CA640F081EEDF55600EC9435 /* EntityCollection.swift in Sources */,
+				CA640F091EEDF55600EC9435 /* EntityExport.swift in Sources */,
 				CA640F131EEDF55600EC9435 /* MessageRequest.swift in Sources */,
 				CA640F0E1EEDF55600EC9435 /* IntentCollectionResponse.swift in Sources */,
 				CA640F141EEDF55600EC9435 /* MessageResponse.swift in Sources */,
 				CA640F061EEDF55600EC9435 /* CreateWorkspace.swift in Sources */,
-				CA640F1C1EEDF55600EC9435 /* ValueCollectionResponse.swift in Sources */,
+				CA640F1C1EEDF55600EC9435 /* ValueCollection.swift in Sources */,
 				CA640F031EEDF55600EC9435 /* CreateEntity.swift in Sources */,
 				CA640F5A1EEE016700EC9435 /* IntentResponse.swift in Sources */,
 				CA640F0B1EEDF55600EC9435 /* ExampleCollectionResponse.swift in Sources */,
-				CA640F1D1EEDF55600EC9435 /* ValueExportResponse.swift in Sources */,
+				CA640F1D1EEDF55600EC9435 /* ValueExport.swift in Sources */,
 				CA640F201EEDF55600EC9435 /* WorkspaceExportResponse.swift in Sources */,
 				CA640F0A1EEDF55600EC9435 /* EntityResponse.swift in Sources */,
 				CA640F191EEDF55600EC9435 /* UpdateSynonym.swift in Sources */,
@@ -4422,16 +4422,16 @@
 				CA640F251EEE00A900EC9435 /* ExampleResponse.swift in Sources */,
 				CA640F151EEDF55600EC9435 /* Output.swift in Sources */,
 				CA640F0D1EEDF55600EC9435 /* Intent.swift in Sources */,
-				CA640F101EEDF55600EC9435 /* LogCollectionResponse.swift in Sources */,
+				CA640F101EEDF55600EC9435 /* LogCollection.swift in Sources */,
 				CA640F1F1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift in Sources */,
-				CA640F111EEDF55600EC9435 /* LogExportResponse.swift in Sources */,
+				CA640F111EEDF55600EC9435 /* LogExport.swift in Sources */,
 				CA640F011EEDF55600EC9435 /* CounterexampleCollectionResponse.swift in Sources */,
 				CA640F0F1EEDF55600EC9435 /* IntentExportResponse.swift in Sources */,
-				CA640F121EEDF55600EC9435 /* LogPaginationResponse.swift in Sources */,
-				CA640F1E1EEDF55600EC9435 /* ValueResponse.swift in Sources */,
+				CA640F121EEDF55600EC9435 /* LogPagination.swift in Sources */,
+				CA640F1E1EEDF55600EC9435 /* Value.swift in Sources */,
 				CA640F1B1EEDF55600EC9435 /* UpdateWorkspace.swift in Sources */,
 				CA640F1A1EEDF55600EC9435 /* UpdateValue.swift in Sources */,
-				CA640F171EEDF55600EC9435 /* SynonymResponse.swift in Sources */,
+				CA640F171EEDF55600EC9435 /* Synonym.swift in Sources */,
 				CA640F5B1EEE016700EC9435 /* UpdateExample.swift in Sources */,
 				CA640F021EEDF55600EC9435 /* CreateDialogNode.swift in Sources */,
 				CA640F5D1EEE016700EC9435 /* WorkspaceResponse.swift in Sources */,

@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** The pagination data for the returned objects. */
-public struct LogPaginationResponse: JSONDecodable, JSONEncodable {
+public struct LogPagination: JSONDecodable, JSONEncodable {
 
     /// The URL that will return the next page of results.
     public let nextUrl: String?
@@ -27,12 +27,12 @@ public struct LogPaginationResponse: JSONDecodable, JSONEncodable {
     public let matched: Int?
 
     /**
-     Initialize a `LogPaginationResponse` with member variables.
+     Initialize a `LogPagination` with member variables.
 
      - parameter nextUrl: The URL that will return the next page of results.
      - parameter matched: Reserved for future use.
 
-     - returns: An initialized `LogPaginationResponse`.
+     - returns: An initialized `LogPagination`.
     */
     public init(nextUrl: String? = nil, matched: Int? = nil) {
         self.nextUrl = nextUrl
@@ -40,14 +40,14 @@ public struct LogPaginationResponse: JSONDecodable, JSONEncodable {
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `LogPaginationResponse` model from JSON.
+    /// Used internally to initialize a `LogPagination` model from JSON.
     public init(json: JSON) throws {
         nextUrl = try? json.getString(at: "next_url")
         matched = try? json.getInt(at: "matched")
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `LogPaginationResponse` model to JSON.
+    /// Used internally to serialize a `LogPagination` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         if let nextUrl = nextUrl { json["next_url"] = nextUrl }

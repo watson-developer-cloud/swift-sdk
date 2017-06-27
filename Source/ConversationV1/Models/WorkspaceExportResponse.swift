@@ -48,7 +48,7 @@ public struct WorkspaceExportResponse: JSONDecodable, JSONEncodable {
     public let intents: [IntentExportResponse]?
 
     /// An array of entities.
-    public let entities: [EntityExportResponse]?
+    public let entities: [EntityExport]?
 
     /// An array of counterexamples.
     public let counterexamples: [ExampleResponse]?
@@ -70,7 +70,7 @@ public struct WorkspaceExportResponse: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `WorkspaceExportResponse`.
     */
-    public init(name: String, description: String, language: String, metadata: [String: Any], created: String, updated: String, workspaceID: String, status: String, intents: [IntentExportResponse]? = nil, entities: [EntityExportResponse]? = nil, counterexamples: [ExampleResponse]? = nil) {
+    public init(name: String, description: String, language: String, metadata: [String: Any], created: String, updated: String, workspaceID: String, status: String, intents: [IntentExportResponse]? = nil, entities: [EntityExport]? = nil, counterexamples: [ExampleResponse]? = nil) {
         self.name = name
         self.description = description
         self.language = language
@@ -96,7 +96,7 @@ public struct WorkspaceExportResponse: JSONDecodable, JSONEncodable {
         workspaceID = try json.getString(at: "workspace_id")
         status = try json.getString(at: "status")
         intents = try? json.decodedArray(at: "intents", type: IntentExportResponse.self)
-        entities = try? json.decodedArray(at: "entities", type: EntityExportResponse.self)
+        entities = try? json.decodedArray(at: "entities", type: EntityExport.self)
         counterexamples = try? json.decodedArray(at: "counterexamples", type: ExampleResponse.self)
     }
 

@@ -17,8 +17,8 @@
 import Foundation
 import RestKit
 
-/** LogExportResponse. */
-public struct LogExportResponse: JSONDecodable {
+/** LogExport. */
+public struct LogExport: JSONDecodable {
 
     /// A request formatted for the Conversation service.
     public let request: MessageRequest
@@ -36,7 +36,7 @@ public struct LogExportResponse: JSONDecodable {
     public let responseTimestamp: String
 
     /**
-     Initialize a `LogExportResponse` with member variables.
+     Initialize a `LogExport` with member variables.
 
      - parameter request: A request formatted for the Conversation service.
      - parameter response: A response from the Conversation service.
@@ -44,7 +44,7 @@ public struct LogExportResponse: JSONDecodable {
      - parameter requestTimestamp: The timestamp for receipt of the message.
      - parameter responseTimestamp: The timestamp for the system response to the message.
 
-     - returns: An initialized `LogExportResponse`.
+     - returns: An initialized `LogExport`.
     */
     public init(request: MessageRequest, response: MessageResponse, logID: String, requestTimestamp: String, responseTimestamp: String) {
         self.request = request
@@ -55,7 +55,7 @@ public struct LogExportResponse: JSONDecodable {
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `LogExportResponse` model from JSON.
+    /// Used internally to initialize a `LogExport` model from JSON.
     public init(json: JSON) throws {
         request = try json.decode(at: "request", type: MessageRequest.self)
         response = try json.decode(at: "response", type: MessageResponse.self)

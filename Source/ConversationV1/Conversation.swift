@@ -521,7 +521,7 @@ public class Conversation {
         entity: String,
         export: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityExportResponse) -> Void)
+        success: @escaping (EntityExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -550,7 +550,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<EntityExportResponse>) in
+            (response: RestResponse<EntityExport>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -580,7 +580,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityCollectionResponse) -> Void)
+        success: @escaping (EntityCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -625,7 +625,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<EntityCollectionResponse>) in
+            (response: RestResponse<EntityCollection>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1282,7 +1282,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollectionResponse) -> Void)
+        success: @escaping (LogCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1323,7 +1323,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<LogCollectionResponse>) in
+            (response: RestResponse<LogCollection>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1349,7 +1349,7 @@ public class Conversation {
         value: String,
         synonym: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
@@ -1381,7 +1381,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SynonymResponse>) in
+            (response: RestResponse<Synonym>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1458,7 +1458,7 @@ public class Conversation {
         value: String,
         synonym: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1483,7 +1483,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SynonymResponse>) in
+            (response: RestResponse<Synonym>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1515,7 +1515,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymCollectionResponse) -> Void)
+        success: @escaping (SynonymCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1556,7 +1556,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SynonymCollectionResponse>) in
+            (response: RestResponse<SynonymCollection>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1584,7 +1584,7 @@ public class Conversation {
         synonym: String,
         newSynonym: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
@@ -1609,14 +1609,14 @@ public class Conversation {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
+            contentType: "application/json",
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SynonymResponse>) in
+            (response: RestResponse<Synonym>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1644,7 +1644,7 @@ public class Conversation {
         metadata: [String: Any]? = nil,
         synonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueResponse) -> Void)
+        success: @escaping (Value) -> Void)
     {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms)
@@ -1676,7 +1676,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ValueResponse>) in
+            (response: RestResponse<Value>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1751,7 +1751,7 @@ public class Conversation {
         value: String,
         export: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueExportResponse) -> Void)
+        success: @escaping (ValueExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1780,7 +1780,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ValueExportResponse>) in
+            (response: RestResponse<ValueExport>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1812,7 +1812,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueCollectionResponse) -> Void)
+        success: @escaping (ValueCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1857,7 +1857,7 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ValueCollectionResponse>) in
+            (response: RestResponse<ValueCollection>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1887,7 +1887,7 @@ public class Conversation {
         newMetadata: [String: Any]? = nil,
         newSynonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueResponse) -> Void)
+        success: @escaping (Value) -> Void)
     {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, synonyms: newSynonyms)
@@ -1912,14 +1912,14 @@ public class Conversation {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
+            contentType: "application/json",
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ValueResponse>) in
+            (response: RestResponse<Value>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)

@@ -17,40 +17,40 @@
 import Foundation
 import RestKit
 
-/** SynonymCollectionResponse. */
-public struct SynonymCollectionResponse: JSONDecodable, JSONEncodable {
+/** ValueCollection. */
+public struct ValueCollection: JSONDecodable, JSONEncodable {
 
-    /// An array of synonyms.
-    public let synonyms: [SynonymResponse]
+    /// An array of entity values.
+    public let values: [ValueExport]
 
     /// An object defining the pagination data for the returned objects.
     public let pagination: PaginationResponse
 
     /**
-     Initialize a `SynonymCollectionResponse` with member variables.
+     Initialize a `ValueCollection` with member variables.
 
-     - parameter synonyms: An array of synonyms.
+     - parameter values: An array of entity values.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `SynonymCollectionResponse`.
+     - returns: An initialized `ValueCollection`.
     */
-    public init(synonyms: [SynonymResponse], pagination: PaginationResponse) {
-        self.synonyms = synonyms
+    public init(values: [ValueExport], pagination: PaginationResponse) {
+        self.values = values
         self.pagination = pagination
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `SynonymCollectionResponse` model from JSON.
+    /// Used internally to initialize a `ValueCollection` model from JSON.
     public init(json: JSON) throws {
-        synonyms = try json.decodedArray(at: "synonyms", type: SynonymResponse.self)
+        values = try json.decodedArray(at: "values", type: ValueExport.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `SynonymCollectionResponse` model to JSON.
+    /// Used internally to serialize a `ValueCollection` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["synonyms"] = synonyms.map { $0.toJSONObject() }
+        json["values"] = values.map { $0.toJSONObject() }
         json["pagination"] = pagination.toJSONObject()
         return json
     }

@@ -17,32 +17,32 @@
 import Foundation
 import RestKit
 
-/** LogCollectionResponse. */
-public struct LogCollectionResponse: JSONDecodable {
+/** LogCollection. */
+public struct LogCollection: JSONDecodable {
 
     /// An array of log events.
-    public let logs: [LogExportResponse]
+    public let logs: [LogExport]
 
     /// An object defining the pagination data for the returned objects.
-    public let pagination: LogPaginationResponse
+    public let pagination: LogPagination
 
     /**
-     Initialize a `LogCollectionResponse` with member variables.
+     Initialize a `LogCollection` with member variables.
 
      - parameter logs: An array of log events.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `LogCollectionResponse`.
+     - returns: An initialized `LogCollection`.
     */
-    public init(logs: [LogExportResponse], pagination: LogPaginationResponse) {
+    public init(logs: [LogExport], pagination: LogPagination) {
         self.logs = logs
         self.pagination = pagination
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `LogCollectionResponse` model from JSON.
+    /// Used internally to initialize a `LogCollection` model from JSON.
     public init(json: JSON) throws {
-        logs = try json.decodedArray(at: "logs", type: LogExportResponse.self)
-        pagination = try json.decode(at: "pagination", type: LogPaginationResponse.self)
+        logs = try json.decodedArray(at: "logs", type: LogExport.self)
+        pagination = try json.decode(at: "pagination", type: LogPagination.self)
     }
 }

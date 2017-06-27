@@ -26,7 +26,7 @@ public struct CreateValue: JSONDecodable, JSONEncodable {
     /// Any metadata related to the entity value.
     public let metadata: [String: Any]?
 
-    /// Any array of synonyms for the entity value.
+    /// An array of synonyms for the entity value.
     public let synonyms: [String]?
 
     /**
@@ -34,7 +34,7 @@ public struct CreateValue: JSONDecodable, JSONEncodable {
 
      - parameter value: The text of the entity value.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: Any array of synonyms for the entity value.
+     - parameter synonyms: An array of synonyms for the entity value.
 
      - returns: An initialized `CreateValue`.
     */

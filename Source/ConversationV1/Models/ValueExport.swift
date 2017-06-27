@@ -17,8 +17,8 @@
 import Foundation
 import RestKit
 
-/** ValueResponse. */
-public struct ValueResponse: JSONDecodable, JSONEncodable {
+/** ValueExport. */
+public struct ValueExport: JSONDecodable, JSONEncodable {
 
     /// The text of the entity value.
     public let value: String
@@ -32,40 +32,49 @@ public struct ValueResponse: JSONDecodable, JSONEncodable {
     /// The timestamp for the last update to the entity value.
     public let updated: String
 
+    /// An array of synonyms.
+    public let synonyms: [String]?
+
     /**
-     Initialize a `ValueResponse` with member variables.
+     Initialize a `ValueExport` with member variables.
 
      - parameter value: The text of the entity value.
      - parameter metadata: Any metadata related to the entity value.
      - parameter created: The timestamp for creation of the entity value.
      - parameter updated: The timestamp for the last update to the entity value.
+     - parameter synonyms: An array of synonyms.
 
-     - returns: An initialized `ValueResponse`.
+     - returns: An initialized `ValueExport`.
     */
-    public init(value: String, metadata: [String: Any], created: String, updated: String) {
+    public init(value: String, metadata: [String: Any], created: String, updated: String, synonyms: [String]? = nil) {
         self.value = value
         self.metadata = metadata
         self.created = created
         self.updated = updated
+        self.synonyms = synonyms
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `ValueResponse` model from JSON.
+    /// Used internally to initialize a `ValueExport` model from JSON.
     public init(json: JSON) throws {
         value = try json.getString(at: "value")
         metadata = try json.getDictionaryObject(at: "metadata")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
+        synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `ValueResponse` model to JSON.
+    /// Used internally to serialize a `ValueExport` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["value"] = value
         json["metadata"] = metadata
         json["created"] = created
         json["updated"] = updated
+        if let synonyms = synonyms {
+            json["synonyms"] = synonyms.map { $0 }
+        }
         return json
     }
 }

@@ -17,8 +17,8 @@
 import Foundation
 import RestKit
 
-/** SynonymResponse. */
-public struct SynonymResponse: JSONDecodable, JSONEncodable {
+/** Synonym. */
+public struct Synonym: JSONDecodable, JSONEncodable {
 
     /// The text of the synonym.
     public let synonym: String
@@ -30,13 +30,13 @@ public struct SynonymResponse: JSONDecodable, JSONEncodable {
     public let updated: String
 
     /**
-     Initialize a `SynonymResponse` with member variables.
+     Initialize a `Synonym` with member variables.
 
      - parameter synonym: The text of the synonym.
      - parameter created: The timestamp for creation of the synonym.
      - parameter updated: The timestamp for the most recent update to the synonym.
 
-     - returns: An initialized `SynonymResponse`.
+     - returns: An initialized `Synonym`.
     */
     public init(synonym: String, created: String, updated: String) {
         self.synonym = synonym
@@ -45,7 +45,7 @@ public struct SynonymResponse: JSONDecodable, JSONEncodable {
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `SynonymResponse` model from JSON.
+    /// Used internally to initialize a `Synonym` model from JSON.
     public init(json: JSON) throws {
         synonym = try json.getString(at: "synonym")
         created = try json.getString(at: "created")
@@ -53,7 +53,7 @@ public struct SynonymResponse: JSONDecodable, JSONEncodable {
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `SynonymResponse` model to JSON.
+    /// Used internally to serialize a `Synonym` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["synonym"] = synonym

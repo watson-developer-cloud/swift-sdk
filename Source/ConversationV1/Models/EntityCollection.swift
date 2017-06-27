@@ -18,36 +18,36 @@ import Foundation
 import RestKit
 
 /** An array of entities. */
-public struct EntityCollectionResponse: JSONDecodable, JSONEncodable {
+public struct EntityCollection: JSONDecodable, JSONEncodable {
 
     /// An array of entities.
-    public let entities: [EntityExportResponse]
+    public let entities: [EntityExport]
 
     /// An object defining the pagination data for the returned objects.
     public let pagination: PaginationResponse
 
     /**
-     Initialize a `EntityCollectionResponse` with member variables.
+     Initialize a `EntityCollection` with member variables.
 
      - parameter entities: An array of entities.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `EntityCollectionResponse`.
+     - returns: An initialized `EntityCollection`.
     */
-    public init(entities: [EntityExportResponse], pagination: PaginationResponse) {
+    public init(entities: [EntityExport], pagination: PaginationResponse) {
         self.entities = entities
         self.pagination = pagination
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `EntityCollectionResponse` model from JSON.
+    /// Used internally to initialize a `EntityCollection` model from JSON.
     public init(json: JSON) throws {
-        entities = try json.decodedArray(at: "entities", type: EntityExportResponse.self)
+        entities = try json.decodedArray(at: "entities", type: EntityExport.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `EntityCollectionResponse` model to JSON.
+    /// Used internally to serialize a `EntityCollection` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["entities"] = entities.map { $0.toJSONObject() }

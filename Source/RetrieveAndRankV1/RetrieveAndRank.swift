@@ -44,29 +44,44 @@ public class RetrieveAndRank {
     }
     
     /**
-     If the given data represents an error returned by the Retrieve and Rank service, then
-     return an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Retrieve and Rank service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            
-            if let msg = try? json.getString(at: "msg") {
-                let code = try json.getInt(at: "code")
-                let userInfo = [NSLocalizedFailureReasonErrorKey: msg]
-                return NSError(domain: domain, code: code, userInfo: userInfo)
+            let code = response?.statusCode ?? 400
+            let userInfo: [String: String]
+            if let message = try? json.getString(at: "msg") {
+                userInfo = [NSLocalizedFailureReasonErrorKey: message]
             } else {
-                let error = try json.getString(at: "error")
+                let message = try json.getString(at: "error")
                 let description = try json.getString(at: "description")
-                let code = try json.getInt(at: "code")
-                let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
+                userInfo = [
+                    NSLocalizedFailureReasonErrorKey: message,
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
-                return NSError(domain: domain, code: code, userInfo: userInfo)
-            } 
+            }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -94,7 +109,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["clusters"]) {
+        request.responseArray(responseToError: responseToError, path: ["clusters"]) {
             (response: RestResponse<[SolrCluster]>) in
                 switch response.result {
                 case .success(let clusters): success(clusters)
@@ -145,7 +160,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
@@ -178,7 +193,7 @@ public class RetrieveAndRank {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -210,7 +225,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
@@ -242,7 +257,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["solr_configs"]) {
+        request.responseArray(responseToError: responseToError, path: ["solr_configs"]) {
             (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let config): success(config)
@@ -277,7 +292,7 @@ public class RetrieveAndRank {
         request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    switch self.dataToError(data: data) {
+                    switch self.responseToError(response: response.response, data: data) {
                     case .some(let error): failure?(error)
                     case .none: success?()
                     }
@@ -403,7 +418,7 @@ public class RetrieveAndRank {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -448,7 +463,7 @@ public class RetrieveAndRank {
         request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    switch self.dataToError(data: data) {
+                    switch self.responseToError(response: response.response, data: data) {
                     case .some(let error): failure?(error)
                     case .none: success?()
                     }
@@ -490,7 +505,7 @@ public class RetrieveAndRank {
         request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    switch self.dataToError(data: data) {
+                    switch self.responseToError(response: response.response, data: data) {
                     case .some(let error): failure?(error)
                     case .none: success?()
                     }
@@ -530,7 +545,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+        request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let collections): success(collections)
@@ -581,7 +596,7 @@ public class RetrieveAndRank {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -639,7 +654,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SearchResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
@@ -698,7 +713,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SearchAndRankResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
@@ -729,7 +744,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["rankers"]) {
+        request.responseArray(responseToError: responseToError, path: ["rankers"]) {
             (response: RestResponse<[Ranker]>) in
                 switch response.result {
                 case .success(let rankers): success(rankers)
@@ -787,7 +802,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<RankerDetails>) in
             switch response.result {
             case .success(let ranker): success(ranker)
@@ -838,7 +853,7 @@ public class RetrieveAndRank {
             messageBody: body
         )
         
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Ranking>) in
             switch response.result {
             case .success(let ranking): success(ranking)
@@ -871,7 +886,7 @@ public class RetrieveAndRank {
         request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    switch self.dataToError(data: data) {
+                    switch self.responseToError(response: response.response, data: data) {
                     case .some(let error): failure?(error)
                     case .none: success?()
                     }
@@ -903,7 +918,7 @@ public class RetrieveAndRank {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<RankerDetails>) in
                 switch response.result {
                 case .success(let details): success(details)

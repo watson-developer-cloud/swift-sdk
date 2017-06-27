@@ -46,19 +46,37 @@ public class NaturalLanguageClassifier {
     }
     
     /**
-     If the given data represents an error returned by the Visual Recognition service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Natural Language Classifier
+     service, then return NSError with information about the error that occured. Otherwise,
+     return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = try json.getInt(at: "code")
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
             let description = try json.getString(at: "description")
             let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedFailureReasonErrorKey: message,
                 NSLocalizedRecoverySuggestionErrorKey: description
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -88,7 +106,7 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
+        request.responseArray(responseToError: responseToError, path: ["classifiers"]) {
             (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
@@ -136,7 +154,7 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifierDetails>) in
             switch response.result {
             case .success(let classifierDetails): success(classifierDetails)
@@ -182,7 +200,7 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
@@ -216,7 +234,7 @@ public class NaturalLanguageClassifier {
         request.responseData { response in
                 switch response.result {
                 case .success(let data):
-                    switch self.dataToError(data: data) {
+                    switch self.responseToError(response: response.response, data: data) {
                     case .some(let error): failure?(error)
                     case .none: success?()
                     }
@@ -248,7 +266,7 @@ public class NaturalLanguageClassifier {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)

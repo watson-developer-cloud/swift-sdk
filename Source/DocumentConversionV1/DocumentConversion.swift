@@ -47,30 +47,38 @@ public class DocumentConversion {
     }
     
     /**
-     If the given data represents an error returned by the Document Conversion service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Document Conversion service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
+            let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            
-            var userInfo = [String:String]()
+            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
             if let description = try? json.getString(at: "description") {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
             }
-            if let errCode = try? json.getInt(at: "code") {
-                let code = errCode
-                userInfo[NSLocalizedFailureReasonErrorKey] = message
-                return NSError(domain: domain, code: code, userInfo: userInfo)
-            } else if let errCode = try? json.getString(at: "code") {
-                let code = Int(errCode)!
-                userInfo[NSLocalizedFailureReasonErrorKey] = message
-                return NSError(domain: domain, code: code, userInfo: userInfo)
-            }
-            return nil
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -124,7 +132,7 @@ public class DocumentConversion {
         )
         
         // execute REST request
-        request.responseString(dataToError: dataToError) { response in
+        request.responseString(responseToError: responseToError) { response in
             switch response.result {
             case .success(let result): success(result)
             case .failure(let error): failure?(error)

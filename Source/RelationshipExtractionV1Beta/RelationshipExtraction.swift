@@ -48,19 +48,35 @@ public class RelationshipExtraction {
     }
     
     /**
-     If the given data represents an error returned by the Relationship Extraction service, then 
-     return an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Relationship Extraction 
+     service, then return NSError with information about the error that occured. Otherwise, 
+     return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let code = try json.getInt(at: "error_code")
-            let error = try json.getString(at: "error_message")
-            let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
-            ]
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
@@ -99,7 +115,7 @@ public class RelationshipExtraction {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["doc"]) {
+        request.responseObject(responseToError: responseToError, path: ["doc"]) {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)

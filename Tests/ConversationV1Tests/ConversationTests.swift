@@ -1085,24 +1085,38 @@ class ConversationTests: XCTestCase {
 		}
 		waitForExpectations()
 
-		let descriptionTwo = "Update the entity"
+		let descriptionTwo = "Update the value of the entity"
 		let expectationTwo = self.expectation(description: descriptionTwo)
 
-		let updatedEntity = UpdateEntity.init(entity: entity.entity, description: "This is a new description for a test entity")
-		conversation.updateEntity(workspaceID: workspaceID, entity: entity.entity, body: updatedEntity, failure: failWithError){ entityResponse in
-			XCTAssertEqual(entityResponse.entity, updatedEntity.entity)
-			XCTAssertEqual(entityResponse.description, updatedEntity.description)
+		let updatedValue = "This is my new description for this entity"
+		conversation.updateValue(workspaceID: workspaceID, entity: entity.entity,value: updatedValue, failure: failWithError){ entityResponse in
+			XCTAssertEqual(entityResponse.value, updatedValue)
 			XCTAssertNotNil(entityResponse.created)
 			XCTAssertNotNil(entityResponse.updated)
 			expectationTwo.fulfill()
 		}
 		waitForExpectations()
 
-		let descriptionThree = "Delete the entity"
+		let descriptionThree = "Update the entity"
 		let expectationThree = self.expectation(description: descriptionThree)
 
+		let updatedEntityName = "up-" + entity.entity
+		let updatedEntityDescription = "This is a new description for a test entity"
+		let updatedEntity = UpdateEntity.init(entity: updatedEntityName, description: updatedEntityDescription)
+		conversation.updateEntity(workspaceID: workspaceID, entity: entity.entity, body: updatedEntity, failure: failWithError){ entityResponse in
+			XCTAssertEqual(entityResponse.entity, updatedEntityName)
+			XCTAssertEqual(entityResponse.description, updatedEntityDescription)
+			XCTAssertNotNil(entityResponse.created)
+			XCTAssertNotNil(entityResponse.updated)
+			expectationTwo.fulfill()
+		}
+		waitForExpectations()
+
+		let descriptionFour = "Delete the entity"
+		let expectationFour = self.expectation(description: descriptionFour)
+
 		conversation.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {_ in
-			expectationThree.fulfill()
+			expectationFour.fulfill()
 		}
 		waitForExpectations()
 	}

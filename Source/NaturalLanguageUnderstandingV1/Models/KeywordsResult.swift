@@ -19,13 +19,13 @@ import RestKit
 
 /** The most important keywords in the content, organized by relevance. */
 public struct KeywordsResult: JSONDecodable {
-    
+
     /// Relevance score from 0 to 1. Higher values indicate greater relevance.
     public let relevance: Double?
-    
+
     /// The text of the keyword.
     public let text: String?
-    
+
     /// The sentiment value of the keyword.
     public let sentiment: KeywordSentiment?
 
@@ -35,13 +35,13 @@ public struct KeywordsResult: JSONDecodable {
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: KeywordSentiment.self)
     }
-    
+
     /** The sentiment of the entity. */
     public struct KeywordSentiment: JSONDecodable {
-        
+
         /// The sentiment value of the found entity within the text from 0 to 1.
         public let score: Double?
-        
+
         /// Used internally to initialize an `EntitySentiment` model from JSON.
         public init(json: JSON) throws {
             score = try? json.getDouble(at: "score")

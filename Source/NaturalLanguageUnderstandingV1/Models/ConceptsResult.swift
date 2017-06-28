@@ -19,13 +19,13 @@ import RestKit
 
 /** The general concepts referenced or alluded to in the specified content. */
 public struct ConceptsResult: JSONDecodable {
-    
+
     /// Name of the concept.
     public let name: String?
-    
+
     /// Relevance score between 0 and 1. Higher scores indicate greater relevance.
     public let relevance: Double?
-    
+
     /// Link to the corresponding DBpedia resource.
     public let dbpediaResource: String?
 

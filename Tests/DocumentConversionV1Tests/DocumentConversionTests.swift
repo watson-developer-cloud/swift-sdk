@@ -19,25 +19,25 @@ import Foundation
 import DocumentConversionV1
 
 class DocumentConversionTests: XCTestCase {
-    
+
     private var documentConversion: DocumentConversion!
     private let timeout: TimeInterval = 5.0
-    
+
     private var testDocument: URL!
     private var testPng: URL!
-    
+
     private var textConfig: URL!
     private var htmlConfig: URL!
     private var answerUnitsConfig: URL!
-    
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
         instantiateDocumentConversion()
         loadResources()
     }
-    
-    static var allTests : [(String, (DocumentConversionTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (DocumentConversionTests) -> () throws -> Void)] {
         return [
             ("testConvertToText", testConvertToText),
             ("testConvertToHtml", testConvertToHtml),
@@ -47,14 +47,14 @@ class DocumentConversionTests: XCTestCase {
             ("testInvalidFileType", testInvalidFileType)
         ]
     }
-    
+
     func instantiateDocumentConversion() {
         let username = Credentials.DocumentConversionUsername
         let password = Credentials.DocumentConversionPassword
         let version = "2015-12-15"
         documentConversion = DocumentConversion(username: username, password: password, version: version)
     }
-    
+
     func loadResources() {
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))
@@ -76,38 +76,37 @@ class DocumentConversionTests: XCTestCase {
             let config2 =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/testConfigHtml.json")
             let config3 =   URL(fileURLWithPath: "Tests/DocumentConversionV1Tests/testConfigAU.json")
         #endif
-        
-        
+
         testDocument = htmlUrl
         testPng = pngUrl
         textConfig = config1
         htmlConfig = config2
         answerUnitsConfig = config3
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive Tests
-    
+
     func testConvertToText() {
         let description = "Convert a document to only its text pieces"
         let expectation = self.expectation(description: description)
-        
+
         documentConversion.convertDocument(testDocument, withConfigurationFile: textConfig,
                                            failure: failWithError) { text in
                                             XCTAssertNotNil(text, "Response should not be nil")
@@ -115,11 +114,11 @@ class DocumentConversionTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToHtml() {
         let description = "Convert a document to html"
         let expectation = self.expectation(description: description)
-        
+
         documentConversion.convertDocument(testDocument, withConfigurationFile: htmlConfig,
                                            failure: failWithError) { text in
                                             XCTAssertNotNil(text, "Response should not be nil")
@@ -127,12 +126,12 @@ class DocumentConversionTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToTextCreateConfig() {
         let description = "Convert a document to only its text pieces"
         let expectation = self.expectation(description: description)
-        
-        do{
+
+        do {
             try documentConversion.convertDocument(
                 testDocument,
                 withConfigurationFile: documentConversion.writeConfig(type: ReturnType.text),
@@ -145,11 +144,11 @@ class DocumentConversionTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToAnswerUnits() {
         let description = "Convert a document to an answer unit object"
         let expectation = self.expectation(description: description)
-        
+
         documentConversion.convertDocument(testDocument, withConfigurationFile: answerUnitsConfig,
                                            failure: failWithError) { text in
                                             do {
@@ -182,22 +181,22 @@ class DocumentConversionTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // MARK: - Negative Tests
-    
+
     func testInvalidVersion() {
         let description = "Use an invalid version"
         let expectation = self.expectation(description: description)
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         let username = Credentials.DocumentConversionUsername
         let password = Credentials.DocumentConversionPassword
         let version = "invalid-version"
         documentConversion = DocumentConversion(username: username, password: password, version: version)
-        
+
         documentConversion.convertDocument(
             testDocument,
             withConfigurationFile: answerUnitsConfig,
@@ -206,15 +205,15 @@ class DocumentConversionTests: XCTestCase {
         )
         waitForExpectations()
     }
-    
+
     func testInvalidFileType() {
         let description = "Use an invalid file type"
         let expectation = self.expectation(description: description)
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         documentConversion.convertDocument(testPng, withConfigurationFile: answerUnitsConfig,
                                            failure: failure, success: failWithResult)
         waitForExpectations()

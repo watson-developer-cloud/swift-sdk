@@ -19,10 +19,10 @@ import RestKit
 
 /** An options specifying if sentiment of detected entities, keywords, or phrases should be returned. */
 public struct SentimentOptions: JSONEncodable {
-    
+
     /// Set this to false to hide document-level sentiment results.
     public let document: Bool?
-    
+
     /// Sentiment results will be returned for each target string that is found in the document.
     public let targets: [String]?
 

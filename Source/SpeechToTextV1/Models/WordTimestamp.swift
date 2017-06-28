@@ -36,7 +36,7 @@ public struct WordTimestamp: JSONDecodable {
         startTime = try array[Index.startTime.rawValue].getDouble()
         endTime = try array[Index.endTime.rawValue].getDouble()
     }
-    
+
     /// The index of each element in the JSON array.
     private enum Index: Int {
         case word = 0

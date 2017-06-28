@@ -20,19 +20,19 @@ import RestKit
 /** Whether or not to return important people, places, geopolitical, and other entities detected
  in the analyzed content. */
 public struct EntitiesOptions: JSONEncodable {
-    
+
     /// Maximum number of entities to return.
     public let limit: Int?
-    
+
     /// Enter a custom model ID to override the standard entity detection model.
     public let model: String?
-    
+
     /// Set this to false to hide entity disambiguation information in the response.
     public let disambiguation: Bool?
-    
+
     /// Set this to true to return sentiment information for detected entities.
     public let sentiment: Bool?
-    
+
     /**
     Initialize a `EntitiesOptions` with all member variables.
 

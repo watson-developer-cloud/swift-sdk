@@ -19,17 +19,17 @@ import RestKit
 
 /** The score of a particular tone. */
 public struct ToneScore: JSONDecodable {
-    
+
     /// A unique number identifying this particular tone.
     public let id: String
-    
+
     /// The name of this particular tone.
     public let name: String
-    
+
     /// The raw score of the tone, computed by the algorithms. This can be
     /// compared to other raw scores and used to build your own normalizations.
     public let score: Double
-    
+
     /// Used internally to initialize a `ToneScore` model from JSON.
     public init(json: JSON) throws {
         id = try json.getString(at: "tone_id")

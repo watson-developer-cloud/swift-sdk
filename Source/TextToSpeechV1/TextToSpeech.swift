@@ -24,13 +24,13 @@ import RestKit
  is streamed back to the client with minimal delay.
 */
 public class TextToSpeech {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
 
@@ -43,7 +43,7 @@ public class TextToSpeech {
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Text to Speech service, then return
      an NSError object with information about the error that occured. Otherwise, return nil.
@@ -68,7 +68,7 @@ public class TextToSpeech {
             return nil
         }
     }
-    
+
     /**
      Retrieve information about all available voices.
     
@@ -77,8 +77,7 @@ public class TextToSpeech {
      */
     public func getVoices(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Voice]) -> Void)
-    {
+        success: @escaping ([Voice]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -87,7 +86,7 @@ public class TextToSpeech {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["voices"]) {
             (response: RestResponse<[Voice]>) in
@@ -97,7 +96,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Get information about the given voice.
      
@@ -115,14 +114,13 @@ public class TextToSpeech {
         _ voice: String,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Voice) -> Void)
-    {
+        success: @escaping (Voice) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let customizationID = customizationID {
             queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -132,7 +130,7 @@ public class TextToSpeech {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Voice>) in
@@ -142,7 +140,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Get the phonetic pronunciation for the given text.
      
@@ -165,8 +163,7 @@ public class TextToSpeech {
         voice: String? = nil,
         format: PhonemeFormat? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Pronunciation) -> Void)
-    {
+        success: @escaping (Pronunciation) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
@@ -176,7 +173,7 @@ public class TextToSpeech {
         if let format = format {
             queryParameters.append(URLQueryItem(name: "format", value: format.rawValue))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -186,7 +183,7 @@ public class TextToSpeech {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Pronunciation>) in
@@ -196,7 +193,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Synthesize text to spoken audio.
  
@@ -217,8 +214,7 @@ public class TextToSpeech {
         customizationID: String? = nil,
         audioFormat: AudioFormat = .wav,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Data) -> Void)
-    {
+        success: @escaping (Data) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
@@ -238,7 +234,7 @@ public class TextToSpeech {
             acceptType: audioFormat.rawValue,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -278,9 +274,9 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     // MARK: - Customizations
-    
+
     /**
      Lists metadata, such as name and description, for the custom voice models that you own.
      
@@ -296,13 +292,13 @@ public class TextToSpeech {
         language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Customization]) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let language = language {
             queryParameters.append(URLQueryItem(name: "language", value: language))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -312,7 +308,7 @@ public class TextToSpeech {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
@@ -322,7 +318,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Creates a new empty custom voice model that is owned by the requesting user.
      
@@ -338,7 +334,7 @@ public class TextToSpeech {
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationID) -> Void) {
-        
+
         // construct the body
         var dict = ["name": name]
         if let language = language {
@@ -347,7 +343,7 @@ public class TextToSpeech {
         if let description = description {
             dict["description"] = description
         }
-        
+
         guard let body = try? JSON(dictionary: dict).serialize() else {
             let failureReason = "Custom voice model metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -355,7 +351,7 @@ public class TextToSpeech {
             failure?(error)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -366,7 +362,7 @@ public class TextToSpeech {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<CustomizationID>) in
@@ -376,7 +372,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Deletes the custom voice model with the specified customizationID.
      
@@ -387,8 +383,8 @@ public class TextToSpeech {
     public func deleteCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -397,7 +393,7 @@ public class TextToSpeech {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -411,7 +407,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Lists all information about the custom voice model with the specified customizationID.
      
@@ -423,7 +419,7 @@ public class TextToSpeech {
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationWords) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -432,7 +428,7 @@ public class TextToSpeech {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<CustomizationWords>) in
@@ -442,7 +438,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Updates information for the custom voice model with the specified customizationID.
 
@@ -462,8 +458,8 @@ public class TextToSpeech {
         description: String? = nil,
         words: [Word] = [],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(name: name, description: description, words: words)
         guard let body = try? customVoiceUpdate.toJSON().serialize() else {
@@ -483,7 +479,7 @@ public class TextToSpeech {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute the request
         request.responseData { response in
             switch response.result {
@@ -497,7 +493,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Lists all of the words and their translations for the custom voice model with the specified
      customizationID.
@@ -510,7 +506,7 @@ public class TextToSpeech {
         forCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Word]) -> Void) {
-        
+
         // construct the request
         let request = RestRequest(
             method: "GET",
@@ -519,7 +515,7 @@ public class TextToSpeech {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute the request
         request.responseArray(dataToError: dataToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
@@ -529,7 +525,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Adds one or more words and their translations to the custom voice model with the specified
      customizationID.
@@ -543,8 +539,8 @@ public class TextToSpeech {
         toCustomizationID customizationID: String,
         fromArray words: [Word],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(words: words)
         guard let body = try? customVoiceUpdate.toJSON().serialize() else {
@@ -554,7 +550,7 @@ public class TextToSpeech {
             failure?(error)
             return
         }
-        
+
         // construct the request
         let request = RestRequest(
             method: "POST",
@@ -564,7 +560,7 @@ public class TextToSpeech {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute the request
         request.responseData { response in
             switch response.result {
@@ -578,7 +574,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Deletes the specified word from custom voice model.
      
@@ -591,8 +587,8 @@ public class TextToSpeech {
         _ word: String,
         fromCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct the request
         let request = RestRequest(
             method: "DELETE",
@@ -600,7 +596,7 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute the request
         request.responseData { response in
             switch response.result {
@@ -614,7 +610,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Lists the translation for a single word from the custom model with the specified customizationID.
      
@@ -628,7 +624,7 @@ public class TextToSpeech {
         withCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void) {
-        
+
         // construct the request
         let request = RestRequest(
             method: "GET",
@@ -637,7 +633,7 @@ public class TextToSpeech {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute the request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Translation>) in
@@ -647,7 +643,7 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     /**
      Adds a single word and its translation to the custom voice model with the specified customizationID.
      
@@ -662,8 +658,8 @@ public class TextToSpeech {
         toCustomizationID customizationID: String,
         withTranslation translation: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct the body
         let dict = ["translation": translation]
         guard let body = try? JSON(dictionary: dict).serialize() else {
@@ -673,7 +669,7 @@ public class TextToSpeech {
             failure?(error)
             return
         }
-        
+
         // construct the request
         let request = RestRequest(
             method: "PUT",
@@ -683,7 +679,7 @@ public class TextToSpeech {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute the request
         request.responseData { response in
             switch response.result {
@@ -697,9 +693,9 @@ public class TextToSpeech {
             }
         }
     }
-    
+
     // MARK: - Internal methods
-    
+
     /**
      Convert a big-endian byte buffer to a UTF-8 encoded string.
      
@@ -715,7 +711,7 @@ public class TextToSpeech {
         let subdata = data.subdata(in: range)
         return String(data: subdata, encoding: String.Encoding.utf8)
     }
-    
+
     /**
      Convert a little-endian byte buffer to a UInt32 integer.
      
@@ -732,7 +728,7 @@ public class TextToSpeech {
         data.copyBytes(to: &num, from: range)
         return Int(num)
     }
-    
+
     /**
      Returns true if the given data is a WAV-formatted audio file.
      
@@ -746,11 +742,11 @@ public class TextToSpeech {
      - returns: `true` if the given data is a WAV-formatted audio file; otherwise, false.
      */
     private static func isWAVFile(data: Data) -> Bool {
-        
+
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
-        
+
         let riffHeaderChunkIDOffset = 0
         let riffHeaderChunkIDSize = 4
         let riffHeaderChunkSizeOffset = 8
@@ -760,20 +756,20 @@ public class TextToSpeech {
         guard data.count >= riffHeaderSize else {
             return false
         }
-        
+
         let riffChunkID = dataToUTF8String(data: data, offset: riffHeaderChunkIDOffset, length: riffHeaderChunkIDSize)
         guard riffChunkID == "RIFF" else {
             return false
         }
-        
+
         let riffFormat = dataToUTF8String(data: data, offset: riffHeaderChunkSizeOffset, length: riffHeaderChunkSizeSize)
         guard riffFormat == "WAVE" else {
             return false
         }
-        
+
         return true
     }
-    
+
     /**
      Repair the WAV header for a WAV-formatted audio file produced by Watson Text to Speech.
      
@@ -781,17 +777,17 @@ public class TextToSpeech {
             byte data will be analyzed and repaired in-place.
      */
     private static func repairWAVHeader(data: inout Data) {
-        
+
         // resources for WAV header format:
         // [1] http://unusedino.de/ec64/technical/formats/wav.html
         // [2] http://soundfile.sapp.org/doc/WaveFormat/
-        
+
         // update RIFF chunk size
         let fileLength = data.count
         var riffChunkSize = UInt32(fileLength - 8)
         let riffChunkSizeData = Data(bytes: &riffChunkSize, count: MemoryLayout<UInt32>.stride)
         data.replaceSubrange(Range(uncheckedBounds: (lower: 4, upper: 8)), with: riffChunkSizeData)
-        
+
         // find data subchunk
         var subchunkID: String?
         var subchunkSize = 0
@@ -802,22 +798,22 @@ public class TextToSpeech {
             if fieldOffset + 2*fieldSize >= data.count {
                 return
             }
-            
+
             // read subchunk ID
             subchunkID = dataToUTF8String(data: data, offset: fieldOffset, length: fieldSize)
             fieldOffset += fieldSize
             if subchunkID == "data" {
                 break
             }
-            
+
             // read subchunk size
             subchunkSize = dataToUInt32(data: data, offset: fieldOffset)
             fieldOffset += fieldSize + subchunkSize
         }
-        
+
         // compute data subchunk size (excludes id and size fields)
         var dataSubchunkSize = UInt32(data.count - fieldOffset - fieldSize)
-        
+
         // update data subchunk size
         let dataSubchunkSizeData = Data(bytes: &dataSubchunkSize, count: MemoryLayout<UInt32>.stride)
         data.replaceSubrange(Range(uncheckedBounds: (lower: fieldOffset, upper: fieldOffset+fieldSize)), with: dataSubchunkSizeData)

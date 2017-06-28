@@ -33,16 +33,16 @@ public class SpeechToText {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    
+
     /// The URL that shall be used to obtain a token.
     public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    
+
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let username: String
     private let password: String
     private let credentials: Credentials
@@ -61,7 +61,7 @@ public class SpeechToText {
         self.password = password
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Speech to Text service, then return
      an NSError object with information about the error that occured. Otherwise, return nil.
@@ -86,7 +86,7 @@ public class SpeechToText {
             return nil
         }
     }
-    
+
     /**
      Retrieve a list of models available for use with the service.
      
@@ -102,7 +102,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["models"]) {
             (response: RestResponse<[Model]>) in
@@ -112,7 +112,7 @@ public class SpeechToText {
                 }
             }
     }
-    
+
     /**
      Retrieve information about a particular model that is available for use with the service.
      
@@ -123,8 +123,7 @@ public class SpeechToText {
     public func getModel(
         withID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Model) -> Void)
-    {
+        success: @escaping (Model) -> Void) {
         //construct REST request
         let request = RestRequest(
             method: "GET",
@@ -133,7 +132,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Model>) in
@@ -166,8 +165,7 @@ public class SpeechToText {
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
-    {
+        success: @escaping (SpeechRecognitionResults) -> Void) {
         do {
             let data = try Data(contentsOf: audio)
             recognize(
@@ -210,8 +208,7 @@ public class SpeechToText {
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
-    {
+        success: @escaping (SpeechRecognitionResults) -> Void) {
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -220,19 +217,19 @@ public class SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // execute recognition request
         session.connect()
         session.startRequest(settings: settings)
@@ -285,8 +282,7 @@ public class SpeechToText {
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
-    {
+        success: @escaping (SpeechRecognitionResults) -> Void) {
         // make sure the AVAudioSession shared instance is properly configured
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.defaultToSpeaker, .mixWithOthers])
@@ -298,11 +294,11 @@ public class SpeechToText {
             failure?(error)
             return
         }
-        
+
         // validate settings
         var settings = settings
         settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)
-        
+
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -311,28 +307,28 @@ public class SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // start recognition request
         session.connect()
         session.startRequest(settings: settings)
         session.startMicrophone(compress: compress)
-        
+
         // store session
         microphoneSession = session
     }
-    
+
     /**
      Stop performing speech recognition for microphone audio.
  
@@ -346,9 +342,9 @@ public class SpeechToText {
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
     }
-    
+
     // MARK: - Custom Models
-    
+
     /**
      List information about all custom language models owned by the calling user. Specify a language
      to see custom models for that language only.
@@ -360,14 +356,13 @@ public class SpeechToText {
     public func getCustomizations(
         withLanguage language: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Customization]) -> Void)
-    {
+        success: @escaping ([Customization]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let language = language {
             queryParameters.append(URLQueryItem(name: "language", value: language))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -377,7 +372,7 @@ public class SpeechToText {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
@@ -387,7 +382,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Create a new custom language model for a specified base language model.
      
@@ -403,8 +398,7 @@ public class SpeechToText {
         withBaseModelName baseModelName: String,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (CustomizationID) -> Void)
-    {
+        success: @escaping (CustomizationID) -> Void) {
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
@@ -416,7 +410,7 @@ public class SpeechToText {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -427,7 +421,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<CustomizationID>) in
@@ -437,7 +431,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Delete an existing custom language model with the given ID. The custom model can't be deleted
      if another request, such as adding a corpus to the model, is currently being processed.
@@ -449,8 +443,7 @@ public class SpeechToText {
     public func deleteCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -459,7 +452,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -473,7 +466,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Get information about a custom language model.
      
@@ -484,8 +477,7 @@ public class SpeechToText {
     public func getCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Customization) -> Void)
-    {
+        success: @escaping (Customization) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -494,7 +486,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Customization>) in
@@ -504,7 +496,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Initiates the training of a custom language model with new corpora, words, or both. The service 
      cannot accept subsequent training requests, or requests to add new corpora or words, until the 
@@ -525,14 +517,13 @@ public class SpeechToText {
         withID customizationID: String,
         wordTypeToAdd: WordTypeToAdd? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let wordTypeToAdd = wordTypeToAdd {
             queryParameters.append(URLQueryItem(name: "word_type_to_add", value: "\(wordTypeToAdd.rawValue)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -541,7 +532,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters)
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -555,7 +546,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Resets a custom language model by removing all corpora and words from the model. Metadata such 
      as the name and language of the model are preserved.
@@ -567,8 +558,7 @@ public class SpeechToText {
     public func resetCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -576,7 +566,7 @@ public class SpeechToText {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json")
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -590,7 +580,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Upgrades a custom language model to the latest release level of the Speech to Text service.
      
@@ -601,8 +591,7 @@ public class SpeechToText {
     public func upgradeCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -610,7 +599,7 @@ public class SpeechToText {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json")
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -624,9 +613,9 @@ public class SpeechToText {
             }
         }
     }
-    
+
     // MARK: - Custom Corpora
-    
+
     /**
      Lists information about all corpora for a custom language model.
      
@@ -638,8 +627,7 @@ public class SpeechToText {
     public func getCorpora(
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Corpus]) -> Void)
-    {
+        success: @escaping ([Corpus]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -648,7 +636,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["corpora"]) {
             (response: RestResponse<[Corpus]>) in
@@ -658,7 +646,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Deletes a corpus from a custom language model. Note: removing a corpus doesn't affect the custom
      model until you train the model with the `train` method.
@@ -672,8 +660,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -682,7 +669,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -696,7 +683,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Lists information about a specific corpus for a custom language model.
      
@@ -709,8 +696,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Corpus) -> Void)
-    {
+        success: @escaping (Corpus) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -719,7 +705,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Corpus>) in
@@ -729,7 +715,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Add a corpus text file to a custom language model.
      
@@ -752,14 +738,13 @@ public class SpeechToText {
         customizationID: String,
         allowOverwrite: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let allowOverwrite = allowOverwrite {
             queryParameters.append(URLQueryItem(name: "allow_overwrite", value: "\(allowOverwrite)"))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(textFile, withName: "body")
@@ -778,7 +763,7 @@ public class SpeechToText {
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body)
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -792,9 +777,9 @@ public class SpeechToText {
             }
         }
     }
-    
+
     // MARK: - Custom Words
-    
+
     /**
      List all custom words from a custom language model.
      
@@ -813,8 +798,7 @@ public class SpeechToText {
         sortOrder: WordSort? = nil,
         sortDirection: WordSortDirection? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Word]) -> Void)
-    {
+        success: @escaping ([Word]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let wordType = wordType {
@@ -827,7 +811,7 @@ public class SpeechToText {
                 queryParameters.append(URLQueryItem(name: "sort", value: sortOrder.rawValue))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -837,7 +821,7 @@ public class SpeechToText {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
@@ -847,7 +831,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Add one or more words to the custom language model, or replace the definition of an existing 
      word with the same name.
@@ -861,8 +845,7 @@ public class SpeechToText {
         customizationID: String,
         words: [NewWord],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct body
         var jsonData = [String: Any]()
         jsonData["words"] = words.map { word in word.toJSONObject() }
@@ -870,7 +853,7 @@ public class SpeechToText {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -881,7 +864,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -895,7 +878,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Delete a custom word from the specified custom model. If the word also exists in the service's 
      base vocabulary, the service removes only the custom pronunciation for the word; the word 
@@ -913,8 +896,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -923,7 +905,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -937,7 +919,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Get details of a word from a specific custom language model.
      
@@ -950,8 +932,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Word) -> Void)
-    {
+        success: @escaping (Word) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -960,7 +941,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Word>) in
@@ -970,7 +951,7 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Add a single custom word to the custom language model, or modify an existing word.
      
@@ -985,14 +966,13 @@ public class SpeechToText {
         customizationID: String,
         word: NewWord? = NewWord(),
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct body
         guard let body = try? word?.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -1003,7 +983,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {

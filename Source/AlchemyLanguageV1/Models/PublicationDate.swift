@@ -26,17 +26,16 @@ import RestKit
  */
 
 public struct PublicationDate: JSONDecodable {
-    
+
     /** confidence level of the detection */
     public let confident: String?
-    
+
     /** detected publication date */
     public let date: String?
-    
+
     /// Used internally to initialize a PublicanDate object
     public init(json: JSON) throws {
         confident = try? json.getString(at: "confident")
         date = try? json.getString(at: "date")
     }
 }
-

@@ -23,7 +23,7 @@ public struct SpeechRecognitionResult: JSONDecodable {
     /// If `true`, then the transcription result for this
     /// utterance is final and will not be updated further.
     public let final: Bool
-    
+
     /// Alternative transcription results.
     public let alternatives: [SpeechRecognitionAlternative]
 

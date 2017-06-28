@@ -20,13 +20,13 @@ import RestKit
 /** The Authors, Publication Date, and Title of the document. Supports URL
     and HTML input types. */
 public struct MetadataResult: JSONDecodable {
-    
+
     /// The authors of the document.
     public let authors: [Author]?
-    
+
     /// The publication date in the format ISO 8601.
     public let publicationDate: String?
-    
+
     /// The title of the document.
     public let title: String?
 

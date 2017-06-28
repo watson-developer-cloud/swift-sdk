@@ -32,8 +32,8 @@ class LanguageTranslatorTests: XCTestCase {
         instantiateLanguageTranslator()
         deleteStaleCustomModels()
     }
-    
-    static var allTests : [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
         return [
             ("testGetModelsAll", testGetModelsAll),
             ("testGetModelsBySourceLanguage", testGetModelsBySourceLanguage),
@@ -57,7 +57,7 @@ class LanguageTranslatorTests: XCTestCase {
         let password = Credentials.LanguageTranslatorPassword
         languageTranslator = LanguageTranslator(username: username, password: password)
     }
-    
+
     /** Delete any stale custom models that were previously created by unit tests. */
     func deleteStaleCustomModels() {
         let description = "Delete any stale custom models previously created by unit tests."
@@ -146,7 +146,7 @@ class LanguageTranslatorTests: XCTestCase {
         let creationExpectation = self.expectation(description: creationDescription)
         let deletionDescription = "Delete the custom language model."
         let deletionExpectation = self.expectation(description: deletionDescription)
-        
+
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))
             guard let glossary = bundle.url(forResource: "glossary", withExtension: "tmx") else {
@@ -156,7 +156,7 @@ class LanguageTranslatorTests: XCTestCase {
         #else
             let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
         #endif
-        
+
         languageTranslator.createModel(fromBaseModelID: "en-es", withGlossary: glossary,
                                        name: "custom-english-to-spanish-model", failure: failWithError)
         {

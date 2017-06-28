@@ -28,56 +28,56 @@ import AVFoundation
  and customizability of the session.
  */
 public class SpeechToTextSession {
-    
+
     /// The base URL of the Speech to Text service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    
+
     /// The URL that shall be used to obtain a token.
     public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    
+
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
         get { return socket.results }
     }
-    
+
     /// Invoked when the session connects to the Speech to Text service.
-    public var onConnect: ((Void) -> Void)? {
+    public var onConnect: (() -> Void)? {
         get { return socket.onConnect }
         set { socket.onConnect = newValue }
     }
-    
+
     /// Invoked with microphone audio when a recording audio queue buffer has been filled.
     /// If microphone audio is being compressed, then the audio data is in Opus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
     public var onMicrophoneData: ((Data) -> Void)?
-    
+
     /// Invoked every 0.025s when recording with the average dB power of the microphone.
     public var onPowerData: ((Float32) -> Void)? {
         get { return recorder.onPowerData }
         set { recorder.onPowerData = newValue }
     }
-    
+
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: ((SpeechRecognitionResults) -> Void)? {
         get { return socket.onResults }
         set { socket.onResults = newValue }
     }
-    
+
     /// Invoked when an error or warning occurs.
     public var onError: ((Error) -> Void)? {
         get { return socket.onError }
         set { socket.onError = newValue }
     }
-    
+
     /// Invoked when the session disconnects from the Speech to Text service.
-    public var onDisconnect: ((Void) -> Void)?
-    
+    public var onDisconnect: (() -> Void)?
+
     private lazy var socket: SpeechToTextSocket = {
         var socket = SpeechToTextSocket(
             username: self.username,
@@ -99,18 +99,18 @@ public class SpeechToTextSession {
         }
         return socket
     }()
-    
+
     private var recorder: SpeechToTextRecorder
     private var encoder: SpeechToTextEncoder
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
-    
+
     private let username: String
     private let password: String
     private let model: String?
     private let customizationID: String?
     private let learningOptOut: Bool?
-    
+
     /**
      Create a `SpeechToTextSession` object.
      
@@ -129,7 +129,7 @@ public class SpeechToTextSession {
         self.model = model
         self.customizationID = customizationID
         self.learningOptOut = learningOptOut
-        
+
         recorder = SpeechToTextRecorder()
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
@@ -137,7 +137,7 @@ public class SpeechToTextSession {
             application: .voip
         )
     }
-    
+
     /**
      Connect to the Speech to Text service.
      
@@ -146,7 +146,7 @@ public class SpeechToTextSession {
     public func connect() {
         socket.connect()
     }
-    
+
     /**
      Start a recognition request.
  
@@ -155,7 +155,7 @@ public class SpeechToTextSession {
     public func startRequest(settings: RecognitionSettings) {
         socket.writeStart(settings: settings)
     }
-    
+
     /**
      Send an audio file to transcribe.
      
@@ -173,7 +173,7 @@ public class SpeechToTextSession {
             return
         }
     }
-    
+
     /**
      Send audio data to transcribe.
      
@@ -182,7 +182,7 @@ public class SpeechToTextSession {
     public func recognize(audio: Data) {
         socket.writeAudio(audio: audio)
     }
-    
+
     /**
      Start streaming microphone audio data to transcribe.
      
@@ -213,14 +213,14 @@ public class SpeechToTextSession {
      */
     public func startMicrophone(compress: Bool = true) {
         self.compress = compress
-        
+
         // reset encoder
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
             opusRate: Int32(recorder.format.mSampleRate),
             application: .voip
         )
-        
+
         // request recording permission
         recorder.session.requestRecordPermission { granted in
             guard granted else {
@@ -230,7 +230,7 @@ public class SpeechToTextSession {
                 self.onError?(error)
                 return
             }
-            
+
             // callback if uncompressed
             let onMicrophoneDataPCM = { [weak self] (pcm: Data) in
                 guard let `self` = self else { return }
@@ -238,7 +238,7 @@ public class SpeechToTextSession {
                 self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
             }
-            
+
             // callback if compressed
             let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
                 guard let `self` = self else { return }
@@ -249,14 +249,14 @@ public class SpeechToTextSession {
                 self.socket.writeAudio(audio: opus)
                 self.onMicrophoneData?(opus)
             }
-            
+
             // set callback
             if compress {
                 self.recorder.onMicrophoneData = onMicrophoneDataOpus
             } else {
                 self.recorder.onMicrophoneData = onMicrophoneDataPCM
             }
-            
+
             // start recording
             do {
                 try self.recorder.startRecording()
@@ -269,7 +269,7 @@ public class SpeechToTextSession {
             }
         }
     }
-    
+
     /**
      Stop streaming microphone audio data to transcribe.
      */
@@ -283,21 +283,21 @@ public class SpeechToTextSession {
             self.onError?(error)
             return
         }
-        
+
         if compress {
             let opus = try! encoder.endstream()
             guard opus.count > 0 else { return }
             self.socket.writeAudio(audio: opus)
         }
     }
-    
+
     /**
      Stop the recognition request.
      */
     public func stopRequest() {
         socket.writeStop()
     }
-    
+
     /**
      Send a message to prevent the service from automatically disconnecting due to inactivity.
  
@@ -314,7 +314,7 @@ public class SpeechToTextSession {
     public func keepAlive() {
         socket.writeNop()
     }
-    
+
     /**
      Wait for any queued recognition requests to complete then disconnect from the service.
      */

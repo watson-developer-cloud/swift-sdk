@@ -19,32 +19,32 @@ import RestKit
 
 /** Analysis features and options. */
 public struct Features: JSONEncodable {
-    
+
     /// Whether or not to return the concepts that are mentioned in the analyzed text.
     public let concepts: ConceptsOptions?
-    
+
     /// Whether or not to extract the emotions implied in the analyzed text.
     public let emotion: EmotionOptions?
-    
+
     /// Whether or not to extract detected entity objects from the analyzed text.
     public let entities: EntitiesOptions?
-    
+
     /// Whether or not to return the keywords in the analyzed text.
     public let keywords: KeywordsOptions?
-    
+
     /// Whether or not the author, publication date, and title of the analyzed text should be returned.
     /// This parameter is only available for URL and HTML input.
     public let metadata: MetadataOptions?
-    
+
     /// Whether or not to return the relationships between detected entities in the analyzed text.
     public let relations: RelationsOptions?
-    
+
     /// Whether or not to return the subject-action-object relations from the analyzed text.
     public let semanticRoles: SemanticRolesOptions?
-    
+
     /// Whether or not to return the overall sentiment of the analyzed text.
     public let sentiment: SentimentOptions?
-    
+
     /// Wether or not to return the high level category the content is categorized as (i.e. news, art).
     public let categories: CategoriesOptions?
 
@@ -77,8 +77,7 @@ public struct Features: JSONEncodable {
         relations: RelationsOptions? = nil,
         semanticRoles: SemanticRolesOptions? = nil,
         sentiment: SentimentOptions? = nil,
-        categories: CategoriesOptions? = nil)
-    {
+        categories: CategoriesOptions? = nil) {
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities

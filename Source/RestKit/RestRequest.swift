@@ -21,7 +21,7 @@ public struct RestRequest {
     public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.15.1"
-        
+
         let operatingSystem: String = {
             #if os(iOS)
                 return "iOS"
@@ -37,18 +37,18 @@ public struct RestRequest {
                 return "Unknown"
             #endif
         }()
-        
+
         let operatingSystemVersion: String = {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         }()
-        
+
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
-    
+
     public init(
         method: String,
         url: String,
@@ -57,8 +57,7 @@ public struct RestRequest {
         acceptType: String? = nil,
         contentType: String? = nil,
         queryItems: [URLQueryItem]? = nil,
-        messageBody: Data? = nil)
-    {
+        messageBody: Data? = nil) {
         // construct url with query parameters
         var urlComponents = URLComponents(string: url)!
         if let queryItems = queryItems, !queryItems.isEmpty {
@@ -72,10 +71,10 @@ public struct RestRequest {
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = method
         request.httpBody = messageBody
-        
+
         // set the request's user agent
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-        
+
         // set the request's authentication credentials
         switch credentials {
         case .apiKey: break
@@ -84,34 +83,34 @@ public struct RestRequest {
             let authString = authData.base64EncodedString()
             request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
         }
-        
+
         // set the request's header parameters
         for (key, value) in headerParameters {
             request.setValue(value, forHTTPHeaderField: key)
         }
-        
+
         // set the request's accept type
         if let acceptType = acceptType {
             request.setValue(acceptType, forHTTPHeaderField: "Accept")
         }
-        
+
         // set the request's content type
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
-        
+
         self.request = request
     }
-    
+
     public func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, response, error) in
             completionHandler(data, response as? HTTPURLResponse, error)
         }
         task.resume()
     }
-    
+
     public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
-        response() { data, response, error in
+        response { data, response, _ in
             guard let data = data else {
                 let result = Result<Data>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
@@ -124,8 +123,7 @@ public struct RestRequest {
         }
     }
 
-    fileprivate func dataToErrorWrapper(dataToError: ((Data) -> Error?)? = nil) -> ((HTTPURLResponse?, Data?) -> Error?)?
-    {
+    fileprivate func dataToErrorWrapper(dataToError: ((Data) -> Error?)? = nil) -> ((HTTPURLResponse?, Data?) -> Error?)? {
         return { response, data in
             // ensure data is not nil
             guard let data = data else {
@@ -145,18 +143,16 @@ public struct RestRequest {
     public func responseObject<T: JSONDecodable>(
         dataToError: ((Data) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<T>) -> Void)
-    {
+        completionHandler: @escaping (RestResponse<T>) -> Void) {
         responseObject(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
     }
 
     public func responseObject<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<T>) -> Void)
-    {
-        response() { data, response, error in
-            
+        completionHandler: @escaping (RestResponse<T>) -> Void) {
+        response { data, response, error in
+
             if let responseToError = responseToError,
                 let error = responseToError(response, data) {
                 let result = Result<T>.failure(error)
@@ -195,27 +191,25 @@ public struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
-    
+
     public func responseArray<T: JSONDecodable>(
         dataToError: ((Data) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<[T]>) -> Void)
-    {
+        completionHandler: @escaping (RestResponse<[T]>) -> Void) {
         responseArray(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
     }
 
     public func responseArray<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<[T]>) -> Void)
-    {
-        response() { data, response, error in
+        completionHandler: @escaping (RestResponse<[T]>) -> Void) {
+        response { data, response, error in
 
             if let responseToError = responseToError,
                 let error = responseToError(response, data) {
@@ -256,7 +250,7 @@ public struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
@@ -265,16 +259,14 @@ public struct RestRequest {
 
     public func responseString(
         dataToError: ((Data) -> Error?)? = nil,
-        completionHandler: @escaping (RestResponse<String>) -> Void)
-    {
+        completionHandler: @escaping (RestResponse<String>) -> Void) {
         responseString(responseToError: dataToErrorWrapper(dataToError: dataToError), completionHandler: completionHandler)
     }
 
     public func responseString(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
-        completionHandler: @escaping (RestResponse<String>) -> Void)
-    {
-        response() { data, response, error in
+        completionHandler: @escaping (RestResponse<String>) -> Void) {
+        response { data, response, error in
 
             if let responseToError = responseToError,
                 let error = responseToError(response, data) {
@@ -299,7 +291,7 @@ public struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // execute callback
             let result = Result.success(string)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
@@ -309,9 +301,8 @@ public struct RestRequest {
 
     public func responseVoid(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
-        completionHandler: @escaping (RestResponse<Void>) -> Void)
-    {
-        response() { data, response, error in
+        completionHandler: @escaping (RestResponse<Void>) -> Void) {
+        response { data, response, error in
 
             if let responseToError = responseToError, let error = responseToError(response, data) {
                 let result = Result<Void>.failure(error)

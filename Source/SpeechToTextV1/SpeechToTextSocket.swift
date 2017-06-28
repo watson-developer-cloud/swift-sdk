@@ -18,23 +18,23 @@ import Foundation
 import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
-    
+
     private(set) internal var results = SpeechRecognitionResults()
     private(set) internal var state: SpeechToTextState = .Disconnected
-    
-    internal var onConnect: ((Void) -> Void)? = nil
-    internal var onListening: ((Void) -> Void)? = nil
-    internal var onResults: ((SpeechRecognitionResults) -> Void)? = nil
-    internal var onError: ((Error) -> Void)? = nil
-    internal var onDisconnect: ((Void) -> Void)? = nil
-    
+
+    internal var onConnect: (() -> Void)?
+    internal var onListening: (() -> Void)?
+    internal var onResults: ((SpeechRecognitionResults) -> Void)?
+    internal var onError: ((Error) -> Void)?
+    internal var onDisconnect: (() -> Void)?
+
     private let socket: WebSocket
     private let queue = OperationQueue()
     private let restToken: RestToken
     private var tokenRefreshes = 0
     private let maxTokenRefreshes = 1
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
-    
+
     internal init(
         username: String,
         password: String,
@@ -44,12 +44,11 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         serviceURL: String,
         tokenURL: String,
         websocketsURL: String,
-        defaultHeaders: [String: String])
-    {
+        defaultHeaders: [String: String]) {
         // initialize authentication token
         let tokenURL = tokenURL + "?url=" + serviceURL
         restToken = RestToken(tokenURL: tokenURL, username: username, password: password)
-        
+
         // build url with options
         let url = SpeechToTextSocket.buildURL(
             url: websocketsURL,
@@ -57,35 +56,35 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
-        
+
         // initialize socket
         socket = WebSocket(url: url)
         socket.delegate = self
-        
+
         // set default headers
         for (key, value) in defaultHeaders {
             socket.headers[key] = value
         }
-        
+
         // configure operation queue
         queue.maxConcurrentOperationCount = 1
         queue.isSuspended = true
     }
-    
+
     internal func connect() {
         // ensure the socket is not already connected
         guard state == .Disconnected || state == .Connecting else {
             return
         }
-        
+
         // flush operation queue
         if state == .Disconnected {
             queue.cancelAllOperations()
         }
-        
+
         // update state
         state = .Connecting
-        
+
         // restrict the number of retries
         guard tokenRefreshes <= maxTokenRefreshes else {
             let failureReason = "Invalid HTTP upgrade. Check credentials?"
@@ -94,7 +93,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             onError?(error)
             return
         }
-        
+
         // refresh token, if necessary
         guard let token = restToken.token else {
             restToken.refreshToken(failure: onError) {
@@ -103,13 +102,13 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
             return
         }
-        
+
         // connect with token
         socket.headers["X-Watson-Authorization-Token"] = token
         socket.headers["User-Agent"] = RestRequest.userAgent
         socket.connect()
     }
-    
+
     internal func writeStart(settings: RecognitionSettings) {
         guard state != .Disconnected else { return }
         guard let start = try? settings.toJSON().serializeString() else { return }
@@ -122,7 +121,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
         }
     }
-    
+
     internal func writeAudio(audio: Data) {
         guard state != .Disconnected else { return }
         queue.addOperation {
@@ -132,7 +131,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
         }
     }
-    
+
     internal func writeStop() {
         guard state != .Disconnected else { return }
         guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
@@ -140,7 +139,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.socket.write(string: stop)
         }
     }
-    
+
     internal func writeNop() {
         guard state != .Disconnected else { return }
         let nop = "{\"action\": \"no-op\"}"
@@ -148,7 +147,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.socket.write(string: nop)
         }
     }
-    
+
     internal func waitForResults() {
         queue.addOperation {
             switch self.state {
@@ -164,7 +163,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
         }
     }
-    
+
     internal func disconnect(forceTimeout: TimeInterval? = nil) {
         queue.addOperation {
             self.queue.isSuspended = true
@@ -172,7 +171,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.socket.disconnect(forceTimeout: forceTimeout)
         }
     }
-    
+
     private static func buildURL(url: String, model: String?, customizationID: String?, learningOptOut: Bool?) -> URL? {
         var queryParameters = [URLQueryItem]()
         if let model = model {
@@ -196,27 +195,27 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             onListening?()
         }
     }
-    
+
     private func onResultsMessage(wrapper: SpeechRecognitionEvent) {
         state = .Transcribing
         results.addResults(wrapper: wrapper)
         onResults?(results)
     }
-    
+
     private func onErrorMessage(error: String) {
         let failureReason = error
         let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
         let error = NSError(domain: domain, code: 0, userInfo: userInfo)
         onError?(error)
     }
-    
+
     private func isAuthenticationFailure(error: Error) -> Bool {
         let error = error as NSError
-        
+
         guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
             return false
         }
-        
+
         let matchesDomain = (error.domain == "WebSocket")
         let matchesCode = (error.code == 400)
         let matchesDescription = (description == "Invalid HTTP upgrade")
@@ -225,7 +224,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
         return false
     }
-    
+
     private func isNormalDisconnect(error: Error) -> Bool {
         let error = error as NSError
         let matchesDomain = (error.domain == "WebSocket")
@@ -235,7 +234,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
         return false
     }
-    
+
     internal func websocketDidConnect(socket: WebSocket) {
         state = .Connected
         tokenRefreshes = 0
@@ -243,11 +242,11 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         results = SpeechRecognitionResults()
         onConnect?()
     }
-    
+
     internal func websocketDidReceiveData(socket: WebSocket, data: Data) {
         return // should not receive any binary data from the service
     }
-    
+
     internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         guard let json = try? JSON(string: text) else {
             return
@@ -262,7 +261,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             onErrorMessage(error: error)
         }
     }
-    
+
     internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         state = .Disconnected
         queue.isSuspended = true

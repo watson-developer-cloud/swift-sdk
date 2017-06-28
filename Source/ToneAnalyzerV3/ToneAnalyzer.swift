@@ -23,13 +23,13 @@ import RestKit
  to help the writer improve their intended language tones.
 **/
 public class ToneAnalyzer {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
@@ -46,7 +46,7 @@ public class ToneAnalyzer {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the given data represents an error returned by the Visual Recognition service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -90,8 +90,7 @@ public class ToneAnalyzer {
         tones: [String]? = nil,
         sentences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
+        success: @escaping (ToneAnalysis) -> Void) {
         // construct body
         guard let body = try? JSON(dictionary: ["text": text]).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
@@ -100,7 +99,7 @@ public class ToneAnalyzer {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -111,7 +110,7 @@ public class ToneAnalyzer {
         if let sentences = sentences {
             queryParameters.append(URLQueryItem(name: "sentences", value: "\(sentences)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -123,7 +122,7 @@ public class ToneAnalyzer {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<ToneAnalysis>) in

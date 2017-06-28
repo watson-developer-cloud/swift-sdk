@@ -19,24 +19,24 @@ import RestKit
 
 /** A term from the request that was identified as an entity. */
 public struct Entity: JSONEncodable, JSONDecodable {
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// The recognized entity from a term in the input.
     public let entity: String
-    
+
     /// The zero-based character offset that indicates
     /// where the entity value begins in the input text.
     public let startIndex: Int
-    
+
     /// The zero-based character offset that indicates
     /// where the entity value ends in the input text.
     public let endIndex: Int
-    
+
     /// The term in the input text that was recognized.
     public let value: String
-    
+
     /// Used internally to initialize an `Entity` model from JSON.
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
@@ -46,7 +46,7 @@ public struct Entity: JSONEncodable, JSONDecodable {
         endIndex = indices[1]
         value = try json.getString(at: "value")
     }
-    
+
     /// Used internally to serialize an `Entity` model to JSON.
     public func toJSONObject() -> Any {
         return json

@@ -19,28 +19,28 @@ import RestKit
 
 /** A classifier for the Visual Recognition service. */
 public struct Classifier: JSONDecodable {
-    
+
     /// The id of the classifier.
     public let classifierID: String
-    
+
     /// The name of the classifier.
     public let name: String
-    
+
     /// The owner of the classifier.
     public let owner: String
-    
+
     /// The training status of the classifier.
     public let status: String
-    
+
     /// If classifier training failed, this property may explain why.
     public let explanation: String?
-    
+
     /// The time and date when the classifier was created.
     public let created: String
-    
+
     /// The classes of the classifier.
     public let classes: [String]
-    
+
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSON) throws {
         classifierID = try json.getString(at: "classifier_id")

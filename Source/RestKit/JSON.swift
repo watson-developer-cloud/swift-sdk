@@ -30,7 +30,7 @@ extension String: JSONPathType {
         }
         return JSON(json: json)
     }
-    
+
     public func value(in array: [Any]) throws -> JSON {
         throw JSON.Error.unexpectedSubscript(type: String.self)
     }
@@ -40,7 +40,7 @@ extension Int: JSONPathType {
     public func value(in dictionary: [String: Any]) throws -> JSON {
         throw JSON.Error.unexpectedSubscript(type: Int.self)
     }
-    
+
     public func value(in array: [Any]) throws -> JSON {
         let json = array[self]
         return JSON(json: json)
@@ -51,34 +51,34 @@ extension Int: JSONPathType {
 
 public struct JSON {
     fileprivate let json: Any
-    
+
     public init(json: Any) {
         self.json = json
     }
-    
+
     public init(string: String) throws {
         guard let data = string.data(using: .utf8) else {
             throw Error.encodingError
         }
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
-    
+
     public init(data: Data) throws {
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
-    
+
     public init(dictionary: [String: Any]) {
         json = dictionary
     }
-    
+
     public init(array: [Any]) {
         json = array
     }
-    
+
     public func serialize() throws -> Data {
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
-    
+
     public func serializeString() throws -> String {
         let data = try serialize()
         guard let string = String(data: data, encoding: .utf8) else {
@@ -86,7 +86,7 @@ public struct JSON {
         }
         return string
     }
-    
+
     private func value(at path: JSONPathType) throws -> JSON {
         if let dictionary = json as? [String: Any] {
             return try path.value(in: dictionary)
@@ -96,7 +96,7 @@ public struct JSON {
         }
         throw Error.unexpectedSubscript(type: type(of: path))
     }
-    
+
     private func value(at path: [JSONPathType]) throws -> JSON {
         var value = self
         for fragment in path {
@@ -108,23 +108,23 @@ public struct JSON {
     public func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
         return try Decoded(json: value(at: path))
     }
-    
+
     public func getDouble(at path: JSONPathType...) throws -> Double {
         return try Double(json: value(at: path))
     }
-    
+
     public func getInt(at path: JSONPathType...) throws -> Int {
         return try Int(json: value(at: path))
     }
-    
+
     public func getString(at path: JSONPathType...) throws -> String {
         return try String(json: value(at: path))
     }
-    
+
     public func getBool(at path: JSONPathType...) throws -> Bool {
         return try Bool(json: value(at: path))
     }
-    
+
     public func getArray(at path: JSONPathType...) throws -> [JSON] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
@@ -132,7 +132,7 @@ public struct JSON {
         }
         return array.map { JSON(json: $0) }
     }
-    
+
     public func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
@@ -140,7 +140,7 @@ public struct JSON {
         }
         return try array.map { try Decoded(json: JSON(json: $0)) }
     }
-    
+
     public func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
@@ -152,11 +152,11 @@ public struct JSON {
         }
         return decoded
     }
-    
+
     public func getJSON(at path: JSONPathType...) throws -> Any {
         return try value(at: path).json
     }
-    
+
     public func getDictionary(at path: JSONPathType...) throws -> [String: JSON] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
@@ -164,7 +164,7 @@ public struct JSON {
         }
         return dictionary.map { JSON(json: $0) }
     }
-    
+
     public func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {

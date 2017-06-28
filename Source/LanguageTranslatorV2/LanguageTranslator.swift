@@ -26,10 +26,10 @@ public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
@@ -52,7 +52,7 @@ public class LanguageTranslator {
     private func dataToError(data: Data) -> Error? {
         do {
             let json = try JSON(data: data)
-            
+
             if let code = try? json.getInt(at: "error_code") {
                 let message = try json.getString(at: "error_message")
                 let userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -88,8 +88,7 @@ public class LanguageTranslator {
         targetLanguage: String? = nil,
         defaultModelsOnly: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([TranslationModel]) -> Void)
-    {
+        success: @escaping ([TranslationModel]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let sourceLanguage = sourceLanguage {
@@ -145,12 +144,11 @@ public class LanguageTranslator {
         withGlossary forcedGlossary: URL,
         name: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
+        success: @escaping (String) -> Void) {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(forcedGlossary, withName: "forced_glossary")
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))
@@ -191,8 +189,7 @@ public class LanguageTranslator {
     public func deleteModel(
         withID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -226,8 +223,7 @@ public class LanguageTranslator {
     public func getModel(
         withID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (MonitorTraining) -> Void)
-    {
+        success: @escaping (MonitorTraining) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -263,8 +259,7 @@ public class LanguageTranslator {
         _ text: String,
         withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslateResponse) -> Void)
-    {
+        success: @escaping (TranslateResponse) -> Void) {
         let translateRequest = TranslateRequest(text: [text], modelID: modelID)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
@@ -283,12 +278,11 @@ public class LanguageTranslator {
         _ text: [String],
         withModelID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslateResponse) -> Void)
-    {
+        success: @escaping (TranslateResponse) -> Void) {
         let translateRequest = TranslateRequest(text: text, modelID: modelID)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
-    
+
     /**
      Translate text from a source language to a target language.
      
@@ -305,8 +299,7 @@ public class LanguageTranslator {
         from sourceLanguage: String,
         to targetLanguage: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslateResponse) -> Void)
-    {
+        success: @escaping (TranslateResponse) -> Void) {
         let translateRequest = TranslateRequest(text: [text], source: sourceLanguage, target: targetLanguage)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
@@ -327,8 +320,7 @@ public class LanguageTranslator {
         from sourceLanguage: String,
         to targetLanguage: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslateResponse) -> Void)
-    {
+        success: @escaping (TranslateResponse) -> Void) {
         let translateRequest = TranslateRequest(text: text, source: sourceLanguage, target: targetLanguage)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
@@ -344,8 +336,7 @@ public class LanguageTranslator {
     private func translate(
         translateRequest: TranslateRequest,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslateResponse) -> Void)
-    {
+        success: @escaping (TranslateResponse) -> Void) {
         // serialize translate request to JSON
         guard let body = try? translateRequest.toJSON().serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
@@ -386,8 +377,7 @@ public class LanguageTranslator {
      */
     public func getIdentifiableLanguages(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([IdentifiableLanguage]) -> Void)
-    {
+        success: @escaping ([IdentifiableLanguage]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -417,8 +407,7 @@ public class LanguageTranslator {
     public func identify(
         languageOf text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([IdentifiedLanguage]) -> Void)
-    {
+        success: @escaping ([IdentifiedLanguage]) -> Void) {
         // convert text to NSData with UTF-8 encoding
         guard let body = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."

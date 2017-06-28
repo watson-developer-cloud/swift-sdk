@@ -19,13 +19,13 @@ import RestKit
 
 /** Whether or not to return emotion analysis of the content. */
 public struct EmotionOptions: JSONEncodable {
-    
+
     /// Set this to false to hide document-level emotion results.
     public let document: Bool?
-    
+
     /// Emotion results will be returned for each target string that is found in the document.
     public let targets: [String]?
-    
+
     /**
     Initialize a `EmotionOptions` with all member variables.
 

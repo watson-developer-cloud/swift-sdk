@@ -19,10 +19,10 @@ import RestKit
 
 /** The entities extracted from a sentence in a given document. */
 public struct RelationEntity: JSONDecodable {
-    
+
     /// Text that corresponds to the entity.
     public let text: String?
-    
+
     /// Entity type.
     public let type: String?
 

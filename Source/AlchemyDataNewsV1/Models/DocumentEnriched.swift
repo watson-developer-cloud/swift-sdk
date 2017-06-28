@@ -25,13 +25,13 @@ import RestKit
  
  */
 public struct DocumentEnriched: JSONDecodable {
-    
+
     /** see **DocumentUrl** */
     public let url: DocumentUrl?
-    
+
     /// used internally to define a DocumentEnriched object
     public init(json: JSON) throws {
         url = try? json.decode(at: "url", type: DocumentUrl.self)
     }
-    
+
 }

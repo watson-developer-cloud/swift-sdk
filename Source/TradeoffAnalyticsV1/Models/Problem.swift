@@ -19,19 +19,19 @@ import RestKit
 
 /// A decision problem.
 public struct Problem: JSONEncodable, JSONDecodable {
-    
+
     /// A list of objectives. This property typically specifies the columns for the tabular
     /// representation of the data.
     public let columns: [Column]
-    
+
     /// A list of options for the decision problem. This property typically specifies the rows
     /// for the tabular representation of the data.
     public let options: [Option]
-    
+
     /// The name of the decision problem. Typically, the name of the column representing the
     /// option names in the tabular representation of your data.
     public let subject: String
-    
+
     /**
      Initialize a `Problem` to be analyzed by Tradeoff Analytics.
 
@@ -46,7 +46,7 @@ public struct Problem: JSONEncodable, JSONDecodable {
         self.options = options
         self.subject = subject
     }
-    
+
     /// Used internally to serialize a `Problem` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -55,7 +55,7 @@ public struct Problem: JSONEncodable, JSONDecodable {
         json["subject"] = subject
         return json
     }
-    
+
     /// Used internally to initialize a `Problem` model from JSON.
     public init(json: JSON) throws {
         columns = try json.decodedArray(at: "columns", type: Column.self)
@@ -66,54 +66,54 @@ public struct Problem: JSONEncodable, JSONDecodable {
 
 /// An objective (i.e. a column in a tabular representation of the data).
 public struct Column: JSONEncodable, JSONDecodable {
-    
+
     /// An identifier for the column that is unique among all columns for the problem.
     public let key: String
-    
+
     /// An indication of whether a column is specified as a `Numeric` value, a `Categorical` value,
     /// a `DateTime`, or as `Text`. Specify a list of valid values for a `Categorical` column by
     /// using the `range` property. For `DateAndTime` columns, options must specify values in
     /// full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). By default, the type is `Text`.
     public let type: ColumnType?
-    
+
     /// The direction of the column. The direction can be minimized (e.g. price of a car) or
     /// maximized (e.g. safety of a car). Meaningful only for columns for which `isObjective` is
     /// `true`. By default, the goal is `Maximize`.
     public let goal: Goal?
-    
+
     /// An indication of whether the column is an objective for the problem. If `true`, the column
     /// contributes to the resolution; if false, the column does not contribute to the resolution.
     /// By default, the value is `false`. A column with type `Text` cannot be set to `true`.
     public let isObjective: Bool?
-    
+
     /// The range of valid values for the column. Any option whose value is outside of the
     /// specified range is marked as `incomplete` and is excluded from the resolution. By default,
     /// the range is calculated from the minimum and maximum values provided in the data set for
     /// the column. See the `Range` model for examples of specifying ranges.
     public let range: Range?
-    
+
     /// For columns whose type is `categorical`, a subset of the values in the range that indicates
     /// their preference; valid only for `categorical` columns. If goal is `min`, elements in the
     /// low position of the array are favored; if goal is `max`, elements in the high position are
     /// favored. By default, preference matches the order of the values in range and the direction
     /// indicated by goal.
     public let preference: [String]?
-    
+
     /// A significant gain for the column in the range of 0 to 1. The value is a proportion of
     /// the complete range for the column. The field is relevant only for columns whose
     /// `isObjective` property is `true`.
     public let significantGain: Double?
-    
+
     /// A significant loss for the column in the range of 0 to 1. The value is a proportion of
     /// the complete range for the column. The field is relevant only for columns whose
     /// `isObjective` property is `true`.
     public let significantLoss: Double?
-    
+
     /// An insignificant loss for the column in the range of 0 to 1. The value is a proportion of
     /// the complete range for the column. The field is relevant only for columns whose
     /// `isObjective` property is `true`.
     public let insignificantLoss: Double?
-    
+
     /// For columns whose type is `Numeric` or `DateTime`, specifies a number or date pattern
     /// that indicates how the value is to be presented by the visualization. For `Numeric`
     /// columns, examples include "number:2", "currency:'USD$':1", "taPrefix:'g'", "taSuffix:'g'",
@@ -123,15 +123,15 @@ public struct Column: JSONEncodable, JSONDecodable {
     /// components in the AngularJS documentation. Used only by the Tradeoff Analytics widget;
     /// not part of the problem definition.
     public let format: String?
-    
+
     /// A descriptive name. Used only by the Tradeoff Analytics widget; not part of the problem
     /// definition.
     public let fullName: String?
-    
+
     /// A long description of the column. Used only by the Tradeoff Analytics widget; not part
     /// of the problem definition.
     public let description: String?
-    
+
     /**
      Initialize a `Column` for a decision problem.
      
@@ -193,8 +193,7 @@ public struct Column: JSONEncodable, JSONDecodable {
         insignificantLoss: Double? = nil,
         format: String? = nil,
         fullName: String? = nil,
-        description: String? = nil)
-    {
+        description: String? = nil) {
         self.key = key
         self.type = type
         self.goal = goal
@@ -208,7 +207,7 @@ public struct Column: JSONEncodable, JSONDecodable {
         self.fullName = fullName
         self.description = description
     }
-    
+
     /// Used internally to serialize a `Column` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -244,7 +243,7 @@ public struct Column: JSONEncodable, JSONDecodable {
         }
         return json
     }
-    
+
     /// Used internally to initialize a `Column` model from JSON.
     public init(json: JSON) throws {
         key = try json.getString(at: "key")
@@ -272,35 +271,35 @@ public struct Column: JSONEncodable, JSONDecodable {
 
 /// The type of an objective.
 public enum ColumnType: String {
-    
+
     /// A categorical objective.
     case categorical = "categorical"
-    
+
     /// A date and time objective.
     case dateTime = "datetime"
-    
+
     /// A numeric objective.
     case numeric = "numeric"
-    
+
     /// A text objective.
     case text = "text"
 }
 
 /// The value of a particular option.
 public enum OptionValue: JSONEncodable, JSONDecodable {
-    
+
     /// An `Int` value for an option.
     case int(Swift.Int)
-    
+
     /// A `Double` value for an option.
     case double(Swift.Double)
-    
+
     /// An `NSDate` value for an option.
     case date(Foundation.Date)
-    
+
     /// A `String` value for an option.
     case string(Swift.String)
-    
+
     /// Used internally to serialize an `OptionValue` model to JSON.
     public func toJSONObject() -> Any {
         switch self {
@@ -310,7 +309,7 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
         case .string(let x): return x
         }
     }
-    
+
     /// Used internally to initialize an `OptionValue` model from JSON.
     public init(json: JSON) throws {
         if let int = try? json.getInt() {
@@ -330,36 +329,36 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
 
 /// The direction of a column (i.e. minimize or maximize).
 public enum Goal: String {
-    
+
     /// Minimize the given column.
     case minimize = "min"
-    
+
     /// Maximize the given column.
     case maximize = "max"
 }
 
 /// A range of valid values for a column.
 public enum Range: JSONEncodable, JSONDecodable {
-    
+
     /// High and low values that define the range of a `DateTime`
     /// column. Valid only for `DateTime` columns.
     case dateRange(low: Date, high: Date)
-    
+
     /// High and low `Double` values that define the range of a
     /// `Numeric` column. Valid only for `Numeric` columns.
     case numericRange(low: Double, high: Double)
-    
+
     /// An array of valid values that define the range of possible values
     /// for a `Categorical` column. Valid only for `Categorical` columns.
     case categoricalRange(categories: [String])
-    
+
     /// A date formatter to convert between `NSDate` and `String`.
     fileprivate static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return dateFormatter
     }()
-    
+
     /// Used internally to serialize a `Range` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -376,7 +375,7 @@ public enum Range: JSONEncodable, JSONDecodable {
             return categories
         }
     }
-    
+
     /// Used internally to initialize a `Range` model from JSON.
     public init(json: JSON) throws {
         // try to parse as `Range.DateRange`
@@ -388,49 +387,49 @@ public enum Range: JSONEncodable, JSONDecodable {
                 return
             }
         }
-        
+
         // try to parse as `Range.NumericRange`
         if let low = try? json.getDouble(at: "low"), let high = try? json.getDouble(at: "high") {
             self = .numericRange(low: low, high: high)
             return
         }
-        
+
         // try to parse as `Range.CategoricalRange`
         if let categories = try? json.decodedArray(type: String.self) {
             self = .categoricalRange(categories: categories)
             return
         }
-        
+
         throw JSON.Error.valueNotConvertible(value: json, to: Range.self)
     }
 }
 
 /// An option in a decision problem (i.e. a row in a tabular representation of the data).
 public struct Option: JSONEncodable, JSONDecodable {
-    
+
     /// An identifier for the option that is unique among all options for the problem.
     public let key: String
-    
+
     /// Option-specific values for the columns (objectives) defined for the problem. Specify
     /// a dictionary of column keys to option values. Value requirements vary by column type; a
     /// value must be of the type defined for its column. An option that fails to specify a value
     /// for a column for which `isObjective` is `true` is marked as `incomplete` and is excluded
     /// from the resolution. Example: `["Name": .Text("BRZ"), "Price": .NumericInt(27395)]`
     public let values: [String: OptionValue]
-    
+
     /// The name of the option. Used only by the Tradeoff Analytics widget; not part of the
     /// problem definition.
     public let name: String?
-    
+
     /// A description in HTML format. Used only by the Tradeoff Analytics widget; not part of the
     /// problem definition.
     public let descriptionHTML: String?
-    
+
     /// Application-specific data available to the hosting application; the service carries but
     /// does not use the data. Used only by the Tradeoff Analytics widget; not part of the
     /// problem definition.
     public let appData: Any?
-    
+
     /**
      Initialize an `Option` for a decision problem (i.e. a row in a tabular representation of
      the data).
@@ -456,15 +455,14 @@ public struct Option: JSONEncodable, JSONDecodable {
         values: [String: OptionValue],
         name: String? = nil,
         descriptionHTML: String? = nil,
-        appData: Any? = nil)
-    {
+        appData: Any? = nil) {
         self.key = key
         self.values = values
         self.name = name
         self.descriptionHTML = descriptionHTML
         self.appData = appData
     }
- 
+
     /// Used internally to serialize an `Option` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

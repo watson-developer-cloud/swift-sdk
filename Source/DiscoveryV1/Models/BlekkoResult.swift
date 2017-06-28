@@ -19,36 +19,36 @@ import RestKit
 
 /** The results the search engine Blekko returns. */
 public struct BlekkoResult: JSONDecodable {
-    
+
     /// Language of the document. If the language is something other than "en" for
     /// english, the document will fail to be processed and the Status of the QueryResponse
     /// will be 'ERROR'.
     public let language: String?
-    
+
     /// Raw title of the document.
     public let rawTitle: [String]?
-    
+
     /// Cleaned title of the document by the service.
     public let cleanTitle: [String]?
-    
+
     /// Extracted URL of the document.
     public let url: String?
-    
+
     /// The publication date in epoch seconds from UTC.
     public let chrondate: Int?
-    
+
     /// Extracted text snippets of the document.
     public let snippets: [String]?
-    
+
     /// Hostname of the document.
     public let host: String?
-    
+
     /// Extracted type of document. 
     public let documentType: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a `BlekkoResult` model from JSON.
     public init(json: JSON) throws {
         language = try? json.getString(at: "lang")
@@ -61,7 +61,7 @@ public struct BlekkoResult: JSONDecodable {
         documentType = try? json.getString(at: "documentType")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'BlekkoResult' model to JSON.
     public func toJSONObject() -> Any {
         return json

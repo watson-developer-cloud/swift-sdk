@@ -20,7 +20,7 @@ import RestKit
 /** An option specifying if the relationships found between entities in the analyzed content should 
  be returned. */
 public struct RelationsOptions: JSONEncodable {
-    
+
     /// Enter a custom model ID to override the default `en-news` model. Use `es-news` for Spanish
     /// news, and `ar-news` for Arabic news.
     public let model: String?

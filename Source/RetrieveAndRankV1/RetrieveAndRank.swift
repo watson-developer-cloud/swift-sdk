@@ -23,16 +23,16 @@ import RestKit
  provide users with more relevant search results by automatically re-ranking them.
  */
 public class RetrieveAndRank {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/retrieve-and-rank/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.RetrieveAndRankV1"
-    
+
     /**
      Create a `RetrieveAndRank` object.
      
@@ -42,7 +42,7 @@ public class RetrieveAndRank {
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Retrieve and Rank service, then
      return an NSError with information about the error that occured. Otherwise, return nil.
@@ -52,7 +52,7 @@ public class RetrieveAndRank {
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
-            
+
             if let msg = try? json.getString(at: "msg") {
                 let code = try json.getInt(at: "code")
                 let userInfo = [NSLocalizedFailureReasonErrorKey: msg]
@@ -66,14 +66,14 @@ public class RetrieveAndRank {
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
-            } 
+            }
         } catch {
             return nil
         }
     }
-    
+
     // MARK: - Solr Clusters
-    
+
     /**
      Retrieves the list of Solr clusters available for this Retrieve and Rank instance.
      
@@ -83,7 +83,7 @@ public class RetrieveAndRank {
     public func getSolrClusters(
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([SolrCluster]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -92,7 +92,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["clusters"]) {
             (response: RestResponse<[SolrCluster]>) in
@@ -102,7 +102,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Creates a new Solr cluster. The Solr cluster will have an initial status of "Not Available"
      and can't be used until the status becomes "Ready".
@@ -118,13 +118,13 @@ public class RetrieveAndRank {
         size: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
-        
+
         // construct body
         var json = ["cluster_name": name]
         if let size = size {
             json["cluster_size"] = String(size)
         }
-        
+
         guard let body = try? JSON(dictionary: json).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -132,7 +132,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -143,7 +143,7 @@ public class RetrieveAndRank {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<SolrCluster>) in
@@ -153,7 +153,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Stops and deletes a Solr cluster.
      
@@ -164,8 +164,8 @@ public class RetrieveAndRank {
     public func deleteSolrCluster(
         withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -173,7 +173,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -187,7 +187,7 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Gets the status and other information about a specific cluster.
      
@@ -199,7 +199,7 @@ public class RetrieveAndRank {
         withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -208,7 +208,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<SolrCluster>) in
@@ -218,7 +218,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Gets all configurations for the specific cluster.
      
@@ -231,7 +231,7 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -240,7 +240,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["solr_configs"]) {
             (response: RestResponse<[String]>) in
@@ -250,7 +250,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Delete this specific configuration from the specified cluster.
      
@@ -263,8 +263,8 @@ public class RetrieveAndRank {
         withName configName: String,
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -272,7 +272,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -286,7 +286,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Gets a configuration .zip file with the given name from the specified cluster.
      
@@ -300,7 +300,7 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -308,7 +308,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // locate downloads directory
         let fileManager = FileManager.default
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
@@ -319,7 +319,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct unique filename
         var filename = configName + ".zip"
         var isUnique = false
@@ -333,17 +333,17 @@ public class RetrieveAndRank {
                 isUnique = true
             }
         }
-        
+
         // specify download destination
         let destinationURL = downloads.appendingPathComponent(filename)
-        
+
         // execute REST request
         request.download(to: destinationURL) { response, error in
             guard error == nil else {
                 failure?(error!)
                 return
             }
-            
+
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -351,7 +351,7 @@ public class RetrieveAndRank {
                 failure?(error)
                 return
             }
-            
+
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -359,11 +359,11 @@ public class RetrieveAndRank {
                 failure?(error)
                 return
             }
-            
+
             success(destinationURL)
         }
     }
-    
+
     /**
      Uploads a configuration .zip file set with the given name to the specified cluster.
      
@@ -381,14 +381,14 @@ public class RetrieveAndRank {
         toSolrClusterID solrClusterID: String,
         zipFile: URL,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct body
         guard let body = try? Data(contentsOf: zipFile) else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -398,7 +398,7 @@ public class RetrieveAndRank {
             contentType: "application/zip",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -412,7 +412,7 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Creates a new Solr collection.
      
@@ -427,14 +427,14 @@ public class RetrieveAndRank {
         forSolrClusterID solrClusterID: String,
         withConfigurationName configName: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "CREATE"))
         queryParameters.append(URLQueryItem(name: "name", value: name))
         queryParameters.append(URLQueryItem(name: "collection.configName", value: configName))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -443,7 +443,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -457,7 +457,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Deletes a Solr collection.
      
@@ -470,13 +470,13 @@ public class RetrieveAndRank {
         withName name: String,
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "DELETE"))
         queryParameters.append(URLQueryItem(name: "name", value: name))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -485,7 +485,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -499,7 +499,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Lists the names of the collections in this Solr cluster.
      
@@ -514,12 +514,12 @@ public class RetrieveAndRank {
         forSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "LIST"))
         queryParameters.append(URLQueryItem(name: "wt", value: "json"))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -528,7 +528,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["collections"]) {
             (response: RestResponse<[String]>) in
@@ -538,7 +538,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Update a collection by adding content to it. This indexes the documents and allows us to 
      search the newly uploaded data later. For more information about the accepted file types and
@@ -559,14 +559,14 @@ public class RetrieveAndRank {
         contentFile: URL,
         contentType: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST body
         guard let body = try? Data(contentsOf: contentFile) else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -576,7 +576,7 @@ public class RetrieveAndRank {
             contentType: contentType,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -619,7 +619,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "q", value: query))
@@ -628,7 +628,7 @@ public class RetrieveAndRank {
         if let numberOfDocuments = numberOfDocuments {
             queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -637,7 +637,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<SearchResponse>) in
@@ -647,7 +647,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Searches the results and then returns them in ranked order.
      
@@ -677,7 +677,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "q", value: query))
@@ -687,7 +687,7 @@ public class RetrieveAndRank {
         if let numberOfDocuments = numberOfDocuments {
             queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -696,7 +696,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<SearchAndRankResponse>) in
@@ -706,9 +706,9 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     // MARK: - Rankers
-    
+
     /**
      Retrieves the list of rankers available for this Retrieve and Rank instance.
      
@@ -717,8 +717,7 @@ public class RetrieveAndRank {
      */
     public func getRankers(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Ranker]) -> Void)
-    {
+        success: @escaping ([Ranker]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -727,7 +726,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(dataToError: dataToError, path: ["rankers"]) {
             (response: RestResponse<[Ranker]>) in
@@ -737,7 +736,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Creates and trains a new ranker. The status of the ranker will be set to `Training` until
      the ranker is ready. You need to wait until the status is `Available` before using.
@@ -751,8 +750,7 @@ public class RetrieveAndRank {
         withName name: String? = nil,
         fromFile trainingDataFile: URL,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (RankerDetails) -> Void)
-    {
+        success: @escaping (RankerDetails) -> Void) {
         // construct training metadata
         var json = [String: String]()
         if let name = name {
@@ -765,7 +763,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingDataFile, withName: "training_data")
@@ -774,7 +772,7 @@ public class RetrieveAndRank {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -785,7 +783,7 @@ public class RetrieveAndRank {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<RankerDetails>) in
@@ -795,7 +793,7 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Identifies the top answer from the list of provided results to rank, and provides the
      number of answers requested, listed in order from descending ranked score.
@@ -814,7 +812,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Ranking) -> Void) {
-        
+
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(resultsFile, withName: "answer_data")
@@ -826,7 +824,7 @@ public class RetrieveAndRank {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -837,7 +835,7 @@ public class RetrieveAndRank {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<Ranking>) in
             switch response.result {
@@ -857,8 +855,8 @@ public class RetrieveAndRank {
     public func deleteRanker(
         withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -866,7 +864,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -880,7 +878,7 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Get status and information about a specific ranker.
      
@@ -892,7 +890,7 @@ public class RetrieveAndRank {
         withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RankerDetails) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -901,7 +899,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) {
             (response: RestResponse<RankerDetails>) in

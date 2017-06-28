@@ -26,20 +26,20 @@ import RestKit
  */
 
 public struct Microformats: JSONDecodable {
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** see **Microformat** */
     public let microformats: [Microformat]?
-    
+
     /// Used internally to initialize a Microformats object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: Microformats.self)
         }
-        
+
         url = try? json.getString(at: "url")
         microformats = try? json.decodedArray(at: "microformats", type: Microformat.self)
     }

@@ -19,24 +19,24 @@ import RestKit
 
 /** The result of analyzing a sentence within a document. */
 public struct SentenceAnalysis: JSONDecodable {
-    
+
     /// A unique number identifying this sentence within the document.
     public let sentenceID: Int
-    
+
     /// The index of the character in the document where this sentence starts.
     public let inputFrom: Int
-    
+
     /// The index of the character in the document after the end of this sentence
     /// (i.e. `inputTo - inputFrom` is the length of the sentence in characters).
     public let inputTo: Int
-    
+
     /// The text of this sentence.
     public let text: String
-    
+
     /// The tone analysis results for this sentence, divided into
     /// three categories: social tone, emotion tone, and writing tone.
     public let toneCategories: [ToneCategory]
-    
+
     /// Used internally to initialize a `SentenceAnalysis` model from JSON.
     public init(json: JSON) throws {
         sentenceID = try json.getInt(at: "sentence_id")

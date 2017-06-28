@@ -25,21 +25,21 @@ import RestKit
  
  */
 public struct Document: JSONDecodable {
-    
+
     /** a unique identifier for the document */
     public let id: String?
-    
+
     /** see **DocumentSource** */
     public let source: DocumentSource?
-    
+
     /** the timestamp of publication */
     public let timestamp: CLong?
-    
+
     /// used internally to initialize a Document object
     public init(json: JSON) throws {
         id = try? json.getString(at: "id")
         source = try? json.decode(at: "source", type: DocumentSource.self)
         timestamp = try? json.decode(at: "timestamp", type: CLong.self)
     }
-    
+
 }

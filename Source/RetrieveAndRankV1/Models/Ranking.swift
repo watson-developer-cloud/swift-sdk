@@ -19,22 +19,22 @@ import RestKit
 
 /** Search results returned by the Retrieve and Rank service, ordered by their ranking. */
 public struct Ranking: JSONDecodable {
-    
+
     /// The unique ID of the ranker used.
     public let rankerID: String
-    
+
     /// The name of the ranker.
     public let name: String?
-    
+
     /// The link to the ranker.
     public let url: String
-    
+
     /// The answer with the highest ranking score.
     public let topAnswer: String
-    
+
     /// An array of up to 10 answers, sorted in descending order of ranking score.
     public let answers: [RankedAnswer]
-    
+
     /// Used internally to initialize a `Ranking` model from JSON.
     public init(json: JSON) throws {
         rankerID = try json.getString(at: "ranker_id")
@@ -47,18 +47,18 @@ public struct Ranking: JSONDecodable {
 
 /** An answer and its associated ranking score. */
 public struct RankedAnswer: JSONDecodable {
-    
+
     /// The unique identifier of the answer in the collection.
     public let answerID: String
-    
+
     /// The rank of this answer, compared to other answers. A higher value represents a higher
     /// relevance. The highest score is the sum of the number of potential answers.
     public let score: Double
-    
+
     /// A decimal percentage from 0 to 1, describing the preference for this answer. A higher value
     /// represents a higher confidence.
     public let confidence: Double
-    
+
     /// Used internally to initialize an `RankedAnswer` model from JSON.
     public init(json: JSON) throws {
         answerID = try json.getString(at: "answer_id")

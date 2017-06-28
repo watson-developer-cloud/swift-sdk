@@ -93,8 +93,7 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -137,8 +136,7 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -180,8 +178,7 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         let json = JSON(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
         guard let content = try? json.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
@@ -226,8 +223,7 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))

@@ -15,16 +15,16 @@
  **/
 
 import Foundation
-    
+
 /** Supported dialog file formats */
 public enum Format: String {
-    
+
     /// OctetStream Format (i.e. a binary file)
     case octetStream = "application/octet-stream"
-    
+
     /// WDSJSON Format
     case wdsJSON = "application/wds+json"
-    
+
     /// WDSXML Format
     case wdsXML = "application/wds+xml"
 }

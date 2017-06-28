@@ -19,34 +19,34 @@ import RestKit
 
 /** JSON object containing request parameters */
 public struct Parameters: JSONEncodable {
-    
+
     /// The plain text to analyze.
     public let text: String?
-    
+
     /// The HTML file to analyze.
     public let html: URL?
-    
+
     /// The web page to analyze.
     public let url: String?
-    
+
     /// Specific features to analyze the document for.
     public let features: Features
-    
+
     /// Remove website elements, such as links, ads, etc.
     public let clean: Bool?
-    
+
     /// XPath query for targeting nodes in HTML.
     public let xpath: String?
-    
+
     /// Whether to use raw HTML content if text cleaning fails.
     public let fallbackToRaw: Bool?
-    
+
     /// Whether or not to return the analyzed text.
     public let returnAnalyzedText: Bool?
-    
+
     /// ISO 639-1 code indicating the language to use in the analysis
     public let language: String?
-    
+
     /// Error domain for when errors are thrown.
     private let errorDomain = "com.watsonplatform.naturalLanguageUnderstanding"
 
@@ -75,8 +75,7 @@ public struct Parameters: JSONEncodable {
         xpath: String? = nil,
         fallbackToRaw: Bool? = nil,
         returnAnalyzedText: Bool? = nil,
-        language: String? = nil)
-    {
+        language: String? = nil) {
         self.text = text
         self.html = html
         self.url = url
@@ -105,10 +104,10 @@ public struct Parameters: JSONEncodable {
         if let language = language { json["language"] = language }
         return json
     }
-    
+
     /// Build HTML as string.
     private func docAsString(document: URL) throws -> String {
-        
+
         guard let docAsString = try? String(contentsOfFile: document.relativePath, encoding:.utf8) else {
             let failureReason = "Unable to convert document to string."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

@@ -19,16 +19,16 @@ import RestKit
 
 /** The relations between entities found in the content. */
 public struct RelationsResult: JSONDecodable {
-    
+
     /// Confidence score for the relation. Higher values indicate greater confidence.
     public let score: Double?
-    
+
     /// The sentence that contains the relation.
     public let sentence: String?
-    
+
     /// The type of the relation.
     public let type: String?
-   
+
     /// The extracted relation objects from the text.
     public let arguments: [RelationArgument]?
 
@@ -43,13 +43,13 @@ public struct RelationsResult: JSONDecodable {
 
 /** The extracted relation in the content.. */
 public struct RelationArgument: JSONDecodable {
-    
+
     /// The relationship of the entity pulled from a sentence.
     public let entities: [RelationEntity]?
-    
+
     /// Text that corresponds to the argument
     public let text: String?
-    
+
     /// Used internally to initialize a `RelationArgument` model from JSON.
     public init(json: JSON) throws {
         entities = try? json.decodedArray(at: "entities", type: RelationEntity.self)

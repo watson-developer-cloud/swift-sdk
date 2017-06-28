@@ -20,19 +20,19 @@ import RestKit
 /** An option specifying whether or not to identify the subjects, actions, and verbs in the 
  analyzed content. */
 public struct SemanticRolesOptions: JSONEncodable {
-    
+
     /// Maximum number of semantic_roles results to return.
     public let limit: Int?
-    
+
     /// Set this to true to return keyword information for subjects and objects.
     public let keywords: Bool?
-    
+
     /// Set this to true to return entity information for subjects and objects.
     public let entities: Bool?
-    
+
     /// Set this to true to only return results in which the subjects and objects contain entities.
     public let requireEntities: Bool?
-    
+
     /// Set this to false to hide entity disambiguation information in the response.
     public let disambiguate: Bool?
 
@@ -52,8 +52,7 @@ public struct SemanticRolesOptions: JSONEncodable {
         keywords: Bool? = nil,
         entities: Bool? = nil,
         requireEntities: Bool? = nil,
-        disambiguate: Bool? = nil)
-    {
+        disambiguate: Bool? = nil) {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities

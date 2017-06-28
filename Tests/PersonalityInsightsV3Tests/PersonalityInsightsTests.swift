@@ -26,7 +26,7 @@ class PersonalityInsightsTests: XCTestCase {
     private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
@@ -99,8 +99,7 @@ class PersonalityInsightsTests: XCTestCase {
             return
         }
         personalityInsights.getProfile(fromText: kennedySpeech,
-                                         failure: failWithError)
-        {
+                                         failure: failWithError) {
             profile in
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
@@ -121,8 +120,7 @@ class PersonalityInsightsTests: XCTestCase {
             return
         }
         personalityInsights.getProfile(fromHTML: kennedySpeech,
-                                       failure: failWithError)
-        {
+                                       failure: failWithError) {
             profile in
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
@@ -157,8 +155,7 @@ class PersonalityInsightsTests: XCTestCase {
 
         let contentItems = [contentItem, contentItem]
         personalityInsights.getProfile(fromContentItems: contentItems,
-                                         failure: failWithError)
-        {
+                                         failure: failWithError) {
             profile in
             if let behaviors = profile.behavior {
                 for behavior in behaviors {
@@ -183,8 +180,7 @@ class PersonalityInsightsTests: XCTestCase {
         personalityInsights.getProfile(fromText: kennedySpeech,
                                        rawScores: true,
                                        consumptionPreferences: true,
-                                       failure: failWithError)
-        {
+                                       failure: failWithError) {
             profile in
             for need in profile.needs {
                 XCTAssertNotNil(need.rawScore)

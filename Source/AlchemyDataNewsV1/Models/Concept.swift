@@ -28,86 +28,86 @@ import RestKit
  */
 
 public struct Concept: JSONDecodable {
-    
+
     /** detected concept tag*/
     public let text: String?
-    
+
     /**
      relevance score for a detected concept tag.
      Possible values: (0.0 - 1.0)   [1.0 = most relevant]
      */
     public let relevance: Double?
-    
+
     /**
      The path through the knowledge graph to the appropriate keyword. Only returned when request
      parameter is provided: knowledgeGraph=1
      */
     public let knowledgeGraph: KnowledgeGraph?
-    
+
     /** the website associated with this concept tag */
     public let website: String?
-    
+
     /** latitude longitude - the geographic coordinates associated with this concept tag */
     public let geo: String?
-    
+
     /**
      sameAs link to DBpedia for this concept tag
      Note: Provided only for entities that exist in this linked data-set
      */
     public let dbpedia: String?
-    
+
     /**
      sameAs link to YAGO for this concept tag
      Note: Provided only for entities that exist in this linked data-set
      */
     public let yago: String?
-    
+
     /**
      sameAs link to OpenCyc for this concept tag
      Note: Provided only for entities that exist in this linked data-set
      */
     public let opencyc: String?
-    
+
     /**
      sameAs link to Freebase for this concept tag.
      Note: Provided only for entities that exist in this linked data-set
      */
     public let freebase: String?
-    
+
     /**
      sameAs link to the CIA World Factbook for this concept tag
      Note: Provided only for entities that exist in this linked data-set
      */
     public let ciaFactbook: String?
-    
+
     /**
      sameAs link to the US Census for this concept tag
      
      Note: Provided only for entities that exist in this linked data-set
      */
     public let census: String?
-    
+
     /**
      sameAs link to Geonames for this concept tag
      
      Note: Provided only for entities that exist in this linked data-set
      */
     public let geonames: String?
-    
+
     /**
      sameAs link to MusicBrainz for this concept tag
      
      Note: Provided only for entities that exist in this linked data-set
      */
     public let musicBrainz: String?
-    
+
     /**
      website link to CrunchBase for this concept tag.
      
      Note: Provided only for entities that exist in CrunchBase.
      */
     public let crunchbase: String?
-    
+
     /// Used internally to initialize a Concept object
     public init(json: JSON) throws {
         text = try? json.getString(at: "text")

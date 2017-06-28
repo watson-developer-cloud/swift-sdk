@@ -25,13 +25,13 @@ import RestKit
  
  */
 public struct NewsResponse: JSONDecodable {
-    
+
     /** number of transactions the service made */
     public let totalTransactions: Int
-    
+
     /** see **NewsResult** */
     public let result: NewsResult?
-    
+
     /// Used internally to initialize a NewsResponse object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
@@ -41,5 +41,5 @@ public struct NewsResponse: JSONDecodable {
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         result = try? json.decode(at: "result", type: NewsResult.self)
     }
-    
+
 }

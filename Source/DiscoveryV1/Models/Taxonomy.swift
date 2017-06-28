@@ -23,19 +23,19 @@ import RestKit
 */
 
 public struct Taxonomy: JSONDecodable {
-    
+
     /// will be "no" if categorization doesn't meet confidence standards
     public let confident: String?
-    
+
     /// The detected topic category.
     public let label: String?
-    
+
     /// The confidence score, 0.0 - 1.0 (higher is better).
     public let score: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a Taxonomy object from JSON.
     public init(json: JSON) throws {
         confident = try? json.getString(at: "confident")
@@ -43,10 +43,9 @@ public struct Taxonomy: JSONDecodable {
         score = try? json.getString(at: "score")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'Taxonomy' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
 }
-

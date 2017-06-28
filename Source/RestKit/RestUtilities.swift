@@ -17,7 +17,7 @@
 import Foundation
 
 public extension Dictionary {
-    
+
     public func map<OutValue>(transform: (Value) throws -> OutValue) rethrows -> [Key: OutValue] {
         var dictionary = [Key: OutValue]()
         for (k, v) in self {

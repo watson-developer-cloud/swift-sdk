@@ -124,32 +124,6 @@ public struct RestRequest {
         }
     }
 
-    fileprivate func dataToErrorWrapper(dataToError: ((Data) -> Error?)? = nil) -> ((HTTPURLResponse?, Data?) -> Error?)?
-    {
-        return { response, data in
-            // ensure data is not nil
-            guard let data = data else {
-                return RestError.noData
-            }
-
-            // can the data be parsed as an error?
-            if let dataToError = dataToError,
-                let error = dataToError(data) {
-                return error
-            }
-
-            return nil
-        }
-    }
-
-    public func responseObject<T: JSONDecodable>(
-        dataToError: ((Data) -> Error?)? = nil,
-        path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<T>) -> Void)
-    {
-        responseObject(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
-    }
-
     public func responseObject<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
@@ -200,14 +174,6 @@ public struct RestRequest {
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
-    }
-    
-    public func responseArray<T: JSONDecodable>(
-        dataToError: ((Data) -> Error?)? = nil,
-        path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<[T]>) -> Void)
-    {
-        responseArray(responseToError: dataToErrorWrapper(dataToError: dataToError), path: path, completionHandler: completionHandler)
     }
 
     public func responseArray<T: JSONDecodable>(
@@ -261,13 +227,6 @@ public struct RestRequest {
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
-    }
-
-    public func responseString(
-        dataToError: ((Data) -> Error?)? = nil,
-        completionHandler: @escaping (RestResponse<String>) -> Void)
-    {
-        responseString(responseToError: dataToErrorWrapper(dataToError: dataToError), completionHandler: completionHandler)
     }
 
     public func responseString(

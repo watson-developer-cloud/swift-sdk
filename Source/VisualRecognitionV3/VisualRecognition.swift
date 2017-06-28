@@ -47,39 +47,47 @@ public class VisualRecognition {
     }
     
     /**
-     If the given data represents an error returned by the Visual Recognition service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
-
+     If the response or data represents an error returned by the Visual Recognition service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
+            var code = response?.statusCode ?? 400
+            let userInfo: [String: String]
             if let status = try? json.getString(at: "status") {
                 let statusInfo = try json.getString(at: "statusInfo")
-                let userInfo = [
+                userInfo = [
                     NSLocalizedFailureReasonErrorKey: status,
                     NSLocalizedDescriptionKey: statusInfo
                 ]
-                return NSError(domain: domain, code: 401, userInfo: userInfo)
-            } else if let code = try? json.getInt(at: "code") {
-                let error = try json.getString(at: "error")
-                let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: "\(code)",
-                    NSLocalizedDescriptionKey: error
+            } else if let message = try? json.getString(at: "error") {
+                userInfo = [
+                    NSLocalizedDescriptionKey: message
                 ]
-                return NSError(domain: domain, code: code, userInfo: userInfo)
-            } else if let error = try? json.getString(at: "images", 0, "error", "error_id") {
+            } else {
+                let message = try json.getString(at: "images", 0, "error", "error_id")
                 let description = try json.getString(at: "images", 0, "error", "description")
                 let imagesProcessed = try json.getInt(at: "images_processed")
-                let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
+                code = 400
+                userInfo = [
+                    NSLocalizedFailureReasonErrorKey: message,
                     NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
                 ]
-                return NSError(domain: domain, code: 400, userInfo: userInfo)
-            } else {
-                return nil
             }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -145,7 +153,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
@@ -227,7 +235,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
@@ -268,7 +276,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ImagesWithFaces>) in
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
@@ -317,7 +325,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ImagesWithFaces>) in
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
@@ -355,7 +363,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
+        request.responseArray(responseToError: responseToError, path: ["classifiers"]) {
             (response: RestResponse<[Classifier]>) in
             switch response.result {
             case .success(let classifiers): success(classifiers)
@@ -447,7 +455,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
@@ -486,7 +494,7 @@ public class VisualRecognition {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -524,7 +532,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
@@ -597,7 +605,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let classifier): success(classifier)
@@ -648,7 +656,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -683,7 +691,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+        request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[Collection]>) in
             switch response.result {
             case .success(let collections): success(collections)
@@ -719,7 +727,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -758,7 +766,7 @@ public class VisualRecognition {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -821,7 +829,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CollectionImages>) in
             switch response.result {
             case .success(let images): success(images)
@@ -858,7 +866,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["images"]) {
+        request.responseArray(responseToError: responseToError, path: ["images"]) {
             (response: RestResponse<[CollectionImage]>) in
             switch response.result {
             case .success(let images): success(images)
@@ -896,7 +904,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CollectionImage>) in
             switch response.result {
             case .success(let image): success(image)
@@ -937,7 +945,7 @@ public class VisualRecognition {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -979,7 +987,7 @@ public class VisualRecognition {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -1018,7 +1026,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Metadata>) in
             switch response.result {
             case .success(let metadata): success(metadata)
@@ -1070,7 +1078,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Metadata>) in
             switch response.result {
             case .success(let metadata): success(metadata)
@@ -1123,7 +1131,7 @@ public class VisualRecognition {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SimilarImages>) in
             switch response.result {
             case .success(let similarImages): success(similarImages)

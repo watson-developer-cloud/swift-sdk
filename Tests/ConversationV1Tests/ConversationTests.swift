@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -302,7 +302,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
-    // MARK: Workspaces
+    // MARK: - Workspaces
     
     func testListAllWorkspaces() {
         let description = "List all workspaces."
@@ -526,7 +526,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
-    // MARK: Intents
+    // MARK: - Intents
     
     func testListAllIntents() {
         let description = "List all the intents in a workspace."
@@ -701,7 +701,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
 
-    // MARK: Examples
+    // MARK: - Examples
     
     func testListAllExamples() {
         let description = "List all the examples of an intent."
@@ -830,7 +830,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
     
-    // MARK: Counterexamples
+    // MARK: - Counterexamples
     
     func testListAllCounterexamples() {
         let description = "List all the counterexamples of a workspace."
@@ -960,7 +960,7 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
 
-	// MARK: Entities
+	// MARK: - Entities
 
 	func testListAllEntities() {
 		let description = "List all entities"
@@ -1085,20 +1085,8 @@ class ConversationTests: XCTestCase {
 		}
 		waitForExpectations()
 
-		let descriptionTwo = "Update the value of the entity"
+		let descriptionTwo = "Update the entity"
 		let expectationTwo = self.expectation(description: descriptionTwo)
-
-		let updatedValue = "This is my new description for this entity"
-		conversation.updateValue(workspaceID: workspaceID, entity: entity.entity,value: updatedValue, failure: failWithError){ entityResponse in
-			XCTAssertEqual(entityResponse.value, updatedValue)
-			XCTAssertNotNil(entityResponse.created)
-			XCTAssertNotNil(entityResponse.updated)
-			expectationTwo.fulfill()
-		}
-		waitForExpectations()
-
-		let descriptionThree = "Update the entity"
-		let expectationThree = self.expectation(description: descriptionThree)
 
 		let updatedEntityName = "up-" + entity.entity
 		let updatedEntityDescription = "This is a new description for a test entity"
@@ -1115,11 +1103,71 @@ class ConversationTests: XCTestCase {
 		let descriptionFour = "Delete the entity"
 		let expectationFour = self.expectation(description: descriptionFour)
 
-		conversation.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {_ in
+		conversation.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName, failure: failWithError) {_ in
 			expectationFour.fulfill()
 		}
 		waitForExpectations()
 	}
+
+    // MARK: - Values Tests
+
+    func testListAllValues() {
+        let description = "List all the values for an entity."
+        let expectation = self.expectation(description: description)
+
+        let entityName = "appliance"
+
+        conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
+            for value in valueCollection.values {
+                XCTAssertNotNil(value.value)
+                XCTAssertNotNil(value.created)
+                XCTAssertNotNil(value.updated)
+            }
+            XCTAssertNotNil(valueCollection.pagination.refreshUrl)
+            XCTAssertNil(valueCollection.pagination.total)
+            XCTAssertNil(valueCollection.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testCreateUpdateAndDeleteValue(){
+        let description = "Create a value for an entity"
+        let expectation = self.expectation(description: description)
+
+        let entityName = "appliance"
+        let valueName = "swift-sdk-test-value" + UUID().uuidString
+
+        conversation.createValue(workspaceID: workspaceID, entity: entityName, value: valueName, failure: failWithError) { value in
+            XCTAssertEqual(value.value, valueName)
+            XCTAssertNotNil(value.created)
+            XCTAssertNotNil(value.updated)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+
+        let descriptionTwo = "Update the value"
+        let expectationTwo = self.expectation(description: descriptionTwo)
+
+        let updatedValueName = "up-" + valueName
+
+        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, newValue: updatedValueName, newMetadata: ["oldname": valueName], failure: failWithError) { value in
+            XCTAssertEqual(value.value, updatedValueName)
+            XCTAssertNotNil(value.created)
+            XCTAssertNotNil(value.updated)
+            XCTAssertNotNil(value.metadata)
+            expectationTwo.fulfill()
+        }
+        waitForExpectations()
+
+        let descriptionThree = "Delete the updated value"
+        let expectationThree = self.expectation(description: descriptionThree)
+
+        conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName, failure: failWithError) {_ in
+            expectationThree.fulfill()
+        }
+        waitForExpectations()
+    }
 
 	// MARK: - Synonym Tests
 

@@ -234,8 +234,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Profile>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

@@ -759,8 +759,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -811,8 +810,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentExportResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentExportResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -885,8 +883,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -944,8 +941,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -989,8 +985,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1033,8 +1028,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1083,8 +1077,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceExportResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceExportResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1144,8 +1137,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1196,8 +1188,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)

@@ -176,7 +176,7 @@ internal class SpeechToTextEncoder {
 
         // construct audio buffers
         var pcm = UnsafeMutablePointer<Int16>(mutating: pcm)
-        var opus = Array<UInt8>(repeating: 0, count: Int(maxFrameSize))
+        var opus = [UInt8](repeating: 0, count: Int(maxFrameSize))
         var count = count
 
         // encode cache, if necessary

@@ -106,8 +106,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<AnalysisResults>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<AnalysisResults>) in
             switch response.result {
             case .success(let result): success(result)
             case .failure(let error): failure?(error)

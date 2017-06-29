@@ -50,7 +50,7 @@ public struct SpeechRecognitionResults {
             wrapperIndex += 1
         }
         // If we have parsed some speakerLabel objects, then store them here
-        if (wrapper.speakerLabels != nil) {
+        if wrapper.speakerLabels != nil {
             for speakerLabel in wrapper.speakerLabels! {
                 speakerLabels.append(speakerLabel)
             }

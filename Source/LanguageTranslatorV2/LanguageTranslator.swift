@@ -115,8 +115,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["models"]) {
-            (response: RestResponse<[TranslationModel]>) in
+        request.responseArray(dataToError: dataToError, path: ["models"]) { (response: RestResponse<[TranslationModel]>) in
             switch response.result {
             case .success(let models): success(models)
             case .failure(let error): failure?(error)
@@ -170,8 +169,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["model_id"]) {
-            (response: RestResponse<String>) in
+        request.responseObject(dataToError: dataToError, path: ["model_id"]) { (response: RestResponse<String>) in
             switch response.result {
             case .success(let modelID): success(modelID)
             case .failure(let error): failure?(error)
@@ -234,8 +232,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<MonitorTraining>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<MonitorTraining>) in
                 switch response.result {
                 case .success(let monitorTraining): success(monitorTraining)
                 case .failure(let error): failure?(error)
@@ -358,8 +355,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<TranslateResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<TranslateResponse>) in
                 switch response.result {
                 case .success(let translateResponse): success(translateResponse)
                 case .failure(let error): failure?(error)
@@ -388,8 +384,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["languages"]) {
-            (response: RestResponse<[IdentifiableLanguage]>) in
+        request.responseArray(dataToError: dataToError, path: ["languages"]){ (response: RestResponse<[IdentifiableLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
                 case .failure(let error): failure?(error)

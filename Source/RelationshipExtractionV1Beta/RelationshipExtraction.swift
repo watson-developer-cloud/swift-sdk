@@ -99,8 +99,7 @@ public class RelationshipExtraction {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["doc"]) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError, path: ["doc"]) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)

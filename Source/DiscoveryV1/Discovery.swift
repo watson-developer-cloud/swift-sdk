@@ -108,8 +108,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["environments"]) {
-            (response: RestResponse<[Environment]>) in
+        request.responseArray(dataToError: dataToError, path: ["environments"]) { (response: RestResponse<[Environment]>) in
             switch response.result {
             case .success(let environments): success(environments)
             case .failure(let error): failure?(error)
@@ -164,8 +163,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
@@ -198,8 +196,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedEnvironment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedEnvironment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
@@ -232,8 +229,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
@@ -284,8 +280,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
@@ -326,8 +321,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["configurations"]) {
-            (response: RestResponse<[Configuration]>) in
+        request.responseArray(dataToError: dataToError, path: ["configurations"]) { (response: RestResponse<[Configuration]>) in
             switch response.result {
             case .success(let configurations): success(configurations)
             case .failure(let error): failure?(error)
@@ -373,8 +367,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
@@ -409,8 +402,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedConfiguration>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedConfiguration>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
@@ -445,8 +437,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
@@ -492,8 +483,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
@@ -579,8 +569,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<TestConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<TestConfigurationDetails>) in
             switch response.result {
             case .success(let configurationDetails): success(configurationDetails)
             case .failure(let error): failure?(error)
@@ -621,8 +610,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
-            (response: RestResponse<[Collection]>) in
+        request.responseArray(dataToError: dataToError, path: ["collections"]) { (response: RestResponse<[Collection]>) in
             switch response.result {
             case .success(let collections): success(collections)
             case .failure(let error): failure?(error)
@@ -680,8 +668,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
@@ -716,8 +703,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedCollection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedCollection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
@@ -752,8 +738,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
@@ -814,8 +799,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
@@ -851,8 +835,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["fields"]) {
-            (response: RestResponse<[Field]>) in
+        request.responseArray(dataToError: dataToError, path: ["fields"]) { (response: RestResponse<[Field]>) in
             switch response.result {
             case .success(let fields): success(fields)
             case .failure(let error): failure?(error)
@@ -945,8 +928,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
@@ -985,8 +967,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
@@ -1025,8 +1006,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
@@ -1119,8 +1099,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
@@ -1208,8 +1187,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<QueryResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<QueryResponse>) in
             switch response.result {
             case .success(let queryResponse): success(queryResponse)
             case .failure(let error): failure?(error)

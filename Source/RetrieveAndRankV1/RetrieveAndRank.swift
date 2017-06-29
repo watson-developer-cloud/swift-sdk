@@ -94,8 +94,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["clusters"]) {
-            (response: RestResponse<[SolrCluster]>) in
+        request.responseArray(dataToError: dataToError, path: ["clusters"]) { (response: RestResponse<[SolrCluster]>) in
                 switch response.result {
                 case .success(let clusters): success(clusters)
                 case .failure(let error): failure?(error)
@@ -145,8 +144,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<SolrCluster>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -210,8 +208,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<SolrCluster>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SolrCluster>) in
                 switch response.result {
                 case .success(let cluster): success(cluster)
                 case .failure(let error): failure?(error)
@@ -242,8 +239,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["solr_configs"]) {
-            (response: RestResponse<[String]>) in
+        request.responseArray(dataToError: dataToError, path: ["solr_configs"]) { (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let config): success(config)
                 case .failure(let error): failure?(error)
@@ -530,8 +526,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
-            (response: RestResponse<[String]>) in
+        request.responseArray(dataToError: dataToError, path: ["collections"]) { (response: RestResponse<[String]>) in
                 switch response.result {
                 case .success(let collections): success(collections)
                 case .failure(let error): failure?(error)
@@ -639,8 +634,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<SearchResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SearchResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -698,8 +692,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<SearchAndRankResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<SearchAndRankResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -728,8 +721,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["rankers"]) {
-            (response: RestResponse<[Ranker]>) in
+        request.responseArray(dataToError: dataToError, path: ["rankers"]) { (response: RestResponse<[Ranker]>) in
                 switch response.result {
                 case .success(let rankers): success(rankers)
                 case .failure(let error): failure?(error)
@@ -785,8 +777,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<RankerDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<RankerDetails>) in
             switch response.result {
             case .success(let ranker): success(ranker)
             case .failure(let error): failure?(error)
@@ -836,8 +827,7 @@ public class RetrieveAndRank {
             messageBody: body
         )
 
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Ranking>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Ranking>) in
             switch response.result {
             case .success(let ranking): success(ranking)
             case .failure(let error): failure?(error)
@@ -901,8 +891,7 @@ public class RetrieveAndRank {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<RankerDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<RankerDetails>) in
                 switch response.result {
                 case .success(let details): success(details)
                 case .failure(let error): failure?(error)

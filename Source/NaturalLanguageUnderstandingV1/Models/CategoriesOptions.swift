@@ -19,10 +19,10 @@ import RestKit
 
 /** An option specifying if the analyzed content should be categorized into a hierarchical 5-level taxonomy. */
 public struct CategoriesOptions: JSONEncodable {
-    
+
     /// The JSON object to internally serialize the model to JSON.
     public let json: [String: Any]?
-    
+
     /**
      Initialize a `CategoriesOptions` with all member variables.
      
@@ -31,7 +31,7 @@ public struct CategoriesOptions: JSONEncodable {
     public init() {
         json = [String: Any]()
     }
-    
+
     /// Used internally to serialize a `CategoriesOptions` model to JSON.
     public func toJSONObject() -> Any {
         return json ?? [String: Any]()

@@ -26,17 +26,16 @@ import RestKit
  */
 
 public struct Microformat: JSONDecodable {
-    
+
     /** Microformat field data */
     public let fieldData: String?
-    
+
     /** Microformat field name */
     public let fieldName: String?
-    
+
     /// Used internally to initialize a Microformat object
     public init(json: JSON) throws {
         fieldData = try? json.getString(at: "fieldData")
         fieldName = try? json.getString(at: "fieldName")
     }
 }
-

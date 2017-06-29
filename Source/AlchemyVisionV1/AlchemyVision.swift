@@ -24,16 +24,16 @@ import RestKit
  */
 @available(*, deprecated, message: "Its functionality became a part of the IBM Watson Visual Recognition service.")
 public class AlchemyVision {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "http://gateway-a.watsonplatform.net/calls"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    
+
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
@@ -46,14 +46,14 @@ public class AlchemyVision {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
+
     /**
      If the given data represents an error returned by the Alchemy Vision service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
      
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    
+
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -86,8 +86,7 @@ public class AlchemyVision {
         fromImage imageData: Data,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (FaceTags) -> Void)
-    {
+        success: @escaping (FaceTags) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -100,7 +99,7 @@ public class AlchemyVision {
                 queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -112,10 +111,9 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<FaceTags>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<FaceTags>) in
             switch response.result {
             case .success(let faceTags): success(faceTags)
             case .failure(let error): failure?(error)
@@ -137,8 +135,7 @@ public class AlchemyVision {
         fromImageAtURL url: String,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (FaceTags) -> Void)
-    {
+        success: @escaping (FaceTags) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -164,8 +161,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<FaceTags>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<FaceTags>) in
             switch response.result {
             case .success(let faceTags): success(faceTags)
             case .failure(let error): failure?(error)
@@ -185,8 +181,7 @@ public class AlchemyVision {
         fromHTMLFile html: URL,
         withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImageLink) -> Void)
-    {
+        success: @escaping (ImageLink) -> Void) {
         guard let html = try? String(contentsOf: html) else {
             let failureReason = "Failed to read the HTML file."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -196,7 +191,7 @@ public class AlchemyVision {
         }
         getImage(fromHTML: html, withURL: url, failure: failure, success: success)
     }
-    
+
     /**
      Identify the primary image in an HTML document.
 
@@ -209,8 +204,7 @@ public class AlchemyVision {
         fromHTML html: String,
         withURL url: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImageLink) -> Void)
-    {
+        success: @escaping (ImageLink) -> Void) {
         // encode html document
         guard let htmlEncoded = html.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
             let failureReason = "Failed to percent encode HTML document."
@@ -219,7 +213,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        
+
         // construct body
         guard let body = "html=\(htmlEncoded)".data(using: String.Encoding.utf8) else {
             let failureReason = "Failed to construct body with HTML document."
@@ -228,7 +222,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -250,8 +244,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ImageLink>) in
+        request.responseObject(dataToError: dataToError) {  (response: RestResponse<ImageLink>) in
             switch response.result {
             case .success(let imageLinks): success(imageLinks)
             case .failure(let error): failure?(error)
@@ -269,8 +262,7 @@ public class AlchemyVision {
     public func getImage(
         fromURL url: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImageLink) -> Void)
-    {
+        success: @escaping (ImageLink) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -295,7 +287,7 @@ public class AlchemyVision {
             }
         }
     }
-    
+
     /**
      Perform image tagging on an uploaded image.
  
@@ -310,8 +302,7 @@ public class AlchemyVision {
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImageKeywords) -> Void)
-    {
+        success: @escaping (ImageKeywords) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -331,7 +322,7 @@ public class AlchemyVision {
                 queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -343,7 +334,7 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST request
         request.responseObject(dataToError: dataToError) { (response: RestResponse<ImageKeywords>) in
             switch response.result {
@@ -367,8 +358,7 @@ public class AlchemyVision {
         forceShowAll: Bool? = nil,
         knowledgeGraph: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImageKeywords) -> Void)
-    {
+        success: @escaping (ImageKeywords) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -407,7 +397,7 @@ public class AlchemyVision {
             }
         }
     }
-    
+
     /**
      Identify text in an uploaded image.
  
@@ -418,8 +408,7 @@ public class AlchemyVision {
     public func getRankedImageSceneText(
         fromImage imageData: Data,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SceneText) -> Void)
-    {
+        success: @escaping (SceneText) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -437,7 +426,7 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST requeset
         request.responseObject(dataToError: dataToError) { (response: RestResponse<SceneText>) in
             switch response.result {
@@ -457,8 +446,7 @@ public class AlchemyVision {
     public func getRankedImageSceneText(
         fromImageAtURL url: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (SceneText) -> Void)
-    {
+        success: @escaping (SceneText) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))

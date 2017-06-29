@@ -19,26 +19,26 @@ import RestKit
 
 /** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {
-    
+
     /// content URL
     public let url: String?
-    
+
     /// total number of transactions made by the request
     public let totalTransactions: Int?
-    
+
     /// language of the analyzed document
     public let language: String?
-    
+
     /// see **Emotions**
     public let docEmotions: Emotions?
-    
+
     /// used internally to initialize a DocumentEmotion object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
         }
-        
+
         url = try? json.getString(at: "url")
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)

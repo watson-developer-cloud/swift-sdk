@@ -18,10 +18,10 @@ import Foundation
 
 /** The phoneme set for a pronunciation. */
 public enum PhonemeFormat: String {
-    
+
     /// The IPA (International Phonetic Alphabet) phoneme set.
     case ipa = "ipa"
-    
+
     /// The IBM SPR (Symbolic Phonetic Representation) phoneme set.
     case spr = "spr"
 }

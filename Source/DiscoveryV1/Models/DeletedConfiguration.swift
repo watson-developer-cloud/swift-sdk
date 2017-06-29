@@ -19,17 +19,17 @@ import RestKit
 
 /** An object with information about the deleted configuration. */
 public struct DeletedConfiguration: JSONDecodable {
-    
+
     /// Unique identifier for the deleted configuration.
     public let configurationID: String
-    
+
     /// Status of the configuration. A status of `deleted` indicates that the configuration
     /// was successfully deleted.
     public let status: String
-    
+
     /// An array of notice messages.
     public let noticeMessages: [NoticeMessage]?
-    
+
     /// Used internally to initialize a `DeletedConfiguration` model from JSON.
     public init(json: JSON) throws {
         configurationID = try json.getString(at: "configuration_id")
@@ -40,19 +40,19 @@ public struct DeletedConfiguration: JSONDecodable {
 
 /** An object containing warnings from the service. */
 public struct NoticeMessage: JSONDecodable {
-    
+
     /// Text ID of the notice.
     public let noticeID: String
-    
+
     /// Creation date of the configuration, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let created: String
-    
+
     /// Severity of the notice.
     public let severity: String
-    
+
     /// Description of the notice.
     public let description: String
-    
+
     /// Used internally to initialize a `NoticeMessage` model from JSON.
     public init(json: JSON) throws {
         noticeID = try json.getString(at: "notice_id")

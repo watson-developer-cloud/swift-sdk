@@ -25,17 +25,17 @@ import RestKit
  Semantic Roles and Metadata from the content given.
  */
 public class NaturalLanguageUnderstanding {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-understanding/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
-    
+
     /**
      Create a `NaturalLanguageUnderstanding` object.
      
@@ -46,7 +46,7 @@ public class NaturalLanguageUnderstanding {
         credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the given data represents an error returned by the Natural Language Understanding service,
      then return an NSError with information about the error that occured. Otherwise, return nil.
@@ -69,7 +69,7 @@ public class NaturalLanguageUnderstanding {
             return nil
         }
     }
-    
+
     /**
      Analyze text, HTML, or a public webpage with one or more text analysis features.
      
@@ -82,17 +82,17 @@ public class NaturalLanguageUnderstanding {
         withParameters parameters: Parameters,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AnalysisResults) -> Void) {
-        
+
         // construct body
         guard let body = try? parameters.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -104,10 +104,9 @@ public class NaturalLanguageUnderstanding {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<AnalysisResults>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<AnalysisResults>) in
             switch response.result {
             case .success(let result): success(result)
             case .failure(let error): failure?(error)

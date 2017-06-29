@@ -30,7 +30,7 @@ internal protocol SSLTrustValidator {
 internal class SSLCert {
     var certData: Data?
     var key: SecKey?
-    
+
     /**
     Designated init for certificates
     
@@ -41,7 +41,7 @@ internal class SSLCert {
     public init(data: Data) {
         self.certData = data
     }
-    
+
     /**
     Designated init for public keys
     
@@ -54,14 +54,14 @@ internal class SSLCert {
     }
 }
 
-internal class SSLSecurity : SSLTrustValidator {
+internal class SSLSecurity: SSLTrustValidator {
     public var validatedDN = true //should the domain name be validated?
-    
+
     var isReady = false //is the key processing done?
     var certificates: [Data]? //the certificates
     var pubKeys: [SecKey]? //the public keys
     var usePublicKeys = false //use public keys or certificate validation?
-    
+
     /**
     Use certs from main app bundle
     
@@ -71,7 +71,7 @@ internal class SSLSecurity : SSLTrustValidator {
     */
     public convenience init(usePublicKeys: Bool = false) {
         let paths = Bundle.main.paths(forResourcesOfType: "cer", inDirectory: ".")
-        
+
         let certs = paths.reduce([SSLCert]()) { (certs: [SSLCert], path: String) -> [SSLCert] in
             var certs = certs
             if let data = NSData(contentsOfFile: path) {
@@ -79,10 +79,10 @@ internal class SSLSecurity : SSLTrustValidator {
             }
             return certs
         }
-        
+
         self.init(certs: certs, usePublicKeys: usePublicKeys)
     }
-    
+
     /**
     Designated init
     
@@ -93,7 +93,7 @@ internal class SSLSecurity : SSLTrustValidator {
     */
     public init(certs: [SSLCert], usePublicKeys: Bool) {
         self.usePublicKeys = usePublicKeys
-        
+
         if self.usePublicKeys {
             DispatchQueue.global(qos: .default).async {
                 let pubKeys = certs.reduce([SecKey]()) { (pubKeys: [SecKey], cert: SSLCert) -> [SecKey] in
@@ -106,7 +106,7 @@ internal class SSLSecurity : SSLTrustValidator {
                     }
                     return pubKeys
                 }
-                
+
                 self.pubKeys = pubKeys
                 self.isReady = true
             }
@@ -122,7 +122,7 @@ internal class SSLSecurity : SSLTrustValidator {
             self.isReady = true
         }
     }
-    
+
     /**
     Valid the trust and domain name.
     
@@ -132,7 +132,7 @@ internal class SSLSecurity : SSLTrustValidator {
     - returns: if the key was successfully validated
     */
     public func isValid(_ trust: SecTrust, domain: String?) -> Bool {
-        
+
         var tries = 0
         while !self.isReady {
             usleep(1000)
@@ -147,7 +147,7 @@ internal class SSLSecurity : SSLTrustValidator {
         } else {
             policy = SecPolicyCreateBasicX509()
         }
-        SecTrustSetPolicies(trust,policy)
+        SecTrustSetPolicies(trust, policy)
         if self.usePublicKeys {
             if let keys = self.pubKeys {
                 let serverPubKeys = publicKeyChain(trust)
@@ -163,11 +163,11 @@ internal class SSLSecurity : SSLTrustValidator {
             let serverCerts = certificateChain(trust)
             var collect = [SecCertificate]()
             for cert in certs {
-                collect.append(SecCertificateCreateWithData(nil,cert as CFData)!)
+                collect.append(SecCertificateCreateWithData(nil, cert as CFData)!)
             }
-            SecTrustSetAnchorCertificates(trust,collect as NSArray)
+            SecTrustSetAnchorCertificates(trust, collect as NSArray)
             var result: SecTrustResultType = .unspecified
-            SecTrustEvaluate(trust,&result)
+            SecTrustEvaluate(trust, &result)
             if result == .unspecified || result == .proceed {
                 var trustedCount = 0
                 for serverCert in serverCerts {
@@ -185,7 +185,7 @@ internal class SSLSecurity : SSLTrustValidator {
         }
         return false
     }
-    
+
     /**
     Get the public key from a certificate data
     
@@ -195,10 +195,10 @@ internal class SSLSecurity : SSLTrustValidator {
     */
     func extractPublicKey(_ data: Data) -> SecKey? {
         guard let cert = SecCertificateCreateWithData(nil, data as CFData) else { return nil }
-        
+
         return extractPublicKey(cert, policy: SecPolicyCreateBasicX509())
     }
-    
+
     /**
     Get the public key from a certificate
     
@@ -209,13 +209,13 @@ internal class SSLSecurity : SSLTrustValidator {
     func extractPublicKey(_ cert: SecCertificate, policy: SecPolicy) -> SecKey? {
         var possibleTrust: SecTrust?
         SecTrustCreateWithCertificates(cert, policy, &possibleTrust)
-        
+
         guard let trust = possibleTrust else { return nil }
         var result: SecTrustResultType = .unspecified
         SecTrustEvaluate(trust, &result)
         return SecTrustCopyPublicKey(trust)
     }
-    
+
     /**
     Get the certificate chain for the trust
     
@@ -230,10 +230,10 @@ internal class SSLSecurity : SSLTrustValidator {
             certificates.append(SecCertificateCopyData(cert!) as Data)
             return certificates
         }
-        
+
         return certificates
     }
-    
+
     /**
     Get the public key chain for the trust
     
@@ -249,12 +249,11 @@ internal class SSLSecurity : SSLTrustValidator {
             if let key = extractPublicKey(cert!, policy: policy) {
                 keys.append(key)
             }
-            
+
             return keys
         }
-        
+
         return keys
     }
-    
-    
+
 }

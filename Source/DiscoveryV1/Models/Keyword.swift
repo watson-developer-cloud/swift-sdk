@@ -20,22 +20,22 @@ import RestKit
 /** Important topics extracted from a document by the Discovery service.*/
 
 public struct Keyword: JSONDecodable {
-    
+
     /// see **KnowledgeGraph**.
     public let knowledgeGraph: KnowledgeGraph?
-    
+
     /// Relevance score for detected keyword.
     public let relevance: Double?
-    
+
     /// See **Sentiment**.
     public let sentiment: Sentiment?
-    
+
     /// The detected keyword text.
     public let text: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a Keyword object
     public init(json: JSON) throws {
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
@@ -44,10 +44,9 @@ public struct Keyword: JSONDecodable {
         text = try? json.getString(at: "text")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'Keyword' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
 }
-

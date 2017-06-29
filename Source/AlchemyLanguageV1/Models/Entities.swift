@@ -26,29 +26,29 @@ import RestKit
  */
 
 public struct Entities: JSONDecodable {
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** the number of transactions made by the call */
     public let totalTransactions: Int?
-    
+
     /** the detected entity text */
     public let text: String?
-    
+
     /** see **Entity** */
     public let entitites: [Entity]?
-    
+
     /// Used internally to initialize an Entities object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: Entities.self)
         }
-        
+
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
@@ -60,4 +60,3 @@ public struct Entities: JSONDecodable {
         entitites = try? json.decodedArray(at: "entities", type: Entity.self)
     }
 }
-

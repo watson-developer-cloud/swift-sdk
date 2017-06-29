@@ -24,13 +24,13 @@ import RestKit
  service can help users explore the trade-offs between options to make complex decisions.
  */
 public class TradeoffAnalytics {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
@@ -43,7 +43,7 @@ public class TradeoffAnalytics {
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Tradeoff Analytics service, then return
      an NSError object with information about the error that occured. Otherwise, return nil.
@@ -86,8 +86,7 @@ public class TradeoffAnalytics {
         for problem: Problem,
         generateVisualization: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Dilemma) -> Void)
-    {
+        success: @escaping (Dilemma) -> Void) {
         // construct body
         guard let body = try? problem.toJSON().serialize() else {
             let failureReason = "Problem could not be serialized to JSON."
@@ -96,13 +95,13 @@ public class TradeoffAnalytics {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let generateVisualization = generateVisualization {
             queryParameters.append(URLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -114,7 +113,7 @@ public class TradeoffAnalytics {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         // TODO: Add status code validation
         request.responseObject(dataToError: dataToError) { (response: RestResponse<Dilemma>) in

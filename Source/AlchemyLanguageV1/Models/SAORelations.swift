@@ -26,30 +26,29 @@ import RestKit
  */
 
 public struct SAORelations: JSONDecodable {
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** document text */
     public let text: String?
-    
+
     /** see **SAORelation** */
     public let relations: [SAORelation]?
-    
+
     /// Used internally to initialize a SAORelations object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: SAORelations.self)
         }
-        
+
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         text = try? json.getString(at: "text")
         relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
     }
 }
-

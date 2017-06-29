@@ -24,17 +24,17 @@ import RestKit
  Watson Retrieve and Rank Service.
  */
 public class DocumentConversion {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
-    
+
     /**
      Create a `DocumentConversion` object.
      
@@ -45,7 +45,7 @@ public class DocumentConversion {
         credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the given data represents an error returned by the Document Conversion service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -56,8 +56,8 @@ public class DocumentConversion {
         do {
             let json = try JSON(data: data)
             let message = try json.getString(at: "error")
-            
-            var userInfo = [String:String]()
+
+            var userInfo = [String: String]()
             if let description = try? json.getString(at: "description") {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
             }
@@ -75,7 +75,7 @@ public class DocumentConversion {
             return nil
         }
     }
-    
+
     /**
      Convert a document to answer units, HTML, or text.
      
@@ -94,8 +94,7 @@ public class DocumentConversion {
         withConfigurationFile config: URL,
         fileType: FileType? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
+        success: @escaping (String) -> Void) {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(config, withName: "config")
@@ -107,11 +106,11 @@ public class DocumentConversion {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -122,7 +121,7 @@ public class DocumentConversion {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseString(dataToError: dataToError) { response in
             switch response.result {
@@ -146,7 +145,7 @@ public class DocumentConversion {
         let answerUnits = try ConversationResponse(json: json)
         return answerUnits
     }
-    
+
     /**
      Write service config parameters to a temporary JSON file that can be uploaded. This creates the
      most basic configuration file possible. For information on creating your own, with greater
@@ -161,13 +160,13 @@ public class DocumentConversion {
         // construct JSON dictionary
         var json = [String: Any]()
         json["conversion_target"] = type.rawValue
-        
+
         // create a globally unique file name in a temporary directory
         let suffix = "DocumentConversionConfiguration.json"
         let fileName = "\(UUID().uuidString)_\(suffix)"
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let fileURL = directoryURL.appendingPathComponent(fileName)!
-        
+
         // save JSON dictionary to file
         do {
             let data = try JSON(dictionary: json).serialize()
@@ -177,23 +176,23 @@ public class DocumentConversion {
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]
             throw NSError(domain: domain, code: 0, userInfo: userInfo)
         }
-        
+
         return fileURL
     }
-    
+
 }
 
 /**
  Enum for supported return types from the DocumentConversion service
  */
 public enum ReturnType: String {
-    
+
     /// Constant for AnswerUnits
     case answerUnits = "ANSWER_UNITS"
-    
+
     /// Constant for HTML
     case html = "NORMALIZED_HTML"
-    
+
     /// Constant for Text
     case text = "NORMALIZED_TEXT"
 }

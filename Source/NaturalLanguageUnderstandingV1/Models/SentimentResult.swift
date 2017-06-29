@@ -19,10 +19,10 @@ import RestKit
 
 /** The sentiment of the content. */
 public struct SentimentResult: JSONDecodable {
-    
+
     /// The document level sentiment.
     public let document: DocumentSentimentResults?
-    
+
     /// The targeted sentiment to analyze.
     public let targets: [TargetedSentimentResults]?
 
@@ -35,10 +35,10 @@ public struct SentimentResult: JSONDecodable {
 
 /** The sentiment results of the document. */
 public struct DocumentSentimentResults: JSONDecodable {
-    
+
     /// Sentiment score from -1 (negative) to 1 (positive).
     public let score: Double?
-    
+
     /// Used internally to initialize a `DocumentSentimentResults` model from JSON.
     public init(json: JSON) throws {
         score = try? json.getDouble(at: "score")
@@ -47,13 +47,13 @@ public struct DocumentSentimentResults: JSONDecodable {
 
 /** The targeted sentiment results of the document. */
 public struct TargetedSentimentResults: JSONDecodable {
-    
+
     /// Targeted text.
     public let text: String?
-    
+
     /// Sentiment score from -1 (negative) to 1 (positive).
     public let score: Double?
-    
+
     /// Used internally to initialize a `TargetedSentimentResults` model from JSON.
     public init(json: JSON) throws {
         text = try? json.getString(at: "text")

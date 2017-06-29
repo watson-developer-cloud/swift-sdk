@@ -77,16 +77,16 @@ public struct RecognitionSettings: JSONEncodable {
     /// If `true`, then profanity will be censored from the service's output, obscuring each
     /// occurrence with a set of asterisks. The default is `true`.
     public var filterProfanity: Bool?
-    
+
     /// Indicates whether dates, times, series of digits and numbers, phone numbers, currency values, 
     /// and Internet addresses are to be converted into more readable, conventional representations 
     /// in the final transcript of a recognition request. If true, smart formatting is performed; 
     /// if false (the default), no formatting is performed. Applies to US English transcription only.
     public var smartFormatting: Bool?
-    
+
     /// If `true`, then speaker labels will be returned for each timestamp.  The default is `false`.
     public var speakerLabels: Bool?
-    
+
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -153,22 +153,22 @@ public struct RecognitionSettings: JSONEncodable {
  Audio formats supported by the Watson Speech to Text service.
  */
 public enum AudioMediaType {
-    
+
     /// FLAC audio format
     case flac
-    
+
     /// L16 audio format with a rate and channels
     case l16(rate: Int, channels: Int)
-    
+
     /// WAV audio format
     case wav
-    
+
     /// Opus audio format
     case opus
-    
+
     /// mu-law audio format
     case muLaw
-    
+
     /// Basic audio format
     case basic
 

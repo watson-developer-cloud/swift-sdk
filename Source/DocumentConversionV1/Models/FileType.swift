@@ -20,16 +20,16 @@ import Foundation
  Enum for supported file types
  */
 public enum FileType: String {
-    
+
     /// Constant for HTML file types
     case html = "text/html"
-    
+
     /// Constant for XML file types
     case xml = "text/xhtml+xml"
-    
+
     /// Constant for PDF file types
     case pdf = "application/pdf"
-    
+
     /// Constant for MicrosoftWord documents
     case msWord = "application/msword"
 }

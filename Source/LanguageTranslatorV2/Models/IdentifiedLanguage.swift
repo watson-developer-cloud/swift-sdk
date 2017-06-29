@@ -19,10 +19,10 @@ import RestKit
 
 /** An identified language. */
 public struct IdentifiedLanguage: JSONDecodable {
-    
+
     /// The code of the identified language.
     public let language: String
-    
+
     /// The confidence score of the identified language.
     public let confidence: Double
 

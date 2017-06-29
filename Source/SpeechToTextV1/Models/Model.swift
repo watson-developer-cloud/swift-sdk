@@ -19,26 +19,26 @@ import RestKit
 
 /** A model supported by the Speech to Text service. */
 public struct Model: JSONDecodable {
-    
+
     /// The name of the model for use as an identifier in calls
     /// to the service (for example, `en-US_BroadbandModel`).
     public let name: String
-    
+
     /// The sample rate (minimum acceptable rate for audio) used by the model in Hertz.
     public let rate: Int
-    
+
     /// The language identifier for the model (for example, `en-US`).
     public let language: String
-    
+
     /// The URI of the model.
     public let url: String
-    
+
     /// The additional service features supported with the model.
     public let supportedFeatures: SupportedFeatures
-    
+
     /// A brief description of the model.
     public let description: String
-    
+
     /// Used internally to initialize a `Model` from JSON.
     public init(json: JSON) throws {
         name = try json.getString(at: "name")
@@ -52,10 +52,10 @@ public struct Model: JSONDecodable {
 
 /** The additional service features supported with a model. */
 public struct SupportedFeatures: JSONDecodable {
-    
+
     /// Indicates whether the model can be customized with a custom language model.
     public let customLanguageModel: Bool
-    
+
     /// Used internally to initialize a `SupportedFeatures` model from JSON.
     public init(json: JSON) throws {
         customLanguageModel = try json.getBool(at: "custom_language_model")

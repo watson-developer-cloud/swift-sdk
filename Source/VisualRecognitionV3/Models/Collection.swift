@@ -19,28 +19,28 @@ import RestKit
 
 /** A collection of images to search. */
 public struct Collection: JSONDecodable {
-    
+
     /// The unique ID of the collection.
     public let collectionID: String
-    
+
     /// The name of the collection.
     public let name: String
-    
+
     /// The date the collection was created.
     public let created: String
-    
+
     /// The number of images in the collection.
     public let images: Int
-    
+
     /// The status of the collection. Returns 'available' when images can be added
     /// to the collection. Returns 'unavailable' when the collection is being created
     /// or trained.
     public let status: String
-    
+
     /// The number of images possible in the collection. Each collection can contain
     /// 1000000 images.
     public let capacity: String
-    
+
     /// Used internally to initialize a 'Collection' model from JSON.
     public init(json: JSON) throws {
         collectionID = try json.getString(at: "collection_id")
@@ -51,4 +51,3 @@ public struct Collection: JSONDecodable {
         capacity = try json.getString(at: "capacity")
     }
 }
-

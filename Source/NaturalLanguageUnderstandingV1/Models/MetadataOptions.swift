@@ -20,10 +20,10 @@ import RestKit
 /** An option indicating whether or not to include the author, publication date, and title of 
  the HTML or URL content. */
 public struct MetadataOptions: JSONEncodable {
-    
+
     /// The JSON object to internally serialize the model to JSON.
     public let json: [String: Any]?
-    
+
     /**
      Initialize a `MetadataOptions` with all member variables.
      
@@ -32,7 +32,7 @@ public struct MetadataOptions: JSONEncodable {
     public init() {
         json = [String: Any]()
     }
-    
+
     /// Used internally to serialize a `MetadataOptions` model to JSON.
     public func toJSONObject() -> Any {
         return json ?? [String: Any]()

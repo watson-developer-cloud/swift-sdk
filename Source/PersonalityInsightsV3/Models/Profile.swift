@@ -29,28 +29,28 @@ public struct Profile: JSONDecodable {
     /// Recursive array of characteristics describing the Big Five dimensions 
     /// inferred from the input text.
     public let personality: [TraitTreeNode]
-    
+
     /// Array of characteristics describing thneeds of the input text.
     public let needs: [TraitTreeNode]
-    
+
     /// Array of characteristics describing values of the input text.
     public let values: [TraitTreeNode]
-    
+
     /// Array of behaviors describing values of the input text that is returned
     /// only for timestamped JSON input.
     public let behavior: [BehaviorNode]?
-    
+
     /// Detailed results for each category of consumption preferences. 
     public let consumptionPreferences: [ConsumptionPreferencesCategoryNode]?
-    
+
     /// Array of warning messages generated from the input text.
     public let warnings: [Warning]
-    
+
     /// A message indicating the number of words found and where the value falls
     /// in the range of required or suggested number of words when guidance is
     /// available.
     public let wordCountMessage: String?
-    
+
     /// Used internally to initialize a `Profile` model from JSON.
     public init(json: JSON) throws {
         wordCount = try json.getInt(at: "word_count")

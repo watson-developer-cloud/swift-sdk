@@ -27,16 +27,16 @@ import RestKit
  */
 @available(*, deprecated, message: "Relationship Extraction will be deprecated on July 27th 2016. If you want to continue using Relationship Extraction models, you can now access them with AlchemyLanguage. See the migration guide for details.")
 public class RelationshipExtraction {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/relationship-extraction-beta/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.RelationshipExtractionV1Beta"
-    
+
     /**
      Create a `RelationshipExtraction` object.
      
@@ -46,7 +46,7 @@ public class RelationshipExtraction {
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Relationship Extraction service, then 
      return an NSError with information about the error that occured. Otherwise, return nil.
@@ -59,14 +59,14 @@ public class RelationshipExtraction {
             let code = try json.getInt(at: "error_code")
             let error = try json.getString(at: "error_message")
             let userInfo = [
-                NSLocalizedFailureReasonErrorKey: error,
+                NSLocalizedFailureReasonErrorKey: error
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
     }
-    
+
     /**
      Analyzes a piece of text and extracts the different entities, along with the relationships that 
      exist between those entities.
@@ -82,13 +82,13 @@ public class RelationshipExtraction {
         withLanguage language: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Document) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "txt", value: text))
         queryParameters.append(URLQueryItem(name: "sid", value: language))
         queryParameters.append(URLQueryItem(name: "rt", value: "json"))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -97,10 +97,9 @@ public class RelationshipExtraction {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["doc"]) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError, path: ["doc"]) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)

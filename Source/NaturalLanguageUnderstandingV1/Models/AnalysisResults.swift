@@ -19,46 +19,46 @@ import RestKit
 
 /** An object containing the results returned by the NLU service. */
 public struct AnalysisResults: JSONDecodable {
-    
+
     /// Language used to analyze the text.
     public let language: String?
-    
+
     /// Text that was used in the analysis.
     public let analyzedText: String?
-    
+
     /// URL that was used to retrieve HTML content.
     public let retrievedUrl: String?
-    
+
     /// The number of features used in the API call.
     public let usage: Usage?
-    
+
     /// The general concepts referenced or alluded to in the specified content.
     public let concepts: [ConceptsResult]?
-    
+
     /// The important entities in the specified content.
     public let entities: [EntitiesResult]?
-    
+
     /// The important keywords in content organized by relevance.
     public let keywords: [KeywordsResult]?
-    
+
     /// The hierarchical 5-level taxonomy the content is categorized into.
     public let categories: [CategoriesResult]?
-    
+
     /// The anger, disgust, fear, joy, or sadness conveyed by the content.
     public let emotion: EmotionResult?
-    
+
     /// The metadata holds author information, publication date and the title of the text/HTML content.
     public let metadata: MetadataResult?
-    
+
     /// The relationships between entities in the content.
     public let relations: [RelationsResult]?
-    
+
     /// The subjects of actions and the objects the actions act upon.
     public let semanticRoles: [SemanticRolesResult]?
-    
+
     /// The sentiment of the content.
     public let sentiment: SentimentResult?
-    
+
     /// Used internally to initialize a `AnalysisResults` model from JSON.
     public init(json: JSON) throws {
         language = try? json.getString(at: "language")
@@ -79,10 +79,10 @@ public struct AnalysisResults: JSONDecodable {
 
 /** An object containing how many features used. */
 public struct Usage: JSONDecodable {
-    
+
     /// The number of features used in the API call.
     public let features: Int
-    
+
     /// Used internally to initialize a 'Usage' model from JSON.
     public init(json: JSON) throws {
         features = try json.getInt(at: "features")

@@ -25,25 +25,25 @@ import RestKit
  
  */
 public struct EnrichedTitle: JSONDecodable {
-    
+
     /** see **Entity** */
     public let entities: [Entity]?
-    
+
     /** see **SAORelation** */
     public let relations: [SAORelation]?
-    
+
     /** see **Taxonomy** */
     public let taxonomy: [Taxonomy]?
-    
+
     /** see **Sentiment** */
     public let sentiment: [Sentiment]?
-    
+
     /** see **Keyword** */
     public let keywords: [Keyword]?
-    
+
     /** see **Concept** */
     public let concepts: [Concept]?
-    
+
     /// used internally to initialize an EnrichedTitle object
     public init(json: JSON) throws {
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
@@ -53,5 +53,4 @@ public struct EnrichedTitle: JSONDecodable {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         concepts = try? json.decodedArray(at: "concept", type: Concept.self)
     }
-    
 }

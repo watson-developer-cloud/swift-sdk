@@ -19,13 +19,13 @@ import RestKit
 
 /** Whether or not to analyze content for general concepts that are referenced or alluded to. */
 public struct ConceptsOptions: JSONEncodable {
-    
+
     /// Maximum number of concepts to return.
     public let limit: Int?
-    
+
     /// Set this to false to hide Linked Data information in the response.
     public let linkedData: Bool?
-    
+
     /**
     Initialize a `ConceptsOptions` with all member variables.
 
@@ -38,7 +38,7 @@ public struct ConceptsOptions: JSONEncodable {
         self.limit = limit
         self.linkedData = linkedData
     }
-    
+
     /// Used internally to serialize a `ConceptsOptions` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

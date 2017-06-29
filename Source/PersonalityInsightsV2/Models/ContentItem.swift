@@ -16,7 +16,7 @@
 
 import Foundation
 import RestKit
-    
+
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
 
@@ -70,8 +70,7 @@ public struct ContentItem: JSONEncodable {
         content: String,
         parentID: String? = nil,
         reply: Bool? = nil,
-        forward: Bool? = nil)
-    {
+        forward: Bool? = nil) {
         self.id = id
         self.userID = userID
         self.sourceID = sourceID

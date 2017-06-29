@@ -16,13 +16,13 @@
 
 import Foundation
 import RestKit
-    
+
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {
-    
+
     /// The node's associated content.
     public let content: String
-    
+
     /// The node's type.
     public let node: String
 

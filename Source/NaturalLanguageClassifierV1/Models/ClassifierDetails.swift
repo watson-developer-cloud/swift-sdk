@@ -19,28 +19,28 @@ import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierDetails: JSONDecodable {
-    
+
     /// A unique identifier for this classifier.
     public let classifierId: String
-    
+
     /// The user-supplied name of the classifier.
     public let name: String?
-    
+
     /// The language used for the classifier.
     public let language: String
-    
+
     /// The date and time (UTC) that the classifier was created.
     public let created: String
-    
+
     /// A link to the classifer.
     public let url: String
-    
+
     /// The classifier's status.
     public let status: ClassifierStatus
-    
+
     /// A human-readable descriptiono of the classifier's status.
     public let statusDescription: String
-    
+
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
     public init(json: JSON) throws {
         classifierId = try json.getString(at: "classifier_id")
@@ -49,7 +49,7 @@ public struct ClassifierDetails: JSONDecodable {
         created = try json.getString(at: "created")
         url = try json.getString(at: "url")
         statusDescription = try json.getString(at: "status_description")
-        
+
         guard let classifierStatus = ClassifierStatus(rawValue: try json.getString(at: "status")) else {
             throw JSON.Error.valueNotConvertible(value: json, to: ClassifierStatus.self)
         }
@@ -59,19 +59,19 @@ public struct ClassifierDetails: JSONDecodable {
 
 /** The status of a classifier. */
 public enum ClassifierStatus: String {
-    
+
     /// Available
     case available = "Available"
-    
+
     /// Failed
     case failed = "Failed"
-    
+
     /// NonExistent
     case nonExistent = "Non Existent"
-    
+
     /// Training
     case training = "Training"
-    
+
     /// Unavailable
     case unavailable = "Unavailable"
 }

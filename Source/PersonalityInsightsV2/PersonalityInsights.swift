@@ -23,13 +23,13 @@ import RestKit
  through blogs, tweets, forum posts, and more.
  */
 public class PersonalityInsights {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
@@ -86,8 +86,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -126,8 +125,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -165,8 +163,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         let json = JSON(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
         guard let content = try? json.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
@@ -207,8 +204,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         includeRaw: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let includeRaw = includeRaw {
@@ -238,8 +234,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Profile>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)

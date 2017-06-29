@@ -63,8 +63,7 @@ public struct ContentItem: JSONEncodable {
         language: String? = nil,
         parentID: String? = nil,
         reply: Bool? = nil,
-        forward: Bool? = nil)
-    {
+        forward: Bool? = nil) {
         self.content = content
         self.id = id
         self.created = created

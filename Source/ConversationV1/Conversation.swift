@@ -98,8 +98,7 @@ public class Conversation {
         withWorkspace workspaceID: WorkspaceID,
         request: MessageRequest? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (MessageResponse) -> Void)
-    {
+        success: @escaping (MessageResponse) -> Void) {
         // construct body
         guard let body = try? request?.toJSON().serialize() else {
             failure?(RestError.serializationError)
@@ -123,8 +122,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<MessageResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<MessageResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -146,8 +144,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct body
         let createCounterexampleRequest = CreateExample(text: text)
         guard let body = try? createCounterexampleRequest.toJSON().serialize() else {
@@ -177,8 +174,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -200,8 +196,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
+        success: @escaping () -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -224,8 +219,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -247,8 +241,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -271,8 +264,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -300,8 +292,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (CounterexampleCollectionResponse) -> Void)
-    {
+        success: @escaping (CounterexampleCollectionResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -340,8 +331,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<CounterexampleCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<CounterexampleCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -365,8 +355,7 @@ public class Conversation {
         text: String,
         newText: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct body
         let updateCounterexampleRequest = UpdateExample(text: newText)
         guard let body = try? updateCounterexampleRequest.toJSON().serialize() else {
@@ -396,8 +385,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -421,8 +409,7 @@ public class Conversation {
         intent: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct body
         let createExampleRequest = CreateExample(text: text)
         guard let body = try? createExampleRequest.toJSON().serialize() else {
@@ -452,8 +439,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -477,8 +463,7 @@ public class Conversation {
         intent: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
+        success: @escaping () -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -501,8 +486,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -526,8 +510,7 @@ public class Conversation {
         intent: String,
         text: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -550,8 +533,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -581,8 +563,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleCollectionResponse) -> Void)
-    {
+        success: @escaping (ExampleCollectionResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -621,8 +602,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -648,8 +628,7 @@ public class Conversation {
         text: String,
         newText: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
+        success: @escaping (ExampleResponse) -> Void) {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText)
         guard let body = try? updateExampleRequest.toJSON().serialize() else {
@@ -679,8 +658,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ExampleResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -706,8 +684,7 @@ public class Conversation {
         description: String? = nil,
         examples: [CreateExample]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentResponse) -> Void)
-    {
+        success: @escaping (IntentResponse) -> Void) {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
         guard let body = try? createIntentRequest.toJSON().serialize() else {
@@ -737,8 +714,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -760,8 +736,7 @@ public class Conversation {
         workspaceID: String,
         intent: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
+        success: @escaping () -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -784,8 +759,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -809,8 +783,7 @@ public class Conversation {
         intent: String,
         export: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentExportResponse) -> Void)
-    {
+        success: @escaping (IntentExportResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -837,8 +810,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentExportResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentExportResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -868,8 +840,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentCollectionResponse) -> Void)
-    {
+        success: @escaping (IntentCollectionResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -912,8 +883,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -941,8 +911,7 @@ public class Conversation {
         newDescription: String? = nil,
         newExamples: [CreateExample]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentResponse) -> Void)
-    {
+        success: @escaping (IntentResponse) -> Void) {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
         guard let body = try? updateIntentRequest.toJSON().serialize() else {
@@ -972,8 +941,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<IntentResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -993,8 +961,7 @@ public class Conversation {
     public func createWorkspace(
         body: CreateWorkspace? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceResponse) -> Void)
-    {
+        success: @escaping (WorkspaceResponse) -> Void) {
         // construct body
         guard let body = try? body?.toJSON().serialize() else {
             failure?(RestError.serializationError)
@@ -1018,8 +985,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1039,8 +1005,7 @@ public class Conversation {
     public func deleteWorkspace(
         workspaceID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
+        success: @escaping () -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -1063,8 +1028,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseVoid(responseToError: responseToError) { (response: RestResponse) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1086,8 +1050,7 @@ public class Conversation {
         workspaceID: String,
         export: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceExportResponse) -> Void)
-    {
+        success: @escaping (WorkspaceExportResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -1114,8 +1077,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceExportResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceExportResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1141,8 +1103,7 @@ public class Conversation {
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceCollectionResponse) -> Void)
-    {
+        success: @escaping (WorkspaceCollectionResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -1176,8 +1137,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceCollectionResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceCollectionResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)
@@ -1199,8 +1159,7 @@ public class Conversation {
         workspaceID: String,
         body: UpdateWorkspace? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceResponse) -> Void)
-    {
+        success: @escaping (WorkspaceResponse) -> Void) {
         // construct body
         guard let body = try? body?.toJSON().serialize() else {
             failure?(RestError.serializationError)
@@ -1229,8 +1188,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<WorkspaceResponse>) in
                 switch response.result {
                 case .success(let retval): success(retval)
                 case .failure(let error): failure?(error)

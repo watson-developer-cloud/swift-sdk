@@ -19,14 +19,14 @@ import RestKit
 
 /** A request formatted for the Conversation service. */
 public struct MessageRequest: JSONEncodable {
-    
+
     private let input: Input
     private let alternateIntents: Bool?
     private let context: Context?
     private let entities: [Entity]?
     private let intents: [Intent]?
     private let output: Output?
-    
+
     /**
      Create a `MessageRequest`.
      
@@ -50,8 +50,7 @@ public struct MessageRequest: JSONEncodable {
         context: Context? = nil,
         entities: [Entity]? = nil,
         intents: [Intent]? = nil,
-        output: Output? = nil)
-    {
+        output: Output? = nil) {
         self.input = input
         self.alternateIntents = alternateIntents
         self.context = context
@@ -59,7 +58,7 @@ public struct MessageRequest: JSONEncodable {
         self.intents = intents
         self.output = output
     }
-    
+
     /**
      Create a `MessageRequest`.
      
@@ -83,8 +82,7 @@ public struct MessageRequest: JSONEncodable {
         context: Context? = nil,
         entities: [Entity]? = nil,
         intents: [Intent]? = nil,
-        output: Output? = nil)
-    {
+        output: Output? = nil) {
         self.input = Input(text: text)
         self.alternateIntents = alternateIntents
         self.context = context
@@ -92,7 +90,7 @@ public struct MessageRequest: JSONEncodable {
         self.intents = intents
         self.output = output
     }
-    
+
     /// Used internally to serialize a `MessageRequest` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()

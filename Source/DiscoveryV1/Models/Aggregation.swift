@@ -19,34 +19,34 @@ import RestKit
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public struct Aggregation: JSONDecodable {
-    
+
     /// Type of aggregation command used. e.g. term, filter, max, min, etc.
     public let type: String?
-    
+
     /// The field where the aggregation is located in the document.
     public let field: String?
-    
+
     /// Results of the aggregation.
     public let results: [AggregationResult]?
-    
+
     /// The match the aggregated results queried for.
     public let match: String?
-    
+
     /// Number of matching results.
     public let matchingResults: Int?
-    
+
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
-    
+
     /// Interval specified by using aggregation type 'timeslice'.
     public let interval: String?
-    
+
     /// Value of the aggregation. (For 'max' and 'min' type).
     public let value: Double?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize an `Aggregation` model from JSON.
     public init(json: JSON) throws {
         type = try? json.getString(at: "type")
@@ -59,7 +59,7 @@ public struct Aggregation: JSONDecodable {
         value = try? json.getDouble(at: "value")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'Aggregation' model to JSON.
     public func toJSONObject() -> Any {
         return json
@@ -68,19 +68,19 @@ public struct Aggregation: JSONDecodable {
 
 /** Results of the aggregation. */
 public struct AggregationResult: JSONDecodable {
-    
+
     /// Key that matched the aggregation type.
     public let key: String?
-    
+
     /// Number of matching results.
     public let matchingResults: Int?
-    
+
     /// Aggregations returned in the case of chained aggregations.
     public let aggregations: [Aggregation]?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialze an 'AggregationResult' model from JSON.
     public init(json: JSON) throws {
         key = try? json.getString(at: "key")
@@ -88,7 +88,7 @@ public struct AggregationResult: JSONDecodable {
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'AggregationResult' model to JSON.
     public func toJSONObject() -> Any {
         return json

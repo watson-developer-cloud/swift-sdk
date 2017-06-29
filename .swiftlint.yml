@@ -1,0 +1,14 @@
+disabled_rules: # rule identifiers to exclude from running
+  - line_length
+  - file_length
+  - identifier_name
+  - type_body_length
+  - function_body_length
+  - type_name
+
+force_try: warning
+force_unwrap: warning
+force_cast: warning
+cyclomatic_complexity:
+  warning: 10
+  error: 50

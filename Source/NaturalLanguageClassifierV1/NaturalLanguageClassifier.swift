@@ -25,16 +25,16 @@ import RestKit
  a corresponding action, such as redirecting the request or answering a question.
  */
 public class NaturalLanguageClassifier {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
-    
+
     /**
      Create a `NaturalLanguageClassifier` object.
      
@@ -44,7 +44,7 @@ public class NaturalLanguageClassifier {
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the given data represents an error returned by the Visual Recognition service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -66,7 +66,7 @@ public class NaturalLanguageClassifier {
             return nil
         }
     }
-    
+
     /**
      Retrieves the list of classifiers for the service instance.
      
@@ -77,7 +77,7 @@ public class NaturalLanguageClassifier {
     public func getClassifiers(
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([ClassifierModel]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -86,17 +86,16 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["classifiers"]) {
-            (response: RestResponse<[ClassifierModel]>) in
+        request.responseArray(dataToError: dataToError, path: ["classifiers"]) { (response: RestResponse<[ClassifierModel]>) in
                 switch response.result {
                 case .success(let classifiers): success(classifiers)
                 case .failure(let error): failure?(error)
                 }
         }
     }
-    
+
     /**
      Sends data to create and train a classifier. When the operation is successful, the status of 
      the classifier is set to "Training". The status must be "Available" before you can use the 
@@ -114,7 +113,7 @@ public class NaturalLanguageClassifier {
         andTrainingFile trainingData: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingMetadata, withName: "training_metadata")
@@ -123,7 +122,7 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -134,10 +133,9 @@ public class NaturalLanguageClassifier {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ClassifierDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ClassifierDetails>) in
             switch response.result {
             case .success(let classifierDetails): success(classifierDetails)
             case .failure(let error): failure?(error)
@@ -159,7 +157,7 @@ public class NaturalLanguageClassifier {
         withClassifierID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void) {
-        
+
         // construct query parameters
         let json = JSON(dictionary: ["text": text])
         guard let body = try? json.serialize() else {
@@ -169,7 +167,7 @@ public class NaturalLanguageClassifier {
             failure?(error)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -180,17 +178,16 @@ public class NaturalLanguageClassifier {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Classification>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Classification>) in
                 switch response.result {
                 case .success(let classification): success(classification)
                 case .failure(let error): failure?(error)
                 }
             }
     }
-    
+
     /**
      Deletes the classifier with the classifierId.
      
@@ -201,8 +198,8 @@ public class NaturalLanguageClassifier {
     public func deleteClassifier(
         withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
-        
+        success: (() -> Void)? = nil) {
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -211,7 +208,7 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -237,7 +234,7 @@ public class NaturalLanguageClassifier {
         withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -246,10 +243,9 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ClassifierDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ClassifierDetails>) in
                 switch response.result {
                 case .success(let classifier): success(classifier)
                 case .failure(let error): failure?(error)

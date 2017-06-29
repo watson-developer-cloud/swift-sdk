@@ -23,16 +23,16 @@ import RestKit
  blogs like a database.
  */
 public class AlchemyDataNews {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    
+
     /**
      Create an `AlchemyDataNews` object.
      - parameter apiKey: The API key credential to use when authenticating with the service.
@@ -40,7 +40,7 @@ public class AlchemyDataNews {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
+
     private func dataToError(data: Data) -> NSError? {
         do {
             let json = try JSON(data: data)
@@ -55,7 +55,7 @@ public class AlchemyDataNews {
             return nil
         }
     }
-    
+
     /**
      Analyze news using Natural Language Processing (NLP) queries and sophisticated filters.
      
@@ -80,8 +80,7 @@ public class AlchemyDataNews {
         to endTime: String? = nil,
         query: [String : String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (NewsResponse) -> Void)
-    {
+        success: @escaping (NewsResponse) -> Void) {
         // construct query items
         var queryItems = [URLQueryItem]()
         queryItems.append(URLQueryItem(name: "start", value: startTime))
@@ -104,7 +103,7 @@ public class AlchemyDataNews {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryItems
         )
-        
+
         // execute rest request
         request.responseObject(dataToError: dataToError) { (response: RestResponse<NewsResponse>) in
             switch response.result {

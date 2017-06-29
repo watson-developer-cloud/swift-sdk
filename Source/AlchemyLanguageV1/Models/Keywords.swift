@@ -26,29 +26,29 @@ import RestKit
  */
 
 public struct Keywords: JSONDecodable {
-    
+
     /** the number of transactions made by the call */
     public let totalTransactions: Int?
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** see **Keyword** */
     public let keywords: [Keyword]?
-    
+
     /** document text */
     public let text: String?
-    
+
     /// Used internally to initialize a Keywords object
     public init(json: JSON) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: Keywords.self)
         }
-        
+
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {
@@ -60,4 +60,3 @@ public struct Keywords: JSONDecodable {
         text = try? json.getString(at: "text")
     }
 }
-

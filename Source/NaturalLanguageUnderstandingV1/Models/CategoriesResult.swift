@@ -19,10 +19,10 @@ import RestKit
 
 /** The hierarchical 5-level taxonomy the content is categorized into. */
 public struct CategoriesResult: JSONDecodable {
-    
+
     /// The path to the category through the taxonomy hierarchy.
     public let label: String?
-    
+
     /// Confidence score for the category classification. Higher values indicate greater confidence.
     public let score: Double?
 

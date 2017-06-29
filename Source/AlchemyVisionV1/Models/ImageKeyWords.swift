@@ -19,7 +19,7 @@ import RestKit
 
 /** A set of keywords for an image analyzed by the Alchemy Vision service. */
 public struct ImageKeywords: JSONDecodable {
-    
+
     /// The status of the request.
     public let status: String
 
@@ -38,7 +38,7 @@ public struct ImageKeywords: JSONDecodable {
         guard status == "OK" else {
             throw JSON.Error.valueNotConvertible(value: json, to: ImageKeywords.self)
         }
-        
+
         url = try json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         imageKeywords = try json.decodedArray(at: "imageKeywords", type: ImageKeyword.self)
@@ -53,7 +53,7 @@ public struct ImageKeyword: JSONDecodable {
 
     /// The likelihood that this keyword corresponds to the image.
     public let score: Double
-    
+
     /// Metadata derived from the Alchemy knowledge graph.
     public let knowledgeGraph: KnowledgeGraph?
 

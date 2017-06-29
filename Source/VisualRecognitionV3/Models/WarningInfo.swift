@@ -19,13 +19,13 @@ import RestKit
 
 /** Information about a warning that occurred. */
 public struct WarningInfo: JSONDecodable {
-    
+
     /// A codified warning string (e.g. "limit_reached").
     public let warningID: String
-    
+
     /// A human-readable warning string (e.g. "Max number of images (100) reached").
     public let description: String
-    
+
     /// Used internally to initialize a `WarningInfo` model from JSON.
     public init(json: JSON) throws {
         warningID = try json.getString(at: "warning_id")

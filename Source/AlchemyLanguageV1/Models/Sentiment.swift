@@ -27,16 +27,16 @@ import RestKit
  */
 
 public struct Sentiment: JSONDecodable {
-    
+
     /** whether sentiment is mixed (both positive and negative) (1 == mixed) */
     public let mixed: Int?
-    
+
     /** sentiment strength (0.0 == neutral) */
     public let score: Double?
-    
+
     /** sentiment polarity - "positive", "negative", "neutral" */
     public let type: String?
-    
+
     /// Used internally to initialize a Sentiment object
     public init(json: JSON) throws {
         if let mixString = try? json.getString(at: "mixed") {
@@ -52,4 +52,3 @@ public struct Sentiment: JSONDecodable {
         type = try? json.getString(at: "type")
     }
 }
-

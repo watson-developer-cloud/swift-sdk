@@ -25,10 +25,10 @@ import RestKit
  
  */
 public struct Authors: JSONDecodable {
-    
+
     /** Names of the extracted authors */
     public let names: [String]
-    
+
     /// Used internally to initialize a Authors object
     public init(json: JSON) throws {
         names = try json.decodedArray(at: "names", type: Swift.String)

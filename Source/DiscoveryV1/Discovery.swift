@@ -25,17 +25,17 @@ public class Discovery {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/discovery/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
     private let version: String
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~(),:.&=")
     private let encodingError = "Failed to percent encode HTML document"
-    
+
     /**
      Create a `Discovery` object.
      
@@ -48,7 +48,7 @@ public class Discovery {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the given data represents an error returned by the Discovery service, then return
      an NSError with information about the error that occured. Otherwise, return nil.
@@ -76,9 +76,9 @@ public class Discovery {
             return nil
         }
     }
-    
+
     // MARK: - Environments
-    
+
     /**
      Get all existing environments for this Discovery instance.
      
@@ -89,15 +89,14 @@ public class Discovery {
     public func getEnvironments (
         withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Environment]) -> Void)
-    {
+        success: @escaping ([Environment]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let name = name {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -107,17 +106,16 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["environments"]) {
-            (response: RestResponse<[Environment]>) in
+        request.responseArray(dataToError: dataToError, path: ["environments"]) { (response: RestResponse<[Environment]>) in
             switch response.result {
             case .success(let environments): success(environments)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Create an environment for this service instance.
      
@@ -135,12 +133,11 @@ public class Discovery {
         withSize size: EnvironmentSize,
         withDescription description: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
-    {
+        success: @escaping (Environment) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
@@ -152,7 +149,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -164,17 +161,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Delete the environment with the given environment ID.
      
@@ -185,12 +181,11 @@ public class Discovery {
     public func deleteEnvironment(
         withID environmentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeletedEnvironment) -> Void)
-    {
+        success: @escaping (DeletedEnvironment) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -199,17 +194,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedEnvironment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedEnvironment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Retrieve information about an environment.
      
@@ -220,12 +214,11 @@ public class Discovery {
     public func getEnvironment(
         withID environmentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
-    {
+        success: @escaping (Environment) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -234,17 +227,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Update an environment.
      
@@ -259,12 +251,11 @@ public class Discovery {
         name: String,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
-    {
+        success: @escaping (Environment) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
@@ -275,7 +266,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -287,17 +278,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Environment>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     // MARK: - Configurations
 
     /**
@@ -312,15 +302,14 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping([Configuration]) -> Void)
-    {
+        success: @escaping([Configuration]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let name = name {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -330,17 +319,16 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["configurations"]) {
-            (response: RestResponse<[Configuration]>) in
+        request.responseArray(dataToError: dataToError, path: ["configurations"]) { (response: RestResponse<[Configuration]>) in
             switch response.result {
             case .success(let configurations): success(configurations)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Create a new configuration for this service instance.
      
@@ -355,18 +343,17 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         configuration: ConfigurationDetails,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
-    {
+        success: @escaping(ConfigurationDetails) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         guard let body = try? configuration.toJSON().serialize() else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -378,17 +365,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Delete the specified configuration.
      
@@ -401,12 +387,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withConfigurationID configurationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(DeletedConfiguration) -> Void)
-    {
+        success: @escaping(DeletedConfiguration) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -415,17 +400,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedConfiguration>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedConfiguration>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Get details of a specific configuration.
      
@@ -438,12 +422,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withConfigurationID configurationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
-    {
+        success: @escaping(ConfigurationDetails) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -452,17 +435,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Replaces the configuration that was at the given path before.
      
@@ -477,18 +459,17 @@ public class Discovery {
         withConfigurationID configurationID: String,
         configuration: ConfigurationDetails,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
-    {
+        success: @escaping(ConfigurationDetails) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         guard let body = try? configuration.toJSON().serialize() else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -500,17 +481,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     // MARK: - Test Configuration on Document
 
     /**
@@ -544,15 +524,14 @@ public class Discovery {
         file: URL? = nil,
         metadata: URL? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(TestConfigurationDetails) -> Void)
-    {
+        success: @escaping(TestConfigurationDetails) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -576,7 +555,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -588,19 +567,18 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<TestConfigurationDetails>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<TestConfigurationDetails>) in
             switch response.result {
             case .success(let configurationDetails): success(configurationDetails)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     // MARK: - Collections
-    
+
     /**
      Get all existing collections.
 
@@ -613,15 +591,14 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withName name: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping([Collection]) -> Void)
-    {
+        success: @escaping([Collection]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let name = name {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -631,17 +608,16 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
-            (response: RestResponse<[Collection]>) in
+        request.responseArray(dataToError: dataToError, path: ["collections"]) { (response: RestResponse<[Collection]>) in
             switch response.result {
             case .success(let collections): success(collections)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Create a new collection for storing documents.
      
@@ -660,12 +636,11 @@ public class Discovery {
         withDescription description: String? = nil,
         withConfigurationID configurationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
-    {
+        success: @escaping(Collection) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct json from parameters
         var bodyData = [String: Any]()
         bodyData["name"] = name
@@ -679,7 +654,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -691,17 +666,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: json
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /** 
      Delete a collection in the environment the collection is located in.
      
@@ -714,12 +688,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeletedCollection) -> Void)
-    {
+        success: @escaping (DeletedCollection) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -728,17 +701,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<DeletedCollection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<DeletedCollection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
             }
         }
     }
- 
+
     /** 
      Retrieve the information of a specified collection.
      
@@ -751,12 +723,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
-    {
+        success: @escaping(Collection) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -765,17 +736,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /** 
      Replaces an existing collection.
      
@@ -797,12 +767,11 @@ public class Discovery {
         description: String? = nil,
         configurationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
-    {
+        success: @escaping(Collection) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct json from parameters
         var bodyData = [String: Any]()
         bodyData["name"] = name
@@ -816,7 +785,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -828,17 +797,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: json
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Collection>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /** 
      Retrieve all unique fields and each field's type stored in a collection's index.
  
@@ -851,12 +819,11 @@ public class Discovery {
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping([Field]) -> Void)
-    {
+        success: @escaping([Field]) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -866,19 +833,18 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["fields"]) {
-            (response: RestResponse<[Field]>) in
+        request.responseArray(dataToError: dataToError, path: ["fields"]) { (response: RestResponse<[Field]>) in
             switch response.result {
             case .success(let fields): success(fields)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     // MARK: - Documents
-    
+
     /** 
      Add document to collection with optional metadata and optional configuration. If both the 
      configuration ID and configuration file are provided, the request will be rejected. Either
@@ -903,7 +869,7 @@ public class Discovery {
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document.
      */
-    
+
     public func addDocumentToCollection(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
@@ -913,15 +879,14 @@ public class Discovery {
         metadata: URL? = nil,
         configuration: URL? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
-    {
+        success: @escaping(Document) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -949,7 +914,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -961,17 +926,16 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Delete document from collection.
      
@@ -988,12 +952,11 @@ public class Discovery {
         withCollectionID collectionID: String,
         withDocumentID documentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
-    {
+        success: @escaping(Document) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -1002,17 +965,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /** 
      Fetch status details about a submitted document. Returns only the document's processing status
      and any notices (warnings or errors) that were generated when the document was ingested. To fetch
@@ -1029,12 +991,11 @@ public class Discovery {
         withCollectionID collectionID: String,
         withDocumentID documentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
-    {
+        success: @escaping(Document) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -1043,17 +1004,16 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
      Add a new document or replace an existing document with optional metadata and optional configuration
      overrides.
@@ -1090,15 +1050,14 @@ public class Discovery {
         metadata: URL? = nil,
         configuration: URL? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
-    {
+        success: @escaping(Document) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -1126,7 +1085,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -1138,19 +1097,18 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Document>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     // MARK: - Queries
-    
+
     /** 
      Query the documents in your collection. See the documentation for reference on how to build
      a query string. https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml.
@@ -1180,12 +1138,11 @@ public class Discovery {
         count: Int? = nil,
         return returnQuery: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(QueryResponse) -> Void)
-    {
+        success: @escaping(QueryResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         if let filter = filter {
             guard let filterEncoded = filter.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let error = failWithError(reason: encodingError)
@@ -1203,7 +1160,7 @@ public class Discovery {
             }
             queryParameters.append(URLQueryItem(name: "query", value: queryEncoded))
         }
-        
+
         if let aggregation = aggregation {
             guard let aggregationEncoded = aggregation.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let error = failWithError(reason: encodingError)
@@ -1218,7 +1175,7 @@ public class Discovery {
         if let returnQuery = returnQuery {
             queryParameters.append(URLQueryItem(name: "return", value: returnQuery))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -1228,17 +1185,16 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<QueryResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<QueryResponse>) in
             switch response.result {
             case .success(let queryResponse): success(queryResponse)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     private func failWithError(reason: String) -> NSError {
         let userInfo = [NSLocalizedFailureReasonErrorKey: reason]
         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)

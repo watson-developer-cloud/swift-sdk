@@ -26,13 +26,12 @@ import RestKit
  */
 
 public struct KnowledgeGraph: JSONDecodable {
-    
+
     /** the path along the graph to the key */
     public let typeHierarchy: String?
-    
+
     /// Used internally to initialize a KnowledgeGraph object
     public init(json: JSON) throws {
         typeHierarchy = try? json.getString(at: "typeHierarchy")
     }
 }
-

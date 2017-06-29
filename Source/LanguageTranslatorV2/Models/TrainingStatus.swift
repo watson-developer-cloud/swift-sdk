@@ -22,13 +22,13 @@ public enum TrainingStatus: String {
     /// Training has completed and this translation model is
     /// ready for use with the Language Translator service.
     case available = "available"
-    
+
     /// Training has just started.
     case starting = "starting"
 
     /// Training is still in progress.
     case training = "training"
-    
+
     /// Training has been uploaded.
     case uploaded = "uploaded"
 

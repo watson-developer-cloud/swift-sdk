@@ -26,13 +26,12 @@ import RestKit
  */
 
 public struct Quotation: JSONDecodable {
-    
+
     /** extracted quotation */
     public let quotation: String?
-    
+
     /// Used internally to initialize a Quotation object
     public init(json: JSON) throws {
         quotation = try? json.getString(at: "quotation")
     }
 }
-

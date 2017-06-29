@@ -31,7 +31,7 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
     /// lowest index in the array that has changed. `resultIndex` always points to the slot
     /// just after the most recent final result.
     internal let results: [SpeechRecognitionResult]
-    
+
     /// The speakerLabels variable will contain an optional array of SpeakerLabel objects
     internal let speakerLabels: [SpeakerLabel]?
 

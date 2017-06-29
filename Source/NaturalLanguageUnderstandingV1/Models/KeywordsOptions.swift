@@ -19,10 +19,10 @@ import RestKit
 
 /** An option indicating whether or not important keywords from the analyzed content should be returned. */
 public struct KeywordsOptions: JSONEncodable {
-    
+
     /// Maximum number of keywords to return.
     public let limit: Int?
-    
+
     /// Set this to true to return sentiment information for detected keywords.
     public let sentiment: Bool?
 

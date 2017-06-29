@@ -27,13 +27,13 @@ public typealias DialogID = String
  */
 @available(*, deprecated, message: "The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
 public class Dialog {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: DateFormatter = {
@@ -80,8 +80,7 @@ public class Dialog {
      */
     public func getDialogs(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([DialogModel]) -> Void)
-    {
+        success: @escaping ([DialogModel]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -92,8 +91,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["dialogs"]) {
-            (response: RestResponse<[DialogModel]>) in
+        request.responseArray(dataToError: dataToError, path: ["dialogs"]) { (response: RestResponse<[DialogModel]>) in
                 switch response.result {
                 case .success(let dialogs): success(dialogs)
                 case .failure(let error): failure?(error)
@@ -123,8 +121,7 @@ public class Dialog {
         withName name: String,
         fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogID) -> Void)
-    {
+        success: @escaping (DialogID) -> Void) {
         // construct body
         let multipartFormData = MultipartFormData()
         let nameData = name.data(using: String.Encoding.utf8)!
@@ -134,7 +131,7 @@ public class Dialog {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -147,8 +144,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["dialog_id"]) {
-            (response: RestResponse<DialogID>) in
+        request.responseObject(dataToError: dataToError, path: ["dialog_id"]) { (response: RestResponse<DialogID>) in
             switch response.result {
             case .success(let dialogID): success(dialogID)
             case .failure(let error): failure?(error)
@@ -168,8 +164,7 @@ public class Dialog {
     public func deleteDialog(
         withID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -207,8 +202,7 @@ public class Dialog {
         fromDialogID dialogID: DialogID,
         inFormat format: Format? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
-    {
+        success: @escaping (URL) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -217,7 +211,7 @@ public class Dialog {
             headerParameters: defaultHeaders,
             acceptType: format?.rawValue
         )
-        
+
         // determine file extension
         var filetype = ".mct"
         if let format = format {
@@ -227,7 +221,7 @@ public class Dialog {
             case .wdsXML: filetype = ".xml"
             }
         }
-        
+
         // locate downloads directory
         let fileManager = FileManager.default
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
@@ -238,7 +232,7 @@ public class Dialog {
             failure?(error)
             return
         }
-        
+
         // construct unique filename
         var filename = "dialog-" + dialogID + filetype
         var isUnique = false
@@ -252,7 +246,7 @@ public class Dialog {
                 isUnique = true
             }
         }
-        
+
         // specify download destination
         let destination = downloads.appendingPathComponent(filename)
 
@@ -262,7 +256,7 @@ public class Dialog {
                 failure?(error!)
                 return
             }
-            
+
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -270,7 +264,7 @@ public class Dialog {
                 failure?(error)
                 return
             }
-            
+
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -278,7 +272,7 @@ public class Dialog {
                 failure?(error)
                 return
             }
-            
+
             success(destination)
         }
     }
@@ -304,8 +298,7 @@ public class Dialog {
         withID dialogID: DialogID,
         fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(fileURL, withName: "file")
@@ -313,7 +306,7 @@ public class Dialog {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -350,8 +343,7 @@ public class Dialog {
     public func getContent(
         fromDialogID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Node]) -> Void)
-    {
+        success: @escaping ([Node]) -> Void) {
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -362,8 +354,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["items"]) {
-            (response: RestResponse<[Node]>) in
+        request.responseArray(dataToError: dataToError, path: ["items"]) { (response: RestResponse<[Node]>) in
                 switch response.result {
                 case .success(let nodes): success(nodes)
                 case .failure(let error): failure?(error)
@@ -383,8 +374,7 @@ public class Dialog {
         fromDialogID dialogID: DialogID,
         forNodes nodes: [Node],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // serialize nodes to JSON
         let json = JSON(dictionary: ["items": nodes.map { $0.toJSONObject() }])
         guard let body = try? json.serialize() else {
@@ -420,8 +410,8 @@ public class Dialog {
         }
     }
 
-    // MARK: -  Conversation Operations
-    
+    // MARK: - Conversation Operations
+
     /**
      Retrieve conversation session history for a specified date range.
      
@@ -442,8 +432,7 @@ public class Dialog {
         offset: Int? = nil,
         limit: Int? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Conversation]) -> Void)
-    {
+        success: @escaping ([Conversation]) -> Void) {
         // construct date strings
         let dateFromString = Dialog.dateFormatter.string(from: dateFrom)
         let dateToString = Dialog.dateFormatter.string(from: dateTo)
@@ -470,8 +459,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["conversations"]) {
-            (response: RestResponse<[Conversation]>) in
+        request.responseArray(dataToError: dataToError, path: ["conversations"]) { (response: RestResponse<[Conversation]>) in
                 switch response.result {
                 case .success(let conversations): success(conversations)
                 case .failure(let error): failure?(error)
@@ -498,8 +486,7 @@ public class Dialog {
         clientID: Int? = nil,
         input: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ConversationResponse) -> Void)
-    {
+        success: @escaping (ConversationResponse) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let conversationID = conversationID {
@@ -523,8 +510,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<ConversationResponse>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConversationResponse>) in
                 switch response.result {
                 case .success(let response): success(response)
                 case .failure(let error): failure?(error)
@@ -549,8 +535,7 @@ public class Dialog {
         withClientID clientID: Int,
         names: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
+        success: @escaping (Profile) -> Void) {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "client_id", value: "\(clientID)"))
@@ -571,8 +556,7 @@ public class Dialog {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
-            (response: RestResponse<Profile>) in
+        request.responseObject(dataToError: dataToError) { (response: RestResponse<Profile>) in
                 switch response.result {
                 case .success(let profile): success(profile)
                 case .failure(let error): failure?(error)
@@ -596,8 +580,7 @@ public class Dialog {
         withClientID clientID: Int? = nil,
         parameters: [String: String],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
-    {
+        success: (() -> Void)? = nil) {
         // serialize the profile to JSON
         let profile = Profile(clientID: clientID, parameters: parameters)
         guard let body = try? profile.toJSON().serialize() else {

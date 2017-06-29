@@ -19,10 +19,10 @@ import RestKit
 
 /** A language that can be identified by the Language Translator service. */
 public struct IdentifiableLanguage: JSONDecodable {
-    
+
     /// The code of the identifiable language.
     public let language: String
-    
+
     /// The name of the identifiable language.
     public let name: String
 

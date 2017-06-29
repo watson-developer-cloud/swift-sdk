@@ -24,8 +24,8 @@ class PersonalityInsightsTests: XCTestCase {
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
     private let timeout: TimeInterval = 5.0
-    
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
@@ -50,7 +50,7 @@ class PersonalityInsightsTests: XCTestCase {
         let password = Credentials.PersonalityInsightsPassword
         personalityInsights = PersonalityInsights(username: username, password: password)
     }
-    
+
     /** Load "MobyDickIntro.txt". */
     func loadMobyDickIntro() {
         let bundle = Bundle(for: type(of: self))
@@ -97,9 +97,9 @@ class PersonalityInsightsTests: XCTestCase {
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive Tests
-    
+
     /** Analyze the text of Kennedy's speech. */
     func testProfile() {
         let description = "Analyze the text of Kennedy's speech."
@@ -111,7 +111,7 @@ class PersonalityInsightsTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Analyze content items. */
     func testContentItem() {
         let description = "Analyze content items."
@@ -141,7 +141,7 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     // MARK: - Negative Tests
-    
+
     /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
         let description = "Try to analyze text that is too short (less than 100 words)."

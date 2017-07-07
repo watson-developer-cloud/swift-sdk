@@ -94,58 +94,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
 
     // MARK: - Positive tests
 
-    /** Default test for HTML input. */
-    func testAnalyzeHTML() {
-        let description = "Analyze HTML."
-        let expectation = self.expectation(description: description)
-
-        guard let fileURL = loadFile(name: testHtmlFileName, withExtension: "html") else {
-            XCTFail("Failed to load file.")
-            return
-        }
-        let concepts = ConceptsOptions(limit: 5)
-        let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, html: fileURL)
-
-        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
-            _ in
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Default test for text input. */
-    func testAnalyzeText() {
-        let description = "Analyze text with no features."
-        let expectation = self.expectation(description: description)
-
-        let concepts = ConceptsOptions(limit: 5)
-        let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, text: text)
-
-        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
-            _ in
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Default test for URL. */
-    func testAnalyzeURL() {
-        let description = "Analyze URL with no features."
-        let expectation = self.expectation(description: description)
-
-        let concepts = ConceptsOptions(limit: 5)
-        let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
-
-        naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failWithError) {
-            _ in
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
     /** Analyze given test input text for concepts. */
     func testAnalyzeTextForConcepts() {
         let description = "Analyze text with features."

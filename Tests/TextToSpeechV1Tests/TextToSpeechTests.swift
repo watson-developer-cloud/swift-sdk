@@ -132,7 +132,13 @@ class TextToSpeechTests: XCTestCase {
         for voice in allVoices {
             let description = "Get information about the given voice."
             let expectation = self.expectation(description: description)
-            textToSpeech.getVoice(voice.rawValue, failure: failWithError) { _ in
+            textToSpeech.getVoice(voice.rawValue, failure: failWithError) { voice in
+                XCTAssertNotNil(voice.url)
+                XCTAssertNotNil(voice.gender)
+                XCTAssertNotNil(voice.name)
+                XCTAssertNotNil(voice.language)
+                XCTAssertNotNil(voice.description)
+                XCTAssertNotNil(voice.customizable)
                 expectation.fulfill()
             }
             waitForExpectations()

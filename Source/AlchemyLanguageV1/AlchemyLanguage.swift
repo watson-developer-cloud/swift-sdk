@@ -54,6 +54,12 @@ public class AlchemyLanguage {
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // Typically, we would check the http status code in the response object here, and return
+        // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
+        // services return a status code of 200 if you are able to successfully contact the
+        // service, without regards to whether the response itself was a success or a failure.
+        
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {

@@ -22,15 +22,15 @@ import DiscoveryV1
 class DiscoveryTests: XCTestCase {
     
     private var discovery: Discovery!
-    private let timeout: TimeInterval = 20.0
-    private let environmentName: String = "swift-sdk-unit-test-environment"
-    private let testDescription: String = "For testing"
+    private let timeout = 20.0
+    private let environmentName = "swift-sdk-unit-test-environment"
+    private let testDescription = "For testing"
     private var environmentID: String?
-    private let newsEnvironmentName: String = "Watson News Environment"
+    private let newsEnvironmentName = "Watson News Environment"
     private var newsEnvironmentID: String?
-    private let newsCollectionName: String = "watson_news"
+    private let newsCollectionName = "watson_news"
     private var newsCollectionID: String?
-    private let collectionName: String = "swift-sdk-unit-test-collection"
+    private let collectionName = "swift-sdk-unit-test-collection"
     private var collectionID: String?
     private var configurationID: String?
     private var documentID: String?
@@ -46,6 +46,30 @@ class DiscoveryTests: XCTestCase {
         lookupConfiguration()
         lookupCollection()
         addDocumentToCollection()
+    }
+    
+    override class func tearDown() {
+        let failure = { (error: Error) in
+            XCTFail("Failed with error: \(error)")
+        }
+        
+        let discovery = Discovery(username: Credentials.DiscoveryUsername, password: Credentials.DiscoveryPassword, version: "2016-12-01")
+        var trainedEnvironmentID: String?
+        
+        let description1 = "Get trained environment ID."
+        let expectation1 = XCTestExpectation(description: description1)
+        discovery.getEnvironments(withName: "swift-sdk-unit-test-environment", failure: failure) { environment in
+            trainedEnvironmentID = environment.first?.environmentID
+            expectation1.fulfill()
+        }
+        XCTWaiter.wait(for: [expectation1], timeout: 20)
+        
+        let description2 = "Delete the trained environment."
+        let expectation2 = XCTestExpectation(description: description2)
+        discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { environment in
+            expectation2.fulfill()
+        }
+        XCTWaiter.wait(for: [expectation2], timeout: 20)
     }
     
     /** Instantiate Discovery instance. */
@@ -97,6 +121,8 @@ class DiscoveryTests: XCTestCase {
                 return
         }
         waitForExpectations()
+        
+        sleep(30)
     }
     
     /** Lookup default configuration for environment created. */

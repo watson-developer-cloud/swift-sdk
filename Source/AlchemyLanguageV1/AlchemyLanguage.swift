@@ -46,16 +46,38 @@ public class AlchemyLanguage {
         self.apiKey = apiKey
     }
     
-    private func dataToError(data: Data) -> NSError? {
+    /**
+     If the response or data represents an error returned by the AlchemyLanguage service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned from the service that may represent an error.
+     */
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // Typically, we would check the http status code in the response object here, and return
+        // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
+        // services return a status code of 200 if you are able to successfully contact the
+        // service, without regards to whether the response itself was a success or a failure.
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: errorDomain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
+            let code = 400
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: status,
                 NSLocalizedDescriptionKey: statusInfo
             ]
-            return NSError(domain: errorDomain, code: 400, userInfo: userInfo)
+            return NSError(domain: errorDomain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -116,7 +138,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
             case .success(let authors): success(authors)
             case .failure(let error): failure?(error)
@@ -160,7 +182,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentAuthors>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
             case .success(let authors): success(authors)
             case .failure(let error): failure?(error)
@@ -207,7 +229,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
             case .success(let concepts): success(concepts)
             case .failure(let error): failure?(error)
@@ -258,7 +280,7 @@ public class AlchemyLanguage {
             messageBody: body
         )
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
             case .success(let concepts): success(concepts)
             case .failure(let error): failure?(error)
@@ -306,7 +328,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ConceptResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
             case .success(let concepts): success(concepts)
             case .failure(let error): failure?(error)
@@ -383,7 +405,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
             case .success(let entities): success(entities)
             case .failure(let error): failure?(error)
@@ -468,7 +490,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
             case .success(let entities): success(entities)
             case .failure(let error): failure?(error)
@@ -548,7 +570,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Entities>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
             case .success(let entities): success(entities)
             case .failure(let error): failure?(error)
@@ -607,7 +629,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
             case .success(let keywords): success(keywords)
             case .failure(let error): failure?(error)
@@ -674,7 +696,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
             case .success(let keywords): success(keywords)
             case .failure(let error): failure?(error)
@@ -736,7 +758,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Keywords>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
             case .success(let keywords): success(keywords)
             case .failure(let error): failure?(error)
@@ -772,7 +794,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Language>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Language>) in
             switch response.result {
             case .success(let language): success(language)
             case .failure(let error): failure?(error)
@@ -813,7 +835,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Language>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Language>) in
             switch response.result {
             case .success(let language): success(language)
             case .failure(let error): failure?(error)
@@ -849,7 +871,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Microformats>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Microformats>) in
             switch response.result {
             case .success(let microformats): success(microformats)
             case .failure(let error): failure?(error)
@@ -896,7 +918,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Microformats>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Microformats>) in
             switch response.result {
             case .success(let microformats): success(microformats)
             case .failure(let error): failure?(error)
@@ -932,7 +954,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<PublicationResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<PublicationResponse>) in
             switch response.result {
             case .success(let pubResponse): success(pubResponse)
             case .failure(let error): failure?(error)
@@ -978,7 +1000,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<PublicationResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<PublicationResponse>) in
             switch response.result {
             case .success(let pubResponse): success(pubResponse)
             case .failure(let error): failure?(error)
@@ -1064,7 +1086,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
             case .success(let relations): success(relations)
             case .failure(let error): failure?(error)
@@ -1158,7 +1180,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
             case .success(let relations): success(relations)
             case .failure(let error): failure?(error)
@@ -1247,7 +1269,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SAORelations>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
             case .success(let relations): success(relations)
             case .failure(let error): failure?(error)
@@ -1283,7 +1305,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1329,7 +1351,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1370,7 +1392,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1408,7 +1430,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1457,7 +1479,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1501,7 +1523,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SentimentResponse>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
             case .success(let sentimentResponse): success(sentimentResponse)
             case .failure(let error): failure?(error)
@@ -1536,7 +1558,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
             case .success(let taxonomies): success(taxonomies)
             case .failure(let error): failure?(error)
@@ -1582,7 +1604,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
             case .success(let taxonomies): success(taxonomies)
             case .failure(let error): failure?(error)
@@ -1623,7 +1645,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Taxonomies>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
             case .success(let taxonomies): success(taxonomies)
             case .failure(let error): failure?(error)
@@ -1658,7 +1680,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
             case .success(let docText): success(docText)
             case .failure(let error): failure?(error)
@@ -1704,7 +1726,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
             case .success(let docText): success(docText)
             case .failure(let error): failure?(error)
@@ -1752,7 +1774,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
             case .success(let docText): success(docText)
             case .failure(let error): failure?(error)
@@ -1808,7 +1830,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
             case .success(let docText): success(docText)
             case .failure(let error): failure?(error)
@@ -1850,7 +1872,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentTitle>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentTitle>) in
             switch response.result {
             case .success(let docTitle): success(docTitle)
             case .failure(let error): failure?(error)
@@ -1900,7 +1922,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentTitle>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentTitle>) in
             switch response.result {
             case .success(let docTitle): success(docTitle)
             case .failure(let error): failure?(error)
@@ -1935,7 +1957,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Feeds>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Feeds>) in
             switch response.result {
             case .success(let feeds): success(feeds)
             case .failure(let error): failure?(error)
@@ -1982,7 +2004,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<Feeds>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<Feeds>) in
             switch response.result {
             case .success(let feeds): success(feeds)
             case .failure(let error): failure?(error)
@@ -2017,7 +2039,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {
             case .success(let emotion): success(emotion)
             case .failure(let error): failure?(error)
@@ -2064,7 +2086,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {
             case .success(let emotion): success(emotion)
             case .failure(let error): failure?(error)
@@ -2106,7 +2128,7 @@ public class AlchemyLanguage {
         )
         
         // execute request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<DocumentEmotion>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {
             case .success(let emotion): success(emotion)
             case .failure(let error): failure?(error)

@@ -47,7 +47,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
             ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
             ("testIdentify", testIdentify),
-            ("testGetModelDoesntExit", testGetModelDoesntExit)
+            ("testGetModelDoesntExist", testGetModelDoesntExist)
         ]
     }
 
@@ -281,7 +281,7 @@ class LanguageTranslatorTests: XCTestCase {
     // MARK: - Negative Tests
 
     /** Try to get information about a model that doesn't exit. */
-    func testGetModelDoesntExit() {
+    func testGetModelDoesntExist() {
         let description = "Try to get information about a model that doesn't exist."
         let expectation = self.expectation(description: description)
 

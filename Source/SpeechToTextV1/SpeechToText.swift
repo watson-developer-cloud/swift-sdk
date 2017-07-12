@@ -63,21 +63,36 @@ public class SpeechToText {
     }
     
     /**
-     If the given data represents an error returned by the Speech to Text service, then return
-     an NSError object with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Speech to Text service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = try json.getInt(at: "code")
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
-            var userInfo = [
-                NSLocalizedFailureReasonErrorKey: error
-            ]
             if let recoverySuggestion = codeDescription ?? description {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
             }
@@ -104,7 +119,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["models"]) {
+        request.responseArray(responseToError: responseToError, path: ["models"]) {
             (response: RestResponse<[Model]>) in
                 switch response.result {
                 case .success(let models): success(models)
@@ -135,7 +150,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Model>) in
                 switch response.result {
                 case .success(let model): success(model)
@@ -379,7 +394,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+        request.responseArray(responseToError: responseToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
             switch response.result {
             case .success(let customizations): success(customizations)
@@ -429,7 +444,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CustomizationID>) in
             switch response.result {
             case .success(let customization): success(customization)
@@ -464,7 +479,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -496,7 +511,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Customization>) in
             switch response.result {
             case .success(let customization): success(customization)
@@ -546,7 +561,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -581,7 +596,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -615,7 +630,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -650,7 +665,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["corpora"]) {
+        request.responseArray(responseToError: responseToError, path: ["corpora"]) {
             (response: RestResponse<[Corpus]>) in
             switch response.result {
             case .success(let corpora): success(corpora)
@@ -687,7 +702,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -721,7 +736,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Corpus>) in
             switch response.result {
             case .success(let corpus): success(corpus)
@@ -783,7 +798,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -839,7 +854,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["words"]) {
+        request.responseArray(responseToError: responseToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
             switch response.result {
             case .success(let words): success(words)
@@ -886,7 +901,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -928,7 +943,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -962,7 +977,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Word>) in
             switch response.result {
             case .success(let word): success(word)
@@ -1008,7 +1023,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }

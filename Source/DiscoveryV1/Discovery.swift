@@ -50,25 +50,42 @@ public class Discovery {
     }
     
     /**
-     If the given data represents an error returned by the Discovery service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Discovery service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = try json.getInt(at: "code")
-            var userInfo: [String: String]
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            let userInfo: [String: String]
             if let description = try? json.getString(at: "description") {
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
+                    NSLocalizedFailureReasonErrorKey: message,
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
             } else {
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error
+                    NSLocalizedFailureReasonErrorKey: message
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -109,7 +126,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["environments"]) {
+        request.responseArray(responseToError: responseToError, path: ["environments"]) {
             (response: RestResponse<[Environment]>) in
             switch response.result {
             case .success(let environments): success(environments)
@@ -166,7 +183,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
@@ -201,7 +218,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedEnvironment>) in
             switch response.result {
             case .success(let environment): success(environment)
@@ -236,7 +253,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
@@ -289,7 +306,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let environment): success(environment)
@@ -332,7 +349,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["configurations"]) {
+        request.responseArray(responseToError: responseToError, path: ["configurations"]) {
             (response: RestResponse<[Configuration]>) in
             switch response.result {
             case .success(let configurations): success(configurations)
@@ -380,7 +397,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
@@ -417,7 +434,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedConfiguration>) in
             switch response.result {
             case .success(let configuration): success(configuration)
@@ -454,7 +471,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
@@ -502,7 +519,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
             switch response.result {
             case .success(let configuration): success(configuration)
@@ -590,7 +607,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<TestConfigurationDetails>) in
             switch response.result {
             case .success(let configurationDetails): success(configurationDetails)
@@ -633,7 +650,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["collections"]) {
+        request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[Collection]>) in
             switch response.result {
             case .success(let collections): success(collections)
@@ -693,7 +710,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -730,7 +747,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedCollection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -767,7 +784,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -830,7 +847,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let collection): success(collection)
@@ -868,7 +885,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["fields"]) {
+        request.responseArray(responseToError: responseToError, path: ["fields"]) {
             (response: RestResponse<[Field]>) in
             switch response.result {
             case .success(let fields): success(fields)
@@ -963,7 +980,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
@@ -1004,7 +1021,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
@@ -1045,7 +1062,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
@@ -1140,7 +1157,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
             switch response.result {
             case .success(let document): success(document)
@@ -1230,7 +1247,7 @@ public class Discovery {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<QueryResponse>) in
             switch response.result {
             case .success(let queryResponse): success(queryResponse)

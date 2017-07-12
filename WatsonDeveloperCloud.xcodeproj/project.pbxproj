@@ -1463,19 +1463,19 @@
 			children = (
 				1241DFC71E38105C00B8B33E /* NaturalLanguageUnderstanding.swift */,
 				124E7B531E39091D00F09E38 /* Models */,
-				1241DFC91E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests */,
+				1241DFC91E38106F00B8B33E /* Tests */,
 			);
 			name = NaturalLanguageUnderstandingV1;
 			path = Source/NaturalLanguageUnderstandingV1;
 			sourceTree = "<group>";
 		};
-		1241DFC91E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests */ = {
+		1241DFC91E38106F00B8B33E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				1241DFCA1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift */,
 				12103CD51E40E89D00F9C842 /* testArticle.html */,
 			);
-			name = NaturalLanguageUnderstandingV1Tests;
+			name = Tests;
 			path = Tests/NaturalLanguageUnderstandingV1Tests;
 			sourceTree = SOURCE_ROOT;
 		};

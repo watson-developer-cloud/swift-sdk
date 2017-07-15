@@ -35,8 +35,10 @@ class AlchemyDataNewsTests: XCTestCase {
     override func setUp() {
         super.setUp()
         alchemyDataNews = AlchemyDataNews(apiKey: Credentials.AlchemyAPIKey)
+        alchemyDataNews.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        alchemyDataNews.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

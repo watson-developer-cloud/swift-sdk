@@ -101,8 +101,10 @@ class VisualRecognitionTests: XCTestCase {
         let apiKey = Credentials.VisualRecognitionAPIKey
         let version = "2016-11-04"
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Load image files with class examples and test images. */
     func loadImageFiles() {
         

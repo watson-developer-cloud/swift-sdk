@@ -48,6 +48,8 @@ class ConversationTests: XCTestCase {
         let password = Credentials.ConversationPassword
         let version = "2017-02-03"
         conversation = Conversation(username: username, password: password, version: version)
+        conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        conversation.defaultHeaders["X-Watson-Test"] = "true"
     }
 
     /** Fail false negatives. */

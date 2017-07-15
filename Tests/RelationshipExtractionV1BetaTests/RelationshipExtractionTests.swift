@@ -48,8 +48,10 @@ class RelationshipExtractionTests: XCTestCase {
         let username = Credentials.RelationshipExtractionUsername
         let password = Credentials.RelationshipExtractionPassword
         relationshipExtraction = RelationshipExtraction(username: username, password: password)
+        relationshipExtraction.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        relationshipExtraction.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

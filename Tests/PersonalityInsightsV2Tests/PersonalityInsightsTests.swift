@@ -49,8 +49,10 @@ class PersonalityInsightsTests: XCTestCase {
         let username = Credentials.PersonalityInsightsUsername
         let password = Credentials.PersonalityInsightsPassword
         personalityInsights = PersonalityInsights(username: username, password: password)
+        personalityInsights.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        personalityInsights.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Load "MobyDickIntro.txt". */
     func loadMobyDickIntro() {
         let bundle = Bundle(for: type(of: self))

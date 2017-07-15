@@ -90,6 +90,8 @@ class DialogTests: XCTestCase {
         let username = Credentials.DialogUsername
         let password = Credentials.DialogPassword
         dialog = Dialog(username: username, password: password)
+        dialog.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        dialog.defaultHeaders["X-Watson-Test"] = "true"
     }
 
     /** Look up (or create) the test dialog application. */

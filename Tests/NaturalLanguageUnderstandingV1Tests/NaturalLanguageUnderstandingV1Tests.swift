@@ -56,8 +56,10 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let username = Credentials.NaturalLanguageUnderstandingUsername
         let password = Credentials.NaturalLanguageUnderstandingPassword
         naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: "2016-05-17")
+        naturalLanguageUnderstanding.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        naturalLanguageUnderstanding.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

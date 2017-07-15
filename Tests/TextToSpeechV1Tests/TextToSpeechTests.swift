@@ -80,8 +80,10 @@ class TextToSpeechTests: XCTestCase {
         let username = Credentials.TextToSpeechUsername
         let password = Credentials.TextToSpeechPassword
         textToSpeech = TextToSpeech(username: username, password: password)
+        textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Delete all customizations. */
     func deleteCustomizations() {
         let description = "Delete all customizations."

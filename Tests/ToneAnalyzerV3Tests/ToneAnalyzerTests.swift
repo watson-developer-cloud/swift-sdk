@@ -51,8 +51,10 @@ class ToneAnalyzerTests: XCTestCase {
         let username = Credentials.ToneAnalyzerUsername
         let password = Credentials.ToneAnalyzerPassword
         toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
+        toneAnalyzer.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        toneAnalyzer.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

@@ -53,8 +53,10 @@ class DocumentConversionTests: XCTestCase {
         let password = Credentials.DocumentConversionPassword
         let version = "2015-12-15"
         documentConversion = DocumentConversion(username: username, password: password, version: version)
+        documentConversion.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        documentConversion.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     func loadResources() {
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))

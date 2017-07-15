@@ -28,8 +28,10 @@ class AlchemyLanguageTests: XCTestCase {
     override func setUp() {
         super.setUp()
         alchemyLanguage = AlchemyLanguage(apiKey: Credentials.AlchemyAPIKey)
+        alchemyLanguage.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        alchemyLanguage.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
         return [
             ("testGetAuthorsURL", testGetAuthorsURL),

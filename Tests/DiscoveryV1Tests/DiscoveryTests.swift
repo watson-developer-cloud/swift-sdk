@@ -54,6 +54,8 @@ class DiscoveryTests: XCTestCase {
         }
         
         let discovery = Discovery(username: Credentials.DiscoveryUsername, password: Credentials.DiscoveryPassword, version: "2016-12-01")
+        discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        discovery.defaultHeaders["X-Watson-Test"] = "true"
         var trainedEnvironmentID: String?
         
         let description1 = "Get trained environment ID."
@@ -78,8 +80,10 @@ class DiscoveryTests: XCTestCase {
         let password = Credentials.DiscoveryPassword
         let version = "2016-12-01"
         discovery = Discovery(username: username, password: password, version: version)
+        discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        discovery.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Look up (or create) environment. */
     func lookupEnvironment() {
         let description = "Look up (or create) the environment."

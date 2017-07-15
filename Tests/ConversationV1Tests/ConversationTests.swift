@@ -1109,6 +1109,20 @@ class ConversationTests: XCTestCase {
 		waitForExpectations()
 	}
 
+    func testGetEntity() {
+        let description = "Get details of a specific counterexample."
+        let expectation = self.expectation(description: description)
+
+        let exampleText = "I want financial advice today."
+        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
+            XCTAssertNotNil(counterexample.created)
+            XCTAssertNotNil(counterexample.updated)
+            XCTAssertEqual(counterexample.text, exampleText)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
     // MARK: - Values Tests
 
     func testListAllValues() {

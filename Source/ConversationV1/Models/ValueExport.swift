@@ -24,7 +24,7 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
     public let value: String
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]
+    public let metadata: [String: Any]?
 
     /// The timestamp for creation of the entity value.
     public let created: String
@@ -39,18 +39,18 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
      Initialize a `ValueExport` with member variables.
 
      - parameter value: The text of the entity value.
-     - parameter metadata: Any metadata related to the entity value.
      - parameter created: The timestamp for creation of the entity value.
      - parameter updated: The timestamp for the last update to the entity value.
+     - parameter metadata: Any metadata related to the entity value.
      - parameter synonyms: An array of synonyms.
 
      - returns: An initialized `ValueExport`.
     */
-    public init(value: String, metadata: [String: Any], created: String, updated: String, synonyms: [String]? = nil) {
+    public init(value: String, created: String, updated: String, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
         self.value = value
-        self.metadata = metadata
         self.created = created
         self.updated = updated
+        self.metadata = metadata
         self.synonyms = synonyms
     }
 
@@ -58,7 +58,7 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
     /// Used internally to initialize a `ValueExport` model from JSON.
     public init(json: JSON) throws {
         value = try json.getString(at: "value")
-        metadata = try json.getDictionaryObject(at: "metadata")
+        metadata = try? json.getDictionaryObject(at: "metadata")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
         synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
@@ -69,9 +69,9 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["value"] = value
-        json["metadata"] = metadata
         json["created"] = created
         json["updated"] = updated
+        if let metadata = metadata { json["metadata"] = metadata }
         if let synonyms = synonyms {
             json["synonyms"] = synonyms.map { $0 }
         }

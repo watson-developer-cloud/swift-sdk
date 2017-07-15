@@ -356,7 +356,7 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
-     - parameter newText: The text of the user input example.
+     - parameter newText: The text of the example to be marked as irrelevant input.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
@@ -368,7 +368,7 @@ public class Conversation {
         success: @escaping (ExampleResponse) -> Void)
     {
         // construct body
-        let updateCounterexampleRequest = UpdateExample(text: newText)
+        let updateCounterexampleRequest = UpdateCounterexample(text: newText)
         guard let body = try? updateCounterexampleRequest.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return

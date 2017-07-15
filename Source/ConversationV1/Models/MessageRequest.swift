@@ -20,7 +20,7 @@ import RestKit
 /** A request formatted for the Conversation service. */
 public struct MessageRequest: JSONDecodable, JSONEncodable {
 
-    private let input: Input
+    private let input: Input?
     private let alternateIntents: Bool?
     private let context: Context?
     private let entities: [Entity]?
@@ -45,7 +45,7 @@ public struct MessageRequest: JSONDecodable, JSONEncodable {
         requests within the same Dialog turn to pass back in the intermediate information.
      */
     public init(
-        input: Input,
+        input: Input? = nil,
         alternateIntents: Bool? = nil,
         context: Context? = nil,
         entities: [Entity]? = nil,
@@ -96,7 +96,7 @@ public struct MessageRequest: JSONDecodable, JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `MessageRequest` model from JSON.
     public init(json: JSON) throws {
-        input = try json.decode(at: "input", type: Input.self)
+        input = try? json.decode(at: "input", type: Input.self)
         alternateIntents = try? json.getBool(at: "alternate_intents")
         context = try? json.decode(at: "context", type: Context.self)
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
@@ -107,7 +107,7 @@ public struct MessageRequest: JSONDecodable, JSONEncodable {
     /// Used internally to serialize a `MessageRequest` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["input"] = input.toJSONObject()
+        if let input = input { json["input"] = input.toJSONObject() }
         if let alternateIntents = alternateIntents {
             json["alternate_intents"] = alternateIntents
         }

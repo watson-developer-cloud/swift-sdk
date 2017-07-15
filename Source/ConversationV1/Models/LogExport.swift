@@ -63,5 +63,4 @@ public struct LogExport: JSONDecodable {
         requestTimestamp = try json.getString(at: "request_timestamp")
         responseTimestamp = try json.getString(at: "response_timestamp")
     }
-
 }

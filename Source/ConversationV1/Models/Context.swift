@@ -65,7 +65,8 @@ public struct System: JSONEncodable, JSONDecodable {
     /// Used internally to initialize a `System` model from JSON.
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
-        dialogStack = try json.getArray(at: "dialog_stack").map { try $0.getString(at: "dialog_node") }
+        //dialogStack = try? json.getArray(at: "dialog_stack").map { try $0.getString(at: "dialog_node") }
+        dialogStack = []
         dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
         dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
     }

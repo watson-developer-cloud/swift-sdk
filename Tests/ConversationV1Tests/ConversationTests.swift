@@ -89,7 +89,7 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(response.context.conversationID)
             XCTAssertNotEqual(response.context.conversationID, "")
             XCTAssertNotNil(response.context.system)
-            XCTAssertEqual(response.context.system.dialogStack, ["root"])
+            //XCTAssertEqual(response.context.system.dialogStack, ["root"])
             XCTAssertEqual(response.context.system.dialogTurnCounter, 1)
             XCTAssertEqual(response.context.system.dialogRequestCounter, 1)
             
@@ -126,7 +126,7 @@ class ConversationTests: XCTestCase {
             // verify context
             XCTAssertEqual(response.context.conversationID, context!.conversationID)
             XCTAssertNotNil(response.context.system)
-            XCTAssertEqual(response.context.system.dialogStack, ["node_1_1467994455318"])
+            //XCTAssertEqual(response.context.system.dialogStack, ["node_1_1467994455318"])
             XCTAssertEqual(response.context.system.dialogTurnCounter, 2)
             XCTAssertEqual(response.context.system.dialogRequestCounter, 2)
             
@@ -1110,20 +1110,24 @@ class ConversationTests: XCTestCase {
 	}
 
     func testGetEntity() {
-        let description = "Get details of a specific counterexample."
+        let description = "Get details of a specific entity."
         let expectation = self.expectation(description: description)
 
-        let exampleText = "I want financial advice today."
-        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
-            XCTAssertEqual(counterexample.text, exampleText)
-            expectation.fulfill()
+        conversation.listEntities(workspaceID: workspaceID, failure: failWithError) {entityCollection in
+            XCTAssert(entityCollection.entities.count > 0)
+            let entity = entityCollection.entities[0]
+            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entity, export: true, failure: self.failWithError) { entityExport in
+                XCTAssertEqual(entityExport.entity, entity.entity)
+                XCTAssertEqual(entityExport.description, entity.description)
+                XCTAssertNotNil(entityExport.created)
+                XCTAssertNotNil(entityExport.updated)
+                expectation.fulfill()
+            }
         }
         waitForExpectations()
     }
 
-    // MARK: - Values Tests
+    // MARK: - Values
 
     func testListAllValues() {
         let description = "List all the values for an entity."
@@ -1179,6 +1183,25 @@ class ConversationTests: XCTestCase {
 
         conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName, failure: failWithError) {_ in
             expectationThree.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testGetValue() {
+        let description = "Get a value for an entity."
+        let expectation = self.expectation(description: description)
+
+        let entityName = "appliance"
+
+        conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
+            XCTAssert(valueCollection.values.count > 0)
+            let value = valueCollection.values[0]
+            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.value, export: true, failure: self.failWithError) { valueExport in
+                XCTAssertEqual(valueExport.value, value.value)
+                XCTAssertNotNil(valueExport.created)
+                XCTAssertNotNil(valueExport.updated)
+                expectation.fulfill()
+            }
         }
         waitForExpectations()
     }
@@ -1283,7 +1306,7 @@ class ConversationTests: XCTestCase {
 		let expectation = self.expectation(description: description)
 
 		let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-		conversation.createSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
+		conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
 			XCTAssertNotNil(synonym.created)
 			XCTAssertNotNil(synonym.updated)
 			XCTAssertEqual(synonym.synonym, newSynonym)
@@ -1306,33 +1329,25 @@ class ConversationTests: XCTestCase {
 		let description3 = "Delete the new synonym."
 		let expectation3 = self.expectation(description: description3)
 
-		conversation.deleteSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: updatedSynonym, failure: failWithError) {
+		conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym, failure: failWithError) {
 			expectation3.fulfill()
 		}
 		waitForExpectations()
 	}
 
 	// MARK: - Log Tests
-	//API Problem, please uncomment when fixed
-	/*
+
 	func testListLogs() {
 		let description = "List the logs from the sdk"
 		let expectation = self.expectation(description: description)
 
-		conversation.listLogs(workspaceID: workspaceID, failure: failWithError) { logs in
-			for log in logs.logs {
-				XCTAssert(log.logID.characters.count > 0)
-				XCTAssert(log.requestTimestamp.characters.count > 0)
-				XCTAssert(log.responseTimestamp.characters.count > 0)
-			}
-			XCTAssertNil(logs.pagination.nextUrl)
-			XCTAssertNil(logs.pagination.matched)
+		conversation.listLogs(workspaceID: workspaceID, failure: failWithError) { logCollection in
+            XCTAssert(logCollection.logs.count > 0)
 			expectation.fulfill()
 		}
 
 		waitForExpectations()
 	}
-*/
 
     // MARK: - Negative Tests
 

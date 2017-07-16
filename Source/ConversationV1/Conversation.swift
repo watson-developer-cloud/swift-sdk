@@ -111,9 +111,14 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/message"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/workspaces/\(workspaceID)/message",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",

@@ -56,8 +56,10 @@ class LanguageTranslatorTests: XCTestCase {
         let username = Credentials.LanguageTranslatorUsername
         let password = Credentials.LanguageTranslatorPassword
         languageTranslator = LanguageTranslator(username: username, password: password)
+        languageTranslator.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        languageTranslator.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Delete any stale custom models that were previously created by unit tests. */
     func deleteStaleCustomModels() {
         let description = "Delete any stale custom models previously created by unit tests."

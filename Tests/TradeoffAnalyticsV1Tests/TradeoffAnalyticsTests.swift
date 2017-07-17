@@ -45,8 +45,10 @@ class TradeoffAnalyticsTests: XCTestCase {
         let username = Credentials.TradeoffAnalyticsUsername
         let password = Credentials.TradeoffAnalyticsPassword
         tradeoffAnalytics = TradeoffAnalytics(username: username, password: password)
+        tradeoffAnalytics.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        tradeoffAnalytics.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

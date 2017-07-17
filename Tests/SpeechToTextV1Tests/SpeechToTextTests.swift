@@ -73,8 +73,10 @@ class SpeechToTextTests: XCTestCase {
         let username = Credentials.SpeechToTextUsername
         let password = Credentials.SpeechToTextPassword
         speechToText = SpeechToText(username: username, password: password)
+        speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

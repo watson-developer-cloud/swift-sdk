@@ -51,6 +51,8 @@ class PersonalityInsightsTests: XCTestCase {
         let username = Credentials.PersonalityInsightsV3Username
         let password = Credentials.PersonalityInsightsV3Password
         personalityInsights = PersonalityInsights(username: username, password: password, version: version)
+        personalityInsights.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        personalityInsights.defaultHeaders["X-Watson-Test"] = "true"
     }
 
     /** Load external files to test. Fails if unable to locate file. */

@@ -81,8 +81,10 @@ class AlchemyVisionTests: XCTestCase {
     func instantiateAlchemyVision() {
         let apiKey = Credentials.AlchemyAPIKey
         alchemyVision = AlchemyVision(apiKey: apiKey)
+        alchemyVision.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        alchemyVision.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Load image files with class examples and test images. */
     func loadResources() {
         let bundle = Bundle(for: type(of: self))

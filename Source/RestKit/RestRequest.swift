@@ -112,6 +112,12 @@ public struct RestRequest {
     
     public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response() { data, response, error in
+            if let error = error {
+                let result = Result<Data>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
             guard let data = data else {
                 let result = Result<Data>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
@@ -130,9 +136,8 @@ public struct RestRequest {
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         response() { data, response, error in
-            
-            if let responseToError = responseToError,
-                let error = responseToError(response, data) {
+
+            if let error = error ?? responseToError?(response,data) {
                 let result = Result<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -183,8 +188,7 @@ public struct RestRequest {
     {
         response() { data, response, error in
 
-            if let responseToError = responseToError,
-                let error = responseToError(response, data) {
+            if let error = error ?? responseToError?(response, data) {
                 let result = Result<[T]>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -235,8 +239,7 @@ public struct RestRequest {
     {
         response() { data, response, error in
 
-            if let responseToError = responseToError,
-                let error = responseToError(response, data) {
+            if let error = error ?? responseToError?(response, data) {
                 let result = Result<String>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -272,7 +275,7 @@ public struct RestRequest {
     {
         response() { data, response, error in
 
-            if let responseToError = responseToError, let error = responseToError(response, data) {
+            if let error = error ?? responseToError?(response, data) {
                 let result = Result<Void>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)

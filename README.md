@@ -27,7 +27,6 @@ There are many resources to help you build your first cognitive application with
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
-* [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -92,6 +91,18 @@ $ carthage update --platform iOS
 
 Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.
 
+### Swift Package Manager
+
+To include the Watson SDK to your projects, add the following to your `Package.swift` file:
+
+```swift
+dependencies: [
+    .Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
+             majorVersion: 0)
+]
+```
+To build the project, run `swift build` from the command line.
+
 ## Service Instances
 
 [IBM Watson Developer Cloud](https://www.ibm.com/watson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/watson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
@@ -146,14 +157,6 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 * [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
 
-## Xcode 7 Compatibility
-
-Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
-
-To continue using the Swift SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
-
-`github "watson-developer-cloud/swift-sdk" ~> 0.7.0`
-
 ## Objective-C Compatibility
 
 Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.
@@ -162,16 +165,7 @@ Please see [this tutorial](docs/objective-c.md) for more information about consu
 
 The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
 
-To include the Watson SDK to your Linux projects, add the following to your `Package.swift` file:
-
-```swift
-dependencies: [
-	.Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
-	         majorVersion: 0)
-]
-```
-
-To build the project, run `swift build` from the command line.
+To include the Watson SDK to your Linux projects, please follow the [Swift Package Manager instructions.](#swift-package-manager)
 
 ## Contributing
 

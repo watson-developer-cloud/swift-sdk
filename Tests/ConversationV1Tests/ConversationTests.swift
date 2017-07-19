@@ -974,4 +974,20 @@ class ConversationTests: XCTestCase {
         conversation.message(withWorkspace: workspaceID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
+
+    func testBadEndpoint() {
+        let description = "Bad endpoint."
+        let expectation = self.expectation(description: description)
+
+        let badService = Conversation(username: "username", password: "password", version: "2017-02-03")
+        badService.serviceURL = "https://foo.bar.baz/"
+        let workspaceID = "workspaceID"
+        let failure = { (error: Error) in
+            expectation.fulfill()
+        }
+
+        badService.message(withWorkspace: workspaceID, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
 }

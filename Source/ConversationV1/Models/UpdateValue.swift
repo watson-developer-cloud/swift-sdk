@@ -17,11 +17,11 @@
 import Foundation
 import RestKit
 
-/** CreateValue. */
-public struct CreateValue: JSONDecodable, JSONEncodable {
+/** UpdateValue. */
+public struct UpdateValue: JSONDecodable, JSONEncodable {
 
     /// The text of the entity value.
-    public let value: String
+    public let value: String?
 
     /// Any metadata related to the entity value.
     public let metadata: [String: Any]?
@@ -30,33 +30,33 @@ public struct CreateValue: JSONDecodable, JSONEncodable {
     public let synonyms: [String]?
 
     /**
-     Initialize a `CreateValue` with member variables.
+     Initialize a `UpdateValue` with member variables.
 
      - parameter value: The text of the entity value.
      - parameter metadata: Any metadata related to the entity value.
      - parameter synonyms: An array of synonyms for the entity value.
 
-     - returns: An initialized `CreateValue`.
+     - returns: An initialized `UpdateValue`.
     */
-    public init(value: String, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
+    public init(value: String? = nil, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
         self.value = value
         self.metadata = metadata
         self.synonyms = synonyms
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateValue` model from JSON.
+    /// Used internally to initialize a `UpdateValue` model from JSON.
     public init(json: JSON) throws {
-        value = try json.getString(at: "value")
+        value = try? json.getString(at: "value")
         metadata = try? json.getDictionaryObject(at: "metadata")
         synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateValue` model to JSON.
+    /// Used internally to serialize a `UpdateValue` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["value"] = value
+        if let value = value { json["value"] = value }
         if let metadata = metadata { json["metadata"] = metadata }
         if let synonyms = synonyms {
             json["synonyms"] = synonyms.map { $0 }

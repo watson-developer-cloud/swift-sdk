@@ -22,17 +22,17 @@ public struct Output: JSONEncodable, JSONDecodable {
 
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Up to 50 messages logged with the request.
     public let logMessages: [LogMessage]
-    
+
     /// An array of responses to the user.
     public let text: [String]
-    
+
     /// An array of the nodes that were executed to create the response. The information is
     /// useful for debugging and for visualizing the path taken through the node tree.
     public let nodesVisited: [String]
-    
+
     /// Used internally to initialize an `Output` model from JSON.
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
@@ -40,7 +40,7 @@ public struct Output: JSONEncodable, JSONDecodable {
         text = try json.decodedArray(at: "text", type: Swift.String)
         nodesVisited = try json.decodedArray(at: "nodes_visited", type: Swift.String)
     }
-    
+
     /// Used internally to serialize an `Output` model to JSON.
     public func toJSONObject() -> Any {
         return json
@@ -49,23 +49,23 @@ public struct Output: JSONEncodable, JSONDecodable {
 
 /** A message logged with the request. */
 public struct LogMessage: JSONEncodable, JSONDecodable {
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// The severity of the message ("info", "error", or "warn")
     public let level: String?
-    
+
     /// The log message
     public let message: String?
-    
+
     /// Used internally to initialize a `LogMessage` model from JSON.
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
         level = try? json.getString(at: "level")
         message = try? json.getString(at: "msg")
     }
-    
+
     /// Used internally to serialize a `LogMessage` model to JSON.
     public func toJSONObject() -> Any {
         return json

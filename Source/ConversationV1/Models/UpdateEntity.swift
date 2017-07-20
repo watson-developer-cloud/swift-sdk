@@ -17,64 +17,64 @@
 import Foundation
 import RestKit
 
-/** CreateEntity. */
-public struct CreateEntity: JSONDecodable, JSONEncodable {
+/** UpdateEntity. */
+public struct UpdateEntity: JSONDecodable, JSONEncodable {
 
     /// The name of the entity.
-    public let entity: String
+    public let entity: String?
 
     /// The description of the entity.
     public let description: String?
 
-    /// Any metadata related to the value.
+    /// Any metadata related to the entity.
     public let metadata: [String: Any]?
-
-    /// An array of entity values.
-    public let values: [CreateValue]?
 
     /// Whether to use fuzzy matching for the entity.
     public let fuzzyMatch: Bool?
 
+    /// An array of entity values.
+    public let values: [CreateValue]?
+
     /**
-     Initialize a `CreateEntity` with member variables.
+     Initialize a `UpdateEntity` with member variables.
 
      - parameter entity: The name of the entity.
      - parameter description: The description of the entity.
-     - parameter metadata: Any metadata related to the value.
-     - parameter values: An array of entity values.
+     - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
+     - parameter values: An array of entity values.
 
-     - returns: An initialized `CreateEntity`.
+     - returns: An initialized `UpdateEntity`.
     */
-    public init(entity: String, description: String? = nil, values: [CreateValue]? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil) {
+    public init(entity: String? = nil, description: String? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil, values: [CreateValue]? = nil) {
         self.entity = entity
         self.description = description
         self.metadata = metadata
-        self.values = values
         self.fuzzyMatch = fuzzyMatch
+        self.values = values
     }
 
     // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateEntity` model from JSON.
+    /// Used internally to initialize a `UpdateEntity` model from JSON.
     public init(json: JSON) throws {
-        entity = try json.getString(at: "entity")
+        entity = try? json.getString(at: "entity")
         description = try? json.getString(at: "description")
         metadata = try? json.getDictionaryObject(at: "metadata")
-        values = try? json.decodedArray(at: "values", type: CreateValue.self)
         fuzzyMatch = try? json.getBool(at: "fuzzy_match")
+        values = try? json.decodedArray(at: "values", type: CreateValue.self)
     }
 
     // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateEntity` model to JSON.
+    /// Used internally to serialize a `UpdateEntity` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["entity"] = entity
+        if let entity = entity { json["entity"] = entity }
         if let description = description { json["description"] = description }
         if let metadata = metadata { json["metadata"] = metadata }
+        if let fuzzyMatch = fuzzyMatch { json["fuzzy_match"] = fuzzyMatch }
         if let values = values {
             json["values"] = values.map { $0.toJSONObject() }
         }
-        if let fuzzyMatch = fuzzyMatch { json["fuzzy_match"] = fuzzyMatch }
         return json
     }
 }

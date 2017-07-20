@@ -91,6 +91,8 @@ class ConversationTests: XCTestCase {
         let password = Credentials.ConversationPassword
         let version = "2017-05-26"
         conversation = Conversation(username: username, password: password, version: version)
+        conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        conversation.defaultHeaders["X-Watson-Test"] = "true"
     }
 
     /** Fail false negatives. */
@@ -1088,8 +1090,6 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newEntityName = "swift-sdk-test-entity" + UUID().uuidString
-        //let firstVal = CreateValue.init(value: "full", synonyms: ["filled"])
-        //let secondVal = CreateValue.init(value: "empty")
         let entity = CreateEntity.init(entity: newEntityName, description: "This is a test entity")
 
         conversation.createEntity(workspaceID: workspaceID, body: entity, failure: failWithError){ entityResponse in

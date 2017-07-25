@@ -288,23 +288,6 @@ public class SpeechToTextSession {
     }
     
     /**
-     Send a message to prevent the service from automatically disconnecting due to inactivity.
- 
-     As described in the service documentation, the Speech to Text service terminates the session
-     and closes the connection if the inactivity or session timeout is reached. The inactivity
-     timeout occurs if audio is being sent by the client but the service detects no speech. The
-     inactivity timeout is 30 seconds by default, but can be configured by specifying a value for
-     the `inactivityTimeout` setting. The session timeout occurs if the service receives no data
-     from the client or sends no interim results for 30 seconds. You cannot change the length of
-     this timeout; however, you can extend the session by sending a message. This function sends
-     a `no-op` message to touch the session and reset the session timeout in order to keep the
-     connection alive.
-     */
-    public func keepAlive() {
-        socket.writeNop()
-    }
-    
-    /**
      Wait for any queued recognition requests to complete then disconnect from the service.
      */
     public func disconnect() {

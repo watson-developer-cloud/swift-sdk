@@ -141,14 +141,6 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
     
-    internal func writeNop() {
-        guard state != .Disconnected else { return }
-        let nop = "{\"action\": \"no-op\"}"
-        queue.addOperation {
-            self.socket.write(string: nop)
-        }
-    }
-    
     internal func waitForResults() {
         queue.addOperation {
             switch self.state {

@@ -416,6 +416,7 @@ public class SpeechToText {
     public func createCustomization(
         withName name: String,
         withBaseModelName baseModelName: String,
+        dialect: String? = nil,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationID) -> Void)
@@ -424,6 +425,9 @@ public class SpeechToText {
         var jsonData = [String: Any]()
         jsonData["name"] = name
         jsonData["base_model_name"] = baseModelName
+        if let dialect = dialect {
+            jsonData["dialect"] = dialect
+        }
         if let description = description {
             jsonData["description"] = description
         }

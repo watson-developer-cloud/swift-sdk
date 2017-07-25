@@ -363,6 +363,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssertNotNil(customization.customizationID)
                 XCTAssertNotNil(customization.created)
                 XCTAssertNotNil(customization.language)
+                XCTAssertNotNil(customization.dialect)
                 XCTAssertNotNil(customization.owner)
                 XCTAssertNotNil(customization.name)
                 XCTAssertNotNil(customization.baseModelName)
@@ -384,6 +385,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.createCustomization(
             withName: "swift-sdk-unit-test-customization-to-delete",
             withBaseModelName: "en-US_BroadbandModel",
+            dialect: "en-US",
             description: "customization created for test",
             failure: failWithError) { customization in
             

@@ -260,21 +260,10 @@ public class SpeechToText {
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
      
-     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
-     
-     - If `false`, then the service ends the recognition request at the first end-of-speech
-     incident (denoted by a half-second of non-speech or when the stream terminates). This
-     will coincide with a `final` transcription result. So the `success` callback should
-     be configured to stop the microphone when a final transcription result is received.
-     
-     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
-     your application may have a button to start/stop the request, or you may stream the
-     microphone for the duration of a long press on a UI element.
-     
      Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
-     `AudioMediaType.Opus`. With compression disabled, the `settings` should specify `contentType`
-     of `AudioMediaType.L16(rate: 16000, channels: 1)`.
+     `AudioMediaType.oggOpus`. With compression disabled, the `settings` should specify a
+     `contentType` of `AudioMediaType.l16(rate: 16000, channels: 1)`.
      
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you

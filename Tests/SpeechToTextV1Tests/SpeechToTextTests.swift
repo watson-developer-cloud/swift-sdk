@@ -719,7 +719,6 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = RecognitionSettings(contentType: format)
-        settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
         settings.keywordsThreshold = 0.75
@@ -823,7 +822,6 @@ class SpeechToTextTests: XCTestCase {
             let audio = try Data(contentsOf: file)
             
             var settings = RecognitionSettings(contentType: format)
-            settings.continuous = true
             settings.inactivityTimeout = -1
             settings.keywords = ["tornadoes"]
             settings.keywordsThreshold = 0.75
@@ -928,7 +926,6 @@ class SpeechToTextTests: XCTestCase {
             let audio = try Data(contentsOf: file)
             
             var settings = RecognitionSettings(contentType: format)
-            settings.continuous = true
             settings.inactivityTimeout = -1
             settings.interimResults = false
             settings.wordConfidence = true

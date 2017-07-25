@@ -34,10 +34,6 @@ public struct RecognitionSettings: JSONEncodable {
     /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
     public var contentType: AudioMediaType
 
-    /// If `true`, then the entire audio stream will be transcribed until it terminates rather
-    /// than stopping at the first half-second of non-speech. The default is `false`.
-    public var continuous: Bool?
-
     /// The number of seconds after which the connection is to time out due to inactivity.
     /// Use `-1` to set the timeout to infinity. The default is `30` seconds.
     public var inactivityTimeout: Int?
@@ -108,9 +104,6 @@ public struct RecognitionSettings: JSONEncodable {
         var json = [String: Any]()
         json["action"] = action
         json["content-type"] = contentType.toString
-        if let continuous = continuous {
-            json["continuous"] = continuous
-        }
         if let inactivityTimeout = inactivityTimeout {
             json["inactivity_timeout"] = inactivityTimeout
         }

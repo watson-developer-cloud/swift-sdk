@@ -186,17 +186,6 @@ public class SpeechToTextSession {
     /**
      Start streaming microphone audio data to transcribe.
      
-     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
-     
-     - If `false`, then the service ends the recognition request at the first end-of-speech
-     incident (denoted by a half-second of non-speech or when the stream terminates). This
-     will coincide with a `final` transcription result. So the `success` callback should
-     be configured to stop the microphone when a final transcription result is received.
-     
-     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
-     your application may have a button to start/stop the request, or you may stream the
-     microphone for the duration of a long press on a UI element.
-     
      By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
      To disable Opus compression and send linear PCM data instead, set `compress` to `false`.
      

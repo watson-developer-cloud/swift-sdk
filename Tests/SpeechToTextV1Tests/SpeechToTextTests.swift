@@ -658,7 +658,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeFileDefaultOpus() {
-        transcribeFileDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeFileDefaultFLAC() {
@@ -699,7 +699,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeFileCustomOpus() {
-        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeFileCustomFLAC() {
@@ -751,7 +751,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeDataDefaultOpus() {
-        transcribeDataDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeDataDefaultFLAC() {
@@ -799,7 +799,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeDataCustomOpus() {
-        transcribeDataCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeDataCustomFLAC() {
@@ -903,7 +903,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testTranscribeDataWithSpeakerLabelsOpus() {
-        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
     
     func testTranscribeDataWithSpeakerLabelsFLAC() {

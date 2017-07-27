@@ -302,8 +302,8 @@ conversation.message(withWorkspace: workspaceID, request: request, failure: fail
 
 The following links provide more information about the IBM Conversation service:
 
-* [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)
-* [IBM Watson Conversation - Documentation](http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml)
+* [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
+* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html#about)
 
 ## Discovery
 

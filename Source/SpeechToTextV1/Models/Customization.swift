@@ -29,6 +29,12 @@ public struct Customization: JSONDecodable {
     /// The language of the custom language model. For example, `en-US` or `ja-JP`.
     public let language: String
     
+    /// The dialect of the language for the custom model. For US English and Japanese models,
+    /// the field is always `en-US` or `ja-JP`. For Spanish models, the field indicates the
+    /// dialect for which the model was created: `es-ES` for Castilian Spanish (the default);
+    /// `es-LA` for Latin-American Spanish; or `es-US` for North-American (Mexican) Spanish.
+    public let dialect: String
+    
     /// The ID of the service credentials for the owner of this model.
     public let owner: String
     
@@ -57,6 +63,7 @@ public struct Customization: JSONDecodable {
         customizationID = try json.getString(at: "customization_id")
         created = try json.getString(at: "created")
         language = try json.getString(at: "language")
+        dialect = try json.getString(at: "dialect")
         owner = try json.getString(at: "owner")
         name = try json.getString(at: "name")
         description = try json.getString(at: "description")

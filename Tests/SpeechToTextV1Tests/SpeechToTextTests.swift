@@ -650,6 +650,30 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    // MARK: - Token Authentication
+    
+    func testInvalidCredentials() {
+        let description = "Test invalid credentials."
+        let expectation = self.expectation(description: description)
+        
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: "SpeechSample", withExtension: "wav") else {
+            XCTFail("Unable to locate SpeechSample.wav.")
+            return
+        }
+        
+        let speechToText = SpeechToText(username: "invalid", password: "invalid")
+        let settings = RecognitionSettings(contentType: .wav)
+        let failure = { (error: Error) in
+            if error.localizedDescription.contains("Please confirm that your credentials match") {
+                expectation.fulfill()
+            }
+        }
+        
+        speechToText.recognize(audio: file, settings: settings, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
 
     // MARK: - Transcribe File, Default Settings
 

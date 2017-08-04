@@ -10,37 +10,14 @@ branches:
     - master
 env:
   global:
-    - IOS_SDK="iphonesimulator10.0"
-    - IOS10_DESTINATION="OS=10.0,name=iPhone 6"
+    - IOS_SDK="iphonesimulator10.3"
+    - IOS_DESTINATION="OS=10.3.1,name=iPhone 7"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_566f29436663_key -iv $encrypted_566f29436663_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
+  - openssl aes-256-cbc -K $encrypted_0a18e1be1a16_key -iv $encrypted_0a18e1be1a16_iv -in Source/SupportingFiles/Credentials.swift.enc -out Source/SupportingFiles/Credentials.swift -d
   - for D in `find Tests -type d -maxdepth 1 -mindepth 1`; do echo "cp SupportingFiles/Credentials.swift $D/"; done
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
 script:
   # build and test for iOS 10
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DiscoveryV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "NaturalLanguageUnderstandingV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "PersonalityInsightsV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "RetrieveAndRankV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS10_DESTINATION" -enableCodeCoverage "YES" | xcpretty ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -y ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://swift.org/builds/swift-3.1-release/ubuntu1404/swift-3.1-RELEASE/swift-3.1-RELEASE-ubuntu14.04.tar.gz ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-3.1-RELEASE-ubuntu14.04.tar.gz ; fi

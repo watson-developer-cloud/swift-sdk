@@ -48,26 +48,37 @@ public class AlchemyVision {
     }
     
     /**
-     If the given data represents an error returned by the Alchemy Vision service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the AlchemyVision service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // Typically, we would check the http status code in the response object here, and return
+        // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
+        // services return a status code of 200 if you are able to successfully contact the
+        // service, without regards to whether the response itself was a success or a failure.
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
+            let code = 400
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")
-            if status == "OK" {
-                return nil
-            } else {
-                let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedDescriptionKey: statusInfo
-                ]
-                return NSError(domain: domain, code: 400, userInfo: userInfo)
-            }
+            let userInfo = [
+                NSLocalizedFailureReasonErrorKey: status,
+                NSLocalizedDescriptionKey: statusInfo
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -114,7 +125,7 @@ public class AlchemyVision {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<FaceTags>) in
             switch response.result {
             case .success(let faceTags): success(faceTags)
@@ -164,7 +175,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<FaceTags>) in
             switch response.result {
             case .success(let faceTags): success(faceTags)
@@ -250,7 +261,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ImageLink>) in
             switch response.result {
             case .success(let imageLinks): success(imageLinks)
@@ -288,7 +299,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ImageLink>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ImageLink>) in
             switch response.result {
             case .success(let imageLinks): success(imageLinks)
             case .failure(let error): failure?(error)
@@ -345,7 +356,7 @@ public class AlchemyVision {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ImageKeywords>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ImageKeywords>) in
             switch response.result {
             case .success(let imageKeywords): success(imageKeywords)
             case .failure(let error): failure?(error)
@@ -400,7 +411,7 @@ public class AlchemyVision {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<ImageKeywords>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<ImageKeywords>) in
             switch response.result {
             case .success(let imageKeywords): success(imageKeywords)
             case .failure(let error): failure?(error)
@@ -439,7 +450,7 @@ public class AlchemyVision {
         )
         
         // execute REST requeset
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SceneText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SceneText>) in
             switch response.result {
             case .success(let sceneTexts): success(sceneTexts)
             case .failure(let error): failure?(error)
@@ -476,7 +487,7 @@ public class AlchemyVision {
         )
 
         // execute REST requeset
-        request.responseObject(dataToError: dataToError) { (response: RestResponse<SceneText>) in
+        request.responseObject(responseToError: responseToError) { (response: RestResponse<SceneText>) in
             switch response.result {
             case .success(let sceneTexts): success(sceneTexts)
             case .failure(let error): failure?(error)

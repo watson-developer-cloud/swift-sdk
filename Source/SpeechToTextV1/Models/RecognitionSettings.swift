@@ -34,10 +34,6 @@ public struct RecognitionSettings: JSONEncodable {
     /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
     public var contentType: AudioMediaType
 
-    /// If `true`, then the entire audio stream will be transcribed until it terminates rather
-    /// than stopping at the first half-second of non-speech. The default is `false`.
-    public var continuous: Bool?
-
     /// The number of seconds after which the connection is to time out due to inactivity.
     /// Use `-1` to set the timeout to infinity. The default is `30` seconds.
     public var inactivityTimeout: Int?
@@ -108,9 +104,6 @@ public struct RecognitionSettings: JSONEncodable {
         var json = [String: Any]()
         json["action"] = action
         json["content-type"] = contentType.toString
-        if let continuous = continuous {
-            json["continuous"] = continuous
-        }
         if let inactivityTimeout = inactivityTimeout {
             json["inactivity_timeout"] = inactivityTimeout
         }
@@ -157,14 +150,38 @@ public enum AudioMediaType {
     /// FLAC audio format
     case flac
     
+    /// MP3 audio format
+    case mp3
+    
+    /// MPEG audio format
+    case mpeg
+    
     /// L16 audio format with a rate and channels
     case l16(rate: Int, channels: Int)
     
     /// WAV audio format
     case wav
     
-    /// Opus audio format
-    case opus
+    /// Ogg audio format
+    case ogg
+    
+    /// Ogg audio format with Opus codec
+    case oggOpus
+    
+    /// Ogg audio format with Opus codec
+    case opus // note: for backwards-compatibility before oggOpus and webmOpus
+    
+    /// Ogg audio format with Vorbis codec
+    case oggVorbis
+    
+    /// WebM audio format
+    case webm
+    
+    /// WebM audio format with Opus codec
+    case webmOpus
+    
+    /// WebM audio format with Vorbis codec
+    case webmVorbis
     
     /// mu-law audio format
     case muLaw
@@ -176,9 +193,17 @@ public enum AudioMediaType {
     var toString: String {
         switch self {
         case .flac:                        return "audio/flac"
+        case .mp3:                         return "audio/mp3"
+        case .mpeg:                        return "audio/mpeg"
         case .l16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
         case .wav:                         return "audio/wav"
+        case .ogg:                         return "audio/ogg"
+        case .oggOpus:                     return "audio/ogg;codecs=opus"
         case .opus:                        return "audio/ogg;codecs=opus"
+        case .oggVorbis:                   return "audio/ogg;codecs=vorbis"
+        case .webm:                        return "audio/webm"
+        case .webmOpus:                    return "audio/webm;codecs=opus"
+        case .webmVorbis:                  return "audio/webm;codecs=vorbis"
         case .muLaw:                       return "audio/mulaw"
         case .basic:                       return "audio/basic"
         }

@@ -34,7 +34,6 @@ let package = Package(
         Target(name: "PersonalityInsightsV3",        dependencies: [.Target(name: "RestKit")]),
         Target(name: "RelationshipExtractionV1Beta", dependencies: [.Target(name: "RestKit")]),
         Target(name: "RetrieveAndRankV1",            dependencies: [.Target(name: "RestKit")]),
-        Target(name: "TextToSpeechV1",               dependencies: [.Target(name: "RestKit")]),
         Target(name: "ToneAnalyzerV3",               dependencies: [.Target(name: "RestKit")]),
         Target(name: "TradeoffAnalyticsV1",          dependencies: [.Target(name: "RestKit")]),
         Target(name: "VisualRecognitionV3",          dependencies: [.Target(name: "RestKit")]),
@@ -43,6 +42,7 @@ let package = Package(
     ],
     exclude: [
         "Source/SpeechToTextV1",
-        "Tests/SpeechToTextV1Tests"
+        "Source/SupportingFiles/Dependencies",
+        "Source/TextToSpeechV1"
     ]
 )

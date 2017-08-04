@@ -45,8 +45,10 @@ class TradeoffAnalyticsTests: XCTestCase {
         let username = Credentials.TradeoffAnalyticsUsername
         let password = Credentials.TradeoffAnalyticsPassword
         tradeoffAnalytics = TradeoffAnalytics(username: username, password: password)
+        tradeoffAnalytics.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        tradeoffAnalytics.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
@@ -153,20 +155,20 @@ class TradeoffAnalyticsTests: XCTestCase {
 
             // verify problem options
             let options = dilemma.problem.options
-            XCTAssertEqual(options[0].key, "galaxy")
-            XCTAssertEqual(options[0].name, "Galaxy S4")
+            XCTAssertEqual(options[0].key, "optimus")
+            XCTAssertEqual(options[0].name, "LG Optimus G")
             XCTAssertNotNil(options[0].values["price"])
             XCTAssertNotNil(options[0].values["os"])
             XCTAssertNotNil(options[0].values["ram"])
             XCTAssertNotNil(options[0].values["screen"])
-            XCTAssertEqual(options[1].key, "iphone")
-            XCTAssertEqual(options[1].name, "iPhone 5")
+            XCTAssertEqual(options[1].key, "galaxy")
+            XCTAssertEqual(options[1].name, "Galaxy S4")
             XCTAssertNotNil(options[1].values["price"])
             XCTAssertNotNil(options[1].values["os"])
             XCTAssertNotNil(options[1].values["ram"])
             XCTAssertNotNil(options[1].values["screen"])
-            XCTAssertEqual(options[2].key, "optimus")
-            XCTAssertEqual(options[2].name, "LG Optimus G")
+            XCTAssertEqual(options[2].key, "iphone")
+            XCTAssertEqual(options[2].name, "iPhone 5")
             XCTAssertNotNil(options[2].values["price"])
             XCTAssertNotNil(options[2].values["os"])
             XCTAssertNotNil(options[2].values["ram"])
@@ -176,18 +178,18 @@ class TradeoffAnalyticsTests: XCTestCase {
             let solutions = dilemma.resolution.solutions
             XCTAssertNil(solutions[0].shadowMe)
             XCTAssertNil(solutions[0].shadows)
-            XCTAssertEqual(solutions[0].solutionRef, "galaxy")
-            XCTAssertEqual(solutions[0].status, SolutionStatus.excluded)
+            XCTAssertEqual(solutions[0].solutionRef, "optimus")
+            XCTAssertEqual(solutions[0].status, SolutionStatus.front)
             XCTAssertNil(solutions[0].statusCause)
             XCTAssertNil(solutions[1].shadowMe)
             XCTAssertNil(solutions[1].shadows)
-            XCTAssertEqual(solutions[1].solutionRef, "iphone")
+            XCTAssertEqual(solutions[1].solutionRef, "galaxy")
             XCTAssertEqual(solutions[1].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[1].statusCause)
             XCTAssertNil(solutions[2].shadowMe)
             XCTAssertNil(solutions[2].shadows)
-            XCTAssertEqual(solutions[2].solutionRef, "optimus")
-            XCTAssertEqual(solutions[2].status, SolutionStatus.front)
+            XCTAssertEqual(solutions[2].solutionRef, "iphone")
+            XCTAssertEqual(solutions[2].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[2].statusCause)
             
             expectation.fulfill()
@@ -372,32 +374,32 @@ class TradeoffAnalyticsTests: XCTestCase {
             
             // verify problem options
             let options = dilemma.problem.options
-            XCTAssertEqual(options[0].key, "option1")
-            XCTAssertEqual(options[0].name, "Option 1")
+            XCTAssertEqual(options[0].key, "option3")
+            XCTAssertEqual(options[0].name, "Option 3")
             XCTAssertNotNil(options[0].values["date"])
             XCTAssertNotNil(options[0].values["categorical"])
             XCTAssertNotNil(options[0].values["text"])
             XCTAssertNotNil(options[0].values["numeric-int"])
             XCTAssertNotNil(options[0].values["numeric-double"])
             XCTAssertNotNil(options[0].descriptionHTML)
-            XCTAssertEqual(options[1].key, "option2")
-            XCTAssertEqual(options[1].name, "Option 2")
+            XCTAssertEqual(options[1].key, "option4")
+            XCTAssertEqual(options[1].name, "Option 4")
             XCTAssertNotNil(options[1].values["date"])
             XCTAssertNotNil(options[1].values["categorical"])
             XCTAssertNotNil(options[1].values["text"])
             XCTAssertNotNil(options[1].values["numeric-int"])
             XCTAssertNotNil(options[1].values["numeric-double"])
             XCTAssertNotNil(options[1].descriptionHTML)
-            XCTAssertEqual(options[2].key, "option3")
-            XCTAssertEqual(options[2].name, "Option 3")
+            XCTAssertEqual(options[2].key, "option1")
+            XCTAssertEqual(options[2].name, "Option 1")
             XCTAssertNotNil(options[2].values["date"])
             XCTAssertNotNil(options[2].values["categorical"])
             XCTAssertNotNil(options[2].values["text"])
             XCTAssertNotNil(options[2].values["numeric-int"])
             XCTAssertNotNil(options[2].values["numeric-double"])
             XCTAssertNotNil(options[2].descriptionHTML)
-            XCTAssertEqual(options[3].key, "option4")
-            XCTAssertEqual(options[3].name, "Option 4")
+            XCTAssertEqual(options[3].key, "option2")
+            XCTAssertEqual(options[3].name, "Option 2")
             XCTAssertNotNil(options[3].values["date"])
             XCTAssertNotNil(options[3].values["categorical"])
             XCTAssertNotNil(options[3].values["text"])
@@ -409,9 +411,9 @@ class TradeoffAnalyticsTests: XCTestCase {
             let solutions = dilemma.resolution.solutions
             XCTAssertNil(solutions[0].shadowMe)
             XCTAssertNil(solutions[0].shadows)
-            XCTAssertEqual(solutions[0].solutionRef, "option1")
-            XCTAssertEqual(solutions[0].status, SolutionStatus.front)
-            XCTAssertNil(solutions[0].statusCause)
+            XCTAssertEqual(solutions[0].solutionRef, "option4")
+            XCTAssertEqual(solutions[0].status, SolutionStatus.incomplete)
+            XCTAssertNotNil(solutions[0].statusCause)
             XCTAssertNil(solutions[1].shadowMe)
             XCTAssertNil(solutions[1].shadows)
             XCTAssertEqual(solutions[1].solutionRef, "option2")
@@ -424,9 +426,9 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNotNil(solutions[2].statusCause)
             XCTAssertNil(solutions[3].shadowMe)
             XCTAssertNil(solutions[3].shadows)
-            XCTAssertEqual(solutions[3].solutionRef, "option4")
-            XCTAssertEqual(solutions[3].status, SolutionStatus.incomplete)
-            XCTAssertNotNil(solutions[3].statusCause)
+            XCTAssertEqual(solutions[3].solutionRef, "option1")
+            XCTAssertEqual(solutions[3].status, SolutionStatus.front)
+            XCTAssertNil(solutions[3].statusCause)
             
             expectation.fulfill()
             

@@ -63,21 +63,36 @@ public class SpeechToText {
     }
     
     /**
-     If the given data represents an error returned by the Speech to Text service, then return
-     an NSError object with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Speech to Text service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = try json.getInt(at: "code")
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
-            var userInfo = [
-                NSLocalizedFailureReasonErrorKey: error
-            ]
             if let recoverySuggestion = codeDescription ?? description {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
             }
@@ -104,7 +119,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["models"]) {
+        request.responseArray(responseToError: responseToError, path: ["models"]) {
             (response: RestResponse<[Model]>) in
                 switch response.result {
                 case .success(let models): success(models)
@@ -135,7 +150,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Model>) in
                 switch response.result {
                 case .success(let model): success(model)
@@ -245,21 +260,10 @@ public class SpeechToText {
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
      
-     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
-     
-     - If `false`, then the service ends the recognition request at the first end-of-speech
-     incident (denoted by a half-second of non-speech or when the stream terminates). This
-     will coincide with a `final` transcription result. So the `success` callback should
-     be configured to stop the microphone when a final transcription result is received.
-     
-     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
-     your application may have a button to start/stop the request, or you may stream the
-     microphone for the duration of a long press on a UI element.
-     
-     Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
+     Microphone audio is compressed to OggOpus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
-     `AudioMediaType.Opus`. With compression disabled, the `settings` should specify `contentType`
-     of `AudioMediaType.L16(rate: 16000, channels: 1)`.
+     `AudioMediaType.oggOpus`. With compression disabled, the `settings` should specify a
+     `contentType` of `AudioMediaType.l16(rate: 16000, channels: 1)`.
      
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
@@ -272,8 +276,8 @@ public class SpeechToText {
         request. The base language model of the specified custom language model must match the
         model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter compress: Should microphone audio be compressed to Opus format?
-        (Opus compression reduces latency and bandwidth.)
+     - parameter compress: Should microphone audio be compressed to OggOpus format?
+        (OggOpus compression reduces latency and bandwidth.)
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
         a final or interim transcription is received.
@@ -301,7 +305,7 @@ public class SpeechToText {
         
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .opus : .l16(rate: 16000, channels: 1)
+        settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
         
         // create session
         let session = SpeechToTextSession(
@@ -379,7 +383,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+        request.responseArray(responseToError: responseToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
             switch response.result {
             case .success(let customizations): success(customizations)
@@ -401,6 +405,7 @@ public class SpeechToText {
     public func createCustomization(
         withName name: String,
         withBaseModelName baseModelName: String,
+        dialect: String? = nil,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CustomizationID) -> Void)
@@ -409,6 +414,9 @@ public class SpeechToText {
         var jsonData = [String: Any]()
         jsonData["name"] = name
         jsonData["base_model_name"] = baseModelName
+        if let dialect = dialect {
+            jsonData["dialect"] = dialect
+        }
         if let description = description {
             jsonData["description"] = description
         }
@@ -429,7 +437,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CustomizationID>) in
             switch response.result {
             case .success(let customization): success(customization)
@@ -464,7 +472,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -496,7 +504,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Customization>) in
             switch response.result {
             case .success(let customization): success(customization)
@@ -546,7 +554,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -581,7 +589,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -615,7 +623,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -650,7 +658,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["corpora"]) {
+        request.responseArray(responseToError: responseToError, path: ["corpora"]) {
             (response: RestResponse<[Corpus]>) in
             switch response.result {
             case .success(let corpora): success(corpora)
@@ -687,7 +695,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -721,7 +729,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Corpus>) in
             switch response.result {
             case .success(let corpus): success(corpus)
@@ -783,7 +791,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -839,7 +847,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["words"]) {
+        request.responseArray(responseToError: responseToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
             switch response.result {
             case .success(let words): success(words)
@@ -886,7 +894,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -928,7 +936,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -962,7 +970,7 @@ public class SpeechToText {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Word>) in
             switch response.result {
             case .success(let word): success(word)
@@ -1008,7 +1016,7 @@ public class SpeechToText {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }

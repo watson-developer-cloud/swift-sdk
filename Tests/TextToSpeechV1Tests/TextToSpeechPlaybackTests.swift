@@ -44,8 +44,10 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let username = Credentials.TextToSpeechUsername
         let password = Credentials.TextToSpeechPassword
         textToSpeech = TextToSpeech(username: username, password: password)
+        textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
@@ -167,6 +169,31 @@ class TextToSpeechPlaybackTests: XCTestCase {
                 }
             } catch {
                 XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    // This test works when you run it individually, but for some reason, running it after the
+    // testSynthesizeFlac() method causes this one to fail. The audio types aren't updated somehow,
+    // and the service seems to think we are still requesting .flac instead of .opus.
+    /** Synthesize text to spoken audio in Opus format. */
+    func testSynthesizeOpus() {
+        let description = "Synthesize text to spoken audio in Opus format."
+        let expectation = self.expectation(description: description)
+        
+        textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
+            XCTAssertGreaterThan(data.count, 0)
+            do {
+                let audioPlayer = try AVAudioPlayer(data: data)
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                if self.playAudio {
+                    sleep(3)
+                }
+            } catch {
+                XCTFail("Failed to create audio player.")
             }
             expectation.fulfill()
         }

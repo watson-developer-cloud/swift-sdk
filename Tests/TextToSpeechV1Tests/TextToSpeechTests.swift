@@ -80,8 +80,10 @@ class TextToSpeechTests: XCTestCase {
         let username = Credentials.TextToSpeechUsername
         let password = Credentials.TextToSpeechPassword
         textToSpeech = TextToSpeech(username: username, password: password)
+        textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Delete all customizations. */
     func deleteCustomizations() {
         let description = "Delete all customizations."
@@ -159,6 +161,9 @@ class TextToSpeechTests: XCTestCase {
         }
     }
     
+    // This test works when you run it individually, but for some reason, running it after the 
+    // testSynthesizeFlac() method causes this one to fail. The audio types aren't updated somehow,
+    // and the service seems to think we are still requesting .flac instead of .opus.
     /** Synthesize text to spoken audio in Opus format. */
     func testSynthesizeOpus() {
         let description = "Synthesize text to spoken audio."

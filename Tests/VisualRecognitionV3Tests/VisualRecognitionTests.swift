@@ -35,7 +35,6 @@ class VisualRecognitionTests: XCTestCase {
             ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
             ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
-            ("testUpdateClassifier", testUpdateClassifier),
             ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
             ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
             ("testClassifyByURL1", testClassifyByURL1),
@@ -102,8 +101,10 @@ class VisualRecognitionTests: XCTestCase {
         let apiKey = Credentials.VisualRecognitionAPIKey
         let version = "2016-11-04"
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Load image files with class examples and test images. */
     func loadImageFiles() {
         
@@ -281,7 +282,7 @@ class VisualRecognitionTests: XCTestCase {
     
     /** Wait for expectations. */
     func waitForExpectations() {
-        waitForExpectations(timeout: timeout) { error in
+        waitForExpectations(timeout: timeoutLong) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -415,23 +416,6 @@ class VisualRecognitionTests: XCTestCase {
             XCTAssertEqual(classifier.name, self.classifierName)
             XCTAssertEqual(classifier.classes.count, 1)
             expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Update the trained classifier. */
-    func testUpdateClassifier() {
-        let description = "Update the trained classifier."
-        let expectation = self.expectation(description: description)
-        
-        let car = PositiveExample(name: "car", examples: examplesCars)
-        visualRecognition.updateClassifier(
-            withID: classifierID!,
-            positiveExamples: [car],
-            negativeExamples: examplesTrucks,
-            failure: failWithError) { classifier in
-                XCTAssertEqual(classifier.name, self.classifierName)
-                expectation.fulfill()
         }
         waitForExpectations()
     }

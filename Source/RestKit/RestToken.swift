@@ -28,6 +28,7 @@ public class RestToken {
     
     private var tokenURL: String
     private var credentials: Credentials
+    private let domain = "com.ibm.watson.developer-cloud.RestKit"
     
     /**
      Create a `RestToken`.
@@ -57,8 +58,7 @@ public class RestToken {
             credentials: credentials,
             headerParameters: [:])
         
-        // TODO - validate request
-        request.responseString(dataToError: nil) { response in
+        request.responseString(responseToError: responseToError) { response in
             switch response.result {
             case .success(let token):
                 self.token = token
@@ -68,4 +68,41 @@ public class RestToken {
             }
         }
     }
+    
+    /**
+     Returns an NSError if the response/data represents an error. Otherwise, returns nil.
+     
+     - parameter response: an http response from the token url
+     - parameter data: raw body data from the token url response
+     */
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // fail if no response from token url
+        guard let response = response else {
+            let description = "Token authentication failed. No response from token url."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            return NSError(domain: domain, code: 400, userInfo: userInfo)
+        }
+        
+        // succeed if status code indicates success
+        if (200..<300).contains(response.statusCode) {
+            return nil
+        }
+        
+        // default error description
+        let code = response.statusCode
+        var userInfo = [NSLocalizedDescriptionKey: "Token authentication failed."]
+        
+        // update error description, if available
+        if let data = data {
+            do {
+                let json = try JSON(data: data)
+                let description = try json.getString(at: "description")
+                userInfo[NSLocalizedDescriptionKey] = description
+            } catch { /* no need to catch -- falls back to default description */ }
+        }
+        
+        return NSError(domain: domain, code: code, userInfo: userInfo)
+    }
+
 }

@@ -73,38 +73,6 @@ We also need to copy the frameworks into our application to make them accessible
 
     ![Add Input Files](quickstart-resources/11-AddInputFiles.png?raw=true)
 
-## Add Exception for App Transport Security
-
-To securely connect to IBM Watson services, the application's `Info.plist` file must be modified with an App Transport Security exception for the `watsonplatform.net` domain.
-
-1. In Xcode, right-click on the `Info.plist` file and choose `Open As -> Source Code`.
-
-    ![Open As Source Code](quickstart-resources/12-OpenAsSourceCode.png?raw=true)
-
-2. Copy-and-paste the following source code into the `Info.plist` file.
-
-    ```
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>watsonplatform.net</key>
-            <dict>
-                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSTemporaryExceptionMinimumTLSVersion</key>
-                <string>TLSv1.0</string>
-            </dict>
-        </dict>
-    </dict>
-    ```
-
-    ![App Transport Security Exception](quickstart-resources/13-AppTransportSecurity.png?raw=true)
-
 ## Synthesize with Text to Speech
 
 We will modify our project's `ViewController` to synthesize English text with the Text to Speech service.

@@ -27,7 +27,6 @@ There are many resources to help you build your first cognitive application with
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
-* [Xcode 7 Compatibility](#xcode-7-compatibility)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -70,6 +69,12 @@ $ brew update
 $ brew install carthage
 ```
 
+Then, navigate to the root directory of your project (where your .xcodeproj file is located) and create an empty `Cartfile` there:
+
+```bash
+$ touch Cartfile
+```
+
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
 
 ```
@@ -86,29 +91,17 @@ $ carthage update --platform iOS
 
 Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.
 
-### App Transport Security
+### Swift Package Manager
 
-App Transport Security was introduced with iOS 9 to enforce secure Internet connections. To securely connect to IBM Watson services, please add the following exception to your application's `Info.plist` file.
+To include the Watson SDK to your projects, add the following to your `Package.swift` file:
 
-```xml
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-        <key>watsonplatform.net</key>
-        <dict>
-            <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-            <false/>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-            <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-            <true/>
-            <key>NSTemporaryExceptionMinimumTLSVersion</key>
-            <string>TLSv1.0</string>
-        </dict>
-    </dict>
-</dict>
+```swift
+dependencies: [
+    .Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
+             majorVersion: 0)
+]
 ```
+To build the project, run `swift build` from the command line.
 
 ## Service Instances
 
@@ -133,7 +126,7 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
-See [Getting Started](https://www.ibm.com/watson/developercloud/doc/getting_started/) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Custom Service URLs
 
@@ -158,18 +151,11 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 
 ## Sample Applications
 
+* [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 * [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
-
-## Xcode 7 Compatibility
-
-Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.
-
-To continue using the Swift SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:
-
-`github "watson-developer-cloud/swift-sdk" ~> 0.7.0`
 
 ## Objective-C Compatibility
 
@@ -179,16 +165,7 @@ Please see [this tutorial](docs/objective-c.md) for more information about consu
 
 The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
 
-To include the Watson SDK to your Linux projects, add the following to your `Package.swift` file:
-
-```swift
-dependencies: [
-	.Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
-	         majorVersion: 0)
-]
-```
-
-To build the project, run `swift build` from the command line.
+To include the Watson SDK to your Linux projects, please follow the [Swift Package Manager instructions.](#swift-package-manager)
 
 ## Contributing
 
@@ -325,8 +302,8 @@ conversation.message(withWorkspace: workspaceID, request: request, failure: fail
 
 The following links provide more information about the IBM Conversation service:
 
-* [IBM Watson Conversation - Service Page](http://www.ibm.com/watson/developercloud/conversation.html)
-* [IBM Watson Conversation - Documentation](http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml)
+* [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
+* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html#about)
 
 ## Discovery
 
@@ -555,33 +532,6 @@ The following links provide more information about the Natural Language Classifi
 * [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
-## Personality Insights
-
-The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
-
-The following example demonstrates how to use the Personality Insights service:
-
-```swift
-import PersonalityInsightsV3
-
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "yyyy-mm-dd" // use today's date for the most recent version
-let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
-
-let text = "your-input-text"
-let failure = { (error: Error) in print(error) }
-personalityInsights.getProfile(fromText: text, failure: failure) { profile in
-    print(profile)                      
-}
-```
-
-The following links provide more information about the Personality Insights service:
-
-* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
-* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
-* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
-
 ## Natural Language Understanding
 
 The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
@@ -610,7 +560,8 @@ let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: userna
 
 let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
 
-let parameters = Parameters(features: Features(), text: textToAnalyze)
+let features = Features(concepts: ConceptsOptions(limit: 5))
+let parameters = Parameters(features: features, text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
@@ -619,6 +570,42 @@ naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure:
 }
 
 ```
+
+#### 500 errors
+Note that **you are required to include at least one feature in your request.** You will receive a 500 error if you do not include any features in your request.
+
+The following links provide more information about the Natural Language Understanding service:
+
+* [IBM Watson Natural Language Understanding - Service Page](http://www.ibm.com/watson/developercloud/natural-language-understanding.html)
+* [IBM Watson Natural Language Understanding - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-understanding/)
+* [IBM Watson Natural Language Understanding - Demo](http://natural-language-understanding-demo.mybluemix.net)
+
+## Personality Insights
+
+The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
+
+The following example demonstrates how to use the Personality Insights service:
+
+```swift
+import PersonalityInsightsV3
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "yyyy-mm-dd" // use today's date for the most recent version
+let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
+
+let text = "your-input-text"
+let failure = { (error: Error) in print(error) }
+personalityInsights.getProfile(fromText: text, failure: failure) { profile in
+    print(profile)                      
+}
+```
+
+The following links provide more information about the Personality Insights service:
+
+* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
+* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
 ## Retrieve and Rank
 
@@ -755,12 +742,11 @@ The `SpeechToText` class is the SDK's primary interface for performing speech re
 
 The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml#WSstart).
 
-The following example demonstrates how to define a recognition request that transcribes Opus-formatted audio data with interim results until the stream terminates:
+The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:
 
 ```swift
 var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
-settings.continuous = true
 ```
 
 See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://www.ibm.com/watson/developercloud/doc/speech-to-text/details.shtml) for more information about the available settings.
@@ -769,19 +755,19 @@ See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/se
 
 The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
 
-Knowing when to stop the microphone depends upon the recognition request's `continuous` setting:
-     
-- If `false`, then the service ends the recognition request at the first end-of-speech incident (denoted by a half-second of non-speech or when the stream terminates). This will coincide with a `final` transcription result. So the `success` or `onResults` callback should be configured to stop the microphone when a final transcription result is received.
+There are two different ways that your app can determine when to stop the microphone:
 
-- If `true`, then the microphone will typically be stopped by user-feedback. For example, your application may have a button to start/stop the request, or you may stream the microphone for the duration of a long press on a UI element.
+- User Interaction: Your app could rely on user input to stop the microphone. For example, you could use a button to start/stop transcribing, or you could require users to press-and-hold a button to start/stop transcribing.
 
-To reduce latency and bandwidth, the microphone audio is compressed to Opus format by default. To disable compression, set the `compress` parameter to `false`.
+- Final Result: Each transcription result has a `final` property that is `true` when the audio stream is complete or a timeout has occurred. By watching for the `final` property, your app can stop the microphone after determining when the user has finished speaking.
+
+To reduce latency and bandwidth, the microphone audio is compressed to OggOpus format by default. To disable compression, set the `compress` parameter to `false`.
 
 It's important to specify the correct audio format for recognition requests that use the microphone:
 
 ```swift
-// compressed microphone audio uses the Opus format
-let settings = RecognitionSettings(contentType: .opus)
+// compressed microphone audio uses the OggOpus format
+let settings = RecognitionSettings(contentType: .oggOpus)
 
 // uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz
 let settings = RecognitionSettings(contentType: .l16(rate: 16000, channels: 1))
@@ -820,8 +806,7 @@ let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
 func startStreaming() {
-    var settings = RecognitionSettings(contentType: .opus)
-    settings.continuous = true
+    var settings = RecognitionSettings(contentType: .oggOpus)
     settings.interimResults = true
     let failure = { (error: Error) in print(error) }
     speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
@@ -836,14 +821,14 @@ func stopStreaming() {
 
 #### Session Management and Advanced Features
 
-Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
+Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
 
 The following steps describe how to execute a recognition request with `SpeechToTextSession`:
 
 1. Connect: Invoke `connect()` to connect to the service.
 2. Start Recognition Request: Invoke `startRequest(settings:)` to start a recognition request.
 3. Send Audio: Invoke `recognize(audio:)` or `startMicrophone(compress:)`/`stopMicrophone()` to send audio to the service.
-4. Stop Recognition Request: Invoke `stopRequest()` to end the recognition request. The service will automatically stop the request if the `continuous` setting is not set to `true`. If the recognition request is already stopped, then sending a stop message will have no effect.
+4. Stop Recognition Request: Invoke `stopRequest()` to end the recognition request. If the recognition request is already stopped, then sending a stop message will have no effect.
 5. Disconnect: Invoke `disconnect()` to wait for any remaining results to be received and then disconnect from the service.
 
 All text and data messages sent by `SpeechToTextSession` are queued, with the exception of `connect()` which immediately connects to the server. The queue ensures that the messages are sent in-order and also buffers messages while waiting for a connection to be established. This behavior is generally transparent.
@@ -851,7 +836,7 @@ All text and data messages sent by `SpeechToTextSession` are queued, with the ex
 A `SpeechToTextSession` also provides several (optional) callbacks. The callbacks can be used to learn about the state of the session or access microphone data.
 
 - `onConnect`: Invoked when the session connects to the Speech to Text service.
-- `onMicrophoneData`: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.
+- `onMicrophoneData`: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in OggOpus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.
 - `onPowerData`: Invoked every 0.025s when recording with the average dB power of the microphone.
 - `onResults`: Invoked when transcription results are received for a recognition request.
 - `onError`: Invoked when an error or warning occurs.
@@ -866,6 +851,14 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToTextSession = SpeechToTextSession(username: username, password: password)
 
+do {
+    let session = AVAudioSession.sharedInstance()
+    try session.setActive(true)
+    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
+} catch {
+    // handle errors
+}
+
 func startStreaming() {
     // define callbacks
     speechToTextSession.onConnect = { print("connected") }
@@ -876,9 +869,8 @@ func startStreaming() {
     speechToTextSession.onResults = { results in print(results.bestTranscript) }
 
     // define recognition request settings
-    var settings = RecognitionSettings(contentType: .opus)
+    var settings = RecognitionSettings(contentType: .oggOpus)
     settings.interimResults = true
-    settings.continuous = true
 
     // start streaming microphone audio for transcription
     speechToTextSession.connect()
@@ -997,6 +989,20 @@ if customizationStatus == .available {
 }
 ```
 
+#### Important notes
+* Since v0.11.0, if you use `SpeechToTextSession`, you'll need to manage the setup for the `AVAudioSession` shared instance. Without the code below, you won't receive data from the Speech To Text service properly. This isn't necessary if you use the `SpeechToText` class.
+```swift
+do {
+    let session = AVAudioSession.sharedInstance()
+    try session.setActive(true)
+    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
+} catch {
+    // handle errors
+}
+```
+
+* As of iOS 10, if you access the device's microphone, you'll be required to include the `NSMicrophoneUsageDescription` key in your `Info.plist` file, or the app will exit. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
+
 #### Additional Information
 
 The following links provide more information about the IBM Speech to Text service:
@@ -1055,6 +1061,11 @@ textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: f
 // if it falls out-of-scope. Therefore, it's important to declare it as a
 // property or otherwise keep it in-scope beyond the completion handler.
 ```
+
+#### Important notes
+* Prior to v0.15.2, users could already request Opus as the return type. Opus files are much smaller than WAV files, so this would save bandwidth. However, Opus isn't playable by the iOS platform.
+* In v0.15.2, we have added functionality to decode Opus files and convert them to WAV files.
+* Currently, this is being done automatically when Opus files are requested. In a future release, we will allow users more control over when the decoding process occurs.
 
 The following links provide more information about the IBM Text To Speech service:
 

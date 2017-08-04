@@ -53,7 +53,7 @@ public class SpeechToTextSession {
     }
     
     /// Invoked with microphone audio when a recording audio queue buffer has been filled.
-    /// If microphone audio is being compressed, then the audio data is in Opus format.
+    /// If microphone audio is being compressed, then the audio data is in OggOpus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
     public var onMicrophoneData: ((Data) -> Void)?
     
@@ -90,7 +90,8 @@ public class SpeechToTextSession {
             websocketsURL: self.websocketsURL,
             defaultHeaders: self.defaultHeaders
         )
-        socket.onDisconnect = {
+        socket.onDisconnect = { [weak self] in
+            guard let `self` = self else { return }
             if self.recorder.isRecording {
                 self.stopMicrophone()
             }
@@ -185,30 +186,19 @@ public class SpeechToTextSession {
     /**
      Start streaming microphone audio data to transcribe.
      
-     Knowing when to stop the microphone depends upon the recognition request's continuous setting:
-     
-     - If `false`, then the service ends the recognition request at the first end-of-speech
-     incident (denoted by a half-second of non-speech or when the stream terminates). This
-     will coincide with a `final` transcription result. So the `success` callback should
-     be configured to stop the microphone when a final transcription result is received.
-     
-     - If `true`, then you will typically stop the microphone based on user-feedback. For example,
-     your application may have a button to start/stop the request, or you may stream the
-     microphone for the duration of a long press on a UI element.
-     
-     By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
-     To disable Opus compression and send linear PCM data instead, set `compress` to `false`.
+     By default, microphone audio data is compressed to OggOpus format to reduce latency and bandwidth.
+     To disable OggOpus compression and send linear PCM data instead, set `compress` to `false`.
      
      If compression is enabled, the recognitions request's `contentType` setting should be set to
-     `AudioMediaType.Opus`. If compression is disabled, then the `contentType` settings should be
+     `AudioMediaType.oggOpus`. If compression is disabled, then the `contentType` settings should be
      set to `AudioMediaType.L16(rate: 16000, channels: 1)`.
      
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
      would rather prefer to ask for the user's permission in advance.
      
-     - parameter compress: Should microphone audio be compressed to Opus format?
-        (Opus compression reduces latency and bandwidth.)
+     - parameter compress: Should microphone audio be compressed to OggOpus format?
+        (OggOpus compression reduces latency and bandwidth.)
      */
     public func startMicrophone(compress: Bool = true) {
         self.compress = compress
@@ -231,14 +221,16 @@ public class SpeechToTextSession {
             }
             
             // callback if uncompressed
-            let onMicrophoneDataPCM = { (pcm: Data) in
+            let onMicrophoneDataPCM = { [weak self] (pcm: Data) in
+                guard let `self` = self else { return }
                 guard pcm.count > 0 else { return }
                 self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
             }
             
             // callback if compressed
-            let onMicrophoneDataOpus = { (pcm: Data) in
+            let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
+                guard let `self` = self else { return }
                 guard pcm.count > 0 else { return }
                 try! self.encoder.encode(pcm: pcm)
                 let opus = self.encoder.bitstream(flush: true)
@@ -293,23 +285,6 @@ public class SpeechToTextSession {
      */
     public func stopRequest() {
         socket.writeStop()
-    }
-    
-    /**
-     Send a message to prevent the service from automatically disconnecting due to inactivity.
- 
-     As described in the service documentation, the Speech to Text service terminates the session
-     and closes the connection if the inactivity or session timeout is reached. The inactivity
-     timeout occurs if audio is being sent by the client but the service detects no speech. The
-     inactivity timeout is 30 seconds by default, but can be configured by specifying a value for
-     the `inactivityTimeout` setting. The session timeout occurs if the service receives no data
-     from the client or sends no interim results for 30 seconds. You cannot change the length of
-     this timeout; however, you can extend the session by sending a message. This function sends
-     a `no-op` message to touch the session and reset the session timeout in order to keep the
-     connection alive.
-     */
-    public func keepAlive() {
-        socket.writeNop()
     }
     
     /**

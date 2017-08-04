@@ -42,31 +42,47 @@ public class LanguageTranslator {
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-
+    
     /**
-     If the given data represents an error returned by the Visual Recognition service, then return
-     an NSError with information about the error that occured. Otherwise, return nil.
+     If the response or data represents an error returned by the Language Translator service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
      
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> Error? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            
-            if let code = try? json.getInt(at: "error_code") {
-                let message = try json.getString(at: "error_message")
-                let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            let code = response?.statusCode ?? 400
+            let userInfo: [String: String]
+            if let message = try? json.getString(at: "error_message") {
+                userInfo = [NSLocalizedFailureReasonErrorKey: message]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else {
-                let error = try json.getString(at: "error")
-                let code = try json.getInt(at: "code")
+                let message = try json.getString(at: "error")
                 let description = try json.getString(at: "description")
-                let userInfo = [
-                    NSLocalizedFailureReasonErrorKey: error,
+                userInfo = [
+                    NSLocalizedFailureReasonErrorKey: message,
                     NSLocalizedRecoverySuggestionErrorKey: description
                 ]
-                return NSError(domain: domain, code: code, userInfo: userInfo)
             }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
@@ -116,7 +132,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["models"]) {
+        request.responseArray(responseToError: responseToError, path: ["models"]) {
             (response: RestResponse<[TranslationModel]>) in
             switch response.result {
             case .success(let models): success(models)
@@ -172,7 +188,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError, path: ["model_id"]) {
+        request.responseObject(responseToError: responseToError, path: ["model_id"]) {
             (response: RestResponse<String>) in
             switch response.result {
             case .success(let modelID): success(modelID)
@@ -206,7 +222,7 @@ public class LanguageTranslator {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -238,7 +254,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<MonitorTraining>) in
                 switch response.result {
                 case .success(let monitorTraining): success(monitorTraining)
@@ -367,7 +383,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<TranslateResponse>) in
                 switch response.result {
                 case .success(let translateResponse): success(translateResponse)
@@ -398,7 +414,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["languages"]) {
+        request.responseArray(responseToError: responseToError, path: ["languages"]) {
             (response: RestResponse<[IdentifiableLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)
@@ -440,7 +456,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["languages"]) {
+        request.responseArray(responseToError: responseToError, path: ["languages"]) {
             (response: RestResponse<[IdentifiedLanguage]>) in
                 switch response.result {
                 case .success(let languages): success(languages)

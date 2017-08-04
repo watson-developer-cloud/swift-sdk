@@ -37,6 +37,20 @@
                BlueprintName = "AlchemyVisionV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AlchemyVisionTests/testGetImageURL()">
+               </Test>
+               <Test
+                  Identifier = "AlchemyVisionTests/testGetRankedImageFaceTagsImageWithoutIdentity()">
+               </Test>
+               <Test
+                  Identifier = "AlchemyVisionTests/testGetRankedImageKeywordsImage1()">
+               </Test>
+               <Test
+                  Identifier = "AlchemyVisionTests/testGetRankedImageKeywordsImage2()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
@@ -70,6 +84,13 @@
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

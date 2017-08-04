@@ -73,8 +73,10 @@ class SpeechToTextTests: XCTestCase {
         let username = Credentials.SpeechToTextUsername
         let password = Credentials.SpeechToTextPassword
         speechToText = SpeechToText(username: username, password: password)
+        speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
@@ -361,6 +363,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssertNotNil(customization.customizationID)
                 XCTAssertNotNil(customization.created)
                 XCTAssertNotNil(customization.language)
+                XCTAssertNotNil(customization.dialect)
                 XCTAssertNotNil(customization.owner)
                 XCTAssertNotNil(customization.name)
                 XCTAssertNotNil(customization.baseModelName)
@@ -382,6 +385,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.createCustomization(
             withName: "swift-sdk-unit-test-customization-to-delete",
             withBaseModelName: "en-US_BroadbandModel",
+            dialect: "en-US",
             description: "customization created for test",
             failure: failWithError) { customization in
             
@@ -646,6 +650,30 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    // MARK: - Token Authentication
+    
+    func testInvalidCredentials() {
+        let description = "Test invalid credentials."
+        let expectation = self.expectation(description: description)
+        
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: "SpeechSample", withExtension: "wav") else {
+            XCTFail("Unable to locate SpeechSample.wav.")
+            return
+        }
+        
+        let speechToText = SpeechToText(username: "invalid", password: "invalid")
+        let settings = RecognitionSettings(contentType: .wav)
+        let failure = { (error: Error) in
+            if error.localizedDescription.contains("Please confirm that your credentials match") {
+                expectation.fulfill()
+            }
+        }
+        
+        speechToText.recognize(audio: file, settings: settings, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
 
     // MARK: - Transcribe File, Default Settings
 
@@ -654,7 +682,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeFileDefaultOpus() {
-        transcribeFileDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeFileDefaultFLAC() {
@@ -695,7 +723,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeFileCustomOpus() {
-        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeFileCustomFLAC() {
@@ -717,7 +745,6 @@ class SpeechToTextTests: XCTestCase {
         }
 
         var settings = RecognitionSettings(contentType: format)
-        settings.continuous = true
         settings.inactivityTimeout = -1
         settings.keywords = ["tornadoes"]
         settings.keywordsThreshold = 0.75
@@ -748,7 +775,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeDataDefaultOpus() {
-        transcribeDataDefault(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeDataDefaultFLAC() {
@@ -796,7 +823,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func testTranscribeDataCustomOpus() {
-        transcribeDataCustom(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
 
     func testTranscribeDataCustomFLAC() {
@@ -821,7 +848,6 @@ class SpeechToTextTests: XCTestCase {
             let audio = try Data(contentsOf: file)
             
             var settings = RecognitionSettings(contentType: format)
-            settings.continuous = true
             settings.inactivityTimeout = -1
             settings.keywords = ["tornadoes"]
             settings.keywordsThreshold = 0.75
@@ -901,7 +927,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func testTranscribeDataWithSpeakerLabelsOpus() {
-        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .opus)
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
     
     func testTranscribeDataWithSpeakerLabelsFLAC() {
@@ -926,7 +952,6 @@ class SpeechToTextTests: XCTestCase {
             let audio = try Data(contentsOf: file)
             
             var settings = RecognitionSettings(contentType: format)
-            settings.continuous = true
             settings.inactivityTimeout = -1
             settings.interimResults = false
             settings.wordConfidence = true

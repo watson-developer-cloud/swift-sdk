@@ -29,32 +29,6 @@ Add a "Copy Frameworks" build phase with the frameworks and dependencies you'd l
 
 <img width="692" alt="screen shot 2016-09-11 at 12 13 04 am" src="https://cloud.githubusercontent.com/assets/1957636/18415356/882803c4-77b4-11e6-912c-0a4d9745340c.png">
 
-Add the following App Transport Security exception to `Info.plist`.
-
-```
-<key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>watsonplatform.net</key>
-            <dict>
-                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSTemporaryExceptionMinimumTLSVersion</key>
-                <string>TLSv1.0</string>
-            </dict>
-        </dict>
-    </dict>
-```
-
-<img width="456" alt="screen shot 2016-09-11 at 12 22 54 am" src="https://cloud.githubusercontent.com/assets/1957636/18415393/1b2c54c6-77b6-11e6-9821-c0a1ea633aa4.png">
-
-<img width="892" alt="screen shot 2016-09-11 at 12 23 11 am" src="https://cloud.githubusercontent.com/assets/1957636/18415396/1df60da0-77b6-11e6-95cd-971aab361fb5.png">
-
 ## Bridge Objective-C to Swift
 
 Create a `WatsonBridge.swift` file. When prompted, allow Xcode to build an Objective-C bridging header.

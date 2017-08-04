@@ -45,21 +45,36 @@ public class TextToSpeech {
     }
     
     /**
-     If the given data represents an error returned by the Text to Speech service, then return
-     an NSError object with information about the error that occured. Otherwise, return nil.
- 
+     If the response or data represents an error returned by the Text to Speech service,
+     then return NSError with information about the error that occured. Otherwise, return nil.
+     
+     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
-    private func dataToError(data: Data) -> NSError? {
+    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+        
+        // First check http status code in response
+        if let response = response {
+            if response.statusCode >= 200 && response.statusCode < 300 {
+                return nil
+            }
+        }
+        
+        // ensure data is not nil
+        guard let data = data else {
+            if let code = response?.statusCode {
+                return NSError(domain: domain, code: code, userInfo: nil)
+            }
+            return nil  // RestKit will generate error for this case
+        }
+        
         do {
             let json = try JSON(data: data)
-            let error = try json.getString(at: "error")
-            let code = try json.getInt(at: "code")
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
-            var userInfo = [
-                NSLocalizedFailureReasonErrorKey: error
-            ]
             if let recoverySuggestion = codeDescription ?? description {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
             }
@@ -89,7 +104,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["voices"]) {
+        request.responseArray(responseToError: responseToError, path: ["voices"]) {
             (response: RestResponse<[Voice]>) in
             switch response.result {
             case .success(let voices): success(voices)
@@ -134,7 +149,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Voice>) in
             switch response.result {
             case .success(let voice): success(voice)
@@ -188,7 +203,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Pronunciation>) in
             switch response.result {
             case .success(let voice): success(voice)
@@ -243,7 +258,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none:
                     if audioFormat == .wav {
@@ -258,6 +273,17 @@ public class TextToSpeech {
                         }
                         TextToSpeech.repairWAVHeader(data: &wav)
                         success(wav)
+                    } else if audioFormat == .opus {
+                        do {
+                            let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                            success(decodedAudio.pcmDataWithHeaders)
+                        } catch {
+                            let failureReason = "Returned audio is in an unexpected format."
+                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                            failure?(error)
+                            return
+                        }
                     } else {
                         success(data)
                     }
@@ -303,7 +329,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseArray(dataToError: dataToError, path: ["customizations"]) {
+        request.responseArray(responseToError: responseToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
             switch response.result {
             case .success(let customizations): success(customizations)
@@ -357,7 +383,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CustomizationID>) in
             switch response.result {
             case .success(let customizationID): success(customizationID)
@@ -391,7 +417,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -423,7 +449,7 @@ public class TextToSpeech {
         )
         
         // execute REST request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CustomizationWords>) in
             switch response.result {
             case .success(let customizationWords): success(customizationWords)
@@ -477,7 +503,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -510,7 +536,7 @@ public class TextToSpeech {
         )
         
         // execute the request
-        request.responseArray(dataToError: dataToError, path: ["words"]) {
+        request.responseArray(responseToError: responseToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
             switch response.result {
             case .success(let words): success(words)
@@ -558,7 +584,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -594,7 +620,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }
@@ -628,7 +654,7 @@ public class TextToSpeech {
         )
         
         // execute the request
-        request.responseObject(dataToError: dataToError) {
+        request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Translation>) in
             switch response.result {
             case .success(let translation): success(translation)
@@ -677,7 +703,7 @@ public class TextToSpeech {
         request.responseData { response in
             switch response.result {
             case .success(let data):
-                switch self.dataToError(data: data) {
+                switch self.responseToError(response: response.response, data: data) {
                 case .some(let error): failure?(error)
                 case .none: success?()
                 }

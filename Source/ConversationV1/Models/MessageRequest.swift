@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@ import Foundation
 import RestKit
 
 /** A request formatted for the Conversation service. */
-public struct MessageRequest: JSONEncodable {
-    
-    private let input: Input
+public struct MessageRequest: JSONDecodable, JSONEncodable {
+
+    private let input: Input?
     private let alternateIntents: Bool?
     private let context: Context?
     private let entities: [Entity]?
     private let intents: [Intent]?
     private let output: Output?
-    
+
     /**
      Create a `MessageRequest`.
-     
+
      - parameter input: An input object that includes the input text.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return
         all matching intents. For example, return all intents when the confidence is not high
@@ -45,7 +45,7 @@ public struct MessageRequest: JSONEncodable {
         requests within the same Dialog turn to pass back in the intermediate information.
      */
     public init(
-        input: Input,
+        input: Input? = nil,
         alternateIntents: Bool? = nil,
         context: Context? = nil,
         entities: [Entity]? = nil,
@@ -59,10 +59,10 @@ public struct MessageRequest: JSONEncodable {
         self.intents = intents
         self.output = output
     }
-    
+
     /**
      Create a `MessageRequest`.
-     
+
      - parameter text: The input text.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return
         all matching intents. For example, return all intents when the confidence is not high
@@ -92,11 +92,22 @@ public struct MessageRequest: JSONEncodable {
         self.intents = intents
         self.output = output
     }
-    
+
+    // MARK: JSONDecodable
+    /// Used internally to initialize a `MessageRequest` model from JSON.
+    public init(json: JSON) throws {
+        input = try? json.decode(at: "input", type: Input.self)
+        alternateIntents = try? json.getBool(at: "alternate_intents")
+        context = try? json.decode(at: "context", type: Context.self)
+        entities = try? json.decodedArray(at: "entities", type: Entity.self)
+        intents = try? json.decodedArray(at: "intents", type: Intent.self)
+        output = try? json.decode(at: "output", type: Output.self)
+    }
+
     /// Used internally to serialize a `MessageRequest` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["input"] = input.toJSONObject()
+        if let input = input { json["input"] = input.toJSONObject() }
         if let alternateIntents = alternateIntents {
             json["alternate_intents"] = alternateIntents
         }

@@ -22,15 +22,15 @@ import DiscoveryV1
 class DiscoveryTests: XCTestCase {
     
     private var discovery: Discovery!
-    private let timeout: TimeInterval = 15.0
-    private let environmentName: String = "swift-sdk-unit-test-environment"
-    private let testDescription: String = "For testing"
+    private let timeout = 20.0
+    private let environmentName = "swift-sdk-unit-test-environment"
+    private let testDescription = "For testing"
     private var environmentID: String?
-    private let newsEnvironmentName: String = "Watson News Environment"
+    private let newsEnvironmentName = "Watson News Environment"
     private var newsEnvironmentID: String?
-    private let newsCollectionName: String = "watson_news"
+    private let newsCollectionName = "watson_news"
     private var newsCollectionID: String?
-    private let collectionName: String = "swift-sdk-unit-test-collection"
+    private let collectionName = "swift-sdk-unit-test-collection"
     private var collectionID: String?
     private var configurationID: String?
     private var documentID: String?
@@ -48,14 +48,42 @@ class DiscoveryTests: XCTestCase {
         addDocumentToCollection()
     }
     
+    override class func tearDown() {
+        let failure = { (error: Error) in
+            XCTFail("Failed with error: \(error)")
+        }
+        
+        let discovery = Discovery(username: Credentials.DiscoveryUsername, password: Credentials.DiscoveryPassword, version: "2016-12-01")
+        discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        discovery.defaultHeaders["X-Watson-Test"] = "true"
+        var trainedEnvironmentID: String?
+        
+        let description1 = "Get trained environment ID."
+        let expectation1 = XCTestExpectation(description: description1)
+        discovery.getEnvironments(withName: "swift-sdk-unit-test-environment", failure: failure) { environment in
+            trainedEnvironmentID = environment.first?.environmentID
+            expectation1.fulfill()
+        }
+        XCTWaiter.wait(for: [expectation1], timeout: 20)
+        
+        let description2 = "Delete the trained environment."
+        let expectation2 = XCTestExpectation(description: description2)
+        discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { environment in
+            expectation2.fulfill()
+        }
+        XCTWaiter.wait(for: [expectation2], timeout: 20)
+    }
+    
     /** Instantiate Discovery instance. */
     func instantiateDiscovery() {
         let username = Credentials.DiscoveryUsername
         let password = Credentials.DiscoveryPassword
         let version = "2016-12-01"
         discovery = Discovery(username: username, password: password, version: version)
+        discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        discovery.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Look up (or create) environment. */
     func lookupEnvironment() {
         let description = "Look up (or create) the environment."
@@ -89,7 +117,7 @@ class DiscoveryTests: XCTestCase {
         let failure = { (error: Error) in XCTFail("Could not create environment") }
         discovery.createEnvironment(
             withName: environmentName,
-            withSize: .zero,
+            withSize: .one,
             withDescription: testDescription,
             failure: failure) { environment in
                 self.environmentID = environment.environmentID
@@ -97,6 +125,8 @@ class DiscoveryTests: XCTestCase {
                 return
         }
         waitForExpectations()
+        
+        sleep(30)
     }
     
     /** Lookup default configuration for environment created. */
@@ -191,6 +221,29 @@ class DiscoveryTests: XCTestCase {
     
     /** Create a collection for the test suite. */
     func createCollection() {
+        
+        var environmentReady = false
+        var tries = 0
+        while(!environmentReady) {
+            tries += 1
+            let description = "Get environment and check if it's `active`."
+            let expectation = self.expectation(description: description)
+            self.discovery.getEnvironment(withID: environmentID!, failure: failWithError) { environment in
+                if environment.status == "active" {
+                    environmentReady = true
+                }
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            
+            if tries > 5 {
+                XCTFail("Environment is not ready, could not add new collection. Try again later.")
+                return
+            }
+            
+            sleep(5)
+        }
+        
         let description = "Create collection for the test suite."
         let expectation = self.expectation(description: description)
         
@@ -285,7 +338,7 @@ class DiscoveryTests: XCTestCase {
 
         discovery.createEnvironment(
             withName: environmentName,
-            withSize: .zero,
+            withSize: .one,
             withDescription: testDescription,
             failure: failWithError)
         {
@@ -323,6 +376,9 @@ class DiscoveryTests: XCTestCase {
             expectation2.fulfill()
         }
         waitForExpectations()
+        
+        // Allow time for the environment to be ready for the next test.
+        sleep(20)
     }
     
     /** Get the trained environment. */
@@ -408,7 +464,40 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
+    /** Retrieve a configuration by name where the name contains special chars. */
+    func testGetConfigurationWithFunkyName() {
+        let description = "Retrieve a configuration with a funky name."
+        let expectation = self.expectation(description: description)
+
+        guard let environmentID = environmentID else {
+            XCTFail("Failed to find test environment")
+            return
+        }
+
+        let configurationName = UUID().uuidString + " with \"funky\" ?x=y&foo=bar ,[x](y) ~!@#$%^&*()-+ {} | ;:<>\\/ chars"
+
+        let configuration = ConfigurationDetails(
+            name: configurationName,
+            description: "configuration with funky name")
+
+        discovery.createConfiguration(
+            withEnvironmentID: environmentID,
+            configuration: configuration,
+            failure: failWithError) { _ in
+
+                self.discovery.getConfigurations(withEnvironmentID: environmentID, withName: configurationName, failure: self.failWithError) {
+                    configurations in
+
+                    XCTAssertEqual(configurations.count, 1)
+                    XCTAssertEqual(configurations[0].name, configurationName)
+                    expectation.fulfill()
+                }
+            }
+
+        waitForExpectations()
+    }
+
     /** Create and delete a configuration. */
     func testCreateAndDeleteConfiguration() {
         let description = "Create a new configuration."
@@ -507,7 +596,7 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(configuration.configurationID, newConfigID)
             XCTAssertEqual(configuration.status, "deleted")
-            XCTAssertEqual(configuration.noticeMessages?.count, nil)
+            XCTAssertEqual(configuration.noticeMessages?.count, 0)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -652,7 +741,7 @@ class DiscoveryTests: XCTestCase {
                 
                 XCTAssertEqual(configuration.configurationID, newConfigID)
                 XCTAssertEqual(configuration.status, "deleted")
-                XCTAssertEqual(configuration.noticeMessages?.count, nil)
+                XCTAssertEqual(configuration.noticeMessages?.count, 0)
                 expectation4.fulfill()
         }
         waitForExpectations()

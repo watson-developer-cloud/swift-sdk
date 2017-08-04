@@ -81,8 +81,10 @@ class RetrieveAndRankTests: XCTestCase {
         let username = Credentials.RetrieveAndRankUsername
         let password = Credentials.RetrieveAndRankPassword
         retrieveAndRank = RetrieveAndRank(username: username, password: password)
+        retrieveAndRank.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        retrieveAndRank.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

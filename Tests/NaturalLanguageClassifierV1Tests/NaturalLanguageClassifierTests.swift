@@ -53,8 +53,10 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let username = Credentials.NaturalLanguageClassifierUsername
         let password = Credentials.NaturalLanguageClassifierPassword
         naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+        naturalLanguageClassifier.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        naturalLanguageClassifier.defaultHeaders["X-Watson-Test"] = "true"
     }
-    
+
     /** Fail false negatives. */
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")

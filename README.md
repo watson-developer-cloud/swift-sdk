@@ -126,7 +126,7 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 
 Note that service credentials are different from your Bluemix username and password.
 
-See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://console.bluemix.net/docs/services/watson/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Custom Service URLs
 
@@ -176,7 +176,7 @@ We would love any and all help! If you would like to contribute, please read our
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
 
-This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools. 
+This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
 ## AlchemyData News
 
@@ -303,7 +303,7 @@ conversation.message(withWorkspace: workspaceID, request: request, failure: fail
 The following links provide more information about the IBM Conversation service:
 
 * [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
-* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html#about)
+* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
 
 ## Discovery
 
@@ -333,8 +333,8 @@ discovery.createEnvironment(
     withName: environmentName,
     withSize: .zero,
     withDescription: testDescription,
-    failure: failure) 
-{   
+    failure: failure)
+{
 	environment in
     self.environmentID = environment.environmentID
 }
@@ -343,7 +343,7 @@ discovery.createEnvironment(
 bool environmentReady = false
 while (!environmentReady) {
 	discovery.getEnvironment(withName: environmentName, failure: failure)
-	{ 
+	{
 		environment in
 		if environment.status == "active" {
 		 self.environmentReady = true
@@ -361,7 +361,7 @@ discovery.createCollection(
     withDescription: collectionDescription,
     withConfigurationID: configurationID,
     failure: failure)
-{   
+{
 	collection in
     self.collectionID = collection.collectionID
 }
@@ -372,7 +372,7 @@ while (!collectionReady) {
 	discovery.listCollectionDetails(
 	withEnvironmentID: environmentID!,
 	withCollectionID: collectionID!,
-	failure: failWithError) 
+	failure: failWithError)
 {
     collection in
     if collection.status == CollectionStatus.active {
@@ -389,7 +389,7 @@ discovery.addDocumentToCollection(
     withEnvironmentID: environmentID!,
     withCollectionID: collectionID!,
     file: file,
-    failure: failWithError) 
+    failure: failWithError)
 {
     document in
     NSLog(document)
@@ -398,24 +398,24 @@ discovery.addDocumentToCollection(
 ```
 The following example demonstrates how to perform a query on the Discovery instance using the `KennedySpeech.html` we have within our `DiscoveryV1Tests` folder:
 
-```swift 
+```swift
 /// String to search for within the documents.
 let query = "United Nations"
 
 /// Find the max sentiment score for entities within the enriched text.
 let aggregation = "max(enriched_text.entities.sentiment.score)"
-    
+
 /// Specify which portion of the document hierarchy to return.
 let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
-    
+
 discovery.queryDocumentsInCollection(
     withEnvironmentID: environmentID!,
     withCollectionID: collectionID!,
     withQuery: query,
     withAggregation: aggregation,
     return: returnHierarchies,
-    failure: failWithError) 
-{ 
+    failure: failWithError)
+{
     queryResponse in
     if let results = queryResponse.results {
         for result in results {
@@ -429,13 +429,13 @@ discovery.queryDocumentsInCollection(
 }
 ```
 
-The following links provide more information about the IBM Discovery service: 
+The following links provide more information about the IBM Discovery service:
 
 * [IBM Discovery - Service Page](http://www.ibm.com/watson/developercloud/discovery.html)
-* [IBM Discovery - Documentation] (http://www.ibm.com/watson/developercloud/doc/discovery/)
+* [IBM Discovery - Documentation] (https://console.bluemix.net/docs/services/discovery/index.html)
 * [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
 * [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
-* [IBM Discovery - Query Building](http://www.ibm.com/watson/developercloud/doc/discovery/query-reference.shtml#parameters)
+* [IBM Discovery - Query Building](https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building)
 
 ## Document Conversion
 
@@ -470,14 +470,14 @@ documentConversion.convertDocument(document, withConfigurationFile: config, fail
 The following links provide more information about the IBM Document Conversion service:
 
 * [IBM Watson Document Conversion - Service Page](http://www.ibm.com/watson/developercloud/document-conversion.html)
-* [IBM Watson Document Conversion - Documentation](http://www.ibm.com/watson/developercloud/doc/document-conversion/)
+* [IBM Watson Document Conversion - Documentation](https://console.bluemix.net/docs/services/document-conversion/index.html)
 * [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
 
 ## Language Translator
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
-Note that the Language Translator service was formerly known as Language Translation. It is recommended to [migrate](http://www.ibm.com/watson/developercloud/doc/language-translator/migrating.shtml) to Language Translator, however, existing Language Translation service instances are currently supported by the `LanguageTranslatorV2` framework. To use a legacy Language Translation service, set the `serviceURL` property before executing the first API call to the service.
+Note that the Language Translator service was formerly known as Language Translation. It is recommended to [migrate](https://console.bluemix.net/docs/services/language-translator/migrating.html) to Language Translator, however, existing Language Translation service instances are currently supported by the `LanguageTranslatorV2` framework. To use a legacy Language Translation service, set the `serviceURL` property before executing the first API call to the service.
 
 The following example demonstrates how to use the Language Translator service:
 
@@ -501,7 +501,7 @@ languageTranslator.translate("Hello", from: "en", to: "es", failure: failure) {
 The following links provide more information about the IBM Watson Language Translator service:
 
 * [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translator.html)
-* [IBM Watson Language Translator - Documentation](http://www.ibm.com/watson/developercloud/doc/language-translator/)
+* [IBM Watson Language Translator - Documentation](https://console.bluemix.net/docs/services/language-translator/index.html)
 * [IBM Watson Language Translator - Demo](https://language-translator-demo.mybluemix.net/)
 
 ## Natural Language Classifier
@@ -529,7 +529,7 @@ naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure
 The following links provide more information about the Natural Language Classifier service:
 
 * [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/watson/developercloud/nl-classifier.html)
-* [IBM Watson Natural Language Classifier - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html)
+* [IBM Watson Natural Language Classifier - Documentation](https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
 
 ## Natural Language Understanding
@@ -565,7 +565,7 @@ let parameters = Parameters(features: features, text: textToAnalyze)
 
 let failure = { (error: Error) in print(error) }
 naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
-    results in 
+    results in
     print (results)
 }
 
@@ -577,7 +577,7 @@ Note that **you are required to include at least one feature in your request.** 
 The following links provide more information about the Natural Language Understanding service:
 
 * [IBM Watson Natural Language Understanding - Service Page](http://www.ibm.com/watson/developercloud/natural-language-understanding.html)
-* [IBM Watson Natural Language Understanding - Documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-understanding/)
+* [IBM Watson Natural Language Understanding - Documentation](https://console.bluemix.net/docs/services/natural-language-understanding/index.html)
 * [IBM Watson Natural Language Understanding - Demo](http://natural-language-understanding-demo.mybluemix.net)
 
 ## Personality Insights
@@ -597,14 +597,14 @@ let personalityInsights = PersonalityInsights(username: username, password: pass
 let text = "your-input-text"
 let failure = { (error: Error) in print(error) }
 personalityInsights.getProfile(fromText: text, failure: failure) { profile in
-    print(profile)                      
+    print(profile)
 }
 ```
 
 The following links provide more information about the Personality Insights service:
 
 * [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
-* [IBM Watson Personality Insights - Documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights)
+* [IBM Watson Personality Insights - Documentation](https://console.bluemix.net/docs/services/personality-insights/index.html)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
 
 ## Retrieve and Rank
@@ -625,7 +625,7 @@ The following example demonstrates how to create a Solr Cluster, configuration, 
 
 ```swift
 let failure = { (error: Error) in print(error) }
-        
+
 // Create and store the Solr Cluster so you can access it later.
 var cluster: SolrCluster!
 let clusterName = "your-cluster-name-here"
@@ -729,7 +729,7 @@ retrieveAndRank.searchAndRank(
 The following links provide more information about the Retrieve and Rank service:
 
 * [IBM Watson Retrieve and Rank - Service Page](http://www.ibm.com/watson/developercloud/retrieve-rank.html)
-* [IBM Watson Retrieve and Rank - Documentation](http://www.ibm.com/watson/developercloud/doc/retrieve-rank/)
+* [IBM Watson Retrieve and Rank - Documentation](https://console.bluemix.net/docs/services/retrieve-and-rank/index.html)
 * [IBM Watson Retrieve and Rank - Demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/)
 
 ## Speech to Text
@@ -740,7 +740,7 @@ The `SpeechToText` class is the SDK's primary interface for performing speech re
 
 #### Recognition Request Settings
 
-The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml#WSstart).
+The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart).
 
 The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:
 
@@ -749,7 +749,7 @@ var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
 ```
 
-See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://www.ibm.com/watson/developercloud/doc/speech-to-text/details.shtml) for more information about the available settings.
+See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
 
 #### Microphone Audio and Compression
 
@@ -821,7 +821,7 @@ func stopStreaming() {
 
 #### Session Management and Advanced Features
 
-Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml).
+Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
 
 The following steps describe how to execute a recognition request with `SpeechToTextSession`:
 
@@ -886,7 +886,7 @@ func stopStreaming() {
 ```
 
 #### Customization
-Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on. 
+Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on.
 
 The following example demonstrates an example of how to customize the language model:
 
@@ -916,9 +916,9 @@ speechToText.getCorpus(
     withName: corpusName,
     customizationID: trainedCustomizationID,
     failure: failWithError) { corpus in
-        
+
     print(corpus.name)
-    // Check that the corpus is finished processing 
+    // Check that the corpus is finished processing
     print("finished processing: \(corpus.status == .analyzed)")
     print(corpus.totalWords)
     print(corpus.outOfVocabularyWords)
@@ -952,7 +952,7 @@ speechToText.getCustomizations(failure: failure) { customizations in
 }
 
 guard let customizationStatus = customizationStatus else {
-	throw error	
+	throw error
 }
 
 // Check the customization status
@@ -979,10 +979,10 @@ case .failed: // training failed => delete & retry
 if customizationStatus == .available {
 	let customWord1 = NewWord(word: "HHonors", soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
 	let customWord2 = NewWord(word: "IEEE", soundsLike: ["i triple e"])
-	
+
 	speechToText.addWords(
-		customizationID: trainedCustomizationID, 
-		words: [customWord1, customWord2], 
+		customizationID: trainedCustomizationID,
+		words: [customWord1, customWord2],
 		failure: failWithError) {
 		print("added words to corpus")
 	}
@@ -1008,7 +1008,7 @@ do {
 The following links provide more information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](http://www.ibm.com/watson/developercloud/speech-to-text.html)
-* [IBM Watson Speech to Text - Documentation](http://www.ibm.com/watson/developercloud/doc/speech-to-text/)
+* [IBM Watson Speech to Text - Documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
 
 ## Text to Speech
@@ -1039,7 +1039,7 @@ textToSpeech.synthesize(text, failure: failure) { data in
 // property or otherwise keep it in-scope beyond the completion handler.
 ```
 
-The Text to Speech service supports a number of [voices](http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
+The Text to Speech service supports a number of [voices](https://console.bluemix.net/docs/services/text-to-speech/http.html#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
 
 ```swift
 import TextToSpeechV1
@@ -1070,7 +1070,7 @@ textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: f
 The following links provide more information about the IBM Text To Speech service:
 
 * [IBM Watson Text To Speech - Service Page](http://www.ibm.com/watson/developercloud/text-to-speech.html)
-* [IBM Watson Text To Speech - Documentation](http://www.ibm.com/watson/developercloud/doc/text-to-speech/)
+* [IBM Watson Text To Speech - Documentation](https://console.bluemix.net/docs/services/text-to-speech/index.html)
 * [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
 
 ## Tone Analyzer
@@ -1099,7 +1099,7 @@ toneAnalyzer.getTone(ofText: text, failure: failure) { tones in
 The following links provide more information about the IBM Watson Tone Analyzer service:
 
 * [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/watson/developercloud/tone-analyzer.html)
-* [IBM Watson Tone Analyzer - Documentation](http://www.ibm.com/watson/developercloud/doc/tone-analyzer/)
+* [IBM Watson Tone Analyzer - Documentation](https://console.bluemix.net/docs/services/tone-analyzer/index.html)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
 
 ## Tradeoff Analytics
@@ -1178,7 +1178,7 @@ tradeoffAnalytics.getDilemma(for: problem, failure: failure) { dilemma in
 The following links provide more information about the IBM Watson Tradeoff Analytics service:
 
 * [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/watson/developercloud/tradeoff-analytics.html)
-* [IBM Watson Tradeoff Analytics - Documentation](http://www.ibm.com/watson/developercloud/doc/tradeoff-analytics/)
+* [IBM Watson Tradeoff Analytics - Documentation](https://console.bluemix.net/docs/services/tradeoff-analytics/index.html)
 * [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
 
 ## Visual Recognition
@@ -1206,5 +1206,5 @@ visualRecognition.classify(image: url, failure: failure) { classifiedImages in
 The following links provide more information about the IBM Watson Visual Recognition service:
 
 * [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
-* [IBM Watson Visual Recognition - Documentation](http://www.ibm.com/watson/developercloud/doc/visual-recognition/)
+* [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
 * [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)

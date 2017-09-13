@@ -68,7 +68,15 @@
 
 #elif (defined(__APPLE__) && defined(__MACH__)) /* MacOS X Framework build */
 
-// #  include <inttypes.h>
+// The ogg build script originally included `#include <inttypes.h>` below. But
+// the `inttypes.h` header was identified by Xcode as a non-modular header and
+// caused the build to fail. We removed the `inttypes.h` header, since tests
+// showed that we could encode/decode OggOpus files without it.
+
+// With Xcode 9, the types below are no longer imported by default. We must
+// explicitly import them by including the `sys/types.h` header.
+
+#  include <sys/types.h>
    typedef int16_t ogg_int16_t;
    typedef uint16_t ogg_uint16_t;
    typedef int32_t ogg_int32_t;

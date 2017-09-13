@@ -1399,7 +1399,7 @@ class ConversationTests: XCTestCase {
         let workspaceID = "this-id-is-unknown"
         let failure = { (error: Error) in
             // The following check fails on Linux with Swift 3.1.1 and earlier, but has been fixed in later releases.
-            XCTAssert(error.localizedDescription.contains("workspaceid parameter is not a valid GUID"))
+            XCTAssert(error.localizedDescription.contains("not a valid GUID"))
             expectation.fulfill()
         }
         
@@ -1429,7 +1429,7 @@ class ConversationTests: XCTestCase {
         let workspaceID = "this id is invalid"   // workspace id with spaces should gracefully return error
         let failure = { (error: Error) in
             // The following check fails on Linux with Swift 3.1.1 and earlier, but has been fixed in later releases.
-            XCTAssert(error.localizedDescription.contains("workspaceid parameter is not a valid GUID"))
+            XCTAssert(error.localizedDescription.contains("not a valid GUID"))
             expectation.fulfill()
         }
 

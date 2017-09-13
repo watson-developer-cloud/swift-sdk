@@ -363,8 +363,8 @@ class RetrieveAndRankTests: XCTestCase {
             withName: "temp-swift-sdk-config",
             toSolrClusterID: trainedClusterID,
             zipFile: configFile,
-            failure: failWithError) { response in
-            
+            failure: failWithError)
+        {
             expectation.fulfill()
         }
         waitForExpectations()

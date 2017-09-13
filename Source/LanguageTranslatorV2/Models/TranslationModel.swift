@@ -72,8 +72,7 @@ public struct TranslationModel: JSONDecodable {
         owner = try json.getString(at: "owner")
 
         guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
-            let type = type(of: TrainingStatus.available)
-            throw JSON.Error.valueNotConvertible(value: json, to: type)
+            throw JSON.Error.valueNotConvertible(value: json, to: TrainingStatus.self)
         }
         self.status = status
     }

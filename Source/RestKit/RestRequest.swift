@@ -283,7 +283,7 @@ public struct RestRequest {
             }
 
             // execute callback
-            let result = Result<Void>.success()
+            let result = Result<Void>.success(())
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }

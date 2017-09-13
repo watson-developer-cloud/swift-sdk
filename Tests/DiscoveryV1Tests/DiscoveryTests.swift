@@ -596,7 +596,7 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(configuration.configurationID, newConfigID)
             XCTAssertEqual(configuration.status, "deleted")
-            XCTAssertEqual(configuration.noticeMessages?.count, 0)
+            XCTAssertNil(configuration.noticeMessages)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -741,7 +741,7 @@ class DiscoveryTests: XCTestCase {
                 
                 XCTAssertEqual(configuration.configurationID, newConfigID)
                 XCTAssertEqual(configuration.status, "deleted")
-                XCTAssertEqual(configuration.noticeMessages?.count, 0)
+                XCTAssertNil(configuration.noticeMessages)
                 expectation4.fulfill()
         }
         waitForExpectations()
@@ -766,7 +766,7 @@ class DiscoveryTests: XCTestCase {
             failure: failWithError) {
                 testConfigurationDetails in
                 XCTAssertEqual(testConfigurationDetails.status, "completed")
-                XCTAssertEqual(testConfigurationDetails.enrichedFieldUnits, 0)
+                XCTAssertEqual(testConfigurationDetails.enrichedFieldUnits, nil)
                 XCTAssertEqual(testConfigurationDetails.originalMediaType, "application/json")
                 if let snapshots = testConfigurationDetails.snapshots {
                     for snapshot in snapshots {

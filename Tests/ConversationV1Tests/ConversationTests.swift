@@ -104,6 +104,11 @@ class ConversationTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
+    
+    /** Fail false positives. */
+    func failWithResult() {
+        XCTFail("Negative test returned a result.")
+    }
 
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 5.0) {

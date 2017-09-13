@@ -95,6 +95,11 @@ class RetrieveAndRankTests: XCTestCase {
         XCTFail("Negative test returned a result.")
     }
     
+    /** Fail false positives. */
+    func failWithResult() {
+        XCTFail("Negative test returned a result.")
+    }
+    
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in

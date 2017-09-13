@@ -207,7 +207,7 @@ public class LanguageTranslator {
     public func deleteModel(
         withID modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(

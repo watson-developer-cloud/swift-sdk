@@ -47,7 +47,7 @@ public class SpeechToTextSession {
     }
     
     /// Invoked when the session connects to the Speech to Text service.
-    public var onConnect: ((Void) -> Void)? {
+    public var onConnect: (() -> Void)? {
         get { return socket.onConnect }
         set { socket.onConnect = newValue }
     }
@@ -76,7 +76,7 @@ public class SpeechToTextSession {
     }
     
     /// Invoked when the session disconnects from the Speech to Text service.
-    public var onDisconnect: ((Void) -> Void)?
+    public var onDisconnect: (() -> Void)?
     
     private lazy var socket: SpeechToTextSocket = {
         var socket = SpeechToTextSocket(

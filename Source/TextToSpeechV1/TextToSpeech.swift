@@ -402,7 +402,7 @@ public class TextToSpeech {
     public func deleteCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
@@ -477,7 +477,7 @@ public class TextToSpeech {
         description: String? = nil,
         words: [Word] = [],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(name: name, description: description, words: words)
@@ -558,7 +558,7 @@ public class TextToSpeech {
         toCustomizationID customizationID: String,
         fromArray words: [Word],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct the body
         let customVoiceUpdate = CustomVoiceUpdate(words: words)
@@ -606,7 +606,7 @@ public class TextToSpeech {
         _ word: String,
         fromCustomizationID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct the request
         let request = RestRequest(
@@ -677,7 +677,7 @@ public class TextToSpeech {
         toCustomizationID customizationID: String,
         withTranslation translation: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct the body
         let dict = ["translation": translation]

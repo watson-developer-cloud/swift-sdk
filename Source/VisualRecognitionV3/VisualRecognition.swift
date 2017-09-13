@@ -480,7 +480,7 @@ public class VisualRecognition {
     public func deleteClassifier(
         withID classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -752,7 +752,7 @@ public class VisualRecognition {
     public func deleteCollection(
         withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -931,7 +931,7 @@ public class VisualRecognition {
         withID collectionID: String,
         imageID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -973,7 +973,7 @@ public class VisualRecognition {
         forImageID imageID: String,
         inCollectionID collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()

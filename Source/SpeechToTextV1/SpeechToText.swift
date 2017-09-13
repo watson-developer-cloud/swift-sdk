@@ -457,7 +457,7 @@ public class SpeechToText {
     public func deleteCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -533,7 +533,7 @@ public class SpeechToText {
         withID customizationID: String,
         wordTypeToAdd: WordTypeToAdd? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -575,7 +575,7 @@ public class SpeechToText {
     public func resetCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -609,7 +609,7 @@ public class SpeechToText {
     public func upgradeCustomization(
         withID customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -680,7 +680,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -760,7 +760,7 @@ public class SpeechToText {
         customizationID: String,
         allowOverwrite: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -869,7 +869,7 @@ public class SpeechToText {
         customizationID: String,
         words: [NewWord],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct body
         var jsonData = [String: Any]()
@@ -921,7 +921,7 @@ public class SpeechToText {
         withName name: String,
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -993,7 +993,7 @@ public class SpeechToText {
         customizationID: String,
         word: NewWord? = NewWord(),
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct body
         guard let body = try? word?.toJSON().serialize() else {

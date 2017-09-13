@@ -31,6 +31,6 @@ public struct Authors: JSONDecodable {
     
     /// Used internally to initialize a Authors object
     public init(json: JSON) throws {
-        names = try json.decodedArray(at: "names", type: Swift.String)
+        names = try json.decodedArray(at: "names", type: Swift.String.self)
     }
 }

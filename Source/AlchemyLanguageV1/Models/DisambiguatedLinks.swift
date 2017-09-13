@@ -119,7 +119,7 @@ public struct DisambiguatedLinks: JSONDecodable {
         musicBrainz = try? json.getString(at: "musicBrainz")
         name = try? json.getString(at: "name")
         opencyc = try? json.getString(at: "opencyc")
-        subType = try? json.decodedArray(at: "subType", type: Swift.String)
+        subType = try? json.decodedArray(at: "subType", type: Swift.String.self)
         umbel = try? json.getString(at: "umbel")
         website = try? json.getString(at: "website")
         yago = try? json.getString(at: "yago")

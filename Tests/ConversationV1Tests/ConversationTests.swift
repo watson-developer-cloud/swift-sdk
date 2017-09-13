@@ -238,7 +238,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
@@ -305,7 +305,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
